@@ -12,7 +12,7 @@ the `api-parameters` fence plugin to manually document them.
     score, Integer, another description line with *markdown* support
     ```
 
-```api-parameters {anchorPrefix: 'inlined_csv'}
+```api-parameters {anchorPrefix: "inlined_csv"}
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
@@ -33,7 +33,7 @@ Use `parent.children` syntax to define nested objects like this:
     
 Note: when using this approach it is necessary to explicitly define a `root` entry, such as `person` in this example.
 
-```api-parameters {anchorPrefix: 'nested_inlined_csv'}
+```api-parameters {anchorPrefix: "nested_inlined_csv"}
 sessionId, Integer, session Id
 person, Person, person to login with
 person.firstName, String, first name of the person
@@ -43,7 +43,7 @@ roles.id, String, role id
 roles.description, String, role description
 ```
 
-Note: if a parameter name actually contains a period ("."), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. 'person.firstName'
+Note: if a parameter name actually contains a period ("."), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. "person.firstName"
 
 # Title
 
@@ -54,7 +54,7 @@ Use the `title` parameter to specify a title.
     score, Integer, another description line with *markdown* support
     ```
 
-```api-parameters {title: "Person Definition", anchorPrefix: 'title'}
+```api-parameters {title: "Person Definition", anchorPrefix: "title"}
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
@@ -68,7 +68,7 @@ Use the `small` parameter to render API Parameters using smaller font size and o
     score, Integer, another description line with *markdown* support
     ```
 
-```api-parameters {small: true, anchorPrefix: 'size'}
+```api-parameters {small: true, anchorPrefix: "size"}
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
@@ -137,12 +137,12 @@ Note: `description` field in JSON file is treated as Markdown
 Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear.
 Use `anchorPrefix` parameter to avoid conflict of anchor ids when using the same API parameter names within a single page:
 
-    ```api-parameters {anchorPrefix: 'customPrefix'}
+    ```api-parameters {anchorPrefix: "customPrefix"}
     firstName, String, description with *markdown* support
     score, Integer, another description line with *markdown* support
     ```
 
-```api-parameters {anchorPrefix: 'customPrefix'}
+```api-parameters {anchorPrefix: "customPrefix"}
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
@@ -153,19 +153,19 @@ In the example above `customPrefix` is added to each parameter link.
 
 Znai hard wraps long parameter names to leave more space to description. 
 
-```api-parameters {anchorPrefix: 'customPrefix'}
+```api-parameters {anchorPrefix: "customPrefix"}
 VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support
 VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support
 ```
 
 Use `noWrap: true` to remove hard wrap enforcement
 
-    ```api-parameters {anchorPrefix: 'customPrefix', noWrap: true}
+    ```api-parameters {anchorPrefix: "customPrefix", noWrap: true}
     VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support
     VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support
     ```
 
-```api-parameters {anchorPrefix: 'customPrefix', noWrap: true}
+```api-parameters {anchorPrefix: "customPrefix", noWrap: true}
 VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support
 VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support
 ```

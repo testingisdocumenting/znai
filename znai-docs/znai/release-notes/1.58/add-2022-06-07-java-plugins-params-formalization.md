@@ -1,1 +1,2 @@
-* Add Java Plugins formal parameters  
+* Add Java Plugins parameters definition  
+  
