@@ -1,0 +1,1 @@
+* Tweak [Image Zoom](visuals/images#fit) style in dark and light themes

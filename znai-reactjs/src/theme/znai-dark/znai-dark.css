@@ -21,7 +21,7 @@
 
     --znai-background-color: #1e2529;
 
-    --znai-zoom-overlay-background-color: rgba(50, 50, 50, 0.5);
+    --znai-zoom-overlay-background-color: rgba(10, 10, 10, 0.9);
     --znai-zoom-container-border: 1px #333 solid;
 
     --znai-regular-text-color: var(--znai-inversed-text-color);
