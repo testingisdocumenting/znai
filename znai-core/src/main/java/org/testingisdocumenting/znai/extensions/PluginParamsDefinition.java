@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.extensions;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -68,18 +69,30 @@ public class PluginParamsDefinition {
     }
 
     public PluginParamsDefinition add(String name, PluginParamType type, String description, String example) {
-        params.add(new Param(name, type, description, example, false));
+        add(new Param(name, type, description, example, false));
         return this;
     }
 
     public PluginParamsDefinition addRequired(String name, PluginParamType type, String description, String example) {
-        params.add(new Param(name, type, description, example, true));
+        add(new Param(name, type, description, example, true));
         return this;
     }
 
     public PluginParamsDefinition add(PluginParamsDefinition paramsDefinition) {
-        params.addAll(paramsDefinition.params);
+        paramsDefinition.params.forEach(this::add);
         return this;
+    }
+
+    private void add(Param param) {
+        validateNameUniqueness(param.name);
+        params.add(param);
+    }
+
+    private void validateNameUniqueness(String name) {
+        boolean found = params.stream().anyMatch(p -> p.name.equals(name));
+        if (found) {
+            throw new IllegalArgumentException("parameter <" + name + "> is already registered");
+        }
     }
 
     private Param findParam(String name) {
@@ -164,7 +177,11 @@ public class PluginParamsDefinition {
             message.append("\n");
         }
 
-        message.append("\navailable plugin parameters:\n").append(this);
+        message.append("\navailable plugin parameters:\n");
+
+        params.stream()
+                .sorted(Comparator.comparing(p -> p.name))
+                .forEach(param -> message.append("  ").append(param).append("\n"));
 
         return message.toString();
     }

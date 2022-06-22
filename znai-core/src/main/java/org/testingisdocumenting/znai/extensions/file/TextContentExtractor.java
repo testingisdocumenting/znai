@@ -53,9 +53,6 @@ class TextContentExtractor {
                 .add(SURROUNDED_BY_SEPARATOR_KEY, PluginParamType.LIST_OR_SINGLE_STRING_WITH_NULLS,
                         "separator(s) to use for multiple surrounded by blocks",
                         "\"...\" or [\"\", \"...\"]")
-                .add(SURROUNDED_BY_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
-                        "markers to use to extract portion of a snippet",
-                        "\"example-of-transaction\" or [\"example-of-creation\", \"example-of-consumption\"]")
                 .add(START_LINE_KEY, PluginParamType.STRING,
                         "partial match of start line for snippet extraction", "\"class\"")
                 .add(END_LINE_KEY, PluginParamType.STRING,
