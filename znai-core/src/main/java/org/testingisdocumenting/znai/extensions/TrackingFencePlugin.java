@@ -58,4 +58,9 @@ public class TrackingFencePlugin implements FencePlugin {
     public SearchText textForSearch() {
         return delegate.textForSearch();
     }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        return delegate.parameters();
+    }
 }

@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.api;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
@@ -43,6 +44,11 @@ public class ApiParametersIncludePlugin implements IncludePlugin {
     @Override
     public IncludePlugin create() {
         return new ApiParametersIncludePlugin();
+    }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        return ApiParametersParams.definition;
     }
 
     @Override

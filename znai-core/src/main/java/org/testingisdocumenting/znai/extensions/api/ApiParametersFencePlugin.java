@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.api;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.search.SearchScore;
@@ -38,6 +39,11 @@ public class ApiParametersFencePlugin implements FencePlugin {
     @Override
     public FencePlugin create() {
         return new ApiParametersFencePlugin();
+    }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        return ApiParametersParams.definition;
     }
 
     @Override
