@@ -1,0 +1,1 @@
+* Fix: Enable [Image](visuals/images) click to zoom on scaled down images 
