@@ -61,7 +61,8 @@
     justify-content: center;
 }
 
-.znai-image-fit {
+.znai-image-fit,
+.znai-image-scaled-down {
     cursor: zoom-in;
 }
 

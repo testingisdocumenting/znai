@@ -31,7 +31,7 @@ export interface ImageProps {
   shapes: object[];
   width: number;
   height: number;
-  align: string;
+  align?: string;
   title?: string;
   fit?: boolean;
   scale?: number;
@@ -66,9 +66,13 @@ export function AnnotatedImage(props: ImageProps) {
   };
 
   const annotations = new Annotations(shapes);
+  const isScaledDown = scaleToUse < 1.0;
 
   const containerClassName =
-    "znai-annotated-image-container" + (align ? " content-block " + align : "") + (fit ? " znai-image-fit" : "");
+    "znai-annotated-image-container" +
+    (align ? " content-block " + align : "") +
+    (fit ? " znai-image-fit" : "") +
+    (isScaledDown ? " znai-image-scaled-down" : "");
 
   const imageClassName = "znai-annotated-image" + (border ? " border" : "");
 
@@ -113,13 +117,15 @@ export function AnnotatedImage(props: ImageProps) {
   }
 
   function zoomImage() {
-    if (!fit) {
+    if (!isScaledDown) {
       return;
     }
 
-    const noFitProps = { ...props };
-    delete noFitProps.fit;
+    const propsNoScaleOrPosition = { ...props };
+    delete propsNoScaleOrPosition.fit;
+    delete propsNoScaleOrPosition.scale;
+    delete propsNoScaleOrPosition.align;
 
-    zoom.zoom(<AnnotatedImage {...noFitProps} />);
+    zoom.zoom(<AnnotatedImage {...propsNoScaleOrPosition} />);
   }
 }

@@ -20,9 +20,9 @@ An image can be included using standard Markdown syntax.
 
 Use `title` to add a title to an image.
 
-    :include-image: castle.jpg {title: "Title of an image"}
+    :include-image: castle.jpg {title: "beautiful castle"}
     
-:include-image: castle.jpg {title: "Title of an image"}
+:include-image: castle.jpg {title: "beautiful castle"}
 
 # Border
 
@@ -42,7 +42,7 @@ Use `fit` parameter to fit an image to the text column width.
 
     :include-image: books.jpg {fit: true}
 
-Note: You can click on the image to zoom into it
+Note: You can click on the scaled down images to display it full screen
 
 :include-image: books.jpg {fit: true, title: "auto scaled down image"}
 
@@ -53,6 +53,8 @@ To scale image up or down use `scale` option, `1` is default, `0.5` is half an i
     :include-image: books.jpg {scale: 0.3}
 
 :include-image: books.jpg {scale: 0.3}
+
+Note: You can click on the scaled down images to display it full screen
 
 # Align
 
