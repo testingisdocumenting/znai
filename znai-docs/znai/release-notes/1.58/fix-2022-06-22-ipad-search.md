@@ -1,0 +1,1 @@
+* Fix: search popup on iPad now fits a browser window 
