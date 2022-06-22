@@ -2,17 +2,31 @@
 
 Use `image` fence plugin to display Image and manually provide badge coordinates 
 
-    ```image testingisdocumenting.png {pixelRatio: 2.0, fit: true} 
+    ```image testingisdocumenting.png {scale: 0.5} 
+    960,600
+    1800,1400
+    ```
+
+```image testingisdocumenting.png {scale: 0.5} 
+960,600
+1800,1400
+```
+
+Note: Color of badges change based on the background color
+
+# Pixel Ratio
+
+Use `pixelRatio` to display HiDPI images and use logical coordinates for the annotations
+
+    ```image testingisdocumenting.png {pixelRatio: 2} 
     490,300
     900,700
     ```
 
-```image testingisdocumenting.png {pixelRatio: 2.0, fit: true} 
+```image testingisdocumenting.png {pixelRatio: 2} 
 490,300
 900,700
 ```
-
-Note: Color of badges change based on the background color
 
 # Annotations File
 

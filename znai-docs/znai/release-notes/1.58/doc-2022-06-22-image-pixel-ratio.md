@@ -1,0 +1,1 @@
+* Doc: Document [Image Pixel Ratio](visuals/image-annotations#pixel-ratio)  
