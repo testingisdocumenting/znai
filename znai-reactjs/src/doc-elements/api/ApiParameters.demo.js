@@ -19,6 +19,7 @@ import React from "react";
 import ApiParameters from "./ApiParameters";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { Paragraph } from "../paragraph/Paragraph";
+import { DocElement } from "../default-elements/DocElement";
 
 const personParameters = [
     {anchorId: 'prefix_firstName', name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
@@ -54,8 +55,8 @@ const personLongDescriptionParameters = [
 ]
 
 const longNameParameters = [
-    {anchorId: 'prefix_long1', name: 'VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
-    {anchorId: 'prefix_long2',name: 'VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
+    {anchorId: 'prefix_long1', name: 'VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES', type: 'string', description: [{"text": "first name line long long first name line long long first name line long long", "type": "SimpleText"}]},
+    {anchorId: 'prefix_long2',name: 'VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES', type: 'string', description: [{"text": "last name last name last name last name last name last name last name last name ", "type": "SimpleText"}]},
 ]
 
 const mailBoxParameters = [
@@ -132,6 +133,9 @@ export function apiParametersDemo(registry) {
             </React.Fragment>
         </div>
       ))
+      .add('with text around wide mode', () => (
+        <DocElement content={apiParametersFullContent()} elementsLibrary={elementsLibrary}/>
+      ))
       .add('with text around and title', () => (
         <div className="content-block">
             <ParagraphText/>
@@ -177,4 +181,16 @@ function createPersonParameters(anchorPrefix) {
         {anchorId: anchorPrefix + '_lastName',name: 'lastName', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
         {anchorId: anchorPrefix + '_score',name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
     ]
+}
+
+function apiParametersFullContent() {
+  return [
+    {
+      type: "ApiParameters",
+      parameters: longNameParameters,
+      wide: true,
+      noWrap: true,
+      title: "my params"
+    }
+  ]
 }

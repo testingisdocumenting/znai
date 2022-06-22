@@ -202,7 +202,7 @@ presentationElementHandlers.CliOutput = presentationCliOutput
 
 library.Spoiler = Spoiler
 
-library.ApiParameters = wrappedInContentBlock(ApiParameters)
+library.ApiParameters = ApiParameters
 
 library.JupyterCell = JupyterCell
 
