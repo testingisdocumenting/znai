@@ -165,6 +165,10 @@
     --znai-spoiler-title-color: var(--znai-link-color);
     --znai-spoiler-background-color: var(--znai-snippets-title-background-color);
 
+    --znai-tooltip-border-color: #29343a;
+    --znai-tooltip-background-color: #181e21;
+    --znai-tooltip-text-color: var(--znai-inversed-text-color);
+
     --znai-attention-note-color: var(--znai-color-blue);
     --znai-attention-note-background-color: rgba(41, 139, 231, .1);
     --znai-attention-warning-color: var(--znai-color-yellow);

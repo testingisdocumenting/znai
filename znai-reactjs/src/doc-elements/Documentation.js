@@ -56,6 +56,7 @@ import './search/Search.css'
 import {mainPanelClassName} from '../layout/classNames';
 import {ZoomOverlay} from './zoom/ZoomOverlay';
 import { updateGlobalAnchors } from "./references/globalAnchors";
+import { TooltipRenderer } from "../components/Tooltip";
 
 export class Documentation extends Component {
     constructor(props) {
@@ -208,6 +209,7 @@ export class Documentation extends Component {
         return (
             <ViewPortProvider onLayoutChange={this.onLayoutChange}>
                 <PreviewTrackerWrapper>
+                    <TooltipRenderer/>
                     <DocumentationLayout docMeta={docMeta}
                                          toc={toc}
                                          theme={theme}

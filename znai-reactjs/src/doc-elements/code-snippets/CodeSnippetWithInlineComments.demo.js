@@ -18,11 +18,17 @@ import React from 'react'
 
 import {Snippet} from "./Snippet";
 import {TwoSidesLayoutRightPart} from "../page/two-sides/TwoSidesLayout";
+import { TooltipRenderer } from "../../components/Tooltip";
 
 export function snippetsWithInlineCommentsDemo(registry) {
     registry
-        .add('with bullet points java', () => <Snippet wide={false} lang="java" snippet={javaWithComments()}
-                                                       commentsType="inline"/>)
+        .add('with bullet points java', () => (
+          <>
+              <TooltipRenderer/>
+              <Snippet wide={false} lang="java" snippet={javaWithComments()}
+                       commentsType="inline"/>
+          </>
+        ))
         .add('with multiline bullet points java', () => <Snippet wide={false} lang="java" snippet={javaCodeWithMultilineComments()}
                                                                  commentsType="inline"/>)
         .add('with bullet points python', () => <Snippet wide={false} lang="python" snippet={pythonCodeWithComments()}
@@ -51,8 +57,8 @@ export function snippetsWithInlineCommentsDemo(registry) {
 function javaWithComments() {
     return 'class InternationalPriceService implements PriceService {\n' +
         '    private static void main(String... args) {\n' +
-        '        ... // code goes here\n' +
-        '    } // code stops here\n' +
+        '        ... // some code goes here\n' +
+        '    } // another code stops here\n' +
         '}\n'
 }
 

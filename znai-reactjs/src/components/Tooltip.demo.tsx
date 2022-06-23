@@ -1,6 +1,5 @@
 /*
- * Copyright 2020 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2022 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,23 +16,13 @@
 
 import React from "react";
 
-import "./SnippetCircleBadge.css";
-import { Tooltip } from "../../../components/Tooltip";
+import { Registry } from "react-component-viewer";
+import { Tooltip } from "./Tooltip";
 
-interface Props {
-  idx: number;
-  tooltip?: string;
-  className?: string;
-}
-
-export function SnippetCircleBadge({ className, idx, tooltip }: Props) {
-  const fullClassName = "znai-circle-badge" + (className ? " " + className : "");
-
-  const bullet = <span className={fullClassName}>{idx}</span>;
-
-  if (!tooltip) {
-    return bullet;
-  }
-
-  return <Tooltip content={tooltip}>{bullet}</Tooltip>;
+export function tooltipDemo(registry: Registry) {
+  registry.add("simple", () => (
+    <Tooltip content="hello world">
+      <div>hover over me</div>
+    </Tooltip>
+  ));
 }

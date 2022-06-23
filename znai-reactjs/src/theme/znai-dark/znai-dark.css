@@ -127,6 +127,10 @@
     --znai-spoiler-title-color: var(--znai-link-color);
     --znai-spoiler-background-color: var(--znai-snippets-title-background-color);
 
+    --znai-tooltip-border-color: #29343a;
+    --znai-tooltip-background-color: #ddd;
+    --znai-tooltip-text-color: var(--znai-color-black);
+
     --znai-default-code-block-color: #aaa;
     --znai-code-class-color: #bbb;
     --znai-code-function-color: #9473a6;
