@@ -30,10 +30,10 @@ class PluginParamsDefinitionTest {
             .addRequired("id", PluginParamType.STRING, "id of the concept", "true")
 
     static def expectedPluginParametersHelp = "available plugin parameters:\n" +
-            "title: title of snippet <string> (e.g. \"example of API\")\n" +
-            "highlight: lines to highlight <list or a single value of either number(s) or string(s)> (e.g. [4, \"class\"])\n" +
-            "autoTitle: auto title based on path <boolean> (e.g. true)\n" +
-            "id: REQUIRED id of the concept <string> (e.g. true)"
+            "  autoTitle: auto title based on path <boolean> (e.g. true)\n" +
+            "  highlight: lines to highlight <list or a single value of either number(s) or string(s)> (e.g. [4, \"class\"])\n" +
+            "  id: REQUIRED id of the concept <string> (e.g. true)\n" +
+            "  title: title of snippet <string> (e.g. \"example of API\")\n"
 
     @Test
     void "passes validation"() {
@@ -74,5 +74,24 @@ class PluginParamsDefinitionTest {
                 "type mismatches:\n" +
                 "  autoTitle given: \"false\" <string>, expected: <boolean> (e.g. true)\n" +
                 "\n" + expectedPluginParametersHelp)
+    }
+
+    @Test
+    void "report name duplicate"() {
+        code {
+            paramsDefinition.add("title", PluginParamType.BOOLEAN, "dummy", "true")
+        } should throwException("parameter <title> is already registered")
+
+        code {
+            paramsDefinition.addRequired("title", PluginParamType.BOOLEAN, "dummy", "true")
+        } should throwException("parameter <title> is already registered")
+
+        code {
+            def additional = new PluginParamsDefinition()
+                    .add("hello", PluginParamType.BOOLEAN, "dummy", "dummy")
+                    .add("id", PluginParamType.BOOLEAN, "dummy", "dummy")
+
+            paramsDefinition.add(additional)
+        } should throwException("parameter <id> is already registered")
     }
 }
