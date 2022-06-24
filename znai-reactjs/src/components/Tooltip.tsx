@@ -91,6 +91,18 @@ export function TooltipRenderer() {
 
 export function Tooltip({ content, children }: Props) {
   const nodeRef = useRef<HTMLDivElement>(null);
+  const insideElementRef = useRef(false);
+
+  const clientTop = nodeRef.current?.getBoundingClientRect()?.top;
+
+  // hide tooltip on any element movement
+  // when scroll happens and element moves around, tooltip stays outside
+  // as there is no <leave> event is fired until scroll stops
+  useEffect(() => {
+    if (clientTop && insideElementRef.current) {
+      handleMouseLeave();
+    }
+  }, [clientTop]);
 
   return (
     <div
@@ -105,6 +117,7 @@ export function Tooltip({ content, children }: Props) {
 
   function handleMouseEnter() {
     if (nodeRef.current) {
+      insideElementRef.current = true;
       tooltipEngine.display({
         content,
         clientRect: nodeRef.current.getBoundingClientRect(),
@@ -113,6 +126,7 @@ export function Tooltip({ content, children }: Props) {
   }
 
   function handleMouseLeave() {
+    insideElementRef.current = false;
     tooltipEngine.clear();
   }
 }
