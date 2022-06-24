@@ -62,6 +62,7 @@ const Snippet = (props) => {
                               tokens={tokensToUse}
                               linesOfCode={modifiedLines}
                               scrollToLineIdx={scrollToLineIdx(props)}
+                              comments={comments}
                               snippetComponent={snippetComponent}/>
             <Explanations comments={comments} {...props}/>
         </>

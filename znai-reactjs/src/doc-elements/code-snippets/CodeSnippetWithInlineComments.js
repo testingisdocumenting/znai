@@ -26,24 +26,24 @@ import {
     containsInlinedComment,
     isCommentToken,
     lineWithTokensTrimmedOnRight,
-    splitTokensIntoLines
-} from './codeUtils'
+    splitTokensIntoLines, trimComment
+} from "./codeUtils";
 
 import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'
 
 import './CodeSnippetWithInlineComments.css'
 
-const CodeSnippetWithInlineComments = ({tokens, references, isPresentation, meta, slideIdx, wrap}) => {
+const CodeSnippetWithInlineComments = ({tokens, references, comments, isPresentation, meta, slideIdx, wrap}) => {
     const lines = collapseCommentsAboveToMakeCommentOnTheCodeLine(splitTokensIntoLines(tokens))
 
     const idxOfLinesWithComments = []
-    const bulletIdxesPerLineIdx = []
-    let bulletIdx = 1
+    const bulletNumbersPerLineIdx = []
+    let bulletNumber = 1
 
     lines.forEach((line, idx) => {
         if (containsInlinedComment(line)) {
             idxOfLinesWithComments.push(idx)
-            bulletIdxesPerLineIdx[idx] = bulletIdx++
+            bulletNumbersPerLineIdx[idx] = bulletNumber++
         }
     })
 
@@ -57,7 +57,7 @@ const CodeSnippetWithInlineComments = ({tokens, references, isPresentation, meta
         <div className={className}>
             <pre>
                 {lines.map((line, idx) => {
-                    const bulletIdxForLine = bulletIdxesPerLineIdx[idx]
+                    const bulletIdxForLine = bulletNumbersPerLineIdx[idx]
                     const lineToRender = bulletIdxForLine ?
                         removeCommentAtTheEnd(line) :
                         line
@@ -69,12 +69,13 @@ const CodeSnippetWithInlineComments = ({tokens, references, isPresentation, meta
                                          isPresentation={isPresentation}
                                          wrap={wrap}
                                          endOfLineRender={() => {
-                                             const bulletIdxForLine = bulletIdxesPerLineIdx[idx]
-                                             return bulletIdxForLine ?
-                                                 <SnippetCircleBadge idx={bulletIdxForLine}
-                                                                     tooltip="test"
-                                                                     className="left-margin"/> :
-                                                 null
+                                             const bulletNumberForLine = bulletNumbersPerLineIdx[idx]
+                                             return bulletNumberForLine ?
+                                               <SnippetCircleBadge className="left-margin"
+                                                                   idx={bulletNumberForLine}
+                                                                   tooltip={comments[bulletNumberForLine - 1] ?
+                                                                     trimComment(comments[bulletNumberForLine - 1].content): ""} /> :
+                                               null
                                          }}
                     />
                 })}

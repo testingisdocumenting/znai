@@ -95,6 +95,7 @@ import { updateGlobalAnchors } from "./doc-elements/references/globalAnchors";
 import { echartDemo } from "./doc-elements/charts/Echart.demo";
 import { chartsPresentationDemo } from "./doc-elements/charts/EchartPresentation.demo";
 import { smartBulletListsDemo } from "./doc-elements/bullets/SmarlBulletList.demo";
+import { tooltipDemo } from "./components/Tooltip.demo";
 
 const docMeta = {
     id: 'preview',
@@ -118,6 +119,9 @@ updateGlobalDocReferences({
 updateGlobalAnchors({ lib_string_tokens: "/preview/block/url", test_link: "list/blah"  });
 
 const registries = new Registries()
+
+registries.add('components')
+  .registerAsRows('tooltip', tooltipDemo)
 
 registries.add('text')
     .registerAsGrid('Typography', 0, typographyDemo)
