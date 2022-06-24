@@ -24,6 +24,7 @@ import {circle, badge} from '../shapes/Circle'
 import rectangle from '../shapes/Rectangle'
 import arrow from '../shapes/Arrow'
 import highlight from '../shapes/Highlight'
+import { TooltipSvg } from "../../../components/Tooltip";
 
 const shapesLib = {circle, badge, rectangle, arrow, highlight}
 
@@ -53,10 +54,23 @@ class Annotations {
         }
     }
 
-    staticAnnotationsToRender(scale) {
-        return this.shapes.map(shape => {
+    staticAnnotationsToRender(shapesTooltipContent, scale) {
+        return this.shapes.map((shape, idx) => {
             const StaticAnnotation = staticAnnotationForShape(shape)
-            return <StaticAnnotation key={shape.id} shape={shape} scale={scale}/>
+
+            const tooltipContent = shapesTooltipContent && shapesTooltipContent[idx]
+
+            const renderedAnnotation = <StaticAnnotation key={shape.id} shape={shape} scale={scale}/>
+
+            if (!tooltipContent) {
+                return renderedAnnotation;
+            }
+
+            return (
+              <TooltipSvg content={tooltipContent} key={shape.id}>
+                  {renderedAnnotation}
+              </TooltipSvg>
+            )
         })
     }
 

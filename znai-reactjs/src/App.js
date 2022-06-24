@@ -96,6 +96,7 @@ import { echartDemo } from "./doc-elements/charts/Echart.demo";
 import { chartsPresentationDemo } from "./doc-elements/charts/EchartPresentation.demo";
 import { smartBulletListsDemo } from "./doc-elements/bullets/SmarlBulletList.demo";
 import { tooltipDemo } from "./components/Tooltip.demo";
+import { annotatedImageWithOrderedListDemo } from "./doc-elements/images/AnnotatedImageWithOrderedList.demo";
 
 const docMeta = {
     id: 'preview',
@@ -159,6 +160,7 @@ registries.add('visuals')
     .registerAsGrid('Spoilers', 0, spoilerDemo)
     .registerAsGrid('Echarts', 0, echartDemo)
     .registerAsRows('Image', imageDemo)
+    .registerAsRows('Image With List', annotatedImageWithOrderedListDemo)
     .registerAsRows('Smart Bullets', smartBulletListsDemo)
     .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
     .registerAsGrid('SVG', 0, svgDemo)

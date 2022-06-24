@@ -1,0 +1,1 @@
+* Add automatic [Image Annotations](visuals/image-annotations) badges textual description tooltips via ordered list
