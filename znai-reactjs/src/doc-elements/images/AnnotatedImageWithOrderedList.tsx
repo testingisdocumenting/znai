@@ -17,7 +17,6 @@
 import React from "react";
 
 import { DocElementContent, WithElementsLibrary } from "../default-elements/DocElement";
-import "./AnnotatedImageWithOrderedList.css";
 
 interface Props extends WithElementsLibrary {
   annotatedImageContent: DocElementContent;
