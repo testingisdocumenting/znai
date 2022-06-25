@@ -3,29 +3,54 @@
 Use `image` fence plugin to display Image and manually provide badge coordinates 
 
     ```image testingisdocumenting.png {scale: 0.5} 
-    960,600
-    1800,1400
+    840,600
+    1680,1400
     ```
 
 ```image testingisdocumenting.png {scale: 0.5} 
-960,600
-1800,1400
+840,600
+1680,1400
 ```
 
 Note: Color of badges change based on the background color
+
+# Badge Textual Description
+
+Put ordered list right before or after an annotated image to associate text with the badges.
+Hovering mouse on badged will display tooltip with the textual description.
+
+````markdown {title: "ordered list markdown example to provide contextual information"}
+1. Use automated testing to exercise happy paths and capture test artifacts
+2. Use captured test artifacts to supercharge your documentation
+
+```image testingisdocumenting.png {scale: 0.5} 
+840,600
+1680,1400
+```
+````
+
+1. Use automated testing to exercise happy paths and capture test artifacts
+2. Use captured test artifacts to supercharge your documentation
+
+```image testingisdocumenting.png {scale: 0.5} 
+840,600
+1680,1400
+```
+
+Note: hover over image annotations to display automatic tooltip 
 
 # Pixel Ratio
 
 Use `pixelRatio` to display HiDPI images and use logical coordinates for the annotations
 
     ```image testingisdocumenting.png {pixelRatio: 2} 
-    490,300
-    900,700
+    420,300
+    840,700
     ```
 
 ```image testingisdocumenting.png {pixelRatio: 2} 
-490,300
-900,700
+420,300
+840,700
 ```
 
 # Annotations File

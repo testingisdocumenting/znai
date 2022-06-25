@@ -44,15 +44,114 @@ export function DocElement({ content, elementsLibrary }: DocElementProps) {
     return null;
   }
 
-  return content.map((item, idx) => {
-    const ElementToUse = elementsLibrary[item.type];
+  const contentProvider = new ElementsContentProvider(content);
+
+  const renderedElements = [];
+  while (contentProvider.peekCurrent()) {
+    const found = findRenderComponent(elementsLibrary, contentProvider);
+    const ElementToUse = found.component;
+    const propsToUse = found.propsToUse;
+
     if (!ElementToUse) {
-      console.warn("can't find component to display: " + JSON.stringify(item));
-      return null;
+      console.warn("can't find component to display: " + JSON.stringify(contentProvider.peekCurrent()));
     } else {
-      return (
-        <ElementToUse key={idx} {...item} elementsLibrary={elementsLibrary} />
+      renderedElements.push(
+        <ElementToUse key={contentProvider.idx} {...propsToUse} elementsLibrary={elementsLibrary} />
       );
     }
-  });
+
+    contentProvider.advance(found.consumedElementsNumber);
+  }
+
+  return renderedElements;
+}
+
+interface ContentProvider {
+  peekCurrent(): DocElementPayload | undefined;
+  peekNext(): DocElementPayload | undefined;
+}
+
+class ElementsContentProvider implements ContentProvider {
+  idx: number = 0;
+
+  constructor(readonly content: DocElementContent) {}
+
+  peekCurrent(): DocElementPayload | undefined {
+    return this.idx >= this.content.length ? undefined : this.content[this.idx];
+  }
+
+  peekNext(): DocElementPayload | undefined {
+    return this.idx === this.content.length - 1 ? undefined : this.content[this.idx + 1];
+  }
+
+  advance(step: number) {
+    this.idx += step;
+  }
+}
+
+function findRenderComponent(elementsLibrary: ElementsLibraryMap, contentProvider: ContentProvider) {
+  const item = contentProvider.peekCurrent();
+  const next = contentProvider.peekNext();
+
+  // TODO generic way in elements library when more use-cases emerge
+  if (isImageWithNumericAnnotations(item!, next)) {
+    return imageWithNumericTextRenderComponent(elementsLibrary, item!, next!);
+  }
+
+  return {
+    component: elementsLibrary[item!.type],
+    propsToUse: item,
+    consumedElementsNumber: 1,
+  };
+}
+
+const ANNOTATED_IMAGE_TYPE = "AnnotatedImage";
+const ORDERED_LIST_TYPE = "OrderedList";
+
+function isImageWithNumericAnnotations(current: DocElementPayload, next?: DocElementPayload) {
+  if (!next) {
+    return false;
+  }
+
+  return (
+    (isAnnotatedImage(current) && next.type === ORDERED_LIST_TYPE) ||
+    (current.type === ORDERED_LIST_TYPE && isAnnotatedImage(next))
+  );
+
+  function isAnnotatedImage(item: DocElementPayload) {
+    if (item.type !== ANNOTATED_IMAGE_TYPE) {
+      return false;
+    }
+
+    // @ts-ignore
+    return item.shapes.length > 0;
+  }
+}
+
+function imageWithNumericTextRenderComponent(
+  elementsLibrary: ElementsLibraryMap,
+  item: DocElementPayload,
+  next: DocElementPayload
+) {
+  return {
+    component: elementsLibrary.AnnotatedImageWithOrderedList,
+    propsToUse: {
+      annotatedImageContent: findImageContent(),
+      orderedListContent: findOrderedListContent(),
+      isImageFirst: findIsImageFirst(),
+    },
+    consumedElementsNumber: 2,
+  };
+
+  function findImageContent() {
+    return item.type === ANNOTATED_IMAGE_TYPE ? item : next;
+  }
+
+  function findOrderedListContent() {
+    return item.type === ORDERED_LIST_TYPE ? item : next;
+  }
+
+  function findIsImageFirst() {
+    return item.type === ANNOTATED_IMAGE_TYPE;
+  }
 }

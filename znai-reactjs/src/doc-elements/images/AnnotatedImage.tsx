@@ -24,8 +24,6 @@ import { cssVarPixelValue } from "../../utils/cssVars";
 import Annotations from "./annotations/Annotations";
 import { zoom } from "../zoom/Zoom";
 
-import "./AnnotatedImage.css";
-
 export interface ImageProps {
   imageSrc: string;
   shapes: object[];
@@ -37,10 +35,11 @@ export interface ImageProps {
   scale?: number;
   border?: boolean;
   timestamp?: number;
+  shapesTooltipContent?: any[];
 }
 
 export function AnnotatedImage(props: ImageProps) {
-  const { imageSrc, width, height, title, shapes, align, fit, scale, border, timestamp } = props;
+  const { imageSrc, width, height, title, shapes, align, fit, scale, border, timestamp, shapesTooltipContent } = props;
 
   const scaleToUse = calcScale();
 
@@ -91,7 +90,7 @@ export function AnnotatedImage(props: ImageProps) {
           </div>
           <div style={childContainerStyle}>
             <svg width={imageWidth} height={imageHeight}>
-              {annotations.staticAnnotationsToRender(scaleToUse)}
+              {annotations.staticAnnotationsToRender(shapesTooltipContent, scaleToUse)}
             </svg>
           </div>
         </div>

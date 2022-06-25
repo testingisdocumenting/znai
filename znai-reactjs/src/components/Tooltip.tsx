@@ -17,7 +17,7 @@
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import "./Tooltip.css";
 
-interface Props {
+interface TooltipProps {
   content: any;
   children: React.ReactNode;
 }
@@ -89,8 +89,28 @@ export function TooltipRenderer() {
   );
 }
 
-export function Tooltip({ content, children }: Props) {
-  const nodeRef = useRef<HTMLDivElement>(null);
+export function Tooltip({ content, children }: TooltipProps) {
+  return (
+    <TooltipImpl content={content} isSvg={false}>
+      {children}
+    </TooltipImpl>
+  );
+}
+
+export function TooltipSvg({ content, children }: TooltipProps) {
+  return (
+    <TooltipImpl content={content} isSvg={true}>
+      {children}
+    </TooltipImpl>
+  );
+}
+
+interface TooltipImplProps extends TooltipProps {
+  isSvg: boolean;
+}
+
+function TooltipImpl({ isSvg, content, children }: TooltipImplProps) {
+  const nodeRef = useRef<Element>(null);
   const insideElementRef = useRef(false);
 
   const clientTop = nodeRef.current?.getBoundingClientRect()?.top;
@@ -104,15 +124,18 @@ export function Tooltip({ content, children }: Props) {
     }
   }, [clientTop]);
 
+  const ParentComponent = isSvg ? "g" : "div";
+
   return (
-    <div
+    <ParentComponent
       className="znai-tooltip-provider"
+      // @ts-ignore
       ref={nodeRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {children}
-    </div>
+    </ParentComponent>
   );
 
   function handleMouseEnter() {
