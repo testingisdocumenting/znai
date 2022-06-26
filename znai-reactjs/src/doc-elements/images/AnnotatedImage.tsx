@@ -24,6 +24,8 @@ import { cssVarPixelValue } from "../../utils/cssVars";
 import Annotations from "./annotations/Annotations";
 import { zoom } from "../zoom/Zoom";
 
+import "./AnnotatedImage.css";
+
 export interface ImageProps {
   imageSrc: string;
   shapes: object[];
