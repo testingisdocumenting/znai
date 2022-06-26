@@ -44,6 +44,7 @@ interface BadgeParams {
   text: string;
   align: string;
   invertedColors: boolean;
+  className?: string;
   scale: number;
 }
 
@@ -71,9 +72,8 @@ function BadgeBody(badgeParams: BadgeParams) {
     fontSize: "var(--znai-image-annotation-badge-font-size)",
   };
 
-  return (
-    <CircleBodyImpl {...badgeParams} r={12} style={style} scale={badgeParams.scale} className="znai-annotation-badge" />
-  );
+  const fullClassName = "znai-annotation-badge" + (badgeParams.className ? "  " + badgeParams.className : "");
+  return <CircleBodyImpl {...badgeParams} r={12} style={style} scale={badgeParams.scale} className={fullClassName} />;
 }
 
 function CircleBodyImpl({ x, y, r = 15, style, text, align, scale, className }: CircleParamsWithStyle) {
