@@ -243,6 +243,10 @@
     --znai-image-annotation-badge-line-width: 2;
     --znai-image-annotation-badge-font-size: 12px;
 
+    --znai-annotated-image-ordered-list-number-background-color: var(--znai-image-annotation-badge-fill-color);
+    --znai-annotated-image-ordered-list-number-text-color: var(--znai-image-annotation-badge-text-color);
+    --znai-annotated-image-ordered-list-number-border-color: var(--znai-image-annotation-badge-line-color);
+
     --znai-diagram-node-shadow-color: #e6e6e6;
     --znai-diagram-a-line: #AA8E39;
     --znai-diagram-a-fill: #FFEAAA;

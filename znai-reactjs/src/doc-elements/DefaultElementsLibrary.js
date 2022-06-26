@@ -82,6 +82,7 @@ import { TextBadge } from "./badge/TextBadge";
 import { DoxygenMember } from "./doxygen/DoxygenMember";
 import { AnnotatedImage } from "./images/AnnotatedImage";
 import { AnnotatedImageWithOrderedList } from "./images/AnnotatedImageWithOrderedList";
+import { OrderedList } from "./default-elements/OrderedList";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -126,9 +127,7 @@ library.KeyboardShortcut = KeyboardShortcut
 
 library.TextBadge = TextBadge
 
-library.OrderedList = ({delimiter, startNumber, ...props}) => <ol className="content-block" start={startNumber}>
-    <props.elementsLibrary.DocElement {...props}/>
-</ol>
+library.OrderedList = OrderedList
 
 presentationElementHandlers.OrderedList = {component: library.OrderedList,
     numberOfSlides: () => 1}

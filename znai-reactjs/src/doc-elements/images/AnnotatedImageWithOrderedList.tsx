@@ -18,6 +18,10 @@ import React from "react";
 
 import { DocElementContent, WithElementsLibrary } from "../default-elements/DocElement";
 
+import { AnnotatedImageOrderedList } from "./AnnotatedImageOrderedList";
+
+import "./AnnotatedImageWithOrderedList.css";
+
 interface Props extends WithElementsLibrary {
   annotatedImageContent: DocElementContent;
   orderedListContent: DocElementContent;
@@ -31,14 +35,24 @@ export function AnnotatedImageWithOrderedList({
   isImageFirst,
 }: Props) {
   const AnnotatedImage = elementsLibrary.AnnotatedImage;
-  const OrderedList = elementsLibrary.OrderedList;
+  const OrderedList = AnnotatedImageOrderedList;
 
   // @ts-ignore
   const tooltipsContent = orderedListContent.content.map((listItem) => (
     <elementsLibrary.DocElement content={listItem.content} elementsLibrary={elementsLibrary} />
   ));
 
-  const renderedList = <OrderedList {...orderedListContent} elementsLibrary={elementsLibrary} />;
+  // @ts-ignore
+  const isInvertedColors = annotatedImageContent.shapes.map((shape) => shape.invertedColors);
+
+  const renderedList = (
+    <OrderedList
+      // @ts-ignore
+      content={orderedListContent.content}
+      elementsLibrary={elementsLibrary}
+      isInvertedColors={isInvertedColors}
+    />
+  );
   const renderedImage = (
     <AnnotatedImage
       {...annotatedImageContent}
