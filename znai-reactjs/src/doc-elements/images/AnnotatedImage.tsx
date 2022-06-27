@@ -38,10 +38,24 @@ export interface ImageProps {
   border?: boolean;
   timestamp?: number;
   shapesTooltipContent?: any[];
+  annotationToHighlightIdx?: number;
 }
 
 export function AnnotatedImage(props: ImageProps) {
-  const { imageSrc, width, height, title, shapes, align, fit, scale, border, timestamp, shapesTooltipContent } = props;
+  const {
+    imageSrc,
+    width,
+    height,
+    title,
+    shapes,
+    align,
+    fit,
+    scale,
+    border,
+    timestamp,
+    shapesTooltipContent,
+    annotationToHighlightIdx,
+  } = props;
 
   const scaleToUse = calcScale();
 
@@ -92,7 +106,7 @@ export function AnnotatedImage(props: ImageProps) {
           </div>
           <div style={childContainerStyle}>
             <svg width={imageWidth} height={imageHeight}>
-              {annotations.staticAnnotationsToRender(shapesTooltipContent, scaleToUse)}
+              {annotations.staticAnnotationsToRender(shapesTooltipContent, annotationToHighlightIdx, scaleToUse)}
             </svg>
           </div>
         </div>

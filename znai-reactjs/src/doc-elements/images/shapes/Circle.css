@@ -21,3 +21,25 @@
 .znai-annotation-badge:hover {
     opacity: 0.2;
 }
+
+.znai-annotation-highlight circle {
+    animation: znai-annotation-pulse 1s infinite reverse;
+}
+
+@keyframes znai-annotation-pulse {
+    0% {
+        transform: scale(0.9);
+        stroke-width: var(--znai-image-annotation-badge-line-width);
+    }
+
+    50% {
+        transform: scale(1.2);
+        stroke-width: 12px;
+        stroke-opacity: 0.3;
+    }
+
+    100% {
+        transform: scale(0.9);
+        stroke-width: var(--znai-image-annotation-badge-line-width);
+    }
+}

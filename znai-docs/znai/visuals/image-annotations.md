@@ -17,7 +17,6 @@ Note: Color of badges change based on the background color
 # Badge Textual Description
 
 Put ordered list right before or after an annotated image to associate text with the badges.
-Hovering mouse on badged will display tooltip with the textual description.
 
 ````markdown {title: "ordered list markdown example to provide contextual information"}
 1. Use automated testing to exercise happy paths and capture test artifacts
@@ -29,6 +28,11 @@ Hovering mouse on badged will display tooltip with the textual description.
 ```
 ````
 
+Note: Hover over image annotations to display automatic tooltip. 
+\
+Hover over an item text to highlight the annotation on the image.
+
+
 1. Use automated testing to exercise happy paths and capture test artifacts
 2. Use captured test artifacts to supercharge your documentation
 
@@ -36,8 +40,6 @@ Hovering mouse on badged will display tooltip with the textual description.
 840,600
 1680,1400
 ```
-
-Note: hover over image annotations to display automatic tooltip 
 
 # Pixel Ratio
 

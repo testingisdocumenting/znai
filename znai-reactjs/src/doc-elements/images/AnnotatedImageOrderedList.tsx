@@ -21,9 +21,10 @@ import "./AnnotatedImageOrderedList.css";
 
 interface Props extends DocElementProps {
   isInvertedColors: boolean[];
+  onHover(itemIdx: number): void;
 }
 
-export function AnnotatedImageOrderedList({ content, elementsLibrary, isInvertedColors }: Props) {
+export function AnnotatedImageOrderedList({ content, elementsLibrary, isInvertedColors, onHover }: Props) {
   return (
     <div className="znai-annotated-image-ordered-list content-block">
       {content.map((item, idx) => (
@@ -31,6 +32,7 @@ export function AnnotatedImageOrderedList({ content, elementsLibrary, isInverted
           key={idx}
           idx={idx}
           content={item.content!}
+          onHover={onHover}
           elementsLibrary={elementsLibrary}
           isInvertedColors={isInvertedColors[idx]}
         />
@@ -44,16 +46,32 @@ interface ListItemProps {
   idx: number;
   content: DocElementContent;
   isInvertedColors: boolean;
+  onHover(itemIdx: number): void;
 }
 
-function ListItem({ elementsLibrary, idx, content, isInvertedColors }: ListItemProps) {
+function ListItem({ elementsLibrary, idx, content, isInvertedColors, onHover }: ListItemProps) {
+  const mouseEnterHandlers = {
+    onMouseEnter,
+    onMouseLeave,
+  };
+
   const numberClassName = "znai-annotated-image-ordered-list-number" + (isInvertedColors ? " inverted" : "");
   return (
     <>
-      <div className={numberClassName}>{idx + 1}</div>
-      <div className="znai-annotated-image-ordered-list-content list-item">
+      <div className={numberClassName} {...mouseEnterHandlers}>
+        {idx + 1}
+      </div>
+      <div className="znai-annotated-image-ordered-list-content list-item" {...mouseEnterHandlers}>
         <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} />
       </div>
     </>
   );
+
+  function onMouseEnter() {
+    onHover(idx);
+  }
+
+  function onMouseLeave() {
+    onHover(-1);
+  }
 }

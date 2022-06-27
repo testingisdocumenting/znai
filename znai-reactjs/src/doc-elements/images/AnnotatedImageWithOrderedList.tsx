@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { useState } from "react";
 
 import { DocElementContent, WithElementsLibrary } from "../default-elements/DocElement";
 
@@ -34,6 +34,8 @@ export function AnnotatedImageWithOrderedList({
   orderedListContent,
   isImageFirst,
 }: Props) {
+  const [annotationToHighlightIdx, setAnnotationToHighlightIdx] = useState(-1);
+
   const AnnotatedImage = elementsLibrary.AnnotatedImage;
   const OrderedList = AnnotatedImageOrderedList;
 
@@ -51,14 +53,17 @@ export function AnnotatedImageWithOrderedList({
       content={orderedListContent.content}
       elementsLibrary={elementsLibrary}
       isInvertedColors={isInvertedColors}
+      onHover={handleOnListItemHover}
     />
   );
+
   const renderedImage = (
     <AnnotatedImage
       {...annotatedImageContent}
       elementsLibrary={elementsLibrary}
       // @ts-ignore
       shapesTooltipContent={tooltipsContent}
+      annotationToHighlightIdx={annotationToHighlightIdx}
     />
   );
 
@@ -77,4 +82,8 @@ export function AnnotatedImageWithOrderedList({
       {renderedImage}
     </>
   );
+
+  function handleOnListItemHover(idx: number) {
+    setAnnotationToHighlightIdx(idx);
+  }
 }

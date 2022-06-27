@@ -54,13 +54,14 @@ class Annotations {
         }
     }
 
-    staticAnnotationsToRender(shapesTooltipContent, scale) {
+    staticAnnotationsToRender(shapesTooltipContent, highlightIdx, scale) {
         return this.shapes.map((shape, idx) => {
             const StaticAnnotation = staticAnnotationForShape(shape)
 
             const tooltipContent = shapesTooltipContent && shapesTooltipContent[idx]
 
-            const renderedAnnotation = <StaticAnnotation key={shape.id} shape={shape} scale={scale}/>
+            const className = highlightIdx === idx ? "znai-annotation-highlight" : "";
+            const renderedAnnotation = <StaticAnnotation key={shape.id} shape={{...shape, className}} scale={scale}/>
 
             if (!tooltipContent) {
                 return renderedAnnotation;
