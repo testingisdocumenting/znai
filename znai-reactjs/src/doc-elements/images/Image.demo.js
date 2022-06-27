@@ -20,6 +20,7 @@ import { AnnotatedImage } from './AnnotatedImage'
 import {elementsLibrary} from '../DefaultElementsLibrary';
 import {ZoomOverlay} from '../zoom/ZoomOverlay';
 import { simulateState } from "react-component-viewer";
+import { TooltipRenderer } from "../../components/Tooltip";
 
 const [getBorder, setBorder] = simulateState(true);
 
@@ -36,7 +37,7 @@ export function imageDemo(registry) {
     registry.add("toggle border", () => (
       <div>
           <button onClick={() => setBorder(!getBorder())}>toggle border</button>
-        <AnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)} border={getBorder()}/>)
+        <AnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)} border={getBorder()}/>
       </div>
     ));
 
@@ -65,8 +66,14 @@ export function imageDemo(registry) {
       <AnnotatedImage {...badgeAlignment(450, 350)} {...scaleImage(0.6)} {...noFitImageAnnotations()}/>
     ))
 
-    registry.add('simple annotations', () => <AnnotatedImage {...simpleAnnotations()}/>)
-    registry.add('simple annotations with border', () => <AnnotatedImage {...simpleAnnotations()}
+    registry.add('arrow annotations', () => (
+      <>
+          <TooltipRenderer/>
+          <AnnotatedImage {...arrowAnnotations()}/>
+      </>
+    ))
+
+    registry.add('annotations with border', () => <AnnotatedImage {...simpleAnnotations()}
                                                                                  border={true}/>)
     registry.add('badge alignment annotations', () => <AnnotatedImage {...badgeAlignment(450, 350)}/>)
     registry.add('badge alignment annotations inverted', () => <AnnotatedImage {...badgeAlignment(50, 350, true)}/>)
@@ -137,6 +144,19 @@ function simpleAnnotations() {
             {type: 'highlight', id: 'c5', x: 150, y: 220, width: 80, height: 40, color: 'c'},
             {type: 'rectangle', id: 'c6', x: 270, y: 170, width: 80, height: 40, text: 'here', color: 'b'},
             {type: 'arrow', id: 'c7', beginX: 200, beginY: 200, endX: 300, endY: 300, color: 'd', text: 'This here'}]
+    }
+}
+
+function arrowAnnotations() {
+    return {
+        imageSrc: 'ui.jpg',
+        width: 800,
+        height: 500,
+        shapes: [
+            {type: 'arrow', id: 'a1`', beginX: 420, beginY: 300, endX: 340, endY: 200, color: 'd', text: 'This here'},
+            {type: 'arrow', id: 'a1`', beginX: 330, beginY: 200, endX: 230, endY: 300, color: 'd', text: 'This here'},
+            {type: 'arrow', id: 'a1`', beginX: 130, beginY: 200, endX: 10, endY: 10, color: 'd', text: 'This here'},
+        ]
     }
 }
 

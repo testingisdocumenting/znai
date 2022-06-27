@@ -1,0 +1,1 @@
+* Change `arrow` [Image Annotations](visuals/image-annotations) style to be single color and use tooltip 

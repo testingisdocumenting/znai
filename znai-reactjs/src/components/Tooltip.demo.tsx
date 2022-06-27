@@ -17,12 +17,15 @@
 import React from "react";
 
 import { Registry } from "react-component-viewer";
-import { Tooltip } from "./Tooltip";
+import { Tooltip, TooltipRenderer } from "./Tooltip";
 
 export function tooltipDemo(registry: Registry) {
   registry.add("simple", () => (
-    <Tooltip content="hello world">
-      <div>hover over me</div>
-    </Tooltip>
+    <>
+      <TooltipRenderer />
+      <Tooltip content="hello world">
+        <div>hover over me</div>
+      </Tooltip>
+    </>
   ));
 }
