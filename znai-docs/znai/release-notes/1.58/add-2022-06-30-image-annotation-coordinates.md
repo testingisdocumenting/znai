@@ -1,0 +1,1 @@
+* [Image Annotation Coordinates](visuals/image-annotations#manual-coordinates) during preview mode 

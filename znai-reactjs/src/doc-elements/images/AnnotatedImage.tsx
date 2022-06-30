@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useState } from "react";
 
 import { imageAdditionalPreviewUrlParam } from "./imagePreviewAdditionalUrlParam";
 
@@ -23,6 +23,8 @@ import { cssVarPixelValue } from "../../utils/cssVars";
 
 import Annotations from "./annotations/Annotations";
 import { zoom } from "../zoom/Zoom";
+
+import { isPreviewEnabled } from "../../structure/docMeta";
 
 import "./AnnotatedImage.css";
 
@@ -58,6 +60,8 @@ export function AnnotatedImage(props: ImageProps) {
   } = props;
 
   const scaleToUse = calcScale();
+
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: -1, y: -1 });
 
   const scaledWidth = width * scaleToUse;
   const scaledHeight = height * scaleToUse;
@@ -105,11 +109,12 @@ export function AnnotatedImage(props: ImageProps) {
             />
           </div>
           <div style={childContainerStyle}>
-            <svg width={imageWidth} height={imageHeight}>
+            <svg width={imageWidth} height={imageHeight} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
               {annotations.staticAnnotationsToRender(shapesTooltipContent, annotationToHighlightIdx, scaleToUse)}
             </svg>
           </div>
         </div>
+        {renderCoordinates()}
       </div>
     </div>
   );
@@ -129,6 +134,38 @@ export function AnnotatedImage(props: ImageProps) {
     }
 
     return <div className="znai-image-title">{title}</div>;
+  }
+
+  function handleMouseMove(e: React.MouseEvent<SVGElement>) {
+    if (!isPreviewEnabled()) {
+      return;
+    }
+
+    const bounds = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - bounds.left;
+    const y = e.clientY - bounds.top;
+
+    setMousePosition({ x, y });
+  }
+
+  function handleMouseLeave() {
+    setMousePosition({ x: -1, y: -1 });
+  }
+
+  function renderCoordinates() {
+    if (!isPreviewEnabled() || mousePosition.x < 0 || mousePosition.y < 0) {
+      return null;
+    }
+
+    const k = 1.0 / scaleToUse;
+
+    const effectiveX = (k * mousePosition.x) | 0;
+    const effectiveY = (k * mousePosition.y) | 0;
+    return (
+      <div className="znai-image-preview-coordinates">
+        preview coordinates, x: {effectiveX}; y: {effectiveY}
+      </div>
+    );
   }
 
   function zoomImage() {

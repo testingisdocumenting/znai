@@ -14,6 +14,10 @@ Use `image` fence plugin to display Image and manually provide badge coordinates
 
 Note: Color of badges change based on the background color
 
+# Manual Coordinates
+
+Hover mouse over image during [Preview Mode](introduction/getting-started#preview-mode) to display coordinates under the cursor. Use the displayed coordinates to update the position.  
+
 # Badge Textual Description
 
 Put ordered list right before or after an annotated image to associate text with the badges.

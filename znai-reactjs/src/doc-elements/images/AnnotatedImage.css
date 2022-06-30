@@ -35,6 +35,14 @@
     color: var(--znai-image-title-color);
 }
 
+.znai-image-preview-coordinates {
+    padding: 4px 16px;
+    font-size: var(--znai-smaller-text-size);
+
+    background-color: var(--znai-image-title-background-color);
+    color: var(--znai-image-title-color);
+}
+
 .znai-annotated-image {
 }
 
