@@ -16,7 +16,7 @@
  */
 
 import React from "react";
-import { TooltipSvg } from "../../../components/Tooltip";
+import { TooltipPlacement, TooltipSvg } from "../../../components/Tooltip";
 
 interface LineParams {
   beginX: number;
@@ -84,13 +84,15 @@ const ArrowBody = ({ beginX, beginY, endX, endY, text, scale, invertedColors, ..
   L ${length} 0 z`;
 
   const svgArrow = <path d={path} fill={style.fill} stroke={style.line} strokeWidth={style.lineWidth} />;
-  const svgArrowWithOptionalTooltip = text ? <TooltipSvg content={text}>{svgArrow}</TooltipSvg> : svgArrow;
-
-  const svgRotatedArrow = (
-    <g {...props} transform={`rotate(${calcAngle()})`}>
-      {svgArrowWithOptionalTooltip}
-    </g>
+  const svgArrowWithOptionalTooltip = text ? (
+    <TooltipSvg content={text} placement={calcTooltipPlacement()}>
+      {svgArrow}
+    </TooltipSvg>
+  ) : (
+    svgArrow
   );
+
+  const svgRotatedArrow = <g transform={`rotate(${calcAngle()})`}>{svgArrowWithOptionalTooltip}</g>;
 
   return <g transform={`translate(${scaledBx} ${scaledBy})`}>{svgRotatedArrow}</g>;
 
@@ -105,6 +107,14 @@ const ArrowBody = ({ beginX, beginY, endX, endY, text, scale, invertedColors, ..
     const det = x1 * y2 - y1 * x2;
 
     return (Math.atan2(det, dot) * 180.0) / Math.PI;
+  }
+
+  function calcTooltipPlacement(): TooltipPlacement {
+    if (beginX < endX) {
+      return beginY < endY ? "bottom-right" : "top-right";
+    } else {
+      return beginY < endY ? "bottom-left" : "top-left";
+    }
   }
 };
 

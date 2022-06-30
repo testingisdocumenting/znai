@@ -27,10 +27,14 @@
     color: var(--znai-tooltip-text-color);
     background: var(--znai-tooltip-background-color);
 
-    margin: -2px;
     padding: 2px 8px;
     border: 1px solid var(--znai-tooltip-border-color);
     border-radius: 6px;
 
     z-index: 1000;
+}
+
+.znai-tooltip.bottom-right,
+.znai-tooltip.bottom-left {
+    transform: translate(-50%, 0%);
 }
