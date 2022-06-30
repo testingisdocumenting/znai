@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { CSSProperties } from "react";
 
 import { Registry } from "react-component-viewer";
-import { Tooltip, TooltipRenderer } from "./Tooltip";
+import { Tooltip, TooltipPlacement, TooltipRenderer } from "./Tooltip";
 
 export function tooltipDemo(registry: Registry) {
   registry.add("simple", () => (
@@ -28,4 +28,22 @@ export function tooltipDemo(registry: Registry) {
       </Tooltip>
     </>
   ));
+
+  tooltipPlacement("top-left");
+  tooltipPlacement("top-right");
+  tooltipPlacement("bottom-left");
+  tooltipPlacement("bottom-right");
+
+  function tooltipPlacement(placement: TooltipPlacement) {
+    const squareStyle: CSSProperties = { height: 100, width: 100, border: "1px solid black" };
+
+    registry.add(placement, () => (
+      <>
+        <TooltipRenderer />
+        <Tooltip content="hello world" placement={placement}>
+          <div style={squareStyle}>hover over me</div>
+        </Tooltip>
+      </>
+    ));
+  }
 }

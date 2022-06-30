@@ -61,14 +61,14 @@ class Annotations {
             const tooltipContent = shapesTooltipContent && shapesTooltipContent[idx]
 
             const className = highlightIdx === idx ? "znai-annotation-highlight" : "";
-            const renderedAnnotation = <StaticAnnotation key={shape.id} shape={{...shape, className}} scale={scale}/>
+            const renderedAnnotation = <StaticAnnotation key={idx} shape={{...shape, className}} scale={scale}/>
 
             if (!tooltipContent) {
                 return renderedAnnotation;
             }
 
             return (
-              <TooltipSvg content={tooltipContent} key={shape.id}>
+              <TooltipSvg content={tooltipContent} key={idx}>
                   {renderedAnnotation}
               </TooltipSvg>
             )

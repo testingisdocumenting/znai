@@ -17,13 +17,17 @@
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import "./Tooltip.css";
 
+export type TooltipPlacement = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+
 interface TooltipProps {
   content: any;
   children: React.ReactNode;
+  placement?: TooltipPlacement;
 }
 
 interface TooltipPayload {
   clientRect: DOMRect;
+  placement: TooltipPlacement;
   content: any;
 }
 
@@ -77,29 +81,61 @@ export function TooltipRenderer() {
     return null;
   }
 
-  const position: CSSProperties = {
-    top: tooltipPayload.clientRect.top - (tooltipRef.current ? tooltipRef.current.clientHeight : 0),
-    left: tooltipPayload.clientRect.left,
-  };
-
+  const className = "znai-tooltip " + tooltipPayload.placement;
   return (
-    <div className="znai-tooltip" style={position} ref={tooltipRef}>
+    <div
+      className={className}
+      style={calcPosition(tooltipPayload.clientRect, tooltipPayload.placement)}
+      ref={tooltipRef}
+    >
       {tooltipPayload.content}
     </div>
   );
+
+  function calcPosition(clientRect: DOMRect, placement: TooltipPlacement): CSSProperties {
+    const contentHeight = tooltipRef.current ? tooltipRef.current.clientHeight : 0;
+
+    const gap = 2;
+
+    switch (placement) {
+      case "top-left":
+        return {
+          top: clientRect.top - contentHeight - gap,
+          left: clientRect.left - gap,
+        };
+
+      case "top-right":
+        return {
+          top: clientRect.top - contentHeight - gap,
+          left: clientRect.right + gap,
+        };
+
+      case "bottom-left":
+        return {
+          top: clientRect.bottom + gap,
+          left: clientRect.left - gap,
+        };
+
+      case "bottom-right":
+        return {
+          top: clientRect.bottom + gap,
+          left: clientRect.right + gap,
+        };
+    }
+  }
 }
 
-export function Tooltip({ content, children }: TooltipProps) {
+export function Tooltip({ content, placement, children }: TooltipProps) {
   return (
-    <TooltipImpl content={content} isSvg={false}>
+    <TooltipImpl content={content} placement={placement} isSvg={false}>
       {children}
     </TooltipImpl>
   );
 }
 
-export function TooltipSvg({ content, children }: TooltipProps) {
+export function TooltipSvg({ content, placement, children }: TooltipProps) {
   return (
-    <TooltipImpl content={content} isSvg={true}>
+    <TooltipImpl content={content} placement={placement} isSvg={true}>
       {children}
     </TooltipImpl>
   );
@@ -109,7 +145,7 @@ interface TooltipImplProps extends TooltipProps {
   isSvg: boolean;
 }
 
-function TooltipImpl({ isSvg, content, children }: TooltipImplProps) {
+function TooltipImpl({ isSvg, content, placement, children }: TooltipImplProps) {
   const nodeRef = useRef<Element>(null);
   const insideElementRef = useRef(false);
 
@@ -144,6 +180,7 @@ function TooltipImpl({ isSvg, content, children }: TooltipImplProps) {
       tooltipEngine.display({
         content,
         clientRect: nodeRef.current.getBoundingClientRect(),
+        placement: placement || "top-left",
       });
     }
   }
