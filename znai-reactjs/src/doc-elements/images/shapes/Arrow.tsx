@@ -29,7 +29,7 @@ interface LineParams {
   scale: number;
 }
 
-const ArrowBody = ({ beginX, beginY, endX, endY, text, scale, invertedColors, ...props }: LineParams) => {
+const ArrowBody = ({ beginX, beginY, endX, endY, text, scale, invertedColors }: LineParams) => {
   const colors = invertedColors
     ? {
         line: "var(--znai-image-annotation-badge-inverted-line-color)",

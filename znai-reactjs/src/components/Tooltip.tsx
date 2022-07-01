@@ -17,7 +17,7 @@
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import "./Tooltip.css";
 
-export type TooltipPlacement = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+export type TooltipPlacement = "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center";
 
 interface TooltipProps {
   content: any;
@@ -120,6 +120,12 @@ export function TooltipRenderer() {
         return {
           top: clientRect.bottom + gap,
           left: clientRect.right + gap,
+        };
+
+      case "center":
+        return {
+          top: (clientRect.top + clientRect.bottom) / 2.0,
+          left: (clientRect.left + clientRect.right) / 2.0,
         };
     }
   }

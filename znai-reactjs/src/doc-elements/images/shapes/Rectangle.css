@@ -14,31 +14,13 @@
  * limitations under the License.
  */
 
-.znai-tooltip-provider {
-    display: inline-block;
+.znai-annotation-rectangle {
+    stroke-dasharray: 40 15;
+    animation: znai-annotation-dash 1s infinite linear;
 }
 
-.znai-tooltip {
-    position: fixed;
-    transform: translate(-50%, -100%);
-
-    font-size: var(--znai-smaller-text-size);
-
-    color: var(--znai-tooltip-text-color);
-    background: var(--znai-tooltip-background-color);
-
-    padding: 2px 8px;
-    border: 1px solid var(--znai-tooltip-border-color);
-    border-radius: 6px;
-
-    z-index: 1000;
-}
-
-.znai-tooltip.bottom-right,
-.znai-tooltip.bottom-left {
-    transform: translate(-50%, 0%);
-}
-
-.znai-tooltip.center {
-    transform: translate(-50%, -50%);
+@keyframes znai-annotation-dash {
+    to {
+        stroke-dashoffset: 55;
+    }
 }

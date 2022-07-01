@@ -73,6 +73,13 @@ export function imageDemo(registry) {
       </>
     ))
 
+    registry.add('rect annotations', () => (
+      <>
+          <TooltipRenderer/>
+          <AnnotatedImage {...rectAnnotations()}/>
+      </>
+    ))
+
     registry.add('annotations with border', () => <AnnotatedImage {...simpleAnnotations()}
                                                                                  border={true}/>)
     registry.add('badge alignment annotations', () => <AnnotatedImage {...badgeAlignment(450, 350)}/>)
@@ -156,6 +163,18 @@ function arrowAnnotations() {
             {type: 'arrow', id: 'a1`', beginX: 420, beginY: 300, endX: 340, endY: 200, color: 'd', text: 'This here'},
             {type: 'arrow', id: 'a1`', beginX: 330, beginY: 200, endX: 230, endY: 300, color: 'd', text: 'This here'},
             {type: 'arrow', id: 'a1`', beginX: 130, beginY: 200, endX: 10, endY: 10, color: 'd', text: 'This here'},
+        ]
+    }
+}
+
+function rectAnnotations() {
+    return {
+        imageSrc: 'ui.jpg',
+        width: 1297,
+        height: 702,
+        shapes: [
+            {type: 'rectangle', beginX: 340, beginY: 230, endX: 640, endY: 400, color: 'd', text: 'some other text'},
+            {type: 'rectangle', beginX: 40, beginY: 90, endX: 140, endY: 400, color: 'd', text: 'some other text', invertedColors: true},
         ]
     }
 }
