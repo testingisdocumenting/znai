@@ -33,14 +33,14 @@ class SimpleCodeSnippet extends Component {
         super(props)
 
         this.processProps(props)
-        this.state = {displayFully: !this.limitLines(props)}
+        this.state = {
+            clickedReadMore: false
+        }
     }
 
     // handles changes during preview
     componentWillReceiveProps(nextProps) {
         this.processProps(nextProps)
-
-        this.setState({displayFully: !this.limitLines(nextProps)})
     }
 
     processProps({tokens, linesOfCode, highlight}) {
@@ -51,13 +51,13 @@ class SimpleCodeSnippet extends Component {
     }
 
     render() {
-        const {displayFully} = this.state
+        const {clickedReadMore} = this.state
         const {wrap, isPresentation, slideIdx, references} = this.props
 
         // slideIdx === 0 means no highlights, 1 - first highlight, etc
         const highlightIsVisible = !isPresentation || slideIdx > 0
 
-        const visibleLines = this.limitLines && !displayFully && !isPresentation ?
+        const visibleLines = this.limitLines(this.props) && !clickedReadMore && !isPresentation ?
             this.linesOfTokens.slice(0, this.readMoreVisibleLines(this.props)) :
             this.linesOfTokens
 
@@ -80,15 +80,17 @@ class SimpleCodeSnippet extends Component {
     }
 
     renderReadMore() {
-        const {displayFully} = this.state
+        const {clickedReadMore} = this.state
         const {isPresentation} = this.props
 
-        if (displayFully || isPresentation) {
+        if (isPresentation || !this.limitLines(this.props)) {
             return null
         }
 
+        const label = clickedReadMore ? "...collapse" : "read more..."
+
         return (
-            <div className="code-snippet-read-more" onClick={this.onReadMoreClick}>Read more...</div>
+            <div className="code-snippet-read-more" onClick={this.toggleReadMoreClick}>{label}</div>
         )
     }
 
@@ -111,8 +113,8 @@ class SimpleCodeSnippet extends Component {
         return lines.map((line, idx) => idx <= upToIdx ? line : [emptyLine])
     }
 
-    onReadMoreClick = () => {
-        this.setState({displayFully: true})
+    toggleReadMoreClick = () => {
+        this.setState(prev => ({clickedReadMore: !prev.clickedReadMore}))
     }
 
     limitLines(props) {
