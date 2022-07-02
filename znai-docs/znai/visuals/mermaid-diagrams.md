@@ -1,16 +1,26 @@
-# Mermaid
+# Fenced Block
 
 Use [Mermaid](https://mermaid-js.github.io/mermaid/#/) to create diagrams using text and code, written in a Markdown style.
 Surround Mermaid expressions with a fenced block and specify `mermaid` as a language
 
     ```mermaid
-    graph TD; A-->B; A-->C; B-->C;
+    flowchart TD
+        A[Start] --> B{Is it?}
+        B -- Yes --> C[OK]
+        C --> D[Rethink]
+        D --> B
+        B -- No ----> E[End]
     ```
 
 The result will be a diagram.
 
 ```mermaid
-graph TD; A-->B; A-->C; B-->C;
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -- Yes --> C[OK]
+    C --> D[Rethink]
+    D --> B
+    B -- No ----> E[End]
 ```
 
 In presentation mode, rendered expressions will automatically scale to make use of the screen space.

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import Mermaid from './Mermaid'
+import Mermaid from "./Mermaid";
+import { Registry } from "react-component-viewer";
 
-export function mermaidDemo(registry) {
-    registry
-        .add('simple graph', () => <Mermaid mermaid={"graph TD; A-->B; B-->C;"}/>)
+export function mermaidDemo(registry: Registry) {
+  registry.add("simple graph", () => <Mermaid mermaid={"graph TD; A-->B; B-->C;"} />);
 }

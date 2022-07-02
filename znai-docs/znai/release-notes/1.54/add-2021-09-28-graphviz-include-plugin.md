@@ -1,1 +1,1 @@
-* Add [graphviz](visuals/graphviz/) include plugin  
+* Add [graphviz](visuals/graphviz-diagrams) include plugin  

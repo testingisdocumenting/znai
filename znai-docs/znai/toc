@@ -57,10 +57,10 @@ visuals
     image-annotations
     iframe
     SVG
-    graphviz
     flow-diagrams
+    mermaid-diagrams
+    graphviz-diagrams
     PlantUml
-    mermaid
 synergy-with-testing
     java
     REST
