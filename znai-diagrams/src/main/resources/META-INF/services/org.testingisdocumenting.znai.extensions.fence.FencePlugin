@@ -15,4 +15,5 @@
 #
 
 org.testingisdocumenting.znai.diagrams.mermaid.MermaidFencePlugin
+org.testingisdocumenting.znai.diagrams.graphviz.GraphvizFencePlugin
 org.testingisdocumenting.znai.diagrams.plantuml.PlantUmlFencePlugin
