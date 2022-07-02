@@ -1,0 +1,1 @@
+* [Mermaid Diagrams Wide Mode](visuals/mermaid-diagrams#wide-mode)  
