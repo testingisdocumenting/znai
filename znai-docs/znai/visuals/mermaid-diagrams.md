@@ -27,6 +27,16 @@ In presentation mode, rendered expressions will automatically scale to make use 
 
 Note: Rendering is done by using [Mermaid](https://mermaid-js.github.io/mermaid/#/) library.
 
+# External File
+
+Use include plugin to render a Mermaid diagram from a file.
+
+    :include-mermaid: mermaid/class-diagram.mmd
+
+:include-mermaid: mermaid/class-diagram.mmd
+
+:include-file: mermaid/class-diagram.mmd { autoTitle: true }
+
 # Wide Mode
 
 Use `wide: true` to use as much horizontal space as required and available.
@@ -47,6 +57,12 @@ Use `wide: true` to use as much horizontal space as required and available.
     end
     ```
 
+or 
+
+```
+:include-mermaid: mermaid/sequence-diagram.mmd { wide: true }
+```
+
 ```mermaid {wide: true}
 sequenceDiagram
     par Alice to Bob
@@ -62,3 +78,4 @@ sequenceDiagram
     end
 end
 ```
+
