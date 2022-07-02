@@ -19,3 +19,4 @@ org.testingisdocumenting.znai.diagrams.graphviz.GvDiagramSlidesIncludePlugin
 org.testingisdocumenting.znai.diagrams.FlowChartIncludePlugin
 org.testingisdocumenting.znai.diagrams.plantuml.PlantUmlIncludePlugin
 org.testingisdocumenting.znai.diagrams.DiagramLegendIncludePlugin
+org.testingisdocumenting.znai.diagrams.mermaid.MermaidIncludePlugin
