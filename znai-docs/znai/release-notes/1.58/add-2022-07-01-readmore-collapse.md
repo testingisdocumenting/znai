@@ -1,0 +1,1 @@
+* Add collapse button for [Snippet Read More](snippets/external-code-snippets#read-more) 
