@@ -1,0 +1,1 @@
+* [Mermaid Diagrams](visuals/mermaid-diagrams) dark mode and auto them switch  
