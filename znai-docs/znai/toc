@@ -36,8 +36,24 @@ snippets
     math
     jupyter-notebook
     markdown
-layout
+visuals
     attention-signs
+    images
+    image-annotations
+    charts
+    mermaid-diagrams
+    SVG
+    icons
+    headings
+    text-badge
+    spoilers
+    keyboard-shortcuts
+    smart-bullet-points
+    flow-diagrams
+    graphviz-diagrams
+    PlantUml
+    iframe
+layout
     tabs
     tables
     columns
@@ -45,22 +61,6 @@ layout
     two-sides-pages
     two-sides-tabs
     jupyter-notebook-two-sides
-visuals
-    spoilers
-    smart-bullet-points
-    text-badge
-    headings
-    icons
-    keyboard-shortcuts
-    charts
-    images
-    image-annotations
-    iframe
-    SVG
-    mermaid-diagrams
-    flow-diagrams
-    graphviz-diagrams
-    PlantUml
 synergy-with-testing
     java
     REST
