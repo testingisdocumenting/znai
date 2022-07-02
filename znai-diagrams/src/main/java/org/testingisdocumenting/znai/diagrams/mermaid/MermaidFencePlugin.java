@@ -17,14 +17,17 @@
 package org.testingisdocumenting.znai.diagrams.mermaid;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class MermaidFencePlugin implements FencePlugin {
     private String content;
@@ -40,9 +43,18 @@ public class MermaidFencePlugin implements FencePlugin {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .add("wide", PluginParamType.BOOLEAN, "use all the horizontal space for the diagram", "true");
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         this.content = content;
-        return PluginResult.docElement("Mermaid", Collections.singletonMap("mermaid", content));
+        Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
+        props.put("mermaid", content);
+
+        return PluginResult.docElement("Mermaid", props);
     }
 
     @Override

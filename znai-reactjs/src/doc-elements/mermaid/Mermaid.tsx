@@ -18,8 +18,41 @@ import React, { useState } from "react";
 
 import mermaid from "mermaid";
 
+import "./Mermaid.css";
+
 interface Props {
   mermaid: string;
+  wide?: boolean;
+}
+
+let mermaidIdIdx = 0;
+function generateNewMermaidId() {
+  return "znai-mermaid-id-" + mermaidIdIdx++;
+}
+
+let isMermaidInitialized = false;
+function initMermaidIfRequired() {
+  if (isMermaidInitialized) {
+    return;
+  }
+
+  // @ts-ignore
+  window.znaiTheme.addChangeHandler(onThemeChange);
+
+  initializeMermaid();
+  isMermaidInitialized = true;
+
+  function onThemeChange() {
+    initializeMermaid();
+  }
+
+  function initializeMermaid() {
+    mermaid.mermaidAPI.initialize({
+      startOnLoad: false,
+      // @ts-ignore
+      theme: mermaidThemeName(),
+    });
+  }
 }
 
 export default function Mermaid(props: Props) {
@@ -31,35 +64,29 @@ export default function Mermaid(props: Props) {
     // @ts-ignore
     window.znaiTheme.addChangeHandler(onThemeChange);
 
-    initializeMermaid();
+    initMermaidIfRequired();
 
     // @ts-ignore
     return () => window.znaiTheme.removeChangeHandler(onThemeChange);
 
-    function initializeMermaid() {
-      mermaid.mermaidAPI.initialize({
-        startOnLoad: false,
-        // @ts-ignore
-        theme: mermaidThemeName(),
-      });
-    }
-
     function onThemeChange() {
-      initializeMermaid();
       setZnaiThemeName(detectZnaiThemeName());
-    }
-
-    function mermaidThemeName() {
-      // @ts-ignore
-      return detectZnaiThemeName() === "znai-dark" ? "dark" : "default";
     }
   }, []);
 
   React.useEffect(() => {
-    mermaid.mermaidAPI.render("mermaid", props.mermaid, (html) => setHTML(html));
+    mermaid.mermaidAPI.render(generateNewMermaidId(), props.mermaid, (html) => {
+      setHTML(html);
+    });
   }, [props.mermaid, znaiThemeName]);
 
-  return <div className="znai-mermaid content-block" dangerouslySetInnerHTML={{ __html: html }}></div>;
+  const className = "znai-mermaid " + (props.wide ? "wide" : "content-block");
+  return <div className={className} dangerouslySetInnerHTML={{ __html: html }}></div>;
+}
+
+function mermaidThemeName() {
+  // @ts-ignore
+  return detectZnaiThemeName() === "znai-dark" ? "dark" : "default";
 }
 
 function detectZnaiThemeName(): string {

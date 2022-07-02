@@ -26,3 +26,39 @@ flowchart TD
 In presentation mode, rendered expressions will automatically scale to make use of the screen space.
 
 Note: Rendering is done by using [Mermaid](https://mermaid-js.github.io/mermaid/#/) library.
+
+# Wide Mode
+
+Use `wide: true` to use as much horizontal space as required and available.
+
+    ```mermaid {wide: true}
+    sequenceDiagram
+        par Alice to Bob
+            Alice->>Bob: Go help John
+        and Alice to John
+            Alice->>John: I want this done today
+            par John to Charlie
+                John->>Charlie: Can we do this today?
+            and John to Diana
+                John->>Diana: Can you help us today?
+        and Alice to Carl
+            Alice->>Carl: I also want this done today
+        end
+    end
+    ```
+
+```mermaid {wide: true}
+sequenceDiagram
+    par Alice to Bob
+        Alice->>Bob: Go help John
+    and Alice to John
+        Alice->>John: I want this done today
+        par John to Charlie
+            John->>Charlie: Can we do this today?
+        and John to Diana
+            John->>Diana: Can you help us today?
+    and Alice to Carl
+        Alice->>Carl: I also want this done today
+    end
+end
+```
