@@ -46,3 +46,15 @@ Use `stroke` parameter to set fill color.
 
 Note: default stroke color is a text color, which may not look good in Dark theme. Use `black` color explicitly if you want
 the stroke color to be black in both Light and Dark themes. 
+
+# Inside Tables
+
+Znai provides a shortcut to use icons inside [Tables](layout/tables).
+
+:include-file: layout/table/table-with-shortcuts.csv {title: "table.csv"}
+
+:include-file: layout/table/table-mapping.csv {title: "mapping.csv"}
+
+    :include-table: table.csv {mappingPath: "mapping.csv"}
+
+:include-table: layout/table/table-with-shortcuts.csv {mappingPath: "layout/table/table-mapping.csv"}

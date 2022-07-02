@@ -1,0 +1,1 @@
+* Doc: [Table with Icons](visuals/icons#inside-tables) example  
