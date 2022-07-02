@@ -1,0 +1,1 @@
+* Add Graphviz [fenced block](visuals/graphviz-diagrams#fenced-block) support  

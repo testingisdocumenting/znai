@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +21,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GlobalAssetsRegistry {
-    private Map<String, Object> assets;
+    private final Map<String, Object> assets;
 
     public GlobalAssetsRegistry() {
         assets = new ConcurrentHashMap<>();

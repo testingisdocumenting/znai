@@ -19,17 +19,12 @@ package org.testingisdocumenting.znai.diagrams.graphviz;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.diagrams.DiagramsGlobalAssetsRegistration;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 public class GraphvizIncludePlugin implements IncludePlugin {
@@ -50,24 +45,10 @@ public class GraphvizIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        String diagramId = generateId();
         diagramPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
-        String gvContent = componentsRegistry.resourceResolver().textContent(diagramPath);
 
-        DiagramsGlobalAssetsRegistration.register(componentsRegistry.globalAssetsRegistry());
-
-        GraphvizDiagram diagram = Graphviz.graphvizEngine.diagramFromGv(
-                pluginParams.getOpts().get("type", GraphvizEngine.DOT_LAYOUT),
-                diagramId, gvContent);
-        Map<String, Object> props = new LinkedHashMap<>();
-        props.put("diagram", diagram.toMap());
-        props.put("urls", Collections.emptyList());
-
-        return PluginResult.docElement("GraphVizDiagram", props);
-    }
-
-    private String generateId() {
-        return "gv_" + UUID.randomUUID().toString().replaceAll("-", "_");
+        return GraphvizPlugin.pluginResult(componentsRegistry.globalAssetsRegistry(), pluginParams,
+                componentsRegistry.resourceResolver().textContent(diagramPath));
     }
 
     @Override
