@@ -1,0 +1,1 @@
+* Rework [Templates](layout/templates) example  
