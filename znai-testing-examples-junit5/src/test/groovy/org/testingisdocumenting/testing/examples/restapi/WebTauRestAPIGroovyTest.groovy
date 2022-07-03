@@ -34,7 +34,14 @@ class WebTauRestAPIGroovyTest {
                 .get("/weather") {request -> server.response([
                         temperature: 90,
                         city: "New York"])
-                })
+                }
+                .get("/messages") {request -> server.response([
+                        messages: [[author: "Alice", message: "Hello all!"],
+                                [author: "Bob", message: "yey!"]]])
+                }
+                .post("/messages") {request -> server.response([id: "mid1", status: "SUCCESS"]) }
+                .put("/messages/:mid") {request -> server.response([id: "mid1", status: "SUCCESS"]) }
+        )
 
         fakeServer.setAsBaseUrl()
     }
@@ -51,5 +58,32 @@ class WebTauRestAPIGroovyTest {
         }
 
         http.doc.capture("weather-example")
+    }
+
+    @Test
+    void getMessages() {
+        http.get("/messages") {
+            messages.author.should == ["Alice", "Bob"]
+        }
+
+        http.doc.capture("chat-get-messages")
+    }
+
+    @Test
+    void postMessages() {
+        http.post("/messages", [message: "Hello all"]) {
+            id.should == "mid1"
+        }
+
+        http.doc.capture("chat-post-messages")
+    }
+
+    @Test
+    void putMessages() {
+        http.post("/messages/mid1", [message: "Hello all!"]) {
+            status.should == "SUCCESS"
+        }
+
+        http.doc.capture("chat-put-messages")
     }
 }
