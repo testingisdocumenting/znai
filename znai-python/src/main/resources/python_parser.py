@@ -74,7 +74,7 @@ def extract_subscript_type(annotation: Subscript):
         if isinstance(annotation.slice, Name):
             return [extract_type(annotation.slice)]
 
-        return [extract_type(type) for type in annotation.slice.dims]
+        return [extract_type(type) for type in annotation.slice.elts]
 
     return {
         "name": extract_type(annotation.value),
