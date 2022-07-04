@@ -16,12 +16,12 @@
 
 package org.testingisdocumenting.znai.python;
 
-public class PythonParam {
+public class PythonDocParam {
     private final String name;
     private final String type;
     private final String pyDocText;
 
-    public PythonParam(String name, String type, String pyDocText) {
+    public PythonDocParam(String name, String type, String pyDocText) {
         this.name = name;
         this.type = type;
         this.pyDocText = pyDocText;

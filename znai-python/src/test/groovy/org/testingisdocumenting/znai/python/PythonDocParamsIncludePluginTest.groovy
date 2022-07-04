@@ -37,6 +37,19 @@ class PythonDocParamsIncludePluginTest {
         props.should == expectedProps
     }
 
+    @Test
+    void "should use types from type hints for doc params"() {
+        def props = resultingProps('pydoc-params-type-hints.py', '{entry: "my_func"}')
+
+        def expectedProps = [
+                parameters: [[name: 'label', type: [[text: 'string', refId: '']], anchorId: 'my_func_label',
+                              description: [[markdown: 'label to use to *render* item in the store', type: 'TestMarkdown']]],
+                             [name: 'price', type: [[text: 'Money', refId: '']], anchorId: 'my_func_price',
+                              description: [[markdown: 'price associated with the **item**', type: 'TestMarkdown']]]],
+                entry: 'my_func']
+        props.should == expectedProps
+    }
+
     private static Map<String, Object> resultingProps(String fileName, String value) {
         return PluginsTestUtils.processIncludeAndGetProps(":include-python-doc-params: $fileName $value")
     }

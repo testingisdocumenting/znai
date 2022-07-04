@@ -16,6 +16,7 @@ import ast
 import json
 import sys
 import traceback
+from _ast import Subscript, Name
 
 content_lines = []
 warnings = set([])
@@ -44,8 +45,42 @@ def node_to_dict(node_type, name_to_use, node, include_docstring=True):
         raise Exception(f"Error processing {name_to_use} {node_type}") from e
 
 
-def function_to_dict(func_node):
-    return node_to_dict("function", func_node.name, func_node)
+def function_to_dict(func_node, name):
+    func_dict = node_to_dict("function", name, func_node)
+    func_dict["args"] = extract_func_args(func_node.args)
+
+    return func_dict
+
+
+def extract_func_args(args):
+    return [{"name": arg.arg, "type": extract_type(arg.annotation)} for arg in args.args]
+
+
+def extract_type(annotation):
+    if annotation is None:
+        return ""
+
+    if isinstance(annotation, Subscript):
+        return extract_subscript_type(annotation)
+
+    if isinstance(annotation, Name):
+        return annotation.id
+
+    return ""
+
+
+def extract_subscript_type(annotation: Subscript):
+    def extract_types():
+        if isinstance(annotation.slice, Name):
+            return [extract_type(annotation.slice)]
+
+        return [extract_type(type) for type in annotation.slice.dims]
+
+    return {
+        "name": extract_type(annotation.value),
+        "types": extract_types()
+    }
+
 
 
 def extract_content(node_type, name_to_use, node):
@@ -54,7 +89,7 @@ def extract_content(node_type, name_to_use, node):
         return None
 
     global content_lines
-    return "\n".join(content_lines[(node.lineno - 1) : node.end_lineno])
+    return "\n".join(content_lines[(node.lineno - 1): node.end_lineno])
 
 
 def partition_assignment_first_line(assignment_node):
@@ -70,7 +105,7 @@ def extract_assignment_value(assignment_node):
         return first_line_content.strip()
 
     return first_line_content.strip() + "\n" + "\n".join(
-        content_lines[assignment_node.lineno : assignment_node.end_lineno])
+        content_lines[assignment_node.lineno: assignment_node.end_lineno])
 
 
 def extract_body_only(node_type, name_to_use, node):
@@ -89,11 +124,12 @@ def extract_body_only(node_type, name_to_use, node):
     end_line_idx = node.body[end_idx].end_lineno - 1
 
     global content_lines
-    return "\n".join(content_lines[start_line_idx : (end_line_idx + 1)])
+    return "\n".join(content_lines[start_line_idx: (end_line_idx + 1)])
 
 
 def is_py_doc(node):
-    if hasattr(node, "value") and isinstance(node.value, ast.Constant) and not hasattr(node, "targets") and not hasattr(node, "target"):
+    if hasattr(node, "value") and isinstance(node.value, ast.Constant) \
+            and not hasattr(node, "targets") and not hasattr(node, "target"):
         return True
 
     return False
@@ -106,7 +142,7 @@ def class_to_list_of_dict(class_node):
     :return:
     """
     return [node_to_dict("class", class_node.name, class_node)] + \
-           [node_to_dict("function", class_node.name + "." + node.name, node) for node in
+           [function_to_dict(node, class_node.name + "." + node.name) for node in
             class_node.body if isinstance(node, ast.FunctionDef)]
 
 
@@ -126,19 +162,19 @@ def parse_file(file_to_parse):
     class_definitions = [node for node in module.body if isinstance(node, ast.ClassDef)]
     variable_assignments = [node for node in module.body if isinstance(node, ast.Assign)]
 
-    parse_result = [function_to_dict(f) for f in function_definitions]
+    file_parse_result = [function_to_dict(f, f.name) for f in function_definitions]
 
     for class_node in class_definitions:
         dicts = class_to_list_of_dict(class_node)
         for class_dict in dicts:
-            parse_result.append(class_dict)
+            file_parse_result.append(class_dict)
 
     for assignment_node in variable_assignments:
         assignment_dict = parse_assignment(assignment_node)
         if assignment_dict is not None:
-            parse_result.append(assignment_dict)
+            file_parse_result.append(assignment_dict)
 
-    return parse_result
+    return file_parse_result
 
 
 def print_parse_completed():

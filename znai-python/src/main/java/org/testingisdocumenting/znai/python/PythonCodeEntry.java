@@ -16,8 +16,11 @@
 
 package org.testingisdocumenting.znai.python;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class PythonCodeEntry {
     private final String name;
@@ -25,6 +28,7 @@ public class PythonCodeEntry {
     private final String content;
     private final String bodyOnly;
     private final String docString;
+    private final List<PythonCodeArg> args;
 
     public PythonCodeEntry(Map<String, Object> parsed) {
         this.name = Objects.toString(parsed.get("name"), "");
@@ -32,6 +36,8 @@ public class PythonCodeEntry {
         this.content = Objects.toString(parsed.get("content"), "");
         this.bodyOnly = Objects.toString(parsed.get("body_only"), "");
         this.docString = Objects.toString(parsed.get("doc_string"), "");
+
+        this.args = buildArgs(parsed);
     }
 
     public String getName() {
@@ -52,5 +58,20 @@ public class PythonCodeEntry {
 
     public String getDocString() {
         return docString;
+    }
+
+    public List<PythonCodeArg> getArgs() {
+        return args;
+    }
+
+    private List<PythonCodeArg> buildArgs(Map<String, Object> parsed) {
+        Object parsedArgs = parsed.get("args");
+        if (parsedArgs == null) {
+            return Collections.emptyList();
+        }
+
+        @SuppressWarnings("unchecked")
+        List<Map<String, Object>> parsedArgsList = (List<Map<String, Object>>) parsedArgs;
+        return parsedArgsList.stream().map(PythonCodeArg::new).collect(Collectors.toList());
     }
 }

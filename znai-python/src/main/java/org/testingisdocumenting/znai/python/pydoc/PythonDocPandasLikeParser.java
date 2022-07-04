@@ -16,7 +16,7 @@
 
 package org.testingisdocumenting.znai.python.pydoc;
 
-import org.testingisdocumenting.znai.python.PythonParam;
+import org.testingisdocumenting.znai.python.PythonDocParam;
 import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
 //    private final Pattern PARAMETER_NAME_TYPE = Pattern.compile("^(\\w+)\\s*:\\s*(.*)\\s*");
     private final Pattern PARAMETER_NAME_TYPE = Pattern.compile("^(\\S+)\\s*:\\s*(.*)\\s*");
 
-    private final List<PythonParam> params = new ArrayList<>();
+    private final List<PythonDocParam> params = new ArrayList<>();
     private String currentName = "";
     private String currentType;
     private List<String> currentDocLines;
@@ -61,7 +61,7 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
     @Override
     public PythonDocParserResult parse(String pyDoc) {
         String descriptionOnly = extractDescriptionOnly(pyDoc);
-        List<PythonParam> params = parseParams(pyDoc);
+        List<PythonDocParam> params = parseParams(pyDoc);
 
         return new PythonDocParserResult(descriptionOnly, params);
     }
@@ -75,7 +75,7 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
         return pyDoc.substring(0, matcher.start()).trim();
     }
 
-    private List<PythonParam> parseParams(String pyDoc) {
+    private List<PythonDocParam> parseParams(String pyDoc) {
         Matcher matcher = PARAMETERS_START.matcher(pyDoc);
         if (!matcher.find()) {
             return Collections.emptyList();
@@ -140,7 +140,7 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
             return;
         }
 
-        params.add(new PythonParam(currentName.trim(),
+        params.add(new PythonDocParam(currentName.trim(),
                 currentType.trim(),
                 StringUtils.stripIndentation(String.join("\n", currentDocLines))));
         currentName = "";

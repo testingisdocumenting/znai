@@ -16,15 +16,15 @@
 
 package org.testingisdocumenting.znai.python.pydoc;
 
-import org.testingisdocumenting.znai.python.PythonParam;
+import org.testingisdocumenting.znai.python.PythonDocParam;
 
 import java.util.List;
 
 public class PythonDocParserResult {
     private final String descriptionOnly;
-    private final List<PythonParam> params;
+    private final List<PythonDocParam> params;
 
-    public PythonDocParserResult(String descriptionOnly, List<PythonParam> params) {
+    public PythonDocParserResult(String descriptionOnly, List<PythonDocParam> params) {
         this.descriptionOnly = descriptionOnly;
         this.params = params;
     }
@@ -33,7 +33,7 @@ public class PythonDocParserResult {
         return descriptionOnly;
     }
 
-    public List<PythonParam> getParams() {
+    public List<PythonDocParam> getParams() {
         return params;
     }
 }

@@ -23,13 +23,19 @@ import java.util.stream.Stream;
 
 public class PythonCode {
     private final Map<String, PythonCodeEntry> entryByName;
+    private final List<Map<String, Object>> parsed;
 
     public PythonCode(List<Map<String, Object>> parsed) {
+        this.parsed = parsed;
         entryByName = new LinkedHashMap<>();
         parsed.forEach(p -> {
             PythonCodeEntry entry = new PythonCodeEntry(p);
             entryByName.put(entry.getName(), entry);
         });
+    }
+
+    public List<Map<String, Object>> getParsed() {
+        return parsed;
     }
 
     public Stream<String> namesStream() {
