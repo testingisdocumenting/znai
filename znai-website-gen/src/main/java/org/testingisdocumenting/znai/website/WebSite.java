@@ -87,7 +87,6 @@ public class WebSite implements Log {
     private final WebResource footerJavaScript;
     private final WebResource globalAssetsJavaScript;
     private final WebResource globalDocReferencesJavaScript;
-    private final WebResource globalAnchorsJavaScript;
     private final WebResource searchIndexJavaScript;
 
     private MultipleLocalLocationsResourceResolver localResourceResolver;
@@ -114,7 +113,6 @@ public class WebSite implements Log {
         footerJavaScript = WebResource.withPath("footer.js");
         globalAssetsJavaScript = WebResource.withPath("assets.js");
         globalDocReferencesJavaScript = WebResource.withPath("documentation-references.js");
-        globalAnchorsJavaScript = WebResource.withPath("global-anchors.js");
         searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
         auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
         markupParsingConfiguration = MarkupParsingConfigurations.byName(cfg.documentationType);
@@ -196,7 +194,6 @@ public class WebSite implements Log {
         deployMeta();
         deployGlobalAssets();
         deployGlobalDocReferences();
-        deployGlobalAnchors();
         deployAuxiliaryFiles();
         deployResources();
         deployPluginsStats();
@@ -334,8 +331,6 @@ public class WebSite implements Log {
             extraJavaScriptsInFront.add(globalDocReferencesJavaScript);
         }
 
-        extraJavaScriptsInFront.add(globalAnchorsJavaScript);
-
         extraJavaScriptsInFront.add(tocJavaScript);
         extraJavaScriptsInFront.add(footerJavaScript);
         extraJavaScriptsInBack = new ArrayList<>(registeredExtraJavaScripts);
@@ -444,14 +439,6 @@ public class WebSite implements Log {
 
         String globalReferences = JsonUtils.serializePrettyPrint(globalDocReferences.getDocReferences().toMap());
         deployer.deploy(globalDocReferencesJavaScript, "docReferences = " + globalReferences);
-    }
-
-    private void deployGlobalAnchors() {
-        reportPhase("deploying global anchors");
-
-        Map<String, String> globalAnchors = docStructure.globalAnchors();
-        String globalAnchorsJson = JsonUtils.serializePrettyPrint(globalAnchors);
-        deployer.deploy(globalAnchorsJavaScript, "globalAnchors = " + globalAnchorsJson);
     }
 
     private void validateTocItemsPresence() {

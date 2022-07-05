@@ -37,17 +37,19 @@ nestedList.score, int, descr6
 'escaped.name', String, desc7
 """)
 
+        def emptyUrl = ApiLinkedText.EMPTY_STRING_SUPPLIER
+
         apiParameters.toMap().should == [parameters: [
-                [anchorId: 'myPrefix_firstName', name: 'firstName', type: [[text: 'String', refId: '']], description: [[markdown: 'descr1', type: 'TestMarkdown']]],
-                [anchorId: 'myPrefix_nested', name: 'nested', type: [[text: 'object', refId: '']], description: [[markdown: 'descr2', type: 'TestMarkdown']], children:
-                        [[anchorId: 'myPrefix_nested_zipCode', name: 'zipCode', type: [[text: 'String', refId: '']], description: [[markdown: 'descr3', type: 'TestMarkdown']]],
-                         [anchorId: 'myPrefix_nested_address', name: 'address', type: [[text: 'String', refId: '']], description: [[markdown: 'descr4', type: 'TestMarkdown']]],
-                         [anchorId: 'myPrefix_nested_subNested', name: 'subNested', type: [[text: 'object', refId: '']], description: [[markdown: 'nested nested', type: 'TestMarkdown']], children:
-                                 [[anchorId: 'myPrefix_nested_subNested_url', name: 'url', type: [[text: 'String', refId: '']], description: [[markdown: 'nested nested 1', type: 'TestMarkdown']]],
-                                  [anchorId: 'myPrefix_nested_subNested_fileName', name: 'fileName', type: [[text: 'String', refId: '']], description: [[markdown: 'nested nested 2', type: 'TestMarkdown']]]]]]],
-                [anchorId: 'myPrefix_nestedList', name: 'nestedList', type: [[text: 'array of objects', refId: '']], description: [[markdown: 'descr5', type: 'TestMarkdown']], children: [
-                        [anchorId: 'myPrefix_nestedList_score', name: 'score', type: [[text: 'int', refId: '']], description: [[markdown: 'descr6', type: 'TestMarkdown']]]]],
-                [anchorId: 'myPrefix_escaped_name', name: 'escaped.name', type: [[text: 'String', refId: '']], description: [[markdown: 'desc7', type: 'TestMarkdown']]]
+                [anchorId: 'myPrefix_firstName', name: 'firstName', type: [[text: 'String', url: emptyUrl]], description: [[markdown: 'descr1', type: 'TestMarkdown']]],
+                [anchorId: 'myPrefix_nested', name: 'nested', type: [[text: 'object', url: emptyUrl]], description: [[markdown: 'descr2', type: 'TestMarkdown']], children:
+                        [[anchorId: 'myPrefix_nested_zipCode', name: 'zipCode', type: [[text: 'String', url: emptyUrl]], description: [[markdown: 'descr3', type: 'TestMarkdown']]],
+                         [anchorId: 'myPrefix_nested_address', name: 'address', type: [[text: 'String', url: emptyUrl]], description: [[markdown: 'descr4', type: 'TestMarkdown']]],
+                         [anchorId: 'myPrefix_nested_subNested', name: 'subNested', type: [[text: 'object', url: emptyUrl]], description: [[markdown: 'nested nested', type: 'TestMarkdown']], children:
+                                 [[anchorId: 'myPrefix_nested_subNested_url', name: 'url', type: [[text: 'String', url: emptyUrl]], description: [[markdown: 'nested nested 1', type: 'TestMarkdown']]],
+                                  [anchorId: 'myPrefix_nested_subNested_fileName', name: 'fileName', type: [[text: 'String', url: emptyUrl]], description: [[markdown: 'nested nested 2', type: 'TestMarkdown']]]]]]],
+                [anchorId: 'myPrefix_nestedList', name: 'nestedList', type: [[text: 'array of objects', url: emptyUrl]], description: [[markdown: 'descr5', type: 'TestMarkdown']], children: [
+                        [anchorId: 'myPrefix_nestedList_score', name: 'score', type: [[text: 'int', url: emptyUrl]], description: [[markdown: 'descr6', type: 'TestMarkdown']]]]],
+                [anchorId: 'myPrefix_escaped_name', name: 'escaped.name', type: [[text: 'String', url: emptyUrl]], description: [[markdown: 'desc7', type: 'TestMarkdown']]]
         ]]
 
         apiParameters.combinedTextForSearch().should == 'firstName String descr1 nested object descr2 zipCode ' +

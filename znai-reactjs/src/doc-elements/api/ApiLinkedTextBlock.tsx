@@ -17,7 +17,6 @@
 import React from "react";
 
 import { ApiLinkedText } from "./ApiLinkedText";
-import { globalAnchorUrl } from "../references/globalAnchors";
 
 import { LinkWrapper } from "../default-elements/LinkWrapper";
 import { isLocalUrl } from "../../structure/links";
@@ -36,7 +35,7 @@ export function ApiLinkedTextBlock({ linkedText }: Props) {
   return (
     <div className="znai-api-text-with-links">
       {linkedText.map((part, idx) => {
-        const url = part.refId ? globalAnchorUrl(part.refId) : undefined;
+        const url = part.url ? part.url : "";
         if (url) {
           const isLocal = isLocalUrl(url);
 

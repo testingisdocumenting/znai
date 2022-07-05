@@ -160,9 +160,9 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     @Override
-    public Map<String, String> globalAnchors() {
-        return globalAnchorsById.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().getUrl()));
+    public Optional<String> findGlobalAnchorUrl(String globalAnchorId) {
+        GlobalAnchor anchor = globalAnchorsById.get(globalAnchorId);
+        return anchor == null ? Optional.empty() : Optional.of(anchor.getUrl());
     }
 
     @Override

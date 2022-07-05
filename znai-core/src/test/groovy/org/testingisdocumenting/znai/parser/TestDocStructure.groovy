@@ -30,6 +30,8 @@ class TestDocStructure implements DocStructure {
 
     Set<String> registeredLocalLinks = [] as TreeSet
 
+    Map<String, String> fakeGlobalAnchors = [:]
+
     @Override
     void validateUrl(Path path, String additionalClue, DocUrl docUrl) {
         if (docUrl.isExternalUrl()) {
@@ -61,7 +63,6 @@ class TestDocStructure implements DocStructure {
 
     @Override
     void registerGlobalAnchor(Path sourcePath, String anchorId) {
-
     }
 
     @Override
@@ -75,8 +76,9 @@ class TestDocStructure implements DocStructure {
     }
 
     @Override
-    Map<String, String> globalAnchors() {
-        return [:]
+    Optional<String> findGlobalAnchorUrl(String globalAnchorId) {
+        String url = fakeGlobalAnchors.get(globalAnchorId)
+        return url == null ? Optional.empty() : Optional.of(url)
     }
 
     void setToc(TableOfContents testToc) {

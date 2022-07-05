@@ -18,28 +18,29 @@ package org.testingisdocumenting.znai.extensions.api;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class ApiLinkedTextPart {
     private final String text;
-    private final String refId;
+    private final Supplier<String> urlProvider;
 
-    public ApiLinkedTextPart(String text, String refId) {
+    public ApiLinkedTextPart(String text, Supplier<String> urlProvider) {
         this.text = text;
-        this.refId = refId;
+        this.urlProvider = urlProvider;
     }
 
     public String getText() {
         return text;
     }
 
-    public String getRefId() {
-        return refId;
+    public Supplier<String> getUrlProvider() {
+        return urlProvider;
     }
 
     public Map<String, Object> toMap() {
         Map<String, Object> result = new HashMap<>();
         result.put("text", text);
-        result.put("refId", refId);
+        result.put("url", urlProvider);
 
         return result;
     }

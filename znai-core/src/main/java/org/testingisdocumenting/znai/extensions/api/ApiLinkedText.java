@@ -19,9 +19,12 @@ package org.testingisdocumenting.znai.extensions.api;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ApiLinkedText {
+    public static final Supplier<String> EMPTY_STRING_SUPPLIER = () -> "";
+
     private final List<ApiLinkedTextPart> parts;
 
     public ApiLinkedText() {
@@ -40,11 +43,11 @@ public class ApiLinkedText {
     }
 
     public void addPart(String text) {
-        parts.add(new ApiLinkedTextPart(text, ""));
+        parts.add(new ApiLinkedTextPart(text, EMPTY_STRING_SUPPLIER));
     }
 
-    public void addPart(String text, String refId) {
-        parts.add(new ApiLinkedTextPart(text, refId));
+    public void addPart(String text, Supplier<String> urlProvider) {
+        parts.add(new ApiLinkedTextPart(text, urlProvider));
     }
 
     public List<ApiLinkedTextPart> getParts() {

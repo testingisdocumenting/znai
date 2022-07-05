@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.structure;
 
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.Optional;
 
 public interface DocStructure {
     void validateUrl(Path path, String additionalClue, DocUrl docUrl);
@@ -27,7 +28,7 @@ public interface DocStructure {
     void registerGlobalAnchor(Path sourcePath, String anchorId);
     void registerLocalAnchor(Path path, String anchorId);
     String globalAnchorUrl(Path clientPath, String anchorId);
-    Map<String, String> globalAnchors();
+    Optional<String> findGlobalAnchorUrl(String globalAnchorId);
 
     TableOfContents tableOfContents();
 }

@@ -17,8 +17,13 @@
 package org.testingisdocumenting.znai.doxygen.parser
 
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PropsUtils
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.testingisdocumenting.znai.utils.ResourceUtils
 import org.testingisdocumenting.znai.utils.XmlUtils
+
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class DoxygenTextWithLinksParserTest {
     @Test
@@ -27,11 +32,15 @@ class DoxygenTextWithLinksParserTest {
                 XmlUtils.parseXml(ResourceUtils.textContent("doxygen-text-with-ref.xml")),
                 "type")
 
-        def textWithLinks = DoxygenTextWithLinksParser.parse(root)
+        TEST_COMPONENTS_REGISTRY.docStructure().fakeGlobalAnchors = [
+                "classutils_1_1second_1_1MyClass": "/ref/my-class",
+        ]
 
-        textWithLinks.toListOfMaps().should == [[text: "const " , refId: ""],
-                                                [text: "utils::second::MyClass",
-                                                 refId: "classutils_1_1second_1_1MyClass"],
-                                                [text: " &", refId: ""]]
+        def textWithLinks = DoxygenTextWithLinksParser.parse(TEST_COMPONENTS_REGISTRY.docStructure(), root)
+
+        PropsUtils.exerciseSuppliers(textWithLinks.toListOfMaps()).should == [[text: "const ", url: ""],
+                                                                              [text: "utils::second::MyClass",
+                                                                               url: "/ref/my-class"],
+                                                                              [text: " &", url: ""]]
     }
 }

@@ -17,9 +17,12 @@
 package org.testingisdocumenting.znai.doxygen.parser
 
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PropsUtils
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.testingisdocumenting.znai.utils.ResourceUtils
 import org.testingisdocumenting.znai.utils.XmlUtils
+
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class DoxygenMemberParserTest {
     @Test
@@ -27,8 +30,13 @@ class DoxygenMemberParserTest {
         def document = XmlUtils.parseXml(ResourceUtils.textContent("doxygen-member-def.xml"))
         def memberNode = XmlUtils.anyNestedNodeByName(document, "memberdef")
         def member = DoxygenMemberParser.parse(
-                TestComponentsRegistry.TEST_COMPONENTS_REGISTRY,
+                TEST_COMPONENTS_REGISTRY,
                 memberNode)
+
+        TEST_COMPONENTS_REGISTRY.docStructure().fakeGlobalAnchors = [
+                "classutils_1_1second_1_1MyClass": "/ref/my-class",
+                "classutils_1_1second_1_1AnotherClass": "/ref/another-class",
+        ]
 
         member.id.should == 'funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7'
         member.name.should == 'my_func'
@@ -38,12 +46,12 @@ class DoxygenMemberParserTest {
 
         member.normalizedParamsSignature.should == "const utils::second::MyClass&,const utils::second::AnotherClass*"
 
-        member.returnType.toListOfMaps().should == [[text: "utils::second::MyClass", refId: "classutils_1_1second_1_1MyClass"]]
-        member.parameters.toListOfMaps().should == [[name: "one", type: [[text: "const ", refId: ""],
-                                                                   [text: "utils::second::MyClass", refId: "classutils_1_1second_1_1MyClass"],
-                                                                   [text: " &", refId: ""]]],
-                                              [name: "two", type: [[text: "const ", refId: ""],
-                                                                   [text: "utils::second::AnotherClass", refId: "classutils_1_1second_1_1AnotherClass"],
-                                                                   [text: " *", refId: ""]]]]
+        PropsUtils.exerciseSuppliers(member.returnType.toListOfMaps()).should == [[text: "utils::second::MyClass", url: "/ref/my-class"]]
+        PropsUtils.exerciseSuppliers(member.parameters.toListOfMaps()).should == [[name: "one", type: [[text: "const ", url: ""],
+                                                                   [text: "utils::second::MyClass", url: "/ref/my-class"],
+                                                                   [text: " &", url: ""]]],
+                                              [name: "two", type: [[text: "const ", url: ""],
+                                                                   [text: "utils::second::AnotherClass", url: "/ref/another-class"],
+                                                                   [text: " *", url: ""]]]]
     }
 }
