@@ -16,6 +16,8 @@ import ast
 import json
 import sys
 import traceback
+import platform
+
 from _ast import Subscript, Name
 
 content_lines = []
@@ -80,7 +82,6 @@ def extract_subscript_type(annotation: Subscript):
         "name": extract_type(annotation.value),
         "types": extract_types()
     }
-
 
 
 def extract_content(node_type, name_to_use, node):
@@ -195,6 +196,7 @@ while True:
     result = {
         "success": success,
         "warnings": list(warnings),
+        "version": platform.python_version(),
         "error": error,
         "result": parse_result
     }
