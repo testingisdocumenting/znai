@@ -22,8 +22,8 @@ class ApiLinkedTextTest {
     @Test
     void "should provide combined text"() {
         def linkedText = new ApiLinkedText("hello")
-        linkedText.addPart("world", "refid1")
-        linkedText.addPart("links ", "refid2")
+        linkedText.addPart("world", () -> "refid1")
+        linkedText.addPart("links ", () -> "refid2")
 
         linkedText.buildCombinedText().should == "hello world links"
     }
