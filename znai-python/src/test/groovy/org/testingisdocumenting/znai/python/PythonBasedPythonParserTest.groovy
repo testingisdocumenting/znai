@@ -134,4 +134,30 @@ class PythonBasedPythonParserTest {
             docString: "A data class with a doc string."
         ]
     }
+
+    @Test
+    void "parse args and types"() {
+        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/cross-classes.py"))
+        parsed.parsed.each { println it }
+
+        parsed.findEntryByName("Transaction.execute").should == [
+                args: [
+                        [name: "self", type: [name: "", types: []]],
+                        [name: "opts", type: [name: "Dict", types: [
+                                [name: "string", types: []],
+                                [name: "int", types: []]]]],
+                        [name: "context", type: [name: "Union", types: [
+                                [name: "Context", types: []],
+                                [name: "list", types: [[name: "Context", types: []]]],
+                                [name: "string", types: []],
+                        ]]],
+                        [name: "some_other", type: [name: "string", types: []]],
+                ]
+        ]
+
+        parsed.findEntryByName("Context").should == [
+                name: "Context",
+                type: "class"
+        ]
+    }
 }

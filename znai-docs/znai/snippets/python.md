@@ -107,10 +107,20 @@ parameters
 
 Use `include-python-doc-params` plugin to render parameters extracted from pydoc text
 
-:include-file: python/pydoc-params.py {title: "pydoc-params.py"}
+:include-file: python/pydoc-params.py {autoTitle: true}
 
     :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "my_func params"}
 
 :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "my_func params"}
 
 Note: read more about [API parameters](snippets/api-parameters) for additional properties   
+
+# Type Hints
+
+If you define [Type Hints](https://docs.python.org/3/library/typing.html), you can omit types from PyDoc text and Znai will take the types from the signature
+
+:include-file: python/pydoc-params-type-hints.py {autoTitle: true}
+
+    :include-python-doc-params: python/pydoc-params-type-hints.py {entry: "my_func", title: "my_func params"}
+
+:include-python-doc-params: python/pydoc-params-type-hints.py {entry: "my_func", title: "my_func params"}

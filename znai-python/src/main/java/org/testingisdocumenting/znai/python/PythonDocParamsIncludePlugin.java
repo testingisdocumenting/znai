@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 public class PythonDocParamsIncludePlugin extends PythonIncludePluginBase {
+    private PythonCodeEntry codeEntry;
+
     @Override
     public String id() {
         return "python-doc-params";
@@ -40,13 +42,13 @@ public class PythonDocParamsIncludePlugin extends PythonIncludePluginBase {
 
     @Override
     public PythonIncludeResult process(PythonCode parsed) {
-        PythonCodeEntry codeEntry = findEntryByName(parsed, entryName);
+        codeEntry = findEntryByName(parsed, entryName);
         ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
 
         ApiParameters apiParameters = new ApiParameters(entryName);
         parsedPythonDoc.getParams().forEach(pythonParam -> {
             MarkupParserResult parsedMarkdown = componentsRegistry.markdownParser().parse(fullPath, pythonParam.getPyDocText());
-            apiParameters.add(pythonParam.getName(), new ApiLinkedText(pythonParam.getType()),
+            apiParameters.add(pythonParam.getName(), paramType(pythonParam),
                     parsedMarkdown.contentToListOfMaps(),
                     parsedMarkdown.getAllText());
         });
@@ -58,5 +60,16 @@ public class PythonDocParamsIncludePlugin extends PythonIncludePluginBase {
         List<DocElement> docElements = PluginResult.docElement("ApiParameters", props).getDocElements();
 
         return new PythonIncludeResult(docElements, codeEntry.getDocString());
+    }
+
+    private ApiLinkedText paramType(PythonDocParam param) {
+        PythonCodeArg typeHint = codeEntry.getArgs().stream().filter(p -> param.getName().equals(p.getName())).findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("no parameter <" + param.getName() + "> found is signature"));
+        String hintedType = typeHint.getType().renderTypeAsString();
+        if (!hintedType.isEmpty()) {
+            return new ApiLinkedText(hintedType);
+        }
+
+        return new ApiLinkedText(param.getType());
     }
 }

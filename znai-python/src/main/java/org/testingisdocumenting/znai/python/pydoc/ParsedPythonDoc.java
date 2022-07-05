@@ -16,7 +16,7 @@
 
 package org.testingisdocumenting.znai.python.pydoc;
 
-import org.testingisdocumenting.znai.python.PythonParam;
+import org.testingisdocumenting.znai.python.PythonDocParam;
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class ParsedPythonDoc {
 
     private final String pyDoc;
     private final String pyDocDescriptionOnly;
-    private final List<PythonParam> params;
+    private final List<PythonDocParam> params;
 
     public ParsedPythonDoc(String pyDoc) {
         PythonDocParser parser = findParser();
@@ -48,7 +48,7 @@ public class ParsedPythonDoc {
         return pyDocDescriptionOnly;
     }
 
-    public List<PythonParam> getParams() {
+    public List<PythonDocParam> getParams() {
         return params;
     }
 
