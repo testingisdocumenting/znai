@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.python
 
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 
 class PythonDocParamsIncludePluginTest {
@@ -24,10 +25,11 @@ class PythonDocParamsIncludePluginTest {
     void "should render python doc params as api params"() {
         def props = resultingProps('pydoc-params.py', '{entry: "my_func"}')
 
+        def emptyUrl = ApiLinkedText.EMPTY_STRING_SUPPLIER
         def expectedProps = [
-                parameters: [[name: 'label', type: [[text: 'String', refId: '']], anchorId: 'my_func_label',
+                parameters: [[name: 'label', type: [[text: 'String', url: emptyUrl]], anchorId: 'my_func_label',
                               description: [[markdown: 'label to use to *render* item in the store', type: 'TestMarkdown']]],
-                             [name: 'price', type: [[text: 'Money', refId: '']], anchorId: 'my_func_price',
+                             [name: 'price', type: [[text: 'Money', url: emptyUrl]], anchorId: 'my_func_price',
                               description: [[markdown: 'price associated with the **item**', type: 'TestMarkdown']]]],
                 entry: 'my_func']
         props.should == expectedProps
@@ -41,10 +43,11 @@ class PythonDocParamsIncludePluginTest {
     void "should use types from type hints for doc params"() {
         def props = resultingProps('pydoc-params-type-hints.py', '{entry: "my_func"}')
 
+        def emptyUrl = ApiLinkedText.EMPTY_STRING_SUPPLIER
         def expectedProps = [
-                parameters: [[name: 'label', type: [[text: 'string', refId: '']], anchorId: 'my_func_label',
+                parameters: [[name: 'label', type: [[text: 'string', url: emptyUrl]], anchorId: 'my_func_label',
                               description: [[markdown: 'label to use to *render* item in the store', type: 'TestMarkdown']]],
-                             [name: 'price', type: [[text: 'Money', refId: '']], anchorId: 'my_func_price',
+                             [name: 'price', type: [[text: 'Money', url: emptyUrl]], anchorId: 'my_func_price',
                               description: [[markdown: 'price associated with the **item**', type: 'TestMarkdown']]]],
                 entry: 'my_func']
         props.should == expectedProps
