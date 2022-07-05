@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.doxygen.parser;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
+import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Node;
 
@@ -52,11 +53,13 @@ public class DoxygenMemberParser {
         member.setVirtual("virtual".equals(XmlUtils.getAttributeText(memberNode, "virt")));
         member.setConst("yes".equals(XmlUtils.getAttributeText(memberNode, "const")));
 
-        member.setReturnType(DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(memberNode, "type")));
+        DocStructure docStructure = componentsRegistry.docStructure();
+        member.setReturnType(DoxygenTextWithLinksParser.parse(docStructure,
+                XmlUtils.nextLevelNodeByName(memberNode, "type")));
 
         XmlUtils.childrenNodesStreamByName(memberNode, "param").forEach((paramNode) -> {
             String name = XmlUtils.nextLevelNodeByName(paramNode, "declname").getTextContent();
-            ApiLinkedText type = DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(paramNode, "type"));
+            ApiLinkedText type = DoxygenTextWithLinksParser.parse(docStructure, XmlUtils.nextLevelNodeByName(paramNode, "type"));
             member.addParameter(name, type);
         });
 
@@ -66,7 +69,7 @@ public class DoxygenMemberParser {
             Node templateParamsNode = XmlUtils.nextLevelNodeByName(memberNode, "templateparamlist");
 
             XmlUtils.childrenNodesStreamByName(templateParamsNode, "param").forEach((paramNode) -> {
-                ApiLinkedText type = DoxygenTextWithLinksParser.parse(XmlUtils.nextLevelNodeByName(paramNode, "type"));
+                ApiLinkedText type = DoxygenTextWithLinksParser.parse(docStructure, XmlUtils.nextLevelNodeByName(paramNode, "type"));
                 member.addTemplateParameter("", type);
             });
         }

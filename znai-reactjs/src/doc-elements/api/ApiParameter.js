@@ -21,8 +21,9 @@ import ApiParameters from './ApiParameters'
 import {ReferenceLinkWrapper} from '../references/ReferenceLinkWrapper'
 
 import {Icon} from '../icons/Icon';
-import './ApiParameter.css'
 import { ApiLinkedTextBlock } from "./ApiLinkedTextBlock";
+
+import './ApiParameter.css'
 
 class ApiParameter extends React.Component {
     constructor(props) {

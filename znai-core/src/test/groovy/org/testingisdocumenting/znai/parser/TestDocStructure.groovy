@@ -75,8 +75,8 @@ class TestDocStructure implements DocStructure {
     }
 
     @Override
-    Map<String, String> globalAnchors() {
-        return [:]
+    Optional<String> findGlobalAnchorUrl(String globalAnchorId) {
+        return Optional.empty()
     }
 
     void setToc(TableOfContents testToc) {

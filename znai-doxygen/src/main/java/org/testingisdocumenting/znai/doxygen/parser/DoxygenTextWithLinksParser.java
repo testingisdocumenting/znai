@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.doxygen.parser;
 
 import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
+import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Node;
 
@@ -24,7 +25,7 @@ public class DoxygenTextWithLinksParser {
     private DoxygenTextWithLinksParser() {
     }
 
-    public static ApiLinkedText parse(Node nodeWithLinks) {
+    public static ApiLinkedText parse(DocStructure docStructure, Node nodeWithLinks) {
         ApiLinkedText result = new ApiLinkedText();
         XmlUtils.forEach(nodeWithLinks.getChildNodes(), (node) -> {
             if (node.getNodeType() == Node.TEXT_NODE) {
@@ -32,7 +33,8 @@ public class DoxygenTextWithLinksParser {
             }
 
             if (node.getNodeName().equals("ref")) {
-                result.addPart(node.getTextContent(), XmlUtils.getAttributeText(node, "refid"));
+                String refId = XmlUtils.getAttributeText(node, "refid");
+                result.addPart(node.getTextContent(), () -> docStructure.findGlobalAnchorUrl(refId).orElse(""));
             }
         });
 

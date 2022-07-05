@@ -34,6 +34,8 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -92,6 +94,16 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
         return PluginResult.docElements(Stream.empty());
     }
 
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.HIGH.text(compound.getName());
+    }
+
+    @Override
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
+        return Stream.of(AuxiliaryFile.builtTime(Doxygen.INSTANCE.getIndexPath()));
+    }
+
     private void declBlock(String name, Stream<DoxygenMember> memberStream) {
         List<DoxygenMember> members = memberStream.collect(Collectors.toList());
         if (members.isEmpty()) {
@@ -109,25 +121,21 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
         parserHandler.onIncludePlugin(includePlugin, pluginResult);
     }
 
-    @Override
-    public SearchText textForSearch() {
-        return SearchScore.HIGH.text(compound.getName());
-    }
-
-    @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(Doxygen.INSTANCE.getIndexPath()));
-    }
-
-    public void createMemberDecl(DoxygenMember member) {
+    private void createMemberDecl(DoxygenMember member) {
         Map<String, Object> memberProps = member.toMap();
         memberProps.put("compoundName", ""); // to remove compound name from rendering list of members
-        memberProps.put("refId", member.getId()); // to make clickable, as in TOC for members
+
+        Supplier<String> urlSupplier = () -> {
+            Optional<String> globalAnchorUrl = componentsRegistry.docStructure().findGlobalAnchorUrl(member.getId());
+            return globalAnchorUrl.orElse("");
+        };
+
+        memberProps.put("url", urlSupplier); // to make clickable, as in TOC for members
 
         parserHandler.onCustomNode("DoxygenMember", memberProps);
     }
 
-    public void createMemberDef(DoxygenMember member) {
+    private void createMemberDef(DoxygenMember member) {
         parserHandler.onSubHeading(4, member.getName(), headingProps);
 
         IncludePlugin includePlugin = DoxygenMemberIncludePlugin.createMemberPlugin();

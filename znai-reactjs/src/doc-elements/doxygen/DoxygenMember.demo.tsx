@@ -63,7 +63,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isVirtual={false}
       isConst={false}
       isStatic={false}
-      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
     />
   ));
@@ -76,7 +76,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isVirtual={false}
       isConst={false}
       isStatic={false}
-      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
       templateParameters={templateParameters}
     />
@@ -90,8 +90,8 @@ export function doxygenMemberDemo(registry: Registry) {
       isStatic={false}
       compoundName=""
       name="my_func"
-      refId="test_link"
-      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      url="#test_link"
+      returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
     />
   ));
@@ -104,8 +104,8 @@ export function doxygenMemberDemo(registry: Registry) {
       isStatic={true}
       compoundName="utils::MyClass"
       name="my_func"
-      refId="test_link"
-      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      url="#test_link"
+      returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
     />
   ));
@@ -118,8 +118,8 @@ export function doxygenMemberDemo(registry: Registry) {
       isStatic={true}
       compoundName="utils::MyClass"
       name="var_name"
-      refId="test_link"
-      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      url="#test_link"
+      returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={[]}
     />
   ));
@@ -132,8 +132,8 @@ export function doxygenMemberDemo(registry: Registry) {
       isStatic={false}
       compoundName="utils::MyClass"
       name="my_func"
-      refId="test_link"
-      returnType={[{ text: "MyClass", refId: "MyClass__8x" }]}
+      url="#test_link"
+      returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
     />
   ));

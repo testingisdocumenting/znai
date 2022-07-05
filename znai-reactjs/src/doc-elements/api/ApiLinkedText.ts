@@ -16,7 +16,7 @@
 
 export interface ApiLinkedTextPart {
   text: string;
-  refId: string; // optional global anchor id
+  url?: string;
 }
 
 export type ApiLinkedText = ApiLinkedTextPart[];

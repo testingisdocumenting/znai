@@ -18,7 +18,6 @@ import React from "react";
 import { DoxygenParameter } from "./Doxygen";
 
 import { LinkWrapper } from "../default-elements/LinkWrapper";
-import { globalAnchorUrl } from "../references/globalAnchors";
 import { ApiLinkedText } from "../api/ApiLinkedText";
 
 import { ApiLinkedTextBlock } from "../api/ApiLinkedTextBlock";
@@ -28,7 +27,7 @@ import "./DoxygenMember.css";
 interface Props {
   compoundName: string;
   name: string;
-  refId?: string;
+  url?: string;
   isFunction: boolean;
   isStatic: boolean;
   isVirtual: boolean;
@@ -41,7 +40,7 @@ interface Props {
 export function DoxygenMember({
   compoundName,
   name,
-  refId,
+  url,
   returnType,
   isFunction,
   isStatic,
@@ -51,9 +50,8 @@ export function DoxygenMember({
   templateParameters,
 }: Props) {
   const renderedName = <div className="znai-doxygen-member-name">{name}</div>;
-  const memberUrl = refId ? globalAnchorUrl(refId) : undefined;
-  const nameWrappedInOptionalLink = memberUrl ? (
-    <LinkWrapper url={memberUrl} treatAsLocal={true}>
+  const nameWrappedInOptionalLink = url ? (
+    <LinkWrapper url={url} treatAsLocal={true}>
       {renderedName}
     </LinkWrapper>
   ) : (

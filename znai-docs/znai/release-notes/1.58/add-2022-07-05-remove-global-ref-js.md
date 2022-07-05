@@ -1,0 +1,1 @@
+* Removed `global-references.js` for handling cross-references in favor of lazy url evaluation at page generation time    
