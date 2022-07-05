@@ -17,11 +17,10 @@
 
 package org.testingisdocumenting.znai.java.extensions
 
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
-
-import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class JavaDocParamsIncludePluginTest {
     @Test
@@ -39,9 +38,9 @@ class JavaDocParamsIncludePluginTest {
     @Test
     void "function name and params should be used as api params anchor prefix"() {
         def props = processAndGetProps('{entry: "sampleMethod(String)"}')
-        println props
 
-        props.should == [parameters: [[name: 'test', type: [[text: 'String', refId: '']], anchorId: 'sampleMethod_test_String_test',
+        def emptyUrl = ApiLinkedText.EMPTY_STRING_SUPPLIER
+        props.should == [parameters: [[name: 'test', type: [[text: 'String', url: emptyUrl]], anchorId: 'sampleMethod_test_String_test',
                                        description:[[type: 'Paragraph',
                                                      content: [[text: 'test param ', type: 'SimpleText'],
                                                                [code: 'package.Param', type: 'InlinedCode']]]]]],
