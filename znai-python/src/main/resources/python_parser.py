@@ -68,15 +68,22 @@ def extract_type(annotation):
     if isinstance(annotation, Name):
         return annotation.id
 
+    # AST api changes between python 3.8 and 3.9 :(
+    if hasattr(annotation, "value") and isinstance(annotation.value, Name):
+        return annotation.value.id
+
     return ""
 
 
 def extract_subscript_type(annotation: Subscript):
     def extract_types():
-        if isinstance(annotation.slice, Name):
+        # AST api changes between python 3.8 and 3.9 :(
+        slice = annotation.slice.value if hasattr(annotation.slice, "value") else annotation.slice
+
+        if isinstance(slice, Name):
             return [extract_type(annotation.slice)]
 
-        return [extract_type(type) for type in annotation.slice.elts]
+        return [extract_type(type) for type in slice.elts]
 
     return {
         "name": extract_type(annotation.value),
