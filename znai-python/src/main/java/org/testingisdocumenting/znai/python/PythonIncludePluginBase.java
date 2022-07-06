@@ -34,47 +34,53 @@ import java.util.stream.Stream;
 
 abstract public class PythonIncludePluginBase implements IncludePlugin {
     private PythonIncludeResult pythonResult;
-    protected String givenFilePath;
-    protected String entryName;
     protected Path fullPath;
     protected ComponentsRegistry componentsRegistry;
     protected PluginParams pluginParams;
     protected PluginFeatureList features;
     protected CodeReferencesFeature codeReferencesFeature;
+    protected ResourcesResolver resourcesResolver;
 
-    abstract public PythonIncludeResult process(PythonCode parsed);
+    abstract public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler);
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
-        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-
         this.componentsRegistry = componentsRegistry;
+        this.resourcesResolver = componentsRegistry.resourceResolver();
+
         this.pluginParams = pluginParams;
 
-        givenFilePath = pluginParams.getFreeParam();
-        if (!resourcesResolver.canResolve(givenFilePath)) {
-            throw new IllegalArgumentException("can't find file: " + givenFilePath);
-        }
+        fullPath = pathToUse();
 
         codeReferencesFeature = new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams);
         features = new PluginFeatureList(
                 codeReferencesFeature
         );
 
-        fullPath = resourcesResolver.fullPath(givenFilePath);
-        entryName = pluginParams.getOpts().getRequiredString("entry");
-
         PythonCode pythonParseResult = PythonBasedPythonParser.INSTANCE.parse(fullPath);
-        pythonResult = process(pythonParseResult);
+        pythonResult = process(pythonParseResult, parserHandler);
 
         return PluginResult.docElements(pythonResult.getDocElements().stream());
+    }
+
+    protected String getEntryName() {
+        return pluginParams.getOpts().getRequiredString("entry");
+    }
+
+    protected String snippetIdToUse() {
+        return pluginParams.getFreeParam();
+    }
+
+    protected Path pathToUse() {
+        String givenPath = pluginParams.getFreeParam();
+        return resourcesResolver.fullPath(givenPath);
     }
 
     protected PythonCodeEntry findEntryByName(PythonCode parsed, String name) {
         PythonCodeEntry entry = parsed.findEntryByName(name);
         if (entry == null) {
             throw new RuntimeException("can't find entry: " + name +
-                    " in: " + givenFilePath + ", available entries: " +
+                    " in: " + snippetIdToUse() + ", available entries: " +
                     parsed.namesStream().collect(Collectors.joining(", ")));
         }
 

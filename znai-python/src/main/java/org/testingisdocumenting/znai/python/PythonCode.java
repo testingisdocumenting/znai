@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.python;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PythonCode {
@@ -44,5 +45,11 @@ public class PythonCode {
 
     public PythonCodeEntry findEntryByName(String name) {
         return entryByName.get(name);
+    }
+
+    public List<PythonCodeEntry> findAllEntriesWithPrefix(String prefix) {
+        return entryByName.values().stream()
+                .filter(e -> e.getName().startsWith(prefix))
+                .collect(Collectors.toList());
     }
 }

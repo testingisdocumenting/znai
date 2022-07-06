@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.python.pydoc.ParsedPythonDoc;
 
@@ -41,7 +42,9 @@ public class PythonDocParamsIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed) {
+    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler) {
+        String entryName = getEntryName();
+
         codeEntry = findEntryByName(parsed, entryName);
         ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
 
