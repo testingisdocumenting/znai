@@ -49,12 +49,14 @@ def node_to_dict(node_type, name_to_use, node, include_docstring=True):
 
 def function_to_dict(func_node, name):
     func_dict = node_to_dict("function", name, func_node)
-    func_dict["args"] = extract_func_args(func_node.args)
+    func_dict["args"] = {
+        "positional": extract_func_positional_args(func_node.args)
+    }
 
     return func_dict
 
 
-def extract_func_args(args):
+def extract_func_positional_args(args):
     return [{"name": arg.arg, "type": extract_type(arg.annotation)} for arg in args.args]
 
 

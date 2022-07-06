@@ -138,8 +138,6 @@ class PythonBasedPythonParserTest {
     @Test
     void "parse args and types"() {
         def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/cross-classes.py"))
-        parsed.parsed.each { println it }
-
         parsed.findEntryByName("Transaction.execute").should == [
                 args: [
                         [name: "self", type: [name: "", types: []]],
@@ -159,5 +157,13 @@ class PythonBasedPythonParserTest {
                 name: "Context",
                 type: "class"
         ]
+    }
+
+    @Test
+    void "args and kwargs"() {
+        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/args-kwargs.py"))
+        parsed.parsed.each { println it }
+
+
     }
 }
