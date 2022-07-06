@@ -138,15 +138,14 @@ class PythonBasedPythonParserTest {
     @Test
     void "parse args and types"() {
         def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/cross-classes.py"))
-        parsed.parsed.each { println it }
 
         parsed.findEntryByName("Transaction.execute").should == [
                 args: [
                         [name: "self", type: [name: "", types: []]],
-                        [name: "opts", type: [name: "Dict", types: [
+                        [name: "opts", type: [name: "typing.Dict", types: [
                                 [name: "string", types: []],
-                                [name: "int", types: []]]]],
-                        [name: "context", type: [name: "Union", types: [
+                                [name: "fin.money.Money", types: []]]]],
+                        [name: "context", type: [name: "typing.Union", types: [
                                 [name: "Context", types: []],
                                 [name: "list", types: [[name: "Context", types: []]]],
                                 [name: "string", types: []],

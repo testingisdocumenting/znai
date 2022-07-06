@@ -17,11 +17,22 @@ import json
 import sys
 import traceback
 import platform
-
-from _ast import Subscript, Name, Attribute
+from typing import Dict
 
 content_lines = []
 warnings = set([])
+
+# contains a mapping between module alias and full module name
+# import fin.money as finm case
+# finm -> fin.money
+module_name_by_alternative_name: Dict[str, str] = {}
+
+# contains a mapping between import aliases and a full type name
+# e.g.
+# from fin.money import Money as SuperMoney:
+# SuperMoney -> fin.money.Money
+#
+full_type_name_by_alternative_name: Dict[str, str] = {}
 
 
 def read_and_parse(file_name):
@@ -62,28 +73,36 @@ def extract_type(annotation):
     if annotation is None:
         return ""
 
-    if isinstance(annotation, Subscript):
+    if isinstance(annotation, ast.Subscript):
         return extract_subscript_type(annotation)
 
-    if isinstance(annotation, Name):
-        return annotation.id
+    if isinstance(annotation, ast.Name):
+        return extract_name_type(annotation)
 
-    if isinstance(annotation, Attribute):
+    if isinstance(annotation, ast.Attribute):
         return extract_attribute_type(annotation)
 
     # AST api changes between python 3.8 and 3.9 :(
-    if hasattr(annotation, "value") and isinstance(annotation.value, Name):
-        return annotation.value.id
+    if hasattr(annotation, "value") and isinstance(annotation.value, ast.Name):
+        return extract_name_type(annotation.value)
 
     return ""
 
 
-def extract_subscript_type(annotation: Subscript):
+def extract_name_type(annotation: ast.Name):
+    global full_type_name_by_alternative_name
+    if annotation.id in full_type_name_by_alternative_name:
+        return full_type_name_by_alternative_name[annotation.id]
+
+    return annotation.id
+
+
+def extract_subscript_type(annotation: ast.Subscript):
     def extract_types():
         # AST api changes between python 3.8 and 3.9 :(
         slice = annotation.slice.value if hasattr(annotation.slice, "value") else annotation.slice
 
-        if isinstance(slice, Name):
+        if isinstance(slice, ast.Name):
             return [extract_type(annotation.slice)]
 
         return [extract_type(type) for type in slice.elts]
@@ -95,16 +114,25 @@ def extract_subscript_type(annotation: Subscript):
 
 
 # type like package.module.ClassName is encoded inside Attribute type
-def extract_attribute_type(annotation: Attribute):
-    parts = [annotation.attr]
+def extract_attribute_type(annotation: ast.Attribute):
+    global module_name_by_alternative_name
+
+    def expand_module_name(name: str):
+        global module_name_by_alternative_name
+        if name in module_name_by_alternative_name:
+            return module_name_by_alternative_name[name]
+        else:
+            return name
+
+    parts = [expand_module_name(annotation.attr)]
     next_annotation = annotation.value
 
     while next_annotation is not None:
-        if isinstance(next_annotation, Attribute):
+        if isinstance(next_annotation, ast.Attribute):
             parts.append(next_annotation.attr)
             next_annotation = next_annotation.value
         else:
-            parts.append(next_annotation.id)
+            parts.append(expand_module_name(next_annotation.id))
             next_annotation = None
 
     parts.reverse()
@@ -183,8 +211,37 @@ def parse_assignment(assignment_node):
     return node_to_dict("assignment", name.strip(), assignment_node.value, include_docstring=False)
 
 
+def generate_type_mappings_through_imports(import_nodes):
+    global module_name_by_alternative_name
+    global full_type_name_by_alternative_name
+
+    for node in import_nodes:
+
+        # import fin.money as finm case
+        #
+        if isinstance(node, ast.Import):
+            for name in node.names:
+                if name.asname is not None:
+                    module_name_by_alternative_name[name.asname] = name.name
+
+        # from fin.money import Money, Debt
+        # from fin.money import Money as SuperMoney
+        # type_name_by_alternative_name["SuperMoney"] = fin.money.Money
+        #
+        if isinstance(node, ast.ImportFrom):
+            for name in node.names:
+                full_name = node.module + "." + name.name
+                if name.asname is not None:
+                    full_type_name_by_alternative_name[name.asname] = full_name
+                else:
+                    full_type_name_by_alternative_name[name.name] = full_name
+
+
 def parse_file(file_to_parse):
     module = read_and_parse(file_to_parse)
+
+    imports = [node for node in module.body if isinstance(node, ast.Import) or isinstance(node, ast.ImportFrom)]
+    generate_type_mappings_through_imports(imports)
 
     function_definitions = [node for node in module.body if isinstance(node, ast.FunctionDef)]
     class_definitions = [node for node in module.body if isinstance(node, ast.ClassDef)]
