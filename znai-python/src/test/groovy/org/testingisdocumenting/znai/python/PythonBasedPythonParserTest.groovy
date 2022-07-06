@@ -151,7 +151,7 @@ class PythonBasedPythonParserTest {
                                 [name: "list", types: [[name: "Context", types: []]]],
                                 [name: "string", types: []],
                         ]]],
-                        [name: "some_other", type: [name: "string", types: []]],
+                        [name: "some_other", type: [name: "fin.money.Money", types: []]],
                 ]
         ]
 
