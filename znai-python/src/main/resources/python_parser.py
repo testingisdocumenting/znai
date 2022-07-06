@@ -18,7 +18,7 @@ import sys
 import traceback
 import platform
 
-from _ast import Subscript, Name
+from _ast import Subscript, Name, Attribute
 
 content_lines = []
 warnings = set([])
@@ -68,6 +68,9 @@ def extract_type(annotation):
     if isinstance(annotation, Name):
         return annotation.id
 
+    if isinstance(annotation, Attribute):
+        return extract_attribute_type(annotation)
+
     # AST api changes between python 3.8 and 3.9 :(
     if hasattr(annotation, "value") and isinstance(annotation.value, Name):
         return annotation.value.id
@@ -89,6 +92,23 @@ def extract_subscript_type(annotation: Subscript):
         "name": extract_type(annotation.value),
         "types": extract_types()
     }
+
+
+# type like package.module.ClassName is encoded inside Attribute type
+def extract_attribute_type(annotation: Attribute):
+    parts = [annotation.attr]
+    next_annotation = annotation.value
+
+    while next_annotation is not None:
+        if isinstance(next_annotation, Attribute):
+            parts.append(next_annotation.attr)
+            next_annotation = next_annotation.value
+        else:
+            parts.append(next_annotation.id)
+            next_annotation = None
+
+    parts.reverse()
+    return ".".join(parts)
 
 
 def extract_content(node_type, name_to_use, node):

@@ -1,7 +1,7 @@
 import string
 
 
-def my_func(label: string, price: Money):
+def my_func(label: string, price: fin.money.Money):
     """
     text inside my *func* doc
     * list one
