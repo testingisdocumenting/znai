@@ -19,12 +19,24 @@ package org.testingisdocumenting.znai.python;
 import java.util.Map;
 
 public class PythonCodeArg {
+    enum Category {
+        REGULAR, // regular params
+        POS_ONLY, // params before `,/ ,
+        KW_ONLY, // key=value after *args
+        ARGS,  // *names
+        KWARGS // **opts
+    }
+
+    private final Category category;
     private final String name;
     private final PythonCodeType type;
+    private final String defaultValue;
 
     public PythonCodeArg(Map<String, Object> parsed) {
+        this.category = extractCategory(parsed.get("category").toString());
         this.name = parsed.get("name").toString();
         this.type = new PythonCodeType(parsed.get("type"));
+        this.defaultValue = parsed.containsKey("defaultValue") ? parsed.get("defaultValue").toString() : "";
     }
 
     public String getName() {
@@ -35,11 +47,37 @@ public class PythonCodeArg {
         return type;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
     @Override
     public String toString() {
         return "PythonCodeArg{" +
-                "name='" + name + '\'' +
+                "category=" + category +
+                ", name='" + name + '\'' +
                 ", type=" + type +
+                ", defaultValue='" + defaultValue + '\'' +
                 '}';
+    }
+
+    private Category extractCategory(String category) {
+        switch (category) {
+            case "args":
+                return Category.ARGS;
+            case "kwargs":
+                return Category.KWARGS;
+            case "pos_only":
+                return Category.POS_ONLY;
+            case "kw_only":
+                return Category.KW_ONLY;
+            case "regular":
+            default:
+                return Category.REGULAR;
+        }
     }
 }
