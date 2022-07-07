@@ -1,8 +1,10 @@
 import string
 from typing import Union, Dict
 
-# import fin
+from fin.money import Money, Debt
+from fin.money import Money as SuperMoney
 
+import fin.money as finm
 
 class Context:
     def clear(self):
@@ -14,11 +16,11 @@ class Transaction:
         self.data = "hello"
 
     def execute(self,
-                opts: Dict[string, int],
+                opts: Dict[string, finm.Money],
                 context: Union[Context, list[Context], string],
-                some_other: fin.money.Money):
+                some_other: Money):
         print("execute: " + self.data)
         pass
 
-    def cancel(self, context: Dict[string, int]):
+    def cancel(self, context: Dict[SuperMoney, Debt]):
         pass
