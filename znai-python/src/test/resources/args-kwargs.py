@@ -1,8 +1,18 @@
-import fin.money
 from fin.money import Money
 
 
-def my_sum(label, *prices: fin.money.Money):
+def position_only_with_default(message, name: str = "no-name", /, title: str = ""):
+    print(message + " " + title + " " + name)
+
+
+def default_kwarg_values(message, name: str = "Default", *prices, label: str = "Hello", price: int = 10,
+                         money=Money(100),
+                         **opts):
+    print(message + " " + label + " " + name)
+    print("*prices[0]=" + prices[0])
+
+
+def my_sum(label="hello", *prices: Money):
     result = 0
 
     for x in prices:
@@ -11,13 +21,10 @@ def my_sum(label, *prices: fin.money.Money):
     return result
 
 
-def default_arg_value(message, label="Hello", name="Default", price=10, money=Money(100), **opts):
-    print(message + " " + label + " " + name)
+def default_values_with_args(message, label: str = "Hello", name="Default", price: int = 10, money=Money(
+    100), **opts):
+    print(message + " " + label + " " + name + " " + str(money))
 
 
-def default_kwarg_value(message, *prices, label="Hello", name="Default", price=10, money=Money(100), **opts):
-    print(message + " " + label + " " + name)
-    print("*prices[0]=" + prices[0])
-
-
-default_arg_value("message text", "hello-hello", price=23, money=Money(200), something="else")
+position_only_with_default("hello", "Alice", title="lady")
+position_only_with_default("hello", title="lady")

@@ -21,6 +21,8 @@ import org.junit.Test
 import java.nio.file.Paths
 
 class PythonBasedPythonParserTest {
+    def noType = [name: "", types: []]
+
     @Test
     void "parsing python using python process"() {
         def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/example.py"))
@@ -141,7 +143,7 @@ class PythonBasedPythonParserTest {
 
         parsed.findEntryByName("Transaction.execute").should == [
                 args: [
-                        [name: "self", type: [name: "", types: []]],
+                        [name: "self", type: noType],
                         [name: "opts", type: [name: "typing.Dict", types: [
                                 [name: "string", types: []],
                                 [name: "fin.money.Money", types: []]]]],
@@ -161,10 +163,28 @@ class PythonBasedPythonParserTest {
     }
 
     @Test
-    void "args and kwargs"() {
+    void "positional args"() {
         def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/args-kwargs.py"))
-        parsed.parsed.each { println it }
 
+        parsed.findEntryByName("position_only_with_default").args.should == [
+                [name: "message", type: noType, category: PythonCodeArg.Category.POS_ONLY],
+                [name: "name", type: [name: "str", types: []], category: PythonCodeArg.Category.POS_ONLY, defaultValue: "\"no-name\""],
+                [name: "title", type: [name: "str", types: []], category: PythonCodeArg.Category.REGULAR, defaultValue: "\"\""]
+        ]
+    }
 
+    @Test
+    void "kwargs args"() {
+        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/args-kwargs.py"))
+
+        parsed.findEntryByName("default_kwarg_values").args.should == [
+                [name: "message", type: noType, category: PythonCodeArg.Category.REGULAR],
+                [name: "name", type: [name: "str", types: []], category: PythonCodeArg.Category.REGULAR, defaultValue: "\"Default\""],
+                [name: "prices", type: noType, category: PythonCodeArg.Category.ARGS, defaultValue: ""],
+                [name: "label", type: [name: "str", types: []], category: PythonCodeArg.Category.KW_ONLY, defaultValue: "\"Hello\""],
+                [name: "price", type: [name: "int", types: []], category: PythonCodeArg.Category.KW_ONLY, defaultValue: "10"],
+                [name: "money", type: noType, category: PythonCodeArg.Category.KW_ONLY, defaultValue: "Money(100)"],
+                [name: "opts", type: noType, category: PythonCodeArg.Category.KWARGS, defaultValue: ""],
+        ]
     }
 }
