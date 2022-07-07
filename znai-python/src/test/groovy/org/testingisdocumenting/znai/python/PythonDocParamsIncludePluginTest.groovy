@@ -47,7 +47,7 @@ class PythonDocParamsIncludePluginTest {
         def expectedProps = [
                 parameters: [[name: 'label', type: [[text: 'string', url: emptyUrl]], anchorId: 'my_func_label',
                               description: [[markdown: 'label to use to *render* item in the store', type: 'TestMarkdown']]],
-                             [name: 'price', type: [[text: 'Money', url: emptyUrl]], anchorId: 'my_func_price',
+                             [name: 'price', type: [[text: 'fin.money.Money', url: emptyUrl]], anchorId: 'my_func_price',
                               description: [[markdown: 'price associated with the **item**', type: 'TestMarkdown']]]],
                 entry: 'my_func']
         props.should == expectedProps
