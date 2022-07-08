@@ -60,6 +60,7 @@ Using class path lookup you can include snippets from projects deployed to, for 
 
 :include-file: maven-class-path.xml {highlight: "classifier"}
 
-    :include-java: org/junit/Assert.java {entry: "assertArrayEquals"}
+    :include-java: org/junit/Assert.java {entry: "fail(String)"}
 
-:include-java: org/junit/Assert.java {entry: "assertArrayEquals"}
+:include-java: org/junit/Assert.java {entry: "fail(String)"}
+
