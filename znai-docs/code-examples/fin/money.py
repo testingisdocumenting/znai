@@ -29,7 +29,6 @@ def print_money(amount: int, message: str = ""):
 
     message:
       message to use for audit
-
     """
 
     print("printing money")

@@ -219,7 +219,7 @@ describe("codeUtils", () => {
             { type: 'punctuation', content: '{' }])
     })
 
-    it("splits multi line comment into separate lines", () => {
+    it("splits java multi line comment into separate lines", () => {
         const tokens = parseCode('java', `  /** hello
   multi line
   comment
@@ -245,6 +245,23 @@ class MyClass {
             ],
             [ { type: 'punctuation', content: '}' } ]
         ])
+    })
+
+    it("splits python multi line comment into separate lines", () => {
+        const tokens = parseCode('python', ` def print_money(amount: int, message: str = ""):
+    """
+    print money with a given message
+    Parameters
+    --------------
+    amount:
+      amount to print
+    """
+
+    print("printing money")
+`)
+        const lines = splitTokensIntoLines(tokens)
+
+        console.log(lines)
     })
 
     describe('inlined comments', () => {

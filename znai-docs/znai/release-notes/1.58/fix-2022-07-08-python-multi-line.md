@@ -1,0 +1,1 @@
+* Fix: python multiline string parsing to properly highlight lines 
