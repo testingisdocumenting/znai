@@ -57,9 +57,10 @@
 }
 
 .token.code {
-    color: #999;
+    color: var(--znai-code-markdown-code-color);
 }
 
+.token.code-language,
 .token.property,
 .token.key {
     color: var(--znai-code-property-color);
