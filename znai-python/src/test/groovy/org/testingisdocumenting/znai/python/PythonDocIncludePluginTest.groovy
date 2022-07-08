@@ -30,13 +30,6 @@ class PythonDocIncludePluginTest {
     }
 
     @Test
-    void "should validate file presence"() {
-        code {
-            resultingProps('example2.py', '')
-        } should throwException("can't find file: example2.py")
-    }
-
-    @Test
     void "should validate entry value presence"() {
         code {
             resultingProps('example.py', '')
