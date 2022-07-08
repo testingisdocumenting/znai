@@ -107,7 +107,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
         features.updateProps(props);
 
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
-        props.forEach(docElement::addProp);
+        docElement.addProps(props);
 
         return new JavaIncludeResult(Collections.singletonList(docElement), contentProvider.snippetContent());
     }

@@ -16,23 +16,79 @@
 
 package org.testingisdocumenting.znai.python;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 class PythonUtils {
-    static String convertQualifiedNameToFilePath(String qualifiedName) {
-        String[] parts = qualifiedName.split("\\.");
-        if (parts.length < 2) {
-            throw new IllegalArgumentException("expect the qualified name to be of a form: module.[optional.].name, given: " + qualifiedName);
+    public static class FileNameAndRelativeName {
+        private final String file;
+        private final String relativeName;
+
+        public FileNameAndRelativeName(String file, String relativeName) {
+            this.file = file;
+            this.relativeName = relativeName;
         }
 
-        return Arrays.stream(parts)
-                .limit(parts.length - 1)
-                .collect(Collectors.joining("/")) + ".py";
+        public String getFile() {
+            return file;
+        }
+
+        public String getRelativeName() {
+            return relativeName;
+        }
+    }
+
+    static String convertQualifiedNameToFilePath(String qualifiedName) {
+        String[] parts = splitIntoParts(qualifiedName);
+        return combineFileNameParts(parts, 1);
+    }
+
+    static List<String> convertQualifiedNameToMultipleFilePaths(String qualifiedName) {
+        String[] parts = splitIntoParts(qualifiedName);
+
+        List<String> result = new ArrayList<>();
+        for (int partsToOmit = 1; partsToOmit < parts.length; partsToOmit++) {
+            result.add(combineFileNameParts(parts, partsToOmit));
+        }
+
+        return result;
     }
 
     static String entityNameFromQualifiedName(String qualifiedName) {
         String[] parts = qualifiedName.split("\\.");
         return parts[parts.length - 1];
+    }
+
+    static List<FileNameAndRelativeName> entityNameFileNamePairs(String qualifiedName) {
+        String[] parts = qualifiedName.split("\\.");
+
+        List<FileNameAndRelativeName> result = new ArrayList<>();
+        for (int namePartsToUse = 1; namePartsToUse < parts.length; namePartsToUse++) {
+            String combinedName = Arrays.stream(parts)
+                    .skip(parts.length - namePartsToUse)
+                    .collect(Collectors.joining("."));
+
+            String fileName = combineFileNameParts(parts, namePartsToUse);
+
+            result.add(new FileNameAndRelativeName(fileName, combinedName));
+        }
+
+        return result;
+    }
+
+    private static String combineFileNameParts(String[] parts, int partsToOmit) {
+        return Arrays.stream(parts)
+                .limit(parts.length - partsToOmit)
+                .collect(Collectors.joining("/")) + ".py";
+    }
+
+    private static String[] splitIntoParts(String qualifiedName) {
+        String[] parts = qualifiedName.split("\\.");
+        if (parts.length < 2) {
+            throw new IllegalArgumentException("expect the qualified name to be of a form: module.[optional.].name, given: " + qualifiedName);
+        }
+        return parts;
     }
 }

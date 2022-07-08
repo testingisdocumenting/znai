@@ -96,6 +96,7 @@ import { chartsPresentationDemo } from "./doc-elements/charts/EchartPresentation
 import { smartBulletListsDemo } from "./doc-elements/bullets/SmarlBulletList.demo";
 import { tooltipDemo } from "./components/Tooltip.demo";
 import { annotatedImageWithOrderedListDemo } from "./doc-elements/images/AnnotatedImageWithOrderedList.demo";
+import { pythonMethodDemo } from "./doc-elements/python/PythonMethod.demo";
 
 const docMeta = {
     id: 'preview',
@@ -151,6 +152,9 @@ registries.add('snippets')
 
 registries.add('doxygen')
   .registerAsRows('member', doxygenMemberDemo)
+
+registries.add('python')
+  .registerAsRows('member', pythonMethodDemo)
 
 registries.add('visuals')
     .registerAsGrid('Text Badges', 0, textBadgeDemo)

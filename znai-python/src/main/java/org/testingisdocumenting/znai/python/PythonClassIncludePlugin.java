@@ -34,7 +34,6 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
         return new PythonClassIncludePlugin();
     }
 
-
     @Override
     protected String snippetIdToUse() {
         return pluginParams.getFreeParam();
@@ -47,7 +46,7 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler) {
+    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
         String qualifiedName = pluginParams.getFreeParam();
 
         List<PythonCodeEntry> entries = parsed.findAllEntriesWithPrefix(PythonUtils.entityNameFromQualifiedName(qualifiedName) + ".");

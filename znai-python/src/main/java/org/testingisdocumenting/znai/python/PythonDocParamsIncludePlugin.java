@@ -16,21 +16,17 @@
 
 package org.testingisdocumenting.znai.python;
 
-import org.testingisdocumenting.znai.extensions.PluginResult;
-import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
-import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
-import org.testingisdocumenting.znai.python.pydoc.ParsedPythonDoc;
 
+import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class PythonDocParamsIncludePlugin extends PythonIncludePluginBase {
-    private PythonCodeEntry codeEntry;
-
     @Override
     public String id() {
         return "python-doc-params";
@@ -42,37 +38,20 @@ public class PythonDocParamsIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler) {
+    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
         String entryName = getEntryName();
 
-        codeEntry = findEntryByName(parsed, entryName);
-        ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
+        PythonCodeEntry codeEntry = findEntryByName(parsed, entryName);
 
-        ApiParameters apiParameters = new ApiParameters(entryName);
-        parsedPythonDoc.getParams().forEach(pythonParam -> {
-            MarkupParserResult parsedMarkdown = componentsRegistry.markdownParser().parse(fullPath, pythonParam.getPyDocText());
-            apiParameters.add(pythonParam.getName(), paramType(pythonParam),
-                    parsedMarkdown.contentToListOfMaps(),
-                    parsedMarkdown.getAllText());
-        });
+        ApiParameters apiParameters = codeEntry.createParametersFromPyDoc(componentsRegistry.markdownParser(),
+                fullPath, entryName);
 
         Map<String, Object> props = apiParameters.toMap();
         codeReferencesFeature.updateProps(props);
         props.putAll(pluginParams.getOpts().toMap());
 
-        List<DocElement> docElements = PluginResult.docElement("ApiParameters", props).getDocElements();
+        List<DocElement> docElements = Collections.singletonList(DocElement.withPropsMap("ApiParameters", props));
 
         return new PythonIncludeResult(docElements, codeEntry.getDocString());
-    }
-
-    private ApiLinkedText paramType(PythonDocParam param) {
-        PythonCodeArg typeHint = codeEntry.getArgs().stream().filter(p -> param.getName().equals(p.getName())).findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("no parameter <" + param.getName() + "> found is signature"));
-        String hintedType = typeHint.getType().renderTypeAsString();
-        if (!hintedType.isEmpty()) {
-            return new ApiLinkedText(hintedType);
-        }
-
-        return new ApiLinkedText(param.getType());
     }
 }

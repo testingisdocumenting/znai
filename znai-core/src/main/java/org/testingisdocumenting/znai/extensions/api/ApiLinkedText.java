@@ -50,6 +50,10 @@ public class ApiLinkedText {
         parts.add(new ApiLinkedTextPart(text, urlProvider));
     }
 
+    public void addParts(ApiLinkedText other) {
+        parts.addAll(other.parts);
+    }
+
     public List<ApiLinkedTextPart> getParts() {
         return parts;
     }

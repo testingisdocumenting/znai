@@ -20,6 +20,8 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.python.pydoc.ParsedPythonDoc;
 
+import java.nio.file.Path;
+
 public class PythonDocIncludePlugin extends PythonIncludePluginBase {
     @Override
     public String id() {
@@ -28,11 +30,15 @@ public class PythonDocIncludePlugin extends PythonIncludePluginBase {
 
     @Override
     public IncludePlugin create() {
+        return createDocPlugin();
+    }
+
+    public static IncludePlugin createDocPlugin() {
         return new PythonDocIncludePlugin();
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler) {
+    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
         PythonCodeEntry codeEntry = findEntryByName(parsed, getEntryName());
         ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
         return new PythonIncludeResult(

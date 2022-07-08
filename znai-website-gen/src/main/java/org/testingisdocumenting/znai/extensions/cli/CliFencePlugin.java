@@ -59,7 +59,7 @@ public class CliFencePlugin implements FencePlugin {
                             content,
                             pluginParams.getOpts());
                     DocElement cliCommand = new DocElement(CliDocElementName);
-                    props.forEach(cliCommand::addProp);
+                    cliCommand.addProps(props);
 
                     return cliCommand;
                 });

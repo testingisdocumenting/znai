@@ -41,7 +41,7 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
     protected CodeReferencesFeature codeReferencesFeature;
     protected ResourcesResolver resourcesResolver;
 
-    abstract public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler);
+    abstract public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath);
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
@@ -58,7 +58,7 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
         );
 
         PythonCode pythonParseResult = PythonBasedPythonParser.INSTANCE.parse(fullPath);
-        pythonResult = process(pythonParseResult, parserHandler);
+        pythonResult = process(pythonParseResult, parserHandler, markupPath);
 
         return PluginResult.docElements(pythonResult.getDocElements().stream());
     }

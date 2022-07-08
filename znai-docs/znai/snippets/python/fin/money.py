@@ -18,5 +18,18 @@ class Debt:
         self.amount = amount
 
 
-def print_money():
+def print_money(amount: int, message: str = ""):
+    """
+    print money with a given message
+
+    Parameters
+    --------------
+    amount:
+      amount to print
+
+    message:
+      message to use for audit
+
+    """
+
     print("printing money")

@@ -330,7 +330,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onCustomNodeStart(String nodeName, Map<String, ?> attrs) {
         DocElement docElement = new DocElement(nodeName);
-        attrs.forEach(docElement::addProp);
+        docElement.addProps(attrs);
 
         appendAndPush(docElement);
     }
@@ -441,7 +441,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     private void start(String type, Map<String, ?> propsKeyValue) {
         DocElement element = new DocElement(type);
-        propsKeyValue.forEach(element::addProp);
+        element.addProps(propsKeyValue);
 
         appendAndPush(element);
     }
@@ -456,7 +456,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     private void append(String type, Map<String, ?> propsKeyValue) {
         DocElement element = new DocElement(type);
-        propsKeyValue.forEach(element::addProp);
+        element.addProps(propsKeyValue);
 
         append(element);
     }

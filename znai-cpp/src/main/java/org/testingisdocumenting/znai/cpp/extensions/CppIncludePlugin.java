@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +42,6 @@ import java.util.stream.Stream;
 public class CppIncludePlugin implements IncludePlugin {
     private MarkupParser markupParser;
     private Path cppPath;
-    private String fileName;
 
     @Override
     public String id() {
@@ -59,8 +59,8 @@ public class CppIncludePlugin implements IncludePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams) {
         markupParser = componentsRegistry.defaultParser();
-        fileName = pluginParams.getFreeParam();
-        cppPath = componentsRegistry.resourceResolver().fullPath(this.fileName);
+        String fileName = pluginParams.getFreeParam();
+        cppPath = componentsRegistry.resourceResolver().fullPath(fileName);
 
         PluginParamsOpts opts = pluginParams.getOpts();
         String commentsType = opts.has("comments") ? opts.get("comments") : "";
@@ -95,7 +95,7 @@ public class CppIncludePlugin implements IncludePlugin {
     private Stream<DocElement> createSnippet(String snippet) {
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
         Map<String, Object> props = CodeSnippetsProps.create("cpp", snippet);
-        props.forEach(docElement::addProp);
+        docElement.addProps(props);
 
         return Stream.of(docElement);
     }

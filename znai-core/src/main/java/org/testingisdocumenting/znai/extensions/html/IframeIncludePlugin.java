@@ -40,7 +40,7 @@ public class IframeIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         DocElement iframe = new DocElement("Iframe");
         iframe.addProp("src", pluginParams.getFreeParam());
-        pluginParams.getOpts().forEach(iframe::addProp);
+        pluginParams.getOpts().assignToDocElement(iframe);
 
         return PluginResult.docElement(iframe);
     }

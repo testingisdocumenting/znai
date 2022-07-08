@@ -26,6 +26,7 @@ import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
 
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class PythonIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler) {
+    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
         isBodyOnly = pluginParams.getOpts().get("bodyOnly", false);
 
         PythonCodeEntry codeEntry = findEntryByName(parsed, getEntryName());
@@ -61,7 +62,7 @@ public class PythonIncludePlugin extends PythonIncludePluginBase {
         features.updateProps(props);
 
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
-        props.forEach(docElement::addProp);
+        docElement.addProps(props);
 
         return new PythonIncludeResult(Collections.singletonList(docElement), contentProvider.snippetContent());
     }

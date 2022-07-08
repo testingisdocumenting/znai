@@ -48,8 +48,7 @@ class DummyFencePlugin implements FencePlugin {
         }
 
         dummy.addProp("content", content)
-
-        pluginParams.opts.forEach { k, v -> dummy.addProp(k, v)}
+        pluginParams.opts.assignToDocElement(dummy)
 
         return PluginResult.docElements([dummy].stream())
     }

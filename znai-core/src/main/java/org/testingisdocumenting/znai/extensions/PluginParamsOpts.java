@@ -17,6 +17,8 @@
 
 package org.testingisdocumenting.znai.extensions;
 
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
+
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
@@ -51,6 +53,14 @@ public class PluginParamsOpts {
         if (has(name)) {
             props.put(name, get(name));
         }
+    }
+
+    public void assignToProps(Map<String, ?> props) {
+        opts.keySet().forEach(k -> props.put(k, get(k)));
+    }
+
+    public void assignToDocElement(DocElement docElement) {
+        opts.forEach(docElement::addProp);
     }
 
     @SuppressWarnings("unchecked")

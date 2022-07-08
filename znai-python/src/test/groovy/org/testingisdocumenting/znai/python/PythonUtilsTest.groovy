@@ -29,6 +29,15 @@ class PythonUtilsTest {
     }
 
     @Test
+    void "converts qualified name to multiple file paths"() {
+        PythonUtils.convertQualifiedNameToMultipleFilePaths("fin.money.Money.add").should == [
+                "fin/money/Money.py",
+                "fin/money.py",
+                "fin.py",
+        ]
+    }
+
+    @Test
     void "requires at least a single module name"() {
         code {
             PythonUtils.convertQualifiedNameToFilePath("Money")
@@ -41,5 +50,13 @@ class PythonUtilsTest {
         PythonUtils.entityNameFromQualifiedName("Money").should == "Money"
         PythonUtils.entityNameFromQualifiedName("fin.Money").should == "Money"
         PythonUtils.entityNameFromQualifiedName("fin.money.Money").should == "Money"
+    }
+
+    @Test
+    void "entity names and file names"() {
+        PythonUtils.entityNameFileNamePairs("fin.money.Money").should == [
+                [relativeName: "Money", file: "fin/money.py"],
+                [relativeName: "money.Money", file: "fin.py"]
+        ]
     }
 }

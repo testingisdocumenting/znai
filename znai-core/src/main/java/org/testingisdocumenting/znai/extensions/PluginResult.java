@@ -50,7 +50,7 @@ public class PluginResult {
 
     public static PluginResult docElement(String type, Map<String, ?> props) {
         DocElement docElement = new DocElement(type);
-        props.forEach(docElement::addProp);
+        docElement.addProps(props);
 
         return new PluginResult(docElement);
     }

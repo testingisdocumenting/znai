@@ -42,6 +42,13 @@ public class DocElement {
         content = new ArrayList<>();
     }
 
+    public static DocElement withPropsMap(String type, Map<String, Object> props) {
+        DocElement docElement = new DocElement(type);
+        docElement.addProps(props);
+
+        return docElement;
+    }
+
     public DocElement(String type, Object... keyValues) {
         this(type);
         Map<String, Object> props = CollectionUtils.createMap(keyValues);
@@ -50,6 +57,10 @@ public class DocElement {
 
     public void addProp(String key, Object value) {
         props.put(key, value);
+    }
+
+    public void addProps(Map<String, ?> props) {
+        this.props.putAll(props);
     }
 
     public void addChild(DocElement element) {
