@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 znai maintainers
+ * Copyright 2022 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,32 +18,44 @@ package org.testingisdocumenting.znai.python;
 
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
-import org.testingisdocumenting.znai.python.pydoc.ParsedPythonDoc;
 
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.List;
 
-public class PythonDocIncludePlugin extends PythonIncludePluginBase {
+public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     @Override
     public String id() {
-        return "python-doc";
+        return "python-class";
     }
 
     @Override
     public IncludePlugin create() {
-        return createDocPlugin();
+        return new PythonClassIncludePlugin();
     }
 
-    public static IncludePlugin createDocPlugin() {
-        return new PythonDocIncludePlugin();
+    @Override
+    protected String snippetIdToUse() {
+        return pluginParams.getFreeParam();
+    }
+
+    @Override
+    protected Path pathToUse() {
+        return resourcesResolver.fullPath(
+                PythonUtils.convertQualifiedNameToFilePath(pluginParams.getFreeParam()));
     }
 
     @Override
     public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
-        PythonCodeEntry codeEntry = findEntryByName(parsed, getEntryName());
-        ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
-        return new PythonIncludeResult(
-                componentsRegistry.markdownParser().parse(fullPath, parsedPythonDoc.getPyDocDescriptionOnly())
-                        .getDocElement().getContent(),
-                parsedPythonDoc.getPyDocDescriptionOnly());
+        String qualifiedName = pluginParams.getFreeParam();
+
+        List<PythonCodeEntry> entries = parsed.findAllEntriesWithPrefix(PythonUtils.entityNameFromQualifiedName(qualifiedName) + ".");
+        entries.forEach(entry -> {
+            parserHandler.onParagraphStart();
+            parserHandler.onSimpleText(entry.getName());
+            parserHandler.onParagraphEnd();
+        });
+
+        return new PythonIncludeResult(Collections.emptyList(), "");
     }
 }

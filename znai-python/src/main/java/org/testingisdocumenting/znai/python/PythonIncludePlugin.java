@@ -22,9 +22,11 @@ import org.testingisdocumenting.znai.extensions.file.SnippetAutoTitleFeature;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
 import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
 
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Map;
 
@@ -42,12 +44,12 @@ public class PythonIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed) {
+    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
         isBodyOnly = pluginParams.getOpts().get("bodyOnly", false);
 
-        PythonCodeEntry codeEntry = findEntryByName(parsed, entryName);
+        PythonCodeEntry codeEntry = findEntryByName(parsed, getEntryName());
 
-        ManipulatedSnippetContentProvider contentProvider = new ManipulatedSnippetContentProvider(givenFilePath,
+        ManipulatedSnippetContentProvider contentProvider = new ManipulatedSnippetContentProvider(snippetIdToUse(),
                 extractContent(codeEntry),
                 pluginParams);
 
@@ -60,7 +62,7 @@ public class PythonIncludePlugin extends PythonIncludePluginBase {
         features.updateProps(props);
 
         DocElement docElement = new DocElement(DocElementType.SNIPPET);
-        props.forEach(docElement::addProp);
+        docElement.addProps(props);
 
         return new PythonIncludeResult(Collections.singletonList(docElement), contentProvider.snippetContent());
     }

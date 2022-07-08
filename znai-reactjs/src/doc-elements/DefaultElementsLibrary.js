@@ -83,6 +83,7 @@ import { DoxygenMember } from "./doxygen/DoxygenMember";
 import { AnnotatedImage } from "./images/AnnotatedImage";
 import { AnnotatedImageWithOrderedList } from "./images/AnnotatedImageWithOrderedList";
 import { OrderedList } from "./default-elements/OrderedList";
+import { PythonMethod } from "./python/PythonMethod";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -176,6 +177,8 @@ library.Xml = Xml
 presentationElementHandlers.Xml = presentationXml
 
 library.DoxygenMember = DoxygenMember
+
+library.PythonMethod = PythonMethod
 
 library.JsxGroup = JsxGroup
 

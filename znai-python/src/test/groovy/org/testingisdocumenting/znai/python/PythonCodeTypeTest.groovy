@@ -17,6 +17,9 @@
 package org.testingisdocumenting.znai.python
 
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PropsUtils
+
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class PythonCodeTypeTest {
     @Test
@@ -28,5 +31,46 @@ class PythonCodeTypeTest {
         ]])
 
         type.renderTypeAsString().should == "Union[Context, list[Context], string]"
+    }
+
+    @Test
+    void "render simple as linked text"() {
+        def type = new PythonCodeType([name: "finance.Money", types: []])
+
+        def docStructure = TEST_COMPONENTS_REGISTRY.docStructure()
+        docStructure.fakeGlobalAnchors = [
+                "python_api_finance_Money": "/api/money",
+        ]
+
+        PropsUtils.exerciseSuppliers(type.convertToApiLinkedText(docStructure).toListOfMaps()).should == [
+                [text: "finance.Money", url: "/api/money"]]
+    }
+
+    @Test
+    void "render complex as linked text"() {
+        def type = new PythonCodeType([name: "Union", types: [
+                [name: "finance.Money", types: []],
+                [name: "list", types: [[name: "finance.Dept", types: []]]],
+                [name: "string", types: []],
+        ]])
+
+        def docStructure = TEST_COMPONENTS_REGISTRY.docStructure()
+        docStructure.fakeGlobalAnchors = [
+                "python_api_finance_Money": "/api/money",
+                "python_api_finance_Dept": "/api/dept"
+        ]
+
+        PropsUtils.exerciseSuppliers(type.convertToApiLinkedText(docStructure).toListOfMaps()).should == [
+                [text: "Union", url: ""],
+                [text: "[", url: ""],
+                [text: "finance.Money", url: "/api/money"],
+                [text: ", ", url: ""],
+                [text: "list", url: ""],
+                [text: "[", url: ""],
+                [text: "finance.Dept", url: "/api/dept"],
+                [text: "]", url: ""],
+                [text: ", ", url: ""],
+                [text: "string", url: ""],
+                [text: "]", url: ""]]
     }
 }

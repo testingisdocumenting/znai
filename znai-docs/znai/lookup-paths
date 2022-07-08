@@ -14,5 +14,6 @@
 ../../.github
 ../readme
 ../target/classes
+../code-examples
 ../example-sources.zip
 https://raw.githubusercontent.com/testingisdocumenting/webtau/master

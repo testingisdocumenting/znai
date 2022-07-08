@@ -16,9 +16,13 @@
 
 package org.testingisdocumenting.znai.python;
 
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
+import org.testingisdocumenting.znai.structure.DocStructure;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class PythonCodeType {
@@ -66,12 +70,42 @@ public class PythonCodeType {
         return result.toString();
     }
 
+    public ApiLinkedText convertToApiLinkedText(DocStructure docStructure) {
+        ApiLinkedText linkedText = new ApiLinkedText();
+
+        Supplier<String> typeUrlSupplier = () -> docStructure.findGlobalAnchorUrl(typeGlobalAnchor(name)).orElse("");
+        linkedText.addPart(name, typeUrlSupplier);
+
+        if (!types.isEmpty()) {
+            linkedText.addPart("[");
+
+            int idx = 0;
+            for (PythonCodeType type : types) {
+                ApiLinkedText nested = type.convertToApiLinkedText(docStructure);
+                linkedText.addParts(nested);
+                if (idx < types.size() - 1) {
+                    linkedText.addPart(", ");
+                }
+
+                idx++;
+            }
+
+            linkedText.addPart("]");
+        }
+
+        return linkedText;
+    }
+
     @Override
     public String toString() {
         return "PythonCodeType{" +
                 "name='" + name + '\'' +
                 ", types=" + types +
                 '}';
+    }
+
+    private String typeGlobalAnchor(String type) {
+        return "python_api_" + type.replaceAll("\\.", "_");
     }
 
     @SuppressWarnings("unchecked")

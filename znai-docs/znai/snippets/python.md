@@ -124,3 +124,13 @@ If you define [Type Hints](https://docs.python.org/3/library/typing.html), you c
     :include-python-doc-params: python/pydoc-params-type-hints.py {entry: "my_func", title: "my_func params"}
 
 :include-python-doc-params: python/pydoc-params-type-hints.py {entry: "my_func", title: "my_func params"}
+
+# Method/Function Definition
+
+Use `python-method` to include function/method definition with signature, documentation and parameters list
+
+    :include-python-method: fin.money.print_money
+
+:include-python-method: fin.money.print_money 
+
+:include-file: fin/money.py {autoTitle: true, highlight: "print_money"}
