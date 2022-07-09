@@ -87,6 +87,10 @@
     color: var(--znai-code-string-color);
 }
 
+.token.triple-quoted-string {
+    color: var(--znai-code-string-color);
+}
+
 .token.highlighted {
     padding: 2px 2px;
     border-radius: 4px;

@@ -1,0 +1,1 @@
+* Fix: Python multi-line token color during snippet render
