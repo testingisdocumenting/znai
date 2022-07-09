@@ -22,22 +22,23 @@ import org.testingisdocumenting.znai.extensions.PropsUtils
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class PythonCodeTypeTest {
+    def docStructure = TEST_COMPONENTS_REGISTRY.docStructure()
+
     @Test
     void "render as string"() {
         def type = new PythonCodeType([name: "Union", types: [
                 [name: "Context", types: []],
                 [name: "list", types: [[name: "Context", types: []]]],
                 [name: "string", types: []],
-        ]])
+        ]], "")
 
         type.renderTypeAsString().should == "Union[Context, list[Context], string]"
     }
 
     @Test
     void "render simple as linked text"() {
-        def type = new PythonCodeType([name: "finance.Money", types: []])
+        def type = new PythonCodeType([name: "finance.Money", types: []], "")
 
-        def docStructure = TEST_COMPONENTS_REGISTRY.docStructure()
         docStructure.fakeGlobalAnchors = [
                 "python_api_finance_Money": "/api/money",
         ]
@@ -47,12 +48,18 @@ class PythonCodeTypeTest {
     }
 
     @Test
+    void "render empty as linked text"() {
+        def type = new PythonCodeType([name: "", types: []], "")
+        PropsUtils.exerciseSuppliers(type.convertToApiLinkedText(docStructure).toListOfMaps()).should == []
+    }
+
+    @Test
     void "render complex as linked text"() {
         def type = new PythonCodeType([name: "Union", types: [
                 [name: "finance.Money", types: []],
                 [name: "list", types: [[name: "finance.Dept", types: []]]],
                 [name: "string", types: []],
-        ]])
+        ]], "")
 
         def docStructure = TEST_COMPONENTS_REGISTRY.docStructure()
         docStructure.fakeGlobalAnchors = [

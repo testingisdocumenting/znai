@@ -28,6 +28,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class PythonCodeEntry {
+    private final String defaultPackageName;
+
     private final String name;
     private final String type;
     private final String content;
@@ -35,7 +37,9 @@ public class PythonCodeEntry {
     private final String docString;
     private final List<PythonCodeArg> args;
 
-    public PythonCodeEntry(Map<String, Object> parsed) {
+    public PythonCodeEntry(Map<String, Object> parsed, String defaultPackageName) {
+        this.defaultPackageName = defaultPackageName;
+
         this.name = Objects.toString(parsed.get("name"), "");
         this.type = Objects.toString(parsed.get("type"), "");
         this.content = Objects.toString(parsed.get("content"), "");
@@ -112,6 +116,6 @@ public class PythonCodeEntry {
 
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> parsedArgsList = (List<Map<String, Object>>) parsedArgs;
-        return parsedArgsList.stream().map(PythonCodeArg::new).collect(Collectors.toList());
+        return parsedArgsList.stream().map((arg) -> new PythonCodeArg(arg, defaultPackageName)).collect(Collectors.toList());
     }
 }

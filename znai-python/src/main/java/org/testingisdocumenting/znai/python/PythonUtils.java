@@ -24,15 +24,21 @@ import java.util.stream.Collectors;
 class PythonUtils {
     public static class FileNameAndRelativeName {
         private final String file;
+        private final String packageName;
         private final String relativeName;
 
-        public FileNameAndRelativeName(String file, String relativeName) {
+        public FileNameAndRelativeName(String file, String packageName, String relativeName) {
             this.file = file;
+            this.packageName = packageName;
             this.relativeName = relativeName;
         }
 
         public String getFile() {
             return file;
+        }
+
+        public String getPackageName() {
+            return packageName;
         }
 
         public String getRelativeName() {
@@ -61,18 +67,19 @@ class PythonUtils {
         return parts[parts.length - 1];
     }
 
-    static List<FileNameAndRelativeName> entityNameFileNamePairs(String qualifiedName) {
+    static List<FileNameAndRelativeName> entityNameFileNameCombos(String qualifiedName) {
         String[] parts = qualifiedName.split("\\.");
 
         List<FileNameAndRelativeName> result = new ArrayList<>();
         for (int namePartsToUse = 1; namePartsToUse < parts.length; namePartsToUse++) {
-            String combinedName = Arrays.stream(parts)
+            String relativeName = Arrays.stream(parts)
                     .skip(parts.length - namePartsToUse)
                     .collect(Collectors.joining("."));
 
             String fileName = combineFileNameParts(parts, namePartsToUse);
+            String packageName = combinePackageNameParts(parts, namePartsToUse);
 
-            result.add(new FileNameAndRelativeName(fileName, combinedName));
+            result.add(new FileNameAndRelativeName(fileName, packageName, relativeName));
         }
 
         return result;
@@ -82,6 +89,12 @@ class PythonUtils {
         return Arrays.stream(parts)
                 .limit(parts.length - partsToOmit)
                 .collect(Collectors.joining("/")) + ".py";
+    }
+
+    private static String combinePackageNameParts(String[] parts, int partsToOmit) {
+        return Arrays.stream(parts)
+                .limit(parts.length - partsToOmit)
+                .collect(Collectors.joining("."));
     }
 
     private static String[] splitIntoParts(String qualifiedName) {

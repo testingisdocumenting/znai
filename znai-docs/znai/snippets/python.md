@@ -134,3 +134,7 @@ Use `python-method` to include function/method definition with signature, docume
 :include-python-method: fin.money.print_money 
 
 :include-file: fin/money.py {autoTitle: true, highlight: "print_money"}
+
+    :include-python-method: fin.money.Money.add
+
+:include-python-method: fin.money.Money.add 

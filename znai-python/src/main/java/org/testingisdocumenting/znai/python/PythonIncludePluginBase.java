@@ -57,7 +57,7 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
                 codeReferencesFeature
         );
 
-        PythonCode pythonParseResult = PythonBasedPythonParser.INSTANCE.parse(fullPath);
+        PythonCode pythonParseResult = PythonBasedPythonParser.INSTANCE.parse(fullPath, defaultPackageName());
         pythonResult = process(pythonParseResult, parserHandler, markupPath);
 
         return PluginResult.docElements(pythonResult.getDocElements().stream());
@@ -69,6 +69,14 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
 
     protected String snippetIdToUse() {
         return pluginParams.getFreeParam();
+    }
+
+    /**
+     * when parsing encounters a type without a package, it prepends it with a default package name
+     * @return default package name
+     */
+    protected String defaultPackageName() {
+        return pluginParams.getOpts().get("packageName", "");
     }
 
     protected Path pathToUse() {
