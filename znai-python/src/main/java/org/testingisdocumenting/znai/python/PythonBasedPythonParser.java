@@ -43,7 +43,7 @@ public class PythonBasedPythonParser {
     }
 
     @SuppressWarnings("unchecked")
-    public PythonCode parse(Path path) {
+    public PythonCode parse(Path path, String defaultPackageName) {
         write(path);
         String json = read();
 
@@ -67,7 +67,7 @@ public class PythonBasedPythonParser {
             warnings.forEach(warning -> System.out.println("\t" + warning));
         }
 
-        return new PythonCode((List<Map<String, Object>>) parserResponse.get("result"));
+        return new PythonCode((List<Map<String, Object>>) parserResponse.get("result"), defaultPackageName);
     }
 
     private void write(Path path) {

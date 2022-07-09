@@ -51,7 +51,7 @@ public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
 
     @Override
     protected Path pathToUse() {
-        List<PythonUtils.FileNameAndRelativeName> fileAndNames = PythonUtils.entityNameFileNamePairs(pluginParams.getFreeParam());
+        List<PythonUtils.FileNameAndRelativeName> fileAndNames = PythonUtils.entityNameFileNameCombos(pluginParams.getFreeParam());
 
         fileAndRelativeEntryName = fileAndNames.stream()
                 .filter(fn -> resourcesResolver.canResolve(fn.getFile()))
@@ -64,6 +64,11 @@ public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
                                 String.join("\n  ") + resourcesResolver.listOfTriedLocations("")));
 
         return resourcesResolver.fullPath(fileAndRelativeEntryName.getFile());
+    }
+
+    @Override
+    protected String defaultPackageName() {
+        return fileAndRelativeEntryName.getPackageName();
     }
 
     @Override

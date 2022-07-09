@@ -19,9 +19,7 @@ package org.testingisdocumenting.znai.python;
 import org.testingisdocumenting.znai.structure.DocStructure;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class PythonCodeArg {
     enum Category {
@@ -37,10 +35,10 @@ public class PythonCodeArg {
     private final PythonCodeType type;
     private final String defaultValue;
 
-    public PythonCodeArg(Map<String, Object> parsed) {
+    public PythonCodeArg(Map<String, Object> parsed, String defaultPackageName) {
         this.category = extractCategory(parsed.get("category").toString());
         this.name = parsed.get("name").toString();
-        this.type = new PythonCodeType(parsed.get("type"));
+        this.type = new PythonCodeType(parsed.get("type"), defaultPackageName);
         this.defaultValue = parsed.containsKey("defaultValue") ? parsed.get("defaultValue").toString() : "";
     }
 

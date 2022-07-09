@@ -32,16 +32,19 @@ public class PythonCodeType {
      * in case of a container type like Union[type1, type2] or dict[string, int]
      */
     private final List<PythonCodeType> types;
+    private final String defaultPackageName;
 
-    public PythonCodeType(Object parsed) {
+    public PythonCodeType(Object parsed, String defaultPackageName) {
+        this.defaultPackageName = defaultPackageName;
+
         if (parsed instanceof Map) {
             @SuppressWarnings("unchecked")
             Map<String, Object> map = (Map<String, Object>) parsed;
 
-            this.name = map.get("name").toString();
+            this.name = nameWithAppliedDefault(map.get("name").toString());
             this.types = extractTypes(map);
         } else {
-            this.name = parsed.toString();
+            this.name = nameWithAppliedDefault(parsed.toString());
             this.types = Collections.emptyList();
         }
     }
@@ -72,6 +75,10 @@ public class PythonCodeType {
 
     public ApiLinkedText convertToApiLinkedText(DocStructure docStructure) {
         ApiLinkedText linkedText = new ApiLinkedText();
+
+        if (name.isEmpty()) {
+            return linkedText;
+        }
 
         Supplier<String> typeUrlSupplier = () -> docStructure.findGlobalAnchorUrl(typeGlobalAnchor(name)).orElse("");
         linkedText.addPart(name, typeUrlSupplier);
@@ -104,13 +111,29 @@ public class PythonCodeType {
                 '}';
     }
 
+    private String nameWithAppliedDefault(String name) {
+        if (name.isEmpty()) {
+            return name;
+        }
+
+        if (defaultPackageName.isEmpty()) {
+            return name;
+        }
+
+        if (!name.contains(".")) {
+            return defaultPackageName + "." + name;
+        }
+
+        return name;
+    }
+
     private String typeGlobalAnchor(String type) {
         return "python_api_" + type.replaceAll("\\.", "_");
     }
 
     @SuppressWarnings("unchecked")
-    private static List<PythonCodeType> extractTypes(Map<String, Object> map) {
+    private List<PythonCodeType> extractTypes(Map<String, Object> map) {
         List<Object> list = (List<Object>) map.get("types");
-        return list.stream().map(PythonCodeType::new).collect(Collectors.toList());
+        return list.stream().map(parsed -> new PythonCodeType(parsed, defaultPackageName)).collect(Collectors.toList());
     }
 }
