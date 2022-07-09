@@ -187,4 +187,13 @@ class PythonBasedPythonParserTest {
                 [name: "opts", type: noType, category: PythonCodeArg.Category.KWARGS, defaultValue: ""],
         ]
     }
+
+    @Test
+    void "self type reference"() {
+        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/fin/money.py"))
+        parsed.findEntryByName("Money.add").args.should == [
+                [name: "self", type: noType, category: PythonCodeArg.Category.REGULAR],
+                [name: "another", type: [name: "Money", types: []], category: PythonCodeArg.Category.REGULAR],
+        ]
+    }
 }

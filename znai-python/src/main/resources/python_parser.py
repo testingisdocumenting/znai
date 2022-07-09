@@ -144,9 +144,13 @@ def extract_type(annotation):
     if isinstance(annotation, ast.Attribute):
         return extract_attribute_type(annotation)
 
-    # AST api changes between python 3.8 and 3.9 :(
-    if hasattr(annotation, "value") and isinstance(annotation.value, ast.Name):
-        return extract_name_type(annotation.value)
+    if hasattr(annotation, "value"):
+        # AST api changes between python 3.8 and 3.9 :(
+        if isinstance(annotation.value, ast.Name):
+            return extract_name_type(annotation.value)
+
+        if isinstance(annotation.value, str):
+            return annotation.value
 
     return ""
 
