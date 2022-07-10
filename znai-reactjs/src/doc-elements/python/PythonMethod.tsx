@@ -25,12 +25,18 @@ import "./PythonMethod.css";
 interface Props {
   qualifiedName: string;
   hideNameQualifier?: boolean;
+  removeSelf?: boolean;
   url?: string;
   args: PythonArg[];
 }
 
-export function PythonMethod({ qualifiedName, hideNameQualifier, url, args }: Props) {
+export function PythonMethod({ qualifiedName, url, args, hideNameQualifier, removeSelf }: Props) {
   const { packageName, name } = splitIntoPackageAndName(qualifiedName);
+
+  // remove self arg if present
+  if (removeSelf && args.length > 0 && args[0].name === "self") {
+    args.shift();
+  }
 
   const positionalArgs = args.filter((arg) => arg.category === "POS_ONLY");
   const restOfArgs = args.filter((arg) => arg.category !== "POS_ONLY");

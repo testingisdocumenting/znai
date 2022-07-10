@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
@@ -154,6 +155,10 @@ public class NoOpParserHandler implements ParserHandler {
 
     @Override
     public void onCustomNodeEnd(String nodeName) {
+    }
+
+    @Override
+    public void onDocElement(DocElement docElement) {
     }
 
     @Override

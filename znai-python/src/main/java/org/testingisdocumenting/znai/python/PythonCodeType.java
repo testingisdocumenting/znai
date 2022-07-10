@@ -80,7 +80,7 @@ public class PythonCodeType {
             return linkedText;
         }
 
-        Supplier<String> typeUrlSupplier = () -> docStructure.findGlobalAnchorUrl(typeGlobalAnchor(name)).orElse("");
+        Supplier<String> typeUrlSupplier = () -> docStructure.findGlobalAnchorUrl(PythonUtils.globalAnchorId(name)).orElse("");
         linkedText.addPart(name, typeUrlSupplier);
 
         if (!types.isEmpty()) {
@@ -125,10 +125,6 @@ public class PythonCodeType {
         }
 
         return name;
-    }
-
-    private String typeGlobalAnchor(String type) {
-        return "python_api_" + type.replaceAll("\\.", "_");
     }
 
     @SuppressWarnings("unchecked")

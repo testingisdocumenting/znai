@@ -16,6 +16,8 @@
 
 package org.testingisdocumenting.znai.python;
 
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +46,25 @@ class PythonUtils {
         public String getRelativeName() {
             return relativeName;
         }
+    }
+
+    static FileNameAndRelativeName findFileNameAndRelativeNameByFullyQualifiedName(ResourcesResolver resourcesResolver,
+                                                                                   String fullyQualifiedName) {
+        List<PythonUtils.FileNameAndRelativeName> fileAndNames = PythonUtils.entityNameFileNameCombos(fullyQualifiedName);
+
+        return fileAndNames.stream()
+                .filter(fn -> resourcesResolver.canResolve(fn.getFile()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "can't find any of <" +
+                                fileAndNames.stream()
+                                        .map(PythonUtils.FileNameAndRelativeName::getFile)
+                                        .collect(Collectors.joining(", ")) + ">, tried locations:\n  " +
+                                String.join("\n  ") + resourcesResolver.listOfTriedLocations("")));
+    }
+
+    static String globalAnchorId(String id) {
+        return "python_api_" + id.replaceAll("\\.", "_");
     }
 
     static String convertQualifiedNameToFilePath(String qualifiedName) {

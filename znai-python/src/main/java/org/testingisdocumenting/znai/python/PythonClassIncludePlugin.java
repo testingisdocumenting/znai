@@ -20,10 +20,14 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 
+import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.ArgsRenderOpt;
+import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.NameRenderOpt;
+
 public class PythonClassIncludePlugin extends PythonIncludePluginBase {
+    private PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName;
+
     @Override
     public String id() {
         return "python-class";
@@ -41,21 +45,44 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
 
     @Override
     protected Path pathToUse() {
-        return resourcesResolver.fullPath(
-                PythonUtils.convertQualifiedNameToFilePath(pluginParams.getFreeParam()));
+        fileAndRelativeEntryName = PythonUtils.findFileNameAndRelativeNameByFullyQualifiedName(
+                resourcesResolver,
+                pluginParams.getFreeParam());
+
+        return resourcesResolver.fullPath(fileAndRelativeEntryName.getFile());
+    }
+
+    @Override
+    protected String defaultPackageName() {
+        return fileAndRelativeEntryName.getPackageName();
     }
 
     @Override
     public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
-        String qualifiedName = pluginParams.getFreeParam();
+        parsed.findRequiredEntryByTypeAndName("class", fileAndRelativeEntryName.getRelativeName());
+        List<PythonCodeEntry> members = parsed.findAllEntriesWithPrefix(fileAndRelativeEntryName.getRelativeName() + ".");
 
-        List<PythonCodeEntry> entries = parsed.findAllEntriesWithPrefix(PythonUtils.entityNameFromQualifiedName(qualifiedName) + ".");
-        entries.forEach(entry -> {
-            parserHandler.onParagraphStart();
-            parserHandler.onSimpleText(entry.getName());
-            parserHandler.onParagraphEnd();
+        PythonIncludeResultBuilder builder = new PythonIncludeResultBuilder(componentsRegistry,
+                parserHandler,
+                pluginParams.getFreeParam(),
+                fileAndRelativeEntryName);
+
+        builder.addClassHeader();
+
+        builder.addSubSection("Members");
+        members.forEach(entry -> {
+            builder.addMethodSignature(entry, NameRenderOpt.SHORT_NAME, ArgsRenderOpt.REMOVE_SELF, true);
         });
 
-        return new PythonIncludeResult(Collections.emptyList(), "");
+        builder.addSubSection("Details");
+        members.forEach(entry -> {
+            builder.addEntryHeader(PythonUtils.entityNameFromQualifiedName(entry.getName()));
+            parserHandler.onGlobalAnchor(PythonUtils.globalAnchorId(defaultPackageName() + "." + entry.getName()));
+            builder.addMethodSignature(entry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.REMOVE_SELF, false);
+            builder.addPyDocTextOnly(markupPath, entry);
+            builder.addPyDocParams(markupPath, entry);
+        });
+
+        return builder.build();
     }
 }

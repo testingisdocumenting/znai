@@ -43,7 +43,9 @@ public class PythonDocParamsIncludePlugin extends PythonIncludePluginBase {
 
         PythonCodeEntry codeEntry = findEntryByName(parsed, entryName);
 
-        ApiParameters apiParameters = codeEntry.createParametersFromPyDoc(componentsRegistry.markdownParser(),
+        ApiParameters apiParameters = codeEntry.createParametersFromPyDoc(
+                componentsRegistry.docStructure(),
+                componentsRegistry.markdownParser(),
                 fullPath, entryName);
 
         Map<String, Object> props = apiParameters.toMap();

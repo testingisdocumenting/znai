@@ -16,23 +16,16 @@
 
 package org.testingisdocumenting.znai.python;
 
-import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
-import org.testingisdocumenting.znai.parser.docelement.DocElement;
-import org.testingisdocumenting.znai.python.pydoc.ParsedPythonDoc;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
+import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.ArgsRenderOpt;
+import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.NameRenderOpt;
 
 public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
     private PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName;
-    private List<DocElement> docElements;
-    private List<String> searchText;
 
     @Override
     public String id() {
@@ -51,18 +44,7 @@ public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
 
     @Override
     protected Path pathToUse() {
-        List<PythonUtils.FileNameAndRelativeName> fileAndNames = PythonUtils.entityNameFileNameCombos(pluginParams.getFreeParam());
-
-        fileAndRelativeEntryName = fileAndNames.stream()
-                .filter(fn -> resourcesResolver.canResolve(fn.getFile()))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "can't find any of <" +
-                                fileAndNames.stream()
-                                        .map(PythonUtils.FileNameAndRelativeName::getFile)
-                                        .collect(Collectors.joining(", ")) + ">, tried locations:\n  " +
-                                String.join("\n  ") + resourcesResolver.listOfTriedLocations("")));
-
+        fileAndRelativeEntryName = PythonUtils.findFileNameAndRelativeNameByFullyQualifiedName(resourcesResolver, pluginParams.getFreeParam());
         return resourcesResolver.fullPath(fileAndRelativeEntryName.getFile());
     }
 
@@ -73,53 +55,18 @@ public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
 
     @Override
     public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
-        docElements = new ArrayList<>();
-        searchText = new ArrayList<>();
+        PythonCodeEntry funcEntry = parsed.findRequiredEntryByTypeAndName("function", fileAndRelativeEntryName.getRelativeName());
 
-        PythonCodeEntry func = findFunc(parsed);
+        String fullyQualifiedName = pluginParams.getFreeParam();
 
-        addMethodSignature(func);
-        addPyDocTextOnly(markupPath, func);
-        addPyDocParams(markupPath, func);
+        PythonIncludeResultBuilder builder = new PythonIncludeResultBuilder(componentsRegistry,
+                parserHandler,
+                fullyQualifiedName, fileAndRelativeEntryName);
 
-        return new PythonIncludeResult(docElements, String.join(" ", searchText));
-    }
+        builder.addMethodSignature(funcEntry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.KEEP_SELF, true);
+        builder.addPyDocTextOnly(markupPath, funcEntry);
+        builder.addPyDocParams(markupPath, funcEntry);
 
-    private void addMethodSignature(PythonCodeEntry func) {
-        Map<String, Object> props = new LinkedHashMap<>(func.toMap(componentsRegistry.docStructure()));
-        props.put("qualifiedName", pluginParams.getFreeParam());
-
-        docElements.add(DocElement.withPropsMap("PythonMethod", props));
-        searchText.add(fileAndRelativeEntryName.getRelativeName()); // TODO include parameter names into search
-    }
-
-    private void addPyDocTextOnly(Path markupPath, PythonCodeEntry func) {
-        ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(func.getDocString());
-        docElements.addAll(componentsRegistry.markdownParser().parse(markupPath, parsedPythonDoc.getPyDocDescriptionOnly())
-                .getDocElement().getContent());
-        searchText.add(parsedPythonDoc.getPyDocDescriptionOnly());
-    }
-
-    private void addPyDocParams(Path markupPath, PythonCodeEntry func) {
-        ApiParameters apiParameters = func.createParametersFromPyDoc(componentsRegistry.markdownParser(), markupPath, pluginParams.getFreeParam());
-        Map<String, Object> props = apiParameters.toMap();
-        props.put("small", true);
-
-        docElements.add(DocElement.withPropsMap("ApiParameters", props));
-        searchText.add(apiParameters.combinedTextForSearch());
-    }
-
-    private PythonCodeEntry findFunc(PythonCode parsed) {
-        PythonCodeEntry func = parsed.findEntryByName(fileAndRelativeEntryName.getRelativeName());
-        if (func == null) {
-            throw new IllegalArgumentException("can't find entry: " + fileAndRelativeEntryName.getRelativeName());
-        }
-
-        if (!func.getType().equals("function")) {
-            throw new IllegalArgumentException("found entry by name <" + fileAndRelativeEntryName.getRelativeName() +
-                    "> is not a function, but <" + func.getType() + ">");
-        }
-
-        return func;
+        return builder.build();
     }
 }

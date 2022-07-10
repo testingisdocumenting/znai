@@ -82,13 +82,13 @@ public class PythonCodeEntry {
         return map;
     }
 
-    public ApiParameters createParametersFromPyDoc(MarkupParser parser, Path parentMarkupPath, String anchorId) {
+    public ApiParameters createParametersFromPyDoc(DocStructure docStructure, MarkupParser parser, Path parentMarkupPath, String anchorId) {
         ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(getDocString());
 
         ApiParameters apiParameters = new ApiParameters(anchorId);
         parsedPythonDoc.getParams().forEach(pythonParam -> {
             MarkupParserResult parsedMarkdown = parser.parse(parentMarkupPath, pythonParam.getPyDocText());
-            apiParameters.add(pythonParam.getName(), paramType(pythonParam),
+            apiParameters.add(pythonParam.getName(), paramType(docStructure, pythonParam),
                     parsedMarkdown.contentToListOfMaps(),
                     parsedMarkdown.getAllText());
         });
@@ -97,15 +97,11 @@ public class PythonCodeEntry {
     }
 
     // TODO use real links based on global ref id
-    private ApiLinkedText paramType(PythonDocParam param) {
+    private ApiLinkedText paramType(DocStructure docStructure, PythonDocParam param) {
         PythonCodeArg typeHint = getArgs().stream().filter(p -> param.getName().equals(p.getName())).findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("no parameter <" + param.getName() + "> found is signature"));
-        String hintedType = typeHint.getType().renderTypeAsString();
-        if (!hintedType.isEmpty()) {
-            return new ApiLinkedText(hintedType);
-        }
 
-        return new ApiLinkedText(param.getType());
+        return typeHint.getType().convertToApiLinkedText(docStructure);
     }
 
     private List<PythonCodeArg> buildArgs(Map<String, Object> parsed) {

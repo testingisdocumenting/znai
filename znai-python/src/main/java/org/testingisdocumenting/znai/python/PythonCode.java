@@ -47,6 +47,19 @@ public class PythonCode {
         return entryByName.get(name);
     }
 
+    public PythonCodeEntry findRequiredEntryByTypeAndName(String type, String name) {
+        PythonCodeEntry entry = findEntryByName(name);
+        if (entry == null) {
+            throw new IllegalArgumentException("can't find entry: " + name);
+        }
+
+        if (!entry.getType().equals(type)) {
+            throw new IllegalArgumentException("found entry by name <" + name + "> is not a " + type + ", but <" + entry.getType() + ">");
+        }
+
+        return entry;
+    }
+
     public List<PythonCodeEntry> findAllEntriesWithPrefix(String prefix) {
         return entryByName.values().stream()
                 .filter(e -> e.getName().startsWith(prefix))
