@@ -17,7 +17,7 @@ import json
 import sys
 import traceback
 import platform
-from typing import Dict
+from typing import Dict, List
 
 content_lines = []
 warnings = set([])
@@ -66,9 +66,10 @@ def node_to_dict(node_type, name_to_use, node, include_docstring=True):
         raise Exception(f"Error processing {name_to_use} {node_type}") from e
 
 
-def function_to_dict(func_node, name):
+def function_to_dict(func_node: ast.FunctionDef, name):
     func_dict = node_to_dict("function", name, func_node)
     func_dict["args"] = extract_func_args(name, func_node.args)
+    func_dict["decorators"] = extract_func_decorators(func_node.decorator_list)
 
     return func_dict
 
@@ -137,6 +138,15 @@ def extract_func_args(name: str, args: ast.arguments):
     extract_kwarg()
 
     return parsed_args
+
+
+def extract_func_decorators(decorator_list: List[ast.expr]):
+    decorators = []
+    for decorator in decorator_list:
+        if isinstance(decorator, ast.Name):
+            decorators.append(decorator.id)
+
+    return decorators
 
 
 def extract_type(annotation):
