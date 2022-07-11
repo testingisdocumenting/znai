@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.parser.ParserHandler;
 import java.nio.file.Path;
 import java.util.List;
 
+import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.*;
 import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.ArgsRenderOpt;
 import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.NameRenderOpt;
 
@@ -71,14 +72,16 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
 
         builder.addSubSection("Members");
         members.forEach(entry -> {
-            builder.addMethodSignature(entry, NameRenderOpt.SHORT_NAME, ArgsRenderOpt.REMOVE_SELF, true);
+            builder.addMethodSignature(entry, NameRenderOpt.SHORT_NAME, ArgsRenderOpt.REMOVE_SELF, MarginOpts.DEFAULT, true);
         });
 
         builder.addSubSection("Details");
         members.forEach(entry -> {
             builder.addEntryHeader(PythonUtils.entityNameFromQualifiedName(entry.getName()));
             parserHandler.onGlobalAnchor(PythonUtils.globalAnchorId(defaultPackageName() + "." + entry.getName()));
-            builder.addMethodSignature(entry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.REMOVE_SELF, false);
+
+            MarginOpts marginOpts = entry.getDocString().isEmpty() ? MarginOpts.DEFAULT: MarginOpts.EXTRA_BOTTOM_MARGIN;
+            builder.addMethodSignature(entry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.REMOVE_SELF, marginOpts, false);
             builder.addPyDocTextOnly(markupPath, entry);
             builder.addPyDocParams(markupPath, entry);
         });

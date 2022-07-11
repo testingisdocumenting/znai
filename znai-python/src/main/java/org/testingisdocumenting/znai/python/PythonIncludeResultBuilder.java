@@ -40,6 +40,11 @@ class PythonIncludeResultBuilder {
         KEEP_SELF
     }
 
+    enum MarginOpts {
+        EXTRA_BOTTOM_MARGIN,
+        DEFAULT
+    }
+
     private final List<String> searchText;
     private final ComponentsRegistry componentsRegistry;
     private final ParserHandler parserHandler;
@@ -76,7 +81,11 @@ class PythonIncludeResultBuilder {
         parserHandler.onSubHeading(4, name, entryNameHeadingProps);
     }
 
-    public void addMethodSignature(PythonCodeEntry func, NameRenderOpt nameRenderOpt, ArgsRenderOpt argsRenderOpt, boolean attachUrl) {
+    public void addMethodSignature(PythonCodeEntry func,
+                                   NameRenderOpt nameRenderOpt,
+                                   ArgsRenderOpt argsRenderOpt,
+                                   MarginOpts marginOpts,
+                                   boolean attachUrl) {
         Map<String, Object> props = new LinkedHashMap<>(func.toMap(componentsRegistry.docStructure()));
         props.put("qualifiedName", fileAndRelativeEntryName.getPackageName() + "." + func.getName());
 
@@ -86,6 +95,10 @@ class PythonIncludeResultBuilder {
 
         if (argsRenderOpt == ArgsRenderOpt.REMOVE_SELF) {
             props.put("removeSelf", true);
+        }
+
+        if (marginOpts == MarginOpts.EXTRA_BOTTOM_MARGIN) {
+            props.put("extraBottomMargin", true);
         }
 
         if (attachUrl) {

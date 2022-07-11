@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
 
+import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.*;
 import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.ArgsRenderOpt;
 import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.NameRenderOpt;
 
@@ -63,7 +64,10 @@ public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
                 parserHandler,
                 fullyQualifiedName, fileAndRelativeEntryName);
 
-        builder.addMethodSignature(funcEntry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.KEEP_SELF, true);
+        MarginOpts marginOpts = funcEntry.getDocString().isEmpty() ?
+                MarginOpts.DEFAULT: MarginOpts.EXTRA_BOTTOM_MARGIN;
+
+        builder.addMethodSignature(funcEntry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.KEEP_SELF, marginOpts, true);
         builder.addPyDocTextOnly(markupPath, funcEntry);
         builder.addPyDocParams(markupPath, funcEntry);
 
