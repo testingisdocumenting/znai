@@ -39,7 +39,7 @@ class JavaDocParamsIncludePluginTest {
     void "function name and params should be used as api params anchor prefix"() {
         def props = processAndGetProps('{entry: "sampleMethod(String)"}')
 
-        PropsUtils.exerciseSuppliers(props).should == [parameters: [[name       : 'test', type: [[text: 'Sstring', url: '']], anchorId: 'sampleMethod_test_String_test',
+        PropsUtils.exerciseSuppliers(props).should == [parameters: [[name       : 'test', type: [[text: 'String', url: '']], anchorId: 'sampleMethod_test_String_test',
                                                                      description: [[type   : 'Paragraph',
                                                                                     content: [[text: 'test param ', type: 'SimpleText'],
                                                                                               [code: 'package.Param', type: 'InlinedCode']]]]]],
