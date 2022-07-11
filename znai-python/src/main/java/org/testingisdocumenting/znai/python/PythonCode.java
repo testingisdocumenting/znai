@@ -26,11 +26,11 @@ public class PythonCode {
     private final Map<String, PythonCodeEntry> entryByName;
     private final List<Map<String, Object>> parsed;
 
-    public PythonCode(List<Map<String, Object>> parsed, String defaultPackageName) {
+    public PythonCode(List<Map<String, Object>> parsed, PythonCodeContext context) {
         this.parsed = parsed;
         entryByName = new LinkedHashMap<>();
         parsed.forEach(p -> {
-            PythonCodeEntry entry = new PythonCodeEntry(p, defaultPackageName);
+            PythonCodeEntry entry = new PythonCodeEntry(p, context);
             entryByName.put(entry.getName(), entry);
         });
     }

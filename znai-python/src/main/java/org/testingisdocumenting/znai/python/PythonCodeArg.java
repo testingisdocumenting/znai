@@ -35,10 +35,10 @@ public class PythonCodeArg {
     private final PythonCodeType type;
     private final String defaultValue;
 
-    public PythonCodeArg(Map<String, Object> parsed, String defaultPackageName) {
+    public PythonCodeArg(Map<String, Object> parsed, PythonCodeContext context) {
         this.category = extractCategory(parsed.get("category").toString());
         this.name = parsed.get("name").toString();
-        this.type = new PythonCodeType(parsed.get("type"), defaultPackageName);
+        this.type = new PythonCodeType(parsed.get("type"), context);
         this.defaultValue = parsed.containsKey("defaultValue") ? parsed.get("defaultValue").toString() : "";
     }
 

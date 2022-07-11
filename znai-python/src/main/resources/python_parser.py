@@ -37,6 +37,14 @@ full_type_name_by_alternative_name: Dict[str, str] = {}
 
 def read_and_parse(file_name):
     global content_lines
+    global warnings
+    global module_name_by_alternative_name
+    global full_type_name_by_alternative_name
+
+    warnings = set([])
+    module_name_by_alternative_name = {}
+    full_type_name_by_alternative_name = {}
+
     with open(file_name) as file:
         content = file.read()
         content_lines = content.splitlines()
@@ -325,16 +333,19 @@ def parse_file(file_to_parse):
     imports = [node for node in module.body if isinstance(node, ast.Import) or isinstance(node, ast.ImportFrom)]
     generate_type_mappings_through_imports(imports)
 
-    function_definitions = [node for node in module.body if isinstance(node, ast.FunctionDef)]
     class_definitions = [node for node in module.body if isinstance(node, ast.ClassDef)]
+    function_definitions = [node for node in module.body if isinstance(node, ast.FunctionDef)]
     variable_assignments = [node for node in module.body if isinstance(node, ast.Assign)]
 
-    file_parse_result = [function_to_dict(f, f.name) for f in function_definitions]
+    file_parse_result = []
 
     for class_node in class_definitions:
         dicts = class_to_list_of_dict(class_node)
         for class_dict in dicts:
             file_parse_result.append(class_dict)
+
+    for func_node in function_definitions:
+        file_parse_result.append(function_to_dict(func_node, func_node.name))
 
     for assignment_node in variable_assignments:
         assignment_dict = parse_assignment(assignment_node)
