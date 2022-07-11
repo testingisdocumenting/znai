@@ -17,10 +17,10 @@
 
 package org.testingisdocumenting.znai.java.extensions
 
-import org.testingisdocumenting.znai.extensions.api.ApiLinkedText
+import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PropsUtils
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
-import org.junit.Test
 
 class JavaDocParamsIncludePluginTest {
     @Test
@@ -39,12 +39,11 @@ class JavaDocParamsIncludePluginTest {
     void "function name and params should be used as api params anchor prefix"() {
         def props = processAndGetProps('{entry: "sampleMethod(String)"}')
 
-        def emptyUrl = ApiLinkedText.EMPTY_STRING_SUPPLIER
-        props.should == [parameters: [[name: 'test', type: [[text: 'String', url: emptyUrl]], anchorId: 'sampleMethod_test_String_test',
-                                       description:[[type: 'Paragraph',
-                                                     content: [[text: 'test param ', type: 'SimpleText'],
-                                                               [code: 'package.Param', type: 'InlinedCode']]]]]],
-                         entry: 'sampleMethod(String)']
+        PropsUtils.exerciseSuppliers(props).should == [parameters: [[name       : 'test', type: [[text: 'String', url: '']], anchorId: 'sampleMethod_test_String_test',
+                                                                     description: [[type   : 'Paragraph',
+                                                                                    content: [[text: 'test param ', type: 'SimpleText'],
+                                                                                              [code: 'package.Param', type: 'InlinedCode']]]]]],
+                                                       entry     : 'sampleMethod(String)']
     }
 
     private static IncludePlugin processAndGetIncludePlugin(String params) {

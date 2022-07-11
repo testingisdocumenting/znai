@@ -346,6 +346,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onDocElement(DocElement docElement) {
+        append(docElement);
+    }
+
+    @Override
     public void onGlobalAnchor(String id) {
         componentsRegistry.docStructure().registerGlobalAnchor(path, id);
         append("Anchor", "id", id);

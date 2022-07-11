@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ApiLinkedText {
-    public static final Supplier<String> EMPTY_STRING_SUPPLIER = () -> "";
+    private static final Supplier<String> EMPTY_STRING_SUPPLIER = () -> "";
 
     private final List<ApiLinkedTextPart> parts;
 

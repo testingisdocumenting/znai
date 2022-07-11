@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
@@ -72,6 +73,8 @@ public interface ParserHandler {
     void onCustomNodeStart(String nodeName, Map<String, ?> attrs);
     void onCustomNode(String nodeName, Map<String, ?> attrs);
     void onCustomNodeEnd(String nodeName);
+
+    void onDocElement(DocElement docElement);
 
     void onGlobalAnchor(String id);
     void onGlobalAnchorRefStart(String id);
