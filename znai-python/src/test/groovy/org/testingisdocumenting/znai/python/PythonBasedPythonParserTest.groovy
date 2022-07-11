@@ -21,11 +21,12 @@ import org.junit.Test
 import java.nio.file.Paths
 
 class PythonBasedPythonParserTest {
+    def emptyContext = new PythonCodeContext("")
     def noType = [name: "", types: []]
 
     @Test
     void "parsing python using python process"() {
-        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/example.py"), "")
+        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/example.py"), emptyContext)
         parsed.findEntryByName("func_no_docs").should == [
                 name: "func_no_docs",
                 type: "function",
@@ -139,7 +140,7 @@ class PythonBasedPythonParserTest {
 
     @Test
     void "parse args and types"() {
-        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/cross-classes.py"), "")
+        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/cross-classes.py"), emptyContext)
 
         parsed.findEntryByName("Transaction.execute").should == [
                 args: [
@@ -164,7 +165,7 @@ class PythonBasedPythonParserTest {
 
     @Test
     void "positional args"() {
-        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/args-kwargs.py"), "")
+        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/args-kwargs.py"), emptyContext)
 
         parsed.findEntryByName("position_only_with_default").args.should == [
                 [name: "message", type: noType, category: PythonCodeArg.Category.POS_ONLY],
@@ -175,7 +176,7 @@ class PythonBasedPythonParserTest {
 
     @Test
     void "kwargs args"() {
-        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/args-kwargs.py"), "")
+        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/args-kwargs.py"), emptyContext)
 
         parsed.findEntryByName("default_kwarg_values").args.should == [
                 [name: "message", type: noType, category: PythonCodeArg.Category.REGULAR],
@@ -190,10 +191,20 @@ class PythonBasedPythonParserTest {
 
     @Test
     void "self type reference"() {
-        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/fin/money.py"), "fin.money")
+        def parsed = PythonBasedPythonParser.INSTANCE.parse(Paths.get("src/test/resources/fin/money.py"), new PythonCodeContext("fin.money"))
+        parsed.findEntryByName("Money.__init__").args.should == [
+                [name: "self", type: noType, category: PythonCodeArg.Category.REGULAR],
+                [name: "amount", type: [name: "int", types: []], category: PythonCodeArg.Category.REGULAR],
+        ]
+
         parsed.findEntryByName("Money.add").args.should == [
                 [name: "self", type: noType, category: PythonCodeArg.Category.REGULAR],
                 [name: "another", type: [name: "fin.money.Money", types: []], category: PythonCodeArg.Category.REGULAR],
+        ]
+
+        parsed.findEntryByName("print_money").args.should == [
+                [name: "amount", type: [name: "fin.money.Money", types: []], category: PythonCodeArg.Category.REGULAR],
+                [name: "message", type: [name: "str", types: []], category: PythonCodeArg.Category.REGULAR, defaultValue: "\"\""],
         ]
     }
 }

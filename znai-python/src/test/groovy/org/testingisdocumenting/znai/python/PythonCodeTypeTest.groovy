@@ -23,6 +23,7 @@ import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_C
 
 class PythonCodeTypeTest {
     def docStructure = TEST_COMPONENTS_REGISTRY.docStructure()
+    def emptyContext = new PythonCodeContext("")
 
     @Test
     void "render as string"() {
@@ -30,14 +31,14 @@ class PythonCodeTypeTest {
                 [name: "Context", types: []],
                 [name: "list", types: [[name: "Context", types: []]]],
                 [name: "string", types: []],
-        ]], "")
+        ]], emptyContext)
 
         type.renderTypeAsString().should == "Union[Context, list[Context], string]"
     }
 
     @Test
     void "render simple as linked text"() {
-        def type = new PythonCodeType([name: "finance.Money", types: []], "")
+        def type = new PythonCodeType([name: "finance.Money", types: []], emptyContext)
 
         docStructure.fakeGlobalAnchors = [
                 "python_api_finance_Money": "/api/money",
@@ -49,7 +50,7 @@ class PythonCodeTypeTest {
 
     @Test
     void "render empty as linked text"() {
-        def type = new PythonCodeType([name: "", types: []], "")
+        def type = new PythonCodeType([name: "", types: []], emptyContext)
         PropsUtils.exerciseSuppliers(type.convertToApiLinkedText(docStructure).toListOfMaps()).should == []
     }
 
@@ -59,7 +60,7 @@ class PythonCodeTypeTest {
                 [name: "finance.Money", types: []],
                 [name: "list", types: [[name: "finance.Dept", types: []]]],
                 [name: "string", types: []],
-        ]], "")
+        ]], emptyContext)
 
         def docStructure = TEST_COMPONENTS_REGISTRY.docStructure()
         docStructure.fakeGlobalAnchors = [

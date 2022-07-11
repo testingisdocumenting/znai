@@ -57,7 +57,8 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
                 codeReferencesFeature
         );
 
-        PythonCode pythonParseResult = PythonBasedPythonParser.INSTANCE.parse(fullPath, defaultPackageName());
+        PythonCodeContext context = new PythonCodeContext(defaultPackageName());
+        PythonCode pythonParseResult = PythonBasedPythonParser.INSTANCE.parse(fullPath, context);
         pythonResult = process(pythonParseResult, parserHandler, markupPath);
 
         return PluginResult.docElements(pythonResult.getDocElements().stream());

@@ -3,6 +3,13 @@ class Money:
         self.amount = amount
 
     def add(self, another: 'Money'):
+        """add money from another money instance
+
+        Parameters
+        --------------
+        another :
+          money to add
+        """
         self.amount += another.amount
 
 
@@ -11,5 +18,17 @@ class Debt:
         self.amount = amount
 
 
-def print_money():
+def print_money(amount: Money, message: str = ""):
+    """
+    print money with a given message
+
+    Parameters
+    --------------
+    amount:
+      amount to print
+
+    message:
+      message to use for audit
+    """
+
     print("printing money")

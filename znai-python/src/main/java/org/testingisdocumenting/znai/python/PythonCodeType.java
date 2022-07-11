@@ -32,10 +32,10 @@ public class PythonCodeType {
      * in case of a container type like Union[type1, type2] or dict[string, int]
      */
     private final List<PythonCodeType> types;
-    private final String defaultPackageName;
+    private final PythonCodeContext context;
 
-    public PythonCodeType(Object parsed, String defaultPackageName) {
-        this.defaultPackageName = defaultPackageName;
+    public PythonCodeType(Object parsed, PythonCodeContext context) {
+        this.context = context;
 
         if (parsed instanceof Map) {
             @SuppressWarnings("unchecked")
@@ -116,12 +116,14 @@ public class PythonCodeType {
             return name;
         }
 
-        if (defaultPackageName.isEmpty()) {
+        if (context.getDefaultPackageName().isEmpty()) {
             return name;
         }
 
-        if (!name.contains(".")) {
-            return defaultPackageName + "." + name;
+        // for classes defined in the same file, we add default package name,
+        // so they have fully qualified name
+        if (!name.contains(".") && context.isTypeDefined(name)) {
+            return context.getDefaultPackageName() + "." + name;
         }
 
         return name;
@@ -130,6 +132,6 @@ public class PythonCodeType {
     @SuppressWarnings("unchecked")
     private List<PythonCodeType> extractTypes(Map<String, Object> map) {
         List<Object> list = (List<Object>) map.get("types");
-        return list.stream().map(parsed -> new PythonCodeType(parsed, defaultPackageName)).collect(Collectors.toList());
+        return list.stream().map(parsed -> new PythonCodeType(parsed, context)).collect(Collectors.toList());
     }
 }
