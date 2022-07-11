@@ -35,4 +35,9 @@ public class HeadingProps {
     public Map<String, ?> getProps() {
         return Collections.unmodifiableMap(props);
     }
+
+    public String getStyle() {
+        Object style = props.get("style");
+        return style == null ? "" : style.toString();
+    }
 }

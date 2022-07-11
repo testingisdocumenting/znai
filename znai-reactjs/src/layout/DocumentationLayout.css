@@ -225,6 +225,11 @@
     padding-left: 12px;
 }
 
+.toc-menu .page-sections .page-section.api a {
+    font-family: var(--znai-code-font-family);
+    font-size: 13px;
+}
+
 .toc-menu .page-sections a {
     color: var(--znai-toc-page-section-color);
     text-decoration: none;

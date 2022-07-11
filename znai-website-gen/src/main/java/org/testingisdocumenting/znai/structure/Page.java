@@ -17,7 +17,9 @@
 package org.testingisdocumenting.znai.structure;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
@@ -56,13 +58,19 @@ public class Page {
 
     private List<PageSectionIdTitle> extractFirstLevelHeadings(final DocElement docElement) {
         return docElement.getContent().stream().
-            filter(e -> e.getType().equals(SECTION)).
-            map(this::createSectionIdTitle).
-            collect(toList());
+                filter(e -> e.getType().equals(SECTION)).
+                map(this::createSectionIdTitle).
+                collect(toList());
     }
 
     private PageSectionIdTitle createSectionIdTitle(DocElement docElement) {
         String title = docElement.getProp("title").toString();
-        return new PageSectionIdTitle(title);
+        Object style = docElement.getProp("style");
+
+        Map<String, Object> headingProps = style == null ?
+                Collections.emptyMap() :
+                Collections.singletonMap("style", style);
+
+        return new PageSectionIdTitle(title, headingProps);
     }
 }
