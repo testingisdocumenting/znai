@@ -33,8 +33,8 @@ class TableOfContentsTest {
         toc.contains("chapter1", "page-a", "page section title").should == false
         def tocItem = toc.findTocItem("chapter1", "page-a")
 
-        def pageSection1 = new PageSectionIdTitle("page section title")
-        def pageSection2 = new PageSectionIdTitle("another title")
+        def pageSection1 = new PageSectionIdTitle("page section title", [:])
+        def pageSection2 = new PageSectionIdTitle("another title", [:])
         tocItem.setPageSectionIdTitles([pageSection1, pageSection2])
 
         toc.contains("chapter1", "page-a", pageSection1.id).should == true
