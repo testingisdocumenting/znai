@@ -21,6 +21,10 @@
     margin-bottom: 8px;
 }
 
+.znai-python-method.extra-bottom-margin {
+    margin-bottom: 12px;
+}
+
 .znai-python-method-full-name {
     display: flex;
 }
