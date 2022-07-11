@@ -96,12 +96,13 @@ public class PythonCodeEntry {
         return apiParameters;
     }
 
-    // TODO use real links based on global ref id
     private ApiLinkedText paramType(DocStructure docStructure, PythonDocParam param) {
         PythonCodeArg typeHint = getArgs().stream().filter(p -> param.getName().equals(p.getName())).findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("no parameter <" + param.getName() + "> found is signature"));
 
-        return typeHint.getType().convertToApiLinkedText(docStructure);
+        return typeHint.getType().isDefined() ?
+                typeHint.getType().convertToApiLinkedText(docStructure) :
+                new ApiLinkedText(param.getType());
     }
 
     private List<PythonCodeArg> buildArgs(Map<String, Object> parsed) {

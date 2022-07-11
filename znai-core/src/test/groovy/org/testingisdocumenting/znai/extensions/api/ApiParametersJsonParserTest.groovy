@@ -18,6 +18,7 @@
 package org.testingisdocumenting.znai.extensions.api
 
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PropsUtils
 
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
@@ -59,14 +60,12 @@ class ApiParametersJsonParserTest {
 ]
 """)
 
-        def emptyUrl = ApiLinkedText.EMPTY_STRING_SUPPLIER
-
-        apiParameters.toMap().should == [parameters:[
-                [anchorId: 'param1', name: 'param1', type: [[text: 'String', url: emptyUrl]], description: [[markdown: 'description 1', type: 'TestMarkdown']]],
-                [anchorId: 'param2', name: 'param2', type: [[text: 'Integer', url: emptyUrl]], description: [[markdown: 'description 2', type: 'TestMarkdown']], children:[
-                        [anchorId: 'param2_param21', name: 'param21', type: [[text: 'String', url: emptyUrl]], description:[[markdown: 'description 21', type: 'TestMarkdown']], children:[
-                                [anchorId: 'param2_param21_param31', name: 'param31', type: [[text: 'Boolean', url: emptyUrl]], description: [[markdown: 'description 31', type: 'TestMarkdown']]]]],
-                        [anchorId: 'param2_param22', name: 'param22', type: [[text: 'Integer', url: emptyUrl]], description: [[markdown: 'description 22', type: 'TestMarkdown']]]]]]]
+        PropsUtils.exerciseSuppliers(apiParameters.toMap()).should == [parameters:[
+                [anchorId: 'param1', name: 'param1', type: [[text: 'String', url: '']], description: [[markdown: 'description 1', type: 'TestMarkdown']]],
+                [anchorId: 'param2', name: 'param2', type: [[text: 'Integer', url: '']], description: [[markdown: 'description 2', type: 'TestMarkdown']], children:[
+                        [anchorId: 'param2_param21', name: 'param21', type: [[text: 'String', url: '']], description:[[markdown: 'description 21', type: 'TestMarkdown']], children:[
+                                [anchorId: 'param2_param21_param31', name: 'param31', type: [[text: 'Boolean', url: '']], description: [[markdown: 'description 31', type: 'TestMarkdown']]]]],
+                        [anchorId: 'param2_param22', name: 'param22', type: [[text: 'Integer', url: '']], description: [[markdown: 'description 22', type: 'TestMarkdown']]]]]]]
 
         apiParameters.combinedTextForSearch().should == 'param1 String description 1 param2 Integer description 2 ' +
                 'param21 String description 21 param31 Boolean description 31 param22 Integer description 22'
