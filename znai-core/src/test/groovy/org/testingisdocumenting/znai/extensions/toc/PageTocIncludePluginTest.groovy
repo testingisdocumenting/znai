@@ -43,8 +43,8 @@ class PageTocIncludePluginTest {
         toc.addIndex("my doc")
         def tocItem = toc.addTocItem("chapter-one", "page-one")
         tocItem.setPageSectionIdTitles([
-                new PageSectionIdTitle("Section One"),
-                new PageSectionIdTitle("Section Two")
+                new PageSectionIdTitle("Section One", [:]),
+                new PageSectionIdTitle("Section Two", [:])
         ])
     }
 

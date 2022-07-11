@@ -1,0 +1,1 @@
+* Reflect [Heading Style](visuals/headings) in Table Of Contents menu panel

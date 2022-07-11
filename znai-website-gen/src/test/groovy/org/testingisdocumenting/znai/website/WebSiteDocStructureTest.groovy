@@ -47,7 +47,7 @@ class WebSiteDocStructureTest {
         toc.addTocItem('chapter', 'pageOne')
         toc.addTocItem('chapter', 'pageTwo')
         toc.addIndex("Product")
-        toc.findTocItem('chapter', 'pageTwo').pageSectionIdTitles = [new PageSectionIdTitle ('Test Section')]
+        toc.findTocItem('chapter', 'pageTwo').pageSectionIdTitles = [new PageSectionIdTitle ('Test Section', [:])]
     }
 
     @Before

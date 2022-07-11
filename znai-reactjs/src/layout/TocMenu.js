@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +25,10 @@ const PageSections = ({pageSectionIdTitles, selected, onTocItemPageSectionClick}
             const onClick = () => onTocItemPageSectionClick(idTitle.id)
 
             const isSelected = idTitle.id === selected.anchorId
-            const className = "page-section" + (isSelected ? " selected" : "")
+            const className = "page-section" +
+              (isSelected ? " selected" : "") +
+              (idTitle.style ? " " + idTitle.style : "")
+
             const href = "#" + idTitle.id
 
             return (

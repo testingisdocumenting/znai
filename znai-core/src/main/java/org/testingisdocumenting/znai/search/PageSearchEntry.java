@@ -19,6 +19,8 @@ package org.testingisdocumenting.znai.search;
 
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 
+import java.util.Collections;
+
 /**
  * search entry local to a single page
  */
@@ -27,7 +29,7 @@ public class PageSearchEntry {
     private final SearchText searchText;
 
     public PageSearchEntry(String pageSectionTitle, SearchText searchText) {
-        this.pageSectionIdTitle = new PageSectionIdTitle(pageSectionTitle);
+        this.pageSectionIdTitle = new PageSectionIdTitle(pageSectionTitle, Collections.emptyMap());
         this.searchText = searchText;
     }
 

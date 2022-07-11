@@ -19,16 +19,19 @@ package org.testingisdocumenting.znai.parser;
 
 import org.testingisdocumenting.znai.utils.NameUtils;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PageSectionIdTitle {
     private final String title;
     private final String id;
+    private final Map<String, ?> headingProps;
 
-    public PageSectionIdTitle(String title) {
+    public PageSectionIdTitle(String title, Map<String, ?> headingProps) {
         this.title = title;
         this.id = NameUtils.idFromTitle(title);
+        this.headingProps = headingProps;
     }
 
     public String getTitle() {
@@ -39,10 +42,15 @@ public class PageSectionIdTitle {
         return id;
     }
 
+    public Map<String, ?> getHeadingProps() {
+        return headingProps;
+    }
+
     public Map<String, ?> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("title", getTitle());
         result.put("id", getId());
+        result.putAll(getHeadingProps());
 
         return result;
     }
