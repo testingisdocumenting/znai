@@ -77,9 +77,9 @@ class ServerSideSimplifiedRendererTest {
         toc.addTocItem('chapter-a', 'page-two')
         toc.addTocItem('chapter-b', 'page-one')
 
-        toc.tocItems[0].pageSectionIdTitles = [new PageSectionIdTitle('PS0')]
-        toc.tocItems[1].pageSectionIdTitles = [new PageSectionIdTitle('PS1'), new PageSectionIdTitle('PS2')]
-        toc.tocItems[2].pageSectionIdTitles = [new PageSectionIdTitle('PS3'), new PageSectionIdTitle('PS4')]
+        toc.tocItems[0].pageSectionIdTitles = [new PageSectionIdTitle('PS0', [:])]
+        toc.tocItems[1].pageSectionIdTitles = [new PageSectionIdTitle('PS1', [:]), new PageSectionIdTitle('PS2', [:])]
+        toc.tocItems[2].pageSectionIdTitles = [new PageSectionIdTitle('PS3', [:]), new PageSectionIdTitle('PS4', [:])]
 
         return toc
     }
