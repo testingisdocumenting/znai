@@ -26,11 +26,12 @@ interface Props {
   qualifiedName: string;
   hideNameQualifier?: boolean;
   removeSelf?: boolean;
+  extraBottomMargin?: boolean;
   url?: string;
   args: PythonArg[];
 }
 
-export function PythonMethod({ qualifiedName, url, args, hideNameQualifier, removeSelf }: Props) {
+export function PythonMethod({ qualifiedName, url, args, hideNameQualifier, removeSelf, extraBottomMargin }: Props) {
   const { packageName, name } = splitIntoPackageAndName(qualifiedName);
 
   // remove self arg if present
@@ -59,8 +60,10 @@ export function PythonMethod({ qualifiedName, url, args, hideNameQualifier, remo
     renderedName
   );
 
+  const className = "znai-python-method content-block" + (extraBottomMargin ? " extra-bottom-margin" : "");
+
   return (
-    <div className="znai-python-method content-block">
+    <div className={className}>
       <div className="znai-python-method-full-name">
         {!hideNameQualifier && (
           <>
