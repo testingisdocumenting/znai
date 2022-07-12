@@ -32,12 +32,13 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
     }
 
     private final String PARAMETERS_HEADER = "Parameters";
+    private final String RETURNS_HEADER = "Returns";
     private final String UNDERSCORE_PATTERN = "\\s+[-_]+";
 
     private final Pattern HEADER_START = Pattern.compile("\\w+" + UNDERSCORE_PATTERN);
     private final Pattern PARAMETERS_START = Pattern.compile(PARAMETERS_HEADER + UNDERSCORE_PATTERN);
-//    private final Pattern PARAMETER_NAME_TYPE = Pattern.compile("^(\\w+)\\s*:\\s*(.*)\\s*");
     private final Pattern PARAMETER_NAME_TYPE = Pattern.compile("^(\\S+)\\s*:\\s*(.*)\\s*");
+    private final Pattern RETURNS_START = Pattern.compile(RETURNS_HEADER + UNDERSCORE_PATTERN);
 
     private final List<PythonDocParam> params = new ArrayList<>();
     private String currentName = "";
@@ -62,8 +63,9 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
     public PythonDocParserResult parse(String pyDoc) {
         String descriptionOnly = extractDescriptionOnly(pyDoc);
         List<PythonDocParam> params = parseParams(pyDoc);
+        PythonDocReturn funcReturn = parseReturn(pyDoc);
 
-        return new PythonDocParserResult(descriptionOnly, params);
+        return new PythonDocParserResult(descriptionOnly, params, funcReturn);
     }
 
     private String extractDescriptionOnly(String pyDoc) {
@@ -85,7 +87,7 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
 
         String[] lines = fromParams.split("\n");
         for (String line : lines) {
-            LineHandleResult result = handleLine(line);
+            LineHandleResult result = handleParamsLine(line);
             if (result == LineHandleResult.BREAK) {
                 break;
             }
@@ -96,7 +98,45 @@ public class PythonDocPandasLikeParser implements PythonDocParser {
         return Collections.unmodifiableList(params);
     }
 
-    private LineHandleResult handleLine(String line) {
+    private PythonDocReturn parseReturn(String pyDoc) {
+        Matcher matcher = RETURNS_START.matcher(pyDoc);
+        if (!matcher.find()) {
+            return PythonDocReturn.undefined();
+        }
+
+        int start = matcher.start();
+        String fromReturns = pyDoc.substring(start);
+
+        String[] lines = fromReturns.split("\n");
+        // header, underscore and first line
+        if (lines.length < 3) {
+            return PythonDocReturn.undefined();
+        }
+
+        String optionalTypeLine = lines[2];
+        if (optionalTypeLine.startsWith(" ")) {
+            return new PythonDocReturn("", extractTextUntilNextDelimiter(lines, 2));
+        } else {
+            return new PythonDocReturn(optionalTypeLine.trim(), extractTextUntilNextDelimiter(lines, 3));
+        }
+    }
+
+    private String extractTextUntilNextDelimiter(String[] lines, int startIdx) {
+        List<String> result = new ArrayList<>();
+        for (int idx = startIdx; idx < lines.length; idx++) {
+            String line = lines[idx];
+
+            if (!line.isEmpty() && !line.startsWith(" ")) {
+                break;
+            }
+
+            result.add(line.trim());
+        }
+
+        return String.join("\n", result).trim();
+    }
+
+    private LineHandleResult handleParamsLine(String line) {
         String trimmed = line.trim();
         if (trimmed.equals(PARAMETERS_HEADER)) {
             return LineHandleResult.CONTINUE;

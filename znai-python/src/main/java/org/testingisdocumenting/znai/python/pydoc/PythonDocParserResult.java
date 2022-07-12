@@ -19,14 +19,17 @@ package org.testingisdocumenting.znai.python.pydoc;
 import org.testingisdocumenting.znai.python.PythonDocParam;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PythonDocParserResult {
     private final String descriptionOnly;
     private final List<PythonDocParam> params;
+    private final PythonDocReturn funcReturn;
 
-    public PythonDocParserResult(String descriptionOnly, List<PythonDocParam> params) {
+    public PythonDocParserResult(String descriptionOnly, List<PythonDocParam> params, PythonDocReturn funcReturn) {
         this.descriptionOnly = descriptionOnly;
         this.params = params;
+        this.funcReturn = funcReturn;
     }
 
     public String getDescriptionOnly() {
@@ -35,5 +38,13 @@ public class PythonDocParserResult {
 
     public List<PythonDocParam> getParams() {
         return params;
+    }
+
+    /**
+     *
+     * @return pyth
+     */
+    public PythonDocReturn getFuncReturn() {
+        return funcReturn;
     }
 }

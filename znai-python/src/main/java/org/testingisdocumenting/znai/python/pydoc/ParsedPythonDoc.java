@@ -30,6 +30,7 @@ public class ParsedPythonDoc {
     private final String pyDoc;
     private final String pyDocDescriptionOnly;
     private final List<PythonDocParam> params;
+    private final PythonDocReturn funcReturn;
 
     public ParsedPythonDoc(String pyDoc) {
         PythonDocParser parser = findParser();
@@ -37,11 +38,16 @@ public class ParsedPythonDoc {
 
         this.pyDoc = pyDoc;
         this.params = parserResult.getParams();
+        this.funcReturn = parserResult.getFuncReturn();
         this.pyDocDescriptionOnly = parserResult.getDescriptionOnly();
     }
 
     public String getPyDoc() {
         return pyDoc;
+    }
+
+    public PythonDocReturn getFuncReturn() {
+        return funcReturn;
     }
 
     public String getPyDocDescriptionOnly() {

@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.python.pydoc.ParsedPythonDoc;
+import org.testingisdocumenting.znai.python.pydoc.PythonDocReturn;
 import org.testingisdocumenting.znai.structure.DocStructure;
 
 import java.nio.file.Path;
@@ -105,6 +106,15 @@ public class PythonCodeEntry {
         ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(getDocString());
 
         ApiParameters apiParameters = new ApiParameters(anchorId);
+
+        PythonDocReturn funcReturn = parsedPythonDoc.getFuncReturn();
+        if (funcReturn.isDefined()) {
+            MarkupParserResult parsedMarkdown = parser.parse(parentMarkupPath, funcReturn.getPyDocText());
+            apiParameters.add("returns", new ApiLinkedText(funcReturn.getType()),
+                    parsedMarkdown.contentToListOfMaps(),
+                    parsedMarkdown.getAllText());
+        }
+
         parsedPythonDoc.getParams().forEach(pythonParam -> {
             MarkupParserResult parsedMarkdown = parser.parse(parentMarkupPath, pythonParam.getPyDocText());
             apiParameters.add(pythonParam.getName(), paramType(docStructure, pythonParam),
