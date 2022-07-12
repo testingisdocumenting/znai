@@ -47,7 +47,7 @@ export function splitTokensIntoLines(tokens) {
             handleNewLineStringToken(token)
         } else if (isString && token.startsWith(' ')) {
             handleSpacing(token)
-        } else if (!isString && token.content.indexOf('\n') > 0) {
+        } else if (!isString && typeof token.content === 'string' && token.content.indexOf('\n') > 0) {
              handleMultiLineToken(token)
         } else {
             pushToken(token)
