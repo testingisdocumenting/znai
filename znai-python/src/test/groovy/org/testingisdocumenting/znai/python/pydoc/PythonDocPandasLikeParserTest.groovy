@@ -64,6 +64,22 @@ class PythonDocPandasLikeParserTest {
         parse("pydoc-pandas-like-example-no-params.txt").descriptionOnly.should == expected
     }
 
+    @Test
+    void "should extract return description and type"() {
+        def expectedDesc = "number of goodies\n\nof tasty goodies"
+
+        parse("pydoc-pandas-like-example.txt").funcReturn.should == [type: "int", pyDocText: expectedDesc]
+        parse("pydoc-pandas-like-example-return-no-type.txt").funcReturn.should == [type: "", pyDocText: expectedDesc]
+    }
+
+    @Test
+    void "should generate empty return when no present"() {
+        def funcReturn = parse("pydoc-pandas-like-name-with-dashes.txt").funcReturn
+
+        funcReturn.should == [type: "", pyDocText: ""]
+        funcReturn.isDefined().should == false
+    }
+
     private static void parseAndValidateParams(String fileName) {
         def params = parse(fileName).params
 

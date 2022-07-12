@@ -1,0 +1,1 @@
+* Parse [Python Returns](snippets/python#doc-parameters) PyDoc section

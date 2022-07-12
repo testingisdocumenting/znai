@@ -84,7 +84,8 @@ To show only a variable's value:
 
 # Doc String
 
-Use `include-python-doc` plugin to embed py doc string with markdown into documentation
+Use `include-python-doc` plugin to embed py doc string with markdown into documentation.
+Znai uses [Pandas style doc string](https://pandas.pydata.org/docs/development/contributing_docstring.html) to parse description and parameters.
 
 :include-file: python/example.py {title: "example.py"}
 
@@ -109,9 +110,9 @@ Use `include-python-doc-params` plugin to render parameters extracted from pydoc
 
 :include-file: python/pydoc-params.py {autoTitle: true}
 
-    :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "my_func params"}
+    :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "result and parameters"}
 
-:include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "my_func params"}
+:include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "result and parameters"}
 
 Note: read more about [API parameters](snippets/api-parameters) for additional properties   
 
@@ -121,9 +122,9 @@ If you define [Type Hints](https://docs.python.org/3/library/typing.html), you c
 
 :include-file: python/pydoc-params-type-hints.py {autoTitle: true}
 
-    :include-python-doc-params: python/pydoc-params-type-hints.py {entry: "my_func", title: "my_func params"}
+    :include-python-doc-params: python/pydoc-params-type-hints.py {entry: "my_func", title: "result and parameters"}
 
-:include-python-doc-params: python/pydoc-params-type-hints.py {entry: "my_func", title: "my_func params"}
+:include-python-doc-params: python/pydoc-params-type-hints.py {entry: "my_func", title: "result and parameters"}
 
 # Method/Function Definition
 
