@@ -45,6 +45,10 @@
     flex-wrap: wrap;
 }
 
+.znai-python-returns {
+    display: flex;
+}
+
 .znai-python-method-arg {
     display: flex;
 }

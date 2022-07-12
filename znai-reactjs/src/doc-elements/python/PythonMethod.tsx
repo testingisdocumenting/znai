@@ -20,6 +20,8 @@ import { PythonArg } from "./PythonArg";
 import { ApiLinkedTextBlock } from "../api/ApiLinkedTextBlock";
 import { LinkWrapper } from "../default-elements/LinkWrapper";
 
+import { ApiLinkedText } from "../api/ApiLinkedText";
+
 import "./PythonMethod.css";
 
 interface Props {
@@ -29,6 +31,7 @@ interface Props {
   extraBottomMargin?: boolean;
   url?: string;
   args: PythonArg[];
+  returns: ApiLinkedText;
   decorators: string[];
 }
 
@@ -37,6 +40,7 @@ export function PythonMethod({
   url,
   args,
   decorators,
+  returns,
   hideNameQualifier,
   removeSelf,
   extraBottomMargin,
@@ -84,7 +88,7 @@ export function PythonMethod({
           </>
         )}
         <div className="znai-python-method-name">{nameWrappedInOptionalLink}</div>
-        <div className="znai-python-method-separator">(</div>
+        <div className="znai-python-method-arg-separator">(</div>
         <div className="znai-python-args">
           {renderedArgs.map((rendered, idx) => {
             const needSeparator = idx !== renderedArgs.length - 1;
@@ -95,7 +99,13 @@ export function PythonMethod({
               </>
             );
           })}
-          <div className="znai-python-method-separator">)</div>
+          <div className="znai-python-method-arg-separator">)</div>
+          {returns.length > 0 && (
+            <div className="znai-python-returns">
+              <div className="znai-python-method-arg-separator"> -&gt; </div>
+              <ApiLinkedTextBlock linkedText={returns} />
+            </div>
+          )}
         </div>
       </div>
     </div>

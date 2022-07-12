@@ -202,6 +202,7 @@ class PythonBasedPythonParserTest {
         parsed.findEntryByName("Money.__init__").args.should == [
                 [name: "self", type: noType, category: PythonCodeArg.Category.REGULAR],
                 [name: "amount", type: [name: "int", types: []], category: PythonCodeArg.Category.REGULAR],
+                [name: "currency", type: [name: "str", types: []], category: PythonCodeArg.Category.REGULAR],
         ]
 
         parsed.findEntryByName("Money.add").args.should == [
