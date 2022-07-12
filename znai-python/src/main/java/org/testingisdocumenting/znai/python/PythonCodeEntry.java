@@ -137,6 +137,7 @@ public class PythonCodeEntry {
 
     @SuppressWarnings("unchecked")
     private List<String> extractDecorators(Map<String, Object> parsed) {
-        return (List<String>) parsed.get("decorators");
+        Object decoratorsValue = parsed.get("decorators");
+        return decoratorsValue == null ? Collections.emptyList() : (List<String>) decoratorsValue;
     }
 }
