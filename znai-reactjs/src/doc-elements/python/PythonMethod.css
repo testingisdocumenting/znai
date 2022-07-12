@@ -25,12 +25,19 @@
     margin-bottom: 12px;
 }
 
+.znai-python-method-decorators {
+    color: var(--znai-code-keyword-color);
+    white-space: pre;
+
+    margin-right: 8px;
+}
+
 .znai-python-method-full-name {
     display: flex;
 }
 
 .znai-python-method-name {
-    color: var(--znai-code-keyword-color);
+    color: var(--znai-code-function-color);
 }
 
 .znai-python-args {

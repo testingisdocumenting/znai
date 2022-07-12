@@ -83,6 +83,14 @@ public class PythonCodeEntry {
         return decorators;
     }
 
+    public boolean isStatic() {
+        return decorators.contains("staticmethod");
+    }
+
+    public boolean isClassMethod() {
+        return decorators.contains("classmethod");
+    }
+
     public Map<String, ?> toMap(DocStructure docStructure) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("name", name);

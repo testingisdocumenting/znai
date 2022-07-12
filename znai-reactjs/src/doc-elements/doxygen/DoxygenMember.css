@@ -25,7 +25,7 @@
 }
 
 .znai-doxygen-member-name {
-    color: var(--znai-code-keyword-color);
+    color: var(--znai-code-function-color);
 }
 
 .znai-doxygen-template-param,

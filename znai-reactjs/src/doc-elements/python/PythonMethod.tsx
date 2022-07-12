@@ -71,12 +71,12 @@ export function PythonMethod({
 
   const className = "znai-python-method content-block" + (extraBottomMargin ? " extra-bottom-margin" : "");
 
-  const combinedDecorators = decorators.join(" ");
+  const combinedDecorators = combineAndAdjustDecorators();
 
   return (
     <div className={className}>
       <div className="znai-python-method-full-name">
-        {combinedDecorators && <div className="znai-python-method-decorators">{combinedDecorators}</div>}
+        {combinedDecorators.length > 0 && <div className="znai-python-method-decorators">{combinedDecorators}</div>}
         {!hideNameQualifier && (
           <>
             <div className="znai-python-method-package-name">{packageName}</div>
@@ -100,6 +100,23 @@ export function PythonMethod({
       </div>
     </div>
   );
+
+  function combineAndAdjustDecorators() {
+    return decorators.map(convertDecorator);
+
+    function convertDecorator(d: string) {
+      switch (d) {
+        case "staticmethod":
+          return "static";
+
+        case "classmethod":
+          return "class method";
+
+        default:
+          return d;
+      }
+    }
+  }
 }
 
 interface PythonArgProps {
