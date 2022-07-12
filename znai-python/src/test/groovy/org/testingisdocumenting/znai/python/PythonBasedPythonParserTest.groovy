@@ -190,6 +190,27 @@ class PythonBasedPythonParserTest {
     }
 
     @Test
+    void "find all functions"() {
+        def parsed = parse("src/test/resources/fin/money.py", "fin.money")
+        parsed.findAllEntriesByTypeWithPrefix("function", "Money.").name.should == [
+                "Money.__init__",
+                "Money.dollars",
+                "Money.add",
+        ]
+    }
+
+    @Test
+    void "extract class properties"() {
+        def parsed = parse("src/test/resources/fin/money.py", "fin.money")
+        def properties = parsed.generatePropertiesForPrefix("Money.")
+
+        properties.should == [
+                [name: "amount", type: [name: "int", types: []], readOnly: false, pyDocText: "amount in provided currency"],
+                [name: "currency", type: [name: "str", types: []], readOnly: true, pyDocText: "money currency"]
+        ]
+    }
+
+    @Test
     void "access to decorators"() {
         def parsed = parse("src/test/resources/fin/money.py", "fin.money")
         parsed.findEntryByName("Money.dollars").decorators.should == ["classmethod"]

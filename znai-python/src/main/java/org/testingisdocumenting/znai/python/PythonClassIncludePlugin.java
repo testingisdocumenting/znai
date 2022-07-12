@@ -16,6 +16,7 @@
 
 package org.testingisdocumenting.znai.python;
 
+import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
@@ -69,7 +70,7 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
         this.markupPath = markupPath;
 
         parsed.findRequiredEntryByTypeAndName("class", fileAndRelativeEntryName.getRelativeName());
-        members = parsed.findAllEntriesWithPrefix(fileAndRelativeEntryName.getRelativeName() + ".");
+        members = parsed.findAllEntriesByTypeWithPrefix("function", fileAndRelativeEntryName.getRelativeName() + ".");
 
         builder = new PythonIncludeResultBuilder(componentsRegistry,
                 parserHandler,
@@ -77,6 +78,8 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
                 fileAndRelativeEntryName);
 
         builder.addClassHeader();
+
+        addProperties(parsed, parserHandler, markupPath);
 
         builder.addSubSection("Members");
         addMembersSignature(classMethods());
@@ -89,6 +92,20 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
         addMembersDetails(regularMethods());
 
         return builder.build();
+    }
+
+    private void addProperties(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
+        ApiParameters properties = parsed.createPropertiesAsApiParameters(componentsRegistry.docStructure(),
+                componentsRegistry.markdownParser(),
+                markupPath,
+                fileAndRelativeEntryName.getRelativeName());
+
+        if (!properties.isEmpty()) {
+            builder.addSubSection("Properties");
+            builder.addSearchText(properties.combinedTextForSearch());
+
+            parserHandler.onCustomNode("ApiParameters", properties.toMap());
+        }
     }
 
     private Stream<PythonCodeEntry> classMethods() {
@@ -117,6 +134,5 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
             builder.addPyDocTextOnly(markupPath, entry);
             builder.addPyDocParams(markupPath, entry);
         });
-
     }
 }

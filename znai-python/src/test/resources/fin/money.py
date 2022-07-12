@@ -11,8 +11,26 @@ class Money:
         currency:
           currency to associate with the created Money
         """
+        self._amount = amount
+        self._currency = currency
+
+    @property
+    def amount(self) -> int:
+        """
+        amount in provided currency
+        """
+        return self._amount
+
+    @amount.setter
+    def amount(self, amount: int):
         self.amount = amount
-        self.currency = currency
+
+    @property
+    def currency(self) -> str:
+        """
+        money currency
+        """
+        return self._currency
 
     @classmethod
     def dollars(cls, amount: int) -> 'Money':
@@ -64,4 +82,4 @@ def render_money(amount: Money, message: str = "") -> str:
       money represented as text
     """
 
-    return "printing money"
+    return f"{message} {amount.amount} {amount.currency}"

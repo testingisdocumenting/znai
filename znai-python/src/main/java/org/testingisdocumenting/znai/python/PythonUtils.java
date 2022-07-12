@@ -48,6 +48,24 @@ class PythonUtils {
         }
     }
 
+    public static class PropertyNameAndQualifier {
+        private final String name;
+        private final String qualifier;
+
+        public PropertyNameAndQualifier(String name, String qualifier) {
+            this.name = name;
+            this.qualifier = qualifier;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getQualifier() {
+            return qualifier;
+        }
+    }
+
     static FileNameAndRelativeName findFileNameAndRelativeNameByFullyQualifiedName(ResourcesResolver resourcesResolver,
                                                                                    String fullyQualifiedName) {
         List<PythonUtils.FileNameAndRelativeName> fileAndNames = PythonUtils.entityNameFileNameCombos(fullyQualifiedName);
@@ -70,6 +88,15 @@ class PythonUtils {
     static String convertQualifiedNameToFilePath(String qualifiedName) {
         String[] parts = splitIntoParts(qualifiedName);
         return combineFileNameParts(parts, 1);
+    }
+
+    static PropertyNameAndQualifier extractPropertyNameAndQualifierFromEntryName(String entryName) {
+        String[] parts = entryName.split("\\.");
+        if (parts.length < 3) {
+            throw new IllegalArgumentException("expect raw property to match [packageName.]ClassName.propertyName.[get|set]");
+        }
+
+        return new PropertyNameAndQualifier(parts[parts.length - 2], parts[parts.length - 1]);
     }
 
     static List<String> convertQualifiedNameToMultipleFilePaths(String qualifiedName) {

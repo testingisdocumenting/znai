@@ -1,0 +1,1 @@
+* Render [Python Properties](snippets/python#finmoneymoney-properties) as [API Parameters](snippets/api-parameters)
