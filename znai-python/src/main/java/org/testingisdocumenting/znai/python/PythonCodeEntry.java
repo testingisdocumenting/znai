@@ -36,6 +36,7 @@ public class PythonCodeEntry {
     private final String bodyOnly;
     private final String docString;
     private final List<PythonCodeArg> args;
+    private final List<String> decorators;
 
     public PythonCodeEntry(Map<String, Object> parsed, PythonCodeContext context) {
         this.context = context;
@@ -51,6 +52,7 @@ public class PythonCodeEntry {
         }
 
         this.args = buildArgs(parsed);
+        this.decorators = extractDecorators(parsed);
     }
 
     public String getName() {
@@ -77,11 +79,24 @@ public class PythonCodeEntry {
         return args;
     }
 
+    public List<String> getDecorators() {
+        return decorators;
+    }
+
+    public boolean isStatic() {
+        return decorators.contains("staticmethod");
+    }
+
+    public boolean isClassMethod() {
+        return decorators.contains("classmethod");
+    }
+
     public Map<String, ?> toMap(DocStructure docStructure) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("name", name);
         map.put("type", type);
         map.put("args", args.stream().map(arg -> arg.toMap(docStructure)).collect(Collectors.toList()));
+        map.put("decorators", decorators);
 
         return map;
     }
@@ -118,5 +133,11 @@ public class PythonCodeEntry {
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> parsedArgsList = (List<Map<String, Object>>) parsedArgs;
         return parsedArgsList.stream().map((arg) -> new PythonCodeArg(arg, context)).collect(Collectors.toList());
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<String> extractDecorators(Map<String, Object> parsed) {
+        Object decoratorsValue = parsed.get("decorators");
+        return decoratorsValue == null ? Collections.emptyList() : (List<String>) decoratorsValue;
     }
 }

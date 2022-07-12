@@ -21,22 +21,58 @@ import { PythonMethod } from "./PythonMethod";
 import { PythonArg } from "./PythonArg";
 
 export function pythonMethodDemo(registry: Registry) {
-  registry.add("no args", () => <PythonMethod qualifiedName="fin.money.split" args={[]} />);
-  registry.add("no types", () => <PythonMethod qualifiedName="fin.money.split" args={noTypeArgs()} />);
-  registry.add("default values", () => <PythonMethod qualifiedName="fin.money.split" args={defaultValuesArgs()} />);
+  const emptyDecorators: string[] = [];
+
+  registry.add("no args", () => (
+    <PythonMethod qualifiedName="fin.money.split" args={[]} decorators={emptyDecorators} />
+  ));
+  registry.add("no types", () => (
+    <PythonMethod qualifiedName="fin.money.split" args={noTypeArgs()} decorators={emptyDecorators} />
+  ));
+  registry.add("default values", () => (
+    <PythonMethod qualifiedName="fin.money.split" args={defaultValuesArgs()} decorators={emptyDecorators} />
+  ));
   registry.add("method url and default values", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={defaultValuesArgs()} url="#definition" />
+    <PythonMethod
+      qualifiedName="fin.money.split"
+      args={defaultValuesArgs()}
+      url="#definition"
+      decorators={emptyDecorators}
+    />
   ));
-  registry.add("simple types", () => <PythonMethod qualifiedName="fin.money.split" args={simpleTypeArgs()} />);
+  registry.add("simple types", () => (
+    <PythonMethod qualifiedName="fin.money.split" args={simpleTypeArgs()} decorators={emptyDecorators} />
+  ));
   registry.add("simple types with default values", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={simpleTypeWithDefaultsArgs()} />
+    <PythonMethod qualifiedName="fin.money.split" args={simpleTypeWithDefaultsArgs()} decorators={emptyDecorators} />
   ));
-  registry.add("position only", () => <PythonMethod qualifiedName="fin.money.split" args={positionalArgs()} />);
-  registry.add("args", () => <PythonMethod qualifiedName="fin.money.split" args={argsArgs()} />);
-  registry.add("kwargs", () => <PythonMethod qualifiedName="fin.money.split" args={kwargsArgs()} />);
-  registry.add("all combined", () => <PythonMethod qualifiedName="fin.money.split" args={allCombinedArgs()} />);
+  registry.add("position only", () => (
+    <PythonMethod qualifiedName="fin.money.split" args={positionalArgs()} decorators={emptyDecorators} />
+  ));
+  registry.add("args", () => (
+    <PythonMethod qualifiedName="fin.money.split" args={argsArgs()} decorators={emptyDecorators} />
+  ));
+  registry.add("kwargs", () => (
+    <PythonMethod qualifiedName="fin.money.split" args={kwargsArgs()} decorators={emptyDecorators} />
+  ));
+  registry.add("all combined", () => (
+    <PythonMethod qualifiedName="fin.money.split" args={allCombinedArgs()} decorators={emptyDecorators} />
+  ));
   registry.add("no name qualifier", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={allCombinedArgs()} hideNameQualifier={true} />
+    <PythonMethod
+      qualifiedName="fin.money.split"
+      args={allCombinedArgs()}
+      decorators={emptyDecorators}
+      hideNameQualifier={true}
+    />
+  ));
+  registry.add("with decorators", () => (
+    <PythonMethod
+      qualifiedName="fin.money.split"
+      args={allCombinedArgs()}
+      decorators={["staticmethod"]}
+      hideNameQualifier={true}
+    />
   ));
 }
 

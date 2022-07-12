@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.*;
 import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.ArgsRenderOpt;
@@ -28,6 +29,10 @@ import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.Na
 
 public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     private PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName;
+    private PythonIncludeResultBuilder builder;
+    private List<PythonCodeEntry> members;
+    private ParserHandler parserHandler;
+    private Path markupPath;
 
     @Override
     public String id() {
@@ -60,10 +65,13 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
 
     @Override
     public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
-        parsed.findRequiredEntryByTypeAndName("class", fileAndRelativeEntryName.getRelativeName());
-        List<PythonCodeEntry> members = parsed.findAllEntriesWithPrefix(fileAndRelativeEntryName.getRelativeName() + ".");
+        this.parserHandler = parserHandler;
+        this.markupPath = markupPath;
 
-        PythonIncludeResultBuilder builder = new PythonIncludeResultBuilder(componentsRegistry,
+        parsed.findRequiredEntryByTypeAndName("class", fileAndRelativeEntryName.getRelativeName());
+        members = parsed.findAllEntriesWithPrefix(fileAndRelativeEntryName.getRelativeName() + ".");
+
+        builder = new PythonIncludeResultBuilder(componentsRegistry,
                 parserHandler,
                 pluginParams.getFreeParam(),
                 fileAndRelativeEntryName);
@@ -71,12 +79,36 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
         builder.addClassHeader();
 
         builder.addSubSection("Members");
-        members.forEach(entry -> {
-            builder.addMethodSignature(entry, NameRenderOpt.SHORT_NAME, ArgsRenderOpt.REMOVE_SELF, MarginOpts.DEFAULT, true);
-        });
+        addMembersSignature(classMethods());
+        addMembersSignature(staticMethods());
+        addMembersSignature(regularMethods());
 
         builder.addSubSection("Details");
-        members.forEach(entry -> {
+        addMembersDetails(classMethods());
+        addMembersDetails(staticMethods());
+        addMembersDetails(regularMethods());
+
+        return builder.build();
+    }
+
+    private Stream<PythonCodeEntry> classMethods() {
+        return members.stream().filter(PythonCodeEntry::isClassMethod);
+    }
+
+    private Stream<PythonCodeEntry> staticMethods() {
+        return members.stream().filter(PythonCodeEntry::isStatic);
+    }
+
+    private Stream<PythonCodeEntry> regularMethods() {
+        return members.stream().filter(e -> !e.isClassMethod() && !e.isStatic());
+    }
+
+    private void addMembersSignature(Stream<PythonCodeEntry> entries) {
+        entries.forEach(entry -> builder.addMethodSignature(entry, NameRenderOpt.SHORT_NAME, ArgsRenderOpt.REMOVE_SELF, MarginOpts.DEFAULT, true));
+    }
+
+    private void addMembersDetails(Stream<PythonCodeEntry> entries) {
+        entries.forEach(entry -> {
             builder.addEntryHeader(PythonUtils.entityNameFromQualifiedName(entry.getName()));
             parserHandler.onGlobalAnchor(PythonUtils.globalAnchorId(defaultPackageName() + "." + entry.getName()));
 
@@ -86,6 +118,5 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
             builder.addPyDocParams(markupPath, entry);
         });
 
-        return builder.build();
     }
 }

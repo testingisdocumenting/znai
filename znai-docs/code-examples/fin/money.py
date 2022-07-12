@@ -2,6 +2,10 @@ class Money:
     def __init__(self, amount: int):
         self.amount = amount
 
+    @classmethod
+    def dollars(cls, amount: int):
+        return cls(amount)
+
     def add(self, another: 'Money'):
         """add money from another money instance
 
