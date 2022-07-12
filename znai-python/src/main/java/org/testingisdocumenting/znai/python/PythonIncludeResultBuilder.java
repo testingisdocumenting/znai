@@ -48,15 +48,18 @@ class PythonIncludeResultBuilder {
     private final List<String> searchText;
     private final ComponentsRegistry componentsRegistry;
     private final ParserHandler parserHandler;
+    private final Path markupPath;
     private final String qualifiedName;
     private final PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName;
 
     public PythonIncludeResultBuilder(ComponentsRegistry componentsRegistry,
                                       ParserHandler parserHandler,
+                                      Path markupPath,
                                       String qualifiedName,
                                       PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName) {
         this.componentsRegistry = componentsRegistry;
         this.parserHandler = parserHandler;
+        this.markupPath = markupPath;
         this.qualifiedName = qualifiedName;
         this.fileAndRelativeEntryName = fileAndRelativeEntryName;
         searchText = new ArrayList<>();
@@ -112,11 +115,11 @@ class PythonIncludeResultBuilder {
         }
 
         parserHandler.onCustomNode("PythonMethod", props);
-        searchText.add(fileAndRelativeEntryName.getRelativeName()); // TODO include parameter names into search
+        searchText.add(fileAndRelativeEntryName.getRelativeName());
     }
 
-    public void addPyDocTextOnly(Path markupPath, PythonCodeEntry func) {
-        ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(func.getDocString());
+    public void addPyDocTextOnly(PythonCodeEntry codeEntry) {
+        ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
 
         componentsRegistry.markdownParser().parse(markupPath, parsedPythonDoc.getPyDocDescriptionOnly())
                 .getDocElement().getContent().forEach(parserHandler::onDocElement);
@@ -124,7 +127,7 @@ class PythonIncludeResultBuilder {
         searchText.add(parsedPythonDoc.getPyDocDescriptionOnly());
     }
 
-    public void addPyDocParams(Path markupPath, PythonCodeEntry func) {
+    public void addPyDocParams(PythonCodeEntry func) {
         ApiParameters apiParameters = func.createParametersFromPyDoc(
                 componentsRegistry.docStructure(),
                 componentsRegistry.markdownParser(),

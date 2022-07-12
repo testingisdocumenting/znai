@@ -1,4 +1,11 @@
 class Money:
+    """
+    Money representation.
+    Encapsulates money type, combining amount and currency. Deals with precision errors.
+
+    Warning: avoid using `int` in place of money and use this type instead
+    """
+
     def __init__(self, amount: int, currency: str):
         """
         generic constructor that accepts a currency

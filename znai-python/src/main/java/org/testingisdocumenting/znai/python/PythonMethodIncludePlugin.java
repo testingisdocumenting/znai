@@ -62,14 +62,14 @@ public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
 
         PythonIncludeResultBuilder builder = new PythonIncludeResultBuilder(componentsRegistry,
                 parserHandler,
-                fullyQualifiedName, fileAndRelativeEntryName);
+                markupPath, fullyQualifiedName, fileAndRelativeEntryName);
 
         MarginOpts marginOpts = funcEntry.getDocString().isEmpty() ?
                 MarginOpts.DEFAULT: MarginOpts.EXTRA_BOTTOM_MARGIN;
 
         builder.addMethodSignature(funcEntry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.KEEP_SELF, marginOpts, true);
-        builder.addPyDocTextOnly(markupPath, funcEntry);
-        builder.addPyDocParams(markupPath, funcEntry);
+        builder.addPyDocTextOnly(funcEntry);
+        builder.addPyDocParams(funcEntry);
 
         return builder.build();
     }
