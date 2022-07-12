@@ -1,7 +1,7 @@
 import fin
 
 
-def my_func(label: str, price: fin.money.Money):
+def my_func(label: str, price: fin.money.Money) -> str:
     """
     text inside my *func* doc
     * list one
@@ -14,6 +14,12 @@ def my_func(label: str, price: fin.money.Money):
 
     price :
       price associated with the **item**
+
+    Returns
+    -------
+      status of the operation
+
+      `OK` for good
     """
 
-    print("hello")
+    return "OK"

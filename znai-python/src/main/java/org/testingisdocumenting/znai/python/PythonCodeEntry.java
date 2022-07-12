@@ -37,6 +37,8 @@ public class PythonCodeEntry {
     private final String bodyOnly;
     private final String docString;
     private final List<PythonCodeArg> args;
+    private final PythonCodeType returns;
+
     private final List<String> decorators;
 
     public PythonCodeEntry(Map<String, Object> parsed, PythonCodeContext context) {
@@ -53,6 +55,7 @@ public class PythonCodeEntry {
         }
 
         this.args = buildArgs(parsed);
+        this.returns = buildReturns(parsed);
         this.decorators = extractDecorators(parsed);
     }
 
@@ -78,6 +81,10 @@ public class PythonCodeEntry {
 
     public List<PythonCodeArg> getArgs() {
         return args;
+    }
+
+    public PythonCodeType getReturns() {
+        return returns;
     }
 
     public List<String> getDecorators() {
@@ -110,7 +117,7 @@ public class PythonCodeEntry {
         PythonDocReturn funcReturn = parsedPythonDoc.getFuncReturn();
         if (funcReturn.isDefined()) {
             MarkupParserResult parsedMarkdown = parser.parse(parentMarkupPath, funcReturn.getPyDocText());
-            apiParameters.add("returns", new ApiLinkedText(funcReturn.getType()),
+            apiParameters.add("returns", returnsType(docStructure, funcReturn),
                     parsedMarkdown.contentToListOfMaps(),
                     parsedMarkdown.getAllText());
         }
@@ -123,6 +130,14 @@ public class PythonCodeEntry {
         });
 
         return apiParameters;
+    }
+
+    private ApiLinkedText returnsType(DocStructure docStructure, PythonDocReturn funcReturn) {
+        PythonCodeType returnTypeHint = getReturns();
+
+        return returnTypeHint.isDefined() ?
+                returnTypeHint.convertToApiLinkedText(docStructure) :
+                new ApiLinkedText(funcReturn.getType());
     }
 
     private ApiLinkedText paramType(DocStructure docStructure, PythonDocParam param) {
@@ -143,6 +158,10 @@ public class PythonCodeEntry {
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> parsedArgsList = (List<Map<String, Object>>) parsedArgs;
         return parsedArgsList.stream().map((arg) -> new PythonCodeArg(arg, context)).collect(Collectors.toList());
+    }
+
+    private PythonCodeType buildReturns(Map<String, Object> parsed) {
+        return new PythonCodeType(parsed.get("returns"), context);
     }
 
     @SuppressWarnings("unchecked")

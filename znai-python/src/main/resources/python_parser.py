@@ -70,6 +70,7 @@ def function_to_dict(func_node: ast.FunctionDef, name):
     func_dict = node_to_dict("function", name, func_node)
     func_dict["args"] = extract_func_args(name, func_node.args)
     func_dict["decorators"] = extract_func_decorators(func_node.decorator_list)
+    func_dict["returns"] = extract_type(func_node.returns)
 
     return func_dict
 

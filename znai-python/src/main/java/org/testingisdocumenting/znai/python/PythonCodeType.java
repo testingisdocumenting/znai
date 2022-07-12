@@ -43,8 +43,11 @@ public class PythonCodeType {
 
             this.name = nameWithAppliedDefault(map.get("name").toString());
             this.types = extractTypes(map);
-        } else {
+        } else if (parsed != null) {
             this.name = nameWithAppliedDefault(parsed.toString());
+            this.types = Collections.emptyList();
+        } else {
+            this.name = "";
             this.types = Collections.emptyList();
         }
     }

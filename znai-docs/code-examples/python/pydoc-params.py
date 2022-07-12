@@ -20,4 +20,4 @@ def my_func(label, price):
       `OK` for good
     """
 
-    print("hello")
+    return "OK"
