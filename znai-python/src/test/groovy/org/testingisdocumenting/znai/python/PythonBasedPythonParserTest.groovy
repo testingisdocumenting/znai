@@ -209,7 +209,7 @@ class PythonBasedPythonParserTest {
                 [name: "another", type: [name: "fin.money.Money", types: []], category: PythonCodeArg.Category.REGULAR],
         ]
 
-        parsed.findEntryByName("print_money").args.should == [
+        parsed.findEntryByName("render_money").args.should == [
                 [name: "amount", type: [name: "fin.money.Money", types: []], category: PythonCodeArg.Category.REGULAR],
                 [name: "message", type: [name: "str", types: []], category: PythonCodeArg.Category.REGULAR, defaultValue: "\"\""],
         ]
