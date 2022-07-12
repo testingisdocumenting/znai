@@ -141,4 +141,8 @@ class PythonIncludeResultBuilder {
         parserHandler.onCustomNode("ApiParameters", props);
         searchText.add(apiParameters.combinedTextForSearch());
     }
+
+    public void addSearchText(String text) {
+        searchText.add(text);
+    }
 }

@@ -59,4 +59,14 @@ class PythonUtilsTest {
                 [packageName: "fin", relativeName: "money.Money", file: "fin.py"]
         ]
     }
+
+    @Test
+    void "extract property name and qualifier from entry name"() {
+        code {
+            PythonUtils.extractPropertyNameAndQualifierFromEntryName("amount.set")
+        } should throwException("expect raw property to match [packageName.]ClassName.propertyName.[get|set]")
+
+        def nameAndQualifier = PythonUtils.extractPropertyNameAndQualifierFromEntryName("fin.Money.amount.set")
+        nameAndQualifier.should == [name: "amount", qualifier: "set"]
+    }
 }

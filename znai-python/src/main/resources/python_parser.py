@@ -75,6 +75,14 @@ def function_to_dict(func_node: ast.FunctionDef, name):
     return func_dict
 
 
+def property_to_dict(property_node: ast.FunctionDef, name):
+    property_dict = node_to_dict("property", name, property_node)
+    property_dict["decorators"] = extract_func_decorators(property_node.decorator_list)
+    property_dict["returns"] = extract_type(property_node.returns)
+
+    return property_dict
+
+
 def extract_func_args(name: str, args: ast.arguments):
     parsed_args: list[dict[str, str]] = []
 
@@ -303,7 +311,49 @@ def class_to_list_of_dict(class_node):
     """
     return [node_to_dict("class", class_node.name, class_node)] + \
            [function_to_dict(node, class_node.name + "." + node.name) for node in
-            class_node.body if isinstance(node, ast.FunctionDef)]
+            class_node.body if is_class_method(node)] + \
+           [property_to_dict(node, class_node.name + "." + node.name + ".get") for node in
+            class_node.body if is_class_method_decorated_with_getter(node)] + \
+           [property_to_dict(node, class_node.name + "." + node.name + ".set") for node in
+            class_node.body if is_class_method_decorated_with_setter(node)]
+
+
+def is_class_method(node: ast.expr):
+    if not isinstance(node, ast.FunctionDef):
+        return False
+
+    if is_class_property(node):
+        return False
+
+    return True
+
+
+def is_class_method_decorated_with_getter(node: ast.FunctionDef):
+    if not hasattr(node, "decorator_list"):
+        return False
+
+    for decorator in node.decorator_list:
+        if isinstance(decorator, ast.Name):
+            if decorator.id == "property":
+                return True
+
+    return False
+
+
+def is_class_method_decorated_with_setter(node: ast.FunctionDef):
+    if not hasattr(node, "decorator_list"):
+        return False
+
+    for decorator in node.decorator_list:
+        if isinstance(decorator, ast.Attribute):
+            if decorator.attr == "setter":
+                return True
+
+    return False
+
+
+def is_class_property(node: ast.FunctionDef):
+    return is_class_method_decorated_with_getter(node) or is_class_method_decorated_with_setter(node)
 
 
 def parse_assignment(assignment_node):
