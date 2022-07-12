@@ -20,17 +20,22 @@ import { Registry } from "react-component-viewer";
 import { PythonMethod } from "./PythonMethod";
 import { PythonArg } from "./PythonArg";
 
-export function pythonMethodDemo(registry: Registry) {
-  const emptyDecorators: string[] = [];
+const emptyDecorators: string[] = [];
 
+export function pythonMethodDemo(registry: Registry) {
   registry.add("no args", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={[]} decorators={emptyDecorators} />
+    <PythonMethod qualifiedName="fin.money.split" args={[]} decorators={emptyDecorators} returns={[]} />
   ));
   registry.add("no types", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={noTypeArgs()} decorators={emptyDecorators} />
+    <PythonMethod qualifiedName="fin.money.split" args={noTypeArgs()} decorators={emptyDecorators} returns={[]} />
   ));
   registry.add("default values", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={defaultValuesArgs()} decorators={emptyDecorators} />
+    <PythonMethod
+      qualifiedName="fin.money.split"
+      args={defaultValuesArgs()}
+      decorators={emptyDecorators}
+      returns={[]}
+    />
   ));
   registry.add("method url and default values", () => (
     <PythonMethod
@@ -38,25 +43,42 @@ export function pythonMethodDemo(registry: Registry) {
       args={defaultValuesArgs()}
       url="#definition"
       decorators={emptyDecorators}
+      returns={[]}
     />
   ));
   registry.add("simple types", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={simpleTypeArgs()} decorators={emptyDecorators} />
+    <PythonMethod qualifiedName="fin.money.split" args={simpleTypeArgs()} decorators={emptyDecorators} returns={[]} />
+  ));
+  registry.add("complex types", () => (
+    <PythonMethod qualifiedName="fin.money.split" args={complexTypeArgs()} decorators={emptyDecorators} returns={[]} />
   ));
   registry.add("simple types with default values", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={simpleTypeWithDefaultsArgs()} decorators={emptyDecorators} />
+    <PythonMethod
+      qualifiedName="fin.money.split"
+      args={simpleTypeWithDefaultsArgs()}
+      decorators={emptyDecorators}
+      returns={[]}
+    />
+  ));
+  registry.add("with return", () => (
+    <PythonMethod
+      qualifiedName="fin.money.split"
+      args={simpleTypeArgs()}
+      decorators={emptyDecorators}
+      returns={[{ text: "fin.money.Money", url: "#money" }]}
+    />
   ));
   registry.add("position only", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={positionalArgs()} decorators={emptyDecorators} />
+    <PythonMethod qualifiedName="fin.money.split" args={positionalArgs()} decorators={emptyDecorators} returns={[]} />
   ));
   registry.add("args", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={argsArgs()} decorators={emptyDecorators} />
+    <PythonMethod qualifiedName="fin.money.split" args={argsArgs()} decorators={emptyDecorators} returns={[]} />
   ));
   registry.add("kwargs", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={kwargsArgs()} decorators={emptyDecorators} />
+    <PythonMethod qualifiedName="fin.money.split" args={kwargsArgs()} decorators={emptyDecorators} returns={[]} />
   ));
   registry.add("all combined", () => (
-    <PythonMethod qualifiedName="fin.money.split" args={allCombinedArgs()} decorators={emptyDecorators} />
+    <PythonMethod qualifiedName="fin.money.split" args={allCombinedArgs()} decorators={emptyDecorators} returns={[]} />
   ));
   registry.add("no name qualifier", () => (
     <PythonMethod
@@ -64,6 +86,7 @@ export function pythonMethodDemo(registry: Registry) {
       args={allCombinedArgs()}
       decorators={emptyDecorators}
       hideNameQualifier={true}
+      returns={[]}
     />
   ));
   registry.add("with decorators", () => (
@@ -72,6 +95,7 @@ export function pythonMethodDemo(registry: Registry) {
       args={allCombinedArgs()}
       decorators={["staticmethod"]}
       hideNameQualifier={true}
+      returns={[]}
     />
   ));
 }
@@ -117,6 +141,23 @@ function simpleTypeArgs(): PythonArg[] {
       defaultValue: "",
       category: "REGULAR",
       type: [{ text: "fin.money.Money", url: "#money" }],
+    },
+    {
+      name: "dept",
+      defaultValue: "",
+      category: "REGULAR",
+      type: [{ text: "fin.money.Dept", url: "" }],
+    },
+  ];
+}
+
+function complexTypeArgs(): PythonArg[] {
+  return [
+    {
+      name: "price",
+      defaultValue: "",
+      category: "REGULAR",
+      type: [{ text: "list[" }, { text: "fin.money.Money", url: "#money" }, { text: "]" }],
     },
     {
       name: "dept",

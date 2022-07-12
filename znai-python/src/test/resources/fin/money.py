@@ -1,13 +1,38 @@
 class Money:
-    def __init__(self, amount: int):
+    def __init__(self, amount: int, currency: str):
+        """
+        generic constructor that accepts a currency
+
+        Parameters
+        ----------
+        amount:
+          amount of money
+
+        currency:
+          currency to associate with the created Money
+        """
         self.amount = amount
+        self.currency = currency
 
     @classmethod
     def dollars(cls, amount: int) -> 'Money':
-        return cls(amount)
+        """
+        creates money instance with `USD` as the currency
+
+        Parameters
+        ----------
+        amount:
+          dollar amount
+
+        Returns
+        -------
+          new money instance with `USD` as currency
+        """
+        return cls(amount, "USD")
 
     def add(self, another: 'Money'):
-        """add money from another money instance
+        """
+        add money from another money instance
 
         Parameters
         --------------
@@ -36,7 +61,7 @@ def render_money(amount: Money, message: str = "") -> str:
 
     Returns
     -------
-    money represented as text
+      money represented as text
     """
 
     return "printing money"

@@ -11,6 +11,7 @@
 ../../znai-testing-examples/src/test/groovy
 ../../znai-testing-examples/src/test/java
 ../../znai-testing-examples/target/test-classes
+../../znai-python/src/test/resources
 ../../.github
 ../readme
 ../target/classes

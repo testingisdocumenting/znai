@@ -104,6 +104,7 @@ public class PythonCodeEntry {
         map.put("name", name);
         map.put("type", type);
         map.put("args", args.stream().map(arg -> arg.toMap(docStructure)).collect(Collectors.toList()));
+        map.put("returns", returns.convertToApiLinkedText(docStructure).toListOfMaps());
         map.put("decorators", decorators);
 
         return map;

@@ -130,11 +130,11 @@ If you define [Type Hints](https://docs.python.org/3/library/typing.html), you c
 
 Use `python-method` to include function/method definition with signature, documentation and parameters list
 
-    :include-python-method: fin.money.print_money
+    :include-python-method: fin.money.render_money
 
-:include-python-method: fin.money.print_money 
+:include-python-method: fin.money.render_money 
 
-:include-file: fin/money.py {autoTitle: true, highlight: "print_money"}
+:include-file: fin/money.py {autoTitle: true, highlight: "render_money"}
 
 # Class Definition
 
