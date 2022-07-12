@@ -153,7 +153,8 @@ class PythonBasedPythonParserTest {
                                 [name: "string", types: []],
                         ]]],
                         [name: "some_other", type: [name: "fin.money.Money", types: []]],
-                ]
+                ],
+                returns: [name: "fin.money.Money", types: []]
         ]
 
         parsed.findEntryByName("Context").should == [

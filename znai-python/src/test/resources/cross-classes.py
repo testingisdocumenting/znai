@@ -6,6 +6,7 @@ from fin.money import Money as SuperMoney
 
 import fin.money as finm
 
+
 class Context:
     def clear(self):
         pass
@@ -18,9 +19,9 @@ class Transaction:
     def execute(self,
                 opts: Dict[string, finm.Money],
                 context: Union[Context, list[Context], string],
-                some_other: Money):
+                some_other: Money) -> Money:
         print("execute: " + self.data)
-        pass
+        return Money(100)
 
     def cancel(self, context: Dict[SuperMoney, Debt]):
         pass

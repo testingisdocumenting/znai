@@ -3,7 +3,7 @@ class Money:
         self.amount = amount
 
     @classmethod
-    def dollars(cls, amount: int):
+    def dollars(cls, amount: int) -> 'Money':
         return cls(amount)
 
     def add(self, another: 'Money'):
@@ -22,9 +22,9 @@ class Debt:
         self.amount = amount
 
 
-def print_money(amount: Money, message: str = ""):
+def render_money(amount: Money, message: str = "") -> str:
     """
-    print money with a given message
+    render money to a string
 
     Parameters
     --------------
@@ -33,6 +33,10 @@ def print_money(amount: Money, message: str = ""):
 
     message:
       message to use for audit
+
+    Returns
+    -------
+    money represented as text
     """
 
-    print("printing money")
+    return "printing money"
