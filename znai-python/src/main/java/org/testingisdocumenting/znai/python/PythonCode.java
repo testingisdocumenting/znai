@@ -88,7 +88,9 @@ public class PythonCode {
         for (PythonCodeProperty property : properties) {
             ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(property.getPyDocText());
 
-            MarkupParserResult parsedMarkdown = parser.parse(parentMarkupPath, parsedPythonDoc.getPyDocDescriptionOnly());
+            MarkupParserResult parsedMarkdown = parser.parse(parentMarkupPath,
+                    (property.isReadOnly() ? "**[readonly]** " : "") +
+                    parsedPythonDoc.getPyDocDescriptionOnly());
 
             apiParameters.add(property.getName(),
                     propertyType(docStructure, property.getType(), parsedPythonDoc.getFuncReturn()),

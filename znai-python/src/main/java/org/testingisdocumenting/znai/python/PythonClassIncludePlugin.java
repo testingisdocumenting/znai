@@ -33,7 +33,6 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     private PythonIncludeResultBuilder builder;
     private List<PythonCodeEntry> members;
     private ParserHandler parserHandler;
-    private Path markupPath;
 
     @Override
     public String id() {
@@ -67,18 +66,19 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     @Override
     public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
         this.parserHandler = parserHandler;
-        this.markupPath = markupPath;
 
-        parsed.findRequiredEntryByTypeAndName("class", fileAndRelativeEntryName.getRelativeName());
+        PythonCodeEntry classEntry = parsed.findRequiredEntryByTypeAndName("class", fileAndRelativeEntryName.getRelativeName());
         members = parsed.findAllEntriesByTypeWithPrefix("function", fileAndRelativeEntryName.getRelativeName() + ".");
 
         builder = new PythonIncludeResultBuilder(componentsRegistry,
                 parserHandler,
+                markupPath,
                 pluginParams.getFreeParam(),
                 fileAndRelativeEntryName);
 
         builder.addClassHeader();
 
+        builder.addPyDocTextOnly(classEntry);
         addProperties(parsed, parserHandler, markupPath);
 
         builder.addSubSection("Members");
@@ -131,8 +131,8 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
 
             MarginOpts marginOpts = entry.getDocString().isEmpty() ? MarginOpts.DEFAULT: MarginOpts.EXTRA_BOTTOM_MARGIN;
             builder.addMethodSignature(entry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.REMOVE_SELF, marginOpts, false);
-            builder.addPyDocTextOnly(markupPath, entry);
-            builder.addPyDocParams(markupPath, entry);
+            builder.addPyDocTextOnly(entry);
+            builder.addPyDocParams(entry);
         });
     }
 }
