@@ -117,7 +117,7 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     }
 
     private Stream<PythonCodeEntry> regularMethods() {
-        return members.stream().filter(e -> !e.isClassMethod() && !e.isStatic());
+        return members.stream().filter(e -> !e.isClassMethod() && !e.isStatic() && !e.isPrivate());
     }
 
     private void addMembersSignature(Stream<PythonCodeEntry> entries) {

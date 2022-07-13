@@ -99,6 +99,11 @@ public class PythonCodeEntry {
         return decorators.contains("classmethod");
     }
 
+    public boolean isPrivate() {
+        String shortName = PythonUtils.entityNameFromQualifiedName(name);
+        return shortName.startsWith("_") && !shortName.equals("__init__");
+    }
+
     public Map<String, ?> toMap(DocStructure docStructure) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("name", name);
