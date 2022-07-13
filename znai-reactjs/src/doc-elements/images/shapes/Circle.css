@@ -29,7 +29,7 @@
 @keyframes znai-annotation-pulse {
     0% {
         transform: scale(0.9);
-        stroke-width: var(--znai-image-annotation-badge-line-width);
+        stroke-width: var(--znai-image-annotation-line-width);
     }
 
     50% {
@@ -40,6 +40,6 @@
 
     100% {
         transform: scale(0.9);
-        stroke-width: var(--znai-image-annotation-badge-line-width);
+        stroke-width: var(--znai-image-annotation-line-width);
     }
 }
