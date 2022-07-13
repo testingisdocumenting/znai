@@ -83,6 +83,10 @@
     color: var(--znai-code-directive-color);
 }
 
+.token.decorator {
+    color: var(--znai-code-directive-color);
+}
+
 .token.string {
     color: var(--znai-code-string-color);
 }
