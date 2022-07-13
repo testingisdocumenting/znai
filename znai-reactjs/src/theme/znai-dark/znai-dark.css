@@ -180,9 +180,9 @@
     --znai-image-title-color: var(--znai-snippets-title-color);
     --znai-image-title-background-color: var(--znai-snippets-title-background-color);
 
-    --znai-annotated-image-ordered-list-number-background-color: var(--znai-image-annotation-badge-inverted-fill-color);
-    --znai-annotated-image-ordered-list-number-text-color: var(--znai-image-annotation-badge-inverted-text-color);
-    --znai-annotated-image-ordered-list-number-border-color: var(--znai-image-annotation-badge-inverted-line-color);
+    --znai-annotated-image-ordered-list-number-background-color: var(--znai-image-annotation-inverted-fill-color);
+    --znai-annotated-image-ordered-list-number-text-color: var(--znai-image-annotation-inverted-text-color);
+    --znai-annotated-image-ordered-list-number-border-color: var(--znai-image-annotation-inverted-line-color);
 
     --znai-diagram-node-shadow-color: #444;
 

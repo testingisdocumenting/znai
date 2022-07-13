@@ -162,7 +162,7 @@ function arrowAnnotations() {
         shapes: [
             {type: 'arrow', id: 'a1`', beginX: 420, beginY: 300, endX: 340, endY: 200, color: 'd', text: 'This here'},
             {type: 'arrow', id: 'a1`', beginX: 330, beginY: 200, endX: 230, endY: 300, color: 'd', text: 'This here'},
-            {type: 'arrow', id: 'a1`', beginX: 130, beginY: 200, endX: 10, endY: 10, color: 'd', text: 'This here'},
+            {type: 'arrow', id: 'a1`', beginX: 130, beginY: 200, endX: 10, endY: 10, color: 'd', text: 'This here', invertedColors: true},
         ]
     }
 }

@@ -32,20 +32,20 @@ interface LineParams {
 const ArrowBody = ({ beginX, beginY, endX, endY, text, scale, invertedColors }: LineParams) => {
   const colors = invertedColors
     ? {
-        line: "var(--znai-image-annotation-badge-inverted-line-color)",
-        fill: "var(--znai-image-annotation-badge-inverted-fill-color)",
-        text: "var(--znai-image-annotation-badge-inverted-text-color)",
+        line: "var(--znai-image-annotation-line-color)",
+        fill: "var(--znai-image-annotation-inverted-fill-color)",
+        text: "var(--znai-image-annotation-text-color)",
       }
     : {
-        line: "var(--znai-image-annotation-badge-line-color)",
-        fill: "var(--znai-image-annotation-badge-fill-color)",
-        text: "var(--znai-image-annotation-badge-text-color)",
+        line: "var(--znai-image-annotation-inverted-line-color)",
+        fill: "var(--znai-image-annotation-fill-color)",
+        text: "var(--znai-image-annotation-inverted-text-color)",
       };
 
   const style = {
     ...colors,
     lineWidth: 1,
-    fontSize: "var(--znai-image-annotation-badge-font-size)",
+    fontSize: "var(--znai-image-annotation-font-size)",
   };
 
   const scaledBx = beginX * scale;

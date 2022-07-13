@@ -56,20 +56,20 @@ function CircleBody(circleParams: CircleParams) {
 function BadgeBody(badgeParams: BadgeParams) {
   const colors = badgeParams.invertedColors
     ? {
-        line: "var(--znai-image-annotation-badge-inverted-line-color)",
-        fill: "var(--znai-image-annotation-badge-inverted-fill-color)",
-        text: "var(--znai-image-annotation-badge-inverted-text-color)",
+        line: "var(--znai-image-annotation-inverted-line-color)",
+        fill: "var(--znai-image-annotation-inverted-fill-color)",
+        text: "var(--znai-image-annotation-inverted-text-color)",
       }
     : {
-        line: "var(--znai-image-annotation-badge-line-color)",
-        fill: "var(--znai-image-annotation-badge-fill-color)",
-        text: "var(--znai-image-annotation-badge-text-color)",
+        line: "var(--znai-image-annotation-line-color)",
+        fill: "var(--znai-image-annotation-fill-color)",
+        text: "var(--znai-image-annotation-text-color)",
       };
 
   const style = {
     ...colors,
-    lineWidth: "var(--znai-image-annotation-badge-line-width)",
-    fontSize: "var(--znai-image-annotation-badge-font-size)",
+    lineWidth: "var(--znai-image-annotation-line-width)",
+    fontSize: "var(--znai-image-annotation-font-size)",
   };
 
   const fullClassName = "znai-annotation-badge" + (badgeParams.className ? "  " + badgeParams.className : "");
