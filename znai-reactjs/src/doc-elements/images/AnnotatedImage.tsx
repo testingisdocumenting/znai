@@ -26,9 +26,11 @@ import { zoom } from "../zoom/Zoom";
 
 import { isPreviewEnabled } from "../../structure/docMeta";
 
+import { TooltipPlacement } from "../../components/Tooltip";
+
 import "./AnnotatedImage.css";
 
-export interface ImageProps {
+export interface AnnotatedImageProps {
   imageSrc: string;
   shapes: object[];
   width: number;
@@ -39,11 +41,11 @@ export interface ImageProps {
   scale?: number;
   border?: boolean;
   timestamp?: number;
-  shapesTooltipContent?: any[];
+  shapesTooltipContent?: Array<{ placement: TooltipPlacement; content: any }>;
   annotationToHighlightIdx?: number;
 }
 
-export function AnnotatedImage(props: ImageProps) {
+export function AnnotatedImage(props: AnnotatedImageProps) {
   const {
     imageSrc,
     width,
@@ -95,6 +97,7 @@ export function AnnotatedImage(props: ImageProps) {
 
   const imageClassName = "znai-annotated-image" + (border ? " border" : "");
 
+  const todo = updatedShapesTooltipBasedOnText();
   return (
     <div className={containerClassName}>
       <div>
@@ -110,7 +113,7 @@ export function AnnotatedImage(props: ImageProps) {
           </div>
           <div style={childContainerStyle}>
             <svg width={imageWidth} height={imageHeight} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-              {annotations.staticAnnotationsToRender(shapesTooltipContent, annotationToHighlightIdx, scaleToUse)}
+              {annotations.staticAnnotationsToRender(todo, annotationToHighlightIdx, scaleToUse)}
             </svg>
           </div>
         </div>
@@ -118,6 +121,50 @@ export function AnnotatedImage(props: ImageProps) {
       </div>
     </div>
   );
+
+  function updatedShapesTooltipBasedOnText() {
+    // may have empty elements when it comes from AnnotatedImageWithOrderedList
+    // we populate
+    return shapes.map((shape: any, idx: number) => {
+      const tooltip: { placement: TooltipPlacement; content: any } | undefined = shapesTooltipContent
+        ? shapesTooltipContent[idx]
+        : undefined;
+
+      if (tooltip) {
+        return tooltip;
+      }
+
+      return buildTooltipForShape(shape);
+    });
+
+    function buildTooltipForShape(shape: any) {
+      if (shape.type === "badge" && shape.tooltip) {
+        return {
+          placement: "center",
+          content: shape.tooltip, // todo: doc elements markdown support from CSV/json
+        };
+      } else if ((shape.type === "rectangle" || shape.type === "arrow") && shape.text) {
+        return {
+          placement: placementForShape(),
+          content: shape.text,
+        };
+      }
+
+      return undefined;
+
+      function placementForShape() {
+        if (shape.type !== "arrow") {
+          return "center";
+        }
+
+        if (shape.beginX < shape.endX) {
+          return shape.beginY < shape.endY ? "bottom-right" : "top-right";
+        } else {
+          return shape.beginY < shape.endY ? "bottom-left" : "top-left";
+        }
+      }
+    }
+  }
 
   function calcScale() {
     if (fit) {

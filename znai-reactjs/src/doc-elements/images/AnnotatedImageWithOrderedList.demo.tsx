@@ -97,6 +97,24 @@ function annotatedImage() {
     height: 400,
     shapes: [
       {
+        type: "arrow",
+        id: "a1",
+        beginX: 200,
+        beginY: 100,
+        endX: 400,
+        endY: 150,
+        text: "hello arrow",
+      },
+      {
+        type: "rectangle",
+        id: "r1",
+        beginX: 20,
+        beginY: 10,
+        endX: 60,
+        endY: 50,
+        text: "",
+      },
+      {
         type: "badge",
         id: "c1",
         x: 100,

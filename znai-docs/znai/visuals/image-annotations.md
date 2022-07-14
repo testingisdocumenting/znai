@@ -59,6 +59,20 @@ Use `pixelRatio` to display HiDPI images and use logical coordinates for the ann
 840,700
 ```
 
+# Rectangles And Arrows
+
+Use `rect` and `arrow` as first column value to render arrow or rectangle annotation
+
+    ```image testingisdocumenting.png {pixelRatio: 2} 
+    rect,60,110,420,430
+    arrow,485,810,310,474
+    ```
+
+```image testingisdocumenting.png {pixelRatio: 2} 
+rect,60,110,420,430
+arrow,485,810,310,474
+```
+
 # Annotations File
 
     :include-image: word-toolbar.jpg {annotationsPath: 'annotations.json'}

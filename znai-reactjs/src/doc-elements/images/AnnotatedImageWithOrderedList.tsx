@@ -20,6 +20,8 @@ import { DocElementContent, WithElementsLibrary } from "../default-elements/DocE
 
 import { AnnotatedImageOrderedList } from "./AnnotatedImageOrderedList";
 
+import { TooltipPlacement } from "../../components/Tooltip";
+
 import "./AnnotatedImageWithOrderedList.css";
 
 interface Props extends WithElementsLibrary {
@@ -40,11 +42,6 @@ export function AnnotatedImageWithOrderedList({
   const OrderedList = AnnotatedImageOrderedList;
 
   // @ts-ignore
-  const tooltipsContent = orderedListContent.content.map((listItem) => (
-    <elementsLibrary.DocElement content={listItem.content} elementsLibrary={elementsLibrary} />
-  ));
-
-  // @ts-ignore
   const isInvertedColors = annotatedImageContent.shapes.map((shape) => shape.invertedColors);
 
   const renderedList = (
@@ -62,7 +59,7 @@ export function AnnotatedImageWithOrderedList({
       {...annotatedImageContent}
       elementsLibrary={elementsLibrary}
       // @ts-ignore
-      shapesTooltipContent={tooltipsContent}
+      shapesTooltipContent={buildTooltipContent()}
       annotationToHighlightIdx={annotationToHighlightIdx}
     />
   );
@@ -83,7 +80,45 @@ export function AnnotatedImageWithOrderedList({
     </>
   );
 
-  function handleOnListItemHover(idx: number) {
-    setAnnotationToHighlightIdx(idx);
+  function buildTooltipContent(): Array<{ placement: TooltipPlacement; content: any }> {
+    // @ts-ignore
+    const badgesTooltipsContent = orderedListContent.content.map((listItem) => (
+      <elementsLibrary.DocElement content={listItem.content} elementsLibrary={elementsLibrary} />
+    ));
+
+    // @ts-ignore
+    const annotationShapes = annotatedImageContent.shapes || [];
+
+    let badgeIdx = 0;
+    return annotationShapes.map((shape: any) => {
+      const type = shape.type;
+      if (type === "badge") {
+        return {
+          placement: "top-left",
+          content: badgesTooltipsContent[badgeIdx++],
+        };
+      }
+
+      return undefined;
+    });
+  }
+
+  function handleOnListItemHover(bulletListIdx: number) {
+    // we get a bullet list idx, which doesn't correspond to all the annotations one to one
+    // we count badge annotation and once it matches a specific bullet list idx,
+    // then highlight a corresponding annotation idx
+
+    // @ts-ignore
+    const annotationShapes = annotatedImageContent.shapes || [];
+    let annotBadgeIdx = -1;
+    for (let annotIdx = 0; annotIdx < annotationShapes.length; annotIdx++) {
+      if (annotationShapes[annotIdx].type === "badge") {
+        annotBadgeIdx++;
+      }
+
+      if (annotBadgeIdx === bulletListIdx) {
+        setAnnotationToHighlightIdx(annotIdx);
+      }
+    }
   }
 }

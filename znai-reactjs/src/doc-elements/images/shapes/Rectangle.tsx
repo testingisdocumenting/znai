@@ -17,8 +17,6 @@
 
 import React from "react";
 
-import { TooltipSvg } from "../../../components/Tooltip";
-
 import "./Rectangle.css";
 
 interface RectParams {
@@ -27,11 +25,10 @@ interface RectParams {
   endX: number;
   endY: number;
   scale: number;
-  text: string;
   invertedColors?: boolean;
 }
 
-const RectangleBody = ({ beginX, beginY, endX, endY, scale, text, invertedColors }: RectParams) => {
+const RectangleBody = ({ beginX, beginY, endX, endY, scale, invertedColors }: RectParams) => {
   const scaledBx = beginX * scale;
   const scaledBy = beginY * scale;
 
@@ -88,7 +85,7 @@ const RectangleBody = ({ beginX, beginY, endX, endY, scale, text, invertedColors
     height + lineWidth
   } z`;
 
-  const svgPath = (
+  return (
     <path
       className="znai-annotation-rectangle"
       d={pathOuter + " " + pathInner}
@@ -97,14 +94,6 @@ const RectangleBody = ({ beginX, beginY, endX, endY, scale, text, invertedColors
       strokeWidth={style.lineWidth}
       strokeOpacity={0.5}
     />
-  );
-
-  return text ? (
-    <TooltipSvg content={text} placement="center">
-      {svgPath}
-    </TooltipSvg>
-  ) : (
-    svgPath
   );
 };
 
