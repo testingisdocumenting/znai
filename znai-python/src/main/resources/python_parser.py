@@ -303,19 +303,20 @@ def is_py_doc(node):
     return False
 
 
-def class_to_list_of_dict(class_node):
+def class_to_dict(class_node):
     """
-    flatten functions from class to put into the flat list alongside class definition
-    :param class_node:
-    :return:
+    class entry dict with members inside
     """
-    return [node_to_dict("class", class_node.name, class_node)] + \
-           [function_to_dict(node, class_node.name + "." + node.name) for node in
-            class_node.body if is_class_method(node)] + \
-           [property_to_dict(node, class_node.name + "." + node.name + ".get") for node in
-            class_node.body if is_class_method_decorated_with_getter(node)] + \
-           [property_to_dict(node, class_node.name + "." + node.name + ".set") for node in
-            class_node.body if is_class_method_decorated_with_setter(node)]
+
+    class_dict = node_to_dict("class", class_node.name, class_node)
+    class_dict["members"] = [function_to_dict(node, class_node.name + "." + node.name) for node in
+                             class_node.body if is_class_method(node)] + \
+                            [property_to_dict(node, class_node.name + "." + node.name + ".get") for node in
+                             class_node.body if is_class_method_decorated_with_getter(node)] + \
+                            [property_to_dict(node, class_node.name + "." + node.name + ".set") for node in
+                             class_node.body if is_class_method_decorated_with_setter(node)]
+
+    return class_dict
 
 
 def is_class_method(node: ast.expr):
@@ -401,9 +402,7 @@ def parse_file(file_to_parse):
     file_parse_result = []
 
     for class_node in class_definitions:
-        dicts = class_to_list_of_dict(class_node)
-        for class_dict in dicts:
-            file_parse_result.append(class_dict)
+        file_parse_result.append(class_to_dict(class_node))
 
     for func_node in function_definitions:
         file_parse_result.append(function_to_dict(func_node, func_node.name))
