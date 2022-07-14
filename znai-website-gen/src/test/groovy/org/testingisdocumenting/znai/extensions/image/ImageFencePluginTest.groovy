@@ -47,13 +47,13 @@ class ImageFencePluginTest {
         def handler = PluginsTestUtils.processAndGetFencePluginAndParserHandler(
                 new PluginParams('image', 'dummy.png', [scale: 2.0d]),
                 "rect,100, 200, 140, 240\n" +
-                        "arrow, 150, 40, 190, 80\n").parserHandler
+                        "arrow, 150, 40, 190, 80, hello world \n").parserHandler
 
         def props = handler.docElement.contentToListOfMaps()
         props.should == [[imageSrc: '/test-doc/dummy.png',
                           shapes: [
                                   [beginX: 100.0, beginY: 200.0, endX: 140.0, endY: 240.0, type: "rectangle", invertedColors: false],
-                                  [beginX: 150.0, beginY: 40.0, endX: 190.0, endY: 80.0, type: "arrow", invertedColors: false]],
+                                  [beginX: 150.0, beginY: 40.0, endX: 190.0, endY: 80.0, type: "arrow", text: "hello world", invertedColors: false]],
                           timestamp: greaterThanOrEqual(0),
                           width: greaterThan(0),
                           height: greaterThan(0),

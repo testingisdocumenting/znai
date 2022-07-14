@@ -28,9 +28,11 @@ import { isPreviewEnabled } from "../../structure/docMeta";
 
 import { TooltipPlacement } from "../../components/Tooltip";
 
+import { WithElementsLibrary } from "../default-elements/DocElement";
+
 import "./AnnotatedImage.css";
 
-export interface AnnotatedImageProps {
+export interface AnnotatedImageProps extends WithElementsLibrary {
   imageSrc: string;
   shapes: object[];
   width: number;
@@ -59,6 +61,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     timestamp,
     shapesTooltipContent,
     annotationToHighlightIdx,
+    elementsLibrary,
   } = props;
 
   const scaleToUse = calcScale();
@@ -143,10 +146,10 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
           placement: "center",
           content: shape.tooltip, // todo: doc elements markdown support from CSV/json
         };
-      } else if ((shape.type === "rectangle" || shape.type === "arrow") && shape.text) {
+      } else if ((shape.type === "rectangle" || shape.type === "arrow") && shape.tooltip) {
         return {
           placement: placementForShape(),
-          content: shape.text,
+          content: <elementsLibrary.DocElement content={shape.tooltip} elementsLibrary={elementsLibrary} />,
         };
       }
 

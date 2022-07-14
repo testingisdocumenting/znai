@@ -25,6 +25,7 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.awt.image.BufferedImage;
@@ -37,6 +38,11 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
+    // type,beginX,beginY,endX,endY,text
+    private static final int RECT_ARROW_TEXT_POS_IDX = 5;
+
+    private ComponentsRegistry componentsRegistry;
+    private Path markupPath;
     private String content;
     private BufferedImage image;
     private Double pixelRatio;
@@ -51,6 +57,8 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
+        this.componentsRegistry = componentsRegistry;
+        this.markupPath = markupPath;
         this.content = content;
         return process(componentsRegistry, markupPath, pluginParams);
     }
@@ -70,7 +78,6 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
             for (CSVRecord record : csvRecords) {
                 Map<String, Object> annotation = createAnnotation(record);
                 annotations.add(annotation);
-
             }
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -116,8 +123,7 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
     }
 
     private Map<String, Object> createArrow(CSVRecord record) {
-        Map<String, Object> arrow = new HashMap<>();
-        arrow.put("type", "arrow");
+        Map<String, Object> arrow = createArrowRectBaseMap("arrow", record);
 
         RectCoord rectCoord = new RectCoord(record);
         arrow.put("invertedColors",
@@ -130,8 +136,7 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
     }
 
     private Map<String, Object> createRect(CSVRecord record) {
-        Map<String, Object> rect = new HashMap<>();
-        rect.put("type", "rectangle");
+        Map<String, Object> rect = createArrowRectBaseMap("rectangle", record);
 
         RectCoord rectCoord = new RectCoord(record);
 
@@ -153,6 +158,21 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
         rect.putAll(rectCoord.toMap());
 
         return rect;
+    }
+
+    private Map<String, Object> createArrowRectBaseMap(String type, CSVRecord record) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("type", type);
+
+        // type,beginX,beginY,endX,endY,text
+        if (record.isSet(RECT_ARROW_TEXT_POS_IDX)) {
+            String markdown = record.get(RECT_ARROW_TEXT_POS_IDX).trim();
+            MarkupParserResult parserResult = componentsRegistry.markdownParser().parse(markupPath, markdown);
+
+            map.put("tooltip", parserResult.getDocElement().contentToListOfMaps());
+        }
+
+        return map;
     }
 
     private boolean isDarkCoordinate(Double x, Double y) {
