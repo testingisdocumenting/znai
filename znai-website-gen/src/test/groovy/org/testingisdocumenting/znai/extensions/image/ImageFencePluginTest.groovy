@@ -53,7 +53,7 @@ class ImageFencePluginTest {
         props.should == [[imageSrc: '/test-doc/dummy.png',
                           shapes: [
                                   [beginX: 100.0, beginY: 200.0, endX: 140.0, endY: 240.0, type: "rectangle", invertedColors: false],
-                                  [beginX: 150.0, beginY: 40.0, endX: 190.0, endY: 80.0, type: "arrow", text: "hello world", invertedColors: false]],
+                                  [beginX: 150.0, beginY: 40.0, endX: 190.0, endY: 80.0, type: "arrow", tooltip: [[markdown: "hello world", type: "TestMarkdown"]], invertedColors: false]],
                           timestamp: greaterThanOrEqual(0),
                           width: greaterThan(0),
                           height: greaterThan(0),
