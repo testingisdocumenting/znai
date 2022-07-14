@@ -202,7 +202,8 @@ class PythonBasedPythonParserTest {
     @Test
     void "extract class properties"() {
         def parsed = parse("src/test/resources/fin/money.py", "fin.money")
-        def properties = parsed.generatePropertiesForPrefix("Money.")
+        def money = parsed.findClassByName("Money")
+        def properties = money.generateProperties()
 
         properties.should == [
                 [name: "amount", type: [name: "int", types: []], readOnly: false, pyDocText: "amount in provided currency"],

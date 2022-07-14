@@ -31,8 +31,9 @@ import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.Na
 public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     private PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName;
     private PythonIncludeResultBuilder builder;
-    private List<PythonCodeEntry> members;
+    private List<PythonCodeEntry> memberFunctions;
     private ParserHandler parserHandler;
+    private PythonClass pythonClass;
 
     @Override
     public String id() {
@@ -67,8 +68,9 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
         this.parserHandler = parserHandler;
 
+        pythonClass = parsed.findClassByName(fileAndRelativeEntryName.getRelativeName());
         PythonCodeEntry classEntry = parsed.findRequiredEntryByTypeAndName("class", fileAndRelativeEntryName.getRelativeName());
-        members = parsed.findAllEntriesByTypeWithPrefix("function", fileAndRelativeEntryName.getRelativeName() + ".");
+        memberFunctions = pythonClass.getFunctions();
 
         builder = new PythonIncludeResultBuilder(componentsRegistry,
                 parserHandler,
@@ -79,7 +81,7 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
         builder.addClassHeader();
 
         builder.addPyDocTextOnly(classEntry);
-        addProperties(parsed, parserHandler, markupPath);
+        addProperties(parserHandler, markupPath);
 
         builder.addSubSection("Members");
         addMembersSignature(classMethods());
@@ -94,11 +96,10 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
         return builder.build();
     }
 
-    private void addProperties(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
-        ApiParameters properties = parsed.createPropertiesAsApiParameters(componentsRegistry.docStructure(),
+    private void addProperties(ParserHandler parserHandler, Path markupPath) {
+        ApiParameters properties = pythonClass.createPropertiesAsApiParameters(componentsRegistry.docStructure(),
                 componentsRegistry.markdownParser(),
-                markupPath,
-                fileAndRelativeEntryName.getRelativeName());
+                markupPath);
 
         if (!properties.isEmpty()) {
             builder.addSubSection("Properties");
@@ -109,15 +110,15 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     }
 
     private Stream<PythonCodeEntry> classMethods() {
-        return members.stream().filter(PythonCodeEntry::isClassMethod);
+        return memberFunctions.stream().filter(PythonCodeEntry::isClassMethod);
     }
 
     private Stream<PythonCodeEntry> staticMethods() {
-        return members.stream().filter(PythonCodeEntry::isStatic);
+        return memberFunctions.stream().filter(PythonCodeEntry::isStatic);
     }
 
     private Stream<PythonCodeEntry> regularMethods() {
-        return members.stream().filter(e -> !e.isClassMethod() && !e.isStatic() && !e.isPrivate());
+        return memberFunctions.stream().filter(e -> !e.isClassMethod() && !e.isStatic() && !e.isPrivate());
     }
 
     private void addMembersSignature(Stream<PythonCodeEntry> entries) {

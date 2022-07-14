@@ -50,10 +50,6 @@ public class PythonCodeEntry {
         this.bodyOnly = Objects.toString(parsed.get("body_only"), "");
         this.docString = Objects.toString(parsed.get("doc_string"), "");
 
-        if (this.type.equals("class")) {
-            context.registerType(this.name);
-        }
-
         this.args = buildArgs(parsed);
         this.returns = buildReturns(parsed);
         this.decorators = extractDecorators(parsed);
