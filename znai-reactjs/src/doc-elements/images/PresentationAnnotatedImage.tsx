@@ -17,12 +17,12 @@
 
 import React from "react";
 
-import { AnnotatedImage, ImageProps } from "./AnnotatedImage";
+import { AnnotatedImage, AnnotatedImageProps } from "./AnnotatedImage";
 import { PresentationProps } from "../presentation/PresentationProps";
 
 import "./PresentationAnnotatedImage.css";
 
-interface Props extends ImageProps, PresentationProps {}
+interface Props extends AnnotatedImageProps, PresentationProps {}
 
 function PresentationAnnotatedImage(props: Props) {
   const { shapes, slideIdx } = props;

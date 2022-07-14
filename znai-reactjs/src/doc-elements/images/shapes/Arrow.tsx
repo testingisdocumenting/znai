@@ -16,20 +16,18 @@
  */
 
 import React from "react";
-import { TooltipPlacement, TooltipSvg } from "../../../components/Tooltip";
 
 interface LineParams {
   beginX: number;
   beginY: number;
   endX: number;
   endY: number;
-  text: string;
   invertedColors: boolean;
   className?: string;
   scale: number;
 }
 
-const ArrowBody = ({ beginX, beginY, endX, endY, text, scale, invertedColors }: LineParams) => {
+const ArrowBody = ({ beginX, beginY, endX, endY, scale, invertedColors }: LineParams) => {
   const colors = invertedColors
     ? {
         line: "var(--znai-image-annotation-line-color)",
@@ -84,15 +82,7 @@ const ArrowBody = ({ beginX, beginY, endX, endY, text, scale, invertedColors }: 
   L ${length} 0 z`;
 
   const svgArrow = <path d={path} fill={style.fill} stroke={style.line} strokeWidth={style.lineWidth} />;
-  const svgArrowWithOptionalTooltip = text ? (
-    <TooltipSvg content={text} placement={calcTooltipPlacement()}>
-      {svgArrow}
-    </TooltipSvg>
-  ) : (
-    svgArrow
-  );
-
-  const svgRotatedArrow = <g transform={`rotate(${calcAngle()})`}>{svgArrowWithOptionalTooltip}</g>;
+  const svgRotatedArrow = <g transform={`rotate(${calcAngle()})`}>{svgArrow}</g>;
 
   return <g transform={`translate(${scaledBx} ${scaledBy})`}>{svgRotatedArrow}</g>;
 
@@ -107,14 +97,6 @@ const ArrowBody = ({ beginX, beginY, endX, endY, text, scale, invertedColors }: 
     const det = x1 * y2 - y1 * x2;
 
     return (Math.atan2(det, dot) * 180.0) / Math.PI;
-  }
-
-  function calcTooltipPlacement(): TooltipPlacement {
-    if (beginX < endX) {
-      return beginY < endY ? "bottom-right" : "top-right";
-    } else {
-      return beginY < endY ? "bottom-left" : "top-left";
-    }
   }
 };
 
