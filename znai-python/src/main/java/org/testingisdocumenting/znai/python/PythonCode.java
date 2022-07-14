@@ -16,15 +16,6 @@
 
 package org.testingisdocumenting.znai.python;
 
-import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
-import org.testingisdocumenting.znai.extensions.api.ApiParameters;
-import org.testingisdocumenting.znai.parser.MarkupParser;
-import org.testingisdocumenting.znai.parser.MarkupParserResult;
-import org.testingisdocumenting.znai.python.pydoc.ParsedPythonDoc;
-import org.testingisdocumenting.znai.python.pydoc.PythonDocReturn;
-import org.testingisdocumenting.znai.structure.DocStructure;
-
-import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,14 +25,15 @@ public class PythonCode {
     private final List<Map<String, Object>> parsed;
     private final PythonCodeContext context;
 
+    private final Map<String, PythonClass> classByName;
+
     public PythonCode(List<Map<String, Object>> parsed, PythonCodeContext context) {
         this.parsed = parsed;
         this.context = context;
         entryByName = new LinkedHashMap<>();
-        parsed.forEach(p -> {
-            PythonCodeEntry entry = new PythonCodeEntry(p, context);
-            entryByName.put(entry.getName(), entry);
-        });
+        classByName = new HashMap<>();
+
+        handleEntriesAndReturnMembers(parsed);
     }
 
     public List<Map<String, Object>> getParsed() {
@@ -54,6 +46,10 @@ public class PythonCode {
 
     public PythonCodeEntry findEntryByName(String name) {
         return entryByName.get(name);
+    }
+
+    public PythonClass findClassByName(String name) {
+        return classByName.get(name);
     }
 
     public PythonCodeEntry findRequiredEntryByTypeAndName(String type, String name) {
@@ -81,62 +77,29 @@ public class PythonCode {
                 .collect(Collectors.toList());
     }
 
-    public ApiParameters createPropertiesAsApiParameters(DocStructure docStructure, MarkupParser parser, Path parentMarkupPath, String className) {
-        ApiParameters apiParameters = new ApiParameters(context.getDefaultPackageName() + "_" + className + "_properties");
+    @SuppressWarnings("unchecked")
+    private List<PythonCodeEntry> handleEntriesAndReturnMembers(List<Map<String, Object>> parsed) {
+        List<PythonCodeEntry> result = new ArrayList<>();
 
-        List<PythonCodeProperty> properties = generatePropertiesForPrefix(className + ".");
-        for (PythonCodeProperty property : properties) {
-            ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(property.getPyDocText());
+        parsed.forEach(p -> {
+            PythonCodeEntry entry = new PythonCodeEntry(p, context);
+            entryByName.put(entry.getName(), entry);
 
-            MarkupParserResult parsedMarkdown = parser.parse(parentMarkupPath,
-                    (property.isReadOnly() ? "**[readonly]** " : "") +
-                    parsedPythonDoc.getPyDocDescriptionOnly());
-
-            apiParameters.add(property.getName(),
-                    propertyType(docStructure, property.getType(), parsedPythonDoc.getFuncReturn()),
-                    parsedMarkdown.contentToListOfMaps(),
-                    parsedMarkdown.getAllText());
-        }
-
-        return apiParameters;
-    }
-
-    public List<PythonCodeProperty> generatePropertiesForPrefix(String prefix) {
-        // raw properties are separate entries with `.get` and `.set` suffixes
-        // we convert them to a combined property
-        //
-        List<PythonCodeEntry> rawProperties = findAllEntriesByTypeWithPrefix("property", prefix);
-
-        Map<String, PythonCodeEntry> entriesGet = new HashMap<>();
-        Map<String, PythonCodeEntry> entriesSet = new HashMap<>();
-
-        for (PythonCodeEntry rawProperty : rawProperties) {
-            PythonUtils.PropertyNameAndQualifier propertyNameAndQualifier =
-                    PythonUtils.extractPropertyNameAndQualifierFromEntryName(rawProperty.getName());
-
-            String name = propertyNameAndQualifier.getName();
-            String qualifier = propertyNameAndQualifier.getQualifier();
-
-            if (qualifier.equals("get")) {
-                entriesGet.put(name, rawProperty);
-            } else if (qualifier.equals("set")) {
-                entriesSet.put(name, rawProperty);
+            if (entry.getType().equals("class")) {
+                handleClass(entry, (List<Map<String, Object>>) p.getOrDefault("members", Collections.emptyList()));
             } else {
-                throw new IllegalArgumentException("unrecognized qualifier <" + qualifier + ">: " + rawProperty.getName());
+                result.add(entry);
             }
-        }
+        });
 
-        return entriesGet.keySet().stream()
-                .map(name -> {
-                    PythonCodeEntry entryGet = entriesGet.get(name);
-                    return new PythonCodeProperty(name, entryGet.getReturns(), !entriesSet.containsKey(name), entryGet.getDocString());
-                })
-                .collect(Collectors.toList());
+        return result;
     }
 
-    private ApiLinkedText propertyType(DocStructure docStructure, PythonCodeType hintType, PythonDocReturn docReturn) {
-        return hintType.isDefined() ?
-                hintType.convertToApiLinkedText(docStructure) :
-                new ApiLinkedText(docReturn.getType());
+    private void handleClass(PythonCodeEntry entry, List<Map<String, Object>> parsedMembers) {
+        PythonClass pythonClass = new PythonClass(entry.getName(), context);
+        classByName.put(pythonClass.getName(), pythonClass);
+
+        List<PythonCodeEntry> members = handleEntriesAndReturnMembers(parsedMembers);
+        pythonClass.addMembers(members);
     }
 }
