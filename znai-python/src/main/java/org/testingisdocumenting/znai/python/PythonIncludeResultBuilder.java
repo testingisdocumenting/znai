@@ -84,7 +84,7 @@ class PythonIncludeResultBuilder {
         parserHandler.onSubHeading(4, name, entryNameHeadingProps);
     }
 
-    public void addMethodSignature(PythonCodeEntry func,
+    public void addMethodSignature(PythonParsedEntry func,
                                    NameRenderOpt nameRenderOpt,
                                    ArgsRenderOpt argsRenderOpt,
                                    MarginOpts marginOpts,
@@ -118,7 +118,7 @@ class PythonIncludeResultBuilder {
         searchText.add(fileAndRelativeEntryName.getRelativeName());
     }
 
-    public void addPyDocTextOnly(PythonCodeEntry codeEntry) {
+    public void addPyDocTextOnly(PythonParsedEntry codeEntry) {
         ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
 
         componentsRegistry.markdownParser().parse(markupPath, parsedPythonDoc.getPyDocDescriptionOnly())
@@ -127,7 +127,7 @@ class PythonIncludeResultBuilder {
         searchText.add(parsedPythonDoc.getPyDocDescriptionOnly());
     }
 
-    public void addPyDocParams(PythonCodeEntry func) {
+    public void addPyDocParams(PythonParsedEntry func) {
         ApiParameters apiParameters = func.createParametersFromPyDoc(
                 componentsRegistry.docStructure(),
                 componentsRegistry.markdownParser(),

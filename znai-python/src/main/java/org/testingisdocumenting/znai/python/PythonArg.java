@@ -21,7 +21,7 @@ import org.testingisdocumenting.znai.structure.DocStructure;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class PythonCodeArg {
+public class PythonArg {
     enum Category {
         REGULAR, // regular params
         POS_ONLY, // params before `,/ ,
@@ -32,13 +32,13 @@ public class PythonCodeArg {
 
     private final Category category;
     private final String name;
-    private final PythonCodeType type;
+    private final PythonType type;
     private final String defaultValue;
 
-    public PythonCodeArg(Map<String, Object> parsed, PythonCodeContext context) {
+    public PythonArg(Map<String, Object> parsed, PythonContext context) {
         this.category = extractCategory(parsed.get("category").toString());
         this.name = parsed.get("name").toString();
-        this.type = new PythonCodeType(parsed.get("type"), context);
+        this.type = new PythonType(parsed.get("type"), context);
         this.defaultValue = parsed.containsKey("defaultValue") ? parsed.get("defaultValue").toString() : "";
     }
 
@@ -46,7 +46,7 @@ public class PythonCodeArg {
         return name;
     }
 
-    public PythonCodeType getType() {
+    public PythonType getType() {
         return type;
     }
 

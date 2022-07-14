@@ -33,17 +33,17 @@ import java.util.stream.Collectors;
 
 public class PythonClass {
     private final String name;
-    private final PythonCodeContext context;
-    private final List<PythonCodeEntry> members;
+    private final PythonContext context;
+    private final List<PythonParsedEntry> members;
 
-    public PythonClass(String name, PythonCodeContext context) {
+    public PythonClass(String name, PythonContext context) {
         this.name = name;
         this.context = context;
         this.members = new ArrayList<>();
         context.registerType(this.name);
     }
 
-    public void addMembers(List<PythonCodeEntry> members) {
+    public void addMembers(List<PythonParsedEntry> members) {
         this.members.addAll(members);
     }
 
@@ -51,7 +51,7 @@ public class PythonClass {
         return name;
     }
 
-    public List<PythonCodeEntry> getFunctions() {
+    public List<PythonParsedEntry> getFunctions() {
         return members.stream()
                 .filter(entry -> entry.getType().equals("function"))
                 .collect(Collectors.toList());
@@ -60,8 +60,8 @@ public class PythonClass {
     public ApiParameters createPropertiesAsApiParameters(DocStructure docStructure, MarkupParser parser, Path parentMarkupPath) {
         ApiParameters apiParameters = new ApiParameters(context.getDefaultPackageName() + "_" + name + "_properties");
 
-        List<PythonCodeProperty> properties = generateProperties();
-        for (PythonCodeProperty property : properties) {
+        List<PythonProperty> properties = generateProperties();
+        for (PythonProperty property : properties) {
             ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(property.getPyDocText());
 
             MarkupParserResult parsedMarkdown = parser.parse(parentMarkupPath,
@@ -77,18 +77,18 @@ public class PythonClass {
         return apiParameters;
     }
 
-    public List<PythonCodeProperty> generateProperties() {
+    public List<PythonProperty> generateProperties() {
         // raw properties are separate entries with `.get` and `.set` suffixes
         // we convert them to a combined property
         //
-        List<PythonCodeEntry> rawProperties = members.stream()
+        List<PythonParsedEntry> rawProperties = members.stream()
                 .filter(member -> member.getType().equals("property"))
                 .collect(Collectors.toList());
 
-        Map<String, PythonCodeEntry> entriesGet = new HashMap<>();
-        Map<String, PythonCodeEntry> entriesSet = new HashMap<>();
+        Map<String, PythonParsedEntry> entriesGet = new HashMap<>();
+        Map<String, PythonParsedEntry> entriesSet = new HashMap<>();
 
-        for (PythonCodeEntry rawProperty : rawProperties) {
+        for (PythonParsedEntry rawProperty : rawProperties) {
             PythonUtils.PropertyNameAndQualifier propertyNameAndQualifier =
                     PythonUtils.extractPropertyNameAndQualifierFromEntryName(rawProperty.getName());
 
@@ -106,13 +106,13 @@ public class PythonClass {
 
         return entriesGet.keySet().stream()
                 .map(name -> {
-                    PythonCodeEntry entryGet = entriesGet.get(name);
-                    return new PythonCodeProperty(name, entryGet.getReturns(), !entriesSet.containsKey(name), entryGet.getDocString());
+                    PythonParsedEntry entryGet = entriesGet.get(name);
+                    return new PythonProperty(name, entryGet.getReturns(), !entriesSet.containsKey(name), entryGet.getDocString());
                 })
                 .collect(Collectors.toList());
     }
 
-    private ApiLinkedText propertyType(DocStructure docStructure, PythonCodeType hintType, PythonDocReturn docReturn) {
+    private ApiLinkedText propertyType(DocStructure docStructure, PythonType hintType, PythonDocReturn docReturn) {
         return hintType.isDefined() ?
                 hintType.convertToApiLinkedText(docStructure) :
                 new ApiLinkedText(docReturn.getType());

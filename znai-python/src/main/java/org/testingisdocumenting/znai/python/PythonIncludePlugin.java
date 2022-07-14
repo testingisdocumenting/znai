@@ -44,10 +44,10 @@ public class PythonIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
+    public PythonIncludeResult process(PythonParsedFile parsed, ParserHandler parserHandler, Path markupPath) {
         isBodyOnly = pluginParams.getOpts().get("bodyOnly", false);
 
-        PythonCodeEntry codeEntry = findEntryByName(parsed, getEntryName());
+        PythonParsedEntry codeEntry = findEntryByName(parsed, getEntryName());
 
         ManipulatedSnippetContentProvider contentProvider = new ManipulatedSnippetContentProvider(snippetIdToUse(),
                 extractContent(codeEntry),
@@ -67,7 +67,7 @@ public class PythonIncludePlugin extends PythonIncludePluginBase {
         return new PythonIncludeResult(Collections.singletonList(docElement), contentProvider.snippetContent());
     }
 
-    private String extractContent(PythonCodeEntry codeEntry) {
+    private String extractContent(PythonParsedEntry codeEntry) {
         if (isBodyOnly) {
             return codeEntry.getBodyOnly();
         }

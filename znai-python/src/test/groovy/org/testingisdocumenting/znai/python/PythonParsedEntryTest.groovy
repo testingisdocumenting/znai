@@ -18,20 +18,20 @@ package org.testingisdocumenting.znai.python
 
 import org.junit.Test
 
-class PythonCodeEntryTest {
+class PythonParsedEntryTest {
     @Test
     void "is private by naming convention"() {
         createEntry("Money._private").isPrivate().should == true
         createEntry("Money.add").isPrivate().should == false
     }
 
-    private static PythonCodeEntry createEntry(String name) {
-        return new PythonCodeEntry([
+    private static PythonParsedEntry createEntry(String name) {
+        return new PythonParsedEntry([
                 name      : name,
                 type      : "function",
                 content   : "",
                 body_only : "",
                 doc_string: ""
-        ], new PythonCodeContext(""))
+        ], new PythonContext(""))
     }
 }

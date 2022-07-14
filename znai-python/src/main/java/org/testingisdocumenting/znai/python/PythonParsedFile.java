@@ -20,14 +20,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class PythonCode {
-    private final Map<String, PythonCodeEntry> entryByName;
+public class PythonParsedFile {
+    private final Map<String, PythonParsedEntry> entryByName;
     private final List<Map<String, Object>> parsed;
-    private final PythonCodeContext context;
+    private final PythonContext context;
 
     private final Map<String, PythonClass> classByName;
 
-    public PythonCode(List<Map<String, Object>> parsed, PythonCodeContext context) {
+    public PythonParsedFile(List<Map<String, Object>> parsed, PythonContext context) {
         this.parsed = parsed;
         this.context = context;
         entryByName = new LinkedHashMap<>();
@@ -44,7 +44,7 @@ public class PythonCode {
         return entryByName.keySet().stream();
     }
 
-    public PythonCodeEntry findEntryByName(String name) {
+    public PythonParsedEntry findEntryByName(String name) {
         return entryByName.get(name);
     }
 
@@ -52,8 +52,8 @@ public class PythonCode {
         return classByName.get(name);
     }
 
-    public PythonCodeEntry findRequiredEntryByTypeAndName(String type, String name) {
-        PythonCodeEntry entry = findEntryByName(name);
+    public PythonParsedEntry findRequiredEntryByTypeAndName(String type, String name) {
+        PythonParsedEntry entry = findEntryByName(name);
         if (entry == null) {
             throw new IllegalArgumentException("can't find entry: " + name);
         }
@@ -65,24 +65,24 @@ public class PythonCode {
         return entry;
     }
 
-    public List<PythonCodeEntry> findAllEntriesWithPrefix(String prefix) {
+    public List<PythonParsedEntry> findAllEntriesWithPrefix(String prefix) {
         return entryByName.values().stream()
                 .filter(e -> e.getName().startsWith(prefix))
                 .collect(Collectors.toList());
     }
 
-    public List<PythonCodeEntry> findAllEntriesByTypeWithPrefix(String type, String prefix) {
+    public List<PythonParsedEntry> findAllEntriesByTypeWithPrefix(String type, String prefix) {
         return entryByName.values().stream()
                 .filter(e -> e.getType().equals(type) && e.getName().startsWith(prefix))
                 .collect(Collectors.toList());
     }
 
     @SuppressWarnings("unchecked")
-    private List<PythonCodeEntry> handleEntriesAndReturnMembers(List<Map<String, Object>> parsed) {
-        List<PythonCodeEntry> result = new ArrayList<>();
+    private List<PythonParsedEntry> handleEntriesAndReturnMembers(List<Map<String, Object>> parsed) {
+        List<PythonParsedEntry> result = new ArrayList<>();
 
         parsed.forEach(p -> {
-            PythonCodeEntry entry = new PythonCodeEntry(p, context);
+            PythonParsedEntry entry = new PythonParsedEntry(p, context);
             entryByName.put(entry.getName(), entry);
 
             if (entry.getType().equals("class")) {
@@ -95,11 +95,11 @@ public class PythonCode {
         return result;
     }
 
-    private void handleClass(PythonCodeEntry entry, List<Map<String, Object>> parsedMembers) {
+    private void handleClass(PythonParsedEntry entry, List<Map<String, Object>> parsedMembers) {
         PythonClass pythonClass = new PythonClass(entry.getName(), context);
         classByName.put(pythonClass.getName(), pythonClass);
 
-        List<PythonCodeEntry> members = handleEntriesAndReturnMembers(parsedMembers);
+        List<PythonParsedEntry> members = handleEntriesAndReturnMembers(parsedMembers);
         pythonClass.addMembers(members);
     }
 }
