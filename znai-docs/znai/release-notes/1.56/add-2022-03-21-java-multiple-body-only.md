@@ -1,1 +1,1 @@
-* Added [multiple bodies only](snippets/java#multiple-bodies) using `entry` for Java  
+* Added [multiple bodies only](java/content-extraction#multiple-bodies) using `entry` for Java  

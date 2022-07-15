@@ -1,1 +1,1 @@
-* Added multiple entries separator for [Java](snippets/java#multiple-bodies) and [Groovy](snippets/groovy#multiple-bodies)  
+* Added multiple entries separator for [Java](java/content-extraction#multiple-bodies) and [Groovy](snippets/groovy#multiple-bodies)  

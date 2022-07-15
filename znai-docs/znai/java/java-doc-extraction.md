@@ -1,6 +1,6 @@
 # Class Level
 
-Documentation maintenance is one of the main goals of this documentation system. 
+Documentation maintenance is one of the main goals of this documentation system.
 In the case of Java you may already use `JavaDoc` strings to explain certain concepts of your system.
 
 :include-java: HelloWorld.java
@@ -8,7 +8,7 @@ In the case of Java you may already use `JavaDoc` strings to explain certain con
 Instead of copy-and-pasting text between sources, you can refer to it inside your documentation.
 
     :include-java-doc: HelloWorld.java
-    
+
 *Text bellow is extracted from top class level `JavaDoc`*
 
 :include-java-doc: HelloWorld.java
@@ -16,22 +16,22 @@ Instead of copy-and-pasting text between sources, you can refer to it inside you
 # Method Level
 
 Method level `JavaDoc` text can be referred to as well by specifying the `entry` parameter.
-    
+
     :include-java-doc: HelloWorld.java {entry: "sampleMethod"}
-    
+
 *Text bellow is extracted from `sampleMethod` method `JavaDoc`*
 
 :include-java-doc: HelloWorld.java {entry: "sampleMethod"}
 
 # Field Level
-    
+
     :include-java-doc: HelloWorld.java {entry: "numberOfStudents"}
-    
+
 :include-java-doc: HelloWorld.java {entry: "numberOfStudents"}
 
 # Inner Classes
 
-Use `NestedName.entityName` to disambiguate a field or a method name 
+Use `NestedName.entityName` to disambiguate a field or a method name
 
 :include-java: HelloWorldWithInner.java {autoTitle: true}
 
@@ -73,7 +73,7 @@ Use the `title` parameter to specify a title.
 # Method Params With References
 
 Use the [Code References](snippets/code-references) file to link method parameters to reference pages.
-  
+
 To do that, define references in a CSV file, using a two column format: `type-or-variable-name, link`.
 
 :include-file: references/javadoc-references-demo.csv {title: "references/javadoc-references-demo.csv"}
@@ -84,11 +84,11 @@ To do that, define references in a CSV file, using a two column format: `type-or
         referencesPath: "references/javadoc-references-demo.csv"}
 
 :include-java-doc-params: HelloWorld.java {
-    entry: "importantAction",
-    title: "Trading Required Parameters", 
-    referencesPath: "references/javadoc-references-demo.csv"}
+entry: "importantAction",
+title: "Trading Required Parameters",
+referencesPath: "references/javadoc-references-demo.csv"}
 
-Parameters are now linked with a reference section for the documentation. 
+Parameters are now linked with a reference section for the documentation.
 
 # Enum Entries
 
@@ -97,11 +97,11 @@ Use `include-java-enum-entries` to enumerate entries of a enum from a file.
 :include-file: MyEnum.java {title: "MyEnum.java"}
 
     :include-java-enum-entries: MyEnum.java
-    
+
 :include-java-enum-entries: MyEnum.java
 
 You can exclude deprecated entries from the list by setting the `excludeDeprecated` parameter.
- 
+
     :include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
 
 :include-java-enum-entries: MyEnum.java {excludeDeprecated: true}
@@ -127,10 +127,10 @@ To do that, define references in a CSV file, using a two column format: `enum-na
         title: "Transaction Types",
         referencesPath: "references/javadoc-references-demo.csv"
     }
-    
+
 :include-java-enum-entries: TransactionTypes.java {referencesPath: "references/javadoc-references-demo.csv", title: "Transaction Types"}
 
-Enums are now linked with a reference section for the documentation. 
+Enums are now linked with a reference section for the documentation.
 
 Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use
 [Global References](snippets/code-references#global-references).

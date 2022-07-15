@@ -1,0 +1,5 @@
+CustomDomain, example-references/domain
+Trader, example-references/domain#trader
+Transaction, example-references/domain#transaction
+BUY, example-references/domain#transaction-buy
+SELL, example-references/domain#transaction-sell
