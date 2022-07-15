@@ -1,1 +1,1 @@
-* Add [include-python-method: package.method_name](snippets/python#methodfunction-definition) to display a function signature, documentation and parameters
+* Add [include-python-method: package.method_name](python/reference-doc#methodfunction-definition) to display a function signature, documentation and parameters

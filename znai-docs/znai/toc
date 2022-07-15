@@ -26,7 +26,6 @@ snippets
     java
     java-doc
     groovy
-    python
     doxygen
     typescript
     cpp
@@ -61,6 +60,10 @@ layout
     two-sides-pages
     two-sides-tabs
     jupyter-notebook-two-sides
+python
+    content-extraction
+    py-doc-extraction
+    reference-doc
 synergy-with-testing
     java
     REST

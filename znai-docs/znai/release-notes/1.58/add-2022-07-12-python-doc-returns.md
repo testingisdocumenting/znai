@@ -1,1 +1,1 @@
-* Parse [Python Returns](snippets/python#doc-parameters) PyDoc section
+* Parse [Python Returns](python/py-doc-extraction#doc-parameters) PyDoc section

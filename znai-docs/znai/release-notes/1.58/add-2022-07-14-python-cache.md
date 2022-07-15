@@ -1,1 +1,1 @@
-* Add caching to [Python Parsing](snippets/python)
+* Add caching to [Python Parsing](python/reference-doc)
