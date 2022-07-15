@@ -16,6 +16,7 @@
 
 package org.testingisdocumenting.znai.python;
 
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.nio.file.Path;
@@ -38,7 +39,18 @@ public class Python {
         parsedByPath = new HashMap<>();
     }
 
-    public PythonParsedFile parseOrGetCached(Path sourcePath, PythonContext context) {
+    public PythonClass parseClassOrGetCached(ResourcesResolver resourcesResolver, String fullyQualifiedName) {
+        PythonFileNameAndRelativeName fileNameAndRelativeName = PythonUtils.findFileNameAndRelativeNameByFullyQualifiedName(
+                resourcesResolver,
+                fullyQualifiedName);
+
+        PythonParsedFile parsedFile = parseFileOrGetCached(resourcesResolver.fullPath(fileNameAndRelativeName.getFileName()), new PythonContext(
+                fileNameAndRelativeName.getFileName(),
+                fileNameAndRelativeName.getPackageName()));
+        return parsedFile.findClassByName(fileNameAndRelativeName.getRelativeName());
+    }
+
+    public PythonParsedFile parseFileOrGetCached(Path sourcePath, PythonContext context) {
         invalidateCache(sourcePath);
         PythonParsedFile cachedParsedFile = parsedByPath.get(sourcePath);
         if (cachedParsedFile != null) {

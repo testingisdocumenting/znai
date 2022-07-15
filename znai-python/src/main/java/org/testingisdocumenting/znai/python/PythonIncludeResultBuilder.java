@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.python;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -50,18 +51,15 @@ class PythonIncludeResultBuilder {
     private final ParserHandler parserHandler;
     private final Path markupPath;
     private final String qualifiedName;
-    private final PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName;
 
     public PythonIncludeResultBuilder(ComponentsRegistry componentsRegistry,
                                       ParserHandler parserHandler,
                                       Path markupPath,
-                                      String qualifiedName,
-                                      PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName) {
+                                      String qualifiedName) {
         this.componentsRegistry = componentsRegistry;
         this.parserHandler = parserHandler;
         this.markupPath = markupPath;
         this.qualifiedName = qualifiedName;
-        this.fileAndRelativeEntryName = fileAndRelativeEntryName;
         searchText = new ArrayList<>();
     }
 
@@ -84,13 +82,14 @@ class PythonIncludeResultBuilder {
         parserHandler.onSubHeading(4, name, entryNameHeadingProps);
     }
 
-    public void addMethodSignature(PythonParsedEntry func,
+    public void addMethodSignature(String packageName,
+                                   PythonParsedEntry func,
                                    NameRenderOpt nameRenderOpt,
                                    ArgsRenderOpt argsRenderOpt,
                                    MarginOpts marginOpts,
                                    boolean attachUrl) {
         Map<String, Object> props = new LinkedHashMap<>(func.toMap(componentsRegistry.docStructure()));
-        props.put("qualifiedName", fileAndRelativeEntryName.getPackageName() + "." + func.getName());
+        props.put("qualifiedName", packageName + "." + func.getName());
 
         if (nameRenderOpt == NameRenderOpt.SHORT_NAME) {
             props.put("hideNameQualifier", true);
@@ -107,7 +106,7 @@ class PythonIncludeResultBuilder {
         if (attachUrl) {
             Supplier<String> urlSupplier = () -> {
                 Optional<String> globalAnchorUrl = componentsRegistry.docStructure().findGlobalAnchorUrl(
-                        PythonUtils.globalAnchorId(fileAndRelativeEntryName.getPackageName() + "." + func.getName()));
+                        PythonUtils.globalAnchorId(packageName + "." + func.getName()));
 
                 return globalAnchorUrl.orElse("");
             };
@@ -115,7 +114,7 @@ class PythonIncludeResultBuilder {
         }
 
         parserHandler.onCustomNode("PythonMethod", props);
-        searchText.add(fileAndRelativeEntryName.getRelativeName());
+        searchText.add(func.getName());
     }
 
     public void addPyDocTextOnly(PythonParsedEntry codeEntry) {
@@ -127,12 +126,12 @@ class PythonIncludeResultBuilder {
         searchText.add(parsedPythonDoc.getPyDocDescriptionOnly());
     }
 
-    public void addPyDocParams(PythonParsedEntry func) {
+    public void addPyDocParams(String packageName, PythonParsedEntry func) {
         ApiParameters apiParameters = func.createParametersFromPyDoc(
                 componentsRegistry.docStructure(),
                 componentsRegistry.markdownParser(),
                 markupPath,
-                fileAndRelativeEntryName.getPackageName() + "_" + func.getName());
+                packageName + "_" + func.getName());
 
         if (apiParameters.isEmpty()) {
             return;
@@ -143,6 +142,42 @@ class PythonIncludeResultBuilder {
 
         parserHandler.onCustomNode("ApiParameters", props);
         searchText.add(apiParameters.combinedTextForSearch());
+    }
+
+    public void addBaseClassesLinks(List<PythonClass> baseClasses) {
+        if (baseClasses.isEmpty()) {
+            return;
+        }
+
+        parserHandler.onParagraphStart();
+        parserHandler.onStrongEmphasisStart();
+        parserHandler.onSimpleText("Base classes: ");
+        parserHandler.onStrongEmphasisEnd();
+
+        int baseClassIdx = 0;
+        for (PythonClass baseClass : baseClasses) {
+            ApiLinkedText linkedText = new ApiLinkedText();
+
+            String fullName = baseClass.buildFullName();
+            String globalAnchorId = PythonUtils.globalAnchorId(fullName);
+            linkedText.addPart(fullName, () -> {
+                Optional<String> anchorUrl = componentsRegistry.docStructure().findGlobalAnchorUrl(globalAnchorId);
+                return anchorUrl.orElse("");
+            });
+
+            parserHandler.onCustomNode("ApiLinkedTextBlock", Collections.singletonMap("linkedText", linkedText.toListOfMaps()));
+
+            boolean isLastClass = baseClassIdx == baseClasses.size() - 1;
+            if (!isLastClass) {
+                parserHandler.onSimpleText(", ");
+            }
+
+            baseClassIdx++;
+        }
+
+        parserHandler.onParagraphEnd();
+
+        baseClasses.forEach(bc -> searchText.add(bc.getName()));
     }
 
     public void addSearchText(String text) {

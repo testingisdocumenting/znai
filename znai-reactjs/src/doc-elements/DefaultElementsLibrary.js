@@ -84,6 +84,7 @@ import { AnnotatedImage } from "./images/AnnotatedImage";
 import { AnnotatedImageWithOrderedList } from "./images/AnnotatedImageWithOrderedList";
 import { OrderedList } from "./default-elements/OrderedList";
 import { PythonMethod } from "./python/PythonMethod";
+import { ApiLinkedTextBlock } from "./api/ApiLinkedTextBlock";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -109,6 +110,8 @@ library.InlinedCode = InlinedCode
 library.SoftLineBreak = () => <span> </span>
 library.HardLineBreak = () => <br />
 library.ThematicBreak = () => <hr />
+
+library.ApiLinkedTextBlock = ApiLinkedTextBlock;
 
 library.Snippet = Snippet
 presentationElementHandlers.Snippet = presentationSnippetHandler

@@ -50,15 +50,16 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
 
         this.pluginParams = pluginParams;
 
-        fullPath = pathToUse();
+        String fileNameToUse = fileNameToUse();
+        fullPath = resourcesResolver.fullPath(fileNameToUse);
 
         codeReferencesFeature = new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams);
         features = new PluginFeatureList(
                 codeReferencesFeature
         );
 
-        PythonContext context = new PythonContext(defaultPackageName());
-        PythonParsedFile pythonParseResult = Python.INSTANCE.parseOrGetCached(fullPath, context);
+        PythonContext context = new PythonContext(fileNameToUse, defaultPackageName());
+        PythonParsedFile pythonParseResult = Python.INSTANCE.parseFileOrGetCached(fullPath, context);
         pythonResult = process(pythonParseResult, parserHandler, markupPath);
 
         return PluginResult.docElements(pythonResult.getDocElements().stream());
@@ -72,17 +73,21 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
         return pluginParams.getFreeParam();
     }
 
+    protected Stream<String> additionalAuxiliaryFileNames() {
+        return Stream.empty();
+    }
+
     /**
      * when parsing encounters a type without a package, it prepends it with a default package name
+     *
      * @return default package name
      */
     protected String defaultPackageName() {
         return pluginParams.getOpts().get("packageName", "");
     }
 
-    protected Path pathToUse() {
-        String givenPath = pluginParams.getFreeParam();
-        return resourcesResolver.fullPath(givenPath);
+    protected String fileNameToUse() {
+        return pluginParams.getFreeParam();
     }
 
     protected PythonParsedEntry findEntryByName(PythonParsedFile parsed, String name) {
@@ -98,7 +103,9 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(fullPath));
+        return Stream.concat(
+                Stream.of(AuxiliaryFile.builtTime(fullPath)),
+                additionalAuxiliaryFileNames().map(fileName -> AuxiliaryFile.builtTime(resourcesResolver.fullPath(fileName))));
     }
 
     @Override

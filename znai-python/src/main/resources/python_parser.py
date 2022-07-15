@@ -316,7 +316,21 @@ def class_to_dict(class_node):
                             [property_to_dict(node, class_node.name + "." + node.name + ".set") for node in
                              class_node.body if is_class_method_decorated_with_setter(node)]
 
+    class_dict["bases"] = extract_class_bases_full_names(class_node)
+
     return class_dict
+
+
+def extract_class_bases_full_names(class_node: ast.ClassDef):
+    bases = []
+    for base in class_node.bases:
+        if isinstance(base, ast.Name):
+            if base.id in full_type_name_by_alternative_name:
+                bases.append(full_type_name_by_alternative_name[base.id])
+            else:
+                bases.append(base.id)
+
+    return bases
 
 
 def is_class_method(node: ast.expr):

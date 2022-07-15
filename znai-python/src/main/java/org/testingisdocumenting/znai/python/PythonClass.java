@@ -35,11 +35,13 @@ public class PythonClass {
     private final String name;
     private final PythonContext context;
     private final List<PythonParsedEntry> members;
+    private final List<String> baseClasses;
 
     public PythonClass(String name, PythonContext context) {
         this.name = name;
         this.context = context;
         this.members = new ArrayList<>();
+        this.baseClasses = new ArrayList<>();
         context.registerType(this.name);
     }
 
@@ -51,9 +53,35 @@ public class PythonClass {
         return name;
     }
 
+    public String buildFullName() {
+        return context.getDefaultPackageName() + "." + name;
+    }
+
+    public String getPackageName() {
+        return context.getDefaultPackageName();
+    }
+
+    public String getFileName() {
+        return context.getFileName();
+    }
+
+    public void addBaseClasses(List<String> bases) {
+        bases.stream()
+                .map(className -> className.contains(".") ? className : context.getDefaultPackageName() + "." + className)
+                .forEach(baseClasses::add);
+    }
+
+    public List<String> getBaseClasses() {
+        return baseClasses;
+    }
+
+    public boolean hasProperties() {
+        return members.stream().anyMatch(PythonParsedEntry::isProperty);
+    }
+
     public List<PythonParsedEntry> getFunctions() {
         return members.stream()
-                .filter(entry -> entry.getType().equals("function"))
+                .filter(PythonParsedEntry::isFunction)
                 .collect(Collectors.toList());
     }
 

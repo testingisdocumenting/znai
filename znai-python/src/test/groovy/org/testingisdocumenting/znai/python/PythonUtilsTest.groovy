@@ -55,8 +55,8 @@ class PythonUtilsTest {
     @Test
     void "entity names and file names"() {
         PythonUtils.entityNameFileNameCombos("fin.money.Money").should == [
-                [packageName: "fin.money", relativeName: "Money", file: "fin/money.py"],
-                [packageName: "fin", relativeName: "money.Money", file: "fin.py"]
+                [packageName: "fin.money", relativeName: "Money", fileName: "fin/money.py"],
+                [packageName: "fin", relativeName: "money.Money", fileName: "fin.py"]
         ]
     }
 

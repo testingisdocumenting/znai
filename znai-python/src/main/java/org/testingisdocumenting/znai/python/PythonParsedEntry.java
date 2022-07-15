@@ -40,9 +40,12 @@ public class PythonParsedEntry {
     private final PythonType returns;
 
     private final List<String> decorators;
+    private final Map<String, Object> parsed;
 
     public PythonParsedEntry(Map<String, Object> parsed, PythonContext context) {
         this.context = context;
+
+        this.parsed = parsed;
 
         this.name = Objects.toString(parsed.get("name"), "");
         this.type = Objects.toString(parsed.get("type"), "");
@@ -53,6 +56,18 @@ public class PythonParsedEntry {
         this.args = buildArgs(parsed);
         this.returns = buildReturns(parsed);
         this.decorators = extractDecorators(parsed);
+    }
+
+    public Map<String, Object> getParsed() {
+        return parsed;
+    }
+
+    public boolean isFunction() {
+        return type.equals("function");
+    }
+
+    public boolean isProperty() {
+        return type.equals("property");
     }
 
     public String getName() {

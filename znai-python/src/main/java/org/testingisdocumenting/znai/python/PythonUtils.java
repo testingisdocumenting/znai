@@ -24,30 +24,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 class PythonUtils {
-    public static class FileNameAndRelativeName {
-        private final String file;
-        private final String packageName;
-        private final String relativeName;
-
-        public FileNameAndRelativeName(String file, String packageName, String relativeName) {
-            this.file = file;
-            this.packageName = packageName;
-            this.relativeName = relativeName;
-        }
-
-        public String getFile() {
-            return file;
-        }
-
-        public String getPackageName() {
-            return packageName;
-        }
-
-        public String getRelativeName() {
-            return relativeName;
-        }
-    }
-
     public static class PropertyNameAndQualifier {
         private final String name;
         private final String qualifier;
@@ -66,19 +42,19 @@ class PythonUtils {
         }
     }
 
-    static FileNameAndRelativeName findFileNameAndRelativeNameByFullyQualifiedName(ResourcesResolver resourcesResolver,
-                                                                                   String fullyQualifiedName) {
-        List<PythonUtils.FileNameAndRelativeName> fileAndNames = PythonUtils.entityNameFileNameCombos(fullyQualifiedName);
+    static PythonFileNameAndRelativeName findFileNameAndRelativeNameByFullyQualifiedName(ResourcesResolver resourcesResolver,
+                                                                                         String fullyQualifiedName) {
+        List<PythonFileNameAndRelativeName> fileAndNames = PythonUtils.entityNameFileNameCombos(fullyQualifiedName);
 
         return fileAndNames.stream()
-                .filter(fn -> resourcesResolver.canResolve(fn.getFile()))
+                .filter(fn -> resourcesResolver.canResolve(fn.getFileName()))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
                         "can't find any of <" +
                                 fileAndNames.stream()
-                                        .map(PythonUtils.FileNameAndRelativeName::getFile)
+                                        .map(PythonFileNameAndRelativeName::getFileName)
                                         .collect(Collectors.joining(", ")) + ">, tried locations:\n  " +
-                                String.join("\n  ") + resourcesResolver.listOfTriedLocations("")));
+                                String.join("\n  ", resourcesResolver.listOfTriedLocations(""))));
     }
 
     static String globalAnchorId(String id) {
@@ -115,10 +91,10 @@ class PythonUtils {
         return parts[parts.length - 1];
     }
 
-    static List<FileNameAndRelativeName> entityNameFileNameCombos(String qualifiedName) {
+    static List<PythonFileNameAndRelativeName> entityNameFileNameCombos(String qualifiedName) {
         String[] parts = qualifiedName.split("\\.");
 
-        List<FileNameAndRelativeName> result = new ArrayList<>();
+        List<PythonFileNameAndRelativeName> result = new ArrayList<>();
         for (int namePartsToUse = 1; namePartsToUse < parts.length; namePartsToUse++) {
             String relativeName = Arrays.stream(parts)
                     .skip(parts.length - namePartsToUse)
@@ -127,7 +103,7 @@ class PythonUtils {
             String fileName = combineFileNameParts(parts, namePartsToUse);
             String packageName = combinePackageNameParts(parts, namePartsToUse);
 
-            result.add(new FileNameAndRelativeName(fileName, packageName, relativeName));
+            result.add(new PythonFileNameAndRelativeName(fileName, packageName, relativeName));
         }
 
         return result;

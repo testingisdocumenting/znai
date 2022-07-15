@@ -95,11 +95,13 @@ public class PythonParsedFile {
         return result;
     }
 
+    @SuppressWarnings("unchecked")
     private void handleClass(PythonParsedEntry entry, List<Map<String, Object>> parsedMembers) {
         PythonClass pythonClass = new PythonClass(entry.getName(), context);
         classByName.put(pythonClass.getName(), pythonClass);
 
         List<PythonParsedEntry> members = handleEntriesAndReturnMembers(parsedMembers);
         pythonClass.addMembers(members);
+        pythonClass.addBaseClasses((List<String>) entry.getParsed().getOrDefault("bases", Collections.emptyList()));
     }
 }

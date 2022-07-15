@@ -16,33 +16,26 @@
 
 package org.testingisdocumenting.znai.python;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class PythonContext {
+public class PythonFileNameAndRelativeName {
     private final String fileName;
-    private final String defaultPackageName;
-    private final Set<String> knownTypes;
+    private final String packageName;
+    private final String relativeName;
 
-    public PythonContext(String fileName, String defaultPackageName) {
+    public PythonFileNameAndRelativeName(String fileName, String packageName, String relativeName) {
         this.fileName = fileName;
-        this.defaultPackageName = defaultPackageName;
-        this.knownTypes = new HashSet<>();
+        this.packageName = packageName;
+        this.relativeName = relativeName;
     }
 
     public String getFileName() {
         return fileName;
     }
 
-    public String getDefaultPackageName() {
-        return defaultPackageName;
+    public String getPackageName() {
+        return packageName;
     }
 
-    public boolean isTypeDefined(String name) {
-        return knownTypes.contains(name);
-    }
-
-    public void registerType(String name) {
-        knownTypes.add(name);
+    public String getRelativeName() {
+        return relativeName;
     }
 }

@@ -23,7 +23,7 @@ import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_C
 
 class PythonTypeTest {
     def docStructure = TEST_COMPONENTS_REGISTRY.docStructure()
-    def emptyContext = new PythonContext("")
+    def emptyContext = new PythonContext("", "")
 
     @Test
     void "render as string"() {
