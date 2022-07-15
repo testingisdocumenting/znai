@@ -31,7 +31,7 @@ import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.Na
 public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     private PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName;
     private PythonIncludeResultBuilder builder;
-    private List<PythonCodeEntry> memberFunctions;
+    private List<PythonParsedEntry> memberFunctions;
     private ParserHandler parserHandler;
     private PythonClass pythonClass;
 
@@ -65,11 +65,11 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
+    public PythonIncludeResult process(PythonParsedFile parsed, ParserHandler parserHandler, Path markupPath) {
         this.parserHandler = parserHandler;
 
         pythonClass = parsed.findClassByName(fileAndRelativeEntryName.getRelativeName());
-        PythonCodeEntry classEntry = parsed.findRequiredEntryByTypeAndName("class", fileAndRelativeEntryName.getRelativeName());
+        PythonParsedEntry classEntry = parsed.findRequiredEntryByTypeAndName("class", fileAndRelativeEntryName.getRelativeName());
         memberFunctions = pythonClass.getFunctions();
 
         builder = new PythonIncludeResultBuilder(componentsRegistry,
@@ -109,23 +109,23 @@ public class PythonClassIncludePlugin extends PythonIncludePluginBase {
         }
     }
 
-    private Stream<PythonCodeEntry> classMethods() {
-        return memberFunctions.stream().filter(PythonCodeEntry::isClassMethod);
+    private Stream<PythonParsedEntry> classMethods() {
+        return memberFunctions.stream().filter(PythonParsedEntry::isClassMethod);
     }
 
-    private Stream<PythonCodeEntry> staticMethods() {
-        return memberFunctions.stream().filter(PythonCodeEntry::isStatic);
+    private Stream<PythonParsedEntry> staticMethods() {
+        return memberFunctions.stream().filter(PythonParsedEntry::isStatic);
     }
 
-    private Stream<PythonCodeEntry> regularMethods() {
+    private Stream<PythonParsedEntry> regularMethods() {
         return memberFunctions.stream().filter(e -> !e.isClassMethod() && !e.isStatic() && !e.isPrivate());
     }
 
-    private void addMembersSignature(Stream<PythonCodeEntry> entries) {
+    private void addMembersSignature(Stream<PythonParsedEntry> entries) {
         entries.forEach(entry -> builder.addMethodSignature(entry, NameRenderOpt.SHORT_NAME, ArgsRenderOpt.REMOVE_SELF, MarginOpts.DEFAULT, true));
     }
 
-    private void addMembersDetails(Stream<PythonCodeEntry> entries) {
+    private void addMembersDetails(Stream<PythonParsedEntry> entries) {
         entries.forEach(entry -> {
             builder.addEntryHeader(PythonUtils.entityNameFromQualifiedName(entry.getName()));
             parserHandler.onGlobalAnchor(PythonUtils.globalAnchorId(defaultPackageName() + "." + entry.getName()));

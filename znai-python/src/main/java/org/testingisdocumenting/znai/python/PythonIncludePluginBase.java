@@ -41,7 +41,7 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
     protected CodeReferencesFeature codeReferencesFeature;
     protected ResourcesResolver resourcesResolver;
 
-    abstract public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath);
+    abstract public PythonIncludeResult process(PythonParsedFile parsed, ParserHandler parserHandler, Path markupPath);
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
@@ -57,8 +57,8 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
                 codeReferencesFeature
         );
 
-        PythonCodeContext context = new PythonCodeContext(defaultPackageName());
-        PythonCode pythonParseResult = PythonBasedPythonParser.INSTANCE.parse(fullPath, context);
+        PythonContext context = new PythonContext(defaultPackageName());
+        PythonParsedFile pythonParseResult = Python.INSTANCE.parseOrGetCached(fullPath, context);
         pythonResult = process(pythonParseResult, parserHandler, markupPath);
 
         return PluginResult.docElements(pythonResult.getDocElements().stream());
@@ -85,8 +85,8 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
         return resourcesResolver.fullPath(givenPath);
     }
 
-    protected PythonCodeEntry findEntryByName(PythonCode parsed, String name) {
-        PythonCodeEntry entry = parsed.findEntryByName(name);
+    protected PythonParsedEntry findEntryByName(PythonParsedFile parsed, String name) {
+        PythonParsedEntry entry = parsed.findEntryByName(name);
         if (entry == null) {
             throw new RuntimeException("can't find entry: " + name +
                     " in: " + snippetIdToUse() + ", available entries: " +

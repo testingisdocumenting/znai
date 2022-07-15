@@ -38,8 +38,8 @@ public class PythonDocIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
-        PythonCodeEntry codeEntry = findEntryByName(parsed, getEntryName());
+    public PythonIncludeResult process(PythonParsedFile parsed, ParserHandler parserHandler, Path markupPath) {
+        PythonParsedEntry codeEntry = findEntryByName(parsed, getEntryName());
         ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
         return new PythonIncludeResult(
                 componentsRegistry.markdownParser().parse(fullPath, parsedPythonDoc.getPyDocDescriptionOnly())

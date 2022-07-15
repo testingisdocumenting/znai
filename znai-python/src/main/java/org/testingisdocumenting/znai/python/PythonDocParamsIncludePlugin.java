@@ -38,10 +38,10 @@ public class PythonDocParamsIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
+    public PythonIncludeResult process(PythonParsedFile parsed, ParserHandler parserHandler, Path markupPath) {
         String entryName = getEntryName();
 
-        PythonCodeEntry codeEntry = findEntryByName(parsed, entryName);
+        PythonParsedEntry codeEntry = findEntryByName(parsed, entryName);
 
         ApiParameters apiParameters = codeEntry.createParametersFromPyDoc(
                 componentsRegistry.docStructure(),

@@ -28,20 +28,20 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class PythonCodeEntry {
-    private final PythonCodeContext context;
+public class PythonParsedEntry {
+    private final PythonContext context;
 
     private final String name;
     private final String type;
     private final String content;
     private final String bodyOnly;
     private final String docString;
-    private final List<PythonCodeArg> args;
-    private final PythonCodeType returns;
+    private final List<PythonArg> args;
+    private final PythonType returns;
 
     private final List<String> decorators;
 
-    public PythonCodeEntry(Map<String, Object> parsed, PythonCodeContext context) {
+    public PythonParsedEntry(Map<String, Object> parsed, PythonContext context) {
         this.context = context;
 
         this.name = Objects.toString(parsed.get("name"), "");
@@ -75,11 +75,11 @@ public class PythonCodeEntry {
         return docString;
     }
 
-    public List<PythonCodeArg> getArgs() {
+    public List<PythonArg> getArgs() {
         return args;
     }
 
-    public PythonCodeType getReturns() {
+    public PythonType getReturns() {
         return returns;
     }
 
@@ -135,7 +135,7 @@ public class PythonCodeEntry {
     }
 
     private ApiLinkedText returnsType(DocStructure docStructure, PythonDocReturn funcReturn) {
-        PythonCodeType returnTypeHint = getReturns();
+        PythonType returnTypeHint = getReturns();
 
         return returnTypeHint.isDefined() ?
                 returnTypeHint.convertToApiLinkedText(docStructure) :
@@ -143,7 +143,7 @@ public class PythonCodeEntry {
     }
 
     private ApiLinkedText paramType(DocStructure docStructure, PythonDocParam param) {
-        PythonCodeArg typeHint = getArgs().stream().filter(p -> param.getName().equals(p.getName())).findFirst()
+        PythonArg typeHint = getArgs().stream().filter(p -> param.getName().equals(p.getName())).findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("no parameter <" + param.getName() + "> found is signature"));
 
         return typeHint.getType().isDefined() ?
@@ -151,7 +151,7 @@ public class PythonCodeEntry {
                 new ApiLinkedText(param.getType());
     }
 
-    private List<PythonCodeArg> buildArgs(Map<String, Object> parsed) {
+    private List<PythonArg> buildArgs(Map<String, Object> parsed) {
         Object parsedArgs = parsed.get("args");
         if (parsedArgs == null) {
             return Collections.emptyList();
@@ -159,11 +159,11 @@ public class PythonCodeEntry {
 
         @SuppressWarnings("unchecked")
         List<Map<String, Object>> parsedArgsList = (List<Map<String, Object>>) parsedArgs;
-        return parsedArgsList.stream().map((arg) -> new PythonCodeArg(arg, context)).collect(Collectors.toList());
+        return parsedArgsList.stream().map((arg) -> new PythonArg(arg, context)).collect(Collectors.toList());
     }
 
-    private PythonCodeType buildReturns(Map<String, Object> parsed) {
-        return new PythonCodeType(parsed.get("returns"), context);
+    private PythonType buildReturns(Map<String, Object> parsed) {
+        return new PythonType(parsed.get("returns"), context);
     }
 
     @SuppressWarnings("unchecked")

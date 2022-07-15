@@ -16,32 +16,27 @@
 
 package org.testingisdocumenting.znai.python;
 
-public class PythonCodeProperty {
-    private final String name;
-    private final PythonCodeType type;
-    private final boolean isReadOnly;
-    private final String pyDocText;
+import java.util.HashSet;
+import java.util.Set;
 
-    public PythonCodeProperty(String name, PythonCodeType type, boolean isReadOnly, String pyDocText) {
-        this.name = name;
-        this.type = type;
-        this.isReadOnly = isReadOnly;
-        this.pyDocText = pyDocText;
+public class PythonContext {
+    private final String defaultPackageName;
+    private final Set<String> knownTypes;
+
+    public PythonContext(String defaultPackageName) {
+        this.defaultPackageName = defaultPackageName;
+        this.knownTypes = new HashSet<>();
     }
 
-    public String getName() {
-        return name;
+    public String getDefaultPackageName() {
+        return defaultPackageName;
     }
 
-    public PythonCodeType getType() {
-        return type;
+    public boolean isTypeDefined(String name) {
+        return knownTypes.contains(name);
     }
 
-    public boolean isReadOnly() {
-        return isReadOnly;
-    }
-
-    public String getPyDocText() {
-        return pyDocText;
+    public void registerType(String name) {
+        knownTypes.add(name);
     }
 }

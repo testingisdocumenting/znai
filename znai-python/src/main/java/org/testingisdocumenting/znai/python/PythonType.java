@@ -25,16 +25,16 @@ import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class PythonCodeType {
+public class PythonType {
     private final String name;
 
     /**
      * in case of a container type like Union[type1, type2] or dict[string, int]
      */
-    private final List<PythonCodeType> types;
-    private final PythonCodeContext context;
+    private final List<PythonType> types;
+    private final PythonContext context;
 
-    public PythonCodeType(Object parsed, PythonCodeContext context) {
+    public PythonType(Object parsed, PythonContext context) {
         this.context = context;
 
         if (parsed instanceof Map) {
@@ -60,7 +60,7 @@ public class PythonCodeType {
         return name;
     }
 
-    public List<PythonCodeType> getTypes() {
+    public List<PythonType> getTypes() {
         return types;
     }
 
@@ -69,7 +69,7 @@ public class PythonCodeType {
         result.append(name);
         if (!types.isEmpty()) {
             result.append("[");
-            result.append(types.stream().map(PythonCodeType::renderTypeAsString).collect(Collectors.joining(", ")));
+            result.append(types.stream().map(PythonType::renderTypeAsString).collect(Collectors.joining(", ")));
             result.append("]");
         }
 
@@ -90,7 +90,7 @@ public class PythonCodeType {
             linkedText.addPart("[");
 
             int idx = 0;
-            for (PythonCodeType type : types) {
+            for (PythonType type : types) {
                 ApiLinkedText nested = type.convertToApiLinkedText(docStructure);
                 linkedText.addParts(nested);
                 if (idx < types.size() - 1) {
@@ -133,8 +133,8 @@ public class PythonCodeType {
     }
 
     @SuppressWarnings("unchecked")
-    private List<PythonCodeType> extractTypes(Map<String, Object> map) {
+    private List<PythonType> extractTypes(Map<String, Object> map) {
         List<Object> list = (List<Object>) map.get("types");
-        return list.stream().map(parsed -> new PythonCodeType(parsed, context)).collect(Collectors.toList());
+        return list.stream().map(parsed -> new PythonType(parsed, context)).collect(Collectors.toList());
     }
 }

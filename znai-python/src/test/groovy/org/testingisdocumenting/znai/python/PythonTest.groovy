@@ -20,7 +20,7 @@ import org.junit.Test
 
 import java.nio.file.Paths
 
-class PythonBasedPythonParserTest {
+class PythonTest {
     def noType = [name: "", types: []]
 
     @Test
@@ -168,9 +168,9 @@ class PythonBasedPythonParserTest {
         def parsed = parse("src/test/resources/args-kwargs.py")
 
         parsed.findEntryByName("position_only_with_default").args.should == [
-                [name: "message", type: noType, category: PythonCodeArg.Category.POS_ONLY],
-                [name: "name", type: [name: "str", types: []], category: PythonCodeArg.Category.POS_ONLY, defaultValue: "\"no-name\""],
-                [name: "title", type: [name: "str", types: []], category: PythonCodeArg.Category.REGULAR, defaultValue: "\"\""]
+                [name: "message", type: noType, category: PythonArg.Category.POS_ONLY],
+                [name: "name", type: [name: "str", types: []], category: PythonArg.Category.POS_ONLY, defaultValue: "\"no-name\""],
+                [name: "title", type: [name: "str", types: []], category: PythonArg.Category.REGULAR, defaultValue: "\"\""]
         ]
     }
 
@@ -179,13 +179,13 @@ class PythonBasedPythonParserTest {
         def parsed = parse("src/test/resources/args-kwargs.py")
 
         parsed.findEntryByName("default_kwarg_values").args.should == [
-                [name: "message", type: noType, category: PythonCodeArg.Category.REGULAR],
-                [name: "name", type: [name: "str", types: []], category: PythonCodeArg.Category.REGULAR, defaultValue: "\"Default\""],
-                [name: "prices", type: noType, category: PythonCodeArg.Category.ARGS, defaultValue: ""],
-                [name: "label", type: [name: "str", types: []], category: PythonCodeArg.Category.KW_ONLY, defaultValue: "\"Hello\""],
-                [name: "price", type: [name: "int", types: []], category: PythonCodeArg.Category.KW_ONLY, defaultValue: "10"],
-                [name: "money", type: noType, category: PythonCodeArg.Category.KW_ONLY, defaultValue: "Money(100)"],
-                [name: "opts", type: noType, category: PythonCodeArg.Category.KWARGS, defaultValue: ""],
+                [name: "message", type: noType, category: PythonArg.Category.REGULAR],
+                [name: "name", type: [name: "str", types: []], category: PythonArg.Category.REGULAR, defaultValue: "\"Default\""],
+                [name: "prices", type: noType, category: PythonArg.Category.ARGS, defaultValue: ""],
+                [name: "label", type: [name: "str", types: []], category: PythonArg.Category.KW_ONLY, defaultValue: "\"Hello\""],
+                [name: "price", type: [name: "int", types: []], category: PythonArg.Category.KW_ONLY, defaultValue: "10"],
+                [name: "money", type: noType, category: PythonArg.Category.KW_ONLY, defaultValue: "Money(100)"],
+                [name: "opts", type: noType, category: PythonArg.Category.KWARGS, defaultValue: ""],
         ]
     }
 
@@ -222,23 +222,23 @@ class PythonBasedPythonParserTest {
         def parsed = parse("src/test/resources/fin/money.py", "fin.money")
 
         parsed.findEntryByName("Money.__init__").args.should == [
-                [name: "self", type: noType, category: PythonCodeArg.Category.REGULAR],
-                [name: "amount", type: [name: "int", types: []], category: PythonCodeArg.Category.REGULAR],
-                [name: "currency", type: [name: "str", types: []], category: PythonCodeArg.Category.REGULAR],
+                [name: "self", type: noType, category: PythonArg.Category.REGULAR],
+                [name: "amount", type: [name: "int", types: []], category: PythonArg.Category.REGULAR],
+                [name: "currency", type: [name: "str", types: []], category: PythonArg.Category.REGULAR],
         ]
 
         parsed.findEntryByName("Money.add").args.should == [
-                [name: "self", type: noType, category: PythonCodeArg.Category.REGULAR],
-                [name: "another", type: [name: "fin.money.Money", types: []], category: PythonCodeArg.Category.REGULAR],
+                [name: "self", type: noType, category: PythonArg.Category.REGULAR],
+                [name: "another", type: [name: "fin.money.Money", types: []], category: PythonArg.Category.REGULAR],
         ]
 
         parsed.findEntryByName("render_money").args.should == [
-                [name: "amount", type: [name: "fin.money.Money", types: []], category: PythonCodeArg.Category.REGULAR],
-                [name: "message", type: [name: "str", types: []], category: PythonCodeArg.Category.REGULAR, defaultValue: "\"\""],
+                [name: "amount", type: [name: "fin.money.Money", types: []], category: PythonArg.Category.REGULAR],
+                [name: "message", type: [name: "str", types: []], category: PythonArg.Category.REGULAR, defaultValue: "\"\""],
         ]
     }
 
-    private static PythonCode parse(String resourceName, String defaultPackageName = "") {
-        return PythonBasedPythonParser.INSTANCE.parse(Paths.get(resourceName), new PythonCodeContext(defaultPackageName))
+    private static PythonParsedFile parse(String resourceName, String defaultPackageName = "") {
+        return Python.INSTANCE.parseOrGetCached(Paths.get(resourceName), new PythonContext(defaultPackageName))
     }
 }

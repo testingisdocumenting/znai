@@ -55,8 +55,8 @@ public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    public PythonIncludeResult process(PythonCode parsed, ParserHandler parserHandler, Path markupPath) {
-        PythonCodeEntry funcEntry = parsed.findRequiredEntryByTypeAndName("function", fileAndRelativeEntryName.getRelativeName());
+    public PythonIncludeResult process(PythonParsedFile parsed, ParserHandler parserHandler, Path markupPath) {
+        PythonParsedEntry funcEntry = parsed.findRequiredEntryByTypeAndName("function", fileAndRelativeEntryName.getRelativeName());
 
         String fullyQualifiedName = pluginParams.getFreeParam();
 

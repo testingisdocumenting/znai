@@ -32,18 +32,17 @@ import static org.testingisdocumenting.znai.utils.ResourceUtils.tempCopyOfResour
 public class PythonBasedPythonParser {
     private static final String PARSE_COMPLETED = "---parse_completed---";
 
-    public static final PythonBasedPythonParser INSTANCE = new PythonBasedPythonParser();
     private final InputStream inputStream;
     private final OutputStream outputStream;
 
-    private PythonBasedPythonParser() {
+    public PythonBasedPythonParser() {
         Process process = createProcess();
         inputStream = process.getInputStream();
         outputStream = process.getOutputStream();
     }
 
     @SuppressWarnings("unchecked")
-    public PythonCode parse(Path path, PythonCodeContext context) {
+    public PythonParsedFile parse(Path path, PythonContext context) {
         write(path);
         String json = read();
 
@@ -67,7 +66,7 @@ public class PythonBasedPythonParser {
             warnings.forEach(warning -> System.out.println("\t" + warning));
         }
 
-        return new PythonCode((List<Map<String, Object>>) parserResponse.get("result"), context);
+        return new PythonParsedFile((List<Map<String, Object>>) parserResponse.get("result"), context);
     }
 
     private void write(Path path) {
