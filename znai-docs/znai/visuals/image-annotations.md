@@ -68,10 +68,19 @@ Use `rect` and `arrow` as first column value to render arrow or rectangle annota
     arrow,485,810,310,474
     ```
 
+Add a text block after coordinates to provide tooltip data. Markdown is supported.
+
+    ```image testingisdocumenting.png {pixelRatio: 2} 
+    rect,60,110,420,430,Note: zone description
+    arrow,485,810,310,474,destination **description**
+    ```
+
 ```image testingisdocumenting.png {pixelRatio: 2} 
-rect,60,110,420,430
-arrow,485,810,310,474
+rect,60,110,420,430,Note: zone description
+arrow,485,810,310,474,destination **description**
 ```
+
+Note: Hover over image annotations to display automatic tooltip.
 
 # Annotations File
 

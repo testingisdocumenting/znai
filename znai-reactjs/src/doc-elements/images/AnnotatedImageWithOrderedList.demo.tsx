@@ -89,6 +89,27 @@ function orderedList() {
   };
 }
 
+function arrowTooltipContent() {
+  return [
+    {
+      type: "Paragraph",
+      content: [
+        {
+          text: "Arrow Text",
+          type: "SimpleText",
+        },
+        {
+          type: "HardLineBreak",
+        },
+        {
+          text: "Another Line",
+          type: "SimpleText",
+        },
+      ],
+    },
+  ];
+}
+
 function annotatedImage() {
   return {
     type: "AnnotatedImage",
@@ -103,7 +124,7 @@ function annotatedImage() {
         beginY: 100,
         endX: 400,
         endY: 150,
-        text: "hello arrow",
+        tooltip: arrowTooltipContent(),
       },
       {
         type: "rectangle",
