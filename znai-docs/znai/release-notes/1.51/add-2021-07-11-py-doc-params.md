@@ -1,1 +1,1 @@
-* Added initial [pythod doc params](snippets/python#doc-parameters) support
+* Added initial [pythod doc params](python/py-doc-extraction#doc-parameters) support

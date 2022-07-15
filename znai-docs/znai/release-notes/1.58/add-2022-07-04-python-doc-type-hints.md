@@ -1,1 +1,1 @@
-* Add Python Doc params [Type Hint support](snippets/python#type-hints)  
+* Add Python Doc params [Type Hint support](python/py-doc-extraction#type-hints)  

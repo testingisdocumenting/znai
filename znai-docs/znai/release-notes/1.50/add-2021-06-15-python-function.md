@@ -1,1 +1,1 @@
-* Add [include-python](snippets/python#content) to include function's content
+* Add [include-python](python/content-extraction) to include function's content

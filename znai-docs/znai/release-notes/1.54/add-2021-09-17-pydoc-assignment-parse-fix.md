@@ -1,1 +1,1 @@
-* Enhance [variable extraction](snippets/python#content-full-content-variable) to include all assignments, not just global variables
+* Enhance [python variable extraction](python/content-extraction) to include all assignments, not just global variables

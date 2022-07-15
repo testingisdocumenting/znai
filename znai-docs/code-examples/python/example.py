@@ -1,5 +1,6 @@
 my_var = "a variable"
 
+
 def my_func(p1, p2):
     """
     text inside my *func* doc
@@ -15,6 +16,7 @@ def my_func(p1, p2):
     """
 
     return 2 + 2
+
 
 class Animal:
     """
