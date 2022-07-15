@@ -212,6 +212,13 @@ class PythonTest {
     }
 
     @Test
+    void "extract inheritance"() {
+        def parsed = parse("src/test/resources/executive_department.py", "executive_department")
+        def workerCto = parsed.findClassByName("WorkerCTO")
+        workerCto.getBaseClasses().should == ["department.Worker"]
+    }
+
+    @Test
     void "access to decorators"() {
         def parsed = parse("src/test/resources/fin/money.py", "fin.money")
         parsed.findEntryByName("Money.dollars").decorators.should == ["classmethod"]
@@ -239,6 +246,6 @@ class PythonTest {
     }
 
     private static PythonParsedFile parse(String resourceName, String defaultPackageName = "") {
-        return Python.INSTANCE.parseOrGetCached(Paths.get(resourceName), new PythonContext(defaultPackageName))
+        return Python.INSTANCE.parseFileOrGetCached(Paths.get(resourceName), new PythonContext(resourceName, defaultPackageName))
     }
 }

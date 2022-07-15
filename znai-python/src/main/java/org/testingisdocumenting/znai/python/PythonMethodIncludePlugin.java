@@ -26,7 +26,7 @@ import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.Ar
 import static org.testingisdocumenting.znai.python.PythonIncludeResultBuilder.NameRenderOpt;
 
 public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
-    private PythonUtils.FileNameAndRelativeName fileAndRelativeEntryName;
+    private PythonFileNameAndRelativeName fileAndRelativeEntryName;
 
     @Override
     public String id() {
@@ -44,9 +44,9 @@ public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
     }
 
     @Override
-    protected Path pathToUse() {
+    protected String fileNameToUse() {
         fileAndRelativeEntryName = PythonUtils.findFileNameAndRelativeNameByFullyQualifiedName(resourcesResolver, pluginParams.getFreeParam());
-        return resourcesResolver.fullPath(fileAndRelativeEntryName.getFile());
+        return fileAndRelativeEntryName.getFileName();
     }
 
     @Override
@@ -62,14 +62,14 @@ public class PythonMethodIncludePlugin extends PythonIncludePluginBase {
 
         PythonIncludeResultBuilder builder = new PythonIncludeResultBuilder(componentsRegistry,
                 parserHandler,
-                markupPath, fullyQualifiedName, fileAndRelativeEntryName);
+                markupPath, fullyQualifiedName);
 
         MarginOpts marginOpts = funcEntry.getDocString().isEmpty() ?
                 MarginOpts.DEFAULT: MarginOpts.EXTRA_BOTTOM_MARGIN;
 
-        builder.addMethodSignature(funcEntry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.KEEP_SELF, marginOpts, true);
+        builder.addMethodSignature(fileAndRelativeEntryName.getPackageName(), funcEntry, NameRenderOpt.FULL_NAME, ArgsRenderOpt.KEEP_SELF, marginOpts, true);
         builder.addPyDocTextOnly(funcEntry);
-        builder.addPyDocParams(funcEntry);
+        builder.addPyDocParams(fileAndRelativeEntryName.getPackageName(), funcEntry);
 
         return builder.build();
     }

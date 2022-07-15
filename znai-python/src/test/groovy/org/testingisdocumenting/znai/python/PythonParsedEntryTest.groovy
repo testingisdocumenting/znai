@@ -32,6 +32,6 @@ class PythonParsedEntryTest {
                 content   : "",
                 body_only : "",
                 doc_string: ""
-        ], new PythonContext(""))
+        ], new PythonContext("", ""))
     }
 }
