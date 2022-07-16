@@ -1,1 +1,1 @@
-* Add [doxygen compound](snippets/doxygen#compound) to include class description and methods/attributes
+* Add [doxygen compound](CPP/auto-reference#compound) to include class description and methods/attributes

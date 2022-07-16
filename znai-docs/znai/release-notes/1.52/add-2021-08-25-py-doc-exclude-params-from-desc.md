@@ -1,1 +1,1 @@
-* Exclude Parameters section type during [python doc](python/py-doc-extraction#doc-string) parsing
+* Exclude Parameters section type during [python doc](python/description-extraction#doc-string) parsing

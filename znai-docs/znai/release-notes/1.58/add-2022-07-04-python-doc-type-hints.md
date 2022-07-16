@@ -1,1 +1,1 @@
-* Add Python Doc params [Type Hint support](python/py-doc-extraction#type-hints)  
+* Add Python Doc params [Type Hint support](python/description-extraction#type-hints)  

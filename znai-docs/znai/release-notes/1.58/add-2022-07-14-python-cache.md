@@ -1,1 +1,1 @@
-* Add caching to [Python Parsing](python/reference-doc)
+* Add caching to [Python Parsing](python/auto-reference)

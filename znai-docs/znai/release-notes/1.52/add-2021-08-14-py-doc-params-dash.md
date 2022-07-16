@@ -1,1 +1,1 @@
-* Handle dash (`----`) for [python doc params](python/py-doc-extraction#doc-parameters) parsing
+* Handle dash (`----`) for [python doc params](python/description-extraction#doc-parameters) parsing

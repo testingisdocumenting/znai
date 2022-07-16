@@ -1,1 +1,1 @@
-* Add Doxygen memeber [select by args](snippets/doxygen#all-matching-signatures) 
+* Add Doxygen member [select by args](CPP/auto-reference#all-matching-signatures) 
