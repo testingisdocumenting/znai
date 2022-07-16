@@ -4,23 +4,9 @@ Note: Function Content support requires running znai in an environment with Pyth
 
 All the examples below are from the following example Python file:
 
-:include-file: python/example.py {title: "example.py"}
+:include-file: python/example.py {autoTitle: true}
 
 Use `include-python` plugin to extract function, class or global variable content.
-
-# Class
-
-To show the full class definition:
-
-    :include-python: python/example.py {entry: "Animal"}
-
-:include-python: python/example.py {entry: "Animal"}
-
-To show the contents of a class without the class declaration or doc string:
-
-    :include-python: python/example.py {entry: "Animal", bodyOnly: true}
-
-:include-python: python/example.py {entry: "Animal", bodyOnly: true}
 
 # Function
 
@@ -61,3 +47,18 @@ To show only a variable's value:
     :include-python: python/example.py {entry: "my_var", bodyOnly: true}
 
 :include-python: python/example.py {entry: "my_var", bodyOnly: true}
+
+# Class
+
+To show the full class definition:
+
+    :include-python: python/example.py {entry: "Animal"}
+
+:include-python: python/example.py {entry: "Animal"}
+
+To show the contents of a class without the class declaration or doc string:
+
+    :include-python: python/example.py {entry: "Animal", bodyOnly: true}
+
+:include-python: python/example.py {entry: "Animal", bodyOnly: true}
+

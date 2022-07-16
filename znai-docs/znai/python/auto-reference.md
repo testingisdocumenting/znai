@@ -6,13 +6,15 @@ Use `python-method` to include function/method definition with signature, docume
 
 :include-python-method: fin.money.render_money
 
-:include-file: fin/money.py {autoTitle: true, highlight: "render_money"}
+:include-file: fin/money.py {autoTitle: true, startLine: "render_money"}
 
 # Class Definition
 
 To define a class use `python-class` include plugin
 
     :include-python-class: fin.money.Money 
+
+:include-file: fin/money.py {autoTitle: true, endLine: "class Debt", excludeStartEnd: true}
 
 Note: Once you define `Money` class, method arguments and parameter descriptions with the same type will automatically link to the place of definition
 
