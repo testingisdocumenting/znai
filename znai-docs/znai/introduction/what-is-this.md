@@ -30,14 +30,14 @@ Three categories of plugins are available for usage and creation
 }
 
 ```markdown {title: "java plugin example"}
-:include-java: ../snippets/HelloWorld.java {
+:include-java: ../java/HelloWorld.java {
   entry: "sampleMethod", 
   bodyOnly: true,
   commentsType: "inline"
 }
 ```
 
-:include-java: ../snippets/HelloWorld.java {
+:include-java: ../java/HelloWorld.java {
   entry: "sampleMethod", 
   bodyOnly: true,
   commentsType: "inline"

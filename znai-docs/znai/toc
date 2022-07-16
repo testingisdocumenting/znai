@@ -23,8 +23,6 @@ snippets
     api-parameters
     code-references
     json
-    java
-    java-doc
     groovy
     doxygen
     typescript
@@ -63,6 +61,10 @@ layout
 python
     content-extraction
     py-doc-extraction
+    reference-doc
+java
+    content-extraction
+    java-doc-extraction
     reference-doc
 synergy-with-testing
     java
