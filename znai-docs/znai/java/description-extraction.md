@@ -84,9 +84,10 @@ To do that, define references in a CSV file, using a two column format: `type-or
         referencesPath: "references/javadoc-references-demo.csv"}
 
 :include-java-doc-params: HelloWorld.java {
-entry: "importantAction",
-title: "Trading Required Parameters",
-referencesPath: "references/javadoc-references-demo.csv"}
+  entry: "importantAction",
+  title: "Trading Required Parameters",
+  referencesPath: "references/javadoc-references-demo.csv"
+}
 
 Parameters are now linked with a reference section for the documentation.
 

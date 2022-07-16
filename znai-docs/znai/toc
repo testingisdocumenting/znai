@@ -23,13 +23,15 @@ snippets
     api-parameters
     code-references
     json
-    groovy
-    typescript
     xml
     open-API
     CLI
     math
     jupyter-notebook
+    cpp
+    python
+    java
+    groovy
     markdown
 visuals
     attention-signs
