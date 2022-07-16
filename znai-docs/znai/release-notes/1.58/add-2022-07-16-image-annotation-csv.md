@@ -1,0 +1,1 @@
+* Image Annotation [From CSV File](visuals/image-annotations#annotations-file)  

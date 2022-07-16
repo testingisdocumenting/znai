@@ -41,10 +41,14 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
     private static final String ANNOTATIONS_PATH_KEY = "annotationsPath";
     private static final String ANNOTATE_KEY = "annotate";
 
-    private Map<String, ?> annotations;
+    private Map<String, ?> parsedJson;
     private ResourcesResolver resourceResolver;
+    private ComponentsRegistry componentsRegistry;
+    private Path markupPath;
 
     protected Path annotationsPath;
+    private boolean isJsonFile;
+    private String annotationsFileContent;
 
     @Override
     public IncludePlugin create() {
@@ -57,20 +61,45 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
                                 Path markupPath,
                                 PluginParams pluginParams) {
         resourceResolver = componentsRegistry.resourceResolver();
+        this.componentsRegistry = componentsRegistry;
+        this.markupPath = markupPath;
+
         String imagePath = pluginParams.getFreeParam();
 
         annotationsPath = determineAnnotationsPath(imagePath, pluginParams);
-        annotations = this.annotationsPath == null ?
-                null :
-                JsonUtils.deserializeAsMap(FileUtils.fileTextContent(this.annotationsPath));
+        preparseJsonFileIfJson();
 
         return process(componentsRegistry, markupPath, pluginParams);
+    }
+
+    private void preparseJsonFileIfJson() {
+        // we need to parse JSON earlier to get pixelRatio if available
+
+        if (annotationsPath == null) {
+            return;
+        }
+
+        annotationsFileContent = FileUtils.fileTextContent(this.annotationsPath);
+        isJsonFile = annotationsFileContent.trim().startsWith("{");
+
+        if (isJsonFile) {
+            parsedJson = JsonUtils.deserializeAsMap(annotationsFileContent);
+        }
     }
 
     @Override
     @SuppressWarnings("unchecked")
     protected List<Map<String, ?>> annotationShapes(BufferedImage image) {
-        return annotations != null ? (List<Map<String, ?>>) annotations.get("shapes") : Collections.emptyList();
+        if (annotationsPath == null) {
+            return Collections.emptyList();
+        }
+
+        if (isJsonFile) {
+            return (List<Map<String, ?>>) parsedJson.get("shapes");
+        }
+
+        return new CsvAnnotations(componentsRegistry.markdownParser(), markupPath, image, pixelRatio())
+                .annotationsShapesFromCsv(annotationsFileContent);
     }
 
     @Override
@@ -79,9 +108,9 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
             return pixelRatioFromOpts;
         }
 
-        return (annotations == null || !annotations.containsKey("pixelRatio")) ?
+        return (parsedJson == null || !parsedJson.containsKey("pixelRatio")) ?
                 1.0 :
-                ((Number) annotations.get("pixelRatio")).doubleValue();
+                ((Number) parsedJson.get("pixelRatio")).doubleValue();
     }
 
     @Override
@@ -112,11 +141,16 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
             return null;
         }
 
-        String annotationsPath = FilePathUtils.replaceExtension(imagePath, "json");
-        if (!resourceResolver.canResolve(annotationsPath)) {
-            throw new RuntimeException("can't find: " + annotationsPath);
+        String jsonAnnotationsPath = FilePathUtils.replaceExtension(imagePath, "json");
+        if (resourceResolver.canResolve(jsonAnnotationsPath)) {
+            return resourceResolver.fullPath(jsonAnnotationsPath);
         }
 
-        return resourceResolver.fullPath(annotationsPath);
+        String csvAnnotationsPath = FilePathUtils.replaceExtension(imagePath, "csv");
+        if (resourceResolver.canResolve(csvAnnotationsPath)) {
+            return resourceResolver.fullPath(csvAnnotationsPath);
+        }
+
+        throw new RuntimeException("can't find any of the files: " + jsonAnnotationsPath + "; " + csvAnnotationsPath);
     }
 }

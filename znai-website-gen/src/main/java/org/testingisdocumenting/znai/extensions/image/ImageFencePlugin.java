@@ -16,39 +16,23 @@
 
 package org.testingisdocumenting.znai.extensions.image;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
-import org.testingisdocumenting.znai.parser.MarkupParserResult;
-import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.UncheckedIOException;
 import java.nio.file.Path;
-import java.text.NumberFormat;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
-    // type,beginX,beginY,endX,endY,text
-    private static final int RECT_ARROW_TEXT_POS_IDX = 5;
-
     private ComponentsRegistry componentsRegistry;
     private Path markupPath;
     private String content;
-    private BufferedImage image;
-    private Double pixelRatio;
-    private int badgeNumber;
-
-    private NumberFormat numberFormat;
 
     @Override
     public FencePlugin create() {
@@ -65,121 +49,8 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
 
     @Override
     protected List<Map<String, ?>> annotationShapes(BufferedImage image) {
-        this.image = image;
-
-        List<Map<String, ?>> annotations = new ArrayList<>();
-
-        pixelRatio = pixelRatio();
-        badgeNumber = 1;
-
-        numberFormat = NumberFormat.getNumberInstance();
-
-        try (CSVParser csvRecords = readCsvRecords(content)) {
-            for (CSVRecord record : csvRecords) {
-                Map<String, Object> annotation = createAnnotation(record);
-                annotations.add(annotation);
-            }
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-
-        return annotations;
-    }
-
-    private Map<String, Object> createAnnotation(CSVRecord record) {
-        String xCoordOrType = record.get(0);
-        if (StringUtils.isNumeric(numberFormat, xCoordOrType)) {
-            return createBadge(record);
-        }
-
-        switch (xCoordOrType) {
-            case "arrow":
-                return createArrow(record);
-            case "rect":
-                return createRect(record);
-            default:
-                throw new IllegalArgumentException("unsupported annotation type: " + xCoordOrType);
-        }
-    }
-
-    private Map<String, Object> createBadge(CSVRecord record) {
-        String xText = record.get(0);
-        String yText = record.get(1);
-
-        Map<String, Object> badge = new HashMap<>();
-        badge.put("type", "badge");
-
-        Double x = toNum(xText);
-        Double y = toNum(yText);
-
-        badge.put("x", x);
-        badge.put("y", y);
-        badge.put("text", String.valueOf(badgeNumber));
-        badge.put("invertedColors", isDarkCoordinate(x, y));
-
-        badgeNumber++;
-
-        return badge;
-    }
-
-    private Map<String, Object> createArrow(CSVRecord record) {
-        Map<String, Object> arrow = createArrowRectBaseMap("arrow", record);
-
-        RectCoord rectCoord = new RectCoord(record);
-        arrow.put("invertedColors",
-                isDarkCoordinate(rectCoord.beginX, rectCoord.beginY) ||
-                isDarkCoordinate(rectCoord.endX, rectCoord.endY));
-
-        arrow.putAll(rectCoord.toMap());
-
-        return arrow;
-    }
-
-    private Map<String, Object> createRect(CSVRecord record) {
-        Map<String, Object> rect = createArrowRectBaseMap("rectangle", record);
-
-        RectCoord rectCoord = new RectCoord(record);
-
-        int numberOfDarkAreas = 0;
-        if (isDarkCoordinate(rectCoord.beginX, rectCoord.beginY)) {
-            numberOfDarkAreas++;
-        }
-        if (isDarkCoordinate(rectCoord.beginX, rectCoord.endY)) {
-            numberOfDarkAreas++;
-        }
-        if (isDarkCoordinate(rectCoord.endX, rectCoord.beginY)) {
-            numberOfDarkAreas++;
-        }
-        if (isDarkCoordinate(rectCoord.endX, rectCoord.endY)) {
-            numberOfDarkAreas++;
-        }
-
-        rect.put("invertedColors", numberOfDarkAreas >= 2);
-        rect.putAll(rectCoord.toMap());
-
-        return rect;
-    }
-
-    private Map<String, Object> createArrowRectBaseMap(String type, CSVRecord record) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("type", type);
-
-        // type,beginX,beginY,endX,endY,text
-        if (record.isSet(RECT_ARROW_TEXT_POS_IDX)) {
-            String markdown = record.get(RECT_ARROW_TEXT_POS_IDX).trim();
-            MarkupParserResult parserResult = componentsRegistry.markdownParser().parse(markupPath, markdown);
-
-            map.put("tooltip", parserResult.getDocElement().contentToListOfMaps());
-        }
-
-        return map;
-    }
-
-    private boolean isDarkCoordinate(Double x, Double y) {
-        return ImageUtils.colorDarknessRatio(image,
-                (int) (x * pixelRatio),
-                (int) (y * pixelRatio),
-                (int) (10 * pixelRatio)) > 0.5;
+        return new CsvAnnotations(componentsRegistry.markdownParser(), markupPath, image, pixelRatio())
+                .annotationsShapesFromCsv(content);
     }
 
     @Override
@@ -201,48 +72,4 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
         return Stream.empty();
     }
 
-    private static Double toNum(String text) {
-        if (text.isEmpty()) {
-            return 0.0;
-        }
-
-        return Double.parseDouble(text);
-    }
-
-    private static CSVParser readCsvRecords(String content) {
-        try {
-            return CSVFormat.RFC4180.
-                    withIgnoreSurroundingSpaces().
-                    withIgnoreEmptyLines().
-                    withTrim().
-                    withDelimiter(',').
-                    parse(new StringReader(content));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    static class RectCoord {
-        private final double beginX;
-        private final double beginY;
-        private final double endX;
-        private final double endY;
-
-        RectCoord(CSVRecord record) {
-            beginX = toNum(record.get(1));
-            beginY = toNum(record.get(2));
-            endX = toNum(record.get(3));
-            endY = toNum(record.get(4));
-        }
-
-        Map<String, ?> toMap() {
-            Map<String, Object> map = new LinkedHashMap<>();
-            map.put("beginX", beginX);
-            map.put("beginY", beginY);
-            map.put("endX", endX);
-            map.put("endY", endY);
-
-            return map;
-        }
-    }
 }
