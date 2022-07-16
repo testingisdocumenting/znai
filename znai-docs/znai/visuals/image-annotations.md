@@ -115,6 +115,12 @@ Use UI testing frameworks to automatically generate annotations file and capture
 For example [WebTau](https://github.com/testingisdocumenting/webtau) automatically generates an annotations file in addition to 
 capturing a screenshot. 
 
+:include-file: webtauexamples/imageCapture.groovy {autoTitle: true}
+
+    :include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
+
+:include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
+
 # Presentation Mode
 
 Annotated images automatically participate in presentation mode. Annotations will appear one by one.

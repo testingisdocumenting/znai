@@ -12,6 +12,7 @@
 ../../znai-testing-examples/src/test/java
 ../../znai-testing-examples/target/test-classes
 ../../znai-python/src/test/resources
+../../znai-testing-examples/examples
 ../../.github
 ../readme
 ../target/classes
