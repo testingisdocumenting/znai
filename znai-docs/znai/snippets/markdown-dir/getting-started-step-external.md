@@ -1,3 +1,3 @@
-``` bash {title: "getting started"}
-$ command specific to external
+```cli
+command specific-to-external
 ```

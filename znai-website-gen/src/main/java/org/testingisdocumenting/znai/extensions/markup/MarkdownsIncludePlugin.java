@@ -18,8 +18,7 @@ package org.testingisdocumenting.znai.extensions.markup;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.PluginParams;
-import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
@@ -40,8 +39,13 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.joining;
 
 public class MarkdownsIncludePlugin implements IncludePlugin {
+    private static final String SORT_KEY = "sort";
+    private static final String ASCENDING = "ascending";
+    private static final String DESCENDING = "descending";
+
     private List<Path> markdowns;
     private List<MarkupParserResult> parserResults;
+    private PluginParamsOpts opts;
 
     @Override
     public String id() {
@@ -54,10 +58,18 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .add(SORT_KEY, PluginParamType.STRING, "sort direction, ascending or descending (descending is default)", "\"ascending\"");
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry,
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
+        opts = pluginParams.getOpts();
+
         Path dir = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         MarkupParser parser = componentsRegistry.defaultParser();
 
@@ -73,10 +85,26 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
 
     private Stream<Path> markdowns(Path dir) {
         try {
-            return Files.list(dir).filter(f -> f.toString().endsWith(".md")).sorted(Comparator.comparing(Path::toString).reversed());
+            return Files.list(dir).filter(f -> f.toString().endsWith(".md")).sorted(createComparator());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Comparator<Path> createComparator() {
+        Comparator<Path> comparator = Comparator.comparing(Path::toString);
+
+        String sortDirection = opts.get(SORT_KEY, "");
+        if (sortDirection.isEmpty() || sortDirection.equals(DESCENDING)) {
+            return comparator.reversed();
+        }
+
+        if (!sortDirection.equals(ASCENDING)) {
+            // TODO formal parameters enums support
+            throw new IllegalArgumentException(SORT_KEY + " only accepts <" + ASCENDING + ">, or <" + DESCENDING + ">");
+        }
+
+        return comparator;
     }
 
     @Override

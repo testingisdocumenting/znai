@@ -4,6 +4,6 @@
 
 ## Brew 
 
-```
+```cli
 brew install testingisdocumenting/brew/znai
 ```
