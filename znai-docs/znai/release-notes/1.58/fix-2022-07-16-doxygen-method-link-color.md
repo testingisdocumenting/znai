@@ -1,0 +1,1 @@
+* Fix: [CPP Auto Ref](CPP/auto-reference) method link color 

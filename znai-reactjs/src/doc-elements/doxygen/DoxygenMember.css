@@ -28,6 +28,11 @@
     color: var(--znai-code-function-color);
 }
 
+a .znai-doxygen-member-name {
+    color: var(--znai-code-function-color);
+    text-decoration: underline;
+}
+
 .znai-doxygen-template-param,
 .znai-doxygen-template-params {
     display: flex;
