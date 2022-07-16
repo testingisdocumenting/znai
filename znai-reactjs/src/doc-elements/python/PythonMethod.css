@@ -40,6 +40,11 @@
     color: var(--znai-code-function-color);
 }
 
+a .znai-python-method-name {
+    color: var(--znai-code-function-color);
+    text-decoration: underline;
+}
+
 .znai-python-args {
     display: flex;
     flex-wrap: wrap;
