@@ -1,1 +1,1 @@
-* Add [Doxygen From Zip](snippets/doxygen#setup) support   
+* Add [Doxygen From Zip](CPP/doxygen-setup#setup) support   

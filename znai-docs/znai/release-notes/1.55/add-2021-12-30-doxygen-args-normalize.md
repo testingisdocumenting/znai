@@ -1,1 +1,1 @@
-* Normalize doxygen member [selection by args](snippets/doxygen#specific-member-by-args)  
+* Normalize doxygen member [selection by args](CPP/auto-reference#specific-member-by-args)  

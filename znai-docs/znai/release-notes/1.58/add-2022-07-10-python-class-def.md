@@ -1,1 +1,1 @@
-* Add [include-python-class: package.ClassName](python/reference-doc#class-definition) to display and define a class
+* Add [include-python-class: package.ClassName](python/auto-reference#class-definition) to display and define a class

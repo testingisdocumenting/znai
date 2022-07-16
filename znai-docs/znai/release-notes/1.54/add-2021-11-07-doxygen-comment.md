@@ -1,1 +1,1 @@
-* Add [doxygen docs](snippets/doxygen#extract-comment-text) to embed comments text  
+* Add [doxygen docs](CPP/description-extraction) to embed comments text  

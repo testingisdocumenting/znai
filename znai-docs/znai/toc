@@ -24,9 +24,7 @@ snippets
     code-references
     json
     groovy
-    doxygen
     typescript
-    cpp
     xml
     open-API
     CLI
@@ -60,12 +58,16 @@ layout
     jupyter-notebook-two-sides
 python
     content-extraction
-    py-doc-extraction
-    reference-doc
+    description-extraction
+    auto-reference
+CPP
+    doxygen-setup
+    description-extraction
+    auto-reference
 java
     content-extraction
-    java-doc-extraction
-    reference-doc
+    description-extraction
+    auto-reference
 synergy-with-testing
     java
     REST
