@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.utils.FilePathUtils;
@@ -60,7 +61,7 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        resourceResolver = componentsRegistry.resourceResolver();
+        this.resourceResolver = componentsRegistry.resourceResolver();
         this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
 
@@ -89,16 +90,21 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
 
     @Override
     @SuppressWarnings("unchecked")
-    protected List<Map<String, ?>> annotationShapes(BufferedImage image) {
+    protected List<Map<String, Object>> annotationShapes(BufferedImage image) {
         if (annotationsPath == null) {
             return Collections.emptyList();
         }
 
+        Double pixelRatio = pixelRatio();
+
         if (isJsonFile) {
-            return (List<Map<String, ?>>) parsedJson.get("shapes");
+            List<Map<String, Object>> shapes = (List<Map<String, Object>>) parsedJson.get("shapes");
+            updateShapesWithAutoColorAndTooltips(image, pixelRatio, shapes);
+
+            return shapes;
         }
 
-        return new CsvAnnotations(componentsRegistry.markdownParser(), markupPath, image, pixelRatio())
+        return new CsvAnnotations(componentsRegistry.markdownParser(), markupPath, image, pixelRatio)
                 .annotationsShapesFromCsv(annotationsFileContent);
     }
 
@@ -127,7 +133,40 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
         return annotationsPath != null ? Stream.of(AuxiliaryFile.builtTime(annotationsPath)) : Stream.empty();
     }
 
-    protected Path determineAnnotationsPath(String imagePath, PluginParams pluginParams) {
+    private void updateShapesWithAutoColorAndTooltips(BufferedImage image,
+                                                      Double pixelRatio,
+                                                      List<Map<String, Object>> shapes) {
+        ShapeColorAnalyzer colorAnalyzer = new ShapeColorAnalyzer(image, pixelRatio);
+
+        shapes.forEach((shape) -> {
+            String type = shape.get("type").toString();
+
+            Boolean isInvertedColor = isInvertedColor(colorAnalyzer, type, shape);
+            shape.put("invertedColors", isInvertedColor);
+
+            Object text = shape.get("text");
+            if (text != null && !text.toString().isEmpty() && !type.equals(ShapeTypes.BADGE)) {
+                String markdown = text.toString();
+                MarkupParserResult parserResult = componentsRegistry.markdownParser().parse(markupPath, markdown);
+                shape.put("tooltip", parserResult.getDocElement().contentToListOfMaps());
+            }
+        });
+    }
+
+    private Boolean isInvertedColor(ShapeColorAnalyzer colorAnalyzer, String type, Map<String, ?> shape) {
+        switch (type) {
+            case ShapeTypes.BADGE:
+                return colorAnalyzer.isDarkCoordinate((Number) shape.get("x"), (Number) shape.get("y"));
+            case ShapeTypes.ARROW:
+                return colorAnalyzer.isDarkBasedOnOppositeCorners(new RectCoord(shape));
+            case ShapeTypes.RECT:
+                return colorAnalyzer.isDarkBasedOnAllCorners(new RectCoord(shape));
+            default:
+                return false;
+        }
+    }
+
+    private Path determineAnnotationsPath(String imagePath, PluginParams pluginParams) {
         String annotationsPathValue = pluginParams.getOpts().get("annotationsPath");
         if (annotationsPathValue != null) {
             return resourceResolver.fullPath(annotationsPathValue);

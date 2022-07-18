@@ -48,7 +48,7 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
     }
 
     @Override
-    protected List<Map<String, ?>> annotationShapes(BufferedImage image) {
+    protected List<Map<String, Object>> annotationShapes(BufferedImage image) {
         return new CsvAnnotations(componentsRegistry.markdownParser(), markupPath, image, pixelRatio())
                 .annotationsShapesFromCsv(content);
     }

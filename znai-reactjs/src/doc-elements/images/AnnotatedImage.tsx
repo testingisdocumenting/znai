@@ -146,7 +146,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
           placement: "center",
           content: shape.tooltip, // todo: doc elements markdown support from CSV/json
         };
-      } else if ((shape.type === "rectangle" || shape.type === "arrow") && shape.tooltip) {
+      } else if (shape.type !== "badge" && shape.tooltip) {
         return {
           placement: placementForShape(),
           content: <elementsLibrary.DocElement content={shape.tooltip} elementsLibrary={elementsLibrary} />,

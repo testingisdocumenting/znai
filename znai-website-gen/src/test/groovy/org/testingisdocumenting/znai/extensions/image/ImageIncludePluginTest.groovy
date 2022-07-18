@@ -29,7 +29,7 @@ class ImageIncludePluginTest {
                 ":include-image: https://super-image")
 
         props.should == [imageSrc: 'https://super-image',
-                         shapes: []]
+                         shapes  : []]
     }
 
     @Test
@@ -37,12 +37,30 @@ class ImageIncludePluginTest {
         def props = PluginsTestUtils.processIncludeAndGetProps(
                 ":include-image: dummy.png {pixelRatio: 1}")
 
-        props.should == [imageSrc: '/test-doc/dummy.png',
+        props.should == [imageSrc  : '/test-doc/dummy.png',
                          pixelRatio: 1.0,
-                         width: 592.0,
-                         height: 535.0,
+                         width     : 592.0,
+                         height    : 535.0,
+                         timestamp : 0,
+                         shapes    : []]
+    }
+
+    @Test
+    void "should convert text to markdown doc elements and auto update shapes color"() {
+        def props = PluginsTestUtils.processIncludeAndGetProps(
+                ":include-image: dummy.png {annotate: true}")
+
+        props.should == [imageSrc : '/test-doc/dummy.png',
+                         annotate : true,
+                         width    : 296.0,
+                         height   : 267.5,
                          timestamp: 0,
-                         shapes: []]
+                         shapes   : [
+                                 [type: ShapeTypes.BADGE, x: 10, y: 10, text: "1", invertedColors: false],
+                                 [type: ShapeTypes.RECT, beginX: 20, beginY: 20, endX: 80, endY: 80, text: "", invertedColors: false],
+                                 [type   : ShapeTypes.ARROW, beginX: 20, beginY: 20, endX: 80, endY: 80, text: "move here", invertedColors: false,
+                                  tooltip: [[type: "TestMarkdown", markdown: "move here"]]]
+                         ]]
     }
 
     @Test

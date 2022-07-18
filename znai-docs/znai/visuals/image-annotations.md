@@ -92,14 +92,18 @@ Note: Hover over image annotations to display automatic tooltip.
 :include-file: testingisdocumenting.csv {autoTitle: true}
 
 :include-image: testingisdocumenting.png {
-  annotationsPath: "testingisdocumenting.csv",
+  annotationsPath: "testingisdocumenting.json",
   pixelRatio: 2,
 }
+
+`include-image` also supports `JSON` file format
+
+:include-json: testingisdocumenting.json {autoTitle: true}
 
 # Annotations Path Shortcut
 
 You don't need to specify annotations path, if annotations file matches file name and path of the image and
-has `csv` extension.
+has `json` or `csv` extension.
 
 Add `annotate: true` to automatically use matching annotations file
 
@@ -119,7 +123,14 @@ capturing a screenshot.
 
     :include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
 
+1. Type question you want to be answered anonymously 
+2. Scan through results and pick the most relevant one
+
 :include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
+
+:include-json: doc-artifacts/duckduckgo-search.json {autoTitle: true, paths: "root.pixelRatio"}
+
+Note: [WebTau](https://github.com/testingisdocumenting/webtau) captures additional data such as `pixelRatio`
 
 # Presentation Mode
 

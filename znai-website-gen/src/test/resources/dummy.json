@@ -1,0 +1,27 @@
+{
+  "shapes": [
+    {
+      "type": "badge",
+      "x": 10,
+      "y": 10,
+      "text": "1"
+    },
+    {
+      "type": "rect",
+      "beginX": 20,
+      "beginY": 20,
+      "endX": 80,
+      "endY": 80,
+      "text": ""
+    },
+    {
+      "type": "arrow",
+      "beginX": 20,
+      "beginY": 20,
+      "endX": 80,
+      "endY": 80,
+      "text": "move here"
+    }
+  ],
+  "pixelRatio": 2
+}

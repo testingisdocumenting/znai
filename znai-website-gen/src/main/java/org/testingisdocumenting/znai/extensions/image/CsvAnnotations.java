@@ -34,25 +34,24 @@ import java.util.*;
 class CsvAnnotations {
     // type,beginX,beginY,endX,endY,text
     private static final int RECT_ARROW_TEXT_POS_IDX = 5;
+    private final ShapeColorAnalyzer shapeColorAnalyzer;
 
     private int badgeNumber;
     private final NumberFormat numberFormat;
     private final MarkdownParser markdownParser;
     private final Path markupPath;
-    private final BufferedImage image;
-    private final Double pixelRatio;
 
     CsvAnnotations(MarkdownParser markdownParser, Path markupPath, BufferedImage image, Double pixelRatio) {
         this.markdownParser = markdownParser;
         this.markupPath = markupPath;
-        this.image = image;
-        this.pixelRatio = pixelRatio;
+        this.shapeColorAnalyzer = new ShapeColorAnalyzer(image, pixelRatio);
+
         badgeNumber = 1;
         numberFormat = NumberFormat.getNumberInstance();
     }
 
-    List<Map<String, ?>> annotationsShapesFromCsv(String csvContent) {
-        List<Map<String, ?>> annotations = new ArrayList<>();
+    List<Map<String, Object>> annotationsShapesFromCsv(String csvContent) {
+        List<Map<String, Object>> annotations = new ArrayList<>();
 
         try (CSVParser csvRecords = readCsvRecords(csvContent)) {
             for (CSVRecord record : csvRecords) {
@@ -87,7 +86,7 @@ class CsvAnnotations {
         String yText = record.get(1);
 
         Map<String, Object> badge = new HashMap<>();
-        badge.put("type", "badge");
+        badge.put("type", ShapeTypes.BADGE);
 
         Double x = toNum(xText);
         Double y = toNum(yText);
@@ -95,7 +94,7 @@ class CsvAnnotations {
         badge.put("x", x);
         badge.put("y", y);
         badge.put("text", String.valueOf(badgeNumber));
-        badge.put("invertedColors", isDarkCoordinate(x, y));
+        badge.put("invertedColors", shapeColorAnalyzer.isDarkCoordinate(x, y));
 
         badgeNumber++;
 
@@ -106,11 +105,8 @@ class CsvAnnotations {
         Map<String, Object> arrow = createArrowRectBaseMap("arrow", record);
 
         RectCoord rectCoord = new RectCoord(record);
-        arrow.put("invertedColors",
-                isDarkCoordinate(rectCoord.beginX, rectCoord.beginY) ||
-                        isDarkCoordinate(rectCoord.endX, rectCoord.endY));
-
         arrow.putAll(rectCoord.toMap());
+        arrow.put("invertedColors", shapeColorAnalyzer.isDarkBasedOnOppositeCorners(rectCoord));
 
         return arrow;
     }
@@ -119,23 +115,8 @@ class CsvAnnotations {
         Map<String, Object> rect = createArrowRectBaseMap("rectangle", record);
 
         RectCoord rectCoord = new RectCoord(record);
-
-        int numberOfDarkAreas = 0;
-        if (isDarkCoordinate(rectCoord.beginX, rectCoord.beginY)) {
-            numberOfDarkAreas++;
-        }
-        if (isDarkCoordinate(rectCoord.beginX, rectCoord.endY)) {
-            numberOfDarkAreas++;
-        }
-        if (isDarkCoordinate(rectCoord.endX, rectCoord.beginY)) {
-            numberOfDarkAreas++;
-        }
-        if (isDarkCoordinate(rectCoord.endX, rectCoord.endY)) {
-            numberOfDarkAreas++;
-        }
-
-        rect.put("invertedColors", numberOfDarkAreas >= 2);
         rect.putAll(rectCoord.toMap());
+        rect.put("invertedColors", shapeColorAnalyzer.isDarkBasedOnAllCorners(rectCoord));
 
         return rect;
     }
@@ -153,13 +134,6 @@ class CsvAnnotations {
         }
 
         return map;
-    }
-
-    private boolean isDarkCoordinate(Double x, Double y) {
-        return ImageUtils.colorDarknessRatio(image,
-                (int) (x * pixelRatio),
-                (int) (y * pixelRatio),
-                (int) (10 * pixelRatio)) > 0.5;
     }
 
     private static Double toNum(String text) {
@@ -180,30 +154,6 @@ class CsvAnnotations {
                     parse(new StringReader(content));
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    static class RectCoord {
-        private final double beginX;
-        private final double beginY;
-        private final double endX;
-        private final double endY;
-
-        RectCoord(CSVRecord record) {
-            beginX = toNum(record.get(1));
-            beginY = toNum(record.get(2));
-            endX = toNum(record.get(3));
-            endY = toNum(record.get(4));
-        }
-
-        Map<String, ?> toMap() {
-            Map<String, Object> map = new LinkedHashMap<>();
-            map.put("beginX", beginX);
-            map.put("beginY", beginY);
-            map.put("endX", endX);
-            map.put("endY", endY);
-
-            return map;
         }
     }
 }

@@ -18,7 +18,7 @@
 import React from 'react'
 import {styleByName} from './styleByName';
 
-import rectangle from './Rectangle'
+import rect from './Rect'
 
 const HighlightBody = ({x, y, width, height, color, scale, ...props}) => {
     const styleScheme = styleByName(color)
@@ -34,7 +34,7 @@ const HighlightBody = ({x, y, width, height, color, scale, ...props}) => {
 }
 
 const highlight = {
-    ...rectangle,
+    ...rect,
     body: HighlightBody
 }
 
