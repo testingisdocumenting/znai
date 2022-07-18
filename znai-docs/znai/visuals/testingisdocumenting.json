@@ -1,0 +1,20 @@
+{
+  "shapes": [
+    {
+      "type": "rect",
+      "beginX": 60.0,
+      "beginY": 110.0,
+      "endX": 420.0,
+      "endY": 430.0,
+      "text": "Note: zone description"
+    },
+    {
+      "type": "arrow",
+      "beginX": 485.0,
+      "beginY": 810.0,
+      "endX": 310.0,
+      "endY": 474.0,
+      "text": "destination **description**"
+    }
+  ]
+}

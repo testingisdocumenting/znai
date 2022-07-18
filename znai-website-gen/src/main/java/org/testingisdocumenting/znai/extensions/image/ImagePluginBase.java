@@ -86,7 +86,7 @@ abstract class ImagePluginBase implements Plugin {
         return Stream.concat(Stream.of(auxiliaryFile), additionalAuxiliaryFiles());
     }
 
-    protected abstract List<Map<String, ?>> annotationShapes(BufferedImage image);
+    protected abstract List<Map<String, Object>> annotationShapes(BufferedImage image);
 
     protected abstract Double pixelRatio();
 

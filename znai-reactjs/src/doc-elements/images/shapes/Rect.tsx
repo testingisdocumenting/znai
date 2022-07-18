@@ -97,7 +97,7 @@ const RectangleBody = ({ beginX, beginY, endX, endY, scale, invertedColors }: Re
   );
 };
 
-const rectangle = {
+const rect = {
   body: RectangleBody,
 
   knobs: (shape: any) => {
@@ -126,4 +126,4 @@ const rectangle = {
   },
 };
 
-export default rectangle;
+export default rect;

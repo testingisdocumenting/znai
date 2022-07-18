@@ -21,12 +21,12 @@ import interactiveAnnotation from './InteractiveAnnotation'
 import staticAnnotation from './StaticAnnotation'
 
 import {circle, badge} from '../shapes/Circle'
-import rectangle from '../shapes/Rectangle'
+import rect from '../shapes/Rect'
 import arrow from '../shapes/Arrow'
 import highlight from '../shapes/Highlight'
 import { TooltipSvg } from "../../../components/Tooltip";
 
-const shapesLib = {circle, badge, rectangle, arrow, highlight}
+const shapesLib = {circle, badge, rectangle: rect, rect, arrow, highlight}
 
 class Annotations {
     constructor(shapes) {
