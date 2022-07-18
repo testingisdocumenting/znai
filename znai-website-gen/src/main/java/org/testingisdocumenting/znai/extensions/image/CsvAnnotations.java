@@ -102,7 +102,7 @@ class CsvAnnotations {
     }
 
     private Map<String, Object> createArrow(CSVRecord record) {
-        Map<String, Object> arrow = createArrowRectBaseMap("arrow", record);
+        Map<String, Object> arrow = createArrowRectBaseMap(ShapeTypes.ARROW, record);
 
         RectCoord rectCoord = new RectCoord(record);
         arrow.putAll(rectCoord.toMap());
@@ -112,7 +112,7 @@ class CsvAnnotations {
     }
 
     private Map<String, Object> createRect(CSVRecord record) {
-        Map<String, Object> rect = createArrowRectBaseMap("rectangle", record);
+        Map<String, Object> rect = createArrowRectBaseMap(ShapeTypes.RECT, record);
 
         RectCoord rectCoord = new RectCoord(record);
         rect.putAll(rectCoord.toMap());
