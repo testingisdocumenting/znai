@@ -24,12 +24,32 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.FileTime;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileUtils {
     private FileUtils() {
+    }
+
+    /**
+     * delete dir with sub dirs and files, ignoring errors.
+     * Not using apache as we delete dirs on exit,
+     * and by the time maven exits (in case of maven plugin), apache io is unloaded already
+     * @param path dir to delete
+     */
+    public static void deleteDirQuietly(Path path) {
+        // read java doc, Files.walk need close the resources.
+        // try-with-resources to ensure that the stream's open directories are closed
+        try (Stream<Path> walk = Files.walk(path)) {
+            walk.sorted(Comparator.reverseOrder())
+                    .forEach(FileUtils::deleteQuietly);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
     }
 
     public static void writeTextContent(Path path, String text) {
@@ -51,7 +71,9 @@ public class FileUtils {
         }
 
         try {
-            return Files.lines(path).collect(Collectors.joining("\n"));
+            try (Stream<String> linesStream = Files.lines(path)) {
+                return linesStream.collect(Collectors.joining("\n"));
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -102,6 +124,14 @@ public class FileUtils {
             Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private static void deleteQuietly(Path path) {
+        try {
+            Files.delete(path);
+        } catch (IOException e) {
+            // ignored
         }
     }
 }
