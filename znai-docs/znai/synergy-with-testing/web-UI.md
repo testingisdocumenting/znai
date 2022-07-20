@@ -1,16 +1,24 @@
-# Auto Annotations
+# Screenshots And Annotations
 
-How to annotate images using the `include-image` plugin [was covered previously](visuals/image-annotations) .
-Now let's automate the screenshot and annotations assignment process.
+In [Image Annotations](visuals/image-annotations) you can specify annotations in an external file.
 
-:include-java: org/testingisdocumenting/testing/examples/WebTauDslDemo.java {bodyOnly: true, entry: "main"}
+Using a testing framework one can generate coordinates during a UI test based on elements' placement.
+Here is an example of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to capture a screenshot and annotations
 
-Example above is using a Selenium-based framework to automatically take a screenshot and retrieve annotations positions. 
-Once we have the information we can include the annotated image in our documentation.
+:include-file: webtauexamples/imageCapture.groovy {autoTitle: true}
 
-    :include-image: test.png {annotationsPath: 'test.json'}
+```markdown {title: "znai example"}
+1. Type question you want to be answered anonymously
+2. Scan through results and pick the most relevant one
 
-The result is below:
+:include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
+```
 
-:include-image: test.png {annotationsPath: 'test.json'}
+1. Type question you want to be answered anonymously
+2. Scan through results and pick the most relevant one
+
+:include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
+
+
+:include-json: doc-artifacts/duckduckgo-search.json {autoTitle: true, paths: "root.pixelRatio"}
 

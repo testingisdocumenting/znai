@@ -47,7 +47,7 @@ This is the source to render the layout above
     }
     ```
 
-Note: request and response were automatically captured using [WebTau](synergy-with-testing/REST) testing framework.
+Note: request and response were automatically captured using [WebTau](synergy-with-testing/REST-API) testing framework.
     
 We need to document other methods as well, and as you can imagine, the repetition will take place.
 

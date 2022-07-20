@@ -79,7 +79,7 @@ scenario("check docs on filesystem") {
 scenario("check docs on hub portal") {
     browser.open("http://localhost:$port")
     def myDocs = hubPortal.names.get("My Docs")
-    myDocs.waitTo beVisible()
+    myDocs.waitTo visible
     myDocs.click()
 
     $("body").waitTo == "test docs"

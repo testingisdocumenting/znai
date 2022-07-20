@@ -18,6 +18,6 @@ class TestToDocExample {
     }
 
     private static void validateRules(TableData rules) {
-        doc.capture("account-rules", rules)
+        doc.capture("account-rules", rules) // capture table data as JSON
     }
 }
