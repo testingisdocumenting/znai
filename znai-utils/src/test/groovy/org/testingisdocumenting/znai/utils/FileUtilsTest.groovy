@@ -20,6 +20,7 @@ import org.junit.Test
 
 import java.nio.file.FileAlreadyExistsException
 import java.nio.file.Files
+import java.nio.file.Paths
 
 class FileUtilsTest {
     @Test
@@ -31,11 +32,30 @@ class FileUtilsTest {
         FileUtils.writeTextContent(root.resolve("d1").resolve("file1.txt"), "hello")
         FileUtils.writeTextContent(root.resolve("d2").resolve("file2.txt"), "hello")
 
-        FileUtils.deleteDirQuietly(root)
+        FileUtils.deleteFileOrDirQuietly(root)
 
         assert !Files.exists(root)
     }
-    
+
+    @Test
+    void "delete file"() {
+        def root = Files.createTempDirectory("znai_test")
+        def file1 = root.resolve("file1.txt")
+
+        FileUtils.writeTextContent(file1, "hello")
+
+        FileUtils.deleteFileOrDirQuietly(file1)
+        assert !Files.exists(file1)
+
+        FileUtils.deleteFileOrDirQuietly(root)
+        assert !Files.exists(root)
+    }
+
+    @Test
+    void "delete non existing file"() {
+        FileUtils.deleteFileOrDirQuietly(Paths.get("non-existing-file"))
+    }
+
     @Test
     void "should read text content from a file"() {
         def testFile = new File("dummy.txt")

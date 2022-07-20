@@ -40,16 +40,15 @@ public class FileUtils {
      * and by the time maven exits (in case of maven plugin), apache io is unloaded already
      * @param path dir to delete
      */
-    public static void deleteDirQuietly(Path path) {
+    public static void deleteFileOrDirQuietly(Path path) {
         // read java doc, Files.walk need close the resources.
         // try-with-resources to ensure that the stream's open directories are closed
         try (Stream<Path> walk = Files.walk(path)) {
             walk.sorted(Comparator.reverseOrder())
                     .forEach(FileUtils::deleteQuietly);
         } catch (IOException e) {
-            throw new UncheckedIOException(e);
+            // ignored
         }
-
     }
 
     public static void writeTextContent(Path path, String text) {

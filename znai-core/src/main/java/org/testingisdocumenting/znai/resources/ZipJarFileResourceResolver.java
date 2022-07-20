@@ -138,7 +138,7 @@ public class ZipJarFileResourceResolver implements ResourcesResolver {
     private Path createTempDirectory() {
         try {
             final Path tempDirectory = Files.createTempDirectory("znai-archive-resource-resolver");
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> FileUtils.deleteDirQuietly(tempDirectory)));
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> FileUtils.deleteFileOrDirQuietly(tempDirectory)));
 
             return tempDirectory;
         } catch (IOException e) {
