@@ -21,11 +21,11 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.58</version>
+        <version>1.59-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-python</artifactId>
-    <version>1.58</version>
+    <version>1.59-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
