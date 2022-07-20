@@ -32,5 +32,5 @@ scenario("access doxygen files from within archive") {
 
 scenario("validate doxygen page") {
     standardView.tocItems.get("Doxygen From Zip").click()
-    docContent.paragraphs.get("list three").waitTo beVisible()
+    docContent.paragraphs.get("list three").waitTo visible
 }

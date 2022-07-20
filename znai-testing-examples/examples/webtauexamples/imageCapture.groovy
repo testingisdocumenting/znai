@@ -13,7 +13,7 @@ scenario("capture screenshot") {
     homeSearchInput.setValue("testing is documenting")
     searchButton.click()
 
-    result.waitTo beVisible()
+    result.waitTo visible
 
     browser.doc.withAnnotations(
             browser.doc.badge(resultSearchInput),

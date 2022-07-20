@@ -71,9 +71,9 @@ java
     description-extraction
     auto-reference
 synergy-with-testing
-    java
-    REST
     web-UI
+    REST-API
+    business-logic
 configuration
     basic
 example-references

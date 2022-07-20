@@ -1,0 +1,1 @@
+* Doc: Improved Examples on [Synergy With Testing](synergy-with-testing/web-UI)

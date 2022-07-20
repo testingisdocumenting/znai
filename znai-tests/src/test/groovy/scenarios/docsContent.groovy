@@ -49,7 +49,7 @@ scenario('table of contents navigation') {
 
 scenario('navigating back and forth should preserve scroll position') {
     standardView.gettingStartedTocItem.click()
-    standardView.metaSection.waitTo beVisible()
+    standardView.metaSection.waitTo visible
     standardView.metaSection.scrollIntoView()
 
     def scrollTopBeforeClick = standardView.mainPanelScrollTop.get()
