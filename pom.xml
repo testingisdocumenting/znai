@@ -121,6 +121,7 @@
         <module>znai-cli</module>
         <module>znai-generators</module>
         <module>znai-maven-plugin</module>
+        <module>znai-maven-plugin-test</module>
         <module>znai-testing-examples</module>
         <module>znai-testing-examples-junit5</module>
         <module>znai-docs</module>

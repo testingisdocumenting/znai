@@ -23,6 +23,20 @@ import java.nio.file.Files
 
 class FileUtilsTest {
     @Test
+    void "delete dir with sub dirs and files"() {
+        def root = Files.createTempDirectory("znai_test")
+        Files.createDirectory(root.resolve("d1"))
+        Files.createDirectory(root.resolve("d2"))
+
+        FileUtils.writeTextContent(root.resolve("d1").resolve("file1.txt"), "hello")
+        FileUtils.writeTextContent(root.resolve("d2").resolve("file2.txt"), "hello")
+
+        FileUtils.deleteDirQuietly(root)
+
+        assert !Files.exists(root)
+    }
+    
+    @Test
     void "should read text content from a file"() {
         def testFile = new File("dummy.txt")
         testFile.deleteOnExit()
@@ -33,7 +47,7 @@ class FileUtilsTest {
 
     @Test
     void "create dirs with non-existent dir"() {
-        def path = Files.createTempDirectory("webtau_test")
+        def path = Files.createTempDirectory("znai_test")
         path.deleteDir()
 
         FileUtils.symlinkAwareCreateDirs(path)
@@ -41,14 +55,14 @@ class FileUtilsTest {
 
     @Test
     void "create dirs with existing empty dir"() {
-        def path = Files.createTempDirectory("webtau_test")
+        def path = Files.createTempDirectory("znai_test")
 
         FileUtils.symlinkAwareCreateDirs(path)
     }
 
     @Test
     void "create dirs with existing non-empty dir"() {
-        def path = Files.createTempDirectory("webtau_test")
+        def path = Files.createTempDirectory("znai_test")
         Files.createTempFile(path, "test", "")
 
         FileUtils.symlinkAwareCreateDirs(path)
@@ -56,7 +70,7 @@ class FileUtilsTest {
 
     @Test
     void "create dirs with non-dir path"() {
-        def file = Files.createTempFile("webtau_test_file", "")
+        def file = Files.createTempFile("znai_test_file", "")
 
         try {
             FileUtils.symlinkAwareCreateDirs(file)
@@ -67,8 +81,8 @@ class FileUtilsTest {
 
     @Test
     void "create dirs with symlink pointing to directory"() {
-        def path = Files.createTempDirectory("webtau_test")
-        def symlink = path.parent.resolve("webtau_link_" + System.currentTimeMillis())
+        def path = Files.createTempDirectory("znai_test")
+        def symlink = path.parent.resolve("znai_link_" + System.currentTimeMillis())
         Files.createSymbolicLink(symlink, path)
 
         FileUtils.symlinkAwareCreateDirs(symlink)
@@ -76,8 +90,8 @@ class FileUtilsTest {
 
     @Test
     void "create dirs with symlink pointing to file"() {
-        def file = Files.createTempFile("webtau_test_file", "")
-        def symlink = file.parent.resolve("webtau_link_" + System.currentTimeMillis())
+        def file = Files.createTempFile("znai_test_file", "")
+        def symlink = file.parent.resolve("znai_link_" + System.currentTimeMillis())
         Files.createSymbolicLink(symlink, file)
 
         try {

@@ -16,9 +16,9 @@
 
 package org.testingisdocumenting.znai.resources;
 
-import org.apache.commons.io.FileUtils;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.core.Log;
+import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -107,19 +107,21 @@ public class ZipJarFileResourceResolver implements ResourcesResolver {
         try (FileSystem archiveFs = FileSystems.newFileSystem(archivePath, null)) {
             Iterable<Path> rootDirectories = archiveFs.getRootDirectories();
             for (Path root : rootDirectories) {
-                Files.walk(root).forEach(path -> {
-                    try {
-                        if (Files.isRegularFile(path)) {
-                            Path dest = allUnarchivedRoot.resolve(
-                                    // remove leading /
-                                    path.toString().substring(1));
-                            Files.createDirectories(dest.getParent());
-                            Files.copy(path, dest);
+                try (Stream<Path> files = Files.walk(root)) {
+                    files.forEach(path -> {
+                        try {
+                            if (Files.isRegularFile(path)) {
+                                Path dest = allUnarchivedRoot.resolve(
+                                        // remove leading /
+                                        path.toString().substring(1));
+                                Files.createDirectories(dest.getParent());
+                                Files.copy(path, dest);
+                            }
+                        } catch (IOException e) {
+                            log.warn("can't unarchive file " + path + " from " + archivePath);
                         }
-                    } catch (IOException e) {
-                        log.warn("can't unarchive file " + path + " from " + archivePath);
-                    }
-                });
+                    });
+                }
             }
         }
     }
@@ -133,10 +135,10 @@ public class ZipJarFileResourceResolver implements ResourcesResolver {
         return docRootPath.resolve(archiveLookupPath);
     }
 
-    private Path createTempDirectory()  {
+    private Path createTempDirectory() {
         try {
             final Path tempDirectory = Files.createTempDirectory("znai-archive-resource-resolver");
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> FileUtils.deleteQuietly(tempDirectory.toFile())));
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> FileUtils.deleteDirQuietly(tempDirectory)));
 
             return tempDirectory;
         } catch (IOException e) {
