@@ -123,7 +123,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -136,24 +135,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "speed-bump",
-      "type" : "Section",
       "title" : "Speed Bump",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -167,20 +167,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "Keyword: message\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "note",
-      "type" : "Section",
       "title" : "Note",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "",
         "snippet" : "Note: It is very important to not overuse signs. Make sure each sign counts.\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -190,13 +190,13 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "warning",
-      "type" : "Section",
       "title" : "Warning",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "",
         "snippet" : "Warning: Bring attention to a common mistake or an often missed configuration step \nusing a warning sign. Do not use too many warning signs.\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -211,13 +211,13 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "avoid",
-      "type" : "Section",
       "title" : "Avoid",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "",
         "snippet" : "Avoid: using multiple versions of `ReactJS` inside one project.\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -233,13 +233,13 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "do-not",
-      "type" : "Section",
       "title" : "Do Not",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "",
         "snippet" : "Don't: commit node_modules to your repository\n\nDo not: commit node_modules to your repository\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -255,13 +255,13 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "question",
-      "type" : "Section",
       "title" : "Question",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "",
         "snippet" : "Question: Use the question sign to bring an extra attention to the main idea of a page.\n\\\nWhat is the point of the `attention signs`?\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -284,13 +284,13 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "exercise",
-      "type" : "Section",
       "title" : "Exercise",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "",
         "snippet" : "Exercise: write a hello world example in this language\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -299,12 +299,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403258,
+    "lastModifiedTime" : 1658335209120,
     "tocItem" : {
-      "sectionTitle" : "Layout",
+      "sectionTitle" : "Visuals",
       "pageTitle" : "Attention Signs",
       "pageMeta" : { },
-      "dirName" : "layout",
+      "dirName" : "visuals",
       "fileName" : "attention-signs",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {

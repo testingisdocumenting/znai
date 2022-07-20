@@ -98,12 +98,16 @@
 <header><h1>Colors</h1></header>
 <p>Stroke Use stroke parameter to set outline color. * `:icon: time {stroke: 'green'}` stroke: `green` * `:icon: cloud {stroke: 'blue'}` stroke: `blue` * `:icon: settings {stroke: 'yellow'}` stroke: `yellow` * `:icon: x-octagon {stroke: 'red'}` stroke: `red` stroke: green stroke: blue stroke: yellow stroke: red Fill Use stroke parameter to set fill color. fill: red fill: red , stroke: 'black' Note: default stroke color is a text color, which may not look good in Dark theme. Use black color explicitly if you want the stroke color to be black in both Light and Dark themes.</p>
 </article>
+
+<article>
+<header><h1>Inside Tables</h1></header>
+<p>Znai provides a shortcut to use icons inside layout/tables Tables. Feature Name, V1, V2 featureA, +, + featureB, -, + +, `:icon: check {stroke: &quot;green&quot;}` -, `:icon: slash {stroke: &quot;red&quot;}` :include-table: table.csv {mappingPath: &quot;mapping.csv&quot;} Feature Name V1 V2 featureA `:icon: check {stroke: &quot;green&quot;}` `:icon: check {stroke: &quot;green&quot;}` featureB `:icon: slash {stroke: &quot;red&quot;}` `:icon: check {stroke: &quot;green&quot;}`</p>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -116,37 +120,38 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "feather-icons",
-      "type" : "Section",
       "title" : "Feather Icons",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Znai has integration with ",
           "type" : "SimpleText"
         }, {
+          "url" : "https://feathericons.com/",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Feather Icons",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://feathericons.com/"
+          } ]
         }, {
           "text" : ".",
           "type" : "SimpleText"
@@ -166,10 +171,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "`:icon: cloud`\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -185,13 +190,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Head over to ",
           "type" : "SimpleText"
         }, {
+          "url" : "https://feathericons.com/",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "https://feathericons.com/",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://feathericons.com/"
+          } ]
         }, {
           "text" : " to find the icon id.",
           "type" : "SimpleText"
@@ -199,8 +204,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "bullet-points",
-      "type" : "Section",
       "title" : "Bullet Points",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -208,14 +213,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "* `:icon: time` Time is important\n* `:icon: settings` Setup must be easy\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -244,13 +249,13 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "colors",
-      "type" : "Section",
       "title" : "Colors",
+      "type" : "Section",
       "content" : [ {
-        "level" : 2,
         "id" : "colors-stroke",
-        "type" : "SubHeading",
-        "title" : "Stroke"
+        "level" : 2,
+        "title" : "Stroke",
+        "type" : "SubHeading"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -264,22 +269,22 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "* `:icon: time {stroke: 'green'}` stroke: `green`\n* `:icon: cloud {stroke: 'blue'}` stroke: `blue`\n* `:icon: settings {stroke: 'yellow'}` stroke: `yellow`\n* `:icon: x-octagon {stroke: 'red'}` stroke: `red`\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "stroke" : "green",
               "id" : "time",
-              "type" : "Icon",
-              "stroke" : "green"
+              "type" : "Icon"
             }, {
               "text" : " stroke: ",
               "type" : "SimpleText"
@@ -293,9 +298,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "stroke" : "blue",
               "id" : "cloud",
-              "type" : "Icon",
-              "stroke" : "blue"
+              "type" : "Icon"
             }, {
               "text" : " stroke: ",
               "type" : "SimpleText"
@@ -309,9 +314,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "stroke" : "yellow",
               "id" : "settings",
-              "type" : "Icon",
-              "stroke" : "yellow"
+              "type" : "Icon"
             }, {
               "text" : " stroke: ",
               "type" : "SimpleText"
@@ -325,9 +330,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "stroke" : "red",
               "id" : "x-octagon",
-              "type" : "Icon",
-              "stroke" : "red"
+              "type" : "Icon"
             }, {
               "text" : " stroke: ",
               "type" : "SimpleText"
@@ -338,10 +343,10 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ]
       }, {
-        "level" : 2,
         "id" : "colors-fill",
-        "type" : "SubHeading",
-        "title" : "Fill"
+        "level" : 2,
+        "title" : "Fill",
+        "type" : "SubHeading"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -356,16 +361,16 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "fill" : "red",
               "id" : "x-octagon",
-              "type" : "Icon",
-              "fill" : "red"
+              "type" : "Icon"
             }, {
               "text" : " fill: ",
               "type" : "SimpleText"
@@ -379,10 +384,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "id" : "x-octagon",
-              "type" : "Icon",
               "fill" : "red",
-              "stroke" : "black"
+              "stroke" : "black",
+              "id" : "x-octagon",
+              "type" : "Icon"
             }, {
               "text" : " fill: ",
               "type" : "SimpleText"
@@ -413,8 +418,97 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       } ]
+    }, {
+      "id" : "inside-tables",
+      "title" : "Inside Tables",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Znai provides a shortcut to use icons inside ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/layout/tables",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Tables",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "csv",
+        "snippet" : "Feature Name, V1, V2\nfeatureA, +, +\nfeatureB, -, +",
+        "title" : "table.csv",
+        "type" : "Snippet"
+      }, {
+        "lang" : "csv",
+        "snippet" : "+, `:icon: check {stroke: \"green\"}`\n-, `:icon: slash {stroke: \"red\"}`",
+        "title" : "mapping.csv",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-table: table.csv {mappingPath: \"mapping.csv\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Feature Name"
+          }, {
+            "title" : "V1"
+          }, {
+            "title" : "V2"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "featureA",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "stroke" : "green",
+              "id" : "check",
+              "type" : "Icon"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "stroke" : "green",
+              "id" : "check",
+              "type" : "Icon"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "featureB",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "stroke" : "red",
+              "id" : "slash",
+              "type" : "Icon"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "stroke" : "green",
+              "id" : "check",
+              "type" : "Icon"
+            } ]
+          } ] ] ]
+        },
+        "type" : "Table"
+      } ]
     } ],
-    "lastModifiedTime" : 1653499403278,
+    "lastModifiedTime" : 1658335209128,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Icons",
@@ -431,6 +525,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Colors",
         "id" : "colors"
+      }, {
+        "title" : "Inside Tables",
+        "id" : "inside-tables"
       } ]
     }
   }

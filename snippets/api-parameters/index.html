@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Inlined CSV</h1></header>
-<p>When you are not able to automatically extract an API parameter definition you can use the api-parameters fence plugin to manually document them. ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support</p>
+<p>Use api-parameters fenced code plugin to document API parameters. ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support</p>
 </article>
 
 <article>
 <header><h1>Nested</h1></header>
-<p>Use parent.children syntax to define nested objects like this: ```api-parameters sessionId, Integer, session Id person, Person, person to login with person.firstName, String, first name of the person person.lastName, String, last name of the person roles, List&lt;Role&gt;, list of authorized roles roles.id, String, role id roles.description, String, role description ``` Note: when using this approach it is necessary to explicitly define a root entry, such as person in this example. sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note: if a parameter name actually contains a period (&quot;.&quot;), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. 'person.firstName'</p>
+<p>Use parent.child syntax to define nested objects like this: ```api-parameters sessionId, Integer, session Id person, Person, person to login with person.firstName, String, first name of the person person.lastName, String, last name of the person roles, List&lt;Role&gt;, list of authorized roles roles.id, String, role id roles.description, String, role description ``` Note: when using this approach it is necessary to explicitly define a root entry, such as person in this example. sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note: if a parameter name actually contains a period (&quot;.&quot;), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. &quot;person.firstName&quot;</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use the title parameter to specify a title. ```api-parameters {title: &quot;Person Definition&quot;} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support</p>
+<p>Use the title parameter to specify a title. ```api-parameters {title: &quot;person definition&quot;} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support</p>
 </article>
 
 <article>
@@ -116,19 +116,23 @@
 
 <article>
 <header><h1>Anchors</h1></header>
-<p>Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear. Use anchorPrefix parameter to avoid conflict of anchor ids when using the same API parameter names within a single page: ```api-parameters {anchorPrefix: 'customPrefix'} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support In the example above customPrefix is added to each parameter link.</p>
+<p>Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear. Use anchorPrefix parameter to avoid conflict of anchor ids when using the same API parameter names within a single page: ```api-parameters {anchorPrefix: &quot;customPrefix&quot;} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support In the example above customPrefix is added to each parameter link.</p>
 </article>
 
 <article>
 <header><h1>Long Parameter Names</h1></header>
-<p>Znai hard wraps long parameter names to leave more space to description. VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support Use noWrap: true to remove hard wrap enforcement ```api-parameters {anchorPrefix: 'customPrefix', noWrap: true} VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support ``` VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support</p>
+<p>Znai hard wraps long parameter names to leave more space to description. VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support Use noWrap: true to remove hard wrap enforcement ```api-parameters {anchorPrefix: &quot;customPrefix&quot;, noWrap: true} VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support ``` VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support</p>
+</article>
+
+<article>
+<header><h1>Wide Mode</h1></header>
+<p>Use wide: true to use all the available horizontal space ```api-parameters {anchorPrefix: &quot;customPrefix&quot;, noWrap: true, wide: true} VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, &quot;longer line longer line, description with *markdown* support&quot; VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, &quot;longer line longer line, another description line with *markdown* support and few moe lines&quot; ``` VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line, description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line, another description line with markdown support and few moe lines</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -141,51 +145,50 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "inlined-csv",
-      "type" : "Section",
       "title" : "Inlined CSV",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "When you are not able to automatically extract an API parameter definition you can use",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "the ",
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
           "code" : "api-parameters",
           "type" : "InlinedCode"
         }, {
-          "text" : " fence plugin to manually document them.",
+          "text" : " fenced code plugin to document API parameters.",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "```api-parameters\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "type" : "ApiParameters",
-        "anchorPrefix" : "inlined_csv",
         "parameters" : [ {
           "name" : "firstName",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "inlined_csv_firstName",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -201,14 +204,14 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "inlined_csv_firstName",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "score",
+          "type" : [ {
+            "text" : "Integer",
+            "url" : ""
+          } ],
+          "anchorId" : "inlined_csv_score",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -224,35 +227,32 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "inlined_csv_score",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Integer"
           } ]
-        } ]
+        } ],
+        "anchorPrefix" : "inlined_csv",
+        "type" : "ApiParameters"
       } ]
     }, {
       "id" : "nested",
-      "type" : "Section",
       "title" : "Nested",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "parent.children",
+          "code" : "parent.child",
           "type" : "InlinedCode"
         }, {
           "text" : " syntax to define nested objects like this:",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "```api-parameters\nsessionId, Integer, session Id\nperson, Person, person to login with\nperson.firstName, String, first name of the person\nperson.lastName, String, last name of the person\nroles, List<Role>, list of authorized roles\nroles.id, String, role id \nroles.description, String, role description\n```\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -272,53 +272,27 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "type" : "ApiParameters",
-        "anchorPrefix" : "nested_inlined_csv",
         "parameters" : [ {
           "name" : "sessionId",
+          "type" : [ {
+            "text" : "Integer",
+            "url" : ""
+          } ],
+          "anchorId" : "nested_inlined_csv_sessionId",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "session Id",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "nested_inlined_csv_sessionId",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Integer"
           } ]
         }, {
-          "children" : [ {
-            "name" : "firstName",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "first name of the person",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "anchorId" : "nested_inlined_csv_person_firstName",
-            "type" : [ {
-              "refId" : "",
-              "text" : "String"
-            } ]
-          }, {
-            "name" : "lastName",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "last name of the person",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "anchorId" : "nested_inlined_csv_person_lastName",
-            "type" : [ {
-              "refId" : "",
-              "text" : "String"
-            } ]
-          } ],
           "name" : "person",
+          "type" : [ {
+            "text" : "Person",
+            "url" : ""
+          } ],
+          "anchorId" : "nested_inlined_csv_person",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -326,42 +300,42 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           } ],
-          "anchorId" : "nested_inlined_csv_person",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Person"
-          } ]
-        }, {
           "children" : [ {
-            "name" : "id",
+            "name" : "firstName",
+            "type" : [ {
+              "text" : "String",
+              "url" : ""
+            } ],
+            "anchorId" : "nested_inlined_csv_person_firstName",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
-                "text" : "role id",
+                "text" : "first name of the person",
                 "type" : "SimpleText"
               } ]
-            } ],
-            "anchorId" : "nested_inlined_csv_roles_id",
-            "type" : [ {
-              "refId" : "",
-              "text" : "String"
             } ]
           }, {
-            "name" : "description",
+            "name" : "lastName",
+            "type" : [ {
+              "text" : "String",
+              "url" : ""
+            } ],
+            "anchorId" : "nested_inlined_csv_person_lastName",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
-                "text" : "role description",
+                "text" : "last name of the person",
                 "type" : "SimpleText"
               } ]
-            } ],
-            "anchorId" : "nested_inlined_csv_roles_description",
-            "type" : [ {
-              "refId" : "",
-              "text" : "String"
             } ]
-          } ],
+          } ]
+        }, {
           "name" : "roles",
+          "type" : [ {
+            "text" : "List<Role>",
+            "url" : ""
+          } ],
+          "anchorId" : "nested_inlined_csv_roles",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -369,23 +343,49 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           } ],
-          "anchorId" : "nested_inlined_csv_roles",
-          "type" : [ {
-            "refId" : "",
-            "text" : "List<Role>"
+          "children" : [ {
+            "name" : "id",
+            "type" : [ {
+              "text" : "String",
+              "url" : ""
+            } ],
+            "anchorId" : "nested_inlined_csv_roles_id",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "role id",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "description",
+            "type" : [ {
+              "text" : "String",
+              "url" : ""
+            } ],
+            "anchorId" : "nested_inlined_csv_roles_description",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "role description",
+                "type" : "SimpleText"
+              } ]
+            } ]
           } ]
-        } ]
+        } ],
+        "anchorPrefix" : "nested_inlined_csv",
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: if a parameter name actually contains a period (\".\"), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. 'person.firstName'",
+          "text" : "Note: if a parameter name actually contains a period (\".\"), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. \"person.firstName\"",
           "type" : "SimpleText"
         } ]
       } ]
     }, {
       "id" : "title",
-      "type" : "Section",
       "title" : "Title",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -399,16 +399,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "```api-parameters {title: \"Person Definition\"}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : "```api-parameters {title: \"person definition\"}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "type" : "ApiParameters",
-        "title" : "Person Definition",
-        "anchorPrefix" : "title",
         "parameters" : [ {
           "name" : "firstName",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "title_firstName",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -424,14 +426,14 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "title_firstName",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "score",
+          "type" : [ {
+            "text" : "Integer",
+            "url" : ""
+          } ],
+          "anchorId" : "title_score",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -447,18 +449,16 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "title_score",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Integer"
           } ]
-        } ]
+        } ],
+        "title" : "person definition",
+        "anchorPrefix" : "title",
+        "type" : "ApiParameters"
       } ]
     }, {
       "id" : "size",
-      "type" : "Section",
       "title" : "Size",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -472,16 +472,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "```api-parameters {small: true}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "small" : true,
-        "type" : "ApiParameters",
-        "anchorPrefix" : "size",
         "parameters" : [ {
           "name" : "firstName",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "size_firstName",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -497,14 +499,14 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "size_firstName",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "score",
+          "type" : [ {
+            "text" : "Integer",
+            "url" : ""
+          } ],
+          "anchorId" : "size_score",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -520,18 +522,16 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "size_score",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Integer"
           } ]
-        } ]
+        } ],
+        "small" : true,
+        "anchorPrefix" : "size",
+        "type" : "ApiParameters"
       } ]
     }, {
       "id" : "multi-line-csv-description",
-      "type" : "Section",
       "title" : "Multi-line CSV Description",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -550,51 +550,51 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "`````api-parameters \ncores, String, \"\n```\nexecute(cores: 10)\n```\nSpecify how many cores to allocate for execution\n\"\n\ngpu, Boolean, \"\n```\nexecute(cores: 10, gpu: true)\n```\nSpecify whether to use gpu\n\"\n`````\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "type" : "ApiParameters",
         "parameters" : [ {
           "name" : "cores",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "cores",
           "description" : [ {
+            "lang" : "",
             "snippet" : "execute(cores: 10)\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : ""
+            "type" : "Snippet"
           }, {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "Specify how many cores to allocate for execution",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "cores",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "gpu",
+          "type" : [ {
+            "text" : "Boolean",
+            "url" : ""
+          } ],
+          "anchorId" : "gpu",
           "description" : [ {
+            "lang" : "",
             "snippet" : "execute(cores: 10, gpu: true)\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : ""
+            "type" : "Snippet"
           }, {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "Specify whether to use gpu",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "gpu",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Boolean"
           } ]
-        } ]
+        } ],
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -615,8 +615,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "external-json-file",
-      "type" : "Section",
       "title" : "External JSON File",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -630,8 +630,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -652,40 +652,40 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ]
       }, {
+        "title" : "api-parameters.json",
         "data" : [ {
           "name" : "sessionId",
-          "description" : "session Id",
-          "type" : "Integer"
+          "type" : "Integer",
+          "description" : "session Id"
         }, {
+          "name" : "person",
+          "type" : "Person",
+          "description" : "person to login with",
           "children" : [ {
             "name" : "firstName",
-            "description" : "*first* name of the person",
-            "type" : "String"
+            "type" : "String",
+            "description" : "*first* name of the person"
           }, {
             "name" : "lastName",
-            "description" : "*last* name of the person",
-            "type" : "String"
-          } ],
-          "name" : "person",
-          "description" : "person to login with",
-          "type" : "Person"
+            "type" : "String",
+            "description" : "*last* name of the person"
+          } ]
         }, {
+          "name" : "roles",
+          "type" : "List<Role>",
+          "description" : "list of authorized roles",
           "children" : [ {
             "name" : "id",
-            "description" : " role id ",
-            "type" : "String"
+            "type" : "String",
+            "description" : " role id "
           }, {
             "name" : "description",
-            "description" : "role description",
-            "type" : "String"
-          } ],
-          "name" : "roles",
-          "description" : "list of authorized roles",
-          "type" : "List<Role>"
+            "type" : "String",
+            "description" : "role description"
+          } ]
         } ],
         "paths" : [ ],
-        "type" : "Json",
-        "title" : "api-parameters.json"
+        "type" : "Json"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -693,10 +693,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-api-parameters: api-parameters.json {title: \"Person Definition\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -704,26 +704,41 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "type" : "ApiParameters",
-        "title" : "Person Definition",
-        "anchorPrefix" : "json",
         "parameters" : [ {
           "name" : "sessionId",
+          "type" : [ {
+            "text" : "Integer",
+            "url" : ""
+          } ],
+          "anchorId" : "json_sessionId",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "session Id",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "json_sessionId",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Integer"
           } ]
         }, {
+          "name" : "person",
+          "type" : [ {
+            "text" : "Person",
+            "url" : ""
+          } ],
+          "anchorId" : "json_person",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "person to login with",
+              "type" : "SimpleText"
+            } ]
+          } ],
           "children" : [ {
             "name" : "firstName",
+            "type" : [ {
+              "text" : "String",
+              "url" : ""
+            } ],
+            "anchorId" : "json_person_firstName",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -736,14 +751,14 @@ ReactDOM.render(React.createElement(Documentation, {
                 "text" : " name of the person",
                 "type" : "SimpleText"
               } ]
-            } ],
-            "anchorId" : "json_person_firstName",
-            "type" : [ {
-              "refId" : "",
-              "text" : "String"
             } ]
           }, {
             "name" : "lastName",
+            "type" : [ {
+              "text" : "String",
+              "url" : ""
+            } ],
+            "anchorId" : "json_person_lastName",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -756,57 +771,15 @@ ReactDOM.render(React.createElement(Documentation, {
                 "text" : " name of the person",
                 "type" : "SimpleText"
               } ]
-            } ],
-            "anchorId" : "json_person_lastName",
-            "type" : [ {
-              "refId" : "",
-              "text" : "String"
             } ]
-          } ],
-          "name" : "person",
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "person to login with",
-              "type" : "SimpleText"
-            } ]
-          } ],
-          "anchorId" : "json_person",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Person"
           } ]
         }, {
-          "children" : [ {
-            "name" : "id",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "role id",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "anchorId" : "json_roles_id",
-            "type" : [ {
-              "refId" : "",
-              "text" : "String"
-            } ]
-          }, {
-            "name" : "description",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "role description",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "anchorId" : "json_roles_description",
-            "type" : [ {
-              "refId" : "",
-              "text" : "String"
-            } ]
-          } ],
           "name" : "roles",
+          "type" : [ {
+            "text" : "List<Role>",
+            "url" : ""
+          } ],
+          "anchorId" : "json_roles",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -814,12 +787,39 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           } ],
-          "anchorId" : "json_roles",
-          "type" : [ {
-            "refId" : "",
-            "text" : "List<Role>"
+          "children" : [ {
+            "name" : "id",
+            "type" : [ {
+              "text" : "String",
+              "url" : ""
+            } ],
+            "anchorId" : "json_roles_id",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "role id",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "description",
+            "type" : [ {
+              "text" : "String",
+              "url" : ""
+            } ],
+            "anchorId" : "json_roles_description",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "role description",
+                "type" : "SimpleText"
+              } ]
+            } ]
           } ]
-        } ]
+        } ],
+        "title" : "Person Definition",
+        "anchorPrefix" : "json",
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -835,8 +835,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "anchors",
-      "type" : "Section",
       "title" : "Anchors",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -855,15 +855,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "```api-parameters {anchorPrefix: 'customPrefix'}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : "```api-parameters {anchorPrefix: \"customPrefix\"}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "type" : "ApiParameters",
-        "anchorPrefix" : "customPrefix",
         "parameters" : [ {
           "name" : "firstName",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "customPrefix_firstName",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -879,14 +882,14 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "customPrefix_firstName",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "score",
+          "type" : [ {
+            "text" : "Integer",
+            "url" : ""
+          } ],
+          "anchorId" : "customPrefix_score",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -902,13 +905,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "customPrefix_score",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Integer"
           } ]
-        } ]
+        } ],
+        "anchorPrefix" : "customPrefix",
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -924,8 +924,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "long-parameter-names",
-      "type" : "Section",
       "title" : "Long Parameter Names",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -933,10 +933,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "type" : "ApiParameters",
-        "anchorPrefix" : "customPrefix",
         "parameters" : [ {
           "name" : "VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "customPrefix_VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -952,14 +955,14 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "customPrefix_VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "customPrefix_VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -975,13 +978,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "customPrefix_VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
-        } ]
+        } ],
+        "anchorPrefix" : "customPrefix",
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -995,16 +995,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "```api-parameters {anchorPrefix: 'customPrefix', noWrap: true}\nVERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support\nVERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support\n```\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : "```api-parameters {anchorPrefix: \"customPrefix\", noWrap: true}\nVERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support\nVERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support\n```\n",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "noWrap" : true,
-        "type" : "ApiParameters",
-        "anchorPrefix" : "customPrefix",
         "parameters" : [ {
           "name" : "VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "customPrefix_VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -1020,14 +1022,14 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "customPrefix_VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "customPrefix_VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -1043,16 +1045,93 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " support",
               "type" : "SimpleText"
             } ]
+          } ]
+        } ],
+        "anchorPrefix" : "customPrefix",
+        "noWrap" : true,
+        "type" : "ApiParameters"
+      } ]
+    }, {
+      "id" : "wide-mode",
+      "title" : "Wide Mode",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "wide: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to use all the available horizontal space",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```api-parameters {anchorPrefix: \"customPrefix\", noWrap: true, wide: true}\nVERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, \"longer line longer line, description with *markdown* support\"\nVERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, \"longer line longer line, another description \nline with *markdown* support and few moe lines\"\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "customPrefix_VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "longer line longer line, description with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
           } ],
           "anchorId" : "customPrefix_VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "longer line longer line, another description",
+              "type" : "SimpleText"
+            }, {
+              "type" : "SoftLineBreak"
+            }, {
+              "text" : "line with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support and few moe lines",
+              "type" : "SimpleText"
+            } ]
           } ]
-        } ]
+        } ],
+        "anchorPrefix" : "customPrefix",
+        "noWrap" : true,
+        "wide" : true,
+        "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403262,
+    "lastModifiedTime" : 1658335209116,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "API Parameters",
@@ -1086,6 +1165,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Long Parameter Names",
         "id" : "long-parameter-names"
+      }, {
+        "title" : "Wide Mode",
+        "id" : "wide-mode"
       } ]
     }
   }

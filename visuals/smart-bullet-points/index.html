@@ -118,7 +118,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -131,24 +130,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "types",
-      "type" : "Section",
       "title" : "Types",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -173,15 +173,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-meta: {bulletListType: \"BulletsListType\"}\n\n* Testing\n* Design\n* Code Review\n* Documentation\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "left-right-timeline",
-      "type" : "Section",
       "title" : "Left Right Timeline",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -200,17 +200,17 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-meta: {bulletListType: \"LeftRightTimeLine\"}\n\n* Testing\n* Design\n* Code Review\n* Documentation\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "bulletListType" : "LeftRightTimeLine",
         "type" : "Meta"
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -251,8 +251,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "venn",
-      "type" : "Section",
       "title" : "Venn",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -270,8 +270,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Meta"
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -303,8 +303,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "steps",
-      "type" : "Section",
       "title" : "Steps",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -322,8 +322,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Meta"
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -365,18 +365,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-meta: {bulletListType: \"Steps\", differentColors: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "differentColors" : true,
         "bulletListType" : "Steps",
+        "differentColors" : true,
         "type" : "Meta"
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -418,19 +418,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-meta: {bulletListType: \"Steps\", differentColors: true, align: \"left\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "differentColors" : true,
         "bulletListType" : "Steps",
-        "type" : "Meta",
-        "align" : "left"
+        "differentColors" : true,
+        "align" : "left",
+        "type" : "Meta"
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -462,8 +462,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "presentation-only",
-      "type" : "Section",
       "title" : "Presentation Only",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -471,15 +471,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-meta: {presentationBulletListType: \"BulletsListType\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "horizontal-stripes",
-      "type" : "Section",
       "title" : "Horizontal Stripes",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -487,17 +487,17 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-meta: {presentationBulletListType: \"HorizontalStripes\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "presentationBulletListType" : "HorizontalStripes",
         "type" : "Meta"
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -528,7 +528,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403282,
+    "lastModifiedTime" : 1658335209132,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Smart Bullet Points",

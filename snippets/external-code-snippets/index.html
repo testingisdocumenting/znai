@@ -123,7 +123,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -136,24 +135,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "embedding-content",
-      "type" : "Section",
       "title" : "Embedding Content",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -172,10 +172,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: file-name.js\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -189,9 +189,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "type" : "Snippet",
-        "lang" : "js"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -200,8 +200,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -239,8 +239,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "syntax-highlighting",
-      "type" : "Section",
       "title" : "Syntax highlighting",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -277,23 +277,23 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: simple.c\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "c",
         "snippet" : "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
-        "type" : "Snippet",
-        "lang" : "c"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-file: Hello.sc\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "sc",
         "snippet" : "object Hello {\n  def main(args: Array[String]) = {\n    println(\"Hello, world\")\n  }\n}",
-        "type" : "Snippet",
-        "lang" : "sc"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -307,14 +307,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: simple.c {lang: \"java\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "java",
         "snippet" : "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
-        "type" : "Snippet",
-        "lang" : "java"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -330,13 +330,13 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "title",
-      "type" : "Section",
       "title" : "Title",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "",
         "snippet" : ":include-file: file-name.js {title: \"ES6 class\"} \n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -350,10 +350,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "type" : "Snippet",
         "title" : "ES6 class",
-        "lang" : "js"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -373,21 +373,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: file-name.js {autoTitle: true} \n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "type" : "Snippet",
-        "title" : "file-name.js",
         "autoTitle" : true,
-        "lang" : "js"
+        "title" : "file-name.js",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "wide-code",
-      "type" : "Section",
       "title" : "Wide Code",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -401,15 +401,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: WideCode.java {wide: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "java",
         "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
         "wide" : true,
-        "type" : "Snippet",
-        "lang" : "java"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -423,9 +423,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "java",
         "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
-        "type" : "Snippet",
-        "lang" : "java"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -444,8 +444,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "wrap-code",
-      "type" : "Section",
       "title" : "Wrap Code",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -459,20 +459,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: WideCode.java {wrap: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
-        "type" : "Snippet",
         "lang" : "java",
-        "wrap" : true
+        "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
+        "wrap" : true,
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "read-more",
-      "type" : "Section",
       "title" : "Read More",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -506,21 +506,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "java",
         "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n        this.workingDir = workingDir;\n        this.fileNameByDirName = new LinkedHashMap<>();\n    }\n\n    public void create() {\n        createPages();\n        createToc();\n        createMeta();\n        createIndex();\n        createLookupPaths();\n    }\n\n    private void createLookupPaths() {\n        createFileFromResource(\"lookup-paths\");\n    }\n\n    private void createMeta() {\n        createFileFromResource(\"meta.json\");\n    }\n}",
-        "readMoreVisibleLines" : 3,
-        "type" : "Snippet",
         "readMore" : true,
-        "lang" : "java"
+        "readMoreVisibleLines" : 3,
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "highlights",
-      "type" : "Section",
       "title" : "Highlights",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -534,15 +534,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: file-name.js {highlight: \"export\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "highlight" : [ 6 ],
-        "type" : "Snippet",
-        "lang" : "js"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -555,15 +555,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: file-name.js {highlight: [\"export\", 1]}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "highlight" : [ 6, 1 ],
-        "type" : "Snippet",
-        "lang" : "js"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -583,24 +583,24 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: file-name.js {highlightPath: \"lines-to-highlight.txt\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlight" : [ 0, 2 ],
         "highlightPath" : "lines-to-highlight.txt",
-        "type" : "Snippet",
-        "lang" : "js"
+        "highlight" : [ 0, 2 ],
+        "type" : "Snippet"
       }, {
+        "lang" : "txt",
         "snippet" : "class\nusefulAction",
-        "type" : "Snippet",
         "title" : "lines-to-highlight.txt",
-        "lang" : "txt"
+        "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403262,
+    "lastModifiedTime" : 1658335209116,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",

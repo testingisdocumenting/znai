@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: Description Extraction</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Members Comment Text</h1></header>
+<p>Use include-doxygen-doc to extract a function description namespace utils { namespace nested { /** * top **level** comment *of* important * * list one * * list two * * list three * * 1. number one * 2. number two * * @param first_param description of first *param* * 1. item a * 2. item b * @param second_param description of second param */ void my_func(int first_param, bool second_param) { } /** * specific description for single param version * @param first_param description of first *param* * 1. item a * 2. item b */ void my_func(int first_param) { } } } void free_func() { } :include-doxygen-doc: utils::nested::my_func top level comment of important list one list two list three number one number two Note: Plugin ignores parameters block and only includes the description text</p>
+</article>
+
+<article>
+<header><h1>Member Args Selection</h1></header>
+<p>Use args param to pick an overload to use for comments extraction :include-doxygen-doc: utils::nested::my_func { title: &quot;My Params&quot;, args: &quot;int&quot; } specific description for single param version Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.</p>
+</article>
+
+<article>
+<header><h1>Classes Comment Text</h1></header>
+<p>To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements.</p>
+</article>
+
+<article>
+<header><h1>Extract Parameters</h1></header>
+<p>Use include-doxygen-doc-params to extract parameters description from doxygen comments :include-doxygen-doc-params: utils::nested::my_func { title: &quot;My Params&quot; } first_param int description of first param item a item b second_param bool description of second param Use small: true option to make parameters smaller first_param int description of first param item a item b second_param bool description of second param</p>
+</article>
+
+<article>
+<header><h1>Extract Parameters By Args</h1></header>
+<p>Use args to select a specific overload by providing parameters string :include-doxygen-doc-params: utils::nested::my_func { title: &quot;My Params&quot;, args: &quot;int&quot; } first_param int description of first param item a item b</p>
+</article>
+
+<article>
+<header><h1>Extract Template Parameters</h1></header>
+<p>Pass type: &quot;template&quot; parameter to include-doxygen-doc-params plugin to extract template parameters /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print */ template&lt;typename T1, typename T2&gt; void multi_println(const T1&amp; v1, const T2&amp; v2) { std::cout &lt;&lt; v1 &lt;&lt; &quot;, &quot; &lt;&lt; v2 &lt;&lt; &quot;\n&quot;; } :include-doxygen-doc-params: multi_println { title: &quot;Template parameters&quot;, type: &quot;template&quot; } v1 const T1 &amp; value to print v2 const T2 &amp; value to print</p>
+</article>
+
+<article>
+<header><h1>Ignore Template Parameters</h1></header>
+<p>Use doc_ignore as part of template parameter name to remove it from signature /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @param v3 value to print * @param v4 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * @tparam T3 type of the value three to print * @tparam T4 type of the value four to print */ template&lt;typename T1, typename T2, typename T3, typename T4, typename T5_doc_ignore&gt; void long_template_func(const T1&amp; v1, const T2&amp; v2, const T3&amp; v3, const T4&amp; v4) { } markdown :include-doxygen-member: long_template_func {signatureOnly: true}</p>
+</article>
+
+<article>
+<header><h1>Return Description</h1></header>
+<p>Return description is part of parameters list /** * sums two numbers * @param a number to add to * @param b number that is added * @return *sum* of **two** numbers */ int add(int a, int b); :include-doxygen-doc-params: math::add return sum of two numbers a int number to add to b int number that is added</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "members-comment-text",
+      "title" : "Members Comment Text",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-doxygen-doc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to extract a function description",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "h",
+        "snippet" : "namespace utils {\nnamespace nested {\n/**\n * top **level** comment *of* important\n * * list one\n * * list two\n * * list three\n *\n * 1. number one\n * 2. number two\n *\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n * @param second_param description of second param\n */\nvoid my_func(int first_param, bool second_param) {\n}\n\n/**\n * specific description for single param version\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n */\nvoid my_func(int first_param) {\n}\n}\n}\n\nvoid free_func() {\n}",
+        "title" : "src/funcs.h",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-doc: utils::nested::my_func\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "top ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "level",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " comment ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "of",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " important",
+          "type" : "SimpleText"
+        }, {
+          "bulletMarker" : "*",
+          "tight" : false,
+          "type" : "BulletList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "list one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "list two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "list three",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "delimiter" : " ",
+          "startNumber" : 1,
+          "type" : "OrderedList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "number one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "number two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Plugin ignores parameters block and only includes the description text",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "member-args-selection",
+      "title" : "Member Args Selection",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "args",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " param to pick an overload to use for comments extraction",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-doc: utils::nested::my_func { title: \"My Params\", args: \"int\" }\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "specific description for single param version ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "copy and paste.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "classes-comment-text",
+      "title" : "Classes Comment Text",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To extract class top level comment, provide full class name",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "h",
+        "snippet" : "namespace utils {\nnamespace second {\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass MyClass {\npublic:\n    /// bark\n    void bark();\n};\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass ThirdClass {\npublic:\n    /// bark\n    void bark();\n};\n\n}\n}",
+        "title" : "src/classes.h",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-doc: utils::second::MyClass\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "Domain",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " specific context setting. Describes business setting and requirements. ",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "extract-parameters",
+      "title" : "Extract Parameters",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-doxygen-doc-params",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to extract parameters description from doxygen comments",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-doc-params: utils::nested::my_func { title: \"My Params\" }\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "My Params",
+        "parameters" : [ {
+          "name" : "first_param",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_first_param",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of first ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "param",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "delimiter" : " ",
+              "startNumber" : 1,
+              "type" : "OrderedList",
+              "content" : [ {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item a",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              }, {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item b ",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              } ]
+            } ]
+          } ]
+        }, {
+          "name" : "second_param",
+          "type" : [ {
+            "text" : "bool",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_second_param",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of second param ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "small: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option to make parameters smaller",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "title" : "My Params",
+        "small" : true,
+        "parameters" : [ {
+          "name" : "first_param",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_first_param",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of first ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "param",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "delimiter" : " ",
+              "startNumber" : 1,
+              "type" : "OrderedList",
+              "content" : [ {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item a",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              }, {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item b ",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              } ]
+            } ]
+          } ]
+        }, {
+          "name" : "second_param",
+          "type" : [ {
+            "text" : "bool",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_second_param",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of second param ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      } ]
+    }, {
+      "id" : "extract-parameters-by-args",
+      "title" : "Extract Parameters By Args",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "args",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to select a specific overload by providing parameters string",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-doc-params: utils::nested::my_func { title: \"My Params\", args: \"int\" }\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "My Params",
+        "args" : "int",
+        "parameters" : [ {
+          "name" : "first_param",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_first_param",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of first ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "param",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "delimiter" : " ",
+              "startNumber" : 1,
+              "type" : "OrderedList",
+              "content" : [ {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item a",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              }, {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item b ",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              } ]
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      } ]
+    }, {
+      "id" : "extract-template-parameters",
+      "title" : "Extract Template Parameters",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "type: \"template\"",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-doxygen-doc-params",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin to extract template parameters",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "hpp",
+        "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n */\ntemplate<typename T1, typename T2>\nvoid multi_println(const T1& v1, const T2& v2) {\n    std::cout << v1 << \", \" << v2 << \"\\n\";\n}",
+        "title" : "source.hpp",
+        "surroundedBy" : "// multi_println",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-doc-params: multi_println { title: \"Template parameters\", type: \"template\" }\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "Template parameters",
+        "type" : "ApiParameters",
+        "parameters" : [ {
+          "name" : "T1",
+          "type" : [ ],
+          "anchorId" : "multi_println_template_T1",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "type of the value one to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "T2",
+          "type" : [ ],
+          "anchorId" : "multi_println_template_T2",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "type of the value two to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "ignore-template-parameters",
+      "title" : "Ignore Template Parameters",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "doc_ignore",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as part of template parameter name to remove it from signature",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "hpp",
+        "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @param v3 value to print\n * @param v4 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n * @tparam T3 type of the value three to print\n * @tparam T4 type of the value four to print\n */\ntemplate<typename T1, typename T2, typename T3, typename T4, typename T5_doc_ignore>\nvoid long_template_func(const T1& v1, const T2& v2, const T3& v3, const T4& v4) {\n}",
+        "title" : "source.hpp",
+        "surroundedBy" : "// ignore_template",
+        "type" : "Snippet"
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-doxygen-member: long_template_func {signatureOnly: true}\n",
+        "lineNumber" : "",
+        "title" : "template example",
+        "type" : "Snippet"
+      }, {
+        "id" : "funcs__template_8hpp_1aa9b71ec13f0f9fe185a26b7e07e818ca",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ {
+          "name" : "",
+          "type" : [ {
+            "text" : "typename T1",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "",
+          "type" : [ {
+            "text" : "typename T2",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "",
+          "type" : [ {
+            "text" : "typename T3",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "",
+          "type" : [ {
+            "text" : "typename T4",
+            "url" : ""
+          } ]
+        } ],
+        "compoundKind" : "file",
+        "name" : "long_template_func",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "v1",
+          "type" : [ {
+            "text" : "const T1 &",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "v2",
+          "type" : [ {
+            "text" : "const T2 &",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "v3",
+          "type" : [ {
+            "text" : "const T3 &",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "v4",
+          "type" : [ {
+            "text" : "const T4 &",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      } ]
+    }, {
+      "id" : "return-description",
+      "title" : "Return Description",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Return description is part of parameters list",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "h",
+        "snippet" : "/**\n * sums two numbers\n * @param a number to add to\n * @param b number that is added\n * @return *sum* of **two** numbers\n */\nint add(int a, int b);",
+        "title" : "math.h",
+        "surroundedBy" : "// math-add",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-doc-params: math::add\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "return",
+          "type" : [ ],
+          "anchorId" : "add_return",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "sum",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " of ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "two",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " numbers ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "a",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "add_a",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "number to add to ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "b",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "add_b",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "number that is added ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      } ]
+    } ],
+    "lastModifiedTime" : 1658335209108,
+    "tocItem" : {
+      "sectionTitle" : "CPP",
+      "pageTitle" : "Description Extraction",
+      "pageMeta" : { },
+      "dirName" : "CPP",
+      "fileName" : "description-extraction",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Members Comment Text",
+        "id" : "members-comment-text"
+      }, {
+        "title" : "Member Args Selection",
+        "id" : "member-args-selection"
+      }, {
+        "title" : "Classes Comment Text",
+        "id" : "classes-comment-text"
+      }, {
+        "title" : "Extract Parameters",
+        "id" : "extract-parameters"
+      }, {
+        "title" : "Extract Parameters By Args",
+        "id" : "extract-parameters-by-args"
+      }, {
+        "title" : "Extract Template Parameters",
+        "id" : "extract-template-parameters"
+      }, {
+        "title" : "Ignore Template Parameters",
+        "id" : "ignore-template-parameters"
+      }, {
+        "title" : "Return Description",
+        "id" : "return-description"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

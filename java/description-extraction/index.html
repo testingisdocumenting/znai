@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Java Doc</title>
+<title>Znai: Description Extraction</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -133,7 +133,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -146,24 +145,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "class-level",
-      "type" : "Section",
       "title" : "Class Level",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -182,9 +182,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "java",
         "snippet" : "/**\n * Top level conceptual description of a {@link CustomDomain} problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * <code>diversity</code>\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample <i>offset</i> according to the rules of the universe\n     * @return name of the <b>best</b> sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    /**\n     * @param trader trader that performs action\n     * @param transaction transaction to perform action on\n     */\n    public void importantAction(Trader trader, Transaction transaction) {\n        // TODO important\n    }\n\n    public Data createData() {\n        // create data\n    }\n}",
-        "type" : "Snippet",
-        "lang" : "java"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -192,10 +192,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-java-doc: HelloWorld.java\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -238,8 +238,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "method-level",
-      "type" : "Section",
       "title" : "Method Level",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -259,10 +259,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-java-doc: HelloWorld.java {entry: \"sampleMethod\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -314,13 +314,13 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "field-level",
-      "type" : "Section",
       "title" : "Field Level",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "",
         "snippet" : ":include-java-doc: HelloWorld.java {entry: \"numberOfStudents\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -333,8 +333,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "inner-classes",
-      "type" : "Section",
       "title" : "Inner Classes",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -348,16 +348,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "java",
         "snippet" : "class HelloWorld {\n    private int importantScore;\n\n    public static class Nested {\n        /**\n         * system caclulates <b>importance</b> score based on following factors...\n         */\n        private int importantScore;\n    }\n}",
-        "type" : "Snippet",
-        "title" : "HelloWorldWithInner.java",
         "autoTitle" : true,
-        "lang" : "java"
+        "title" : "HelloWorldWithInner.java",
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-java-doc: HelloWorldWithInner.java {entry: \"Nested.importantScore\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -376,8 +376,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "handling-links",
-      "type" : "Section",
       "title" : "Handling Links",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -390,13 +390,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " are automatically converted to ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/snippets/inlined-code-snippets",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Inlined Code",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/inlined-code-snippets"
+          } ]
         }, {
           "text" : " and become",
           "type" : "SimpleText"
@@ -415,13 +415,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " into a link you need to use ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/snippets/code-references",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Code References",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/code-references"
+          } ]
         }, {
           "text" : ".",
           "type" : "SimpleText"
@@ -445,6 +445,11 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "markdown" : {
+          "lang" : "markdown",
+          "snippet" : ":include-java-doc: HelloWorld.java {\n    referencesPath: \"references/javadoc-references-demo.csv\"\n}\n",
+          "type" : "Snippet"
+        },
         "result" : [ {
           "type" : "Paragraph",
           "content" : [ {
@@ -456,11 +461,11 @@ ReactDOM.render(React.createElement(Documentation, {
               "CustomDomain" : {
                 "pageUrl" : "example-references/domain"
               },
-              "Transaction" : {
-                "pageUrl" : "example-references/domain#transaction"
-              },
               "SELL" : {
                 "pageUrl" : "example-references/domain#transaction-sell"
+              },
+              "Transaction" : {
+                "pageUrl" : "example-references/domain#transaction"
               },
               "Trader" : {
                 "pageUrl" : "example-references/domain#trader"
@@ -490,30 +495,25 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         } ],
-        "markdown" : {
-          "snippet" : ":include-java-doc: HelloWorld.java {\n    referencesPath: \"references/javadoc-references-demo.csv\"\n}\n",
-          "type" : "Snippet",
-          "lang" : "markdown"
-        },
         "type" : "MarkdownAndResult"
       }, {
+        "lang" : "csv",
         "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#transaction-buy\nSELL, example-references/domain#transaction-sell",
-        "type" : "Snippet",
         "title" : "references/javadoc-references-demo.csv",
-        "lang" : "csv"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Alternatively you can define ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/snippets/code-references#global-references",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Global References",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/code-references#global-references"
+          } ]
         }, {
           "text" : " to turn ",
           "type" : "SimpleText"
@@ -527,18 +527,21 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "method-params",
-      "type" : "Section",
       "title" : "Method Params",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "",
         "snippet" : ":include-java-doc-params: HelloWorld.java {entry: \"sampleMethod\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "entry" : "sampleMethod",
-        "type" : "ApiParameters",
         "parameters" : [ {
           "name" : "return",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "sampleMethod_p1_String_p2_int_return",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -554,28 +557,28 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " sample",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "sampleMethod_p1_String_p2_int_return",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "p1",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "sampleMethod_p1_String_p2_int_p1",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "important parameter of something",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "sampleMethod_p1_String_p2_int_p1",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "p2",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "sampleMethod_p1_String_p2_int_p2",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -591,13 +594,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " according to the rules of the universe",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "sampleMethod_p1_String_p2_int_p2",
-          "type" : [ {
-            "refId" : "",
-            "text" : "int"
           } ]
-        } ]
+        } ],
+        "entry" : "sampleMethod",
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -611,61 +611,61 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-java-doc-params: HelloWorld.java {entry: \"importantAction\", title: \"Trading Required Parameters\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "entry" : "importantAction",
-        "type" : "ApiParameters",
-        "title" : "Trading Required Parameters",
         "parameters" : [ {
           "name" : "trader",
+          "type" : [ {
+            "text" : "Trader",
+            "url" : ""
+          } ],
+          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_trader",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "trader that performs action",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_trader",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Trader"
           } ]
         }, {
           "name" : "transaction",
+          "type" : [ {
+            "text" : "Transaction",
+            "url" : ""
+          } ],
+          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_transaction",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "transaction to perform action on",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_transaction",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Transaction"
           } ]
-        } ]
+        } ],
+        "entry" : "importantAction",
+        "title" : "Trading Required Parameters",
+        "type" : "ApiParameters"
       } ]
     }, {
       "id" : "method-params-with-references",
-      "type" : "Section",
       "title" : "Method Params With References",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Use the ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/snippets/code-references",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Code References",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/code-references"
+          } ]
         }, {
           "text" : " file to link method parameters to reference pages.",
           "type" : "SimpleText"
@@ -683,27 +683,54 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "csv",
         "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#transaction-buy\nSELL, example-references/domain#transaction-sell",
-        "type" : "Snippet",
         "title" : "references/javadoc-references-demo.csv",
-        "lang" : "csv"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-java-doc-params: HelloWorld.java {\n    entry: \"importantAction\", \n    title: \"Trading Required Parameters\",\n    referencesPath: \"references/javadoc-references-demo.csv\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "entry" : "importantAction",
-        "referencesPath" : "references/javadoc-references-demo.csv",
+        "parameters" : [ {
+          "name" : "trader",
+          "type" : [ {
+            "text" : "Trader",
+            "url" : ""
+          } ],
+          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_trader",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "trader that performs action",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "transaction",
+          "type" : [ {
+            "text" : "Transaction",
+            "url" : ""
+          } ],
+          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_transaction",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "transaction to perform action on",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
         "references" : {
           "CustomDomain" : {
             "pageUrl" : "example-references/domain"
           },
-          "Transaction" : {
-            "pageUrl" : "example-references/domain#transaction"
-          },
           "SELL" : {
             "pageUrl" : "example-references/domain#transaction-sell"
+          },
+          "Transaction" : {
+            "pageUrl" : "example-references/domain#transaction"
           },
           "Trader" : {
             "pageUrl" : "example-references/domain#trader"
@@ -712,37 +739,10 @@ ReactDOM.render(React.createElement(Documentation, {
             "pageUrl" : "example-references/domain#transaction-buy"
           }
         },
-        "type" : "ApiParameters",
+        "entry" : "importantAction",
         "title" : "Trading Required Parameters",
-        "parameters" : [ {
-          "name" : "trader",
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "trader that performs action",
-              "type" : "SimpleText"
-            } ]
-          } ],
-          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_trader",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Trader"
-          } ]
-        }, {
-          "name" : "transaction",
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "transaction to perform action on",
-              "type" : "SimpleText"
-            } ]
-          } ],
-          "anchorId" : "importantAction_trader_Trader_transaction_Transaction_transaction",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Transaction"
-          } ]
-        } ]
+        "referencesPath" : "references/javadoc-references-demo.csv",
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -752,8 +752,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "enum-entries",
-      "type" : "Section",
       "title" : "Enum Entries",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -767,19 +767,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "java",
         "snippet" : "package my.company;\n\nenum MyEnum {\n    /**\n     * description of <b>entry one</b>\n     */\n    ENTRY_ONE,\n\n    /**\n     * description of entry two\n     * <ul>\n     *     <li>item one</li>\n     *     <li>item two</li>\n     * </ul>\n     */\n    ENTRY_TWO,\n\n    /**\n     * Don't use, instead use ENTRY_TWO\n     */\n    @Deprecated\n    ENTRY_THREE\n}",
-        "type" : "Snippet",
         "title" : "MyEnum.java",
-        "lang" : "java"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-java-enum-entries: MyEnum.java\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "type" : "ApiParameters",
         "parameters" : [ {
           "name" : "ENTRY_ONE",
+          "type" : [ ],
+          "anchorId" : "MyEnum_java_ENTRY_ONE",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -792,11 +793,11 @@ ReactDOM.render(React.createElement(Documentation, {
                 "type" : "SimpleText"
               } ]
             } ]
-          } ],
-          "anchorId" : "MyEnum_java_ENTRY_ONE",
-          "type" : [ ]
+          } ]
         }, {
           "name" : "ENTRY_TWO",
+          "type" : [ ],
+          "anchorId" : "MyEnum_java_ENTRY_TWO",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -805,8 +806,8 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           }, {
             "bulletMarker" : "*",
-            "type" : "BulletList",
             "tight" : false,
+            "type" : "BulletList",
             "content" : [ {
               "type" : "ListItem",
               "content" : [ {
@@ -820,21 +821,20 @@ ReactDOM.render(React.createElement(Documentation, {
                 "type" : "SimpleText"
               } ]
             } ]
-          } ],
-          "anchorId" : "MyEnum_java_ENTRY_TWO",
-          "type" : [ ]
+          } ]
         }, {
           "name" : "ENTRY_THREE",
+          "type" : [ ],
+          "anchorId" : "MyEnum_java_ENTRY_THREE",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "Don't use, instead use ENTRY_TWO",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "MyEnum_java_ENTRY_THREE",
-          "type" : [ ]
-        } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -848,15 +848,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-java-enum-entries: MyEnum.java {excludeDeprecated: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "excludeDeprecated" : true,
-        "type" : "ApiParameters",
         "parameters" : [ {
           "name" : "ENTRY_ONE",
+          "type" : [ ],
+          "anchorId" : "MyEnum_java_ENTRY_ONE",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -869,11 +869,11 @@ ReactDOM.render(React.createElement(Documentation, {
                 "type" : "SimpleText"
               } ]
             } ]
-          } ],
-          "anchorId" : "MyEnum_java_ENTRY_ONE",
-          "type" : [ ]
+          } ]
         }, {
           "name" : "ENTRY_TWO",
+          "type" : [ ],
+          "anchorId" : "MyEnum_java_ENTRY_TWO",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -882,8 +882,8 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           }, {
             "bulletMarker" : "*",
-            "type" : "BulletList",
             "tight" : false,
+            "type" : "BulletList",
             "content" : [ {
               "type" : "ListItem",
               "content" : [ {
@@ -897,10 +897,10 @@ ReactDOM.render(React.createElement(Documentation, {
                 "type" : "SimpleText"
               } ]
             } ]
-          } ],
-          "anchorId" : "MyEnum_java_ENTRY_TWO",
-          "type" : [ ]
-        } ]
+          } ]
+        } ],
+        "excludeDeprecated" : true,
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -914,54 +914,54 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-java-enum-entries: TransactionTypes.java {title: \"Transaction Types\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "type" : "ApiParameters",
-        "title" : "Transaction Types",
         "parameters" : [ {
           "name" : "BUY",
+          "type" : [ ],
+          "anchorId" : "TransactionTypes_java_BUY",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "buy intrument",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "TransactionTypes_java_BUY",
-          "type" : [ ]
+          } ]
         }, {
           "name" : "SELL",
+          "type" : [ ],
+          "anchorId" : "TransactionTypes_java_SELL",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "sell instrument",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "TransactionTypes_java_SELL",
-          "type" : [ ]
-        } ]
+          } ]
+        } ],
+        "title" : "Transaction Types",
+        "type" : "ApiParameters"
       } ]
     }, {
       "id" : "enum-entries-with-references",
-      "type" : "Section",
       "title" : "Enum Entries With References",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Use a ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/snippets/code-references",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Code References",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/code-references"
+          } ]
         }, {
           "text" : " file to link enum entries to reference pages.",
           "type" : "SimpleText"
@@ -979,31 +979,53 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "csv",
         "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#transaction-buy\nSELL, example-references/domain#transaction-sell",
-        "type" : "Snippet",
         "title" : "references/javadoc-references-demo.csv",
-        "lang" : "csv"
+        "type" : "Snippet"
       }, {
+        "lang" : "java",
         "snippet" : "package my.company;\n\nenum TransactionTypes {\n    /**\n     * buy intrument\n     */\n    BUY,\n\n    /**\n     * sell instrument\n     */\n    SELL\n}",
-        "type" : "Snippet",
         "title" : "TransactionTypes.java",
-        "lang" : "java"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-java-enum-entries: TransactionTypes.java {\n    title: \"Transaction Types\",\n    referencesPath: \"references/javadoc-references-demo.csv\"\n}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "referencesPath" : "references/javadoc-references-demo.csv",
+        "parameters" : [ {
+          "name" : "BUY",
+          "type" : [ ],
+          "anchorId" : "TransactionTypes_java_BUY",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "buy intrument",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "SELL",
+          "type" : [ ],
+          "anchorId" : "TransactionTypes_java_SELL",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "sell instrument",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
         "references" : {
           "CustomDomain" : {
             "pageUrl" : "example-references/domain"
           },
-          "Transaction" : {
-            "pageUrl" : "example-references/domain#transaction"
-          },
           "SELL" : {
             "pageUrl" : "example-references/domain#transaction-sell"
+          },
+          "Transaction" : {
+            "pageUrl" : "example-references/domain#transaction"
           },
           "Trader" : {
             "pageUrl" : "example-references/domain#trader"
@@ -1012,31 +1034,9 @@ ReactDOM.render(React.createElement(Documentation, {
             "pageUrl" : "example-references/domain#transaction-buy"
           }
         },
-        "type" : "ApiParameters",
+        "referencesPath" : "references/javadoc-references-demo.csv",
         "title" : "Transaction Types",
-        "parameters" : [ {
-          "name" : "BUY",
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "buy intrument",
-              "type" : "SimpleText"
-            } ]
-          } ],
-          "anchorId" : "TransactionTypes_java_BUY",
-          "type" : [ ]
-        }, {
-          "name" : "SELL",
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "sell instrument",
-              "type" : "SimpleText"
-            } ]
-          } ],
-          "anchorId" : "TransactionTypes_java_SELL",
-          "type" : [ ]
-        } ]
+        "type" : "ApiParameters"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -1051,26 +1051,26 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "type" : "SoftLineBreak"
         }, {
+          "url" : "/znai/snippets/code-references#global-references",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Global References",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/code-references#global-references"
+          } ]
         }, {
           "text" : ".",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403262,
+    "lastModifiedTime" : 1658335209112,
     "tocItem" : {
-      "sectionTitle" : "Snippets",
-      "pageTitle" : "Java Doc",
+      "sectionTitle" : "Java",
+      "pageTitle" : "Description Extraction",
       "pageMeta" : { },
-      "dirName" : "snippets",
-      "fileName" : "java-doc",
+      "dirName" : "java",
+      "fileName" : "description-extraction",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Class Level",

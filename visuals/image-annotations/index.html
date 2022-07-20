@@ -86,34 +86,53 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Badges</h1></header>
-<p>Use image fence plugin to display Image and manually provide badge coordinates ```image word-toolbar.jpg 100,50 150,80 ```</p>
+<p>Use image fence plugin to display Image and manually provide badge coordinates ```image testingisdocumenting.png {scale: 0.5} 840,600 1680,1400 ``` Note: Color of badges change based on the background color</p>
+</article>
+
+<article>
+<header><h1>Manual Coordinates</h1></header>
+<p>Hover mouse over image during introduction/getting-started#preview-mode Preview Mode to display coordinates under the cursor. Use the displayed coordinates to update the position.</p>
+</article>
+
+<article>
+<header><h1>Badge Textual Description</h1></header>
+<p>Put ordered list right before or after an annotated image to associate text with the badges. markdown 1. Use automated testing to exercise happy paths and capture test artifacts 2. Use captured test artifacts to supercharge your documentation ```image testingisdocumenting.png {scale: 0.5} 840,600 1680,1400 ``` Note: Hover over image annotations to display automatic tooltip. Hover over an item text to highlight the annotation on the image.Use automated testing to exercise happy paths and capture test artifacts Use captured test artifacts to supercharge your documentation</p>
+</article>
+
+<article>
+<header><h1>Pixel Ratio</h1></header>
+<p>Use pixelRatio to display HiDPI images and use logical coordinates for the annotations ```image testingisdocumenting.png {pixelRatio: 2} 420,300 840,700 ```</p>
+</article>
+
+<article>
+<header><h1>Rectangles And Arrows</h1></header>
+<p>Use rect and arrow as first column value to render arrow or rectangle annotation ```image testingisdocumenting.png {pixelRatio: 2} rect,60,110,420,430 arrow,485,810,310,474 ``` Add a text block after coordinates to provide tooltip data. Markdown is supported. ```image testingisdocumenting.png {pixelRatio: 2} rect,60,110,420,430,Note: zone description arrow,485,810,310,474,destination **description** ``` Note: Hover over image annotations to display automatic tooltip.</p>
 </article>
 
 <article>
 <header><h1>Annotations File</h1></header>
-<p>:include-image: word-toolbar.jpg {annotationsPath: 'annotations.json'} {&quot;shapes&quot;: [{&quot;type&quot;: &quot;arrow&quot;, &quot;id&quot;:&quot;a1&quot;, &quot;beginX&quot;: 200, &quot;beginY&quot;: 100, &quot;endX&quot;: 48, &quot;endY&quot;: 42, &quot;color&quot;: &quot;a&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;rectangle&quot;, &quot;id&quot;:&quot;r1&quot;, &quot;x&quot;: 200, &quot;y&quot;: 50, &quot;width&quot;: 100, &quot;height&quot;: 40, &quot;color&quot;: &quot;b&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;circle&quot;, &quot;id&quot;: &quot;c1&quot;, &quot;x&quot;: 350, &quot;y&quot;: 100, &quot;r&quot;: 30, &quot;color&quot;: &quot;c&quot;, &quot;text&quot;: &quot;text&quot;}, {&quot;type&quot;: &quot;badge&quot;, &quot;id&quot;: &quot;b1&quot;, &quot;x&quot;: 350, &quot;y&quot;: 140, &quot;text&quot;: &quot;1&quot;}, {&quot;type&quot;: &quot;badge&quot;, &quot;id&quot;: &quot;b2&quot;, &quot;x&quot;: 380, &quot;y&quot;: 180, &quot;text&quot;: &quot;2&quot;} ]} There are different types of annotations:Circles Badges Rectangles Arrows etc.</p>
+<p>:include-image: testingisdocumenting.png { annotationsPath: &quot;testingisdocumenting.csv&quot;, pixelRatio: 2, } rect,60,110,420,430,Note: zone description arrow,485,810,310,474,destination **description** include-image also supports JSON file format</p>
+</article>
+
+<article>
+<header><h1>Annotations Path Shortcut</h1></header>
+<p>You don't need to specify annotations path, if annotations file matches file name and path of the image and has json or csv extension.Add annotate: true to automatically use matching annotations file :include-image: testingisdocumenting.png { annotate: true, pixelRatio: 2, }</p>
 </article>
 
 <article>
 <header><h1>Integration With Testing</h1></header>
-<p>It is possible to generate an annotations file by using UI testing framework.For example https://github.com/testingisdocumenting/webtau webtau automatically generates an annotations file in addition to capturing a screenshot.</p>
-</article>
-
-<article>
-<header><h1>Path Shortcut</h1></header>
-<p>You don't need to specify annotations path, if annotations file matches file name and path of the image and has json extension.Add annotate:true to automatically use matching annotations file :include-image: word-toolbar.jpg {annotate: true} {&quot;shapes&quot;: [{&quot;type&quot;: &quot;arrow&quot;, &quot;id&quot;:&quot;a1&quot;, &quot;beginX&quot;: 200, &quot;beginY&quot;: 100, &quot;endX&quot;: 48, &quot;endY&quot;: 42, &quot;color&quot;: &quot;a&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;rectangle&quot;, &quot;id&quot;:&quot;r1&quot;, &quot;x&quot;: 200, &quot;y&quot;: 50, &quot;width&quot;: 100, &quot;height&quot;: 40, &quot;color&quot;: &quot;b&quot;, &quot;text&quot;: &quot;debug&quot;}, {&quot;type&quot;: &quot;circle&quot;, &quot;id&quot;: &quot;c1&quot;, &quot;x&quot;: 350, &quot;y&quot;: 100, &quot;r&quot;: 30, &quot;color&quot;: &quot;c&quot;, &quot;text&quot;: &quot;text&quot;}, {&quot;type&quot;: &quot;badge&quot;, &quot;id&quot;: &quot;b1&quot;, &quot;x&quot;: 350, &quot;y&quot;: 140, &quot;text&quot;: &quot;1&quot;}, {&quot;type&quot;: &quot;badge&quot;, &quot;id&quot;: &quot;b2&quot;, &quot;x&quot;: 380, &quot;y&quot;: 180, &quot;text&quot;: &quot;2&quot;} ]}</p>
+<p>Use UI testing frameworks to automatically generate annotations file and capture screenshot.For example https://github.com/testingisdocumenting/webtau WebTau automatically generates an annotations file in addition to capturing a screenshot. package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $(&quot;#search_form_input_homepage&quot;) def resultSearchInput = $(&quot;#search_form_input&quot;) def searchButton = $(&quot;#search_button_homepage&quot;) def result = $('article[data-testid=&quot;result&quot;]') scenario(&quot;capture screenshot&quot;) { browser.open(&quot;https://duckduckgo.com/&quot;) homeSearchInput.setValue(&quot;testing is documenting&quot;) searchButton.click() result.waitTo visible browser.doc.withAnnotations( browser.doc.badge(resultSearchInput), browser.doc.badge(result)).capture(&quot;duckduckgo-search&quot;) } :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one Note: https://github.com/testingisdocumenting/webtau WebTau captures additional data such as pixelRatio</p>
 </article>
 
 <article>
 <header><h1>Presentation Mode</h1></header>
-<p>Annotated images automatically participate in presentation mode. Annotations appear one by one and scale to match the zoom level of a presentation.</p>
+<p>Annotated images automatically participate in presentation mode. Annotations will appear one by one.</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -126,24 +145,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "badges",
-      "type" : "Section",
       "title" : "Badges",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -157,182 +177,363 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "```image word-toolbar.jpg\n100,50\n150,80\n```\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : "```image testingisdocumenting.png {scale: 0.5} \n840,600\n1680,1400\n```\n",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "scale" : 0.5,
+        "imageSrc" : "/znai/visuals/testingisdocumenting.png",
+        "timestamp" : 1658335209144,
         "shapes" : [ {
-          "x" : 100.0,
-          "y" : 50.0,
+          "invertedColors" : true,
+          "x" : 840.0,
+          "y" : 600.0,
           "text" : "1",
           "type" : "badge"
         }, {
-          "x" : 150.0,
-          "y" : 80.0,
+          "invertedColors" : false,
+          "x" : 1680.0,
+          "y" : 1400.0,
           "text" : "2",
           "type" : "badge"
         } ],
-        "width" : 833.0,
-        "imageSrc" : "/znai/visuals/word-toolbar.jpg",
-        "type" : "AnnotatedImage",
-        "height" : 204.0,
-        "timestamp" : 1653499403282
-      } ]
-    }, {
-      "id" : "annotations-file",
-      "type" : "Section",
-      "title" : "Annotations File",
-      "content" : [ {
-        "snippet" : ":include-image: word-toolbar.jpg {annotationsPath: 'annotations.json'}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "annotationsPath" : "annotations.json",
-        "shapes" : [ {
-          "endY" : 42,
-          "endX" : 48,
-          "color" : "a",
-          "beginX" : 200,
-          "beginY" : 100,
-          "text" : "debug",
-          "id" : "a1",
-          "type" : "arrow"
-        }, {
-          "color" : "b",
-          "width" : 100,
-          "x" : 200,
-          "y" : 50,
-          "text" : "debug",
-          "id" : "r1",
-          "type" : "rectangle",
-          "height" : 40
-        }, {
-          "r" : 30,
-          "color" : "c",
-          "x" : 350,
-          "y" : 100,
-          "text" : "text",
-          "id" : "c1",
-          "type" : "circle"
-        }, {
-          "x" : 350,
-          "y" : 140,
-          "text" : "1",
-          "id" : "b1",
-          "type" : "badge"
-        }, {
-          "x" : 380,
-          "y" : 180,
-          "text" : "2",
-          "id" : "b2",
-          "type" : "badge"
-        } ],
-        "width" : 833.0,
-        "imageSrc" : "/znai/visuals/word-toolbar.jpg",
-        "type" : "AnnotatedImage",
-        "height" : 204.0,
-        "timestamp" : 1653499403282
-      }, {
-        "snippet" : "{\"shapes\": [{\"type\": \"arrow\", \"id\":\"a1\",\n  \"beginX\": 200, \"beginY\": 100, \"endX\": 48, \"endY\": 42,\n  \"color\": \"a\", \"text\": \"debug\"},\n\n  {\"type\": \"rectangle\", \"id\":\"r1\",\n    \"x\": 200, \"y\": 50, \"width\": 100, \"height\": 40,\n    \"color\": \"b\", \"text\": \"debug\"},\n\n  {\"type\": \"circle\", \"id\": \"c1\",\n    \"x\": 350, \"y\": 100, \"r\": 30,\n    \"color\": \"c\", \"text\": \"text\"},\n\n  {\"type\": \"badge\", \"id\": \"b1\",\n    \"x\": 350, \"y\": 140, \"text\": \"1\"},\n\n  {\"type\": \"badge\", \"id\": \"b2\",\n    \"x\": 380, \"y\": 180, \"text\": \"2\"}\n]}",
-        "type" : "Snippet",
-        "title" : "annotations.json",
-        "lang" : "json"
+        "width" : 1806.0,
+        "height" : 1694.0,
+        "type" : "AnnotatedImage"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "There are different types of annotations:",
+          "text" : "Note: Color of badges change based on the background color",
           "type" : "SimpleText"
-        } ]
-      }, {
-        "bulletMarker" : "*",
-        "type" : "BulletList",
-        "tight" : true,
-        "content" : [ {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Circles",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Badges",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Rectangles",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Arrows",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "etc.",
-              "type" : "SimpleText"
-            } ]
-          } ]
         } ]
       } ]
     }, {
-      "id" : "integration-with-testing",
+      "id" : "manual-coordinates",
+      "title" : "Manual Coordinates",
       "type" : "Section",
-      "title" : "Integration With Testing",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "It is possible to generate an annotations file by using UI testing framework.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "For example ",
+          "text" : "Hover mouse over image during ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/introduction/getting-started#preview-mode",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
-            "text" : "webtau",
+            "text" : "Preview Mode",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://github.com/testingisdocumenting/webtau"
+          } ]
         }, {
-          "text" : " automatically generates an annotations file in addition to",
+          "text" : " to display coordinates under the cursor. Use the displayed coordinates to update the position.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "badge-textual-description",
+      "title" : "Badge Textual Description",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Put ordered list right before or after an annotated image to associate text with the badges.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "1. Use automated testing to exercise happy paths and capture test artifacts\n2. Use captured test artifacts to supercharge your documentation\n\n```image testingisdocumenting.png {scale: 0.5} \n840,600\n1680,1400\n```\n",
+        "lineNumber" : "",
+        "title" : "ordered list markdown example to provide contextual information",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Hover over image annotations to display automatic tooltip.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "capturing a screenshot.",
+          "type" : "HardLineBreak"
+        }, {
+          "text" : "Hover over an item text to highlight the annotation on the image.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "delimiter" : ".",
+        "startNumber" : 1,
+        "type" : "OrderedList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Use automated testing to exercise happy paths and capture test artifacts",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Use captured test artifacts to supercharge your documentation",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "scale" : 0.5,
+        "imageSrc" : "/znai/visuals/testingisdocumenting.png",
+        "timestamp" : 1658335209144,
+        "shapes" : [ {
+          "invertedColors" : true,
+          "x" : 840.0,
+          "y" : 600.0,
+          "text" : "1",
+          "type" : "badge"
+        }, {
+          "invertedColors" : false,
+          "x" : 1680.0,
+          "y" : 1400.0,
+          "text" : "2",
+          "type" : "badge"
+        } ],
+        "width" : 1806.0,
+        "height" : 1694.0,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "id" : "pixel-ratio",
+      "title" : "Pixel Ratio",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "pixelRatio",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to display HiDPI images and use logical coordinates for the annotations",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```image testingisdocumenting.png {pixelRatio: 2} \n420,300\n840,700\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "pixelRatio" : 2,
+        "imageSrc" : "/znai/visuals/testingisdocumenting.png",
+        "timestamp" : 1658335209144,
+        "shapes" : [ {
+          "invertedColors" : true,
+          "x" : 420.0,
+          "y" : 300.0,
+          "text" : "1",
+          "type" : "badge"
+        }, {
+          "invertedColors" : false,
+          "x" : 840.0,
+          "y" : 700.0,
+          "text" : "2",
+          "type" : "badge"
+        } ],
+        "width" : 903.0,
+        "height" : 847.0,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "id" : "rectangles-and-arrows",
+      "title" : "Rectangles And Arrows",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "rect",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "arrow",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as first column value to render arrow or rectangle annotation",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```image testingisdocumenting.png {pixelRatio: 2} \nrect,60,110,420,430\narrow,485,810,310,474\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Add a text block after coordinates to provide tooltip data. Markdown is supported.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```image testingisdocumenting.png {pixelRatio: 2} \nrect,60,110,420,430,Note: zone description\narrow,485,810,310,474,destination **description**\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "pixelRatio" : 2,
+        "imageSrc" : "/znai/visuals/testingisdocumenting.png",
+        "timestamp" : 1658335209144,
+        "shapes" : [ {
+          "endY" : 430.0,
+          "endX" : 420.0,
+          "invertedColors" : true,
+          "beginX" : 60.0,
+          "tooltip" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Note: zone description",
+              "type" : "SimpleText"
+            } ]
+          } ],
+          "beginY" : 110.0,
+          "type" : "rect"
+        }, {
+          "endY" : 474.0,
+          "endX" : 310.0,
+          "invertedColors" : true,
+          "beginX" : 485.0,
+          "tooltip" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "destination ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "description",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ],
+          "beginY" : 810.0,
+          "type" : "arrow"
+        } ],
+        "width" : 903.0,
+        "height" : 847.0,
+        "type" : "AnnotatedImage"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Hover over image annotations to display automatic tooltip.",
           "type" : "SimpleText"
         } ]
       } ]
     }, {
-      "id" : "path-shortcut",
+      "id" : "annotations-file",
+      "title" : "Annotations File",
       "type" : "Section",
-      "title" : "Path Shortcut",
+      "content" : [ {
+        "lang" : "",
+        "snippet" : ":include-image: testingisdocumenting.png {\n  annotationsPath: \"testingisdocumenting.csv\",\n  pixelRatio: 2,\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "csv",
+        "snippet" : "rect,60,110,420,430,Note: zone description\narrow,485,810,310,474,destination **description**",
+        "autoTitle" : true,
+        "title" : "testingisdocumenting.csv",
+        "type" : "Snippet"
+      }, {
+        "annotationsPath" : "testingisdocumenting.json",
+        "pixelRatio" : 2,
+        "imageSrc" : "/znai/visuals/testingisdocumenting.png",
+        "timestamp" : 1658335209144,
+        "shapes" : [ {
+          "type" : "rect",
+          "beginX" : 60.0,
+          "beginY" : 110.0,
+          "endX" : 420.0,
+          "endY" : 430.0,
+          "text" : "Note: zone description",
+          "invertedColors" : true,
+          "tooltip" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Note: zone description",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "arrow",
+          "beginX" : 485.0,
+          "beginY" : 810.0,
+          "endX" : 310.0,
+          "endY" : 474.0,
+          "text" : "destination **description**",
+          "invertedColors" : true,
+          "tooltip" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "destination ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "description",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "width" : 903.0,
+        "height" : 847.0,
+        "type" : "AnnotatedImage"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "code" : "include-image",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " also supports ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "JSON",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file format",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "autoTitle" : true,
+        "data" : {
+          "shapes" : [ {
+            "type" : "rect",
+            "beginX" : 60.0,
+            "beginY" : 110.0,
+            "endX" : 420.0,
+            "endY" : 430.0,
+            "text" : "Note: zone description"
+          }, {
+            "type" : "arrow",
+            "beginX" : 485.0,
+            "beginY" : 810.0,
+            "endX" : 310.0,
+            "endY" : 474.0,
+            "text" : "destination **description**"
+          } ]
+        },
+        "paths" : [ ],
+        "title" : "testingisdocumenting.json",
+        "type" : "Json"
+      } ]
+    }, {
+      "id" : "annotations-path-shortcut",
+      "title" : "Annotations Path Shortcut",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -347,6 +548,12 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "json",
           "type" : "InlinedCode"
         }, {
+          "text" : " or ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "csv",
+          "type" : "InlinedCode"
+        }, {
           "text" : " extension.",
           "type" : "SimpleText"
         } ]
@@ -356,75 +563,161 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Add ",
           "type" : "SimpleText"
         }, {
-          "code" : "annotate:true",
+          "code" : "annotate: true",
           "type" : "InlinedCode"
         }, {
           "text" : " to automatically use matching annotations file",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-image: word-toolbar.jpg {annotate: true}\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : ":include-image: testingisdocumenting.png {\n  annotate: true,\n  pixelRatio: 2,\n}\n",
         "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "shapes" : [ {
-          "endY" : 42,
-          "endX" : 48,
-          "color" : "a",
-          "beginX" : 200,
-          "beginY" : 100,
-          "text" : "debug",
-          "id" : "a1",
-          "type" : "arrow"
-        }, {
-          "color" : "b",
-          "width" : 100,
-          "x" : 200,
-          "y" : 50,
-          "text" : "debug",
-          "id" : "r1",
-          "type" : "rectangle",
-          "height" : 40
-        }, {
-          "r" : 30,
-          "color" : "c",
-          "x" : 350,
-          "y" : 100,
-          "text" : "text",
-          "id" : "c1",
-          "type" : "circle"
-        } ],
-        "width" : 833.0,
-        "imageSrc" : "/znai/visuals/word-toolbar.jpg",
-        "annotate" : true,
-        "type" : "AnnotatedImage",
-        "height" : 204.0,
-        "timestamp" : 1653499403282
-      }, {
-        "snippet" : "{\"shapes\": [{\"type\": \"arrow\", \"id\":\"a1\",\n  \"beginX\": 200, \"beginY\": 100, \"endX\": 48, \"endY\": 42,\n  \"color\": \"a\", \"text\": \"debug\"},\n\n  {\"type\": \"rectangle\", \"id\":\"r1\",\n    \"x\": 200, \"y\": 50, \"width\": 100, \"height\": 40,\n    \"color\": \"b\", \"text\": \"debug\"},\n\n  {\"type\": \"circle\", \"id\": \"c1\",\n    \"x\": 350, \"y\": 100, \"r\": 30,\n    \"color\": \"c\", \"text\": \"text\"},\n\n  {\"type\": \"badge\", \"id\": \"b1\",\n    \"x\": 350, \"y\": 140, \"text\": \"1\"},\n\n  {\"type\": \"badge\", \"id\": \"b2\",\n    \"x\": 380, \"y\": 180, \"text\": \"2\"}\n]}",
-        "type" : "Snippet",
-        "title" : "word-toolbar.json",
-        "lang" : "json"
+        "type" : "Snippet"
       } ]
     }, {
-      "id" : "presentation-mode",
+      "id" : "integration-with-testing",
+      "title" : "Integration With Testing",
       "type" : "Section",
-      "title" : "Presentation Mode",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Annotated images automatically participate in presentation mode. Annotations appear one by one and scale to match the",
+          "text" : "Use UI testing frameworks to automatically generate annotations file and capture screenshot.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "For example ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://github.com/testingisdocumenting/webtau",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "WebTau",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " automatically generates an annotations file in addition to",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "zoom level of a presentation.",
+          "text" : "capturing a screenshot.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $(\"#search_form_input_homepage\")\ndef resultSearchInput = $(\"#search_form_input\")\ndef searchButton = $(\"#search_button_homepage\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.setValue(\"testing is documenting\")\n    searchButton.click()\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(\n            browser.doc.badge(resultSearchInput),\n            browser.doc.badge(result)).capture(\"duckduckgo-search\")\n}",
+        "autoTitle" : true,
+        "title" : "webtauexamples/imageCapture.groovy",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-image: doc-artifacts/duckduckgo-search.png {annotate: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "delimiter" : ".",
+        "startNumber" : 1,
+        "type" : "OrderedList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Type question you want to be answered anonymously",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Scan through results and pick the most relevant one",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "annotate" : true,
+        "imageSrc" : "/znai/doc-artifacts/duckduckgo-search.png",
+        "timestamp" : 1658335259333,
+        "shapes" : [ {
+          "type" : "badge",
+          "text" : "1",
+          "x" : 374,
+          "y" : 39,
+          "align" : "Center",
+          "invertedColors" : false
+        }, {
+          "type" : "badge",
+          "text" : "2",
+          "x" : 367,
+          "y" : 236,
+          "align" : "Center",
+          "invertedColors" : false
+        } ],
+        "width" : 1000.0,
+        "height" : 682.0,
+        "type" : "AnnotatedImage"
+      }, {
+        "autoTitle" : true,
+        "paths" : [ "root.pixelRatio" ],
+        "data" : {
+          "shapes" : [ {
+            "type" : "badge",
+            "text" : "1",
+            "x" : 374,
+            "y" : 39,
+            "align" : "Center"
+          }, {
+            "type" : "badge",
+            "text" : "2",
+            "x" : 367,
+            "y" : 236,
+            "align" : "Center"
+          } ],
+          "pixelRatio" : 1
+        },
+        "title" : "doc-artifacts/duckduckgo-search.json",
+        "type" : "Json"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://github.com/testingisdocumenting/webtau",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "WebTau",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " captures additional data such as ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "pixelRatio",
+          "type" : "InlinedCode"
+        } ]
+      } ]
+    }, {
+      "id" : "presentation-mode",
+      "title" : "Presentation Mode",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Annotated images automatically participate in presentation mode. Annotations will appear one by one.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403282,
+    "lastModifiedTime" : 1658335209132,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Image Annotations",
@@ -436,14 +729,26 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Badges",
         "id" : "badges"
       }, {
+        "title" : "Manual Coordinates",
+        "id" : "manual-coordinates"
+      }, {
+        "title" : "Badge Textual Description",
+        "id" : "badge-textual-description"
+      }, {
+        "title" : "Pixel Ratio",
+        "id" : "pixel-ratio"
+      }, {
+        "title" : "Rectangles And Arrows",
+        "id" : "rectangles-and-arrows"
+      }, {
         "title" : "Annotations File",
         "id" : "annotations-file"
       }, {
+        "title" : "Annotations Path Shortcut",
+        "id" : "annotations-path-shortcut"
+      }, {
         "title" : "Integration With Testing",
         "id" : "integration-with-testing"
-      }, {
-        "title" : "Path Shortcut",
-        "id" : "path-shortcut"
       }, {
         "title" : "Presentation Mode",
         "id" : "presentation-mode"

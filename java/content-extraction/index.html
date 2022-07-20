@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: Content Extraction</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Method Body</h1></header>
+<p>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method</p>
+</article>
+
+<article>
+<header><h1>Callout Comments</h1></header>
+<p>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot;} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method</p>
+</article>
+
+<article>
+<header><h1>Signature Only</h1></header>
+<p>You can also specify a method name and extract only its signature. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} If signatureOnly is specified, body will be omitted. public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) Pass entrySeparator: &quot;&lt;separator&gt;&quot; to have a provided line in between entries as a separator. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true, entrySeparator: &quot;...&quot;} public String sampleMethod(String p1, int p2) ... public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive)</p>
+</article>
+
+<article>
+<header><h1>Overloads</h1></header>
+<p>Specify types inside brackets to select an overloaded versions of your methods.Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version inside the plugin. :include-java: HelloWorld.java {entry: &quot;sampleMethod(Map, int, boolean)&quot;} Note: Generic types are erased and spaces after commas are optional public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method }</p>
+</article>
+
+<article>
+<header><h1>Type Body</h1></header>
+<p>To extract class , interface or enum body use: :include-java: MyEnum.java {entry: &quot;MyEnum&quot;} enum MyEnum { /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE } Use bodyOnly to only display body of your type. :include-java: MyEnum.java {entry: &quot;MyEnum&quot;, bodyOnly: true} /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE</p>
+</article>
+
+<article>
+<header><h1>Multiple Entries</h1></header>
+<p>To display multiple methods at once pass a list to entry parameter :include-java: HelloWorld.java {entry: [&quot;createData&quot;, &quot;importantAction&quot;]} This will render: public Data createData() { // create data } public void importantAction(Trader trader, Transaction transaction) { // TODO important } List important methods signatures at one place by passing signatureOnly: true . :include-java: HelloWorld.java {entry: [&quot;createData&quot;, &quot;importantAction&quot;], signatureOnly: true} This will render: public Data createData() public void importantAction(Trader trader, Transaction transaction)</p>
+</article>
+
+<article>
+<header><h1>Multiple Overloads</h1></header>
+<p>To list of the overloads of a method, specify method name using the entry parameter. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive)</p>
+</article>
+
+<article>
+<header><h1>Multiple Bodies</h1></header>
+<p>Pass multiple entries and bodyOnly to extract example of usage from unit tests public class HelloWorldTest { @Test public void exampleOfA() { a.action(); } @Test public void exampleOfB() { b.action(); } } :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action(); Pass entrySeparator: &quot;&lt;separator&gt;&quot; to have a provided line in between entries as a separator. markdown :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], entrySeparator: &quot;&quot;, bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action();</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "method-body",
+      "title" : "Method Body",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you need to extract a specific method body, use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-java",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Consider the file below:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "/**\n * Top level conceptual description of a {@link CustomDomain} problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * <code>diversity</code>\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample <i>offset</i> according to the rules of the universe\n     * @return name of the <b>best</b> sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    /**\n     * @param trader trader that performs action\n     * @param transaction transaction to perform action on\n     */\n    public void importantAction(Trader trader, Transaction transaction) {\n        // TODO important\n    }\n\n    public Data createData() {\n        // create data\n    }\n}",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can specify a method name to extract its full definition, or display only its body.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "bodyOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " is specified, signature will be omitted.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n// overloaded method",
+        "entry" : "sampleMethod",
+        "bodyOnly" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "callout-comments",
+      "title" : "Callout Comments",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Similar to how you ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/code-comments#callout-comments",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "specify comments type",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " for a regular file,",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "you can specify ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "commentsType",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option for ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-java",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true, commentsType: \"inline\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n// overloaded method",
+        "entry" : "sampleMethod",
+        "bodyOnly" : true,
+        "commentsType" : "inline",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "signature-only",
+      "title" : "Signature Only",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can also specify a method name and extract only its signature.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "signatureOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " is specified, body will be omitted.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "public String sampleMethod(String p1, int p2)\npublic void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive)",
+        "entry" : "sampleMethod",
+        "signatureOnly" : true,
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entrySeparator: \"<separator>\"",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to have a provided line in between entries as a separator.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true, entrySeparator: \"...\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "public String sampleMethod(String p1, int p2)\n...\npublic void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive)",
+        "entry" : "sampleMethod",
+        "signatureOnly" : true,
+        "entrySeparator" : "...",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "overloads",
+      "title" : "Overloads",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Specify types inside brackets to select an overloaded versions of your methods.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "inside the plugin.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod(Map, int, boolean)\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Generic types are erased and spaces after commas are optional",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n    // overloaded method\n}",
+        "entry" : "sampleMethod(Map, int, boolean)",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "type-body",
+      "title" : "Type Body",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To extract ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "class",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "interface",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " or ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "enum",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " body use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "enum MyEnum {\n    /**\n     * description of <b>entry one</b>\n     */\n    ENTRY_ONE,\n\n    /**\n     * description of entry two\n     * <ul>\n     *     <li>item one</li>\n     *     <li>item two</li>\n     * </ul>\n     */\n    ENTRY_TWO,\n\n    /**\n     * Don't use, instead use ENTRY_TWO\n     */\n    @Deprecated\n    ENTRY_THREE\n}",
+        "entry" : "MyEnum",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "bodyOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to only display body of your type.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\", bodyOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "/**\n * description of <b>entry one</b>\n */\nENTRY_ONE,\n\n/**\n * description of entry two\n * <ul>\n *     <li>item one</li>\n *     <li>item two</li>\n * </ul>\n */\nENTRY_TWO,\n\n/**\n * Don't use, instead use ENTRY_TWO\n */\n@Deprecated\nENTRY_THREE",
+        "entry" : "MyEnum",
+        "bodyOnly" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "multiple-entries",
+      "title" : "Multiple Entries",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To display multiple methods at once pass a list to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entry",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: [\"createData\", \"importantAction\"]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This will render:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "public Data createData() {\n    // create data\n}\npublic void importantAction(Trader trader, Transaction transaction) {\n    // TODO important\n}",
+        "entry" : [ "createData", "importantAction" ],
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "List important methods signatures at one place by passing ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "signatureOnly: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: [\"createData\", \"importantAction\"], signatureOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This will render:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "public Data createData()\npublic void importantAction(Trader trader, Transaction transaction)",
+        "entry" : [ "createData", "importantAction" ],
+        "signatureOnly" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "multiple-overloads",
+      "title" : "Multiple Overloads",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To list of the overloads of a method, specify method name using the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entry",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "public String sampleMethod(String p1, int p2)\npublic void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive)",
+        "entry" : "sampleMethod",
+        "signatureOnly" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "multiple-bodies",
+      "title" : "Multiple Bodies",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass multiple entries and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "bodyOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to extract example of usage from unit tests",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "public class HelloWorldTest {\n    @Test\n    public void exampleOfA() {\n        a.action();\n    }\n\n    @Test\n    public void exampleOfB() {\n        b.action();\n    }\n}",
+        "autoTitle" : true,
+        "title" : "HelloWorldTest.java",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java: HelloWorldTest.java {\n  entry: [\"exampleOfA\", \"exampleOfB\"],\n  bodyOnly: true,\n  title: \"example of actions\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "a.action();\nb.action();",
+        "entry" : [ "exampleOfA", "exampleOfB" ],
+        "bodyOnly" : true,
+        "title" : "example of actions",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "entrySeparator: \"<separator>\"",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to have a provided line in between entries as a separator.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-java: HelloWorldTest.java {\n  entry: [\"exampleOfA\", \"exampleOfB\"],\n  entrySeparator: \"\",\n  bodyOnly: true,\n  title: \"example of actions\"}\n",
+        "lineNumber" : "",
+        "highlight" : [ 2 ],
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "a.action();\n\nb.action();",
+        "entry" : [ "exampleOfA", "exampleOfB" ],
+        "entrySeparator" : "",
+        "bodyOnly" : true,
+        "title" : "example of actions",
+        "type" : "Snippet"
+      } ]
+    } ],
+    "lastModifiedTime" : 1658335209112,
+    "tocItem" : {
+      "sectionTitle" : "Java",
+      "pageTitle" : "Content Extraction",
+      "pageMeta" : { },
+      "dirName" : "java",
+      "fileName" : "content-extraction",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Method Body",
+        "id" : "method-body"
+      }, {
+        "title" : "Callout Comments",
+        "id" : "callout-comments"
+      }, {
+        "title" : "Signature Only",
+        "id" : "signature-only"
+      }, {
+        "title" : "Overloads",
+        "id" : "overloads"
+      }, {
+        "title" : "Type Body",
+        "id" : "type-body"
+      }, {
+        "title" : "Multiple Entries",
+        "id" : "multiple-entries"
+      }, {
+        "title" : "Multiple Overloads",
+        "id" : "multiple-overloads"
+      }, {
+        "title" : "Multiple Bodies",
+        "id" : "multiple-bodies"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

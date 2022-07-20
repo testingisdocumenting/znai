@@ -27,6 +27,18 @@ toc = [ {
       "title" : "Extensive Plugins System",
       "id" : "extensive-plugins-system"
     }, {
+      "title" : "Rich Visuals",
+      "id" : "rich-visuals"
+    }, {
+      "title" : "Dark/Light Runtime Mode",
+      "id" : "darklight-runtime-mode"
+    }, {
+      "title" : "Two Sides Page Layout",
+      "id" : "two-sides-page-layout"
+    }, {
+      "title" : "Local Search",
+      "id" : "local-search"
+    }, {
       "title" : "Auto Presentation",
       "id" : "auto-presentation"
     }, {
@@ -215,8 +227,8 @@ toc = [ {
     "fileName" : "support",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Definition",
-      "id" : "definition"
+      "title" : "Linking To Support Site",
+      "id" : "linking-to-support-site"
     } ]
   }, {
     "sectionTitle" : "Flow",
@@ -412,6 +424,9 @@ toc = [ {
     }, {
       "title" : "Long Parameter Names",
       "id" : "long-parameter-names"
+    }, {
+      "title" : "Wide Mode",
+      "id" : "wide-mode"
     } ]
   }, {
     "sectionTitle" : "Snippets",
@@ -432,205 +447,20 @@ toc = [ {
     } ]
   }, {
     "sectionTitle" : "Snippets",
-    "pageTitle" : "Java",
-    "pageMeta" : { },
-    "dirName" : "snippets",
-    "fileName" : "java",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Method Body",
-      "id" : "method-body"
-    }, {
-      "title" : "Callout Comments",
-      "id" : "callout-comments"
-    }, {
-      "title" : "Signature Only",
-      "id" : "signature-only"
-    }, {
-      "title" : "Overloads",
-      "id" : "overloads"
-    }, {
-      "title" : "Type Body",
-      "id" : "type-body"
-    }, {
-      "title" : "Multiple Entries",
-      "id" : "multiple-entries"
-    }, {
-      "title" : "Multiple Overloads",
-      "id" : "multiple-overloads"
-    }, {
-      "title" : "Multiple Bodies",
-      "id" : "multiple-bodies"
-    } ]
-  }, {
-    "sectionTitle" : "Snippets",
-    "pageTitle" : "Java Doc",
-    "pageMeta" : { },
-    "dirName" : "snippets",
-    "fileName" : "java-doc",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Class Level",
-      "id" : "class-level"
-    }, {
-      "title" : "Method Level",
-      "id" : "method-level"
-    }, {
-      "title" : "Field Level",
-      "id" : "field-level"
-    }, {
-      "title" : "Inner Classes",
-      "id" : "inner-classes"
-    }, {
-      "title" : "Handling Links",
-      "id" : "handling-links"
-    }, {
-      "title" : "Method Params",
-      "id" : "method-params"
-    }, {
-      "title" : "Method Params With References",
-      "id" : "method-params-with-references"
-    }, {
-      "title" : "Enum Entries",
-      "id" : "enum-entries"
-    }, {
-      "title" : "Enum Entries With References",
-      "id" : "enum-entries-with-references"
-    } ]
-  }, {
-    "sectionTitle" : "Snippets",
-    "pageTitle" : "Groovy",
-    "pageMeta" : { },
-    "dirName" : "snippets",
-    "fileName" : "groovy",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Method Body",
-      "id" : "method-body"
-    }, {
-      "title" : "Multiple Bodies",
-      "id" : "multiple-bodies"
-    }, {
-      "title" : "Overloads",
-      "id" : "overloads"
-    }, {
-      "title" : "Class Body",
-      "id" : "class-body"
-    } ]
-  }, {
-    "sectionTitle" : "Snippets",
-    "pageTitle" : "Python",
-    "pageMeta" : { },
-    "dirName" : "snippets",
-    "fileName" : "python",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Content",
-      "id" : "content"
-    }, {
-      "title" : "Doc String",
-      "id" : "doc-string"
-    }, {
-      "title" : "Doc Parameters",
-      "id" : "doc-parameters"
-    } ]
-  }, {
-    "sectionTitle" : "Snippets",
-    "pageTitle" : "Doxygen",
-    "pageMeta" : { },
-    "dirName" : "snippets",
-    "fileName" : "doxygen",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Introduction",
-      "id" : "introduction"
-    }, {
-      "title" : "Setup",
-      "id" : "setup"
-    }, {
-      "title" : "Extract Comment Text",
-      "id" : "extract-comment-text"
-    }, {
-      "title" : "Member Signature, Comment And Parameters",
-      "id" : "member-signature-comment-and-parameters"
-    }, {
-      "title" : "Member Signature Only",
-      "id" : "member-signature-only"
-    }, {
-      "title" : "All Matching Signatures",
-      "id" : "all-matching-signatures"
-    }, {
-      "title" : "Specific Member By Args",
-      "id" : "specific-member-by-args"
-    }, {
-      "title" : "Extract Parameters",
-      "id" : "extract-parameters"
-    }, {
-      "title" : "Extract Parameters By Args",
-      "id" : "extract-parameters-by-args"
-    }, {
-      "title" : "Extract Template Parameters",
-      "id" : "extract-template-parameters"
-    }, {
-      "title" : "Ignore Template Parameters",
-      "id" : "ignore-template-parameters"
-    }, {
-      "title" : "Return Description",
-      "id" : "return-description"
-    }, {
-      "title" : "Compound",
-      "id" : "compound"
-    }, {
-      "title" : "utils::second::AnotherClass",
-      "id" : "utilssecondanotherclass"
-    }, {
-      "title" : "Cross-Reference",
-      "id" : "cross-reference"
-    }, {
-      "title" : "utils::second::MyClass",
-      "id" : "utilssecondmyclass"
-    } ]
-  }, {
-    "sectionTitle" : "Snippets",
-    "pageTitle" : "Typescript",
-    "pageMeta" : { },
-    "dirName" : "snippets",
-    "fileName" : "typescript",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Parsing",
-      "id" : "parsing"
-    }, {
-      "title" : "Properties",
-      "id" : "properties"
-    }, {
-      "title" : "JSX Elements",
-      "id" : "jsx-elements"
-    } ]
-  }, {
-    "sectionTitle" : "Snippets",
-    "pageTitle" : "Cpp",
-    "pageMeta" : { },
-    "dirName" : "snippets",
-    "fileName" : "cpp",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Comments",
-      "id" : "comments"
-    } ]
-  }, {
-    "sectionTitle" : "Snippets",
     "pageTitle" : "Json",
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "json",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Paths",
-      "id" : "paths"
+      "title" : "Auto Formatting",
+      "id" : "auto-formatting"
     }, {
-      "title" : "Paths From File",
-      "id" : "paths-from-file"
+      "title" : "Highlight Values By Path",
+      "id" : "highlight-values-by-path"
+    }, {
+      "title" : "Highlight By Path From File",
+      "id" : "highlight-by-path-from-file"
     }, {
       "title" : "Json Subparts",
       "id" : "json-subparts"
@@ -779,6 +609,74 @@ toc = [ {
     } ]
   }, {
     "sectionTitle" : "Snippets",
+    "pageTitle" : "Cpp",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "cpp",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Description Extraction",
+      "id" : "description-extraction"
+    }, {
+      "title" : "Auto Reference",
+      "id" : "auto-reference"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Python",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "python",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Content Extraction",
+      "id" : "content-extraction"
+    }, {
+      "title" : "Description Extraction",
+      "id" : "description-extraction"
+    }, {
+      "title" : "Auto Reference",
+      "id" : "auto-reference"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Java",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "java",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Content Extraction",
+      "id" : "content-extraction"
+    }, {
+      "title" : "Description Extraction",
+      "id" : "description-extraction"
+    }, {
+      "title" : "Auto Reference",
+      "id" : "auto-reference"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
+    "pageTitle" : "Groovy",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "groovy",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Method Body",
+      "id" : "method-body"
+    }, {
+      "title" : "Multiple Bodies",
+      "id" : "multiple-bodies"
+    }, {
+      "title" : "Overloads",
+      "id" : "overloads"
+    }, {
+      "title" : "Class Body",
+      "id" : "class-body"
+    } ]
+  }, {
+    "sectionTitle" : "Snippets",
     "pageTitle" : "Markdown",
     "pageMeta" : { },
     "dirName" : "snippets",
@@ -788,30 +686,27 @@ toc = [ {
       "title" : "Single Markdown File",
       "id" : "single-markdown-file"
     }, {
-      "title" : "Multiple Markdown Files",
-      "id" : "multiple-markdown-files"
-    }, {
-      "title" : "Section One",
-      "id" : "section-one"
-    }, {
-      "title" : "Section Two",
-      "id" : "section-two"
+      "title" : "Included Markdown",
+      "id" : "included-markdown"
     }, {
       "title" : "Optional Markdown",
       "id" : "optional-markdown"
     }, {
       "title" : "Partial Markdown",
       "id" : "partial-markdown"
+    }, {
+      "title" : "Multiple Markdown Files",
+      "id" : "multiple-markdown-files"
     } ]
   } ]
 }, {
-  "sectionTitle" : "Layout",
-  "dirName" : "layout",
+  "sectionTitle" : "Visuals",
+  "dirName" : "visuals",
   "items" : [ {
-    "sectionTitle" : "Layout",
+    "sectionTitle" : "Visuals",
     "pageTitle" : "Attention Signs",
     "pageMeta" : { },
-    "dirName" : "layout",
+    "dirName" : "visuals",
     "fileName" : "attention-signs",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
@@ -837,6 +732,341 @@ toc = [ {
       "id" : "exercise"
     } ]
   }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Images",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "images",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Markdown",
+      "id" : "markdown"
+    }, {
+      "title" : "Extension",
+      "id" : "extension"
+    }, {
+      "title" : "Title",
+      "id" : "title"
+    }, {
+      "title" : "Border",
+      "id" : "border"
+    }, {
+      "title" : "Fit",
+      "id" : "fit"
+    }, {
+      "title" : "Scale",
+      "id" : "scale"
+    }, {
+      "title" : "Align",
+      "id" : "align"
+    }, {
+      "title" : "External Image",
+      "id" : "external-image"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Image Annotations",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "image-annotations",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Badges",
+      "id" : "badges"
+    }, {
+      "title" : "Manual Coordinates",
+      "id" : "manual-coordinates"
+    }, {
+      "title" : "Badge Textual Description",
+      "id" : "badge-textual-description"
+    }, {
+      "title" : "Pixel Ratio",
+      "id" : "pixel-ratio"
+    }, {
+      "title" : "Rectangles And Arrows",
+      "id" : "rectangles-and-arrows"
+    }, {
+      "title" : "Annotations File",
+      "id" : "annotations-file"
+    }, {
+      "title" : "Annotations Path Shortcut",
+      "id" : "annotations-path-shortcut"
+    }, {
+      "title" : "Integration With Testing",
+      "id" : "integration-with-testing"
+    }, {
+      "title" : "Presentation Mode",
+      "id" : "presentation-mode"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Charts",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "charts",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Pie",
+      "id" : "pie"
+    }, {
+      "title" : "Bar",
+      "id" : "bar"
+    }, {
+      "title" : "Line",
+      "id" : "line"
+    }, {
+      "title" : "Legend",
+      "id" : "legend"
+    }, {
+      "title" : "Wide Mode",
+      "id" : "wide-mode"
+    }, {
+      "title" : "Inlined Data",
+      "id" : "inlined-data"
+    }, {
+      "title" : "Presentation",
+      "id" : "presentation"
+    }, {
+      "title" : "ECharts",
+      "id" : "echarts"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Mermaid Diagrams",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "mermaid-diagrams",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Fenced Block",
+      "id" : "fenced-block"
+    }, {
+      "title" : "External File",
+      "id" : "external-file"
+    }, {
+      "title" : "Wide Mode",
+      "id" : "wide-mode"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "SVG",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "SVG",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Retina Displays",
+      "id" : "retina-displays"
+    }, {
+      "title" : "Ids To Reveal",
+      "id" : "ids-to-reveal"
+    }, {
+      "title" : "Actual Size",
+      "id" : "actual-size"
+    }, {
+      "title" : "Scale",
+      "id" : "scale"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Icons",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "icons",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Feather Icons",
+      "id" : "feather-icons"
+    }, {
+      "title" : "Bullet Points",
+      "id" : "bullet-points"
+    }, {
+      "title" : "Colors",
+      "id" : "colors"
+    }, {
+      "title" : "Inside Tables",
+      "id" : "inside-tables"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Headings",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "headings",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Heading Types",
+      "id" : "heading-types"
+    }, {
+      "title" : "Heading API Type",
+      "id" : "heading-api-type",
+      "style" : "api"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Text Badge",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "text-badge",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Part Of Text",
+      "id" : "part-of-text"
+    }, {
+      "title" : "Part Of Heading",
+      "id" : "part-of-heading"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Spoilers",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "spoilers",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Hidden Content",
+      "id" : "hidden-content"
+    }, {
+      "title" : "Hidden Content Title",
+      "id" : "hidden-content-title"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Keyboard Shortcuts",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "keyboard-shortcuts",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Inlined Keyboard Shorcuts",
+      "id" : "inlined-keyboard-shorcuts"
+    }, {
+      "title" : "Multiple Keys",
+      "id" : "multiple-keys"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Smart Bullet Points",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "smart-bullet-points",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Types",
+      "id" : "types"
+    }, {
+      "title" : "Left Right Timeline",
+      "id" : "left-right-timeline"
+    }, {
+      "title" : "Venn",
+      "id" : "venn"
+    }, {
+      "title" : "Steps",
+      "id" : "steps"
+    }, {
+      "title" : "Presentation Only",
+      "id" : "presentation-only"
+    }, {
+      "title" : "Horizontal Stripes",
+      "id" : "horizontal-stripes"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Flow Diagrams",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "flow-diagrams",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Nodes and Edges",
+      "id" : "nodes-and-edges"
+    }, {
+      "title" : "Multiline Labels",
+      "id" : "multiline-labels"
+    }, {
+      "title" : "Nodes Size",
+      "id" : "nodes-size"
+    }, {
+      "title" : "Highlight",
+      "id" : "highlight"
+    }, {
+      "title" : "Color Groups",
+      "id" : "color-groups"
+    }, {
+      "title" : "Shapes",
+      "id" : "shapes"
+    }, {
+      "title" : "Legend",
+      "id" : "legend"
+    }, {
+      "title" : "Presentation",
+      "id" : "presentation"
+    }, {
+      "title" : "Vertical Layout",
+      "id" : "vertical-layout"
+    }, {
+      "title" : "Layout Types",
+      "id" : "layout-types"
+    }, {
+      "title" : "Links",
+      "id" : "links"
+    }, {
+      "title" : "Reusable Nodes",
+      "id" : "reusable-nodes"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Graphviz Diagrams",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "graphviz-diagrams",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Fenced Block",
+      "id" : "fenced-block"
+    }, {
+      "title" : "External File",
+      "id" : "external-file"
+    }, {
+      "title" : "Setup Requirements",
+      "id" : "setup-requirements"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "PlantUml",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "PlantUml",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "In Place",
+      "id" : "in-place"
+    }, {
+      "title" : "External File",
+      "id" : "external-file"
+    }, {
+      "title" : "Gantt Example",
+      "id" : "gantt-example"
+    } ]
+  }, {
+    "sectionTitle" : "Visuals",
+    "pageTitle" : "Iframe",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "iframe",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Embedding Video",
+      "id" : "embedding-video"
+    }, {
+      "title" : "Aspect Ratio",
+      "id" : "aspect-ratio"
+    } ]
+  } ]
+}, {
+  "sectionTitle" : "Layout",
+  "dirName" : "layout",
+  "items" : [ {
     "sectionTitle" : "Layout",
     "pageTitle" : "Tabs",
     "pageMeta" : { },
@@ -937,20 +1167,14 @@ toc = [ {
     "fileName" : "templates",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Don't Repeat Yourself",
-      "id" : "dont-repeat-yourself"
+      "title" : "Re-usable patterns",
+      "id" : "re-usable-patterns"
     }, {
-      "title" : "Definition",
-      "id" : "definition"
+      "title" : "Extract A Pattern",
+      "id" : "extract-a-pattern"
     }, {
-      "title" : "Inlined",
-      "id" : "inlined"
-    }, {
-      "title" : "External Parameters",
-      "id" : "external-parameters"
-    }, {
-      "title" : "Loops",
-      "id" : "loops"
+      "title" : "Use A Pattern",
+      "id" : "use-a-pattern"
     } ]
   }, {
     "sectionTitle" : "Layout",
@@ -1017,310 +1241,239 @@ toc = [ {
     } ]
   } ]
 }, {
-  "sectionTitle" : "Visuals",
-  "dirName" : "visuals",
+  "sectionTitle" : "Python",
+  "dirName" : "python",
   "items" : [ {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Spoilers",
+    "sectionTitle" : "Python",
+    "pageTitle" : "Content Extraction",
     "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "spoilers",
+    "dirName" : "python",
+    "fileName" : "content-extraction",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Hidden Content",
-      "id" : "hidden-content"
+      "title" : "Content",
+      "id" : "content"
     }, {
-      "title" : "Hidden Content Title",
-      "id" : "hidden-content-title"
+      "title" : "Function",
+      "id" : "function"
+    }, {
+      "title" : "Variable",
+      "id" : "variable"
+    }, {
+      "title" : "Class",
+      "id" : "class"
     } ]
   }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Smart Bullet Points",
+    "sectionTitle" : "Python",
+    "pageTitle" : "Description Extraction",
     "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "smart-bullet-points",
+    "dirName" : "python",
+    "fileName" : "description-extraction",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Types",
-      "id" : "types"
+      "title" : "Doc String",
+      "id" : "doc-string"
     }, {
-      "title" : "Left Right Timeline",
-      "id" : "left-right-timeline"
+      "title" : "Doc Parameters",
+      "id" : "doc-parameters"
     }, {
-      "title" : "Venn",
-      "id" : "venn"
-    }, {
-      "title" : "Steps",
-      "id" : "steps"
-    }, {
-      "title" : "Presentation Only",
-      "id" : "presentation-only"
-    }, {
-      "title" : "Horizontal Stripes",
-      "id" : "horizontal-stripes"
+      "title" : "Type Hints",
+      "id" : "type-hints"
     } ]
   }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Text Badge",
+    "sectionTitle" : "Python",
+    "pageTitle" : "Auto Reference",
     "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "text-badge",
+    "dirName" : "python",
+    "fileName" : "auto-reference",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Part Of Text",
-      "id" : "part-of-text"
+      "title" : "Method/Function Definition",
+      "id" : "methodfunction-definition"
     }, {
-      "title" : "Part Of Heading",
-      "id" : "part-of-heading"
+      "title" : "Class Definition",
+      "id" : "class-definition"
+    }, {
+      "title" : "fin.money.Money",
+      "id" : "finmoneymoney",
+      "style" : "api"
+    }, {
+      "title" : "Inheritance",
+      "id" : "inheritance"
+    }, {
+      "title" : "executive_department.WorkerCTO",
+      "id" : "executive_departmentworkercto",
+      "style" : "api"
+    }, {
+      "title" : "department.Worker",
+      "id" : "departmentworker",
+      "style" : "api"
+    } ]
+  } ]
+}, {
+  "sectionTitle" : "CPP",
+  "dirName" : "CPP",
+  "items" : [ {
+    "sectionTitle" : "CPP",
+    "pageTitle" : "Doxygen Setup",
+    "pageMeta" : { },
+    "dirName" : "CPP",
+    "fileName" : "doxygen-setup",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Doxygen",
+      "id" : "doxygen"
+    }, {
+      "title" : "Setup",
+      "id" : "setup"
     } ]
   }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Headings",
+    "sectionTitle" : "CPP",
+    "pageTitle" : "Description Extraction",
     "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "headings",
+    "dirName" : "CPP",
+    "fileName" : "description-extraction",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Heading Types",
-      "id" : "heading-types"
+      "title" : "Members Comment Text",
+      "id" : "members-comment-text"
     }, {
-      "title" : "Heading API Type",
-      "id" : "heading-api-type"
+      "title" : "Member Args Selection",
+      "id" : "member-args-selection"
+    }, {
+      "title" : "Classes Comment Text",
+      "id" : "classes-comment-text"
+    }, {
+      "title" : "Extract Parameters",
+      "id" : "extract-parameters"
+    }, {
+      "title" : "Extract Parameters By Args",
+      "id" : "extract-parameters-by-args"
+    }, {
+      "title" : "Extract Template Parameters",
+      "id" : "extract-template-parameters"
+    }, {
+      "title" : "Ignore Template Parameters",
+      "id" : "ignore-template-parameters"
+    }, {
+      "title" : "Return Description",
+      "id" : "return-description"
     } ]
   }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Icons",
+    "sectionTitle" : "CPP",
+    "pageTitle" : "Auto Reference",
     "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "icons",
+    "dirName" : "CPP",
+    "fileName" : "auto-reference",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Feather Icons",
-      "id" : "feather-icons"
+      "title" : "Member Signature, Comment And Parameters",
+      "id" : "member-signature-comment-and-parameters"
     }, {
-      "title" : "Bullet Points",
-      "id" : "bullet-points"
+      "title" : "Member Signature Only",
+      "id" : "member-signature-only"
     }, {
-      "title" : "Colors",
-      "id" : "colors"
+      "title" : "All Matching Signatures",
+      "id" : "all-matching-signatures"
+    }, {
+      "title" : "Specific Member By Args",
+      "id" : "specific-member-by-args"
+    }, {
+      "title" : "Compound",
+      "id" : "compound"
+    }, {
+      "title" : "utils::second::AnotherClass",
+      "id" : "utilssecondanotherclass",
+      "style" : "api"
+    }, {
+      "title" : "Cross-Reference",
+      "id" : "cross-reference"
+    }, {
+      "title" : "utils::second::MyClass",
+      "id" : "utilssecondmyclass",
+      "style" : "api"
+    } ]
+  } ]
+}, {
+  "sectionTitle" : "Java",
+  "dirName" : "java",
+  "items" : [ {
+    "sectionTitle" : "Java",
+    "pageTitle" : "Content Extraction",
+    "pageMeta" : { },
+    "dirName" : "java",
+    "fileName" : "content-extraction",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Method Body",
+      "id" : "method-body"
+    }, {
+      "title" : "Callout Comments",
+      "id" : "callout-comments"
+    }, {
+      "title" : "Signature Only",
+      "id" : "signature-only"
+    }, {
+      "title" : "Overloads",
+      "id" : "overloads"
+    }, {
+      "title" : "Type Body",
+      "id" : "type-body"
+    }, {
+      "title" : "Multiple Entries",
+      "id" : "multiple-entries"
+    }, {
+      "title" : "Multiple Overloads",
+      "id" : "multiple-overloads"
+    }, {
+      "title" : "Multiple Bodies",
+      "id" : "multiple-bodies"
     } ]
   }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Keyboard Shortcuts",
+    "sectionTitle" : "Java",
+    "pageTitle" : "Description Extraction",
     "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "keyboard-shortcuts",
+    "dirName" : "java",
+    "fileName" : "description-extraction",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Inlined Keyboard Shorcuts",
-      "id" : "inlined-keyboard-shorcuts"
+      "title" : "Class Level",
+      "id" : "class-level"
     }, {
-      "title" : "Multiple Keys",
-      "id" : "multiple-keys"
+      "title" : "Method Level",
+      "id" : "method-level"
+    }, {
+      "title" : "Field Level",
+      "id" : "field-level"
+    }, {
+      "title" : "Inner Classes",
+      "id" : "inner-classes"
+    }, {
+      "title" : "Handling Links",
+      "id" : "handling-links"
+    }, {
+      "title" : "Method Params",
+      "id" : "method-params"
+    }, {
+      "title" : "Method Params With References",
+      "id" : "method-params-with-references"
+    }, {
+      "title" : "Enum Entries",
+      "id" : "enum-entries"
+    }, {
+      "title" : "Enum Entries With References",
+      "id" : "enum-entries-with-references"
     } ]
   }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Charts",
+    "sectionTitle" : "Java",
+    "pageTitle" : "Auto Reference",
     "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "charts",
+    "dirName" : "java",
+    "fileName" : "auto-reference",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Pie",
-      "id" : "pie"
-    }, {
-      "title" : "Bar",
-      "id" : "bar"
-    }, {
-      "title" : "Line",
-      "id" : "line"
-    }, {
-      "title" : "Legend",
-      "id" : "legend"
-    }, {
-      "title" : "Wide Mode",
-      "id" : "wide-mode"
-    }, {
-      "title" : "Inlined Data",
-      "id" : "inlined-data"
-    }, {
-      "title" : "Presentation",
-      "id" : "presentation"
-    }, {
-      "title" : "ECharts",
-      "id" : "echarts"
-    } ]
-  }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Images",
-    "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "images",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Markdown",
-      "id" : "markdown"
-    }, {
-      "title" : "Extension",
-      "id" : "extension"
-    }, {
-      "title" : "Caption",
-      "id" : "caption"
-    }, {
-      "title" : "Border",
-      "id" : "border"
-    }, {
-      "title" : "Fit",
-      "id" : "fit"
-    }, {
-      "title" : "Scale Ratio",
-      "id" : "scale-ratio"
-    }, {
-      "title" : "Align",
-      "id" : "align"
-    }, {
-      "title" : "External Image",
-      "id" : "external-image"
-    } ]
-  }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Image Annotations",
-    "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "image-annotations",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Badges",
-      "id" : "badges"
-    }, {
-      "title" : "Annotations File",
-      "id" : "annotations-file"
-    }, {
-      "title" : "Integration With Testing",
-      "id" : "integration-with-testing"
-    }, {
-      "title" : "Path Shortcut",
-      "id" : "path-shortcut"
-    }, {
-      "title" : "Presentation Mode",
-      "id" : "presentation-mode"
-    } ]
-  }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Iframe",
-    "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "iframe",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Embedding Video",
-      "id" : "embedding-video"
-    }, {
-      "title" : "Aspect Ratio",
-      "id" : "aspect-ratio"
-    } ]
-  }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "SVG",
-    "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "SVG",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Retina Displays",
-      "id" : "retina-displays"
-    }, {
-      "title" : "Ids To Reveal",
-      "id" : "ids-to-reveal"
-    }, {
-      "title" : "Actual Size",
-      "id" : "actual-size"
-    }, {
-      "title" : "Scale",
-      "id" : "scale"
-    } ]
-  }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Graphviz",
-    "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "graphviz",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "External File",
-      "id" : "external-file"
-    } ]
-  }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Flow Diagrams",
-    "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "flow-diagrams",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Nodes and Edges",
-      "id" : "nodes-and-edges"
-    }, {
-      "title" : "Multiline Labels",
-      "id" : "multiline-labels"
-    }, {
-      "title" : "Nodes Size",
-      "id" : "nodes-size"
-    }, {
-      "title" : "Highlight",
-      "id" : "highlight"
-    }, {
-      "title" : "Color Groups",
-      "id" : "color-groups"
-    }, {
-      "title" : "Shapes",
-      "id" : "shapes"
-    }, {
-      "title" : "Legend",
-      "id" : "legend"
-    }, {
-      "title" : "Presentation",
-      "id" : "presentation"
-    }, {
-      "title" : "Vertical Layout",
-      "id" : "vertical-layout"
-    }, {
-      "title" : "Layout Types",
-      "id" : "layout-types"
-    }, {
-      "title" : "Links",
-      "id" : "links"
-    }, {
-      "title" : "Reusable Nodes",
-      "id" : "reusable-nodes"
-    } ]
-  }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "PlantUml",
-    "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "PlantUml",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "In Place",
-      "id" : "in-place"
-    }, {
-      "title" : "External File",
-      "id" : "external-file"
-    }, {
-      "title" : "Gantt Example",
-      "id" : "gantt-example"
-    } ]
-  }, {
-    "sectionTitle" : "Visuals",
-    "pageTitle" : "Mermaid",
-    "pageMeta" : { },
-    "dirName" : "visuals",
-    "fileName" : "mermaid",
-    "viewOnRelativePath" : null,
-    "pageSectionIdTitles" : [ {
-      "title" : "Mermaid",
-      "id" : "mermaid"
+      "title" : "Coming Soon",
+      "id" : "coming-soon"
     } ]
   } ]
 }, {
@@ -1328,21 +1481,21 @@ toc = [ {
   "dirName" : "synergy-with-testing",
   "items" : [ {
     "sectionTitle" : "Synergy With Testing",
-    "pageTitle" : "Java",
+    "pageTitle" : "Web UI",
     "pageMeta" : { },
     "dirName" : "synergy-with-testing",
-    "fileName" : "java",
+    "fileName" : "web-UI",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Table Data",
-      "id" : "table-data"
+      "title" : "Screenshots And Annotations",
+      "id" : "screenshots-and-annotations"
     } ]
   }, {
     "sectionTitle" : "Synergy With Testing",
-    "pageTitle" : "REST",
+    "pageTitle" : "REST API",
     "pageMeta" : { },
     "dirName" : "synergy-with-testing",
-    "fileName" : "REST",
+    "fileName" : "REST-API",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Request and Response Capture",
@@ -1351,22 +1504,22 @@ toc = [ {
       "title" : "WebTau",
       "id" : "webtau"
     }, {
-      "title" : "Capture REST Artifacts",
-      "id" : "capture-rest-artifacts"
+      "title" : "Documentation Pipeline",
+      "id" : "documentation-pipeline"
     }, {
-      "title" : "Document REST Calls",
-      "id" : "document-rest-calls"
+      "title" : "Create Employee",
+      "id" : "create-employee"
     } ]
   }, {
     "sectionTitle" : "Synergy With Testing",
-    "pageTitle" : "Web UI",
+    "pageTitle" : "Business Logic",
     "pageMeta" : { },
     "dirName" : "synergy-with-testing",
-    "fileName" : "web-UI",
+    "fileName" : "business-logic",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Auto Annotations",
-      "id" : "auto-annotations"
+      "title" : "Capture Input Example",
+      "id" : "capture-input-example"
     } ]
   } ]
 }, {
@@ -1432,6 +1585,9 @@ toc = [ {
     "fileName" : "2022",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.58",
+      "id" : "158"
+    }, {
       "title" : "1.57",
       "id" : "157"
     }, {

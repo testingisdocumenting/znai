@@ -106,14 +106,13 @@
 
 <article>
 <header><h1>Class Path Lookup</h1></header>
-<p>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central. &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;${project.version}&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;${junit.version}&lt;/version&gt; &lt;classifier&gt;sources&lt;/classifier&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;/plugin&gt; :include-java: org/junit/Assert.java {entry: &quot;assertArrayEquals&quot;} public static void assertArrayEquals(String message, Object[] expecteds, Object[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(Object[] expecteds, Object[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, boolean[] expecteds, boolean[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(boolean[] expecteds, boolean[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, byte[] expecteds, byte[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(byte[] expecteds, byte[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, char[] expecteds, char[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(char[] expecteds, char[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, short[] expecteds, short[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(short[] expecteds, short[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, int[] expecteds, int[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(int[] expecteds, int[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, long[] expecteds, long[] actuals) throws ArrayComparisonFailure { internalArrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(long[] expecteds, long[] actuals) { assertArrayEquals(null, expecteds, actuals); } public static void assertArrayEquals(String message, double[] expecteds, double[] actuals, double delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(double[] expecteds, double[] actuals, double delta) { assertArrayEquals(null, expecteds, actuals, delta); } public static void assertArrayEquals(String message, float[] expecteds, float[] actuals, float delta) throws ArrayComparisonFailure { new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals); } public static void assertArrayEquals(float[] expecteds, float[] actuals, float delta) { assertArrayEquals(null, expecteds, actuals, delta); }</p>
+<p>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central. &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;${project.version}&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;${junit.version}&lt;/version&gt; &lt;classifier&gt;sources&lt;/classifier&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;/plugin&gt; :include-java: org/junit/Assert.java {entry: &quot;fail(String)&quot;} public static void fail(String message) { if (message == null) { throw new AssertionError(); } throw new AssertionError(message); }</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -126,24 +125,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "files-reference-lookup",
-      "type" : "Section",
       "title" : "Files Reference Lookup",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -167,8 +167,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -207,16 +207,16 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ]
       }, {
+        "lang" : "txt",
         "snippet" : "../examples\n../module/src/main/java\n",
-        "type" : "Snippet",
-        "title" : "lookup-paths",
         "lineNumber" : "",
-        "lang" : "txt"
+        "title" : "lookup-paths",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "cli-parameter",
-      "type" : "Section",
       "title" : "CLI parameter",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -230,14 +230,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "command" : "znai --lookup-paths /extra/path-one /extra/path-two",
         "paramsToHighlight" : [ ],
-        "type" : "CliCommand",
-        "command" : "znai --lookup-paths /extra/path-one /extra/path-two"
+        "type" : "CliCommand"
       } ]
     }, {
       "id" : "zip-and-jar-lookup",
-      "type" : "Section",
       "title" : "Zip and Jar Lookup",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -256,27 +256,27 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "txt",
         "snippet" : "../sources.zip\n../module/archive.jar\n",
-        "type" : "Snippet",
+        "lineNumber" : "",
         "title" : "lookup-paths",
-        "lineNumber" : "",
-        "lang" : "txt"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-file: dir/inside-zip-b.txt\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "txt",
         "snippet" : "inside\nzip\nB",
-        "type" : "Snippet",
-        "title" : "dir/inside-zip-b.txt",
         "autoTitle" : true,
-        "lang" : "txt"
+        "title" : "dir/inside-zip-b.txt",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "http-lookup-location",
-      "type" : "Section",
       "title" : "HTTP Lookup Location",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -290,11 +290,11 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "txt",
         "snippet" : "../examples\n../module/src/main/java\nhttps://raw.githubusercontent.com/testingisdocumenting/webtau/master\n",
-        "type" : "Snippet",
-        "title" : "lookup-paths",
         "lineNumber" : "",
-        "lang" : "txt"
+        "title" : "lookup-paths",
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -302,19 +302,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: .travis.yml\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "yaml",
         "snippet" : "language: java\n\njdk:\n  - openjdk8\n  - openjdk11\n\ncache:\n  directories:\n  - $HOME/.m2\n  - $HOME/.npm\n  - node_modules\n\ndist: xenial\n\nservices:\n  - xvfb\n\naddons:\n  chrome: stable\n  firefox: latest\n  apt:\n    packages:\n      - graphviz\n\n# disables the default install step which is mvn install skipping tests\ninstall: true\n\nscript: mvn -B verify -P code-coverage",
-        "type" : "Snippet",
-        "lang" : "yaml"
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "class-path-lookup",
-      "type" : "Section",
       "title" : "Class Path Lookup",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -327,23 +327,23 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "xml",
         "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>${project.version}</version>\n    <dependencies>\n        <dependency>\n            <groupId>junit</groupId>\n            <artifactId>junit</artifactId>\n            <version>${junit.version}</version>\n            <classifier>sources</classifier>\n        </dependency>\n    </dependencies>\n</plugin>",
         "highlight" : [ 9 ],
-        "type" : "Snippet",
-        "lang" : "xml"
+        "type" : "Snippet"
       }, {
-        "snippet" : ":include-java: org/junit/Assert.java {entry: \"assertArrayEquals\"}\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : ":include-java: org/junit/Assert.java {entry: \"fail(String)\"}\n",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "snippet" : "public static void assertArrayEquals(String message, Object[] expecteds,\n        Object[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(Object[] expecteds, Object[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, boolean[] expecteds,\n        boolean[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(boolean[] expecteds, boolean[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, byte[] expecteds,\n        byte[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(byte[] expecteds, byte[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, char[] expecteds,\n        char[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(char[] expecteds, char[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, short[] expecteds,\n        short[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(short[] expecteds, short[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, int[] expecteds,\n        int[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(int[] expecteds, int[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, long[] expecteds,\n        long[] actuals) throws ArrayComparisonFailure {\n    internalArrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(long[] expecteds, long[] actuals) {\n    assertArrayEquals(null, expecteds, actuals);\n}\npublic static void assertArrayEquals(String message, double[] expecteds,\n        double[] actuals, double delta) throws ArrayComparisonFailure {\n    new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(double[] expecteds, double[] actuals, double delta) {\n    assertArrayEquals(null, expecteds, actuals, delta);\n}\npublic static void assertArrayEquals(String message, float[] expecteds,\n        float[] actuals, float delta) throws ArrayComparisonFailure {\n    new InexactComparisonCriteria(delta).arrayEquals(message, expecteds, actuals);\n}\npublic static void assertArrayEquals(float[] expecteds, float[] actuals, float delta) {\n    assertArrayEquals(null, expecteds, actuals, delta);\n}",
-        "entry" : "assertArrayEquals",
-        "type" : "Snippet",
-        "lang" : "java"
+        "lang" : "java",
+        "snippet" : "public static void fail(String message) {\n    if (message == null) {\n        throw new AssertionError();\n    }\n    throw new AssertionError(message);\n}",
+        "entry" : "fail(String)",
+        "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403250,
+    "lastModifiedTime" : 1658335209112,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Lookup Paths",

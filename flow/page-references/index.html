@@ -108,7 +108,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -121,24 +120,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "follow-the-order",
-      "type" : "Section",
       "title" : "Follow the Order",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -174,8 +174,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "links",
-      "type" : "Section",
       "title" : "Links",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -189,10 +189,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "markdown",
         "snippet" : "[Link Title](http://external/reference)\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : "markdown"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -206,10 +206,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "markdown",
         "snippet" : "[internal link](dir-name/file-name#optional-page-section-id)\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : "markdown"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -223,69 +223,69 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "level" : 2,
         "id" : "links-links-to-subsection",
-        "type" : "SubHeading",
-        "title" : "Links to Subsection"
+        "level" : 2,
+        "title" : "Links to Subsection",
+        "type" : "SubHeading"
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Linking to subsections is the same as linking to a top level section. ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/flow/page-references#links-links-to-subsection",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Here is an example",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/flow/page-references#links-links-to-subsection"
+          } ]
         } ]
       }, {
+        "lang" : "markdown",
         "snippet" : "[Here is an example](flow/page-references#links-links-to-subsection)\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : "markdown"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Use ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/flow/page-references#links",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Subsection Shortcut",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/flow/page-references#links"
+          } ]
         }, {
           "text" : " if a subsection is within the same page:",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "markdown",
         "snippet" : "[Subsection Shortcut](#links)\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : "markdown"
+        "type" : "Snippet"
       }, {
-        "level" : 2,
         "id" : "links-index-page",
-        "type" : "SubHeading",
-        "title" : "Index Page"
+        "level" : 2,
+        "title" : "Index Page",
+        "type" : "SubHeading"
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Clicking this ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "index page",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai"
+          } ]
         }, {
           "text" : " link will have the same effect as clicking the documentation title at the top of the ",
           "type" : "SimpleText"
@@ -309,15 +309,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "markdown",
         "snippet" : "[index page](/)\n[index page](/#link-to-subsection)\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : "markdown"
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "downloads",
-      "type" : "Section",
       "title" : "Downloads",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -330,29 +330,29 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "Download [test json file](data/test.json)\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Download ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/flow/data/test.json",
           "isFile" : true,
           "type" : "Link",
           "content" : [ {
             "text" : "test json file",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/flow/data/test.json"
+          } ]
         } ]
       } ]
     }, {
       "id" : "validation",
-      "type" : "Section",
       "title" : "Validation",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -378,7 +378,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403250,
+    "lastModifiedTime" : 1658335209112,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Page References",

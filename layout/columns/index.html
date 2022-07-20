@@ -86,34 +86,33 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Information Layout</h1></header>
-<p>The way your information is laid out affects how easy it is to comprehend any given material. Some content benefits from being formatted side-by-side. Some examples are:Before-and-after transition Action and its result Input and output</p>
+<p>Use columns plugin to render content in two columns:Before-and-after transition Action and its result Input and output Result comparison</p>
 </article>
 
 <article>
 <header><h1>Definition</h1></header>
-<p>To define columns layout use a fenced block plugin with the columns keyword: ```columns left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the rightand can span multiple lines</p>
+<p>To define columns use fenced code block ```columns left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the rightand can span multiple lines</p>
 </article>
 
 <article>
 <header><h1>Sizes</h1></header>
-<p>Size can be specified for a column as a portion . By default both portions are assigned a value of 10 . If you specify portion to be 3 for left column it will occupy 0.3 of the space. ```columns {left: {portion: 3}} left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the rightand can span multiple lines</p>
+<p>Size can be specified for a column as a portion . By default, both portions are assigned a value of 10 . If you specify right column portion to be 5 , then left will be left as 10 by default, leaving right side to be roughly 33% in size. http.get(&quot;/weather&quot;) { temperature.shouldBe &lt; 100 } http.doc.capture(&quot;weather-example&quot;) ```columns {right: {portion: 5}} left: :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;WebTau REST API test example&quot;, entry: &quot;weather&quot;, bodyOnly: true } right: :include-json: weather-example/response.json { title: &quot;weather response example&quot;, pathsFile: &quot;weather-example/paths.json&quot; } ```</p>
 </article>
 
 <article>
 <header><h1>Border</h1></header>
-<p>You can add a border to your columns. ```columns {left: {portion: 3}, border: true} left: **Argument Name** right: Argument description and what argument is for ``` ```columns {left: {portion: 3}, border: true} left: **Another Name** right: Argument description and what argument is for ``` Argument Name Argument description and what argument is for Another Name Argument description and what argument is for</p>
+<p>Use border to add a border separator between columns BeforeHello World AfterWorld Of Hellos ```columns {border: true} left: **Before** Hello World right: **After** World Of Hellos ```</p>
 </article>
 
 <article>
 <header><h1>Alignment</h1></header>
-<p>Specify text alignment using align . ```columns {left: {portion: 3, align: &quot;right&quot;}, border: true} left: **Argument Name** *optional* right: Argument description and what argument is for ``` Argument Nameoptional Argument description and what argument is for</p>
+<p>Use align to change a column content alignment. BeforeHello World AfterWorld Of Hellos ```columns {border: true, left: {align: &quot;right&quot;}} left: **Before** Hello World right: **After** World Of Hellos ```</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -126,39 +125,41 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "information-layout",
-      "type" : "Section",
       "title" : "Information Layout",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "The way your information is laid out affects how easy it is to comprehend any given material.",
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "type" : "SoftLineBreak"
+          "code" : "columns",
+          "type" : "InlinedCode"
         }, {
-          "text" : "Some content benefits from being formatted side-by-side. Some examples are:",
+          "text" : " plugin to render content in two columns:",
           "type" : "SimpleText"
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -186,35 +187,32 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Result comparison",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
       } ]
     }, {
       "id" : "definition",
-      "type" : "Section",
       "title" : "Definition",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To define columns layout use a ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "fenced",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " block plugin with the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "columns",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " keyword:",
+          "text" : "To define columns use fenced code block",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "```columns\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "columns" : [ {
           "content" : [ {
@@ -245,13 +243,13 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ],
-        "type" : "Columns",
-        "config" : { }
+        "config" : { },
+        "type" : "Columns"
       } ]
     }, {
       "id" : "sizes",
-      "type" : "Section",
       "title" : "Sizes",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -261,7 +259,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "portion",
           "type" : "InlinedCode"
         }, {
-          "text" : ". By default both portions are assigned a value of ",
+          "text" : ". By default, both portions are assigned a value of ",
           "type" : "SimpleText"
         }, {
           "code" : "10",
@@ -272,7 +270,7 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "If you specify ",
+          "text" : "If you specify right column ",
           "type" : "SimpleText"
         }, {
           "code" : "portion",
@@ -281,153 +279,135 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " to be ",
           "type" : "SimpleText"
         }, {
-          "code" : "3",
+          "code" : "5",
           "type" : "InlinedCode"
         }, {
-          "text" : " for left column it will occupy ",
+          "text" : ", then left will be left as ",
           "type" : "SimpleText"
         }, {
-          "code" : "0.3",
+          "code" : "10",
           "type" : "InlinedCode"
         }, {
-          "text" : " of the space.",
+          "text" : " by default,",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "leaving right side to be roughly 33% in size.",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "```columns {left: {portion: 3}}\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
         "columns" : [ {
           "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "this content goes to the left",
-              "type" : "SimpleText"
-            } ]
-          }, {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "and can span multiple lines",
-              "type" : "SimpleText"
-            } ]
+            "lang" : "groovy",
+            "snippet" : "http.get(\"/weather\") {\n    temperature.shouldBe < 100\n}\n\nhttp.doc.capture(\"weather-example\")",
+            "title" : "WebTau REST API test example",
+            "entry" : "weather",
+            "bodyOnly" : true,
+            "type" : "Snippet"
           } ]
         }, {
           "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "this content goes to the right",
-              "type" : "SimpleText"
-            } ]
-          }, {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "and can span multiple lines",
-              "type" : "SimpleText"
-            } ]
+            "title" : "weather response example",
+            "pathsFile" : "weather-example/paths.json",
+            "data" : {
+              "temperature" : 90,
+              "city" : "New York"
+            },
+            "paths" : [ "root.temperature" ],
+            "type" : "Json"
           } ]
         } ],
-        "type" : "Columns",
         "config" : {
-          "left" : {
-            "portion" : 3
+          "right" : {
+            "portion" : 5
           }
-        }
+        },
+        "type" : "Columns"
+      }, {
+        "lang" : "",
+        "snippet" : "```columns {right: {portion: 5}}\nleft: \n:include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"WebTau REST API test example\",\n  entry: \"weather\",\n  bodyOnly: true\n}\n\nright:\n:include-json: weather-example/response.json {\n  title: \"weather response example\",\n  pathsFile: \"weather-example/paths.json\"\n}\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "border",
-      "type" : "Section",
       "title" : "Border",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "You can add a border to your columns.",
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "border",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to add a border separator between columns",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "```columns {left: {portion: 3}, border: true}\nleft: **Argument Name**\nright: Argument description and what argument is for\n```\n```columns {left: {portion: 3}, border: true}\nleft: **Another Name**\nright: Argument description and what argument is for\n```\n",
-        "type" : "Snippet",
+        "columns" : [ {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "Before",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Hello World",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "After",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "World Of Hellos",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : {
+          "border" : true
+        },
+        "type" : "Columns"
+      }, {
+        "lang" : "",
+        "snippet" : "```columns {border: true}\nleft: \n**Before**\n\nHello World\n\nright:\n**After**\n\nWorld Of Hellos\n```\n",
         "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "columns" : [ {
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "type" : "StrongEmphasis",
-              "content" : [ {
-                "text" : "Argument Name",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          } ]
-        }, {
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Argument description and what argument is for",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        } ],
-        "type" : "Columns",
-        "config" : {
-          "border" : true,
-          "left" : {
-            "portion" : 3
-          }
-        }
-      }, {
-        "columns" : [ {
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "type" : "StrongEmphasis",
-              "content" : [ {
-                "text" : "Another Name",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          } ]
-        }, {
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Argument description and what argument is for",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        } ],
-        "type" : "Columns",
-        "config" : {
-          "border" : true,
-          "left" : {
-            "portion" : 3
-          }
-        }
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "alignment",
-      "type" : "Section",
       "title" : "Alignment",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Specify text alignment using ",
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
           "code" : "align",
           "type" : "InlinedCode"
         }, {
-          "text" : ".",
+          "text" : " to change a column content alignment.",
           "type" : "SimpleText"
         } ]
-      }, {
-        "snippet" : "```columns {left: {portion: 3, align: \"right\"}, border: true}\nleft: **Argument Name**\n\n*optional*\nright: Argument description and what argument is for\n```\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
       }, {
         "columns" : [ {
           "content" : [ {
@@ -435,40 +415,50 @@ ReactDOM.render(React.createElement(Documentation, {
             "content" : [ {
               "type" : "StrongEmphasis",
               "content" : [ {
-                "text" : "Argument Name",
+                "text" : "Before",
                 "type" : "SimpleText"
               } ]
             } ]
           }, {
             "type" : "Paragraph",
             "content" : [ {
-              "type" : "Emphasis",
-              "content" : [ {
-                "text" : "optional",
-                "type" : "SimpleText"
-              } ]
+              "text" : "Hello World",
+              "type" : "SimpleText"
             } ]
           } ]
         }, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Argument description and what argument is for",
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "After",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "World Of Hellos",
               "type" : "SimpleText"
             } ]
           } ]
         } ],
-        "type" : "Columns",
         "config" : {
           "border" : true,
           "left" : {
-            "portion" : 3,
             "align" : "right"
           }
-        }
+        },
+        "type" : "Columns"
+      }, {
+        "lang" : "",
+        "snippet" : "```columns {border: true, left: {align: \"right\"}}\nleft: \n**Before**\n\nHello World\n\nright:\n**After**\n\nWorld Of Hellos\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403258,
+    "lastModifiedTime" : 1658335209112,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Columns",

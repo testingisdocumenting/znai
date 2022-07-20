@@ -103,7 +103,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -116,24 +115,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "local-references",
-      "type" : "Section",
       "title" : "Local References",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -153,17 +153,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "csv",
         "snippet" : "constructor, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor\nusefulAction, flow/footer",
-        "type" : "Snippet",
         "title" : "references/references-demo.csv",
-        "lang" : "csv"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-file: file-name.js {referencesPath: \"references/references-demo.csv\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+        "referencesPath" : "references/references-demo.csv",
         "references" : {
           "usefulAction" : {
             "pageUrl" : "flow/footer"
@@ -172,14 +174,12 @@ ReactDOM.render(React.createElement(Documentation, {
             "pageUrl" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor"
           }
         },
-        "referencesPath" : "references/references-demo.csv",
-        "type" : "Snippet",
-        "lang" : "js"
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "global-references",
-      "type" : "Section",
       "title" : "Global References",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -193,30 +193,30 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "csv",
         "snippet" : "fapi.book, example-references/api#book\nfapi.query, example-references/api#query",
-        "type" : "Snippet",
         "title" : "references.csv",
-        "lang" : "csv"
+        "type" : "Snippet"
       }, {
+        "lang" : "js",
         "snippet" : "import * as fapi from 'flight-api'\n\nfunction bookFlight(flightInfo) {\n    const confirmation = fapi.book(flightInfo)\n    //...\n}\n\nfunction flightStatus(id) {\n    const fullStatus = fapi.query(id)\n    return fullStatus.shortStatus\n}",
-        "type" : "Snippet",
         "title" : "API example",
-        "lang" : "js"
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "inlined-code",
-      "type" : "Section",
       "title" : "Inlined Code",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
+          "url" : "/znai/snippets/inlined-code-snippets",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Inlined code",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/inlined-code-snippets"
+          } ]
         }, {
           "text" : " is automatically converted into a link if its content matches one of the",
           "type" : "SimpleText"
@@ -227,10 +227,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "md",
         "snippet" : "Use `fapi.book` to book a flight.  ",
-        "type" : "Snippet",
         "title" : "Example",
-        "lang" : "md"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -245,7 +245,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403262,
+    "lastModifiedTime" : 1658335209116,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Code References",

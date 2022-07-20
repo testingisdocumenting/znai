@@ -128,7 +128,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -141,24 +140,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "pie",
-      "type" : "Section",
       "title" : "Pie",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -166,26 +166,26 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-piechart: charts/genres.csv\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "csv",
         "snippet" : "genre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50",
-        "type" : "Snippet",
-        "title" : "charts/genres.csv",
         "autoTitle" : true,
-        "lang" : "csv"
+        "title" : "charts/genres.csv",
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "chartType" : "pie",
-        "type" : "EchartGeneric",
-        "labels" : [ "genre", "preference" ]
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "labels" : [ "genre", "preference" ],
+        "type" : "EchartGeneric"
       } ]
     }, {
       "id" : "bar",
-      "type" : "Section",
       "title" : "Bar",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -193,21 +193,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-barchart: charts/genres.csv\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "chartType" : "bar",
-        "type" : "EchartGeneric",
-        "labels" : [ "genre", "preference" ]
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "labels" : [ "genre", "preference" ],
+        "type" : "EchartGeneric"
       }, {
+        "lang" : "csv",
         "snippet" : "genre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50",
-        "type" : "Snippet",
-        "title" : "charts/genres.csv",
         "autoTitle" : true,
-        "lang" : "csv"
+        "title" : "charts/genres.csv",
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -215,21 +215,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-barchart: charts/game-activities.csv\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
         "chartType" : "bar",
-        "type" : "EchartGeneric",
-        "labels" : [ "game", "walking", "fighting", "reading" ]
+        "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
+        "labels" : [ "game", "walking", "fighting", "reading" ],
+        "type" : "EchartGeneric"
       }, {
+        "lang" : "csv",
         "snippet" : "game, walking, fighting, reading\nOblivion, 100, 100, 20\nElden Ring, 110, 110, 5\nPersona 5, 20, 30, 50\nDivinity, 30, 30, 10",
-        "type" : "Snippet",
-        "title" : "charts/game-activities.csv",
         "autoTitle" : true,
-        "lang" : "csv"
+        "title" : "charts/game-activities.csv",
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -243,16 +243,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-barchart: charts/game-activities.csv {stack: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "stack" : true,
-        "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
         "chartType" : "bar",
-        "type" : "EchartGeneric",
-        "labels" : [ "game", "walking", "fighting", "reading" ]
+        "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
+        "labels" : [ "game", "walking", "fighting", "reading" ],
+        "type" : "EchartGeneric"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -272,23 +272,23 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 250}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "horizontal" : true,
         "stack" : true,
-        "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
+        "horizontal" : true,
+        "height" : 250,
         "chartType" : "bar",
-        "type" : "EchartGeneric",
+        "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
         "labels" : [ "game", "walking", "fighting", "reading" ],
-        "height" : 250
+        "type" : "EchartGeneric"
       } ]
     }, {
       "id" : "line",
-      "type" : "Section",
       "title" : "Line",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -296,21 +296,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-linechart: charts/genres.csv\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "csv",
         "snippet" : "genre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50",
-        "type" : "Snippet",
-        "title" : "charts/genres.csv",
         "autoTitle" : true,
-        "lang" : "csv"
+        "title" : "charts/genres.csv",
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "chartType" : "line",
-        "type" : "EchartGeneric",
-        "labels" : [ "genre", "preference" ]
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "labels" : [ "genre", "preference" ],
+        "type" : "EchartGeneric"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -318,21 +318,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-linechart: charts/daily-genres.csv\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "csv",
         "snippet" : "day, RPG, RTS, FPS\nMonday, 100, 10, 0\nTuesday, 50, 50, 20\nWednesday, 10, 30, 50\nThursday, 5, 5, 100\nFriday, 0, 100, 10",
-        "type" : "Snippet",
-        "title" : "charts/daily-genres.csv",
         "autoTitle" : true,
-        "lang" : "csv"
+        "title" : "charts/daily-genres.csv",
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "chartType" : "line",
-        "type" : "EchartGeneric",
-        "labels" : [ "day", "RPG", "RTS", "FPS" ]
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
+        "labels" : [ "day", "RPG", "RTS", "FPS" ],
+        "type" : "EchartGeneric"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -340,26 +340,26 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-linechart: charts/competitors.csv\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "csv",
         "snippet" : "x, company one, company two\n10, 100, 150\n15.5, 110, 145\n30, 120, 130\n40, 110, 145\n50, 115, 100",
-        "type" : "Snippet",
-        "title" : "charts/competitors.csv",
         "autoTitle" : true,
-        "lang" : "csv"
+        "title" : "charts/competitors.csv",
+        "type" : "Snippet"
       }, {
-        "data" : [ [ 10, 100, 150 ], [ 15.5, 110, 145 ], [ 30, 120, 130 ], [ 40, 110, 145 ], [ 50, 115, 100 ] ],
         "chartType" : "line",
-        "type" : "EchartGeneric",
-        "labels" : [ "x", "company one", "company two" ]
+        "data" : [ [ 10, 100, 150 ], [ 15.5, 110, 145 ], [ 30, 120, 130 ], [ 40, 110, 145 ], [ 50, 115, 100 ] ],
+        "labels" : [ "x", "company one", "company two" ],
+        "type" : "EchartGeneric"
       } ]
     }, {
       "id" : "legend",
-      "type" : "Section",
       "title" : "Legend",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -373,21 +373,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-linechart: charts/daily-genres.csv {legend: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "legend" : true,
         "chartType" : "line",
-        "type" : "EchartGeneric",
-        "labels" : [ "day", "RPG", "RTS", "FPS" ]
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
+        "labels" : [ "day", "RPG", "RTS", "FPS" ],
+        "type" : "EchartGeneric"
       } ]
     }, {
       "id" : "wide-mode",
-      "type" : "Section",
       "title" : "Wide Mode",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -401,16 +401,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-linechart: charts/daily-genres.csv {wide: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "wide" : true,
         "chartType" : "line",
-        "type" : "EchartGeneric",
-        "labels" : [ "day", "RPG", "RTS", "FPS" ]
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
+        "labels" : [ "day", "RPG", "RTS", "FPS" ],
+        "type" : "EchartGeneric"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -418,22 +418,22 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-linechart: charts/daily-genres.csv {wide: true, height: 800}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "wide" : true,
+        "height" : 800,
         "chartType" : "line",
-        "type" : "EchartGeneric",
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "labels" : [ "day", "RPG", "RTS", "FPS" ],
-        "height" : 800
+        "type" : "EchartGeneric"
       } ]
     }, {
       "id" : "inlined-data",
-      "type" : "Section",
       "title" : "Inlined Data",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -441,41 +441,41 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "```piechart\ngenre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50\n```\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "chartType" : "pie",
-        "type" : "EchartGeneric",
-        "labels" : [ "genre", "preference" ]
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "labels" : [ "genre", "preference" ],
+        "type" : "EchartGeneric"
       }, {
+        "lang" : "",
         "snippet" : "```linechart {legend: true}\nday, RPG, RTS, FPS\nMonday, 100, 10, 0\nTuesday, 50, 50, 20\nWednesday, 10, 30, 50\nThursday, 5, 5, 100\nFriday, 0, 100, 10\n```\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "legend" : true,
         "chartType" : "line",
-        "type" : "EchartGeneric",
-        "labels" : [ "day", "RPG", "RTS", "FPS" ]
+        "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
+        "labels" : [ "day", "RPG", "RTS", "FPS" ],
+        "type" : "EchartGeneric"
       }, {
+        "lang" : "",
         "snippet" : "```barchart\ngenre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50\n```\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "chartType" : "bar",
-        "type" : "EchartGeneric",
-        "labels" : [ "genre", "preference" ]
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "labels" : [ "genre", "preference" ],
+        "type" : "EchartGeneric"
       } ]
     }, {
       "id" : "presentation",
-      "type" : "Section",
       "title" : "Presentation",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -500,17 +500,17 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-linechart: charts/competitors.csv {\n  legend: true,\n  breakpoint: [17, 42]\n}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ 10, 100, 150 ], [ 15.5, 110, 145 ], [ 30, 120, 130 ], [ 40, 110, 145 ], [ 50, 115, 100 ] ],
         "legend" : true,
+        "breakpoint" : [ 17, 42 ],
         "chartType" : "line",
-        "type" : "EchartGeneric",
+        "data" : [ [ 10, 100, 150 ], [ 15.5, 110, 145 ], [ 30, 120, 130 ], [ 40, 110, 145 ], [ 50, 115, 100 ] ],
         "labels" : [ "x", "company one", "company two" ],
-        "breakpoint" : [ 17, 42 ]
+        "type" : "EchartGeneric"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -533,16 +533,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-piechart: charts/genres.csv {breakpoint: \"Action\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
+        "breakpoint" : [ "Action" ],
         "chartType" : "pie",
-        "type" : "EchartGeneric",
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "labels" : [ "genre", "preference" ],
-        "breakpoint" : [ "Action" ]
+        "type" : "EchartGeneric"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -556,22 +556,22 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-barchart: charts/genres.csv {\n  legend: true,\n  breakpoint: \"all\"\n}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "legend" : true,
+        "breakpoint" : [ "RPG", "Action", "RTS" ],
         "chartType" : "bar",
-        "type" : "EchartGeneric",
+        "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "labels" : [ "genre", "preference" ],
-        "breakpoint" : [ "RPG", "Action", "RTS" ]
+        "type" : "EchartGeneric"
       } ]
     }, {
       "id" : "echarts",
-      "type" : "Section",
       "title" : "ECharts",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -581,20 +581,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " uses the beautiful and functional ",
           "type" : "SimpleText"
         }, {
+          "url" : "https://echarts.apache.org/",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "EChart",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://echarts.apache.org/"
+          } ]
         }, {
           "text" : " library to render charts.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403274,
+    "lastModifiedTime" : 1658335209128,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Charts",

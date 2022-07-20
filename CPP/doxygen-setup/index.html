@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Mermaid</title>
+<title>Znai: Doxygen Setup</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,15 +85,19 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Mermaid</h1></header>
-<p>Use https://mermaid-js.github.io/mermaid/#/ Mermaid to create diagrams using text and code, written in a Markdown style. Surround Mermaid expressions with a fenced block and specify mermaid as a language ```mermaid graph TD; A--&gt;B; A--&gt;C; B--&gt;C; ``` The result will be a diagram. graph TD; A--&gt;B; A--&gt;C; B--&gt;C; In presentation mode, rendered expressions will automatically scale to make use of the screen space.Note: Rendering is done by using https://mermaid-js.github.io/mermaid/#/ Mermaid library.</p>
+<header><h1>Doxygen</h1></header>
+<p>Znai parses generated https://www.doxygen.nl/index.html Doxygen XML files to extract and embedComments Signatures Parameters Use the building blocks to mix and match API documentation with visuals and other artifacts. Or use the built-in plugins to generate the whole blocks of API reference.</p>
+</article>
+
+<article>
+<header><h1>Setup</h1></header>
+<p>Specify index.xml location inside &lt;docroot&gt;/doxygen.json { &quot;indexPath&quot;: &quot;doxygen/xml/index.xml&quot; } Note: To read doxygen XMLs from zip, add path to the zip to flow/lookup-paths#zip-and-jar-lookup lookup-paths</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -106,102 +110,141 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "mermaid",
+      "id" : "doxygen",
+      "title" : "Doxygen",
       "type" : "Section",
-      "title" : "Mermaid",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
+          "text" : "Znai parses generated ",
           "type" : "SimpleText"
         }, {
+          "url" : "https://www.doxygen.nl/index.html",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
-            "text" : "Mermaid",
+            "text" : "Doxygen",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://mermaid-js.github.io/mermaid/#/"
+          } ]
         }, {
-          "text" : " to create diagrams using text and code, written in a Markdown style.",
+          "text" : " XML files to extract and embed",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Comments",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Signatures",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Parameters",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the building blocks to mix and match API documentation with visuals and other artifacts.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "Surround Mermaid expressions with a fenced block and specify ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "mermaid",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " as a language",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "```mermaid\ngraph TD; A-->B; A-->C; B-->C;\n```\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "The result will be a diagram.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "mermaid" : "graph TD; A-->B; A-->C; B-->C;\n",
-        "type" : "Mermaid"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "In presentation mode, rendered expressions will automatically scale to make use of the screen space.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Note: Rendering is done by using ",
-          "type" : "SimpleText"
-        }, {
-          "isFile" : false,
-          "type" : "Link",
-          "content" : [ {
-            "text" : "Mermaid",
-            "type" : "SimpleText"
-          } ],
-          "url" : "https://mermaid-js.github.io/mermaid/#/"
-        }, {
-          "text" : " library.",
+          "text" : "Or use the built-in plugins to generate the whole blocks of API reference.",
           "type" : "SimpleText"
         } ]
       } ]
+    }, {
+      "id" : "setup",
+      "title" : "Setup",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Specify ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "index.xml",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " location inside ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "<docroot>/doxygen.json",
+          "type" : "InlinedCode"
+        } ]
+      }, {
+        "lang" : "json",
+        "snippet" : "{\n  \"indexPath\": \"doxygen/xml/index.xml\"\n}",
+        "autoTitle" : true,
+        "title" : "doxygen.json",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: To read doxygen XMLs from zip, add path to the zip to ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/flow/lookup-paths#zip-and-jar-lookup",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "lookup-paths",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      } ]
     } ],
-    "lastModifiedTime" : 1653499403282,
+    "lastModifiedTime" : 1658335209108,
     "tocItem" : {
-      "sectionTitle" : "Visuals",
-      "pageTitle" : "Mermaid",
+      "sectionTitle" : "CPP",
+      "pageTitle" : "Doxygen Setup",
       "pageMeta" : { },
-      "dirName" : "visuals",
-      "fileName" : "mermaid",
+      "dirName" : "CPP",
+      "fileName" : "doxygen-setup",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Mermaid",
-        "id" : "mermaid"
+        "title" : "Doxygen",
+        "id" : "doxygen"
+      }, {
+        "title" : "Setup",
+        "id" : "setup"
       } ]
     }
   }

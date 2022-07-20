@@ -85,12 +85,17 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Paths</h1></header>
-<p>Use the include-json plugin to bring attention to a certain place in a JSON file. :include-json: book-store.json {paths: [&quot;root.store.book[0].category&quot;, &quot;root.store.book[2].category&quot;]} Comma-separated paths specified inside paths will be highlighted.</p>
+<header><h1>Auto Formatting</h1></header>
+<p>Use json fence block to render auto formatted json and use extra capabilities described below ```json [{&quot;key1&quot;: &quot;value1&quot;}, {&quot;key2&quot;: &quot;value2&quot;}] ``` Use json include plugin to read json from an external file [{&quot;key1&quot;: &quot;value1&quot;}, {&quot;key2&quot;: &quot;value2&quot;}] :include-json: simple.json</p>
 </article>
 
 <article>
-<header><h1>Paths From File</h1></header>
+<header><h1>Highlight Values By Path</h1></header>
+<p>Use the paths plugin parameter to bring attention to a certain place in a JSON file. ```json {paths: &quot;root[1].key2&quot;} [{&quot;key1&quot;: &quot;value1&quot;}, {&quot;key2&quot;: &quot;value2&quot;}] ``` Pass multiple values to paths to highlight more than one leaf value :include-json: book-store.json {paths: [&quot;root.store.book[0].category&quot;, &quot;root.store.book[2].category&quot;]} Comma-separated paths specified inside paths will be highlighted.</p>
+</article>
+
+<article>
+<header><h1>Highlight By Path From File</h1></header>
 <p>Use pathsFile to specify a file to read paths from. :include-json: book-store.json {pathsFile: &quot;book-store-paths.json&quot;}</p>
 </article>
 
@@ -101,7 +106,7 @@
 
 <article>
 <header><h1>Title</h1></header>
-<p>To specify a title use the title property: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;}</p>
+<p>Use title parameter to specify a snippet title: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;} Use autoTitle: true to automatically set title to specified file name</p>
 </article>
 
 <article>
@@ -121,19 +126,18 @@
 
 <article>
 <header><h1>Code References</h1></header>
-<p>You can turn parts of JSON into links to internal or external pages.</p>
+<p>You can turn parts of JSON into links to internal or external pages. :include-json: trader.json { title: &quot;trader&quot;, referencesPath: &quot;references/json-references-demo.csv&quot; } trader, example-references/domain#trader transaction, example-references/domain#transaction</p>
 </article>
 
 <article>
 <header><h1>Test Results</h1></header>
-<p>Consider leveraging testing frameworks to extract JSON samples from your endpoints. Information about what assertions were made can be used to highlight points of interest.</p>
+<p>Below is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to make an HTTP call, extract JSON response and information about asserted fields to highlight. http.get(&quot;/weather&quot;) { temperature.shouldBe &lt; 100 } http.doc.capture(&quot;weather-example&quot;) http.doc.capture captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json (validated paths). markdown :include-json: weather-example/response.json { title: &quot;weather response example&quot;, pathsFile: &quot;weather-example/paths.json&quot; }</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -146,34 +150,96 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "paths",
+      "id" : "auto-formatting",
+      "title" : "Auto Formatting",
       "type" : "Section",
-      "title" : "Paths",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "json",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " fence block to render auto formatted json and use extra capabilities described below",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```json\n[{\"key1\": \"value1\"}, {\"key2\": \"value2\"}]\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "data" : [ {
+          "key1" : "value1"
+        }, {
+          "key2" : "value2"
+        } ],
+        "paths" : [ ],
+        "type" : "Json"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "json",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " include plugin to read json from an external file",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "json",
+        "snippet" : "[{\"key1\": \"value1\"}, {\"key2\": \"value2\"}]",
+        "autoTitle" : true,
+        "title" : "simple.json",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: simple.json\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "data" : [ {
+          "key1" : "value1"
+        }, {
+          "key2" : "value2"
+        } ],
+        "paths" : [ ],
+        "type" : "Json"
+      } ]
+    }, {
+      "id" : "highlight-values-by-path",
+      "title" : "Highlight Values By Path",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Use the ",
           "type" : "SimpleText"
         }, {
-          "code" : "include-json",
+          "code" : "paths",
           "type" : "InlinedCode"
         }, {
-          "text" : " plugin to bring attention to a certain place in a ",
+          "text" : " plugin parameter to bring attention to a certain place in a ",
           "type" : "SimpleText"
         }, {
           "code" : "JSON",
@@ -183,10 +249,35 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-json: book-store.json {paths: [\"root.store.book[0].category\", \"root.store.book[2].category\"]}\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : "```json {paths: \"root[1].key2\"}\n[{\"key1\": \"value1\"}, {\"key2\": \"value2\"}]\n```\n",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
+      }, {
+        "paths" : [ "root[1].key2" ],
+        "data" : [ {
+          "key1" : "value1"
+        }, {
+          "key2" : "value2"
+        } ],
+        "type" : "Json"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass multiple values to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "paths",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to highlight more than one leaf value",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {paths: [\"root.store.book[0].category\", \"root.store.book[2].category\"]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -200,45 +291,45 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "paths" : [ "root.store.book[0].category", "root.store.book[2].category" ],
         "data" : {
           "store" : {
+            "book" : [ {
+              "category" : "reference",
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "price" : 8.95
+            }, {
+              "category" : "fiction",
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "price" : 12.99
+            }, {
+              "category" : "fiction",
+              "author" : "Herman Melville",
+              "title" : "Moby Dick",
+              "isbn" : "0-553-21311-3",
+              "price" : 8.99
+            }, {
+              "category" : "fiction",
+              "author" : "J. R. R. Tolkien",
+              "title" : "The Lord of the Rings",
+              "isbn" : "0-395-19395-8",
+              "price" : 22.99
+            } ],
             "bicycle" : {
               "color" : "red",
               "price" : 19.95
-            },
-            "book" : [ {
-              "price" : 8.95,
-              "author" : "Nigel Rees",
-              "title" : "Sayings of the Century",
-              "category" : "reference"
-            }, {
-              "price" : 12.99,
-              "author" : "Evelyn Waugh",
-              "title" : "Sword of Honour",
-              "category" : "fiction"
-            }, {
-              "price" : 8.99,
-              "author" : "Herman Melville",
-              "isbn" : "0-553-21311-3",
-              "title" : "Moby Dick",
-              "category" : "fiction"
-            }, {
-              "price" : 22.99,
-              "author" : "J. R. R. Tolkien",
-              "isbn" : "0-395-19395-8",
-              "title" : "The Lord of the Rings",
-              "category" : "fiction"
-            } ]
+            }
           },
           "expensive" : 10
         },
-        "paths" : [ "root.store.book[0].category", "root.store.book[2].category" ],
         "type" : "Json"
       } ]
     }, {
-      "id" : "paths-from-file",
+      "id" : "highlight-by-path-from-file",
+      "title" : "Highlight By Path From File",
       "type" : "Section",
-      "title" : "Paths From File",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -252,20 +343,21 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "autoTitle" : true,
         "data" : [ "root.store.book[1].category", "root.store.book[2].category" ],
         "paths" : [ ],
-        "type" : "Json",
-        "title" : "book-store-paths.json"
+        "title" : "book-store-paths.json",
+        "type" : "Json"
       }, {
+        "lang" : "",
         "snippet" : ":include-json: book-store.json {pathsFile: \"book-store-paths.json\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "json-subparts",
-      "type" : "Section",
       "title" : "Json Subparts",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -277,13 +369,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "pass ",
           "type" : "SimpleText"
         }, {
+          "url" : "https://github.com/json-path/JsonPath",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Json Path",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://github.com/json-path/JsonPath"
+          } ]
         }, {
           "text" : " as ",
           "type" : "SimpleText"
@@ -295,68 +387,114 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "include" : "$..book[0,1]",
         "data" : [ {
-          "price" : 8.95,
+          "category" : "reference",
           "author" : "Nigel Rees",
           "title" : "Sayings of the Century",
-          "category" : "reference"
+          "price" : 8.95
         }, {
-          "price" : 12.99,
+          "category" : "fiction",
           "author" : "Evelyn Waugh",
           "title" : "Sword of Honour",
-          "category" : "fiction"
+          "price" : 12.99
         } ],
         "paths" : [ ],
         "type" : "Json"
       } ]
     }, {
       "id" : "title",
-      "type" : "Section",
       "title" : "Title",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To specify a title use the ",
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
           "code" : "title",
           "type" : "InlinedCode"
         }, {
-          "text" : " property:",
+          "text" : " parameter to specify a snippet title:",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", title: \"Books\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "include" : "$..book[0,1]",
+        "title" : "Books",
         "data" : [ {
-          "price" : 8.95,
+          "category" : "reference",
           "author" : "Nigel Rees",
           "title" : "Sayings of the Century",
-          "category" : "reference"
+          "price" : 8.95
         }, {
-          "price" : 12.99,
+          "category" : "fiction",
           "author" : "Evelyn Waugh",
           "title" : "Sword of Honour",
-          "category" : "fiction"
+          "price" : 12.99
         } ],
         "paths" : [ ],
-        "type" : "Json",
-        "title" : "Books"
+        "type" : "Json"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "autoTitle: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to automatically set title to specified file name",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "include" : "$..book[0,1]",
+        "autoTitle" : true,
+        "data" : [ {
+          "category" : "reference",
+          "author" : "Nigel Rees",
+          "title" : "Sayings of the Century",
+          "price" : 8.95
+        }, {
+          "category" : "fiction",
+          "author" : "Evelyn Waugh",
+          "title" : "Sword of Honour",
+          "price" : 12.99
+        } ],
+        "paths" : [ ],
+        "title" : "book-store.json",
+        "type" : "Json"
+      }, {
+        "include" : "$..book[0,1]",
+        "autoTitle" : true,
+        "data" : [ {
+          "category" : "reference",
+          "author" : "Nigel Rees",
+          "title" : "Sayings of the Century",
+          "price" : 8.95
+        }, {
+          "category" : "fiction",
+          "author" : "Evelyn Waugh",
+          "title" : "Sword of Honour",
+          "price" : 12.99
+        } ],
+        "paths" : [ ],
+        "title" : "book-store.json",
+        "type" : "Json"
       } ]
     }, {
       "id" : "read-more",
-      "type" : "Section",
       "title" : "Read More",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -396,52 +534,52 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "readMore" : true,
         "readMoreVisibleLines" : 5,
         "data" : {
           "store" : {
+            "book" : [ {
+              "category" : "reference",
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "price" : 8.95
+            }, {
+              "category" : "fiction",
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "price" : 12.99
+            }, {
+              "category" : "fiction",
+              "author" : "Herman Melville",
+              "title" : "Moby Dick",
+              "isbn" : "0-553-21311-3",
+              "price" : 8.99
+            }, {
+              "category" : "fiction",
+              "author" : "J. R. R. Tolkien",
+              "title" : "The Lord of the Rings",
+              "isbn" : "0-395-19395-8",
+              "price" : 22.99
+            } ],
             "bicycle" : {
               "color" : "red",
               "price" : 19.95
-            },
-            "book" : [ {
-              "price" : 8.95,
-              "author" : "Nigel Rees",
-              "title" : "Sayings of the Century",
-              "category" : "reference"
-            }, {
-              "price" : 12.99,
-              "author" : "Evelyn Waugh",
-              "title" : "Sword of Honour",
-              "category" : "fiction"
-            }, {
-              "price" : 8.99,
-              "author" : "Herman Melville",
-              "isbn" : "0-553-21311-3",
-              "title" : "Moby Dick",
-              "category" : "fiction"
-            }, {
-              "price" : 22.99,
-              "author" : "J. R. R. Tolkien",
-              "isbn" : "0-395-19395-8",
-              "title" : "The Lord of the Rings",
-              "category" : "fiction"
-            } ]
+            }
           },
           "expensive" : 10
         },
         "paths" : [ ],
-        "type" : "Json",
-        "readMore" : true
+        "type" : "Json"
       } ]
     }, {
       "id" : "hidden-parts",
-      "type" : "Section",
       "title" : "Hidden Parts",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -461,51 +599,51 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-json: book-store.json {collapsedPaths: ['root.store.book']}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "collapsedPaths" : [ "root.store.book" ],
         "data" : {
           "store" : {
+            "book" : [ {
+              "category" : "reference",
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "price" : 8.95
+            }, {
+              "category" : "fiction",
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "price" : 12.99
+            }, {
+              "category" : "fiction",
+              "author" : "Herman Melville",
+              "title" : "Moby Dick",
+              "isbn" : "0-553-21311-3",
+              "price" : 8.99
+            }, {
+              "category" : "fiction",
+              "author" : "J. R. R. Tolkien",
+              "title" : "The Lord of the Rings",
+              "isbn" : "0-395-19395-8",
+              "price" : 22.99
+            } ],
             "bicycle" : {
               "color" : "red",
               "price" : 19.95
-            },
-            "book" : [ {
-              "price" : 8.95,
-              "author" : "Nigel Rees",
-              "title" : "Sayings of the Century",
-              "category" : "reference"
-            }, {
-              "price" : 12.99,
-              "author" : "Evelyn Waugh",
-              "title" : "Sword of Honour",
-              "category" : "fiction"
-            }, {
-              "price" : 8.99,
-              "author" : "Herman Melville",
-              "isbn" : "0-553-21311-3",
-              "title" : "Moby Dick",
-              "category" : "fiction"
-            }, {
-              "price" : 22.99,
-              "author" : "J. R. R. Tolkien",
-              "isbn" : "0-395-19395-8",
-              "title" : "The Lord of the Rings",
-              "category" : "fiction"
-            } ]
+            }
           },
           "expensive" : 10
         },
         "paths" : [ ],
-        "collapsedPaths" : [ "root.store.book" ],
         "type" : "Json"
       } ]
     }, {
       "id" : "highlights",
-      "type" : "Section",
       "title" : "Highlights",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -524,13 +662,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : ", in (similar fashion to ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/snippets/external-code-snippets#highlights",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "regular code snippets",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/external-code-snippets#highlights"
+          } ]
         }, {
           "text" : "), you can highlight",
           "type" : "SimpleText"
@@ -541,41 +679,41 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-json: book-store.json {highlight: [\"category\", 2]}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "highlight" : [ "category", 2 ],
         "data" : {
           "store" : {
+            "book" : [ {
+              "category" : "reference",
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "price" : 8.95
+            }, {
+              "category" : "fiction",
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "price" : 12.99
+            }, {
+              "category" : "fiction",
+              "author" : "Herman Melville",
+              "title" : "Moby Dick",
+              "isbn" : "0-553-21311-3",
+              "price" : 8.99
+            }, {
+              "category" : "fiction",
+              "author" : "J. R. R. Tolkien",
+              "title" : "The Lord of the Rings",
+              "isbn" : "0-395-19395-8",
+              "price" : 22.99
+            } ],
             "bicycle" : {
               "color" : "red",
               "price" : 19.95
-            },
-            "book" : [ {
-              "price" : 8.95,
-              "author" : "Nigel Rees",
-              "title" : "Sayings of the Century",
-              "category" : "reference"
-            }, {
-              "price" : 12.99,
-              "author" : "Evelyn Waugh",
-              "title" : "Sword of Honour",
-              "category" : "fiction"
-            }, {
-              "price" : 8.99,
-              "author" : "Herman Melville",
-              "isbn" : "0-553-21311-3",
-              "title" : "Moby Dick",
-              "category" : "fiction"
-            }, {
-              "price" : 22.99,
-              "author" : "J. R. R. Tolkien",
-              "isbn" : "0-395-19395-8",
-              "title" : "The Lord of the Rings",
-              "category" : "fiction"
-            } ]
+            }
           },
           "expensive" : 10
         },
@@ -584,8 +722,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "code-references",
-      "type" : "Section",
       "title" : "Code References",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -599,47 +737,96 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "include" : "$..book[0,1]",
-        "data" : [ {
-          "price" : 8.95,
-          "author" : "Nigel Rees",
-          "title" : "Sayings of the Century",
-          "category" : "reference"
-        }, {
-          "price" : 12.99,
-          "author" : "Evelyn Waugh",
-          "title" : "Sword of Honour",
-          "category" : "fiction"
-        } ],
+        "lang" : "",
+        "snippet" : ":include-json: trader.json {\n  title: \"trader\",\n  referencesPath: \"references/json-references-demo.csv\"\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "csv",
+        "snippet" : "trader, example-references/domain#trader\ntransaction, example-references/domain#transaction",
+        "autoTitle" : true,
+        "title" : "references/json-references-demo.csv",
+        "type" : "Snippet"
+      }, {
+        "title" : "trader",
         "referencesPath" : "references/json-references-demo.csv",
+        "data" : {
+          "trader" : {
+            "firstName" : "John",
+            "lastName" : "Smith"
+          }
+        },
         "paths" : [ ],
-        "type" : "Json",
-        "title" : "Books"
+        "references" : {
+          "trader" : {
+            "pageUrl" : "example-references/domain#trader"
+          },
+          "transaction" : {
+            "pageUrl" : "example-references/domain#transaction"
+          }
+        },
+        "type" : "Json"
       } ]
     }, {
       "id" : "test-results",
-      "type" : "Section",
       "title" : "Test Results",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Consider leveraging testing frameworks to extract ",
+          "text" : "Below is an example of using ",
           "type" : "SimpleText"
         }, {
-          "code" : "JSON",
-          "type" : "InlinedCode"
+          "url" : "https://github.com/testingisdocumenting/webtau",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "WebTau",
+            "type" : "SimpleText"
+          } ]
         }, {
-          "text" : " samples from your endpoints.",
+          "text" : " testing framework to make",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "Information about what assertions were made can be used to highlight points of interest.",
+          "text" : "an HTTP call, extract JSON response and information about asserted fields to highlight.",
           "type" : "SimpleText"
         } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "http.get(\"/weather\") {\n    temperature.shouldBe < 100\n}\n\nhttp.doc.capture(\"weather-example\")",
+        "title" : "WebTau REST API test example",
+        "entry" : "weather",
+        "bodyOnly" : true,
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "code" : "http.doc.capture",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json (validated paths).",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-json: weather-example/response.json {\n  title: \"weather response example\",\n  pathsFile: \"weather-example/paths.json\"\n}\n",
+        "lineNumber" : "",
+        "title" : "include-json using test results",
+        "type" : "Snippet"
+      }, {
+        "title" : "weather response example",
+        "pathsFile" : "weather-example/paths.json",
+        "data" : {
+          "temperature" : 90,
+          "city" : "New York"
+        },
+        "paths" : [ "root.temperature" ],
+        "type" : "Json"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403262,
+    "lastModifiedTime" : 1658335209116,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Json",
@@ -648,11 +835,14 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "json",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Paths",
-        "id" : "paths"
+        "title" : "Auto Formatting",
+        "id" : "auto-formatting"
       }, {
-        "title" : "Paths From File",
-        "id" : "paths-from-file"
+        "title" : "Highlight Values By Path",
+        "id" : "highlight-values-by-path"
+      }, {
+        "title" : "Highlight By Path From File",
+        "id" : "highlight-by-path-from-file"
       }, {
         "title" : "Json Subparts",
         "id" : "json-subparts"

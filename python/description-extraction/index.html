@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: Description Extraction</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Doc String</h1></header>
+<p>Use include-python-doc plugin to embed py doc string with markdown into documentation. Znai uses https://pandas.pydata.org/docs/development/contributing_docstring.html Pandas style doc string to parse description and parameters. my_var = &quot;a variable&quot; def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc: python/example.py {entry: &quot;my_func&quot;} text inside my *func* doc * list one * list two Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include parameters :include-python-doc: python/example.py {entry: &quot;Animal&quot;} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: &quot;Animal.says&quot;} animal **talks** `code`</p>
+</article>
+
+<article>
+<header><h1>Doc Parameters</h1></header>
+<p>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- label : str label to use to *render* item in the store price : fin.money.Money price associated with the **item** Returns ------- str status of the operation `OK` for good &quot;&quot;&quot; return &quot;OK&quot; :include-python-doc-params: python/pydoc-params.py {entry: &quot;my_func&quot;, title: &quot;result and parameters&quot;} text inside my *func* doc * list one * list two Parameters ---------- label : str label to use to *render* item in the store price : fin.money.Money price associated with the **item** Returns ------- str status of the operation `OK` for good Note: read more about snippets/api-parameters API parameters for additional properties</p>
+</article>
+
+<article>
+<header><h1>Type Hints</h1></header>
+<p>If you define https://docs.python.org/3/library/typing.html Type Hints, you can omit types from PyDoc text and Znai will take the types from the signature import fin def my_func(label: str, price: fin.money.Money) -&gt; str: &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters -------------- label : label to use to *render* item in the store price : price associated with the **item** Returns ------- status of the operation `OK` for good &quot;&quot;&quot; return &quot;OK&quot; :include-python-doc-params: python/pydoc-params-type-hints.py {entry: &quot;my_func&quot;, title: &quot;result and parameters&quot;} text inside my *func* doc * list one * list two Parameters -------------- label : label to use to *render* item in the store price : price associated with the **item** Returns ------- status of the operation `OK` for good</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "doc-string",
+      "title" : "Doc String",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-python-doc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin to embed py doc string with markdown into documentation.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Znai uses ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://pandas.pydata.org/docs/development/contributing_docstring.html",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Pandas style doc string",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " to parse description and parameters.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "py",
+        "snippet" : "my_var = \"a variable\"\n\n\ndef my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2\n\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
+        "title" : "example.py",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-doc: python/example.py {entry: \"my_func\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "text inside my ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "func",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " doc",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "list one",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "list two",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "parameters",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-doc: python/example.py {entry: \"Animal\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "animal top level class doc string",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "code block\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-doc: python/example.py {entry: \"Animal.says\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "animal ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "talks",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "code",
+          "type" : "InlinedCode"
+        } ]
+      } ]
+    }, {
+      "id" : "doc-parameters",
+      "title" : "Doc Parameters",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-python-doc-params",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin to render parameters extracted from pydoc text",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "py",
+        "snippet" : "def my_func(label, price):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    label : str\n      label to use to *render* item in the store\n\n    price : fin.money.Money\n      price associated with the **item**\n\n    Returns\n    -------\n    str\n      status of the operation\n\n      `OK` for good\n    \"\"\"\n\n    return \"OK\"",
+        "autoTitle" : true,
+        "title" : "python/pydoc-params.py",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-doc-params: python/pydoc-params.py {entry: \"my_func\", title: \"result and parameters\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "returns",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_returns",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "status of the operation",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "code" : "OK",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for good",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "label",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_label",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "label to use to ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "render",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " item in the store",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "price",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_price",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "price associated with the ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "item",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "entry" : "my_func",
+        "title" : "result and parameters",
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: read more about ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/api-parameters",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "API parameters",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " for additional properties",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "type-hints",
+      "title" : "Type Hints",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "If you define ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://docs.python.org/3/library/typing.html",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Type Hints",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ", you can omit types from PyDoc text and Znai will take the types from the signature",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "py",
+        "snippet" : "import fin\n\n\ndef my_func(label: str, price: fin.money.Money) -> str:\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    --------------\n    label :\n      label to use to *render* item in the store\n\n    price :\n      price associated with the **item**\n\n    Returns\n    -------\n      status of the operation\n\n      `OK` for good\n    \"\"\"\n\n    return \"OK\"",
+        "autoTitle" : true,
+        "title" : "python/pydoc-params-type-hints.py",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-doc-params: python/pydoc-params-type-hints.py {entry: \"my_func\", title: \"result and parameters\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "returns",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_returns",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "status of the operation",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "code" : "OK",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for good",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "label",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_label",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "label to use to ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "render",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " item in the store",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "price",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ],
+          "anchorId" : "my_func_price",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "price associated with the ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "item",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "entry" : "my_func",
+        "title" : "result and parameters",
+        "type" : "ApiParameters"
+      } ]
+    } ],
+    "lastModifiedTime" : 1658335209112,
+    "tocItem" : {
+      "sectionTitle" : "Python",
+      "pageTitle" : "Description Extraction",
+      "pageMeta" : { },
+      "dirName" : "python",
+      "fileName" : "description-extraction",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Doc String",
+        "id" : "doc-string"
+      }, {
+        "title" : "Doc Parameters",
+        "id" : "doc-parameters"
+      }, {
+        "title" : "Type Hints",
+        "id" : "type-hints"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

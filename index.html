@@ -91,7 +91,27 @@
 
 <article>
 <header><h1>Extensive Plugins System</h1></header>
-<p>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Inlined Code plugins markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Include plugins markdown :include-json: example.json { title: &quot;JSON example&quot;, paths: [&quot;root.person.id&quot;], collapsedPaths: [&quot;root.details&quot;] } Fence plugins markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</p>
+<p>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include plugins markdown :include-json: example.json { title: &quot;JSON example&quot;, paths: [&quot;root.person.id&quot;], collapsedPaths: [&quot;root.details&quot;] } markdown :include-java: ../java/HelloWorld.java { entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot; } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method Inlined Code plugins markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fence plugins markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</p>
+</article>
+
+<article>
+<header><h1>Rich Visuals</h1></header>
+<p>Leverage multiple out-of-the box plugins to render charts, flow diagrams, annotated images, dynamic SVGs, etc</p>
+</article>
+
+<article>
+<header><h1>Dark/Light Runtime Mode</h1></header>
+<p>Generate one documentation and let your users switch Dark/Light theme at runtime</p>
+</article>
+
+<article>
+<header><h1>Two Sides Page Layout</h1></header>
+<p>Use layout/two-sides-tabs two sides layout option to render examples and supporting information side by side with convenient examples language switch</p>
+</article>
+
+<article>
+<header><h1>Local Search</h1></header>
+<p>Local search with preview and instant navigation to the result</p>
 </article>
 
 <article>
@@ -101,14 +121,13 @@
 
 <article>
 <header><h1>Batteries Included</h1></header>
-<p>Znai comes withdev server mode with changes highlight and auto-jump to a change local search (with full preview) dark/light mode runtime switch instant switching between pages</p>
+<p>Znai comes withMarkdown with custom extensions and dozens of plugins:Content from external files with markers and filters support Simplified extraction of a function body content (working with examples) Embedding of JavaDoc/PyDoc documentation text, preserving styles Beautiful API documentation capabilities Two Sides Page Layout with convenient examples language switch Rich visuals like flow diagrams and charts etc Dev server mode with changes highlight and auto-jump to a change Local search (with full preview) Dark/light mode runtime switch Presentation Mode to automatically turn your documentation into slides, using the same content</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -121,23 +140,24 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "type" : "Redirect",
-      "url" : "introduction/what-is-this"
+      "url" : "introduction/what-is-this",
+      "type" : "Redirect"
     } ],
     "lastModifiedTime" : 0,
     "tocItem" : {

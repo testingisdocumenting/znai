@@ -108,7 +108,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -121,24 +120,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "method-body",
-      "type" : "Section",
       "title" : "Method Body",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -158,9 +158,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "groovy",
         "snippet" : "class HelloWorldTest {\n    @Test\n    void \"should calculate risk based on epsilon\"() {\n        generateStatement(price: 10, quantity: 10, epsilon: 2)\n        calcRisk().should == 108\n    }\n\n    @Test\n    void \"should calculate risk without quantity\"() {\n        generateStatement(price: 10, epsilon: 2)\n        calcRisk().should == 108\n    }\n}",
-        "type" : "Snippet",
-        "lang" : "groovy"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -168,10 +168,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-groovy: HelloWorldTest.groovy {entry: \"should calculate risk based on epsilon\", bodyOnly: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -185,16 +185,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "groovy",
         "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
         "entry" : "should calculate risk based on epsilon",
         "bodyOnly" : true,
-        "type" : "Snippet",
-        "lang" : "groovy"
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "multiple-bodies",
-      "type" : "Section",
       "title" : "Multiple Bodies",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -214,18 +214,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "markdown",
         "snippet" : ":include-groovy: HelloWorldTest.groovy {\n  title: \"api example\",\n  entry: [\"should calculate risk based on epsilon\", \"should calculate risk based on epsilon\"],\n  bodyOnly: true }\n",
-        "highlight" : [ 2 ],
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : "markdown"
+        "highlight" : [ 2 ],
+        "type" : "Snippet"
       }, {
+        "lang" : "groovy",
         "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108\ngenerateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
+        "title" : "api example",
         "entry" : [ "should calculate risk based on epsilon", "should calculate risk based on epsilon" ],
         "bodyOnly" : true,
-        "type" : "Snippet",
-        "title" : "api example",
-        "lang" : "groovy"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -239,24 +239,24 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "markdown",
         "snippet" : ":include-groovy: HelloWorldTest.groovy {\n  title: \"api example\",\n  entry: [\"should calculate risk based on epsilon\", \"should calculate risk based on epsilon\"],\n  entrySeparator: \"\",\n  bodyOnly: true }\n",
-        "highlight" : [ 3 ],
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : "markdown"
+        "highlight" : [ 3 ],
+        "type" : "Snippet"
       }, {
+        "lang" : "groovy",
         "snippet" : "generateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108\n\ngenerateStatement(price: 10, quantity: 10, epsilon: 2)\ncalcRisk().should == 108",
-        "entry" : [ "should calculate risk based on epsilon", "should calculate risk based on epsilon" ],
-        "bodyOnly" : true,
-        "entrySeparator" : "",
-        "type" : "Snippet",
         "title" : "api example",
-        "lang" : "groovy"
+        "entry" : [ "should calculate risk based on epsilon", "should calculate risk based on epsilon" ],
+        "entrySeparator" : "",
+        "bodyOnly" : true,
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "overloads",
-      "type" : "Section",
       "title" : "Overloads",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -275,14 +275,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "groovy",
         "snippet" : "import your.company.com.util.*\n\n/*\n groovy docs on top\n */\nclass HelloWorld {\n    void methodName(List<String> a, Map<String, Integer> b) {\n        actionA()\n    }\n\n    void methodName(List<String> a, Boolean b) {\n        actionB()\n    }\n\n    void methodName(def a, def b) {\n        actionC()\n    }\n}",
-        "type" : "Snippet",
-        "lang" : "groovy"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-groovy: HelloWorld.groovy {entry: \"methodName(List, Map)\"}\n:include-groovy: HelloWorld.groovy {entry: \"methodName(def,def)\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -290,10 +290,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "groovy",
         "snippet" : "void methodName(List<String> a, Map<String, Integer> b) {\n    actionA()\n}",
         "entry" : "methodName(List, Map)",
-        "type" : "Snippet",
-        "lang" : "groovy"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -316,19 +316,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "InlinedCode"
         } ]
       }, {
+        "lang" : "groovy",
         "snippet" : "void methodName(def a, def b) {\n    actionC()\n}",
         "entry" : "methodName(def, def)",
-        "type" : "Snippet",
-        "lang" : "groovy"
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "class-body",
-      "type" : "Section",
       "title" : "Class Body",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "groovy",
         "snippet" : "import your.company.com.util.*\n\n/*\n groovy docs on top\n */\nclass HelloWorld {\n    void methodName(List<String> a, Map<String, Integer> b) {\n        actionA()\n    }\n\n    void methodName(List<String> a, Boolean b) {\n        actionB()\n    }\n\n    void methodName(def a, def b) {\n        actionC()\n    }\n}",
-        "type" : "Snippet",
-        "lang" : "groovy"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -342,15 +342,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-groovy: HelloWorld.groovy {entry: \"HelloWorld\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "groovy",
         "snippet" : "class HelloWorld {\n    void methodName(List<String> a, Map<String, Integer> b) {\n        actionA()\n    }\n\n    void methodName(List<String> a, Boolean b) {\n        actionB()\n    }\n\n    void methodName(def a, def b) {\n        actionC()\n    }\n}",
         "entry" : "HelloWorld",
-        "type" : "Snippet",
-        "lang" : "groovy"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -364,19 +364,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-groovy: HelloWorld.groovy {entry: \"HelloWorld\", bodyOnly: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "groovy",
         "snippet" : "void methodName(List<String> a, Map<String, Integer> b) {\n    actionA()\n}\n\nvoid methodName(List<String> a, Boolean b) {\n    actionB()\n}\n\nvoid methodName(def a, def b) {\n    actionC()\n}",
         "entry" : "HelloWorld",
         "bodyOnly" : true,
-        "type" : "Snippet",
-        "lang" : "groovy"
+        "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403262,
+    "lastModifiedTime" : 1658335209116,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Groovy",

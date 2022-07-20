@@ -136,7 +136,7 @@
 
 <article>
 <header><h1>Links</h1></header>
-<p>To attach links to nodes use url property.Combine links and highlights to create a sub navigation for your product. { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;No Link&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;Link To Java&quot;, &quot;url&quot;: &quot;snippets/java&quot; }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;Link to External&quot;, &quot;url&quot;: &quot;http://commonmark.org&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n2&quot;], [&quot;n3&quot;, &quot;n2&quot;] ] }</p>
+<p>To attach links to nodes use url property.Combine links and highlights to create a sub navigation for your product. { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;No Link&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;Link To Java&quot;, &quot;url&quot;: &quot;java/content-extraction&quot; }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;Link to External&quot;, &quot;url&quot;: &quot;http://commonmark.org&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n2&quot;], [&quot;n3&quot;, &quot;n2&quot;] ] }</p>
 </article>
 
 <article>
@@ -148,7 +148,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -161,24 +160,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "nodes-and-edges",
-      "type" : "Section",
       "title" : "Nodes and Edges",
+      "type" : "Section",
       "content" : [ {
         "diagram" : {
           "isInvertedTextColorByStyleId" : { },
@@ -186,10 +186,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag2"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -203,10 +203,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "json",
         "snippet" : "{\n  \"nodes\": [\n    {\n      \"id\": \"n1\",\n      \"label\": \"input one\"\n    },\n    {\n      \"id\": \"n2\",\n      \"label\": \"input two\"\n    },\n    {\n      \"id\": \"n3\",\n      \"label\": \"processor\"\n    },\n    {\n      \"id\": \"n4\",\n      \"label\": \"output one\"\n    },\n    {\n      \"id\": \"n5\",\n      \"label\": \"output two\"\n    },\n    {\n      \"id\": \"n6\",\n      \"label\": \"output three\"\n    }\n  ],\n  \"edges\": [\n    [\"n1\", \"n3\"],\n    [\"n2\", \"n3\"],\n    [\"n3\", \"n4\"],\n    [\"n3\", \"n5\"],\n    [\"n3\", \"n6\"]\n  ]\n}",
-        "type" : "Snippet",
         "title" : "simple-dag.json",
-        "lang" : "json"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -220,15 +220,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-flow-chart: simple-dag.json\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "multiline-labels",
-      "type" : "Section",
       "title" : "Multiline Labels",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -242,9 +242,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "json",
         "snippet" : "{\n  \"nodes\": [\n    {\n      \"id\": \"n1\",\n      \"label\": \"input\\none\"\n    },\n    {\n      \"id\": \"n2\",\n      \"label\": \"output\\ntwo\"\n    }\n  ],\n  \"edges\": [\n    [\"n1\", \"n2\"]\n  ]\n}",
-        "type" : "Snippet",
-        "lang" : "json"
+        "type" : "Snippet"
       }, {
         "diagram" : {
           "isInvertedTextColorByStyleId" : { },
@@ -252,15 +252,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag3"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       } ]
     }, {
       "id" : "nodes-size",
-      "type" : "Section",
       "title" : "Nodes Size",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -274,16 +274,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "title" : "shared nodes size",
+        "collapsedPaths" : [ "root.nodes", "root.edges" ],
         "data" : {
           "nodes" : [ {
-            "label" : "one",
-            "id" : "n1"
+            "id" : "n1",
+            "label" : "one"
           }, {
-            "label" : "two",
-            "id" : "n2"
+            "id" : "n2",
+            "label" : "two"
           }, {
-            "label" : "three",
-            "id" : "n3"
+            "id" : "n3",
+            "label" : "three"
           } ],
           "edges" : [ [ "n1", "n2" ], [ "n2", "n3" ], [ "n1", "n3" ] ],
           "config" : {
@@ -294,9 +296,7 @@ ReactDOM.render(React.createElement(Documentation, {
           }
         },
         "paths" : [ ],
-        "collapsedPaths" : [ "root.nodes", "root.edges" ],
-        "type" : "Json",
-        "title" : "shared nodes size"
+        "type" : "Json"
       }, {
         "diagram" : {
           "isInvertedTextColorByStyleId" : { },
@@ -304,23 +304,23 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag4"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Note: Size unit is not based on pixels. It is sized in inches (assuming correct DPI). It is the size units used by ",
           "type" : "SimpleText"
         }, {
+          "url" : "https://graphviz.gitlab.io/",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Graphviz",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://graphviz.gitlab.io/"
+          } ]
         }, {
           "text" : ")",
           "type" : "SimpleText"
@@ -344,17 +344,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "title" : "nodes size override",
+        "collapsedPaths" : [ "root.config", "root.edges" ],
         "data" : {
           "nodes" : [ {
-            "label" : "one",
-            "id" : "n1"
+            "id" : "n1",
+            "label" : "one"
           }, {
-            "label" : "two",
-            "id" : "n2"
+            "id" : "n2",
+            "label" : "two"
           }, {
-            "width" : 2,
-            "label" : "three",
             "id" : "n3",
+            "label" : "three",
+            "width" : 2,
             "height" : 2
           } ],
           "edges" : [ [ "n1", "n2" ], [ "n2", "n3" ], [ "n1", "n3" ] ],
@@ -366,9 +368,7 @@ ReactDOM.render(React.createElement(Documentation, {
           }
         },
         "paths" : [ ],
-        "collapsedPaths" : [ "root.config", "root.edges" ],
-        "type" : "Json",
-        "title" : "nodes size override"
+        "type" : "Json"
       }, {
         "diagram" : {
           "isInvertedTextColorByStyleId" : { },
@@ -376,19 +376,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag5"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       } ]
     }, {
       "id" : "highlight",
-      "type" : "Section",
       "title" : "Highlight",
+      "type" : "Section",
       "content" : [ {
+        "lang" : "json",
         "snippet" : "{\n  \"nodes\": [\n    {\n      \"id\": \"n1\",\n      \"label\": \"label 1\"\n    },\n    {\n      \"id\": \"n2\",\n      \"label\": \"label 2\",\n      \"highlight\": true\n    },\n    {\n      \"id\": \"n3\",\n      \"label\": \"label 3\"\n    }\n  ],\n  \"edges\": [\n    [\"n1\", \"n2\"],\n    [\"n2\", \"n3\"],\n    [\"n1\", \"n3\"]\n  ]\n}",
-        "type" : "Snippet",
-        "lang" : "json"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -410,10 +410,10 @@ ReactDOM.render(React.createElement(Documentation, {
           },
           "id" : "dag6"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -433,10 +433,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-flow-chart: simple-dag.json {highlight: \"n3\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "diagram" : {
           "isInvertedTextColorByStyleId" : { },
@@ -444,10 +444,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag7"
         },
-        "urls" : { },
+        "idsToHighlight" : [ "n3" ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ "n3" ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -460,8 +460,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "color-groups",
-      "type" : "Section",
       "title" : "Color Groups",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -499,9 +499,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "json",
         "snippet" : "{\n  \"nodes\": [\n    {\n      \"id\": \"n1\",\n      \"label\": \"input one\"\n    },\n    {\n      \"id\": \"n2\",\n      \"label\": \"input two\"\n    },\n    {\n      \"id\": \"n3\",\n      \"label\": \"processor\",\n      \"colorGroup\": \"b\"\n    },\n    {\n      \"id\": \"n4\",\n      \"label\": \"output one\",\n      \"colorGroup\": \"c\"\n    },\n    {\n      \"id\": \"n5\",\n      \"label\": \"output two\",\n      \"colorGroup\": \"c\"\n    },\n    {\n      \"id\": \"n6\",\n      \"label\": \"output three\",\n      \"colorGroup\": \"d\"\n    }\n  ],\n  \"edges\": [\n    [\"n1\", \"n3\"],\n    [\"n2\", \"n3\"],\n    [\"n3\", \"n4\"],\n    [\"n3\", \"n5\"],\n    [\"n3\", \"n6\"]\n  ]\n}",
-        "type" : "Snippet",
-        "lang" : "json"
+        "type" : "Snippet"
       }, {
         "diagram" : {
           "isInvertedTextColorByStyleId" : { },
@@ -514,15 +514,15 @@ ReactDOM.render(React.createElement(Documentation, {
           },
           "id" : "dag8"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       } ]
     }, {
       "id" : "shapes",
-      "type" : "Section",
       "title" : "Shapes",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -536,9 +536,9 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "json",
         "snippet" : "{\n  \"nodes\": [\n    {\n      \"id\": \"researcher\",\n      \"label\": \"researcher\",\n      \"shape\": \"actor\"\n    },\n    {\n      \"id\": \"db\",\n      \"label\": \"two\",\n      \"shape\": \"database\"\n    },\n    {\n      \"id\": \"another-db\",\n      \"label\": \"three input\",\n      \"shape\": \"database-bottom-label\"\n    },\n    {\n      \"id\": \"processor\",\n      \"label\": \"processor\",\n      \"colorGroup\": \"b\"\n    },\n    {\n      \"id\": \"outcome\",\n      \"colorGroup\": \"c\",\n      \"shape\": \"world\"\n    },\n    {\n      \"id\": \"config\",\n      \"label\": \"config file\",\n      \"colorGroup\": \"b\",\n      \"shape\": \"document\"\n    }\n  ],\n  \"edges\": [\n    [\"researcher\", \"processor\"],\n    [\"researcher\", \"config\"],\n    [\"db\", \"processor\"],\n    [\"another-db\", \"processor\"],\n    [\"config\", \"outcome\"],\n    [\"processor\", \"outcome\"]\n  ]\n}",
-        "type" : "Snippet",
-        "lang" : "json"
+        "type" : "Snippet"
       }, {
         "diagram" : {
           "isInvertedTextColorByStyleId" : {
@@ -550,23 +550,23 @@ ReactDOM.render(React.createElement(Documentation, {
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"264pt\" height=\"282pt\"\n viewBox=\"0.00 0.00 264.00 281.50\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 277.5)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-277.5 260,-277.5 260,4 -4,4\"/>\n<!-- researcher -->\n<g id=\"node1\" class=\"node\">\n<title>researcher</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"50,-79 0,-79 0,0 50,0 50,-79\"/>\n<text text-anchor=\"middle\" x=\"25\" y=\"-3\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">researcher</text>\n</g>\n<!-- processor -->\n<g id=\"node2\" class=\"node\">\n<title>processor</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"86,-115 86,-154 162,-154 162,-115 86,-115\"/>\n<text text-anchor=\"middle\" x=\"124\" y=\"-132\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">processor</text>\n</g>\n<!-- researcher&#45;&gt;processor -->\n<g id=\"edge1\" class=\"edge\">\n<title>researcher&#45;&gt;processor</title>\n<path fill=\"none\" stroke=\"black\" d=\"M50.08,-63.88C60.98,-74.84 74.07,-87.89 86,-99.5 88.84,-102.26 91.82,-105.13 94.81,-107.99\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"92.5,-110.62 102.16,-114.98 97.33,-105.55 92.5,-110.62\"/>\n</g>\n<!-- config -->\n<g id=\"node3\" class=\"node\">\n<title>config</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"149,-91 99,-91 99,-12 149,-12 149,-91\"/>\n<text text-anchor=\"middle\" x=\"124\" y=\"-15\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">config file</text>\n</g>\n<!-- researcher&#45;&gt;config -->\n<g id=\"edge2\" class=\"edge\">\n<title>researcher&#45;&gt;config</title>\n<path fill=\"none\" stroke=\"black\" d=\"M50.48,-42.53C62.05,-43.96 76.07,-45.69 88.69,-47.25\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"88.51,-50.76 98.87,-48.51 89.37,-43.81 88.51,-50.76\"/>\n</g>\n<!-- outcome -->\n<g id=\"node6\" class=\"node\">\n<title>outcome</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"256,-121.5 198,-121.5 198,-63.5 256,-63.5 256,-121.5\"/>\n</g>\n<!-- processor&#45;&gt;outcome -->\n<g id=\"edge6\" class=\"edge\">\n<title>processor&#45;&gt;outcome</title>\n<path fill=\"none\" stroke=\"black\" d=\"M162.04,-119.1C170.63,-115.53 179.78,-111.72 188.39,-108.14\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"189.94,-111.29 197.83,-104.21 187.25,-104.82 189.94,-111.29\"/>\n</g>\n<!-- config&#45;&gt;outcome -->\n<g id=\"edge5\" class=\"edge\">\n<title>config&#45;&gt;outcome</title>\n<path fill=\"none\" stroke=\"black\" d=\"M149.19,-61.32C160.93,-66.09 175.3,-71.92 188.43,-77.25\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"187.13,-80.5 197.71,-81.01 189.76,-74.01 187.13,-80.5\"/>\n</g>\n<!-- db -->\n<g id=\"node4\" class=\"node\">\n<title>db</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"48.5,-273.5 1.5,-273.5 1.5,-201.5 48.5,-201.5 48.5,-273.5\"/>\n<text text-anchor=\"middle\" x=\"25\" y=\"-235\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">two</text>\n</g>\n<!-- db&#45;&gt;processor -->\n<g id=\"edge3\" class=\"edge\">\n<title>db&#45;&gt;processor</title>\n<path fill=\"none\" stroke=\"black\" d=\"M48.74,-213.35C63.37,-197.82 82.4,-177.61 97.54,-161.54\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"100.31,-163.7 104.62,-154.02 95.22,-158.9 100.31,-163.7\"/>\n</g>\n<!-- another&#45;db -->\n<g id=\"node5\" class=\"node\">\n<title>another&#45;db</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"48.5,-183.5 1.5,-183.5 1.5,-97.5 48.5,-97.5 48.5,-183.5\"/>\n<text text-anchor=\"middle\" x=\"25\" y=\"-100.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">three input</text>\n</g>\n<!-- another&#45;db&#45;&gt;processor -->\n<g id=\"edge4\" class=\"edge\">\n<title>another&#45;db&#45;&gt;processor</title>\n<path fill=\"none\" stroke=\"black\" d=\"M48.99,-139.08C57.05,-138.58 66.43,-138 75.75,-137.42\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"76.01,-140.91 85.77,-136.8 75.57,-133.93 76.01,-140.91\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : {
             "researcher" : [ "actor" ],
-            "another-db" : [ "database-bottom-label" ],
-            "config" : [ "b", "document" ],
             "processor" : [ "b" ],
-            "outcome" : [ "c", "world" ],
-            "db" : [ "database" ]
+            "config" : [ "b", "document" ],
+            "db" : [ "database" ],
+            "another-db" : [ "database-bottom-label" ],
+            "outcome" : [ "c", "world" ]
           },
           "id" : "dag9"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       } ]
     }, {
       "id" : "legend",
-      "type" : "Section",
       "title" : "Legend",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -591,10 +591,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-diagram-legend: {a: \"inputs\", b: \"optimization process\", c: \"outcome\", d: \"unknown\",\n    clickableNodes: true}\n\n:include-flow-chart: flow-diagrams/simple-dag-colors.json\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "legend" : {
           "a" : "inputs",
@@ -616,15 +616,15 @@ ReactDOM.render(React.createElement(Documentation, {
           },
           "id" : "dag10"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       } ]
     }, {
       "id" : "presentation",
-      "type" : "Section",
       "title" : "Presentation",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -638,15 +638,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-meta: {allAtOnce: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "vertical-layout",
-      "type" : "Section",
       "title" : "Vertical Layout",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -666,15 +666,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag11"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       } ]
     }, {
       "id" : "layout-types",
-      "type" : "Section",
       "title" : "Layout Types",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -705,10 +705,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-flow-chart: simple-dag.json {layout: \"neato\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "diagram" : {
           "isInvertedTextColorByStyleId" : { },
@@ -716,26 +716,26 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag12"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       }, {
         "type" : "Paragraph",
         "content" : [ {
+          "url" : "https://www.graphviz.org/pdf/neatoguide.pdf",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Neato layout guide from Graphviz",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://www.graphviz.org/pdf/neatoguide.pdf"
+          } ]
         } ]
       } ]
     }, {
       "id" : "links",
-      "type" : "Section",
       "title" : "Links",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -755,13 +755,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag13"
         },
+        "idsToHighlight" : [ ],
+        "wide" : false,
         "urls" : {
-          "n2" : "/znai/snippets/java",
+          "n2" : "/znai/java/content-extraction",
           "n3" : "http://commonmark.org"
         },
-        "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "type" : "GraphVizDiagram"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -769,14 +769,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : "{\n  \"nodes\": [\n    {\n      \"id\": \"n1\",\n      \"label\": \"No Link\"\n    },\n    {\n      \"id\": \"n2\",\n      \"label\": \"Link To Java\",\n      \"url\": \"snippets/java\"\n    },\n    {\n      \"id\": \"n3\",\n      \"label\": \"Link to External\",\n      \"url\": \"http://commonmark.org\"\n    }\n  ],\n  \"edges\": [\n    [\"n1\", \"n2\"],\n    [\"n3\", \"n2\"]\n  ]\n}",
-        "type" : "Snippet",
-        "lang" : "json"
+        "lang" : "json",
+        "snippet" : "{\n  \"nodes\": [\n    {\n      \"id\": \"n1\",\n      \"label\": \"No Link\"\n    },\n    {\n      \"id\": \"n2\",\n      \"label\": \"Link To Java\",\n      \"url\": \"java/content-extraction\"\n    },\n    {\n      \"id\": \"n3\",\n      \"label\": \"Link to External\",\n      \"url\": \"http://commonmark.org\"\n    }\n  ],\n  \"edges\": [\n    [\"n1\", \"n2\"],\n    [\"n3\", \"n2\"]\n  ]\n}",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "reusable-nodes",
-      "type" : "Section",
       "title" : "Reusable Nodes",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -784,25 +784,25 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "json",
         "snippet" : "{\n  \"edges\": [\n    [\"a1\", \"a2\"],\n    [\"b1\", \"b2\"],\n    [\"b1\", \"a2\"]\n  ]\n}",
-        "type" : "Snippet",
         "title" : "only edges definitions",
-        "lang" : "json"
+        "type" : "Snippet"
       }, {
+        "lang" : "json",
         "snippet" : "[\n  {\n    \"id\": \"a1\",\n    \"label\": \"Label A 1\"\n  },\n  {\n    \"id\": \"a2\",\n    \"label\": \"Label A 2\"\n  },\n  {\n    \"id\": \"a3\",\n    \"label\": \"Label A 3\"\n  }\n]",
-        "type" : "Snippet",
         "title" : "nodes/set-a.json",
-        "lang" : "json"
+        "type" : "Snippet"
       }, {
+        "lang" : "json",
         "snippet" : "[\n  {\n    \"id\": \"b1\",\n    \"label\": \"Label B 1\"\n  },\n  {\n    \"id\": \"b2\",\n    \"label\": \"Label B 2\"\n  },\n  {\n    \"id\": \"b3\",\n    \"label\": \"Label B 3\"\n  }\n]",
-        "type" : "Snippet",
         "title" : "nodes/set-b.json",
-        "lang" : "json"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: \"nodes/set-a.json\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "diagram" : {
           "isInvertedTextColorByStyleId" : { },
@@ -810,15 +810,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag14"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       }, {
+        "lang" : "",
         "snippet" : ":include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: [\"nodes/set-a.json\", \"nodes/set-b.json\"]}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "diagram" : {
           "isInvertedTextColorByStyleId" : { },
@@ -826,13 +826,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "stylesByNodeId" : { },
           "id" : "dag15"
         },
-        "urls" : { },
+        "idsToHighlight" : [ ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403278,
+    "lastModifiedTime" : 1658335209128,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Flow Diagrams",

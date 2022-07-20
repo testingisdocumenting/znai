@@ -113,7 +113,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -126,24 +125,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "primary-use-case",
-      "type" : "Section",
       "title" : "Primary Use Case",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -152,8 +152,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -246,8 +246,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "definition",
-      "type" : "Section",
       "title" : "Definition",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -255,10 +255,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "```tabs\nJavaScript: :include-file: snippets/file-name.js\nJava: :include-file: snippets/WideCode.java\nCpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}\n```\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -275,24 +275,24 @@ ReactDOM.render(React.createElement(Documentation, {
         "tabsContent" : [ {
           "name" : "JavaScript",
           "content" : [ {
+            "lang" : "js",
             "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-            "type" : "Snippet",
-            "lang" : "js"
+            "type" : "Snippet"
           } ]
         }, {
           "name" : "Java",
           "content" : [ {
+            "lang" : "java",
             "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
             "wide" : true,
-            "type" : "Snippet",
-            "lang" : "java"
+            "type" : "Snippet"
           } ]
         }, {
           "name" : "Cpp",
           "content" : [ {
+            "lang" : "cpp",
             "snippet" : "int test = 2;\n\n// comment with **important**\n// information\nint b = 3;\nint d = 3;\n\n/*\n * multi line comment\n * of multi *lines* text\n*/\nint e = 5;",
-            "type" : "Snippet",
-            "lang" : "cpp"
+            "type" : "Snippet"
           } ]
         } ],
         "type" : "Tabs"
@@ -305,8 +305,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "markdown-per-tab",
-      "type" : "Section",
       "title" : "Markdown Per Tab",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -335,10 +335,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "````tabs\nJavaScript: \nFirst you need to download WebStorm and then run the following using your terminal\n\n```bash\n$ yarn install\n$ yarn start\n```\n    \nJava: \nFirst you need to download Intellij IDEA and then run the following using your terminal\n    \n```bash\n$ mvn install\n$ mvn exec:exec\n```\n    \nCpp: \nFirst you need to download CLion and then run the following using your terminal\n\n```bash\n$ pwd\n$ whoamis\n```\n````\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "tabsContent" : [ {
           "name" : "JavaScript",
@@ -349,10 +349,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
+            "lang" : "bash",
             "snippet" : "$ yarn install\n$ yarn start\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : "bash"
+            "type" : "Snippet"
           } ]
         }, {
           "name" : "Java",
@@ -363,10 +363,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
+            "lang" : "bash",
             "snippet" : "$ mvn install\n$ mvn exec:exec\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : "bash"
+            "type" : "Snippet"
           } ]
         }, {
           "name" : "Cpp",
@@ -377,18 +377,18 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
+            "lang" : "bash",
             "snippet" : "$ pwd\n$ whoamis\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : "bash"
+            "type" : "Snippet"
           } ]
         } ],
         "type" : "Tabs"
       } ]
     }, {
       "id" : "separate-markdown-files",
-      "type" : "Section",
       "title" : "Separate Markdown Files",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -407,10 +407,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "```tabs\nJavaScript: :include-markdown: instructions/javascript-install.md\nJava: :include-markdown: instructions/java-install.md\nCpp: :include-markdown: instructions/cpp-install.md\n```\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -427,10 +427,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
+            "lang" : "",
             "snippet" : "$ yarn install\n$ yarn start\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : ""
+            "type" : "Snippet"
           } ]
         }, {
           "name" : "Java",
@@ -441,10 +441,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
+            "lang" : "",
             "snippet" : "$ mvn install\n$ mvn exec:exec\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : ""
+            "type" : "Snippet"
           } ]
         }, {
           "name" : "Cpp",
@@ -455,18 +455,18 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
+            "lang" : "",
             "snippet" : "$ pwd\n$ whoami\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : ""
+            "type" : "Snippet"
           } ]
         } ],
         "type" : "Tabs"
       } ]
     }, {
       "id" : "attention-signs",
-      "type" : "Section",
       "title" : "Attention Signs",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -485,18 +485,18 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "````tabs\nJavaScript: \n\n```bash\n$ yarn install\n$ yarn start\n```\n\n Avoid: committing node_modules\n    \nJava: \nFirst you need to download Intellij IDEA and then run the following using your terminal\n    \n```bash\n$ mvn install\n$ mvn exec:exec\n```\n    \n Warning: `mvn` install for the first time may take considerable amount of time\n\nCpp: \nFirst you need to download CLion and then run the following using your terminal\n\n```bash\n$ pwd\n$ whoamis\n```\n\n Question: is C++ awesome or what?\n````\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "tabsContent" : [ {
           "name" : "JavaScript",
           "content" : [ {
+            "lang" : "bash",
             "snippet" : "$ yarn install\n$ yarn start\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : "bash"
+            "type" : "Snippet"
           }, {
             "type" : "Paragraph",
             "content" : [ {
@@ -513,10 +513,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
+            "lang" : "bash",
             "snippet" : "$ mvn install\n$ mvn exec:exec\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : "bash"
+            "type" : "Snippet"
           }, {
             "type" : "Paragraph",
             "content" : [ {
@@ -539,10 +539,10 @@ ReactDOM.render(React.createElement(Documentation, {
               "type" : "SimpleText"
             } ]
           }, {
+            "lang" : "bash",
             "snippet" : "$ pwd\n$ whoamis\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : "bash"
+            "type" : "Snippet"
           }, {
             "type" : "Paragraph",
             "content" : [ {
@@ -554,7 +554,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Tabs"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403258,
+    "lastModifiedTime" : 1658335209112,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Tabs",

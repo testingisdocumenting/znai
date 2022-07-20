@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: Auto Reference</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Member Signature, Comment And Parameters</h1></header>
+<p>Use include-doxygen-member to render member signature, its description and parameters list namespace utils { namespace nested { /** * top **level** comment *of* important * * list one * * list two * * list three * * 1. number one * 2. number two * * @param first_param description of first *param* * 1. item a * 2. item b * @param second_param description of second param */ void my_func(int first_param, bool second_param) { } /** * specific description for single param version * @param first_param description of first *param* * 1. item a * 2. item b */ void my_func(int first_param) { } } } void free_func() { } :include-doxygen-member: utils::nested::my_func top level comment of important list one list two list three number one number two first_param int description of first param item a item b second_param bool description of second param markdown :include-doxygen-member: multi_println /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print */ template&lt;typename T1, typename T2&gt; void multi_println(const T1&amp; v1, const T2&amp; v2) { std::cout &lt;&lt; v1 &lt;&lt; &quot;, &quot; &lt;&lt; v2 &lt;&lt; &quot;\n&quot;; } prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print</p>
+</article>
+
+<article>
+<header><h1>Member Signature Only</h1></header>
+<p>Use signatureOnly: true parameter to render only member signature namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }</p>
+</article>
+
+<article>
+<header><h1>All Matching Signatures</h1></header>
+<p>namespace utils { namespace nested { void their_func(long param1, std::string param2, bool param3) { } /** * Description of *what* and *why* for their_func * * @param param1 description of param1 * @param param3 description of param3 */ void their_func(long param1, bool param3) { } void their_func(long param1) { } } } :include-doxygen-member: utils::nested::their_func { signatureOnly: true, includeAllMatches: true }</p>
+</article>
+
+<article>
+<header><h1>Specific Member By Args</h1></header>
+<p>Use args to select a specific overload by providing parameters string :include-doxygen-member: utils::nested::their_func { args: &quot;long, bool&quot; } Description of what and why for their_func param1 long description of param1 param3 bool description of param3 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.</p>
+</article>
+
+<article>
+<header><h1>utils::second::AnotherClass</h1></header>
+<p>Use include-doxygen-compound to render a definition of a class/struct :include-doxygen-compound: utils::second::AnotherClass Domain specific context setting. Describes business setting and requirements. Public Functions Static Public Functions Public Attributes Static Public Attributes Protected Functions Definitions sing sing out loud tone int tone at which to sing volume int volume at which to sing bark bark out loud myClass const MyClass &amp; to test reference tone int tone at which to sing volume int volume at which to sing smile global smile volume int smile volume number_of_sounds current number of sounds made counter help ask for help out loud example tone int tone at which to sing volume int volume at which to sing utils::second::AnotherClass</p>
+</article>
+
+<article>
+<header><h1>utils::second::MyClass</h1></header>
+<p>Znai uses doxygen cross-reference to link definitions together. Class above references MyClass in its parameters. After you include definition of that class, MyClass reference above becomes a link. :include-doxygen-compound: utils::second::MyClass Domain specific context setting. Describes business setting and requirements. Public Functions Definitions bark bark utils::second::MyClass</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "member-signature-comment-and-parameters",
+      "title" : "Member Signature, Comment And Parameters",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-doxygen-member",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to render member signature, its description and parameters list",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "h",
+        "snippet" : "namespace utils {\nnamespace nested {\n/**\n * top **level** comment *of* important\n * * list one\n * * list two\n * * list three\n *\n * 1. number one\n * 2. number two\n *\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n * @param second_param description of second param\n */\nvoid my_func(int first_param, bool second_param) {\n}\n\n/**\n * specific description for single param version\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n */\nvoid my_func(int first_param) {\n}\n}\n}\n\nvoid free_func() {\n}",
+        "title" : "src/funcs.h",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-member: utils::nested::my_func\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "id" : "funcs_8h_1a5049cb5e6566fcb928af1f05dee569cd",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "namespace",
+        "name" : "my_func",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "first_param",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "second_param",
+          "type" : [ {
+            "text" : "bool",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "utils::nested",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "top ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "level",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " comment ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "of",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " important",
+          "type" : "SimpleText"
+        }, {
+          "bulletMarker" : "*",
+          "tight" : false,
+          "type" : "BulletList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "list one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "list two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "list three",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "delimiter" : " ",
+          "startNumber" : 1,
+          "type" : "OrderedList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "number one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "number two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "small" : true,
+        "type" : "ApiParameters",
+        "parameters" : [ {
+          "name" : "first_param",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_first_param",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of first ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "param",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "delimiter" : " ",
+              "startNumber" : 1,
+              "type" : "OrderedList",
+              "content" : [ {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item a",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              }, {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item b ",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              } ]
+            } ]
+          } ]
+        }, {
+          "name" : "second_param",
+          "type" : [ {
+            "text" : "bool",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_second_param",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of second param ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-doxygen-member: multi_println\n",
+        "lineNumber" : "",
+        "title" : "template example",
+        "type" : "Snippet"
+      }, {
+        "lang" : "hpp",
+        "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n */\ntemplate<typename T1, typename T2>\nvoid multi_println(const T1& v1, const T2& v2) {\n    std::cout << v1 << \", \" << v2 << \"\\n\";\n}",
+        "title" : "source.hpp",
+        "surroundedBy" : "// multi_println",
+        "type" : "Snippet"
+      }, {
+        "id" : "funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ {
+          "name" : "",
+          "type" : [ {
+            "text" : "typename T1",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "",
+          "type" : [ {
+            "text" : "typename T2",
+            "url" : ""
+          } ]
+        } ],
+        "compoundKind" : "file",
+        "name" : "multi_println",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "v1",
+          "type" : [ {
+            "text" : "const T1 &",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "v2",
+          "type" : [ {
+            "text" : "const T2 &",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "prints a value and a new line ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "small" : true,
+        "type" : "ApiParameters",
+        "title" : "parameters",
+        "parameters" : [ {
+          "name" : "v1",
+          "type" : [ {
+            "text" : "const T1 &",
+            "url" : ""
+          } ],
+          "anchorId" : "multi_println_v1",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "value to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "v2",
+          "type" : [ {
+            "text" : "const T2 &",
+            "url" : ""
+          } ],
+          "anchorId" : "multi_println_v2",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "value to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "small" : true,
+        "type" : "ApiParameters",
+        "title" : "template parameters",
+        "parameters" : [ {
+          "name" : "T1",
+          "type" : [ ],
+          "anchorId" : "multi_println_template_T1",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "type of the value one to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "T2",
+          "type" : [ ],
+          "anchorId" : "multi_println_template_T2",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "type of the value two to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "member-signature-only",
+      "title" : "Member Signature Only",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "signatureOnly: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to render only member signature",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "h",
+        "snippet" : "namespace utils {\nnamespace second {\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass MyClass {\npublic:\n    /// bark\n    void bark();\n};\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass ThirdClass {\npublic:\n    /// bark\n    void bark();\n};\n\n}\n}",
+        "title" : "src/classes.h",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "id" : "classutils_1_1second_1_1ThirdClass_1a0b8841f3d07edf14f592150dab8f0046",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "bark",
+        "isVirtual" : false,
+        "parameters" : [ ],
+        "compoundName" : "utils::second::ThirdClass",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      } ]
+    }, {
+      "id" : "all-matching-signatures",
+      "title" : "All Matching Signatures",
+      "type" : "Section",
+      "content" : [ {
+        "lang" : "h",
+        "snippet" : "namespace utils {\nnamespace nested {\n\nvoid their_func(long param1, std::string param2, bool param3) {\n}\n\n/**\n * Description of *what* and *why* for their_func\n *\n * @param param1 description of param1\n * @param param3 description of param3\n */\nvoid their_func(long param1, bool param3) {\n}\n\nvoid their_func(long param1) {\n}\n\n}\n}",
+        "title" : "src/funcs.h",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-member: utils::nested::their_func { signatureOnly: true, includeAllMatches: true }\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "id" : "funcs__two_8h_1a84ee829975e83205e4d19ad95d193e7f",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "namespace",
+        "name" : "their_func",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "param1",
+          "type" : [ {
+            "text" : "long",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "param2",
+          "type" : [ {
+            "text" : "std::string",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "param3",
+          "type" : [ {
+            "text" : "bool",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "utils::nested",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "id" : "funcs__two_8h_1aba9044a671c9870fc6616d5968d283b1",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "namespace",
+        "name" : "their_func",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "param1",
+          "type" : [ {
+            "text" : "long",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "param3",
+          "type" : [ {
+            "text" : "bool",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "utils::nested",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "id" : "funcs__two_8h_1a148cd7898973999d38680871eb7eaf05",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "namespace",
+        "name" : "their_func",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "param1",
+          "type" : [ {
+            "text" : "long",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "utils::nested",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      } ]
+    }, {
+      "id" : "specific-member-by-args",
+      "title" : "Specific Member By Args",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "args",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to select a specific overload by providing parameters string",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-member: utils::nested::their_func { args: \"long, bool\" }\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "namespace",
+        "name" : "their_func",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "param1",
+          "type" : [ {
+            "text" : "long",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "param3",
+          "type" : [ {
+            "text" : "bool",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "utils::nested",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Description of ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "what",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "why",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " for their_func",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "args" : "long, bool",
+        "disableAnchor" : true,
+        "small" : true,
+        "type" : "ApiParameters",
+        "parameters" : [ {
+          "name" : "param1",
+          "type" : [ {
+            "text" : "long",
+            "url" : ""
+          } ],
+          "anchorId" : "their_func_param1",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of param1 ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "param3",
+          "type" : [ {
+            "text" : "bool",
+            "url" : ""
+          } ],
+          "anchorId" : "their_func_param3",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of param3 ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "copy and paste.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "compound",
+      "title" : "Compound",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-doxygen-compound",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to render a definition of a class/struct",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-compound: utils::second::AnotherClass\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "id" : "classutils_1_1second_1_1AnotherClass",
+        "type" : "Anchor"
+      } ]
+    }, {
+      "badge" : "class",
+      "style" : "api",
+      "id" : "utilssecondanotherclass",
+      "title" : "utils::second::AnotherClass",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "Domain",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " specific context setting. Describes business setting and requirements. ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-public-functions",
+        "level" : 3,
+        "title" : "Public Functions",
+        "type" : "SubHeading"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1AnotherClass_1a2221a3c49e7c701f5a1829249c53078d",
+        "isConst" : true,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "sing",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "tone",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1AnotherClass_1a6df6948dc0a20d9df49b49d89df7bbee",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "bark",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "myClass",
+          "type" : [ {
+            "text" : "const ",
+            "url" : ""
+          }, {
+            "text" : "MyClass",
+            "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1MyClass"
+          }, {
+            "text" : " &",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "tone",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-static-public-functions",
+        "level" : 3,
+        "title" : "Static Public Functions",
+        "type" : "SubHeading"
+      }, {
+        "isStatic" : true,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1AnotherClass_1a7f879de76a89c99be528367721e77526",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "smile",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-public-attributes",
+        "level" : 3,
+        "title" : "Public Attributes",
+        "type" : "SubHeading"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : false,
+        "kind" : "variable",
+        "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "number_of_sounds",
+        "isVirtual" : false,
+        "parameters" : [ ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "int",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-static-public-attributes",
+        "level" : 3,
+        "title" : "Static Public Attributes",
+        "type" : "SubHeading"
+      }, {
+        "isStatic" : true,
+        "visibility" : "public",
+        "isFunction" : false,
+        "kind" : "variable",
+        "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "counter",
+        "isVirtual" : false,
+        "parameters" : [ ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "int",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-protected-functions",
+        "level" : 3,
+        "title" : "Protected Functions",
+        "type" : "SubHeading"
+      }, {
+        "isStatic" : false,
+        "visibility" : "protected",
+        "isFunction" : true,
+        "kind" : "function",
+        "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "help",
+        "isVirtual" : true,
+        "parameters" : [ {
+          "name" : "tone",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-definitions",
+        "level" : 3,
+        "title" : "Definitions",
+        "type" : "SubHeading"
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-definitions-sing",
+        "level" : 4,
+        "title" : "sing",
+        "type" : "SubHeading"
+      }, {
+        "id" : "classutils_1_1second_1_1AnotherClass_1a2221a3c49e7c701f5a1829249c53078d",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : true,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "sing",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "tone",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "utils::second::AnotherClass",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "sing out loud ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "small" : true,
+        "type" : "ApiParameters",
+        "parameters" : [ {
+          "name" : "tone",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "sing_tone",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "tone at which to sing ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "sing_volume",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "volume at which to sing ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-definitions-bark",
+        "level" : 4,
+        "title" : "bark",
+        "type" : "SubHeading"
+      }, {
+        "id" : "classutils_1_1second_1_1AnotherClass_1a6df6948dc0a20d9df49b49d89df7bbee",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "bark",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "myClass",
+          "type" : [ {
+            "text" : "const ",
+            "url" : ""
+          }, {
+            "text" : "MyClass",
+            "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1MyClass"
+          }, {
+            "text" : " &",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "tone",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "utils::second::AnotherClass",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "bark out loud ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "small" : true,
+        "type" : "ApiParameters",
+        "parameters" : [ {
+          "name" : "myClass",
+          "type" : [ {
+            "text" : "const ",
+            "url" : ""
+          }, {
+            "text" : "MyClass",
+            "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1MyClass"
+          }, {
+            "text" : " &",
+            "url" : ""
+          } ],
+          "anchorId" : "bark_myClass",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "to test reference ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "tone",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "bark_tone",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "tone at which to sing ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "bark_volume",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "volume at which to sing ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-definitions-smile",
+        "level" : 4,
+        "title" : "smile",
+        "type" : "SubHeading"
+      }, {
+        "id" : "classutils_1_1second_1_1AnotherClass_1a7f879de76a89c99be528367721e77526",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : true,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "smile",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "utils::second::AnotherClass",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "global smile ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "small" : true,
+        "type" : "ApiParameters",
+        "parameters" : [ {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "smile_volume",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "smile volume ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-definitions-number_of_sounds",
+        "level" : 4,
+        "title" : "number_of_sounds",
+        "type" : "SubHeading"
+      }, {
+        "id" : "classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : false,
+        "kind" : "variable",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "number_of_sounds",
+        "isVirtual" : false,
+        "parameters" : [ ],
+        "compoundName" : "utils::second::AnotherClass",
+        "returnType" : [ {
+          "text" : "int",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "current number of ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "sounds",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " made ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-definitions-counter",
+        "level" : 4,
+        "title" : "counter",
+        "type" : "SubHeading"
+      }, {
+        "id" : "classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : true,
+        "visibility" : "public",
+        "isFunction" : false,
+        "kind" : "variable",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "counter",
+        "isVirtual" : false,
+        "parameters" : [ ],
+        "compoundName" : "utils::second::AnotherClass",
+        "returnType" : [ {
+          "text" : "int",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "style" : "api",
+        "id" : "utilssecondanotherclass-definitions-help",
+        "level" : 4,
+        "title" : "help",
+        "type" : "SubHeading"
+      }, {
+        "id" : "classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "protected",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "help",
+        "isVirtual" : true,
+        "parameters" : [ {
+          "name" : "tone",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "utils::second::AnotherClass",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "ask for help out loud ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "Emphasis",
+          "content" : [ {
+            "text" : "example",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "lang" : "cpp",
+          "snippet" : "utils::second::AnotherClass* instance;\ninstance->help(10, 20);\n",
+          "lineNumber" : "",
+          "type" : "Snippet"
+        } ]
+      }, {
+        "small" : true,
+        "type" : "ApiParameters",
+        "parameters" : [ {
+          "name" : "tone",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "help_tone",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "tone at which to sing ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "volume",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "help_volume",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "volume at which to sing ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "cross-reference",
+      "title" : "Cross-Reference",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Znai uses doxygen cross-reference to link definitions together.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Class above references ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "MyClass",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " in its parameters. After you include definition of that class,",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "code" : "MyClass",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " reference above becomes a link.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-compound: utils::second::MyClass\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "id" : "classutils_1_1second_1_1MyClass",
+        "type" : "Anchor"
+      } ]
+    }, {
+      "badge" : "class",
+      "style" : "api",
+      "id" : "utilssecondmyclass",
+      "title" : "utils::second::MyClass",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "Domain",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " specific context setting. Describes business setting and requirements. ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "utilssecondmyclass-public-functions",
+        "level" : 3,
+        "title" : "Public Functions",
+        "type" : "SubHeading"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "url" : "/znai/CPP/auto-reference#classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "bark",
+        "isVirtual" : false,
+        "parameters" : [ ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "style" : "api",
+        "id" : "utilssecondmyclass-definitions",
+        "level" : 3,
+        "title" : "Definitions",
+        "type" : "SubHeading"
+      }, {
+        "style" : "api",
+        "id" : "utilssecondmyclass-definitions-bark",
+        "level" : 4,
+        "title" : "bark",
+        "type" : "SubHeading"
+      }, {
+        "id" : "classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ ],
+        "compoundKind" : "class",
+        "name" : "bark",
+        "isVirtual" : false,
+        "parameters" : [ ],
+        "compoundName" : "utils::second::MyClass",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "bark ",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1658335209108,
+    "tocItem" : {
+      "sectionTitle" : "CPP",
+      "pageTitle" : "Auto Reference",
+      "pageMeta" : { },
+      "dirName" : "CPP",
+      "fileName" : "auto-reference",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Member Signature, Comment And Parameters",
+        "id" : "member-signature-comment-and-parameters"
+      }, {
+        "title" : "Member Signature Only",
+        "id" : "member-signature-only"
+      }, {
+        "title" : "All Matching Signatures",
+        "id" : "all-matching-signatures"
+      }, {
+        "title" : "Specific Member By Args",
+        "id" : "specific-member-by-args"
+      }, {
+        "title" : "Compound",
+        "id" : "compound"
+      }, {
+        "title" : "utils::second::AnotherClass",
+        "id" : "utilssecondanotherclass",
+        "style" : "api"
+      }, {
+        "title" : "Cross-Reference",
+        "id" : "cross-reference"
+      }, {
+        "title" : "utils::second::MyClass",
+        "id" : "utilssecondmyclass",
+        "style" : "api"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

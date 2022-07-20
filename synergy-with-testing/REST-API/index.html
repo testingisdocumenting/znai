@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: REST API</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Request and Response Capture</h1></header>
+<p>snippets/open-API Open API helps to define a formal API specification. And real examples of request/response helps to clarify.Instead of manually copy-and-pasting the responses to your documentation, consider running tests and automatically capturing the relevant artifacts.</p>
+</article>
+
+<article>
+<header><h1>WebTau</h1></header>
+<p>https://testingisdocumenting.org/webtau WebTau (short for web test automation) is a testing API, command line tool and a framework to write unit, integration and end-to-end tests. Test across REST-API, Graph QL, Browser, Database, CLI and Business Logic with consistent set of matchers and concepts.Here is an example of REST API test with test artifacts capture scenario(&quot;create and access employee&quot;) { def id = http.post(&quot;/employee&quot;, [firstName: 'FN', lastName: 'LN']) { id.shouldNot == &quot;&quot; return id } http.doc.capture('employee-post') // capture previous HTTP call into &lt;docDir&gt;/employee-post http.get(&quot;/employee/$id&quot;) { firstName.should == &quot;FN&quot; lastName.should == &quot;LN&quot; } http.doc.capture('employee-get') // capture previous HTTP call into &lt;docDir&gt;/employee-get }</p>
+</article>
+
+<article>
+<header><h1>Documentation Pipeline</h1></header>
+<p>Documentation pipeline can look like markdown # Create Employee :include-open-api: openapi/api-spec.json {operationId: &quot;createEmployee&quot; } ```columns left: :include-json: doc-artifacts/employee-post/request.json { title: &quot;request payload&quot; } right: :include-json: doc-artifacts/employee-post/response.json { title: &quot;response payload&quot;, pathsFile: &quot;doc-artifacts/employee-post/paths.json&quot; } ```</p>
+</article>
+
+<article>
+<header><h1>Create Employee</h1></header>
+<p></p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "request-and-response-capture",
+      "title" : "Request and Response Capture",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "url" : "/znai/snippets/open-API",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Open API",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " helps to define a formal API specification.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "And real examples of request/response helps to clarify.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Instead of manually copy-and-pasting the responses to your documentation, consider running tests and automatically",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "capturing the relevant artifacts.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "webtau",
+      "title" : "WebTau",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "url" : "https://testingisdocumenting.org/webtau",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "WebTau",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " (short for web test automation) is a testing API, command line tool and a framework to write unit,",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "integration and end-to-end tests. Test across REST-API, Graph QL, Browser, Database, CLI and Business Logic with consistent set of matchers and concepts.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Here is an example of REST API test with test artifacts capture",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "groovy",
+        "snippet" : "scenario(\"create and access employee\") {\n    def id = http.post(\"/employee\", [firstName: 'FN', lastName: 'LN']) {\n        id.shouldNot == \"\"\n        return id\n    }\n    http.doc.capture('employee-post') // capture previous HTTP call into <docDir>/employee-post\n\n    http.get(\"/employee/$id\") {\n        firstName.should == \"FN\"\n        lastName.should == \"LN\"\n    }\n    http.doc.capture('employee-get') // capture previous HTTP call into <docDir>/employee-get\n}",
+        "title" : "happy path test scenario",
+        "surroundedBy" : "// example",
+        "commentsType" : "inline",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "documentation-pipeline",
+      "title" : "Documentation Pipeline",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Documentation pipeline can look like",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "diagram" : {
+          "isInvertedTextColorByStyleId" : { },
+          "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"434pt\" height=\"48pt\"\n viewBox=\"0.00 0.00 434.00 48.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 44)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-44 430,-44 430,4 -4,4\"/>\n<!-- build -->\n<g id=\"node1\" class=\"node\">\n<title>build</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"0,-0.5 0,-39.5 54,-39.5 54,-0.5 0,-0.5\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-17.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Build</text>\n</g>\n<!-- deploy -->\n<g id=\"node2\" class=\"node\">\n<title>deploy</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"90,-0.5 90,-39.5 153,-39.5 153,-0.5 90,-0.5\"/>\n<text text-anchor=\"middle\" x=\"121.5\" y=\"-17.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Deploy</text>\n</g>\n<!-- build&#45;&gt;deploy -->\n<g id=\"edge1\" class=\"edge\">\n<title>build&#45;&gt;deploy</title>\n<path fill=\"none\" stroke=\"black\" d=\"M54.26,-20C62.24,-20 71.21,-20 79.91,-20\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"79.92,-23.5 89.92,-20 79.92,-16.5 79.92,-23.5\"/>\n</g>\n<!-- testrun -->\n<g id=\"node3\" class=\"node\">\n<title>testrun</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"189,-0.5 189,-39.5 259,-39.5 259,-0.5 189,-0.5\"/>\n<text text-anchor=\"middle\" x=\"224\" y=\"-17.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Test Run</text>\n</g>\n<!-- deploy&#45;&gt;testrun -->\n<g id=\"edge2\" class=\"edge\">\n<title>deploy&#45;&gt;testrun</title>\n<path fill=\"none\" stroke=\"black\" d=\"M153.2,-20C161.33,-20 170.27,-20 178.96,-20\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"178.98,-23.5 188.98,-20 178.98,-16.5 178.98,-23.5\"/>\n</g>\n<!-- documentation -->\n<g id=\"node4\" class=\"node\">\n<title>documentation</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"295,-0.5 295,-39.5 426,-39.5 426,-0.5 295,-0.5\"/>\n<text text-anchor=\"middle\" x=\"360.5\" y=\"-17.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Documentation Build</text>\n</g>\n<!-- testrun&#45;&gt;documentation -->\n<g id=\"edge3\" class=\"edge\">\n<title>testrun&#45;&gt;documentation</title>\n<path fill=\"none\" stroke=\"black\" d=\"M259.29,-20C267.2,-20 275.93,-20 284.83,-20\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"284.92,-23.5 294.92,-20 284.92,-16.5 284.92,-23.5\"/>\n</g>\n</g>\n</svg>\n",
+          "stylesByNodeId" : {
+            "testrun" : [ "h" ]
+          },
+          "id" : "dag16"
+        },
+        "idsToHighlight" : [ ],
+        "wide" : false,
+        "urls" : { },
+        "type" : "GraphVizDiagram"
+      }, {
+        "lang" : "markdown",
+        "snippet" : "# Create Employee\n\n:include-open-api: openapi/api-spec.json {operationId: \"createEmployee\" }\n\n```columns\nleft: \n:include-json: doc-artifacts/employee-post/request.json { title: \"request payload\" }\n\nright: \n:include-json: doc-artifacts/employee-post/response.json { \n  title: \"response payload\", \n  pathsFile: \"doc-artifacts/employee-post/paths.json\" \n}\n```\n",
+        "lineNumber" : "",
+        "title" : "znai example of using test artifacts",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "create-employee",
+      "title" : "Create Employee",
+      "type" : "Section",
+      "content" : [ {
+        "operationId" : "createEmployee",
+        "operation" : {
+          "id" : "createEmployee",
+          "method" : "post",
+          "path" : "/employee",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "summary" : "Create new employee",
+          "parameters" : [ {
+            "name" : "body",
+            "in" : "body",
+            "type" : "null",
+            "required" : true,
+            "schema" : {
+              "type" : "object",
+              "required" : [ "firstName", "lastName" ],
+              "properties" : {
+                "firstName" : {
+                  "description" : [ {
+                    "type" : "Paragraph",
+                    "content" : [ {
+                      "text" : "first name of an employee",
+                      "type" : "SimpleText"
+                    } ]
+                  } ],
+                  "type" : "string"
+                },
+                "lastName" : {
+                  "description" : [ {
+                    "type" : "Paragraph",
+                    "content" : [ {
+                      "text" : "last name of an employee",
+                      "type" : "SimpleText"
+                    } ]
+                  } ],
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : [ ]
+          } ],
+          "responses" : [ {
+            "code" : "200",
+            "schema" : {
+              "type" : "object",
+              "required" : [ "id" ],
+              "properties" : {
+                "id" : {
+                  "description" : [ {
+                    "type" : "Paragraph",
+                    "content" : [ {
+                      "text" : "employee unique identifier",
+                      "type" : "SimpleText"
+                    } ]
+                  } ],
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "customer already exists",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "code" : "201",
+            "schema" : {
+              "type" : "object",
+              "required" : [ "id" ],
+              "properties" : {
+                "id" : {
+                  "description" : [ {
+                    "type" : "Paragraph",
+                    "content" : [ {
+                      "text" : "employee unique identifier",
+                      "type" : "SimpleText"
+                    } ]
+                  } ],
+                  "type" : "string"
+                }
+              }
+            },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "customer created successfully",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ],
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Create a new employee, by sending details and get back the id of a newly created employee",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        },
+        "type" : "OpenApiOperation"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "title" : "request payload",
+            "data" : {
+              "firstName" : "FN",
+              "lastName" : "LN"
+            },
+            "paths" : [ ],
+            "type" : "Json"
+          } ]
+        }, {
+          "content" : [ {
+            "title" : "response payload",
+            "pathsFile" : "doc-artifacts/employee-post/paths.json",
+            "data" : {
+              "id" : "employee-id"
+            },
+            "paths" : [ "root.id" ],
+            "type" : "Json"
+          } ]
+        } ],
+        "config" : { },
+        "type" : "Columns"
+      } ]
+    } ],
+    "lastModifiedTime" : 1658335209120,
+    "tocItem" : {
+      "sectionTitle" : "Synergy With Testing",
+      "pageTitle" : "REST API",
+      "pageMeta" : { },
+      "dirName" : "synergy-with-testing",
+      "fileName" : "REST-API",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Request and Response Capture",
+        "id" : "request-and-response-capture"
+      }, {
+        "title" : "WebTau",
+        "id" : "webtau"
+      }, {
+        "title" : "Documentation Pipeline",
+        "id" : "documentation-pipeline"
+      }, {
+        "title" : "Create Employee",
+        "id" : "create-employee"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

@@ -98,7 +98,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -111,34 +110,35 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "code-first",
-      "type" : "Section",
       "title" : "Code First",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
+          "url" : "/znai/snippets/jupyter-notebook",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "The include-jupyter extension",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/jupyter-notebook"
+          } ]
         }, {
           "text" : " automatically assigns ",
           "type" : "SimpleText"
@@ -176,10 +176,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "InlinedCode"
         } ]
       }, {
-        "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
         "cellType" : "code",
-        "type" : "JupyterCell",
-        "lang" : "python"
+        "lang" : "python",
+        "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
+        "type" : "JupyterCell"
       }, {
         "cellType" : "empty-output",
         "meta" : {
@@ -187,34 +187,34 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "JupyterCell"
       }, {
-        "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
         "cellType" : "code",
-        "type" : "JupyterCell",
-        "lang" : "python"
-      }, {
-        "cellType" : "output",
-        "meta" : {
-          "rightSide" : true
-        },
-        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
+        "lang" : "python",
+        "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
         "type" : "JupyterCell"
       }, {
-        "snippet" : "display(tran)",
-        "cellType" : "code",
-        "type" : "JupyterCell",
-        "lang" : "python"
-      }, {
         "cellType" : "output",
+        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
         "meta" : {
           "rightSide" : true
         },
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "display(tran)",
+        "type" : "JupyterCell"
+      }, {
+        "cellType" : "output",
         "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+        "meta" : {
+          "rightSide" : true
+        },
         "type" : "JupyterCell"
       } ]
     }, {
       "id" : "story-first",
-      "type" : "Section",
       "title" : "Story First",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -233,15 +233,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-jupyter: notebook.ipynb {storyFirst: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "pandas",
-      "type" : "Section",
       "title" : "Pandas",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -264,13 +264,13 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "JupyterCell"
       }, {
-        "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
         "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell",
-        "lang" : "python"
+        "type" : "JupyterCell"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -288,13 +288,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
         "type" : "JupyterCell"
       }, {
-        "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
         "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell",
-        "lang" : "python"
+        "type" : "JupyterCell"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -312,16 +312,16 @@ ReactDOM.render(React.createElement(Documentation, {
         "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
         "type" : "JupyterCell"
       }, {
-        "snippet" : "display(tran)",
         "cellType" : "code",
+        "lang" : "python",
+        "snippet" : "display(tran)",
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell",
-        "lang" : "python"
+        "type" : "JupyterCell"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403258,
+    "lastModifiedTime" : 1658335209112,
     "tocItem" : {
       "sectionTitle" : "Layout",
       "pageTitle" : "Jupyter Notebook Two Sides",

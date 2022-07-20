@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: Auto Reference</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Method/Function Definition</h1></header>
+<p>Use python-method to include function/method definition with signature, documentation and parameters list :include-python-method: fin.money.render_money render_money render money to a string returns str money represented as text amount fin.money.Money amount to print message str message to use for audit def render_money(amount: Money, message: str = &quot;&quot;) -&gt; str: &quot;&quot;&quot; render money to a string Parameters -------------- amount: amount to print message: message to use for audit Returns ------- money represented as text &quot;&quot;&quot; return f&quot;{message} {amount.amount} {amount.currency}&quot;</p>
+</article>
+
+<article>
+<header><h1>fin.money.Money</h1></header>
+<p>To define a class use python-class include plugin :include-python-class: fin.money.Money class Money: &quot;&quot;&quot; Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead &quot;&quot;&quot; def __init__(self, amount: int, currency: str): &quot;&quot;&quot; generic constructor that accepts a currency Parameters ---------- amount: amount of money currency: currency to associate with the created Money &quot;&quot;&quot; self._amount = amount self._currency = currency @property def amount(self) -&gt; int: &quot;&quot;&quot; amount in provided currency &quot;&quot;&quot; return self._amount @amount.setter def amount(self, amount: int): self.amount = amount @property def currency(self) -&gt; str: &quot;&quot;&quot; money currency &quot;&quot;&quot; return self._currency @classmethod def dollars(cls, amount: int) -&gt; 'Money': &quot;&quot;&quot; creates money instance with `USD` as the currency Parameters ---------- amount: dollar amount Returns ------- new money instance with `USD` as currency &quot;&quot;&quot; return cls(amount, &quot;USD&quot;) def add(self, another: 'Money'): &quot;&quot;&quot; add money from another money instance Parameters -------------- another : money to add &quot;&quot;&quot; self.amount += another.amount Note: Once you define Money class, method arguments and parameter descriptions with the same type will automatically link to the place of definition Properties Members Details dollars __init__ add Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str [readonly] money currency Money.dollars Money.__init__ Money.add Money.dollars creates money instance with `USD` as the currency returns fin.money.Money new money instance with USD as currency amount int dollar amount Money.__init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money.add add money from another money instance another fin.money.Money money to add</p>
+</article>
+
+<article>
+<header><h1>department.Worker</h1></header>
+<p>Example of inheritance from fin.money import Money class Person: &quot;&quot;&quot; Person, the root of all &quot;&quot;&quot; def __init__(self, name): self._name = name self._desire = &quot;&quot; @property def name(self) -&gt; str: &quot;&quot;&quot; Person name, you'd better use it when talking to them &quot;&quot;&quot; return self._name @property def desire(self) -&gt; str: &quot;&quot;&quot; Person desire, can change over time &quot;&quot;&quot; return self._desire @desire.setter def desire(self, new_desire: str): self._desire = new_desire def talk(self): &quot;&quot;&quot; person talks &quot;&quot;&quot; print(f&quot;{self.name} talks&quot;) class Worker(Person): &quot;&quot;&quot; Works and improves the world &quot;&quot;&quot; def __init__(self, name: str, salary: Money): Person.__init__(self, name) self._salary = salary def work(self): &quot;&quot;&quot; work to the best ability &quot;&quot;&quot; pass @property def salary(self) -&gt; Money: &quot;&quot;&quot; Annual non-yet-taxed salary &quot;&quot;&quot; return self._salary from department import Worker as Wo from fin.money import Money class WorkerCTO(Wo): &quot;&quot;&quot; CTO worker with all the qualities and attributes required for a successful business &quot;&quot;&quot; def __init__(self, name: str, salary: Money, goal: str): &quot;&quot;&quot; Create a new instance of CTO with provided name, salary and the goal Parameters ---------- name: CTO name salary: CTO salary goal: top priority goal to achieve &quot;&quot;&quot; Wo.__init__(self, name=name, salary=salary) self._goal = goal def work_hard(self, level: int): &quot;&quot;&quot; work as hard as possible to observe Parameters ---------- level: effort level from 0 to 100 &quot;&quot;&quot; pass @property def goal(self) -&gt; str: &quot;&quot;&quot; CTO's top priority goal to achieve &quot;&quot;&quot; return self._goal @goal.setter def goal(self, new_goal: str): self._goal = new_goal :include-python-class: executive_department.WorkerCTO :include-python-class: department.Worker Note: Base classes that are defined somewhere in the documentation will turn into linksBase classes: , Properties WorkerCTO Members Worker Members Person Members WorkerCTO Details __init__ work_hard CTO worker with all the qualities and attributes required for a successful business Worker Person goal str CTO's top priority goal to achieve salary fin.money.Money [readonly] Annual non-yet-taxed salary desire str Person desire, can change over time name str [readonly] Person name, you'd better use it when talking to them WorkerCTO.__init__ WorkerCTO.work_hard Worker.work Person.talk WorkerCTO.__init__ Create a new instance of CTO with provided name, salary and the goal name str CTO name salary fin.money.Money CTO salary goal str top priority goal to achieve WorkerCTO.work_hard work as hard as possible to observe level int effort level from 0 to 100 Base classes: Properties Worker Members Person Members Worker Details __init__ work Works and improves the world Person salary fin.money.Money [readonly] Annual non-yet-taxed salary desire str Person desire, can change over time name str [readonly] Person name, you'd better use it when talking to them Worker.__init__ Worker.work Person.talk Worker.__init__ Worker.work work to the best ability</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "methodfunction-definition",
+      "title" : "Method/Function Definition",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "python-method",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to include function/method definition with signature, documentation and parameters list",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-method: fin.money.render_money\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "name" : "render_money",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "amount",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "message",
+          "defaultValue" : "\"\"",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ {
+          "text" : "str",
+          "url" : ""
+        } ],
+        "decorators" : [ ],
+        "qualifiedName" : "fin.money.render_money",
+        "extraBottomMargin" : true,
+        "url" : ""
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "render money to a string",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "returns",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "fin_money_render_money_returns",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "money represented as text",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "amount",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ],
+          "anchorId" : "fin_money_render_money_amount",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "amount to print",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "message",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "fin_money_render_money_message",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "message to use for audit",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "small" : true,
+        "type" : "ApiParameters"
+      }, {
+        "lang" : "py",
+        "snippet" : "def render_money(amount: Money, message: str = \"\") -> str:\n    \"\"\"\n    render money to a string\n\n    Parameters\n    --------------\n    amount:\n      amount to print\n\n    message:\n      message to use for audit\n\n    Returns\n    -------\n      money represented as text\n    \"\"\"\n\n    return f\"{message} {amount.amount} {amount.currency}\"",
+        "autoTitle" : true,
+        "startLine" : "render_money",
+        "title" : "fin/money.py",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "class-definition",
+      "title" : "Class Definition",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To define a class use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "python-class",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " include plugin",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-class: fin.money.Money \n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "class Money:\n    \"\"\"\n    Money representation.\n    Encapsulates money type, combining amount and currency. Deals with precision errors.\n\n    Warning: avoid using `int` in place of money and use this type instead\n    \"\"\"\n\n    def __init__(self, amount: int, currency: str):\n        \"\"\"\n        generic constructor that accepts a currency\n\n        Parameters\n        ----------\n        amount:\n          amount of money\n\n        currency:\n          currency to associate with the created Money\n        \"\"\"\n        self._amount = amount\n        self._currency = currency\n\n    @property\n    def amount(self) -> int:\n        \"\"\"\n        amount in provided currency\n        \"\"\"\n        return self._amount\n\n    @amount.setter\n    def amount(self, amount: int):\n        self.amount = amount\n\n    @property\n    def currency(self) -> str:\n        \"\"\"\n        money currency\n        \"\"\"\n        return self._currency\n\n    @classmethod\n    def dollars(cls, amount: int) -> 'Money':\n        \"\"\"\n        creates money instance with `USD` as the currency\n\n        Parameters\n        ----------\n        amount:\n          dollar amount\n\n        Returns\n        -------\n          new money instance with `USD` as currency\n        \"\"\"\n        return cls(amount, \"USD\")\n\n    def add(self, another: 'Money'):\n        \"\"\"\n        add money from another money instance\n\n        Parameters\n        --------------\n        another :\n          money to add\n        \"\"\"\n        self.amount += another.amount",
+        "autoTitle" : true,
+        "endLine" : "class Debt",
+        "excludeStartEnd" : true,
+        "title" : "fin/money.py",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Once you define ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "Money",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " class, method arguments and parameter descriptions with the same type will automatically link to the place of definition",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "id" : "python_api_fin_money_Money",
+        "type" : "Anchor"
+      } ]
+    }, {
+      "badge" : "class",
+      "style" : "api",
+      "id" : "finmoneymoney",
+      "title" : "fin.money.Money",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Money representation.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Encapsulates money type, combining amount and currency. Deals with precision errors.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Warning: avoid using ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "int",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " in place of money and use this type instead",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "finmoneymoney-properties",
+        "level" : 3,
+        "title" : "Properties",
+        "type" : "SubHeading"
+      }, {
+        "parameters" : [ {
+          "name" : "amount",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "fin_money_Money_properties_amount",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "amount in provided currency",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "currency",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "fin_money_Money_properties_currency",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "[readonly]",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " money currency",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "finmoneymoney-members",
+        "level" : 3,
+        "title" : "Members",
+        "type" : "SubHeading"
+      }, {
+        "name" : "Money.dollars",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "cls",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "amount",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ {
+          "text" : "fin.money.Money",
+          "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+        } ],
+        "decorators" : [ "classmethod" ],
+        "qualifiedName" : "fin.money.Money.dollars",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : "/znai/python/auto-reference#python_api_fin_money_Money_dollars"
+      }, {
+        "name" : "Money.__init__",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "amount",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "currency",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "fin.money.Money.__init__",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : "/znai/python/auto-reference#python_api_fin_money_Money___init__"
+      }, {
+        "name" : "Money.add",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "another",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "fin.money.Money.add",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : "/znai/python/auto-reference#python_api_fin_money_Money_add"
+      }, {
+        "style" : "api",
+        "id" : "finmoneymoney-details",
+        "level" : 3,
+        "title" : "Details",
+        "type" : "SubHeading"
+      }, {
+        "style" : "api",
+        "id" : "finmoneymoney-details-dollars",
+        "level" : 4,
+        "title" : "dollars",
+        "type" : "SubHeading"
+      }, {
+        "id" : "python_api_fin_money_Money_dollars",
+        "type" : "Anchor"
+      }, {
+        "name" : "Money.dollars",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "cls",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "amount",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ {
+          "text" : "fin.money.Money",
+          "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+        } ],
+        "decorators" : [ "classmethod" ],
+        "qualifiedName" : "fin.money.Money.dollars",
+        "removeSelf" : true,
+        "extraBottomMargin" : true
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "creates money instance with ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "USD",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as the currency",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "returns",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ],
+          "anchorId" : "fin_money_Money_dollars_returns",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "new money instance with ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "USD",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " as currency",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "amount",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "fin_money_Money_dollars_amount",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "dollar amount",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "small" : true,
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "finmoneymoney-details-__init__",
+        "level" : 4,
+        "title" : "__init__",
+        "type" : "SubHeading"
+      }, {
+        "id" : "python_api_fin_money_Money___init__",
+        "type" : "Anchor"
+      }, {
+        "name" : "Money.__init__",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "amount",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "currency",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "fin.money.Money.__init__",
+        "removeSelf" : true,
+        "extraBottomMargin" : true
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "generic constructor that accepts a currency",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "amount",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "fin_money_Money___init___amount",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "amount of money",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "currency",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "fin_money_Money___init___currency",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "currency to associate with the created Money",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "small" : true,
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "finmoneymoney-details-add",
+        "level" : 4,
+        "title" : "add",
+        "type" : "SubHeading"
+      }, {
+        "id" : "python_api_fin_money_Money_add",
+        "type" : "Anchor"
+      }, {
+        "name" : "Money.add",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "another",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "fin.money.Money.add",
+        "removeSelf" : true,
+        "extraBottomMargin" : true
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "add money from another money instance",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "another",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ],
+          "anchorId" : "fin_money_Money_add_another",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "money to add",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "small" : true,
+        "type" : "ApiParameters"
+      } ]
+    }, {
+      "id" : "inheritance",
+      "title" : "Inheritance",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Example of inheritance",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "py",
+        "snippet" : "from fin.money import Money\n\n\nclass Person:\n    \"\"\"\n    Person, the root of all\n    \"\"\"\n    def __init__(self, name):\n        self._name = name\n        self._desire = \"\"\n\n    @property\n    def name(self) -> str:\n        \"\"\"\n        Person name, you'd better use it when talking to them\n        \"\"\"\n        return self._name\n\n    @property\n    def desire(self) -> str:\n        \"\"\"\n        Person desire, can change over time\n        \"\"\"\n        return self._desire\n\n    @desire.setter\n    def desire(self, new_desire: str):\n        self._desire = new_desire\n\n    def talk(self):\n        \"\"\"\n        person talks\n        \"\"\"\n        print(f\"{self.name} talks\")\n\n\nclass Worker(Person):\n    \"\"\"\n    Works and improves the world\n    \"\"\"\n    def __init__(self, name: str, salary: Money):\n        Person.__init__(self, name)\n        self._salary = salary\n\n    def work(self):\n        \"\"\"\n        work to the best ability\n        \"\"\"\n        pass\n\n    @property\n    def salary(self) -> Money:\n        \"\"\"\n        Annual non-yet-taxed salary\n        \"\"\"\n        return self._salary",
+        "autoTitle" : true,
+        "title" : "department.py",
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "from department import Worker as Wo\nfrom fin.money import Money\n\n\nclass WorkerCTO(Wo):\n    \"\"\"\n    CTO worker with all the qualities and attributes required for a successful business\n    \"\"\"\n    def __init__(self, name: str, salary: Money, goal: str):\n        \"\"\"\n        Create a new instance of CTO with provided name, salary and the goal\n\n        Parameters\n        ----------\n        name:\n          CTO name\n        salary:\n          CTO salary\n        goal:\n          top priority goal to achieve\n        \"\"\"\n        Wo.__init__(self, name=name, salary=salary)\n        self._goal = goal\n\n    def work_hard(self, level: int):\n        \"\"\"\n        work as hard as possible to observe\n\n        Parameters\n        ----------\n        level:\n          effort level from 0 to 100\n        \"\"\"\n        pass\n\n    @property\n    def goal(self) -> str:\n        \"\"\"\n        CTO's top priority goal to achieve\n        \"\"\"\n        return self._goal\n\n    @goal.setter\n    def goal(self, new_goal: str):\n        self._goal = new_goal",
+        "autoTitle" : true,
+        "title" : "executive_department.py",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-class: executive_department.WorkerCTO\n:include-python-class: department.Worker\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Base classes that are defined somewhere in the documentation will turn into links",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "id" : "python_api_executive_department_WorkerCTO",
+        "type" : "Anchor"
+      } ]
+    }, {
+      "badge" : "class",
+      "style" : "api",
+      "id" : "executive_departmentworkercto",
+      "title" : "executive_department.WorkerCTO",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "CTO worker with all the qualities and attributes required for a successful business",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "Base classes: ",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "linkedText" : [ {
+            "text" : "department.Worker",
+            "url" : "/znai/python/auto-reference#python_api_department_Worker"
+          } ],
+          "type" : "ApiLinkedTextBlock"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "linkedText" : [ {
+            "text" : "department.Person",
+            "url" : ""
+          } ],
+          "type" : "ApiLinkedTextBlock"
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "executive_departmentworkercto-properties",
+        "level" : 3,
+        "title" : "Properties",
+        "type" : "SubHeading"
+      }, {
+        "parameters" : [ {
+          "name" : "goal",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "executive_department_WorkerCTO_properties_goal",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "CTO's top priority goal to achieve",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "WorkerCTO",
+        "type" : "ApiParameters"
+      }, {
+        "parameters" : [ {
+          "name" : "salary",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ],
+          "anchorId" : "department_Worker_properties_salary",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "[readonly]",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " Annual non-yet-taxed salary",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "Worker",
+        "type" : "ApiParameters"
+      }, {
+        "parameters" : [ {
+          "name" : "desire",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "department_Person_properties_desire",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Person desire, can change over time",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "name",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "department_Person_properties_name",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "[readonly]",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " Person name, you'd better use it when talking to them",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "Person",
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "executive_departmentworkercto-workercto-members",
+        "level" : 3,
+        "title" : "WorkerCTO Members",
+        "type" : "SubHeading"
+      }, {
+        "name" : "WorkerCTO.__init__",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "name",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "salary",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "goal",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "executive_department.WorkerCTO.__init__",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : "/znai/python/auto-reference#python_api_executive_department_WorkerCTO___init__"
+      }, {
+        "name" : "WorkerCTO.work_hard",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "level",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "executive_department.WorkerCTO.work_hard",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : "/znai/python/auto-reference#python_api_executive_department_WorkerCTO_work_hard"
+      }, {
+        "style" : "api",
+        "id" : "executive_departmentworkercto-worker-members",
+        "level" : 3,
+        "title" : "Worker Members",
+        "type" : "SubHeading"
+      }, {
+        "name" : "Worker.work",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "department.Worker.work",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : "/znai/python/auto-reference#python_api_department_Worker_work"
+      }, {
+        "style" : "api",
+        "id" : "executive_departmentworkercto-person-members",
+        "level" : 3,
+        "title" : "Person Members",
+        "type" : "SubHeading"
+      }, {
+        "name" : "Person.talk",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "department.Person.talk",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : ""
+      }, {
+        "style" : "api",
+        "id" : "executive_departmentworkercto-workercto-details",
+        "level" : 3,
+        "title" : "WorkerCTO Details",
+        "type" : "SubHeading"
+      }, {
+        "style" : "api",
+        "id" : "executive_departmentworkercto-workercto-details-__init__",
+        "level" : 4,
+        "title" : "__init__",
+        "type" : "SubHeading"
+      }, {
+        "id" : "python_api_executive_department_WorkerCTO___init__",
+        "type" : "Anchor"
+      }, {
+        "name" : "WorkerCTO.__init__",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "name",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "salary",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "goal",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "executive_department.WorkerCTO.__init__",
+        "removeSelf" : true,
+        "extraBottomMargin" : true
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Create a new instance of CTO with provided name, salary and the goal",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "name",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "executive_department_WorkerCTO___init___name",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "CTO name",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "salary",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ],
+          "anchorId" : "executive_department_WorkerCTO___init___salary",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "CTO salary",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "goal",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "executive_department_WorkerCTO___init___goal",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "top priority goal to achieve",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "small" : true,
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "executive_departmentworkercto-workercto-details-work_hard",
+        "level" : 4,
+        "title" : "work_hard",
+        "type" : "SubHeading"
+      }, {
+        "id" : "python_api_executive_department_WorkerCTO_work_hard",
+        "type" : "Anchor"
+      }, {
+        "name" : "WorkerCTO.work_hard",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "level",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "executive_department.WorkerCTO.work_hard",
+        "removeSelf" : true,
+        "extraBottomMargin" : true
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "work as hard as possible to observe",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "level",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "executive_department_WorkerCTO_work_hard_level",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "effort level from 0 to 100",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "small" : true,
+        "type" : "ApiParameters"
+      }, {
+        "id" : "python_api_department_Worker",
+        "type" : "Anchor"
+      } ]
+    }, {
+      "badge" : "class",
+      "style" : "api",
+      "id" : "departmentworker",
+      "title" : "department.Worker",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Works and improves the world",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "Base classes: ",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "linkedText" : [ {
+            "text" : "department.Person",
+            "url" : ""
+          } ],
+          "type" : "ApiLinkedTextBlock"
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "departmentworker-properties",
+        "level" : 3,
+        "title" : "Properties",
+        "type" : "SubHeading"
+      }, {
+        "parameters" : [ {
+          "name" : "salary",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ],
+          "anchorId" : "department_Worker_properties_salary",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "[readonly]",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " Annual non-yet-taxed salary",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "Worker",
+        "type" : "ApiParameters"
+      }, {
+        "parameters" : [ {
+          "name" : "desire",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "department_Person_properties_desire",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Person desire, can change over time",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "name",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "department_Person_properties_name",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "[readonly]",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " Person name, you'd better use it when talking to them",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "Person",
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "departmentworker-worker-members",
+        "level" : 3,
+        "title" : "Worker Members",
+        "type" : "SubHeading"
+      }, {
+        "name" : "Worker.__init__",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "name",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "salary",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "department.Worker.__init__",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : "/znai/python/auto-reference#python_api_department_Worker___init__"
+      }, {
+        "name" : "Worker.work",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "department.Worker.work",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : "/znai/python/auto-reference#python_api_department_Worker_work"
+      }, {
+        "style" : "api",
+        "id" : "departmentworker-person-members",
+        "level" : 3,
+        "title" : "Person Members",
+        "type" : "SubHeading"
+      }, {
+        "name" : "Person.talk",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "department.Person.talk",
+        "hideNameQualifier" : true,
+        "removeSelf" : true,
+        "url" : ""
+      }, {
+        "style" : "api",
+        "id" : "departmentworker-worker-details",
+        "level" : 3,
+        "title" : "Worker Details",
+        "type" : "SubHeading"
+      }, {
+        "style" : "api",
+        "id" : "departmentworker-worker-details-__init__",
+        "level" : 4,
+        "title" : "__init__",
+        "type" : "SubHeading"
+      }, {
+        "id" : "python_api_department_Worker___init__",
+        "type" : "Anchor"
+      }, {
+        "name" : "Worker.__init__",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "name",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "salary",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "department.Worker.__init__",
+        "removeSelf" : true
+      }, {
+        "style" : "api",
+        "id" : "departmentworker-worker-details-work",
+        "level" : 4,
+        "title" : "work",
+        "type" : "SubHeading"
+      }, {
+        "id" : "python_api_department_Worker_work",
+        "type" : "Anchor"
+      }, {
+        "name" : "Worker.work",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "self",
+          "defaultValue" : "",
+          "type" : [ ]
+        } ],
+        "returns" : [ ],
+        "decorators" : [ ],
+        "qualifiedName" : "department.Worker.work",
+        "removeSelf" : true,
+        "extraBottomMargin" : true
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "work to the best ability",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1658335209112,
+    "tocItem" : {
+      "sectionTitle" : "Python",
+      "pageTitle" : "Auto Reference",
+      "pageMeta" : { },
+      "dirName" : "python",
+      "fileName" : "auto-reference",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Method/Function Definition",
+        "id" : "methodfunction-definition"
+      }, {
+        "title" : "Class Definition",
+        "id" : "class-definition"
+      }, {
+        "title" : "fin.money.Money",
+        "id" : "finmoneymoney",
+        "style" : "api"
+      }, {
+        "title" : "Inheritance",
+        "id" : "inheritance"
+      }, {
+        "title" : "executive_department.WorkerCTO",
+        "id" : "executive_departmentworkercto",
+        "style" : "api"
+      }, {
+        "title" : "department.Worker",
+        "id" : "departmentworker",
+        "style" : "api"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

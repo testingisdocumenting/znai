@@ -85,15 +85,14 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Definition</h1></header>
-<p>It is very useful to provide a way to contact an owner of a documentation, so he/she can get a feedback about the documentation from a reader. When a user defines a link in meta.json, Support link will show up under a page title if you define a link under support .</p>
+<header><h1>Linking To Support Site</h1></header>
+<p>To provide a support link to your users add link and title to the meta.json file.Take a look at the example at the top of this page.</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -106,62 +105,63 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "definition",
+      "id" : "linking-to-support-site",
+      "title" : "Linking To Support Site",
       "type" : "Section",
-      "title" : "Definition",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "It is very useful to provide a way to contact an owner of a documentation, so he/she can get a feedback about the documentation from a reader. When a user defines a link in meta.json, Support link will show up under a page title if you define a ",
+          "text" : "To provide a support link to your users add link and title to the ",
           "type" : "SimpleText"
         }, {
-          "code" : "link",
+          "code" : "meta.json",
           "type" : "InlinedCode"
         }, {
-          "text" : " under ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "support",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ".",
+          "text" : " file.",
           "type" : "SimpleText"
         } ]
       }, {
-        "highlight" : [ 9, 10, 11 ],
+        "paths" : [ "root.support.link" ],
         "data" : {
+          "title" : "Znai",
+          "type" : "User Guide",
+          "category" : "Documentation",
+          "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
           "viewOn" : {
             "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-            "title" : "View On GitHub"
+            "title" : "View Markdown"
           },
-          "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
-          "category" : "Documentation",
-          "type" : "User Guide",
-          "title" : "Znai",
           "support" : {
-            "link" : "https://github.com/testingisdocumenting/znai/issues"
+            "link" : "https://github.com/testingisdocumenting/znai/discussions",
+            "title" : "Questions/Suggestions"
           }
         },
-        "paths" : [ ],
         "type" : "Json"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Take a look at the example at the top of this page.",
+          "type" : "SimpleText"
+        } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403250,
+    "lastModifiedTime" : 1658335209112,
     "tocItem" : {
       "sectionTitle" : "Flow",
       "pageTitle" : "Support",
@@ -170,8 +170,8 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "support",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Definition",
-        "id" : "definition"
+        "title" : "Linking To Support Site",
+        "id" : "linking-to-support-site"
       } ]
     }
   }

@@ -91,7 +91,27 @@
 
 <article>
 <header><h1>Extensive Plugins System</h1></header>
-<p>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Inlined Code plugins markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Include plugins markdown :include-json: example.json { title: &quot;JSON example&quot;, paths: [&quot;root.person.id&quot;], collapsedPaths: [&quot;root.details&quot;] } Fence plugins markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</p>
+<p>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include plugins markdown :include-json: example.json { title: &quot;JSON example&quot;, paths: [&quot;root.person.id&quot;], collapsedPaths: [&quot;root.details&quot;] } markdown :include-java: ../java/HelloWorld.java { entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot; } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method Inlined Code plugins markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fence plugins markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</p>
+</article>
+
+<article>
+<header><h1>Rich Visuals</h1></header>
+<p>Leverage multiple out-of-the box plugins to render charts, flow diagrams, annotated images, dynamic SVGs, etc</p>
+</article>
+
+<article>
+<header><h1>Dark/Light Runtime Mode</h1></header>
+<p>Generate one documentation and let your users switch Dark/Light theme at runtime</p>
+</article>
+
+<article>
+<header><h1>Two Sides Page Layout</h1></header>
+<p>Use layout/two-sides-tabs two sides layout option to render examples and supporting information side by side with convenient examples language switch</p>
+</article>
+
+<article>
+<header><h1>Local Search</h1></header>
+<p>Local search with preview and instant navigation to the result</p>
 </article>
 
 <article>
@@ -101,14 +121,13 @@
 
 <article>
 <header><h1>Batteries Included</h1></header>
-<p>Znai comes withdev server mode with changes highlight and auto-jump to a change local search (with full preview) dark/light mode runtime switch instant switching between pages</p>
+<p>Znai comes withMarkdown with custom extensions and dozens of plugins:Content from external files with markers and filters support Simplified extraction of a function body content (working with examples) Embedding of JavaDoc/PyDoc documentation text, preserving styles Beautiful API documentation capabilities Two Sides Page Layout with convenient examples language switch Rich visuals like flow diagrams and charts etc Dev server mode with changes highlight and auto-jump to a change Local search (with full preview) Dark/light mode runtime switch Presentation Mode to automatically turn your documentation into slides, using the same content</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -121,24 +140,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "beautiful-and-maintainable-user-guide",
-      "type" : "Section",
       "title" : "Beautiful and Maintainable User Guide",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -208,25 +228,25 @@ ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width=\"553pt\" height=\"276pt\"\n viewBox=\"0.00 0.00 552.50 276.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 272)\">\n<title>Generated</title>\n<polygon fill=\"transparent\" stroke=\"transparent\" points=\"-4,4 -4,-272 548.5,-272 548.5,4 -4,4\"/>\n<!-- author -->\n<g id=\"node1\" class=\"node\">\n<title>author</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"232.5,-228.5 232.5,-267.5 294.5,-267.5 294.5,-228.5 232.5,-228.5\"/>\n<text text-anchor=\"middle\" x=\"263.5\" y=\"-245.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Project</text>\n</g>\n<!-- src -->\n<g id=\"node2\" class=\"node\">\n<title>src</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"151.5,-152.5 151.5,-191.5 205.5,-191.5 205.5,-152.5 151.5,-152.5\"/>\n<text text-anchor=\"middle\" x=\"178.5\" y=\"-169.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Code</text>\n</g>\n<!-- author&#45;&gt;src -->\n<g id=\"edge1\" class=\"edge\">\n<title>author&#45;&gt;src</title>\n<path fill=\"none\" stroke=\"black\" d=\"M242.05,-228.33C231.58,-219.21 218.83,-208.11 207.51,-198.25\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"209.78,-195.59 199.94,-191.67 205.19,-200.87 209.78,-195.59\"/>\n</g>\n<!-- markdown -->\n<g id=\"node3\" class=\"node\">\n<title>markdown</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"223.5,-152.5 223.5,-191.5 303.5,-191.5 303.5,-152.5 223.5,-152.5\"/>\n<text text-anchor=\"middle\" x=\"263.5\" y=\"-169.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Markdown</text>\n</g>\n<!-- author&#45;&gt;markdown -->\n<g id=\"edge2\" class=\"edge\">\n<title>author&#45;&gt;markdown</title>\n<path fill=\"none\" stroke=\"black\" d=\"M263.5,-228.33C263.5,-220.26 263.5,-210.65 263.5,-201.71\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"267,-201.67 263.5,-191.67 260,-201.67 267,-201.67\"/>\n</g>\n<!-- test -->\n<g id=\"node4\" class=\"node\">\n<title>test</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"328.5,-152.5 328.5,-191.5 382.5,-191.5 382.5,-152.5 328.5,-152.5\"/>\n<text text-anchor=\"middle\" x=\"355.5\" y=\"-169.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Test</text>\n</g>\n<!-- author&#45;&gt;test -->\n<g id=\"edge3\" class=\"edge\">\n<title>author&#45;&gt;test</title>\n<path fill=\"none\" stroke=\"black\" d=\"M286.72,-228.33C298.16,-219.12 312.11,-207.9 324.46,-197.97\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"326.69,-200.66 332.29,-191.67 322.31,-195.21 326.69,-200.66\"/>\n</g>\n<!-- javadoc -->\n<g id=\"node5\" class=\"node\">\n<title>javadoc</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"0,-76.5 0,-115.5 133,-115.5 133,-76.5 0,-76.5\"/>\n<text text-anchor=\"middle\" x=\"66.5\" y=\"-93.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">JavaDoc/Doxygen/etc</text>\n</g>\n<!-- src&#45;&gt;javadoc -->\n<g id=\"edge4\" class=\"edge\">\n<title>src&#45;&gt;javadoc</title>\n<path fill=\"none\" stroke=\"black\" d=\"M151.39,-153.09C136.86,-143.49 118.75,-131.53 103,-121.12\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"104.8,-118.11 94.53,-115.52 100.95,-123.95 104.8,-118.11\"/>\n</g>\n<!-- examples -->\n<g id=\"node6\" class=\"node\">\n<title>examples</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"151,-76.5 151,-115.5 228,-115.5 228,-76.5 151,-76.5\"/>\n<text text-anchor=\"middle\" x=\"189.5\" y=\"-93.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Examples</text>\n</g>\n<!-- src&#45;&gt;examples -->\n<g id=\"edge5\" class=\"edge\">\n<title>src&#45;&gt;examples</title>\n<path fill=\"none\" stroke=\"black\" d=\"M181.28,-152.33C182.47,-144.26 183.9,-134.65 185.23,-125.71\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"188.72,-126.07 186.73,-115.67 181.79,-125.04 188.72,-126.07\"/>\n</g>\n<!-- userguide -->\n<g id=\"node9\" class=\"node\">\n<title>userguide</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"215,-0.5 215,-39.5 298,-39.5 298,-0.5 215,-0.5\"/>\n<text text-anchor=\"middle\" x=\"256.5\" y=\"-17.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">User Guide</text>\n</g>\n<!-- markdown&#45;&gt;userguide -->\n<g id=\"edge8\" class=\"edge\">\n<title>markdown&#45;&gt;userguide</title>\n<path fill=\"none\" stroke=\"black\" d=\"M262.63,-152.31C261.43,-126.71 259.28,-80.48 257.87,-50.27\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"261.35,-49.76 257.38,-39.93 254.35,-50.08 261.35,-49.76\"/>\n</g>\n<!-- screenshots -->\n<g id=\"node7\" class=\"node\">\n<title>screenshots</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"285,-76.5 285,-115.5 426,-115.5 426,-76.5 285,-76.5\"/>\n<text text-anchor=\"middle\" x=\"355.5\" y=\"-93.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">Annotated Screenshots</text>\n</g>\n<!-- test&#45;&gt;screenshots -->\n<g id=\"edge6\" class=\"edge\">\n<title>test&#45;&gt;screenshots</title>\n<path fill=\"none\" stroke=\"black\" d=\"M355.5,-152.33C355.5,-144.26 355.5,-134.65 355.5,-125.71\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"359,-125.67 355.5,-115.67 352,-125.67 359,-125.67\"/>\n</g>\n<!-- apiresponse -->\n<g id=\"node8\" class=\"node\">\n<title>apiresponse</title>\n<polygon fill=\"none\" stroke=\"black\" points=\"444.5,-76.5 444.5,-115.5 544.5,-115.5 544.5,-76.5 444.5,-76.5\"/>\n<text text-anchor=\"middle\" x=\"494.5\" y=\"-93.5\" font-family=\"Helvetica,sans-Serif\" font-size=\"10.00\">API Responses</text>\n</g>\n<!-- test&#45;&gt;apiresponse -->\n<g id=\"edge7\" class=\"edge\">\n<title>test&#45;&gt;apiresponse</title>\n<path fill=\"none\" stroke=\"black\" d=\"M382.63,-156.56C401.93,-146.28 428.29,-132.25 450.57,-120.39\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"452.34,-123.41 459.52,-115.62 449.05,-117.23 452.34,-123.41\"/>\n</g>\n<!-- javadoc&#45;&gt;userguide -->\n<g id=\"edge9\" class=\"edge\">\n<title>javadoc&#45;&gt;userguide</title>\n<path fill=\"none\" stroke=\"black\" d=\"M114.45,-76.33C142.08,-65.56 176.82,-52.03 205.03,-41.05\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"206.66,-44.17 214.71,-37.28 204.12,-37.64 206.66,-44.17\"/>\n</g>\n<!-- examples&#45;&gt;userguide -->\n<g id=\"edge10\" class=\"edge\">\n<title>examples&#45;&gt;userguide</title>\n<path fill=\"none\" stroke=\"black\" d=\"M206.41,-76.33C214.42,-67.48 224.13,-56.75 232.86,-47.11\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"235.48,-49.43 239.6,-39.67 230.29,-44.73 235.48,-49.43\"/>\n</g>\n<!-- screenshots&#45;&gt;userguide -->\n<g id=\"edge12\" class=\"edge\">\n<title>screenshots&#45;&gt;userguide</title>\n<path fill=\"none\" stroke=\"black\" d=\"M330.52,-76.33C318.09,-67.04 302.9,-55.69 289.53,-45.69\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"291.58,-42.85 281.47,-39.67 287.39,-48.46 291.58,-42.85\"/>\n</g>\n<!-- apiresponse&#45;&gt;userguide -->\n<g id=\"edge11\" class=\"edge\">\n<title>apiresponse&#45;&gt;userguide</title>\n<path fill=\"none\" stroke=\"black\" d=\"M444.3,-78.78C441.33,-77.84 438.37,-76.9 435.5,-76 392.56,-62.49 343.69,-47.5 307.88,-36.59\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"308.73,-33.19 298.14,-33.62 306.69,-39.88 308.73,-33.19\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : {
-            "test" : [ "c" ],
-            "src" : [ "b" ]
+            "src" : [ "b" ],
+            "test" : [ "c" ]
           },
           "id" : "dag1"
         },
-        "urls" : { },
+        "idsToHighlight" : [ "userguide" ],
         "wide" : false,
-        "type" : "GraphVizDiagram",
-        "idsToHighlight" : [ "userguide" ]
+        "urls" : { },
+        "type" : "GraphVizDiagram"
       }, {
-        "endLine" : ":include-flow-chart",
+        "lang" : "md",
         "snippet" : "# Beautiful and Maintainable User Guide\n\n`Znai` combines human written text with artifacts such as\n`code`, `graphs`, `REST API`, `Java Docs`, `Doxygen`, etc. \nto create up-to-date, maintainable, beautiful **User Guides** and **Tutorials**.   \n\n:include-flow-chart: artifacts-flow.json {vertical: true, highlight: \"userguide\"}",
-        "type" : "Snippet",
-        "lang" : "md"
+        "endLine" : ":include-flow-chart",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "extensive-plugins-system",
-      "type" : "Section",
       "title" : "Extensive Plugins System",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -242,17 +262,56 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "style" : "api",
+        "id" : "extensive-plugins-system-include-plugins",
         "level" : 3,
+        "title" : "Include plugins",
+        "type" : "SubHeading"
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-json: example.json {\n  title: \"JSON example\",\n  paths: [\"root.person.id\"],\n  collapsedPaths: [\"root.details\"]\n}\n",
+        "lineNumber" : "",
+        "title" : "json plugin example",
+        "type" : "Snippet"
+      }, {
+        "title" : "JSON example",
+        "paths" : [ "root.person.id" ],
+        "collapsedPaths" : [ "root.details" ],
+        "data" : {
+          "person" : {
+            "id" : "pid1",
+            "name" : "Person Name"
+          },
+          "details" : {
+            "extra" : "info"
+          }
+        },
+        "type" : "Json"
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-java: ../java/HelloWorld.java {\n  entry: \"sampleMethod\", \n  bodyOnly: true,\n  commentsType: \"inline\"\n}\n",
+        "lineNumber" : "",
+        "title" : "java plugin example",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n// overloaded method",
+        "entry" : "sampleMethod",
+        "bodyOnly" : true,
+        "commentsType" : "inline",
+        "type" : "Snippet"
+      }, {
         "style" : "api",
         "id" : "extensive-plugins-system-inlined-code-plugins",
-        "type" : "SubHeading",
-        "title" : "Inlined Code plugins"
+        "level" : 3,
+        "title" : "Inlined Code plugins",
+        "type" : "SubHeading"
       }, {
+        "lang" : "markdown",
         "snippet" : "It is a `:icon: cloud` day, `:icon: clock` is ticking\n",
-        "type" : "Snippet",
-        "title" : "plugin example",
         "lineNumber" : "",
-        "lang" : "markdown"
+        "title" : "plugin example",
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -272,75 +331,141 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "level" : 3,
-        "style" : "api",
-        "id" : "extensive-plugins-system-include-plugins",
-        "type" : "SubHeading",
-        "title" : "Include plugins"
-      }, {
-        "snippet" : ":include-json: example.json {\n  title: \"JSON example\",\n  paths: [\"root.person.id\"],\n  collapsedPaths: [\"root.details\"] }\n",
-        "type" : "Snippet",
-        "title" : "plugin example",
-        "lineNumber" : "",
-        "lang" : "markdown"
-      }, {
-        "data" : {
-          "person" : {
-            "name" : "Person Name",
-            "id" : "pid1"
-          },
-          "details" : {
-            "extra" : "info"
-          }
-        },
-        "paths" : [ "root.person.id" ],
-        "collapsedPaths" : [ "root.details" ],
-        "type" : "Json",
-        "title" : "JSON example"
-      }, {
-        "level" : 3,
         "style" : "api",
         "id" : "extensive-plugins-system-fence-plugins",
-        "type" : "SubHeading",
-        "title" : "Fence plugins"
+        "level" : 3,
+        "title" : "Fence plugins",
+        "type" : "SubHeading"
       }, {
+        "lang" : "markdown",
         "snippet" : "```tabs\nC++: \n    content of C++ tab\nJava:\n    content of Java tab\nPython:\n    content of Python tab\n```\n",
-        "type" : "Snippet",
-        "title" : "plugin example",
         "lineNumber" : "",
-        "lang" : "markdown"
+        "title" : "plugin example",
+        "type" : "Snippet"
       }, {
         "tabsContent" : [ {
           "name" : "C++",
           "content" : [ {
+            "lang" : "",
             "snippet" : "content of C++ tab\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : ""
+            "type" : "Snippet"
           } ]
         }, {
           "name" : "Java",
           "content" : [ {
+            "lang" : "",
             "snippet" : "content of Java tab\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : ""
+            "type" : "Snippet"
           } ]
         }, {
           "name" : "Python",
           "content" : [ {
+            "lang" : "",
             "snippet" : "content of Python tab\n",
-            "type" : "Snippet",
             "lineNumber" : "",
-            "lang" : ""
+            "type" : "Snippet"
           } ]
         } ],
         "type" : "Tabs"
       } ]
     }, {
-      "id" : "auto-presentation",
+      "id" : "rich-visuals",
+      "title" : "Rich Visuals",
       "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Leverage multiple out-of-the box plugins to render charts, flow diagrams, annotated images, dynamic SVGs, etc",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "pixelRatio" : 2.0,
+        "imageSrc" : "/znai/znai-charts.png",
+        "timestamp" : 1658335209076,
+        "shapes" : [ ],
+        "width" : 1399.0,
+        "height" : 1127.0,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "id" : "darklight-runtime-mode",
+      "title" : "Dark/Light Runtime Mode",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Generate one documentation and let your users switch Dark/Light theme at runtime",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "pixelRatio" : 2.0,
+        "imageSrc" : "/znai/znai-flow-diagram.png",
+        "timestamp" : 1658335209088,
+        "shapes" : [ ],
+        "width" : 1399.0,
+        "height" : 1127.0,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "id" : "two-sides-page-layout",
+      "title" : "Two Sides Page Layout",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/layout/two-sides-tabs",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "two sides",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " layout option to render examples and supporting information side by side",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "with convenient examples language switch",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "pixelRatio" : 2.0,
+        "imageSrc" : "/znai/znai-two-sides-tabs.png",
+        "timestamp" : 1658335209108,
+        "shapes" : [ ],
+        "width" : 1395.0,
+        "height" : 1132.0,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "id" : "local-search",
+      "title" : "Local Search",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Local search with preview and instant navigation to the result",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "pixelRatio" : 2.0,
+        "imageSrc" : "/znai/znai-search.png",
+        "timestamp" : 1658335209100,
+        "shapes" : [ ],
+        "width" : 1399.0,
+        "height" : 1127.0,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "id" : "auto-presentation",
       "title" : "Auto Presentation",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -374,38 +499,111 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "border" : true,
+        "pixelRatio" : 2.0,
+        "imageSrc" : "/znai/znai-presentation.png",
+        "timestamp" : 1658335209096,
         "shapes" : [ ],
-        "width" : 1100.0,
-        "scale" : 0.5,
-        "imageSrc" : "/znai/introduction/slide.png",
-        "type" : "AnnotatedImage",
-        "height" : 795.0,
-        "timestamp" : 1653499403258
+        "width" : 1399.0,
+        "height" : 1127.0,
+        "type" : "AnnotatedImage"
       } ]
     }, {
       "id" : "batteries-included",
-      "type" : "Section",
       "title" : "Batteries Included",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "code" : "Znai",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " comes with",
+          "text" : "Znai comes with",
           "type" : "SimpleText"
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "dev server mode with changes highlight and auto-jump to a change",
+              "text" : "Markdown with custom extensions and dozens of plugins:",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "bulletMarker" : "*",
+            "tight" : true,
+            "type" : "BulletList",
+            "content" : [ {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Content from external files with markers and filters support",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Simplified extraction of a function body content (working with examples)",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Embedding of JavaDoc/PyDoc documentation text, preserving styles",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Beautiful API documentation capabilities",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Two Sides Page Layout with convenient examples language switch",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Rich visuals like flow diagrams and charts",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "etc",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Dev server mode with changes highlight and auto-jump to a change",
               "type" : "SimpleText"
             } ]
           } ]
@@ -414,7 +612,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "local search (with full preview)",
+              "text" : "Local search (with full preview)",
               "type" : "SimpleText"
             } ]
           } ]
@@ -423,7 +621,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "dark/light mode runtime switch",
+              "text" : "Dark/light mode runtime switch",
               "type" : "SimpleText"
             } ]
           } ]
@@ -432,23 +630,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "instant switching between pages",
+              "text" : "Presentation Mode to automatically turn your documentation into slides, using the same content",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
-      }, {
-        "border" : true,
-        "fit" : true,
-        "shapes" : [ ],
-        "width" : 3040.0,
-        "imageSrc" : "/znai/introduction/search.png",
-        "type" : "AnnotatedImage",
-        "height" : 2056.0,
-        "timestamp" : 1653499403254
       } ]
     } ],
-    "lastModifiedTime" : 1653499403258,
+    "lastModifiedTime" : 1658335209112,
     "tocItem" : {
       "sectionTitle" : "Introduction",
       "pageTitle" : "What Is This",
@@ -462,6 +651,18 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Extensive Plugins System",
         "id" : "extensive-plugins-system"
+      }, {
+        "title" : "Rich Visuals",
+        "id" : "rich-visuals"
+      }, {
+        "title" : "Dark/Light Runtime Mode",
+        "id" : "darklight-runtime-mode"
+      }, {
+        "title" : "Two Sides Page Layout",
+        "id" : "two-sides-page-layout"
+      }, {
+        "title" : "Local Search",
+        "id" : "local-search"
       }, {
         "title" : "Auto Presentation",
         "id" : "auto-presentation"

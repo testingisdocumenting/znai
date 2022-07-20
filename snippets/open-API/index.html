@@ -108,7 +108,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -121,37 +120,38 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "operation-definition",
-      "type" : "Section",
       "title" : "Operation definition",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "If you have a file with an ",
           "type" : "SimpleText"
         }, {
+          "url" : "https://github.com/OAI/OpenAPI-Specification/blob/master/README.md",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Open API",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://github.com/OAI/OpenAPI-Specification/blob/master/README.md"
+          } ]
         }, {
           "type" : "SoftLineBreak"
         }, {
@@ -199,39 +199,87 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Let's consider ",
           "type" : "SimpleText"
         }, {
+          "url" : "https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "Uber's API definition",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json"
+          } ]
         }, {
           "text" : " as an example:",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-open-api: open-api/uber.json {method: \"get\", path: \"/v1/estimates/time\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "path" : "/v1/estimates/time",
         "method" : "get",
-        "type" : "OpenApiOperation",
+        "path" : "/v1/estimates/time",
         "operation" : {
-          "summary" : "Time Estimates",
-          "path" : "/v1/estimates/time",
+          "id" : "null",
           "method" : "get",
+          "path" : "/v1/estimates/time",
           "produces" : [ "application/json" ],
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
-              "type" : "SimpleText"
+          "summary" : "Time Estimates",
+          "tags" : [ "Estimates" ],
+          "parameters" : [ {
+            "name" : "start_latitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Latitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "start_longitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Longitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "customer_uuid",
+            "in" : "query",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique customer identifier to be used for experience customization.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "product_id",
+            "in" : "query",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
+                "type" : "SimpleText"
+              } ]
             } ]
           } ],
           "responses" : [ {
+            "code" : "200",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -289,7 +337,6 @@ ReactDOM.render(React.createElement(Documentation, {
                 }
               }
             },
-            "code" : "200",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -298,11 +345,11 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           }, {
+            "code" : "default",
             "schema" : {
               "type" : "Error",
               "properties" : { }
             },
-            "code" : "default",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -311,75 +358,28 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           } ],
-          "id" : "null",
-          "parameters" : [ {
-            "schema" : { },
-            "in" : "query",
-            "name" : "start_latitude",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Latitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "number",
-            "required" : true
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "start_longitude",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Longitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "number",
-            "required" : true
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "customer_uuid",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique customer identifier to be used for experience customization.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "string",
-            "required" : false
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "product_id",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "string",
-            "required" : false
-          } ],
-          "tags" : [ "Estimates" ]
-        }
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        },
+        "type" : "OpenApiOperation"
       }, {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "Note: descriptions are treated as Markdown, using the ",
           "type" : "SimpleText"
         }, {
+          "url" : "https://commonmark.org/help/",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
             "text" : "CommonMark",
             "type" : "SimpleText"
-          } ],
-          "url" : "https://commonmark.org/help/"
+          } ]
         }, {
           "text" : " specification",
           "type" : "SimpleText"
@@ -387,8 +387,8 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "producesconsumes",
-      "type" : "Section",
       "title" : "Produces/Consumes",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -437,29 +437,77 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-open-api: open-api/uber.json {method: \"get\", path: \"/v1/estimates/time\", \n    showConsumes: true, showProduces: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "path" : "/v1/estimates/time",
-        "showProduces" : true,
-        "showConsumes" : true,
         "method" : "get",
-        "type" : "OpenApiOperation",
+        "path" : "/v1/estimates/time",
+        "showConsumes" : true,
+        "showProduces" : true,
         "operation" : {
-          "summary" : "Time Estimates",
-          "path" : "/v1/estimates/time",
+          "id" : "null",
           "method" : "get",
+          "path" : "/v1/estimates/time",
           "produces" : [ "application/json" ],
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
-              "type" : "SimpleText"
+          "summary" : "Time Estimates",
+          "tags" : [ "Estimates" ],
+          "parameters" : [ {
+            "name" : "start_latitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Latitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "start_longitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Longitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "customer_uuid",
+            "in" : "query",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique customer identifier to be used for experience customization.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "product_id",
+            "in" : "query",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
+                "type" : "SimpleText"
+              } ]
             } ]
           } ],
           "responses" : [ {
+            "code" : "200",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -517,7 +565,6 @@ ReactDOM.render(React.createElement(Documentation, {
                 }
               }
             },
-            "code" : "200",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -526,11 +573,11 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           }, {
+            "code" : "default",
             "schema" : {
               "type" : "Error",
               "properties" : { }
             },
-            "code" : "default",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -539,67 +586,20 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           } ],
-          "id" : "null",
-          "parameters" : [ {
-            "schema" : { },
-            "in" : "query",
-            "name" : "start_latitude",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Latitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "number",
-            "required" : true
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "start_longitude",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Longitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "number",
-            "required" : true
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "customer_uuid",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique customer identifier to be used for experience customization.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "string",
-            "required" : false
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "product_id",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "string",
-            "required" : false
-          } ],
-          "tags" : [ "Estimates" ]
-        }
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        },
+        "type" : "OpenApiOperation"
       } ]
     }, {
       "id" : "auto-section",
-      "type" : "Section",
       "title" : "Auto Section",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -613,10 +613,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-open-api: open-api/uber.yaml {method: \"get\", path: \"/v1/estimates/time\", autoSection: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -629,26 +629,74 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "time-estimates",
-      "type" : "Section",
       "title" : "Time Estimates",
+      "type" : "Section",
       "content" : [ {
+        "method" : "get",
         "path" : "/v1/estimates/time",
         "autoSection" : true,
-        "method" : "get",
-        "type" : "OpenApiOperation",
         "operation" : {
-          "summary" : "Time Estimates",
-          "path" : "/v1/estimates/time",
+          "id" : "null",
           "method" : "get",
+          "path" : "/v1/estimates/time",
           "produces" : [ "application/json" ],
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
-              "type" : "SimpleText"
+          "summary" : "Time Estimates",
+          "tags" : [ "Estimates" ],
+          "parameters" : [ {
+            "name" : "start_latitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Latitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "start_longitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Longitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "customer_uuid",
+            "in" : "query",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique customer identifier to be used for experience customization.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "product_id",
+            "in" : "query",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
+                "type" : "SimpleText"
+              } ]
             } ]
           } ],
           "responses" : [ {
+            "code" : "200",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -706,7 +754,6 @@ ReactDOM.render(React.createElement(Documentation, {
                 }
               }
             },
-            "code" : "200",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -715,11 +762,11 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           }, {
+            "code" : "default",
             "schema" : {
               "type" : "Error",
               "properties" : { }
             },
-            "code" : "default",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -728,67 +775,20 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           } ],
-          "id" : "null",
-          "parameters" : [ {
-            "schema" : { },
-            "in" : "query",
-            "name" : "start_latitude",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Latitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "number",
-            "required" : true
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "start_longitude",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Longitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "number",
-            "required" : true
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "customer_uuid",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique customer identifier to be used for experience customization.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "string",
-            "required" : false
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "product_id",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "string",
-            "required" : false
-          } ],
-          "tags" : [ "Estimates" ]
-        }
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        },
+        "type" : "OpenApiOperation"
       } ]
     }, {
       "id" : "tags",
-      "type" : "Section",
       "title" : "Tags",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -802,10 +802,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-open-api: open-api/uber.json {tags: \"Estimates\", autoSection: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -818,38 +818,73 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "price-estimates",
-      "type" : "Section",
       "title" : "Price Estimates",
+      "type" : "Section",
       "content" : [ {
+        "tags" : "Estimates",
         "autoSection" : true,
-        "type" : "OpenApiOperation",
         "operation" : {
-          "summary" : "Price Estimates",
-          "path" : "/v1/estimates/price",
+          "id" : "null",
           "method" : "get",
+          "path" : "/v1/estimates/price",
           "produces" : [ "application/json" ],
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "The Price Estimates endpoint returns an estimated price range for each product offered at a given location. The price estimate is provided as a formatted string with the full price range and the localized currency symbol.",
-              "type" : "SimpleText"
-            }, {
-              "text" : "The response also includes low and high estimates, and the ",
-              "type" : "SimpleText"
-            }, {
-              "isFile" : false,
-              "type" : "Link",
+          "summary" : "Price Estimates",
+          "tags" : [ "Estimates" ],
+          "parameters" : [ {
+            "name" : "start_latitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
               "content" : [ {
-                "text" : "ISO 4217",
+                "text" : "Latitude component of start location.",
                 "type" : "SimpleText"
-              } ],
-              "url" : "http://en.wikipedia.org/wiki/ISO_4217"
-            }, {
-              "text" : " currency code for situations requiring currency conversion. When surge is active for a particular product, its surge_multiplier will be greater than 1, but the price estimate already factors in this multiplier.",
-              "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "start_longitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Longitude component of start location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "end_latitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Latitude component of end location.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "end_longitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Longitude component of end location.",
+                "type" : "SimpleText"
+              } ]
             } ]
           } ],
           "responses" : [ {
+            "code" : "200",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -864,15 +899,15 @@ ReactDOM.render(React.createElement(Documentation, {
                     } ],
                     "type" : "number"
                   },
-                  "surge_multiplier" : {
+                  "product_id" : {
                     "description" : [ {
                       "type" : "Paragraph",
                       "content" : [ {
-                        "text" : "Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier.",
+                        "text" : "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles",
                         "type" : "SimpleText"
                       } ]
                     } ],
-                    "type" : "number"
+                    "type" : "string"
                   },
                   "low_estimate" : {
                     "description" : [ {
@@ -884,15 +919,15 @@ ReactDOM.render(React.createElement(Documentation, {
                     } ],
                     "type" : "number"
                   },
-                  "product_id" : {
+                  "surge_multiplier" : {
                     "description" : [ {
                       "type" : "Paragraph",
                       "content" : [ {
-                        "text" : "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles",
+                        "text" : "Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier.",
                         "type" : "SimpleText"
                       } ]
                     } ],
-                    "type" : "string"
+                    "type" : "number"
                   },
                   "estimate" : {
                     "description" : [ {
@@ -918,13 +953,13 @@ ReactDOM.render(React.createElement(Documentation, {
                     "description" : [ {
                       "type" : "Paragraph",
                       "content" : [ {
+                        "url" : "https://en.wikipedia.org/wiki/ISO_4217",
                         "isFile" : false,
                         "type" : "Link",
                         "content" : [ {
                           "text" : "ISO 4217",
                           "type" : "SimpleText"
-                        } ],
-                        "url" : "https://en.wikipedia.org/wiki/ISO_4217"
+                        } ]
                       }, {
                         "text" : " currency code.",
                         "type" : "SimpleText"
@@ -935,7 +970,6 @@ ReactDOM.render(React.createElement(Documentation, {
                 }
               }
             },
-            "code" : "200",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -944,21 +978,21 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           }, {
+            "code" : "default",
             "schema" : {
               "properties" : {
                 "code" : {
                   "format" : "int32",
                   "type" : "integer"
                 },
-                "fields" : {
+                "message" : {
                   "type" : "string"
                 },
-                "message" : {
+                "fields" : {
                   "type" : "string"
                 }
               }
             },
-            "code" : "default",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -967,84 +1001,99 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           } ],
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "The Price Estimates endpoint returns an estimated price range for each product offered at a given location. The price estimate is provided as a formatted string with the full price range and the localized currency symbol.",
+              "type" : "SimpleText"
+            }, {
+              "text" : "The response also includes low and high estimates, and the ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "http://en.wikipedia.org/wiki/ISO_4217",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "ISO 4217",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " currency code for situations requiring currency conversion. When surge is active for a particular product, its surge_multiplier will be greater than 1, but the price estimate already factors in this multiplier.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        },
+        "type" : "OpenApiOperation"
+      } ]
+    }, {
+      "id" : "time-estimates",
+      "title" : "Time Estimates",
+      "type" : "Section",
+      "content" : [ {
+        "tags" : "Estimates",
+        "autoSection" : true,
+        "operation" : {
           "id" : "null",
+          "method" : "get",
+          "path" : "/v1/estimates/time",
+          "produces" : [ "application/json" ],
+          "summary" : "Time Estimates",
+          "tags" : [ "Estimates" ],
           "parameters" : [ {
-            "schema" : { },
-            "in" : "query",
             "name" : "start_latitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
                 "text" : "Latitude component of start location.",
                 "type" : "SimpleText"
               } ]
-            } ],
-            "type" : "number",
-            "required" : true
+            } ]
           }, {
-            "schema" : { },
-            "in" : "query",
             "name" : "start_longitude",
+            "in" : "query",
+            "type" : "number",
+            "required" : true,
+            "schema" : { },
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
                 "text" : "Longitude component of start location.",
                 "type" : "SimpleText"
               } ]
-            } ],
-            "type" : "number",
-            "required" : true
+            } ]
           }, {
-            "schema" : { },
+            "name" : "customer_uuid",
             "in" : "query",
-            "name" : "end_latitude",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
-                "text" : "Latitude component of end location.",
+                "text" : "Unique customer identifier to be used for experience customization.",
                 "type" : "SimpleText"
               } ]
-            } ],
-            "type" : "number",
-            "required" : true
+            } ]
           }, {
-            "schema" : { },
+            "name" : "product_id",
             "in" : "query",
-            "name" : "end_longitude",
+            "type" : "string",
+            "required" : false,
+            "schema" : { },
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
-                "text" : "Longitude component of end location.",
+                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
                 "type" : "SimpleText"
               } ]
-            } ],
-            "type" : "number",
-            "required" : true
-          } ],
-          "tags" : [ "Estimates" ]
-        },
-        "tags" : "Estimates"
-      } ]
-    }, {
-      "id" : "time-estimates",
-      "type" : "Section",
-      "title" : "Time Estimates",
-      "content" : [ {
-        "autoSection" : true,
-        "type" : "OpenApiOperation",
-        "operation" : {
-          "summary" : "Time Estimates",
-          "path" : "/v1/estimates/time",
-          "method" : "get",
-          "produces" : [ "application/json" ],
-          "description" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
-              "type" : "SimpleText"
             } ]
           } ],
           "responses" : [ {
+            "code" : "200",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -1102,7 +1151,6 @@ ReactDOM.render(React.createElement(Documentation, {
                 }
               }
             },
-            "code" : "200",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -1111,11 +1159,11 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           }, {
+            "code" : "default",
             "schema" : {
               "type" : "Error",
               "properties" : { }
             },
-            "code" : "default",
             "description" : [ {
               "type" : "Paragraph",
               "content" : [ {
@@ -1124,66 +1172,18 @@ ReactDOM.render(React.createElement(Documentation, {
               } ]
             } ]
           } ],
-          "id" : "null",
-          "parameters" : [ {
-            "schema" : { },
-            "in" : "query",
-            "name" : "start_latitude",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Latitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "number",
-            "required" : true
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "start_longitude",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Longitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "number",
-            "required" : true
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "customer_uuid",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique customer identifier to be used for experience customization.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "string",
-            "required" : false
-          }, {
-            "schema" : { },
-            "in" : "query",
-            "name" : "product_id",
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
-                "type" : "SimpleText"
-              } ]
-            } ],
-            "type" : "string",
-            "required" : false
-          } ],
-          "tags" : [ "Estimates" ]
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
+              "type" : "SimpleText"
+            } ]
+          } ]
         },
-        "tags" : "Estimates"
+        "type" : "OpenApiOperation"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403266,
+    "lastModifiedTime" : 1658335209120,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Open API",

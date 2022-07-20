@@ -91,12 +91,12 @@
 
 <article>
 <header><h1>Extension</h1></header>
-<p>Znai adds additional extension to provide additional information:caption annotations fit parameters</p>
+<p>Znai has :include-image: extension to provide additional features:title annotations fit scale alignment presentation mode</p>
 </article>
 
 <article>
-<header><h1>Caption</h1></header>
-<p>To add a caption at the top of an image use: :include-image: castle.jpg {caption: &quot;Title of an image&quot;} To add a caption at the bottom of an image use: :include-image: castle.jpg {caption: &quot;Title of an image&quot;, captionBottom: true}</p>
+<header><h1>Title</h1></header>
+<p>Use title to add a title to an image. :include-image: castle.jpg {title: &quot;beautiful castle&quot;}</p>
 </article>
 
 <article>
@@ -106,12 +106,12 @@
 
 <article>
 <header><h1>Fit</h1></header>
-<p>An unfitted image will occupy all available space:To fit the image to the width of a text use the fit parameter. :include-image: books.jpg {fit: true} Note: You can click on the image to zoom into it</p>
+<p>By default image occupies all available horizontal space:Use fit parameter to fit an image to the text column width. :include-image: books.jpg {fit: true} Note: You can click on the scaled down images to display it full screen</p>
 </article>
 
 <article>
-<header><h1>Scale Ratio</h1></header>
-<p>To scale image up or down use scale option, 1 is default, 0.5 is half image size. :include-image: books.jpg {scale: 0.3}</p>
+<header><h1>Scale</h1></header>
+<p>To scale image up or down use scale option, 1 is default, 0.5 is half an image size. :include-image: books.jpg {scale: 0.3} Note: You can click on the scaled down images to display it full screen</p>
 </article>
 
 <article>
@@ -128,7 +128,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -141,24 +140,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "markdown",
-      "type" : "Section",
       "title" : "Markdown",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -166,42 +166,48 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "![alt text](regular-image.png)\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "width" : 583,
-        "alt" : "alt text",
         "destination" : "/znai/visuals/regular-image.png",
-        "type" : "Image",
+        "alt" : "alt text",
         "inlined" : false,
+        "timestamp" : 1658335209132,
+        "width" : 583,
         "height" : 385,
-        "timestamp" : 1653499403282
+        "type" : "Image"
       } ]
     }, {
       "id" : "extension",
-      "type" : "Section",
       "title" : "Extension",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "code" : "Znai",
           "type" : "InlinedCode"
         }, {
-          "text" : " adds additional extension to provide additional information:",
+          "text" : " has ",
+          "type" : "SimpleText"
+        }, {
+          "code" : ":include-image:",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " extension to provide additional features:",
           "type" : "SimpleText"
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "caption",
+              "text" : "title",
               "type" : "SimpleText"
             } ]
           } ]
@@ -219,60 +225,73 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "fit parameters",
+              "text" : "fit",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "scale",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "alignment",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "presentation mode",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
       } ]
     }, {
-      "id" : "caption",
+      "id" : "title",
+      "title" : "Title",
       "type" : "Section",
-      "title" : "Caption",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To add a caption at the top of an image use:",
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to add a title to an image.",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-image: castle.jpg {caption: \"Title of an image\"}\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : ":include-image: castle.jpg {title: \"beautiful castle\"}\n",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "title" : "beautiful castle",
+        "imageSrc" : "/znai/visuals/castle.jpg",
+        "timestamp" : 1658335209128,
         "shapes" : [ ],
         "width" : 810.0,
-        "caption" : "Title of an image",
-        "imageSrc" : "/znai/visuals/castle.jpg",
-        "type" : "AnnotatedImage",
         "height" : 557.0,
-        "timestamp" : 1653499403274
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To add a caption at the bottom of an image use:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-image: castle.jpg {caption: \"Title of an image\", captionBottom: true}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "captionBottom" : true,
-        "shapes" : [ ],
-        "width" : 810.0,
-        "caption" : "Title of an image",
-        "imageSrc" : "/znai/visuals/castle.jpg",
-        "type" : "AnnotatedImage",
-        "height" : 557.0,
-        "timestamp" : 1653499403274
+        "type" : "AnnotatedImage"
       } ]
     }, {
       "id" : "border",
-      "type" : "Section",
       "title" : "Border",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -286,72 +305,74 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-image: image.png {border: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "border" : true,
+        "imageSrc" : "/znai/visuals/regular-image.png",
+        "timestamp" : 1658335209132,
         "shapes" : [ ],
         "width" : 583.0,
-        "imageSrc" : "/znai/visuals/regular-image.png",
-        "type" : "AnnotatedImage",
         "height" : 385.0,
-        "timestamp" : 1653499403282
+        "type" : "AnnotatedImage"
       } ]
     }, {
       "id" : "fit",
-      "type" : "Section",
       "title" : "Fit",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "An unfitted image will occupy all available space:",
+          "text" : "By default image occupies all available horizontal space:",
           "type" : "SimpleText"
         } ]
       }, {
+        "title" : "wide image",
+        "imageSrc" : "/znai/visuals/books.jpg",
+        "timestamp" : 1658335209128,
         "shapes" : [ ],
         "width" : 1698.0,
-        "imageSrc" : "/znai/visuals/books.jpg",
-        "type" : "AnnotatedImage",
         "height" : 1131.0,
-        "timestamp" : 1653499403274
+        "type" : "AnnotatedImage"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To fit the image to the width of a text use the ",
+          "text" : "Use ",
           "type" : "SimpleText"
         }, {
           "code" : "fit",
           "type" : "InlinedCode"
         }, {
-          "text" : " parameter.",
+          "text" : " parameter to fit an image to the text column width.",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-image: books.jpg {fit: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: You can click on the image to zoom into it",
+          "text" : "Note: You can click on the scaled down images to display it full screen",
           "type" : "SimpleText"
         } ]
       }, {
         "fit" : true,
+        "title" : "auto scaled down image",
+        "imageSrc" : "/znai/visuals/books.jpg",
+        "timestamp" : 1658335209128,
         "shapes" : [ ],
         "width" : 1698.0,
-        "imageSrc" : "/znai/visuals/books.jpg",
-        "type" : "AnnotatedImage",
         "height" : 1131.0,
-        "timestamp" : 1653499403274
+        "type" : "AnnotatedImage"
       } ]
     }, {
-      "id" : "scale-ratio",
+      "id" : "scale",
+      "title" : "Scale",
       "type" : "Section",
-      "title" : "Scale Ratio",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -373,27 +394,33 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "0.5",
           "type" : "InlinedCode"
         }, {
-          "text" : " is half image size.",
+          "text" : " is half an image size.",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-image: books.jpg {scale: 0.3}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "shapes" : [ ],
-        "width" : 509.4,
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "type" : "AnnotatedImage",
-        "height" : 339.3,
-        "timestamp" : 1653499403274
+        "timestamp" : 1658335209128,
+        "shapes" : [ ],
+        "width" : 1698.0,
+        "height" : 1131.0,
+        "type" : "AnnotatedImage"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: You can click on the scaled down images to display it full screen",
+          "type" : "SimpleText"
+        } ]
       } ]
     }, {
       "id" : "align",
-      "type" : "Section",
       "title" : "Align",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -407,38 +434,38 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-image: books.jpg {align: \"left\", scale: 0.3}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "shapes" : [ ],
-        "width" : 509.4,
-        "scale" : 0.3,
-        "imageSrc" : "/znai/visuals/books.jpg",
-        "type" : "AnnotatedImage",
         "align" : "left",
-        "height" : 339.3,
-        "timestamp" : 1653499403274
-      }, {
-        "snippet" : ":include-image: books.jpg {align: \"right\", scale: 0.3}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "shapes" : [ ],
-        "width" : 509.4,
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "type" : "AnnotatedImage",
+        "timestamp" : 1658335209128,
+        "shapes" : [ ],
+        "width" : 1698.0,
+        "height" : 1131.0,
+        "type" : "AnnotatedImage"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-image: books.jpg {align: \"right\", scale: 0.3}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
         "align" : "right",
-        "height" : 339.3,
-        "timestamp" : 1653499403274
+        "scale" : 0.3,
+        "imageSrc" : "/znai/visuals/books.jpg",
+        "timestamp" : 1658335209128,
+        "shapes" : [ ],
+        "width" : 1698.0,
+        "height" : 1131.0,
+        "type" : "AnnotatedImage"
       } ]
     }, {
       "id" : "external-image",
-      "type" : "Section",
       "title" : "External Image",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -446,10 +473,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : "![text](https://external-url)\n\n:include-image: https://external-url { align: \"left\" }\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -464,7 +491,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403282,
+    "lastModifiedTime" : 1658335209132,
     "tocItem" : {
       "sectionTitle" : "Visuals",
       "pageTitle" : "Images",
@@ -479,8 +506,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Extension",
         "id" : "extension"
       }, {
-        "title" : "Caption",
-        "id" : "caption"
+        "title" : "Title",
+        "id" : "title"
       }, {
         "title" : "Border",
         "id" : "border"
@@ -488,8 +515,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Fit",
         "id" : "fit"
       }, {
-        "title" : "Scale Ratio",
-        "id" : "scale-ratio"
+        "title" : "Scale",
+        "id" : "scale"
       }, {
         "title" : "Align",
         "id" : "align"

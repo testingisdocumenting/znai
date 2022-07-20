@@ -103,7 +103,6 @@
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -116,24 +115,25 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
       "id" : "callout-comments",
-      "type" : "Section",
       "title" : "Callout Comments",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -153,19 +153,19 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
-        "type" : "Snippet",
-        "lang" : "js"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"inline\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
         "commentsType" : "inline",
-        "type" : "Snippet",
-        "lang" : "js"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -173,20 +173,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "py",
         "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
-        "type" : "Snippet",
         "title" : "multi line comments above line",
-        "lang" : "py"
+        "type" : "Snippet"
       }, {
+        "lang" : "py",
         "snippet" : "order = fetch_order()\n# explanation of why\n# strategic price calculation\n# is important here\nprice = strategic_price_calc(order)",
         "commentsType" : "inline",
-        "type" : "Snippet",
-        "lang" : "py"
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "spoilers",
-      "type" : "Section",
       "title" : "Spoilers",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -200,10 +200,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
         "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"inline\", spoiler: true}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -211,16 +211,16 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
         "commentsType" : "inline",
         "spoiler" : true,
-        "type" : "Snippet",
-        "lang" : "js"
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "remove-comments",
-      "type" : "Section",
       "title" : "Remove Comments",
+      "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
@@ -239,22 +239,22 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
-        "type" : "Snippet",
-        "lang" : "js"
+        "type" : "Snippet"
       }, {
+        "lang" : "",
         "snippet" : ":include-file: file-name-with-comments.js {commentsType: \"remove\"}\n",
-        "type" : "Snippet",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
+        "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
         "commentsType" : "remove",
-        "type" : "Snippet",
-        "lang" : "js"
+        "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1653499403262,
+    "lastModifiedTime" : 1658335209116,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Code Comments",

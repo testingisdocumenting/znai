@@ -85,25 +85,24 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Content</h1></header>
-<p>Note: Function Content support requires running znai in an environment with Python 3.8 or later.All the examples below are from the following example Python file: my_var = &quot;a variable&quot; def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Full Content Use include-python plugin to extract function, class or global variable content. Class To show the full class definition: :include-python: python/example.py {entry: &quot;Animal&quot;} class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Function To show the full contents of a function: :include-python: python/example.py {entry: &quot;Animal.says&quot;} def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) This also works for global functions: :include-python: python/example.py {entry: &quot;my_func&quot;} def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 Class To show the full contents of a class: :include-python: python/example.py {entry: &quot;Animal&quot;} class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Variable To show a variable's definition and assignment: :include-python: python/example.py {entry: &quot;my_var&quot;} my_var = &quot;a variable&quot; Body Only Use bodyOnly to include just the &quot;body&quot; part of the content. The specifics differ based on what is being included. Function To show a function's body, without signature or doc string: :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true} print(&quot;hello&quot;) This also works for global functions: :include-python: python/example.py {entry: &quot;my_func&quot;, bodyOnly: true} return 2 + 2 Class To show the contents of a class without the class declaration or doc string: :include-python: python/example.py {entry: &quot;Animal&quot;, bodyOnly: true} def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Variable To show only a variable's value: :include-python: python/example.py {entry: &quot;my_var&quot;, bodyOnly: true} &quot;a variable&quot;</p>
+<header><h1>Content Extraction</h1></header>
+<p>In addition to snippets/snippets-manipulation snippets manipulation that is applicable to any language, Znai can extract content of methods. :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true} print(&quot;hello&quot;) class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Head over to python/content-extraction Python Content Extraction to learn more</p>
 </article>
 
 <article>
-<header><h1>Doc String</h1></header>
-<p>Use include-python-doc plugin to embed py doc string with markdown into documentation my_var = &quot;a variable&quot; def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc: python/example.py {entry: &quot;my_func&quot;} text inside my *func* doc * list one * list two Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include parameters :include-python-doc: python/example.py {entry: &quot;Animal&quot;} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: &quot;Animal.says&quot;} animal **talks** `code`</p>
+<header><h1>Description Extraction</h1></header>
+<p>Znai provides plugin to extract PyDoc content. Use it to extract high level description and merge it with the rest of the documentation. Convert method parameters into snippets/api-parameters API Parameters :include-python-doc-params: python/pydoc-params.py {entry: &quot;my_func&quot;, title: &quot;result and parameters&quot;} text inside my *func* doc * list one * list two Parameters ---------- label : str label to use to *render* item in the store price : fin.money.Money price associated with the **item** Returns ------- str status of the operation `OK` for good def my_func(label, price): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- label : str label to use to *render* item in the store price : fin.money.Money price associated with the **item** Returns ------- str status of the operation `OK` for good &quot;&quot;&quot; return &quot;OK&quot; Head over to python/description-extraction Python Description Extraction to learn more</p>
 </article>
 
 <article>
-<header><h1>Doc Parameters</h1></header>
-<p>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters -------------- label : String label to use to *render* item in the store price : Money price associated with the **item** &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc-params: python/pydoc-params.py {entry: &quot;my_func&quot;, title: &quot;my_func params&quot;} text inside my *func* doc * list one * list two Parameters -------------- label : String label to use to *render* item in the store price : Money price associated with the **item** Note: read more about snippets/api-parameters API parameters for additional properties</p>
+<header><h1>Auto Reference</h1></header>
+<p>Znai provides plugins to automatically create reference documentation for methods and classes. :include-python-method: fin.money.render_money render_money render money to a string returns str money represented as text amount fin.money.Money amount to print message str message to use for audit def render_money(amount: Money, message: str = &quot;&quot;) -&gt; str: &quot;&quot;&quot; render money to a string Parameters -------------- amount: amount to print message: message to use for audit Returns ------- money represented as text &quot;&quot;&quot; return f&quot;{message} {amount.amount} {amount.currency}&quot; Head over to python/auto-reference Python Auto Reference to learn more</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -116,406 +115,142 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "content",
+      "id" : "content-extraction",
+      "title" : "Content Extraction",
       "type" : "Section",
-      "title" : "Content",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: Function Content support requires running znai in an environment with Python 3.8 or later.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "All the examples below are from the following example Python file:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "my_var = \"a variable\"\n\ndef my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
-        "type" : "Snippet",
-        "title" : "example.py",
-        "lang" : "py"
-      }, {
-        "level" : 2,
-        "id" : "content-full-content",
-        "type" : "SubHeading",
-        "title" : "Full Content"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
+          "text" : "In addition to ",
           "type" : "SimpleText"
         }, {
-          "code" : "include-python",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " plugin to extract function, class or global variable content.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "level" : 3,
-        "id" : "content-full-content-class",
-        "type" : "SubHeading",
-        "title" : "Class"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To show the full class definition:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-python: python/example.py {entry: \"Animal\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "class Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
-        "entry" : "Animal",
-        "type" : "Snippet",
-        "lang" : "python"
-      }, {
-        "level" : 3,
-        "id" : "content-full-content-function",
-        "type" : "SubHeading",
-        "title" : "Function"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To show the full contents of a function:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "def says(self):\n    \"\"\"\n    animal **talks** `code`\n    \"\"\"\n    print(\"hello\")",
-        "entry" : "Animal.says",
-        "type" : "Snippet",
-        "lang" : "python"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "This also works for global functions:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-python: python/example.py {entry: \"my_func\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "def my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2",
-        "entry" : "my_func",
-        "type" : "Snippet",
-        "lang" : "python"
-      }, {
-        "level" : 3,
-        "id" : "content-full-content-class-2",
-        "type" : "SubHeading",
-        "title" : "Class"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To show the full contents of a class:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-python: python/example.py {entry: \"Animal\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "class Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
-        "entry" : "Animal",
-        "type" : "Snippet",
-        "lang" : "python"
-      }, {
-        "level" : 3,
-        "id" : "content-full-content-variable",
-        "type" : "SubHeading",
-        "title" : "Variable"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To show a variable's definition and assignment:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-python: python/example.py {entry: \"my_var\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "my_var = \"a variable\"",
-        "entry" : "my_var",
-        "type" : "Snippet",
-        "lang" : "python"
-      }, {
-        "level" : 2,
-        "id" : "content-body-only",
-        "type" : "SubHeading",
-        "title" : "Body Only"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "bodyOnly",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to include just the \"body\" part of the content.  The specifics differ based on what is being included.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "level" : 3,
-        "id" : "content-body-only-function",
-        "type" : "SubHeading",
-        "title" : "Function"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To show a function's body, without signature or doc string:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\", bodyOnly: true}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "print(\"hello\")",
-        "entry" : "Animal.says",
-        "bodyOnly" : true,
-        "type" : "Snippet",
-        "lang" : "python"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "This also works for global functions:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-python: python/example.py {entry: \"my_func\", bodyOnly: true}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "return 2 + 2",
-        "entry" : "my_func",
-        "bodyOnly" : true,
-        "type" : "Snippet",
-        "lang" : "python"
-      }, {
-        "level" : 3,
-        "id" : "content-body-only-class",
-        "type" : "SubHeading",
-        "title" : "Class"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To show the contents of a class without the class declaration or doc string:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-python: python/example.py {entry: \"Animal\", bodyOnly: true}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "def says(self):\n    \"\"\"\n    animal **talks** `code`\n    \"\"\"\n    print(\"hello\")",
-        "entry" : "Animal",
-        "bodyOnly" : true,
-        "type" : "Snippet",
-        "lang" : "python"
-      }, {
-        "level" : 3,
-        "id" : "content-body-only-variable",
-        "type" : "SubHeading",
-        "title" : "Variable"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To show only a variable's value:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-python: python/example.py {entry: \"my_var\", bodyOnly: true}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : "\"a variable\"",
-        "entry" : "my_var",
-        "bodyOnly" : true,
-        "type" : "Snippet",
-        "lang" : "python"
-      } ]
-    }, {
-      "id" : "doc-string",
-      "type" : "Section",
-      "title" : "Doc String",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "include-python-doc",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " plugin to embed py doc string with markdown into documentation",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "my_var = \"a variable\"\n\ndef my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
-        "type" : "Snippet",
-        "title" : "example.py",
-        "lang" : "py"
-      }, {
-        "snippet" : ":include-python-doc: python/example.py {entry: \"my_func\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "text inside my ",
-          "type" : "SimpleText"
-        }, {
-          "type" : "Emphasis",
+          "url" : "/znai/snippets/snippets-manipulation",
+          "isFile" : false,
+          "type" : "Link",
           "content" : [ {
-            "text" : "func",
+            "text" : "snippets manipulation",
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " doc",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "bulletMarker" : "*",
-        "type" : "BulletList",
-        "tight" : true,
-        "content" : [ {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "list one",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "list two",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include",
+          "text" : " that is applicable to any language,",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "parameters",
+          "text" : "Znai can extract content of methods.",
           "type" : "SimpleText"
         } ]
       }, {
-        "snippet" : ":include-python-doc: python/example.py {entry: \"Animal\"}\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\", bodyOnly: true}\n",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
+      }, {
+        "lang" : "python",
+        "snippet" : "print(\"hello\")",
+        "entry" : "Animal.says",
+        "bodyOnly" : true,
+        "type" : "Snippet"
+      }, {
+        "lang" : "py",
+        "snippet" : "class Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
+        "autoTitle" : true,
+        "startLine" : "class Animal",
+        "title" : "python/example.py",
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "animal top level class doc string",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "code block\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "snippet" : ":include-python-doc: python/example.py {entry: \"Animal.says\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "animal ",
+          "text" : "Head over to ",
           "type" : "SimpleText"
         }, {
-          "type" : "StrongEmphasis",
+          "url" : "/znai/python/content-extraction",
+          "isFile" : false,
+          "type" : "Link",
           "content" : [ {
-            "text" : "talks",
+            "text" : "Python Content Extraction",
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " ",
+          "text" : " to learn more",
           "type" : "SimpleText"
-        }, {
-          "code" : "code",
-          "type" : "InlinedCode"
         } ]
       } ]
     }, {
-      "id" : "doc-parameters",
+      "id" : "description-extraction",
+      "title" : "Description Extraction",
       "type" : "Section",
-      "title" : "Doc Parameters",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use ",
+          "text" : "Znai provides plugin to extract PyDoc content. Use it to extract high level description and merge it with the rest of the documentation.",
           "type" : "SimpleText"
         }, {
-          "code" : "include-python-doc-params",
-          "type" : "InlinedCode"
+          "type" : "SoftLineBreak"
         }, {
-          "text" : " plugin to render parameters extracted from pydoc text",
+          "text" : "Convert method parameters into ",
           "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/api-parameters",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "API Parameters",
+            "type" : "SimpleText"
+          } ]
         } ]
       }, {
-        "snippet" : "def my_func(label, price):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    --------------\n    label : String\n      label to use to *render* item in the store\n\n    price : Money\n      price associated with the **item**\n    \"\"\"\n\n    print(\"hello\")",
-        "type" : "Snippet",
-        "title" : "pydoc-params.py",
-        "lang" : "py"
-      }, {
-        "snippet" : ":include-python-doc-params: python/pydoc-params.py {entry: \"my_func\", title: \"my_func params\"}\n",
-        "type" : "Snippet",
+        "lang" : "",
+        "snippet" : ":include-python-doc-params: python/pydoc-params.py {entry: \"my_func\", title: \"result and parameters\"}\n",
         "lineNumber" : "",
-        "lang" : ""
+        "type" : "Snippet"
       }, {
-        "entry" : "my_func",
-        "type" : "ApiParameters",
-        "title" : "my_func params",
         "parameters" : [ {
+          "name" : "returns",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_returns",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "status of the operation",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "type" : "Paragraph",
+            "content" : [ {
+              "code" : "OK",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for good",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
           "name" : "label",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_label",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -531,14 +266,14 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : " item in the store",
               "type" : "SimpleText"
             } ]
-          } ],
-          "anchorId" : "my_func_label",
-          "type" : [ {
-            "refId" : "",
-            "text" : "String"
           } ]
         }, {
           "name" : "price",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_price",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
@@ -551,33 +286,157 @@ ReactDOM.render(React.createElement(Documentation, {
                 "type" : "SimpleText"
               } ]
             } ]
-          } ],
-          "anchorId" : "my_func_price",
-          "type" : [ {
-            "refId" : "",
-            "text" : "Money"
           } ]
-        } ]
+        } ],
+        "entry" : "my_func",
+        "title" : "result and parameters",
+        "type" : "ApiParameters"
+      }, {
+        "lang" : "py",
+        "snippet" : "def my_func(label, price):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    label : str\n      label to use to *render* item in the store\n\n    price : fin.money.Money\n      price associated with the **item**\n\n    Returns\n    -------\n    str\n      status of the operation\n\n      `OK` for good\n    \"\"\"\n\n    return \"OK\"",
+        "autoTitle" : true,
+        "title" : "python/pydoc-params.py",
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: read more about ",
+          "text" : "Head over to ",
           "type" : "SimpleText"
         }, {
+          "url" : "/znai/python/description-extraction",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
-            "text" : "API parameters",
+            "text" : "Python Description Extraction",
             "type" : "SimpleText"
-          } ],
-          "url" : "/znai/snippets/api-parameters"
+          } ]
         }, {
-          "text" : " for additional properties",
+          "text" : " to learn more",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "auto-reference",
+      "title" : "Auto Reference",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Znai provides plugins to automatically create reference documentation for methods and classes.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python-method: fin.money.render_money\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "name" : "render_money",
+        "type" : "PythonMethod",
+        "args" : [ {
+          "category" : "REGULAR",
+          "name" : "amount",
+          "defaultValue" : "",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ]
+        }, {
+          "category" : "REGULAR",
+          "name" : "message",
+          "defaultValue" : "\"\"",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ]
+        } ],
+        "returns" : [ {
+          "text" : "str",
+          "url" : ""
+        } ],
+        "decorators" : [ ],
+        "qualifiedName" : "fin.money.render_money",
+        "extraBottomMargin" : true,
+        "url" : ""
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "render money to a string",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "returns",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "fin_money_render_money_returns",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "money represented as text",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "amount",
+          "type" : [ {
+            "text" : "fin.money.Money",
+            "url" : "/znai/python/auto-reference#python_api_fin_money_Money"
+          } ],
+          "anchorId" : "fin_money_render_money_amount",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "amount to print",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "message",
+          "type" : [ {
+            "text" : "str",
+            "url" : ""
+          } ],
+          "anchorId" : "fin_money_render_money_message",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "message to use for audit",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "small" : true,
+        "type" : "ApiParameters"
+      }, {
+        "lang" : "py",
+        "snippet" : "def render_money(amount: Money, message: str = \"\") -> str:\n    \"\"\"\n    render money to a string\n\n    Parameters\n    --------------\n    amount:\n      amount to print\n\n    message:\n      message to use for audit\n\n    Returns\n    -------\n      money represented as text\n    \"\"\"\n\n    return f\"{message} {amount.amount} {amount.currency}\"",
+        "autoTitle" : true,
+        "startLine" : "render_money",
+        "title" : "fin/money.py",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Head over to ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/python/auto-reference",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Python Auto Reference",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " to learn more",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403266,
+    "lastModifiedTime" : 1658335209120,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Python",
@@ -586,14 +445,14 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "python",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Content",
-        "id" : "content"
+        "title" : "Content Extraction",
+        "id" : "content-extraction"
       }, {
-        "title" : "Doc String",
-        "id" : "doc-string"
+        "title" : "Description Extraction",
+        "id" : "description-extraction"
       }, {
-        "title" : "Doc Parameters",
-        "id" : "doc-parameters"
+        "title" : "Auto Reference",
+        "id" : "auto-reference"
       } ]
     }
   }

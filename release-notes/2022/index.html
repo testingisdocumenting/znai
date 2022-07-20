@@ -85,20 +85,24 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.58</h1></header>
+<p>Fix: Maven Plugin race condition between shutdown hook and apache FileUtils class unload Fix: CPP/auto-reference CPP Auto Ref method link color Fix: highlight python code snippet decorator Fix: Python multi-line token color during snippet render Fix: python multiline string parsing to properly highlight lines Fix: snippets/json JSON rendering order Fix: search popup on iPad now fits a browser window Fix: Enable visuals/images Image click to zoom on scaled down images Fix: layout/columns Column rendering when content starts with a link Fix: Empty layout/columns Column rendering crash Fix: visuals/images#border Image bottom border rendering Fix: Image explicit scale now respects visuals/image-annotations Annotations Placement Fix: iPad layout adjustments to battle 100vh rendering feature Doc: Improved Examples on synergy-with-testing/web-UI Synergy With Testing Doc: Move CPP/doxygen-setup CPP to its own chapter Doc: Move python/content-extraction Python to its own chapter Doc: Move java/content-extraction Java to its own chapter Doc: fix example of flow/lookup-paths#class-path-lookup classpath lookup Rework layout/templates Templates example Doc: visuals/icons#inside-tables Table with Icons example Doc: Document visuals/image-annotations#pixel-ratio Image Pixel Ratio Doc: Update layout/columns Columns examples and text refactoring Doc: Rework introduction/what-is-this What Is This with more examples and reorganized order Doc: snippets/json#test-results JSON WebTau example Add visuals/image-annotations Auto Annotation Color for JSON annotations Add snippets/markdown#multiple-markdown-files include-markdowns sort parameter Image Annotation visuals/image-annotations#annotations-file From CSV File Add caching to python/auto-reference Python Parsing Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows image annotations Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows Tooltips Parse python/description-extraction#doc-parameters Python Returns PyDoc section Render python/auto-reference#finmoneymoney-properties Python Properties as snippets/api-parameters API Parameters Reflect visuals/headings Heading Style in Table Of Contents menu panel Add python/auto-reference#class-definition include-python-class: package.ClassName to display and define a class Add python/auto-reference#methodfunction-definition include-python-method: package.method_name to display a function signature, documentation and parameters Tweak color of code snippets of lang=markdown Removed global-references.js for handling cross-references in favor of lazy url evaluation at page generation time Add Python Doc params python/description-extraction#type-hints Type Hint support visuals/mermaid-diagrams#wide-mode Mermaid Diagrams Wide Mode visuals/mermaid-diagrams#external-file Mermaid Diagrams External File Add Graphviz visuals/graphviz-diagrams#fenced-block fenced block support Add collapse button for snippets/external-code-snippets#read-more Snippet Read More visuals/mermaid-diagrams Mermaid Diagrams dark mode and auto them switch visuals/image-annotations#manual-coordinates Image Annotation Coordinates during preview mode Change arrow visuals/image-annotations Image Annotations style to be single color and use tooltip Add automatic visuals/image-annotations Image Annotations badges textual description tooltips via ordered list Add tooltip for snippets/code-comments Code Comments Bullet Points Tweak visuals/images#fit Image Zoom style in dark and light themes Add snippets/api-parameters#wide-mode API Parameters Wide Mode Tweak snippets/api-parameters#title API Parameters Title style Add snippets/api-parameters API Parameters plugin parameters definition New visuals/images#title Image Title look and feel Add flow/support Support Title Add snippets/json#hidden-parts JSON Collapsed Paths validation Add formal plugin parameters to visuals/images Image Plugin Add visuals/image-annotations#badges Image Badge Annotation auto color detection Add snippets/json JSON fence plugin Add snippets/json JSON parameters formalization Add snippets/json#title JSON Auto Title feature Add Java Plugins parameters definition Add initial plugin parameters formalization. Enforce parameters validation for snippets/snippets-manipulation File Plugin Add snippets/json#code-references JSON Code References support More prominent colors for highlight of snippets/json JSON value Better error message in case of wrong znai CLI argument name Add --version param to znai CLI</p>
+</article>
+
+<article>
 <header><h1>1.57</h1></header>
-<p>Fix: selected TOC item padding Fix: layout/tables Table text selection during preview is not auto deselected Fix: snippets/external-code-snippets#read-more read more option change during preview now properly updates the snippet Fix: snippets/math Latex more complex math render by adding missing fonts Fix: remove extra top margin in case of code snippet in between code snippets in two columns mode Fix: markdown snippets render extra new line at the end Fix: search preview popup has fixed height now to avoid size jump Use standard args parsing for flow/lookup-paths#cli-parameter CLI Lookup Paths Add snippets/doxygen#setup Doxygen From Zip support Add visuals/charts#presentation Charts Presentation support for all breakpoint support that creates a slide for every textual value Add visuals/charts#presentation Charts Presentation breakpoint validation Add visuals/charts#presentation Bar Chart presentation mode breakpoints support Add flow/lookup-paths#zip-and-jar-lookup Zip and Jar lookup path support to access content from within archives Add visuals/charts#presentation Pie Chart presentation mode breakpoints support Better validation of snippets/api-parameters#external-json-file API Parameters input JSON Add automatic hard wrap and snippets/api-parameters#long-parameter-names noWrap option to snippets/api-parameters API Parameters to handle long parameter names without spaces Add visuals/smart-bullet-points#steps Smart Bullets Points Steps align option Add visuals/charts#wide-mode Charts Wide Mode Add visuals/charts#inlined-data Charts Inlined Data Add visuals/images#external-image External Images support and image URL validation Add presentation support for [Line Chart] breakpoints (visuals/charts#presentation) Remove generic include-chart plugin that uses Victory Chart for rendering Add visuals/charts#legend chart legend Add dark theme support for visuals/charts Charts Migrate visuals/charts#pie Pie Chart to https://echarts.apache.org/ ECharts Migrate visuals/charts#line Line Chart to https://echarts.apache.org/ ECharts Add stack mode to visuals/charts#bar Bar Chart visuals/charts#bar Bar Chart horizontal mode with height setting Add multiple values per tick support to visuals/charts#bar Bar Chart Wrap code option for snippets/code-snippets#wrap-code Fence Block and snippets/external-code-snippets#wrap-code External Code Landing hub opens documentation in the same window and not a new tab Add snippets/snippets-manipulation#multiple-surrounded-by surrounded by null as separator value No extra separator for snippets/java#multiple-entries java and snippets/groovy#multiple-bodies groovy entries separator</p>
+<p>Fix: selected TOC item padding Fix: layout/tables Table text selection during preview is not auto deselected Fix: snippets/external-code-snippets#read-more read more option change during preview now properly updates the snippet Fix: snippets/math Latex more complex math render by adding missing fonts Fix: remove extra top margin in case of code snippet in between code snippets in two columns mode Fix: markdown snippets render extra new line at the end Fix: search preview popup has fixed height now to avoid size jump Use standard args parsing for flow/lookup-paths#cli-parameter CLI Lookup Paths Add CPP/doxygen-setup#setup Doxygen From Zip support Add visuals/charts#presentation Charts Presentation support for all breakpoint support that creates a slide for every textual value Add visuals/charts#presentation Charts Presentation breakpoint validation Add visuals/charts#presentation Bar Chart presentation mode breakpoints support Add flow/lookup-paths#zip-and-jar-lookup Zip and Jar lookup path support to access content from within archives Add visuals/charts#presentation Pie Chart presentation mode breakpoints support Better validation of snippets/api-parameters#external-json-file API Parameters input JSON Add automatic hard wrap and snippets/api-parameters#long-parameter-names noWrap option to snippets/api-parameters API Parameters to handle long parameter names without spaces Add visuals/smart-bullet-points#steps Smart Bullets Points Steps align option Add visuals/charts#wide-mode Charts Wide Mode Add visuals/charts#inlined-data Charts Inlined Data Add visuals/images#external-image External Images support and image URL validation Add presentation support for visuals/charts#presentation Line Chart breakpoints Remove generic include-chart plugin that uses Victory Chart for rendering Add visuals/charts#legend chart legend Add dark theme support for visuals/charts Charts Migrate visuals/charts#pie Pie Chart to https://echarts.apache.org/ ECharts Migrate visuals/charts#line Line Chart to https://echarts.apache.org/ ECharts Add stack mode to visuals/charts#bar Bar Chart visuals/charts#bar Bar Chart horizontal mode with height setting Add multiple values per tick support to visuals/charts#bar Bar Chart Wrap code option for snippets/code-snippets#wrap-code Fence Block and snippets/external-code-snippets#wrap-code External Code Landing hub opens documentation in the same window and not a new tab Add snippets/snippets-manipulation#multiple-surrounded-by surrounded by null as separator value No extra separator for java/content-extraction#multiple-entries java and snippets/groovy#multiple-bodies groovy entries separator</p>
 </article>
 
 <article>
 <header><h1>1.56</h1></header>
-<p>Fix: search result preview highlight across styles Fix highlight code lines when multiline comment is present (e.g. /* */ ) Fix: using : , - , + chars in Search doesn't lead to crash anymore Fix: search popup window height is consistent size when jumping between results Added snippets/markdown#partial-markdown include partial markdown Added multiple entries separator for snippets/java#multiple-bodies Java and snippets/groovy#multiple-bodies Groovy Added snippets/groovy#multiple-bodies multiple bodies only using entry for Groovy Added snippets/java#multiple-bodies multiple bodies only using entry for Java flow/landing index.md is now optional Add validate external links flag --validate-external-links Add visuals/image-annotations#badges image fence plugin with badge annotations Handle loop reference in snippets/open-API Open API Generate plugin params usage statistics file Generate plugins usage statistics file</p>
+<p>Fix: search result preview highlight across styles Fix highlight code lines when multiline comment is present (e.g. /* */ ) Fix: using : , - , + chars in Search doesn't lead to crash anymore Fix: search popup window height is consistent size when jumping between results Added snippets/markdown#partial-markdown include partial markdown Added multiple entries separator for java/content-extraction#multiple-bodies Java and snippets/groovy#multiple-bodies Groovy Added snippets/groovy#multiple-bodies multiple bodies only using entry for Groovy Added java/content-extraction#multiple-bodies multiple bodies only using entry for Java flow/landing index.md is now optional Add validate external links flag --validate-external-links Add visuals/image-annotations#badges image fence plugin with badge annotations Handle loop reference in snippets/open-API Open API Generate plugin params usage statistics file Generate plugins usage statistics file</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -111,28 +115,1521 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "157",
+      "badge" : "Upcoming Release",
+      "id" : "158",
+      "title" : "1.58",
       "type" : "Section",
-      "title" : "1.57",
       "content" : [ {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Maven Plugin race condition between shutdown hook and apache FileUtils class unload",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/CPP/auto-reference",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "CPP Auto Ref",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " method link color",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: highlight python code snippet decorator",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Python multi-line token color during snippet render",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: python multiline string parsing to properly highlight lines",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " rendering order",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: search popup on iPad now fits a browser window",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Enable ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/images",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " click to zoom on scaled down images",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/columns",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Column",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " rendering when content starts with a link",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Empty ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/columns",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Column",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " rendering crash",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/images#border",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " bottom border rendering",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Image explicit ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "scale",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " now respects ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Annotations Placement",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: iPad layout adjustments to battle 100vh rendering feature",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: Improved Examples on ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/synergy-with-testing/web-UI",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Synergy With Testing",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: Move ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/CPP/doxygen-setup",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "CPP",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to its own chapter",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: Move ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/python/content-extraction",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Python",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to its own chapter",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: Move ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/java/content-extraction",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Java",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to its own chapter",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: fix example of ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/lookup-paths#class-path-lookup",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "classpath lookup",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Rework ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/templates",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Templates",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " example",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/icons#inside-tables",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Table with Icons",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " example",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: Document ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations#pixel-ratio",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image Pixel Ratio",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: Update ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/columns",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Columns",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " examples and text refactoring",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: Rework ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/introduction/what-is-this",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "What Is This",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " with more examples and reorganized order",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json#test-results",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON WebTau example",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Auto Annotation Color",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " for JSON annotations",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/markdown#multiple-markdown-files",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include-markdowns",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "sort",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " parameter",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Image Annotation ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations#annotations-file",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "From CSV File",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add caching to ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/python/auto-reference",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Python Parsing",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations#rectangles-and-arrows",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Rectangles And Arrows",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " image annotations",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations#rectangles-and-arrows",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Rectangles And Arrows",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " Tooltips",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Parse ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/python/description-extraction#doc-parameters",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Python Returns",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " PyDoc section",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Render ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/python/auto-reference#finmoneymoney-properties",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Python Properties",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " as ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/api-parameters",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "API Parameters",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Reflect ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/headings",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Heading Style",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " in Table Of Contents menu panel",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/python/auto-reference#class-definition",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include-python-class: package.ClassName",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to display and define a class",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/python/auto-reference#methodfunction-definition",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include-python-method: package.method_name",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to display a function signature, documentation and parameters",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Tweak color of code snippets of lang=markdown",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Removed ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "global-references.js",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for handling cross-references in favor of lazy url evaluation at page generation time",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add Python Doc params ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/python/description-extraction#type-hints",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Type Hint support",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "url" : "/znai/visuals/mermaid-diagrams#wide-mode",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Mermaid Diagrams Wide Mode",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "url" : "/znai/visuals/mermaid-diagrams#external-file",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Mermaid Diagrams External File",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add Graphviz ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/graphviz-diagrams#fenced-block",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "fenced block",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add collapse button for ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/external-code-snippets#read-more",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Snippet Read More",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "url" : "/znai/visuals/mermaid-diagrams",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Mermaid Diagrams",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " dark mode and auto them switch",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "url" : "/znai/visuals/image-annotations#manual-coordinates",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image Annotation Coordinates",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " during preview mode",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Change ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "arrow",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image Annotations",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " style to be single color and use tooltip",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add automatic ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image Annotations",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " badges textual description tooltips via ordered list",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add tooltip for ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/code-comments",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Code Comments Bullet Points",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Tweak ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/images#fit",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image Zoom",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " style in dark and light themes",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/api-parameters#wide-mode",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "API Parameters Wide Mode",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Tweak ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/api-parameters#title",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "API Parameters Title",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " style",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/api-parameters",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "API Parameters",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " plugin parameters definition",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "New ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/images#title",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image Title",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " look and feel",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/support",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Support Title",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json#hidden-parts",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON Collapsed Paths",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " validation",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add formal plugin parameters to ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/images",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image Plugin",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations#badges",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image Badge Annotation",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " auto color detection",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " fence plugin",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " parameters formalization",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json#title",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON Auto Title",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " feature",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add Java Plugins parameters definition",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add initial plugin parameters formalization. Enforce parameters validation for ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-manipulation",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "File Plugin",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json#code-references",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON Code References",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "More prominent colors for highlight of ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON value",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Better error message in case of wrong ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "znai",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " CLI argument name",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "--version",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " param to ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "znai",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " CLI",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "157",
+      "title" : "1.57",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -145,8 +1642,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -155,13 +1652,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Fix: ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/layout/tables",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Table",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/layout/tables"
+              } ]
             }, {
               "text" : " text selection during preview is not auto deselected",
               "type" : "SimpleText"
@@ -170,8 +1667,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -180,13 +1677,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Fix: ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/external-code-snippets#read-more",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "read more",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/external-code-snippets#read-more"
+              } ]
             }, {
               "text" : " option change during preview now properly updates the snippet",
               "type" : "SimpleText"
@@ -195,8 +1692,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -205,13 +1702,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Fix: ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/math",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Latex",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/math"
+              } ]
             }, {
               "text" : " more complex math render by adding missing fonts",
               "type" : "SimpleText"
@@ -220,8 +1717,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -234,8 +1731,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -248,8 +1745,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -262,8 +1759,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -272,20 +1769,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Use standard args parsing for ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/flow/lookup-paths#cli-parameter",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "CLI Lookup Paths",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/flow/lookup-paths#cli-parameter"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -294,13 +1791,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/CPP/doxygen-setup#setup",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Doxygen From Zip",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/doxygen#setup"
+              } ]
             }, {
               "text" : " support",
               "type" : "SimpleText"
@@ -309,8 +1806,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -319,13 +1816,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#presentation",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Charts Presentation",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#presentation"
+              } ]
             }, {
               "text" : " support for ",
               "type" : "SimpleText"
@@ -345,13 +1842,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#presentation",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Charts Presentation",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#presentation"
+              } ]
             }, {
               "text" : " breakpoint validation",
               "type" : "SimpleText"
@@ -360,8 +1857,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -370,13 +1867,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#presentation",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Bar Chart",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#presentation"
+              } ]
             }, {
               "text" : " presentation mode breakpoints support",
               "type" : "SimpleText"
@@ -385,8 +1882,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -395,13 +1892,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/flow/lookup-paths#zip-and-jar-lookup",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Zip and Jar",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/flow/lookup-paths#zip-and-jar-lookup"
+              } ]
             }, {
               "text" : " lookup path support to access content from within archives",
               "type" : "SimpleText"
@@ -410,8 +1907,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -420,13 +1917,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#presentation",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Pie Chart",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#presentation"
+              } ]
             }, {
               "text" : " presentation mode breakpoints support",
               "type" : "SimpleText"
@@ -435,8 +1932,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -445,13 +1942,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Better validation of ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/api-parameters#external-json-file",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "API Parameters",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/api-parameters#external-json-file"
+              } ]
             }, {
               "text" : " input JSON",
               "type" : "SimpleText"
@@ -460,8 +1957,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -470,24 +1967,24 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add automatic hard wrap and ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/api-parameters#long-parameter-names",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "noWrap",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/api-parameters#long-parameter-names"
+              } ]
             }, {
               "text" : " option to ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/api-parameters",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "API Parameters",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/api-parameters"
+              } ]
             }, {
               "text" : "",
               "type" : "SimpleText"
@@ -501,8 +1998,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -511,13 +2008,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/smart-bullet-points#steps",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Smart Bullets Points Steps",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/smart-bullet-points#steps"
+              } ]
             }, {
               "text" : " align option",
               "type" : "SimpleText"
@@ -526,8 +2023,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -536,20 +2033,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#wide-mode",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Charts Wide Mode",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#wide-mode"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -558,20 +2055,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#inlined-data",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Charts Inlined Data",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#inlined-data"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -580,13 +2077,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/images#external-image",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "External Images",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/images#external-image"
+              } ]
             }, {
               "text" : " support and image URL validation",
               "type" : "SimpleText"
@@ -595,22 +2092,33 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Add presentation support for [Line Chart] breakpoints (visuals/charts#presentation)",
+              "text" : "Add presentation support for ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/charts#presentation",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Line Chart",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " breakpoints",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -629,8 +2137,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -639,20 +2147,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#legend",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "chart legend",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#legend"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -661,20 +2169,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add dark theme support for ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Charts",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -683,31 +2191,31 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Migrate ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#pie",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Pie Chart",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#pie"
+              } ]
             }, {
               "text" : " to ",
               "type" : "SimpleText"
             }, {
+              "url" : "https://echarts.apache.org/",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "ECharts",
                 "type" : "SimpleText"
-              } ],
-              "url" : "https://echarts.apache.org/"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -716,31 +2224,31 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Migrate ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#line",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Line Chart",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#line"
+              } ]
             }, {
               "text" : " to ",
               "type" : "SimpleText"
             }, {
+              "url" : "https://echarts.apache.org/",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "ECharts",
                 "type" : "SimpleText"
-              } ],
-              "url" : "https://echarts.apache.org/"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -749,32 +2257,32 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add stack mode to ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#bar",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Bar Chart",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#bar"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "url" : "/znai/visuals/charts#bar",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Bar Chart",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#bar"
+              } ]
             }, {
               "text" : " horizontal mode with height setting",
               "type" : "SimpleText"
@@ -783,8 +2291,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -793,20 +2301,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add multiple values per tick support to ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/charts#bar",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Bar Chart",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/charts#bar"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -815,31 +2323,31 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Wrap code option for ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/code-snippets#wrap-code",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Fence Block",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/code-snippets#wrap-code"
+              } ]
             }, {
               "text" : " and ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/external-code-snippets#wrap-code",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "External Code",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/external-code-snippets#wrap-code"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -852,8 +2360,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -862,13 +2370,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/snippets-manipulation#multiple-surrounded-by",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "surrounded by null",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/snippets-manipulation#multiple-surrounded-by"
+              } ]
             }, {
               "text" : " as separator value",
               "type" : "SimpleText"
@@ -877,8 +2385,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -887,24 +2395,24 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "No extra separator for ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/java/content-extraction#multiple-entries",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "java",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/java#multiple-entries"
+              } ]
             }, {
               "text" : " and ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/groovy#multiple-bodies",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "groovy",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/groovy#multiple-bodies"
+              } ]
             }, {
               "text" : " entries separator",
               "type" : "SimpleText"
@@ -914,12 +2422,12 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "156",
-      "type" : "Section",
       "title" : "1.56",
+      "type" : "Section",
       "content" : [ {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -932,8 +2440,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -952,8 +2460,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -993,8 +2501,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1007,8 +2515,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1017,20 +2525,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Added ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/markdown#partial-markdown",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "include partial markdown",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/markdown#partial-markdown"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1039,31 +2547,31 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Added multiple entries separator for ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/java/content-extraction#multiple-bodies",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Java",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/java#multiple-bodies"
+              } ]
             }, {
               "text" : " and ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/groovy#multiple-bodies",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Groovy",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/groovy#multiple-bodies"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1072,13 +2580,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Added ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/groovy#multiple-bodies",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "multiple bodies only",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/groovy#multiple-bodies"
+              } ]
             }, {
               "text" : " using ",
               "type" : "SimpleText"
@@ -1093,8 +2601,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1103,13 +2611,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Added ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/java/content-extraction#multiple-bodies",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "multiple bodies only",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/java#multiple-bodies"
+              } ]
             }, {
               "text" : " using ",
               "type" : "SimpleText"
@@ -1124,20 +2632,20 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "url" : "/znai/flow/landing",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "index.md",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/flow/landing"
+              } ]
             }, {
               "text" : " is now optional",
               "type" : "SimpleText"
@@ -1146,8 +2654,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1163,8 +2671,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1173,13 +2681,13 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/visuals/image-annotations#badges",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "image fence",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/visuals/image-annotations#badges"
+              } ]
             }, {
               "text" : " plugin with badge annotations",
               "type" : "SimpleText"
@@ -1188,8 +2696,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1198,20 +2706,20 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Handle loop reference in ",
               "type" : "SimpleText"
             }, {
+              "url" : "/znai/snippets/open-API",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
                 "text" : "Open API",
                 "type" : "SimpleText"
-              } ],
-              "url" : "/znai/snippets/open-API"
+              } ]
             } ]
           } ]
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1224,8 +2732,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "bulletMarker" : "*",
-        "type" : "BulletList",
         "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
           "type" : "ListItem",
           "content" : [ {
@@ -1238,7 +2746,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403262,
+    "lastModifiedTime" : 1658335209116,
     "tocItem" : {
       "sectionTitle" : "Release Notes",
       "pageTitle" : "2022 Releases",
@@ -1249,6 +2757,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "2022",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.58",
+        "id" : "158"
+      }, {
         "title" : "1.57",
         "id" : "157"
       }, {

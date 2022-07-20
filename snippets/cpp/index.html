@@ -85,15 +85,19 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Comments</h1></header>
-<p>You can reuse comments that are inside your functions and refer to them inside your documentation. Mark a comment with @znai and use :include-cpp-comments: plugin. int my_func() { // @znai important context information goes here // this information is useful and can be re-used inside a user guide code_goes_here(); // this comment is not marked another_code(); /* @znai another piece of **documentation** in multiple lines, but it will be treated as `markdown` */ } Specify a file and an entry point to extract comments from. :include-cpp-comments: comments.cpp {entry: &quot;my_func&quot;} Result will be a text rendered as if it was typed inside markup file. See the text immediately below:</p>
+<header><h1>Description Extraction</h1></header>
+<p>In addition to snippets/snippets-manipulation snippets manipulation that is applicable to any language, Znai can extract description of methods and convert parameters into snippets/api-parameters API Parameters :include-doxygen-doc-params: utils::nested::my_func { title: &quot;My Params&quot; } first_param int description of first param item a item b second_param bool description of second param Head over to CPP/description-extraction CPP Description Extraction to learn more</p>
+</article>
+
+<article>
+<header><h1>Auto Reference</h1></header>
+<p>Znai provides plugins to automatically create reference documentation for methods and classes. :include-doxygen-member: multi_println prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print */ template&lt;typename T1, typename T2&gt; void multi_println(const T1&amp; v1, const T2&amp; v2) { std::cout &lt;&lt; v1 &lt;&lt; &quot;, &quot; &lt;&lt; v2 &lt;&lt; &quot;\n&quot;; } Head over to CPP/auto-reference CPP Auto Reference to learn more</p>
 </article>
 </section>
 </div>
 <!--test extension added comment-->
 <script type="text/javascript" src="/znai/footer.js"></script>
 <script type="text/javascript" src="/znai/toc.js"></script>
-<script type="text/javascript" src="/znai/global-anchors.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
 <script type="text/javascript" src="/znai/static/main.js"></script>
@@ -106,97 +110,290 @@ ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-      "title" : "View On GitHub"
+      "title" : "View Markdown"
     },
-    "description" : "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
     "id" : "znai",
     "title" : "Znai",
     "type" : "User Guide",
     "category" : "Documentation",
     "previewEnabled" : false,
     "support" : {
-      "link" : "https://github.com/testingisdocumenting/znai/issues"
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
     }
   },
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "comments",
+      "id" : "description-extraction",
+      "title" : "Description Extraction",
       "type" : "Section",
-      "title" : "Comments",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "You can reuse comments that are inside your functions and refer to them inside your documentation.",
+          "text" : "In addition to ",
           "type" : "SimpleText"
         }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Mark a comment with ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "@znai",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " and use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : ":include-cpp-comments:",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " plugin.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : "int my_func() {\n    // @znai important context information goes here\n    // this information is useful and can be re-used inside a user guide\n\n    code_goes_here();\n     // this comment is not marked\n    another_code();\n\n    /* @znai\n    another piece of **documentation**\n    in multiple lines, but it will be treated as `markdown`\n    */\n}",
-        "type" : "Snippet",
-        "lang" : "cpp"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Specify a file and an entry point to extract comments from.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "snippet" : ":include-cpp-comments: comments.cpp {entry: \"my_func\"}\n",
-        "type" : "Snippet",
-        "lineNumber" : "",
-        "lang" : ""
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Result will be a text rendered as if it was typed inside markup file. See the text immediately below:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "important context information goes here this information is useful and can be re-used inside a user guide",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "another piece of ",
-          "type" : "SimpleText"
-        }, {
-          "type" : "StrongEmphasis",
+          "url" : "/znai/snippets/snippets-manipulation",
+          "isFile" : false,
+          "type" : "Link",
           "content" : [ {
-            "text" : "documentation",
+            "text" : "snippets manipulation",
             "type" : "SimpleText"
           } ]
         }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "in multiple lines, but it will be treated as ",
+          "text" : " that is applicable to any language,",
           "type" : "SimpleText"
         }, {
-          "code" : "markdown",
-          "type" : "InlinedCode"
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Znai can extract description of methods and convert parameters into ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/api-parameters",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "API Parameters",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-doc-params: utils::nested::my_func { title: \"My Params\" }\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "My Params",
+        "parameters" : [ {
+          "name" : "first_param",
+          "type" : [ {
+            "text" : "int",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_first_param",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of first ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "param",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "delimiter" : " ",
+              "startNumber" : 1,
+              "type" : "OrderedList",
+              "content" : [ {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item a",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              }, {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item b ",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              } ]
+            } ]
+          } ]
+        }, {
+          "name" : "second_param",
+          "type" : [ {
+            "text" : "bool",
+            "url" : ""
+          } ],
+          "anchorId" : "my_func_second_param",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description of second param ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Head over to ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/CPP/description-extraction",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "CPP Description Extraction",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " to learn more",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "auto-reference",
+      "title" : "Auto Reference",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Znai provides plugins to automatically create reference documentation for methods and classes.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-doxygen-member: multi_println\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "id" : "funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2",
+        "type" : "Anchor"
+      }, {
+        "isStatic" : false,
+        "visibility" : "public",
+        "isFunction" : true,
+        "kind" : "function",
+        "isConst" : false,
+        "templateParameters" : [ {
+          "name" : "",
+          "type" : [ {
+            "text" : "typename T1",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "",
+          "type" : [ {
+            "text" : "typename T2",
+            "url" : ""
+          } ]
+        } ],
+        "compoundKind" : "file",
+        "name" : "multi_println",
+        "isVirtual" : false,
+        "parameters" : [ {
+          "name" : "v1",
+          "type" : [ {
+            "text" : "const T1 &",
+            "url" : ""
+          } ]
+        }, {
+          "name" : "v2",
+          "type" : [ {
+            "text" : "const T2 &",
+            "url" : ""
+          } ]
+        } ],
+        "compoundName" : "",
+        "returnType" : [ {
+          "text" : "void",
+          "url" : ""
+        } ],
+        "type" : "DoxygenMember"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "prints a value and a new line ",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "small" : true,
+        "type" : "ApiParameters",
+        "title" : "parameters",
+        "parameters" : [ {
+          "name" : "v1",
+          "type" : [ {
+            "text" : "const T1 &",
+            "url" : ""
+          } ],
+          "anchorId" : "multi_println_v1",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "value to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "v2",
+          "type" : [ {
+            "text" : "const T2 &",
+            "url" : ""
+          } ],
+          "anchorId" : "multi_println_v2",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "value to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "small" : true,
+        "type" : "ApiParameters",
+        "title" : "template parameters",
+        "parameters" : [ {
+          "name" : "T1",
+          "type" : [ ],
+          "anchorId" : "multi_println_template_T1",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "type of the value one to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "T2",
+          "type" : [ ],
+          "anchorId" : "multi_println_template_T2",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "type of the value two to print ",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "lang" : "hpp",
+        "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n */\ntemplate<typename T1, typename T2>\nvoid multi_println(const T1& v1, const T2& v2) {\n    std::cout << v1 << \", \" << v2 << \"\\n\";\n}",
+        "title" : "source.hpp",
+        "surroundedBy" : "// multi_println",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Head over to ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/CPP/auto-reference",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "CPP Auto Reference",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " to learn more",
+          "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1653499403262,
+    "lastModifiedTime" : 1658335209116,
     "tocItem" : {
       "sectionTitle" : "Snippets",
       "pageTitle" : "Cpp",
@@ -205,8 +402,11 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "cpp",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Comments",
-        "id" : "comments"
+        "title" : "Description Extraction",
+        "id" : "description-extraction"
+      }, {
+        "title" : "Auto Reference",
+        "id" : "auto-reference"
       } ]
     }
   }
