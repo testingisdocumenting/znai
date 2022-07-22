@@ -1,0 +1,1 @@
+* Fix: [Image Zoom](visuals/images#fit) now has vertical scroll for tall images   

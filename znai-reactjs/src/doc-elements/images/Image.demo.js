@@ -99,7 +99,8 @@ function standardImage() {
         type: 'AnnotatedImage',
         imageSrc: 'ui.jpg',
         width: 800,
-        height: 400
+        height: 400,
+        shapes: []
     }
 }
 
@@ -109,6 +110,7 @@ function fitImage() {
         imageSrc: 'books.jpg',
         width: 1698,
         height: 1131,
+        shapes: [],
         fit: true
     }
 }
@@ -200,6 +202,7 @@ function leftAlign() {
         align: 'left',
         width: 400,
         height: 250,
+        shapes: []
     }
 }
 
@@ -209,5 +212,6 @@ function rightAlign() {
         align: 'right',
         width: 400,
         height: 250,
+        shapes: []
     }
 }

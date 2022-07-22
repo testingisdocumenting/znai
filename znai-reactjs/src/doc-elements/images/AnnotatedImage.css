@@ -25,6 +25,10 @@
     overflow-y: hidden;
 }
 
+.znai-zoom-container .znai-annotated-image-container {
+    overflow: visible;
+}
+
 .znai-image-title {
     padding: 4px 16px;
     font-size: var(--znai-smaller-text-size);
