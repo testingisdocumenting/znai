@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +23,7 @@ import org.testingisdocumenting.znai.search.PageSearchEntry
 import org.testingisdocumenting.znai.search.SearchScore
 import org.testingisdocumenting.znai.structure.TableOfContents
 import org.junit.Test
+import org.testingisdocumenting.znai.structure.TocNameAndOpts
 
 class ServerSideSimplifiedRendererTest {
     TableOfContents toc = createToc()
@@ -73,9 +75,9 @@ class ServerSideSimplifiedRendererTest {
 
     private static TableOfContents createToc() {
         def toc = new TableOfContents()
-        toc.addTocItem('chapter-a', 'page-one')
-        toc.addTocItem('chapter-a', 'page-two')
-        toc.addTocItem('chapter-b', 'page-one')
+        toc.addTocItem(new TocNameAndOpts("chapter-a"), 'page-one')
+        toc.addTocItem(new TocNameAndOpts("chapter-a"), 'page-two')
+        toc.addTocItem(new TocNameAndOpts("chapter-b"), 'page-one')
 
         toc.tocItems[0].pageSectionIdTitles = [new PageSectionIdTitle('PS0', [:])]
         toc.tocItems[1].pageSectionIdTitles = [new PageSectionIdTitle('PS1', [:]), new PageSectionIdTitle('PS2', [:])]
