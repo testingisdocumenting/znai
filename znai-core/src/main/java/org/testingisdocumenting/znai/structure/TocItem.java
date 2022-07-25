@@ -26,13 +26,12 @@ import java.util.regex.Pattern;
 import static java.util.stream.Collectors.toList;
 
 public class TocItem {
-    private static final Pattern fileNameAllowedPattern = Pattern.compile("[a-zA-Z0-9-_]*");
+    private static final Pattern fileNameAllowedPattern = Pattern.compile("[a-zA-Z\\d-_]*");
 
     public static final String INDEX = "index";
 
-    private final String dirName;
+    private final TocNameAndOpts chapter;
     private final String fileNameWithoutExtension;
-    private String sectionTitle;
     private String pageTitle;
     private PageMeta pageMeta;
 
@@ -46,19 +45,18 @@ public class TocItem {
     private List<PageSectionIdTitle> pageSectionIdTitles;
 
     static TocItem createIndex(String docTitle) {
-        TocItem tocItem = new TocItem("", INDEX);
+        TocItem tocItem = new TocItem(new TocNameAndOpts(""), INDEX);
         tocItem.setPageTitle(docTitle);
 
         return tocItem;
     }
 
-    public TocItem(String dirName, String fileNameWithoutExtension) {
-        this.dirName = dirName;
+    public TocItem(TocNameAndOpts chapter, String fileNameWithoutExtension) {
+        this.chapter = chapter;
         this.fileNameWithoutExtension = fileNameWithoutExtension;
-        validateFileName(this.dirName);
+        validateFileName(chapter.getGivenName());
         validateFileName(this.fileNameWithoutExtension);
 
-        this.sectionTitle = NameUtils.dashToCamelCaseWithSpaces(dirName);
         this.pageTitle = NameUtils.dashToCamelCaseWithSpaces(fileNameWithoutExtension);
 
         this.pageMeta = new PageMeta(Collections.emptyMap());
@@ -66,21 +64,21 @@ public class TocItem {
         this.pageSectionIdTitles = new ArrayList<>();
     }
 
-    public TocItem(String dirName, String fileNameWithoutExtension, String sectionTitle) {
-        this(dirName, fileNameWithoutExtension);
-        this.sectionTitle = sectionTitle;
+    public TocItem(String dirName, String fileNameWithoutExtension, String chapterTitle) {
+        this(new TocNameAndOpts(dirName), fileNameWithoutExtension);
+        this.chapter.setHumanReadableName(chapterTitle);
     }
 
     public String getDirName() {
-        return dirName;
+        return chapter.getGivenName();
     }
 
     public String getFileNameWithoutExtension() {
         return fileNameWithoutExtension;
     }
 
-    public String getSectionTitle() {
-        return sectionTitle;
+    public String getChapterTitle() {
+        return chapter.getHumanReadableName();
     }
 
     public String getPageTitle() {
@@ -116,7 +114,7 @@ public class TocItem {
     }
 
     public boolean isIndex() {
-        return dirName.isEmpty() && fileNameWithoutExtension.equals(INDEX);
+        return chapter.getGivenName().isEmpty() && fileNameWithoutExtension.equals(INDEX);
     }
 
     public boolean match(String dirName, String fileNameWithoutExtension) {
@@ -125,7 +123,7 @@ public class TocItem {
 
     public Map<String, ?> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
-        result.put("sectionTitle", getSectionTitle());
+        result.put("chapterTitle", getChapterTitle());
         result.put("pageTitle", getPageTitle());
         result.put("pageMeta", pageMeta.toMap());
         result.put("dirName", getDirName());
@@ -139,7 +137,7 @@ public class TocItem {
 
     @Override
     public String toString() {
-        return dirName + "/" + fileNameWithoutExtension;
+        return chapter.getGivenName() + "/" + fileNameWithoutExtension;
     }
 
     @Override
@@ -153,19 +151,19 @@ public class TocItem {
 
         TocItem tocItem = (TocItem) o;
 
-        return dirName.equals(tocItem.dirName) &&
+        return chapter.getGivenName().equals(tocItem.chapter.getGivenName()) &&
                 fileNameWithoutExtension.equals(tocItem.fileNameWithoutExtension);
     }
 
     @Override
     public int hashCode() {
-        int result = dirName.hashCode();
+        int result = chapter.getGivenName().hashCode();
         result = 31 * result + fileNameWithoutExtension.hashCode();
         return result;
     }
 
     private void validateFileName(String name) {
-        if (! fileNameAllowedPattern.matcher(name).matches()) {
+        if (!fileNameAllowedPattern.matcher(name).matches()) {
             throw new IllegalArgumentException("file name should match: " + fileNameAllowedPattern + "\ngiven name: " +
                     name + "\n" +
                     "use\n---\ntitle: my custom title with any symbols like !#?\n---\nto override the title for your page");

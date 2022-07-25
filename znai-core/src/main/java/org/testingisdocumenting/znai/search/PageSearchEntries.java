@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 
 public class PageSearchEntries {
     private final TocItem tocItem;
-    private List<PageSearchEntry> entries;
+    private final List<PageSearchEntry> entries;
 
     public PageSearchEntries(TocItem tocItem, List<PageSearchEntry> entries) {
         this.tocItem = tocItem;
@@ -48,7 +49,7 @@ public class PageSearchEntries {
     private List<String> createList(PageSearchEntry pageSearchEntry) {
         return Arrays.asList(
                 genId(pageSearchEntry),
-                tocItem.getSectionTitle(),
+                tocItem.getChapterTitle(),
                 tocItem.getPageTitle(),
                 pageSearchEntry.getPageSectionTitle(),
                 pageSearchEntry.getSearchText().getText());

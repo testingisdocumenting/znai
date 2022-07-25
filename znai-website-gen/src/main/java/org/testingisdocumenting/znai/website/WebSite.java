@@ -582,7 +582,7 @@ public class WebSite implements Log {
         }
 
         return docMeta.getTitle() + ": " + tocItem.getPageTitle() + ", " + pageSearchEntry.getPageSectionTitle() +
-                " [" + tocItem.getSectionTitle() + "]";
+                " [" + tocItem.getChapterTitle() + "]";
     }
 
     // each markup file may refer other files like code snippets or diagrams
@@ -820,13 +820,13 @@ public class WebSite implements Log {
         private Path footerPath;
         private Path extensionsDefPath;
         private Path globalReferencesPath;
-        private List<WebResource> webResources;
+        private final List<WebResource> webResources;
         private String id;
         private String title;
         private String type;
         private String fileWithLookupPaths;
         private String logoRelativePath;
-        private List<WebResource> registeredExtraJavaScripts;
+        private final List<WebResource> registeredExtraJavaScripts;
         private boolean isPreviewEnabled;
         private boolean isValidateExternalLinks;
         private String documentationType = MARKDOWN;
