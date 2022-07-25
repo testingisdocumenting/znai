@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,12 +19,13 @@ package org.testingisdocumenting.znai.search
 
 import org.testingisdocumenting.znai.structure.TocItem
 import org.junit.Test
+import org.testingisdocumenting.znai.structure.TocNameAndOpts
 
 class PageSearchEntriesTest {
     @Test
     void "should generate list representation of entries for local search indexer"() {
         def searchEntries = new PageSearchEntries(
-                new TocItem('dir-name', 'file-name'),
+                new TocItem(new TocNameAndOpts('dir-name'), 'file-name'),
                 [new PageSearchEntry('section one', SearchScore.STANDARD.text('hello world')),
                  new PageSearchEntry('section two', SearchScore.STANDARD.text('how is the weather')),
                 ])

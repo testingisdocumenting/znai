@@ -22,6 +22,7 @@ import org.junit.Test
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle
 import org.testingisdocumenting.znai.structure.TableOfContents
+import org.testingisdocumenting.znai.structure.TocNameAndOpts
 
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -41,7 +42,7 @@ class PageTocIncludePluginTest {
         TEST_COMPONENTS_REGISTRY.docStructure().setToc(toc)
 
         toc.addIndex("my doc")
-        def tocItem = toc.addTocItem("chapter-one", "page-one")
+        def tocItem = toc.addTocItem(new TocNameAndOpts("chapter-one"), "page-one")
         tocItem.setPageSectionIdTitles([
                 new PageSectionIdTitle("Section One", [:]),
                 new PageSectionIdTitle("Section Two", [:])

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +25,7 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 class TocItemTest {
     @Test
     void "should not allow special symbols in file name"() {
-        def okTocItem = new TocItem('dir-name', 'file-name')
+        def okTocItem = new TocItem(new TocNameAndOpts('dir-name'), 'file-name')
 
         shouldThrow('dir-name', 'fileName?')
         shouldThrow('dir-name?', 'fileName')
@@ -33,7 +34,7 @@ class TocItemTest {
 
     private static void shouldThrow(String dirName, String fileName) {
         code {
-            new TocItem(dirName, fileName)
+            new TocItem(new TocNameAndOpts(dirName), fileName)
         } should throwException(IllegalArgumentException)
     }
 }
