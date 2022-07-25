@@ -1,0 +1,1 @@
+* Add code snippets `class` color to be distinct from the regular text    
