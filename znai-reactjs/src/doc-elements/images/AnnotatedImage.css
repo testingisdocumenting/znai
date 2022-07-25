@@ -16,13 +16,38 @@
  */
 
 .znai-annotated-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "ttl"
+        "img"
+        "cor";
+
     margin-top: 30px;
     margin-bottom: 30px;
+
     overflow-x: auto;
     overflow-y: hidden;
+}
+
+.znai-annotated-image-container.center {
+    display: grid;
+    /* not using flex and justify-content center because it is not working with scroll: portion of image becomes hidden */
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        ". ttl ."
+        ". img ."
+        ". cor .";
+}
+
+.znai-annotated-image {
+    grid-area: img;
+}
+
+.znai-image-title-wrapper {
+    overflow: auto;
 }
 
 .znai-zoom-container .znai-annotated-image-container {
@@ -30,6 +55,8 @@
 }
 
 .znai-image-title {
+    grid-area: ttl;
+
     padding: 4px 16px;
     font-size: var(--znai-smaller-text-size);
 
@@ -45,9 +72,6 @@
 
     background-color: var(--znai-image-title-background-color);
     color: var(--znai-image-title-color);
-}
-
-.znai-annotated-image {
 }
 
 .znai-annotated-image.border {
@@ -67,10 +91,6 @@
 
 .znai-annotated-image-container.right {
     justify-content: flex-end;
-}
-
-.znai-annotated-image-container.center {
-    justify-content: center;
 }
 
 .znai-image-fit,

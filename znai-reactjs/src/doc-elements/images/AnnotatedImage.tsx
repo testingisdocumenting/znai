@@ -91,37 +91,55 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
 
   const annotations = new Annotations(shapes);
   const isScaledDown = scaleToUse < 1.0;
+  const isCentered = !align || align === "center";
 
   const containerClassName =
     "znai-annotated-image-container" +
+    (isCentered ? " center" : "") +
     (align ? " content-block " + align : "") +
+    (title ? " with-title" : "") +
     (fit ? " znai-image-fit" : "") +
     (isScaledDown ? " znai-image-scaled-down" : "");
 
   const imageClassName = "znai-annotated-image" + (border ? " border" : "");
 
-  const todo = updatedShapesTooltipBasedOnText();
+  const renderedImage = (
+    <div style={parentStyle} className={imageClassName} onClick={zoomImage}>
+      <div style={childContainerStyle}>
+        <img
+          alt="annotated"
+          src={imageSrc + imageAdditionalPreviewUrlParam(timestamp)}
+          width={imageWidth}
+          height={imageHeight}
+        />
+      </div>
+      <div style={childContainerStyle}>
+        <svg width={imageWidth} height={imageHeight} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+          {annotations.staticAnnotationsToRender(
+            updatedShapesTooltipBasedOnText(),
+            annotationToHighlightIdx,
+            scaleToUse
+          )}
+        </svg>
+      </div>
+    </div>
+  );
+
+  const renderedPaddedImage = isCentered ? (
+    <>
+      <div />
+      {renderedImage}
+      <div />
+    </>
+  ) : (
+    renderedImage
+  );
+
   return (
     <div className={containerClassName}>
-      <div>
-        {renderTitle()}
-        <div style={parentStyle} className={imageClassName} onClick={zoomImage}>
-          <div style={childContainerStyle}>
-            <img
-              alt="annotated"
-              src={imageSrc + imageAdditionalPreviewUrlParam(timestamp)}
-              width={imageWidth}
-              height={imageHeight}
-            />
-          </div>
-          <div style={childContainerStyle}>
-            <svg width={imageWidth} height={imageHeight} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-              {annotations.staticAnnotationsToRender(todo, annotationToHighlightIdx, scaleToUse)}
-            </svg>
-          </div>
-        </div>
-        {renderCoordinates()}
-      </div>
+      {renderTitle()}
+      {renderedPaddedImage}
+      {renderCoordinates()}
     </div>
   );
 
@@ -179,11 +197,16 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   }
 
   function renderTitle() {
-    if (!title) {
-      return null;
-    }
-
-    return <div className="znai-image-title">{title}</div>;
+    const renderedTitle = title ? <div className="znai-image-title">{title}</div> : <div />;
+    return isCentered ? (
+      <>
+        <div />
+        {renderedTitle}
+        <div />
+      </>
+    ) : (
+      renderedTitle
+    );
   }
 
   function handleMouseMove(e: React.MouseEvent<SVGElement>) {
@@ -211,10 +234,20 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
 
     const effectiveX = (k * mousePosition.x) | 0;
     const effectiveY = (k * mousePosition.y) | 0;
-    return (
+    const renderedCoord = (
       <div className="znai-image-preview-coordinates">
         preview coordinates, x: {effectiveX}; y: {effectiveY}
       </div>
+    );
+
+    return isCentered ? (
+      <>
+        <div />
+        {renderedCoord}
+        <div />
+      </>
+    ) : (
+      renderedCoord
     );
   }
 
