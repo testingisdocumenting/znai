@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,17 +28,17 @@ public class PlainTextTocGenerator implements TocGenerator {
 
     private static class Parser {
         public static final String INDENTATION = "    ";
-        private List<String> nestedLines;
-        private String currentSection;
-        private TableOfContents toc;
+        private final List<String> lines;
+        private TocNameAndOpts currentChapter;
+        private final TableOfContents toc;
 
         public Parser(final String nestedText) {
-            nestedLines = Arrays.asList(nestedText.replace("\r", "").split("\n"));
+            lines = Arrays.asList(nestedText.replace("\r", "").split("\n"));
             toc = new TableOfContents();
         }
 
         public TableOfContents parse() {
-            nestedLines.forEach(this::parse);
+            lines.forEach(this::parse);
             return toc;
         }
 
@@ -51,26 +52,26 @@ public class PlainTextTocGenerator implements TocGenerator {
             } else if (line.startsWith(" ")) {
                 handleSyntaxError();
             } else {
-                handleSectionEntry(trimmedLine);
+                handleChapterEntry(trimmedLine);
             }
         }
 
         private void handleSyntaxError() {
             throw new IllegalArgumentException(
                     "toc line should either start with " + INDENTATION.length() + " spaces to denote " +
-                            "section name, or start without spaces to denote page file name");
+                            "page file name, or start without spaces to denote chapter dir name");
         }
 
-        private void handleSectionEntry(final String trimmedLine) {
-            currentSection = trimmedLine;
+        private void handleChapterEntry(final String trimmedLine) {
+            currentChapter = new TocNameAndOpts(trimmedLine);
         }
 
         private void handlePageEntry(final String line) {
-            if (currentSection == null) {
+            if (currentChapter == null) {
                 throw new IllegalArgumentException(
-                        "section is not specified, use a line without indentation to specify a section");
+                        "chapter is not specified, use a line without indentation to specify a chapter");
             } else {
-                toc.addTocItem(currentSection, line);
+                toc.addTocItem(currentChapter, line);
             }
         }
     }

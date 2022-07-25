@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.parser.PageSectionIdTitle
 import org.testingisdocumenting.znai.core.DocMeta
 import org.testingisdocumenting.znai.structure.DocUrl
 import org.testingisdocumenting.znai.structure.TableOfContents
+import org.testingisdocumenting.znai.structure.TocNameAndOpts
 import org.testingisdocumenting.znai.website.markups.MarkdownParsingConfiguration
 import org.junit.Before
 import org.junit.BeforeClass
@@ -41,13 +42,13 @@ class WebSiteDocStructureTest {
     @BeforeClass
     static void init() {
         docMeta = new DocMeta([:])
-        docMeta.setId('product')
+        docMeta.setId("product")
 
         toc = new TableOfContents()
-        toc.addTocItem('chapter', 'pageOne')
-        toc.addTocItem('chapter', 'pageTwo')
+        toc.addTocItem(new TocNameAndOpts("chapter"), "pageOne")
+        toc.addTocItem(new TocNameAndOpts("chapter"), "pageTwo")
         toc.addIndex("Product")
-        toc.findTocItem('chapter', 'pageTwo').pageSectionIdTitles = [new PageSectionIdTitle ('Test Section', [:])]
+        toc.findTocItem("chapter", "pageTwo").pageSectionIdTitles = [new PageSectionIdTitle ("Test Section", [:])]
     }
 
     @Before

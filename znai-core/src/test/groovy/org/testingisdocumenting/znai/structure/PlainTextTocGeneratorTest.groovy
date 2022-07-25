@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,14 +29,27 @@ chapter1
 chapter2
     page-c""")
 
-        toc.toListOfMaps().should == [[sectionTitle: 'Chapter1', dirName: 'chapter1',
-                                       items       : [[sectionTitle       : 'Chapter1', pageTitle: 'Page A', fileName: 'page-a', dirName: 'chapter1',
+        toc.toListOfMaps().should == [[chapterTitle: 'Chapter1', dirName: 'chapter1',
+                                       items       : [[chapterTitle       : 'Chapter1', pageTitle: 'Page A', fileName: 'page-a', dirName: 'chapter1',
                                                        pageSectionIdTitles: [], pageMeta: [:], viewOnRelativePath: null],
-                                                      [sectionTitle       : 'Chapter1', pageTitle: 'Page B', fileName: 'page-b', dirName: 'chapter1',
+                                                      [chapterTitle       : 'Chapter1', pageTitle: 'Page B', fileName: 'page-b', dirName: 'chapter1',
                                                        pageSectionIdTitles: [], pageMeta: [:],  viewOnRelativePath: null]]],
-                                      [sectionTitle: 'Chapter2', dirName: 'chapter2',
+                                      [chapterTitle: 'Chapter2', dirName: 'chapter2',
                                        items       :
-                                               [[sectionTitle       : 'Chapter2', pageTitle: 'Page C', fileName: 'page-c', dirName: 'chapter2',
+                                               [[chapterTitle       : 'Chapter2', pageTitle: 'Page C', fileName: 'page-c', dirName: 'chapter2',
                                                  pageSectionIdTitles: [], pageMeta: [:],  viewOnRelativePath: null]]]]
+    }
+
+    @Test
+    void "should override chapter title"() {
+        def toc = new PlainTextTocGenerator().generate("""
+chapter1 
+    page-a
+    page-b
+chapter2 {title: "chapter TWO"}
+    page-c""")
+
+        def tocItem = toc.findTocItem("chapter2", "page-c")
+        tocItem.getChapterTitle().should == "chapter TWO"
     }
 }

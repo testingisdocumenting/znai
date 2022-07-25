@@ -31,8 +31,8 @@ public class TableOfContents {
         this.tocItems = new ArrayList<>();
     }
 
-    public TocItem addTocItem(String dirName, String fileNameWithoutExtension) {
-        TocItem tocItem = new TocItem(dirName, fileNameWithoutExtension);
+    public TocItem addTocItem(TocNameAndOpts chapter, String fileNameWithoutExtension) {
+        TocItem tocItem = new TocItem(chapter, fileNameWithoutExtension);
         tocItems.add(tocItem);
 
         return tocItem;
@@ -61,14 +61,14 @@ public class TableOfContents {
     }
 
     public void replaceTocItem(String originalDirName, String originalFileNameWithoutExtension,
-                               String newDirName, String newFileNameWithoutExtension) {
+                               TocNameAndOpts newChapter, String newFileNameWithoutExtension) {
         int idx = findTocItemIdx(originalDirName, originalFileNameWithoutExtension);
         if (idx == -1) {
             throw new IllegalArgumentException("can't find toc item: " +
                     originalDirName + "/" + originalFileNameWithoutExtension);
         }
 
-        tocItems.set(idx, new TocItem(newDirName, newFileNameWithoutExtension));
+        tocItems.set(idx, new TocItem(newChapter, newFileNameWithoutExtension));
     }
 
     public List<TocItem> detectNewTocItems(TableOfContents newToc) {
@@ -123,10 +123,10 @@ public class TableOfContents {
 
     public List<Map<String, Object>> toListOfMaps() {
         Map<String, List<TocItem>> bySectionTitle = tocItems.stream().collect(
-                groupingBy(TocItem::getSectionTitle, LinkedHashMap::new, toList()));
+                groupingBy(TocItem::getChapterTitle, LinkedHashMap::new, toList()));
 
         List<Map<String, Object>> result = new ArrayList<>();
-        bySectionTitle.forEach((sectionTitle, items) -> result.add(createSectionWithItems(sectionTitle, items)));
+        bySectionTitle.forEach((sectionTitle, items) -> result.add(createChapterWithItems(sectionTitle, items)));
 
         return result;
     }
@@ -141,14 +141,14 @@ public class TableOfContents {
         return -1;
     }
 
-    private Map<String, Object> createSectionWithItems(String sectionTitle, List<TocItem> items) {
+    private Map<String, Object> createChapterWithItems(String sectionTitle, List<TocItem> items) {
         Map<String, Object> result = new LinkedHashMap<>();
 
         if (items.isEmpty()) {
             return result;
         }
 
-        result.put("sectionTitle", sectionTitle);
+        result.put("chapterTitle", sectionTitle);
         result.put("dirName", items.iterator().next().getDirName());
         result.put("items", items.stream().map(TocItem::toMap).collect(toList()));
 

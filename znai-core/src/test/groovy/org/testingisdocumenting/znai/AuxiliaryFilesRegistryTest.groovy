@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +21,7 @@ import org.testingisdocumenting.znai.core.AuxiliaryFile
 import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry
 import org.testingisdocumenting.znai.structure.TocItem
 import org.junit.Test
+import org.testingisdocumenting.znai.structure.TocNameAndOpts
 
 import java.nio.file.Paths
 
@@ -28,7 +30,7 @@ class AuxiliaryFilesRegistryTest {
     void "deployment requirement of a file is never overridden"() {
         def registry = new AuxiliaryFilesRegistry()
 
-        def tocItem = new TocItem("", "")
+        def tocItem = new TocItem(new TocNameAndOpts(""), "")
         def path = Paths.get("thePath")
         def afRequiringDeployment = AuxiliaryFile.runTime(path, path)
         def afNotRequiringDeployment = AuxiliaryFile.builtTime(path)
@@ -49,19 +51,19 @@ class AuxiliaryFilesRegistryTest {
     void "maintains dependency between tocitem and auxiliary files"() {
         def registry = new AuxiliaryFilesRegistry()
 
-        def tocItemA = new TocItem("chapter-a", "page-one")
-        def tocItemB = new TocItem("chapter-b", "page-two")
+        def tocItemA = new TocItem(new TocNameAndOpts("chapter-a"), "page-one")
+        def tocItemB = new TocItem(new TocNameAndOpts("chapter-b"), "page-two")
 
         registry.updateFileAssociations(tocItemA, AuxiliaryFile.builtTime(Paths.get('/root/a1')))
         registry.updateFileAssociations(tocItemA, AuxiliaryFile.builtTime(Paths.get('/root/a2')))
         registry.updateFileAssociations(tocItemB, AuxiliaryFile.builtTime(Paths.get('/root/b1')))
         registry.updateFileAssociations(tocItemB, AuxiliaryFile.builtTime(Paths.get('/root/b2')))
 
-        def auxiliaryFilesA = registry.auxiliaryFilesByTocItem(new TocItem("chapter-a", "page-one"))
+        def auxiliaryFilesA = registry.auxiliaryFilesByTocItem(new TocItem(new TocNameAndOpts("chapter-a"), "page-one"))
         auxiliaryFilesA.path.size().should == 2
         auxiliaryFilesA.path*.toString().sort().should == ['/root/a1', '/root/a2']
 
-        def auxiliaryFilesB = registry.auxiliaryFilesByTocItem(new TocItem("chapter-b", "page-two"))
+        def auxiliaryFilesB = registry.auxiliaryFilesByTocItem(new TocItem(new TocNameAndOpts("chapter-b"), "page-two"))
         auxiliaryFilesB.path.size().should == 2
         auxiliaryFilesB.path*.toString().sort().should == ['/root/b1', '/root/b2']
     }

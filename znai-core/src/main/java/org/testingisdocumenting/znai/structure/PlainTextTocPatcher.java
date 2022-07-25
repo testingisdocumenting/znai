@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,16 +48,19 @@ public class PlainTextTocPatcher {
     }
 
     private void apply(String command, DirNameFileName arg1, DirNameFileName arg2) {
+        TocNameAndOpts chapter1 = new TocNameAndOpts(arg1.dirName);
+        TocNameAndOpts chapter2 = new TocNameAndOpts(arg2.dirName);
+
         switch (command) {
             case "remove":
                 toc.removeTocItem(arg1.dirName, arg1.fileName);
                 break;
             case "add":
-                toc.addTocItem(arg1.dirName, arg1.fileName);
+                toc.addTocItem(chapter1, arg1.fileName);
                 break;
             case "replace":
                 toc.replaceTocItem(arg1.dirName, arg1.fileName,
-                        arg2.dirName, arg2.fileName);
+                        chapter2, arg2.fileName);
                 break;
             default:
                 throw new IllegalArgumentException("unrecognized command: " + command);

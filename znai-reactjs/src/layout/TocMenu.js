@@ -90,7 +90,7 @@ const Section = ({section, selected, onTocItemClick, onTocItemPageSectionClick})
 
     return (
         <div className={className}>
-            <div className="title">{section.sectionTitle}</div>
+            <div className="title">{section.chapterTitle}</div>
             {section.items.map((item) => <Item key={item.fileName}
                                                item={item}
                                                selected={selected}
@@ -108,7 +108,7 @@ const TocMenu = ({toc, selected, onTocItemClick, onTocItemPageSectionClick}) => 
     return (
         <div className="toc-menu">
             {toc.filter(sectionEntry => sectionEntry.dirName.length > 0).map((sectionEntry) =>
-                <Section key={sectionEntry.sectionTitle}
+                <Section key={sectionEntry.chapterTitle}
                          selected={selected}
                          onTocItemClick={onTocItemClick}
                          onTocItemPageSectionClick={onTocItemPageSectionClick}

@@ -18,3 +18,14 @@ To keep things easy for future documentation owners, it's good practice to keep 
 * Need to use special characters in title
 * Want to avoid auto-capitalization
 
+# Chapter Names
+
+By default, a chapter name is derived from dir name. Dir name `my-chapter` becomes `My Chapter` chapter name.
+
+To override a chapter name, use `{title: "chapter title"}` inside `toc` file
+
+```text {title: "toc"}
+chapter-one {title: "Chapter ONE explicit"} 
+    structure
+    setup
+```
