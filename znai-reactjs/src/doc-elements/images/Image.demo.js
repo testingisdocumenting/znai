@@ -85,6 +85,7 @@ export function imageDemo(registry) {
     registry.add('badge alignment annotations', () => <AnnotatedImage {...badgeAlignment(450, 350)}/>)
     registry.add('badge alignment annotations inverted', () => <AnnotatedImage {...badgeAlignment(50, 350, true)}/>)
     registry.add('left aligned', () => <AnnotatedImage {...leftAlign()}/>)
+    registry.add('left aligned with title', () => <AnnotatedImage {...leftAlign()} title="my image"/>)
     registry.add('right aligned', () => <AnnotatedImage {...rightAlign()}/>)
     registry.add('left aligned and scaled down', () => (
       <>

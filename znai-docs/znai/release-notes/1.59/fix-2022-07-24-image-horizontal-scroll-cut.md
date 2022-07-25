@@ -1,0 +1,1 @@
+* Fix: Centered [Image](visuals/images) with horizontal scrollbar doesn't cut parts of image anymore    
