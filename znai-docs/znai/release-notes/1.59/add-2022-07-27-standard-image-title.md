@@ -1,0 +1,1 @@
+* Add title support for [Standard Markdown Image](visuals/images#standard-markdown)    

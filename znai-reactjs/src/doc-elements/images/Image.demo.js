@@ -25,11 +25,13 @@ import { TooltipRenderer } from "../../components/Tooltip";
 const [getBorder, setBorder] = simulateState(true);
 
 export function imageDemo(registry) {
-    registry.add('standard image', () => (
-        <div style={{width: 300, overflow: 'hidden'}}>
-            <elementsLibrary.DocElement content={[standardImage()]}
-                                        elementsLibrary={elementsLibrary}/>
-        </div>
+    registry.add('markdown image', () => (
+      <elementsLibrary.DocElement content={[markdownImage()]}
+                                  elementsLibrary={elementsLibrary}/>
+    ))
+    registry.add('markdown inline image', () => (
+      <elementsLibrary.DocElement content={markdownInlineImage()}
+                                  elementsLibrary={elementsLibrary}/>
     ))
     registry.add('with border', () => <AnnotatedImage {...standardImage()} border={true}/>)
     registry.add('with border and badge', () => <AnnotatedImage {...standardImage()} {...badgeAlignment(450, 350)} border={true}/>)
@@ -103,6 +105,32 @@ function standardImage() {
         height: 400,
         shapes: []
     }
+}
+
+function markdownImage() {
+    return {
+        type: 'Image',
+        destination: 'ui.jpg',
+        title: "image title",
+    }
+}
+
+function markdownInlineImage() {
+    return [
+        {
+            type: 'Paragraph',
+            content: [
+                {type: "SimpleText", text: "hello"},
+                {
+                    type: 'Image',
+                    destination: 'favicon.ico',
+                    title: "image title",
+                    inlined: true
+                },
+                {type: "SimpleText", text: "world"},
+            ]
+        }
+    ]
 }
 
 function fitImage() {

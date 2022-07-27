@@ -1,19 +1,27 @@
-# Markdown
+# Standard Markdown
 
 An image can be included using standard Markdown syntax.
 
-    ![alt text](regular-image.png)
+```markdown
+![alt text](regular-image.png)
+```
 
 ![alt text](regular-image.png)
+
+```markdown {title: "with title"}
+![alt text](castle.jpg "custom title")
+```
+
+![alt text](castle.jpg "custom title")
 
 # Extension
 
 `Znai` has `:include-image:` extension to provide additional features:
-* title
 * annotations
 * fit 
 * scale
 * alignment
+* border
 * presentation mode
 
 # Title
