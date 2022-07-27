@@ -37,12 +37,14 @@ export interface AnnotatedImageProps extends WithElementsLibrary {
   shapes: object[];
   width: number;
   height: number;
+  alt?: string;
   align?: string;
   title?: string;
   fit?: boolean;
   scale?: number;
   border?: boolean;
   timestamp?: number;
+  inlined?: boolean;
   shapesTooltipContent?: Array<{ placement: TooltipPlacement; content: any }>;
   annotationToHighlightIdx?: number;
 }
@@ -52,6 +54,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     imageSrc,
     width,
     height,
+    alt,
     title,
     shapes,
     align,
@@ -59,6 +62,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     scale,
     border,
     timestamp,
+    inlined,
     shapesTooltipContent,
     annotationToHighlightIdx,
     elementsLibrary,
@@ -68,6 +72,8 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
 
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: -1, y: -1 });
 
+  const sizeSpecified = width > 0;
+
   const scaledWidth = width * scaleToUse;
   const scaledHeight = height * scaleToUse;
 
@@ -76,12 +82,12 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
 
   const parentStyle: CSSProperties = {
     position: "relative",
-    width: scaledWidth + borderSizeAdjustment + "px",
-    height: scaledHeight + borderSizeAdjustment + "px",
+    width: sizeSpecified ? scaledWidth + borderSizeAdjustment + "px" : "auto",
+    height: sizeSpecified ? scaledHeight + borderSizeAdjustment + "px" : "auto",
   };
 
-  const imageWidth = scaledWidth + "px";
-  const imageHeight = scaledHeight + "px";
+  const imageWidth = sizeSpecified ? scaledWidth + "px" : "auto";
+  const imageHeight = sizeSpecified ? scaledHeight + "px" : "auto";
 
   const childContainerStyle: CSSProperties = {
     position: "absolute",
@@ -99,31 +105,12 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     (align ? " content-block " + align : "") +
     (title ? " with-title" : "") +
     (fit ? " znai-image-fit" : "") +
+    (inlined ? "  inlined" : "") +
     (isScaledDown ? " znai-image-scaled-down" : "");
 
   const imageClassName = "znai-annotated-image" + (border ? " border" : "");
 
-  const renderedImage = (
-    <div style={parentStyle} className={imageClassName} onClick={zoomImage}>
-      <div style={childContainerStyle}>
-        <img
-          alt="annotated"
-          src={imageSrc + imageAdditionalPreviewUrlParam(timestamp)}
-          width={imageWidth}
-          height={imageHeight}
-        />
-      </div>
-      <div style={childContainerStyle}>
-        <svg width={imageWidth} height={imageHeight} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-          {annotations.staticAnnotationsToRender(
-            updatedShapesTooltipBasedOnText(),
-            annotationToHighlightIdx,
-            scaleToUse
-          )}
-        </svg>
-      </div>
-    </div>
-  );
+  const renderedImage = renderImage();
 
   const renderedPaddedImage = isCentered ? (
     <>
@@ -142,6 +129,37 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
       {renderCoordinates()}
     </div>
   );
+
+  function renderImage() {
+    const image = (
+      <img
+        alt={alt}
+        src={imageSrc + imageAdditionalPreviewUrlParam(timestamp)}
+        width={imageWidth}
+        height={imageHeight}
+      />
+    );
+
+    // comes from a standard markdown syntax
+    if (!sizeSpecified) {
+      return image;
+    }
+
+    return (
+      <div style={parentStyle} className={imageClassName} onClick={zoomImage}>
+        <div style={childContainerStyle}>{image}</div>
+        <div style={childContainerStyle}>
+          <svg width={imageWidth} height={imageHeight} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+            {annotations.staticAnnotationsToRender(
+              updatedShapesTooltipBasedOnText(),
+              annotationToHighlightIdx,
+              scaleToUse
+            )}
+          </svg>
+        </div>
+      </div>
+    );
+  }
 
   function updatedShapesTooltipBasedOnText() {
     // may have empty elements when it comes from AnnotatedImageWithOrderedList

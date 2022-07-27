@@ -42,6 +42,11 @@
         ". cor .";
 }
 
+.znai-annotated-image-container.inlined {
+    display: inline-grid;
+    margin: 15px;
+}
+
 .znai-annotated-image {
     grid-area: img;
 }
