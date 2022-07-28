@@ -137,3 +137,10 @@ an HTTP call, extract JSON response and information about asserted fields to hig
   pathsFile: "weather-example/paths.json"
 }
 
+# Incomplete JSON
+
+All the features above require fully formed JSON. If you need only syntax highlighting use [include-file](snippets/external-code-snippets) plugin
+
+    :include-file: incomplete.json
+
+:include-file: incomplete.json 
