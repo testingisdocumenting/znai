@@ -23,6 +23,13 @@ import java.text.NumberFormat
 
 class StringUtilsTest {
     @Test
+    void "convert null as empty"() {
+        StringUtils.nullAsEmpty(null).should == ""
+        StringUtils.nullAsEmpty(20).should == "20"
+        StringUtils.nullAsEmpty("hello").should == "hello"
+    }
+
+    @Test
     void "should calculate max length on a line in multiline text"() {
         def maxLineLength = StringUtils.maxLineLength("""line #1
 line #_2
