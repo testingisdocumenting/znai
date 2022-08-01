@@ -21,14 +21,12 @@ import org.junit.BeforeClass
 import org.junit.Test
 import org.testingisdocumenting.znai.utils.ResourceUtils
 
-import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
-
 class OpenApiSpec3Test {
     static OpenApi3Spec spec
 
     @BeforeClass
     static void init() {
-        spec = OpenApi3Spec.parse(TEST_COMPONENTS_REGISTRY.markdownParser(), ResourceUtils.textContent("petstore-openapi3.json"))
+        spec = OpenApi3Spec.parse(ResourceUtils.textContent("petstore-openapi3.json"))
     }
 
     @Test
