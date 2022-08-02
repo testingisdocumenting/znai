@@ -29,6 +29,10 @@ public class StringUtils {
     private StringUtils() {
     }
 
+    public static String nullAsEmpty(Object v) {
+        return v == null ? "" : v.toString();
+    }
+
     public static int maxLineLength(String text) {
         return Arrays.stream(text.replace("\r", "").split("\n")).
                 map(String::length).

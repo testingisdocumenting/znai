@@ -2,6 +2,7 @@
 ../../znai-cli/src/main/java
 ../../znai-console/src/main/java
 ../../znai-console/src/test/groovy
+../../znai-open-api/src/test/resources
 ../../znai-jupyter
 ../../znai-testing-examples-junit5
 ../../znai-testing-examples-junit5/doc-artifacts

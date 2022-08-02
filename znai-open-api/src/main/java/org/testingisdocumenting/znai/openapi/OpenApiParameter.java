@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,12 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 public class OpenApiParameter {
-    private String name;
-    private String in;
-    private String type;
-    private boolean required;
-    private Map<String, ?> schema;
-    private List<Map<String, Object>> description;
+    private final String name;
+    private final String in;
+    private final String type;
+    private final boolean required;
+    private final Map<String, ?> schema;
+    private final List<Map<String, Object>> description;
 
     public OpenApiParameter(String name, String in, String type, boolean required,
                             Map<String, ?> schema,

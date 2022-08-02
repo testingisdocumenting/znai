@@ -10,6 +10,8 @@ Let's consider [Uber's API definition](https://github.com/OAI/OpenAPI-Specificat
     
 :include-open-api: open-api/uber.json {method: "get", path: "/v1/estimates/time"}
 
+[//]: # (:include-open-api3: petstore-openapi3.json {operationId: "getPetById"})
+
 Note: descriptions are treated as Markdown, using the [CommonMark](https://commonmark.org/help/) specification
 
 # Produces/Consumes

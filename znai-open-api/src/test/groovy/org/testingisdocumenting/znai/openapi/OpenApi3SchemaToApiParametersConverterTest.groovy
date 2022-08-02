@@ -1,0 +1,115 @@
+/*
+ * Copyright 2022 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.testingisdocumenting.znai.openapi
+
+import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PropsUtils
+import org.testingisdocumenting.znai.utils.JsonUtils
+
+class OpenApi3SchemaToApiParametersConverterTest {
+    @Test
+    void "convert object"() {
+        def root = new OpenApi3Schema("", "object", "root object")
+        root.properties.add(new OpenApi3Schema("name", "string", "user name"))
+        root.properties.add(new OpenApi3Schema("phone", "string", "user phone number"))
+
+        def apiParams = convertToMap(root)
+
+        apiParams.should == [
+                "parameters": [[
+                                       "name"       : "name",
+                                       "type"       : [[
+                                                               "text": "string",
+                                                               "url" : ""
+                                                       ]],
+                                       "anchorId"   : "testprefix_name",
+                                       "description": [[
+                                                               "text": "user name",
+                                                               "type": "testMarkdown"
+                                                       ]]
+                               ], [
+                                       "name"       : "phone",
+                                       "type"       : [[
+                                                               "text": "string",
+                                                               "url" : ""
+                                                       ]],
+                                       "anchorId"   : "testprefix_phone",
+                                       "description": [[
+                                                               "text": "user phone number",
+                                                               "type": "testMarkdown"
+                                                       ]]
+                               ]]
+        ]
+    }
+
+    @Test
+    void "convert array"() {
+        def root = new OpenApi3Schema("", "array", "people")
+        def person = new OpenApi3Schema("", "object", "person")
+        person.properties.add(new OpenApi3Schema("name", "string", "user name"))
+        person.properties.add(new OpenApi3Schema("phone", "string", "user phone number"))
+
+        root.items = person
+
+        def apiParams = convertToMap(root)
+        apiParams.should == [
+                "parameters" : [ [
+                                         "name" : "",
+                                         "type" : [ [
+                                                            "text" : "array of object",
+                                                            "url" : ""
+                                                    ] ],
+                                         "anchorId" : "testprefix_",
+                                         "description" : [ [
+                                                                   "text" : "people",
+                                                                   "type" : "testMarkdown"
+                                                           ] ],
+                                         "children" : [ [
+                                                                "name" : "name",
+                                                                "type" : [ [
+                                                                                   "text" : "string",
+                                                                                   "url" : ""
+                                                                           ] ],
+                                                                "anchorId" : "testprefix__name",
+                                                                "description" : [ [
+                                                                                          "text" : "user name",
+                                                                                          "type" : "testMarkdown"
+                                                                                  ] ]
+                                                        ], [
+                                                                "name" : "phone",
+                                                                "type" : [ [
+                                                                                   "text" : "string",
+                                                                                   "url" : ""
+                                                                           ] ],
+                                                                "anchorId" : "testprefix__phone",
+                                                                "description" : [ [
+                                                                                          "text" : "user phone number",
+                                                                                          "type" : "testMarkdown"
+                                                                                  ] ]
+                                                        ] ]
+                                 ] ]]
+    }
+
+    private static Map<String, ?> convertToMap(OpenApi3Schema root) {
+        def apiParameters = new OpenApi3SchemaToApiParametersConverter(new SchemaTestMarkdownParser(), "testprefix", root).convert()
+        def asMap = PropsUtils.exerciseSuppliers(apiParameters.toMap()) as Map<String, ?>
+
+        System.out.println(JsonUtils.serializePrettyPrint(asMap))
+
+        return asMap
+    }
+}
