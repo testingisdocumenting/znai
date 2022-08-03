@@ -26,7 +26,6 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.Map;
 
 public class ApiParametersFencePlugin implements FencePlugin {
     private ApiParameters apiParameters;
@@ -43,7 +42,7 @@ public class ApiParametersFencePlugin implements FencePlugin {
 
     @Override
     public PluginParamsDefinition parameters() {
-        return ApiParametersParams.definition;
+        return ApiParametersCommon.paramsDefinition;
     }
 
     @Override
@@ -52,12 +51,7 @@ public class ApiParametersFencePlugin implements FencePlugin {
                 pluginParams.getOpts().get("anchorPrefix", ""),
                 componentsRegistry.markdownParser(), content);
 
-        ApiParametersAnchors.registerLocalAnchors(componentsRegistry, markupPath, apiParameters);
-
-        Map<String, Object> props = apiParameters.toMap();
-        props.putAll(pluginParams.getOpts().toMap());
-
-        return PluginResult.docElement("ApiParameters", props);
+        return ApiParametersCommon.pluginResult(apiParameters, componentsRegistry, pluginParams, markupPath);
     }
 
     @Override

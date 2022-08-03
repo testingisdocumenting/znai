@@ -57,6 +57,8 @@
     --znai-light-black: #666;
     --znai-brand-primary-color: var(--znai-color-blue);
 
+    --znai-expand-collaps-color: var(--znai-brand-primary-color);
+
     --znai-link-color: var(--znai-brand-primary-color);
     --znai-link-decoration: underline;
 

@@ -59,7 +59,7 @@
 }
 
 .znai-api-param-type-and-toggle > .expand-toggle {
-    color: var(--znai-brand-primary-color);
+    color: var(--znai-expand-collaps-color);
 
     width: 10px;
     padding: 0 10px;

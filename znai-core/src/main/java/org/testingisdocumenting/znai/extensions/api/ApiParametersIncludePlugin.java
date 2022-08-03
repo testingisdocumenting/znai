@@ -29,7 +29,6 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.Map;
 import java.util.stream.Stream;
 
 public class ApiParametersIncludePlugin implements IncludePlugin {
@@ -48,7 +47,7 @@ public class ApiParametersIncludePlugin implements IncludePlugin {
 
     @Override
     public PluginParamsDefinition parameters() {
-        return ApiParametersParams.definition;
+        return ApiParametersCommon.paramsDefinition;
     }
 
     @Override
@@ -61,12 +60,7 @@ public class ApiParametersIncludePlugin implements IncludePlugin {
                 componentsRegistry.markdownParser(),
                 resourcesResolver.textContent(fullPath));
 
-        ApiParametersAnchors.registerLocalAnchors(componentsRegistry, markupPath, apiParameters);
-
-        Map<String, Object> props = apiParameters.toMap();
-        props.putAll(pluginParams.getOpts().toMap());
-
-        return PluginResult.docElement("ApiParameters", props);
+        return ApiParametersCommon.pluginResult(apiParameters, componentsRegistry, pluginParams, markupPath);
     }
 
     @Override
