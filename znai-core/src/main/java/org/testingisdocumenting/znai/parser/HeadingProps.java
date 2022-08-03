@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.parser;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,8 +26,17 @@ import java.util.Map;
  */
 public class HeadingProps {
     public static HeadingProps EMPTY = new HeadingProps(Collections.emptyMap());
+    public static HeadingProps STYLE_API = new HeadingProps(Collections.singletonMap("style", "api"));
 
     private final Map<String, ?> props;
+
+    public static HeadingProps styleApiWithBadge(String badgeText) {
+        Map<String, Object> props = new HashMap<>();
+        props.put("badge", badgeText);
+        props.put("style", "api");
+
+        return new HeadingProps(props);
+    }
 
     public HeadingProps(Map<String, ?> props) {
         this.props = props;

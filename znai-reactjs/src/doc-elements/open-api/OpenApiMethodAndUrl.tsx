@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.openapi;
+import React from "react";
 
-public class OpenApi3Request {
-    private final String description;
+import "./OpenApiMethodAndUrl.css";
 
-    private final OpenApi3Content content;
+interface Props {
+  method: string;
+  url: string;
+}
 
-    public OpenApi3Request(String description, OpenApi3Content content) {
-        this.description = description;
-        this.content = content;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public OpenApi3Content getContent() {
-        return content;
-    }
+export function OpenApiMethodAndUrl({ method, url }: Props) {
+  return (
+    <div className="znai-open-api-method-and-url content-block">
+      <div className="znai-open-api-method">{method}</div>
+      <div className="znai-open-api-url">{url}</div>
+    </div>
+  );
 }

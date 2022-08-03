@@ -110,6 +110,7 @@ public class OpenApi3Spec {
 
         parsedResponses.forEach((code, parsedResponse) -> {
             OpenApi3Response response = new OpenApi3Response(
+                    code,
                     parsedResponse.getDescription(),
                     convertContent(parsedResponse.getContent()));
             operation.addResponse(response);

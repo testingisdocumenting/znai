@@ -28,10 +28,8 @@ import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
-import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -40,7 +38,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DoxygenCompoundIncludePlugin implements IncludePlugin {
-    private static final HeadingProps headingProps = new HeadingProps(Collections.singletonMap("style", "api"));
     private DoxygenCompound compound;
     private ComponentsRegistry componentsRegistry;
     private ParserHandler parserHandler;
@@ -73,8 +70,7 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
         }
 
         parserHandler.onGlobalAnchor(compound.getId());
-        parserHandler.onSectionStart(compound.getName(),
-                new HeadingProps(CollectionUtils.createMap("badge", compound.getKind(), "style", "api")));
+        parserHandler.onSectionStart(compound.getName(), HeadingProps.styleApiWithBadge(compound.getKind()));
 
         insertDocs(fullName);
 
@@ -84,7 +80,7 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
         declBlock("Static Public Attributes", compound.publicStaticAttributesStream());
         declBlock("Protected Functions", compound.protectedFunctionsStream());
 
-        parserHandler.onSubHeading(3, "Definitions", headingProps);
+        parserHandler.onSubHeading(3, "Definitions", HeadingProps.STYLE_API);
         compound.publicNonStaticFunctionsStream().forEach(this::createMemberDef);
         compound.publicStaticFunctionsStream().forEach(this::createMemberDef);
         compound.publicNonStaticAttributesStream().forEach(this::createMemberDef);
@@ -110,7 +106,7 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
             return;
         }
 
-        parserHandler.onSubHeading(3, name, headingProps);
+        parserHandler.onSubHeading(3, name, HeadingProps.STYLE_API);
         members.forEach(this::createMemberDecl);
     }
 
@@ -136,7 +132,7 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
     }
 
     private void createMemberDef(DoxygenMember member) {
-        parserHandler.onSubHeading(4, member.getName(), headingProps);
+        parserHandler.onSubHeading(4, member.getName(), HeadingProps.STYLE_API);
 
         IncludePlugin includePlugin = DoxygenMemberIncludePlugin.createMemberPlugin();
         PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, markupPath,

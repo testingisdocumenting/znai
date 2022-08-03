@@ -33,4 +33,8 @@ public class OpenApi3Content {
     public Map<String, OpenApi3Schema> getByMimeType() {
         return byMimeType;
     }
+
+    public boolean isEmpty() {
+        return byMimeType.isEmpty();
+    }
 }

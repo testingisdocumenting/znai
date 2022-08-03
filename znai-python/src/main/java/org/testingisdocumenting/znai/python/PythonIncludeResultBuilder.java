@@ -29,7 +29,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 class PythonIncludeResultBuilder {
-    private static final HeadingProps entryNameHeadingProps = new HeadingProps(Collections.singletonMap("style", "api"));
+    private static final HeadingProps entryNameHeadingProps = HeadingProps.STYLE_API;
 
     enum NameRenderOpt {
         FULL_NAME,
@@ -70,8 +70,7 @@ class PythonIncludeResultBuilder {
     public void addClassHeader() {
         String globalAnchorId = PythonUtils.globalAnchorId(qualifiedName);
         parserHandler.onGlobalAnchor(globalAnchorId);
-        parserHandler.onSectionStart(qualifiedName,
-                new HeadingProps(CollectionUtils.createMap("badge", "class", "style", "api")));
+        parserHandler.onSectionStart(qualifiedName, HeadingProps.styleApiWithBadge("class"));
     }
 
     public void addSubSection(String title) {
