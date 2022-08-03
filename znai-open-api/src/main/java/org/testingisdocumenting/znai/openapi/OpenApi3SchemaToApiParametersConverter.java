@@ -58,7 +58,10 @@ public class OpenApi3SchemaToApiParametersConverter {
 
     private void handleArraySchema(ApiParameter parent, OpenApi3Schema schema) {
         ApiParameter newParent = addParameter(parent, schema);
-        handleSchema(newParent, schema.getItems());
+        OpenApi3Schema items = schema.getItems();
+        if (items.getType().equals("object")) {
+            handleSchema(newParent, items);
+        }
     }
 
     private void handleGenericSchema(ApiParameter parent, OpenApi3Schema schema) {

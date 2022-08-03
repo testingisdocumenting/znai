@@ -85,6 +85,7 @@ import { AnnotatedImageWithOrderedList } from "./images/AnnotatedImageWithOrdere
 import { OrderedList } from "./default-elements/OrderedList";
 import { PythonMethod } from "./python/PythonMethod";
 import { ApiLinkedTextBlock } from "./api/ApiLinkedTextBlock";
+import { OpenApiMethodAndUrl } from "./open-api/OpenApiMethodAndUrl";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -216,6 +217,7 @@ library.JupyterCell = JupyterCell
 
 library.WebTauRest = WebTauRest
 
+library.OpenApiMethodAndUrl = OpenApiMethodAndUrl
 library.OpenApiOperation = OpenApiOperation
 library.DiagramLegend = DiagramLegend
 

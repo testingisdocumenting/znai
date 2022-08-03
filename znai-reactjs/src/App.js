@@ -97,6 +97,7 @@ import { smartBulletListsDemo } from "./doc-elements/bullets/SmarlBulletList.dem
 import { tooltipDemo } from "./components/Tooltip.demo";
 import { annotatedImageWithOrderedListDemo } from "./doc-elements/images/AnnotatedImageWithOrderedList.demo";
 import { pythonMethodDemo } from "./doc-elements/python/PythonMethod.demo";
+import { openApiAndMethodAndUrlDemo } from "./doc-elements/open-api/OpenApiAndMethodAndUrl.demo";
 
 const docMeta = {
     id: 'preview',
@@ -146,6 +147,7 @@ registries.add('snippets')
     .registerAsGrid('API Parameters', 0, apiParametersDemo)
     .registerAsGrid('Open API', 0, openApiOperationDemo)
     .registerAsGrid('Open API Schema', 0, openApiSchemaDemo)
+    .registerAsGrid('Open API Url', 0, openApiAndMethodAndUrlDemo)
     .registerAsGrid('Jupyter', 0, jupyterDemo)
     .registerAsGrid('CLI Command', 0, cliCommandDemo)
     .registerAsGrid('CLI Output', 0, cliOutputDemo)

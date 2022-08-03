@@ -22,12 +22,16 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
+import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OpenApi3IncludePlugin implements IncludePlugin {
@@ -59,27 +63,108 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
         String specContent = componentsRegistry.resourceResolver().textContent(specPath);
 
         spec = OpenApi3Spec.parse(specContent);
-        operation = spec.findById(pluginParams.getOpts().get("operationId"));
 
-        renderDescription();
+        findOperation(pluginParams);
+
+        renderSection();
+        renderUrl();
+        renderDescription(operation.getDescription());
         renderParameters();
+        renderRequests();
+        renderResponses();
 
         return PluginResult.docElements(Stream.empty());
     }
 
-    private void renderDescription() {
-        DocElement docElement = openApiMarkdownParser.docElementFromDescription(operation.getDescription());
+    private void findOperation(PluginParams pluginParams) {
+        String operationId = pluginParams.getOpts().get("operationId");
+        operation = spec.findById(operationId);
+
+        if (operation == null) {
+            throw new IllegalArgumentException("can't find openapi operation: " + operationId);
+        }
+    }
+
+    private void renderSection() {
+        parserHandler.onSectionStart(operation.getSummary(), HeadingProps.EMPTY);
+    }
+
+    private void renderUrl() {
+        parserHandler.onCustomNode("OpenApiMethodAndUrl", CollectionUtils.createMap("method", operation.getMethod(), "url", operation.getPath()));
+    }
+
+    private void renderRequests() {
+        if (operation.getRequest() == null) {
+            return;
+        }
+
+        parserHandler.onSubHeading(2, "Request", HeadingProps.STYLE_API);
+        renderDescription(operation.getRequest().getDescription());
+        renderContent(operation.getRequest().getContent());
+    }
+
+    private void renderResponses() {
+        if (operation.getResponses().isEmpty()) {
+            return;
+        }
+
+        parserHandler.onSubHeading(2, renderResponsesTitle(), HeadingProps.STYLE_API);
+
+        for (OpenApi3Response response : operation.getResponses()) {
+            parserHandler.onSubHeading(4, response.getCode(), HeadingProps.STYLE_API);
+            renderDescription(response.getDescription());
+
+            renderContent(response.getContent());
+        }
+    }
+
+    private String renderResponsesTitle() {
+        return "Response" + (operation.getResponses().size() > 1 ? "s" : "");
+    }
+
+    private void renderContent(OpenApi3Content content) {
+        Map<String, OpenApi3Schema> byMimeType = content.getByMimeType();
+        byMimeType.forEach(this::renderSchema);
+    }
+
+    private void renderDescription(String description) {
+        DocElement docElement = openApiMarkdownParser.docElementFromDescription(description);
         docElement.getContent().forEach(parserHandler::onDocElement);
     }
 
     private void renderParameters() {
         List<OpenApi3Parameter> parameters = operation.getParameters();
+        renderParametersWithTitle(parameters.stream().filter(p -> p.getIn().equals("path")), "path parameters");
+        renderParametersWithTitle(parameters.stream().filter(p -> p.getIn().equals("query")), "query parameters");
+    }
+
+    private void renderParametersWithTitle(Stream<OpenApi3Parameter> parametersStream, String title) {
+        List<OpenApi3Parameter> parameters = parametersStream.collect(Collectors.toList());
         if (parameters.isEmpty()) {
             return;
         }
 
-        ApiParameters apiParameters = new OpenApi3ParametersToApiParametersConverter(openApiMarkdownParser, operation.getId(), parameters).convert();
-        parserHandler.onCustomNode("ApiParameters", apiParameters.toMap());
+        ApiParameters apiParameters = new OpenApi3ParametersToApiParametersConverter(
+                openApiMarkdownParser,
+                operation.getId(),
+                parameters).convert();
+
+        Map<String, Object> props = apiParameters.toMap();
+        props.put("title", title);
+
+        parserHandler.onCustomNode("ApiParameters", props);
+    }
+
+    private void renderSchema(String mimeType, OpenApi3Schema schema) {
+        ApiParameters apiParameters = new OpenApi3SchemaToApiParametersConverter(
+                openApiMarkdownParser,
+                operation.getId() + mimeType,
+                schema).convert();
+
+        Map<String, Object> props = apiParameters.toMap();
+        props.put("title", mimeType);
+
+        parserHandler.onCustomNode("ApiParameters", props);
     }
 
     @Override

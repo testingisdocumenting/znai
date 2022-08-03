@@ -57,7 +57,7 @@ class OpenApi3SchemaToApiParametersConverterTest {
     }
 
     @Test
-    void "convert array"() {
+    void "convert array of object"() {
         def root = new OpenApi3Schema("", "array", "people")
         def person = new OpenApi3Schema("", "object", "person")
         person.properties.add(new OpenApi3Schema("name", "string", "user name"))
@@ -102,6 +102,32 @@ class OpenApi3SchemaToApiParametersConverterTest {
                                                                                   ] ]
                                                         ] ]
                                  ] ]]
+    }
+
+    @Test
+    void "convert array of string"() {
+        def root = new OpenApi3Schema("", "object", "people")
+        def telephoneList = new OpenApi3Schema("telephone", "array", "people")
+        def telephone = new OpenApi3Schema("", "string", "telephone")
+
+        root.properties.add(telephoneList)
+        telephoneList.items = telephone
+
+        def apiParams = convertToMap(root)
+        apiParams.should == [
+                "parameters" : [ [
+                                         "name" : "telephone",
+                                         "type" : [ [
+                                                            "text" : "array of string",
+                                                            "url" : ""
+                                                    ] ],
+                                         "anchorId" : "testprefix_telephone",
+                                         "description" : [ [
+                                                                   "text" : "people",
+                                                                   "type" : "testMarkdown"
+                                                           ] ]
+                                 ] ]
+        ]
     }
 
     private static Map<String, ?> convertToMap(OpenApi3Schema root) {

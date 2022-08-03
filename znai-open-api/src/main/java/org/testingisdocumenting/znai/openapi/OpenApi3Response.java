@@ -17,12 +17,18 @@
 package org.testingisdocumenting.znai.openapi;
 
 public class OpenApi3Response {
+    private final String code;
     private final String description;
     private final OpenApi3Content content;
 
-    public OpenApi3Response(String description, OpenApi3Content content) {
+    public OpenApi3Response(String code, String description, OpenApi3Content content) {
+        this.code = code;
         this.description = description;
         this.content = content;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public String getDescription() {

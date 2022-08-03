@@ -12,6 +12,8 @@ Let's consider [Uber's API definition](https://github.com/OAI/OpenAPI-Specificat
 
 [//]: # (:include-open-api3: petstore-openapi3.json {operationId: "getPetById"})
 
+[//]: # (:include-open-api3: petstore-openapi3.json {operationId: "updatePet"})
+
 Note: descriptions are treated as Markdown, using the [CommonMark](https://commonmark.org/help/) specification
 
 # Produces/Consumes
