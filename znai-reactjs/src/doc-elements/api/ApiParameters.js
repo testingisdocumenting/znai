@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { useState } from "react";
 import ApiParameter from "./ApiParameter";
 
 import "./ApiParameters.css";
@@ -28,19 +28,24 @@ export default function ApiParameters({
                                         small,
                                         noWrap,
                                         wide,
+                                        collapsible,
+                                        collapsed,
                                         parentWidth = 0,
                                         elementsLibrary
                                       }) {
-  const renderedParameters = (parameters || []).map(p => <ApiParameter key={p.name}
-                                                                       anchorId={p.anchorId}
-                                                                       name={p.name}
-                                                                       type={p.type}
-                                                                       isExpanded={false}
-                                                                       children={p.children}
-                                                                       description={p.description}
-                                                                       nestedLevel={nestedLevel}
-                                                                       references={references}
-                                                                       elementsLibrary={elementsLibrary} />);
+  const [userDrivenCollapsed, setUserDrivenCollapsed] = useState(collapsed);
+
+  const renderedParameters = userDrivenCollapsed ? null :
+    (parameters || []).map(p => <ApiParameter key={p.name}
+                                              anchorId={p.anchorId}
+                                              name={p.name}
+                                              type={p.type}
+                                              isExpanded={false}
+                                              children={p.children}
+                                              description={p.description}
+                                              nestedLevel={nestedLevel}
+                                              references={references}
+                                              elementsLibrary={elementsLibrary} />);
 
   const isNested = nestedLevel > 0;
   const containerClass = !isNested ? (wide ? " wide" : " content-block") : "";
@@ -53,7 +58,7 @@ export default function ApiParameters({
 
   const rendered = (
     <div className={className} style={style}>
-      <ApiParametersTitle title={title} nestedLevel={nestedLevel} />
+      <ApiParametersTitle title={title} nestedLevel={nestedLevel} collapsible={collapsible} collapsed={userDrivenCollapsed} collapseToggle={collapseToggle}/>
       {renderedParameters}
     </div>
   );
@@ -67,15 +72,22 @@ export default function ApiParameters({
   }
 
   return rendered
+
+  function collapseToggle() {
+    setUserDrivenCollapsed(prev => !prev)
+  }
 }
 
-function ApiParametersTitle({ title, nestedLevel }) {
+function ApiParametersTitle({ title, nestedLevel, collapsible, collapsed, collapseToggle}) {
   if (!title || nestedLevel > 0) {
     return null;
   }
 
   return (
     <div className="znai-api-parameters-title-cell">
+      {collapsible && (<div className="znai-api-parameters-collapse-toggle"
+                            onClick={collapseToggle}>{collapsed ? "+" : "-"}</div>)}
+
       <div className="znai-api-parameters-title">
         {title}
       </div>

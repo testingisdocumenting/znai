@@ -104,6 +104,12 @@ export function apiParametersDemo(registry) {
       .add('flat parameters with title', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition"/>
       ))
+      .add('collapsible requires title', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" collapsible={true}/>
+      ))
+      .add('collapsible collapsed by default', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" collapsible={true} collapsed={true}/>
+      ))
       .add('flat parameters with long description', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongDescriptionParameters}/>
       ))

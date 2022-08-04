@@ -1,0 +1,1 @@
+* Add [collapsible](snippets/api-parameters#collapsing-parameters) option to [API Parameters](snippets/api-parameters)   
