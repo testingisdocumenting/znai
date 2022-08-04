@@ -31,6 +31,8 @@ export interface WithElementsLibrary {
 
 export interface DocElementProps extends WithElementsLibrary {
   content: DocElementContent;
+  next?: DocElementPayload;
+  prev?: DocElementPayload;
 }
 
 /**
@@ -56,7 +58,13 @@ export function DocElement({ content, elementsLibrary }: DocElementProps) {
       console.warn("can't find component to display: " + JSON.stringify(contentProvider.peekCurrent()));
     } else {
       renderedElements.push(
-        <ElementToUse key={contentProvider.idx} {...propsToUse} elementsLibrary={elementsLibrary} />
+        <ElementToUse
+          key={contentProvider.idx}
+          {...propsToUse}
+          prev={contentProvider.peekPrev()}
+          next={contentProvider.peekNext()}
+          elementsLibrary={elementsLibrary}
+        />
       );
     }
 
@@ -68,6 +76,7 @@ export function DocElement({ content, elementsLibrary }: DocElementProps) {
 
 interface ContentProvider {
   peekCurrent(): DocElementPayload | undefined;
+  peekPrev(): DocElementPayload | undefined;
   peekNext(): DocElementPayload | undefined;
 }
 
@@ -82,6 +91,10 @@ class ElementsContentProvider implements ContentProvider {
 
   peekNext(): DocElementPayload | undefined {
     return this.idx === this.content.length - 1 ? undefined : this.content[this.idx + 1];
+  }
+
+  peekPrev(): DocElementPayload | undefined {
+    return this.idx === 0 ? undefined : this.content[this.idx - 1];
   }
 
   advance(step: number) {
