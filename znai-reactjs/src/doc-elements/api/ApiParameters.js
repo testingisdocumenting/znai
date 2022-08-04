@@ -31,6 +31,8 @@ export default function ApiParameters({
                                         collapsible,
                                         collapsed,
                                         parentWidth = 0,
+                                        next,
+                                        prev,
                                         elementsLibrary
                                       }) {
   const [userDrivenCollapsed, setUserDrivenCollapsed] = useState(collapsed);
@@ -48,7 +50,6 @@ export default function ApiParameters({
                                               elementsLibrary={elementsLibrary} />);
 
   const isNested = nestedLevel > 0;
-  const containerClass = !isNested ? (wide ? " wide" : " content-block") : "";
   const className = "znai-api-parameters" +
     (isNested ? " nested" : "") +
     (small ? " small" : "") +
@@ -63,9 +64,14 @@ export default function ApiParameters({
     </div>
   );
 
-  if (containerClass) {
+  if (!isNested) {
+    const containerClass = "znai-api-parameters-wrapper " +
+      (wide ? "wide" : "content-block") +
+      (next?.type === "ApiParameters" ? " no-bottom-margin" : "") +
+      (prev?.type === "ApiParameters" ? " no-top-margin" : "")
+
     return (
-      <div className={"znai-api-parameters-wrapper" + containerClass}>
+      <div className={containerClass}>
         {rendered}
       </div>
     )

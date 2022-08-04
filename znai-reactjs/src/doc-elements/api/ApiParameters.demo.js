@@ -142,6 +142,9 @@ export function apiParametersDemo(registry) {
       .add('with text around wide mode', () => (
         <DocElement content={apiParametersFullContent()} elementsLibrary={elementsLibrary}/>
       ))
+      .add('multiple api parameters', () => (
+        <DocElement content={multipleApiParameters()} elementsLibrary={elementsLibrary}/>
+      ))
       .add('with text around and title', () => (
         <div className="content-block">
             <ParagraphText/>
@@ -192,11 +195,70 @@ function createPersonParameters(anchorPrefix) {
 function apiParametersFullContent() {
   return [
     {
+      type: "Paragraph",
+      content: [
+        {
+          type: "SimpleText",
+          text: "hello world"
+        }
+      ]
+    },
+    {
       type: "ApiParameters",
       parameters: longNameParameters,
       wide: true,
       noWrap: true,
       title: "my params"
+    },
+    {
+      type: "Paragraph",
+      content: [
+        {
+          type: "SimpleText",
+          text: "hello world"
+        }
+      ]
+    }
+  ]
+}
+
+function multipleApiParameters() {
+  return [
+    {
+      type: "Paragraph",
+      content: [
+        {
+          type: "SimpleText",
+          text: "hello world"
+        }
+      ]
+    },
+    {
+      type: "ApiParameters",
+      parameters: longNameParameters,
+      noWrap: true,
+      title: "my params"
+    },
+    {
+      type: "ApiParameters",
+      parameters: longNameParameters,
+      noWrap: true,
+      title: "my params"
+    },
+    {
+      type: "ApiParameters",
+      parameters: longNameParameters,
+      noWrap: true,
+      title: "my params"
+    },
+    {
+      type: "Paragraph",
+      content: [
+        {
+          type: "SimpleText",
+          text: "hello world"
+        }
+      ]
     }
   ]
 }
