@@ -29,9 +29,12 @@ import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class OpenApi3IncludePlugin implements IncludePlugin {
@@ -123,8 +126,26 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
     }
 
     private void renderContent(OpenApi3Content content) {
+        if (content.getByMimeType().isEmpty()) {
+            return;
+        }
+
+        List<SchemaWithCollapsed> schemasWithCollapsed = new ArrayList<>();
+
         Map<String, OpenApi3Schema> byMimeType = content.getByMimeType();
-        byMimeType.forEach(this::renderSchema);
+        byMimeType.forEach((mimeType, schema) -> schemasWithCollapsed.add(new SchemaWithCollapsed(mimeType, schema, true)));
+
+        int jsonIdx = IntStream.range(0, schemasWithCollapsed.size())
+                .filter(idx -> schemasWithCollapsed.get(idx).mimeType.equals("application/json"))
+                .findFirst().orElse(-1);
+
+        if (jsonIdx != -1) {
+            Collections.swap(schemasWithCollapsed, jsonIdx, 0);
+        }
+
+        schemasWithCollapsed.get(0).collapsed = false;
+
+        schemasWithCollapsed.forEach(this::renderSchema);
     }
 
     private void renderDescription(String description) {
@@ -151,18 +172,21 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
 
         Map<String, Object> props = apiParameters.toMap();
         props.put("title", title);
+        props.put("collapsible", true);
 
         parserHandler.onCustomNode("ApiParameters", props);
     }
 
-    private void renderSchema(String mimeType, OpenApi3Schema schema) {
+    private void renderSchema(SchemaWithCollapsed schemaWithCollapsed) {
         ApiParameters apiParameters = new OpenApi3SchemaToApiParametersConverter(
                 openApiMarkdownParser,
-                operation.getId() + mimeType,
-                schema).convert();
+                operation.getId() + schemaWithCollapsed.mimeType,
+                schemaWithCollapsed.schema).convert();
 
         Map<String, Object> props = apiParameters.toMap();
-        props.put("title", mimeType);
+        props.put("title", schemaWithCollapsed.mimeType);
+        props.put("collapsible", true);
+        props.put("collapsed", schemaWithCollapsed.collapsed);
 
         parserHandler.onCustomNode("ApiParameters", props);
     }
@@ -170,5 +194,17 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(specPath));
+    }
+
+    private static class SchemaWithCollapsed {
+        private final String mimeType;
+        private final OpenApi3Schema schema;
+        private boolean collapsed;
+
+        private SchemaWithCollapsed(String mimeType, OpenApi3Schema schema, boolean collapsed) {
+            this.mimeType = mimeType;
+            this.schema = schema;
+            this.collapsed = collapsed;
+        }
     }
 }
