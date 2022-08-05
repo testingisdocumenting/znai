@@ -37,12 +37,14 @@ export default function ApiParameters({
                                       }) {
   const [userDrivenCollapsed, setUserDrivenCollapsed] = useState(collapsed);
 
+  const isExpanded = !nestedLevel && parameters.length === 1;
+
   const renderedParameters = userDrivenCollapsed ? null :
     (parameters || []).map(p => <ApiParameter key={p.name}
                                               anchorId={p.anchorId}
                                               name={p.name}
                                               type={p.type}
-                                              isExpanded={false}
+                                              isExpanded={isExpanded}
                                               children={p.children}
                                               description={p.description}
                                               nestedLevel={nestedLevel}
