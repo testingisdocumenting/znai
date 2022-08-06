@@ -1,0 +1,1 @@
+* [API Parameters](snippets/api-parameters) expand nested by default when single root parameter
