@@ -28,7 +28,7 @@ class OpenApiSpec3Test {
 
     @BeforeClass
     static void init() {
-        spec = OpenApi3Spec.parse(ResourceUtils.textContent("petstore-openapi3.json"))
+        spec = OpenApi3Spec.parse(ResourceUtils.textContent("test-openapi3.json"))
     }
 
     @Test
@@ -57,28 +57,12 @@ class OpenApiSpec3Test {
                          "children": [
                                  ["name": "", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
                                   "children": [
-                                          ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                          ["name": "username", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_username", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                          ["name": "firstName", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_firstName", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                          ["name": "lastName", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_lastName", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                          ["name": "email", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_email", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                          ["name": "password", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_password", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                          ["name": "phone", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_phone", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                          ["name": "userStatus", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_userStatus", "description": [ ["text": "User Status", "type": "testMarkdown"] ]] ]],
+                                          ["name": "id", "type": [ ["text": "integer(int64)", "url": ""] ], "anchorId": "testprefix_id", "description": [ ["text": "*Example*: `10`", "type": "testMarkdown"] ]],
+                                          ["name": "username", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_username", "description": [ ["text": "*Example*: `theUser`", "type": "testMarkdown"] ]] ]],
                                  ["name": "", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
                                   "children": [
-                                          ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_id", "description": [ ["text": "unique identifier", "type": "testMarkdown"] ]],
-                                          ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                          ["name": "category", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix_category", "description": [ ["text": "", "type": "testMarkdown"] ],
-                                           "children": [
-                                                   ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_category_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                                   ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_category_name", "description": [ ["text": "", "type": "testMarkdown"] ]] ]],
-                                          ["name": "photoUrls", "type": [ ["text": "array of string", "url": ""] ], "anchorId": "testprefix_photoUrls", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                          ["name": "tags", "type": [ ["text": "array of object", "url": ""] ], "anchorId": "testprefix_tags", "description": [ ["text": "", "type": "testMarkdown"] ],
-                                           "children": [
-                                                   ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_tags_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                                   ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_tags_name", "description": [ ["text": "", "type": "testMarkdown"] ]] ]],
-                                          ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]] ]] ]
+                                          ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
+                                          ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]]]] ]
                         ] ]
         ]
     }
@@ -98,17 +82,7 @@ class OpenApiSpec3Test {
 
         asMap.should == [
                 "parameters": [
-                        ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_id", "description": [ ["text": "unique identifier", "type": "testMarkdown"] ]],
-                        ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                        ["name": "category", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix_category", "description": [ ["text": "", "type": "testMarkdown"] ],
-                         "children": [
-                                 ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_category_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                 ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_category_name", "description": [ ["text": "", "type": "testMarkdown"] ]] ]],
-                        ["name": "photoUrls", "type": [ ["text": "array of string", "url": ""] ], "anchorId": "testprefix_photoUrls", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                        ["name": "tags", "type": [ ["text": "array of object", "url": ""] ], "anchorId": "testprefix_tags", "description": [ ["text": "", "type": "testMarkdown"] ],
-                         "children": [
-                                 ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_tags_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
-                                 ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_tags_name", "description": [ ["text": "", "type": "testMarkdown"] ]] ]],
+                        ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
                         ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]] ]
         ]
     }

@@ -1,47 +1,13 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Swagger Petstore - OpenAPI 3.0",
-    "description": "/* Modified example with more description added to the fields. Also forced anyOf/allOf/etc */. This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [http://swagger.io](http://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!\nYou can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\nSome useful links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n- [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)",
-    "termsOfService": "http://swagger.io/terms/",
-    "contact": {
-      "email": "apiteam@swagger.io"
-    },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    },
-    "version": "1.0.11"
-  },
-  "externalDocs": {
-    "description": "Find out more about Swagger",
-    "url": "http://swagger.io"
+    "title": "test samples",
+    "description": "test samples",
+    "version": "0.1"
   },
   "servers": [
     {
       "url": "/api/v3"
-    }
-  ],
-  "tags": [
-    {
-      "name": "pet",
-      "description": "Everything about your Pets",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "http://swagger.io"
-      }
-    },
-    {
-      "name": "store",
-      "description": "Access to Petstore orders",
-      "externalDocs": {
-        "description": "Find out more about our store",
-        "url": "http://swagger.io"
-      }
-    },
-    {
-      "name": "user",
-      "description": "Operations about user"
     }
   ],
   "paths": {
@@ -197,14 +163,6 @@
           "200": {
             "description": "successful operation",
             "content": {
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Pet"
-                  }
-                }
-              },
               "application/json": {
                 "schema": {
                   "type": "array",
@@ -1062,36 +1020,7 @@
           "username": {
             "type": "string",
             "example": "theUser"
-          },
-          "firstName": {
-            "type": "string",
-            "example": "John"
-          },
-          "lastName": {
-            "type": "string",
-            "example": "James"
-          },
-          "email": {
-            "type": "string",
-            "example": "john@email.com"
-          },
-          "password": {
-            "type": "string",
-            "example": "12345"
-          },
-          "phone": {
-            "type": "string",
-            "example": "12345"
-          },
-          "userStatus": {
-            "type": "integer",
-            "description": "User Status",
-            "format": "int32",
-            "example": 1
           }
-        },
-        "xml": {
-          "name": "user"
         }
       },
       "Tag": {
@@ -1113,47 +1042,14 @@
       },
       "Pet": {
         "required": [
-          "name",
-          "photoUrls"
+          "name"
         ],
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 10,
-            "description": "unique identifier"
-          },
           "name": {
             "type": "string",
             "example": "doggie",
             "description": "pet name"
-          },
-          "category": {
-            "$ref": "#/components/schemas/Category"
-          },
-          "photoUrls": {
-            "type": "array",
-            "description": "urls of pet's photos",
-            "xml": {
-              "wrapped": true
-            },
-            "items": {
-              "type": "string",
-              "xml": {
-                "name": "photoUrl"
-              }
-            }
-          },
-          "tags": {
-            "type": "array",
-            "description": "associated tags",
-            "xml": {
-              "wrapped": true
-            },
-            "items": {
-              "$ref": "#/components/schemas/Tag"
-            }
           },
           "status": {
             "type": "string",

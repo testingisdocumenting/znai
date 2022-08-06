@@ -30,6 +30,9 @@ public class OpenApi3Schema {
     private final List<OpenApi3Schema> properties;
     private final List<String> required;
 
+    private String format;
+    private Object example;
+
     private String defaultRendered;
     private List<String> enumValues;
 
@@ -57,16 +60,54 @@ public class OpenApi3Schema {
         return type;
     }
 
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public Object getExample() {
+        return example;
+    }
+
+    public void setExample(Object example) {
+        this.example = example;
+    }
+
+    public String renderTypeWithFormat() {
+        return format != null ?
+                type + "(" + format + ")":
+                type;
+    }
+
     public String renderCombinedType() {
         if (getType().equals("array")) {
-            return "array of " + getItems().getType();
+            return "array of " + getItems().renderTypeWithFormat();
         }
 
-        return getType();
+        return renderTypeWithFormat();
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public String renderDescriptionWithExamples() {
+        if (description.isEmpty()) {
+            return renderExample();
+        }
+
+        return description + (example == null ?
+                "" :
+                "\n\\\n" /* hard line break */ + renderExample());
+    }
+
+    public String renderExample() {
+        return example != null ?
+                "*Example*: `" + example + "`" :
+                "";
     }
 
     public OpenApi3Schema getItems() {
@@ -157,8 +198,18 @@ public class OpenApi3Schema {
     }
 
     private static OpenApi3Schema createSchema(String name, String type, Schema<?> parsed) {
-        return new OpenApi3Schema(name,
+        OpenApi3Schema schema = new OpenApi3Schema(name,
                 type,
                 StringUtils.nullAsEmpty(parsed.getDescription()));
+
+        if (parsed.getFormat() != null) {
+            schema.setFormat(parsed.getFormat());
+        }
+
+        if (parsed.getExampleSetFlag()) {
+            schema.setExample(parsed.getExample());
+        }
+
+        return schema;
     }
 }

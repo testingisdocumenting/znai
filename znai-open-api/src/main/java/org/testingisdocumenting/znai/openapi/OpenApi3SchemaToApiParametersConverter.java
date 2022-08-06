@@ -95,7 +95,7 @@ public class OpenApi3SchemaToApiParametersConverter {
     }
 
     private ApiParameter addParameter(ApiParameter parent, OpenApi3Schema schema) {
-        DocElement docElementFromDescription = parser.docElementFromDescription(schema.getDescription());
+        DocElement docElementFromDescription = parser.docElementFromDescription(schema.renderDescriptionWithExamples());
 
         return parent.add(
                 schema.getName(),
