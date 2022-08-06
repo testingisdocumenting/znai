@@ -33,6 +33,10 @@ class ApiParametersAnchors {
     }
 
     static String anchorIdFromNameAndPrefix(String prefix, String name) {
+        if (name.isEmpty()) {
+            return prefix;
+        }
+
         return prefix + (prefix.isEmpty() ? "" : "_") + sanitizeAnchorId(name.replace('.', '_'));
     }
 

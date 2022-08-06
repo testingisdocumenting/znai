@@ -32,8 +32,18 @@ class OpenApiSpec3Test {
     }
 
     @Test
-    void "query parameters"() {
+    void "spec by operationId"() {
         def findPet = spec.findById("findPetsByStatus")
+        findPet.summary.should == "Finds Pets by status"
+        findPet.description.should == "Multiple status values can be provided with comma separated strings"
+        findPet.path.should == "/pet/findByStatus"
+        findPet.tags.should == ["pet"]
+        findPet.request.should == null
+    }
+
+    @Test
+    void "anyof handling"() {
+        def findPet = spec.findById("createUser")
         findPet.summary.should == "Finds Pets by status"
         findPet.description.should == "Multiple status values can be provided with comma separated strings"
         findPet.path.should == "/pet/findByStatus"

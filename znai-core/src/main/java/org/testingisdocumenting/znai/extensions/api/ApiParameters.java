@@ -41,8 +41,28 @@ public class ApiParameters {
         return root.add(name, type, description, textForSearch);
     }
 
+    public void add(ApiParameter parameter) {
+        root.add(parameter);
+    }
+
     public ApiParameter find(String name) {
         return root.find(name);
+    }
+
+    public String getAnchorId() {
+        return root.getAnchorId();
+    }
+
+    public ApiParameters withoutTopLevel() {
+        ApiParameters result = new ApiParameters(root.getAnchorId());
+        if (root.getChildren().isEmpty()) {
+            return result;
+        }
+
+        ApiParameter firstChild = root.getChildren().get(0);
+        firstChild.getChildren().forEach(result::add);
+
+        return result;
     }
 
     public ApiParameter getRoot() {

@@ -34,29 +34,9 @@ class OpenApi3ParametersToApiParametersConverterTest {
 
         def apiParameters = convertToMap(parameters)
         apiParameters.should == [
-                "parameters" : [ [
-                                         "name" : "firstName",
-                                         "type" : [ [
-                                                            "text" : "string",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_firstName",
-                                         "description" : [ [
-                                                                   "text" : "first name",
-                                                                   "type" : "testMarkdown"
-                                                           ] ]
-                                 ], [
-                                         "name" : "lastName",
-                                         "type" : [ [
-                                                            "text" : "array of string",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_lastName",
-                                         "description" : [ [
-                                                                   "text" : "last name",
-                                                                   "type" : "testMarkdown"
-                                                           ] ]
-                                 ] ]
+                "parameters": [ 
+                        ["name": "firstName", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_firstName", "description": [ ["text": "first name", "type": "testMarkdown"] ]],
+                        ["name": "lastName", "type": [ ["text": "array of string", "url": ""] ], "anchorId": "testprefix_lastName", "description": [ ["text": "last name", "type": "testMarkdown"] ]] ]
         ]
     }
 
