@@ -77,6 +77,10 @@ const nestedParameters = [
     {name: 'ids', type: 'array of objects', children: createPersonParameters('nested'), description: [{"text": "secondary person", "type": "SimpleText"}]},
 ]
 
+const singleNestedParameters = [
+    {name: 'primaryResidence', type: 'object', children: addressParameters, description: [{"text": "primary residence", "type": "SimpleText"}]},
+]
+
 const withCodeSnippetFirst = [
     {name: 'paramOne', type: 'string', description: codeBeforeParagraph}
 ]
@@ -120,6 +124,9 @@ export function apiParametersDemo(registry) {
       ))
       .add('nested parameters', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
+      ))
+      .add('single nested parameter', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={singleNestedParameters}/>
       ))
       .add('with text around', () => (
         <div className="content-block">
