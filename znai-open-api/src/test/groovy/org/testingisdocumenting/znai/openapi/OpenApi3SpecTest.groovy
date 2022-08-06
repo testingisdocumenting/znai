@@ -42,6 +42,12 @@ class OpenApi3SpecTest {
     }
 
     @Test
+    void "spec by method and path"() {
+        def getUser = spec.findByMethodAndPath("get", "/user/{username}")
+        getUser.summary.should == "Get user by user name"
+    }
+
+    @Test
     void "anyof handling"() {
         def createUser = spec.findById("createUser")
         def jsonRequest = createUser.request.content.byMimeType.get("application/json")

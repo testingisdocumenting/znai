@@ -68,6 +68,11 @@ public class OpenApi3Spec {
                 .findFirst().orElse(null);
     }
 
+    public OpenApi3Operation findByMethodAndPath(String method, String path) {
+        return operations.stream().filter(o -> o.matches(method, path)).findFirst()
+                .orElseThrow(() -> new RuntimeException("cannot find operation: " + method + " " + path));
+    }
+
     private void process() {
         Paths paths = parseResult.getOpenAPI().getPaths();
         for (Map.Entry<String, PathItem> pathEntry : paths.entrySet()) {
