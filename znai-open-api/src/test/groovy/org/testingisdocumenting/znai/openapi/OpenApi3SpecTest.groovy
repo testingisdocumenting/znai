@@ -23,7 +23,7 @@ import org.testingisdocumenting.znai.extensions.PropsUtils
 import org.testingisdocumenting.znai.utils.JsonUtils
 import org.testingisdocumenting.znai.utils.ResourceUtils
 
-class OpenApiSpec3Test {
+class OpenApi3SpecTest {
     static OpenApi3Spec spec
 
     @BeforeClass
