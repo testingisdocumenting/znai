@@ -30,29 +30,9 @@ class OpenApi3SchemaToApiParametersConverterTest {
         def apiParams = convertToMap(root)
 
         apiParams.should == [
-                "parameters": [[
-                                       "name"       : "name",
-                                       "type"       : [[
-                                                               "text": "string",
-                                                               "url" : ""
-                                                       ]],
-                                       "anchorId"   : "testprefix_name",
-                                       "description": [[
-                                                               "text": "user name",
-                                                               "type": "testMarkdown"
-                                                       ]]
-                               ], [
-                                       "name"       : "phone",
-                                       "type"       : [[
-                                                               "text": "string",
-                                                               "url" : ""
-                                                       ]],
-                                       "anchorId"   : "testprefix_phone",
-                                       "description": [[
-                                                               "text": "user phone number",
-                                                               "type": "testMarkdown"
-                                                       ]]
-                               ]]
+                "parameters": [
+                        ["name": "name", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_name", "description": [["text": "user name", "type": "testMarkdown"]]],
+                        ["name": "phone", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_phone", "description": [["text": "user phone number", "type": "testMarkdown"]]]]
         ]
     }
 
@@ -66,42 +46,11 @@ class OpenApi3SchemaToApiParametersConverterTest {
         root.items = person
 
         def apiParams = convertToMap(root)
-        apiParams.should == [
-                "parameters" : [ [
-                                         "name" : "",
-                                         "type" : [ [
-                                                            "text" : "array of object",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_",
-                                         "description" : [ [
-                                                                   "text" : "people",
-                                                                   "type" : "testMarkdown"
-                                                           ] ],
-                                         "children" : [ [
-                                                                "name" : "name",
-                                                                "type" : [ [
-                                                                                   "text" : "string",
-                                                                                   "url" : ""
-                                                                           ] ],
-                                                                "anchorId" : "testprefix__name",
-                                                                "description" : [ [
-                                                                                          "text" : "user name",
-                                                                                          "type" : "testMarkdown"
-                                                                                  ] ]
-                                                        ], [
-                                                                "name" : "phone",
-                                                                "type" : [ [
-                                                                                   "text" : "string",
-                                                                                   "url" : ""
-                                                                           ] ],
-                                                                "anchorId" : "testprefix__phone",
-                                                                "description" : [ [
-                                                                                          "text" : "user phone number",
-                                                                                          "type" : "testMarkdown"
-                                                                                  ] ]
-                                                        ] ]
-                                 ] ]]
+        apiParams.should == ["parameters": [
+                        ["name": "", "type": [ ["text": "array of object", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "people", "type": "testMarkdown"] ],
+                         "children": [
+                                 ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "user name", "type": "testMarkdown"] ]],
+                                 ["name": "phone", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_phone", "description": [ ["text": "user phone number", "type": "testMarkdown"] ]] ]] ]]
     }
 
     @Test
@@ -115,18 +64,36 @@ class OpenApi3SchemaToApiParametersConverterTest {
 
         def apiParams = convertToMap(root)
         apiParams.should == [
-                "parameters" : [ [
-                                         "name" : "telephone",
-                                         "type" : [ [
-                                                            "text" : "array of string",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_telephone",
-                                         "description" : [ [
-                                                                   "text" : "people",
-                                                                   "type" : "testMarkdown"
-                                                           ] ]
-                                 ] ]
+                "parameters": [
+                        ["name": "telephone", "type": [ ["text": "array of string", "url": ""] ], "anchorId": "testprefix_telephone", "description": [ ["text": "people", "type": "testMarkdown"] ]] ]
+        ]
+    }
+
+    @Test
+    void "convert composed"() {
+        def root = new OpenApi3Schema("", "oneOf", "composed response")
+
+        def person = new OpenApi3Schema("person", "object", "person object")
+        person.properties.add(new OpenApi3Schema("name", "string", "user name"))
+
+        def dog = new OpenApi3Schema("dog", "object", "dog object")
+        dog.properties.add(new OpenApi3Schema("name", "string", "pet name"))
+
+        root.properties.add(person)
+        root.properties.add(dog)
+
+        def apiParams = convertToMap(root)
+        apiParams.should == ["parameters": [
+                ["name": "", "type": [ ["text": "oneOf", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "composed response", "type": "testMarkdown"] ],
+                 "children": [
+                         ["name": "person", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix_person", "description": [ ["text": "person object", "type": "testMarkdown"] ],
+                          "children": [
+                                  ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_person_name", "description": [ ["text": "user name", "type": "testMarkdown"] ]] ]],
+                         ["name": "dog", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix_dog", "description": [ ["text": "dog object", "type": "testMarkdown"] ],
+                          "children": [
+                                  ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_dog_name", "description": [ ["text": "pet name", "type": "testMarkdown"] ]] ]
+                        ] ]
+                ] ]
         ]
     }
 

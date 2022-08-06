@@ -32,13 +32,55 @@ class OpenApiSpec3Test {
     }
 
     @Test
-    void "query parameters"() {
+    void "spec by operationId"() {
         def findPet = spec.findById("findPetsByStatus")
         findPet.summary.should == "Finds Pets by status"
         findPet.description.should == "Multiple status values can be provided with comma separated strings"
         findPet.path.should == "/pet/findByStatus"
         findPet.tags.should == ["pet"]
         findPet.request.should == null
+    }
+
+    @Test
+    void "anyof handling"() {
+        def createUser = spec.findById("createUser")
+        def jsonRequest = createUser.request.content.byMimeType.get("application/json")
+        def apiParameters = new OpenApi3SchemaToApiParametersConverter(
+                new SchemaTestMarkdownParser(), "testprefix", jsonRequest).convert()
+
+        def asMap = PropsUtils.exerciseSuppliers(apiParameters.toMap()) as Map<String, ?>
+        System.out.println(JsonUtils.serializePrettyPrint(asMap))
+
+        asMap.should == [
+                "parameters": [
+                        ["name": "", "type": [ ["text": "oneOf", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
+                         "children": [
+                                 ["name": "", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
+                                  "children": [
+                                          ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                          ["name": "username", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_username", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                          ["name": "firstName", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_firstName", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                          ["name": "lastName", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_lastName", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                          ["name": "email", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_email", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                          ["name": "password", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_password", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                          ["name": "phone", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_phone", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                          ["name": "userStatus", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_userStatus", "description": [ ["text": "User Status", "type": "testMarkdown"] ]] ]],
+                                 ["name": "", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
+                                  "children": [
+                                          ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_id", "description": [ ["text": "unique identifier", "type": "testMarkdown"] ]],
+                                          ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                          ["name": "category", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix_category", "description": [ ["text": "", "type": "testMarkdown"] ],
+                                           "children": [
+                                                   ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_category_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                                   ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_category_name", "description": [ ["text": "", "type": "testMarkdown"] ]] ]],
+                                          ["name": "photoUrls", "type": [ ["text": "array of string", "url": ""] ], "anchorId": "testprefix_photoUrls", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                          ["name": "tags", "type": [ ["text": "array of object", "url": ""] ], "anchorId": "testprefix_tags", "description": [ ["text": "", "type": "testMarkdown"] ],
+                                           "children": [
+                                                   ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_tags_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                                   ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_tags_name", "description": [ ["text": "", "type": "testMarkdown"] ]] ]],
+                                          ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]] ]] ]
+                        ] ]
+        ]
     }
 
     @Test
@@ -55,119 +97,19 @@ class OpenApiSpec3Test {
         System.out.println(JsonUtils.serializePrettyPrint(asMap))
 
         asMap.should == [
-                "parameters" : [ [
-                                         "name" : "id",
-                                         "type" : [ [
-                                                            "text" : "integer",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_id",
-                                         "description" : [ [
-                                                                   "text" : "unique identifier",
-                                                                   "type" : "testMarkdown"
-                                                           ] ]
-                                 ], [
-                                         "name" : "name",
-                                         "type" : [ [
-                                                            "text" : "string",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_name",
-                                         "description" : [ [
-                                                                   "text" : "",
-                                                                   "type" : "testMarkdown"
-                                                           ] ]
-                                 ], [
-                                         "name" : "category",
-                                         "type" : [ [
-                                                            "text" : "object",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_category",
-                                         "description" : [ [
-                                                                   "text" : "",
-                                                                   "type" : "testMarkdown"
-                                                           ] ],
-                                         "children" : [ [
-                                                                "name" : "id",
-                                                                "type" : [ [
-                                                                                   "text" : "integer",
-                                                                                   "url" : ""
-                                                                           ] ],
-                                                                "anchorId" : "testprefix_category_id",
-                                                                "description" : [ [
-                                                                                          "text" : "",
-                                                                                          "type" : "testMarkdown"
-                                                                                  ] ]
-                                                        ], [
-                                                                "name" : "name",
-                                                                "type" : [ [
-                                                                                   "text" : "string",
-                                                                                   "url" : ""
-                                                                           ] ],
-                                                                "anchorId" : "testprefix_category_name",
-                                                                "description" : [ [
-                                                                                          "text" : "",
-                                                                                          "type" : "testMarkdown"
-                                                                                  ] ]
-                                                        ] ]
-                                 ], [
-                                         "name" : "photoUrls",
-                                         "type" : [ [
-                                                            "text" : "array of string",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_photoUrls",
-                                         "description" : [ [
-                                                                   "text" : "",
-                                                                   "type" : "testMarkdown"
-                                                           ] ]
-                                 ], [
-                                         "name" : "tags",
-                                         "type" : [ [
-                                                            "text" : "array of object",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_tags",
-                                         "description" : [ [
-                                                                   "text" : "",
-                                                                   "type" : "testMarkdown"
-                                                           ] ],
-                                         "children" : [ [
-                                                                "name" : "id",
-                                                                "type" : [ [
-                                                                                   "text" : "integer",
-                                                                                   "url" : ""
-                                                                           ] ],
-                                                                "anchorId" : "testprefix_tags_id",
-                                                                "description" : [ [
-                                                                                          "text" : "",
-                                                                                          "type" : "testMarkdown"
-                                                                                  ] ]
-                                                        ], [
-                                                                "name" : "name",
-                                                                "type" : [ [
-                                                                                   "text" : "string",
-                                                                                   "url" : ""
-                                                                           ] ],
-                                                                "anchorId" : "testprefix_tags_name",
-                                                                "description" : [ [
-                                                                                          "text" : "",
-                                                                                          "type" : "testMarkdown"
-                                                                                  ] ]
-                                                        ] ]
-                                 ], [
-                                         "name" : "status",
-                                         "type" : [ [
-                                                            "text" : "string",
-                                                            "url" : ""
-                                                    ] ],
-                                         "anchorId" : "testprefix_status",
-                                         "description" : [ [
-                                                                   "text" : "pet status in the store",
-                                                                   "type" : "testMarkdown"
-                                                           ] ]
-                                 ] ]
+                "parameters": [
+                        ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_id", "description": [ ["text": "unique identifier", "type": "testMarkdown"] ]],
+                        ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                        ["name": "category", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix_category", "description": [ ["text": "", "type": "testMarkdown"] ],
+                         "children": [
+                                 ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_category_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                 ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_category_name", "description": [ ["text": "", "type": "testMarkdown"] ]] ]],
+                        ["name": "photoUrls", "type": [ ["text": "array of string", "url": ""] ], "anchorId": "testprefix_photoUrls", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                        ["name": "tags", "type": [ ["text": "array of object", "url": ""] ], "anchorId": "testprefix_tags", "description": [ ["text": "", "type": "testMarkdown"] ],
+                         "children": [
+                                 ["name": "id", "type": [ ["text": "integer", "url": ""] ], "anchorId": "testprefix_tags_id", "description": [ ["text": "", "type": "testMarkdown"] ]],
+                                 ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_tags_name", "description": [ ["text": "", "type": "testMarkdown"] ]] ]],
+                        ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]] ]
         ]
     }
 }

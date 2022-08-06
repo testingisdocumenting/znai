@@ -55,6 +55,10 @@ public class ApiParameter {
         return description;
     }
 
+    public String getAnchorId() {
+        return anchorId;
+    }
+
     public String getTextForSearch() {
         return textForSearch;
     }
@@ -98,6 +102,10 @@ public class ApiParameter {
         children.add(apiParameter);
 
         return apiParameter;
+    }
+
+    public void add(ApiParameter parameter) {
+        children.add(parameter);
     }
 
     ApiParameter find(String name) {

@@ -16,18 +16,12 @@
 
 package org.testingisdocumenting.znai.openapi;
 
-import io.swagger.v3.oas.models.media.ArraySchema;
-import io.swagger.v3.oas.models.media.ObjectSchema;
-import io.swagger.v3.oas.models.media.Schema;
-import io.swagger.v3.oas.models.media.StringSchema;
-import org.testingisdocumenting.znai.extensions.api.ApiLinkedText;
-import org.testingisdocumenting.znai.extensions.api.ApiParameter;
-import org.testingisdocumenting.znai.extensions.api.ApiParameters;
-import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import io.swagger.v3.oas.models.media.*;
 import org.testingisdocumenting.znai.utils.StringUtils;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class OpenApi3Schema {
     private final String name;
@@ -42,7 +36,9 @@ public class OpenApi3Schema {
     private OpenApi3Schema items;
 
     public static OpenApi3Schema convertFromParsed(String name, Schema<?> parsed) {
-        if (parsed instanceof ObjectSchema) {
+        if (parsed instanceof ComposedSchema) {
+            return convertFromComposed(name, (ComposedSchema) parsed);
+        } if (parsed instanceof ObjectSchema) {
             return convertFromObject(name, (ObjectSchema) parsed);
         } else if (parsed instanceof ArraySchema) {
             return convertFromArray(name, (ArraySchema) parsed);
@@ -97,6 +93,32 @@ public class OpenApi3Schema {
         this.required = new ArrayList<>();
     }
 
+    private static OpenApi3Schema convertFromComposed(String name, ComposedSchema parsed) {
+        String composedType = composedType(parsed);
+        OpenApi3Schema schema = createSchema(name, composedType, parsed);
+        if (parsed.getOneOf() != null) {
+            populateComposed(schema, composedType, parsed.getOneOf());
+        } else if (parsed.getAnyOf() != null) {
+            populateComposed(schema, composedType, parsed.getAnyOf());
+        }
+
+        return schema;
+    }
+
+    private static String composedType(ComposedSchema schema) {
+        if (schema.getOneOf() != null) {
+            return "oneOf";
+        } else if (schema.getAnyOf() != null) {
+            return "anyOf";
+        }
+
+        return "unknown-composed-type";
+    }
+
+    private static void populateComposed(OpenApi3Schema parent, String composedType, List<Schema> list) {
+        list.forEach((child) -> parent.properties.add(convertFromParsed("", child)));
+    }
+
     private static OpenApi3Schema convertFromObject(String name, ObjectSchema parsed) {
         OpenApi3Schema schema = createSchema(name, parsed);
 
@@ -131,8 +153,12 @@ public class OpenApi3Schema {
     }
 
     private static OpenApi3Schema createSchema(String name, Schema<?> parsed) {
+        return createSchema(name, parsed.getType(), parsed);
+    }
+
+    private static OpenApi3Schema createSchema(String name, String type, Schema<?> parsed) {
         return new OpenApi3Schema(name,
-                parsed.getType(),
+                type,
                 StringUtils.nullAsEmpty(parsed.getDescription()));
     }
 }

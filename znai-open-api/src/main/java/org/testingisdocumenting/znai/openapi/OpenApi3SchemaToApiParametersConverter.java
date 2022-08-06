@@ -26,30 +26,54 @@ public class OpenApi3SchemaToApiParametersConverter {
     private final OpenApi3Schema rootSchema;
     private final ApiParameters apiParameters;
 
+    private boolean createNewParent;
+
     public OpenApi3SchemaToApiParametersConverter(OpenApiMarkdownParser parser, String anchorPrefix, OpenApi3Schema rootSchema) {
         this.parser = parser;
         this.rootSchema = rootSchema;
         this.apiParameters = new ApiParameters(anchorPrefix);
+        this.createNewParent = true;
     }
 
     public ApiParameters convert() {
         handleSchema(apiParameters.getRoot(), rootSchema);
+
+        if (rootSchema.getType().equals("object")) {
+            return apiParameters.withoutTopLevel();
+        }
+
         return apiParameters;
     }
 
     private void handleSchema(ApiParameter parent, OpenApi3Schema schema) {
         String type = schema.getType();
-        if (type.equals("object")) {
-            handleObjectSchema(parent, schema);
-        } else if (type.equals("array")) {
-            handleArraySchema(parent, schema);
-        } else {
-            handleGenericSchema(parent, schema);
+        switch (type) {
+            case "object":
+                handleObjectSchema(parent, schema);
+                break;
+            case "anyOf":
+            case "oneOf":
+                handleComposeSchema(parent, schema);
+                break;
+            case "array":
+                handleArraySchema(parent, schema);
+                break;
+            default:
+                handleGenericSchema(parent, schema);
+                break;
+        }
+    }
+
+    private void handleComposeSchema(ApiParameter parent, OpenApi3Schema schema) {
+        ApiParameter newParent = addParameter(parent, schema);
+
+        for (OpenApi3Schema property : schema.getProperties()) {
+            handleSchema(newParent, property);
         }
     }
 
     private void handleObjectSchema(ApiParameter parent, OpenApi3Schema schema) {
-        ApiParameter newParent = schema.getName().isEmpty() ? parent : addParameter(parent, schema);
+        ApiParameter newParent = !createNewParent ? parent : addParameter(parent, schema);
 
         for (OpenApi3Schema property : schema.getProperties()) {
             handleSchema(newParent, property);
@@ -60,7 +84,9 @@ public class OpenApi3SchemaToApiParametersConverter {
         ApiParameter newParent = addParameter(parent, schema);
         OpenApi3Schema items = schema.getItems();
         if (items.getType().equals("object")) {
+            createNewParent = false;
             handleSchema(newParent, items);
+            createNewParent = true;
         }
     }
 
