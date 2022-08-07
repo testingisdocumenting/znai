@@ -18,7 +18,9 @@ package org.testingisdocumenting.znai.openapi;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
@@ -56,6 +58,14 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .add("operationId", PluginParamType.STRING, "operation ID to find operation", "findUserById")
+                .add("method", PluginParamType.STRING, "method to find operation", "post")
+                .add("path", PluginParamType.STRING, "path to find operation", "/user");
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         this.markdownParser = componentsRegistry.markdownParser();
         this.parserHandler = parserHandler;
@@ -67,7 +77,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
 
         spec = OpenApi3Spec.parse(specContent);
 
-        findOperation(pluginParams);
+        operation = findOperation(pluginParams);
 
         renderSection();
         renderUrl();
@@ -79,13 +89,32 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
         return PluginResult.docElements(Stream.empty());
     }
 
-    private void findOperation(PluginParams pluginParams) {
+    private OpenApi3Operation findOperation(PluginParams pluginParams) {
         String operationId = pluginParams.getOpts().get("operationId");
-        operation = spec.findById(operationId);
+        return operationId != null ?
+            findOperationByOperationId(operationId):
+            findOperationByMethodAndPath(pluginParams);
+    }
+
+    private OpenApi3Operation findOperationByOperationId(String operationId) {
+        OpenApi3Operation result = spec.findById(operationId);
 
         if (operation == null) {
             throw new IllegalArgumentException("can't find openapi operation: " + operationId);
         }
+
+        return result;
+    }
+
+    private OpenApi3Operation findOperationByMethodAndPath(PluginParams pluginParams) {
+        String method = pluginParams.getOpts().get("method", "");
+        String path = pluginParams.getOpts().get("path", "");
+
+        if (method.isEmpty() || path.isEmpty()) {
+            throw new IllegalArgumentException("operationId or method/path is required to find OpenAPI operation");
+        }
+
+        return spec.findByMethodAndPath(method, path);
     }
 
     private void renderSection() {

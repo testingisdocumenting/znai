@@ -6,9 +6,9 @@ Both `yaml` and `json` formats are supported.
 
 Let's consider [Uber's API definition](https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json) as an example:
 
-    :include-open-api: open-api/uber.json {method: "get", path: "/v1/estimates/time"}
+    :include-open-api: open-api/uber.json {method: "get", path: "/estimates/time"}
     
-:include-open-api: open-api/uber.json {method: "get", path: "/v1/estimates/time"}
+:include-open-api3: open-api/uber.json {method: "get", path: "/estimates/time"}
 
 [//]: # (:include-open-api3: petstore-openapi3.json {operationId: "getPetById"})
 

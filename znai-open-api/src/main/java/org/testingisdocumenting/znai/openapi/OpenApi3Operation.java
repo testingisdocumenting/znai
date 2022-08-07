@@ -50,7 +50,7 @@ public class OpenApi3Operation {
     }
 
     public void setMethod(String method) {
-        this.method = method;
+        this.method = method.toLowerCase();
     }
 
     public String getSummary() {
@@ -103,6 +103,10 @@ public class OpenApi3Operation {
 
     public void addResponse(OpenApi3Response response) {
         responses.add(response);
+    }
+
+    public boolean matches(String method, String path) {
+        return this.method.equals(method) && this.path.equals(path);
     }
 
     public List<OpenApi3Response> getResponses() {
