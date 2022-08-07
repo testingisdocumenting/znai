@@ -40,6 +40,11 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class OpenApi3IncludePlugin implements IncludePlugin {
+    private static final String OPERATION_ID_KEY = "operationId";
+    private static final String METHOD_KEY = "method";
+    private static final String PATH_KEY = "path";
+    private static final String AUTO_SECTION_KEY = "autoSection";
+
     private Path specPath;
     private OpenApi3Operation operation;
     private ParserHandler parserHandler;
@@ -60,9 +65,10 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
     @Override
     public PluginParamsDefinition parameters() {
         return new PluginParamsDefinition()
-                .add("operationId", PluginParamType.STRING, "operation ID to find operation", "findUserById")
-                .add("method", PluginParamType.STRING, "method to find operation", "post")
-                .add("path", PluginParamType.STRING, "path to find operation", "/user");
+                .add(OPERATION_ID_KEY, PluginParamType.STRING, "operation ID to find operation", "findUserById")
+                .add(METHOD_KEY, PluginParamType.STRING, "method to find operation", "post")
+                .add(PATH_KEY, PluginParamType.STRING, "path to find operation", "/user")
+                .add(AUTO_SECTION_KEY, PluginParamType.BOOLEAN, "auto generate page section for the operation", "true");
     }
 
     @Override
@@ -79,7 +85,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
 
         operation = findOperation(pluginParams);
 
-        renderSection();
+        renderSectionIfRequired(pluginParams);
         renderUrl();
         renderDescription(operation.getDescription());
         renderParameters();
@@ -117,8 +123,10 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
         return spec.findByMethodAndPath(method, path);
     }
 
-    private void renderSection() {
-        parserHandler.onSectionStart(operation.getSummary(), HeadingProps.EMPTY);
+    private void renderSectionIfRequired(PluginParams pluginParams) {
+        if (pluginParams.getOpts().get(AUTO_SECTION_KEY, false)) {
+            parserHandler.onSectionStart(operation.getSummary(), HeadingProps.EMPTY);
+        }
     }
 
     private void renderUrl() {
