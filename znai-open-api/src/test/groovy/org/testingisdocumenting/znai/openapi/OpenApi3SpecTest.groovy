@@ -67,7 +67,7 @@ class OpenApi3SpecTest {
                                           ["name": "username", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_username", "description": [ ["text": "*Example*: `theUser`", "type": "testMarkdown"] ]] ]],
                                  ["name": "", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
                                   "children": [
-                                          ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
+                                          ["name": "name*", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
                                           ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]]]] ]
                         ] ]
         ]
@@ -88,7 +88,7 @@ class OpenApi3SpecTest {
 
         asMap.should == [
                 "parameters": [
-                        ["name": "name", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
+                        ["name": "name*", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
                         ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]] ]
         ]
     }
