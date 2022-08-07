@@ -1034,6 +1034,7 @@
       "Category": {
         "type": "object",
         "description": "pet category",
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "integer",

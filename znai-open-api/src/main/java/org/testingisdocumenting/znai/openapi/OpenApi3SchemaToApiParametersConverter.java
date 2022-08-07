@@ -36,7 +36,7 @@ public class OpenApi3SchemaToApiParametersConverter {
     }
 
     public ApiParameters convert() {
-        handleSchema(apiParameters.getRoot(), rootSchema);
+        handleSchema(apiParameters.getRoot(), rootSchema, false);
 
         if (rootSchema.getType().equals("object")) {
             return apiParameters.withoutTopLevel();
@@ -45,60 +45,61 @@ public class OpenApi3SchemaToApiParametersConverter {
         return apiParameters;
     }
 
-    private void handleSchema(ApiParameter parent, OpenApi3Schema schema) {
+    private void handleSchema(ApiParameter parent, OpenApi3Schema schema, boolean required) {
         String type = schema.getType();
         switch (type) {
             case "object":
-                handleObjectSchema(parent, schema);
+                handleObjectSchema(parent, schema, required);
                 break;
             case "anyOf":
             case "oneOf":
-                handleComposeSchema(parent, schema);
+                handleComposeSchema(parent, schema, required);
                 break;
             case "array":
-                handleArraySchema(parent, schema);
+                handleArraySchema(parent, schema, required);
                 break;
             default:
-                handleGenericSchema(parent, schema);
+                handleGenericSchema(parent, schema, required);
                 break;
         }
     }
 
-    private void handleComposeSchema(ApiParameter parent, OpenApi3Schema schema) {
-        ApiParameter newParent = addParameter(parent, schema);
+    private void handleComposeSchema(ApiParameter parent, OpenApi3Schema schema, boolean required) {
+        ApiParameter newParent = addParameter(parent, schema, required);
 
         for (OpenApi3Schema property : schema.getProperties()) {
-            handleSchema(newParent, property);
+            handleSchema(newParent, property, schema.isRequired(property.getName()));
         }
     }
 
-    private void handleObjectSchema(ApiParameter parent, OpenApi3Schema schema) {
-        ApiParameter newParent = !createNewParent ? parent : addParameter(parent, schema);
+    private void handleObjectSchema(ApiParameter parent, OpenApi3Schema schema, boolean required) {
+        ApiParameter newParent = !createNewParent ? parent : addParameter(parent, schema, required);
 
         for (OpenApi3Schema property : schema.getProperties()) {
-            handleSchema(newParent, property);
+            handleSchema(newParent, property, schema.isRequired(property.getName()));
         }
     }
 
-    private void handleArraySchema(ApiParameter parent, OpenApi3Schema schema) {
-        ApiParameter newParent = addParameter(parent, schema);
+    private void handleArraySchema(ApiParameter parent, OpenApi3Schema schema, boolean required) {
+        ApiParameter newParent = addParameter(parent, schema, required);
         OpenApi3Schema items = schema.getItems();
         if (items.getType().equals("object")) {
             createNewParent = false;
-            handleSchema(newParent, items);
+            handleSchema(newParent, items, false);
             createNewParent = true;
         }
     }
 
-    private void handleGenericSchema(ApiParameter parent, OpenApi3Schema schema) {
-        addParameter(parent, schema);
+    private void handleGenericSchema(ApiParameter parent, OpenApi3Schema schema, boolean required) {
+        addParameter(parent, schema, required);
     }
 
-    private ApiParameter addParameter(ApiParameter parent, OpenApi3Schema schema) {
+    private ApiParameter addParameter(ApiParameter parent, OpenApi3Schema schema, boolean required) {
         DocElement docElementFromDescription = parser.docElementFromDescription(schema.renderDescriptionWithExamples());
 
+        String namePrefix = required ? "*" : "";
         return parent.add(
-                schema.getName(),
+                schema.getName() + namePrefix,
                 new ApiLinkedText(schema.renderCombinedType()),
                 docElementFromDescription.contentToListOfMaps(), schema.getDescription());
     }

@@ -41,6 +41,6 @@ class ApiParametersAnchors {
     }
 
     static String sanitizeAnchorId(String anchorId) {
-        return anchorId.replace('.', '_');
+        return anchorId.replace('.', '_').replace("*", "");
     }
 }

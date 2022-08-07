@@ -37,6 +37,23 @@ class OpenApi3SchemaToApiParametersConverterTest {
     }
 
     @Test
+    void "required fields"() {
+        def root = new OpenApi3Schema("", "object", "root object")
+
+        root.properties.add(new OpenApi3Schema("name", "string", "user name"))
+        root.properties.add(new OpenApi3Schema("phone", "string", "user phone number"))
+        root.addRequired(["name"])
+
+        def apiParams = convertToMap(root)
+
+        apiParams.should == [
+                "parameters": [
+                        ["name": "name*", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_name", "description": [["text": "user name", "type": "testMarkdown"]]],
+                        ["name": "phone", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_phone", "description": [["text": "user phone number", "type": "testMarkdown"]]]]
+        ]
+    }
+
+    @Test
     void "convert array of object"() {
         def root = new OpenApi3Schema("", "array", "people")
         def person = new OpenApi3Schema("", "object", "person")
