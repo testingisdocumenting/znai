@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OpenApi3Schema {
     private static final String ADDITIONAL_PROPS_NAME = "< * >";
@@ -85,32 +86,64 @@ public class OpenApi3Schema {
         return required.contains(name);
     }
 
-    public String renderTypeWithFormat() {
-        return format != null ?
-                type + "(" + format + ")":
+    public String renderTypeWithFormatOrEnum() {
+        String typeClassifier = renderTypeClassifier();
+
+        return !typeClassifier.isEmpty() ?
+                type + "(" + typeClassifier + ")":
                 type;
     }
 
     public String renderCombinedType() {
         if (getType().equals("array")) {
-            return "array of " + getItems().renderTypeWithFormat();
+            return "array of " + getItems().renderTypeWithFormatOrEnum();
         }
 
-        return renderTypeWithFormat();
+        return renderTypeWithFormatOrEnum();
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String renderDescriptionWithExamples() {
-        if (description.isEmpty()) {
-            return renderExample();
+    public String renderDescriptionWithExamplesAndEnums() {
+        List<String> parts = new ArrayList<>();
+
+        if (!description.isEmpty()) {
+            parts.add(description);
         }
 
-        return description + (example == null ?
-                "" :
-                "\n\\\n" /* hard line break */ + renderExample());
+        if (example != null) {
+            parts.add(renderExample());
+        }
+
+        if (enumValues != null) {
+            parts.add(renderEnumValues());
+        }
+
+        return String.join(
+                "\n\\\n", // hard line break
+                parts);
+    }
+
+    public String renderTypeClassifier() {
+        if (format != null) {
+            return format;
+        }
+
+        if (enumValues != null) {
+            return "enum";
+        }
+
+        return "";
+    }
+
+    private String renderEnumValues() {
+        if (enumValues == null) {
+            return "";
+        }
+
+        return "*Available Values*: " + enumValues.stream().map(v -> "`" + v + "`").collect(Collectors.joining(", "));
     }
 
     public String renderExample() {

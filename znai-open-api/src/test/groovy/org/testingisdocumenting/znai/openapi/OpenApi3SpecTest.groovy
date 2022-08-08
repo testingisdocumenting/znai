@@ -26,6 +26,10 @@ import org.testingisdocumenting.znai.utils.ResourceUtils
 class OpenApi3SpecTest {
     static OpenApi3Spec spec
 
+    static def petProperties = [
+            ["name": "name*", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_name", "description": [["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"]]],
+            ["name": "status", "type": [["text": "string(enum)", "url": ""]], "anchorId": "testprefix_status", "description": [["text": "pet status in the store\n\\\n*Available Values*: `available`, `pending`, `sold`", "type": "testMarkdown"]]]]
+
     @BeforeClass
     static void init() {
         spec = OpenApi3Spec.parse(ResourceUtils.textContent("test-openapi3.json"))
@@ -63,9 +67,7 @@ class OpenApi3SpecTest {
                                           ["name": "id", "type": [["text": "integer(int64)", "url": ""]], "anchorId": "testprefix_id", "description": [["text": "*Example*: `10`", "type": "testMarkdown"]]],
                                           ["name": "username", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_username", "description": [["text": "*Example*: `theUser`", "type": "testMarkdown"]]]]],
                                  ["name": "", "type": [["text": "object", "url": ""]], "anchorId": "testprefix", "description": [["text": "", "type": "testMarkdown"]],
-                                  "children": [
-                                          ["name": "name*", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_name", "description": [["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"]]],
-                                          ["name": "status", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_status", "description": [["text": "pet status in the store", "type": "testMarkdown"]]]]]]
+                                  "children": petProperties]]
                         ]]
         ]
     }
@@ -79,10 +81,8 @@ class OpenApi3SpecTest {
 
         asMap.should == ["parameters": [
                 ["name": "tempId", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_tempId", "description": [ ["text": "temporary inventory id", "type": "testMarkdown"] ]],
-                ["name": "< * >", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix_<  >", "description": [ ["text": "", "type": "testMarkdown"] ],
-                 "children": [
-                         ["name": "name*", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_<  >_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
-                         ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_<  >_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]] ]] ]
+                ["name": "< * >", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
+                 "children": petProperties] ]
         ]
     }
 
@@ -94,11 +94,7 @@ class OpenApi3SpecTest {
         def jsonResponse = response.content.byMimeType.get("application/json")
         def asMap = schemaAsApiParamsMap(jsonResponse)
 
-        asMap.should == [
-                "parameters": [
-                        ["name": "name*", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_name", "description": [["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"]]],
-                        ["name": "status", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_status", "description": [["text": "pet status in the store", "type": "testMarkdown"]]]]
-        ]
+        asMap.should == ["parameters": petProperties]
     }
 
     private static Map<String, ?> schemaAsApiParamsMap(OpenApi3Schema schema) {

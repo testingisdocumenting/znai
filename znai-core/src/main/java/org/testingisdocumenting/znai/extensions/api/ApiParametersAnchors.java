@@ -33,14 +33,16 @@ class ApiParametersAnchors {
     }
 
     static String anchorIdFromNameAndPrefix(String prefix, String name) {
-        if (name.isEmpty()) {
+        String sanitizeAnchorId = sanitizeAnchorId(name);
+
+        if (sanitizeAnchorId.isEmpty()) {
             return prefix;
         }
 
-        return prefix + (prefix.isEmpty() ? "" : "_") + sanitizeAnchorId(name.replace('.', '_'));
+        return prefix + (prefix.isEmpty() ? "" : "_") + sanitizeAnchorId;
     }
 
     static String sanitizeAnchorId(String anchorId) {
-        return anchorId.replace('.', '_').replace("*", "");
+        return anchorId.replace('.', '_').replaceAll("[\\\\*<> ]", "");
     }
 }
