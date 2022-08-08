@@ -78,6 +78,11 @@ public class OpenApi3SchemaToApiParametersConverter {
         for (OpenApi3Schema property : schema.getProperties()) {
             handleSchema(newParent, property, schema.isRequired(property.getName()));
         }
+
+        OpenApi3Schema additionalProperties = schema.getAdditionalProperties();
+        if (additionalProperties != null) {
+            handleSchema(newParent, schema.getAdditionalProperties(), false);
+        }
     }
 
     private void handleArraySchema(ApiParameter parent, OpenApi3Schema schema, boolean required) {

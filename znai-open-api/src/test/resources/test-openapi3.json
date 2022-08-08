@@ -469,9 +469,14 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "properties": {
+                    "tempId": {
+                      "type": "string",
+                      "description": "temporary inventory id"
+                    }
+                  },
                   "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
+                    "$ref": "#/components/schemas/Pet"
                   }
                 }
               }

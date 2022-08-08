@@ -48,28 +48,41 @@ class OpenApi3SpecTest {
     }
 
     @Test
-    void "anyof handling"() {
+    void "anyof request"() {
         def createUser = spec.findById("createUser")
-        def jsonRequest = createUser.request.content.byMimeType.get("application/json")
-        def apiParameters = new OpenApi3SchemaToApiParametersConverter(
-                new SchemaTestMarkdownParser(), "testprefix", jsonRequest).convert()
 
-        def asMap = PropsUtils.exerciseSuppliers(apiParameters.toMap()) as Map<String, ?>
-        System.out.println(JsonUtils.serializePrettyPrint(asMap))
+        def jsonRequest = createUser.request.content.byMimeType.get("application/json")
+        def asMap = schemaAsApiParamsMap(jsonRequest)
 
         asMap.should == [
                 "parameters": [
-                        ["name": "", "type": [ ["text": "oneOf", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
+                        ["name": "", "type": [["text": "oneOf", "url": ""]], "anchorId": "testprefix", "description": [["text": "", "type": "testMarkdown"]],
                          "children": [
-                                 ["name": "", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
+                                 ["name": "", "type": [["text": "object", "url": ""]], "anchorId": "testprefix", "description": [["text": "", "type": "testMarkdown"]],
                                   "children": [
-                                          ["name": "id", "type": [ ["text": "integer(int64)", "url": ""] ], "anchorId": "testprefix_id", "description": [ ["text": "*Example*: `10`", "type": "testMarkdown"] ]],
-                                          ["name": "username", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_username", "description": [ ["text": "*Example*: `theUser`", "type": "testMarkdown"] ]] ]],
-                                 ["name": "", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix", "description": [ ["text": "", "type": "testMarkdown"] ],
+                                          ["name": "id", "type": [["text": "integer(int64)", "url": ""]], "anchorId": "testprefix_id", "description": [["text": "*Example*: `10`", "type": "testMarkdown"]]],
+                                          ["name": "username", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_username", "description": [["text": "*Example*: `theUser`", "type": "testMarkdown"]]]]],
+                                 ["name": "", "type": [["text": "object", "url": ""]], "anchorId": "testprefix", "description": [["text": "", "type": "testMarkdown"]],
                                   "children": [
-                                          ["name": "name*", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
-                                          ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]]]] ]
-                        ] ]
+                                          ["name": "name*", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_name", "description": [["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"]]],
+                                          ["name": "status", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_status", "description": [["text": "pet status in the store", "type": "testMarkdown"]]]]]]
+                        ]]
+        ]
+    }
+
+    @Test
+    void "additional properties"() {
+        def getInventory = spec.findById("getInventory")
+
+        def jsonResponse = getInventory.responses.get(0).content.byMimeType.get("application/json")
+        def asMap = schemaAsApiParamsMap(jsonResponse)
+
+        asMap.should == ["parameters": [
+                ["name": "tempId", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_tempId", "description": [ ["text": "temporary inventory id", "type": "testMarkdown"] ]],
+                ["name": "< * >", "type": [ ["text": "object", "url": ""] ], "anchorId": "testprefix_<  >", "description": [ ["text": "", "type": "testMarkdown"] ],
+                 "children": [
+                         ["name": "name*", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_<  >_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
+                         ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_<  >_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]] ]] ]
         ]
     }
 
@@ -79,17 +92,22 @@ class OpenApi3SpecTest {
         def response = petById.responses.get(0)
 
         def jsonResponse = response.content.byMimeType.get("application/json")
+        def asMap = schemaAsApiParamsMap(jsonResponse)
 
+        asMap.should == [
+                "parameters": [
+                        ["name": "name*", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_name", "description": [["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"]]],
+                        ["name": "status", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_status", "description": [["text": "pet status in the store", "type": "testMarkdown"]]]]
+        ]
+    }
+
+    private static Map<String, ?> schemaAsApiParamsMap(OpenApi3Schema schema) {
         def apiParameters = new OpenApi3SchemaToApiParametersConverter(
-                new SchemaTestMarkdownParser(), "testprefix", jsonResponse).convert()
+                new SchemaTestMarkdownParser(), "testprefix", schema).convert()
         def asMap = PropsUtils.exerciseSuppliers(apiParameters.toMap()) as Map<String, ?>
 
         System.out.println(JsonUtils.serializePrettyPrint(asMap))
 
-        asMap.should == [
-                "parameters": [
-                        ["name": "name*", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_name", "description": [ ["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"] ]],
-                        ["name": "status", "type": [ ["text": "string", "url": ""] ], "anchorId": "testprefix_status", "description": [ ["text": "pet status in the store", "type": "testMarkdown"] ]] ]
-        ]
+        return asMap
     }
 }
