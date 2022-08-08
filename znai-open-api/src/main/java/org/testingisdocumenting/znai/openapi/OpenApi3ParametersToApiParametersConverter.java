@@ -42,7 +42,8 @@ public class OpenApi3ParametersToApiParametersConverter {
     private void convertParameter(OpenApi3Parameter parameter) {
         DocElement docElementFromDescription = parser.docElementFromDescription(parameter.getDescription());
 
-        apiParameters.add(parameter.getName(),
+        String namePrefix = parameter.getRequired() != null && parameter.getRequired() ? "*" : "";
+        apiParameters.add(parameter.getName() + namePrefix,
                 new ApiLinkedText(parameter.getSchema().renderCombinedType()),
                 docElementFromDescription.contentToListOfMaps(), parameter.getDescription());
     }

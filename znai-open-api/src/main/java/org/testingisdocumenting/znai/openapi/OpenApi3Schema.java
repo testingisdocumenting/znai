@@ -76,6 +76,10 @@ public class OpenApi3Schema {
         this.example = example;
     }
 
+    public boolean isRequired(String name) {
+        return required.contains(name);
+    }
+
     public String renderTypeWithFormat() {
         return format != null ?
                 type + "(" + format + ")":
@@ -124,6 +128,10 @@ public class OpenApi3Schema {
 
     public List<String> getRequired() {
         return required;
+    }
+
+    public void addRequired(List<String> names) {
+        required.addAll(names);
     }
 
     OpenApi3Schema(String name, String type, String description) {

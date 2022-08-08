@@ -105,7 +105,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
     private OpenApi3Operation findOperationByOperationId(String operationId) {
         OpenApi3Operation result = spec.findById(operationId);
 
-        if (operation == null) {
+        if (result == null) {
             throw new IllegalArgumentException("can't find openapi operation: " + operationId);
         }
 
