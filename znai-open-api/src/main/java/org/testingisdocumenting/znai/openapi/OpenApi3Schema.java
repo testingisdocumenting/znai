@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 public class OpenApi3Schema {
+    private static final String ADDITIONAL_PROPS_NAME = "< * >";
+
     private final String name;
     private final String type;
     private final String description;
@@ -37,12 +39,15 @@ public class OpenApi3Schema {
     private List<String> enumValues;
 
     private OpenApi3Schema items;
+    private OpenApi3Schema additionalProperties;
 
     public static OpenApi3Schema convertFromParsed(String name, Schema<?> parsed) {
         if (parsed instanceof ComposedSchema) {
             return convertFromComposed(name, (ComposedSchema) parsed);
-        } if (parsed instanceof ObjectSchema) {
+        } else if (parsed instanceof ObjectSchema) {
             return convertFromObject(name, (ObjectSchema) parsed);
+        } else if (parsed instanceof MapSchema) {
+            return convertFromMap(name, (MapSchema) parsed);
         } else if (parsed instanceof ArraySchema) {
             return convertFromArray(name, (ArraySchema) parsed);
         } else if (parsed instanceof StringSchema) {
@@ -122,6 +127,10 @@ public class OpenApi3Schema {
         this.items = items;
     }
 
+    public OpenApi3Schema getAdditionalProperties() {
+        return additionalProperties;
+    }
+
     public List<OpenApi3Schema> getProperties() {
         return properties;
     }
@@ -168,11 +177,13 @@ public class OpenApi3Schema {
         list.forEach((child) -> parent.properties.add(convertFromParsed("", child)));
     }
 
-    private static OpenApi3Schema convertFromObject(String name, ObjectSchema parsed) {
+    private static OpenApi3Schema convertFromObject(String name, Schema<Object> parsed) {
         OpenApi3Schema schema = createSchema(name, parsed);
 
         Map<String, Schema> parsedProperties = parsed.getProperties();
-        parsedProperties.forEach((propertyName, parsedSchema) -> schema.properties.add(convertFromParsed(propertyName, parsedSchema)));
+        if (parsedProperties != null) {
+            parsedProperties.forEach((propertyName, parsedSchema) -> schema.properties.add(convertFromParsed(propertyName, parsedSchema)));
+        }
 
         if (parsed.getRequired() != null) {
             schema.required.addAll(parsed.getRequired());
@@ -181,9 +192,28 @@ public class OpenApi3Schema {
         return schema;
     }
 
+    private static OpenApi3Schema convertFromMap(String name, MapSchema parsed) {
+        OpenApi3Schema schema = convertFromObject(name, parsed);
+        if (parsed.getAdditionalProperties() == null) {
+            return schema;
+        }
+
+        if (parsed.getAdditionalProperties() instanceof Boolean && parsed.getAdditionalProperties().equals(true)) {
+            schema.additionalProperties = createAnyTypeSchema();
+        } else if (parsed.getAdditionalProperties() instanceof Schema) {
+            schema.additionalProperties = convertFromParsed(ADDITIONAL_PROPS_NAME, (Schema<?>) parsed.getAdditionalProperties());
+        }
+
+        return schema;
+    }
+
+    private static OpenApi3Schema createAnyTypeSchema() {
+        return new OpenApi3Schema(ADDITIONAL_PROPS_NAME, "any", "");
+    }
+
     private static OpenApi3Schema convertFromArray(String name, ArraySchema parsed) {
         OpenApi3Schema result = createSchema(name, parsed);
-        result.items = convertFromParsed("", parsed.getItems());
+        result.setItems(convertFromParsed("", parsed.getItems()));
 
         return result;
     }
