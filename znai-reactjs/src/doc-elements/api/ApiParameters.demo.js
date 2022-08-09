@@ -27,6 +27,10 @@ const personParameters = [
     {anchorId: 'prefix_score',name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
 ]
 
+const singleParameter = [
+    {anchorId: 'prefix_firstName', name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
+]
+
 const personParametersWithTypeRef = [
     {anchorId: 'prefix_firstName', name: 'firstName', type: [
             {text: "list of ", refId: ""},
@@ -89,6 +93,9 @@ export function apiParametersDemo(registry) {
     registry
       .add('flat parameters', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>
+      ))
+      .add('single parameter', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={singleParameter}/>
       ))
       .add('flat parameters with global refs', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personParametersWithTypeRef}/>

@@ -37,7 +37,7 @@ export default function ApiParameters({
                                       }) {
   const [userDrivenCollapsed, setUserDrivenCollapsed] = useState(collapsed);
 
-  const isExpanded = !nestedLevel && parameters.length === 1;
+  const isExpanded = !nestedLevel && parameters.length === 1 && parameters[0].children;
 
   const renderedParameters = userDrivenCollapsed ? null :
     (parameters || []).map(p => <ApiParameter key={p.name}
