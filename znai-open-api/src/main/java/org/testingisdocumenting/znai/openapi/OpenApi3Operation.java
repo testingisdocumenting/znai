@@ -17,14 +17,16 @@
 package org.testingisdocumenting.znai.openapi;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class OpenApi3Operation {
     private String id;
     private String method;
     private String summary;
     private String path;
-    private List<String> tags;
+    private final Set<String> tags;
     private String description;
 
     private OpenApi3Request request;
@@ -32,7 +34,7 @@ public class OpenApi3Operation {
     private final List<OpenApi3Parameter> parameters;
 
     public OpenApi3Operation() {
-        tags = new ArrayList<>();
+        tags = new HashSet<>();
         responses = new ArrayList<>();
         parameters = new ArrayList<>();
     }
@@ -69,14 +71,6 @@ public class OpenApi3Operation {
         this.path = path;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
     public OpenApi3Request getRequest() {
         return request;
     }
@@ -111,5 +105,17 @@ public class OpenApi3Operation {
 
     public List<OpenApi3Response> getResponses() {
         return responses;
+    }
+
+    public boolean hasTags(List<String> tagsToCheck) {
+        return this.tags.containsAll(tagsToCheck);
+    }
+
+    public void addTags(List<String> tags) {
+        this.tags.addAll(tags);
+    }
+
+    public Set<String> getTags() {
+        return tags;
     }
 }

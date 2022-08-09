@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.toList;
 import static org.testingisdocumenting.znai.utils.StringUtils.nullAsEmpty;
 
 public class OpenApi3Spec {
@@ -73,6 +74,10 @@ public class OpenApi3Spec {
                 .orElseThrow(() -> new RuntimeException("cannot find operation: " + method + " " + path));
     }
 
+    public List<OpenApi3Operation> findOperationsByTags(List<String> tags) {
+        return operations.stream().filter(o -> o.hasTags(tags)).collect(toList());
+    }
+
     private void process() {
         Paths paths = parseResult.getOpenAPI().getPaths();
         for (Map.Entry<String, PathItem> pathEntry : paths.entrySet()) {
@@ -94,7 +99,7 @@ public class OpenApi3Spec {
 
         OpenApi3Operation operation = new OpenApi3Operation();
         operation.setId(Objects.toString(parsed.getOperationId()));
-        operation.setTags(parsed.getTags());
+        operation.addTags(parsed.getTags());
         operation.setPath(path);
         operation.setMethod(method);
         operation.setSummary(parsed.getSummary());
