@@ -100,7 +100,7 @@ public class OpenApi3SchemaToApiParametersConverter {
     }
 
     private ApiParameter addParameter(ApiParameter parent, OpenApi3Schema schema, boolean required) {
-        DocElement docElementFromDescription = parser.docElementFromDescription(schema.renderDescriptionWithExamples());
+        DocElement docElementFromDescription = parser.docElementFromDescription(schema.renderDescriptionWithExamplesAndEnums());
 
         String namePrefix = required ? "*" : "";
         return parent.add(
