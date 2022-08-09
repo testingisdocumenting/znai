@@ -44,9 +44,9 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
     private static final String METHOD_KEY = "method";
     private static final String PATH_KEY = "path";
     private static final String AUTO_SECTION_KEY = "autoSection";
+    private static final String TAGS_KEY = "tags";
 
     private Path specPath;
-    private OpenApi3Operation operation;
     private ParserHandler parserHandler;
     private OpenApi3Spec spec;
     private MarkdownParser markdownParser;
@@ -68,6 +68,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
                 .add(OPERATION_ID_KEY, PluginParamType.STRING, "operation ID to find operation", "findUserById")
                 .add(METHOD_KEY, PluginParamType.STRING, "method to find operation", "post")
                 .add(PATH_KEY, PluginParamType.STRING, "path to find operation", "/user")
+                .add(TAGS_KEY, PluginParamType.STRING, "tags to find operation", "[\"pet\"]")
                 .add(AUTO_SECTION_KEY, PluginParamType.BOOLEAN, "auto generate page section for the operation", "true");
     }
 
@@ -83,86 +84,110 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
 
         spec = OpenApi3Spec.parse(specContent);
 
-        operation = findOperation(pluginParams);
+        List<OpenApi3Operation> operations = findOperations(pluginParams);
+        validateOperations(operations);
 
-        renderSectionIfRequired(pluginParams);
-        renderUrl();
-        renderDescription(operation.getDescription());
-        renderParameters();
-        renderRequests();
-        renderResponses();
+        operations.forEach(operation -> renderOperation(operation, pluginParams));
 
         return PluginResult.docElements(Stream.empty());
     }
 
-    private OpenApi3Operation findOperation(PluginParams pluginParams) {
-        String operationId = pluginParams.getOpts().get("operationId");
-        return operationId != null ?
-            findOperationByOperationId(operationId):
-            findOperationByMethodAndPath(pluginParams);
+    private void validateOperations(List<OpenApi3Operation> operations) {
+        if (operations.isEmpty()) {
+            throw new IllegalArgumentException("can't find open api operation(s), make sure provided " +
+                    OPERATION_ID_KEY + ", " + METHOD_KEY + ", " + PATH_KEY + ", " + TAGS_KEY + " are set correctly");
+        }
     }
 
-    private OpenApi3Operation findOperationByOperationId(String operationId) {
+    private void renderOperation(OpenApi3Operation operation, PluginParams pluginParams) {
+        renderSectionIfRequired(operation, pluginParams);
+        renderUrl(operation);
+        renderDescription(operation.getDescription());
+        renderParameters(operation);
+        renderRequests(operation);
+        renderResponses(operation);
+    }
+
+    private List<OpenApi3Operation> findOperations(PluginParams pluginParams) {
+        String operationId = pluginParams.getOpts().get(OPERATION_ID_KEY);
+        if (operationId != null) {
+            return findOperationByOperationId(operationId);
+        }
+
+        List<String> tags = pluginParams.getOpts().getList(TAGS_KEY);
+        if (!tags.isEmpty()) {
+            return findOperationsByTags(tags);
+        }
+
+        return findOperationByMethodAndPath(pluginParams);
+    }
+
+    private List<OpenApi3Operation> findOperationByOperationId(String operationId) {
         OpenApi3Operation result = spec.findById(operationId);
 
         if (result == null) {
-            throw new IllegalArgumentException("can't find openapi operation: " + operationId);
+            return Collections.emptyList();
         }
 
-        return result;
+        return Collections.singletonList(result);
     }
 
-    private OpenApi3Operation findOperationByMethodAndPath(PluginParams pluginParams) {
-        String method = pluginParams.getOpts().get("method", "");
-        String path = pluginParams.getOpts().get("path", "");
+    private List<OpenApi3Operation> findOperationByMethodAndPath(PluginParams pluginParams) {
+        String method = pluginParams.getOpts().get(METHOD_KEY, "");
+        String path = pluginParams.getOpts().get(PATH_KEY, "");
 
-        if (method.isEmpty() || path.isEmpty()) {
-            throw new IllegalArgumentException("operationId or method/path is required to find OpenAPI operation");
+        OpenApi3Operation result = spec.findByMethodAndPath(method, path);
+        if (result == null) {
+            return Collections.emptyList();
         }
 
-        return spec.findByMethodAndPath(method, path);
+        return Collections.singletonList(result);
     }
 
-    private void renderSectionIfRequired(PluginParams pluginParams) {
+    private List<OpenApi3Operation> findOperationsByTags(List<String> tags) {
+        return spec.findOperationsByTags(tags);
+    }
+
+    private void renderSectionIfRequired(OpenApi3Operation operation, PluginParams pluginParams) {
         if (pluginParams.getOpts().get(AUTO_SECTION_KEY, false)) {
             parserHandler.onSectionStart(operation.getSummary(), HeadingProps.EMPTY);
         }
     }
 
-    private void renderUrl() {
+    private void renderUrl(OpenApi3Operation operation) {
         parserHandler.onCustomNode("OpenApiMethodAndUrl", CollectionUtils.createMap("method", operation.getMethod(), "url", operation.getPath()));
     }
 
-    private void renderRequests() {
+    private void renderRequests(OpenApi3Operation operation) {
         if (operation.getRequest() == null) {
             return;
         }
 
         parserHandler.onSubHeading(2, "Request", HeadingProps.STYLE_API);
         renderDescription(operation.getRequest().getDescription());
-        renderContent(operation.getRequest().getContent());
+        renderContent(operation, operation.getRequest().getContent());
     }
 
-    private void renderResponses() {
+    private void renderResponses(OpenApi3Operation operation) {
         if (operation.getResponses().isEmpty()) {
             return;
         }
 
-        parserHandler.onSubHeading(2, renderResponsesTitle(), HeadingProps.STYLE_API);
+        parserHandler.onSubHeading(2, renderResponsesTitle(operation), HeadingProps.STYLE_API);
 
         for (OpenApi3Response response : operation.getResponses()) {
             parserHandler.onSubHeading(4, response.getCode(), HeadingProps.STYLE_API);
             renderDescription(response.getDescription());
 
-            renderContent(response.getContent());
+            renderContent(operation, response.getContent());
         }
     }
 
-    private String renderResponsesTitle() {
+    private String renderResponsesTitle(OpenApi3Operation operation) {
         return "Response" + (operation.getResponses().size() > 1 ? "s" : "");
     }
 
-    private void renderContent(OpenApi3Content content) {
+    private void renderContent(OpenApi3Operation operation, OpenApi3Content content) {
         if (content.getByMimeType().isEmpty()) {
             return;
         }
@@ -182,7 +207,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
 
         schemasWithCollapsed.get(0).collapsed = false;
 
-        schemasWithCollapsed.forEach(this::renderSchema);
+        schemasWithCollapsed.forEach(schemaWithCollapsed -> renderSchema(operation, schemaWithCollapsed));
     }
 
     private void renderDescription(String description) {
@@ -190,13 +215,13 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
         docElement.getContent().forEach(parserHandler::onDocElement);
     }
 
-    private void renderParameters() {
+    private void renderParameters(OpenApi3Operation operation) {
         List<OpenApi3Parameter> parameters = operation.getParameters();
-        renderParametersWithTitle(parameters.stream().filter(p -> p.getIn().equals("path")), "path parameters");
-        renderParametersWithTitle(parameters.stream().filter(p -> p.getIn().equals("query")), "query parameters");
+        renderParametersWithTitle(operation, parameters.stream().filter(p -> p.getIn().equals("path")), "path parameters");
+        renderParametersWithTitle(operation, parameters.stream().filter(p -> p.getIn().equals("query")), "query parameters");
     }
 
-    private void renderParametersWithTitle(Stream<OpenApi3Parameter> parametersStream, String title) {
+    private void renderParametersWithTitle(OpenApi3Operation operation, Stream<OpenApi3Parameter> parametersStream, String title) {
         List<OpenApi3Parameter> parameters = parametersStream.collect(Collectors.toList());
         if (parameters.isEmpty()) {
             return;
@@ -214,7 +239,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
         parserHandler.onCustomNode("ApiParameters", props);
     }
 
-    private void renderSchema(SchemaWithCollapsed schemaWithCollapsed) {
+    private void renderSchema(OpenApi3Operation operation, SchemaWithCollapsed schemaWithCollapsed) {
         ApiParameters apiParameters = new OpenApi3SchemaToApiParametersConverter(
                 openApiMarkdownParser,
                 operation.getId() + schemaWithCollapsed.mimeType,
