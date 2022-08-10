@@ -15,129 +15,149 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import { Icon } from '../icons/Icon'
+import React from "react";
+import { Icon } from "../icons/Icon";
 
-import {paragraphStartsWith, removeSuffixFromParagraph} from './paragraphUtils'
+import { paragraphStartsWith, removeSuffixFromParagraph } from "./paragraphUtils";
 
-import {elementMetaValue} from '../meta/meta';
+import { elementMetaValue } from "../meta/meta";
 
-import './Paragraph.css'
+import "./Paragraph.css";
 import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
 
-const noteSuffix = "Note:"
-const warningSuffix = "Warning:"
-const questionSuffix = "Question:"
-const exerciseSuffix = "Exercise:"
-const avoidSuffix = "Avoid:"
-const dontSuffix = "Don't:"
-const doNotSuffix = "Do not:"
+const noteSuffix = "Note:";
+const warningSuffix = "Warning:";
+const questionSuffix = "Question:";
+const exerciseSuffix = "Exercise:";
+const avoidSuffix = "Avoid:";
+const dontSuffix = "Don't:";
+const doNotSuffix = "Do not:";
 
-const allSuffixes = [noteSuffix, warningSuffix, questionSuffix, exerciseSuffix, avoidSuffix, dontSuffix, doNotSuffix]
+const allSuffixes = [noteSuffix, warningSuffix, questionSuffix, exerciseSuffix, avoidSuffix, dontSuffix, doNotSuffix];
 
 const DefaultParagraph = (props: DocElementProps) => {
-    return <div className="paragraph content-block"><props.elementsLibrary.DocElement {...props}/></div>
-}
+  return (
+    <div className="paragraph content-block">
+      <props.elementsLibrary.DocElement {...props} />
+    </div>
+  );
+};
 
 interface WithAttentionProps extends DocElementProps {
-    attentionType: string;
-    suffix: string;
-    icon: string
+  attentionType: string;
+  suffix: string;
+  icon: string;
 }
 
-const ParagraphWithAttention = ({attentionType, suffix, icon, ...props}: WithAttentionProps) => {
-    const contentWithRemovedSuffix = removeSuffixFromParagraph(props.content, suffix)
-    return (
-        <div className={`paragraph attention ${attentionType} content-block`}>
-            <span className="icon-part">
-                <Icon id={icon}/>
-                <span className="label-message">{suffix}</span>
-            </span>
-            <span className="message-part">
-                <props.elementsLibrary.DocElement {...props} content={contentWithRemovedSuffix}/>
-            </span>
-        </div>
-    )
-}
+const ParagraphWithAttention = ({ attentionType, suffix, icon, ...props }: WithAttentionProps) => {
+  const contentWithRemovedSuffix = removeSuffixFromParagraph(props.content, suffix);
+  return (
+    <div className={`paragraph attention ${attentionType} content-block`}>
+      <span className="icon-part">
+        <Icon id={icon} />
+        <span className="label-message">{suffix}</span>
+      </span>
+      <span className="message-part">
+        <props.elementsLibrary.DocElement {...props} content={contentWithRemovedSuffix} />
+      </span>
+    </div>
+  );
+};
 
-const NoteParagraph = (props: DocElementProps) => <ParagraphWithAttention attentionType="note" suffix={noteSuffix} icon="info" {...props}/>
-const WarningParagraph = (props: DocElementProps) => <ParagraphWithAttention attentionType="warning" suffix={warningSuffix} icon="alert-triangle" {...props}/>
-const QuestionParagraph = (props: DocElementProps) => <ParagraphWithAttention attentionType="question" suffix={questionSuffix} icon="help-circle" {...props}/>
-const ExerciseParagraph = (props: DocElementProps) => <ParagraphWithAttention attentionType="question" suffix={exerciseSuffix} icon="help-circle" {...props}/>
-const AvoidParagraph = (props: DocElementProps) => <ParagraphWithAttention attentionType="avoid" suffix={avoidSuffix} icon="x-octagon" {...props}/>
-const DontParagraph = (props: DocElementProps) => <ParagraphWithAttention attentionType="avoid" suffix={dontSuffix} icon="x-octagon" {...props}/>
-const DoNotParagraph = (props: DocElementProps) => <ParagraphWithAttention attentionType="avoid" suffix={doNotSuffix} icon="x-octagon" {...props}/>
+const NoteParagraph = (props: DocElementProps) => (
+  <ParagraphWithAttention attentionType="note" suffix={noteSuffix} icon="info" {...props} />
+);
+const WarningParagraph = (props: DocElementProps) => (
+  <ParagraphWithAttention attentionType="warning" suffix={warningSuffix} icon="alert-triangle" {...props} />
+);
+const QuestionParagraph = (props: DocElementProps) => (
+  <ParagraphWithAttention attentionType="question" suffix={questionSuffix} icon="help-circle" {...props} />
+);
+const ExerciseParagraph = (props: DocElementProps) => (
+  <ParagraphWithAttention attentionType="question" suffix={exerciseSuffix} icon="help-circle" {...props} />
+);
+const AvoidParagraph = (props: DocElementProps) => (
+  <ParagraphWithAttention attentionType="avoid" suffix={avoidSuffix} icon="x-octagon" {...props} />
+);
+const DontParagraph = (props: DocElementProps) => (
+  <ParagraphWithAttention attentionType="avoid" suffix={dontSuffix} icon="x-octagon" {...props} />
+);
+const DoNotParagraph = (props: DocElementProps) => (
+  <ParagraphWithAttention attentionType="avoid" suffix={doNotSuffix} icon="x-octagon" {...props} />
+);
 
 const Paragraph = (props: DocElementProps) => {
-    if (paragraphStartsWith(props.content, noteSuffix)) {
-        return <NoteParagraph {...props}/>
-    }
+  if (paragraphStartsWith(props.content, noteSuffix)) {
+    return <NoteParagraph {...props} />;
+  }
 
-    if (paragraphStartsWith(props.content, warningSuffix)) {
-        return <WarningParagraph {...props}/>
-    }
+  if (paragraphStartsWith(props.content, warningSuffix)) {
+    return <WarningParagraph {...props} />;
+  }
 
-    if (paragraphStartsWith(props.content, questionSuffix)) {
-        return <QuestionParagraph {...props}/>
-    }
+  if (paragraphStartsWith(props.content, questionSuffix)) {
+    return <QuestionParagraph {...props} />;
+  }
 
-    if (paragraphStartsWith(props.content, exerciseSuffix)) {
-        return <ExerciseParagraph {...props}/>
-    }
+  if (paragraphStartsWith(props.content, exerciseSuffix)) {
+    return <ExerciseParagraph {...props} />;
+  }
 
-    if (paragraphStartsWith(props.content, avoidSuffix)) {
-        return <AvoidParagraph {...props}/>
-    }
+  if (paragraphStartsWith(props.content, avoidSuffix)) {
+    return <AvoidParagraph {...props} />;
+  }
 
-    if (paragraphStartsWith(props.content, dontSuffix)) {
-        return <DontParagraph {...props}/>
-    }
+  if (paragraphStartsWith(props.content, dontSuffix)) {
+    return <DontParagraph {...props} />;
+  }
 
-    if (paragraphStartsWith(props.content, doNotSuffix)) {
-        return <DoNotParagraph {...props}/>
-    }
+  if (paragraphStartsWith(props.content, doNotSuffix)) {
+    return <DoNotParagraph {...props} />;
+  }
 
-    return <DefaultParagraph {...props}/>
-}
+  return <DefaultParagraph {...props} />;
+};
 
 const PresentationParagraph = (props: DocElementProps) => {
-    const className = "znai-presentation-paragraph-wrapper" + buildAdditionalClassName()
+  const className = "znai-presentation-paragraph-wrapper" + buildAdditionalClassName();
 
-    return (
-        <div className={className}>
-            <Paragraph {...props}/>
-        </div>
-    )
+  return (
+    <div className={className}>
+      <Paragraph {...props} />
+    </div>
+  );
 
-    function buildAdditionalClassName() {
-        if (allSuffixes.some((suffix) => paragraphStartsWith(props.content, suffix))) {
-            return "";
-        }
-
-        if (isParagraphPresentationForced(props.content)) {
-            return " znai-presentation-paragraph-default";
-        }
-
-        return "";
+  function buildAdditionalClassName() {
+    if (allSuffixes.some((suffix) => paragraphStartsWith(props.content, suffix))) {
+      return "";
     }
-}
 
-const presentationParagraph = {component: PresentationParagraph,
-    numberOfSlides: ({content}: {content: DocElementContent}) => {
-        const presentParagraph = isParagraphPresentationForced(content)
-        return presentParagraph ||
-            paragraphStartsWith(content, questionSuffix) ||
-            paragraphStartsWith(content, exerciseSuffix) ? 1 : 0;
+    if (isParagraphPresentationForced(props.content!)) {
+      return " znai-presentation-paragraph-default";
     }
-}
+
+    return "";
+  }
+};
+
+const presentationParagraph = {
+  component: PresentationParagraph,
+  numberOfSlides: ({ content }: { content: DocElementContent }) => {
+    const presentParagraph = isParagraphPresentationForced(content);
+    return presentParagraph ||
+      paragraphStartsWith(content, questionSuffix) ||
+      paragraphStartsWith(content, exerciseSuffix)
+      ? 1
+      : 0;
+  },
+};
 
 function isParagraphPresentationForced(content: DocElementContent) {
-    if (content.length === 0) {
-        return false
-    }
+  if (content.length === 0) {
+    return false;
+  }
 
-    return elementMetaValue(content[0], 'presentationParagraph') === "default"
+  return elementMetaValue(content[0], "presentationParagraph") === "default";
 }
 
-export { Paragraph, presentationParagraph }
-
+export { Paragraph, presentationParagraph };
