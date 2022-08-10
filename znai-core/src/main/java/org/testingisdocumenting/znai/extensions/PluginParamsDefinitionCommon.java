@@ -16,11 +16,19 @@
 
 package org.testingisdocumenting.znai.extensions;
 
+import java.util.Map;
+
 public class PluginParamsDefinitionCommon {
     public static final String TITLE_KEY = "title";
 
     public static final PluginParamsDefinition snippetTitle = new PluginParamsDefinition()
             .add(TITLE_KEY, PluginParamType.STRING, "title to use for snippet", "\"title of the snippet\"");
+
+    public static final PluginParamsDefinition collapsible = new PluginParamsDefinition()
+            .add("collapsible", PluginParamType.BOOLEAN,
+                    "add collapse/expand toggle. requires title", "true")
+            .add("collapsed", PluginParamType.BOOLEAN,
+                    "is collapsed by default (when specified, collapsible is not required)", "true");
 
     public static final PluginParamsDefinition snippetReadMore = new PluginParamsDefinition()
             .add("readMore", PluginParamType.BOOLEAN,
@@ -38,4 +46,10 @@ public class PluginParamsDefinitionCommon {
                     "change way code comments are displayed: <inline> - use bullet points, <remove> - hide comments", "\"inline\"")
             .add("spoiler", PluginParamType.BOOLEAN,
                     "hide bullet points comments (commentsType: \"inline\") behind spoiler", "\"inline\"");
+
+    public static void updateCollapsibleProps(PluginParamsOpts opts, Map<String, Object> props) {
+        if (opts.has("collapsed")) {
+            props.put("collapsible", true);
+        }
+    }
 }

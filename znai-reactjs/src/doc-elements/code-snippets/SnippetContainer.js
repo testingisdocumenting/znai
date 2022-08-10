@@ -27,7 +27,13 @@ import {SnippetOptionallyScrollablePart} from "./SnippetOptionallyScrollablePart
 import './SnippetContainer.css'
 
 class SnippetContainer extends React.Component {
-    state = { displayCopied: false }
+    constructor(props) {
+        super(props);
+        this.state = {
+            displayCopied: false,
+            collapsed: !!this.props.collapsed
+        }
+    }
 
     render() {
         const {wide, isPresentation} = this.props
@@ -75,14 +81,30 @@ class SnippetContainer extends React.Component {
 
     renderTitle(title) {
         if (!title) {
-            return null
+            return null;
         }
 
+        const { collapsible } = this.props;
+        const { collapsed } = this.state;
+
+        const titleClassName = "title" + (collapsible ? " collapsible" : "")
+
         return (
-            <div className="title-container content-block">
-                <div className="title">{title}</div>
-            </div>
+          <div className="title-container content-block">
+              {collapsible && (
+                <div className="znai-snippet-collapse-toggle" onClick={this.collapseToggle}>
+                    {collapsed ? "+" : "-"}
+                </div>
+              )}
+              <div className={titleClassName}>
+                  {title}
+              </div>
+          </div>
         )
+    }
+
+     collapseToggle = () => {
+        this.setState(prev => ({collapsed: !prev.collapsed}))
     }
 
     renderSnippet() {
@@ -91,7 +113,7 @@ class SnippetContainer extends React.Component {
                 <SnippetOptionallyScrollablePart{...this.props}/>
                 {this.renderCopyToClipboard()}
             </div>
-        )
+        );
     }
 
     renderCopyToClipboard() {
@@ -113,7 +135,10 @@ class SnippetContainer extends React.Component {
 
     get snippetClassName() {
         const {title} = this.props
-        return "snippet" + (title ? " with-title" : "")
+        const {collapsed} = this.state
+        return "snippet"
+          + (title ? " with-title" : "")
+          + (collapsed ? " collapsed" : "")
     }
 
     saveCopyToClipboardNode = (node) => {

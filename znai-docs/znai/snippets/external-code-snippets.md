@@ -81,6 +81,17 @@ option with an **optional** `readMoreVisibleLines` option to specify a number of
     
 :include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3} 
 
+# Collapse 
+
+Use `collapsed: true` to make code snippet collapsible.
+Note: `title` option is required  
+
+```markdown
+:include-file: file-name.js {title: "collapsible snippet", collapsed: true}
+```
+
+:include-file: file-name.js {title: "collapsible snippet", collapsed: true}
+
 # Highlights
 
 Use the `highlight` option to bring readers attention to the important lines.
