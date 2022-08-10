@@ -94,6 +94,7 @@ export default function ApiParameters({
     <div className={className} style={style}>
       <ApiParametersTitle
         title={title}
+        example={example}
         nestedLevel={nestedLevel}
         collapsible={collapsible}
         collapsed={userDrivenCollapsed}
@@ -123,19 +124,22 @@ export default function ApiParameters({
 
 interface TitleProps {
   title?: string;
+  example?: string;
   nestedLevel: number;
   collapsible?: boolean;
   collapsed?: boolean;
   collapseToggle(): void;
 }
 
-function ApiParametersTitle({ title, nestedLevel, collapsible, collapsed, collapseToggle }: TitleProps) {
+function ApiParametersTitle({ title, example, nestedLevel, collapsible, collapsed, collapseToggle }: TitleProps) {
   if (!title || nestedLevel > 0) {
     return null;
   }
 
+  const className = "znai-api-parameters-title-cell" + (example ? " with-example" : "");
+
   return (
-    <div className="znai-api-parameters-title-cell">
+    <div className={className}>
       {collapsible && (
         <div className="znai-api-parameters-collapse-toggle" onClick={collapseToggle}>
           {collapsed ? "+" : "-"}
@@ -153,8 +157,6 @@ interface ExampleProps {
 }
 
 function ApiParametersExample({ example, isNested }: ExampleProps) {
-  const [exampleExpanded, setExampleExpanded] = useState(false);
-
   if (!example || isNested) {
     return null;
   }
@@ -163,24 +165,9 @@ function ApiParametersExample({ example, isNested }: ExampleProps) {
 
   return (
     <div className="znai-api-parameters-example-cell">
-      {exampleExpanded ? (
-        <>
-          <div className="znai-api-parameters-example-label expanded" onClick={toggleExampleExpand}>
-            hide example
-          </div>
-          <Snippet lang={lang()} snippet={example} />
-        </>
-      ) : (
-        <div className="znai-api-parameters-example-label collapsed" onClick={toggleExampleExpand}>
-          show example
-        </div>
-      )}
+      <Snippet lang={lang()} snippet={example} collapsed={true} collapsible={true} title="example" />
     </div>
   );
-
-  function toggleExampleExpand() {
-    setExampleExpanded((prevState) => !prevState);
-  }
 
   function lang() {
     if (!example) {

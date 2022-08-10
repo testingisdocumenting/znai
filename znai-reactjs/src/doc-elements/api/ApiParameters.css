@@ -70,6 +70,10 @@
     padding: 0 10px;
 }
 
+.znai-api-parameters-title-cell.with-example {
+    border-left: 1px solid var(--znai-snippets-title-left-border-color);
+}
+
 .znai-api-parameters-title {
     color: var(--znai-api-title-color);
     font-size: var(--znai-smaller-text-size);
@@ -84,6 +88,11 @@
 .znai-api-parameters-example-cell .snippet-container {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.znai-api-parameters-example-cell .title-container,
+.znai-api-parameters-example-cell .title-container .title {
+    font-size: var(--znai-small-text-size);
 }
 
 .znai-api-parameters-example-label {

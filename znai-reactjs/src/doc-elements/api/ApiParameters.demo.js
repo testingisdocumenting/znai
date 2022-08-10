@@ -124,6 +124,9 @@ export function apiParametersDemo(registry) {
       .add('flat parameters with title', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition"/>
       ))
+      .add('flat parameters with title and example', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" example={jsonExample}/>
+      ))
       .add('collapsible requires title', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" collapsible={true}/>
       ))
