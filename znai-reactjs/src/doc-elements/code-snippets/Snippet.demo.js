@@ -36,7 +36,9 @@ const [getReadMore, setReadMore] = simulateState(true);
 export function snippetsDemo(registry) {
     registry
         .add('title', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()}/>)
+        .add('title collapsible', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()} collapsible={true}/>)
         .add('wide with title', () => <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()}/>)
+        .add('wide with title collapsible', () => <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()} collapsible={true}/>)
         .add('with linked method calls', () => <Snippet wide={true} title="snippet title" lang="java"
                                                         references={methodCallReferences()}
                                                         snippet={codeWithMethodCalls()}/>)

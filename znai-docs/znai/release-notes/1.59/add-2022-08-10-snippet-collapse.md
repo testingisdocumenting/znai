@@ -1,0 +1,1 @@
+* Add [collapsible](snippets/external-code-snippets#collapse) option to [Code Snippets](snippets/external-code-snippets)   

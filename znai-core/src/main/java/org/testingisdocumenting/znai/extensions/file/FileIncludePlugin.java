@@ -48,6 +48,7 @@ public class FileIncludePlugin implements IncludePlugin {
 
         result.add(PluginParamsDefinitionCommon.snippetRender);
         result.add(PluginParamsDefinitionCommon.snippetTitle);
+        result.add(PluginParamsDefinitionCommon.collapsible);
         result.add(SnippetAutoTitleFeature.paramsDefinition);
         result.add(SnippetHighlightFeature.paramsDefinition);
         result.add(ManipulatedSnippetContentProvider.paramsDefinition);
@@ -90,6 +91,9 @@ public class FileIncludePlugin implements IncludePlugin {
 
         Map<String, Object> props = CodeSnippetsProps.create(langToUse, contentProvider.snippetContent());
         props.putAll(pluginParams.getOpts().toMap());
+
+        PluginParamsDefinitionCommon.updateCollapsibleProps(pluginParams.getOpts(), props);
+
         features.updateProps(props);
 
         return PluginResult.docElement(DocElementType.SNIPPET, props);
