@@ -27,7 +27,7 @@ interface Props extends DocElementProps {
 export function AnnotatedImageOrderedList({ content, elementsLibrary, isInvertedColors, onHover }: Props) {
   return (
     <div className="znai-annotated-image-ordered-list content-block">
-      {content.map((item, idx) => (
+      {(content || []).map((item, idx) => (
         <ListItem
           key={idx}
           idx={idx}

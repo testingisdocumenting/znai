@@ -30,7 +30,7 @@ export interface WithElementsLibrary {
 }
 
 export interface DocElementProps extends WithElementsLibrary {
-  content: DocElementContent;
+  content?: DocElementContent;
   next?: DocElementPayload;
   prev?: DocElementPayload;
 }

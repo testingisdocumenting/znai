@@ -89,10 +89,19 @@ const withCodeSnippetFirst = [
     {name: 'paramOne', type: 'string', description: codeBeforeParagraph}
 ]
 
+const jsonExample = `
+{
+  "key1": "value1"
+}
+`
+
 export function apiParametersDemo(registry) {
     registry
       .add('flat parameters', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>
+      ))
+      .add('flat parameters with example', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} example={jsonExample}/>
       ))
       .add('single parameter', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={singleParameter}/>
