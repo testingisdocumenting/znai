@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
 import { ApiLinkedText } from "./ApiLinkedText";
@@ -62,6 +62,10 @@ export default function ApiParameters({
   elementsLibrary,
 }: Props) {
   const [userDrivenCollapsed, setUserDrivenCollapsed] = useState(collapsed);
+
+  useEffect(() => {
+    setUserDrivenCollapsed(collapsed);
+  }, [collapsed]);
 
   const isExpanded = !nestedLevel && parameters.length === 1 && !!parameters[0].children;
 

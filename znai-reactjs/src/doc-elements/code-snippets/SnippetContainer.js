@@ -150,6 +150,12 @@ class SnippetContainer extends React.Component {
         this.setupClipboard()
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.collapsed !== this.props.collapsed) {
+            this.setState({ collapsed: this.props.collapsed})
+        }
+    }
+
     componentWillUnmount() {
         this.clearTimer()
         this.destroyClipboard()
