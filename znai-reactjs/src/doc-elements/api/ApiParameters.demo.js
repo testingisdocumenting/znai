@@ -128,10 +128,10 @@ export function apiParametersDemo(registry) {
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" example={jsonExample}/>
       ))
       .add('collapsible requires title', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" collapsible={true}/>
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" collapsed={false}/>
       ))
       .add('collapsible collapsed by default', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" collapsible={true} collapsed={true}/>
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" collapsed={true}/>
       ))
       .add('flat parameters with long description', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongDescriptionParameters}/>

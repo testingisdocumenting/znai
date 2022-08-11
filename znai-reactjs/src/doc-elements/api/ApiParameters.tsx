@@ -41,7 +41,6 @@ interface Props extends DocElementProps {
   small?: boolean;
   noWrap?: boolean;
   wide?: boolean;
-  collapsible?: boolean;
   collapsed?: boolean;
   parentWidth?: number;
   references?: any;
@@ -56,7 +55,6 @@ export default function ApiParameters({
   small,
   noWrap,
   wide,
-  collapsible,
   collapsed,
   parentWidth = 0,
   next,
@@ -96,7 +94,6 @@ export default function ApiParameters({
         title={title}
         example={example}
         nestedLevel={nestedLevel}
-        collapsible={collapsible}
         collapsed={userDrivenCollapsed}
         collapseToggle={collapseToggle}
       />
@@ -126,17 +123,18 @@ interface TitleProps {
   title?: string;
   example?: string;
   nestedLevel: number;
-  collapsible?: boolean;
   collapsed?: boolean;
   collapseToggle(): void;
 }
 
-function ApiParametersTitle({ title, example, nestedLevel, collapsible, collapsed, collapseToggle }: TitleProps) {
+function ApiParametersTitle({ title, example, nestedLevel, collapsed, collapseToggle }: TitleProps) {
   if (!title || nestedLevel > 0) {
     return null;
   }
 
   const className = "znai-api-parameters-title-cell" + (example ? " with-example" : "");
+
+  const collapsible = collapsed !== undefined;
 
   return (
     <div className={className}>

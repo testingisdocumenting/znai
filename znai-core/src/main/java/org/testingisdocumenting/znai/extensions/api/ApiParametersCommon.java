@@ -42,10 +42,6 @@ class ApiParametersCommon {
         }
     }
 
-    static void updateProps(PluginParamsOpts opts, Map<String, Object> props) {
-        PluginParamsDefinitionCommon.updateCollapsibleProps(opts, props);
-    }
-
     static PluginResult pluginResult(ApiParameters apiParameters,
                                      ComponentsRegistry componentsRegistry,
                                      PluginParams pluginParams,
@@ -58,7 +54,6 @@ class ApiParametersCommon {
         props.putAll(opts.toMap());
 
         ApiParametersCommon.validateParams(opts);
-        ApiParametersCommon.updateProps(opts, props);
 
         return PluginResult.docElement("ApiParameters", props);
     }

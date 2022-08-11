@@ -46,10 +46,4 @@ public class PluginParamsDefinitionCommon {
                     "change way code comments are displayed: <inline> - use bullet points, <remove> - hide comments", "\"inline\"")
             .add("spoiler", PluginParamType.BOOLEAN,
                     "hide bullet points comments (commentsType: \"inline\") behind spoiler", "\"inline\"");
-
-    public static void updateCollapsibleProps(PluginParamsOpts opts, Map<String, Object> props) {
-        if (opts.has("collapsed")) {
-            props.put("collapsible", true);
-        }
-    }
 }

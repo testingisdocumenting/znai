@@ -92,8 +92,6 @@ public class FileIncludePlugin implements IncludePlugin {
         Map<String, Object> props = CodeSnippetsProps.create(langToUse, contentProvider.snippetContent());
         props.putAll(pluginParams.getOpts().toMap());
 
-        PluginParamsDefinitionCommon.updateCollapsibleProps(pluginParams.getOpts(), props);
-
         features.updateProps(props);
 
         return PluginResult.docElement(DocElementType.SNIPPET, props);

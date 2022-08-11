@@ -83,7 +83,7 @@ option with an **optional** `readMoreVisibleLines` option to specify a number of
 
 # Collapse 
 
-Use `collapsed: true` to make code snippet collapsible.
+Use `collapsed: true|false` to make code snippet collapsible.
 Note: `title` option is required  
 
 ```markdown
