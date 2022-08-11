@@ -60,10 +60,10 @@ score, Integer, another description line with *markdown* support
 
 # Collapsing Parameters
 
-Use `collapsible: true` to make `api-parameters` collapsible, or use `collapsed: true` to make it collapsible and collapsed by default. 
+Use `collapsed: true|false` to make `api-parameters` collapsible. 
 
 `````markdown
-```api-parameters {title: "person definition", anchorPrefix: "title", collapsed: true}
+```api-parameters {title: "person definition", anchorPrefix: "title", collapsed: false}
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
@@ -74,7 +74,7 @@ zipCode, String, zip code
 ```
 `````
 
-```api-parameters {title: "person definition", anchorPrefix: "title", collapsed: true}
+```api-parameters {title: "person definition", anchorPrefix: "title", collapsed: false}
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
@@ -84,7 +84,7 @@ city, String, city name
 zipCode, String, zip code
 ```
 
-Note: `collapsible` requires `title` to be present
+Note: `collapsed` requires `title` to be present
 
 # Size
 

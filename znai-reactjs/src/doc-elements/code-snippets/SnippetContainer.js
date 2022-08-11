@@ -84,7 +84,8 @@ class SnippetContainer extends React.Component {
             return null;
         }
 
-        const { collapsible } = this.props;
+        const collapsible = this.props.collapsed !== undefined
+
         const { collapsed } = this.state;
 
         const titleClassName = "title" + (collapsible ? " collapsible" : "")
