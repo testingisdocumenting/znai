@@ -110,7 +110,7 @@
 
 .znai-api-parameters-collapse-toggle {
     color: var(--znai-expand-collaps-color);
-    padding: 4px;
+    padding: 0 4px;
     width: 12px;
 
     user-select: none;
