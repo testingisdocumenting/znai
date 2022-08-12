@@ -20,21 +20,30 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class OpenApi3Content {
-    private final Map<String, OpenApi3Schema> byMimeType;
+    private final Map<String, OpenApi3Schema> schemaByMimeType;
+    private final Map<String, String> exampleByMimeType;
 
     public OpenApi3Content() {
-        this.byMimeType = new LinkedHashMap<>();
+        this.schemaByMimeType = new LinkedHashMap<>();
+        this.exampleByMimeType = new LinkedHashMap<>();
     }
 
-    public void register(String mimeType, OpenApi3Schema schema) {
-        byMimeType.put(mimeType, schema);
+    public void register(String mimeType, OpenApi3Schema schema, Object example) {
+        schemaByMimeType.put(mimeType, schema);
+        if (example != null) {
+            exampleByMimeType.put(mimeType, example.toString());
+        }
     }
 
-    public Map<String, OpenApi3Schema> getByMimeType() {
-        return byMimeType;
+    public Map<String, OpenApi3Schema> getSchemaByMimeType() {
+        return schemaByMimeType;
+    }
+
+    public String exampleByMimeType(String mimeType) {
+        return exampleByMimeType.getOrDefault(mimeType, "");
     }
 
     public boolean isEmpty() {
-        return byMimeType.isEmpty();
+        return schemaByMimeType.isEmpty();
     }
 }

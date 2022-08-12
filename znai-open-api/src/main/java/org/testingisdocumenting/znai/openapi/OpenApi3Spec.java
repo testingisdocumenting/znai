@@ -147,7 +147,7 @@ public class OpenApi3Spec {
         }
 
         OpenApi3Content result = new OpenApi3Content();
-        parsedContent.forEach((mimeType, media) -> result.register(mimeType, convertSchema(media.getSchema())));
+        parsedContent.forEach((mimeType, media) -> result.register(mimeType, convertSchema(media.getSchema()), media.getExample()));
 
         return result;
     }

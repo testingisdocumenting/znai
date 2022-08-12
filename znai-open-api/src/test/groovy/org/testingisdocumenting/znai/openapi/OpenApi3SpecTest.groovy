@@ -55,7 +55,7 @@ class OpenApi3SpecTest {
     void "anyof request"() {
         def createUser = spec.findById("createUser")
 
-        def jsonRequest = createUser.request.content.byMimeType.get("application/json")
+        def jsonRequest = createUser.request.content.schemaByMimeType.get("application/json")
         def asMap = schemaAsApiParamsMap(jsonRequest)
 
         asMap.should == [
@@ -76,7 +76,7 @@ class OpenApi3SpecTest {
     void "additional properties"() {
         def getInventory = spec.findById("getInventory")
 
-        def jsonResponse = getInventory.responses.get(0).content.byMimeType.get("application/json")
+        def jsonResponse = getInventory.responses.get(0).content.schemaByMimeType.get("application/json")
         def asMap = schemaAsApiParamsMap(jsonResponse)
 
         asMap.should == ["parameters": [
@@ -91,7 +91,7 @@ class OpenApi3SpecTest {
         def petById = spec.findById("getPetById")
         def response = petById.responses.get(0)
 
-        def jsonResponse = response.content.byMimeType.get("application/json")
+        def jsonResponse = response.content.schemaByMimeType.get("application/json")
         def asMap = schemaAsApiParamsMap(jsonResponse)
 
         asMap.should == ["parameters": petProperties]

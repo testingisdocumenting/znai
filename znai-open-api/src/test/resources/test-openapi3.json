@@ -23,6 +23,7 @@
           "description": "Update an existent pet in the store",
           "content": {
             "application/json": {
+              "example": "{name: \"new name\"}",
               "schema": {
                 "$ref": "#/components/schemas/Pet"
               }
