@@ -21,7 +21,7 @@ import { elementsLibrary } from "../DefaultElementsLibrary";
 import { Paragraph } from "../paragraph/Paragraph";
 import { DocElement } from "../default-elements/DocElement";
 
-const personParameters = [
+export const personApiParameters = [
     {anchorId: 'prefix_firstName', name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
     {anchorId: 'prefix_lastName',name: 'lastName', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
     {anchorId: 'prefix_score',name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
@@ -98,10 +98,10 @@ const jsonExample = `
 export function apiParametersDemo(registry) {
     registry
       .add('flat parameters', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters}/>
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters}/>
       ))
       .add('flat parameters with example', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} example={jsonExample}/>
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} example={jsonExample}/>
       ))
       .add('single parameter', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={singleParameter}/>
@@ -110,7 +110,7 @@ export function apiParametersDemo(registry) {
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personParametersWithTypeRef}/>
       ))
       .add('flat parameters small size', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} small={true}/>
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} small={true}/>
       ))
       .add('flat parameters long type', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongTypeParameters}/>
@@ -122,23 +122,26 @@ export function apiParametersDemo(registry) {
         <ApiParameters elementsLibrary={elementsLibrary} parameters={longNameParameters} noWrap={true}/>
       ))
       .add('flat parameters with title', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition"/>
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition"/>
       ))
       .add('flat parameters with title and example', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" example={jsonExample}/>
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" example={jsonExample}/>
       ))
       .add('collapsible requires title', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" collapsed={false}/>
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" collapsed={false}/>
       ))
       .add('collapsible collapsed by default', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParameters} title="Person definition" collapsed={true}/>
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" collapsed={true}/>
+      ))
+      .add('flat parameters collapsible with title and example', () => (
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" example={jsonExample} collapsed={false}/>
       ))
       .add('flat parameters with long description', () => (
         <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongDescriptionParameters}/>
       ))
       .add('flat parameters with references', () => (
         <ApiParameters elementsLibrary={elementsLibrary}
-                       parameters={personParameters}
+                       parameters={personApiParameters}
                        references={paramsReferences()}/>
       ))
       .add('nested parameters', () => (
