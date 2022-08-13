@@ -29,40 +29,47 @@ import {Section} from '../default-elements/Section';
 
 import { simulateState } from "react-component-viewer";
 
+import ApiParameters from "../api/ApiParameters";
+import { personApiParameters } from "../api/ApiParameters.demo";
+
 import './tokens.css'
 
 const [getReadMore, setReadMore] = simulateState(true);
 
 export function snippetsDemo(registry) {
     registry
-        .add('title', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()}/>)
-        .add('title collapsible', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()} collapsed={false}/>)
-        .add('wide with title', () => <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()}/>)
-        .add('wide with title collapsible', () => <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()} collapsed={false}/>)
-        .add('with linked method calls', () => <Snippet wide={true} title="snippet title" lang="java"
-                                                        references={methodCallReferences()}
-                                                        snippet={codeWithMethodCalls()}/>)
-        .add('horizontal scroll', () => <Snippet wide={false} lang="java" snippet={wideCode()}/>)
-        .add('wrap', () => <Snippet wide={false} lang="java" snippet={wideCode()} wrap={true}/>)
-        .add('horizontal scroll with title and highlight', () => <Snippet wide={false} lang="java" snippet={wideCode()}
-                                                                          highlight={2} title="Hello Snippet"/>)
-        .add('highlight by line idx', () => <Snippet lang="markdown" snippet={markdownCode()} highlight={[0]}/>)
-        .add('highlight right side background', () => <TwoSidesLayoutRightPart><Snippet lang="java"
-                                                                                        snippet={wideCode()}
-                                                                                        highlight={[1]}/></TwoSidesLayoutRightPart>)
-        .add('read more', () => <Snippet lang="csv" snippet={longCode()}
-                                         readMore={true} readMoreVisibleLines={4}/>)
-        .add('read more switch', () => (
-          <div>
-              <button onClick={() => setReadMore(!getReadMore())}>toggle read more</button>
-              <Snippet lang="csv" snippet={longCode()}
-                       readMore={getReadMore()} readMoreVisibleLines={4}/>)
-          </div>))
-        .add('tabs with wide', () => <Tabs {...tabsContent({label: 'wide', wide: true})}
-                                           elementsLibrary={elementsLibrary}/>)
-        .add('python code', () => <Snippet lang="python" snippet={pythonCode()}/>)
-        .add('large java code with javadocs', () => <Snippet lang="java" highlight={[0, 3, 6]} snippet={largeJavaCodeWithJavaDocs()}/>)
-        .add('markdown code', () => <Snippet lang="markdown" highlight={[0, 2]} snippet={markdownCode()}/>)
+      .add('title', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()}/>)
+      .add('title collapsible', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()} collapsed={false}/>)
+      .add('collapsible next to api params', () => (<>
+          <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" collapsed={false}/>
+          <Snippet title="snippet title" lang="html" snippet={htmlCode()} collapsed={false}/>
+      </>))
+      .add('wide with title', () => <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()}/>)
+      .add('wide with title collapsible', () => <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()} collapsed={false}/>)
+      .add('with linked method calls', () => <Snippet wide={true} title="snippet title" lang="java"
+                                                      references={methodCallReferences()}
+                                                      snippet={codeWithMethodCalls()}/>)
+      .add('horizontal scroll', () => <Snippet wide={false} lang="java" snippet={wideCode()}/>)
+      .add('wrap', () => <Snippet wide={false} lang="java" snippet={wideCode()} wrap={true}/>)
+      .add('horizontal scroll with title and highlight', () => <Snippet wide={false} lang="java" snippet={wideCode()}
+                                                                        highlight={2} title="Hello Snippet"/>)
+      .add('highlight by line idx', () => <Snippet lang="markdown" snippet={markdownCode()} highlight={[0]}/>)
+      .add('highlight right side background', () => <TwoSidesLayoutRightPart><Snippet lang="java"
+                                                                                      snippet={wideCode()}
+                                                                                      highlight={[1]}/></TwoSidesLayoutRightPart>)
+      .add('read more', () => <Snippet lang="csv" snippet={longCode()}
+                                       readMore={true} readMoreVisibleLines={4}/>)
+      .add('read more switch', () => (
+        <div>
+            <button onClick={() => setReadMore(!getReadMore())}>toggle read more</button>
+            <Snippet lang="csv" snippet={longCode()}
+                     readMore={getReadMore()} readMoreVisibleLines={4}/>)
+        </div>))
+      .add('tabs with wide', () => <Tabs {...tabsContent({label: 'wide', wide: true})}
+                                         elementsLibrary={elementsLibrary}/>)
+      .add('python code', () => <Snippet lang="python" snippet={pythonCode()}/>)
+      .add('large java code with javadocs', () => <Snippet lang="java" highlight={[0, 3, 6]} snippet={largeJavaCodeWithJavaDocs()}/>)
+      .add('markdown code', () => <Snippet lang="markdown" highlight={[0, 2]} snippet={markdownCode()}/>)
 }
 
 export function snippetsTwoSidesDemo(registry) {

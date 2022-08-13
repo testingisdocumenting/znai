@@ -70,8 +70,22 @@
     padding: 0 10px;
 }
 
+.znai-api-parameters-title-cell.collapsible {
+    padding-left: 0;
+}
+
 .znai-api-parameters-title-cell.with-example {
     border-left: 1px solid var(--znai-snippets-title-left-border-color);
+}
+
+.znai-api-parameters-collapse-toggle {
+    display: flex;
+    justify-content: center;
+    width: 32px;
+    color: var(--znai-expand-collaps-color);
+
+    user-select: none;
+    cursor: pointer;
 }
 
 .znai-api-parameters-title {
@@ -79,6 +93,14 @@
     font-size: var(--znai-smaller-text-size);
 
     padding: 4px 10px;
+}
+
+.znai-api-parameters-title-cell.collapsible .znai-api-parameters-title {
+    padding-left: 0;
+}
+
+.znai-api-parameters-title-cell.with-example .znai-api-parameters-title {
+    padding-left: 0;
 }
 
 .znai-api-parameters-example-cell {
@@ -108,11 +130,3 @@
     padding-bottom: 8px;
 }
 
-.znai-api-parameters-collapse-toggle {
-    color: var(--znai-expand-collaps-color);
-    padding: 0 4px;
-    width: 12px;
-
-    user-select: none;
-    cursor: pointer;
-}

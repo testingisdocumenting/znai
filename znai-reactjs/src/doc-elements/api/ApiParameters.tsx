@@ -101,7 +101,7 @@ export default function ApiParameters({
         collapsed={userDrivenCollapsed}
         collapseToggle={collapseToggle}
       />
-      <ApiParametersExample example={example} isNested={isNested} />
+      {!userDrivenCollapsed && <ApiParametersExample example={example} isNested={isNested} />}
       {renderedParameters}
     </div>
   );
@@ -136,9 +136,9 @@ function ApiParametersTitle({ title, example, nestedLevel, collapsed, collapseTo
     return null;
   }
 
-  const className = "znai-api-parameters-title-cell" + (example ? " with-example" : "");
-
   const collapsible = collapsed !== undefined;
+  const className =
+    "znai-api-parameters-title-cell" + (example ? " with-example" : "") + (collapsible ? " collapsible" : "");
 
   return (
     <div className={className}>

@@ -160,12 +160,12 @@
 
 .znai-snippet-collapse-toggle {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     color: var(--znai-expand-collaps-color);
-    width: 24px;
+
+    width: 32px;
     border-left: 1px solid var(--znai-snippets-title-left-border-color);
 
     user-select: none;
