@@ -86,7 +86,9 @@ public class ApiParameters {
     public Map<String, Object> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("parameters", root.getChildren().stream().map(ApiParameter::toMap).collect(toList()));
-        result.put("example", example);
+        if (example != null) {
+            result.put("example", example);
+        }
 
         return result;
     }
