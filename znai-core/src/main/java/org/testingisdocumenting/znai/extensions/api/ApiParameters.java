@@ -27,6 +27,7 @@ import static java.util.stream.Collectors.toList;
 
 public class ApiParameters {
     private final ApiParameter root;
+    private String example;
 
     public ApiParameters(String anchorPrefix) {
         root = new ApiParameter(ApiParametersAnchors.sanitizeAnchorId(anchorPrefix),
@@ -53,8 +54,17 @@ public class ApiParameters {
         return root.getAnchorId();
     }
 
+    public String getExample() {
+        return example;
+    }
+
+    public void setExample(String example) {
+        this.example = example;
+    }
+
     public ApiParameters withoutTopLevel() {
         ApiParameters result = new ApiParameters(root.getAnchorId());
+        result.example = example;
         if (root.getChildren().isEmpty()) {
             return result;
         }
@@ -76,6 +86,9 @@ public class ApiParameters {
     public Map<String, Object> toMap() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("parameters", root.getChildren().stream().map(ApiParameter::toMap).collect(toList()));
+        if (example != null) {
+            result.put("example", example);
+        }
 
         return result;
     }
