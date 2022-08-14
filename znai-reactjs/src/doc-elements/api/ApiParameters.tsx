@@ -138,7 +138,10 @@ function ApiParametersTitle({ title, example, nestedLevel, collapsed, collapseTo
 
   const collapsible = collapsed !== undefined;
   const className =
-    "znai-api-parameters-title-cell" + (example ? " with-example" : "") + (collapsible ? " collapsible" : "");
+    "znai-api-parameters-title-cell" +
+    (example ? " with-example" : "") +
+    (collapsible ? " collapsible" : "") +
+    (collapsed ? " collapsed" : "");
 
   return (
     <div className={className}>
@@ -167,7 +170,7 @@ function ApiParametersExample({ example, isNested }: ExampleProps) {
 
   return (
     <div className="znai-api-parameters-example-cell">
-      <Snippet lang={lang()} snippet={example} collapsed={true} collapsible={true} title="example" />
+      <Snippet lang={lang()} snippet={example} collapsed={true} title="example" />
     </div>
   );
 

@@ -74,7 +74,7 @@
     padding-left: 0;
 }
 
-.znai-api-parameters-title-cell.with-example {
+.znai-api-parameters-title-cell.with-example:not(.collapsed) {
     border-left: 1px solid var(--znai-snippets-title-left-border-color);
 }
 
