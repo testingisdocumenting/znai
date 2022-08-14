@@ -28,31 +28,34 @@ All the following content will go to the right side. At the start of a new secti
 
 # Open API Example
 
-:include-open-api: snippets/open-api/uber.json {method: "get", path: "/v1/estimates/time"}
+:include-open-api: snippets/open-api/uber.json {method: "get", path: "/estimates/time"}
 :include-meta: {rightSide: true}
-:include-json: two-sides/price-estimate.json {title: "Response"}
+:include-json: two-sides/price-estimate.json {title: "Response", rightSide: true}
 
-# Aligning Data in Columns
-
-Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.
-:include-empty-block: {rightSide: true}
-
-:include-table: layout/table/table.csv
-:include-meta: {rightSide: true}
-:include-file: layout/table/table.csv
-
-:include-meta: {rightSide: false}
-
-Table and code snippets above are aligned by using an empty block on the right side. 
-:include-file: two-sides-pages.md {startLine: "Aligning Data in Columns", excludeStartEnd: true, endLine: ":include-meta: {rightSide: false}"}
 
 # Single Data Block Shortcut
 
 :include-table: layout/table/table.csv
-:include-file: layout/table/table.csv  {rightSide: true}
+:include-file: layout/table/table.csv {rightSide: true}
 
-:include-meta: {rightSide: false}
-
-If need to put a single data block to a right side, you can add `rightSide: true` as a parameter to `include-` plugins. 
+Use `rightSide: true` as a parameter to `include-` plugins to move result to the right side.
 
 :include-file: two-sides-pages.md {startLine: "Single Data Block Shortcut", endLine: "{rightSide: true}"}
+
+# Aligning Data in Columns
+
+Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.
+
+:include-empty-block: {rightSide: true}
+
+:include-table: layout/table/table.csv
+:include-file: layout/table/table.csv {rightSide: true}
+
+Table and code snippets above are aligned by using an empty block on the right side. 
+
+```markdown
+:include-empty-block: {rightSide: true}
+
+:include-table: layout/table/table.csv
+:include-file: layout/table/table.csv {rightSide: true}
+```

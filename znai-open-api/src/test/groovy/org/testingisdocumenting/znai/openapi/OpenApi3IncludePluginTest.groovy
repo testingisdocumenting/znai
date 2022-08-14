@@ -20,24 +20,21 @@ package org.testingisdocumenting.znai.openapi
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
-class OpenApiIncludePluginTest {
+class OpenApi3IncludePluginTest {
     @Test
     void "should automatically create a section for summary"() {
-        def elements = process('open-api-spec.json {operationId: "addPet", autoSection: true}')
+        def elements = process('test-openapi3.json {operationId: "addPet", autoSection: true}')
 
-        elements[0].title.should == 'Add Pet'
-        elements[0].id.should == 'add-pet'
+        elements[0].title.should == 'Add a new pet to the store'
         elements[0].type.should == 'Section'
     }
 
     @Test
     void "should create multiple entries by tags"() {
-        def elements = process('open-api-spec.json {tags: "multiple", autoSection: true}')
+        def elements = process('test-openapi3.json {tags: "user", autoSection: true}')
 
-        elements.should == ['type'    | 'title'] {
-                            _______________________________________________________
-                            'Section' | 'find all pets'
-                            'Section' | 'find all customers ordered by last name'  }
+        elements[0].title.should == 'Create user'
+        elements[1].title.should == 'Creates list of users with given input array'
     }
 
     @Test

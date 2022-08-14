@@ -99,11 +99,14 @@ public class OpenApi3Spec {
 
         OpenApi3Operation operation = new OpenApi3Operation();
         operation.setId(Objects.toString(parsed.getOperationId()));
-        operation.addTags(parsed.getTags());
         operation.setPath(path);
         operation.setMethod(method);
         operation.setSummary(parsed.getSummary());
         operation.setDescription(parsed.getDescription());
+
+        if (parsed.getTags() != null) {
+            operation.addTags(parsed.getTags());
+        }
 
         List<Parameter> parsedParameters = parsed.getParameters();
         if (parsedParameters != null) {

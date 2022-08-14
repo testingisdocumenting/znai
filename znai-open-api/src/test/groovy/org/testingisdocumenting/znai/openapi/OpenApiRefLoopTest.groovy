@@ -24,16 +24,10 @@ import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_C
 class OpenApiRefLoopTest {
     @Test
     void "parse"() {
-        def spec = OpenApiSpec.fromJson(
-                TEST_COMPONENTS_REGISTRY.markdownParser(),
-                ResourceUtils.textContent("open-api-spec-loop.json"))
+        def spec = OpenApi3Spec.parse(ResourceUtils.textContent("open-api-spec-loop.json"))
 
-        def operation = spec.findOperationById('findPets')
-        def properties = operation.responses[0].schema.items.properties
-        properties.keySet().should == ["name", "friend", "tag", "id"]
-        properties.friend.should == [
-                type: "NewPet",
-                description: [[markdown: "pet friend of type Pet", type: "TestMarkdown"]],
-                properties: [:]]
+        def operation = spec.findById("findPets")
+        def properties = operation.responses[0].content.schemaByMimeType.get("application/json").items.properties
+        properties.should == []
     }
 }

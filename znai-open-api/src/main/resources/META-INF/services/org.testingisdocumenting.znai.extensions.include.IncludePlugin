@@ -14,5 +14,4 @@
 # limitations under the License.
 #
 
-org.testingisdocumenting.znai.openapi.OpenApiIncludePlugin
 org.testingisdocumenting.znai.openapi.OpenApi3IncludePlugin
