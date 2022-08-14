@@ -64,7 +64,6 @@ import WebTauRest from './test-results/WebTauRest'
 import LangClass from './lang/LangClass'
 import LangFunction from './lang/LangFunction'
 import ApiParameters from './api/ApiParameters'
-import OpenApiOperation from './open-api/operation/OpenApiOperation'
 import {Iframe} from './iframe/Iframe';
 import JupyterCell from './jupyter/JupyterCell'
 import {Spoiler} from './spoiler/Spoiler'
@@ -218,7 +217,6 @@ library.JupyterCell = JupyterCell
 library.WebTauRest = WebTauRest
 
 library.OpenApiMethodAndUrl = OpenApiMethodAndUrl
-library.OpenApiOperation = OpenApiOperation
 library.DiagramLegend = DiagramLegend
 
 registerDocUtilsElements(library)
