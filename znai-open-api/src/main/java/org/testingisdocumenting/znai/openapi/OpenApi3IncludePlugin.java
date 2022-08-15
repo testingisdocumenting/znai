@@ -54,7 +54,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
 
     @Override
     public String id() {
-        return "open-api3";
+        return "open-api";
     }
 
     @Override
@@ -212,6 +212,10 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
     }
 
     private void renderDescription(String description) {
+        if (description == null) {
+            return;
+        }
+
         DocElement docElement = openApiMarkdownParser.docElementFromDescription(description);
         docElement.getContent().forEach(parserHandler::onDocElement);
     }

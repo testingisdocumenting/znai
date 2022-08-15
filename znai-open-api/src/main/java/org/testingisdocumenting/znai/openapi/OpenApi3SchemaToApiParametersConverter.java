@@ -38,6 +38,10 @@ public class OpenApi3SchemaToApiParametersConverter {
     public ApiParameters convert() {
         handleSchema(apiParameters.getRoot(), rootSchema, false);
 
+        if (rootSchema.getType() == null) {
+            return apiParameters;
+        }
+
         if (rootSchema.getType().equals("object")) {
             return apiParameters.withoutTopLevel();
         }
@@ -47,6 +51,10 @@ public class OpenApi3SchemaToApiParametersConverter {
 
     private void handleSchema(ApiParameter parent, OpenApi3Schema schema, boolean required) {
         String type = schema.getType();
+        if (type == null) {
+            return;
+        }
+
         switch (type) {
             case "object":
                 handleObjectSchema(parent, schema, required);
