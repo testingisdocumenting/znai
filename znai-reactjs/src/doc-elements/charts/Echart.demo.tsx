@@ -30,6 +30,8 @@ export function echartDemo(registry: Registry) {
     .add("pie legend", () => <EchartGeneric {...pieChartData()} legend={true} />)
     .add("line with text x axis", () => <EchartGeneric {...multiLineTextXData()} />)
     .add("line with number", () => <EchartGeneric {...multiLineNumberXData()} />)
+    .add("line time", () => <EchartGeneric {...timelineChart("line")} />)
+    .add("bar time", () => <EchartGeneric {...timelineChart("line")} />)
     .add("line legend", () => <EchartGeneric {...multiLineTextXData()} legend={true} />)
     .add("line wide", () => <EchartGeneric {...multiLineNumberXDataLarge()} wide={true} />);
 }
@@ -89,6 +91,21 @@ function multiLineTextXData() {
       ["Wednesday", 36, 6, 7],
       ["Thursday", 10, 7, 3],
       ["Friday", 10, 2, 5],
+    ],
+  };
+}
+
+function timelineChart(type: string) {
+  return {
+    chartType: type,
+    isTimeSeries: true,
+    labels: ["time", "fee", "feefee"],
+    data: [
+      ["2022-10-04", 5, 7],
+      ["2022-11-05", 20, 2],
+      ["2022-12-12", 36, 6],
+      ["2023-01-14", 10, 7],
+      ["2023-02-24", 10, 2],
     ],
   };
 }

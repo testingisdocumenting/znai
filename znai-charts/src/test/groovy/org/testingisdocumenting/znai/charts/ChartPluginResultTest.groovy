@@ -36,6 +36,7 @@ class ChartPluginResultTest {
                          chartType: "bar",
                          data: [["test", 10], ["another", 20], ["last", 30]],
                          labels: ["x", "y"],
+                         isTimeSeries: false,
                          type: "EchartGeneric"]
     }
 

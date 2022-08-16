@@ -64,6 +64,14 @@ Use numbers in first column to have a regular X, Y plots
 
 :include-linechart: charts/competitors.csv
 
+# Time Series
+
+Use `time: true` to treat `X` as time series
+
+:include-file: charts/time-series.csv {autoTitle: true} 
+
+    :include-linechart: charts/time-series.csv {time: true}
+
 # Legend 
 
 Use `legend: true` to add legend to a chart

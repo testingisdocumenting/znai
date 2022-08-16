@@ -19,15 +19,25 @@ import {
   echartGridUsingMaxDataAndLegend,
   echartGridUsingPadding,
   findBreakpointDataIndexForText,
+  isNumericChartValue,
   partialDataExcludingDataAfterPoint,
 } from "./echartUtils";
 
+test("is numeric value", () => {
+  expect(isNumericChartValue(10)).toEqual(true);
+  expect(isNumericChartValue(10.32)).toEqual(true);
+  expect(isNumericChartValue("10")).toEqual(false);
+});
+
 test("invisible line for numbers X", () => {
-  const invisible = createInvisibleLineSeries([
-    [-1, 0.1, -2, 3],
-    [0, -4, -3, 5],
-    [2, -2, 7, 1],
-  ]);
+  const invisible = createInvisibleLineSeries(
+    [
+      [-1, 0.1, -2, 3],
+      [0, -4, -3, 5],
+      [2, -2, 7, 1],
+    ],
+    false
+  );
 
   expect(invisible).toEqual({
     data: [
@@ -51,11 +61,14 @@ test("invisible line for numbers X", () => {
 });
 
 test("invisible line for text X", () => {
-  const invisible = createInvisibleLineSeries([
-    ["A", 0.1, -2, 3],
-    ["B", -4, -3, 5],
-    ["C", -2, 7, 1],
-  ]);
+  const invisible = createInvisibleLineSeries(
+    [
+      ["A", 0.1, -2, 3],
+      ["B", -4, -3, 5],
+      ["C", -2, 7, 1],
+    ],
+    false
+  );
 
   expect(invisible).toEqual({
     data: [
@@ -86,6 +99,7 @@ test("partial data with number breakpoint", () => {
       [2, -2, 7, 1],
     ],
     2,
+    false,
     1
   );
 
@@ -103,6 +117,7 @@ test("partial data with text breakpoint", () => {
       ["C", -2, 7, 1],
     ],
     2,
+    false,
     "B"
   );
 

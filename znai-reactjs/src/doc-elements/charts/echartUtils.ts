@@ -16,22 +16,27 @@
 
 import { EchartCommonProps } from "./EchartCommon";
 
+export function isNumericChartValue(value: any) {
+  return typeof value === "number";
+}
+
 /**
  * finds max and min values from data and creates invisible line data series
  * so that chart scale remains the same for presentation mode as new values are revealed over time
  * @param data data to analyze
+ * @param isTimeSeries true if treat as time series
  */
-export function createInvisibleLineSeries(data: any[][]) {
-  const isNumbersX = typeof data[0][0] === "number";
+export function createInvisibleLineSeries(data: any[][], isTimeSeries: boolean) {
+  const isNumericOrTime = isNumericChartValue(data[0][0]) || isTimeSeries;
 
   let minY = Number.MAX_SAFE_INTEGER;
   let maxY = Number.MIN_SAFE_INTEGER;
 
-  let minX = isNumbersX ? Number.MAX_SAFE_INTEGER : data[0][0];
-  let maxX = isNumbersX ? Number.MIN_SAFE_INTEGER : data[data.length - 1][0];
+  let minX = isNumericOrTime ? Number.MAX_SAFE_INTEGER : data[0][0];
+  let maxX = isNumericOrTime ? Number.MIN_SAFE_INTEGER : data[data.length - 1][0];
 
   for (let rowIdx = 0; rowIdx < data.length; rowIdx++) {
-    if (isNumbersX) {
+    if (isNumericOrTime) {
       minX = Math.min(minX, data[rowIdx][0]);
       maxX = Math.max(maxX, data[rowIdx][0]);
     }
@@ -45,11 +50,11 @@ export function createInvisibleLineSeries(data: any[][]) {
   return {
     data: [
       {
-        value: isNumbersX ? [minX, minY] : minY,
+        value: isNumericOrTime ? [minX, minY] : minY,
         itemStyle: { color: "none" },
       },
       {
-        value: isNumbersX ? [maxX, maxY] : maxY,
+        value: isNumericOrTime ? [maxX, maxY] : maxY,
         itemStyle: { color: "none" },
       },
     ],
@@ -63,28 +68,30 @@ export function createInvisibleLineSeries(data: any[][]) {
  * all the values after breakpoint are ignored
  * @param fullData all data
  * @param colIdx column index to process
+ * @param isTimeSeries true if treat X as time
  * @param breakpointX breakpoint to split data
  */
 export function partialDataExcludingDataAfterPoint(
   fullData: any[][],
   colIdx: number,
+  isTimeSeries: boolean,
   breakpointX: number | string | undefined
 ) {
   const partialData: any[][] = [];
 
-  const isNumbersX = typeof fullData[0][0] === "number";
+  const isNumbersOrTimeX = isNumericChartValue(fullData[0][0]) || isTimeSeries;
 
   for (let rowIdx = 0; rowIdx < fullData.length; rowIdx++) {
     const row = fullData[rowIdx];
     const x = row[0];
 
-    if (isNumbersX && breakpointX !== undefined && x > breakpointX) {
+    if (isNumbersOrTimeX && breakpointX !== undefined && x > breakpointX) {
       break;
     }
 
-    partialData.push(isNumbersX ? [x, row[colIdx]] : row[colIdx]);
+    partialData.push(isNumbersOrTimeX ? [x, row[colIdx]] : row[colIdx]);
 
-    if (!isNumbersX && x === breakpointX) {
+    if (!isNumbersOrTimeX && x === breakpointX) {
       break;
     }
   }
