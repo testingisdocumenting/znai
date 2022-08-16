@@ -30,6 +30,7 @@ interface Props extends PresentationProps {
   legend?: boolean;
   wide?: boolean;
   padding?: string;
+  isTimeSeries?: boolean;
   breakpoint?: any[];
 }
 
@@ -44,6 +45,7 @@ export function EchartGeneric({
   wide,
   padding,
   breakpoint,
+  isTimeSeries,
   isPresentation,
   slideIdx,
 }: Props) {
@@ -53,10 +55,10 @@ export function EchartGeneric({
     wide: wide || false,
     padding: padding || "",
     breakpoint: breakpoint || [],
+    isTimeSeries: isTimeSeries || false,
     isPresentation,
     slideIdx,
   };
-
   switch (chartType) {
     case "bar":
       return <EchartBar labels={labels!} data={data} stack={stack} horizontal={horizontal} {...commonProps} />;

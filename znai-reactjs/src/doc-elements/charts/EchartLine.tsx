@@ -17,7 +17,12 @@
 import React from "react";
 import { EchartReactWrapper } from "./EchartReactWrapper";
 import { EchartCommonProps } from "./EchartCommon";
-import { createInvisibleLineSeries, echartCalcBreakpoint, partialDataExcludingDataAfterPoint } from "./echartUtils";
+import {
+  createInvisibleLineSeries,
+  echartCalcBreakpoint,
+  isNumericChartValue,
+  partialDataExcludingDataAfterPoint,
+} from "./echartUtils";
 
 const type = "line";
 
@@ -36,14 +41,14 @@ export function EchartLine(props: Props) {
 
   function configProvider() {
     const firstRow = props.data.length > 0 ? props.data[0] : [0];
-    const isXNumbers = typeof firstRow[0] === "number";
+    const isXNumbersOrTime = isNumericChartValue(firstRow[0]) || props.isTimeSeries;
 
     const series = [];
     for (let colIdx = 1; colIdx < props.labels.length; colIdx++) {
       series.push(createSeriesInstance(colIdx));
     }
 
-    series.push({ ...createInvisibleLineSeries(props.data), type });
+    series.push({ ...createInvisibleLineSeries(props.data, props.isTimeSeries), type });
 
     return {
       ...defineAxes(),
@@ -51,9 +56,9 @@ export function EchartLine(props: Props) {
     };
 
     function defineAxes() {
-      if (isXNumbers) {
+      if (isXNumbersOrTime) {
         return {
-          xAxis: {},
+          xAxis: props.isTimeSeries ? { type: "time" } : {},
           yAxis: {},
         };
       }
@@ -72,7 +77,12 @@ export function EchartLine(props: Props) {
       return {
         name: props.labels[columnIdx],
         type,
-        data: partialDataExcludingDataAfterPoint(props.data, columnIdx, echartCalcBreakpoint(props)),
+        data: partialDataExcludingDataAfterPoint(
+          props.data,
+          columnIdx,
+          props.isTimeSeries,
+          echartCalcBreakpoint(props)
+        ),
       };
     }
   }

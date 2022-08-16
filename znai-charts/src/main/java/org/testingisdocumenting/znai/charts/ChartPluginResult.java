@@ -31,7 +31,8 @@ class ChartPluginResult {
         ChartData chartData = ChartDataCsvParser.parse(csvContent);
 
         List<List<Object>> data = chartData.getData();
-        List<Object> breakpoints = pluginParams.getOpts().getList("breakpoint");
+        List<Object> breakpoints = pluginParams.getOpts().getList(ChartIncludeBasePlugin.BREAKPOINT_KEY);
+        boolean isTimeSeries = pluginParams.getOpts().get(ChartIncludeBasePlugin.TIME_KEY, false);
 
         validateBreakpoints(breakpoints, data);
 
@@ -39,6 +40,8 @@ class ChartPluginResult {
 
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         props.put("chartType", type);
+        props.put("isTimeSeries", isTimeSeries);
+
         if (!breakpoints.isEmpty()) {
             props.put("breakpoint", convertedBreakpoints);
         }

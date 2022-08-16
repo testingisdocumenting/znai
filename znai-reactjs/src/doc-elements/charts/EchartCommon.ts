@@ -15,7 +15,7 @@
  */
 
 import * as echarts from "echarts/core";
-import { GridComponent, TooltipComponent, LegendComponent } from "echarts/components";
+import { GridComponent, TooltipComponent, LegendComponent, TimelineComponent } from "echarts/components";
 import { BarChart, LineChart, PieChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
 import { SVGRenderer } from "echarts/renderers";
@@ -33,6 +33,7 @@ export function configuredEcharts() {
       LineChart,
       LabelLayout,
       SVGRenderer,
+      TimelineComponent,
     ]);
 
     configured = true;
@@ -45,6 +46,7 @@ export interface EchartCommonProps extends PresentationProps {
   data: any[][];
   breakpoint: any[];
   height: number;
+  isTimeSeries: boolean;
   legend: boolean;
   wide: boolean;
   padding: string;

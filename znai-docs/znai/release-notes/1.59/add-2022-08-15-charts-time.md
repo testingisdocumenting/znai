@@ -1,0 +1,1 @@
+* Add [Time Series](visuals/charts#time-series) option to [Charts](visuals/charts)   
