@@ -20,6 +20,14 @@
     background: var(--znai-snippets-background-color);
 }
 
+.snippet-container.no-margin-bottom {
+    margin-bottom: 0;
+}
+
+.snippet-container.no-margin-top {
+    margin-top: 0;
+}
+
 .snippet-container.wide-screen {
     justify-content: center;
     display: grid;

@@ -40,6 +40,15 @@ export function snippetsDemo(registry) {
     registry
       .add('title', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()}/>)
       .add('title collapsible', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()} collapsed={false}/>)
+      .add('title compact', () => (
+        <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[
+            contentParagraph(false),
+            compactContentSnippet("snippet one", true),
+            compactContentSnippet("snippet two"),
+            compactContentSnippet("snippet three"),
+            contentParagraph(false),
+        ]}/>
+      ))
       .add('collapsible next to api params', () => (<>
           <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" collapsed={false}/>
           <Snippet title="snippet title" lang="html" snippet={htmlCode()} collapsed={false}/>
@@ -288,6 +297,16 @@ function contentSnippet(isRightSide) {
         "meta": {
             "rightSide": isRightSide
         }
+    }
+}
+
+function compactContentSnippet(title, removeCompact) {
+    return {
+        "type": "Snippet",
+        "lang": "java",
+        "title": title,
+        "compact": !removeCompact,
+        "snippet": codeWithMethodCalls(),
     }
 }
 
