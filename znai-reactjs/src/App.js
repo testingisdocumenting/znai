@@ -26,8 +26,6 @@ import {tabsDemo} from './doc-elements/tabs/Tabs.demo'
 import {jsonDemo} from './doc-elements/json/Json.demo'
 import {langClassDemo} from './doc-elements/lang/LangClass.demo'
 import {langFunctionDemo} from './doc-elements/lang/LangFunction.demo'
-import {openApiOperationDemo} from './doc-elements/open-api/operation/OpenApiOperation.demo'
-import {openApiSchemaDemo} from './doc-elements/open-api/schema/OpenApiSchema.demo'
 import {docUtilsDemo} from './doc-elements/doc-utils/DocUtils.demo'
 import {pagesDemo} from './doc-elements/page/Page.demo'
 import {imageDemo} from './doc-elements/images/Image.demo'
@@ -145,8 +143,6 @@ registries.add('snippets')
     .registerAsGrid('Lang Class', 0, langClassDemo)
     .registerAsGrid('Lang Function', 0, langFunctionDemo)
     .registerAsGrid('API Parameters', 0, apiParametersDemo)
-    .registerAsGrid('Open API', 0, openApiOperationDemo)
-    .registerAsGrid('Open API Schema', 0, openApiSchemaDemo)
     .registerAsGrid('Open API Url', 0, openApiAndMethodAndUrlDemo)
     .registerAsGrid('Jupyter', 0, jupyterDemo)
     .registerAsGrid('CLI Command', 0, cliCommandDemo)

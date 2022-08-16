@@ -1,0 +1,1 @@
+* Add [compact](snippets/external-code-snippets#compact) option to [Code Snippets](snippets/external-code-snippets)   

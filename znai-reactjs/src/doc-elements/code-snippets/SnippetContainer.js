@@ -15,16 +15,16 @@
  * limitations under the License.
  */
 
-import * as React from 'react'
+import * as React from "react";
 
-import * as ClipboardJS from 'clipboard'
+import * as ClipboardJS from "clipboard";
 
-import {extractTextFromTokens} from './codeUtils'
+import { extractTextFromTokens } from "./codeUtils";
 
-import { Icon } from '../icons/Icon'
-import {SnippetOptionallyScrollablePart} from "./SnippetOptionallyScrollablePart";
+import { Icon } from "../icons/Icon";
+import { SnippetOptionallyScrollablePart } from "./SnippetOptionallyScrollablePart";
 
-import './SnippetContainer.css'
+import "./SnippetContainer.css";
 
 class SnippetContainer extends React.Component {
     constructor(props) {
@@ -44,9 +44,12 @@ class SnippetContainer extends React.Component {
     }
 
     renderNormalMode() {
-        const {title, className} = this.props
+        const {title, className, compact, next, prev} = this.props
 
-        const fullClassName = "snippet-container content-block" + (className ? " " + className : "")
+        const fullClassName = "snippet-container content-block"
+          + (className ? " " + className : "")
+          + (noMargin(next) ? " no-margin-bottom" : "")
+          + (noMargin(prev) ? " no-margin-top" : "")
 
         return (
             <div className={fullClassName}>
@@ -54,6 +57,10 @@ class SnippetContainer extends React.Component {
                 {this.renderSnippet()}
             </div>
         )
+
+        function noMargin(nextPrev) {
+            return compact && nextPrev && nextPrev.type === "Snippet" && !!nextPrev.title && !!nextPrev.compact
+        }
     }
 
     renderWideMode() {

@@ -16,8 +16,6 @@
 
 package org.testingisdocumenting.znai.extensions;
 
-import java.util.Map;
-
 public class PluginParamsDefinitionCommon {
     public static final String TITLE_KEY = "title";
 
@@ -25,10 +23,12 @@ public class PluginParamsDefinitionCommon {
             .add(TITLE_KEY, PluginParamType.STRING, "title to use for snippet", "\"title of the snippet\"");
 
     public static final PluginParamsDefinition collapsible = new PluginParamsDefinition()
-            .add("collapsible", PluginParamType.BOOLEAN,
-                    "add collapse/expand toggle. requires title", "true")
             .add("collapsed", PluginParamType.BOOLEAN,
-                    "is collapsed by default (when specified, collapsible is not required)", "true");
+                    "is collapsed by default", "true");
+
+    public static final PluginParamsDefinition compact = new PluginParamsDefinition()
+            .add("compact", PluginParamType.BOOLEAN,
+                    "remove margins when multiple snippets in a row", "true");
 
     public static final PluginParamsDefinition snippetReadMore = new PluginParamsDefinition()
             .add("readMore", PluginParamType.BOOLEAN,
@@ -42,6 +42,8 @@ public class PluginParamsDefinitionCommon {
             .add("wrap", PluginParamType.BOOLEAN,
                     "force snippet soft wrapping", "true")
             .add(snippetReadMore)
+            .add(compact)
+            .add(collapsible)
             .add("commentsType", PluginParamType.STRING,
                     "change way code comments are displayed: <inline> - use bullet points, <remove> - hide comments", "\"inline\"")
             .add("spoiler", PluginParamType.BOOLEAN,

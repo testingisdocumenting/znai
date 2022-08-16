@@ -48,7 +48,6 @@ public class FileIncludePlugin implements IncludePlugin {
 
         result.add(PluginParamsDefinitionCommon.snippetRender);
         result.add(PluginParamsDefinitionCommon.snippetTitle);
-        result.add(PluginParamsDefinitionCommon.collapsible);
         result.add(SnippetAutoTitleFeature.paramsDefinition);
         result.add(SnippetHighlightFeature.paramsDefinition);
         result.add(ManipulatedSnippetContentProvider.paramsDefinition);

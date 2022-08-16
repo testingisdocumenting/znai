@@ -92,6 +92,19 @@ Note: `title` option is required
 
 :include-file: file-name.js {title: "collapsible snippet", collapsed: true}
 
+# Compact
+
+Use `compact: true` to remove top/bottom margins when there are multiple snippets in a row.
+Note: `title` option is required
+
+```markdown
+:include-file: file-name.js {title: "part one", compact: true, collapsed: false}
+:include-file: simple.c {title: "part two", compact: true, collapsed: false}
+```
+
+:include-file: file-name.js {title: "part one", compact: true, collapsed: false}
+:include-file: simple.c {title: "part two", compact: true, collapsed: false}
+
 # Highlights
 
 Use the `highlight` option to bring readers attention to the important lines.
