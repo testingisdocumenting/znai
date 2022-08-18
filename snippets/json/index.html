@@ -133,6 +133,11 @@
 <header><h1>Test Results</h1></header>
 <p>Below is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to make an HTTP call, extract JSON response and information about asserted fields to highlight. http.get(&quot;/weather&quot;) { temperature.shouldBe &lt; 100 } http.doc.capture(&quot;weather-example&quot;) http.doc.capture captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json (validated paths). markdown :include-json: weather-example/response.json { title: &quot;weather response example&quot;, pathsFile: &quot;weather-example/paths.json&quot; }</p>
 </article>
+
+<article>
+<header><h1>Incomplete JSON</h1></header>
+<p>All the features above require fully formed JSON. If you need only syntax highlighting use snippets/external-code-snippets include-file plugin :include-file: incomplete.json { &quot;config&quot;: { ... } }</p>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
@@ -825,10 +830,41 @@ ReactDOM.render(React.createElement(Documentation, {
         "paths" : [ "root.temperature" ],
         "type" : "Json"
       } ]
+    }, {
+      "id" : "incomplete-json",
+      "title" : "Incomplete JSON",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "All the features above require fully formed JSON. If you need only syntax highlighting use ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/external-code-snippets",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "include-file",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " plugin",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: incomplete.json\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "json",
+        "snippet" : "{\n  \"config\": {\n     ...\n  }\n}",
+        "type" : "Snippet"
+      } ]
     } ],
-    "lastModifiedTime" : 1658336084514,
+    "lastModifiedTime" : 1660845237620,
     "tocItem" : {
-      "sectionTitle" : "Snippets",
+      "chapterTitle" : "Snippets",
       "pageTitle" : "Json",
       "pageMeta" : { },
       "dirName" : "snippets",
@@ -864,6 +900,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Test Results",
         "id" : "test-results"
+      }, {
+        "title" : "Incomplete JSON",
+        "id" : "incomplete-json"
       } ]
     }
   }

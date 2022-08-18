@@ -85,13 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Markdown</h1></header>
-<p>An image can be included using standard Markdown syntax. ![alt text](regular-image.png) null regular-image.png alt text</p>
+<header><h1>Standard Markdown</h1></header>
+<p>An image can be included using standard Markdown syntax. markdown ![alt text](regular-image.png) null regular-image.png alt text markdown ![alt text](castle.jpg &quot;custom title&quot;) custom title castle.jpg alt text</p>
 </article>
 
 <article>
 <header><h1>Extension</h1></header>
-<p>Znai has :include-image: extension to provide additional features:title annotations fit scale alignment presentation mode</p>
+<p>Znai has :include-image: extension to provide additional features:annotations fit scale alignment border presentation mode</p>
 </article>
 
 <article>
@@ -156,8 +156,8 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "markdown",
-      "title" : "Markdown",
+      "id" : "standard-markdown",
+      "title" : "Standard Markdown",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
@@ -166,7 +166,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
+        "lang" : "markdown",
         "snippet" : "![alt text](regular-image.png)\n",
         "lineNumber" : "",
         "type" : "Snippet"
@@ -174,9 +174,24 @@ ReactDOM.render(React.createElement(Documentation, {
         "destination" : "/znai/visuals/regular-image.png",
         "alt" : "alt text",
         "inlined" : false,
-        "timestamp" : 1658336084530,
+        "timestamp" : 1660845237640,
         "width" : 583,
         "height" : 385,
+        "type" : "Image"
+      }, {
+        "lang" : "markdown",
+        "snippet" : "![alt text](castle.jpg \"custom title\")\n",
+        "lineNumber" : "",
+        "title" : "with title",
+        "type" : "Snippet"
+      }, {
+        "title" : "custom title",
+        "destination" : "/znai/visuals/castle.jpg",
+        "alt" : "alt text",
+        "inlined" : false,
+        "timestamp" : 1660845237632,
+        "width" : 810,
+        "height" : 557,
         "type" : "Image"
       } ]
     }, {
@@ -203,15 +218,6 @@ ReactDOM.render(React.createElement(Documentation, {
         "tight" : true,
         "type" : "BulletList",
         "content" : [ {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "title",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
@@ -252,6 +258,15 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "text" : "border",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
               "text" : "presentation mode",
               "type" : "SimpleText"
             } ]
@@ -282,7 +297,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "beautiful castle",
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1658336084526,
+        "timestamp" : 1660845237632,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -312,7 +327,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "border" : true,
         "imageSrc" : "/znai/visuals/regular-image.png",
-        "timestamp" : 1658336084530,
+        "timestamp" : 1660845237640,
         "shapes" : [ ],
         "width" : 583.0,
         "height" : 385.0,
@@ -331,7 +346,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "wide image",
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1658336084522,
+        "timestamp" : 1660845237632,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -363,7 +378,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "fit" : true,
         "title" : "auto scaled down image",
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1658336084522,
+        "timestamp" : 1660845237632,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -405,7 +420,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1658336084522,
+        "timestamp" : 1660845237632,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -442,7 +457,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "align" : "left",
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1658336084522,
+        "timestamp" : 1660845237632,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -456,7 +471,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "align" : "right",
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1658336084522,
+        "timestamp" : 1660845237632,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -491,17 +506,17 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1658336084530,
+    "lastModifiedTime" : 1660845237636,
     "tocItem" : {
-      "sectionTitle" : "Visuals",
+      "chapterTitle" : "Visuals",
       "pageTitle" : "Images",
       "pageMeta" : { },
       "dirName" : "visuals",
       "fileName" : "images",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Markdown",
-        "id" : "markdown"
+        "title" : "Standard Markdown",
+        "id" : "standard-markdown"
       }, {
         "title" : "Extension",
         "id" : "extension"

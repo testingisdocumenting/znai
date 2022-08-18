@@ -100,6 +100,11 @@
 </article>
 
 <article>
+<header><h1>Collapsing Parameters</h1></header>
+<p>Use collapsed: true|false to make api-parameters collapsible. markdown ```api-parameters {title: &quot;person definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: false} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code Note: collapsed requires title to be present</p>
+</article>
+
+<article>
 <header><h1>Size</h1></header>
 <p>Use the small parameter to render API Parameters using smaller font size and occupying less width ```api-parameters {small: true} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support</p>
 </article>
@@ -454,6 +459,138 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "person definition",
         "anchorPrefix" : "title",
         "type" : "ApiParameters"
+      } ]
+    }, {
+      "id" : "collapsing-parameters",
+      "title" : "Collapsing Parameters",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "collapsed: true|false",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to make ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "api-parameters",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " collapsible.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "```api-parameters {title: \"person definition\", anchorPrefix: \"title\", collapsed: false}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n\n```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true}\ncity, String, city name\nzipCode, String, zip code\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "firstName",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "title_firstName",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "description with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "score",
+          "type" : [ {
+            "text" : "Integer",
+            "url" : ""
+          } ],
+          "anchorId" : "title_score",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "another description line with ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "markdown",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "person definition",
+        "anchorPrefix" : "title",
+        "collapsed" : false,
+        "type" : "ApiParameters"
+      }, {
+        "parameters" : [ {
+          "name" : "city",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "title_city",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "city name",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "zipCode",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "title_zipCode",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "zip code",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "address definition",
+        "anchorPrefix" : "title",
+        "collapsed" : true,
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "collapsed",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " requires ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to be present",
+          "type" : "SimpleText"
+        } ]
       } ]
     }, {
       "id" : "size",
@@ -1131,9 +1268,9 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1658336084510,
+    "lastModifiedTime" : 1660845237620,
     "tocItem" : {
-      "sectionTitle" : "Snippets",
+      "chapterTitle" : "Snippets",
       "pageTitle" : "API Parameters",
       "pageMeta" : {
         "title" : [ "API Parameters" ]
@@ -1150,6 +1287,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Title",
         "id" : "title"
+      }, {
+        "title" : "Collapsing Parameters",
+        "id" : "collapsing-parameters"
       }, {
         "title" : "Size",
         "id" : "size"

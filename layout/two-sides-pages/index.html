@@ -95,13 +95,18 @@
 </article>
 
 <article>
-<header><h1>Aligning Data in Columns</h1></header>
-<p>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side. :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-meta: {rightSide: true} :include-file: layout/table/table.csv</p>
+<header><h1>Open API Example</h1></header>
+<p>Responses 200 default</p>
 </article>
 
 <article>
 <header><h1>Single Data Block Shortcut</h1></header>
-<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch If need to put a single data block to a right side, you can add rightSide: true as a parameter to include- plugins. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
+<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Use rightSide: true as a parameter to include- plugins to move result to the right side. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
+</article>
+
+<article>
+<header><h1>Aligning Data in Columns</h1></header>
+<p>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. markdown :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
 </article>
 </section>
 </div>
@@ -190,161 +195,226 @@ ReactDOM.render(React.createElement(Documentation, {
       "type" : "Section",
       "content" : [ {
         "method" : "get",
-        "path" : "/v1/estimates/time",
-        "operation" : {
-          "id" : "null",
-          "method" : "get",
-          "path" : "/v1/estimates/time",
-          "produces" : [ "application/json" ],
-          "summary" : "Time Estimates",
-          "tags" : [ "Estimates" ],
-          "parameters" : [ {
-            "name" : "start_latitude",
-            "in" : "query",
-            "type" : "number",
-            "required" : true,
-            "schema" : { },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Latitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "name" : "start_longitude",
-            "in" : "query",
-            "type" : "number",
-            "required" : true,
-            "schema" : { },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Longitude component of start location.",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "name" : "customer_uuid",
-            "in" : "query",
-            "type" : "string",
-            "required" : false,
-            "schema" : { },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique customer identifier to be used for experience customization.",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "name" : "product_id",
-            "in" : "query",
-            "type" : "string",
-            "required" : false,
-            "schema" : { },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
-                "type" : "SimpleText"
-              } ]
-            } ]
+        "url" : "/estimates/time",
+        "type" : "OpenApiMethodAndUrl"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "start_latitude*",
+          "type" : [ {
+            "text" : "number(double)",
+            "url" : ""
           } ],
-          "responses" : [ {
-            "code" : "200",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "properties" : {
-                  "image" : {
-                    "description" : [ {
-                      "type" : "Paragraph",
-                      "content" : [ {
-                        "text" : "Image URL representing the product.",
-                        "type" : "SimpleText"
-                      } ]
-                    } ],
-                    "type" : "string"
-                  },
-                  "product_id" : {
-                    "description" : [ {
-                      "type" : "Paragraph",
-                      "content" : [ {
-                        "text" : "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.",
-                        "type" : "SimpleText"
-                      } ]
-                    } ],
-                    "type" : "string"
-                  },
-                  "description" : {
-                    "description" : [ {
-                      "type" : "Paragraph",
-                      "content" : [ {
-                        "text" : "Description of product.",
-                        "type" : "SimpleText"
-                      } ]
-                    } ],
-                    "type" : "string"
-                  },
-                  "display_name" : {
-                    "description" : [ {
-                      "type" : "Paragraph",
-                      "content" : [ {
-                        "text" : "Display name of product.",
-                        "type" : "SimpleText"
-                      } ]
-                    } ],
-                    "type" : "string"
-                  },
-                  "capacity" : {
-                    "description" : [ {
-                      "type" : "Paragraph",
-                      "content" : [ {
-                        "text" : "Capacity of product. For example, 4 people.",
-                        "type" : "SimpleText"
-                      } ]
-                    } ],
-                    "type" : "string"
-                  }
-                }
-              }
-            },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "An array of products",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "code" : "default",
-            "schema" : {
-              "type" : "Error",
-              "properties" : { }
-            },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "Unexpected error",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          } ],
+          "anchorId" : "null_start_latitude",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "The Time Estimates endpoint returns ETAs for all products offered at a given location, with the responses expressed as integers in seconds. We recommend that this endpoint be called every minute to provide the most accurate, up-to-date ETAs.",
+              "text" : "Latitude component of start location.",
               "type" : "SimpleText"
             } ]
           } ]
-        },
-        "type" : "OpenApiOperation"
+        }, {
+          "name" : "start_longitude*",
+          "type" : [ {
+            "text" : "number(double)",
+            "url" : ""
+          } ],
+          "anchorId" : "null_start_longitude",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Longitude component of start location.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "customer_uuid",
+          "type" : [ {
+            "text" : "string(uuid)",
+            "url" : ""
+          } ],
+          "anchorId" : "null_customer_uuid",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Unique customer identifier to be used for experience customization.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "product_id",
+          "type" : [ {
+            "text" : "string",
+            "url" : ""
+          } ],
+          "anchorId" : "null_product_id",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Unique identifier representing a specific product for a given latitude & longitude.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "query parameters",
+        "collapsible" : true,
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "open-api-example-responses",
+        "level" : 2,
+        "title" : "Responses",
+        "type" : "SubHeading"
+      }, {
+        "style" : "api",
+        "id" : "open-api-example-responses-200",
+        "level" : 4,
+        "title" : "200",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "An array of products",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "",
+          "type" : [ {
+            "text" : "array of object",
+            "url" : ""
+          } ],
+          "anchorId" : "nullapplication/json",
+          "description" : [ ],
+          "children" : [ {
+            "name" : "product_id",
+            "type" : [ {
+              "text" : "string",
+              "url" : ""
+            } ],
+            "anchorId" : "nullapplication/json_product_id",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "description",
+            "type" : [ {
+              "text" : "string",
+              "url" : ""
+            } ],
+            "anchorId" : "nullapplication/json_description",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Description of product.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "display_name",
+            "type" : [ {
+              "text" : "string",
+              "url" : ""
+            } ],
+            "anchorId" : "nullapplication/json_display_name",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Display name of product.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "capacity",
+            "type" : [ {
+              "text" : "string",
+              "url" : ""
+            } ],
+            "anchorId" : "nullapplication/json_capacity",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Capacity of product. For example, 4 people.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "image",
+            "type" : [ {
+              "text" : "string",
+              "url" : ""
+            } ],
+            "anchorId" : "nullapplication/json_image",
+            "description" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Image URL representing the product.",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "title" : "application/json",
+        "collapsed" : false,
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "open-api-example-responses-default",
+        "level" : 4,
+        "title" : "default",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Unexpected error",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "code",
+          "type" : [ {
+            "text" : "integer(int32)",
+            "url" : ""
+          } ],
+          "anchorId" : "nullapplication/json_code",
+          "description" : [ ]
+        }, {
+          "name" : "message",
+          "type" : [ {
+            "text" : "string",
+            "url" : ""
+          } ],
+          "anchorId" : "nullapplication/json_message",
+          "description" : [ ]
+        }, {
+          "name" : "fields",
+          "type" : [ {
+            "text" : "string",
+            "url" : ""
+          } ],
+          "anchorId" : "nullapplication/json_fields",
+          "description" : [ ]
+        } ],
+        "title" : "application/json",
+        "collapsed" : false,
+        "type" : "ApiParameters"
       }, {
         "rightSide" : true,
         "type" : "Meta"
       }, {
         "title" : "Response",
+        "meta" : {
+          "rightSide" : true
+        },
         "data" : {
           "prices" : [ {
             "localized_display_name" : "POOL",
@@ -390,6 +460,108 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "paths" : [ ],
         "type" : "Json"
+      } ]
+    }, {
+      "id" : "single-data-block-shortcut",
+      "title" : "Single Data Block Shortcut",
+      "type" : "Section",
+      "content" : [ {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "type" : "Table"
+      }, {
+        "lang" : "csv",
+        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
+        "meta" : {
+          "rightSide" : true
+        },
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "rightSide: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as a parameter to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugins to move result to the right side.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "md",
+        "snippet" : "# Single Data Block Shortcut\n\n:include-table: layout/table/table.csv\n:include-file: layout/table/table.csv {rightSide: true}",
+        "startLine" : "Single Data Block Shortcut",
+        "endLine" : "{rightSide: true}",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "aligning-data-in-columns",
@@ -479,100 +651,6 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "Table"
       }, {
-        "rightSide" : true,
-        "type" : "Meta"
-      }, {
-        "lang" : "csv",
-        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
-        "type" : "Snippet"
-      }, {
-        "rightSide" : false,
-        "type" : "Meta"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Table and code snippets above are aligned by using an empty block on the right side.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "md",
-        "snippet" : "Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.\n:include-empty-block: {rightSide: true}\n\n:include-table: layout/table/table.csv\n:include-meta: {rightSide: true}\n:include-file: layout/table/table.csv",
-        "startLine" : "Aligning Data in Columns",
-        "excludeStartEnd" : true,
-        "endLine" : ":include-meta: {rightSide: false}",
-        "type" : "Snippet"
-      } ]
-    }, {
-      "id" : "single-data-block-shortcut",
-      "title" : "Single Data Block Shortcut",
-      "type" : "Section",
-      "content" : [ {
-        "table" : {
-          "columns" : [ {
-            "title" : "Account"
-          }, {
-            "title" : "Price"
-          }, {
-            "title" : "Description"
-          } ],
-          "data" : [ [ [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "#12BGD3",
-              "type" : "SimpleText"
-            } ]
-          } ], [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "100",
-              "type" : "SimpleText"
-            } ]
-          } ], [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "custom table with a long attachment",
-              "type" : "SimpleText"
-            } ]
-          } ] ], [ [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "#12BGD3",
-              "type" : "SimpleText"
-            } ]
-          } ], [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "150",
-              "type" : "SimpleText"
-            } ]
-          } ], [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "chair",
-              "type" : "SimpleText"
-            } ]
-          } ] ], [ [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "#91AGB1",
-              "type" : "SimpleText"
-            } ]
-          } ], [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "10",
-              "type" : "SimpleText"
-            } ]
-          } ], [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "lunch",
-              "type" : "SimpleText"
-            } ]
-          } ] ] ]
-        },
-        "type" : "Table"
-      }, {
         "lang" : "csv",
         "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
         "meta" : {
@@ -580,37 +658,21 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "Snippet"
       }, {
-        "rightSide" : false,
-        "type" : "Meta"
-      }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "If need to put a single data block to a right side, you can add ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "rightSide: true",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " as a parameter to ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "include-",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " plugins.",
+          "text" : "Table and code snippets above are aligned by using an empty block on the right side.",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "md",
-        "snippet" : "# Single Data Block Shortcut\n\n:include-table: layout/table/table.csv\n:include-file: layout/table/table.csv  {rightSide: true}",
-        "startLine" : "Single Data Block Shortcut",
-        "endLine" : "{rightSide: true}",
+        "lang" : "markdown",
+        "snippet" : ":include-empty-block: {rightSide: true}\n\n:include-table: layout/table/table.csv\n:include-file: layout/table/table.csv {rightSide: true}\n",
+        "lineNumber" : "",
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1658336084506,
+    "lastModifiedTime" : 1660845237616,
     "tocItem" : {
-      "sectionTitle" : "Layout",
+      "chapterTitle" : "Layout",
       "pageTitle" : "Two Sides Pages",
       "pageMeta" : {
         "type" : [ "two-sides" ]
@@ -628,11 +690,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Open API Example",
         "id" : "open-api-example"
       }, {
-        "title" : "Aligning Data in Columns",
-        "id" : "aligning-data-in-columns"
-      }, {
         "title" : "Single Data Block Shortcut",
         "id" : "single-data-block-shortcut"
+      }, {
+        "title" : "Aligning Data in Columns",
+        "id" : "aligning-data-in-columns"
       } ]
     }
   }

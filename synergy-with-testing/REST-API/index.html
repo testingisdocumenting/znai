@@ -101,7 +101,7 @@
 
 <article>
 <header><h1>Create Employee</h1></header>
-<p></p>
+<p>Request Responses 200 201</p>
 </article>
 </section>
 </div>
@@ -242,107 +242,122 @@ ReactDOM.render(React.createElement(Documentation, {
       "title" : "Create Employee",
       "type" : "Section",
       "content" : [ {
-        "operationId" : "createEmployee",
-        "operation" : {
-          "id" : "createEmployee",
-          "method" : "post",
-          "path" : "/employee",
-          "consumes" : [ "application/json" ],
-          "produces" : [ "application/json" ],
-          "summary" : "Create new employee",
-          "parameters" : [ {
-            "name" : "body",
-            "in" : "body",
-            "type" : "null",
-            "required" : true,
-            "schema" : {
-              "type" : "object",
-              "required" : [ "firstName", "lastName" ],
-              "properties" : {
-                "firstName" : {
-                  "description" : [ {
-                    "type" : "Paragraph",
-                    "content" : [ {
-                      "text" : "first name of an employee",
-                      "type" : "SimpleText"
-                    } ]
-                  } ],
-                  "type" : "string"
-                },
-                "lastName" : {
-                  "description" : [ {
-                    "type" : "Paragraph",
-                    "content" : [ {
-                      "text" : "last name of an employee",
-                      "type" : "SimpleText"
-                    } ]
-                  } ],
-                  "type" : "string"
-                }
-              }
-            },
-            "description" : [ ]
+        "method" : "post",
+        "url" : "/employee",
+        "type" : "OpenApiMethodAndUrl"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Create a new employee, by sending details and get back the id of a newly created employee",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "style" : "api",
+        "id" : "create-employee-request",
+        "level" : 2,
+        "title" : "Request",
+        "type" : "SubHeading"
+      }, {
+        "parameters" : [ {
+          "name" : "firstName*",
+          "type" : [ {
+            "text" : "string",
+            "url" : ""
           } ],
-          "responses" : [ {
-            "code" : "200",
-            "schema" : {
-              "type" : "object",
-              "required" : [ "id" ],
-              "properties" : {
-                "id" : {
-                  "description" : [ {
-                    "type" : "Paragraph",
-                    "content" : [ {
-                      "text" : "employee unique identifier",
-                      "type" : "SimpleText"
-                    } ]
-                  } ],
-                  "type" : "string"
-                }
-              }
-            },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "customer already exists",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          }, {
-            "code" : "201",
-            "schema" : {
-              "type" : "object",
-              "required" : [ "id" ],
-              "properties" : {
-                "id" : {
-                  "description" : [ {
-                    "type" : "Paragraph",
-                    "content" : [ {
-                      "text" : "employee unique identifier",
-                      "type" : "SimpleText"
-                    } ]
-                  } ],
-                  "type" : "string"
-                }
-              }
-            },
-            "description" : [ {
-              "type" : "Paragraph",
-              "content" : [ {
-                "text" : "customer created successfully",
-                "type" : "SimpleText"
-              } ]
-            } ]
-          } ],
+          "anchorId" : "createEmployeeapplication/json_firstName",
           "description" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Create a new employee, by sending details and get back the id of a newly created employee",
+              "text" : "first name of an employee",
               "type" : "SimpleText"
             } ]
           } ]
-        },
-        "type" : "OpenApiOperation"
+        }, {
+          "name" : "lastName*",
+          "type" : [ {
+            "text" : "string",
+            "url" : ""
+          } ],
+          "anchorId" : "createEmployeeapplication/json_lastName",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "last name of an employee",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "application/json",
+        "collapsed" : false,
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "create-employee-responses",
+        "level" : 2,
+        "title" : "Responses",
+        "type" : "SubHeading"
+      }, {
+        "style" : "api",
+        "id" : "create-employee-responses-200",
+        "level" : 4,
+        "title" : "200",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "customer already exists",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "id*",
+          "type" : [ {
+            "text" : "string",
+            "url" : ""
+          } ],
+          "anchorId" : "createEmployeeapplication/json_id",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "employee unique identifier",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "application/json",
+        "collapsed" : false,
+        "type" : "ApiParameters"
+      }, {
+        "style" : "api",
+        "id" : "create-employee-responses-201",
+        "level" : 4,
+        "title" : "201",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "customer created successfully",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "parameters" : [ {
+          "name" : "id*",
+          "type" : [ {
+            "text" : "string",
+            "url" : ""
+          } ],
+          "anchorId" : "createEmployeeapplication/json_id",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "employee unique identifier",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "application/json",
+        "collapsed" : false,
+        "type" : "ApiParameters"
       }, {
         "columns" : [ {
           "content" : [ {
@@ -369,9 +384,9 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       } ]
     } ],
-    "lastModifiedTime" : 1658336084514,
+    "lastModifiedTime" : 1660845237620,
     "tocItem" : {
-      "sectionTitle" : "Synergy With Testing",
+      "chapterTitle" : "Synergy With Testing",
       "pageTitle" : "REST API",
       "pageMeta" : { },
       "dirName" : "synergy-with-testing",

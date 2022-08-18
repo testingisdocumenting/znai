@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.58/znai-dist-1.58-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.59/znai-dist-1.59-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.58&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.58&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.58&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -204,6 +204,14 @@
     <fullTitle>Znai: Page Titles, Name Overrides [Flow]</fullTitle>
     <text>
       <text>To override the default, add the following syntax to the top of your Markdown file: --- title: Custom Name --- To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:Need to use special characters in title Want to avoid auto-capitalization</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/names#chapter-names</url>
+    <fullTitle>Znai: Page Titles, Chapter Names [Flow]</fullTitle>
+    <text>
+      <text>By default, a chapter name is derived from dir name. Dir name my-chapter becomes My Chapter chapter name.To override a chapter name, use {title: "chapter title"} inside toc file text chapter-one {title: "Chapter ONE explicit"} structure setup</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -464,6 +472,22 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/external-code-snippets#collapse</url>
+    <fullTitle>Znai: External Code Snippets, Collapse [Snippets]</fullTitle>
+    <text>
+      <text>Use collapsed: true|false to make code snippet collapsible. Note: title option is required markdown :include-file: file-name.js {title: "collapsible snippet", collapsed: true} class JsClass { constructor() { usefulAction() } } export default JsClass</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/external-code-snippets#compact</url>
+    <fullTitle>Znai: External Code Snippets, Compact [Snippets]</fullTitle>
+    <text>
+      <text>Use compact: true to remove top/bottom margins when there are multiple snippets in a row. Note: title option is required markdown :include-file: file-name.js {title: "part one", compact: true, collapsed: false} :include-file: simple.c {title: "part two", compact: true, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/external-code-snippets#highlights</url>
     <fullTitle>Znai: External Code Snippets, Highlights [Snippets]</fullTitle>
     <text>
@@ -596,6 +620,14 @@
     <fullTitle>Znai: API Parameters, Title [Snippets]</fullTitle>
     <text>
       <text>Use the title parameter to specify a title. ```api-parameters {title: "person definition"} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/api-parameters#collapsing-parameters</url>
+    <fullTitle>Znai: API Parameters, Collapsing Parameters [Snippets]</fullTitle>
+    <text>
+      <text>Use collapsed: true|false to make api-parameters collapsible. markdown ```api-parameters {title: "person definition", anchorPrefix: "title", collapsed: false} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code Note: collapsed requires title to be present</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -752,6 +784,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/json#incomplete-json</url>
+    <fullTitle>Znai: Json, Incomplete JSON [Snippets]</fullTitle>
+    <text>
+      <text>All the features above require fully formed JSON. If you need only syntax highlighting use snippets/external-code-snippets include-file plugin :include-file: incomplete.json { "config": { ... } }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/xml#highlight-parts</url>
     <fullTitle>Znai: Xml, Highlight Parts [Snippets]</fullTitle>
     <text>
@@ -776,18 +816,26 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/open-API#operation-definition</url>
-    <fullTitle>Znai: Open API, Operation definition [Snippets]</fullTitle>
+    <url>/znai/snippets/open-API#operation-by-method-and-path</url>
+    <fullTitle>Znai: Open API, Operation By Method And Path [Snippets]</fullTitle>
     <text>
-      <text>If you have a file with an https://github.com/OAI/OpenAPI-Specification/blob/master/README.md Open API definition (a.k.a. a Swagger file) you can render it by a given method and path , or by operationId . Both yaml and json formats are supported.Let's consider https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json Uber's API definition as an example: :include-open-api: open-api/uber.json {method: "get", path: "/v1/estimates/time"} Note: descriptions are treated as Markdown, using the https://commonmark.org/help/ CommonMark specification</text>
+      <text>If you have a file with an https://github.com/OAI/OpenAPI-Specification/blob/master/README.md Open API definition (a.k.a. a Swagger file) you can render it by a given method and path , or by operationId . Both yaml and json formats are supported.Let's consider https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json Uber's API definition as an example: :include-open-api: open-api/uber.json {method: "get", path: "/estimates/time"} Responses 200 default Note: descriptions are treated as Markdown, using the https://commonmark.org/help/ CommonMark specification</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/open-API#producesconsumes</url>
-    <fullTitle>Znai: Open API, Produces/Consumes [Snippets]</fullTitle>
+    <url>/znai/snippets/open-API#operation-by-id</url>
+    <fullTitle>Znai: Open API, Operation By ID [Snippets]</fullTitle>
     <text>
-      <text>By default produces and consumes parts are not displayed. If you are documenting a modern API, chances are it will be consistent and you can specify at the start of your documentation that you are dealing with application/json .Use showConsumes and showProduces params to show what content types are supported. :include-open-api: open-api/uber.json {method: "get", path: "/v1/estimates/time", showConsumes: true, showProduces: true}</text>
+      <text>Let's take a pet store example. Use operationId to include operation definition by ID. :include-open-api: petstore-openapi3.json {operationId: "updatePet"} Request Responses 200 400 404 405</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/open-API#add-a-new-pet-to-the-store</url>
+    <fullTitle>Znai: Open API, Add a new pet to the store [Snippets]</fullTitle>
+    <text>
+      <text>Use the autoSection property to automatically generate a page section with a title taken from an operation summary. :include-open-api: petstore-openapi3.json {operationId: "addPet", autoSection: true} Note: The section below is automatically generated by include-open-api Request Responses 200 405</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -795,7 +843,15 @@
     <url>/znai/snippets/open-API#time-estimates</url>
     <fullTitle>Znai: Open API, Time Estimates [Snippets]</fullTitle>
     <text>
-      <text>Use the autoSection property to automatically generate a page section with a title taken from an operation summary. :include-open-api: open-api/uber.yaml {method: "get", path: "/v1/estimates/time", autoSection: true} Note: The section below is automatically generated by include-open-api</text>
+      <text>Specify tags to automatically generate multiple entries from a service definition file. :include-open-api: open-api/uber.yaml {tags: "Estimates", autoSection: true} Note: The sections below are automatically generated by include-open-api Responses 200 default Responses 200 default</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/open-API#two-sides-layout</url>
+    <fullTitle>Znai: Open API, Two Sides Layout [Snippets]</fullTitle>
+    <text>
+      <text>Znai supports layout/two-sides-pages Two Sides Layout mode that is perfect to supplement API documentation with examples column. layout/two-sides-pages#open-api-example Open API example</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1120,10 +1176,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/visuals/images#markdown</url>
-    <fullTitle>Znai: Images, Markdown [Visuals]</fullTitle>
+    <url>/znai/visuals/images#standard-markdown</url>
+    <fullTitle>Znai: Images, Standard Markdown [Visuals]</fullTitle>
     <text>
-      <text>An image can be included using standard Markdown syntax. ![alt text](regular-image.png) null regular-image.png alt text</text>
+      <text>An image can be included using standard Markdown syntax. markdown ![alt text](regular-image.png) null regular-image.png alt text markdown ![alt text](castle.jpg "custom title") custom title castle.jpg alt text</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1131,7 +1187,7 @@
     <url>/znai/visuals/images#extension</url>
     <fullTitle>Znai: Images, Extension [Visuals]</fullTitle>
     <text>
-      <text>Znai has :include-image: extension to provide additional features:title annotations fit scale alignment presentation mode</text>
+      <text>Znai has :include-image: extension to provide additional features:annotations fit scale alignment border presentation mode</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1243,7 +1299,7 @@
     <url>/znai/visuals/image-annotations#integration-with-testing</url>
     <fullTitle>Znai: Image Annotations, Integration With Testing [Visuals]</fullTitle>
     <text>
-      <text>Use UI testing frameworks to automatically generate annotations file and capture screenshot.For example https://github.com/testingisdocumenting/webtau WebTau automatically generates an annotations file in addition to capturing a screenshot. package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $("#search_form_input_homepage") def resultSearchInput = $("#search_form_input") def searchButton = $("#search_button_homepage") def result = $('article[data-testid="result"]') scenario("capture screenshot") { browser.open("https://duckduckgo.com/") homeSearchInput.setValue("testing is documenting") searchButton.click() result.waitTo visible browser.doc.withAnnotations( browser.doc.badge(resultSearchInput), browser.doc.badge(result)).capture("duckduckgo-search") } :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one Note: https://github.com/testingisdocumenting/webtau WebTau captures additional data such as pixelRatio</text>
+      <text>Use UI testing frameworks to automatically generate annotations file and capture screenshot.For example https://github.com/testingisdocumenting/webtau WebTau automatically generates an annotations file in addition to capturing a screenshot. package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*="search"]') def resultSearchInput = $("#search_form_input") def result = $('article[data-testid="result"]') scenario("capture screenshot") { browser.open("https://duckduckgo.com/") homeSearchInput.waitToBe visible homeSearchInput.setValue("testing is documenting\n") result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture("duckduckgo-search") } :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one Note: https://github.com/testingisdocumenting/webtau WebTau captures additional data such as pixelRatio</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1276,6 +1332,14 @@
     <fullTitle>Znai: Charts, Line [Visuals]</fullTitle>
     <text>
       <text>To build a line chart use: :include-linechart: charts/genres.csv genre, preference RPG, 75 Action, 50 RTS, 40 FPS, 50 Use multiple CSV columns to add more lines :include-linechart: charts/daily-genres.csv day, RPG, RTS, FPS Monday, 100, 10, 0 Tuesday, 50, 50, 20 Wednesday, 10, 30, 50 Thursday, 5, 5, 100 Friday, 0, 100, 10 Use numbers in first column to have a regular X, Y plots :include-linechart: charts/competitors.csv x, company one, company two 10, 100, 150 15.5, 110, 145 30, 120, 130 40, 110, 145 50, 115, 100</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/charts#time-series</url>
+    <fullTitle>Znai: Charts, Time Series [Visuals]</fullTitle>
+    <text>
+      <text>Use time: true to treat X as time series day, RPG 2022-08-01, 100 2022-08-04, 50 2022-08-05, 10 2022-08-08, 5 2022-09-12, 22 :include-linechart: charts/time-series.csv {time: true}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1904,10 +1968,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/layout/two-sides-pages#aligning-data-in-columns</url>
-    <fullTitle>Znai: Two Sides Pages, Aligning Data in Columns [Layout]</fullTitle>
+    <url>/znai/layout/two-sides-pages#open-api-example</url>
+    <fullTitle>Znai: Two Sides Pages, Open API Example [Layout]</fullTitle>
     <text>
-      <text>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side. :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-meta: {rightSide: true} :include-file: layout/table/table.csv</text>
+      <text>Responses 200 default</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1915,7 +1979,15 @@
     <url>/znai/layout/two-sides-pages#single-data-block-shortcut</url>
     <fullTitle>Znai: Two Sides Pages, Single Data Block Shortcut [Layout]</fullTitle>
     <text>
-      <text>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch If need to put a single data block to a right side, you can add rightSide: true as a parameter to include- plugins. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</text>
+      <text>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Use rightSide: true as a parameter to include- plugins to move result to the right side. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/two-sides-pages#aligning-data-in-columns</url>
+    <fullTitle>Znai: Two Sides Pages, Aligning Data in Columns [Layout]</fullTitle>
+    <text>
+      <text>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. markdown :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2315,7 +2387,7 @@
     <url>/znai/synergy-with-testing/web-UI#screenshots-and-annotations</url>
     <fullTitle>Znai: Web UI, Screenshots And Annotations [Synergy With Testing]</fullTitle>
     <text>
-      <text>In visuals/image-annotations Image Annotations you can specify annotations in an external file.Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to capture a screenshot and annotations package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $("#search_form_input_homepage") def resultSearchInput = $("#search_form_input") def searchButton = $("#search_button_homepage") def result = $('article[data-testid="result"]') scenario("capture screenshot") { browser.open("https://duckduckgo.com/") homeSearchInput.setValue("testing is documenting") searchButton.click() result.waitTo visible browser.doc.withAnnotations( browser.doc.badge(resultSearchInput), browser.doc.badge(result)).capture("duckduckgo-search") } markdown 1. Type question you want to be answered anonymously 2. Scan through results and pick the most relevant one :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one</text>
+      <text>In visuals/image-annotations Image Annotations you can specify annotations in an external file.Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to capture a screenshot and annotations package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*="search"]') def resultSearchInput = $("#search_form_input") def result = $('article[data-testid="result"]') scenario("capture screenshot") { browser.open("https://duckduckgo.com/") homeSearchInput.waitToBe visible homeSearchInput.setValue("testing is documenting\n") result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture("duckduckgo-search") } markdown 1. Type question you want to be answered anonymously 2. Scan through results and pick the most relevant one :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2347,7 +2419,7 @@
     <url>/znai/synergy-with-testing/REST-API#create-employee</url>
     <fullTitle>Znai: REST API, Create Employee [Synergy With Testing]</fullTitle>
     <text>
-      <text></text>
+      <text>Request Responses 200 201</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2408,10 +2480,18 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/release-notes/2022#159</url>
+    <fullTitle>Znai: 2022 Releases, 1.59 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: Centered visuals/images Image with horizontal scrollbar doesn't cut parts of image anymore Fix: visuals/images#fit Image Zoom now has vertical scroll for tall images Add visuals/charts#time-series Time Series option to visuals/charts Charts Add snippets/open-API Open API 3 support Add snippets/external-code-snippets#compact compact option to snippets/external-code-snippets Code Snippets Add snippets/external-code-snippets#collapse collapsible option to snippets/external-code-snippets Code Snippets snippets/api-parameters API Parameters expand nested by default when single root parameter Add snippets/api-parameters#collapsing-parameters collapsible option to snippets/api-parameters API Parameters Add title support for visuals/images#standard-markdown Standard Markdown Image Add code snippets class color to be distinct from the regular text Add flow/names#chapter-names Chapter Title Override via toc file</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/release-notes/2022#158</url>
     <fullTitle>Znai: 2022 Releases, 1.58 [Release Notes]</fullTitle>
     <text>
-      <text>Fix: Maven Plugin race condition between shutdown hook and apache FileUtils class unload Fix: CPP/auto-reference CPP Auto Ref method link color Fix: highlight python code snippet decorator Fix: Python multi-line token color during snippet render Fix: python multiline string parsing to properly highlight lines Fix: snippets/json JSON rendering order Fix: search popup on iPad now fits a browser window Fix: Enable visuals/images Image click to zoom on scaled down images Fix: layout/columns Column rendering when content starts with a link Fix: Empty layout/columns Column rendering crash Fix: visuals/images#border Image bottom border rendering Fix: Image explicit scale now respects visuals/image-annotations Annotations Placement Fix: iPad layout adjustments to battle 100vh rendering feature Doc: Improved Examples on synergy-with-testing/web-UI Synergy With Testing Doc: Move CPP/doxygen-setup CPP to its own chapter Doc: Move python/content-extraction Python to its own chapter Doc: Move java/content-extraction Java to its own chapter Doc: fix example of flow/lookup-paths#class-path-lookup classpath lookup Rework layout/templates Templates example Doc: visuals/icons#inside-tables Table with Icons example Doc: Document visuals/image-annotations#pixel-ratio Image Pixel Ratio Doc: Update layout/columns Columns examples and text refactoring Doc: Rework introduction/what-is-this What Is This with more examples and reorganized order Doc: snippets/json#test-results JSON WebTau example Add visuals/image-annotations Auto Annotation Color for JSON annotations Add snippets/markdown#multiple-markdown-files include-markdowns sort parameter Image Annotation visuals/image-annotations#annotations-file From CSV File Add caching to python/auto-reference Python Parsing Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows image annotations Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows Tooltips Parse python/description-extraction#doc-parameters Python Returns PyDoc section Render python/auto-reference#finmoneymoney-properties Python Properties as snippets/api-parameters API Parameters Reflect visuals/headings Heading Style in Table Of Contents menu panel Add python/auto-reference#class-definition include-python-class: package.ClassName to display and define a class Add python/auto-reference#methodfunction-definition include-python-method: package.method_name to display a function signature, documentation and parameters Tweak color of code snippets of lang=markdown Removed global-references.js for handling cross-references in favor of lazy url evaluation at page generation time Add Python Doc params python/description-extraction#type-hints Type Hint support visuals/mermaid-diagrams#wide-mode Mermaid Diagrams Wide Mode visuals/mermaid-diagrams#external-file Mermaid Diagrams External File Add Graphviz visuals/graphviz-diagrams#fenced-block fenced block support Add collapse button for snippets/external-code-snippets#read-more Snippet Read More visuals/mermaid-diagrams Mermaid Diagrams dark mode and auto them switch visuals/image-annotations#manual-coordinates Image Annotation Coordinates during preview mode Change arrow visuals/image-annotations Image Annotations style to be single color and use tooltip Add automatic visuals/image-annotations Image Annotations badges textual description tooltips via ordered list Add tooltip for snippets/code-comments Code Comments Bullet Points Tweak visuals/images#fit Image Zoom style in dark and light themes Add snippets/api-parameters#wide-mode API Parameters Wide Mode Tweak snippets/api-parameters#title API Parameters Title style Add snippets/api-parameters API Parameters plugin parameters definition New visuals/images#title Image Title look and feel Add flow/support Support Title Add snippets/json#hidden-parts JSON Collapsed Paths validation Add formal plugin parameters to visuals/images Image Plugin Add visuals/image-annotations#badges Image Badge Annotation auto color detection Add snippets/json JSON fence plugin Add snippets/json JSON parameters formalization Add snippets/json#title JSON Auto Title feature Add Java Plugins parameters definition Add initial plugin parameters formalization. Enforce parameters validation for snippets/snippets-manipulation File Plugin Add snippets/json#code-references JSON Code References support More prominent colors for highlight of snippets/json JSON value Better error message in case of wrong znai CLI argument name Add --version param to znai CLI</text>
+      <text>Fix: Maven Plugin race condition between shutdown hook and apache FileUtils class unload Fix: CPP/auto-reference CPP Auto Ref method link color Fix: highlight python code snippet decorator Fix: Python multi-line token color during snippet render Fix: python multiline string parsing to properly highlight lines Fix: snippets/json JSON rendering order Fix: search popup on iPad now fits a browser window Fix: Enable visuals/images Image click to zoom on scaled down images Fix: layout/columns Column rendering when content starts with a link Fix: Empty layout/columns Column rendering crash Fix: visuals/images#border Image bottom border rendering Fix: Image explicit scale now respects visuals/image-annotations Annotations Placement Fix: iPad layout adjustments to battle 100vh rendering feature Doc: how to include snippets/json#incomplete-json json that is not valid Doc: Improved Examples on synergy-with-testing/web-UI Synergy With Testing Doc: Move CPP/doxygen-setup CPP to its own chapter Doc: Move python/content-extraction Python to its own chapter Doc: Move java/content-extraction Java to its own chapter Doc: fix example of flow/lookup-paths#class-path-lookup classpath lookup Rework layout/templates Templates example Doc: visuals/icons#inside-tables Table with Icons example Doc: Document visuals/image-annotations#pixel-ratio Image Pixel Ratio Doc: Update layout/columns Columns examples and text refactoring Doc: Rework introduction/what-is-this What Is This with more examples and reorganized order Doc: snippets/json#test-results JSON WebTau example Add visuals/image-annotations Auto Annotation Color for JSON annotations Add snippets/markdown#multiple-markdown-files include-markdowns sort parameter Image Annotation visuals/image-annotations#annotations-file From CSV File Add caching to python/auto-reference Python Parsing Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows image annotations Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows Tooltips Parse python/description-extraction#doc-parameters Python Returns PyDoc section Render python/auto-reference#finmoneymoney-properties Python Properties as snippets/api-parameters API Parameters Reflect visuals/headings Heading Style in Table Of Contents menu panel Add python/auto-reference#class-definition include-python-class: package.ClassName to display and define a class Add python/auto-reference#methodfunction-definition include-python-method: package.method_name to display a function signature, documentation and parameters Tweak color of code snippets of lang=markdown Removed global-references.js for handling cross-references in favor of lazy url evaluation at page generation time Add Python Doc params python/description-extraction#type-hints Type Hint support visuals/mermaid-diagrams#wide-mode Mermaid Diagrams Wide Mode visuals/mermaid-diagrams#external-file Mermaid Diagrams External File Add Graphviz visuals/graphviz-diagrams#fenced-block fenced block support Add collapse button for snippets/external-code-snippets#read-more Snippet Read More visuals/mermaid-diagrams Mermaid Diagrams dark mode and auto them switch visuals/image-annotations#manual-coordinates Image Annotation Coordinates during preview mode Change arrow visuals/image-annotations Image Annotations style to be single color and use tooltip Add automatic visuals/image-annotations Image Annotations badges textual description tooltips via ordered list Add tooltip for snippets/code-comments Code Comments Bullet Points Tweak visuals/images#fit Image Zoom style in dark and light themes Add snippets/api-parameters#wide-mode API Parameters Wide Mode Tweak snippets/api-parameters#title API Parameters Title style Add snippets/api-parameters API Parameters plugin parameters definition New visuals/images#title Image Title look and feel Add flow/support Support Title Add snippets/json#hidden-parts JSON Collapsed Paths validation Add formal plugin parameters to visuals/images Image Plugin Add visuals/image-annotations#badges Image Badge Annotation auto color detection Add snippets/json JSON fence plugin Add snippets/json JSON parameters formalization Add snippets/json#title JSON Auto Title feature Add Java Plugins parameters definition Add initial plugin parameters formalization. Enforce parameters validation for snippets/snippets-manipulation File Plugin Add snippets/json#code-references JSON Code References support More prominent colors for highlight of snippets/json JSON value Better error message in case of wrong znai CLI argument name Add --version param to znai CLI</text>
       <score>STANDARD</score>
     </text>
   </entry>

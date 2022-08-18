@@ -100,6 +100,11 @@
 </article>
 
 <article>
+<header><h1>Time Series</h1></header>
+<p>Use time: true to treat X as time series day, RPG 2022-08-01, 100 2022-08-04, 50 2022-08-05, 10 2022-08-08, 5 2022-09-12, 22 :include-linechart: charts/time-series.csv {time: true}</p>
+</article>
+
+<article>
 <header><h1>Legend</h1></header>
 <p>Use legend: true to add legend to a chart :include-linechart: charts/daily-genres.csv {legend: true}</p>
 </article>
@@ -178,6 +183,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "chartType" : "pie",
+        "isTimeSeries" : false,
         "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "labels" : [ "genre", "preference" ],
         "type" : "EchartGeneric"
@@ -199,6 +205,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "chartType" : "bar",
+        "isTimeSeries" : false,
         "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "labels" : [ "genre", "preference" ],
         "type" : "EchartGeneric"
@@ -221,6 +228,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "chartType" : "bar",
+        "isTimeSeries" : false,
         "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
         "labels" : [ "game", "walking", "fighting", "reading" ],
         "type" : "EchartGeneric"
@@ -250,6 +258,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "stack" : true,
         "chartType" : "bar",
+        "isTimeSeries" : false,
         "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
         "labels" : [ "game", "walking", "fighting", "reading" ],
         "type" : "EchartGeneric"
@@ -281,6 +290,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "horizontal" : true,
         "height" : 250,
         "chartType" : "bar",
+        "isTimeSeries" : false,
         "data" : [ [ "Oblivion", 100, 100, 20 ], [ "Elden Ring", 110, 110, 5 ], [ "Persona 5", 20, 30, 50 ], [ "Divinity", 30, 30, 10 ] ],
         "labels" : [ "game", "walking", "fighting", "reading" ],
         "type" : "EchartGeneric"
@@ -308,6 +318,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "chartType" : "line",
+        "isTimeSeries" : false,
         "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "labels" : [ "genre", "preference" ],
         "type" : "EchartGeneric"
@@ -330,6 +341,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "chartType" : "line",
+        "isTimeSeries" : false,
         "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "labels" : [ "day", "RPG", "RTS", "FPS" ],
         "type" : "EchartGeneric"
@@ -352,9 +364,44 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "chartType" : "line",
+        "isTimeSeries" : false,
         "data" : [ [ 10, 100, 150 ], [ 15.5, 110, 145 ], [ 30, 120, 130 ], [ 40, 110, 145 ], [ 50, 115, 100 ] ],
         "labels" : [ "x", "company one", "company two" ],
         "type" : "EchartGeneric"
+      } ]
+    }, {
+      "id" : "time-series",
+      "title" : "Time Series",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "time: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to treat ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "X",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " as time series",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "csv",
+        "snippet" : "day, RPG\n2022-08-01, 100\n2022-08-04, 50\n2022-08-05, 10\n2022-08-08, 5\n2022-09-12, 22",
+        "autoTitle" : true,
+        "title" : "charts/time-series.csv",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-linechart: charts/time-series.csv {time: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "legend",
@@ -380,6 +427,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "legend" : true,
         "chartType" : "line",
+        "isTimeSeries" : false,
         "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "labels" : [ "day", "RPG", "RTS", "FPS" ],
         "type" : "EchartGeneric"
@@ -408,6 +456,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "wide" : true,
         "chartType" : "line",
+        "isTimeSeries" : false,
         "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "labels" : [ "day", "RPG", "RTS", "FPS" ],
         "type" : "EchartGeneric"
@@ -426,6 +475,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "wide" : true,
         "height" : 800,
         "chartType" : "line",
+        "isTimeSeries" : false,
         "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "labels" : [ "day", "RPG", "RTS", "FPS" ],
         "type" : "EchartGeneric"
@@ -447,6 +497,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "chartType" : "pie",
+        "isTimeSeries" : false,
         "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "labels" : [ "genre", "preference" ],
         "type" : "EchartGeneric"
@@ -458,6 +509,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "legend" : true,
         "chartType" : "line",
+        "isTimeSeries" : false,
         "data" : [ [ "Monday", 100, 10, 0 ], [ "Tuesday", 50, 50, 20 ], [ "Wednesday", 10, 30, 50 ], [ "Thursday", 5, 5, 100 ], [ "Friday", 0, 100, 10 ] ],
         "labels" : [ "day", "RPG", "RTS", "FPS" ],
         "type" : "EchartGeneric"
@@ -468,6 +520,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "chartType" : "bar",
+        "isTimeSeries" : false,
         "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "labels" : [ "genre", "preference" ],
         "type" : "EchartGeneric"
@@ -508,6 +561,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "legend" : true,
         "breakpoint" : [ 17, 42 ],
         "chartType" : "line",
+        "isTimeSeries" : false,
         "data" : [ [ 10, 100, 150 ], [ 15.5, 110, 145 ], [ 30, 120, 130 ], [ 40, 110, 145 ], [ 50, 115, 100 ] ],
         "labels" : [ "x", "company one", "company two" ],
         "type" : "EchartGeneric"
@@ -540,6 +594,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "breakpoint" : [ "Action" ],
         "chartType" : "pie",
+        "isTimeSeries" : false,
         "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "labels" : [ "genre", "preference" ],
         "type" : "EchartGeneric"
@@ -564,6 +619,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "legend" : true,
         "breakpoint" : [ "RPG", "Action", "RTS" ],
         "chartType" : "bar",
+        "isTimeSeries" : false,
         "data" : [ [ "RPG", 75 ], [ "Action", 50 ], [ "RTS", 40 ], [ "FPS", 50 ] ],
         "labels" : [ "genre", "preference" ],
         "type" : "EchartGeneric"
@@ -594,9 +650,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1658336084526,
+    "lastModifiedTime" : 1660845237632,
     "tocItem" : {
-      "sectionTitle" : "Visuals",
+      "chapterTitle" : "Visuals",
       "pageTitle" : "Charts",
       "pageMeta" : { },
       "dirName" : "visuals",
@@ -611,6 +667,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Line",
         "id" : "line"
+      }, {
+        "title" : "Time Series",
+        "id" : "time-series"
       }, {
         "title" : "Legend",
         "id" : "legend"

@@ -93,6 +93,11 @@
 <header><h1>Name Overrides</h1></header>
 <p>To override the default, add the following syntax to the top of your Markdown file: --- title: Custom Name --- To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:Need to use special characters in title Want to avoid auto-capitalization</p>
 </article>
+
+<article>
+<header><h1>Chapter Names</h1></header>
+<p>By default, a chapter name is derived from dir name. Dir name my-chapter becomes My Chapter chapter name.To override a chapter name, use {title: &quot;chapter title&quot;} inside toc file text chapter-one {title: &quot;Chapter ONE explicit&quot;} structure setup</p>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
@@ -193,10 +198,57 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ]
       } ]
+    }, {
+      "id" : "chapter-names",
+      "title" : "Chapter Names",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "By default, a chapter name is derived from dir name. Dir name ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "my-chapter",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " becomes ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "My Chapter",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " chapter name.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To override a chapter name, use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "{title: \"chapter title\"}",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " inside ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "toc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "text",
+        "snippet" : "chapter-one {title: \"Chapter ONE explicit\"} \n    structure\n    setup\n",
+        "lineNumber" : "",
+        "title" : "toc",
+        "type" : "Snippet"
+      } ]
     } ],
-    "lastModifiedTime" : 1658336084506,
+    "lastModifiedTime" : 1660845237612,
     "tocItem" : {
-      "sectionTitle" : "Flow",
+      "chapterTitle" : "Flow",
       "pageTitle" : "Page Titles",
       "pageMeta" : {
         "title" : [ "Page Titles" ]
@@ -210,6 +262,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Name Overrides",
         "id" : "name-overrides"
+      }, {
+        "title" : "Chapter Names",
+        "id" : "chapter-names"
       } ]
     }
   }

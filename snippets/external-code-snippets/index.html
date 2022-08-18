@@ -115,6 +115,16 @@
 </article>
 
 <article>
+<header><h1>Collapse</h1></header>
+<p>Use collapsed: true|false to make code snippet collapsible. Note: title option is required markdown :include-file: file-name.js {title: &quot;collapsible snippet&quot;, collapsed: true} class JsClass { constructor() { usefulAction() } } export default JsClass</p>
+</article>
+
+<article>
+<header><h1>Compact</h1></header>
+<p>Use compact: true to remove top/bottom margins when there are multiple snippets in a row. Note: title option is required markdown :include-file: file-name.js {title: &quot;part one&quot;, compact: true, collapsed: false} :include-file: simple.c {title: &quot;part two&quot;, compact: true, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; }</p>
+</article>
+
+<article>
 <header><h1>Highlights</h1></header>
 <p>Use the highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: &quot;export&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: [&quot;export&quot;, 1]} class JsClass { constructor() { usefulAction() } } export default JsClass Note: Order of lines to highlight is reflected during presentation modeUse the highlightPath option to highlight lines specified in a separate file. :include-file: file-name.js {highlightPath: &quot;lines-to-highlight.txt&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass class usefulAction</p>
 </article>
@@ -518,6 +528,92 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     }, {
+      "id" : "collapse",
+      "title" : "Collapse",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "collapsed: true|false",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to make code snippet collapsible.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option is required",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-file: file-name.js {title: \"collapsible snippet\", collapsed: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "js",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+        "title" : "collapsible snippet",
+        "collapsed" : true,
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "compact",
+      "title" : "Compact",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "compact: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove top/bottom margins when there are multiple snippets in a row.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option is required",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-file: file-name.js {title: \"part one\", compact: true, collapsed: false}\n:include-file: simple.c {title: \"part two\", compact: true, collapsed: false}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "js",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+        "title" : "part one",
+        "compact" : true,
+        "collapsed" : false,
+        "type" : "Snippet"
+      }, {
+        "lang" : "c",
+        "snippet" : "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
+        "title" : "part two",
+        "compact" : true,
+        "collapsed" : false,
+        "type" : "Snippet"
+      } ]
+    }, {
       "id" : "highlights",
       "title" : "Highlights",
       "type" : "Section",
@@ -600,9 +696,9 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1658336084514,
+    "lastModifiedTime" : 1660845237620,
     "tocItem" : {
-      "sectionTitle" : "Snippets",
+      "chapterTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
       "pageMeta" : { },
       "dirName" : "snippets",
@@ -626,6 +722,12 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Read More",
         "id" : "read-more"
+      }, {
+        "title" : "Collapse",
+        "id" : "collapse"
+      }, {
+        "title" : "Compact",
+        "id" : "compact"
       }, {
         "title" : "Highlights",
         "id" : "highlights"
