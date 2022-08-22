@@ -239,7 +239,7 @@ class MyClass {
             [
                 { type: 'keyword', content: 'class' },
                 ' ',
-                { type: 'class-name', content: 'MyClass' },
+                { type: 'class-name', content: ['MyClass'] },
                 ' ',
                 { type: 'punctuation', content: '{' }
             ],
