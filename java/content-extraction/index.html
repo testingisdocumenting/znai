@@ -86,12 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Method Body</h1></header>
-<p>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method</p>
+<p>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
 </article>
 
 <article>
 <header><h1>Callout Comments</h1></header>
-<p>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot;} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method</p>
+<p>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot;} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
 </article>
 
 <article>
@@ -206,7 +206,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "java",
-        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n// overloaded method",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();",
         "entry" : "sampleMethod",
         "bodyOnly" : true,
         "type" : "Snippet"
@@ -256,7 +256,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "java",
-        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();\n// overloaded method",
+        "snippet" : "validate();\nprocess(p2); // important comment\nnotifyAll(p1); // very important\n\nreturn bestSample();",
         "entry" : "sampleMethod",
         "bodyOnly" : true,
         "commentsType" : "inline",
@@ -572,7 +572,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1660845237612,
+    "lastModifiedTime" : 1661211034254,
     "tocItem" : {
       "chapterTitle" : "Java",
       "pageTitle" : "Content Extraction",

@@ -737,17 +737,23 @@ toc = [ {
       "title" : "Warning",
       "id" : "warning"
     }, {
+      "title" : "Question",
+      "id" : "question"
+    }, {
+      "title" : "Exercise",
+      "id" : "exercise"
+    }, {
       "title" : "Avoid",
       "id" : "avoid"
     }, {
       "title" : "Do Not",
       "id" : "do-not"
     }, {
-      "title" : "Question",
-      "id" : "question"
+      "title" : "Tip",
+      "id" : "tip"
     }, {
-      "title" : "Exercise",
-      "id" : "exercise"
+      "title" : "Recommendation",
+      "id" : "recommendation"
     } ]
   }, {
     "chapterTitle" : "Visuals",
@@ -1606,6 +1612,9 @@ toc = [ {
     "fileName" : "2022",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.59.1",
+      "id" : "1591"
+    }, {
       "title" : "1.59",
       "id" : "159"
     }, {

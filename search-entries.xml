@@ -11,7 +11,7 @@
     <url>/znai/introduction/what-is-this#extensive-plugins-system</url>
     <fullTitle>Znai: What Is This, Extensive Plugins System [Introduction]</fullTitle>
     <text>
-      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include plugins markdown :include-json: example.json { title: "JSON example", paths: ["root.person.id"], collapsedPaths: ["root.details"] } markdown :include-java: ../java/HelloWorld.java { entry: "sampleMethod", bodyOnly: true, commentsType: "inline" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method Inlined Code plugins markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fence plugins markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</text>
+      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include plugins markdown :include-json: example.json { title: "JSON example", paths: ["root.person.id"], collapsedPaths: ["root.details"] } markdown :include-java: ../java/HelloWorld.java { entry: "sampleMethod", bodyOnly: true, commentsType: "inline" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Inlined Code plugins markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fence plugins markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.59/znai-dist-1.59-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.59.1/znai-dist-1.59.1-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59.1&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59.1&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59.1&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1035,7 +1035,7 @@
     <url>/znai/snippets/java#content-extraction</url>
     <fullTitle>Znai: Java, Content Extraction [Snippets]</fullTitle>
     <text>
-      <text>In addition to snippets/snippets-manipulation snippets manipulation that is applicable to any language, Znai can extract content of methods. :include-java: HelloWorld.java { entry: "sampleMethod", commentsType: "inline", bodyOnly: true } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method Head over to java/content-extraction Java Content Extraction to learn more</text>
+      <text>In addition to snippets/snippets-manipulation snippets manipulation that is applicable to any language, Znai can extract content of methods. :include-java: HelloWorld.java { entry: "sampleMethod", commentsType: "inline", bodyOnly: true } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Head over to java/content-extraction Java Content Extraction to learn more</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1144,6 +1144,22 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/attention-signs#question</url>
+    <fullTitle>Znai: Attention Signs, Question [Visuals]</fullTitle>
+    <text>
+      <text>Question: Use the question sign to bring an extra attention to the main idea of a page. \ What is the point of the `attention signs`? Question: Use the question sign to bring extra attention to the main idea of a page. What is the point of the attention signs ?</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/attention-signs#exercise</url>
+    <fullTitle>Znai: Attention Signs, Exercise [Visuals]</fullTitle>
+    <text>
+      <text>Exercise: write a hello world example in this language Exercise: write a hello world example in this language</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/attention-signs#avoid</url>
     <fullTitle>Znai: Attention Signs, Avoid [Visuals]</fullTitle>
     <text>
@@ -1160,18 +1176,18 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/visuals/attention-signs#question</url>
-    <fullTitle>Znai: Attention Signs, Question [Visuals]</fullTitle>
+    <url>/znai/visuals/attention-signs#tip</url>
+    <fullTitle>Znai: Attention Signs, Tip [Visuals]</fullTitle>
     <text>
-      <text>Question: Use the question sign to bring an extra attention to the main idea of a page. \ What is the point of the `attention signs`? Question: Use the question sign to bring extra attention to the main idea of a page. What is the point of the attention signs ?</text>
+      <text>Tip: use temporary directory to generate the summary file for upload Tip: use temporary directory to generate the summary file for upload</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/visuals/attention-signs#exercise</url>
-    <fullTitle>Znai: Attention Signs, Exercise [Visuals]</fullTitle>
+    <url>/znai/visuals/attention-signs#recommendation</url>
+    <fullTitle>Znai: Attention Signs, Recommendation [Visuals]</fullTitle>
     <text>
-      <text>Exercise: write a hello world example in this language Exercise: write a hello world example in this language</text>
+      <text>Recommendation: write automated tests for new business logic Recommendation: write automated tests for new business logic</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2243,7 +2259,7 @@
     <url>/znai/java/content-extraction#method-body</url>
     <fullTitle>Znai: Content Extraction, Method Body [Java]</fullTitle>
     <text>
-      <text>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p> * To avoid &lt;b>copy &amp; paste&lt;/b> of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code>diversity&lt;/code> */ private int numberOfStudents; /** * Conceptual description of a &lt;i>Domain&lt;/i> problem. * &lt;p> * It will work only if you put high level description here and * &lt;b>not&lt;/b> implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i>offset&lt;/i> according to the rules of the universe * @return name of the &lt;b>best&lt;/b> sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer> p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method</text>
+      <text>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p> * To avoid &lt;b>copy &amp; paste&lt;/b> of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code>diversity&lt;/code> */ private int numberOfStudents; /** * Conceptual description of a &lt;i>Domain&lt;/i> problem. * &lt;p> * It will work only if you put high level description here and * &lt;b>not&lt;/b> implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i>offset&lt;/i> according to the rules of the universe * @return name of the &lt;b>best&lt;/b> sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer> p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2251,7 +2267,7 @@
     <url>/znai/java/content-extraction#callout-comments</url>
     <fullTitle>Znai: Content Extraction, Callout Comments [Java]</fullTitle>
     <text>
-      <text>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); // overloaded method</text>
+      <text>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2476,6 +2492,14 @@
     <fullTitle>Znai: Api, Query [Example References]</fullTitle>
     <text>
       <text>Lower level explanation of fapi.query</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2022#1591</url>
+    <fullTitle>Znai: 2022 Releases, 1.59.1 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: java/content-extraction#method-body include-java body only takes first method when overloads are present but no types are specified Fix: next/prev page chapter name is properly rendered (was undefined) Fix: layout/tabs Tabs don't confuse Fence block of snippets/api-parameters API Parameters with tab name Fix: remove possible duplication of snippets/api-parameters API Parameters when param names match Add tooltip to TOC items to display full title in case of overflow Add syntax highlight for SQL , GraphQL , Cypher snippets/code-snippets#specifying-language code snippets Add visuals/attention-signs#tip Tip and visuals/attention-signs#recommendation Recommendation attention signs visuals/PlantUml PlantUml version bump to 1.2022.6</text>
       <score>STANDARD</score>
     </text>
   </entry>
