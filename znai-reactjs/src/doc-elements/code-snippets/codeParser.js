@@ -33,6 +33,9 @@ import 'prismjs/components/prism-yaml'
 import 'prismjs/components/prism-typescript'
 import 'prismjs/components/prism-protobuf'
 import 'prismjs/components/prism-diff'
+import 'prismjs/components/prism-graphql'
+import 'prismjs/components/prism-cypher'
+import 'prismjs/components/prism-sql'
 import 'prismjs/plugins/autoloader/prism-autoloader'
 import 'prismjs/plugins/diff-highlight/prism-diff-highlight'
 
@@ -86,6 +89,8 @@ const extensionsMapping = {
     pb: 'protobuf',
     protobuf: 'protobuf',
     sc: 'scala',
+    cql: 'cypher',
+    cyp: 'cypher',
 }
 
 function adjustLang(lang) {
