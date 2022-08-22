@@ -24,8 +24,24 @@ export function syntaxHighlightSnippetDemo(registry) {
         .add('yaml', () => <Snippet snippet={yamlCode()} lang="yaml" highlight={[3, 5]}/>)
         .add('protobuf', () => <Snippet snippet={protoCode()} lang="proto" highlight={[5]}/>)
         .add('graphql', () => <Snippet snippet={graphqlCode()} lang="graphql" highlight={[5]}/>)
+        .add('cypher', () => <Snippet snippet={cypherCode()} lang="cyp" highlight={[5]}/>)
+        .add('sql', () => <Snippet snippet={sqlCode()} lang="sql" highlight={[5]}/>)
         .add('diff', () => <Snippet snippet={diffCode()} lang="diff"/>)
         .add('diff-javascript', () => <Snippet snippet={diffJavaScriptCode()} lang="diff-javascript"/>)
+}
+
+function cypherCode() {
+    return "CASE test\n" +
+      "  WHEN value THEN result\n" +
+      "  [WHEN ...]\n" +
+      "  [ELSE default]\n" +
+      "END"
+}
+
+function sqlCode() {
+    return "SELECT column1, column2, ...\n" +
+      "FROM table_name\n" +
+      "WHERE condition;"
 }
 
 function yamlCode() {
