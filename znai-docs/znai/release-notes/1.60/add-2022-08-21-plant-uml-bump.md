@@ -1,0 +1,1 @@
+* [PlantUml](visuals/PlantUml) version bump to `1.2022.6`
