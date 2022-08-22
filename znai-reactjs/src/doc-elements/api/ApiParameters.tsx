@@ -71,9 +71,9 @@ export default function ApiParameters({
 
   const renderedParameters = userDrivenCollapsed
     ? null
-    : (parameters || []).map((p) => (
+    : (parameters || []).map((p, idx) => (
         <ApiParameter
-          key={p.name}
+          key={p.name || idx}
           anchorId={p.anchorId}
           name={p.name}
           type={p.type}

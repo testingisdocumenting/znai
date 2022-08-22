@@ -96,98 +96,105 @@ const jsonExample = `
 `
 
 export function apiParametersDemo(registry) {
-    registry
-      .add('flat parameters', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters}/>
-      ))
-      .add('flat parameters with example', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} example={jsonExample}/>
-      ))
-      .add('single parameter', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={singleParameter}/>
-      ))
-      .add('flat parameters with global refs', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personParametersWithTypeRef}/>
-      ))
-      .add('flat parameters small size', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} small={true}/>
-      ))
-      .add('flat parameters long type', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongTypeParameters}/>
-      ))
-      .add('with long names without spaces', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={longNameParameters}/>
-      ))
-      .add('with long names without spaces and noWrap option', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={longNameParameters} noWrap={true}/>
-      ))
-      .add('flat parameters with title', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition"/>
-      ))
-      .add('flat parameters with title and example', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" example={jsonExample}/>
-      ))
-      .add('collapsible requires title', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" collapsed={false}/>
-      ))
-      .add('collapsible collapsed by default', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" collapsed={true}/>
-      ))
-      .add('flat parameters collapsible with title and example', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" example={jsonExample} collapsed={false}/>
-      ))
-      .add('flat parameters with long description', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongDescriptionParameters}/>
-      ))
-      .add('flat parameters with references', () => (
-        <ApiParameters elementsLibrary={elementsLibrary}
-                       parameters={personApiParameters}
-                       references={paramsReferences()}/>
-      ))
-      .add('nested parameters', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
-      ))
-      .add('single nested parameter', () => (
-        <ApiParameters elementsLibrary={elementsLibrary} parameters={singleNestedParameters}/>
-      ))
-      .add('with text around', () => (
-        <div className="content-block">
-            <React.Fragment>
-                <ParagraphText/>
-                <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters}/>
-                <ParagraphText/>
-            </React.Fragment>
-        </div>
-      ))
-      .add('with text around small size', () => (
-        <div className="content-block">
-            <React.Fragment>
-                <ParagraphText/>
-                <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} small={true}/>
-                <ParagraphText/>
-            </React.Fragment>
-        </div>
-      ))
-      .add('with text around wide mode', () => (
-        <DocElement content={apiParametersFullContent()} elementsLibrary={elementsLibrary}/>
-      ))
-      .add('multiple api parameters', () => (
-        <DocElement content={multipleApiParameters()} elementsLibrary={elementsLibrary}/>
-      ))
-      .add('with text around and title', () => (
-        <div className="content-block">
-            <ParagraphText/>
-            <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} title="Person definition"/>
-            <ParagraphText/>
-        </div>
-      ))
-      .add('with code first in description', () => (
-        <div className="content-block">
-            <ParagraphText/>
-            <ApiParameters elementsLibrary={elementsLibrary} parameters={withCodeSnippetFirst}/>
-            <ParagraphText/>
-        </div>
-      ))
+  registry
+    .add("flat parameters", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} />
+    ))
+    .add("flat parameters with example", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} example={jsonExample} />
+    ))
+    .add("single parameter", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={singleParameter} />
+    ))
+    .add("flat parameters with global refs", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personParametersWithTypeRef} />
+    ))
+    .add("flat parameters small size", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} small={true} />
+    ))
+    .add("flat parameters long type", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongTypeParameters} />
+    ))
+    .add("with long names without spaces", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={longNameParameters} />
+    ))
+    .add("with long names without spaces and noWrap option", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={longNameParameters} noWrap={true} />
+    ))
+    .add("flat parameters with title", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" />
+    ))
+    .add("flat parameters with title and example", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition"
+                     example={jsonExample} />
+    ))
+    .add("collapsible requires title", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition"
+                     collapsed={false} />
+    ))
+    .add("collapsible collapsed by default", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition"
+                     collapsed={true} />
+    ))
+    .add("flat parameters collapsible with title and example", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition"
+                     example={jsonExample} collapsed={false} />
+    ))
+    .add("flat parameters with long description", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={personLongDescriptionParameters} />
+    ))
+    .add("flat parameters with references", () => (
+      <ApiParameters elementsLibrary={elementsLibrary}
+                     parameters={personApiParameters}
+                     references={paramsReferences()} />
+    ))
+    .add("nested parameters", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} />
+    ))
+    .add("single nested parameter", () => (
+      <ApiParameters elementsLibrary={elementsLibrary} parameters={singleNestedParameters} />
+    ))
+    .add("with text around", () => (
+      <div className="content-block">
+        <React.Fragment>
+          <ParagraphText />
+          <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} />
+          <ParagraphText />
+        </React.Fragment>
+      </div>
+    ))
+    .add("with text around small size", () => (
+      <div className="content-block">
+        <React.Fragment>
+          <ParagraphText />
+          <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} small={true} />
+          <ParagraphText />
+        </React.Fragment>
+      </div>
+    ))
+    .add("with text around wide mode", () => (
+      <DocElement content={apiParametersFullContent()} elementsLibrary={elementsLibrary} />
+    ))
+    .add("multiple api parameters", () => (
+      <DocElement content={multipleApiParameters()} elementsLibrary={elementsLibrary} />
+    ))
+    .add("with text around and title", () => (
+      <div className="content-block">
+        <ParagraphText />
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={nestedParameters} title="Person definition" />
+        <ParagraphText />
+      </div>
+    ))
+    .add("with code first in description", () => (
+      <div className="content-block">
+        <ParagraphText />
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={withCodeSnippetFirst} />
+        <ParagraphText />
+      </div>
+    ))
+    .add("inside tabs", () => (
+      <DocElement elementsLibrary={elementsLibrary} content={insideTabs()} />
+    ));
 }
 
 function ParagraphText() {
@@ -290,4 +297,93 @@ function multipleApiParameters() {
       ]
     }
   ]
+}
+
+function insideTabs() {
+  return [{
+    "id": "bug",
+    "title": "bug",
+    "type": "Section",
+    "content": [{
+      "tabsContent": [{
+        "name": "Options",
+        "content": [{
+          "parameters": [{
+            "name": "time",
+            "type": [{
+              "text": "Required",
+              "url": ""
+            }],
+            "anchorId": "time",
+            "description": [{
+              "type": "Paragraph",
+              "content": [{
+                "text": "The amount of time to forward. Time is in this format: 1m29s (1 minute and 29s), for example.",
+                "type": "SimpleText"
+              }]
+            }]
+          }, {
+            "name": "",
+            "type": [],
+            "anchorId": "",
+            "description": [{
+              "type": "Paragraph",
+              "content": [{
+                "text": "/forward ",
+                "type": "SimpleText"
+              }, {
+                "code": "time:",
+                "type": "InlinedCode"
+              }, {
+                "text": "2m",
+                "type": "SimpleText"
+              }]
+            }]
+          }],
+          "type": "ApiParameters"
+        }]
+      }, {
+        "name": "Examples",
+        "content": [{
+          "parameters": [{
+            "name": "",
+            "type": [],
+            "anchorId": "",
+            "description": [{
+              "type": "Paragraph",
+              "content": [{
+                "text": "/forward ",
+                "type": "SimpleText"
+              }, {
+                "code": "time:",
+                "type": "InlinedCode"
+              }, {
+                "text": "2m",
+                "type": "SimpleText"
+              }]
+            }]
+          }, {
+            "name": "",
+            "type": [],
+            "anchorId": "",
+            "description": [{
+              "type": "Paragraph",
+              "content": [{
+                "text": "/forward ",
+                "type": "SimpleText"
+              }, {
+                "code": "time:",
+                "type": "InlinedCode"
+              }, {
+                "text": "1m29s",
+                "type": "SimpleText"
+              }]
+            }]
+          }],
+          "type": "ApiParameters"
+        }]
+      }],
+      "type": "Tabs"
+    }]
+  }];
 }
