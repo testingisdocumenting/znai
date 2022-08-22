@@ -180,6 +180,8 @@
     --znai-attention-dont-background-color: #d9544f18;
     --znai-attention-question-color: var(--znai-color-green);
     --znai-attention-question-background-color: #59a65a15;
+    --znai-attention-recommendation-color: var(--znai-attention-question-color);
+    --znai-attention-recommendation-background-color: var(--znai-attention-question-background-color);
 
     --znai-text-badge-background-color: #06437c;
     --znai-text-badge-text-color: #eee;

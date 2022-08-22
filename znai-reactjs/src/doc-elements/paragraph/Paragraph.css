@@ -104,6 +104,15 @@ not belong to the same parent node so margins won't even each other out.
     color: var(--znai-attention-question-color);
 }
 
+.paragraph.attention.recommendation {
+    border-left: 3px solid var(--znai-attention-recommendation-color);
+    background: var(--znai-attention-recommendation-background-color);
+}
+
+.paragraph.attention.recommendation .icon-part {
+    color: var(--znai-attention-recommendation-color);
+}
+
 .paragraph.attention.avoid {
     border-left: 3px solid var(--znai-attention-dont-color);
     background: var(--znai-attention-dont-background-color);

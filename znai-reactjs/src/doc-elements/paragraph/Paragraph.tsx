@@ -32,8 +32,20 @@ const exerciseSuffix = "Exercise:";
 const avoidSuffix = "Avoid:";
 const dontSuffix = "Don't:";
 const doNotSuffix = "Do not:";
+const recommendationSuffix = "Recommendation:";
+const tipSuffix = "Tip:";
 
-const allSuffixes = [noteSuffix, warningSuffix, questionSuffix, exerciseSuffix, avoidSuffix, dontSuffix, doNotSuffix];
+const allSuffixes = [
+  noteSuffix,
+  warningSuffix,
+  questionSuffix,
+  exerciseSuffix,
+  avoidSuffix,
+  dontSuffix,
+  doNotSuffix,
+  recommendationSuffix,
+  tipSuffix,
+];
 
 const DefaultParagraph = (props: DocElementProps) => {
   return (
@@ -85,6 +97,12 @@ const DontParagraph = (props: DocElementProps) => (
 const DoNotParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="avoid" suffix={doNotSuffix} icon="x-octagon" {...props} />
 );
+const RecommendationParagraph = (props: DocElementProps) => (
+  <ParagraphWithAttention attentionType="recommendation" suffix={recommendationSuffix} icon="check-circle" {...props} />
+);
+const TipParagraph = (props: DocElementProps) => (
+  <ParagraphWithAttention attentionType="recommendation" suffix={tipSuffix} icon="check-circle" {...props} />
+);
 
 const Paragraph = (props: DocElementProps) => {
   if (paragraphStartsWith(props.content, noteSuffix)) {
@@ -113,6 +131,14 @@ const Paragraph = (props: DocElementProps) => {
 
   if (paragraphStartsWith(props.content, doNotSuffix)) {
     return <DoNotParagraph {...props} />;
+  }
+
+  if (paragraphStartsWith(props.content, recommendationSuffix)) {
+    return <RecommendationParagraph {...props} />;
+  }
+
+  if (paragraphStartsWith(props.content, tipSuffix)) {
+    return <TipParagraph {...props} />;
   }
 
   return <DefaultParagraph {...props} />;

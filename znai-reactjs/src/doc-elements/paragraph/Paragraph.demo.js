@@ -40,6 +40,12 @@ export function paragraphDemo(registry) {
 
     registry.add('exercise', () => (<elementsLibrary.DocElement content={createAttentionParagraph("Exercise:")}
                                                                 elementsLibrary={elementsLibrary}/>))
+
+    registry.add('recommendation', () => (<elementsLibrary.DocElement content={createAttentionParagraph("Recommendation:")}
+                                                                      elementsLibrary={elementsLibrary}/>))
+
+    registry.add('tip', () => (<elementsLibrary.DocElement content={createAttentionParagraph("Tip:")}
+                                                           elementsLibrary={elementsLibrary}/>))
 }
 
 function createParagraphWithIcon() {
