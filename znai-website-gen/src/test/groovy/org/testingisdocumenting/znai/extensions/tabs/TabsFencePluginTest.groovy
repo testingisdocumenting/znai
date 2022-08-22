@@ -17,7 +17,6 @@
 
 package org.testingisdocumenting.znai.extensions.tabs
 
-import org.testingisdocumenting.webtau.Matchers
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
