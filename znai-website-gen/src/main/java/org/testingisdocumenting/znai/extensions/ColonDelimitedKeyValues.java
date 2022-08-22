@@ -107,7 +107,7 @@ public class ColonDelimitedKeyValues {
         int quoteStartIdx = -1;
         int quoteEndIdx = -1;
         int numberOfQuotes = 0;
-        int numberOfDelimiters = 0;
+        int numberOfDelimitersOutsideQuote = 0;
         for (int i = 0; i < line.length(); i++) {
             char c = line.charAt(i);
 
@@ -123,15 +123,15 @@ public class ColonDelimitedKeyValues {
             }
 
             if (c == ':') {
-                if (numberOfQuotes == 2) {
+                if (numberOfQuotes == 2 && numberOfDelimitersOutsideQuote == 0) {
                     return new KeyValuePart(line.substring(quoteStartIdx + 1, quoteEndIdx), line.substring(quoteEndIdx + 2));
                 }
 
-                if (numberOfQuotes == 0 && numberOfDelimiters == 0) {
+                if (numberOfQuotes == 0 && numberOfDelimitersOutsideQuote == 0) {
                     return new KeyValuePart(line.substring(0, i), line.substring(i + 1));
                 }
-            } else if (Character.isSpaceChar(c) || c == '[') {
-                numberOfDelimiters++;
+            } else if (numberOfQuotes % 2 == 0 && Character.isSpaceChar(c) || c == '[') {
+                numberOfDelimitersOutsideQuote++;
             }
 
             pc = c;
