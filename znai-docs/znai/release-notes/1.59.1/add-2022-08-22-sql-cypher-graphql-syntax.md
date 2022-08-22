@@ -1,0 +1,1 @@
+* Add syntax highlight for `SQL`, `GraphQL`, `Cypher` [code snippets](snippets/code-snippets#specifying-language)
