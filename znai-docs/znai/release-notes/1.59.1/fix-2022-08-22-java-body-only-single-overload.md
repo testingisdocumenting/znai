@@ -1,0 +1,1 @@
+* Fix: [include-java](java/content-extraction#method-body) body only takes first method when overloads are present but no types are specified

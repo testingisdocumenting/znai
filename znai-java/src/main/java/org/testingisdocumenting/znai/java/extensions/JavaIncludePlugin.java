@@ -134,17 +134,17 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     }
 
     private String extractMethodContent(JavaCode javaCode, String entry) {
-        List<JavaMethod> methods = javaCode.findAllMethods(entry);
-
         if (isBodyOnly) {
-            return extractBodiesOnly(methods);
+            return extractBodiesOnly(Collections.singletonList(javaCode.findMethod(entry)));
         }
+
+        List<JavaMethod> allMethods = javaCode.findAllMethods(entry);
 
         if (isSignatureOnly) {
-            return extractSignaturesOnly(methods);
+            return extractSignaturesOnly(allMethods);
         }
 
-        return extractFullBodies(methods);
+        return extractFullBodies(allMethods);
     }
 
     private String extractFullBodies(List<JavaMethod> methods) {
