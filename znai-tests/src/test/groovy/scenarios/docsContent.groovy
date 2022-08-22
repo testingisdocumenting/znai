@@ -32,6 +32,18 @@ scenario('open docs in browser') {
     browser.open(scaffoldServerUrl.get() + '/my-product')
 }
 
+scenario('next page has chapter name rendered') {
+    standardView.pageTwoTocItem.click()
+
+    standardView.nextPage.should == "Chapter Two: Page Three"
+    standardView.prevPage.shouldNotBe visible
+}
+
+scenario('navigate to next page and validate prev page') {
+    standardView.nextPage.click()
+    standardView.prevPage.should == "Chapter One: Page Two"
+}
+
 scenario('check generated plugin stats') {
     http.get(http.concatUrl(scaffoldServerUrl.get(), '/my-product/plugin-stats.json')) {
         includePlugins.file.count.shouldBe > 1
