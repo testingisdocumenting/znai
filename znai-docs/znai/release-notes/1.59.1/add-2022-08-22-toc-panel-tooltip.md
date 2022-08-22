@@ -1,0 +1,1 @@
+* Add tooltip to TOC items to display full title in case of overflow
