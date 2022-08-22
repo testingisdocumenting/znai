@@ -32,7 +32,7 @@ const PageSections = ({pageSectionIdTitles, selected, onTocItemPageSectionClick}
             const href = "#" + idTitle.id
 
             return (
-                <div className={className} key={idx} onClick={onClick}>
+                <div className={className} key={idx} onClick={onClick} title={idTitle.title}>
                     <a href={href}>{idTitle.title}</a>
                 </div>
             )
@@ -55,7 +55,7 @@ class Item extends PureComponent {
         } : null
 
         return (
-            <div className={className} ref={this.saveNodeRef}>
+            <div className={className} ref={this.saveNodeRef} title={item.pageTitle}>
                 <a href={href} onClick={onClick}>{item.pageTitle}</a>
                 {displayPageSections && <PageSections pageSectionIdTitles={item.pageSectionIdTitles}
                                                       selected={selected}
