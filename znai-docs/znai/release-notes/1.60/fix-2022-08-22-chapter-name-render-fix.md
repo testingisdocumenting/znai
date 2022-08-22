@@ -1,0 +1,1 @@
+* Fix: next/prev page chapter name is properly rendered (was undefined)

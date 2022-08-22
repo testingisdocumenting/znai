@@ -28,17 +28,15 @@ class StandardView {
 
     def docTitle = $(".toc-panel-header")
 
-    def shortcutsTocItem = tocItems.get("Shortcuts")
-
-    def codeSnippetsTocItem = tocItems.get("Code Snippets")
-    def externalCodeSnippetsTocItem = tocItems.get("External Code Snippets")
     def gettingStartedTocItem = tocItems.get("Getting Started")
+    def pageTwoTocItem = tocItems.get("Page Two")
     def pageThreeTocItem = tocItems.get("Page Three")
-    def externalCodeWideCodeSection = $("h1").get("Wide Code")
     def metaSection = $("h1").get("Meta")
-
-    def apiParametersTocItem = tocItems.get("API Parameters")
 
     def mainPanel = $(".znai-main-panel")
     def mainPanelScrollTop = mainPanel.scrollTop
+
+    def nextPage = $(".next-prev-page-title.next")
+    def prevPage = $(".next-prev-page-title.prev")
+
 }

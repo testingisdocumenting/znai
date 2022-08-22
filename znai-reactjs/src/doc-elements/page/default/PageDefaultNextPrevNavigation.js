@@ -67,7 +67,7 @@ function fullTitle(current, nextOrPrev) {
         return nextOrPrev.pageTitle
     }
 
-    return `${nextOrPrev.sectionTitle}: ${nextOrPrev.pageTitle}`
+    return `${nextOrPrev.chapterTitle}: ${nextOrPrev.pageTitle}`
 }
 
 export {PageDefaultNextPrevNavigation, DefaultPrevPageButton, DefaultNextPageButton}
