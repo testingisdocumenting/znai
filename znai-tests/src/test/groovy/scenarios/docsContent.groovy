@@ -36,7 +36,7 @@ scenario('next page has chapter name rendered') {
     standardView.pageTwoTocItem.click()
 
     standardView.nextPage.should == "Chapter Two: Page Three"
-    standardView.prevPage.shouldNotBe visible
+    standardView.prevPage.should == "Getting Started"
 }
 
 scenario('navigate to next page and validate prev page') {
