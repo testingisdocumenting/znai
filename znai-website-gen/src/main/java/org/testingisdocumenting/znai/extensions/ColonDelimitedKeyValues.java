@@ -123,7 +123,7 @@ public class ColonDelimitedKeyValues {
             }
 
             if (c == ':') {
-                if (numberOfQuotes == 2) {
+                if (numberOfQuotes == 2 && numberOfDelimiters == 0) {
                     return new KeyValuePart(line.substring(quoteStartIdx + 1, quoteEndIdx), line.substring(quoteEndIdx + 2));
                 }
 

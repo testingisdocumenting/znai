@@ -58,4 +58,14 @@ value42
         def values = new ColonDelimitedKeyValues("key:\n[mylink](https://site)")
         values.toMap().should == [key: "[mylink](https://site)"]
     }
+
+    @Test
+    void "should not confuse plugin parameters inside value with a column"() {
+        def values = new ColonDelimitedKeyValues("""key1:\n
+```api-parameters {title: "hello", collapse: false}
+```""")
+
+        values.toMap().should == [key1: "\n```api-parameters {title: \"hello\", collapse: false}\n" +
+                "```"]
+    }
 }
