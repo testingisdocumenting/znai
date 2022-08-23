@@ -79,6 +79,8 @@ configuration
 example-references
     domain
     api
+znai-development
+    local-build
 release-notes
     2022
     2021

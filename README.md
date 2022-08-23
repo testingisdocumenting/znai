@@ -69,3 +69,7 @@ to learn more about Enterprise setup. It will help me prioritize.
 [Znai documentation website built with Znai](https://testingisdocumenting.org/znai/)
 
 For curios, znai word meaning: `znai` is a `to know` in Ukranian and is a prefix for words like `knoweldge` are built on.
+
+# Developers Setup
+
+[Local Build](https://testingisdocumenting.org/znai/znai-development/local-build)
