@@ -16,14 +16,15 @@
  */
 
 import React from "react";
-import { Icon } from "../icons/Icon";
 
 import { paragraphStartsWith, removeSuffixFromParagraph } from "./paragraphUtils";
 
 import { elementMetaValue } from "../meta/meta";
 
-import "./Paragraph.css";
 import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
+import { AttentionBlock } from "./AttentionBlock";
+
+import "./Paragraph.css";
 
 const noteSuffix = "Note:";
 const warningSuffix = "Warning:";
@@ -63,16 +64,17 @@ interface WithAttentionProps extends DocElementProps {
 
 const ParagraphWithAttention = ({ attentionType, suffix, icon, ...props }: WithAttentionProps) => {
   const contentWithRemovedSuffix = removeSuffixFromParagraph(props.content, suffix);
+  const suffixColonIdx = suffix.indexOf(":");
+
+  const iconLabel = suffix.substr(0, suffixColonIdx);
+
   return (
-    <div className={`paragraph attention ${attentionType} content-block`}>
-      <span className="icon-part">
-        <Icon id={icon} />
-        <span className="label-message">{suffix}</span>
-      </span>
-      <span className="message-part">
-        <props.elementsLibrary.DocElement {...props} content={contentWithRemovedSuffix} />
-      </span>
-    </div>
+    <AttentionBlock
+      attentionType={attentionType}
+      label={iconLabel}
+      content={contentWithRemovedSuffix}
+      elementsLibrary={props.elementsLibrary}
+    />
   );
 };
 

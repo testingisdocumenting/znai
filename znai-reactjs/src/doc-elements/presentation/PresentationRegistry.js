@@ -59,6 +59,10 @@ class PresentationRegistry {
         const presentationElementHandler = this.presentationElementHandlers[type]
         if (presentationElementHandler) {
             this.register(presentationElementHandler.component, props, presentationElementHandler)
+
+            if (presentationElementHandler.ignoreNestedContent && presentationElementHandler.ignoreNestedContent(props)) {
+                return;
+            }
         }
 
         if (item.content) {
