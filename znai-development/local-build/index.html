@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Doxygen Setup</title>
+<title>Znai: Local Build</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,13 +85,23 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Doxygen</h1></header>
-<p>Znai parses generated https://www.doxygen.nl/index.html Doxygen XML files to extract and embedComments Signatures Parameters Use the building blocks to mix and match API documentation with visuals and other artifacts. Or use the built-in plugins to generate the whole blocks of API reference.</p>
+<header><h1>Clone Project</h1></header>
+<p>git clone https://github.com/testingisdocumenting/znai.git</p>
 </article>
 
 <article>
-<header><h1>Setup</h1></header>
-<p>Specify index.xml location inside &lt;docroot&gt;/doxygen.json { &quot;indexPath&quot;: &quot;doxygen/xml/index.xml&quot; } Note: To read doxygen XMLs from zip, add path to the zip to flow/lookup-paths#zip-and-jar-lookup lookup-paths</p>
+<header><h1>Build Tools Setup</h1></header>
+<p>SDK Man Easy way to maintain Java specific dependencies below is by using https://sdkman.io SDKMAN Java And Maven You need Java 8 and Maven to build Znai. sdk install java 8.0.342-amzn sdk install maven Graphviz Diagram features depend on its presence of http://www.graphviz.org/ dot when build generates documentation for Znai.Use https://brew.sh brew to install http://www.graphviz.org/ GraphViz brew install graphviz</p>
+</article>
+
+<article>
+<header><h1>Build</h1></header>
+<p>cd znai mvn clean install</p>
+</article>
+
+<article>
+<header><h1>Run Local Version</h1></header>
+<p>cd znai-dist/target unzip dist-znai.zip export PATH=$(pwd)/dist:$PATH znai --version</p>
 </article>
 </section>
 </div>
@@ -126,125 +136,163 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "doxygen",
-      "title" : "Doxygen",
+      "id" : "clone-project",
+      "title" : "Clone Project",
       "type" : "Section",
       "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Znai parses generated ",
-          "type" : "SimpleText"
-        }, {
-          "url" : "https://www.doxygen.nl/index.html",
-          "isFile" : false,
-          "type" : "Link",
-          "content" : [ {
-            "text" : "Doxygen",
-            "type" : "SimpleText"
-          } ]
-        }, {
-          "text" : " XML files to extract and embed",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "bulletMarker" : "*",
-        "tight" : true,
-        "type" : "BulletList",
-        "content" : [ {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Comments",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Signatures",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Parameters",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use the building blocks to mix and match API documentation with visuals and other artifacts.",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Or use the built-in plugins to generate the whole blocks of API reference.",
-          "type" : "SimpleText"
-        } ]
+        "command" : "git clone https://github.com/testingisdocumenting/znai.git",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
       } ]
     }, {
-      "id" : "setup",
-      "title" : "Setup",
+      "id" : "build-tools-setup",
+      "title" : "Build Tools Setup",
       "type" : "Section",
       "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Specify ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "index.xml",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " location inside ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "<docroot>/doxygen.json",
-          "type" : "InlinedCode"
-        } ]
-      }, {
-        "lang" : "json",
-        "snippet" : "{\n  \"indexPath\": \"doxygen/xml/index.xml\"\n}",
-        "autoTitle" : true,
-        "title" : "doxygen.json",
-        "type" : "Snippet"
+        "id" : "build-tools-setup-sdk-man",
+        "level" : 2,
+        "title" : "SDK Man",
+        "type" : "SubHeading"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: To read doxygen XMLs from zip, add path to the zip to ",
+          "text" : "Easy way to maintain Java specific dependencies below is by using ",
           "type" : "SimpleText"
         }, {
-          "url" : "/znai/flow/lookup-paths#zip-and-jar-lookup",
+          "url" : "https://sdkman.io",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
-            "text" : "lookup-paths",
+            "text" : "SDKMAN",
             "type" : "SimpleText"
           } ]
         } ]
+      }, {
+        "id" : "build-tools-setup-java-and-maven",
+        "level" : 2,
+        "title" : "Java And Maven",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You need Java 8 and Maven to build Znai.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "command" : "sdk install java 8.0.342-amzn",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      }, {
+        "command" : "sdk install maven",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      }, {
+        "id" : "build-tools-setup-graphviz",
+        "level" : 2,
+        "title" : "Graphviz",
+        "type" : "SubHeading"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Diagram features depend on its presence of ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "http://www.graphviz.org/",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "dot",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " when build generates documentation for Znai.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://brew.sh",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "brew",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " to install ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "http://www.graphviz.org/",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "GraphViz",
+            "type" : "SimpleText"
+          } ]
+        } ]
+      }, {
+        "command" : "brew install graphviz",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      } ]
+    }, {
+      "id" : "build",
+      "title" : "Build",
+      "type" : "Section",
+      "content" : [ {
+        "command" : "cd znai",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      }, {
+        "command" : "mvn clean install",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      } ]
+    }, {
+      "id" : "run-local-version",
+      "title" : "Run Local Version",
+      "type" : "Section",
+      "content" : [ {
+        "command" : "cd znai-dist/target",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      }, {
+        "command" : "unzip dist-znai.zip",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      }, {
+        "command" : "export PATH=$(pwd)/dist:$PATH",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      }, {
+        "command" : "znai --version",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355289,
+    "lastModifiedTime" : 1661276355329,
     "tocItem" : {
-      "chapterTitle" : "CPP",
-      "pageTitle" : "Doxygen Setup",
+      "chapterTitle" : "Znai Development",
+      "pageTitle" : "Local Build",
       "pageMeta" : { },
-      "dirName" : "CPP",
-      "fileName" : "doxygen-setup",
+      "dirName" : "znai-development",
+      "fileName" : "local-build",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Doxygen",
-        "id" : "doxygen"
+        "title" : "Clone Project",
+        "id" : "clone-project"
       }, {
-        "title" : "Setup",
-        "id" : "setup"
+        "title" : "Build Tools Setup",
+        "id" : "build-tools-setup"
+      }, {
+        "title" : "Build",
+        "id" : "build"
+      }, {
+        "title" : "Run Local Version",
+        "id" : "run-local-version"
       } ]
     }
   }

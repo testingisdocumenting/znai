@@ -1600,6 +1600,30 @@ toc = [ {
     } ]
   } ]
 }, {
+  "chapterTitle" : "Znai Development",
+  "dirName" : "znai-development",
+  "items" : [ {
+    "chapterTitle" : "Znai Development",
+    "pageTitle" : "Local Build",
+    "pageMeta" : { },
+    "dirName" : "znai-development",
+    "fileName" : "local-build",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Clone Project",
+      "id" : "clone-project"
+    }, {
+      "title" : "Build Tools Setup",
+      "id" : "build-tools-setup"
+    }, {
+      "title" : "Build",
+      "id" : "build"
+    }, {
+      "title" : "Run Local Version",
+      "id" : "run-local-version"
+    } ]
+  } ]
+}, {
   "chapterTitle" : "Release Notes",
   "dirName" : "release-notes",
   "items" : [ {
@@ -1612,6 +1636,9 @@ toc = [ {
     "fileName" : "2022",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.60",
+      "id" : "160"
+    }, {
       "title" : "1.59.1",
       "id" : "1591"
     }, {

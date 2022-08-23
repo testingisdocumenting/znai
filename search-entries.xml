@@ -155,7 +155,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic configuration basic example-references domain api release-notes 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic configuration basic example-references domain api znai-development local-build release-notes 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2492,6 +2492,46 @@
     <fullTitle>Znai: Api, Query [Example References]</fullTitle>
     <text>
       <text>Lower level explanation of fapi.query</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/znai-development/local-build#clone-project</url>
+    <fullTitle>Znai: Local Build, Clone Project [Znai Development]</fullTitle>
+    <text>
+      <text>git clone https://github.com/testingisdocumenting/znai.git</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/znai-development/local-build#build-tools-setup</url>
+    <fullTitle>Znai: Local Build, Build Tools Setup [Znai Development]</fullTitle>
+    <text>
+      <text>SDK Man Easy way to maintain Java specific dependencies below is by using https://sdkman.io SDKMAN Java And Maven You need Java 8 and Maven to build Znai. sdk install java 8.0.342-amzn sdk install maven Graphviz Diagram features depend on its presence of http://www.graphviz.org/ dot when build generates documentation for Znai.Use https://brew.sh brew to install http://www.graphviz.org/ GraphViz brew install graphviz</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/znai-development/local-build#build</url>
+    <fullTitle>Znai: Local Build, Build [Znai Development]</fullTitle>
+    <text>
+      <text>cd znai mvn clean install</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/znai-development/local-build#run-local-version</url>
+    <fullTitle>Znai: Local Build, Run Local Version [Znai Development]</fullTitle>
+    <text>
+      <text>cd znai-dist/target unzip dist-znai.zip export PATH=$(pwd)/dist:$PATH znai --version</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2022#160</url>
+    <fullTitle>Znai: 2022 Releases, 1.60 [Release Notes]</fullTitle>
+    <text>
+      <text>Doc: znai-development/local-build Local Build instructions</text>
       <score>STANDARD</score>
     </text>
   </entry>
