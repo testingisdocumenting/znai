@@ -1,0 +1,96 @@
+/*
+ * Copyright 2022 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.znai-attention-block {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 8px 0 8px 16px;
+}
+
+.znai-attention-block-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.znai-attention-block-icon .znai-icon {
+    height: 24px;
+    width: 24px;
+}
+
+.znai-attention-block-icon svg {
+    height: 24px;
+    width: 24px;
+}
+
+.znai-attention-block-label {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.znai-attention-block-content {
+    flex: 1;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    padding-right: 10px;
+}
+
+.znai-attention-block.note {
+    border-left: 3px solid var(--znai-attention-note-color);
+    background: var(--znai-attention-note-background-color);
+}
+
+.znai-attention-block.note .znai-attention-block-icon {
+    color: var(--znai-attention-note-color);
+}
+
+.znai-attention-block.warning {
+    border-left: 3px solid var(--znai-attention-warning-color);
+    background: var(--znai-attention-warning-background-color)
+}
+
+.znai-attention-block.warning .znai-attention-block-icon {
+    color: var(--znai-attention-warning-color);
+}
+
+.znai-attention-block.question {
+    border-left: 3px solid var(--znai-attention-question-color);
+    background: var(--znai-attention-question-background-color);
+}
+
+.znai-attention-block.question .znai-attention-block-icon {
+    color: var(--znai-attention-question-color);
+}
+
+.znai-attention-block.recommendation {
+    border-left: 3px solid var(--znai-attention-recommendation-color);
+    background: var(--znai-attention-recommendation-background-color);
+}
+
+.znai-attention-block.recommendation .znai-attention-block-icon {
+    color: var(--znai-attention-recommendation-color);
+}
+
+.znai-attention-block.avoid {
+    border-left: 3px solid var(--znai-attention-dont-color);
+    background: var(--znai-attention-dont-background-color);
+}
+
+.znai-attention-block.avoid .znai-attention-block-icon {
+    color: var(--znai-attention-dont-color);
+}

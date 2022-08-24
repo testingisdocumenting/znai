@@ -96,6 +96,8 @@ import { tooltipDemo } from "./components/Tooltip.demo";
 import { annotatedImageWithOrderedListDemo } from "./doc-elements/images/AnnotatedImageWithOrderedList.demo";
 import { pythonMethodDemo } from "./doc-elements/python/PythonMethod.demo";
 import { openApiAndMethodAndUrlDemo } from "./doc-elements/open-api/OpenApiAndMethodAndUrl.demo";
+import { attentionBlockDemo } from "./doc-elements/paragraph/AttentionBlock.demo";
+import { attentionBlockPresentationDemo } from "./doc-elements/paragraph/PresentationAttentionBlock.demo";
 
 const docMeta = {
     id: 'preview',
@@ -125,6 +127,7 @@ registries.add('text')
     .registerAsGrid('Typography', 0, typographyDemo)
     .registerAsRows('Blockquote', blockQuoteDemo)
     .registerAsRows('Paragraph', paragraphDemo)
+    .registerAsRows('Attention Block', attentionBlockDemo)
     .registerAsRows('Bullets', bulletListsDemo)
 
 registries.add('snippets')
@@ -191,6 +194,7 @@ registries.add('presentation')
     .registerAsTabs('Blockquote', blockQuotePresentationDemo)
     .registerAsTabs('Bullet Points', bulletListPresentationDemo)
     .registerAsTabs('Paragraph', paragraphPresentationDemo)
+    .registerAsTabs('Attention Block', attentionBlockPresentationDemo)
     .registerAsTabs('Image', imagePresentationDemo)
     .registerAsTabs('Code Snippets', snippetPresentationDemo)
     .registerAsTabs('Code Snippets With Scroll', snippetWithScrollPresentationDemo)

@@ -37,6 +37,7 @@ import Link from './default-elements/Link'
 import {SubHeading, presentationSubHeading} from './default-elements/SubHeading'
 import ListItem from './bullets/ListItem'
 import { Paragraph, presentationParagraph } from './paragraph/Paragraph'
+import { AttentionBlock, presentationAttentionBlock } from './paragraph/AttentionBlock'
 import GraphVizSvg from './graphviz/GraphVizSvg'
 import presentationGraphVizSvg from './graphviz/PresentationGraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
@@ -98,6 +99,9 @@ library.Anchor = Anchor
 
 library.Paragraph = Paragraph
 presentationElementHandlers.Paragraph = presentationParagraph
+
+library.AttentionBlock = AttentionBlock
+presentationElementHandlers.AttentionBlock = presentationAttentionBlock
 
 library.SubHeading = SubHeading
 presentationElementHandlers.SubHeading = presentationSubHeading
