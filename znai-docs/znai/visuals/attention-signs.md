@@ -63,3 +63,73 @@ Tip: use temporary directory to generate the summary file for upload
     Recommendation: write automated tests for new business logic
     
 Recommendation: write automated tests for new business logic
+
+# Fence Block
+
+Use fence block to create an explicit attention block. 
+
+`````markdown
+```attention-note
+hello world
+```
+`````
+
+```attention-note
+hello world
+```
+
+By default, there is only icon. Use `label` to add text
+
+`````markdown
+```attention-note {label: "Custom Label"}
+hello world
+```
+`````
+
+```attention-note {label: "Custom Label"}
+hello world
+```
+
+Using block makes it easier to include other plugins inside
+
+```````markdown
+`````attention-note
+Use this command to setup fresh environment
+```cli
+mycommand setup
+```
+`````
+```````
+
+`````attention-note
+Use this command to setup fresh environment
+```cli
+mycommand setup
+```
+`````
+
+# Attention Block Types
+
+```
+attention-<type>
+```
+
+```attention-note
+`note`
+```
+
+```attention-warning
+`warning`
+```
+
+```attention-avoid
+`avoid`
+```
+
+```attention-question
+`question`
+```
+
+```attention-recommendation
+`recommendation`
+```
