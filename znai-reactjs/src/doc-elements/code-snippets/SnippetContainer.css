@@ -151,6 +151,14 @@
     right: 5px;
 }
 
+.znai-snippet-anchor {
+    align-self: center;
+    display: none;
+}
+
+.title-container:hover .znai-snippet-anchor {
+    display: block;
+}
 
 .snippet-container.wide-screen.with-title .title {
     border: none;

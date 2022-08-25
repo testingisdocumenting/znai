@@ -53,6 +53,7 @@ public class FileIncludePlugin implements IncludePlugin {
         result.add(ManipulatedSnippetContentProvider.paramsDefinition);
         result.add(SnippetRevealLineStopFeature.paramsDefinition);
         result.add(CodeReferencesFeature.paramsDefinition);
+        result.add(AnchorPluginFeature.paramsDefinition);
 
         return result;
     }
@@ -82,7 +83,8 @@ public class FileIncludePlugin implements IncludePlugin {
                 new SnippetAutoTitleFeature(contentProvider.snippetId()),
                 new SnippetRevealLineStopFeature(pluginParams, contentProvider),
                 new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider),
-                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams)
+                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams),
+                new AnchorPluginFeature(componentsRegistry.docStructure(), markupPath, pluginParams)
         );
 
         String providedLang = pluginParams.getOpts().getString("lang");

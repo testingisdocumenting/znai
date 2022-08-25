@@ -53,7 +53,9 @@ export function snippetsDemo(registry) {
           <ApiParameters elementsLibrary={elementsLibrary} parameters={personApiParameters} title="Person definition" collapsed={false}/>
           <Snippet title="snippet title" lang="html" snippet={htmlCode()} collapsed={false}/>
       </>))
+      .add('title anchor', () => <Snippet title="snippet title" anchorId="my-code" lang="html" snippet={htmlCode()}/>)
       .add('wide with title', () => <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()}/>)
+      .add('wide with title and anchor', () => <Snippet wide={true} title="snippet title" lang="java" anchorId="wide-code-anchor" snippet={wideCode()}/>)
       .add('wide with title collapsible', () => <Snippet wide={true} title="snippet title" lang="java" snippet={wideCode()} collapsed={false}/>)
       .add('with linked method calls', () => <Snippet wide={true} title="snippet title" lang="java"
                                                       references={methodCallReferences()}

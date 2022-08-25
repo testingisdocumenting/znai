@@ -24,5 +24,7 @@ import java.util.stream.Stream;
 public interface PluginFeature {
     void updateProps(Map<String, Object> props);
 
-    Stream<AuxiliaryFile> auxiliaryFiles();
+    default Stream<AuxiliaryFile> auxiliaryFiles() {
+        return Stream.empty();
+    }
 }

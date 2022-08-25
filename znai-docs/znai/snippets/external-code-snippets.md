@@ -49,6 +49,16 @@ Use the `autoTitle` property to set `title` to be the file name.
 
 :include-file: file-name.js {autoTitle: true} 
 
+# Anchor
+
+Use `anchorId` to make a code snippet linkable. Hover mouse over title to see a clickable anchor.
+
+    :include-file: file-name.js {autoTitle: true, anchorId: "my-code-anchor"}
+
+:include-file: file-name.js {autoTitle: true, anchorId: "my-code-anchor"}
+
+
+Note: title is required for anchor to work
 
 # Wide Code
 
