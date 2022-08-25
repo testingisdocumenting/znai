@@ -91,6 +91,7 @@ class SnippetContainer extends React.Component {
             return null;
         }
 
+        const anchorId = this.props.anchorId
         const collapsible = this.props.collapsed !== undefined
 
         const { collapsed } = this.state;
@@ -98,7 +99,7 @@ class SnippetContainer extends React.Component {
         const titleClassName = "title" + (collapsible ? " collapsible" : "")
 
         return (
-          <div className="title-container content-block">
+          <div className="title-container content-block" id={anchorId}>
               {collapsible && (
                 <div className="znai-snippet-collapse-toggle" onClick={this.collapseToggle}>
                     {collapsed ? "+" : "-"}
@@ -107,6 +108,13 @@ class SnippetContainer extends React.Component {
               <div className={titleClassName}>
                   {title}
               </div>
+              {anchorId && (
+                <div className="znai-snippet-anchor">
+                    <a href={"#" + anchorId}>
+                        <Icon id="link" />
+                    </a>
+                </div>
+              )}
           </div>
         )
     }
