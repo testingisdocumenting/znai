@@ -98,6 +98,7 @@ import { pythonMethodDemo } from "./doc-elements/python/PythonMethod.demo";
 import { openApiAndMethodAndUrlDemo } from "./doc-elements/open-api/OpenApiAndMethodAndUrl.demo";
 import { attentionBlockDemo } from "./doc-elements/paragraph/AttentionBlock.demo";
 import { attentionBlockPresentationDemo } from "./doc-elements/paragraph/PresentationAttentionBlock.demo";
+import { containerTitleDemo } from "./doc-elements/title/ContainerTitle.demo";
 
 const docMeta = {
     id: 'preview',
@@ -131,6 +132,7 @@ registries.add('text')
     .registerAsRows('Bullets', bulletListsDemo)
 
 registries.add('snippets')
+    .registerAsRows('containers title', containerTitleDemo)
     .registerAsGrid('Code Snippet', 0, snippetsDemo)
     .registerAsGrid('Code Snippet With Bullets', 0, snippetsWithInlineCommentsDemo)
     .registerAsGrid('Code Snippet Removed Comments', 0, codeSnippetWithRemovedCommentsDemo)
