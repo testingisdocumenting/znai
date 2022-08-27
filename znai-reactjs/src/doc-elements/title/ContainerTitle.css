@@ -1,0 +1,58 @@
+/*
+ * Copyright 2022 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.znai-container-title-wrapper {
+    display: flex;
+    align-items: center;
+
+    background: var(--znai-snippets-title-background-color);
+}
+
+.znai-container-title {
+    color: var(--znai-snippets-title-color);
+    padding: 8px 16px;
+}
+
+.znai-container-title.collapsible {
+    padding-left: 0;
+}
+
+.znai-container-title-collapse-toggle {
+    width: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--znai-expand-collaps-color);
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.znai-container-title-anchor {
+    display: none;
+}
+
+.znai-container-title-wrapper:hover .znai-container-title-anchor {
+    display: block;
+}
+
+.znai-container-title-anchor .znai-icon,
+.znai-container-title-anchor .znai-icon svg {
+    width: 14px;
+    height: 14px;
+}
