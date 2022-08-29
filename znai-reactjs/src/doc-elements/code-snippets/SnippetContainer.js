@@ -24,6 +24,8 @@ import { extractTextFromTokens } from "./codeUtils";
 import { Icon } from "../icons/Icon";
 import { SnippetOptionallyScrollablePart } from "./SnippetOptionallyScrollablePart";
 
+import { ContainerTitle } from "../title/ContainerTitle";
+
 import "./SnippetContainer.css";
 
 class SnippetContainer extends React.Component {
@@ -92,30 +94,15 @@ class SnippetContainer extends React.Component {
         }
 
         const anchorId = this.props.anchorId
-        const collapsible = this.props.collapsed !== undefined
 
         const { collapsed } = this.state;
 
-        const titleClassName = "title" + (collapsible ? " collapsible" : "")
-
         return (
-          <div className="title-container content-block" id={anchorId}>
-              {collapsible && (
-                <div className="znai-snippet-collapse-toggle" onClick={this.collapseToggle}>
-                    {collapsed ? "+" : "-"}
-                </div>
-              )}
-              <div className={titleClassName}>
-                  {title}
-              </div>
-              {anchorId && (
-                <div className="znai-snippet-anchor">
-                    <a href={"#" + anchorId}>
-                        <Icon id="link" />
-                    </a>
-                </div>
-              )}
-          </div>
+          <ContainerTitle title={title}
+                          anchorId={anchorId}
+                          collapsed={collapsed}
+                          additionalTitleClassNames="znai-snippet-container-title"
+                          onCollapseToggle={this.collapseToggle}/>
         )
     }
 

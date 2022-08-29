@@ -23,6 +23,8 @@ import { ApiParameter } from "./ApiParameter";
 
 import { Snippet } from "../code-snippets/Snippet";
 
+import { ContainerTitle } from "../title/ContainerTitle";
+
 import "./ApiParameters.css";
 
 export interface ApiParameterProps {
@@ -35,6 +37,7 @@ export interface ApiParameterProps {
 
 interface Props extends DocElementProps {
   title?: string;
+  anchorId?: string;
   parameters: ApiParameterProps[];
   example?: string;
   nestedLevel?: number;
@@ -48,6 +51,7 @@ interface Props extends DocElementProps {
 
 export default function ApiParameters({
   title,
+  anchorId,
   parameters,
   example,
   references,
@@ -96,6 +100,7 @@ export default function ApiParameters({
     <div className={className} style={style}>
       <ApiParametersTitle
         title={title}
+        anchorId={anchorId}
         example={example}
         nestedLevel={nestedLevel}
         collapsed={userDrivenCollapsed}
@@ -125,34 +130,29 @@ export default function ApiParameters({
 
 interface TitleProps {
   title?: string;
+  anchorId?: string;
   example?: string;
   nestedLevel: number;
   collapsed?: boolean;
   collapseToggle(): void;
 }
 
-function ApiParametersTitle({ title, example, nestedLevel, collapsed, collapseToggle }: TitleProps) {
+function ApiParametersTitle({ title, anchorId, example, nestedLevel, collapsed, collapseToggle }: TitleProps) {
   if (!title || nestedLevel > 0) {
     return null;
   }
 
-  const collapsible = collapsed !== undefined;
-  const className =
-    "znai-api-parameters-title-cell" +
-    (example ? " with-example" : "") +
-    (collapsible ? " collapsible" : "") +
-    (collapsed ? " collapsed" : "");
+  const className = "znai-api-parameters-title-cell" + (example ? " with-example" : "");
 
   return (
-    <div className={className}>
-      {collapsible && (
-        <div className="znai-api-parameters-collapse-toggle" onClick={collapseToggle}>
-          {collapsed ? "+" : "-"}
-        </div>
-      )}
-
-      <div className="znai-api-parameters-title">{title}</div>
-    </div>
+    <ContainerTitle
+      title={title}
+      anchorId={anchorId}
+      collapsed={collapsed}
+      onCollapseToggle={collapseToggle}
+      additionalContainerClassNames={className}
+      additionalTitleClassNames="znai-api-parameters-title"
+    />
   );
 }
 
