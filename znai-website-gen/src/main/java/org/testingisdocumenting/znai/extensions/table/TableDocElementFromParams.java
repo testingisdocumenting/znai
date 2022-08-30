@@ -17,9 +17,11 @@
 package org.testingisdocumenting.znai.extensions.table;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.file.AnchorPluginFeature;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
@@ -39,16 +41,19 @@ class TableDocElementFromParams {
     private final Path mappingPath;
     private final MarkupTableDataMapping tableDataMapping;
     private final String mappingFileName;
+    private final AnchorPluginFeature anchorPluginFeature;
     private MarkupTableData rearrangedTable;
 
     private final ResourcesResolver resourcesResolver;
     private final String content;
 
-    TableDocElementFromParams(PluginParams pluginParams, MarkupParser parser, ResourcesResolver resourcesResolver,
+    TableDocElementFromParams(ComponentsRegistry componentsRegistry, Path markupParentPath, PluginParams pluginParams, MarkupParser parser,
                               Path fullPath, String content) {
+        anchorPluginFeature = new AnchorPluginFeature(componentsRegistry.docStructure(), markupParentPath, pluginParams);
+
         this.pluginParams = pluginParams;
         this.parser = parser;
-        this.resourcesResolver = resourcesResolver;
+        this.resourcesResolver = componentsRegistry.resourceResolver();
         this.content = content;
         this.fullPath = fullPath;
 
@@ -108,6 +113,9 @@ class TableDocElementFromParams {
         handleHighlight(props);
 
         opts.assignToProps(props, "title");
+        opts.assignToProps(props, "anchorId");
+
+        anchorPluginFeature.updateProps(props);
 
         return PluginResult.docElement(DocElementType.TABLE, props);
     }

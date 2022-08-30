@@ -57,7 +57,7 @@ public class TableIncludePlugin implements IncludePlugin {
 
         fullPath = resourcesResolver.fullPath(fileName);
 
-        docElementFromParams = new TableDocElementFromParams(pluginParams, parser, resourcesResolver, fullPath, textContent);
+        docElementFromParams = new TableDocElementFromParams(componentsRegistry, markupPath, pluginParams, parser, fullPath, textContent);
         return docElementFromParams.create();
     }
 

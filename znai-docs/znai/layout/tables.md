@@ -35,6 +35,14 @@ Use `title` parameter to set a table title.
     
 :include-table: table/table.json {title: "Monthly Report"}
 
+# Anchor
+
+Use `anchorId` parameter to set table anchor for linking. Hover over title to reveal anchor link to click.
+
+    :include-table: table/table.json {title: "Monthly Report", anchorId: "my-super-table"}
+
+:include-table: table/table.json {title: "Monthly Report", anchorId: "my-super-table"}
+
 # Highlight
 
 Use `highlightRow` to highlight a row, or a set of rows by their index

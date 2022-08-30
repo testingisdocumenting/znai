@@ -20,8 +20,10 @@ import React, { CSSProperties } from "react";
 import { DocElementProps } from "../default-elements/DocElement";
 import { calcTableWidth } from "./tableSize";
 
-import "./Table.css";
 import { cssVarPixelValue } from "../../utils/cssVars";
+import { ContainerTitle } from "../title/ContainerTitle";
+
+import "./Table.css";
 
 interface Column {
   title: string;
@@ -39,6 +41,7 @@ interface Table {
 
 interface Props extends DocElementProps {
   title?: string;
+  anchorId?: string;
   table: Table;
   highlightRowIndexes: number[];
 }
@@ -78,7 +81,7 @@ export function Table({ table, highlightRowIndexes, ...props }: Props) {
 
   return (
     <div className={wrapperClassName}>
-      <TableTitle title={props.title} />
+      <TableTitle title={props.title} anchorId={props.anchorId} />
       <div className="znai-table-inner-scroll-wrapper">
         <table className={tableClassName}>
           <thead>
@@ -130,12 +133,17 @@ function buildColumnStyle(table: Table, c: Column): CSSProperties {
   return { textAlign, width: widthToUse, minWidth: widthToUse };
 }
 
-function TableTitle({ title }: { title?: string }) {
+interface TitleProps {
+  title?: string;
+  anchorId?: string;
+}
+
+function TableTitle({ title, anchorId }: TitleProps) {
   if (!title) {
     return null;
   }
 
-  return <div className="znai-table-title">{title}</div>;
+  return <ContainerTitle title={title} anchorId={anchorId} additionalTitleClassNames="znai-table-title" />;
 }
 
 export default Table;
