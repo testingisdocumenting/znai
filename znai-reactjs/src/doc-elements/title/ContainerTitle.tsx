@@ -63,15 +63,16 @@ export function ContainerTitle({
         </div>
       )}
 
-      <div className={titleClassName}>{title}</div>
-
-      {anchorId && (
-        <div className="znai-container-title-anchor">
-          <a href={"#" + anchorId}>
-            <Icon id="link" />
-          </a>
-        </div>
-      )}
+      <div className={titleClassName}>
+        <div className="znai-container-title-label">{title}</div>
+        {anchorId && (
+          <div className="znai-container-title-anchor">
+            <a href={"#" + anchorId}>
+              <Icon id="link" />
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

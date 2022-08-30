@@ -19,11 +19,14 @@
     align-items: center;
 
     background: var(--znai-snippets-title-background-color);
+    padding-right: 8px;
 }
 
 .znai-container-title {
+    display: flex;
+    align-items: center;
     color: var(--znai-snippets-title-color);
-    padding: 8px 16px;
+    padding: 8px 0 8px 16px;
 }
 
 .znai-container-title.collapsible {
@@ -32,6 +35,9 @@
 
 .znai-container-title-collapse-toggle {
     width: 32px;
+
+    font-family: var(--znai-code-font-family);
+    font-size: var(--znai-code-text-size);
 
     display: flex;
     align-items: center;
@@ -44,6 +50,7 @@
 }
 
 .znai-container-title-anchor {
+    margin-left: 8px;
     display: none;
 }
 

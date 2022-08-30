@@ -33,7 +33,7 @@ class SnippetContainer extends React.Component {
         super(props);
         this.state = {
             displayCopied: false,
-            collapsed: !!this.props.collapsed
+            collapsed: this.props.collapsed
         }
     }
 
@@ -154,7 +154,7 @@ class SnippetContainer extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.collapsed !== this.props.collapsed) {
-            this.setState({ collapsed: this.props.collapsed})
+            this.setState({ collapsed: this.props.collapsed })
         }
     }
 

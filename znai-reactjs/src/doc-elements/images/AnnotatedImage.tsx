@@ -31,9 +31,11 @@ import { TooltipPlacement } from "../../components/Tooltip";
 import { WithElementsLibrary } from "../default-elements/DocElement";
 
 import "./AnnotatedImage.css";
+import { ContainerTitle } from "../title/ContainerTitle";
 
 export interface AnnotatedImageProps extends WithElementsLibrary {
   imageSrc: string;
+  anchorId?: string;
   shapes: object[];
   width: number;
   height: number;
@@ -52,6 +54,7 @@ export interface AnnotatedImageProps extends WithElementsLibrary {
 export function AnnotatedImage(props: AnnotatedImageProps) {
   const {
     imageSrc,
+    anchorId,
     width,
     height,
     alt,
@@ -215,7 +218,12 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   }
 
   function renderTitle() {
-    const renderedTitle = title ? <div className="znai-image-title">{title}</div> : <div />;
+    const renderedTitle = title ? (
+      <ContainerTitle title={title} additionalTitleClassNames="znai-image-title" anchorId={anchorId} />
+    ) : (
+      <div />
+    );
+
     return isCentered ? (
       <>
         <div />

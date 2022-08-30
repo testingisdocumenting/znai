@@ -47,7 +47,7 @@ export function imageDemo(registry) {
       <AnnotatedImage {...noFitImage()} {...noFitImageAnnotations()}/>
     ))
 
-    registry.add('with title', () => <AnnotatedImage {...standardImage()} title="My Image"/>)
+    registry.add('with title and anchor', () => <AnnotatedImage {...standardImage()} title="My Image" anchorId="my-image-anchor"/>)
     registry.add('no fit with title', () => (
       <AnnotatedImage {...noFitImage()} title="My Image"/>
     ))

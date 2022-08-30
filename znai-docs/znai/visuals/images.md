@@ -32,6 +32,14 @@ Use `title` to add a title to an image.
     
 :include-image: castle.jpg {title: "beautiful castle"}
 
+# Anchor
+
+Use `anchorId` to add an anchor to the image. Hover over title to reveal anchor link to click.
+
+    :include-image: castle.jpg {title: "beautiful castle", anchorId: "castle-image"}
+
+:include-image: castle.jpg {title: "beautiful castle", anchorId: "castle-image"}
+
 # Border
 
 Use `border: true` to include a border around image.
