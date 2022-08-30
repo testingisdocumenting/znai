@@ -109,7 +109,7 @@
     font-family: var(--znai-code-font-family);
 }
 
-.snippet-container.wide-screen .znai-container-title-wrapper.collapsible {
+.snippet-container.wide-screen .znai-container-title-wrapper {
     padding-left: 0;
     border-left: none;
 }

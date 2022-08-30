@@ -1,0 +1,1 @@
+* Add: Image [Anchor](visuals/images#anchor)

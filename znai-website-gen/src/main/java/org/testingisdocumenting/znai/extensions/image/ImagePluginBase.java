@@ -36,6 +36,7 @@ abstract class ImagePluginBase implements Plugin {
     protected static final String ALIGN_KEY = "align";
     protected static final String BORDER_KEY = "border";
     protected static final String TITLE_KEY = "title";
+    protected static final String ANCHOR_ID_KEY = "anchorId";
     protected static final String CAPTION_KEY = "caption";
     protected static final String CAPTION_BOTTOM_KEY = "captionBottom";
     protected static final String FIT_KEY = "fit";
@@ -53,6 +54,7 @@ abstract class ImagePluginBase implements Plugin {
     public PluginParamsDefinition parameters() {
         PluginParamsDefinition params = new PluginParamsDefinition();
         params.add(TITLE_KEY, PluginParamType.STRING, "image title", "\"my image\"");
+        params.add(ANCHOR_ID_KEY, PluginParamType.STRING, "anchor id to use for linking", "\"my-image\"");
         // TODO use title, deprecate caption
         params.add(CAPTION_KEY, PluginParamType.STRING, "image title", "\"my image\"");
         // TODO deprecate

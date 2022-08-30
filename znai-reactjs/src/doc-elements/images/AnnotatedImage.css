@@ -62,10 +62,13 @@
 .znai-image-title {
     grid-area: ttl;
 
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+
     padding: 4px 16px;
     font-size: var(--znai-smaller-text-size);
-
-    text-align: center;
 
     background-color: var(--znai-image-title-background-color);
     color: var(--znai-image-title-color);
