@@ -47,6 +47,7 @@ export function ContainerTitle({
   const containerClassName =
     "znai-container-title-wrapper" +
     (collapsible ? " collapsible" : "") +
+    (collapsed ? " collapsed" : " expanded") +
     (additionalContainerClassNames ? " " + additionalContainerClassNames : "");
 
   const titleClassName =

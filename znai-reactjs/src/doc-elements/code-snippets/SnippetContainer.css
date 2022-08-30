@@ -102,22 +102,19 @@
     display: flex;
 }
 
-.snippet-container .title-container .title {
-    color: var(--znai-snippets-title-color);
-    display: inline-block;
-    padding: 8px 16px;
+.snippet-container .znai-container-title-wrapper {
     border-left: 1px solid var(--znai-snippets-title-left-border-color);
     border-bottom: none;
     font-size: var(--znai-code-text-size);
     font-family: var(--znai-code-font-family);
 }
 
-.snippet-container.wide-screen .title-container .title.collapsible {
+.snippet-container.wide-screen .znai-container-title-wrapper.collapsible {
     padding-left: 0;
+    border-left: none;
 }
 
-.snippet-container .title-container .title.collapsible {
-    border-left: none;
+.snippet-container .znai-snippet-container-title.collapsible {
     padding-left: 0;
 }
 
