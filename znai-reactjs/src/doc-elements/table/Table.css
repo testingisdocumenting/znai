@@ -102,6 +102,10 @@
     border-left: 1px solid var(--znai-table-border-color);
 }
 
+.znai-table-wrapper .znai-container-title-wrapper {
+    padding-right: 0;
+}
+
 .znai-table-title {
     color: var(--znai-table-title-color);
     background-color: var(--znai-table-title-background-color);

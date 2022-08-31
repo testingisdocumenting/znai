@@ -27,6 +27,14 @@ export function tableDemo(registry: Registry) {
     .add("with title", () => (
       <Table table={defaultStyle(twoColumnsData())} title="User Data" elementsLibrary={elementsLibrary} />
     ))
+    .add("with title and anchor", () => (
+      <Table
+        table={defaultStyle(twoColumnsData())}
+        title="User Data"
+        elementsLibrary={elementsLibrary}
+        anchorId="my-table"
+      />
+    ))
     .add("with highlight", () => (
       <Table table={defaultStyle(twoColumnsData())} highlightRowIndexes={[1]} elementsLibrary={elementsLibrary} />
     ))

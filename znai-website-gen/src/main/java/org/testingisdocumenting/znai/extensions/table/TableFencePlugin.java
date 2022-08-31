@@ -46,8 +46,8 @@ public class TableFencePlugin implements FencePlugin {
         MarkupParser parser = componentsRegistry.defaultParser();
         String fileName = pluginParams.getFreeParam();
 
-        docElementFromParams = new TableDocElementFromParams(pluginParams, parser,
-                resourcesResolver, resourcesResolver.fullPath(fileName), content);
+        docElementFromParams = new TableDocElementFromParams(componentsRegistry, markupPath, pluginParams, parser,
+                resourcesResolver.fullPath(fileName), content);
         return docElementFromParams.create();
     }
 
