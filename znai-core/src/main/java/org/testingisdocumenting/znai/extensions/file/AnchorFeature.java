@@ -25,7 +25,7 @@ import org.testingisdocumenting.znai.structure.DocStructure;
 import java.nio.file.Path;
 import java.util.Map;
 
-public class AnchorPluginFeature implements PluginFeature {
+public class AnchorFeature implements PluginFeature {
     public static final PluginParamsDefinition paramsDefinition = createParamsDefinition();
 
     private static final String ANCHOR_ID_KEY = "anchorId";
@@ -34,7 +34,7 @@ public class AnchorPluginFeature implements PluginFeature {
     private final Path markupPath;
     private final PluginParams pluginParams;
 
-    public AnchorPluginFeature(DocStructure docStructure, Path markupPath, PluginParams pluginParams) {
+    public AnchorFeature(DocStructure docStructure, Path markupPath, PluginParams pluginParams) {
         this.docStructure = docStructure;
         this.markupPath = markupPath;
         this.pluginParams = pluginParams;
