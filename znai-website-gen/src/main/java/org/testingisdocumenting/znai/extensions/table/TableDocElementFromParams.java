@@ -16,21 +16,18 @@
 
 package org.testingisdocumenting.znai.extensions.table;
 
-import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
-import org.testingisdocumenting.znai.extensions.file.AnchorPluginFeature;
+import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
 import org.testingisdocumenting.znai.parser.table.*;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 
 import java.nio.file.Path;
 import java.util.*;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -38,7 +35,7 @@ class TableDocElementFromParams {
     private final PluginParams pluginParams;
     private final MarkupParser parser;
     private final Path fullPath;
-    private final AnchorPluginFeature anchorPluginFeature;
+    private final AnchorFeature anchorFeature;
     private final MarkupTableDataFromContentAndParams markupTableDataFromContentAndParams;
     private MarkupTableData rearrangedTable;
 
@@ -49,7 +46,7 @@ class TableDocElementFromParams {
                               MarkupParser parser,
                               Path fullPath) {
         this.markupTableDataFromContentAndParams = markupTableDataFromContentAndParams;
-        anchorPluginFeature = new AnchorPluginFeature(componentsRegistry.docStructure(), markupParentPath, pluginParams);
+        anchorFeature = new AnchorFeature(componentsRegistry.docStructure(), markupParentPath, pluginParams);
 
         this.pluginParams = pluginParams;
         this.parser = parser;
@@ -88,7 +85,7 @@ class TableDocElementFromParams {
         opts.assignToProps(props, "title");
         opts.assignToProps(props, "anchorId");
 
-        anchorPluginFeature.updateProps(props);
+        anchorFeature.updateProps(props);
 
         return PluginResult.docElement(DocElementType.TABLE, props);
     }

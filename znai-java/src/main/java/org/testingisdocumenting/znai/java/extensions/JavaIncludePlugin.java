@@ -68,6 +68,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
         return new PluginParamsDefinition()
                 .add(PluginParamsDefinitionCommon.snippetTitle)
                 .add(SnippetAutoTitleFeature.paramsDefinition)
+                .add(AnchorFeature.paramsDefinition)
                 .add(ENTRY_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "entry to include content of",
                         "\"myMethod\" or [\"myMethod1(String)\", \"myMethod2(Integer)\"]")
                 .add(ENTRY_SEPARATOR_KEY, PluginParamType.STRING, "separator to use when displaying multiple entries", "\"...\"")
