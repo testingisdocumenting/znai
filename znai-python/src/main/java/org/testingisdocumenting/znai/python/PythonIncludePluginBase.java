@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.features.PluginFeatureList;
+import org.testingisdocumenting.znai.extensions.file.AnchorPluginFeature;
 import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -55,7 +56,8 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
 
         codeReferencesFeature = new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams);
         features = new PluginFeatureList(
-                codeReferencesFeature
+                codeReferencesFeature,
+                new AnchorPluginFeature(componentsRegistry.docStructure(), markupPath, pluginParams)
         );
 
         PythonContext context = new PythonContext(fileNameToUse, defaultPackageName());
