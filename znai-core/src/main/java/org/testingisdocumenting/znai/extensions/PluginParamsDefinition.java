@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -194,12 +195,16 @@ public class PluginParamsDefinition {
                 return matchNumber(value);
             case BOOLEAN:
                 return matchBoolean(value);
+            case OBJECT:
+                return matchObject(value);
             case LIST_OR_SINGLE_STRING:
                 return matchListOrSingleString(value);
             case LIST_OR_SINGLE_STRING_WITH_NULLS:
                 return matchListOrSingleStringWithNulls(value);
             case LIST_OR_SINGLE_STRING_OR_NUMBER:
                 return matchListOrSingleStringOrNumber(value);
+            case LIST_OR_SINGLE_NUMBER:
+                return matchListOrSingleNumber(value);
             case LIST_OF_ANY:
                 return matchListOfAny(value);
             default:
@@ -223,12 +228,20 @@ public class PluginParamsDefinition {
         return value instanceof Boolean;
     }
 
+    private boolean matchObject(Object value) {
+        return value instanceof Map;
+    }
+
     private boolean matchStringOrNumber(Object value) {
         return matchString(value) || matchNumber(value);
     }
 
     private boolean matchListOrSingleString(Object value) {
         return matchListOrSingleValue(value, this::matchString);
+    }
+
+    private boolean matchListOrSingleNumber(Object value) {
+        return matchListOrSingleValue(value, this::matchNumber);
     }
 
     private boolean matchListOrSingleStringWithNulls(Object value) {

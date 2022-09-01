@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.extensions.table;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
@@ -29,6 +30,7 @@ import java.nio.file.Path;
 
 public class TableFencePlugin implements FencePlugin {
     private TableDocElementFromParams docElementFromParams;
+    private MarkupTableDataFromContentAndParams tableDataFromContentAndParams;
 
     @Override
     public String id() {
@@ -41,13 +43,24 @@ public class TableFencePlugin implements FencePlugin {
     }
 
     @Override
+    public void preprocess(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
+        tableDataFromContentAndParams = new MarkupTableDataFromContentAndParams(componentsRegistry, pluginParams, content);
+    }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        return TablePluginParams.paramsFromColumnNames(tableDataFromContentAndParams);
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         MarkupParser parser = componentsRegistry.defaultParser();
         String fileName = pluginParams.getFreeParam();
 
-        docElementFromParams = new TableDocElementFromParams(componentsRegistry, markupPath, pluginParams, parser,
-                resourcesResolver.fullPath(fileName), content);
+        docElementFromParams = new TableDocElementFromParams(componentsRegistry, tableDataFromContentAndParams,
+                markupPath, pluginParams, parser,
+                resourcesResolver.fullPath(fileName));
         return docElementFromParams.create();
     }
 

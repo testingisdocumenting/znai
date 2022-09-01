@@ -89,6 +89,8 @@ class PluginsTestUtils {
         PluginParams includeParams = new PluginParams(idAndParams.id, idAndParams.params)
         def includePlugin = Plugins.includePluginById(includeParams.pluginId)
 
+
+        includePlugin.preprocess(TEST_COMPONENTS_REGISTRY, parserHandler, markupPath, includeParams)
         includePlugin.parameters().validate(includeParams)
 
         def pluginResult = includePlugin.process(TEST_COMPONENTS_REGISTRY, parserHandler, markupPath, includeParams)
@@ -115,6 +117,8 @@ class PluginsTestUtils {
         DocElementCreationParserHandler parserHandler = createParserHandler()
 
         def fencePlugin = Plugins.fencePluginById(pluginParams.pluginId)
+        fencePlugin.preprocess(TEST_COMPONENTS_REGISTRY, Paths.get(""),  pluginParams, textContent)
+
         fencePlugin.parameters().validate(pluginParams)
 
         def pluginResult = fencePlugin.process(TEST_COMPONENTS_REGISTRY, Paths.get(""),  pluginParams, textContent)

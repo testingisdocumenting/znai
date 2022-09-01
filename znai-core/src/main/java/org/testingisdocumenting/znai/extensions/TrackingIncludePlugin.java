@@ -55,6 +55,11 @@ public class TrackingIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public void preprocess(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
+        delegate.preprocess(componentsRegistry, parserHandler, markupPath, pluginParams);
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         paramsTracker.trackParams(pluginParams);
         return delegate.process(componentsRegistry, parserHandler, markupPath, pluginParams);
