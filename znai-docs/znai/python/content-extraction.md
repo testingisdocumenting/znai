@@ -34,6 +34,33 @@ This also works for global functions:
 
 :include-python: python/example.py {entry: "my_func", bodyOnly: true}
 
+# Title
+
+Use the `title` property to specify an extracted snippet title.
+
+    :include-python: python/example.py {entry: "Animal.says", bodyOnly: true, title: "extracted snippet"}
+
+:include-python: python/example.py {entry: "Animal.says", bodyOnly: true, title: "extracted snippet"}
+
+# Anchor
+
+Use `anchorId` to make a code snippet linkable. Hover mouse over title to see a clickable anchor.
+
+    :include-python: python/example.py {
+      entry: "Animal.says", 
+      bodyOnly: true,
+      title: "extracted snippet",
+      anchorId: "my-extracted-snippet"
+    }
+
+:include-python: python/example.py {
+  entry: "Animal.says", 
+  bodyOnly: true,
+  title: "extracted snippet",
+  anchorId: "my-extracted-snippet"
+}
+
+
 # Variable
 
 To show a variable's definition and assignment:
