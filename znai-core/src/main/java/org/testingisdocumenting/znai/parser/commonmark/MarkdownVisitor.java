@@ -213,6 +213,8 @@ public class MarkdownVisitor extends AbstractVisitor {
     private void handleIncludePlugin(PluginParams params) {
         try {
             IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
+            includePlugin.preprocess(componentsRegistry, parserHandler, path, params);
+
             includePlugin.parameters().validate(params);
 
             PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, path, params);
@@ -226,6 +228,8 @@ public class MarkdownVisitor extends AbstractVisitor {
     private void handleFencePlugin(PluginParams params, String fenceContent) {
         try {
             FencePlugin fencePlugin = Plugins.fencePluginById(params.getPluginId());
+            fencePlugin.preprocess(componentsRegistry, path, params, fenceContent);
+
             fencePlugin.parameters().validate(params);
 
             PluginResult pluginResult = fencePlugin.process(componentsRegistry, path, params, fenceContent);

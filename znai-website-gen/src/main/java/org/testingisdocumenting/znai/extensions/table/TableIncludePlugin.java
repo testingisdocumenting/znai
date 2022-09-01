@@ -20,9 +20,9 @@ package org.testingisdocumenting.znai.extensions.table;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
-import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.search.SearchScore;
@@ -34,6 +34,7 @@ import java.util.stream.Stream;
 public class TableIncludePlugin implements IncludePlugin {
     private Path fullPath;
     private TableDocElementFromParams docElementFromParams;
+    private MarkupTableDataFromContentAndParams tableDataFromContentAndParams;
 
     @Override
     public String id() {
@@ -46,18 +47,26 @@ public class TableIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public PluginResult process(ComponentsRegistry componentsRegistry,
-                                ParserHandler parserHandler,
-                                Path markupPath,
-                                PluginParams pluginParams) {
+    public void preprocess(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-        MarkupParser parser = componentsRegistry.defaultParser();
         String fileName = pluginParams.getFreeParam();
         String textContent = resourcesResolver.textContent(fileName);
 
         fullPath = resourcesResolver.fullPath(fileName);
+        tableDataFromContentAndParams = new MarkupTableDataFromContentAndParams(componentsRegistry, pluginParams, textContent);
+    }
 
-        docElementFromParams = new TableDocElementFromParams(componentsRegistry, markupPath, pluginParams, parser, fullPath, textContent);
+    @Override
+    public PluginParamsDefinition parameters() {
+        return TablePluginParams.paramsFromColumnNames(tableDataFromContentAndParams);
+    }
+
+    @Override
+    public PluginResult process(ComponentsRegistry componentsRegistry,
+                                ParserHandler parserHandler,
+                                Path markupPath,
+                                PluginParams pluginParams) {
+        docElementFromParams = new TableDocElementFromParams(componentsRegistry, tableDataFromContentAndParams, markupPath, pluginParams, componentsRegistry.defaultParser(), fullPath);
         return docElementFromParams.create();
     }
 
@@ -65,7 +74,7 @@ public class TableIncludePlugin implements IncludePlugin {
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.concat(
                 Stream.of(AuxiliaryFile.builtTime(fullPath)),
-                docElementFromParams.mappingAuxiliaryFile());
+                tableDataFromContentAndParams.mappingAuxiliaryFile());
     }
 
     @Override

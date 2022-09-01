@@ -55,6 +55,18 @@ class TableIncludePluginTest {
     }
 
     @Test
+    void "should provide column width"() {
+        def element = process('test-table.json', '{Account: {width: "30%"}}')
+
+        println element
+        element.should == [type: 'Table', table: [columns: [[title: 'Account', width: "30%"], [title: 'Price'], [title: 'Description']],
+                                                  data   : [[[[type: 'TestMarkup', markup: '#12BGD3']], [[type: 'TestMarkup', markup: '100']],
+                                                             [[type: 'TestMarkup', markup: 'custom table with a long attachment']]],
+                                                            [[[type: 'TestMarkup', markup: '#12BGD3']], [[type: 'TestMarkup', markup: '150']],
+                                                             [[type: 'TestMarkup', markup: 'chair']]]]]]
+    }
+
+    @Test
     void "should filter out columns from csv based on case insensitive provided names"() {
         def element = process('test-table.csv', '{columns: ["account", "description"]}')
 

@@ -38,61 +38,34 @@ class TableDocElementFromParams {
     private final PluginParams pluginParams;
     private final MarkupParser parser;
     private final Path fullPath;
-    private final Path mappingPath;
-    private final MarkupTableDataMapping tableDataMapping;
-    private final String mappingFileName;
     private final AnchorPluginFeature anchorPluginFeature;
+    private final MarkupTableDataFromContentAndParams markupTableDataFromContentAndParams;
     private MarkupTableData rearrangedTable;
 
-    private final ResourcesResolver resourcesResolver;
-    private final String content;
-
-    TableDocElementFromParams(ComponentsRegistry componentsRegistry, Path markupParentPath, PluginParams pluginParams, MarkupParser parser,
-                              Path fullPath, String content) {
+    TableDocElementFromParams(ComponentsRegistry componentsRegistry,
+                              MarkupTableDataFromContentAndParams markupTableDataFromContentAndParams,
+                              Path markupParentPath,
+                              PluginParams pluginParams,
+                              MarkupParser parser,
+                              Path fullPath) {
+        this.markupTableDataFromContentAndParams = markupTableDataFromContentAndParams;
         anchorPluginFeature = new AnchorPluginFeature(componentsRegistry.docStructure(), markupParentPath, pluginParams);
 
         this.pluginParams = pluginParams;
         this.parser = parser;
-        this.resourcesResolver = componentsRegistry.resourceResolver();
-        this.content = content;
         this.fullPath = fullPath;
-
-        this.mappingFileName = pluginParams.getOpts().get("mappingPath", "");
-        this.mappingPath = mappingFileName.isEmpty() ? null : resourcesResolver.fullPath(mappingFileName);
-
-        this.tableDataMapping = createMapping();
     }
 
     MarkupTableData getRearrangedTable() {
         return rearrangedTable;
     }
 
-    Stream<AuxiliaryFile> mappingAuxiliaryFile() {
-        return mappingPath == null ? Stream.empty() : Stream.of(AuxiliaryFile.builtTime(mappingPath));
-    }
-
-    private MarkupTableDataMapping createMapping() {
-        return new MapBasedMarkupTableMapping(mappingPath == null ?
-                Collections.emptyMap():
-                createMappingFromFileContent());
-    }
-
-    private Map<Object, Object> createMappingFromFileContent() {
-        MarkupTableData tableData = CsvTableParser.parseWithHeader(resourcesResolver.textContent(mappingFileName),
-                "from", "to");
-        return Collections.unmodifiableMap(tableData.toKeyValue());
-    }
-
     @SuppressWarnings("unchecked")
     PluginResult create() {
-        MarkupTableData tableFromContent = (isJson() ?
-                JsonTableParser.parse(content) :
-                CsvTableParser.parse(content)).mapValues(tableDataMapping);
-
         PluginParamsOpts opts = pluginParams.getOpts();
         rearrangedTable = opts.has("columns") ?
-                tableFromContent.withColumnsInOrder(opts.getList("columns")) :
-                tableFromContent;
+                markupTableDataFromContentAndParams.getMarkupTableData().withColumnsInOrder(opts.getList("columns")) :
+                markupTableDataFromContentAndParams.getMarkupTableData();
 
         Map<String, Object> tableAsMap = rearrangedTable.toMap();
 
@@ -145,9 +118,5 @@ class TableDocElementFromParams {
 
         MarkupParserResult parserResult = parser.parse(fullPath, cell.toString());
         return (List<Object>) parserResult.getDocElement().toMap().get("content");
-    }
-
-    private boolean isJson() {
-        return content.trim().startsWith("[");
     }
 }
