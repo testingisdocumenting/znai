@@ -98,7 +98,7 @@ import { pythonMethodDemo } from "./doc-elements/python/PythonMethod.demo";
 import { openApiAndMethodAndUrlDemo } from "./doc-elements/open-api/OpenApiAndMethodAndUrl.demo";
 import { attentionBlockDemo } from "./doc-elements/paragraph/AttentionBlock.demo";
 import { attentionBlockPresentationDemo } from "./doc-elements/paragraph/PresentationAttentionBlock.demo";
-import { containerTitleDemo } from "./doc-elements/title/ContainerTitle.demo";
+import { containerTitleDemo } from "./doc-elements/container/ContainerTitle.demo";
 
 const docMeta = {
     id: 'preview',

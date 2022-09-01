@@ -22,6 +22,7 @@ export type DocElementContent = DocElementPayload[];
 
 export interface DocElementPayload {
   type: any;
+  noGap?: boolean;
   content?: DocElementContent;
 }
 
