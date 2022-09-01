@@ -1,0 +1,1 @@
+* Rename: `compact` property is now [noGap](snippets/external-code-snippets#no-gap)

@@ -40,7 +40,7 @@ export function snippetsDemo(registry) {
     registry
       .add('title', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()}/>)
       .add('title collapsible', () => <Snippet title="snippet title" lang="html" snippet={htmlCode()} collapsed={false}/>)
-      .add('title compact', () => (
+      .add('title no gap', () => (
         <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[
             contentParagraph(false),
             compactContentSnippet("snippet one", true),
@@ -307,7 +307,7 @@ function compactContentSnippet(title, removeCompact) {
         "type": "Snippet",
         "lang": "java",
         "title": title,
-        "compact": !removeCompact,
+        "noGap": !removeCompact,
         "snippet": codeWithMethodCalls(),
     }
 }

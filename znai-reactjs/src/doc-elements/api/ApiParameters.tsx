@@ -23,7 +23,7 @@ import { ApiParameter } from "./ApiParameter";
 
 import { Snippet } from "../code-snippets/Snippet";
 
-import { ContainerTitle } from "../title/ContainerTitle";
+import { ContainerTitle } from "../container/ContainerTitle";
 
 import "./ApiParameters.css";
 

@@ -24,7 +24,8 @@ import { extractTextFromTokens } from "./codeUtils";
 import { Icon } from "../icons/Icon";
 import { SnippetOptionallyScrollablePart } from "./SnippetOptionallyScrollablePart";
 
-import { ContainerTitle } from "../title/ContainerTitle";
+import { Container } from "../container/Container";
+import { ContainerTitle } from "../container/ContainerTitle";
 
 import "./SnippetContainer.css";
 
@@ -46,23 +47,17 @@ class SnippetContainer extends React.Component {
     }
 
     renderNormalMode() {
-        const {title, className, compact, next, prev} = this.props
+        const {title, className, noGap, next, prev} = this.props
 
         const fullClassName = "snippet-container content-block"
           + (className ? " " + className : "")
-          + (noMargin(next) ? " no-margin-bottom" : "")
-          + (noMargin(prev) ? " no-margin-top" : "")
 
         return (
-            <div className={fullClassName}>
+            <Container className={fullClassName} next={next} prev={prev} noGap={noGap}>
                 {this.renderTitle(title)}
                 {this.renderSnippet()}
-            </div>
+            </Container>
         )
-
-        function noMargin(nextPrev) {
-            return compact && nextPrev && nextPrev.type === "Snippet" && !!nextPrev.title && !!nextPrev.compact
-        }
     }
 
     renderWideMode() {

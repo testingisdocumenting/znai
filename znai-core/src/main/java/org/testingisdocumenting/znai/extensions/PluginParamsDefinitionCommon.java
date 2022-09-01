@@ -26,8 +26,8 @@ public class PluginParamsDefinitionCommon {
             .add("collapsed", PluginParamType.BOOLEAN,
                     "is collapsed by default", "true");
 
-    public static final PluginParamsDefinition compact = new PluginParamsDefinition()
-            .add("compact", PluginParamType.BOOLEAN,
+    public static final PluginParamsDefinition noGap = new PluginParamsDefinition()
+            .add("noGap", PluginParamType.BOOLEAN,
                     "remove margins when multiple snippets in a row", "true");
 
     public static final PluginParamsDefinition snippetReadMore = new PluginParamsDefinition()
@@ -42,7 +42,7 @@ public class PluginParamsDefinitionCommon {
             .add("wrap", PluginParamType.BOOLEAN,
                     "force snippet soft wrapping", "true")
             .add(snippetReadMore)
-            .add(compact)
+            .add(noGap)
             .add(collapsible)
             .add("commentsType", PluginParamType.STRING,
                     "change way code comments are displayed: <inline> - use bullet points, <remove> - hide comments", "\"inline\"")

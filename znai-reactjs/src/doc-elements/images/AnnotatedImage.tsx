@@ -30,8 +30,9 @@ import { TooltipPlacement } from "../../components/Tooltip";
 
 import { WithElementsLibrary } from "../default-elements/DocElement";
 
+import { ContainerTitle } from "../container/ContainerTitle";
+
 import "./AnnotatedImage.css";
-import { ContainerTitle } from "../title/ContainerTitle";
 
 export interface AnnotatedImageProps extends WithElementsLibrary {
   imageSrc: string;

@@ -21,7 +21,7 @@ import { DocElementProps } from "../default-elements/DocElement";
 import { calcTableWidth } from "./tableSize";
 
 import { cssVarPixelValue } from "../../utils/cssVars";
-import { ContainerTitle } from "../title/ContainerTitle";
+import { ContainerTitle } from "../container/ContainerTitle";
 
 import "./Table.css";
 
