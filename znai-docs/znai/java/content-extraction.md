@@ -23,6 +23,32 @@ you can specify `commentsType` option for `include-java`.
 
 :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"}
 
+# Title
+
+Use `title` property to specify extracted code snippet title
+
+    :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, title: "my snippet"}
+
+:include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, title: "my snippet"}
+
+# Anchor
+
+Use `anchorId` to make a code snippet linkable. Hover mouse over title to see a clickable anchor.
+
+    :include-java: HelloWorld.java {
+      entry: "sampleMethod",
+      bodyOnly: true,
+      title: "my snippet",
+      anchorId: "my-java-snippet"
+    }
+
+:include-java: HelloWorld.java {
+  entry: "sampleMethod", 
+  bodyOnly: true,
+  title: "my snippet", 
+  anchorId: "my-java-snippet"
+}
+
 # Signature Only
 
 You can also specify a method name and extract only its signature.
