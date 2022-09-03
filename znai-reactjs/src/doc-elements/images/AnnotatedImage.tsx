@@ -32,6 +32,8 @@ import { WithElementsLibrary } from "../default-elements/DocElement";
 
 import { ContainerTitle } from "../container/ContainerTitle";
 
+import { useIsMobile } from "../../theme/ViewPortContext";
+
 import "./AnnotatedImage.css";
 
 export interface AnnotatedImageProps extends WithElementsLibrary {
@@ -46,6 +48,8 @@ export interface AnnotatedImageProps extends WithElementsLibrary {
   fit?: boolean;
   scale?: number;
   border?: boolean;
+  mobileOnly?: boolean;
+  desktopOnly?: boolean;
   timestamp?: number;
   inlined?: boolean;
   shapesTooltipContent?: Array<{ placement: TooltipPlacement; content: any }>;
@@ -67,14 +71,25 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     border,
     timestamp,
     inlined,
+    mobileOnly,
+    desktopOnly,
     shapesTooltipContent,
     annotationToHighlightIdx,
     elementsLibrary,
   } = props;
 
   const scaleToUse = calcScale();
+  const isMobile = useIsMobile();
 
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: -1, y: -1 });
+
+  if (isMobile && desktopOnly) {
+    return null;
+  }
+
+  if (!isMobile && mobileOnly) {
+    return null;
+  }
 
   const sizeSpecified = width > 0;
 

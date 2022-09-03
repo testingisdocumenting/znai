@@ -1,0 +1,1 @@
+* Add: Mobile and Desktop only [Images](visuals/images#mobile-and-desktop-only)

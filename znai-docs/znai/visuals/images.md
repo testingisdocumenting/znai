@@ -93,3 +93,14 @@ Pass external url in place of image to render image from a remote site
     :include-image: https://external-url { align: "left" }
 
 Note: Pass `:identifier: validate-external-links {validationPath: "org/testingisdocumenting/znai/cli/ZnaiCliConfig.java"}` parameter to validate image urls
+
+# Mobile And Desktop Only
+
+Use `mobileOnly` to only render an image in mobile screen size.
+Use `desktopOnly` to only render an image in desktop screen size.
+
+    :include-image: small-book.png {title: "only visible in mobile screen size", mobileOnly: true}
+    :include-image: books.jpg {title: "only visible in desktop screen size", desktopOnly: true, fit: true}
+
+:include-image: small-book.png {title: "only visible in mobile screen size", mobileOnly: true}
+:include-image: books.jpg {title: "only visible in desktop screen size", desktopOnly: true, fit: true}
