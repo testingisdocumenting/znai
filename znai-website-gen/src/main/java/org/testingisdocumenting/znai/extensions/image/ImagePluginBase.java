@@ -45,6 +45,9 @@ abstract class ImagePluginBase implements Plugin {
 
     private static final String PIXEL_RATIO_KEY = "pixelRatio";
 
+    private static final String MOBILE_ONLY_KEY = "mobileOnly";
+    private static final String DESKTOP_ONLY_KEY = "desktopOnly";
+
     protected AuxiliaryFile auxiliaryFile;
     protected boolean isExternal;
 
@@ -61,6 +64,9 @@ abstract class ImagePluginBase implements Plugin {
         params.add(CAPTION_BOTTOM_KEY, PluginParamType.BOOLEAN, "place image title at the bottom", "true");
         params.add(ALIGN_KEY, PluginParamType.STRING, "horizontal image alignment",
                 ALIGN_VALUES.stream().map(v -> "\"" + v + "\"").collect(Collectors.joining(", ")));
+
+        params.add(MOBILE_ONLY_KEY, PluginParamType.BOOLEAN, "render image only for mobile screen size", "true");
+        params.add(DESKTOP_ONLY_KEY, PluginParamType.BOOLEAN, "render image only for desktop screen size", "true");
 
         params.add(BORDER_KEY, PluginParamType.BOOLEAN, "use border around image", "true");
         params.add(FIT_KEY, PluginParamType.BOOLEAN, "fit image to the text width", "true");
