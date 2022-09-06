@@ -78,8 +78,8 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     elementsLibrary,
   } = props;
 
-  const scaleToUse = calcScale();
   const isMobile = useIsMobile();
+  const scaleToUse = calcScale();
 
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: -1, y: -1 });
 
@@ -225,12 +225,15 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   }
 
   function calcScale() {
-    if (fit) {
-      const singleColumnWidth = cssVarPixelValue("znai-single-column-full-width");
-      return singleColumnWidth / width;
+    if (!fit) {
+      return scale || 1.0;
     }
 
-    return scale || 1.0;
+    const singleColumnWidth = isMobile
+      ? window.innerWidth - 2 * cssVarPixelValue("znai-single-side-horizontal-min-spacing")
+      : cssVarPixelValue("znai-single-column-full-width");
+
+    return singleColumnWidth / width;
   }
 
   function renderTitle() {

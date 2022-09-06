@@ -1,0 +1,1 @@
+* Fix: [Fit Image](visuals/images#fit) in mobile view

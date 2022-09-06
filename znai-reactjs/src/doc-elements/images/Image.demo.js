@@ -60,6 +60,14 @@ export function imageDemo(registry) {
             </>
         )
     )
+    registry.add('fit image mobile with zoom', () =>
+        (
+            <div style={{width: 700}}>
+                <ZoomOverlay/>
+                <AnnotatedImage {...fitImage()}/>
+            </div>
+        )
+    )
     registry.add('badge alignment annotations fit', () => (
       <AnnotatedImage {...badgeAlignment(450, 350)} {...fitImage()} {...noFitImageAnnotations()}/>
     ))
