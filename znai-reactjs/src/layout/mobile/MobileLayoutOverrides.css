@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@media only screen and (max-width: 940px) {
+@media only screen and (max-width: 9840px) {
     :root {
         --znai-single-column-render-width: auto;
     }
