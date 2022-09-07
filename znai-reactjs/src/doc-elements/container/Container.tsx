@@ -20,13 +20,16 @@ import { DocElementPayload } from "../default-elements/DocElement";
 
 import "./Container.css";
 
-interface Props {
-  className: string;
-  style?: CSSProperties;
-  onClick?(): void;
+export interface ContainerCommonProps {
   noGap?: boolean;
   next?: DocElementPayload;
   prev?: DocElementPayload;
+}
+
+interface Props extends ContainerCommonProps {
+  className: string;
+  style?: CSSProperties;
+  onClick?(): void;
   children: any;
 }
 

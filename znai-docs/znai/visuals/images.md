@@ -84,6 +84,59 @@ Use `align` option to align images left or right.
     
 :include-image: books.jpg {align: "right", scale: 0.3}
 
+# Collapse
+
+Use `collapsed: true|false` to make image collapsible.
+Note: `title` option is required
+
+```markdown {highlight: "collapsed"}
+:include-image: books.jpg {
+  fit: true, 
+  title: "books", 
+  anchorId: "my-books", 
+  collapsed: true
+}
+```
+
+:include-image: books.jpg {
+  fit: true, 
+  title: "books", 
+  anchorId: "my-books", 
+  collapsed: true
+}
+
+# No Gap
+
+Use `noGap: true` to remove top/bottom margins when there are multiple images in a row.
+
+```markdown {highlight: "noGap"}
+:include-image: books.jpg {
+  fit: true,
+  title: "books",
+  collapsed: true,
+  noGap: true
+}
+:include-image: castle.jpg {
+  fit: true,
+  title: "castle",
+  collapsed: false,
+  noGap: true
+}
+```
+
+:include-image: books.jpg {
+  fit: true,
+  title: "books",
+  collapsed: true,
+  noGap: true
+}
+:include-image: castle.jpg {
+  fit: true,
+  title: "castle",
+  collapsed: false,
+  noGap: true
+}
+
 # External Image
 
 Pass external url in place of image to render image from a remote site 

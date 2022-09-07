@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Icon } from "../icons/Icon";
 
 import "./ContainerTitle.css";
 
-interface Props {
-  title: string;
+export interface TitleCommonProps {
+  title?: string;
+  collapsed?: boolean;
+  anchorId?: string;
+}
+
+interface Props extends TitleCommonProps {
   additionalContainerClassNames?: string;
   additionalTitleClassNames?: string;
   collapsed?: boolean;
@@ -75,4 +80,21 @@ export function ContainerTitle({
       </div>
     </div>
   );
+}
+
+export function useIsUserDrivenCollapsed(originalCollapsed?: boolean) {
+  const [userDrivenCollapsed, setUserDrivenCollapsed] = useState(originalCollapsed);
+
+  useEffect(() => {
+    setUserDrivenCollapsed(originalCollapsed);
+  }, [originalCollapsed]);
+
+  return {
+    userDrivenCollapsed,
+    collapseToggle,
+  };
+
+  function collapseToggle() {
+    setUserDrivenCollapsed((prev) => !prev);
+  }
 }

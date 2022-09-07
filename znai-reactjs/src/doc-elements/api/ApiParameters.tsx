@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
 import { ApiLinkedText } from "./ApiLinkedText";
@@ -23,7 +23,7 @@ import { ApiParameter } from "./ApiParameter";
 
 import { Snippet } from "../code-snippets/Snippet";
 
-import { ContainerTitle } from "../container/ContainerTitle";
+import { ContainerTitle, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
 
 import "./ApiParameters.css";
 
@@ -65,11 +65,7 @@ export default function ApiParameters({
   prev,
   elementsLibrary,
 }: Props) {
-  const [userDrivenCollapsed, setUserDrivenCollapsed] = useState(collapsed);
-
-  useEffect(() => {
-    setUserDrivenCollapsed(collapsed);
-  }, [collapsed]);
+  const { userDrivenCollapsed, collapseToggle } = useIsUserDrivenCollapsed(collapsed);
 
   const isExpanded = !nestedLevel && parameters.length === 1 && !!parameters[0].children;
 
@@ -122,10 +118,6 @@ export default function ApiParameters({
   }
 
   return rendered;
-
-  function collapseToggle() {
-    setUserDrivenCollapsed((prev) => !prev);
-  }
 }
 
 interface TitleProps {
