@@ -33,6 +33,7 @@ import { WithElementsLibrary } from "../default-elements/DocElement";
 import { ContainerTitle } from "../container/ContainerTitle";
 
 import { useIsMobile } from "../../theme/ViewPortContext";
+import { Container } from "../container/Container";
 
 import "./AnnotatedImage.css";
 
@@ -142,11 +143,11 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   );
 
   return (
-    <div className={containerClassName}>
+    <Container className={containerClassName}>
       {renderTitle()}
       {renderedPaddedImage}
       {renderCoordinates()}
-    </div>
+    </Container>
   );
 
   function renderImage() {
@@ -229,10 +230,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
       return scale || 1.0;
     }
 
-    const singleColumnWidth = isMobile
-      ? window.innerWidth - 2 * cssVarPixelValue("znai-single-side-horizontal-min-spacing")
-      : cssVarPixelValue("znai-single-column-full-width");
-
+    const singleColumnWidth = isMobile ? window.innerWidth : cssVarPixelValue("znai-single-column-full-width");
     return singleColumnWidth / width;
   }
 

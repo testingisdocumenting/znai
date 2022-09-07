@@ -1,0 +1,1 @@
+* Remove [Image](visuals/images) padding in mobile view
