@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { CSSProperties } from "react";
 
 import { DocElementPayload } from "../default-elements/DocElement";
 
@@ -22,6 +22,8 @@ import "./Container.css";
 
 interface Props {
   className: string;
+  style?: CSSProperties;
+  onClick?(): void;
   noGap?: boolean;
   next?: DocElementPayload;
   prev?: DocElementPayload;
@@ -32,11 +34,18 @@ interface Props {
  * handles things like removing gaps based on next/prev doc elements
  * @constructor
  */
-export function Container({ className, noGap, next, prev, children }: Props) {
+export function Container({ className, style, onClick, noGap, next, prev, children }: Props) {
   const noBottomMargin = noGap && next && next.noGap;
   const noTopMargin = noGap && prev && prev.noGap;
   const fullClassName =
-    "znai-container " + className + (noBottomMargin ? " no-bottom-margin" : "") + (noTopMargin ? " no-top-margin" : "");
+    "znai-container znai-mobile-remove-padding " +
+    className +
+    (noBottomMargin ? " no-bottom-margin" : "") +
+    (noTopMargin ? " no-top-margin" : "");
 
-  return <div className={fullClassName}>{children}</div>;
+  return (
+    <div className={fullClassName} style={style} onClick={onClick}>
+      {children}
+    </div>
+  );
 }
