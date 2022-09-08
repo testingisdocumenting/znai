@@ -117,8 +117,6 @@
 
     border: 1px solid var(--znai-table-border-color);
     border-bottom: none;
-
-    padding: 8px 16px;
 }
 
 .znai-table-row-highlight {

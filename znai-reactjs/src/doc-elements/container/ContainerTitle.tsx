@@ -29,8 +29,6 @@ export interface ContainerTitleCommonProps {
 interface Props extends ContainerTitleCommonProps {
   additionalContainerClassNames?: string;
   additionalTitleClassNames?: string;
-  collapsed?: boolean;
-  anchorId?: string;
 
   onCollapseToggle?(): void;
 }

@@ -85,6 +85,7 @@ class TableDocElementFromParams {
         opts.assignToProps(props, "title");
         opts.assignToProps(props, "anchorId");
         opts.assignToProps(props, "noGap");
+        opts.assignToProps(props, "collapsed");
 
         anchorFeature.updateProps(props);
 

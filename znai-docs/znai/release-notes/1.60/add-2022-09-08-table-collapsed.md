@@ -1,0 +1,1 @@
+* Add: Table [Collapse](layout/tables#collapse)
