@@ -20,13 +20,13 @@ import { Icon } from "../icons/Icon";
 
 import "./ContainerTitle.css";
 
-export interface TitleCommonProps {
+export interface ContainerTitleCommonProps {
   title?: string;
   collapsed?: boolean;
   anchorId?: string;
 }
 
-interface Props extends TitleCommonProps {
+interface Props extends ContainerTitleCommonProps {
   additionalContainerClassNames?: string;
   additionalTitleClassNames?: string;
   collapsed?: boolean;

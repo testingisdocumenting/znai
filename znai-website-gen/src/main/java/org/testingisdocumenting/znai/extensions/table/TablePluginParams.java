@@ -18,11 +18,11 @@ package org.testingisdocumenting.znai.extensions.table;
 
 import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinitionCommon;
 
 class TablePluginParams {
     private static final PluginParamsDefinition commonParamsDefinition = new PluginParamsDefinition()
-            .add("title", PluginParamType.STRING, "table title", "\"my table\"")
-            .add("anchorId", PluginParamType.STRING, "anchor to use to link", "\"my-table\"")
+            .add(PluginParamsDefinitionCommon.container)
             .add("mappingPath", PluginParamType.STRING, "csv file path with values mapping", "\"mapping.csv\"")
             .add("columns", PluginParamType.LIST_OR_SINGLE_STRING, "list of columns to include/re-arrange", "[\"colA\", \"colB\"]")
             .add("highlightRow", PluginParamType.LIST_OR_SINGLE_NUMBER, "row indexes to highlight", "[2, 5]")

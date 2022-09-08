@@ -30,14 +30,14 @@ import { TooltipPlacement } from "../../components/Tooltip";
 
 import { WithElementsLibrary } from "../default-elements/DocElement";
 
-import { ContainerTitle, TitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
+import { ContainerTitle, ContainerTitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
 
 import { useIsMobile } from "../../theme/ViewPortContext";
 import { Container, ContainerCommonProps } from "../container/Container";
 
 import "./AnnotatedImage.css";
 
-export interface AnnotatedImageProps extends WithElementsLibrary, TitleCommonProps, ContainerCommonProps {
+export interface AnnotatedImageProps extends WithElementsLibrary, ContainerTitleCommonProps, ContainerCommonProps {
   imageSrc: string;
   shapes: object[];
   width: number;

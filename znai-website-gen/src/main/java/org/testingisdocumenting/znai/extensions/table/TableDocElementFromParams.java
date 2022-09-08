@@ -84,6 +84,7 @@ class TableDocElementFromParams {
 
         opts.assignToProps(props, "title");
         opts.assignToProps(props, "anchorId");
+        opts.assignToProps(props, "noGap");
 
         anchorFeature.updateProps(props);
 

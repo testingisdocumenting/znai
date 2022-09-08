@@ -20,6 +20,7 @@ import React from "react";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import Table from "./Table";
 import { Registry } from "react-component-viewer";
+import { contentParagraph } from "../demo-utils/contentGenerators";
 
 export function tableDemo(registry: Registry) {
   registry
@@ -33,6 +34,13 @@ export function tableDemo(registry: Registry) {
         title="User Data"
         elementsLibrary={elementsLibrary}
         anchorId="my-table"
+      />
+    ))
+    .add("no gaps", () => (
+      // @ts-ignore
+      <elementsLibrary.DocElement
+        elementsLibrary={elementsLibrary}
+        content={[contentParagraph(false), tableNoGapAsContent(), tableNoGapAsContent(), contentParagraph(false)]}
       />
     ))
     .add("with highlight", () => (
@@ -84,6 +92,15 @@ function defaultStyle(data: any[][]) {
     styles: [],
     columns: twoColumns(),
     data: data,
+  };
+}
+
+function tableNoGapAsContent() {
+  return {
+    type: "Table",
+    title: "My Table",
+    table: defaultStyle(twoColumnsData()),
+    noGap: true,
   };
 }
 
