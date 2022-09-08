@@ -36,11 +36,16 @@ export function tableDemo(registry: Registry) {
         anchorId="my-table"
       />
     ))
-    .add("no gaps", () => (
+    .add("no gaps and collapse", () => (
       // @ts-ignore
       <elementsLibrary.DocElement
         elementsLibrary={elementsLibrary}
-        content={[contentParagraph(false), tableNoGapAsContent(), tableNoGapAsContent(), contentParagraph(false)]}
+        content={[
+          contentParagraph(false),
+          tableNoGapAsContent(true),
+          tableNoGapAsContent(false),
+          contentParagraph(false),
+        ]}
       />
     ))
     .add("with highlight", () => (
@@ -95,12 +100,13 @@ function defaultStyle(data: any[][]) {
   };
 }
 
-function tableNoGapAsContent() {
+function tableNoGapAsContent(collapsed: boolean) {
   return {
     type: "Table",
     title: "My Table",
     table: defaultStyle(twoColumnsData()),
     noGap: true,
+    collapsed,
   };
 }
 

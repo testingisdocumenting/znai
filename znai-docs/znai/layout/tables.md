@@ -43,18 +43,49 @@ Use `anchorId` parameter to set table anchor for linking. Hover over title to re
 
 :include-table: table/table.json {title: "Monthly Report", anchorId: "my-super-table"}
 
+# Collapse
+
+Use `collapsed: true|false` to make image collapsible.
+Note: `title` option is required
+
+```markdown {highlight: "collapsed"}
+:include-table: table/table.json {
+  title: "Monthly Report",
+  collapsed: true
+}
+```
+
+:include-table: table/table.json {title: "Monthly Report", collapsed: true}
 
 # No Gap
 
 Use `noGap: true` to remove top/bottom margins when there are multiple tables in a row.
 
-```markdown
-:include-table: table/table.json {title: "Monthly Report", noGap: true}
-:include-table: table/table.json {title: "Weekly Report", noGap: true}
+```markdown {highlight: "noGap"}
+:include-table: table/table.json {
+  title: "Monthly Report",
+  collapsed: true,
+  noGap: true,
+}
+
+:include-table: table/table.json {
+  title: "Weekly Report",
+  collapsed: false,
+  noGap: true,
+}
 ```
 
-:include-table: table/table.json {title: "Monthly Report", noGap: true}
-:include-table: table/table.json {title: "Weekly Report", noGap: true}
+:include-table: table/table.json {
+  title: "Monthly Report",
+  collapsed: true,
+  noGap: true,
+}
+
+:include-table: table/table.json {
+  title: "Weekly Report",
+  collapsed: false,
+  noGap: true,
+}
 
 # Highlight
 
