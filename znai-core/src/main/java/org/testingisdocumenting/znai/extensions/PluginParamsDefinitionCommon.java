@@ -38,7 +38,7 @@ public class PluginParamsDefinitionCommon {
             .add("readMoreVisibleLines", PluginParamType.NUMBER,
                     "number of lines to display when readMore is true", "10");
 
-    public static final PluginParamsDefinition containerCommon = new PluginParamsDefinition()
+    public static final PluginParamsDefinition container = new PluginParamsDefinition()
             .add(title)
             .add(collapsible)
             .add(noGap)
@@ -50,7 +50,7 @@ public class PluginParamsDefinitionCommon {
             .add("wrap", PluginParamType.BOOLEAN,
                     "force snippet soft wrapping", "true")
             .add(snippetReadMore)
-            .add(containerCommon)
+            .add(container)
             .add("commentsType", PluginParamType.STRING,
                     "change way code comments are displayed: <inline> - use bullet points, <remove> - hide comments", "\"inline\"")
             .add("spoiler", PluginParamType.BOOLEAN,

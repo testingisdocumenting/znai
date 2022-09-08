@@ -43,6 +43,19 @@ Use `anchorId` parameter to set table anchor for linking. Hover over title to re
 
 :include-table: table/table.json {title: "Monthly Report", anchorId: "my-super-table"}
 
+
+# No Gap
+
+Use `noGap: true` to remove top/bottom margins when there are multiple tables in a row.
+
+```markdown
+:include-table: table/table.json {title: "Monthly Report", noGap: true}
+:include-table: table/table.json {title: "Weekly Report", noGap: true}
+```
+
+:include-table: table/table.json {title: "Monthly Report", noGap: true}
+:include-table: table/table.json {title: "Weekly Report", noGap: true}
+
 # Highlight
 
 Use `highlightRow` to highlight a row, or a set of rows by their index

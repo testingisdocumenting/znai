@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@media only screen and (max-width: 9840px) {
+@media only screen and (max-width: 940px) {
     :root {
         --znai-single-column-render-width: auto;
     }
@@ -24,11 +24,6 @@
     }
 
     .znai-mobile-remove-padding {
-        margin-left: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
-        margin-right: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
-    }
-
-    .znai-table-wrapper {
         margin-left: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
         margin-right: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
     }

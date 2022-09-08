@@ -21,9 +21,10 @@ import { DocElementProps } from "../default-elements/DocElement";
 import { calcTableWidth } from "./tableSize";
 
 import { cssVarPixelValue } from "../../utils/cssVars";
-import { ContainerTitle } from "../container/ContainerTitle";
+import { ContainerTitle, ContainerTitleCommonProps } from "../container/ContainerTitle";
 
 import "./Table.css";
+import { Container, ContainerCommonProps } from "../container/Container";
 
 interface Column {
   title: string;
@@ -39,9 +40,7 @@ interface Table {
   data: any[][];
 }
 
-interface Props extends DocElementProps {
-  title?: string;
-  anchorId?: string;
+interface Props extends DocElementProps, ContainerTitleCommonProps, ContainerCommonProps {
   table: Table;
   highlightRowIndexes: number[];
 }
@@ -80,7 +79,7 @@ export function Table({ table, highlightRowIndexes, ...props }: Props) {
   const tableClassName = (isCustomClassName ? tableStyles.join(" ") : "znai-table") + (hasTitle ? " with-title" : "");
 
   return (
-    <div className={wrapperClassName}>
+    <Container className={wrapperClassName} next={props.next} prev={props.prev} noGap={props.noGap}>
       <TableTitle title={props.title} anchorId={props.anchorId} />
       <div className="znai-table-inner-scroll-wrapper">
         <table className={tableClassName}>
@@ -105,7 +104,7 @@ export function Table({ table, highlightRowIndexes, ...props }: Props) {
           </tbody>
         </table>
       </div>
-    </div>
+    </Container>
   );
 }
 

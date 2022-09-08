@@ -56,7 +56,7 @@ abstract class ImagePluginBase implements Plugin {
     @Override
     public PluginParamsDefinition parameters() {
         PluginParamsDefinition params = new PluginParamsDefinition();
-        params.add(PluginParamsDefinitionCommon.containerCommon);
+        params.add(PluginParamsDefinitionCommon.container);
         // TODO use title, deprecate caption
         params.add(CAPTION_KEY, PluginParamType.STRING, "image title", "\"my image\"");
         // TODO deprecate
