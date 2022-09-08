@@ -63,21 +63,11 @@ score, Integer, another description line with *markdown* support
 Use `collapsed: true|false` to make `api-parameters` collapsible. 
 
 `````markdown
-```api-parameters {title: "person definition", anchorPrefix: "title", collapsed: false}
-firstName, String, description with *markdown* support
-score, Integer, another description line with *markdown* support
-```
-
 ```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true}
 city, String, city name
 zipCode, String, zip code
 ```
 `````
-
-```api-parameters {title: "person definition", anchorPrefix: "title", collapsed: false}
-firstName, String, description with *markdown* support
-score, Integer, another description line with *markdown* support
-```
 
 ```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true}
 city, String, city name
@@ -85,6 +75,33 @@ zipCode, String, zip code
 ```
 
 Note: `collapsed` requires `title` to be present
+
+# No Gap
+
+Use `noGap: true` to remove top/bottom margins when there are multiple parameter instances in a row.
+
+`````markdown
+```api-parameters { title: "person definition", anchorPrefix: "title", collapsed: false, noGap: true }
+firstName, String, description with *markdown* support
+score, Integer, another description line with *markdown* support
+```
+
+```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true, noGap: true}
+city, String, city name
+zipCode, String, zip code
+```
+`````
+
+```api-parameters { title: "person definition", anchorPrefix: "title", collapsed: false, noGap: true }
+firstName, String, description with *markdown* support
+score, Integer, another description line with *markdown* support
+```
+
+```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true, noGap: true}
+city, String, city name
+zipCode, String, zip code
+```
+
 
 # Size
 

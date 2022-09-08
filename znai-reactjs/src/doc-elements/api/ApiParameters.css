@@ -15,6 +15,11 @@
  * limitations under the License.
  */
 
+.znai-api-parameters-wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .znai-api-parameters {
     max-width: var(--znai-single-column-render-width);
 
@@ -23,9 +28,6 @@
 
     font-size: var(--znai-regular-text-size);
     font-family: var(--znai-regular-font-family);
-
-    margin-top: 20px;
-    margin-bottom: 20px;
 
     border-top: 1px solid var(--znai-snippets-outer-border-color);
     border-bottom: 1px solid var(--znai-snippets-outer-border-color);
@@ -41,12 +43,7 @@
 }
 
 .znai-api-parameters-wrapper.no-bottom-margin > .znai-api-parameters {
-    margin-bottom: 0;
     border-bottom: none;
-}
-
-.znai-api-parameters-wrapper.no-top-margin > .znai-api-parameters {
-    margin-top: 0;
 }
 
 .znai-api-parameters.small {

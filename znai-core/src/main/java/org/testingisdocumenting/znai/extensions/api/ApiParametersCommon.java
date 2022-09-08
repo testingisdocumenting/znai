@@ -26,15 +26,13 @@ class ApiParametersCommon {
     static final PluginParamsDefinition paramsDefinition = new PluginParamsDefinition()
             .add("anchorPrefix", PluginParamType.STRING,
                     "prefix to use for individual parameter link anchors", "\"my-api\"")
-            .add("title", PluginParamType.STRING,
-                    "api parameters title", "\"my api\"")
             .add("small", PluginParamType.BOOLEAN,
                     "use smaller font and width", "true")
             .add("noWrap", PluginParamType.BOOLEAN,
                     "do not wrap long parameter names and instead expand parameters column width to fit", "true")
             .add("wide", PluginParamType.BOOLEAN,
                     "use available horizontal space", "true")
-            .add(PluginParamsDefinitionCommon.collapsible);
+            .add(PluginParamsDefinitionCommon.container);
 
     static void validateParams(PluginParamsOpts opts) {
         if (opts.has("collapsible") && !opts.has("title")) {

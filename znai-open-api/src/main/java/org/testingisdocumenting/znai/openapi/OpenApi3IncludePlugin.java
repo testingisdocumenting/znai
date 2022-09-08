@@ -239,7 +239,8 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
 
         Map<String, Object> props = apiParameters.toMap();
         props.put("title", title);
-        props.put("collapsible", true);
+        props.put("collapsed", false);
+        props.put("noGap", true);
 
         parserHandler.onCustomNode("ApiParameters", props);
     }
@@ -257,6 +258,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
         Map<String, Object> props = apiParameters.toMap();
         props.put("title", schemaWithCollapsedAndExample.mimeType);
         props.put("collapsed", schemaWithCollapsedAndExample.collapsed);
+        props.put("noGap", true);
 
         parserHandler.onCustomNode("ApiParameters", props);
     }
