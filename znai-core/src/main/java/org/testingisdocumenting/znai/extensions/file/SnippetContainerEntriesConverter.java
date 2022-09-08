@@ -42,7 +42,7 @@ public class SnippetContainerEntriesConverter {
             if (idxOrText instanceof Number) {
                 result.add(validateIdx((Number) idxOrText));
             } else {
-                result.add(validateContainsAndGetIdx((String) idxOrText));
+                result.addAll(validateContainsAndGetIdx((String) idxOrText));
             }
         }
 
@@ -58,27 +58,28 @@ public class SnippetContainerEntriesConverter {
         return idxInt;
     }
 
-    public int findContainsIdx(String partial) {
+    public List<Integer> findAllContainsIdx(String partial) {
+        List<Integer> result = new ArrayList<>();
         int idx = 0;
         for (String line : lines) {
             if (line.contains(partial)) {
-                return idx;
+                result.add(idx);
             }
             idx++;
         }
 
-        return -1;
+        return result;
     }
 
-    public int validateContainsAndGetIdx(String partial) {
-        int containsIdx = findContainsIdx(partial);
-        if (containsIdx == -1) {
+    public List<Integer> validateContainsAndGetIdx(String partial) {
+        List<Integer> containsIndexes = findAllContainsIdx(partial);
+        if (containsIndexes.isEmpty()) {
             throw new IllegalArgumentException(label + " text <" + partial + "> is not found" +
                     exceptionIdMessage() +
                     "\n" + content);
         }
 
-        return containsIdx;
+        return containsIndexes;
     }
 
     private String exceptionIdMessage() {
