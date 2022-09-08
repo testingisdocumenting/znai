@@ -341,6 +341,12 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should highlight all lines based on contains"() {
+        def props = resultingProps("script.groovy", "{highlight: 'import'}")
+        props.highlight.should == [0, 1]
+    }
+
+    @Test
     void "should highlight lines from a highlight text file"() {
         def props = resultingProps("script.groovy", "{highlightPath: 'highlight.txt'}")
         props.highlight.should == [4, 5]
