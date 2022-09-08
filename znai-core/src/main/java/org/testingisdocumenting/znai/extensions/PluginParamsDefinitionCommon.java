@@ -16,11 +16,13 @@
 
 package org.testingisdocumenting.znai.extensions;
 
+import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
+
 public class PluginParamsDefinitionCommon {
     public static final String TITLE_KEY = "title";
 
-    public static final PluginParamsDefinition snippetTitle = new PluginParamsDefinition()
-            .add(TITLE_KEY, PluginParamType.STRING, "title to use for snippet", "\"title of the snippet\"");
+    public static final PluginParamsDefinition title = new PluginParamsDefinition()
+            .add(TITLE_KEY, PluginParamType.STRING, "title to use for the container", "\"my title\"");
 
     public static final PluginParamsDefinition collapsible = new PluginParamsDefinition()
             .add("collapsed", PluginParamType.BOOLEAN,
@@ -36,14 +38,19 @@ public class PluginParamsDefinitionCommon {
             .add("readMoreVisibleLines", PluginParamType.NUMBER,
                     "number of lines to display when readMore is true", "10");
 
+    public static final PluginParamsDefinition containerCommon = new PluginParamsDefinition()
+            .add(title)
+            .add(collapsible)
+            .add(noGap)
+            .add(AnchorFeature.paramsDefinition);
+
     public static final PluginParamsDefinition snippetRender = new PluginParamsDefinition()
             .add("wide", PluginParamType.BOOLEAN,
                     "force snippet to take all the available horizontal space", "true")
             .add("wrap", PluginParamType.BOOLEAN,
                     "force snippet soft wrapping", "true")
             .add(snippetReadMore)
-            .add(noGap)
-            .add(collapsible)
+            .add(containerCommon)
             .add("commentsType", PluginParamType.STRING,
                     "change way code comments are displayed: <inline> - use bullet points, <remove> - hide comments", "\"inline\"")
             .add("spoiler", PluginParamType.BOOLEAN,

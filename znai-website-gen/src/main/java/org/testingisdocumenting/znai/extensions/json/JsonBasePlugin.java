@@ -53,7 +53,7 @@ public abstract class JsonBasePlugin implements Plugin {
     @Override
     public PluginParamsDefinition parameters() {
         PluginParamsDefinition params = new PluginParamsDefinition()
-                .add(PluginParamsDefinitionCommon.snippetTitle)
+                .add(PluginParamsDefinitionCommon.title)
                 .add(INCLUDE_KEY, PluginParamType.STRING, "json path to include", "$..book[0,1]")
                 .add(PATHS_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "path(s) to leaf values to highlight",
                         "\"root.store.book[0].category\" or " +

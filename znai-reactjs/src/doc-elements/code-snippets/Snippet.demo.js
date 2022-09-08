@@ -32,6 +32,8 @@ import { simulateState } from "react-component-viewer";
 import ApiParameters from "../api/ApiParameters";
 import { personApiParameters } from "../api/ApiParameters.demo";
 
+import { contentParagraph } from "../demo-utils/contentGenerators";
+
 import './tokens.css'
 
 const [getReadMore, setReadMore] = simulateState(true);
@@ -274,21 +276,6 @@ function textBetweenSnippetsMultipleBlocks() {
             ]
         }
     ]
-}
-
-function contentParagraph(isRightSide) {
-    return {
-        "type": "Paragraph",
-        "content": [
-            {
-                "text": "The sea had jeeringly kept his finite body up, but drowned the infinite of his soul. Not drowned entirely, though. Rather carried down alive to wondrous depths, where strange shapes of the unwarped primal world glided to and fro before his passive eyes; and the miser-merman, Wisdom, revealed his hoarded heaps; and among the joyous, heartless, ever-juvenile eternities, Pip saw the multitudinous, God-omnipresent, coral insects, that out of the firmament of waters heaved the colossal orbs.",
-                "type": "SimpleText"
-            }
-        ],
-        "meta": {
-            "rightSide": isRightSide
-        }
-    }
 }
 
 function contentSnippet(isRightSide) {

@@ -22,6 +22,8 @@ import {ZoomOverlay} from '../zoom/ZoomOverlay';
 import { simulateState } from "react-component-viewer";
 import { TooltipRenderer } from "../../components/Tooltip";
 
+import { contentParagraph } from "../demo-utils/contentGenerators";
+
 const [getBorder, setBorder] = simulateState(true);
 
 export function imageDemo(registry) {
@@ -48,6 +50,7 @@ export function imageDemo(registry) {
     ))
 
     registry.add('with title and anchor', () => <AnnotatedImage {...standardImage()} title="My Image" anchorId="my-image-anchor"/>)
+    registry.add('with collapse and no gap', () => <AnnotatedImage {...standardImage()} title="My Image" anchorId="my-image-anchor"/>)
     registry.add('no fit with title', () => (
       <AnnotatedImage {...noFitImage()} title="My Image"/>
     ))
@@ -103,6 +106,18 @@ export function imageDemo(registry) {
           <AnnotatedImage {...fitImage()} align="left"/>
       </>
     ))
+    registry.add("gaps and collapse", () => (
+      <>
+          <ZoomOverlay/>
+          <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[
+              contentParagraph(false),
+              collapsedGapImage(true, true),
+              collapsedGapImage(true, false),
+              collapsedGapImage(false, false),
+              contentParagraph(false)
+          ]} />
+      </>
+    ));
 }
 
 function standardImage() {
@@ -157,6 +172,15 @@ function noFitImage() {
         ...fitImage(),
         fit: false
     }
+}
+
+function collapsedGapImage(noGap, collapsed) {
+    return {
+        ...fitImage(),
+        title: "my image",
+        collapsed: collapsed,
+        noGap
+    };
 }
 
 function scaleImage(scale) {

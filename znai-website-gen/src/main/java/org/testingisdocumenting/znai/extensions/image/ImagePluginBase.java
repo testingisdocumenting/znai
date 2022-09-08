@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.image;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.*;
+import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
@@ -36,7 +37,6 @@ abstract class ImagePluginBase implements Plugin {
     protected static final String ALIGN_KEY = "align";
     protected static final String BORDER_KEY = "border";
     protected static final String TITLE_KEY = "title";
-    protected static final String ANCHOR_ID_KEY = "anchorId";
     protected static final String CAPTION_KEY = "caption";
     protected static final String CAPTION_BOTTOM_KEY = "captionBottom";
     protected static final String FIT_KEY = "fit";
@@ -56,8 +56,7 @@ abstract class ImagePluginBase implements Plugin {
     @Override
     public PluginParamsDefinition parameters() {
         PluginParamsDefinition params = new PluginParamsDefinition();
-        params.add(TITLE_KEY, PluginParamType.STRING, "image title", "\"my image\"");
-        params.add(ANCHOR_ID_KEY, PluginParamType.STRING, "anchor id to use for linking", "\"my-image\"");
+        params.add(PluginParamsDefinitionCommon.containerCommon);
         // TODO use title, deprecate caption
         params.add(CAPTION_KEY, PluginParamType.STRING, "image title", "\"my image\"");
         // TODO deprecate
@@ -133,6 +132,8 @@ abstract class ImagePluginBase implements Plugin {
 
         updatePropsScale(props, opts);
         updateTitleProp(props, opts);
+
+        new AnchorFeature(docStructure, markupPath, pluginParams).updateProps(props);
 
         return PluginResult.docElement("AnnotatedImage", props);
     }

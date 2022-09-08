@@ -30,22 +30,20 @@ import { TooltipPlacement } from "../../components/Tooltip";
 
 import { WithElementsLibrary } from "../default-elements/DocElement";
 
-import { ContainerTitle } from "../container/ContainerTitle";
+import { ContainerTitle, TitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
 
 import { useIsMobile } from "../../theme/ViewPortContext";
-import { Container } from "../container/Container";
+import { Container, ContainerCommonProps } from "../container/Container";
 
 import "./AnnotatedImage.css";
 
-export interface AnnotatedImageProps extends WithElementsLibrary {
+export interface AnnotatedImageProps extends WithElementsLibrary, TitleCommonProps, ContainerCommonProps {
   imageSrc: string;
-  anchorId?: string;
   shapes: object[];
   width: number;
   height: number;
   alt?: string;
   align?: string;
-  title?: string;
   fit?: boolean;
   scale?: number;
   border?: boolean;
@@ -60,11 +58,15 @@ export interface AnnotatedImageProps extends WithElementsLibrary {
 export function AnnotatedImage(props: AnnotatedImageProps) {
   const {
     imageSrc,
+    title,
     anchorId,
+    collapsed,
+    noGap,
+    next,
+    prev,
     width,
     height,
     alt,
-    title,
     shapes,
     align,
     fit,
@@ -80,6 +82,8 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   } = props;
 
   const isMobile = useIsMobile();
+  const { userDrivenCollapsed, collapseToggle } = useIsUserDrivenCollapsed(collapsed);
+
   const scaleToUse = calcScale();
 
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: -1, y: -1 });
@@ -103,7 +107,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const parentStyle: CSSProperties = {
     position: "relative",
     width: sizeSpecified ? scaledWidth + borderSizeAdjustment + "px" : "auto",
-    height: sizeSpecified ? scaledHeight + borderSizeAdjustment + "px" : "auto",
+    height: calcContainerHeight(),
   };
 
   const imageWidth = sizeSpecified ? scaledWidth + "px" : "auto";
@@ -124,31 +128,34 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     (isCentered ? " center" : "") +
     (align ? " content-block " + align : "") +
     (title ? " with-title" : "") +
+    (inlined ? "  inlined" : "");
+
+  const imageClassName =
+    "znai-annotated-image" +
+    (border ? " border" : "") +
     (fit ? " znai-image-fit" : "") +
-    (inlined ? "  inlined" : "") +
     (isScaledDown ? " znai-image-scaled-down" : "");
 
-  const imageClassName = "znai-annotated-image" + (border ? " border" : "");
-
-  const renderedImage = renderImage();
-
-  const renderedPaddedImage = isCentered ? (
-    <>
-      <div />
-      {renderedImage}
-      <div />
-    </>
-  ) : (
-    renderedImage
-  );
-
   return (
-    <Container className={containerClassName}>
+    <Container className={containerClassName} noGap={noGap} next={next} prev={prev}>
       {renderTitle()}
-      {renderedPaddedImage}
+      {renderPaddedImageIfRequired()}
       {renderCoordinates()}
     </Container>
   );
+
+  function renderPaddedImageIfRequired() {
+    const renderedImage = renderImage();
+    return isCentered ? (
+      <>
+        <div />
+        {renderedImage}
+        <div />
+      </>
+    ) : (
+      renderedImage
+    );
+  }
 
   function renderImage() {
     const image = (
@@ -179,6 +186,14 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
         </div>
       </div>
     );
+  }
+
+  function calcContainerHeight() {
+    if (userDrivenCollapsed) {
+      return 0;
+    }
+
+    return sizeSpecified ? scaledHeight + borderSizeAdjustment + "px" : "auto";
   }
 
   function updatedShapesTooltipBasedOnText() {
@@ -236,7 +251,13 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
 
   function renderTitle() {
     const renderedTitle = title ? (
-      <ContainerTitle title={title} additionalTitleClassNames="znai-image-title" anchorId={anchorId} />
+      <ContainerTitle
+        title={title}
+        additionalTitleClassNames="znai-image-title"
+        anchorId={anchorId}
+        collapsed={userDrivenCollapsed}
+        onCollapseToggle={collapseToggle}
+      />
     ) : (
       <div />
     );
@@ -299,11 +320,12 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
       return;
     }
 
-    const propsNoScaleOrPosition = { ...props };
-    delete propsNoScaleOrPosition.fit;
-    delete propsNoScaleOrPosition.scale;
-    delete propsNoScaleOrPosition.align;
+    const propsRemovedStyles = { ...props };
+    delete propsRemovedStyles.fit;
+    delete propsRemovedStyles.scale;
+    delete propsRemovedStyles.align;
+    delete propsRemovedStyles.collapsed;
 
-    zoom.zoom(<AnnotatedImage {...propsNoScaleOrPosition} />);
+    zoom.zoom(<AnnotatedImage {...propsRemovedStyles} />);
   }
 }
