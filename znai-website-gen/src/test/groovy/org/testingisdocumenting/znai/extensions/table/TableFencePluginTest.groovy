@@ -40,7 +40,7 @@ Account, Price, Description
                                          [[markup: "chair", type: "TestMarkup"]]],
                                         [[[markup: "#91AGB1", type: "TestMarkup"]],
                                          [[markup: 10, type: "TestMarkup"]],
-                                         [[markup: "lunch", type: "TestMarkup"]]]]], title: "my table"]
+                                         [[markup: "lunch", type: "TestMarkup"]]]]], title: "my table", anchorId: "my-table"]
 
     }
 
