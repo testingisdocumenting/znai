@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,8 +25,8 @@ public class NameUtils {
         if (title == null)
             return null;
 
-        String onlyTextAndNumbers = title.replaceAll("[^a-zA-Z0-9-_ ]", "");
-        return onlyTextAndNumbers.toLowerCase().replaceAll("\\s+", "-");
+        String onlyTextAndNumbers = title.replaceAll("[^a-zA-Z0-9-_./ ]", "");
+        return onlyTextAndNumbers.toLowerCase().replaceAll("[\\s./]+", "-");
     }
 
     public static String dashToCamelCaseWithSpaces(final String dashBasedName) {

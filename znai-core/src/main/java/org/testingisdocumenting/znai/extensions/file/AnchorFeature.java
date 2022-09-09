@@ -21,9 +21,12 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
 import org.testingisdocumenting.znai.structure.DocStructure;
+import org.testingisdocumenting.znai.utils.NameUtils;
 
 import java.nio.file.Path;
 import java.util.Map;
+
+import static org.testingisdocumenting.znai.extensions.PluginParamsDefinitionCommon.TITLE_KEY;
 
 public class AnchorFeature implements PluginFeature {
     public static final PluginParamsDefinition paramsDefinition = createParamsDefinition();
@@ -43,11 +46,19 @@ public class AnchorFeature implements PluginFeature {
     @Override
     public void updateProps(Map<String, Object> props) {
         String anchorId = pluginParams.getOpts().get(ANCHOR_ID_KEY, "");
-        if (anchorId.isEmpty()) {
+        if (!anchorId.isEmpty()) {
+            docStructure.registerLocalAnchor(markupPath, anchorId);
             return;
         }
 
-        docStructure.registerLocalAnchor(markupPath, anchorId);
+        String title = pluginParams.getOpts().get(TITLE_KEY, props.getOrDefault(TITLE_KEY, "").toString());
+        if (!title.isEmpty()) {
+            String idFromTitle = NameUtils.idFromTitle(title);
+            String uniqueAnchorId = docStructure.generateUniqueAnchor(markupPath, idFromTitle);
+            docStructure.registerLocalAnchor(markupPath, idFromTitle);
+
+            props.put(ANCHOR_ID_KEY, uniqueAnchorId);
+        }
     }
 
     private static PluginParamsDefinition createParamsDefinition() {

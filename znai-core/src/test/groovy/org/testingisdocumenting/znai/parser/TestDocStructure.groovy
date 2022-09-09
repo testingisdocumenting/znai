@@ -19,14 +19,15 @@ package org.testingisdocumenting.znai.parser
 
 import org.testingisdocumenting.znai.structure.DocStructure
 import org.testingisdocumenting.znai.structure.DocUrl
-import org.testingisdocumenting.znai.structure.GlobalAnchor
 import org.testingisdocumenting.znai.structure.TableOfContents
+import org.testingisdocumenting.znai.structure.UniqueAnchorIdGenerator
 
 import java.nio.file.Path
 
 class TestDocStructure implements DocStructure {
     private Set<String> validLinks = [] as Set
     private TableOfContents toc = new TableOfContents()
+    private final UniqueAnchorIdGenerator uniqueAnchorIdGenerator = new UniqueAnchorIdGenerator()
 
     Set<String> registeredLocalLinks = [] as TreeSet
 
@@ -59,6 +60,16 @@ class TestDocStructure implements DocStructure {
     @Override
     String fullUrl(String relativeUrl) {
         return  "/test-doc/" + relativeUrl
+    }
+
+    @Override
+    void onSectionOrSubHeading(Path path, int level, String id) {
+        uniqueAnchorIdGenerator.registerSectionOrSubHeading(path, level, id)
+    }
+
+    @Override
+    String generateUniqueAnchor(Path path, String localId) {
+        return uniqueAnchorIdGenerator.generateId(path, localId)
     }
 
     @Override

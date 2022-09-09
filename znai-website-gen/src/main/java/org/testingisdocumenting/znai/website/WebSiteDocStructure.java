@@ -27,7 +27,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
@@ -43,6 +42,8 @@ class WebSiteDocStructure implements DocStructure {
     private final Map<String, GlobalAnchor> globalAnchorsById;
     private final Map<TocItem, List<String>> localAnchorIdsByTocItem;
 
+    private final UniqueAnchorIdGenerator uniqueAnchorIdGenerator;
+
     WebSiteDocStructure(ComponentsRegistry componentsRegistry,
                         DocMeta docMeta,
                         TableOfContents toc,
@@ -55,6 +56,7 @@ class WebSiteDocStructure implements DocStructure {
         this.collectedLocalLinks = new ArrayList<>();
         this.globalAnchorsById = new HashMap<>();
         this.localAnchorIdsByTocItem = new HashMap<>();
+        this.uniqueAnchorIdGenerator = new UniqueAnchorIdGenerator();
     }
 
     void removeGlobalAnchorsForPath(Path path) {
@@ -118,6 +120,16 @@ class WebSiteDocStructure implements DocStructure {
     @Override
     public String fullUrl(String relativeUrl) {
         return  "/" + docMeta.getId() + "/" + relativeUrl;
+    }
+
+    @Override
+    public void onSectionOrSubHeading(Path path, int level, String id) {
+        uniqueAnchorIdGenerator.registerSectionOrSubHeading(path, level, id);
+    }
+
+    @Override
+    public String generateUniqueAnchor(Path path, String localId) {
+        return uniqueAnchorIdGenerator.generateId(path, localId);
     }
 
     @Override
@@ -212,9 +224,6 @@ class WebSiteDocStructure implements DocStructure {
 
     private Optional<String> validateExternalLink(LinkToValidate linkToValidate) {
         String url = linkToValidate.docUrl.getUrl();
-//        if (url.endsWith("/")) {
-//            url += "index.html";
-//        }
 
         int responseCode = pingUrlConnection(url, 5000);
         if ((responseCode >= 200 && responseCode <= 204) || responseCode == 301) {

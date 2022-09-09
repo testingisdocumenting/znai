@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.parser
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
+import java.nio.file.Path
 import java.nio.file.Paths
 
 import static org.testingisdocumenting.webtau.Matchers.code
@@ -219,7 +220,7 @@ world""")
 
     @Test
     void "second level section"() {
-        parse("## Secondary Section \ntext text")
+        parse("## Secondary Section \ntext text", Paths.get("new-file.md"))
         content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section'],
                            [type: 'Paragraph', content: [[type: 'SimpleText', text: 'text text']]]]
     }
@@ -514,8 +515,8 @@ title: custom title
         parseResult.pageMeta.toMap().title.should == ["custom title"]
     }
 
-    private void parse(String markdown) {
-        parseResult = parser.parse(Paths.get("test.md"), markdown)
+    private void parse(String markdown, Path path = Paths.get("test.md")) {
+        parseResult = parser.parse(path, markdown)
         content = parseResult.docElement.getContent().collect { it.toMap() }
     }
 }
