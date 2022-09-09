@@ -23,7 +23,8 @@ import { ApiParameter } from "./ApiParameter";
 
 import { Snippet } from "../code-snippets/Snippet";
 
-import { ContainerTitle, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
+import { ContainerTitle, ContainerTitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
+import { Container, ContainerCommonProps } from "../container/Container";
 
 import "./ApiParameters.css";
 
@@ -35,16 +36,13 @@ export interface ApiParameterProps {
   children?: ApiParameterProps[];
 }
 
-interface Props extends DocElementProps {
-  title?: string;
-  anchorId?: string;
+interface Props extends DocElementProps, ContainerCommonProps, ContainerTitleCommonProps {
   parameters: ApiParameterProps[];
   example?: string;
   nestedLevel?: number;
   small?: boolean;
   noWrap?: boolean;
   wide?: boolean;
-  collapsed?: boolean;
   parentWidth?: number;
   references?: any;
 }
@@ -63,6 +61,7 @@ export default function ApiParameters({
   parentWidth = 0,
   next,
   prev,
+  noGap,
   elementsLibrary,
 }: Props) {
   const { userDrivenCollapsed, collapseToggle } = useIsUserDrivenCollapsed(collapsed);
@@ -108,13 +107,13 @@ export default function ApiParameters({
   );
 
   if (!isNested) {
-    const containerClass =
-      "znai-api-parameters-wrapper " +
-      (wide ? "wide" : "content-block") +
-      (next?.type === "ApiParameters" ? " no-bottom-margin" : "") +
-      (prev?.type === "ApiParameters" ? " no-top-margin" : "");
+    const containerClass = "znai-api-parameters-wrapper " + (wide ? "wide" : "content-block");
 
-    return <div className={containerClass}>{rendered}</div>;
+    return (
+      <Container className={containerClass} noGap={noGap} next={next} prev={prev}>
+        {rendered}
+      </Container>
+    );
   }
 
   return rendered;

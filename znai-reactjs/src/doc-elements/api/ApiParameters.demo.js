@@ -274,19 +274,24 @@ function multipleApiParameters() {
       type: "ApiParameters",
       parameters: longNameParameters,
       noWrap: true,
+      collapsed: false,
       title: "my params"
     },
     {
       type: "ApiParameters",
       parameters: longNameParameters,
       noWrap: true,
-      title: "my params"
+      title: "my params",
+      collapsed: true,
+      noGap: true,
     },
     {
       type: "ApiParameters",
       parameters: longNameParameters,
       noWrap: true,
-      title: "my params"
+      title: "my params",
+      collapsed: false,
+      noGap: true,
     },
     {
       type: "Paragraph",
