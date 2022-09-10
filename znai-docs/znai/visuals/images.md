@@ -34,7 +34,9 @@ Use `title` to add a title to an image.
 
 # Anchor
 
-Use `anchorId` to add an anchor to the image. Hover over title to reveal anchor link to click.
+When you specify a title, hover mouse over it to see a clickable anchor.
+
+Use `anchorId` to override auto generated identifier.
 
     :include-image: castle.jpg {title: "beautiful castle", anchorId: "castle-image"}
 

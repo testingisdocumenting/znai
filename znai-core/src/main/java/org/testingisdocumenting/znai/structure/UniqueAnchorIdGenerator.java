@@ -14,44 +14,62 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.parser.docelement;
+package org.testingisdocumenting.znai.structure;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-class SubHeadingUniqueIdGenerator {
-    private final List<LevelId> subheadings;
-    private final Map<String, Integer> usedSubheadingsCount;
+public class UniqueAnchorIdGenerator {
+    private final List<LevelId> headings;
+    private final Map<String, Integer> usedHeadingsCount;
+    private Path previousPath;
 
-    SubHeadingUniqueIdGenerator(String topPrefix) {
-        subheadings = new ArrayList<>();
-        subheadings.add(new LevelId(1, topPrefix));
-
-        usedSubheadingsCount = new HashMap<>();
+    public UniqueAnchorIdGenerator() {
+        headings = new ArrayList<>();
+        usedHeadingsCount = new HashMap<>();
     }
 
-    void registerSubHeading(Integer level, String id) {
-        subheadings.removeIf(levelId -> levelId.level >= level);
-        subheadings.add(new LevelId(level, id));
+    public void registerSectionOrSubHeading(Path path, Integer level, String id) {
+        clearHeadingsOnPathChange(path);
+        headings.removeIf(levelId -> levelId.level >= level);
+
+        previousPath = path;
+        headings.add(new LevelId(level, id));
     }
 
-    String generateId() {
-        String prefix = subheadings.stream()
+    public String generateId(Path path, String nonUniqueId) {
+        clearHeadingsOnPathChange(path);
+
+        String prefix = headings.stream()
                 .map(LevelId::getId)
                 .filter(id -> !id.isEmpty())
                 .collect(Collectors.joining("-"));
 
-        Integer count = usedSubheadingsCount.get(prefix);
+        if (!nonUniqueId.isEmpty()) {
+            prefix = prefix + (prefix.isEmpty() ? nonUniqueId : "-" + nonUniqueId);
+        }
+
+        Integer count = usedHeadingsCount.get(prefix);
         if (count == null) {
-            usedSubheadingsCount.put(prefix, 1);
+            usedHeadingsCount.put(prefix, 1);
             return prefix;
         }
 
-        usedSubheadingsCount.put(prefix, count + 1);
+        usedHeadingsCount.put(prefix, count + 1);
         return prefix + "-" + (count + 1);
+    }
+
+    private void clearHeadingsOnPathChange(Path path) {
+        if (!path.equals(previousPath)) {
+            headings.clear();
+            usedHeadingsCount.clear();
+        }
+
+        previousPath = path;
     }
 
     static class LevelId {

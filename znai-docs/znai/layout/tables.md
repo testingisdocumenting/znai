@@ -37,7 +37,9 @@ Use `title` parameter to set a table title.
 
 # Anchor
 
-Use `anchorId` parameter to set table anchor for linking. Hover over title to reveal anchor link to click.
+When you specify a title, hover mouse over it to see a clickable anchor.
+
+Use `anchorId` to override auto generated identifier.
 
     :include-table: table/table.json {title: "Monthly Report", anchorId: "my-super-table"}
 

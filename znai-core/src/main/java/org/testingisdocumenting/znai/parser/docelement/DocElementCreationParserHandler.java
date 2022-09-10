@@ -56,7 +56,6 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private final Deque<DocElement> elementsStack;
 
     private String currentSectionTitle;
-    private SubHeadingUniqueIdGenerator subHeadingUniqueIdGenerator;
 
     private boolean isSectionStarted;
 
@@ -74,7 +73,6 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
         this.currentSectionTitle = "";
         this.isSectionStarted = false;
-        this.subHeadingUniqueIdGenerator = new SubHeadingUniqueIdGenerator("");
     }
 
     public DocElement getDocElement() {
@@ -109,9 +107,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
         props.put("title", title);
 
         start(DocElementType.SECTION, props);
-        subHeadingUniqueIdGenerator = new SubHeadingUniqueIdGenerator(id);
 
-        componentsRegistry.docStructure().registerLocalAnchor(path, id);
+        DocStructure docStructure = componentsRegistry.docStructure();
+        docStructure.registerLocalAnchor(path, id);
+        docStructure.onSectionOrSubHeading(path, 1, id);
 
         isSectionStarted = true;
     }
@@ -136,16 +135,17 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
         String idByTitle = new PageSectionIdTitle(title, headingPropsMap).getId();
 
-        subHeadingUniqueIdGenerator.registerSubHeading(level, idByTitle);
-        String id = subHeadingUniqueIdGenerator.generateId();
+        DocStructure docStructure = componentsRegistry.docStructure();
+        docStructure.onSectionOrSubHeading(path, level, idByTitle);
+
+        String id = docStructure.generateUniqueAnchor(path, "");
+        docStructure.registerLocalAnchor(path, id);
 
         Map<String, Object> props = new LinkedHashMap<>(headingPropsMap);
         props.put("id", id);
         props.put("level", level);
         props.put("title", title);
-
         append(DocElementType.SUB_HEADING, props);
-        componentsRegistry.docStructure().registerLocalAnchor(path, id);
     }
 
     @Override

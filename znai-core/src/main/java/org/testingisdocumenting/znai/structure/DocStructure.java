@@ -17,13 +17,15 @@
 package org.testingisdocumenting.znai.structure;
 
 import java.nio.file.Path;
-import java.util.Map;
 import java.util.Optional;
 
 public interface DocStructure {
     void validateUrl(Path path, String additionalClue, DocUrl docUrl);
     String createUrl(Path path, DocUrl docUrl);
     String fullUrl(String relativeUrl);
+
+    void onSectionOrSubHeading(Path path, int level, String id);
+    String generateUniqueAnchor(Path path, String localId);
 
     void registerGlobalAnchor(Path sourcePath, String anchorId);
     void registerLocalAnchor(Path path, String anchorId);

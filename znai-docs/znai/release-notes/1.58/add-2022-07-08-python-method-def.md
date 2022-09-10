@@ -1,1 +1,1 @@
-* Add [include-python-method: package.method_name](python/auto-reference#methodfunction-definition) to display a function signature, documentation and parameters
+* Add [include-python-method: package.method_name](python/auto-reference#method-function-definition) to display a function signature, documentation and parameters
