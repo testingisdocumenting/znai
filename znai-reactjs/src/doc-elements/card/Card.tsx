@@ -23,17 +23,19 @@ import "./Card.css";
 interface Props extends WithElementsLibrary {
   title?: string;
   imageSrc?: string;
+  imageHeight?: number;
+  imageBackground?: string;
   bodyContent: DocElementContent;
 }
 
-export function Card({ title, elementsLibrary, imageSrc, bodyContent }: Props) {
+export function Card({ title, elementsLibrary, imageSrc, imageHeight, imageBackground, bodyContent }: Props) {
   const cardClassName = "znai-card " + (isLastElementContentContainer() ? " no-bottom-padding" : "");
   return (
     <div className="znai-card-wrapper content-block">
       <div className={cardClassName}>
         {imageSrc && (
-          <div className="znai-card-image">
-            <img src={imageSrc} alt="card visual" />
+          <div className="znai-card-image" style={{ background: imageBackground }}>
+            <img src={imageSrc} alt="card visual" style={{ height: imageHeight }} />
           </div>
         )}
         <div className="znai-card-content">
