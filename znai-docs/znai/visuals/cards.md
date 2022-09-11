@@ -20,14 +20,14 @@ Markdown content of the card goes here
 
 Note: Card scales down large image to fit
 
-# Height And Background
+# Image Height And Background
 
 When you use icon like images, e.g. SVGs, then they will take all the horizontal available space, and it may not be ideal.
 
-Use `imageHeight` to force image height. Use `background` to specify a [background color/gradient](https://www.w3schools.com/css/css3_gradients.asp).
+Use `imageHeight` to force image height. Use `imageBackground` to specify a [background color/gradient](https://www.w3schools.com/css/css3_gradients.asp).
 
 `````markdown
-```card diamond.svg {title: "My Card", imageHeight: 120, background: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+```card diamond.svg {title: "My Card", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
 Markdown content of the card goes here
 * item one
 * item two
@@ -35,7 +35,7 @@ Markdown content of the card goes here
 ```
 `````
 
-```card diamond.svg {title: "My Card", imageHeight: 120, background: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+```card diamond.svg {title: "My Card", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
 Markdown content of the card goes here
 * item one
 * item two
@@ -46,14 +46,14 @@ Markdown content of the card goes here
 
 ```````columns
 left:
-```card diamond.svg {title: "Error Proof", imageHeight: 120, background: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
 Easy to use API
 Robust language and API
 :include-file: snippets/file-name.js 
 ```
 
 right:
-`````card star.svg {title: "API for the Win", imageHeight: 120, background: "linear-gradient(to right, rgba(0,0,0,0), rgba(25,25,150,1))"}
+`````card star.svg {title: "API for the Win", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))"}
 Easy to use API
 ```api-parameters
 firstName, String, description with *markdown* support
@@ -65,14 +65,14 @@ score, Integer, another description line with *markdown* support
 `````````markdown
 ```````columns
 left:
-```card diamond.svg {title: "Error Proof", imageHeight: 120, background: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
 Easy to use API
 Robust language and API
 :include-file: snippets/file-name.js 
 ```
 
 right:
-`````card star.svg {title: "API for the Win", imageHeight: 120, background: "linear-gradient(to right, rgba(0,0,0,0), rgba(25,25,150,1))"}
+`````card star.svg {title: "API for the Win", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))"}
 Easy to use API
 ```api-parameters
 firstName, String, description with *markdown* support

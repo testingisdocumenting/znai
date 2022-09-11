@@ -33,7 +33,7 @@ import java.util.stream.Stream;
 public class CardFencePlugin implements FencePlugin {
     private static final String IMAGE_SRC_KEY = "imageSrc";
     private static final String IMAGE_HEIGHT_KEY = "imageHeight";
-    private static final String BACKGROUND_KEY = "background";
+    private static final String IMAGE_BACKGROUND_KEY = "imageBackground";
 
     private AuxiliaryFile imageAuxiliaryFile;
     private MarkupParserResult contentParseResult;
@@ -55,7 +55,7 @@ public class CardFencePlugin implements FencePlugin {
         return new PluginParamsDefinition()
                 .add(PluginParamsDefinitionCommon.title)
                 .add(IMAGE_HEIGHT_KEY, PluginParamType.NUMBER, "force image height", "100")
-                .add(BACKGROUND_KEY, PluginParamType.STRING, "image background gradient/color", "#aere83");
+                .add(IMAGE_BACKGROUND_KEY, PluginParamType.STRING, "image background gradient/color", "#aere83");
     }
 
     @Override

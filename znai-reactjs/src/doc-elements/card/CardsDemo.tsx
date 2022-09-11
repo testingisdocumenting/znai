@@ -52,7 +52,7 @@ export function cardsDemo(registry: Registry) {
       title="My Card"
       imageSrc="diamond.svg"
       imageHeight={120}
-      background="linear-gradient(to right, #266465, #9198e5)"
+      imageBackground="linear-gradient(to right, #266465, #9198e5)"
       bodyContent={[contentParagraph(false)]}
       elementsLibrary={elementsLibrary}
     />
