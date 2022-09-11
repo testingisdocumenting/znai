@@ -31,7 +31,28 @@ export function cardsDemo(registry: Registry) {
   registry.add("large image", () => (
     <Card
       title="My Card"
-      imageSrc="books.jpg"
+      imageSrc="diamond.svg"
+      bodyContent={[contentParagraph(false)]}
+      elementsLibrary={elementsLibrary}
+    />
+  ));
+
+  registry.add("forced image height", () => (
+    <Card
+      title="My Card"
+      imageSrc="diamond.svg"
+      imageHeight={100}
+      bodyContent={[contentParagraph(false)]}
+      elementsLibrary={elementsLibrary}
+    />
+  ));
+
+  registry.add("background", () => (
+    <Card
+      title="My Card"
+      imageSrc="diamond.svg"
+      imageHeight={120}
+      background="linear-gradient(to right, #266465, #9198e5)"
       bodyContent={[contentParagraph(false)]}
       elementsLibrary={elementsLibrary}
     />

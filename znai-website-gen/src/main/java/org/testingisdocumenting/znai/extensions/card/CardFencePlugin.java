@@ -32,8 +32,13 @@ import java.util.stream.Stream;
 
 public class CardFencePlugin implements FencePlugin {
     private static final String IMAGE_SRC_KEY = "imageSrc";
+    private static final String IMAGE_HEIGHT_KEY = "imageHeight";
+    private static final String BACKGROUND_KEY = "background";
+
     private AuxiliaryFile imageAuxiliaryFile;
     private MarkupParserResult contentParseResult;
+    private boolean isExternal;
+    private ComponentsRegistry componentsRegistry;
 
     @Override
     public String id() {
@@ -48,7 +53,9 @@ public class CardFencePlugin implements FencePlugin {
     @Override
     public PluginParamsDefinition parameters() {
         return new PluginParamsDefinition()
-                .add(PluginParamsDefinitionCommon.title);
+                .add(PluginParamsDefinitionCommon.title)
+                .add(IMAGE_HEIGHT_KEY, PluginParamType.NUMBER, "force image height", "100")
+                .add(BACKGROUND_KEY, PluginParamType.STRING, "image background gradient/color", "#aere83");
     }
 
     @Override
@@ -62,9 +69,12 @@ public class CardFencePlugin implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
+        this.componentsRegistry = componentsRegistry;
+
         String imageSrc = pluginParams.getFreeParam();
-        boolean isExternal = UrlUtils.isExternal(imageSrc);
-        imageAuxiliaryFile = imageSrc.isEmpty() ? null : componentsRegistry.resourceResolver().runtimeAuxiliaryFile(imageSrc);
+        isExternal = UrlUtils.isExternal(imageSrc);
+
+        imageAuxiliaryFile = createAuxiliaryFileIfRequired(imageSrc);
 
         contentParseResult = componentsRegistry.markdownParser().parse(markupPath, content);
 
@@ -84,5 +94,17 @@ public class CardFencePlugin implements FencePlugin {
     @Override
     public SearchText textForSearch() {
         return SearchScore.STANDARD.text(contentParseResult.getAllText());
+    }
+
+    private AuxiliaryFile createAuxiliaryFileIfRequired(String imageSrc) {
+        if (imageSrc.isEmpty()) {
+            return null;
+        }
+
+        if (isExternal) {
+            return null;
+        }
+
+        return componentsRegistry.resourceResolver().runtimeAuxiliaryFile(imageSrc);
     }
 }

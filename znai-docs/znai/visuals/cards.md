@@ -18,59 +18,68 @@ Markdown content of the card goes here
 * item three
 ```
 
-# Multiple Columns
+Note: Card scales down large image to fit
 
-`````columns
-left:
-```card books.jpg {title: "My Card One"}
+# Height And Background
+
+When you use icon like images, e.g. SVGs, then they will take all the horizontal available space, and it may not be ideal.
+
+Use `imageHeight` to force image height. Use `background` to specify a [background color/gradient](https://www.w3schools.com/css/css3_gradients.asp).
+
+`````markdown
+```card diamond.svg {title: "My Card", imageHeight: 120, background: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+Markdown content of the card goes here
+* item one
+* item two
+* item three
+```
+`````
+
+```card diamond.svg {title: "My Card", imageHeight: 120, background: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
 Markdown content of the card goes here
 * item one
 * item two
 * item three
 ```
 
+# Multiple Columns
+
+```````columns
+left:
+```card diamond.svg {title: "Error Proof", imageHeight: 120, background: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+Easy to use API
+Robust language and API
+:include-file: snippets/file-name.js 
+```
+
 right:
-```card books.jpg {title: "My Card Two"}
-Markdown content of the card goes here
-* item one
-```
-`````
-
-# Code Snippets
-
-Card plugin is designed to work with [code snippets](snippets/external-code-snippets)
-
-`````markdown
-```card castle.jpg {title: "Error Proof"}
-Robust language and API
-:include-file: snippets/file-name.js 
-```
-`````
-
-```card castle.jpg {title: "Error Proof"}
-Robust language and API
-:include-file: snippets/file-name.js 
-```
-
-# API Parameters
-
-Card plugin is designed to work with [API Parameters](snippets/api-parameters)
-
-```````markdown
-
-`````card castle.jpg {title: "API for the Win"}
+`````card star.svg {title: "API for the Win", imageHeight: 120, background: "linear-gradient(to right, rgba(0,0,0,0), rgba(25,25,150,1))"}
 Easy to use API
 ```api-parameters
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
-``` 
+```
 `````
-```````
+````````
 
-`````card castle.jpg {title: "API for the Win"}
+`````````markdown
+```````columns
+left:
+```card diamond.svg {title: "Error Proof", imageHeight: 120, background: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+Easy to use API
+Robust language and API
+:include-file: snippets/file-name.js 
+```
+
+right:
+`````card star.svg {title: "API for the Win", imageHeight: 120, background: "linear-gradient(to right, rgba(0,0,0,0), rgba(25,25,150,1))"}
 Easy to use API
 ```api-parameters
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
-``` 
+```
 `````
+````````
+`````````
+
+Note: Card plugin is designed to work with [code snippets](snippets/external-code-snippets) and with [API Parameters](snippets/api-parameters) by reducing spacing integrating border lines
