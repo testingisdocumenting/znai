@@ -29,3 +29,68 @@ export function contentParagraph(isRightSide: boolean) {
     },
   };
 }
+
+export function contentParagraphSmall(isRightSide: boolean) {
+  return {
+    type: "Paragraph",
+    content: [
+      {
+        text:
+          "The sea had jeeringly kept his finite body up, but drowned the infinite of his soul. Not drowned entirely, though.",
+        type: "SimpleText",
+      },
+    ],
+    meta: {
+      rightSide: isRightSide,
+    },
+  };
+}
+
+export function contentSnippet(isRightSide: boolean) {
+  return {
+    type: "Snippet",
+    lang: "java",
+    snippet: codeWithMethodCalls(),
+    meta: {
+      rightSide: isRightSide,
+    },
+  };
+}
+
+export function codeWithMethodCalls() {
+  return (
+    'http.get("/end-point", http.header("h1", "v1"), ((header, body) -> {\n' +
+    '    body.get("price").should(equal(100));\n' +
+    "}));"
+  );
+}
+
+export const personApiParameters = [
+  {
+    anchorId: "prefix_firstName",
+    name: "firstName",
+    type: "string",
+    description: [{ text: "first name", type: "SimpleText" }],
+  },
+  {
+    anchorId: "prefix_lastName",
+    name: "lastName",
+    type: "string",
+    description: [{ text: "last name", type: "SimpleText" }],
+  },
+  {
+    anchorId: "prefix_score",
+    name: "score",
+    type: "integer",
+    description: [{ text: "score accumulated over last year", type: "SimpleText" }],
+  },
+];
+
+export function contentApiParameters() {
+  return {
+    type: "ApiParameters",
+    parameters: personApiParameters,
+    noWrap: true,
+    title: "my params",
+  };
+}

@@ -1,0 +1,82 @@
+/*
+ * Copyright 2022 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.znai-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.znai-card {
+    --znai-card-content-padding: 24px;
+
+    height: 100%;
+    max-width: calc(var(--znai-single-column-render-width) / 2.0);
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+
+.znai-card .znai-container {
+    margin-left: calc(-1 *var(--znai-card-content-padding));
+    margin-right: calc(-1 *var(--znai-card-content-padding));
+}
+
+.znai-card .snippet,
+.znai-card .znai-container-title-wrapper {
+    border-left: none;
+}
+
+.znai-card .znai-container:last-child {
+    margin-bottom: 0;
+}
+
+.znai-card .znai-container:last-child .znai-api-parameters {
+    border-bottom: none;
+}
+
+.znai-card-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    line-height: 0;
+}
+
+.znai-card-image img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.znai-card-content {
+    padding: var(--znai-card-content-padding);
+}
+
+.znai-card.no-bottom-padding .znai-card-content {
+    padding-bottom: 0;
+}
+
+.znai-card-content {
+    --znai-single-column-render-width: auto;
+}
+
+.znai-card-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
