@@ -86,6 +86,7 @@ import { OrderedList } from "./default-elements/OrderedList";
 import { PythonMethod } from "./python/PythonMethod";
 import { ApiLinkedTextBlock } from "./api/ApiLinkedTextBlock";
 import { OpenApiMethodAndUrl } from "./open-api/OpenApiMethodAndUrl";
+import { Card } from "./card/Card";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -170,6 +171,8 @@ library.AnnotatedImage = AnnotatedImage
 presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 
 library.AnnotatedImageWithOrderedList = AnnotatedImageWithOrderedList
+
+library.Card = Card;
 
 library.Tabs = Tabs
 presentationElementHandlers.Tabs = presentationTabsHandler

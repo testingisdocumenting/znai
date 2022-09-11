@@ -30,9 +30,13 @@ import {Section} from '../default-elements/Section';
 import { simulateState } from "react-component-viewer";
 
 import ApiParameters from "../api/ApiParameters";
-import { personApiParameters } from "../api/ApiParameters.demo";
 
-import { contentParagraph } from "../demo-utils/contentGenerators";
+import {
+    codeWithMethodCalls,
+    contentParagraph,
+    contentSnippet,
+    personApiParameters
+} from "../demo-utils/contentGenerators";
 
 import './tokens.css'
 
@@ -179,12 +183,6 @@ function wideCode() {
         '}\n'
 }
 
-function codeWithMethodCalls() {
-    return 'http.get("/end-point", http.header("h1", "v1"), ((header, body) -> {\n' +
-        '    body.get("price").should(equal(100));\n' +
-        '}));'
-}
-
 function methodCallReferences() {
     return {
         'http.header': {
@@ -276,17 +274,6 @@ function textBetweenSnippetsMultipleBlocks() {
             ]
         }
     ]
-}
-
-function contentSnippet(isRightSide) {
-    return {
-        "type": "Snippet",
-        "lang": "java",
-        "snippet": codeWithMethodCalls(),
-        "meta": {
-            "rightSide": isRightSide
-        }
-    }
 }
 
 function compactContentSnippet(title, removeCompact) {

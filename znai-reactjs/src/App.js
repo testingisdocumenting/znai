@@ -99,6 +99,7 @@ import { openApiAndMethodAndUrlDemo } from "./doc-elements/open-api/OpenApiAndMe
 import { attentionBlockDemo } from "./doc-elements/paragraph/AttentionBlock.demo";
 import { attentionBlockPresentationDemo } from "./doc-elements/paragraph/PresentationAttentionBlock.demo";
 import { containerTitleDemo } from "./doc-elements/container/ContainerTitle.demo";
+import { cardsDemo } from "./doc-elements/card/CardsDemo";
 
 const docMeta = {
     id: 'preview',
@@ -169,6 +170,7 @@ registries.add('visuals')
     .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
     .registerAsGrid('SVG', 0, svgDemo)
     .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
+    .registerAsRows('Cards', cardsDemo)
     .registerAsRows('Diagram Legend', diagramLegendDemo)
     .registerAsGrid('Keyboard shortcuts', 0, keyboardShortcutsDemo)
     .registerAsGrid('Iframe', 0, iframeDemo)

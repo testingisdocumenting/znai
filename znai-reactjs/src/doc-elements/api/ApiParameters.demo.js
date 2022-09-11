@@ -20,12 +20,8 @@ import ApiParameters from "./ApiParameters";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { Paragraph } from "../paragraph/Paragraph";
 import { DocElement } from "../default-elements/DocElement";
+import { personApiParameters } from "../demo-utils/contentGenerators";
 
-export const personApiParameters = [
-    {anchorId: 'prefix_firstName', name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},
-    {anchorId: 'prefix_lastName',name: 'lastName', type: 'string', description: [{"text": "last name", "type": "SimpleText"}]},
-    {anchorId: 'prefix_score',name: 'score', type: 'integer', description: [{"text": "score accumulated over last year", "type": "SimpleText"}]},
-]
 
 const singleParameter = [
     {anchorId: 'prefix_firstName', name: 'firstName', type: 'string', description: [{"text": "first name", "type": "SimpleText"}]},

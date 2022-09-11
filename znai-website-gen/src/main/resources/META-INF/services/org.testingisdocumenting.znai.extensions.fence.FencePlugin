@@ -22,3 +22,4 @@ org.testingisdocumenting.znai.extensions.table.TableFencePlugin
 org.testingisdocumenting.znai.extensions.cli.CliFencePlugin
 org.testingisdocumenting.znai.extensions.image.ImageFencePlugin
 org.testingisdocumenting.znai.extensions.json.JsonFencePlugin
+org.testingisdocumenting.znai.extensions.card.CardFencePlugin
