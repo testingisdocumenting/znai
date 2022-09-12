@@ -20,8 +20,6 @@ package org.testingisdocumenting.znai.extensions;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -59,11 +57,15 @@ public class ColonDelimitedKeyValues {
     }
 
     public String get(String name) {
-        if (! vars.containsKey(name)) {
+        if (!vars.containsKey(name)) {
             throw new RuntimeException("no value defined for key: " + name);
         }
 
         return vars.get(name);
+    }
+
+    public boolean has(String name) {
+        return vars.containsKey(name);
     }
 
     public Map<String, String> toMap() {

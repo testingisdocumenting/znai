@@ -6,29 +6,68 @@ Use `columns` plugin to render content in two columns:
 * Input and output
 * Result comparison
 
-# Definition
+# Two Columns
 
-To define columns use fenced code block 
- 
-    ```columns
-    left: 
-    this content goes to the left
-    
-    and can span multiple lines
-    right: this content goes to the right
-    
-    and can span multiple lines
-    ```
+To define two columns layout use fenced code block and `left:` and `right:` labels 
 
+`````markdown 
+```columns
+left: 
+this content goes to the left
+
+and can span multiple lines
+
+right: 
+this content goes to the right
+and can span multiple lines
+```
+`````
 
 ```columns
 left: 
 this content goes to the left
 
 and can span multiple lines
-right: this content goes to the right
 
+right: 
+this content goes to the right
 and can span multiple lines
+```
+
+# Three Columns
+
+To define three columns layout use fenced code block and `left:`, `middle:` and `right:` labels
+
+````markdown
+```columns
+left: 
+### Pros {style: "api"}
+* Item One
+
+middle: 
+### Undecided {style: "api"}
+* Item Two
+* Item Three
+
+right:
+### Cons {style: "api"}
+* Item Four
+```
+````
+
+```columns
+left: 
+### Pros {style: "api"}
+* Item One
+
+middle: 
+### Undecided {style: "api"}
+* Item Two
+* Item Three
+
+right:
+### Cons {style: "api"}
+* Item Four
 ```
 
 # Sizes
@@ -123,3 +162,7 @@ World Of Hellos
     
     World Of Hellos
     ```
+
+# Presentation Mode
+
+In Presentation Mode each column content will appear on slide transition

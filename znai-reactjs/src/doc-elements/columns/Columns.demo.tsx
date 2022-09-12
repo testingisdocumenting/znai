@@ -29,8 +29,10 @@ export function columnsDemo(registry: Registry) {
         <Columns elementsLibrary={elementsLibrary} {...contentAndConfig()} />
       </ViewPortProvider>
     ))
-    .add("missing column content", () => <Columns elementsLibrary={elementsLibrary}
-                                                  {...missingContentForRightColumn()} />)
+    .add("three columns", () => <Columns elementsLibrary={elementsLibrary} {...threeColumnsDifferentSize()} />)
+    .add("missing column content", () => (
+      <Columns elementsLibrary={elementsLibrary} {...missingContentForRightColumn()} />
+    ))
     .add("with code snippet", () => <Columns elementsLibrary={elementsLibrary} {...snippetAndText()} />)
     .add("with code snippet mobile", () => (
       <ViewPortProvider isMobileForced={true}>
@@ -69,6 +71,44 @@ function contentAndConfig() {
   };
 }
 
+function threeColumnsDifferentSize() {
+  return {
+    isPresentation: false,
+    slideIdx: 0,
+    config: {
+      border: true,
+      left: { portion: 5 },
+      right: { portion: 5 },
+    },
+    columns: [
+      {
+        content: [
+          {
+            text: `It_is_very_`,
+            type: "SimpleText",
+          },
+        ],
+      },
+      {
+        content: [
+          {
+            text: `middle`,
+            type: "SimpleText",
+          },
+        ],
+      },
+      {
+        content: [
+          {
+            text: "one liner",
+            type: "SimpleText",
+          },
+        ],
+      },
+    ],
+  };
+}
+
 function missingContentForRightColumn() {
   return {
     isPresentation: false,
@@ -78,25 +118,29 @@ function missingContentForRightColumn() {
         content: [
           {
             type: "Paragraph",
-            content: [{
-              isFile: false,
-              type: "Link",
-              content: [{
-                text: "left link",
-                type: "SimpleText"
-              }],
-              url: "http://localhost:3030"
-            }]
-          }
-        ]
+            content: [
+              {
+                isFile: false,
+                type: "Link",
+                content: [
+                  {
+                    text: "left link",
+                    type: "SimpleText",
+                  },
+                ],
+                url: "http://localhost:3030",
+              },
+            ],
+          },
+        ],
       },
       {
-        content: []
-      }
+        content: [],
+      },
     ],
     type: "Columns",
-    config: {}
-  }
+    config: {},
+  };
 }
 
 function snippetAndText() {
@@ -105,6 +149,7 @@ function snippetAndText() {
     slideIdx: 0,
     config: {
       left: { portion: 10 },
+      right: { portion: 5 },
     },
     columns: [
       {
