@@ -20,17 +20,19 @@ import React from "react";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import Table from "./Table";
 import { Registry } from "react-component-viewer";
-import { contentParagraph } from "../demo-utils/contentGenerators";
+import { contentParagraph, contentTable, contentTableTwoColumnsData } from "../demo-utils/contentGenerators";
 
 export function tableDemo(registry: Registry) {
   registry
-    .add("no style", () => <Table table={defaultStyle(twoColumnsData())} elementsLibrary={elementsLibrary} />)
+    .add("no style", () => (
+      <Table table={defaultStyle(contentTableTwoColumnsData())} elementsLibrary={elementsLibrary} />
+    ))
     .add("with title", () => (
-      <Table table={defaultStyle(twoColumnsData())} title="User Data" elementsLibrary={elementsLibrary} />
+      <Table table={defaultStyle(contentTableTwoColumnsData())} title="User Data" elementsLibrary={elementsLibrary} />
     ))
     .add("with title and anchor", () => (
       <Table
-        table={defaultStyle(twoColumnsData())}
+        table={defaultStyle(contentTableTwoColumnsData())}
         title="User Data"
         elementsLibrary={elementsLibrary}
         anchorId="my-table"
@@ -42,20 +44,24 @@ export function tableDemo(registry: Registry) {
         elementsLibrary={elementsLibrary}
         content={[
           contentParagraph(false),
-          tableNoGapAsContent(true),
-          tableNoGapAsContent(false),
+          contentTable(true, true),
+          contentTable(true, false),
           contentParagraph(false),
         ]}
       />
     ))
     .add("with highlight", () => (
-      <Table table={defaultStyle(twoColumnsData())} highlightRowIndexes={[1]} elementsLibrary={elementsLibrary} />
+      <Table
+        table={defaultStyle(contentTableTwoColumnsData())}
+        highlightRowIndexes={[1]}
+        elementsLibrary={elementsLibrary}
+      />
     ))
     .add("no header, vertical only", () => (
-      <Table table={vertLinesOnly(twoColumnsData())} elementsLibrary={elementsLibrary} />
+      <Table table={vertLinesOnly(contentTableTwoColumnsData())} elementsLibrary={elementsLibrary} />
     ))
     .add("no header, vertical only, no vertical padding", () => (
-      <Table table={noVertPadding(twoColumnsData())} elementsLibrary={elementsLibrary} />
+      <Table table={noVertPadding(contentTableTwoColumnsData())} elementsLibrary={elementsLibrary} />
     ))
     .add("long inlined code", () => (
       <Table table={defaultStyle(dataWithLongInlinedCode())} elementsLibrary={elementsLibrary} />
@@ -97,16 +103,6 @@ function defaultStyle(data: any[][]) {
     styles: [],
     columns: twoColumns(),
     data: data,
-  };
-}
-
-function tableNoGapAsContent(collapsed: boolean) {
-  return {
-    type: "Table",
-    title: "My Table",
-    table: defaultStyle(twoColumnsData()),
-    noGap: true,
-    collapsed,
   };
 }
 
@@ -164,37 +160,6 @@ function fourColumnsWithOverflownWidth(data: any[][]) {
     ],
     data,
   };
-}
-
-function twoColumnsData() {
-  return [
-    [1, 2],
-    [3, 4],
-    [
-      "hello",
-      [
-        {
-          text: "We saw (todo link) how you can annotate images using ",
-          type: "SimpleText",
-        },
-        {
-          code: "include-image",
-          type: "InlinedCode",
-        },
-        {
-          text: " plugin.",
-          type: "SimpleText",
-        },
-        {
-          type: "SoftLineBreak",
-        },
-        {
-          text: "Now let\u0027s automate the screenshot and annotations assigning process.",
-          type: "SimpleText",
-        },
-      ],
-    ],
-  ];
 }
 
 function fourColumnsData() {

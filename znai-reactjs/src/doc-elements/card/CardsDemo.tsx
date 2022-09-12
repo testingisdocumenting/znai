@@ -24,6 +24,7 @@ import {
   contentParagraphSmall,
   contentSingleLink,
   contentSnippet,
+  contentTable,
 } from "../demo-utils/contentGenerators";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { DocElementContent } from "../default-elements/DocElement";
@@ -96,22 +97,37 @@ export function cardsDemo(registry: Registry) {
     />
   ));
 
+  registry.add("with table", () => (
+    <Card
+      title="My Card"
+      imageSrc="small-book.png"
+      // @ts-ignore
+      bodyContent={[contentParagraphSmall(false), contentTable(true, undefined)]}
+      elementsLibrary={elementsLibrary}
+    />
+  ));
+
   registry.add("two columns", () => (
     // @ts-ignore
-    <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[columnsContent()]} />
+    <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[twoColumnsContent()]} />
+  ));
+
+  registry.add("three columns", () => (
+    // @ts-ignore
+    <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[threeColumnsContent()]} />
   ));
 }
 
-function cardContent(bodyContent: DocElementContent) {
+function cardContent(bodyContent: DocElementContent, removeImage?: boolean) {
   return {
     type: "Card",
     title: "My Card",
-    imageSrc: "books.jpg",
+    imageSrc: removeImage ? undefined : "books.jpg",
     bodyContent: bodyContent,
   };
 }
 
-function columnsContent() {
+function twoColumnsContent() {
   return {
     type: "Columns",
     isPresentation: false,
@@ -123,6 +139,29 @@ function columnsContent() {
     columns: [
       {
         content: [cardContent([contentParagraph(false)])],
+      },
+      {
+        content: [cardContent([contentParagraphSmall(false)])],
+      },
+    ],
+  };
+}
+
+function threeColumnsContent() {
+  return {
+    type: "Columns",
+    isPresentation: false,
+    slideIdx: 0,
+    config: {
+      left: {},
+      right: {},
+    },
+    columns: [
+      {
+        content: [cardContent([contentParagraph(false)])],
+      },
+      {
+        content: [cardContent([contentParagraphSmall(false)], true)],
       },
       {
         content: [cardContent([contentParagraphSmall(false)])],

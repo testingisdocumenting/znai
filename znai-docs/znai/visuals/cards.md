@@ -44,6 +44,8 @@ Markdown content of the card goes here
 
 # Multiple Columns
 
+Use [Colums](layout/columns) to arrange cards side by side
+
 ```````columns
 left:
 ```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
@@ -51,6 +53,14 @@ Easy to use API
 Robust language and API
 
 :include-file: snippets/file-name.js 
+```
+
+middle:
+```card small-book.png {title: "Book", imageHeight: 120}
+Markdown content of the card goes here
+* item one
+* item two
+* item three
 ```
 
 right:
@@ -71,6 +81,14 @@ Easy to use API
 Robust language and API
 
 :include-file: snippets/file-name.js 
+```
+
+middle:
+```card small-book.png {title: "Book", imageHeight: 120}
+Markdown content of the card goes here
+* item one
+* item two
+* item three
 ```
 
 right:
