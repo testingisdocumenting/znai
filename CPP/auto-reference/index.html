@@ -165,6 +165,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace nested {\n/**\n * top **level** comment *of* important\n * * list one\n * * list two\n * * list three\n *\n * 1. number one\n * 2. number two\n *\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n * @param second_param description of second param\n */\nvoid my_func(int first_param, bool second_param) {\n}\n\n/**\n * specific description for single param version\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n */\nvoid my_func(int first_param) {\n}\n}\n}\n\nvoid free_func() {\n}",
         "title" : "src/funcs.h",
+        "anchorId" : "member-signature-comment-and-parameters-src-funcs-h",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -354,6 +355,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n */\ntemplate<typename T1, typename T2>\nvoid multi_println(const T1& v1, const T2& v2) {\n    std::cout << v1 << \", \" << v2 << \"\\n\";\n}",
         "title" : "source.hpp",
         "surroundedBy" : "// multi_println",
+        "anchorId" : "member-signature-comment-and-parameters-source-hpp",
         "type" : "Snippet"
       }, {
         "id" : "funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2",
@@ -486,6 +488,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace second {\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass MyClass {\npublic:\n    /// bark\n    void bark();\n};\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass ThirdClass {\npublic:\n    /// bark\n    void bark();\n};\n\n}\n}",
         "title" : "src/classes.h",
+        "anchorId" : "member-signature-only-src-classes-h",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -521,6 +524,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace nested {\n\nvoid their_func(long param1, std::string param2, bool param3) {\n}\n\n/**\n * Description of *what* and *why* for their_func\n *\n * @param param1 description of param1\n * @param param3 description of param3\n */\nvoid their_func(long param1, bool param3) {\n}\n\nvoid their_func(long param1) {\n}\n\n}\n}",
         "title" : "src/funcs.h",
+        "anchorId" : "all-matching-signatures-src-funcs-h",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -1497,7 +1501,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1661276355289,
+    "lastModifiedTime" : 1663025548312,
     "tocItem" : {
       "chapterTitle" : "CPP",
       "pageTitle" : "Auto Reference",

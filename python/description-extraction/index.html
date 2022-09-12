@@ -166,6 +166,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "py",
         "snippet" : "my_var = \"a variable\"\n\n\ndef my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2\n\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
         "title" : "example.py",
+        "anchorId" : "doc-string-example-py",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -282,6 +283,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "def my_func(label, price):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    label : str\n      label to use to *render* item in the store\n\n    price : fin.money.Money\n      price associated with the **item**\n\n    Returns\n    -------\n    str\n      status of the operation\n\n      `OK` for good\n    \"\"\"\n\n    return \"OK\"",
         "autoTitle" : true,
         "title" : "python/pydoc-params.py",
+        "anchorId" : "doc-parameters-python-pydoc-params-py",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -403,6 +405,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "import fin\n\n\ndef my_func(label: str, price: fin.money.Money) -> str:\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    --------------\n    label :\n      label to use to *render* item in the store\n\n    price :\n      price associated with the **item**\n\n    Returns\n    -------\n      status of the operation\n\n      `OK` for good\n    \"\"\"\n\n    return \"OK\"",
         "autoTitle" : true,
         "title" : "python/pydoc-params-type-hints.py",
+        "anchorId" : "type-hints-python-pydoc-params-type-hints-py",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -482,7 +485,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355293,
+    "lastModifiedTime" : 1663025548316,
     "tocItem" : {
       "chapterTitle" : "Python",
       "pageTitle" : "Description Extraction",

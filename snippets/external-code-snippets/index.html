@@ -100,6 +100,11 @@
 </article>
 
 <article>
+<header><h1>Anchor</h1></header>
+<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-file: file-name.js {autoTitle: true, anchorId: &quot;my-code-anchor&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass</p>
+</article>
+
+<article>
 <header><h1>Wide Code</h1></header>
 <p>Use the wide option to stretch wide code to occupy as much horizontal screen real estate as possible. :include-file: WideCode.java {wide: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Without the wide option code will be aligned with the rest of the text and users can use scrollbars. class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Note: Good placement of a Wide Code element is at the end of a page or a section to show the full version of a code sample.</p>
 </article>
@@ -120,8 +125,8 @@
 </article>
 
 <article>
-<header><h1>Compact</h1></header>
-<p>Use compact: true to remove top/bottom margins when there are multiple snippets in a row. Note: title option is required markdown :include-file: file-name.js {title: &quot;part one&quot;, compact: true, collapsed: false} :include-file: simple.c {title: &quot;part two&quot;, compact: true, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; }</p>
+<header><h1>No Gap</h1></header>
+<p>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: &quot;part one&quot;, noGap: true, collapsed: false} :include-file: simple.c {title: &quot;part two&quot;, noGap: true, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; }</p>
 </article>
 
 <article>
@@ -363,6 +368,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "title" : "ES6 class",
+        "anchorId" : "title-es6-class",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -391,6 +397,42 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "autoTitle" : true,
+        "title" : "file-name.js",
+        "anchorId" : "title-file-name-js",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "anchor",
+      "title" : "Anchor",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you specify a title, hover mouse over it to see a clickable anchor.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "anchorId",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to override auto generated identifier.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: file-name.js {autoTitle: true, anchorId: \"my-code-anchor\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "js",
+        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+        "autoTitle" : true,
+        "anchorId" : "my-code-anchor",
         "title" : "file-name.js",
         "type" : "Snippet"
       } ]
@@ -564,11 +606,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "title" : "collapsible snippet",
         "collapsed" : true,
+        "anchorId" : "collapse-collapsible-snippet",
         "type" : "Snippet"
       } ]
     }, {
-      "id" : "compact",
-      "title" : "Compact",
+      "id" : "no-gap",
+      "title" : "No Gap",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
@@ -576,41 +619,32 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "compact: true",
+          "code" : "noGap: true",
           "type" : "InlinedCode"
         }, {
           "text" : " to remove top/bottom margins when there are multiple snippets in a row.",
           "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Note: ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "title",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " option is required",
-          "type" : "SimpleText"
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: file-name.js {title: \"part one\", compact: true, collapsed: false}\n:include-file: simple.c {title: \"part two\", compact: true, collapsed: false}\n",
+        "snippet" : ":include-file: file-name.js {title: \"part one\", noGap: true, collapsed: false}\n:include-file: simple.c {title: \"part two\", noGap: true, collapsed: false}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "js",
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "title" : "part one",
-        "compact" : true,
+        "noGap" : true,
         "collapsed" : false,
+        "anchorId" : "no-gap-part-one",
         "type" : "Snippet"
       }, {
         "lang" : "c",
         "snippet" : "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
         "title" : "part two",
-        "compact" : true,
+        "noGap" : true,
         "collapsed" : false,
+        "anchorId" : "no-gap-part-two",
         "type" : "Snippet"
       } ]
     }, {
@@ -693,10 +727,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "txt",
         "snippet" : "class\nusefulAction",
         "title" : "lines-to-highlight.txt",
+        "anchorId" : "highlights-lines-to-highlight-txt",
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355297,
+    "lastModifiedTime" : 1663025548324,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
@@ -714,6 +749,9 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Title",
         "id" : "title"
       }, {
+        "title" : "Anchor",
+        "id" : "anchor"
+      }, {
         "title" : "Wide Code",
         "id" : "wide-code"
       }, {
@@ -726,8 +764,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Collapse",
         "id" : "collapse"
       }, {
-        "title" : "Compact",
-        "id" : "compact"
+        "title" : "No Gap",
+        "id" : "no-gap"
       }, {
         "title" : "Highlights",
         "id" : "highlights"

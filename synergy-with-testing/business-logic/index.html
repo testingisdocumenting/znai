@@ -166,6 +166,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "package org.testingisdocumenting.testing.examples\n\nimport org.junit.Test\nimport org.testingisdocumenting.webtau.data.table.TableData\n\nimport static org.testingisdocumenting.webtau.WebTauCore.*\n\nclass TestToDocExample {\n    @Test\n    void shouldRestrictAccountsActivity() {\n        def rules = [\"Account Type\" | \"Operation\"    | \"Restriction\"] {\n                    _________________________________________________\n                        \"SPB3\"      | \"Buy Options\"  | \"weekends only\"\n                        \"TR\"        | \"Sell Futures\" | \"except holidays\"\n                        \"BOSS\"      | \"Buy Stocks\"   | \"none\" }\n\n        validateRules(rules)\n    }\n\n    private static void validateRules(TableData rules) {\n        doc.capture(\"account-rules\", rules) // capture table data as JSON\n    }\n}",
         "title" : "documentation artifact example",
         "commentsType" : "inline",
+        "anchorId" : "capture-input-example-documentation-artifact-example",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -268,7 +269,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355301,
+    "lastModifiedTime" : 1663025548324,
     "tocItem" : {
       "chapterTitle" : "Synergy With Testing",
       "pageTitle" : "Business Logic",

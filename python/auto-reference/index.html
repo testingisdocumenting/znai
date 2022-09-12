@@ -131,7 +131,7 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "methodfunction-definition",
+      "id" : "method-function-definition",
       "title" : "Method/Function Definition",
       "type" : "Section",
       "content" : [ {
@@ -237,6 +237,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "autoTitle" : true,
         "startLine" : "render_money",
         "title" : "fin/money.py",
+        "anchorId" : "method-function-definition-fin-money-py",
         "type" : "Snippet"
       } ]
     }, {
@@ -267,6 +268,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "endLine" : "class Debt",
         "excludeStartEnd" : true,
         "title" : "fin/money.py",
+        "anchorId" : "class-definition-fin-money-py",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -287,7 +289,7 @@ ReactDOM.render(React.createElement(Documentation, {
     }, {
       "badge" : "class",
       "style" : "api",
-      "id" : "finmoneymoney",
+      "id" : "fin-money-money",
       "title" : "fin.money.Money",
       "type" : "Section",
       "content" : [ {
@@ -315,7 +317,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "style" : "api",
-        "id" : "finmoneymoney-properties",
+        "id" : "fin-money-money-properties",
         "level" : 3,
         "title" : "Properties",
         "type" : "SubHeading"
@@ -358,7 +360,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "finmoneymoney-members",
+        "id" : "fin-money-money-members",
         "level" : 3,
         "title" : "Members",
         "type" : "SubHeading"
@@ -444,13 +446,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : "/znai/python/auto-reference#python_api_fin_money_Money_add"
       }, {
         "style" : "api",
-        "id" : "finmoneymoney-details",
+        "id" : "fin-money-money-details",
         "level" : 3,
         "title" : "Details",
         "type" : "SubHeading"
       }, {
         "style" : "api",
-        "id" : "finmoneymoney-details-dollars",
+        "id" : "fin-money-money-details-dollars",
         "level" : 4,
         "title" : "dollars",
         "type" : "SubHeading"
@@ -534,7 +536,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "finmoneymoney-details-__init__",
+        "id" : "fin-money-money-details-__init__",
         "level" : 4,
         "title" : "__init__",
         "type" : "SubHeading"
@@ -611,7 +613,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "finmoneymoney-details-add",
+        "id" : "fin-money-money-details-add",
         "level" : 4,
         "title" : "add",
         "type" : "SubHeading"
@@ -680,12 +682,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "from fin.money import Money\n\n\nclass Person:\n    \"\"\"\n    Person, the root of all\n    \"\"\"\n    def __init__(self, name):\n        self._name = name\n        self._desire = \"\"\n\n    @property\n    def name(self) -> str:\n        \"\"\"\n        Person name, you'd better use it when talking to them\n        \"\"\"\n        return self._name\n\n    @property\n    def desire(self) -> str:\n        \"\"\"\n        Person desire, can change over time\n        \"\"\"\n        return self._desire\n\n    @desire.setter\n    def desire(self, new_desire: str):\n        self._desire = new_desire\n\n    def talk(self):\n        \"\"\"\n        person talks\n        \"\"\"\n        print(f\"{self.name} talks\")\n\n\nclass Worker(Person):\n    \"\"\"\n    Works and improves the world\n    \"\"\"\n    def __init__(self, name: str, salary: Money):\n        Person.__init__(self, name)\n        self._salary = salary\n\n    def work(self):\n        \"\"\"\n        work to the best ability\n        \"\"\"\n        pass\n\n    @property\n    def salary(self) -> Money:\n        \"\"\"\n        Annual non-yet-taxed salary\n        \"\"\"\n        return self._salary",
         "autoTitle" : true,
         "title" : "department.py",
+        "anchorId" : "inheritance-department-py",
         "type" : "Snippet"
       }, {
         "lang" : "py",
         "snippet" : "from department import Worker as Wo\nfrom fin.money import Money\n\n\nclass WorkerCTO(Wo):\n    \"\"\"\n    CTO worker with all the qualities and attributes required for a successful business\n    \"\"\"\n    def __init__(self, name: str, salary: Money, goal: str):\n        \"\"\"\n        Create a new instance of CTO with provided name, salary and the goal\n\n        Parameters\n        ----------\n        name:\n          CTO name\n        salary:\n          CTO salary\n        goal:\n          top priority goal to achieve\n        \"\"\"\n        Wo.__init__(self, name=name, salary=salary)\n        self._goal = goal\n\n    def work_hard(self, level: int):\n        \"\"\"\n        work as hard as possible to observe\n\n        Parameters\n        ----------\n        level:\n          effort level from 0 to 100\n        \"\"\"\n        pass\n\n    @property\n    def goal(self) -> str:\n        \"\"\"\n        CTO's top priority goal to achieve\n        \"\"\"\n        return self._goal\n\n    @goal.setter\n    def goal(self, new_goal: str):\n        self._goal = new_goal",
         "autoTitle" : true,
         "title" : "executive_department.py",
+        "anchorId" : "inheritance-executive_department-py",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -705,7 +709,7 @@ ReactDOM.render(React.createElement(Documentation, {
     }, {
       "badge" : "class",
       "style" : "api",
-      "id" : "executive_departmentworkercto",
+      "id" : "executive_department-workercto",
       "title" : "executive_department.WorkerCTO",
       "type" : "Section",
       "content" : [ {
@@ -740,7 +744,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "style" : "api",
-        "id" : "executive_departmentworkercto-properties",
+        "id" : "executive_department-workercto-properties",
         "level" : 3,
         "title" : "Properties",
         "type" : "SubHeading"
@@ -826,7 +830,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "executive_departmentworkercto-workercto-members",
+        "id" : "executive_department-workercto-workercto-members",
         "level" : 3,
         "title" : "WorkerCTO Members",
         "type" : "SubHeading"
@@ -894,7 +898,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : "/znai/python/auto-reference#python_api_executive_department_WorkerCTO_work_hard"
       }, {
         "style" : "api",
-        "id" : "executive_departmentworkercto-worker-members",
+        "id" : "executive_department-workercto-worker-members",
         "level" : 3,
         "title" : "Worker Members",
         "type" : "SubHeading"
@@ -915,7 +919,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : "/znai/python/auto-reference#python_api_department_Worker_work"
       }, {
         "style" : "api",
-        "id" : "executive_departmentworkercto-person-members",
+        "id" : "executive_department-workercto-person-members",
         "level" : 3,
         "title" : "Person Members",
         "type" : "SubHeading"
@@ -936,13 +940,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : ""
       }, {
         "style" : "api",
-        "id" : "executive_departmentworkercto-workercto-details",
+        "id" : "executive_department-workercto-workercto-details",
         "level" : 3,
         "title" : "WorkerCTO Details",
         "type" : "SubHeading"
       }, {
         "style" : "api",
-        "id" : "executive_departmentworkercto-workercto-details-__init__",
+        "id" : "executive_department-workercto-workercto-details-__init__",
         "level" : 4,
         "title" : "__init__",
         "type" : "SubHeading"
@@ -1041,7 +1045,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "executive_departmentworkercto-workercto-details-work_hard",
+        "id" : "executive_department-workercto-workercto-details-work_hard",
         "level" : 4,
         "title" : "work_hard",
         "type" : "SubHeading"
@@ -1101,7 +1105,7 @@ ReactDOM.render(React.createElement(Documentation, {
     }, {
       "badge" : "class",
       "style" : "api",
-      "id" : "departmentworker",
+      "id" : "department-worker",
       "title" : "department.Worker",
       "type" : "Section",
       "content" : [ {
@@ -1127,7 +1131,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "style" : "api",
-        "id" : "departmentworker-properties",
+        "id" : "department-worker-properties",
         "level" : 3,
         "title" : "Properties",
         "type" : "SubHeading"
@@ -1195,7 +1199,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "departmentworker-worker-members",
+        "id" : "department-worker-worker-members",
         "level" : 3,
         "title" : "Worker Members",
         "type" : "SubHeading"
@@ -1247,7 +1251,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : "/znai/python/auto-reference#python_api_department_Worker_work"
       }, {
         "style" : "api",
-        "id" : "departmentworker-person-members",
+        "id" : "department-worker-person-members",
         "level" : 3,
         "title" : "Person Members",
         "type" : "SubHeading"
@@ -1268,13 +1272,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : ""
       }, {
         "style" : "api",
-        "id" : "departmentworker-worker-details",
+        "id" : "department-worker-worker-details",
         "level" : 3,
         "title" : "Worker Details",
         "type" : "SubHeading"
       }, {
         "style" : "api",
-        "id" : "departmentworker-worker-details-__init__",
+        "id" : "department-worker-worker-details-__init__",
         "level" : 4,
         "title" : "__init__",
         "type" : "SubHeading"
@@ -1312,7 +1316,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "removeSelf" : true
       }, {
         "style" : "api",
-        "id" : "departmentworker-worker-details-work",
+        "id" : "department-worker-worker-details-work",
         "level" : 4,
         "title" : "work",
         "type" : "SubHeading"
@@ -1341,7 +1345,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1661276355293,
+    "lastModifiedTime" : 1663025548316,
     "tocItem" : {
       "chapterTitle" : "Python",
       "pageTitle" : "Auto Reference",
@@ -1351,24 +1355,24 @@ ReactDOM.render(React.createElement(Documentation, {
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Method/Function Definition",
-        "id" : "methodfunction-definition"
+        "id" : "method-function-definition"
       }, {
         "title" : "Class Definition",
         "id" : "class-definition"
       }, {
         "title" : "fin.money.Money",
-        "id" : "finmoneymoney",
+        "id" : "fin-money-money",
         "style" : "api"
       }, {
         "title" : "Inheritance",
         "id" : "inheritance"
       }, {
         "title" : "executive_department.WorkerCTO",
-        "id" : "executive_departmentworkercto",
+        "id" : "executive_department-workercto",
         "style" : "api"
       }, {
         "title" : "department.Worker",
-        "id" : "departmentworker",
+        "id" : "department-worker",
         "style" : "api"
       } ]
     }

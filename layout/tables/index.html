@@ -100,6 +100,21 @@
 </article>
 
 <article>
+<header><h1>Anchor</h1></header>
+<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-table: table/table.json {title: &quot;Monthly Report&quot;, anchorId: &quot;my-super-table&quot;} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
+<header><h1>Collapse</h1></header>
+<p>Use collapsed: true|false to make image collapsible. Note: title option is required markdown :include-table: table/table.json { title: &quot;Monthly Report&quot;, collapsed: true } Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
+<header><h1>No Gap</h1></header>
+<p>Use noGap: true to remove top/bottom margins when there are multiple tables in a row. markdown :include-table: table/table.json { title: &quot;Monthly Report&quot;, collapsed: true, noGap: true, } :include-table: table/table.json { title: &quot;Weekly Report&quot;, collapsed: false, noGap: true, } Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
 <header><h1>Highlight</h1></header>
 <p>Use highlightRow to highlight a row, or a set of rows by their index :include-table: table/table.json {title: &quot;Highlight multiple rows&quot;, highlightRow: [0, 2]} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch :include-table: table/table.json {title: &quot;Highlight single row&quot;, highlightRow: 1} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
 </article>
@@ -487,6 +502,369 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ] ]
         },
         "title" : "Monthly Report",
+        "anchorId" : "title-monthly-report",
+        "type" : "Table"
+      } ]
+    }, {
+      "id" : "anchor",
+      "title" : "Anchor",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you specify a title, hover mouse over it to see a clickable anchor.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "anchorId",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to override auto generated identifier.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-table: table/table.json {title: \"Monthly Report\", anchorId: \"my-super-table\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "title" : "Monthly Report",
+        "anchorId" : "my-super-table",
+        "type" : "Table"
+      } ]
+    }, {
+      "id" : "collapse",
+      "title" : "Collapse",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "collapsed: true|false",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to make image collapsible.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option is required",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-table: table/table.json {\n  title: \"Monthly Report\",\n  collapsed: true\n}\n",
+        "lineNumber" : "",
+        "highlight" : [ 2 ],
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "title" : "Monthly Report",
+        "collapsed" : true,
+        "anchorId" : "collapse-monthly-report",
+        "type" : "Table"
+      } ]
+    }, {
+      "id" : "no-gap",
+      "title" : "No Gap",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "noGap: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove top/bottom margins when there are multiple tables in a row.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-table: table/table.json {\n  title: \"Monthly Report\",\n  collapsed: true,\n  noGap: true,\n}\n\n:include-table: table/table.json {\n  title: \"Weekly Report\",\n  collapsed: false,\n  noGap: true,\n}\n",
+        "lineNumber" : "",
+        "highlight" : [ 3, 9 ],
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "title" : "Monthly Report",
+        "noGap" : true,
+        "collapsed" : true,
+        "anchorId" : "no-gap-monthly-report",
+        "type" : "Table"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#91AGB1",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "title" : "Weekly Report",
+        "noGap" : true,
+        "collapsed" : false,
+        "anchorId" : "no-gap-weekly-report",
         "type" : "Table"
       } ]
     }, {
@@ -577,6 +955,7 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "highlightRowIndexes" : [ 0, 2 ],
         "title" : "Highlight multiple rows",
+        "anchorId" : "highlight-highlight-multiple-rows",
         "type" : "Table"
       }, {
         "lang" : "",
@@ -650,6 +1029,7 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "highlightRowIndexes" : [ 1 ],
         "title" : "Highlight single row",
+        "anchorId" : "highlight-highlight-single-row",
         "type" : "Table"
       } ]
     }, {
@@ -1192,6 +1572,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "wide" : true
         },
         "title" : "My Items",
+        "anchorId" : "wide-mode-my-items",
         "type" : "Table"
       } ]
     }, {
@@ -1386,11 +1767,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "csv",
         "snippet" : "Feature Name, V1, V2\nfeatureA, +, +\nfeatureB, -, +",
         "title" : "table.csv",
+        "anchorId" : "mapping-table-csv",
         "type" : "Snippet"
       }, {
         "lang" : "csv",
         "snippet" : "+, `:icon: check {stroke: \"green\"}`\n-, `:icon: slash {stroke: \"red\"}`",
         "title" : "mapping.csv",
+        "anchorId" : "mapping-mapping-csv",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -1544,6 +1927,7 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ] ]
         },
         "title" : "my table",
+        "anchorId" : "inlined-my-table",
         "type" : "Table"
       } ]
     }, {
@@ -1677,7 +2061,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355293,
+    "lastModifiedTime" : 1663025548316,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Tables",
@@ -1694,6 +2078,15 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Title",
         "id" : "title"
+      }, {
+        "title" : "Anchor",
+        "id" : "anchor"
+      }, {
+        "title" : "Collapse",
+        "id" : "collapse"
+      }, {
+        "title" : "No Gap",
+        "id" : "no-gap"
       }, {
         "title" : "Highlight",
         "id" : "highlight"

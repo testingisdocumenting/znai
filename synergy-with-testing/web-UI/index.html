@@ -168,6 +168,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[id*=\"search\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\\n\")\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
         "autoTitle" : true,
         "title" : "webtauexamples/imageCapture.groovy",
+        "anchorId" : "screenshots-and-annotations-webtauexamples-imagecapture-groovy",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
@@ -201,7 +202,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "annotate" : true,
         "imageSrc" : "/znai/doc-artifacts/duckduckgo-search.png",
-        "timestamp" : 1661276416832,
+        "timestamp" : 1663025601240,
         "shapes" : [ {
           "type" : "badge",
           "text" : "1",
@@ -243,7 +244,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Json"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355301,
+    "lastModifiedTime" : 1663025548328,
     "tocItem" : {
       "chapterTitle" : "Synergy With Testing",
       "pageTitle" : "Web UI",

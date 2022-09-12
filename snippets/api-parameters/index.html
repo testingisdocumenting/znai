@@ -101,7 +101,12 @@
 
 <article>
 <header><h1>Collapsing Parameters</h1></header>
-<p>Use collapsed: true|false to make api-parameters collapsible. markdown ```api-parameters {title: &quot;person definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: false} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code Note: collapsed requires title to be present</p>
+<p>Use collapsed: true|false to make api-parameters collapsible. markdown ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true} city, String, city name zipCode, String, zip code ``` city String city name zipCode String zip code Note: collapsed requires title to be present</p>
+</article>
+
+<article>
+<header><h1>No Gap</h1></header>
+<p>Use noGap: true to remove top/bottom margins when there are multiple parameter instances in a row. markdown ```api-parameters { title: &quot;person definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: false, noGap: true } firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true, noGap: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code</p>
 </article>
 
 <article>
@@ -484,7 +489,81 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "```api-parameters {title: \"person definition\", anchorPrefix: \"title\", collapsed: false}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n\n```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true}\ncity, String, city name\nzipCode, String, zip code\n```\n",
+        "snippet" : "```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true}\ncity, String, city name\nzipCode, String, zip code\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "parameters" : [ {
+          "name" : "city",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "title_city",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "city name",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "name" : "zipCode",
+          "type" : [ {
+            "text" : "String",
+            "url" : ""
+          } ],
+          "anchorId" : "title_zipCode",
+          "description" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "zip code",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "title" : "address definition",
+        "anchorPrefix" : "title",
+        "collapsed" : true,
+        "type" : "ApiParameters"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "collapsed",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " requires ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to be present",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "no-gap",
+      "title" : "No Gap",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "noGap: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove top/bottom margins when there are multiple parameter instances in a row.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "```api-parameters { title: \"person definition\", anchorPrefix: \"title\", collapsed: false, noGap: true }\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n\n```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true, noGap: true}\ncity, String, city name\nzipCode, String, zip code\n```\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -538,6 +617,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "person definition",
         "anchorPrefix" : "title",
         "collapsed" : false,
+        "noGap" : true,
         "type" : "ApiParameters"
       }, {
         "parameters" : [ {
@@ -572,25 +652,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "address definition",
         "anchorPrefix" : "title",
         "collapsed" : true,
+        "noGap" : true,
         "type" : "ApiParameters"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Note: ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "collapsed",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " requires ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "title",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to be present",
-          "type" : "SimpleText"
-        } ]
       } ]
     }, {
       "id" : "size",
@@ -1268,7 +1331,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355297,
+    "lastModifiedTime" : 1663025548324,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "API Parameters",
@@ -1290,6 +1353,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Collapsing Parameters",
         "id" : "collapsing-parameters"
+      }, {
+        "title" : "No Gap",
+        "id" : "no-gap"
       }, {
         "title" : "Size",
         "id" : "size"

@@ -128,6 +128,16 @@
 <header><h1>Recommendation</h1></header>
 <p>Recommendation: write automated tests for new business logic Recommendation: write automated tests for new business logic</p>
 </article>
+
+<article>
+<header><h1>Fence Block</h1></header>
+<p>Use fence block to create an explicit attention block. markdown ```attention-note hello world ``` hello world By default, there is only icon. Use label to add text markdown ```attention-note {label: &quot;Custom Label&quot;} hello world ``` hello world Using block makes it easier to include other plugins inside markdown `````attention-note Use this command to setup fresh environment ```cli mycommand setup ``` ````` Use this command to setup fresh environment mycommand setup</p>
+</article>
+
+<article>
+<header><h1>Attention Block Types</h1></header>
+<p>attention-&lt;type&gt; note warning avoid question recommendation</p>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
@@ -340,8 +350,147 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       } ]
+    }, {
+      "id" : "fence-block",
+      "title" : "Fence Block",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use fence block to create an explicit attention block.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "```attention-note\nhello world\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "attentionType" : "note",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "hello world",
+            "type" : "SimpleText"
+          } ]
+        } ],
+        "type" : "AttentionBlock"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "By default, there is only icon. Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "label",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to add text",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "```attention-note {label: \"Custom Label\"}\nhello world\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "label" : "Custom Label",
+        "attentionType" : "note",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "hello world",
+            "type" : "SimpleText"
+          } ]
+        } ],
+        "type" : "AttentionBlock"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Using block makes it easier to include other plugins inside",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "`````attention-note\nUse this command to setup fresh environment\n```cli\nmycommand setup\n```\n`````\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "attentionType" : "note",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Use this command to setup fresh environment",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "command" : "mycommand setup",
+          "paramsToHighlight" : [ ],
+          "type" : "CliCommand"
+        } ],
+        "type" : "AttentionBlock"
+      } ]
+    }, {
+      "id" : "attention-block-types",
+      "title" : "Attention Block Types",
+      "type" : "Section",
+      "content" : [ {
+        "lang" : "",
+        "snippet" : "attention-<type>\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "attentionType" : "note",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "code" : "note",
+            "type" : "InlinedCode"
+          } ]
+        } ],
+        "type" : "AttentionBlock"
+      }, {
+        "attentionType" : "warning",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "code" : "warning",
+            "type" : "InlinedCode"
+          } ]
+        } ],
+        "type" : "AttentionBlock"
+      }, {
+        "attentionType" : "avoid",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "code" : "avoid",
+            "type" : "InlinedCode"
+          } ]
+        } ],
+        "type" : "AttentionBlock"
+      }, {
+        "attentionType" : "question",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "code" : "question",
+            "type" : "InlinedCode"
+          } ]
+        } ],
+        "type" : "AttentionBlock"
+      }, {
+        "attentionType" : "recommendation",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "code" : "recommendation",
+            "type" : "InlinedCode"
+          } ]
+        } ],
+        "type" : "AttentionBlock"
+      } ]
     } ],
-    "lastModifiedTime" : 1661276355301,
+    "lastModifiedTime" : 1663025548328,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Attention Signs",
@@ -376,6 +525,12 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Recommendation",
         "id" : "recommendation"
+      }, {
+        "title" : "Fence Block",
+        "id" : "fence-block"
+      }, {
+        "title" : "Attention Block Types",
+        "id" : "attention-block-types"
       } ]
     }
   }

@@ -100,6 +100,11 @@
 </article>
 
 <article>
+<header><h1>Anchor</h1></header>
+<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-image: castle.jpg {title: &quot;beautiful castle&quot;, anchorId: &quot;castle-image&quot;}</p>
+</article>
+
+<article>
 <header><h1>Border</h1></header>
 <p>Use border: true to include a border around image. :include-image: image.png {border: true}</p>
 </article>
@@ -120,8 +125,23 @@
 </article>
 
 <article>
+<header><h1>Collapse</h1></header>
+<p>Use collapsed: true|false to make image collapsible. Note: title option is required markdown :include-image: books.jpg { fit: true, title: &quot;books&quot;, anchorId: &quot;my-books&quot;, collapsed: true }</p>
+</article>
+
+<article>
+<header><h1>No Gap</h1></header>
+<p>Use noGap: true to remove top/bottom margins when there are multiple images in a row. markdown :include-image: books.jpg { fit: true, title: &quot;books&quot;, collapsed: true, noGap: true } :include-image: castle.jpg { fit: true, title: &quot;castle&quot;, collapsed: false, noGap: true }</p>
+</article>
+
+<article>
 <header><h1>External Image</h1></header>
 <p>Pass external url in place of image to render image from a remote site ![text](https://external-url) :include-image: https://external-url { align: &quot;left&quot; } Note: Pass parameter to validate image urls</p>
+</article>
+
+<article>
+<header><h1>Mobile And Desktop Only</h1></header>
+<p>Use mobileOnly to only render an image in mobile screen size. Use desktopOnly to only render an image in desktop screen size. :include-image: small-book.png {title: &quot;only visible in mobile screen size&quot;, mobileOnly: true} :include-image: books.jpg {title: &quot;only visible in desktop screen size&quot;, desktopOnly: true, fit: true}</p>
 </article>
 </section>
 </div>
@@ -174,7 +194,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "destination" : "/znai/visuals/regular-image.png",
         "alt" : "alt text",
         "inlined" : false,
-        "timestamp" : 1661276355317,
+        "timestamp" : 1663025548340,
         "width" : 583,
         "height" : 385,
         "type" : "Image"
@@ -189,7 +209,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "destination" : "/znai/visuals/castle.jpg",
         "alt" : "alt text",
         "inlined" : false,
-        "timestamp" : 1661276355313,
+        "timestamp" : 1663025548336,
         "width" : 810,
         "height" : 557,
         "type" : "Image"
@@ -297,7 +317,45 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "beautiful castle",
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1661276355313,
+        "timestamp" : 1663025548336,
+        "shapes" : [ ],
+        "width" : 810.0,
+        "height" : 557.0,
+        "anchorId" : "title-beautiful-castle",
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "id" : "anchor",
+      "title" : "Anchor",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you specify a title, hover mouse over it to see a clickable anchor.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "anchorId",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to override auto generated identifier.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-image: castle.jpg {title: \"beautiful castle\", anchorId: \"castle-image\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "beautiful castle",
+        "anchorId" : "castle-image",
+        "imageSrc" : "/znai/visuals/castle.jpg",
+        "timestamp" : 1663025548336,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -327,7 +385,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "border" : true,
         "imageSrc" : "/znai/visuals/regular-image.png",
-        "timestamp" : 1661276355317,
+        "timestamp" : 1663025548340,
         "shapes" : [ ],
         "width" : 583.0,
         "height" : 385.0,
@@ -346,10 +404,11 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "wide image",
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1661276355309,
+        "timestamp" : 1663025548336,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
+        "anchorId" : "fit-wide-image",
         "type" : "AnnotatedImage"
       }, {
         "type" : "Paragraph",
@@ -378,10 +437,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "fit" : true,
         "title" : "auto scaled down image",
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1661276355309,
+        "timestamp" : 1663025548336,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
+        "anchorId" : "fit-auto-scaled-down-image",
         "type" : "AnnotatedImage"
       } ]
     }, {
@@ -420,7 +480,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1661276355309,
+        "timestamp" : 1663025548336,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -457,7 +517,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "align" : "left",
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1661276355309,
+        "timestamp" : 1663025548336,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -471,10 +531,102 @@ ReactDOM.render(React.createElement(Documentation, {
         "align" : "right",
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1661276355309,
+        "timestamp" : 1663025548336,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "id" : "collapse",
+      "title" : "Collapse",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "collapsed: true|false",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to make image collapsible.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Note: ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option is required",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-image: books.jpg {\n  fit: true, \n  title: \"books\", \n  anchorId: \"my-books\", \n  collapsed: true\n}\n",
+        "lineNumber" : "",
+        "highlight" : [ 4 ],
+        "type" : "Snippet"
+      }, {
+        "fit" : true,
+        "title" : "books",
+        "anchorId" : "my-books",
+        "collapsed" : true,
+        "imageSrc" : "/znai/visuals/books.jpg",
+        "timestamp" : 1663025548336,
+        "shapes" : [ ],
+        "width" : 1698.0,
+        "height" : 1131.0,
+        "type" : "AnnotatedImage"
+      } ]
+    }, {
+      "id" : "no-gap",
+      "title" : "No Gap",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "noGap: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove top/bottom margins when there are multiple images in a row.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-image: books.jpg {\n  fit: true,\n  title: \"books\",\n  collapsed: true,\n  noGap: true\n}\n:include-image: castle.jpg {\n  fit: true,\n  title: \"castle\",\n  collapsed: false,\n  noGap: true\n}\n",
+        "lineNumber" : "",
+        "highlight" : [ 4, 10 ],
+        "type" : "Snippet"
+      }, {
+        "fit" : true,
+        "title" : "books",
+        "collapsed" : true,
+        "noGap" : true,
+        "imageSrc" : "/znai/visuals/books.jpg",
+        "timestamp" : 1663025548336,
+        "shapes" : [ ],
+        "width" : 1698.0,
+        "height" : 1131.0,
+        "anchorId" : "no-gap-books",
+        "type" : "AnnotatedImage"
+      }, {
+        "fit" : true,
+        "title" : "castle",
+        "collapsed" : false,
+        "noGap" : true,
+        "imageSrc" : "/znai/visuals/castle.jpg",
+        "timestamp" : 1663025548336,
+        "shapes" : [ ],
+        "width" : 810.0,
+        "height" : 557.0,
+        "anchorId" : "no-gap-castle",
         "type" : "AnnotatedImage"
       } ]
     }, {
@@ -505,8 +657,62 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       } ]
+    }, {
+      "id" : "mobile-and-desktop-only",
+      "title" : "Mobile And Desktop Only",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "mobileOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to only render an image in mobile screen size.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "desktopOnly",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to only render an image in desktop screen size.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-image: small-book.png {title: \"only visible in mobile screen size\", mobileOnly: true}\n:include-image: books.jpg {title: \"only visible in desktop screen size\", desktopOnly: true, fit: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "only visible in mobile screen size",
+        "mobileOnly" : true,
+        "imageSrc" : "/znai/visuals/small-book.png",
+        "timestamp" : 1663025548340,
+        "shapes" : [ ],
+        "width" : 256.0,
+        "height" : 200.0,
+        "anchorId" : "mobile-and-desktop-only-only-visible-in-mobile-screen-size",
+        "type" : "AnnotatedImage"
+      }, {
+        "title" : "only visible in desktop screen size",
+        "desktopOnly" : true,
+        "fit" : true,
+        "imageSrc" : "/znai/visuals/books.jpg",
+        "timestamp" : 1663025548336,
+        "shapes" : [ ],
+        "width" : 1698.0,
+        "height" : 1131.0,
+        "anchorId" : "mobile-and-desktop-only-only-visible-in-desktop-screen-size",
+        "type" : "AnnotatedImage"
+      } ]
     } ],
-    "lastModifiedTime" : 1661276355317,
+    "lastModifiedTime" : 1663025548340,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Images",
@@ -524,6 +730,9 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Title",
         "id" : "title"
       }, {
+        "title" : "Anchor",
+        "id" : "anchor"
+      }, {
         "title" : "Border",
         "id" : "border"
       }, {
@@ -536,8 +745,17 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Align",
         "id" : "align"
       }, {
+        "title" : "Collapse",
+        "id" : "collapse"
+      }, {
+        "title" : "No Gap",
+        "id" : "no-gap"
+      }, {
         "title" : "External Image",
         "id" : "external-image"
+      }, {
+        "title" : "Mobile And Desktop Only",
+        "id" : "mobile-and-desktop-only"
       } ]
     }
   }

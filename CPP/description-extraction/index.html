@@ -175,6 +175,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace nested {\n/**\n * top **level** comment *of* important\n * * list one\n * * list two\n * * list three\n *\n * 1. number one\n * 2. number two\n *\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n * @param second_param description of second param\n */\nvoid my_func(int first_param, bool second_param) {\n}\n\n/**\n * specific description for single param version\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n */\nvoid my_func(int first_param) {\n}\n}\n}\n\nvoid free_func() {\n}",
         "title" : "src/funcs.h",
+        "anchorId" : "members-comment-text-src-funcs-h",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -320,6 +321,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace second {\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass MyClass {\npublic:\n    /// bark\n    void bark();\n};\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass ThirdClass {\npublic:\n    /// bark\n    void bark();\n};\n\n}\n}",
         "title" : "src/classes.h",
+        "anchorId" : "classes-comment-text-src-classes-h",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -593,6 +595,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n */\ntemplate<typename T1, typename T2>\nvoid multi_println(const T1& v1, const T2& v2) {\n    std::cout << v1 << \", \" << v2 << \"\\n\";\n}",
         "title" : "source.hpp",
         "surroundedBy" : "// multi_println",
+        "anchorId" : "extract-template-parameters-source-hpp",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -647,6 +650,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @param v3 value to print\n * @param v4 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n * @tparam T3 type of the value three to print\n * @tparam T4 type of the value four to print\n */\ntemplate<typename T1, typename T2, typename T3, typename T4, typename T5_doc_ignore>\nvoid long_template_func(const T1& v1, const T2& v2, const T3& v3, const T4& v4) {\n}",
         "title" : "source.hpp",
         "surroundedBy" : "// ignore_template",
+        "anchorId" : "ignore-template-parameters-source-hpp",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
@@ -738,6 +742,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "/**\n * sums two numbers\n * @param a number to add to\n * @param b number that is added\n * @return *sum* of **two** numbers\n */\nint add(int a, int b);",
         "title" : "math.h",
         "surroundedBy" : "// math-add",
+        "anchorId" : "return-description-math-h",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -803,7 +808,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355289,
+    "lastModifiedTime" : 1663025548312,
     "tocItem" : {
       "chapterTitle" : "CPP",
       "pageTitle" : "Description Extraction",

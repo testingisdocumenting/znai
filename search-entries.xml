@@ -24,7 +24,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/introduction/what-is-this#darklight-runtime-mode</url>
+    <url>/znai/introduction/what-is-this#dark-light-runtime-mode</url>
     <fullTitle>Znai: What Is This, Dark/Light Runtime Mode [Introduction]</fullTitle>
     <text>
       <text>Generate one documentation and let your users switch Dark/Light theme at runtime</text>
@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.59.1/znai-dist-1.59.1-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.60/znai-dist-1.60-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59.1&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.60&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59.1&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.60&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.59.1&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.60&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -155,7 +155,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic configuration basic example-references domain api znai-development local-build release-notes 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations cards charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic configuration basic example-references domain api znai-development local-build release-notes 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -448,6 +448,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/external-code-snippets#anchor</url>
+    <fullTitle>Znai: External Code Snippets, Anchor [Snippets]</fullTitle>
+    <text>
+      <text>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-file: file-name.js {autoTitle: true, anchorId: "my-code-anchor"} class JsClass { constructor() { usefulAction() } } export default JsClass</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/external-code-snippets#wide-code</url>
     <fullTitle>Znai: External Code Snippets, Wide Code [Snippets]</fullTitle>
     <text>
@@ -480,10 +488,10 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/external-code-snippets#compact</url>
-    <fullTitle>Znai: External Code Snippets, Compact [Snippets]</fullTitle>
+    <url>/znai/snippets/external-code-snippets#no-gap</url>
+    <fullTitle>Znai: External Code Snippets, No Gap [Snippets]</fullTitle>
     <text>
-      <text>Use compact: true to remove top/bottom margins when there are multiple snippets in a row. Note: title option is required markdown :include-file: file-name.js {title: "part one", compact: true, collapsed: false} :include-file: simple.c {title: "part two", compact: true, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; }</text>
+      <text>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: "part one", noGap: true, collapsed: false} :include-file: simple.c {title: "part two", noGap: true, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -528,7 +536,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/snippets-manipulation#startend-line</url>
+    <url>/znai/snippets/snippets-manipulation#start-end-line</url>
     <fullTitle>Znai: Snippets Manipulation, Start/End Line [Snippets]</fullTitle>
     <text>
       <text>Use startLine , endLine to extract specific content by using marker lines. # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: "example: book trade", endLine: "example-end", excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100)</text>
@@ -627,7 +635,15 @@
     <url>/znai/snippets/api-parameters#collapsing-parameters</url>
     <fullTitle>Znai: API Parameters, Collapsing Parameters [Snippets]</fullTitle>
     <text>
-      <text>Use collapsed: true|false to make api-parameters collapsible. markdown ```api-parameters {title: "person definition", anchorPrefix: "title", collapsed: false} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code Note: collapsed requires title to be present</text>
+      <text>Use collapsed: true|false to make api-parameters collapsible. markdown ```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true} city, String, city name zipCode, String, zip code ``` city String city name zipCode String zip code Note: collapsed requires title to be present</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/api-parameters#no-gap</url>
+    <fullTitle>Znai: API Parameters, No Gap [Snippets]</fullTitle>
+    <text>
+      <text>Use noGap: true to remove top/bottom margins when there are multiple parameter instances in a row. markdown ```api-parameters { title: "person definition", anchorPrefix: "title", collapsed: false, noGap: true } firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true, noGap: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1192,6 +1208,22 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/attention-signs#fence-block</url>
+    <fullTitle>Znai: Attention Signs, Fence Block [Visuals]</fullTitle>
+    <text>
+      <text>Use fence block to create an explicit attention block. markdown ```attention-note hello world ``` hello world By default, there is only icon. Use label to add text markdown ```attention-note {label: "Custom Label"} hello world ``` hello world Using block makes it easier to include other plugins inside markdown `````attention-note Use this command to setup fresh environment ```cli mycommand setup ``` ````` Use this command to setup fresh environment mycommand setup</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/attention-signs#attention-block-types</url>
+    <fullTitle>Znai: Attention Signs, Attention Block Types [Visuals]</fullTitle>
+    <text>
+      <text>attention-&lt;type> note warning avoid question recommendation</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/images#standard-markdown</url>
     <fullTitle>Znai: Images, Standard Markdown [Visuals]</fullTitle>
     <text>
@@ -1212,6 +1244,14 @@
     <fullTitle>Znai: Images, Title [Visuals]</fullTitle>
     <text>
       <text>Use title to add a title to an image. :include-image: castle.jpg {title: "beautiful castle"}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/images#anchor</url>
+    <fullTitle>Znai: Images, Anchor [Visuals]</fullTitle>
+    <text>
+      <text>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-image: castle.jpg {title: "beautiful castle", anchorId: "castle-image"}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1248,10 +1288,34 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/images#collapse</url>
+    <fullTitle>Znai: Images, Collapse [Visuals]</fullTitle>
+    <text>
+      <text>Use collapsed: true|false to make image collapsible. Note: title option is required markdown :include-image: books.jpg { fit: true, title: "books", anchorId: "my-books", collapsed: true }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/images#no-gap</url>
+    <fullTitle>Znai: Images, No Gap [Visuals]</fullTitle>
+    <text>
+      <text>Use noGap: true to remove top/bottom margins when there are multiple images in a row. markdown :include-image: books.jpg { fit: true, title: "books", collapsed: true, noGap: true } :include-image: castle.jpg { fit: true, title: "castle", collapsed: false, noGap: true }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/images#external-image</url>
     <fullTitle>Znai: Images, External Image [Visuals]</fullTitle>
     <text>
       <text>Pass external url in place of image to render image from a remote site ![text](https://external-url) :include-image: https://external-url { align: "left" } Note: Pass parameter to validate image urls</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/images#mobile-and-desktop-only</url>
+    <fullTitle>Znai: Images, Mobile And Desktop Only [Visuals]</fullTitle>
+    <text>
+      <text>Use mobileOnly to only render an image in mobile screen size. Use desktopOnly to only render an image in desktop screen size. :include-image: small-book.png {title: "only visible in mobile screen size", mobileOnly: true} :include-image: books.jpg {title: "only visible in desktop screen size", desktopOnly: true, fit: true}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1324,6 +1388,38 @@
     <fullTitle>Znai: Image Annotations, Presentation Mode [Visuals]</fullTitle>
     <text>
       <text>Annotated images automatically participate in presentation mode. Annotations will appear one by one.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/cards#image-and-title</url>
+    <fullTitle>Znai: Cards, Image And Title [Visuals]</fullTitle>
+    <text>
+      <text>Use card fenced block plugin to render a card. markdown ```card books.jpg {title: "My Card"} Markdown content of the card goes here * item one * item two * item three ``` Markdown content of the card goes hereitem one item two item three Note: Card scales down large image to fit</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/cards#image-height-and-background</url>
+    <fullTitle>Znai: Cards, Image Height And Background [Visuals]</fullTitle>
+    <text>
+      <text>When you use icon like images, e.g. SVGs, then they will take all the horizontal available space, and it may not be ideal.Use imageHeight to force image height. Use imageBackground to specify a https://www.w3schools.com/css/css3_gradients.asp background color/gradient. markdown ```card diamond.svg {title: "My Card", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"} Markdown content of the card goes here * item one * item two * item three ``` Markdown content of the card goes hereitem one item two item three</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/cards#multiple-columns</url>
+    <fullTitle>Znai: Cards, Multiple Columns [Visuals]</fullTitle>
+    <text>
+      <text>Use layout/columns Colums to arrange cards side by side Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass Markdown content of the card goes hereitem one item two item three Easy to use API firstName String description with markdown support score Integer another description line with markdown support markdown ```````columns left: ```card diamond.svg {title: "Card Title", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"} Markdown content goes here :include-file: snippets/file-name.js ``` middle: ```card small-book.png {title: "Book", imageHeight: 120} Markdown content of the card goes here * item one * item two * item three ``` right: `````card star.svg {title: "API for the Win", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))"} Easy to use API ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ````` ```````` Note: Card plugin is designed to work with snippets/external-code-snippets code snippets and with snippets/api-parameters API Parameters by reducing spacing integrating border lines</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/cards#links</url>
+    <fullTitle>Znai: Cards, Links [Visuals]</fullTitle>
+    <text>
+      <text>Card plugin automatically converts links at the end of the fenced block content into dedicated card links. Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass snippets/external-code-snippets Learn More markdown ```card diamond.svg {title: "Card Title", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"} Markdown content goes here :include-file: snippets/file-name.js [Learn More](snippets/external-code-snippets) ```</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1824,6 +1920,30 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/layout/tables#anchor</url>
+    <fullTitle>Znai: Tables, Anchor [Layout]</fullTitle>
+    <text>
+      <text>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-table: table/table.json {title: "Monthly Report", anchorId: "my-super-table"} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/tables#collapse</url>
+    <fullTitle>Znai: Tables, Collapse [Layout]</fullTitle>
+    <text>
+      <text>Use collapsed: true|false to make image collapsible. Note: title option is required markdown :include-table: table/table.json { title: "Monthly Report", collapsed: true } Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/tables#no-gap</url>
+    <fullTitle>Znai: Tables, No Gap [Layout]</fullTitle>
+    <text>
+      <text>Use noGap: true to remove top/bottom margins when there are multiple tables in a row. markdown :include-table: table/table.json { title: "Monthly Report", collapsed: true, noGap: true, } :include-table: table/table.json { title: "Weekly Report", collapsed: false, noGap: true, } Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/layout/tables#highlight</url>
     <fullTitle>Znai: Tables, Highlight [Layout]</fullTitle>
     <text>
@@ -1912,10 +2032,18 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/layout/columns#definition</url>
-    <fullTitle>Znai: Columns, Definition [Layout]</fullTitle>
+    <url>/znai/layout/columns#two-columns</url>
+    <fullTitle>Znai: Columns, Two Columns [Layout]</fullTitle>
     <text>
-      <text>To define columns use fenced code block ```columns left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the rightand can span multiple lines</text>
+      <text>To define two columns layout use fenced code block and left: and right: labels markdown ```columns left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the right and can span multiple lines</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/columns#three-columns</url>
+    <fullTitle>Znai: Columns, Three Columns [Layout]</fullTitle>
+    <text>
+      <text>To define three columns layout use fenced code block and left: , middle: and right: labels markdown ```columns left: ### Pros {style: "api"} * Item One middle: ### Undecided {style: "api"} * Item Two * Item Three right: ### Cons {style: "api"} * Item Four ``` Pros Item One Undecided Item Two Item Three Cons Item Four</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1940,6 +2068,14 @@
     <fullTitle>Znai: Columns, Alignment [Layout]</fullTitle>
     <text>
       <text>Use align to change a column content alignment. BeforeHello World AfterWorld Of Hellos ```columns {border: true, left: {align: "right"}} left: **Before** Hello World right: **After** World Of Hellos ```</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/columns#presentation-mode</url>
+    <fullTitle>Znai: Columns, Presentation Mode [Layout]</fullTitle>
+    <text>
+      <text>In Presentation Mode each column content will appear on slide transition</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2064,6 +2200,22 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/python/content-extraction#title</url>
+    <fullTitle>Znai: Content Extraction, Title [Python]</fullTitle>
+    <text>
+      <text>Use the title property to specify an extracted snippet title. :include-python: python/example.py {entry: "Animal.says", bodyOnly: true, title: "extracted snippet"} print("hello")</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/python/content-extraction#anchor</url>
+    <fullTitle>Znai: Content Extraction, Anchor [Python]</fullTitle>
+    <text>
+      <text>Use anchorId to make a code snippet linkable. Hover mouse over title to see a clickable anchor. :include-python: python/example.py { entry: "Animal.says", bodyOnly: true, title: "extracted snippet", anchorId: "my-extracted-snippet" } print("hello")</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/python/content-extraction#variable</url>
     <fullTitle>Znai: Content Extraction, Variable [Python]</fullTitle>
     <text>
@@ -2104,7 +2256,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/python/auto-reference#methodfunction-definition</url>
+    <url>/znai/python/auto-reference#method-function-definition</url>
     <fullTitle>Znai: Auto Reference, Method/Function Definition [Python]</fullTitle>
     <text>
       <text>Use python-method to include function/method definition with signature, documentation and parameters list :include-python-method: fin.money.render_money render_money render money to a string returns str money represented as text amount fin.money.Money amount to print message str message to use for audit def render_money(amount: Money, message: str = "") -> str: """ render money to a string Parameters -------------- amount: amount to print message: message to use for audit Returns ------- money represented as text """ return f"{message} {amount.amount} {amount.currency}"</text>
@@ -2112,7 +2264,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/python/auto-reference#finmoneymoney</url>
+    <url>/znai/python/auto-reference#fin-money-money</url>
     <fullTitle>Znai: Auto Reference, fin.money.Money [Python]</fullTitle>
     <text>
       <text>To define a class use python-class include plugin :include-python-class: fin.money.Money class Money: """ Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead """ def __init__(self, amount: int, currency: str): """ generic constructor that accepts a currency Parameters ---------- amount: amount of money currency: currency to associate with the created Money """ self._amount = amount self._currency = currency @property def amount(self) -> int: """ amount in provided currency """ return self._amount @amount.setter def amount(self, amount: int): self.amount = amount @property def currency(self) -> str: """ money currency """ return self._currency @classmethod def dollars(cls, amount: int) -> 'Money': """ creates money instance with `USD` as the currency Parameters ---------- amount: dollar amount Returns ------- new money instance with `USD` as currency """ return cls(amount, "USD") def add(self, another: 'Money'): """ add money from another money instance Parameters -------------- another : money to add """ self.amount += another.amount Note: Once you define Money class, method arguments and parameter descriptions with the same type will automatically link to the place of definition Properties Members Details dollars __init__ add Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str [readonly] money currency Money.dollars Money.__init__ Money.add Money.dollars creates money instance with `USD` as the currency returns fin.money.Money new money instance with USD as currency amount int dollar amount Money.__init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money.add add money from another money instance another fin.money.Money money to add</text>
@@ -2120,7 +2272,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/python/auto-reference#departmentworker</url>
+    <url>/znai/python/auto-reference#department-worker</url>
     <fullTitle>Znai: Auto Reference, department.Worker [Python]</fullTitle>
     <text>
       <text>Example of inheritance from fin.money import Money class Person: """ Person, the root of all """ def __init__(self, name): self._name = name self._desire = "" @property def name(self) -> str: """ Person name, you'd better use it when talking to them """ return self._name @property def desire(self) -> str: """ Person desire, can change over time """ return self._desire @desire.setter def desire(self, new_desire: str): self._desire = new_desire def talk(self): """ person talks """ print(f"{self.name} talks") class Worker(Person): """ Works and improves the world """ def __init__(self, name: str, salary: Money): Person.__init__(self, name) self._salary = salary def work(self): """ work to the best ability """ pass @property def salary(self) -> Money: """ Annual non-yet-taxed salary """ return self._salary from department import Worker as Wo from fin.money import Money class WorkerCTO(Wo): """ CTO worker with all the qualities and attributes required for a successful business """ def __init__(self, name: str, salary: Money, goal: str): """ Create a new instance of CTO with provided name, salary and the goal Parameters ---------- name: CTO name salary: CTO salary goal: top priority goal to achieve """ Wo.__init__(self, name=name, salary=salary) self._goal = goal def work_hard(self, level: int): """ work as hard as possible to observe Parameters ---------- level: effort level from 0 to 100 """ pass @property def goal(self) -> str: """ CTO's top priority goal to achieve """ return self._goal @goal.setter def goal(self, new_goal: str): self._goal = new_goal :include-python-class: executive_department.WorkerCTO :include-python-class: department.Worker Note: Base classes that are defined somewhere in the documentation will turn into linksBase classes: , Properties WorkerCTO Members Worker Members Person Members WorkerCTO Details __init__ work_hard CTO worker with all the qualities and attributes required for a successful business Worker Person goal str CTO's top priority goal to achieve salary fin.money.Money [readonly] Annual non-yet-taxed salary desire str Person desire, can change over time name str [readonly] Person name, you'd better use it when talking to them WorkerCTO.__init__ WorkerCTO.work_hard Worker.work Person.talk WorkerCTO.__init__ Create a new instance of CTO with provided name, salary and the goal name str CTO name salary fin.money.Money CTO salary goal str top priority goal to achieve WorkerCTO.work_hard work as hard as possible to observe level int effort level from 0 to 100 Base classes: Properties Worker Members Person Members Worker Details __init__ work Works and improves the world Person salary fin.money.Money [readonly] Annual non-yet-taxed salary desire str Person desire, can change over time name str [readonly] Person name, you'd better use it when talking to them Worker.__init__ Worker.work Person.talk Worker.__init__ Worker.work work to the best ability</text>
@@ -2268,6 +2420,22 @@
     <fullTitle>Znai: Content Extraction, Callout Comments [Java]</fullTitle>
     <text>
       <text>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/java/content-extraction#title</url>
+    <fullTitle>Znai: Content Extraction, Title [Java]</fullTitle>
+    <text>
+      <text>Use title property to specify extracted code snippet title :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, title: "my snippet"} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/java/content-extraction#anchor</url>
+    <fullTitle>Znai: Content Extraction, Anchor [Java]</fullTitle>
+    <text>
+      <text>Use anchorId to make a code snippet linkable. Hover mouse over title to see a clickable anchor. :include-java: HelloWorld.java { entry: "sampleMethod", bodyOnly: true, title: "my snippet", anchorId: "my-java-snippet" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2528,15 +2696,15 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2022#160</url>
+    <url>/znai/release-notes/2022#1-60</url>
     <fullTitle>Znai: 2022 Releases, 1.60 [Release Notes]</fullTitle>
     <text>
-      <text>Doc: znai-development/local-build Local Build instructions</text>
+      <text>Fix: visuals/images#fit Fit Image in mobile view Doc: znai-development/local-build Local Build instructions Add: Three columns layout/columns#three-columns Layout**** Add: visuals/cards Cards Add: Auto anchor id from title for layout/tables#title Tables Add: Auto anchor id from title for snippets/external-code-snippets#title Snippets Add: Auto anchor id from title for visuals/images#title Images Add: Table layout/tables#no-gap No Gap Add: Table layout/tables#collapse Collapse Add: snippets/external-code-snippets#highlights highlight by text highlights all matches Add: API Parameters snippets/api-parameters#no-gap No Gap Remove visuals/images Image padding in mobile view Add: Image visuals/images#collapse Collapse Add: Image visuals/images#no-gap No Gap Add: Mobile and Desktop only visuals/images#mobile-and-desktop-only Images Add: Python content python/content-extraction#anchor Anchor Add: Java content java/content-extraction#anchor Anchor Rename: compact property is now snippets/external-code-snippets#no-gap noGap Add: layout/tables Table formal parameters support Add: Table layout/tables#anchor Anchor Add: Image visuals/images#anchor Anchor Add: snippets/external-code-snippets#my-code-anchor External Snippet Anchor Add: Attention Sign visuals/attention-signs#fence-block Fence Block</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2022#1591</url>
+    <url>/znai/release-notes/2022#1-59-1</url>
     <fullTitle>Znai: 2022 Releases, 1.59.1 [Release Notes]</fullTitle>
     <text>
       <text>Fix: java/content-extraction#method-body include-java body only takes first method when overloads are present but no types are specified Fix: next/prev page chapter name is properly rendered (was undefined) Fix: layout/tabs Tabs don't confuse Fence block of snippets/api-parameters API Parameters with tab name Fix: remove possible duplication of snippets/api-parameters API Parameters when param names match Add tooltip to TOC items to display full title in case of overflow Add syntax highlight for SQL , GraphQL , Cypher snippets/code-snippets#specifying-language code snippets Add visuals/attention-signs#tip Tip and visuals/attention-signs#recommendation Recommendation attention signs visuals/PlantUml PlantUml version bump to 1.2022.6</text>
@@ -2544,23 +2712,23 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2022#159</url>
+    <url>/znai/release-notes/2022#1-59</url>
     <fullTitle>Znai: 2022 Releases, 1.59 [Release Notes]</fullTitle>
     <text>
-      <text>Fix: Centered visuals/images Image with horizontal scrollbar doesn't cut parts of image anymore Fix: visuals/images#fit Image Zoom now has vertical scroll for tall images Add visuals/charts#time-series Time Series option to visuals/charts Charts Add snippets/open-API Open API 3 support Add snippets/external-code-snippets#compact compact option to snippets/external-code-snippets Code Snippets Add snippets/external-code-snippets#collapse collapsible option to snippets/external-code-snippets Code Snippets snippets/api-parameters API Parameters expand nested by default when single root parameter Add snippets/api-parameters#collapsing-parameters collapsible option to snippets/api-parameters API Parameters Add title support for visuals/images#standard-markdown Standard Markdown Image Add code snippets class color to be distinct from the regular text Add flow/names#chapter-names Chapter Title Override via toc file</text>
+      <text>Fix: Centered visuals/images Image with horizontal scrollbar doesn't cut parts of image anymore Fix: visuals/images#fit Image Zoom now has vertical scroll for tall images Add visuals/charts#time-series Time Series option to visuals/charts Charts Add snippets/open-API Open API 3 support Add snippets/external-code-snippets#no-gap compact option to snippets/external-code-snippets Code Snippets Add snippets/external-code-snippets#collapse collapsible option to snippets/external-code-snippets Code Snippets snippets/api-parameters API Parameters expand nested by default when single root parameter Add snippets/api-parameters#collapsing-parameters collapsible option to snippets/api-parameters API Parameters Add title support for visuals/images#standard-markdown Standard Markdown Image Add code snippets class color to be distinct from the regular text Add flow/names#chapter-names Chapter Title Override via toc file</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2022#158</url>
+    <url>/znai/release-notes/2022#1-58</url>
     <fullTitle>Znai: 2022 Releases, 1.58 [Release Notes]</fullTitle>
     <text>
-      <text>Fix: Maven Plugin race condition between shutdown hook and apache FileUtils class unload Fix: CPP/auto-reference CPP Auto Ref method link color Fix: highlight python code snippet decorator Fix: Python multi-line token color during snippet render Fix: python multiline string parsing to properly highlight lines Fix: snippets/json JSON rendering order Fix: search popup on iPad now fits a browser window Fix: Enable visuals/images Image click to zoom on scaled down images Fix: layout/columns Column rendering when content starts with a link Fix: Empty layout/columns Column rendering crash Fix: visuals/images#border Image bottom border rendering Fix: Image explicit scale now respects visuals/image-annotations Annotations Placement Fix: iPad layout adjustments to battle 100vh rendering feature Doc: how to include snippets/json#incomplete-json json that is not valid Doc: Improved Examples on synergy-with-testing/web-UI Synergy With Testing Doc: Move CPP/doxygen-setup CPP to its own chapter Doc: Move python/content-extraction Python to its own chapter Doc: Move java/content-extraction Java to its own chapter Doc: fix example of flow/lookup-paths#class-path-lookup classpath lookup Rework layout/templates Templates example Doc: visuals/icons#inside-tables Table with Icons example Doc: Document visuals/image-annotations#pixel-ratio Image Pixel Ratio Doc: Update layout/columns Columns examples and text refactoring Doc: Rework introduction/what-is-this What Is This with more examples and reorganized order Doc: snippets/json#test-results JSON WebTau example Add visuals/image-annotations Auto Annotation Color for JSON annotations Add snippets/markdown#multiple-markdown-files include-markdowns sort parameter Image Annotation visuals/image-annotations#annotations-file From CSV File Add caching to python/auto-reference Python Parsing Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows image annotations Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows Tooltips Parse python/description-extraction#doc-parameters Python Returns PyDoc section Render python/auto-reference#finmoneymoney-properties Python Properties as snippets/api-parameters API Parameters Reflect visuals/headings Heading Style in Table Of Contents menu panel Add python/auto-reference#class-definition include-python-class: package.ClassName to display and define a class Add python/auto-reference#methodfunction-definition include-python-method: package.method_name to display a function signature, documentation and parameters Tweak color of code snippets of lang=markdown Removed global-references.js for handling cross-references in favor of lazy url evaluation at page generation time Add Python Doc params python/description-extraction#type-hints Type Hint support visuals/mermaid-diagrams#wide-mode Mermaid Diagrams Wide Mode visuals/mermaid-diagrams#external-file Mermaid Diagrams External File Add Graphviz visuals/graphviz-diagrams#fenced-block fenced block support Add collapse button for snippets/external-code-snippets#read-more Snippet Read More visuals/mermaid-diagrams Mermaid Diagrams dark mode and auto them switch visuals/image-annotations#manual-coordinates Image Annotation Coordinates during preview mode Change arrow visuals/image-annotations Image Annotations style to be single color and use tooltip Add automatic visuals/image-annotations Image Annotations badges textual description tooltips via ordered list Add tooltip for snippets/code-comments Code Comments Bullet Points Tweak visuals/images#fit Image Zoom style in dark and light themes Add snippets/api-parameters#wide-mode API Parameters Wide Mode Tweak snippets/api-parameters#title API Parameters Title style Add snippets/api-parameters API Parameters plugin parameters definition New visuals/images#title Image Title look and feel Add flow/support Support Title Add snippets/json#hidden-parts JSON Collapsed Paths validation Add formal plugin parameters to visuals/images Image Plugin Add visuals/image-annotations#badges Image Badge Annotation auto color detection Add snippets/json JSON fence plugin Add snippets/json JSON parameters formalization Add snippets/json#title JSON Auto Title feature Add Java Plugins parameters definition Add initial plugin parameters formalization. Enforce parameters validation for snippets/snippets-manipulation File Plugin Add snippets/json#code-references JSON Code References support More prominent colors for highlight of snippets/json JSON value Better error message in case of wrong znai CLI argument name Add --version param to znai CLI</text>
+      <text>Fix: Maven Plugin race condition between shutdown hook and apache FileUtils class unload Fix: CPP/auto-reference CPP Auto Ref method link color Fix: highlight python code snippet decorator Fix: Python multi-line token color during snippet render Fix: python multiline string parsing to properly highlight lines Fix: snippets/json JSON rendering order Fix: search popup on iPad now fits a browser window Fix: Enable visuals/images Image click to zoom on scaled down images Fix: layout/columns Column rendering when content starts with a link Fix: Empty layout/columns Column rendering crash Fix: visuals/images#border Image bottom border rendering Fix: Image explicit scale now respects visuals/image-annotations Annotations Placement Fix: iPad layout adjustments to battle 100vh rendering feature Doc: how to include snippets/json#incomplete-json json that is not valid Doc: Improved Examples on synergy-with-testing/web-UI Synergy With Testing Doc: Move CPP/doxygen-setup CPP to its own chapter Doc: Move python/content-extraction Python to its own chapter Doc: Move java/content-extraction Java to its own chapter Doc: fix example of flow/lookup-paths#class-path-lookup classpath lookup Rework layout/templates Templates example Doc: visuals/icons#inside-tables Table with Icons example Doc: Document visuals/image-annotations#pixel-ratio Image Pixel Ratio Doc: Update layout/columns Columns examples and text refactoring Doc: Rework introduction/what-is-this What Is This with more examples and reorganized order Doc: snippets/json#test-results JSON WebTau example Add visuals/image-annotations Auto Annotation Color for JSON annotations Add snippets/markdown#multiple-markdown-files include-markdowns sort parameter Image Annotation visuals/image-annotations#annotations-file From CSV File Add caching to python/auto-reference Python Parsing Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows image annotations Add visuals/image-annotations#rectangles-and-arrows Rectangles And Arrows Tooltips Parse python/description-extraction#doc-parameters Python Returns PyDoc section Render python/auto-reference#fin-money-money-properties Python Properties as snippets/api-parameters API Parameters Reflect visuals/headings Heading Style in Table Of Contents menu panel Add python/auto-reference#class-definition include-python-class: package.ClassName to display and define a class Add python/auto-reference#method-function-definition include-python-method: package.method_name to display a function signature, documentation and parameters Tweak color of code snippets of lang=markdown Removed global-references.js for handling cross-references in favor of lazy url evaluation at page generation time Add Python Doc params python/description-extraction#type-hints Type Hint support visuals/mermaid-diagrams#wide-mode Mermaid Diagrams Wide Mode visuals/mermaid-diagrams#external-file Mermaid Diagrams External File Add Graphviz visuals/graphviz-diagrams#fenced-block fenced block support Add collapse button for snippets/external-code-snippets#read-more Snippet Read More visuals/mermaid-diagrams Mermaid Diagrams dark mode and auto them switch visuals/image-annotations#manual-coordinates Image Annotation Coordinates during preview mode Change arrow visuals/image-annotations Image Annotations style to be single color and use tooltip Add automatic visuals/image-annotations Image Annotations badges textual description tooltips via ordered list Add tooltip for snippets/code-comments Code Comments Bullet Points Tweak visuals/images#fit Image Zoom style in dark and light themes Add snippets/api-parameters#wide-mode API Parameters Wide Mode Tweak snippets/api-parameters#title API Parameters Title style Add snippets/api-parameters API Parameters plugin parameters definition New visuals/images#title Image Title look and feel Add flow/support Support Title Add snippets/json#hidden-parts JSON Collapsed Paths validation Add formal plugin parameters to visuals/images Image Plugin Add visuals/image-annotations#badges Image Badge Annotation auto color detection Add snippets/json JSON fence plugin Add snippets/json JSON parameters formalization Add snippets/json#title JSON Auto Title feature Add Java Plugins parameters definition Add initial plugin parameters formalization. Enforce parameters validation for snippets/snippets-manipulation File Plugin Add snippets/json#code-references JSON Code References support More prominent colors for highlight of snippets/json JSON value Better error message in case of wrong znai CLI argument name Add --version param to znai CLI</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2022#157</url>
+    <url>/znai/release-notes/2022#1-57</url>
     <fullTitle>Znai: 2022 Releases, 1.57 [Release Notes]</fullTitle>
     <text>
       <text>Fix: selected TOC item padding Fix: layout/tables Table text selection during preview is not auto deselected Fix: snippets/external-code-snippets#read-more read more option change during preview now properly updates the snippet Fix: snippets/math Latex more complex math render by adding missing fonts Fix: remove extra top margin in case of code snippet in between code snippets in two columns mode Fix: markdown snippets render extra new line at the end Fix: search preview popup has fixed height now to avoid size jump Use standard args parsing for flow/lookup-paths#cli-parameter CLI Lookup Paths Add CPP/doxygen-setup#setup Doxygen From Zip support Add visuals/charts#presentation Charts Presentation support for all breakpoint support that creates a slide for every textual value Add visuals/charts#presentation Charts Presentation breakpoint validation Add visuals/charts#presentation Bar Chart presentation mode breakpoints support Add flow/lookup-paths#zip-and-jar-lookup Zip and Jar lookup path support to access content from within archives Add visuals/charts#presentation Pie Chart presentation mode breakpoints support Better validation of snippets/api-parameters#external-json-file API Parameters input JSON Add automatic hard wrap and snippets/api-parameters#long-parameter-names noWrap option to snippets/api-parameters API Parameters to handle long parameter names without spaces Add visuals/smart-bullet-points#steps Smart Bullets Points Steps align option Add visuals/charts#wide-mode Charts Wide Mode Add visuals/charts#inlined-data Charts Inlined Data Add visuals/images#external-image External Images support and image URL validation Add presentation support for visuals/charts#presentation Line Chart breakpoints Remove generic include-chart plugin that uses Victory Chart for rendering Add visuals/charts#legend chart legend Add dark theme support for visuals/charts Charts Migrate visuals/charts#pie Pie Chart to https://echarts.apache.org/ ECharts Migrate visuals/charts#line Line Chart to https://echarts.apache.org/ ECharts Add stack mode to visuals/charts#bar Bar Chart visuals/charts#bar Bar Chart horizontal mode with height setting Add multiple values per tick support to visuals/charts#bar Bar Chart Wrap code option for snippets/code-snippets#wrap-code Fence Block and snippets/external-code-snippets#wrap-code External Code Landing hub opens documentation in the same window and not a new tab Add snippets/snippets-manipulation#multiple-surrounded-by surrounded by null as separator value No extra separator for java/content-extraction#multiple-entries java and snippets/groovy#multiple-bodies groovy entries separator</text>
@@ -2568,7 +2736,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2022#156</url>
+    <url>/znai/release-notes/2022#1-56</url>
     <fullTitle>Znai: 2022 Releases, 1.56 [Release Notes]</fullTitle>
     <text>
       <text>Fix: search result preview highlight across styles Fix highlight code lines when multiline comment is present (e.g. /* */ ) Fix: using : , - , + chars in Search doesn't lead to crash anymore Fix: search popup window height is consistent size when jumping between results Added snippets/markdown#partial-markdown include partial markdown Added multiple entries separator for java/content-extraction#multiple-bodies Java and snippets/groovy#multiple-bodies Groovy Added snippets/groovy#multiple-bodies multiple bodies only using entry for Groovy Added java/content-extraction#multiple-bodies multiple bodies only using entry for Java flow/landing index.md is now optional Add validate external links flag --validate-external-links Add visuals/image-annotations#badges image fence plugin with badge annotations Handle loop reference in snippets/open-API Open API Generate plugin params usage statistics file Generate plugins usage statistics file</text>
@@ -2576,7 +2744,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#155</url>
+    <url>/znai/release-notes/2021#1-55</url>
     <fullTitle>Znai: 2021 Releases, 1.55 [Release Notes]</fullTitle>
     <text>
       <text>Doc: moved snippets/snippets-manipulation Snippets Manipulation to its own page Doc: rewrite of introduction/what-is-this What Is This starting page Extra spacing between section title and visuals/text-badge#part-of-heading its badge Color tweaks for snippets/code-comments#callout-comments code snippet bullet points and visuals/text-badge text badge for light and dark theme Normalize doxygen member CPP/auto-reference#specific-member-by-args selection by args Add snippets/snippets-manipulation#replace Replace snippet manipulation Add snippets/snippets-manipulation#multiple-surrounded-by Surrounded By Multiple blocks support Add snippets/CLI CLI fence plugin Tweaked text selection color for dark theme Fix: snippets/CLI#ansi-colors CLI ANSI output background colors Fix: snippets highlight regression Fix: win cmd script to include passed params</text>
@@ -2584,7 +2752,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#154</url>
+    <url>/znai/release-notes/2021#1-54</url>
     <fullTitle>Znai: 2021 Releases, 1.54 [Release Notes]</fullTitle>
     <text>
       <text>Doc: more examples Add Doxygen CPP/description-extraction#ignore-template-parameters ignore template parameter Add Doxygen member CPP/auto-reference#all-matching-signatures select by args Add CPP/auto-reference#specific-member-by-args doxygen all overloads at once Add CPP/auto-reference#compound doxygen compound to include class description and methods/attributes Add java/description-extraction#inner-classes inner classes reference to java doc parsing Add visuals/headings API heading style Add CPP/auto-reference#member-signature-only doxygen member signature Add CPP/description-extraction#extract-parameters doxygen docs params to embed as snippets/api-parameters API parameters Add CPP/description-extraction doxygen docs to embed comments text Add visuals/text-badge#part-of-heading heading text badge Add visuals/text-badge text badge Add snippets/code-comments#remove-comments commentsType: remove to remove comments from a code snippet Add uploadzip command to upload any html zip to znai hub Add visuals/graphviz-diagrams graphviz include plugin Plugin parameters parsing error provides more details about plugin id and provided parameters Add include , fence and inline code plugin failure context: id, params Add layout/tabs Tabs presence validation Enhance python/content-extraction python variable extraction to include all assignments, not just global variables Fix: Enterprise nix based authz last user group is now taken into account Fix: icon alignment regression in visuals/attention-signs Attention Paragraphs</text>
@@ -2592,7 +2760,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#153</url>
+    <url>/znai/release-notes/2021#1-53</url>
     <fullTitle>Znai: 2021 Releases, 1.53 [Release Notes]</fullTitle>
     <text>
       <text>Add support for parameter names with dashes ( - ) to python/description-extraction#doc-parameters python doc params Fix visuals/image-annotations Image Annotations placement when fit: true is present Fix python/content-extraction python variable extraction crashing in certain cases by adding more checks Fix: Parsing of Python data classes that include default field values</text>
@@ -2600,7 +2768,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#152</url>
+    <url>/znai/release-notes/2021#1-52</url>
     <fullTitle>Znai: 2021 Releases, 1.52 [Release Notes]</fullTitle>
     <text>
       <text>Add enterprise server log rotation Force max width for type and name for snippets/api-parameters API Parameters. Reduce title height. Exclude Parameters section type during python/description-extraction#doc-string python doc parsing Handle optional type during python/description-extraction#doc-parameters python doc params parsing Added Scala syntax highlight Added layout/tables#highlight Table row highlight by index Handle dash ( ---- ) for python/description-extraction#doc-parameters python doc params parsing Add flow/page-toc Page Table Of Contents Add Table layout/tables#wide-mode wide mode Add Table layout/tables#min-width column min width Add layout/tables#width Table percentage width Add Windows znai.cmd script Add support for variables to python/content-extraction include-python and revamped the entire doc section Fix: Table layout/tables#title title rendering when scroll is present</text>
@@ -2608,15 +2776,15 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#151</url>
+    <url>/znai/release-notes/2021#1-51</url>
     <fullTitle>Znai: 2021 Releases, 1.51 [Release Notes]</fullTitle>
     <text>
-      <text>Doc: introduction/getting-started#brew brew install instruction Added initial python/description-extraction#doc-parameters pythod doc params support Python parsing is more robust and partially work with older versions of python Explicit use of annotate:true to use matching visuals/image-annotations#annotations-path-shortcut image annotations file Fix: handle dashes in visuals/flow-diagrams flow diagram node ids</text>
+      <text>Doc: introduction/getting-started#command-line-brew brew install instruction Added initial python/description-extraction#doc-parameters pythod doc params support Python parsing is more robust and partially work with older versions of python Explicit use of annotate:true to use matching visuals/image-annotations#annotations-path-shortcut image annotations file Fix: handle dashes in visuals/flow-diagrams flow diagram node ids</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#150</url>
+    <url>/znai/release-notes/2021#1-50</url>
     <fullTitle>Znai: 2021 Releases, 1.50 [Release Notes]</fullTitle>
     <text>
       <text>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add python/content-extraction include-python to include function's content Rename paramsToHighlight -> highlight for :include-cli-command: plugin Rename scaleRatio -> scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/snippets-manipulation#surrounded-by documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/snippets-manipulation#include-regexp snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added python/description-extraction#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</text>
@@ -2624,7 +2792,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#149</url>
+    <url>/znai/release-notes/2021#1-49</url>
     <fullTitle>Znai: 2021 Releases, 1.49 [Release Notes]</fullTitle>
     <text>
       <text>No notes</text>
@@ -2632,7 +2800,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#148</url>
+    <url>/znai/release-notes/2021#1-48</url>
     <fullTitle>Znai: 2021 Releases, 1.48 [Release Notes]</fullTitle>
     <text>
       <text>No notes</text>
@@ -2640,7 +2808,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#147</url>
+    <url>/znai/release-notes/2021#1-47</url>
     <fullTitle>Znai: 2021 Releases, 1.47 [Release Notes]</fullTitle>
     <text>
       <text>No notes</text>
@@ -2648,7 +2816,7 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/release-notes/2021#146</url>
+    <url>/znai/release-notes/2021#1-46</url>
     <fullTitle>Znai: 2021 Releases, 1.46 [Release Notes]</fullTitle>
     <text>
       <text>No notes</text>

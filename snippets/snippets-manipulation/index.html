@@ -170,6 +170,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "py",
         "snippet" : "# example-import-block\nimport market\n# example-import-block\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example-cancel-trade\n    market.cancel_trade(id)\n    # example-cancel-trade\n\nif __name__  == \"__main__\":\n    main()",
         "title" : "file with examples",
+        "anchorId" : "surrounded-by-file-with-examples",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -181,6 +182,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "market.cancel_trade(id)",
         "title" : "extracted result",
         "surroundedBy" : "# example-cancel-trade",
+        "anchorId" : "surrounded-by-extracted-result",
         "type" : "Snippet"
       } ]
     }, {
@@ -209,6 +211,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "import market\nmarket.cancel_trade(id)",
         "title" : "extracted result",
         "surroundedBy" : [ "# example-import-block", "# example-cancel-trade" ],
+        "anchorId" : "multiple-surrounded-by-extracted-result",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -233,6 +236,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "extracted result",
         "surroundedBy" : [ "# example-import-block", "# example-cancel-trade" ],
         "surroundedBySeparator" : [ "..." ],
+        "anchorId" : "multiple-surrounded-by-extracted-result-2",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -281,6 +285,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "surroundedBy" : "# example-cancel-trade",
         "replace" : [ "id", "\"trade_id\"" ],
         "title" : "replace result",
+        "anchorId" : "replace-replace-result",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -306,6 +311,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "replace multiple result",
         "surroundedBy" : "# example-cancel-trade",
         "replace" : [ [ "id", "\"trade_id\"" ], [ "market", "api" ] ],
+        "anchorId" : "replace-replace-multiple-result",
         "type" : "Snippet"
       } ]
     }, {
@@ -329,6 +335,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "hello1 world2\nanother3 line4",
         "autoTitle" : true,
         "title" : "replace-all-group.txt",
+        "anchorId" : "replace-regexp-groups-replace-all-group-txt",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -340,10 +347,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "1-hello 2-world\n3-another 4-line",
         "title" : "replace regexp group result",
         "replace" : [ "(\\w+)(\\d+)", "$2-$1" ],
+        "anchorId" : "replace-regexp-groups-replace-regexp-group-result",
         "type" : "Snippet"
       } ]
     }, {
-      "id" : "startend-line",
+      "id" : "start-end-line",
       "title" : "Start/End Line",
       "type" : "Section",
       "content" : [ {
@@ -368,6 +376,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "py",
         "snippet" : "# example-import-block\nimport market\n# example-import-block\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example-cancel-trade\n    market.cancel_trade(id)\n    # example-cancel-trade\n\nif __name__  == \"__main__\":\n    main()",
         "title" : "file with examples",
+        "anchorId" : "start-end-line-file-with-examples",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -380,6 +389,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "extracted example",
         "startLine" : "example: book trade",
         "endLine" : "example-end",
+        "anchorId" : "start-end-line-extracted-example",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -429,6 +439,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "startLine" : "example: book trade",
         "endLine" : "example-end",
         "excludeStartEnd" : true,
+        "anchorId" : "start-end-line-extracted-result",
         "type" : "Snippet"
       } ]
     }, {
@@ -457,6 +468,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "import market",
         "includeRegexp" : [ "import " ],
         "title" : "include by regexp result",
+        "anchorId" : "include-regexp-include-by-regexp-result",
         "type" : "Snippet"
       } ]
     }, {
@@ -485,10 +497,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "import market\n\ndef main():\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n\n    market.cancel_trade(id)\n\nif __name__  == \"__main__\":\n    main()",
         "excludeRegexp" : [ "# example" ],
         "title" : "exclude by regexp result",
+        "anchorId" : "exclude-regexp-exclude-by-regexp-result",
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355301,
+    "lastModifiedTime" : 1663025548324,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Snippets Manipulation",
@@ -510,7 +523,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "id" : "replace-regexp-groups"
       }, {
         "title" : "Start/End Line",
-        "id" : "startend-line"
+        "id" : "start-end-line"
       }, {
         "title" : "Include Regexp",
         "id" : "include-regexp"

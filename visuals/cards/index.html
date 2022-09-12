@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: Cards</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Image And Title</h1></header>
+<p>Use card fenced block plugin to render a card. markdown ```card books.jpg {title: &quot;My Card&quot;} Markdown content of the card goes here * item one * item two * item three ``` Markdown content of the card goes hereitem one item two item three Note: Card scales down large image to fit</p>
+</article>
+
+<article>
+<header><h1>Image Height And Background</h1></header>
+<p>When you use icon like images, e.g. SVGs, then they will take all the horizontal available space, and it may not be ideal.Use imageHeight to force image height. Use imageBackground to specify a https://www.w3schools.com/css/css3_gradients.asp background color/gradient. markdown ```card diamond.svg {title: &quot;My Card&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))&quot;} Markdown content of the card goes here * item one * item two * item three ``` Markdown content of the card goes hereitem one item two item three</p>
+</article>
+
+<article>
+<header><h1>Multiple Columns</h1></header>
+<p>Use layout/columns Colums to arrange cards side by side Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass Markdown content of the card goes hereitem one item two item three Easy to use API firstName String description with markdown support score Integer another description line with markdown support markdown ```````columns left: ```card diamond.svg {title: &quot;Card Title&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))&quot;} Markdown content goes here :include-file: snippets/file-name.js ``` middle: ```card small-book.png {title: &quot;Book&quot;, imageHeight: 120} Markdown content of the card goes here * item one * item two * item three ``` right: `````card star.svg {title: &quot;API for the Win&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))&quot;} Easy to use API ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ````` ```````` Note: Card plugin is designed to work with snippets/external-code-snippets code snippets and with snippets/api-parameters API Parameters by reducing spacing integrating border lines</p>
+</article>
+
+<article>
+<header><h1>Links</h1></header>
+<p>Card plugin automatically converts links at the end of the fenced block content into dedicated card links. Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass snippets/external-code-snippets Learn More markdown ```card diamond.svg {title: &quot;Card Title&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))&quot;} Markdown content goes here :include-file: snippets/file-name.js [Learn More](snippets/external-code-snippets) ```</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "Questions/Suggestions"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "image-and-title",
+      "title" : "Image And Title",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "card",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " fenced block plugin to render a card.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "```card books.jpg {title: \"My Card\"}\nMarkdown content of the card goes here\n* item one\n* item two\n* item three\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "My Card",
+        "imageSrc" : "/znai/visuals/books.jpg",
+        "bodyContent" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Markdown content of the card goes here",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "bulletMarker" : "*",
+          "tight" : true,
+          "type" : "BulletList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item three",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "type" : "Card"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Card scales down large image to fit",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "image-height-and-background",
+      "title" : "Image Height And Background",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you use icon like images, e.g. SVGs, then they will take all the horizontal available space, and it may not be ideal.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "imageHeight",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to force image height. Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "imageBackground",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to specify a ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://www.w3schools.com/css/css3_gradients.asp",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "background color/gradient",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "```card diamond.svg {title: \"My Card\", imageHeight: 120, imageBackground: \"linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))\"}\nMarkdown content of the card goes here\n* item one\n* item two\n* item three\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "My Card",
+        "imageHeight" : 120,
+        "imageBackground" : "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))",
+        "imageSrc" : "/znai/visuals/diamond.svg",
+        "bodyContent" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Markdown content of the card goes here",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "bulletMarker" : "*",
+          "tight" : true,
+          "type" : "BulletList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item one",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item three",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ],
+        "type" : "Card"
+      } ]
+    }, {
+      "id" : "multiple-columns",
+      "title" : "Multiple Columns",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/layout/columns",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Colums",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " to arrange cards side by side",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "title" : "Card Title",
+            "imageHeight" : 120,
+            "imageBackground" : "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))",
+            "imageSrc" : "/znai/visuals/diamond.svg",
+            "bodyContent" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Markdown content goes here",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "lang" : "js",
+              "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+              "type" : "Snippet"
+            } ],
+            "type" : "Card"
+          } ]
+        }, {
+          "content" : [ {
+            "title" : "Book",
+            "imageHeight" : 120,
+            "imageSrc" : "/znai/visuals/small-book.png",
+            "bodyContent" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Markdown content of the card goes here",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "bulletMarker" : "*",
+              "tight" : true,
+              "type" : "BulletList",
+              "content" : [ {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item one",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              }, {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item two",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              }, {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "item three",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              } ]
+            } ],
+            "type" : "Card"
+          } ]
+        }, {
+          "content" : [ {
+            "title" : "API for the Win",
+            "imageHeight" : 120,
+            "imageBackground" : "linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))",
+            "imageSrc" : "/znai/visuals/star.svg",
+            "bodyContent" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Easy to use API",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "parameters" : [ {
+                "name" : "firstName",
+                "type" : [ {
+                  "text" : "String",
+                  "url" : ""
+                } ],
+                "anchorId" : "firstName",
+                "description" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "description with ",
+                    "type" : "SimpleText"
+                  }, {
+                    "type" : "Emphasis",
+                    "content" : [ {
+                      "text" : "markdown",
+                      "type" : "SimpleText"
+                    } ]
+                  }, {
+                    "text" : " support",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              }, {
+                "name" : "score",
+                "type" : [ {
+                  "text" : "Integer",
+                  "url" : ""
+                } ],
+                "anchorId" : "score",
+                "description" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "another description line with ",
+                    "type" : "SimpleText"
+                  }, {
+                    "type" : "Emphasis",
+                    "content" : [ {
+                      "text" : "markdown",
+                      "type" : "SimpleText"
+                    } ]
+                  }, {
+                    "text" : " support",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              } ],
+              "type" : "ApiParameters"
+            } ],
+            "type" : "Card"
+          } ]
+        } ],
+        "config" : { },
+        "type" : "Columns"
+      }, {
+        "lang" : "markdown",
+        "snippet" : "```````columns\nleft:\n```card diamond.svg {title: \"Card Title\", imageHeight: 120, imageBackground: \"linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))\"}\nMarkdown content goes here\n\n:include-file: snippets/file-name.js \n```\n\nmiddle:\n```card small-book.png {title: \"Book\", imageHeight: 120}\nMarkdown content of the card goes here\n* item one\n* item two\n* item three\n```\n\nright:\n`````card star.svg {title: \"API for the Win\", imageHeight: 120, imageBackground: \"linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))\"}\nEasy to use API\n```api-parameters\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n`````\n````````\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Card plugin is designed to work with ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/external-code-snippets",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "code snippets",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " and with ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/api-parameters",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "API Parameters",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " by reducing spacing integrating border lines",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "links",
+      "title" : "Links",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Card plugin automatically converts links at the end of the fenced block content into dedicated card links.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "title" : "Card Title",
+        "imageHeight" : 120,
+        "imageBackground" : "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))",
+        "imageSrc" : "/znai/visuals/diamond.svg",
+        "bodyContent" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Markdown content goes here",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "lang" : "js",
+          "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+          "type" : "Snippet"
+        }, {
+          "type" : "Paragraph",
+          "content" : [ {
+            "url" : "/znai/snippets/external-code-snippets",
+            "isFile" : false,
+            "type" : "Link",
+            "content" : [ {
+              "text" : "Learn More",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "Card"
+      }, {
+        "lang" : "markdown",
+        "snippet" : "```card diamond.svg {title: \"Card Title\", imageHeight: 120, imageBackground: \"linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))\"}\nMarkdown content goes here\n\n:include-file: snippets/file-name.js \n\n[Learn More](snippets/external-code-snippets)\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      } ]
+    } ],
+    "lastModifiedTime" : 1663025548336,
+    "tocItem" : {
+      "chapterTitle" : "Visuals",
+      "pageTitle" : "Cards",
+      "pageMeta" : { },
+      "dirName" : "visuals",
+      "fileName" : "cards",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Image And Title",
+        "id" : "image-and-title"
+      }, {
+        "title" : "Image Height And Background",
+        "id" : "image-height-and-background"
+      }, {
+        "title" : "Multiple Columns",
+        "id" : "multiple-columns"
+      }, {
+        "title" : "Links",
+        "id" : "links"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

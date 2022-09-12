@@ -90,8 +90,13 @@
 </article>
 
 <article>
-<header><h1>Definition</h1></header>
-<p>To define columns use fenced code block ```columns left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the rightand can span multiple lines</p>
+<header><h1>Two Columns</h1></header>
+<p>To define two columns layout use fenced code block and left: and right: labels markdown ```columns left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the right and can span multiple lines</p>
+</article>
+
+<article>
+<header><h1>Three Columns</h1></header>
+<p>To define three columns layout use fenced code block and left: , middle: and right: labels markdown ```columns left: ### Pros {style: &quot;api&quot;} * Item One middle: ### Undecided {style: &quot;api&quot;} * Item Two * Item Three right: ### Cons {style: &quot;api&quot;} * Item Four ``` Pros Item One Undecided Item Two Item Three Cons Item Four</p>
 </article>
 
 <article>
@@ -107,6 +112,11 @@
 <article>
 <header><h1>Alignment</h1></header>
 <p>Use align to change a column content alignment. BeforeHello World AfterWorld Of Hellos ```columns {border: true, left: {align: &quot;right&quot;}} left: **Before** Hello World right: **After** World Of Hellos ```</p>
+</article>
+
+<article>
+<header><h1>Presentation Mode</h1></header>
+<p>In Presentation Mode each column content will appear on slide transition</p>
 </article>
 </section>
 </div>
@@ -199,18 +209,30 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "id" : "definition",
-      "title" : "Definition",
+      "id" : "two-columns",
+      "title" : "Two Columns",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To define columns use fenced code block",
+          "text" : "To define two columns layout use fenced code block and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "left:",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "right:",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " labels",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
-        "snippet" : "```columns\nleft: \nthis content goes to the left\n\nand can span multiple lines\nright: this content goes to the right\n\nand can span multiple lines\n```\n",
+        "lang" : "markdown",
+        "snippet" : "```columns\nleft: \nthis content goes to the left\n\nand can span multiple lines\n\nright: \nthis content goes to the right\nand can span multiple lines\n```\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -234,12 +256,124 @@ ReactDOM.render(React.createElement(Documentation, {
             "content" : [ {
               "text" : "this content goes to the right",
               "type" : "SimpleText"
-            } ]
-          }, {
-            "type" : "Paragraph",
-            "content" : [ {
+            }, {
+              "type" : "SoftLineBreak"
+            }, {
               "text" : "and can span multiple lines",
               "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "config" : { },
+        "type" : "Columns"
+      } ]
+    }, {
+      "id" : "three-columns",
+      "title" : "Three Columns",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To define three columns layout use fenced code block and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "left:",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "middle:",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "right:",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " labels",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "```columns\nleft: \n### Pros {style: \"api\"}\n* Item One\n\nmiddle: \n### Undecided {style: \"api\"}\n* Item Two\n* Item Three\n\nright:\n### Cons {style: \"api\"}\n* Item Four\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "style" : "api",
+            "id" : "three-columns-pros",
+            "level" : 3,
+            "title" : "Pros",
+            "type" : "SubHeading"
+          }, {
+            "bulletMarker" : "*",
+            "tight" : true,
+            "type" : "BulletList",
+            "content" : [ {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Item One",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "style" : "api",
+            "id" : "three-columns-undecided",
+            "level" : 3,
+            "title" : "Undecided",
+            "type" : "SubHeading"
+          }, {
+            "bulletMarker" : "*",
+            "tight" : true,
+            "type" : "BulletList",
+            "content" : [ {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Item Two",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Item Three",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            } ]
+          } ]
+        }, {
+          "content" : [ {
+            "style" : "api",
+            "id" : "three-columns-cons",
+            "level" : 3,
+            "title" : "Cons",
+            "type" : "SubHeading"
+          }, {
+            "bulletMarker" : "*",
+            "tight" : true,
+            "type" : "BulletList",
+            "content" : [ {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "Item Four",
+                  "type" : "SimpleText"
+                } ]
+              } ]
             } ]
           } ]
         } ],
@@ -457,8 +591,19 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
+    }, {
+      "id" : "presentation-mode",
+      "title" : "Presentation Mode",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "In Presentation Mode each column content will appear on slide transition",
+          "type" : "SimpleText"
+        } ]
+      } ]
     } ],
-    "lastModifiedTime" : 1661276355293,
+    "lastModifiedTime" : 1663025548316,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Columns",
@@ -470,8 +615,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Information Layout",
         "id" : "information-layout"
       }, {
-        "title" : "Definition",
-        "id" : "definition"
+        "title" : "Two Columns",
+        "id" : "two-columns"
+      }, {
+        "title" : "Three Columns",
+        "id" : "three-columns"
       }, {
         "title" : "Sizes",
         "id" : "sizes"
@@ -481,6 +629,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Alignment",
         "id" : "alignment"
+      }, {
+        "title" : "Presentation Mode",
+        "id" : "presentation-mode"
       } ]
     }
   }

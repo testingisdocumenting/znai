@@ -95,6 +95,16 @@
 </article>
 
 <article>
+<header><h1>Title</h1></header>
+<p>Use the title property to specify an extracted snippet title. :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true, title: &quot;extracted snippet&quot;} print(&quot;hello&quot;)</p>
+</article>
+
+<article>
+<header><h1>Anchor</h1></header>
+<p>Use anchorId to make a code snippet linkable. Hover mouse over title to see a clickable anchor. :include-python: python/example.py { entry: &quot;Animal.says&quot;, bodyOnly: true, title: &quot;extracted snippet&quot;, anchorId: &quot;my-extracted-snippet&quot; } print(&quot;hello&quot;)</p>
+</article>
+
+<article>
 <header><h1>Variable</h1></header>
 <p>To show a variable's definition and assignment: :include-python: python/example.py {entry: &quot;my_var&quot;} my_var = &quot;a variable&quot; To show only a variable's value: :include-python: python/example.py {entry: &quot;my_var&quot;, bodyOnly: true} &quot;a variable&quot;</p>
 </article>
@@ -156,6 +166,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "my_var = \"a variable\"\n\n\ndef my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2\n\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
         "autoTitle" : true,
         "title" : "python/example.py",
+        "anchorId" : "content-python-example-py",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -242,6 +253,66 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     }, {
+      "id" : "title",
+      "title" : "Title",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " property to specify an extracted snippet title.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\", bodyOnly: true, title: \"extracted snippet\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "python",
+        "snippet" : "print(\"hello\")",
+        "entry" : "Animal.says",
+        "bodyOnly" : true,
+        "title" : "extracted snippet",
+        "anchorId" : "title-extracted-snippet",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "anchor",
+      "title" : "Anchor",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "anchorId",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to make a code snippet linkable. Hover mouse over title to see a clickable anchor.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-python: python/example.py {\n  entry: \"Animal.says\", \n  bodyOnly: true,\n  title: \"extracted snippet\",\n  anchorId: \"my-extracted-snippet\"\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "python",
+        "snippet" : "print(\"hello\")",
+        "entry" : "Animal.says",
+        "bodyOnly" : true,
+        "title" : "extracted snippet",
+        "anchorId" : "my-extracted-snippet",
+        "type" : "Snippet"
+      } ]
+    }, {
       "id" : "variable",
       "title" : "Variable",
       "type" : "Section",
@@ -318,7 +389,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1661276355293,
+    "lastModifiedTime" : 1663025548316,
     "tocItem" : {
       "chapterTitle" : "Python",
       "pageTitle" : "Content Extraction",
@@ -332,6 +403,12 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Function",
         "id" : "function"
+      }, {
+        "title" : "Title",
+        "id" : "title"
+      }, {
+        "title" : "Anchor",
+        "id" : "anchor"
       }, {
         "title" : "Variable",
         "id" : "variable"
