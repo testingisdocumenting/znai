@@ -48,7 +48,7 @@
     --znai-blockquote-border-color: #333;
     --zani-blockquote-background-color: #181e22;
 
-    --znai-card-shadow: 0 2px 2px 0 rgb(0 0 0 / 74%), 0 3px 1px -2px rgb(0 0 0 / 72%), 0 1px 5px 0 rgb(0 0 0 / 80%);
+    --znai-card-shadow: 0 2px 2px 0 rgb(0 0 0 / 74%), 0 3px 1px -2px rgb(0 0 0 / 72%), 0 0 5px 0 rgb(0 0 0 / 80%);
     --znai-card-link-separator-color: #141515;
 
     --znai-toc-title-color: #a0a1a0;

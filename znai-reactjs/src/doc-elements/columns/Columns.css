@@ -16,6 +16,7 @@
 
 .columns {
     display: flex;
+    gap: 20px;
     flex-wrap: nowrap;
 }
 
@@ -29,11 +30,6 @@
 
 .column {
     flex: 1;
-}
-
-.column:first-child {
-    margin-right: 10px;
-    padding-right: 10px;
 }
 
 .column .content-block {
@@ -62,8 +58,7 @@
 
 .column.border {
     border-right: 1px solid var(--znai-brand-primary-color);
-    margin-right: 20px;
-    padding-right: 20px;
+    padding-right: 10px;
 }
 
 .columns.mobile .column.border {

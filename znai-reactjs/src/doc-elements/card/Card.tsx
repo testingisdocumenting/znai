@@ -100,6 +100,6 @@ export function Card({ title, elementsLibrary, imageSrc, imageHeight, imageBackg
     }
 
     const type = bodyContent[lastNonLinkIdx].type;
-    return type === "Snippet" || type === "ApiParameters";
+    return type === "Snippet" || type === "ApiParameters" || type === "Table";
   }
 }
