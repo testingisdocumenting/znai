@@ -48,9 +48,8 @@ Use [Colums](layout/columns) to arrange cards side by side
 
 ```````columns
 left:
-```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
-Easy to use API
-Robust language and API
+```card diamond.svg {title: "Card Title", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+Markdown content goes here
 
 :include-file: snippets/file-name.js 
 ```
@@ -76,9 +75,8 @@ score, Integer, another description line with *markdown* support
 `````````markdown
 ```````columns
 left:
-```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
-Easy to use API
-Robust language and API
+```card diamond.svg {title: "Card Title", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+Markdown content goes here
 
 :include-file: snippets/file-name.js 
 ```
@@ -108,9 +106,8 @@ Note: Card plugin is designed to work with [code snippets](snippets/external-cod
 
 Card plugin automatically converts links at the end of the fenced block content into dedicated card links.
 
-```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
-Easy to use API
-Robust language and API
+```card diamond.svg {title: "Card Title", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+Markdown content goes here
 
 :include-file: snippets/file-name.js 
 
@@ -118,9 +115,8 @@ Robust language and API
 ```
 
 `````markdown
-```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
-Easy to use API
-Robust language and API
+```card diamond.svg {title: "Card Title", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+Markdown content goes here
 
 :include-file: snippets/file-name.js 
 
