@@ -22,6 +22,7 @@ import {
   contentApiParameters,
   contentParagraph,
   contentParagraphSmall,
+  contentSingleLink,
   contentSnippet,
 } from "../demo-utils/contentGenerators";
 import { elementsLibrary } from "../DefaultElementsLibrary";
@@ -64,6 +65,23 @@ export function cardsDemo(registry: Registry) {
       imageSrc="small-book.png"
       // @ts-ignore
       bodyContent={[contentParagraphSmall(false), { ...contentSnippet(false), title: "example" }]}
+      elementsLibrary={elementsLibrary}
+    />
+  ));
+
+  registry.add("with link and code", () => (
+    <Card
+      title="My Card"
+      imageSrc="diamond.svg"
+      imageHeight={120}
+      imageBackground="linear-gradient(to right, #266465, #9198e5)"
+      bodyContent={[
+        contentParagraphSmall(false),
+        // @ts-ignore
+        { ...contentSnippet(false), title: "example" },
+        contentSingleLink("Learn More"),
+        contentSingleLink("report"),
+      ]}
       elementsLibrary={elementsLibrary}
     />
   ));

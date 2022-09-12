@@ -49,6 +49,7 @@ left:
 ```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
 Easy to use API
 Robust language and API
+
 :include-file: snippets/file-name.js 
 ```
 
@@ -68,6 +69,7 @@ left:
 ```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
 Easy to use API
 Robust language and API
+
 :include-file: snippets/file-name.js 
 ```
 
@@ -83,3 +85,27 @@ score, Integer, another description line with *markdown* support
 `````````
 
 Note: Card plugin is designed to work with [code snippets](snippets/external-code-snippets) and with [API Parameters](snippets/api-parameters) by reducing spacing integrating border lines
+
+# Links 
+
+Card plugin automatically converts links at the end of the fenced block content into dedicated card links.
+
+```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+Easy to use API
+Robust language and API
+
+:include-file: snippets/file-name.js 
+
+[Learn More](snippets/external-code-snippets)
+```
+
+`````markdown
+```card diamond.svg {title: "Error Proof", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
+Easy to use API
+Robust language and API
+
+:include-file: snippets/file-name.js 
+
+[Learn More](snippets/external-code-snippets)
+```
+`````

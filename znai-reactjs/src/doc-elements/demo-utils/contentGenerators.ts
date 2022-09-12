@@ -30,6 +30,25 @@ export function contentParagraph(isRightSide: boolean) {
   };
 }
 
+export function contentSingleLink(text: string) {
+  return {
+    type: "Paragraph",
+    content: [
+      {
+        url: "#url",
+        isFile: false,
+        type: "Link",
+        content: [
+          {
+            text,
+            type: "SimpleText",
+          },
+        ],
+      },
+    ],
+  };
+}
+
 export function contentParagraphSmall(isRightSide: boolean) {
   return {
     type: "Paragraph",

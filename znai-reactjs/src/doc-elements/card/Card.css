@@ -80,3 +80,17 @@
     font-size: 24px;
     margin-bottom: 16px;
 }
+
+.znai-card-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    border-top: 1px solid var(--znai-card-link-separator-color);
+    padding: 16px;
+}
+
+.znai-card-links a {
+    font-weight: 400;
+    text-transform: uppercase;
+    text-decoration: none;
+}
