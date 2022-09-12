@@ -37,6 +37,7 @@ interface Props {
   columns: ColumnContent[];
   config: {
     left?: ColumnConfig;
+    middle?: ColumnConfig;
     right?: ColumnConfig;
     border?: boolean;
   };
@@ -49,35 +50,29 @@ function Columns({ columns, config, isPresentation, slideIdx, ...props }: Props)
   const isMobile = useIsMobile();
 
   const leftStyle = buildStyle(config.left);
+  const middleStyle = buildStyle(config.middle);
   const rightStyle = buildStyle(config.right);
 
-  const showRight = !isPresentation || slideIdx >= 1;
-  const leftClassName = "column" + (config.border && showRight ? " border" : "");
+  const styles = columns.length > 2 ? [leftStyle, middleStyle, rightStyle] : [leftStyle, rightStyle];
+  const columnsToDisplay = isPresentation ? columns.slice(0, slideIdx + 1) : columns;
 
-  const leftContent = columns[0].content;
-  const rightContent = columns[1].content;
+  const hasCodeSnippetAsLastElement = columnsToDisplay.some((column) => isLastElementCodeSnippet(column.content));
 
-  const left = (
-    <div className={leftClassName} style={leftStyle}>
-      <props.elementsLibrary.DocElement {...props} content={leftContent} />
-    </div>
-  );
-
-  const right = showRight ? (
-    <div className="column" style={rightStyle}>
-      <props.elementsLibrary.DocElement {...props} content={rightContent} />
-    </div>
-  ) : null;
-
-  const hasCodeSnippetAsLastElement = isLastElementCodeSnippet(leftContent) || isLastElementCodeSnippet(rightContent);
-
-  const className =
+  const columnsClassName =
     "columns content-block" + (isMobile ? " mobile" : "") + (hasCodeSnippetAsLastElement ? " snippet-at-bottom" : "");
 
   return (
-    <div className={className}>
-      {left}
-      {right}
+    <div className={columnsClassName}>
+      {columnsToDisplay.map((column, idx) => {
+        const isLastColumn = idx === columnsToDisplay.length - 1;
+        const className = "column" + (config.border && !isLastColumn ? " border" : "");
+
+        return (
+          <div className={className} style={styles[idx]}>
+            <props.elementsLibrary.DocElement {...props} content={column.content} />
+          </div>
+        );
+      })}
     </div>
   );
 }

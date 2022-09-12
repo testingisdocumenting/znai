@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -69,8 +70,15 @@ public class ColumnsFencePlugin implements FencePlugin {
     }
 
     private List<Map<String, Object>> buildColumns(ColonDelimitedKeyValues columnsDefinitions) {
-        return Stream.of(columnsDefinitions.get("left"), columnsDefinitions.get("right")).
-                map(this::buildColumn).collect(toList());
+        List<String> definitions = new ArrayList<>();
+        definitions.add(columnsDefinitions.get("left"));
+        if (columnsDefinitions.has("middle")) {
+            definitions.add(columnsDefinitions.get("middle"));
+        }
+        definitions.add(columnsDefinitions.get("right"));
+
+        return definitions.stream()
+                .map(this::buildColumn).collect(toList());
     }
 
     private Map<String, Object> buildColumn(String markup) {
