@@ -80,6 +80,8 @@ Leverage multiple out-of-the box plugins to render charts, flow diagrams, annota
 
 :include-image: znai-charts.png {pixelRatio: 2.0}
 
+:include-image: znai-cards.png {pixelRatio: 2.0}
+
 # Dark/Light Runtime Mode
 
 Generate one documentation and let your users switch Dark/Light theme at runtime

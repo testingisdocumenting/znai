@@ -8,7 +8,7 @@ Build functional, maintainable, beautiful User Guides with `Znai`.
   * Embedding of JavaDoc/PyDoc documentation text, preserving styles
   * Beautiful API documentation capabilities  
   * Two Sides Page Layout Option with convenient example languages switch 
-  * Rich visuals like flow diagrams and charts
+  * Rich visuals like flow diagrams, charts and cards
   * etc
 * Instant pages navigation 
 * Local search
@@ -24,13 +24,19 @@ Embedding of [External Resources](https://testingisdocumenting.org/znai/snippets
 
 ![generated site example of external code](znai-docs/readme/znai-external-code.png)
 
-Rich Visuals such as [Charts](https://testingisdocumenting.org/znai/visuals/charts) and [Flow Diagrams](https://testingisdocumenting.org/znai/visuals/flow-diagrams)
+Rich Visuals such as [Charts](https://testingisdocumenting.org/znai/visuals/charts),
+[Flow Diagrams](https://testingisdocumenting.org/znai/visuals/flow-diagrams) and
+[Cards](https://testingisdocumenting.org/znai/visuals/cards)
 
 ![generated site example of charts](znai-docs/readme/znai-charts.png)
 
 Dark/Light mode switching 
 
 ![generated site example of flow diagram](znai-docs/readme/znai-flow-diagram.png)
+
+Cards support
+
+![generated site example of cards](znai-docs/readme/znai-cards.png)
 
 Beautiful way to document your API 
 
