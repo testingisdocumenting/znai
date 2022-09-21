@@ -127,7 +127,7 @@ public class PluginParamsDefinition {
                 boolean isTypeMatch = param.type.isValid(value);
                 if (!isTypeMatch) {
                     typeMismatches.add(name + " given: " + renderGiven(value) +
-                            ", expected: " + param.type);
+                            ", expected: " + param.type.descriptionWithExample());
                 }
             }
         });

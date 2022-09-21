@@ -33,4 +33,8 @@ public interface PluginParamType {
     String example();
 
     boolean isValid(Object param);
+
+    default String descriptionWithExample() {
+        return "<" + description() + "> (e.g. " + example() + ")";
+    }
 }
