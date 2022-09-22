@@ -16,32 +16,25 @@
 
 package org.testingisdocumenting.znai.extensions;
 
-public enum PluginParamType {
-    STRING("string", "\"text\""),
-    NUMBER("number", "5"),
-    BOOLEAN("boolean", "true"),
-    OBJECT("object", "{nestedField: true}"),
-    STRING_OR_NUMBER("string or number", "\"text\" or 5"),
-    LIST_OR_SINGLE_NUMBER("list or a single number value", "5 or [5, 8]"),
-    LIST_OR_SINGLE_STRING_OR_NUMBER("list or a single value of either number(s) or string(s)", "\"hello\" or [\"text\", 8]"),
-    LIST_OR_SINGLE_STRING("list or a single value of string(s)", "\"hello\" or [\"hello\", \"text\"]"),
-    LIST_OR_SINGLE_STRING_WITH_NULLS("list or a single value of string(s) with optional null values", "\"hello\" or [null, \"text\"]"),
-    LIST_OF_ANY("list", "[\"hello\", \"text\"]");
+import org.testingisdocumenting.znai.extensions.paramtypes.*;
 
-    private final String description;
-    private final String example;
+public interface PluginParamType {
+    PluginParamType STRING = new PluginParamTypeString();
+    PluginParamType NUMBER = new PluginParamTypeNumber();
+    PluginParamType BOOLEAN = new PluginParamTypeBoolean();
+    PluginParamType OBJECT = new PluginParamTypeObject();
+    PluginParamType LIST_OR_SINGLE_NUMBER = new PluginParamTypeListOrSingleNumber();
+    PluginParamType LIST_OR_SINGLE_STRING_OR_NUMBER = new PluginParamTypeListOrSingleStringOrNumber();
+    PluginParamType LIST_OR_SINGLE_STRING = new PluginParamTypeListOrSingleString();
+    PluginParamType LIST_OR_SINGLE_STRING_WITH_NULLS = new PluginParamTypeListOrSingleStringWithNulls();
+    PluginParamType LIST_OF_ANY = new PluginParamTypeListOfAny();
 
-    PluginParamType(String description, String example) {
-        this.description = description;
-        this.example = example;
-    }
+    String description();
+    String example();
 
-    public String getDescription() {
-        return description;
-    }
+    boolean isValid(Object param);
 
-    @Override
-    public String toString() {
-        return "<" + description + "> (e.g. " + example + ")";
+    default String descriptionWithExample() {
+        return "<" + description() + "> (e.g. " + example() + ")";
     }
 }

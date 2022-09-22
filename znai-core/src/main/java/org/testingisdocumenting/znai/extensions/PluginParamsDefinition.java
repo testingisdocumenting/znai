@@ -19,8 +19,6 @@ package org.testingisdocumenting.znai.extensions;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PluginParamsDefinition {
@@ -50,7 +48,7 @@ public class PluginParamsDefinition {
         @Override
         public String toString() {
             return name + ": " + (isRequired ? "REQUIRED " : "")
-                    + description + " <" + type.getDescription() + "> (e.g. " + example + ")";
+                    + description + " <" + type.description() + "> (e.g. " + example + ")";
         }
     }
 
@@ -126,10 +124,10 @@ public class PluginParamsDefinition {
             if (param == null) {
                 unrecognizedNames.add(name);
             } else {
-                boolean isTypeMatch = matchType(param, value);
+                boolean isTypeMatch = param.type.isValid(value);
                 if (!isTypeMatch) {
                     typeMismatches.add(name + " given: " + renderGiven(value) +
-                            ", expected: " + param.type);
+                            ", expected: " + param.type.descriptionWithExample());
                 }
             }
         });
@@ -185,88 +183,6 @@ public class PluginParamsDefinition {
                 .forEach(param -> message.append("  ").append(param).append("\n"));
 
         return message.toString();
-    }
-
-    private boolean matchType(Param param, Object value) {
-        switch (param.type) {
-            case STRING:
-                return matchString(value);
-            case NUMBER:
-                return matchNumber(value);
-            case BOOLEAN:
-                return matchBoolean(value);
-            case OBJECT:
-                return matchObject(value);
-            case LIST_OR_SINGLE_STRING:
-                return matchListOrSingleString(value);
-            case LIST_OR_SINGLE_STRING_WITH_NULLS:
-                return matchListOrSingleStringWithNulls(value);
-            case LIST_OR_SINGLE_STRING_OR_NUMBER:
-                return matchListOrSingleStringOrNumber(value);
-            case LIST_OR_SINGLE_NUMBER:
-                return matchListOrSingleNumber(value);
-            case LIST_OF_ANY:
-                return matchListOfAny(value);
-            default:
-                throw new IllegalStateException("unsupported type: " + param.type);
-        }
-    }
-
-    private boolean matchString(Object value) {
-        return value instanceof CharSequence;
-    }
-
-    private boolean matchStringOrNull(Object value) {
-        return value == null || value instanceof CharSequence;
-    }
-
-    private boolean matchNumber(Object value) {
-        return value instanceof Number;
-    }
-
-    private boolean matchBoolean(Object value) {
-        return value instanceof Boolean;
-    }
-
-    private boolean matchObject(Object value) {
-        return value instanceof Map;
-    }
-
-    private boolean matchStringOrNumber(Object value) {
-        return matchString(value) || matchNumber(value);
-    }
-
-    private boolean matchListOrSingleString(Object value) {
-        return matchListOrSingleValue(value, this::matchString);
-    }
-
-    private boolean matchListOrSingleNumber(Object value) {
-        return matchListOrSingleValue(value, this::matchNumber);
-    }
-
-    private boolean matchListOrSingleStringWithNulls(Object value) {
-        return matchListOrSingleValue(value, this::matchStringOrNull);
-    }
-
-    private boolean matchListOrSingleStringOrNumber(Object value) {
-        return matchListOrSingleValue(value, this::matchStringOrNumber);
-    }
-
-    private boolean matchListOrSingleValue(Object value, Predicate<Object> predicate) {
-        if (predicate.test(value)) {
-            return true;
-        }
-
-        if (!(value instanceof List)) {
-            return false;
-        }
-
-        List<?> listValue = (List<?>) value;
-        return listValue.stream().allMatch(predicate);
-    }
-
-    private boolean matchListOfAny(Object value) {
-        return value instanceof List;
     }
 
     @Override
