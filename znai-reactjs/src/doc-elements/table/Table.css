@@ -18,6 +18,16 @@
     margin: 20px auto;
 }
 
+.znai-table-wrapper.znai-table-wide-screen {
+    margin-left: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
+    margin-right: calc(-1 *var(--znai-single-side-horizontal-min-spacing));
+}
+
+.znai-table-wide-screen table {
+    border-left: none;
+    border-right: none;
+}
+
 .znai-table-wrapper td .content-block {
     width: auto;
 }
@@ -125,4 +135,6 @@
 
 .znai-table-wide-screen .znai-table-title {
     text-align: center;
+    border-left: none;
+    border-right: none;
 }
