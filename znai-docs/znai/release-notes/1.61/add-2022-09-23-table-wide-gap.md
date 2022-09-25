@@ -1,0 +1,1 @@
+* Remove [Table](layout/tables) gap in [wide mode](layout/tables#wide-mode)
