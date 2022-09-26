@@ -1,0 +1,1 @@
+* Fix: [local ref](flow/page-references#links-links-to-subsection) in index page link doesn't add `/index` to url on ref click
