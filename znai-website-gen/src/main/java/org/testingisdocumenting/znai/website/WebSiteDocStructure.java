@@ -110,7 +110,8 @@ class WebSiteDocStructure implements DocStructure {
             return docUrl.getUrl();
         }
 
-        if (docUrl.isIndexUrl()) {
+        boolean isIndexPath = path != null && toc.findTocItem(path).isIndex();
+        if (docUrl.isIndexUrl() || isIndexPath) {
             return "/" + docMeta.getId() + (docUrl.getAnchorId().isEmpty() ? "" : docUrl.getAnchorIdWithHash());
         }
 

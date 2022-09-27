@@ -58,6 +58,7 @@ class WebSiteDocStructureTest {
 
     @Test
     void "should create full url based on url type"() {
+        def indexPath = Paths.get('/home/user/docs/index.md')
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
 
         docStructure.createUrl(path, new DocUrl("http://abc")).should == "http://abc"
@@ -71,6 +72,7 @@ class WebSiteDocStructureTest {
         docStructure.createUrl(path, new DocUrl("mailto/page")).should == "/product/mailto/page"
         docStructure.createUrl(path, new DocUrl("test/page#anchor")).should == "/product/test/page#anchor"
         docStructure.createUrl(path, new DocUrl("file-system/page")).should == "/product/file-system/page"
+        docStructure.createUrl(indexPath, new DocUrl("#ref")).should == "/product#ref"
     }
 
     @Test
