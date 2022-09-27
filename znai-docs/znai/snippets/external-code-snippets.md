@@ -59,8 +59,6 @@ Use `anchorId` to override auto generated identifier.
 
 :include-file: file-name.js {autoTitle: true, anchorId: "my-code-anchor"}
 
-[ref](#my-code-anchor)
-
 # Wide Code
 
 Use the `wide` option to stretch wide code to occupy as much horizontal screen real estate as possible.  

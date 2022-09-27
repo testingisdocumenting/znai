@@ -20,7 +20,6 @@ package org.testingisdocumenting.znai.java.extensions;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
-import org.testingisdocumenting.znai.extensions.PluginParamsDefinitionCommon;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.file.*;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
@@ -66,7 +65,6 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
     @Override
     public PluginParamsDefinition parameters() {
         return new PluginParamsDefinition()
-                .add(SnippetAutoTitleFeature.paramsDefinition)
                 .add(ENTRY_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "entry to include content of",
                         "\"myMethod\" or [\"myMethod1(String)\", \"myMethod2(Integer)\"]")
                 .add(ENTRY_SEPARATOR_KEY, PluginParamType.STRING, "separator to use when displaying multiple entries", "\"...\"")
@@ -74,11 +72,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
                 .add(SIGNATURE_ONLY_KEY, PluginParamType.BOOLEAN, "renders only signature of an entry", "true")
                 .add(REMOVE_RETURN_KEY, PluginParamType.BOOLEAN, "remove <return> from a method content", "true")
                 .add(REMOVE_SEMICOLON_KEY, PluginParamType.BOOLEAN, "remove semicolon \";\" from a method content", "true")
-                .add(PluginParamsDefinitionCommon.snippetRender)
-                .add(ManipulatedSnippetContentProvider.paramsDefinition)
-                .add(CodeReferencesFeature.paramsDefinition)
-                .add(SnippetHighlightFeature.paramsDefinition)
-                .add(SnippetRevealLineStopFeature.paramsDefinition);
+                .add(SnippetsCommon.createParamsDefinition());
     }
 
     @Override
@@ -97,9 +91,7 @@ public class JavaIncludePlugin extends JavaIncludePluginBase {
                 extractContent(javaCode),
                 pluginParams);
 
-        features.add(new SnippetAutoTitleFeature(contentProvider.snippetId()));
-        features.add(new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider));
-        features.add(new SnippetRevealLineStopFeature(pluginParams, contentProvider));
+        features.add(SnippetsCommon.createCommonFeatures(componentsRegistry, markupPath, pluginParams, contentProvider).asList());
 
         Map<String, Object> props = CodeSnippetsProps.create("java", contentProvider.snippetContent());
         props.putAll(pluginParams.getOpts().toMap());

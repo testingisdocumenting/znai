@@ -46,12 +46,7 @@ public class FileIncludePlugin implements IncludePlugin {
         result.add("lang", PluginParamType.STRING,
                 "force language to use for syntax highlight (by default is taken from file extension)", "yaml");
 
-        result.add(PluginParamsDefinitionCommon.snippetRender);
-        result.add(SnippetAutoTitleFeature.paramsDefinition);
-        result.add(SnippetHighlightFeature.paramsDefinition);
-        result.add(ManipulatedSnippetContentProvider.paramsDefinition);
-        result.add(SnippetRevealLineStopFeature.paramsDefinition);
-        result.add(CodeReferencesFeature.paramsDefinition);
+        result.add(SnippetsCommon.createParamsDefinition());
 
         return result;
     }
@@ -77,13 +72,8 @@ public class FileIncludePlugin implements IncludePlugin {
                 componentsRegistry.resourceResolver().textContent(fileName),
                 pluginParams);
 
-        features = new PluginFeatureList(
-                new SnippetAutoTitleFeature(contentProvider.snippetId()),
-                new SnippetRevealLineStopFeature(pluginParams, contentProvider),
-                new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider),
-                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams),
-                new AnchorFeature(componentsRegistry.docStructure(), markupPath, pluginParams)
-        );
+        features = new PluginFeatureList();
+        features.add(SnippetsCommon.createCommonFeatures(componentsRegistry, markupPath, pluginParams, contentProvider).asList());
 
         String providedLang = pluginParams.getOpts().getString("lang");
         String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;

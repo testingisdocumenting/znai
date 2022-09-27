@@ -18,10 +18,7 @@ package org.testingisdocumenting.znai.extensions.features;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class PluginFeatureList implements PluginFeature {
@@ -33,6 +30,10 @@ public class PluginFeatureList implements PluginFeature {
 
     public void add(PluginFeature feature) {
         list.add(feature);
+    }
+
+    public void add(PluginFeatureList features) {
+        list.addAll(features.list);
     }
 
     @Override
