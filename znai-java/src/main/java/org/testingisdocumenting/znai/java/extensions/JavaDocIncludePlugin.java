@@ -45,6 +45,9 @@ public class JavaDocIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
+        CodeReferencesFeature codeReferencesFeature = new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams);
+        features.add(codeReferencesFeature);
+
         String entry = pluginParams.getOpts().get(ENTRY_KEY);
 
         HtmlToDocElementConverter.Result htmlParseResult = HtmlToDocElementConverter.convert(

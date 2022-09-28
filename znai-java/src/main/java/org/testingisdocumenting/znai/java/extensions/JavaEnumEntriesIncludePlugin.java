@@ -34,6 +34,8 @@ import static java.util.stream.Collectors.joining;
 
 public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     private final static String EXCLUDE_DEPRECATED_KEY = "excludeDeprecated";
+    private CodeReferencesFeature codeReferencesFeature;
+
     @Override
     public String id() {
         return "java-enum-entries";
@@ -54,12 +56,15 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
+        codeReferencesFeature = new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams);
+        features.add(codeReferencesFeature);
+
         ApiParameters apiParameters = new ApiParameters(determineAnchorPrefix());
         javaCode.getEnumEntries().stream()
                 .filter(this::includeEnum)
                 .forEach((enumEntry) -> {
                     JavaDocElementsMapsAndSearchText elementsMapsAndSearchText = javaDocTextToDocElements(
-                            enumEntry.getJavaDocText());
+                            enumEntry.getJavaDocText(), codeReferencesFeature);
                     apiParameters.add(enumEntry.getName(), new ApiLinkedText(), elementsMapsAndSearchText.docElementsMaps,
                             elementsMapsAndSearchText.searchText);
         });

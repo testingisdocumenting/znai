@@ -35,6 +35,8 @@ import java.util.Map;
 import static java.util.stream.Collectors.joining;
 
 public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
+    private CodeReferencesFeature codeReferencesFeature;
+
     @Override
     public String id() {
         return "java-doc-params";
@@ -56,6 +58,9 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
 
     @Override
     public JavaIncludeResult process(JavaCode javaCode) {
+        codeReferencesFeature = new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams);
+        features.add(codeReferencesFeature);
+
         JavaMethod javaMethod = javaCode.findMethod(entries.get(0));
 
         ApiParameters apiParameters = new ApiParameters(javaMethod.getAnchorPrefix());
@@ -63,13 +68,13 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
         addReturn(apiParameters, javaMethod);
         javaMethod.getParams().forEach(param -> {
             JavaDocElementsMapsAndSearchText docElementsMapsAndSearchText =
-                    javaDocTextToDocElements(param.getJavaDocText());
+                    javaDocTextToDocElements(param.getJavaDocText(), codeReferencesFeature);
             apiParameters.add(param.getName(), new ApiLinkedText(param.getType()),
                     docElementsMapsAndSearchText.docElementsMaps, docElementsMapsAndSearchText.searchText);
         });
 
         Map<String, Object> props = apiParameters.toMap();
-        codeReferencesFeature.updateProps(props);
+        features.updateProps(props);
         props.putAll(pluginParams.getOpts().toMap());
 
         List<DocElement> docElements =
@@ -100,7 +105,7 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
         }
 
         JavaDocElementsMapsAndSearchText elementsMapsAndSearchText =
-                javaDocTextToDocElements(methodReturn.getJavaDocText());
+                javaDocTextToDocElements(methodReturn.getJavaDocText(), codeReferencesFeature);
 
         apiParameters.add("return", new ApiLinkedText(methodReturn.getType()),
                 elementsMapsAndSearchText.docElementsMaps, elementsMapsAndSearchText.searchText);

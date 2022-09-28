@@ -60,17 +60,13 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
     private JavaIncludeResult javaIncludeResult;
 
     protected PluginFeatureList features;
-    protected CodeReferencesFeature codeReferencesFeature;
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry,
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        codeReferencesFeature = new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams);
-        features = new PluginFeatureList(
-                codeReferencesFeature
-        );
+        features = new PluginFeatureList();
 
         this.componentsRegistry = componentsRegistry;
         this.markupPath = markupPath;
@@ -98,7 +94,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
         return SearchScore.HIGH.text(javaIncludeResult.getText());
     }
 
-    protected JavaDocElementsMapsAndSearchText javaDocTextToDocElements(String html) {
+    protected JavaDocElementsMapsAndSearchText javaDocTextToDocElements(String html, CodeReferencesFeature codeReferencesFeature) {
         HtmlToDocElementConverter.Result converted = HtmlToDocElementConverter.convert(
                 componentsRegistry, markupPath, html, codeReferencesFeature.getReferences());
 

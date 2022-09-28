@@ -1,0 +1,1 @@
+* Fix: [Java Anchor](java/content-extraction#anchor) linking from pages incorrect validation
