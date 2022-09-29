@@ -42,4 +42,22 @@ class RowTest {
         row.data.should == ['A', 'B', 'C', 'D']
         newRow.data.should == ['A', 'hello', 'C', 'world']
     }
+
+    @Test
+    void "should check if row contains provided regexp"() {
+        def noText = new Row()
+        noText.add(8)
+        noText.add(10)
+        noText.matchRegexp(~/hello/).should == false
+        noText.matchRegexp(~/1/).should == true
+        noText.matchRegexp(~/\d/).should == true
+
+        def withText = new Row()
+        withText.add("testing")
+        withText.add(20)
+        withText.add("word")
+        withText.matchRegexp(~/help/).should == false
+        withText.matchRegexp(~/te.*ing/).should == true
+        withText.matchRegexp(~/w..d/).should == true
+    }
 }

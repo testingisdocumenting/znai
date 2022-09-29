@@ -79,6 +79,6 @@ public class TableIncludePlugin implements IncludePlugin {
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(docElementFromParams.getRearrangedTable().allText());
+        return SearchScore.STANDARD.text(docElementFromParams.getModifiedTable().allText());
     }
 }

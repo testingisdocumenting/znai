@@ -22,8 +22,9 @@ import org.testingisdocumenting.znai.utils.StringUtils;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -99,6 +100,23 @@ public class MarkupTableData {
         List<Row> newRows = data.stream().map(r -> r.onlyWithIdxs(newIdxOrder)).collect(toList());
 
         return new MarkupTableData(newHeader, newRows);
+    }
+
+    public MarkupTableData withRowsMatchingRegexp(List<String> regexpList) {
+        return withRowsRegexpPredicate(regexpList, Row::matchRegexp);
+    }
+
+    public MarkupTableData withoutRowsMatchingRegexp(List<String> regexpList) {
+        return withRowsRegexpPredicate(regexpList, (row, regexp) -> !row.matchRegexp(regexp));
+    }
+
+    public MarkupTableData withRowsRegexpPredicate(List<String> regexpList, BiFunction<Row, Pattern, Boolean> predicate) {
+        List<Pattern> patternsList = regexpList.stream().map(Pattern::compile).collect(toList());
+        List<Row> newRows = data.stream()
+                .filter(row -> patternsList.stream().anyMatch(regexp -> predicate.apply(row, regexp)))
+                .collect(toList());
+
+        return new MarkupTableData(header, newRows);
     }
 
     private List<Integer> findColumnIdxes(List<String> columnNames) {
