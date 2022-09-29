@@ -30,6 +30,8 @@ import java.nio.file.Path;
 import java.util.*;
 
 import static java.util.stream.Collectors.toList;
+import static org.testingisdocumenting.znai.extensions.table.TablePluginParams.EXCLUDE_ROWS_REGEXP_KEY;
+import static org.testingisdocumenting.znai.extensions.table.TablePluginParams.INCLUDE_ROWS_REGEXP_KEY;
 
 class TableDocElementFromParams {
     private final PluginParams pluginParams;
@@ -37,7 +39,7 @@ class TableDocElementFromParams {
     private final Path fullPath;
     private final AnchorFeature anchorFeature;
     private final MarkupTableDataFromContentAndParams markupTableDataFromContentAndParams;
-    private MarkupTableData rearrangedTable;
+    private MarkupTableData modifiedTable;
 
     TableDocElementFromParams(ComponentsRegistry componentsRegistry,
                               MarkupTableDataFromContentAndParams markupTableDataFromContentAndParams,
@@ -53,18 +55,16 @@ class TableDocElementFromParams {
         this.fullPath = fullPath;
     }
 
-    MarkupTableData getRearrangedTable() {
-        return rearrangedTable;
+    MarkupTableData getModifiedTable() {
+        return modifiedTable;
     }
 
     @SuppressWarnings("unchecked")
     PluginResult create() {
         PluginParamsOpts opts = pluginParams.getOpts();
-        rearrangedTable = opts.has("columns") ?
-                markupTableDataFromContentAndParams.getMarkupTableData().withColumnsInOrder(opts.getList("columns")) :
-                markupTableDataFromContentAndParams.getMarkupTableData();
+        modifiedTable = createModifiedTable(opts);
 
-        Map<String, Object> tableAsMap = rearrangedTable.toMap();
+        Map<String, Object> tableAsMap = modifiedTable.toMap();
 
         List<Map<String, Object>> columns = (List<Map<String, Object>>) tableAsMap.get("columns");
 
@@ -90,6 +90,24 @@ class TableDocElementFromParams {
         anchorFeature.updateProps(props);
 
         return PluginResult.docElement(DocElementType.TABLE, props);
+    }
+
+    private MarkupTableData createModifiedTable(PluginParamsOpts opts) {
+        MarkupTableData result = markupTableDataFromContentAndParams.getMarkupTableData();
+
+        if (opts.has("columns")) {
+            result = result.withColumnsInOrder(opts.getList("columns"));
+        }
+
+        if (opts.has(INCLUDE_ROWS_REGEXP_KEY)) {
+            result = result.withRowsMatchingRegexp(opts.getList(INCLUDE_ROWS_REGEXP_KEY));
+        }
+
+        if (opts.has(EXCLUDE_ROWS_REGEXP_KEY)) {
+            result = result.withoutRowsMatchingRegexp(opts.getList(EXCLUDE_ROWS_REGEXP_KEY));
+        }
+
+        return result;
     }
 
     private void handleHighlight(Map<String, Object> props) {

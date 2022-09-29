@@ -4,6 +4,7 @@
 ../../znai-console/src/test/groovy
 ../../znai-open-api/src/test/resources
 ../../znai-jupyter
+../../znai-website-gen/src/main/java
 ../../znai-testing-examples-junit5
 ../../znai-testing-examples-junit5/doc-artifacts
 ../../znai-testing-examples-junit5/src/test/groovy

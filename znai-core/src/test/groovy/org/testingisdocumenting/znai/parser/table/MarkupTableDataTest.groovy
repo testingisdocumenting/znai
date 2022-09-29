@@ -40,7 +40,7 @@ class MarkupTableDataTest {
     @Test
     void "should rearange and filter out columns by case insensitive names"() {
         def newTable = table.withColumnsInOrder(['c', 'A'])
-        newTable.toMap().should == [columns:[[title: 'C'], [title: 'a']], data:[['c1', 'a1'], ['c2', 'a2']]]
+        newTable.toMap().should == [columns: [[title: 'C'], [title: 'a']], data: [['c1', 'a1'], ['c2', 'a2']]]
     }
 
     @Test
@@ -129,11 +129,28 @@ class MarkupTableDataTest {
         table.addRow(new Row(['k1', '100']))
         table.addRow(new Row(['k2', '101.3']))
 
-
         def data = table.getDataConvertingNumbers()
         data.should == [['k1', 100], ['k2', 101.3]]
 
         (data[0][1] instanceof Number).should == true
         (data[1][1] instanceof Number).should == true
+    }
+
+    @Test
+    void "include and exclude rows by regexp"() {
+        def table = new MarkupTableData()
+        table.addColumn('a')
+        table.addColumn('b')
+
+        table.addRow(new Row(['k1', '222']))
+        table.addRow(new Row(['k2', '311']))
+        table.addRow(new Row(['k2_', '411']))
+        table.addRow(new Row(['k4', '322']))
+        table.addRow(new Row(['k5', '433']))
+
+        def filtered = table
+                .withRowsMatchingRegexp(["22", "11"])
+                .withoutRowsMatchingRegexp(["3"])
+        filtered.getData().should == [['k1', '222'], ['k2_', '411']]
     }
 }

@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.parser.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toList;
 
@@ -46,6 +47,11 @@ public class Row {
             Object newValue = mapping.map(v);
             return newValue == null ? v : newValue;
         }).collect(toList()));
+    }
+
+    public boolean matchRegexp(Pattern regexp) {
+        return data.stream()
+                .anyMatch(v -> regexp.matcher(v.toString()).find());
     }
 
     @SuppressWarnings("unchecked")

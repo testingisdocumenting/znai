@@ -66,6 +66,6 @@ public class TableFencePlugin implements FencePlugin {
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(docElementFromParams.getRearrangedTable().allText());
+        return SearchScore.STANDARD.text(docElementFromParams.getModifiedTable().allText());
     }
 }

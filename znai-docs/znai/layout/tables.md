@@ -102,13 +102,31 @@ Use `highlightRow` to highlight a row, or a set of rows by their index
 :include-table: table/table.json {title: "Highlight single row", highlightRow: 1}
 
 
-# Arrange and Filter
+# Arrange and Remove Columns
 
 To change the order of columns or to filter out certain columns, specify the `columns` parameter.
 
     :include-table: table.csv {columns: ["Description", "Price"]}
     
 :include-table: table/table.csv {columns: ["Description", "Price"]}
+
+# Filter Rows
+
+Use `:identifier: includeRowsRegexp {validationPath: "org/testingisdocumenting/znai/extensions/table/TablePluginParams.java"}` 
+to include only rows that match a regular expression
+
+    :include-table: table/table.csv {includeRowsRegexp: ["table", "cha.."]}
+
+:include-table: table/table.csv {includeRowsRegexp: ["table", "cha.."]}
+
+Use `:identifier: excludeRowsRegexp {validationPath: "org/testingisdocumenting/znai/extensions/table/TablePluginParams.java"}`
+to exclude rows that match a regular expression
+
+    :include-table: table/table.csv {includeRowsRegexp: ["table", "cha.."], excludeRowsRegexp: "short"}
+
+:include-table: table/table.csv {includeRowsRegexp: ["table", "cha.."], excludeRowsRegexp: "short"}
+
+
 
 # Width
 
