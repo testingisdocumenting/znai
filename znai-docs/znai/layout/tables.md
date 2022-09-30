@@ -126,8 +126,6 @@ to exclude rows that match a regular expression
 
 :include-table: table/table.csv {includeRowsRegexp: ["table", "cha.."], excludeRowsRegexp: "short"}
 
-
-
 # Width
 
 By default, columns width is auto-calculated to fit the values inside.
@@ -208,6 +206,13 @@ Account, Price, Description
 #12BGD3, 150, chair
 #91AGB1, 10, lunch
 ```
+
+# Multiline Content
+
+Use quotes to provide multi line markdown content such as bullet points and code snippets
+
+:include-file: table-multiline.csv
+:include-table: table-multiline.csv
 
 # Markdown in Cells
 
