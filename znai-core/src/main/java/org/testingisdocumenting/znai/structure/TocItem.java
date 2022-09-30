@@ -44,11 +44,8 @@ public class TocItem {
 
     private List<PageSectionIdTitle> pageSectionIdTitles;
 
-    static TocItem createIndex(String docTitle) {
-        TocItem tocItem = new TocItem(new TocNameAndOpts(""), INDEX);
-        tocItem.setPageTitle(docTitle);
-
-        return tocItem;
+    static TocItem createIndex() {
+        return new TocItem(new TocNameAndOpts(""), INDEX);
     }
 
     public TocItem(TocNameAndOpts chapter, String fileNameWithoutExtension) {
@@ -57,8 +54,7 @@ public class TocItem {
         validateFileName(chapter.getGivenName());
         validateFileName(this.fileNameWithoutExtension);
 
-        this.pageTitle = NameUtils.dashToCamelCaseWithSpaces(fileNameWithoutExtension);
-
+        this.pageTitle = isIndex() ? "" : NameUtils.dashToCamelCaseWithSpaces(fileNameWithoutExtension);
         this.pageMeta = new PageMeta(Collections.emptyMap());
 
         this.pageSectionIdTitles = new ArrayList<>();

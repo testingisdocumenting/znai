@@ -23,7 +23,7 @@ import { Icon } from '../icons/Icon'
 import "./PageTitle.css"
 
 const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta}) => {
-    const displayTitle = tocItem.dirName.length && tocItem.fileName !== "index"
+    const displayTitle = !!tocItem.pageTitle
     const title = displayTitle ? [<span key="title" className="page-title">{tocItem.pageTitle}</span>,
         onPresentationOpen ?
             <Icon key="presentation-mode"

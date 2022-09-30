@@ -49,7 +49,7 @@ public class DocTreeTocGenerator implements TocGenerator {
             handleChapter(node);
         }
 
-        toc.addIndex("Index");
+        toc.addIndex();
         return toc;
     }
 

@@ -41,7 +41,7 @@ class PageTocIncludePluginTest {
         toc = new TableOfContents()
         TEST_COMPONENTS_REGISTRY.docStructure().setToc(toc)
 
-        toc.addIndex("my doc")
+        toc.addIndex()
         def tocItem = toc.addTocItem(new TocNameAndOpts("chapter-one"), "page-one")
         tocItem.setPageSectionIdTitles([
                 new PageSectionIdTitle("Section One", [:]),
