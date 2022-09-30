@@ -551,6 +551,8 @@ public class WebSite implements Log {
 
         if (pageMeta.hasValue("title")) {
             tocItem.setPageTitle(pageMeta.getSingleValue("title"));
+        } else if (tocItem.isIndex()) {
+            tocItem.setPageTitle("");
         }
     }
 

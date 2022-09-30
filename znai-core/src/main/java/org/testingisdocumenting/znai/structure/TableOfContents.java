@@ -45,8 +45,8 @@ public class TableOfContents {
         return tocItem;
     }
 
-    public void addIndex(String docTitle) {
-        tocItems.add(0, TocItem.createIndex(docTitle));
+    public void addIndex() {
+        tocItems.add(0, TocItem.createIndex());
     }
 
     public TocItem firstNonIndexPage() {

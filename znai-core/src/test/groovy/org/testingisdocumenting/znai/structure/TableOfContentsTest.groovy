@@ -42,11 +42,11 @@ class TableOfContentsTest {
     }
 
     @Test
-    void "index page title should be a doc title"() {
+    void "index page title should be empty"() {
         def toc = new TableOfContents()
-        toc.addIndex("My Documentation")
+        toc.addIndex()
 
-        toc.index.pageTitle.should == "My Documentation"
+        toc.index.pageTitle.should == ""
     }
 
     @Test

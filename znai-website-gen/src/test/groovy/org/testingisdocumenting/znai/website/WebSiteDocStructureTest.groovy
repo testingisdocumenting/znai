@@ -47,7 +47,7 @@ class WebSiteDocStructureTest {
         toc = new TableOfContents()
         toc.addTocItem(new TocNameAndOpts("chapter"), "pageOne")
         toc.addTocItem(new TocNameAndOpts("chapter"), "pageTwo")
-        toc.addIndex("Product")
+        toc.addIndex()
         toc.findTocItem("chapter", "pageTwo").pageSectionIdTitles = [new PageSectionIdTitle ("Test Section", [:])]
     }
 

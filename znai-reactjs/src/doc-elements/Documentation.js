@@ -25,7 +25,7 @@ import {getSearchPromise} from './search/searchPromise'
 import {documentationNavigation} from '../structure/DocumentationNavigation'
 import {documentationTracking} from './tracking/DocumentationTracking'
 import {textSelection} from './selected-text-extensions/TextSelection'
-import {isTocItemIndex, tableOfContents} from '../structure/toc/TableOfContents'
+import {tableOfContents} from '../structure/toc/TableOfContents'
 import {getAllPagesPromise} from './allPages'
 
 import Presentation from './presentation/Presentation'
@@ -427,8 +427,7 @@ export class Documentation extends Component {
         const theme = this.theme
         const presentationRegistry = new PresentationRegistry(theme.elementsLibrary, theme.presentationElementHandlers, page)
 
-        const isIndex = isTocItemIndex(page.tocItem)
-        document.title = isIndex ? docMeta.title : docMeta.title + ": " + page.tocItem.pageTitle
+        document.title = page.tocItem.pageTitle ? docMeta.title + ": " + page.tocItem.pageTitle : docMeta.title
 
         this.setState({presentationRegistry})
     }

@@ -43,7 +43,7 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
     public TableOfContents createToc(String docTitle, ComponentsRegistry componentsRegistry) {
         TableOfContents toc = new PlainTextTocGenerator().generate(
                 componentsRegistry.resourceResolver().textContent("toc"));
-        toc.addIndex(docTitle);
+        toc.addIndex();
 
         if (componentsRegistry.resourceResolver().canResolve(TOC_PATCH_NAME)) {
             String patch = componentsRegistry.resourceResolver().textContent(TOC_PATCH_NAME);
