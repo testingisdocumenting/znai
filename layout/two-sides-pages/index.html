@@ -101,12 +101,12 @@
 
 <article>
 <header><h1>Single Data Block Shortcut</h1></header>
-<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Use rightSide: true as a parameter to include- plugins to move result to the right side. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
+<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD4, 90, custom table with a short attachment #12BGD5, 150, chair #91AGB1, 10, lunch Use rightSide: true as a parameter to include- plugins to move result to the right side. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
 </article>
 
 <article>
 <header><h1>Aligning Data in Columns</h1></header>
-<p>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. markdown :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
+<p>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD4, 90, custom table with a short attachment #12BGD5, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. markdown :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
 </article>
 </section>
 </div>
@@ -498,7 +498,25 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ], [ [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "#12BGD3",
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
               "type" : "SimpleText"
             } ]
           } ], [ {
@@ -536,7 +554,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       }, {
         "lang" : "csv",
-        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
+        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD4, 90, custom table with a short attachment\n#12BGD5, 150, chair\n#91AGB1, 10, lunch",
         "meta" : {
           "rightSide" : true
         },
@@ -617,7 +635,25 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ], [ [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "#12BGD3",
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
               "type" : "SimpleText"
             } ]
           } ], [ {
@@ -655,7 +691,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       }, {
         "lang" : "csv",
-        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
+        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD4, 90, custom table with a short attachment\n#12BGD5, 150, chair\n#91AGB1, 10, lunch",
         "meta" : {
           "rightSide" : true
         },
@@ -673,7 +709,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1663025548316,
+    "lastModifiedTime" : 1664816820240,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Two Sides Pages",

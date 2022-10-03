@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.60/znai-dist-1.60-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.61/znai-dist-1.61-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.60&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.61&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.60&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.61&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.60&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.61&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1899,7 +1899,7 @@
     <url>/znai/layout/tables#csv</url>
     <fullTitle>Znai: Tables, CSV [Layout]</fullTitle>
     <text>
-      <text>Instead of aligning tables using one of the standard Markdown extensions, you can use your CSV editor of choice. :include-table: table.csv In this way, the following CSV file... Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch ...will render like so: Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <text>Instead of aligning tables using one of the standard Markdown extensions, you can use your CSV editor of choice. :include-table: table.csv In this way, the following CSV file... Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD4, 90, custom table with a short attachment #12BGD5, 150, chair #91AGB1, 10, lunch ...will render like so: Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1952,10 +1952,18 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/layout/tables#arrange-and-filter</url>
-    <fullTitle>Znai: Tables, Arrange and Filter [Layout]</fullTitle>
+    <url>/znai/layout/tables#arrange-and-remove-columns</url>
+    <fullTitle>Znai: Tables, Arrange and Remove Columns [Layout]</fullTitle>
     <text>
-      <text>To change the order of columns or to filter out certain columns, specify the columns parameter. :include-table: table.csv {columns: ["Description", "Price"]} Description Price custom table with a long attachment 100 chair 150 lunch 10</text>
+      <text>To change the order of columns or to filter out certain columns, specify the columns parameter. :include-table: table.csv {columns: ["Description", "Price"]} Description Price custom table with a long attachment 100 custom table with a short attachment 90 chair 150 lunch 10</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/tables#filter-rows</url>
+    <fullTitle>Znai: Tables, Filter Rows [Layout]</fullTitle>
+    <text>
+      <text>Use to include only rows that match a regular expression :include-table: table/table.csv {includeRowsRegexp: ["table", "cha.."]} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair Use to exclude rows that match a regular expression :include-table: table/table.csv {includeRowsRegexp: ["table", "cha.."], excludeRowsRegexp: "short"} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD5 150 chair</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1963,7 +1971,7 @@
     <url>/znai/layout/tables#width</url>
     <fullTitle>Znai: Tables, Width [Layout]</fullTitle>
     <text>
-      <text>By default, columns width is auto-calculated to fit the values inside. Use width to control the width of a column. :include-table: table.csv {Price: {width: 200}, "Description": {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width. :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "30%"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "60%"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <text>By default, columns width is auto-calculated to fit the values inside. Use width to control the width of a column. :include-table: table.csv {Price: {width: 200}, "Description": {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width. :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "30%"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "60%"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1971,7 +1979,7 @@
     <url>/znai/layout/tables#min-width</url>
     <fullTitle>Znai: Tables, Min Width [Layout]</fullTitle>
     <text>
-      <text>Use minColumnWidth to set min width for all table columns :include-table: table/table.csv {minColumnWidth: 400, "Description": {width: 500}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <text>Use minColumnWidth to set min width for all table columns :include-table: table/table.csv {minColumnWidth: 400, "Description": {width: 500}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1987,7 +1995,7 @@
     <url>/znai/layout/tables#text-alignment</url>
     <fullTitle>Znai: Tables, Text Alignment [Layout]</fullTitle>
     <text>
-      <text>Use align to change a column text alignment. :include-table: table.csv {Price: {width: 200, align: "right"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch JSON data example: :include-table: table.json {Price: {width: 100, align: "right"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <text>Use align to change a column text alignment. :include-table: table.csv {Price: {width: 200, align: "right"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch JSON data example: :include-table: table.json {Price: {width: 100, align: "right"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2004,6 +2012,14 @@
     <fullTitle>Znai: Tables, Inlined [Layout]</fullTitle>
     <text>
       <text>```table {title: "my table", Price: {width: 100, align: "right"}} Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch ``` Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/tables#multiline-content</url>
+    <fullTitle>Znai: Tables, Multiline Content [Layout]</fullTitle>
+    <text>
+      <text>Use quotes to provide multi line markdown content such as bullet points and code snippets Account, Price, Description #12BGD3, 100, "multi line markdown with * bullet point * list " #12BGD3, 150, "and some code snippet ```java class HelloWorld { } ``` " Account Price Description #12BGD3 100 multi line markdown with * bullet point * list #12BGD3 150 and some code snippet ```java class HelloWorld { } ```</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2131,7 +2147,7 @@
     <url>/znai/layout/two-sides-pages#single-data-block-shortcut</url>
     <fullTitle>Znai: Two Sides Pages, Single Data Block Shortcut [Layout]</fullTitle>
     <text>
-      <text>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Use rightSide: true as a parameter to include- plugins to move result to the right side. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</text>
+      <text>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD4, 90, custom table with a short attachment #12BGD5, 150, chair #91AGB1, 10, lunch Use rightSide: true as a parameter to include- plugins to move result to the right side. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2139,7 +2155,7 @@
     <url>/znai/layout/two-sides-pages#aligning-data-in-columns</url>
     <fullTitle>Znai: Two Sides Pages, Aligning Data in Columns [Layout]</fullTitle>
     <text>
-      <text>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. markdown :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</text>
+      <text>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD4, 90, custom table with a short attachment #12BGD5, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. markdown :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2692,6 +2708,14 @@
     <fullTitle>Znai: Local Build, Run Local Version [Znai Development]</fullTitle>
     <text>
       <text>cd znai-dist/target unzip dist-znai.zip export PATH=$(pwd)/dist:$PATH znai --version</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2022#1-61</url>
+    <fullTitle>Znai: 2022 Releases, 1.61 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: flow/names#name-overrides page title override for index page Fix: java/content-extraction#anchor Java Anchor linking from pages incorrect validation Fix: flow/page-references#links-links-to-subsection local ref in index page link doesn't add /index to url on ref click Doc: layout/tables#multiline-content Table Multiline Content Add: layout/tables#filter-rows Table Regexp Filter Remove layout/tables Table gap in layout/tables#wide-mode wide mode</text>
       <score>STANDARD</score>
     </text>
   </entry>

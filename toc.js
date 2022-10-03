@@ -3,7 +3,7 @@ toc = [ {
   "dirName" : "",
   "items" : [ {
     "chapterTitle" : "",
-    "pageTitle" : "Znai",
+    "pageTitle" : "",
     "pageMeta" : { },
     "dirName" : "",
     "fileName" : "index",
@@ -1189,8 +1189,11 @@ toc = [ {
       "title" : "Highlight",
       "id" : "highlight"
     }, {
-      "title" : "Arrange and Filter",
-      "id" : "arrange-and-filter"
+      "title" : "Arrange and Remove Columns",
+      "id" : "arrange-and-remove-columns"
+    }, {
+      "title" : "Filter Rows",
+      "id" : "filter-rows"
     }, {
       "title" : "Width",
       "id" : "width"
@@ -1209,6 +1212,9 @@ toc = [ {
     }, {
       "title" : "Inlined",
       "id" : "inlined"
+    }, {
+      "title" : "Multiline Content",
+      "id" : "multiline-content"
     }, {
       "title" : "Markdown in Cells",
       "id" : "markdown-in-cells"
@@ -1707,6 +1713,9 @@ toc = [ {
     "fileName" : "2022",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.61",
+      "id" : "1-61"
+    }, {
       "title" : "1.60",
       "id" : "1-60"
     }, {

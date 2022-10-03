@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>CSV</h1></header>
-<p>Instead of aligning tables using one of the standard Markdown extensions, you can use your CSV editor of choice. :include-table: table.csv In this way, the following CSV file... Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch ...will render like so: Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+<p>Instead of aligning tables using one of the standard Markdown extensions, you can use your CSV editor of choice. :include-table: table.csv In this way, the following CSV file... Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD4, 90, custom table with a short attachment #12BGD5, 150, chair #91AGB1, 10, lunch ...will render like so: Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch</p>
 </article>
 
 <article>
@@ -120,18 +120,23 @@
 </article>
 
 <article>
-<header><h1>Arrange and Filter</h1></header>
-<p>To change the order of columns or to filter out certain columns, specify the columns parameter. :include-table: table.csv {columns: [&quot;Description&quot;, &quot;Price&quot;]} Description Price custom table with a long attachment 100 chair 150 lunch 10</p>
+<header><h1>Arrange and Remove Columns</h1></header>
+<p>To change the order of columns or to filter out certain columns, specify the columns parameter. :include-table: table.csv {columns: [&quot;Description&quot;, &quot;Price&quot;]} Description Price custom table with a long attachment 100 custom table with a short attachment 90 chair 150 lunch 10</p>
+</article>
+
+<article>
+<header><h1>Filter Rows</h1></header>
+<p>Use to include only rows that match a regular expression :include-table: table/table.csv {includeRowsRegexp: [&quot;table&quot;, &quot;cha..&quot;]} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair Use to exclude rows that match a regular expression :include-table: table/table.csv {includeRowsRegexp: [&quot;table&quot;, &quot;cha..&quot;], excludeRowsRegexp: &quot;short&quot;} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD5 150 chair</p>
 </article>
 
 <article>
 <header><h1>Width</h1></header>
-<p>By default, columns width is auto-calculated to fit the values inside. Use width to control the width of a column. :include-table: table.csv {Price: {width: 200}, &quot;Description&quot;: {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width. :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;30%&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;60%&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+<p>By default, columns width is auto-calculated to fit the values inside. Use width to control the width of a column. :include-table: table.csv {Price: {width: 200}, &quot;Description&quot;: {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width. :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;30%&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;60%&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch</p>
 </article>
 
 <article>
 <header><h1>Min Width</h1></header>
-<p>Use minColumnWidth to set min width for all table columns :include-table: table/table.csv {minColumnWidth: 400, &quot;Description&quot;: {width: 500}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+<p>Use minColumnWidth to set min width for all table columns :include-table: table/table.csv {minColumnWidth: 400, &quot;Description&quot;: {width: 500}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch</p>
 </article>
 
 <article>
@@ -141,7 +146,7 @@
 
 <article>
 <header><h1>Text Alignment</h1></header>
-<p>Use align to change a column text alignment. :include-table: table.csv {Price: {width: 200, align: &quot;right&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch JSON data example: :include-table: table.json {Price: {width: 100, align: &quot;right&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+<p>Use align to change a column text alignment. :include-table: table.csv {Price: {width: 200, align: &quot;right&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch JSON data example: :include-table: table.json {Price: {width: 100, align: &quot;right&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
 </article>
 
 <article>
@@ -152,6 +157,11 @@
 <article>
 <header><h1>Inlined</h1></header>
 <p>```table {title: &quot;my table&quot;, Price: {width: 100, align: &quot;right&quot;}} Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch ``` Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
+<header><h1>Multiline Content</h1></header>
+<p>Use quotes to provide multi line markdown content such as bullet points and code snippets Account, Price, Description #12BGD3, 100, &quot;multi line markdown with * bullet point * list &quot; #12BGD3, 150, &quot;and some code snippet ```java class HelloWorld { } ``` &quot; Account Price Description #12BGD3 100 multi line markdown with * bullet point * list #12BGD3 150 and some code snippet ```java class HelloWorld { } ```</p>
 </article>
 
 <article>
@@ -230,7 +240,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "csv",
-        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch",
+        "snippet" : "Account, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD4, 90, custom table with a short attachment\n#12BGD5, 150, chair\n#91AGB1, 10, lunch",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -268,7 +278,25 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ], [ [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "#12BGD3",
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
               "type" : "SimpleText"
             } ]
           } ], [ {
@@ -1033,8 +1061,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     }, {
-      "id" : "arrange-and-filter",
-      "title" : "Arrange and Filter",
+      "id" : "arrange-and-remove-columns",
+      "title" : "Arrange and Remove Columns",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
@@ -1075,6 +1103,18 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ], [ [ {
             "type" : "Paragraph",
             "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
               "text" : "chair",
               "type" : "SimpleText"
             } ]
@@ -1094,6 +1134,166 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "10",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "type" : "Table"
+      } ]
+    }, {
+      "id" : "filter-rows",
+      "title" : "Filter Rows",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "includeRowsRegexp",
+          "type" : "InlinedCode"
+        }, {
+          "text" : "",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "to include only rows that match a regular expression",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-table: table/table.csv {includeRowsRegexp: [\"table\", \"cha..\"]}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "type" : "Table"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "excludeRowsRegexp",
+          "type" : "InlinedCode"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "to exclude rows that match a regular expression",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-table: table/table.csv {includeRowsRegexp: [\"table\", \"cha..\"], excludeRowsRegexp: \"short\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "chair",
               "type" : "SimpleText"
             } ]
           } ] ] ]
@@ -1158,7 +1358,25 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ], [ [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "#12BGD3",
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
               "type" : "SimpleText"
             } ]
           } ], [ {
@@ -1237,7 +1455,25 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ], [ [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "#12BGD3",
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
               "type" : "SimpleText"
             } ]
           } ], [ {
@@ -1316,7 +1552,25 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ], [ [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "#12BGD3",
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
               "type" : "SimpleText"
             } ]
           } ], [ {
@@ -1405,7 +1659,25 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ], [ [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "#12BGD3",
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
               "type" : "SimpleText"
             } ]
           } ], [ {
@@ -1628,7 +1900,25 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ], [ [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "#12BGD3",
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "90",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD5",
               "type" : "SimpleText"
             } ]
           } ], [ {
@@ -1931,6 +2221,97 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     }, {
+      "id" : "multiline-content",
+      "title" : "Multiline Content",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use quotes to provide multi line markdown content such as bullet points and code snippets",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "csv",
+        "snippet" : "Account, Price, Description\n#12BGD3, 100, \"multi line markdown with\n* bullet point\n* list\n\"\n#12BGD3, 150, \"and some code snippet\n```java\nclass HelloWorld {\n}\n```\n\"",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "Account"
+          }, {
+            "title" : "Price"
+          }, {
+            "title" : "Description"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "100",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "multi line markdown with",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "bulletMarker" : "*",
+            "tight" : true,
+            "type" : "BulletList",
+            "content" : [ {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "bullet point",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            }, {
+              "type" : "ListItem",
+              "content" : [ {
+                "type" : "Paragraph",
+                "content" : [ {
+                  "text" : "list",
+                  "type" : "SimpleText"
+                } ]
+              } ]
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "150",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "and some code snippet",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "java",
+            "snippet" : "class HelloWorld {\n}\n",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          } ] ] ]
+        },
+        "type" : "Table"
+      } ]
+    }, {
       "id" : "markdown-in-cells",
       "title" : "Markdown in Cells",
       "type" : "Section",
@@ -2061,7 +2442,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1663025548316,
+    "lastModifiedTime" : 1664816820240,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Tables",
@@ -2091,8 +2472,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "Highlight",
         "id" : "highlight"
       }, {
-        "title" : "Arrange and Filter",
-        "id" : "arrange-and-filter"
+        "title" : "Arrange and Remove Columns",
+        "id" : "arrange-and-remove-columns"
+      }, {
+        "title" : "Filter Rows",
+        "id" : "filter-rows"
       }, {
         "title" : "Width",
         "id" : "width"
@@ -2111,6 +2495,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Inlined",
         "id" : "inlined"
+      }, {
+        "title" : "Multiline Content",
+        "id" : "multiline-content"
       }, {
         "title" : "Markdown in Cells",
         "id" : "markdown-in-cells"
