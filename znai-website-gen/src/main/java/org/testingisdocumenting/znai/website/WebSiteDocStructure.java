@@ -110,8 +110,7 @@ class WebSiteDocStructure implements DocStructure {
             return docUrl.getUrl();
         }
 
-        boolean isIndexPath = path != null && toc.findTocItem(path).isIndex();
-        if (docUrl.isIndexUrl() || isIndexPath) {
+        if (isIndexPath(path, docUrl)) {
             return "/" + docMeta.getId() + (docUrl.getAnchorId().isEmpty() ? "" : docUrl.getAnchorIdWithHash());
         }
 
@@ -181,6 +180,19 @@ class WebSiteDocStructure implements DocStructure {
     @Override
     public TableOfContents tableOfContents() {
         return toc;
+    }
+
+    private boolean isIndexPath(Path path, DocUrl docUrl) {
+        if (docUrl.isIndexUrl()) {
+            return true;
+        }
+
+        if (path == null) {
+            return false;
+        }
+
+        TocItem tocItem = toc.findTocItem(path);
+        return tocItem != null && tocItem.isIndex();
     }
 
     private String validateLocalLinks() {

@@ -1,0 +1,1 @@
+* Fix: Null Pointer in some cases of URL resolve
