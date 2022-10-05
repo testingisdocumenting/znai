@@ -1,0 +1,1 @@
+* Add: Report [Image Annotations](visuals/image-annotations) that are outside of image boundaries

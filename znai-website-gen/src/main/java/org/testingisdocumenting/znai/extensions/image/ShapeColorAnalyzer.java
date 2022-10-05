@@ -28,9 +28,17 @@ class ShapeColorAnalyzer {
     }
 
     boolean isDarkCoordinate(Number x, Number y) {
+        int xAsInt = (int) (x.doubleValue() * pixelRatio);
+        int yAsInt = (int) (y.doubleValue() * pixelRatio);
+
+        if (xAsInt < 0 || yAsInt < 0 || xAsInt >= image.getWidth() || yAsInt >= image.getHeight()) {
+            throw new IllegalArgumentException("x: " + xAsInt + "; y: " + yAsInt + "; pixelRatio: " + pixelRatio +
+                " is outside the image (width: " + image.getWidth() + "; height: " + image.getHeight() + ")");
+        }
+
         return ImageUtils.colorDarknessRatio(image,
-                (int) (x.doubleValue() * pixelRatio),
-                (int) (y.doubleValue() * pixelRatio),
+                xAsInt,
+                yAsInt,
                 (int) (10 * pixelRatio)) > 0.5;
     }
 

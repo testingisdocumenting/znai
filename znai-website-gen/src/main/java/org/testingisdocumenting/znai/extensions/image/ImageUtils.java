@@ -39,6 +39,10 @@ public class ImageUtils {
     public static double colorDarknessRatio(BufferedImage image, int x1, int y1, int x2, int y2) {
         x1 = Math.max(0, x1);
         y1 = Math.max(0, y1);
+
+        x1 = Math.min(x1, image.getWidth() - 1);
+        y1 = Math.min(y1, image.getHeight() - 1);
+
         x2 = Math.min(x2, image.getWidth() - 1);
         y2 = Math.min(y2, image.getHeight() - 1);
 
