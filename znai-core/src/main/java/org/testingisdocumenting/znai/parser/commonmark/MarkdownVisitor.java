@@ -221,7 +221,7 @@ public class MarkdownVisitor extends AbstractVisitor {
 
             parserHandler.onIncludePlugin(includePlugin, pluginResult);
         } catch (Exception e) {
-            throw new RuntimeException(createPluginErrorMessage("include", params, e));
+            throw new RuntimeException(createPluginErrorMessage("include", params, e), e);
         }
     }
 
@@ -237,7 +237,7 @@ public class MarkdownVisitor extends AbstractVisitor {
             parserHandler.onFencePlugin(fencePlugin, pluginResult);
         } catch (Exception e) {
             throw new RuntimeException(createPluginErrorMessage("fence", params, e) + "\n" +
-                    "  fence content:\n" + fenceContent);
+                    "  fence content:\n" + fenceContent, e);
         }
     }
 
@@ -249,7 +249,7 @@ public class MarkdownVisitor extends AbstractVisitor {
             PluginResult pluginResult = inlinedCodePlugin.process(componentsRegistry, path, params);
             parserHandler.onInlinedCodePlugin(inlinedCodePlugin, pluginResult);
         } catch (Exception e) {
-            throw new RuntimeException(createPluginErrorMessage("inline code", params, e));
+            throw new RuntimeException(createPluginErrorMessage("inline code", params, e), e);
         }
     }
 
