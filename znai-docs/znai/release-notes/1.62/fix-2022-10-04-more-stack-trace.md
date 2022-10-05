@@ -1,0 +1,1 @@
+* Fix: Display stacktrace within plugin to identify problems easier

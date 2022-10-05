@@ -43,7 +43,7 @@ class DummyIncludePlugin implements IncludePlugin {
                          PluginParams pluginParams) {
         def throwMessage = pluginParams.getOpts().get("throw", "")
         if (throwMessage) {
-            throw new RuntimeException(throwMessage)
+            callThatThrows(throwMessage)
         }
 
         def dummy = new DocElement("IncludeDummy")
@@ -52,4 +52,9 @@ class DummyIncludePlugin implements IncludePlugin {
 
         return PluginResult.docElements([dummy].stream())
     }
+
+    private static void callThatThrows(String message) {
+        throw new RuntimeException(message)
+    }
 }
+
