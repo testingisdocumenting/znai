@@ -20,8 +20,10 @@ import org.junit.Test
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 
+import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.greaterThan
 import static org.testingisdocumenting.webtau.Matchers.greaterThanOrEqual
+import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class ImageFencePluginTest {
     @Test
@@ -59,5 +61,25 @@ class ImageFencePluginTest {
                           height: greaterThan(0),
                           scale: 2.0,
                           type: "AnnotatedImage"]]
+    }
+
+    @Test
+    void "should validate annotations are inside the image"() {
+        code {
+            PluginsTestUtils.processAndGetFencePluginAndParserHandler(
+                    new PluginParams('image', 'dummy.png', [scale: 2.0d]),
+                    "600, 300\n" +
+                            "150, 40\n").parserHandler
+        } should throwException("x: 600; y: 300; pixelRatio: 1.0 is outside the image (width: 592; height: 535)")
+    }
+
+    @Test
+    void "annotation in the corner should be allowed"() {
+        def handler = PluginsTestUtils.processAndGetFencePluginAndParserHandler(
+                new PluginParams('image', 'dummy.png', [scale: 2.0d]),
+                "591, 534\n").parserHandler
+
+        def props = handler.docElement.contentToListOfMaps()
+        props[0].shapes.should == [[invertedColors:false, x: 591.0, y: 534.0, text: "1", type: ShapeTypes.BADGE]]
     }
 }
