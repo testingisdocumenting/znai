@@ -85,6 +85,11 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.61.1</h1></header>
+<p>Fix: Null Pointer in some cases of URL resolve Fix: Display stacktrace within plugin to identify problems easier Add: Report visuals/image-annotations Image Annotations that are outside of image boundaries</p>
+</article>
+
+<article>
 <header><h1>1.61</h1></header>
 <p>Fix: flow/names#name-overrides page title override for index page Fix: java/content-extraction#anchor Java Anchor linking from pages incorrect validation Fix: flow/page-references#links-links-to-subsection local ref in index page link doesn't add /index to url on ref click Doc: layout/tables#multiline-content Table Multiline Content Add: layout/tables#filter-rows Table Regexp Filter Remove layout/tables Table gap in layout/tables#wide-mode wide mode</p>
 </article>
@@ -151,6 +156,64 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "1-61-1",
+      "title" : "1.61.1",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Null Pointer in some cases of URL resolve",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Display stacktrace within plugin to identify problems easier",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Report ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Image Annotations",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " that are outside of image boundaries",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "1-61",
       "title" : "1.61",
       "type" : "Section",
@@ -3997,7 +4060,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1664816820248,
+    "lastModifiedTime" : 1665251345836,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2022 Releases",
@@ -4008,6 +4071,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "2022",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.61.1",
+        "id" : "1-61-1"
+      }, {
         "title" : "1.61",
         "id" : "1-61"
       }, {
