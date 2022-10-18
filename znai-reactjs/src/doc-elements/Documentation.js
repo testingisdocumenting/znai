@@ -210,6 +210,7 @@ export class Documentation extends Component {
                     <TooltipRenderer/>
                     <DocumentationLayout docMeta={docMeta}
                                          toc={toc}
+                                         tocItem={page.tocItem}
                                          theme={theme}
                                          zoomOverlay={zoomOverlay}
                                          selectedTocItem={selectedTocItem}
