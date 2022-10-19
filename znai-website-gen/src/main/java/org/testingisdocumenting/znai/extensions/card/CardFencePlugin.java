@@ -60,11 +60,12 @@ public class CardFencePlugin implements FencePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
+        Stream<AuxiliaryFile> cardContentAuxiliaryFiles = contentParseResult.getAuxiliaryFiles().stream();
         if (imageAuxiliaryFile != null) {
-            return Stream.of(imageAuxiliaryFile);
+            return Stream.concat(cardContentAuxiliaryFiles, Stream.of(imageAuxiliaryFile));
         }
 
-        return Stream.empty();
+        return cardContentAuxiliaryFiles;
     }
 
     @Override
