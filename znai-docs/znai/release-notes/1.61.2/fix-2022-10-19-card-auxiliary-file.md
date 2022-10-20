@@ -1,0 +1,1 @@
+* Fix: [Card](visuals/cards) recognizes additional images inside to include into dist.
