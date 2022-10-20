@@ -2712,6 +2712,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/release-notes/2022#1-61-2</url>
+    <fullTitle>Znai: 2022 Releases, 1.61.2 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: visuals/cards Card recognizes additional images inside to include into dist.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/release-notes/2022#1-61-1</url>
     <fullTitle>Znai: 2022 Releases, 1.61.1 [Release Notes]</fullTitle>
     <text>
