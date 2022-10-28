@@ -72,6 +72,11 @@ public class PluginParamsDefinition {
         return this;
     }
 
+    public PluginParamsDefinition add(String name, PluginParamType type, String description) {
+        add(new Param(name, type, description, type.example(), false));
+        return this;
+    }
+
     public PluginParamsDefinition addRequired(String name, PluginParamType type, String description, String example) {
         add(new Param(name, type, description, example, true));
         return this;

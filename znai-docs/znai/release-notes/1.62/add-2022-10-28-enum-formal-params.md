@@ -1,0 +1,1 @@
+* Add: enum type formal parameters for plugins

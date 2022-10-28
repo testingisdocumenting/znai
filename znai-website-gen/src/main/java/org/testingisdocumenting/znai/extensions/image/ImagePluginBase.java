@@ -20,6 +20,7 @@ import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
+import org.testingisdocumenting.znai.extensions.paramtypes.PluginParamTypeEnum;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
@@ -28,7 +29,6 @@ import org.testingisdocumenting.znai.utils.UrlUtils;
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 abstract class ImagePluginBase implements Plugin {
@@ -61,8 +61,7 @@ abstract class ImagePluginBase implements Plugin {
         params.add(CAPTION_KEY, PluginParamType.STRING, "image title", "\"my image\"");
         // TODO deprecate
         params.add(CAPTION_BOTTOM_KEY, PluginParamType.BOOLEAN, "place image title at the bottom", "true");
-        params.add(ALIGN_KEY, PluginParamType.STRING, "horizontal image alignment",
-                ALIGN_VALUES.stream().map(v -> "\"" + v + "\"").collect(Collectors.joining(", ")));
+        params.add(ALIGN_KEY, new PluginParamTypeEnum(ALIGN_VALUES), "horizontal image alignment");
 
         params.add(MOBILE_ONLY_KEY, PluginParamType.BOOLEAN, "render image only for mobile screen size", "true");
         params.add(DESKTOP_ONLY_KEY, PluginParamType.BOOLEAN, "render image only for desktop screen size", "true");
@@ -111,8 +110,6 @@ abstract class ImagePluginBase implements Plugin {
         DocStructure docStructure = componentsRegistry.docStructure();
         String imagePath = pluginParams.getFreeParam();
 
-        validateAlign(opts);
-
         isExternal = UrlUtils.isExternal(imagePath);
         Map<String, Object> props = new LinkedHashMap<>(opts.toMap());
 
@@ -136,18 +133,6 @@ abstract class ImagePluginBase implements Plugin {
         new AnchorFeature(docStructure, markupPath, pluginParams).updateProps(props);
 
         return PluginResult.docElement("AnnotatedImage", props);
-    }
-
-    private void validateAlign(PluginParamsOpts opts) {
-        if (!opts.has(ALIGN_KEY)) {
-            return;
-        }
-
-        String align = opts.get(ALIGN_KEY);
-        if (!ALIGN_VALUES.contains(align)) {
-            throw new IllegalArgumentException("<" + ALIGN_KEY + "> only accept following values: " +
-                    ALIGN_VALUES.stream().map(v -> "\"" + v + "\"").collect(Collectors.joining(", ")));
-        }
     }
 
     private void setWidthHeight(BufferedImage bufferedImage,
