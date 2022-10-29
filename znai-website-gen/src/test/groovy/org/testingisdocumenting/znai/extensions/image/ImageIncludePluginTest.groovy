@@ -68,6 +68,6 @@ class ImageIncludePluginTest {
         code {
             PluginsTestUtils.processIncludeAndGetProps(":include-image: dummy.png {align: \"cen\"}")
         } should throwException(IllegalArgumentException,
-                "<align> only accept following values: \"left\", \"center\", \"right\"")
+               ~/align given: "cen" <string>, expected: <enum "left", "center", "right"> \(e.g. "left"\)/)
     }
 }
