@@ -1,0 +1,1 @@
+* Add: JSON [anchor id](add-2022-10-28-enum-formal-params.md) support
