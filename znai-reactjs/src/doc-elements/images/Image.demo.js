@@ -50,7 +50,7 @@ export function imageDemo(registry) {
     ))
 
     registry.add('with title and anchor', () => <AnnotatedImage {...standardImage()} title="My Image" anchorId="my-image-anchor"/>)
-    registry.add('with collapse and no gap', () => <AnnotatedImage {...standardImage()} title="My Image" anchorId="my-image-anchor"/>)
+    registry.add('with collapse', () => <AnnotatedImage {...standardImage()} title="My Image" anchorId="my-image-anchor" collapsed={false}/>)
     registry.add('no fit with title', () => (
       <AnnotatedImage {...noFitImage()} title="My Image"/>
     ))
