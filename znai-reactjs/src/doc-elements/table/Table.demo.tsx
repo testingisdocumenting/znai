@@ -77,6 +77,17 @@ export function tableDemo(registry: Registry) {
         elementsLibrary={elementsLibrary}
       />
     ))
+    .add("wide mode anchor and collapse", () => (
+      <div style={{ padding: "0 20px" }}>
+        <Table
+          table={{ ...fourColumnsWithWidth(fourColumnsData()), wide: true }}
+          title="Wide mode"
+          anchorId="my-wide-table"
+          collapsed={false}
+          elementsLibrary={elementsLibrary}
+        />
+      </div>
+    ))
     .add("wide mode with scroll", () => (
       <div style={{ width: 1200 }}>
         <Table

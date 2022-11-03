@@ -165,7 +165,8 @@ function TableTitle({ title, anchorId, collapsed, onCollapseToggle }: TableTitle
       anchorId={anchorId}
       collapsed={collapsed}
       onCollapseToggle={onCollapseToggle}
-      additionalContainerClassNames="znai-table-title"
+      additionalContainerClassNames="znai-table-title-container"
+      additionalTitleClassNames="znai-table-title"
     />
   );
 }
