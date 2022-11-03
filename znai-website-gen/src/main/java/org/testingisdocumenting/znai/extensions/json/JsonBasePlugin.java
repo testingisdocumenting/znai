@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
 import org.testingisdocumenting.znai.extensions.features.PluginFeatureList;
+import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
 import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
 import org.testingisdocumenting.znai.extensions.validation.EntryPresenceValidation;
@@ -65,7 +66,8 @@ public abstract class JsonBasePlugin implements Plugin {
                         "\"root.store.book\" or [\"root.store.book\", \"root.store.discount\"]")
                 .add(SnippetHighlightFeature.paramsDefinition)
                 .add(PluginParamsDefinitionCommon.snippetReadMore)
-                .add(CodeReferencesFeature.paramsDefinition);
+                .add(CodeReferencesFeature.paramsDefinition)
+                .add(AnchorFeature.paramsDefinition);
 
         updateParams(params);
 
@@ -80,9 +82,9 @@ public abstract class JsonBasePlugin implements Plugin {
         String jsonPath = pluginParams.getOpts().get(INCLUDE_KEY, "$");
         Object parsed = JsonPath.read(jsonText, jsonPath);
 
-        features = new PluginFeatureList(
-                new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams));
+        features = new PluginFeatureList(new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams));
         additionalPluginFeatures().forEach(features::add);
+        features.add(new AnchorFeature(componentsRegistry.docStructure(), markupPath, pluginParams));
 
         Set<String> existingPaths = buildPaths(parsed);
 

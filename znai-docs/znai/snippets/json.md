@@ -65,10 +65,19 @@ Use `title` parameter to specify a snippet title:
 
 Use `autoTitle: true` to automatically set title to specified file name
 
-  :include-json: book-store.json {include: "$..book[0,1]", autoTitle: true}
+    :include-json: book-store.json {include: "$..book[0,1]", autoTitle: true}
 
 :include-json: book-store.json {include: "$..book[0,1]", autoTitle: true}
 
+# Anchor
+
+When you specify a title, hover mouse over it to see a clickable anchor.
+
+Use `anchorId` to override auto generated identifier.
+
+:include-json: book-store.json {include: "$..book[0,1]", title: "Books", anchorId: "my-books"}
+
+    :include-json: book-store.json {include: "$..book[0,1]", title: "Books", anchorId: "my-books"}
 
 # Read More
 

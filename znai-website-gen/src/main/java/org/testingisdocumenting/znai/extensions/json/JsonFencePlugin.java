@@ -47,7 +47,7 @@ public class JsonFencePlugin extends JsonBasePlugin implements FencePlugin {
 
     @Override
     protected Stream<PluginFeature> additionalPluginFeatures() {
-        return Stream.of();
+        return Stream.empty();
     }
 
     @Override
