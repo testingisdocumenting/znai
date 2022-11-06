@@ -100,7 +100,17 @@ score, Integer, another description line with *markdown* support
 ````````
 `````````
 
-Note: Card plugin is designed to work with [code snippets](snippets/external-code-snippets) and with [API Parameters](snippets/api-parameters) by reducing spacing integrating border lines
+Note: Card plugin is designed to work with [code snippets](snippets/external-code-snippets), [Tables](layout/tables) and [API Parameters](snippets/api-parameters) by reducing spacing and integrating borders
+
+`````card small-book.png {title: "With Table", imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))", imageHeight: 120}
+* List Item One
+* List Item Two
+```table
+column A, column B
+hello, world
+of, cards
+```
+`````
 
 # Links 
 

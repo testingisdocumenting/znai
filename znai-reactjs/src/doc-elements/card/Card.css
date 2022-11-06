@@ -46,7 +46,8 @@
     margin-bottom: 0;
 }
 
-.znai-card .znai-container:last-child .znai-api-parameters {
+.znai-card .znai-container:last-child .znai-api-parameters,
+.znai-card .znai-container:last-child .znai-table {
     border-bottom: none;
 }
 
