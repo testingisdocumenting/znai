@@ -15,7 +15,7 @@ In this way, the following `CSV` file...
 
 # JSON
 
-A similar extension can be used to display data from a `JSON` file representing tabular data.
+This extension can be used to display data from a `JSON` file representing tabular data.
 
     :include-table: table.json 
 

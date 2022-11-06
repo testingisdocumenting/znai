@@ -1,0 +1,1 @@
+* Add: [Table](layout/tables) and [Card](visuals/cards) integration
