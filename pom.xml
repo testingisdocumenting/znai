@@ -138,7 +138,7 @@
         <vertx.io.version>3.9.4</vertx.io.version>
         <commonmark.version>0.15.2</commonmark.version>
         <antlr.version>4.5</antlr.version>
-        <jackson.verson>2.11.2</jackson.verson>
+        <jackson.verson>2.12.7.1</jackson.verson>
         <webtau.version>1.49</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
         <ant.version>1.10.11</ant.version>
