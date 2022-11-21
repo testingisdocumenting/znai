@@ -54,6 +54,11 @@ public class TrackingInlineCodePlugin implements InlinedCodePlugin {
     }
 
     @Override
+    public void preprocess(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+        delegate.preprocess(componentsRegistry, markupPath, pluginParams);
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         paramsTracker.trackParams(pluginParams);
         return delegate.process(componentsRegistry, markupPath, pluginParams);

@@ -44,6 +44,11 @@ public class TrackingFencePlugin implements FencePlugin {
     }
 
     @Override
+    public void preprocess(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
+        delegate.preprocess(componentsRegistry, markupPath, pluginParams);
+    }
+
+    @Override
     public void preprocess(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         delegate.preprocess(componentsRegistry, markupPath, pluginParams, content);
     }

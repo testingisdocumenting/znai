@@ -213,7 +213,7 @@ public class MarkdownVisitor extends AbstractVisitor {
     private void handleIncludePlugin(PluginParams params) {
         try {
             IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
-            includePlugin.preprocess(componentsRegistry, parserHandler, path, params);
+            includePlugin.preprocess(componentsRegistry, path, params);
 
             includePlugin.parameters().validate(params);
 
@@ -228,6 +228,7 @@ public class MarkdownVisitor extends AbstractVisitor {
     private void handleFencePlugin(PluginParams params, String fenceContent) {
         try {
             FencePlugin fencePlugin = Plugins.fencePluginById(params.getPluginId());
+            fencePlugin.preprocess(componentsRegistry, path, params);
             fencePlugin.preprocess(componentsRegistry, path, params, fenceContent);
 
             fencePlugin.parameters().validate(params);
@@ -244,6 +245,7 @@ public class MarkdownVisitor extends AbstractVisitor {
     private void handleInlineCodePlugin(PluginParams params) {
         try {
             InlinedCodePlugin inlinedCodePlugin = Plugins.inlinedCodePluginById(params.getPluginId());
+            inlinedCodePlugin.preprocess(componentsRegistry, path, params);
             inlinedCodePlugin.parameters().validate(params);
 
             PluginResult pluginResult = inlinedCodePlugin.process(componentsRegistry, path, params);
