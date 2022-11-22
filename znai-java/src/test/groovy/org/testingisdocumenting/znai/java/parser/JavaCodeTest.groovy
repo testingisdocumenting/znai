@@ -285,7 +285,7 @@ enum MyEnum {
     void "list all available methods with signatures when no match is found"() {
         code {
             javaCode.findMethod("nonExisting")
-        } should throwException("no method found: nonExisting.\n" +
+        } should throwException("no method found: <nonExisting>\n" +
                 "Available methods:\n" +
                 "    sampleMethod(String)\n" +
                 "    sampleMethod(String,List)\n" +

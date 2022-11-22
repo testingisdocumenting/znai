@@ -28,21 +28,6 @@ import java.nio.file.Path;
 public interface IncludePlugin extends Plugin {
     IncludePlugin create();
 
-    /**
-     * called before params validation and before process
-     * can be used to pre-calculate some values for params validation
-     * and then reuse the calculated for actual process
-     * @param componentsRegistry registry of components
-     * @param parserHandler handler to build doc elements explicitly
-     * @param markupPath path of the parsed file where this plugin is used
-     * @param pluginParams plugin parameters
-     */
-    default void preprocess(ComponentsRegistry componentsRegistry,
-                            ParserHandler parserHandler,
-                            Path markupPath,
-                            PluginParams pluginParams) {
-    }
-
     PluginResult process(ComponentsRegistry componentsRegistry,
                          ParserHandler parserHandler,
                          Path markupPath,

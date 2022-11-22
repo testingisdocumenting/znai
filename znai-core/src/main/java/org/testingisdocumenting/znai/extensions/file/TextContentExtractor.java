@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-class TextContentExtractor {
+public class TextContentExtractor {
     static final String SURROUNDED_BY_KEY = "surroundedBy";
     static final String SURROUNDED_BY_SEPARATOR_KEY = "surroundedBySeparator";
 
@@ -45,7 +45,7 @@ class TextContentExtractor {
     private TextContentExtractor() {
     }
 
-    static PluginParamsDefinition createParamsDefinition() {
+    public static PluginParamsDefinition createParamsDefinition() {
         return new PluginParamsDefinition()
                 .add(SURROUNDED_BY_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
                         "markers to use to extract portion of a snippet",

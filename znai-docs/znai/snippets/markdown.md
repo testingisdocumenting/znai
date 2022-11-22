@@ -20,7 +20,7 @@ We build documentation twice and the differences are handled by `:include-markdo
     :include-markdown: {firstAvailable: [
         "markdown-dir/getting-started-step-internal.md", 
         "markdown-dir/getting-started-step-external.md"]}
-        
+
 :include-markdown: {firstAvailable: [
     "markdown-dir/getting-started-step-internal.md", 
     "markdown-dir/getting-started-step-external.md"]}
@@ -38,6 +38,41 @@ Given an existing markdown files with markers
 ```
 
 :include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: "<> (marker-one)"}
+
+# Inlined Markdown
+
+To inline a piece of markdown use the inlined version of the plugin
+
+```
+content `:markdown: path-to-file.md` content
+```
+
+Plugin will inline text content into current paragraph.
+
+```markdown
+Use the latest version `:markdown: markdown-dir/inlined.md` to get the feature.
+```
+
+:include-file: markdown-dir/inlined.md {autoTitle: true}
+
+Use the latest version `:markdown: markdown-dir/inlined.md` to get the feature.
+
+Use `firstAvailable` parameter to include first file that can be resolved
+
+```markdown
+Use the latest version `:markdown: {
+  firstAvailable: ["markdown-dir/inlined-alternative.md", "markdown-dir/inlined.md"]}` to get the feature.
+```
+
+```columns
+left: 
+:include-file: markdown-dir/inlined-alternative.md {autoTitle: true}
+right: 
+:include-file: markdown-dir/inlined.md {autoTitle: true}
+```
+
+Use the latest version `:markdown: {
+firstAvailable: ["markdown-dir/inlined-alternative.md", "markdown-dir/inlined.md"]}` to get the feature.
 
 # Multiple Markdown Files
 

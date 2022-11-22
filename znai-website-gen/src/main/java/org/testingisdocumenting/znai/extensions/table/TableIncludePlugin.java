@@ -47,7 +47,7 @@ public class TableIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public void preprocess(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
+    public void preprocess(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         String fileName = pluginParams.getFreeParam();
         String textContent = resourcesResolver.textContent(fileName);

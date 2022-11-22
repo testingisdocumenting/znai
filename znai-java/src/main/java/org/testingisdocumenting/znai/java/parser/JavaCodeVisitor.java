@@ -30,7 +30,6 @@ import com.github.javaparser.javadoc.description.JavadocSnippet;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.RETURN;
@@ -91,7 +90,7 @@ class JavaCodeVisitor extends VoidVisitorAdapter<String> {
     }
 
     private JavaMethod throwNoMethodFound(String methodNameWithOptionalTypes) {
-        throw new RuntimeException("no method found: " + methodNameWithOptionalTypes + "." +
+        throw new RuntimeException("no method found: <" + methodNameWithOptionalTypes + ">" +
                 "\nAvailable methods:\n" + renderAllMethods());
     }
 

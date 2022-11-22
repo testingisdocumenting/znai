@@ -90,7 +90,7 @@ class PluginsTestUtils {
         def includePlugin = Plugins.includePluginById(includeParams.pluginId)
 
 
-        includePlugin.preprocess(TEST_COMPONENTS_REGISTRY, parserHandler, markupPath, includeParams)
+        includePlugin.preprocess(TEST_COMPONENTS_REGISTRY, markupPath, includeParams)
         includePlugin.parameters().validate(includeParams)
 
         def pluginResult = includePlugin.process(TEST_COMPONENTS_REGISTRY, parserHandler, markupPath, includeParams)

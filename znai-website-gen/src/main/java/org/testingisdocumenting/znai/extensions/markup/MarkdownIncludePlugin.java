@@ -16,36 +16,15 @@
 
 package org.testingisdocumenting.znai.extensions.markup;
 
-import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
-import org.testingisdocumenting.znai.parser.MarkupParser;
-import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
-import org.testingisdocumenting.znai.search.SearchScore;
-import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.List;
-import java.util.stream.Stream;
 
-public class MarkdownIncludePlugin implements IncludePlugin {
-    private static final String FIRST_AVAILABLE_PARAM = "firstAvailable";
-    private static final String USAGE_MESSAGE = "use either <" + FIRST_AVAILABLE_PARAM + "> or free " +
-            "form param to specify file to include";
-
-    private MarkupParserResult parserResult;
-    private Path markdownPathUsed;
-
-    @Override
-    public String id() {
-        return "markdown";
-    }
-
+public class MarkdownIncludePlugin extends MarkdownBasePlugin implements IncludePlugin {
     @Override
     public IncludePlugin create() {
         return new MarkdownIncludePlugin();
@@ -56,52 +35,6 @@ public class MarkdownIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
-        MarkupParser parser = componentsRegistry.defaultParser();
-
-        markdownPathUsed = selectMarkdown(componentsRegistry.resourceResolver(), pluginParams);
-        String content = modifiedContent(markdownPathUsed.toString(),
-                resourcesResolver.textContent(markdownPathUsed), pluginParams);
-        parserResult = parser.parse(markupPath, content);
-
         return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
-    }
-
-    private String modifiedContent(String id, String fullContent, PluginParams pluginParams) {
-        ManipulatedSnippetContentProvider contentProvider = new ManipulatedSnippetContentProvider(id,
-                fullContent,
-                pluginParams);
-
-        return contentProvider.snippetContent();
-    }
-
-    private Path selectMarkdown(ResourcesResolver resourcesResolver, PluginParams pluginParams) {
-        if (pluginParams.getOpts().has(FIRST_AVAILABLE_PARAM) && !pluginParams.getFreeParam().isEmpty()) {
-            throw new IllegalArgumentException(USAGE_MESSAGE + ", but not both");
-        }
-
-        List<Object> optionalPaths = pluginParams.getOpts().getList(FIRST_AVAILABLE_PARAM);
-
-        if (pluginParams.getFreeParam().isEmpty() && optionalPaths.isEmpty()) {
-            throw new IllegalArgumentException(USAGE_MESSAGE + ", but none was specified");
-        }
-
-        return optionalPaths.stream()
-                .filter(p -> resourcesResolver.canResolve(p.toString()))
-                .findFirst()
-                .map(p -> resourcesResolver.fullPath(p.toString()))
-                .orElseGet(() -> resourcesResolver.fullPath(pluginParams.getFreeParam()));
-    }
-
-    @Override
-    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.concat(
-                Stream.of(AuxiliaryFile.builtTime(markdownPathUsed)),
-                parserResult.getAuxiliaryFiles().stream());
-    }
-
-    @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(parserResult.getAllText());
     }
 }
