@@ -72,7 +72,7 @@ class JavaIncludePluginTest {
 
         code {
             process("Simple.java", "{entry: 'methodB(String2)', signatureOnly: true}")
-        } should throwException(~/no method found: methodB/)
+        } should throwException(~/no method found: <methodB\(String2\)>/)
     }
 
     @Test
