@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,5 +25,12 @@ class RegexpUtilsTest {
     void "replace matches with a callback result"() {
         def replaced = RegexpUtils.replaceAll("hello 10 world of 42 numbers", ~/(\d)\d*/, { m -> '"' + m.group(1) + '"' })
         Assert.assertEquals('hello "1" world of "4" numbers', replaced)
+    }
+
+    @Test
+    void "preserve quoted new line when replacing text"() {
+        def replaced = RegexpUtils.replaceAll("[hello\\nworld] numbers", ~/\[(\D+)]/,
+                 { m -> m.group(1) })
+        Assert.assertEquals("hello\\nworld numbers", replaced)
     }
 }

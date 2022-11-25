@@ -59,6 +59,16 @@ class GraphvizFromJsonGenTest {
     }
 
     @Test
+    void "generates graphviz compatible line break for multiline labels when color is set"() {
+        generate([
+                nodes: [[id: "n", label: "multi\nline", "colorGroup": "a"]],
+                edges: [["n", "n"]
+                ]])
+
+        gv.should contain('"n" [label="multi\\nline[a]"]')
+    }
+
+    @Test
     void "pass size information to each node from config section"() {
         generate([
                 nodes: [
