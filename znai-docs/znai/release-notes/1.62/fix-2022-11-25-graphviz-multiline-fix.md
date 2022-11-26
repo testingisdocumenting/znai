@@ -1,0 +1,1 @@
+* Fix: Flow Diagrams [multi line](visuals/flow-diagrams#multiline-labels) support when color or shape is set

@@ -21,6 +21,8 @@ import org.testingisdocumenting.znai.utils.ResourceUtils
 import org.testingisdocumenting.znai.diagrams.graphviz.meta.GraphvizShapeConfig
 import org.junit.Test
 
+import static org.testingisdocumenting.webtau.Matchers.contain
+
 class GraphvizEngineTest {
     static shapeConfig = new GraphvizShapeConfig(ResourceUtils.textContent("graphviz-meta-conf.json"))
     static dot = new InteractiveCmdGraphviz("dot")
@@ -31,11 +33,13 @@ class GraphvizEngineTest {
 
          def diagram = engine.diagramFromGv("dot", "id", """digraph Simple {
     "main-bridge" [label="mn [world]"];
-    server [label="server [a]"];
+    server [label="server\\nline [a]"];
 
     server -> "main-bridge";
 }""")
 
-        assert diagram.stylesByNodeId == ['main-bridge': ['world'], server: ['a']]
+        diagram.svg.should contain("server</text")
+        diagram.svg.should contain("line</text")
+        diagram.stylesByNodeId.should == ['main-bridge': ['world'], server: ['a']]
     }
 }
