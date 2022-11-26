@@ -108,7 +108,7 @@ public class MarkdownVisitor extends AbstractVisitor {
         String literal = code.getLiteral();
         PluginsRegexp.IdAndParams idAndParams = PluginsRegexp.parseInlinedCodePlugin(literal);
 
-        if (idAndParams != null && Plugins.hasInlinedCodePlugin(idAndParams.getId())) {
+        if (idAndParams != null) {
             handleInlineCodePlugin(new PluginParams(idAndParams.getId(), idAndParams.getParams()));
         } else {
             parserHandler.onInlinedCode(literal, DocReferences.EMPTY);

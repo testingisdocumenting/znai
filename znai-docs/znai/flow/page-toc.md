@@ -1,6 +1,8 @@
-Use `:include-page-toc:` to include page top level sections as links
+Use `include-page-toc` to include page top level sections as links
 
-    :include-page-toc:
+```markdown
+:include-page-toc:
+```
 
 :include-page-toc:
 

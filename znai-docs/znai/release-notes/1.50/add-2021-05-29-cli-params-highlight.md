@@ -1,1 +1,1 @@
-* Rename `paramsToHighlight` -> `highlight` for `:include-cli-command:` plugin  
+* Rename `paramsToHighlight` -> `highlight` for `include-cli-command` plugin  

@@ -2,9 +2,11 @@
 
 When you refer to a file using plugins like
 
- `:include-file: my-file.cpp` 
+```markdown
+:include-file: my-file.cpp
+```
  
- `Znai` tries to find the file in following locations:
+`Znai` tries to find the file in following locations:
 
 * directory with the markup file that refers `my-file.cpp`
 * documentation root directory
