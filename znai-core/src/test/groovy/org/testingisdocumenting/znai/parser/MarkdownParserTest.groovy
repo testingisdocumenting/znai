@@ -426,6 +426,13 @@ world""")
     }
 
     @Test
+    void "include plugin wrong id should be reported"() {
+        code {
+            parse(":include-wrong-id: params")
+        } should throwException(~/can't find plugin with id 'wrong-id'/)
+    }
+
+    @Test
     void "code snippets by indentation"() {
         parse("    println 'hello world'")
         content.should == [[lang: '', snippet:"println 'hello world'\n", lineNumber: '', type: 'Snippet']]
@@ -493,6 +500,13 @@ world""")
         parse("`:dummy: free-param {p1: 'v1'}`")
 
         content.should == [[type: 'Paragraph', content: [[type: 'InlinedCodeDummy', ff: 'free-param', opts: [p1: 'v1']]]]]
+    }
+
+    @Test
+    void "inlined code plugin wrong id should be reported"() {
+        code {
+            parse("`:wrong-id: param`")
+        } should throwException(~/can't find plugin with id 'wrong-id'/)
     }
 
     @Test

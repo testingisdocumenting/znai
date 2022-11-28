@@ -16,7 +16,7 @@ An image can be included using standard Markdown syntax.
 
 # Extension
 
-`Znai` has `:include-image:` extension to provide additional features:
+`Znai` has `include-image` extension to provide additional features:
 * annotations
 * fit 
 * scale

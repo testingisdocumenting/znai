@@ -39,7 +39,7 @@ The nested entries like `Page Two`, corresponds to the file `page-two.md`.
 # Embedding Content
 
 To reduce documentation maintenance burden avoid copy and paste of code snippets.
-Embed content by referencing existing files using `:include-file:` plugin instead.  
+Embed content by referencing existing files using `include-file` plugin instead.  
 
     :include-file: file-name.js {title: "Optional Title"}
     

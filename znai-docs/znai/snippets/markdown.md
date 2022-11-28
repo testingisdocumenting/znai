@@ -15,7 +15,7 @@ When you document an open source project you may have different instructions bas
 For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages.
 Most of the documentation parts are the same, but there are differences in sections like *Getting Started*.
 
-We build documentation twice and the differences are handled by `:include-markdown:`'s `firstAvailable` parameter.
+We build documentation twice and the differences are handled by `include-markdown`'s `firstAvailable` parameter.
 
     :include-markdown: {firstAvailable: [
         "markdown-dir/getting-started-step-internal.md", 
