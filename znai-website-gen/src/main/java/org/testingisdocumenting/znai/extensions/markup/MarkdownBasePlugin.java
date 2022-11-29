@@ -23,7 +23,6 @@ import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider;
-import org.testingisdocumenting.znai.extensions.file.TextContentExtractor;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
@@ -51,7 +50,7 @@ public abstract class MarkdownBasePlugin implements Plugin {
         return new PluginParamsDefinition().add(FIRST_AVAILABLE_PARAM_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
                         "path(s) of files to consider to include, first one will be included." +
                                 " Use this to provide an alternative docs for on-prem documentation")
-                .add(TextContentExtractor.createParamsDefinition());
+                .add(ManipulatedSnippetContentProvider.paramsDefinition);
     }
 
     @Override
