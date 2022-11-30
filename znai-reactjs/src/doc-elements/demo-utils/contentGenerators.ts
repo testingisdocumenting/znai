@@ -89,7 +89,10 @@ export const personApiParameters = [
     anchorId: "prefix_firstName",
     name: "firstName",
     type: "string",
-    description: [{ text: "first name", type: "SimpleText" }],
+    description: [
+      { type: "SubHeading", level: 4, title: "Test", id: "anchor-id" },
+      { text: "first name", type: "SimpleText" },
+    ],
   },
   {
     anchorId: "prefix_lastName",
