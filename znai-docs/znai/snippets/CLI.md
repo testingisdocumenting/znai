@@ -127,6 +127,24 @@ Use `title` to specify output of the output
 
 :include-cli-output: cli/file-path-of-captured.out {title: "Captured output"}
 
+# Anchor
+
+When you specify a title, hover mouse over it to see a clickable anchor.
+
+Use `anchorId` to override auto generated identifier.
+
+    :include-cli-output: cli/file-path-of-captured.out {
+      title: "Captured output",
+      anchorId: "my-output",
+      readMore: true
+    }
+
+:include-cli-output: cli/file-path-of-captured.out { 
+  title: "Captured output",
+  anchorId: "my-output",
+  readMore: true 
+}
+    
 # Extract Snippets
 
 Use `startLine`, `endLine` to extract specific content by using marker lines.

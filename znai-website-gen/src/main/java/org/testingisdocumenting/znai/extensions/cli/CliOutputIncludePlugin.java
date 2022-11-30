@@ -20,11 +20,11 @@ package org.testingisdocumenting.znai.extensions.cli;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinitionCommon;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.features.PluginFeatureList;
-import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider;
-import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
-import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature;
+import org.testingisdocumenting.znai.extensions.file.*;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
@@ -54,6 +54,16 @@ public class CliOutputIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .add(PluginParamsDefinitionCommon.container)
+                .add(PluginParamsDefinitionCommon.snippetReadMore)
+                .add(ManipulatedSnippetContentProvider.paramsDefinition)
+                .add(SnippetHighlightFeature.paramsDefinition)
+                .add(SnippetRevealLineStopFeature.paramsDefinition);
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry,
                                 ParserHandler parserHandler,
                                 Path markupPath,
@@ -66,9 +76,7 @@ public class CliOutputIncludePlugin implements IncludePlugin {
         contentProvider = new ManipulatedSnippetContentProvider(fileName, content, pluginParams);
 
         features = new PluginFeatureList(
-                new SnippetRevealLineStopFeature(pluginParams, contentProvider),
-                new SnippetHighlightFeature(componentsRegistry, pluginParams, contentProvider)
-        );
+                SnippetsCommon.createCommonFeatures(componentsRegistry, markupPath, pluginParams, contentProvider).asList());
 
         LinkedHashMap<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         List<String> lines = Arrays.asList(contentProvider.snippetContent().split("\n"));
