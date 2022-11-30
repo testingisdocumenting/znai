@@ -33,6 +33,7 @@ public class OpenApi3Schema {
     private final List<OpenApi3Schema> properties;
     private final List<String> required;
 
+    private String title;
     private String format;
     private Object example;
 
@@ -74,6 +75,14 @@ public class OpenApi3Schema {
         this.format = format;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Object getExample() {
         return example;
     }
@@ -109,8 +118,13 @@ public class OpenApi3Schema {
     public String renderDescriptionWithExamplesAndEnums() {
         List<String> parts = new ArrayList<>();
 
-        if (!description.isEmpty()) {
+        String titlePart = title != null ? "#### " + title : "";
+        if (titlePart.isEmpty() && !description.isEmpty()) {
             parts.add(description);
+        } else if (!titlePart.isEmpty() && description.isEmpty()) {
+            parts.add(titlePart);
+        } else if (!titlePart.isEmpty()) {
+            parts.add(titlePart + "\n\n" + description);
         }
 
         if (example != null) {
@@ -272,6 +286,10 @@ public class OpenApi3Schema {
         OpenApi3Schema schema = new OpenApi3Schema(name,
                 type,
                 StringUtils.nullAsEmpty(parsed.getDescription()));
+
+        if (parsed.getTitle() != null) {
+            schema.setTitle(parsed.getTitle());
+        }
 
         if (parsed.getFormat() != null) {
             schema.setFormat(parsed.getFormat());

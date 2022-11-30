@@ -82,6 +82,7 @@
     margin-right: 0;
 }
 
+.znai-api-param-description-cell .znai-heading:first-child,
 .znai-api-param-description-cell .snippet-container:first-child {
     margin-top: 0;
 }

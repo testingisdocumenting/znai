@@ -1,0 +1,1 @@
+* Add: handle property title in [Open API](snippets/open-API)

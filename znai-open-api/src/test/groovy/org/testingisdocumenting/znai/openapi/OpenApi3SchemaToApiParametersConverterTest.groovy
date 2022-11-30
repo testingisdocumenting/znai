@@ -114,6 +114,27 @@ class OpenApi3SchemaToApiParametersConverterTest {
         ]
     }
 
+    @Test
+    void "handle property title"() {
+        def root = new OpenApi3Schema("", "object", "root object")
+
+        def name = new OpenApi3Schema("name", "string", "")
+        name.setTitle("name title")
+        root.properties.add(name)
+
+        def phone = new OpenApi3Schema("phone", "string", "user phone number")
+        phone.setTitle("phone title")
+        root.properties.add(phone)
+
+        def apiParams = convertToMap(root)
+
+        apiParams.should == [
+                "parameters": [
+                        ["name": "name", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_name", "description": [["text": "#### name title", "type": "testMarkdown"]]],
+                        ["name": "phone", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_phone", "description": [["text": "#### phone title\n\nuser phone number", "type": "testMarkdown"]]]]
+        ]
+    }
+
     private static Map<String, ?> convertToMap(OpenApi3Schema root) {
         def apiParameters = new OpenApi3SchemaToApiParametersConverter(new SchemaTestMarkdownParser(), "testprefix", root).convert()
         def asMap = PropsUtils.exerciseSuppliers(apiParameters.toMap()) as Map<String, ?>
