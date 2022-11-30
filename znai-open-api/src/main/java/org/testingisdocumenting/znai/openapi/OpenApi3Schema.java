@@ -119,9 +119,12 @@ public class OpenApi3Schema {
         List<String> parts = new ArrayList<>();
 
         String titlePart = title != null ? "#### " + title : "";
-        String combinedTitleAndDescr = titlePart + description;
-        if (!combinedTitleAndDescr.isEmpty()) {
-            parts.add(titlePart + (description.isEmpty() ? "": "\n\n") + description);
+        if (titlePart.isEmpty() && !description.isEmpty()) {
+            parts.add(description);
+        } else if (!titlePart.isEmpty() && description.isEmpty()) {
+            parts.add(titlePart);
+        } else if (!titlePart.isEmpty()) {
+            parts.add(titlePart + "\n\n" + description);
         }
 
         if (example != null) {
