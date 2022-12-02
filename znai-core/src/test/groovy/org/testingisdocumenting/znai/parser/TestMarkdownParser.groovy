@@ -47,7 +47,7 @@ class TestMarkdownParser extends MarkdownParser {
     }
 
     @Override
-    void parse(Path path, String markdown, ParserHandler handler) {
-        handler.onCustomNode('TestMarkdown', [markdown: markdown])
+    void parse(Path path, ParserHandler parserHandler, String markdown) {
+        parserHandler.onCustomNode('TestMarkdown', [markdown: markdown])
     }
 }

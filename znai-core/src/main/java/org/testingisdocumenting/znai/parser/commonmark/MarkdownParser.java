@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,12 +43,7 @@ public class MarkdownParser implements MarkupParser {
 
     public MarkdownParser(ComponentsRegistry componentsRegistry) {
         this.componentsRegistry = componentsRegistry;
-        CommonMarkExtension extension = new CommonMarkExtension();
-
-        fullParser = Parser.builder().extensions(Arrays.asList(extension,
-                TablesExtension.create(),
-                StrikethroughExtension.create(),
-                YamlFrontMatterExtension.create())).build();
+        fullParser = createCommonMarkParser();
 
         metaOnlyParser = Parser.builder().extensions(
                 Collections.singletonList(YamlFrontMatterExtension.create())).build();
@@ -82,7 +78,7 @@ public class MarkdownParser implements MarkupParser {
         return parsePageMeta(node);
     }
 
-    public void parse(Path path, String markdown, ParserHandler handler) {
+    public void parse(Path path, ParserHandler handler, String markdown) {
         Node node = fullParser.parse(markdown);
         parsePartial(node, path, handler);
     }
@@ -99,5 +95,14 @@ public class MarkdownParser implements MarkupParser {
         node.accept(frontMatterVisitor);
 
         return new PageMeta(frontMatterVisitor.getData());
+    }
+
+    private static Parser createCommonMarkParser() {
+        CommonMarkExtension extension = new CommonMarkExtension();
+
+        return Parser.builder().extensions(Arrays.asList(extension,
+                TablesExtension.create(),
+                StrikethroughExtension.create(),
+                YamlFrontMatterExtension.create())).build();
     }
 }

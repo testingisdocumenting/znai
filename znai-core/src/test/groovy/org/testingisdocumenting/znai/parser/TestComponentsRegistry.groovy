@@ -31,8 +31,8 @@ class TestComponentsRegistry implements ComponentsRegistry {
     public static final TestComponentsRegistry TEST_COMPONENTS_REGISTRY = new TestComponentsRegistry()
 
     private final TestDocStructure docStructure = new TestDocStructure()
-    private final MarkupParser markdownParser = new TestMarkdownParser()
 
+    private MarkupParser markdownParser = new TestMarkdownParser()
     private MarkupParser defaultParser = new TestMarkupParser()
 
     private GlobalAssetsRegistry assetsRegistry = new GlobalAssetsRegistry()
@@ -55,6 +55,10 @@ class TestComponentsRegistry implements ComponentsRegistry {
     @Override
     MarkdownParser markdownParser() {
         return markdownParser
+    }
+
+    void setMarkdownParser(MarkdownParser parser) {
+        this.markdownParser = parser
     }
 
     @Override

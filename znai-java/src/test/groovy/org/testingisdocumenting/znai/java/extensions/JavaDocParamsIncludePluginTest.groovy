@@ -46,6 +46,12 @@ class JavaDocParamsIncludePluginTest {
                                                        entry     : 'sampleMethod(String)']
     }
 
+    @Test
+    void "params should parse markdown when specified"() {
+        def props = processAndGetProps('{entry: "markdownParamsDoc", markdown: true}')
+        PropsUtils.exerciseSuppliers(props).parameters[0].description.should == [[markdown: "my **param**", type: 'TestMarkdown']]
+    }
+
     private static IncludePlugin processAndGetIncludePlugin(String params) {
         return PluginsTestUtils.processAndGetIncludePlugin(":include-java-doc-params: WithJavaDocs.java " + params)
     }

@@ -25,7 +25,9 @@ class JavaEnumEntriesIncludePluginTest {
                                                                           [type: 'StrongEmphasis', content: [[text: 'entry one', type: 'SimpleText']]]]]]
 
 
-    static final def entryTwoDescription = [[type: 'Paragraph', content: [[text: 'description of entry two', type: 'SimpleText']]]]
+    static final def entryTwoDescription = [[type: 'Paragraph', content: [[text: 'description of **entry two**', type: 'SimpleText']]]]
+
+    static final def entryDescriptionMarkdown = [[type: 'TestMarkdown', markdown: 'description of **entry**']]
 
     @Test
     void "should generate table component with enum entries"() {
@@ -65,6 +67,21 @@ class JavaEnumEntriesIncludePluginTest {
                                         description: entryOneDescription
                                 ]],
                 ]]
+    }
+
+    @Test
+    void "should support markdown"() {
+        def result = process('EnumMarkdown.java', '{markdown: true}')
+
+        result.should == [ [ type      : 'ApiParameters',
+                             markdown: true,
+                             parameters: [
+                                     [
+                                             name    : 'ENTRY',
+                                             anchorId: 'EnumMarkdown_java_ENTRY',
+                                             type    : [], description: entryDescriptionMarkdown
+                                     ]],
+                           ]]
     }
 
     private static List<Map<String, Object>> process(String fileName, String params) {

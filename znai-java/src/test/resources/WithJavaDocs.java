@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +33,13 @@ class HelloWorld {
     private int myField;
 
     /**
+     * outer *field* description {@link package.Class} some text
+     * * bullet one
+     * * bullet two
+     */
+    private int myOtherField;
+
+    /**
      * method level java doc {@link package.Class}
      * @param test test param {@link package.Param}
      */
@@ -54,6 +62,12 @@ class HelloWorld {
                                      List<String> name) {
         statement3();
         statement4();
+    }
+
+    /**
+     * @param param my **param**
+     */
+    public void markdownParamsDoc(String param) {
     }
 
     private class InnerClass {

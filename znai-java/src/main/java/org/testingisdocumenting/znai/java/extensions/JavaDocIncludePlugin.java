@@ -40,6 +40,7 @@ public class JavaDocIncludePlugin extends JavaIncludePluginBase {
         return new PluginParamsDefinition()
                 .add(ENTRY_KEY, PluginParamType.STRING, "entry to extract java doc from, if empty, then plugin extracts top level class java doc",
                         "\"myMethod(String)\"")
+                .add(JavaDocMarkdownParameter.definition)
                 .add(CodeReferencesFeature.paramsDefinition);
     }
 
@@ -53,7 +54,8 @@ public class JavaDocIncludePlugin extends JavaIncludePluginBase {
         HtmlToDocElementConverter.Result htmlParseResult = HtmlToDocElementConverter.convert(
                 componentsRegistry, markupPath,
                 entry == null ? javaCode.getClassJavaDocText() : javaCode.findJavaDoc(entry),
-                codeReferencesFeature.getReferences());
+                codeReferencesFeature.getReferences(),
+                pluginParams.getOpts().get(JavaDocMarkdownParameter.KEY, false));
 
         return new JavaIncludeResult(htmlParseResult.getDocElements(), htmlParseResult.getSearchText());
     }

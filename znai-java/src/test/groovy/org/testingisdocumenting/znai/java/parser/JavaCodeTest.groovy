@@ -32,7 +32,7 @@ class JavaCodeTest {
  */
 class HelloWorld {
     /**
-     * Each year we hire students from different universities to increase
+     * Each year we hire {@link students} from different universities to increase
      * diversity
      */
     private int numberOfStudents;
@@ -248,7 +248,7 @@ enum MyEnum {
 
     @Test
     void "extracts field level java doc"() {
-        Assert.assertEquals("Each year we hire students from different universities to increase\ndiversity\n",
+        Assert.assertEquals("Each year we hire <code>students</code> from different universities to increase\ndiversity",
                 javaCode.fieldByName("numberOfStudents").getJavaDocText())
 
         Assert.assertEquals("",
@@ -257,7 +257,7 @@ enum MyEnum {
 
     @Test
     void "extracts java doc by name with optional signature"() {
-        Assert.assertEquals("Each year we hire students from different universities to increase\ndiversity\n",
+        Assert.assertEquals("Each year we hire <code>students</code> from different universities to increase\ndiversity",
                 javaCode.findJavaDoc("numberOfStudents"))
 
         Assert.assertEquals("method level java doc <code>package.Class</code>",

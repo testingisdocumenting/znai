@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.ParserHandlersList;
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
 import org.testingisdocumenting.znai.reference.DocReferences;
@@ -59,22 +60,28 @@ public class HtmlToDocElementConverter {
     }
 
     /**
-     * converts html to doc elements so it can be re-used inside generated documentation
+     * converts html to doc elements, so it can be re-used inside generated documentation
      *
      * @param componentsRegistry components like code parser
      * @param filePath           path to use by markup parser to handle include plugins resource location
      * @param html               html to parse
      * @param codeReferences     code references to use during conversion
+     * @param isMarkdown         treat text as markdown
      * @return doc element that is a representation of th®e html
      */
-    public static Result convert(ComponentsRegistry componentsRegistry, Path filePath, String html, DocReferences codeReferences) {
+    public static Result convert(ComponentsRegistry componentsRegistry, Path filePath, String html, DocReferences codeReferences, boolean isMarkdown) {
         Document document = Jsoup.parse(html);
+        document.outputSettings(new Document.OutputSettings().prettyPrint(false));
 
         SearchCrawlerParserHandler searchCrawler = new SearchCrawlerParserHandler();
         DocElementCreationParserHandler parserHandler = new DocElementCreationParserHandler(componentsRegistry, filePath);
         ParserHandlersList parserHandlersList = new ParserHandlersList(parserHandler, searchCrawler);
 
-        document.body().traverse(new ConverterNodeVisitor(parserHandlersList, codeReferences));
+        document.body().traverse(new ConverterNodeVisitor(filePath,
+                componentsRegistry.markdownParser(),
+                parserHandlersList,
+                codeReferences,
+                isMarkdown));
 
         parserHandlersList.onParsingEnd();
 
@@ -84,8 +91,12 @@ public class HtmlToDocElementConverter {
     }
 
     private static class ConverterNodeVisitor implements NodeVisitor {
+        private final Path filePath;
+        private final MarkdownParser markdownParser;
         private final ParserHandler parserHandler;
         private final DocReferences codeReferences;
+        private final boolean isMarkdown;
+
         private boolean isInsideInlinedCode;
         private boolean isInsideBlockCode;
 
@@ -95,10 +106,20 @@ public class HtmlToDocElementConverter {
          */
         private boolean isInsideParagraph;
 
-        ConverterNodeVisitor(ParserHandler parserHandler, DocReferences codeReferences) {
+        ConverterNodeVisitor(Path filePath,
+                             MarkdownParser markdownParser,
+                             ParserHandler parserHandler,
+                             DocReferences codeReferences,
+                             boolean isMarkdown) {
+            this.filePath = filePath;
+            this.markdownParser = markdownParser;
             this.parserHandler = parserHandler;
             this.codeReferences = codeReferences;
-            startParagraphIfRequired();
+            this.isMarkdown = isMarkdown;
+
+            if (!isMarkdown) {
+                startParagraphIfRequired();
+            }
         }
 
         @Override
@@ -126,7 +147,7 @@ public class HtmlToDocElementConverter {
                 parserHandler.onListItemStart();
             } else if (node.nodeName().equals("#text")) {
                 TextNode textNode = (TextNode) node;
-                handleText(textNode.text());
+                handleText(textNode);
             }
         }
 
@@ -159,19 +180,28 @@ public class HtmlToDocElementConverter {
             }
         }
 
-        private void handleText(String text) {
-            if (text.trim().isEmpty()) {
+        private void handleText(TextNode textNode) {
+            String content = textNode.text();
+            if (content.trim().isEmpty()) {
                 return;
             }
 
             if (isInsideInlinedCode) {
-                parserHandler.onInlinedCode(text, codeReferences);
+                parserHandler.onInlinedCode(content, codeReferences);
             } else if (isInsideBlockCode) {
                 closeParagraphIfRequired();
-                parserHandler.onSnippet(PluginParams.EMPTY,"", "", text);
+                parserHandler.onSnippet(PluginParams.EMPTY,"", "", content);
             } else {
-                parserHandler.onSimpleText(text);
+                if (isMarkdown) {
+                    parseMarkdownText(textNode.getWholeText());
+                } else {
+                    parserHandler.onSimpleText(content);
+                }
             }
+        }
+
+        private void parseMarkdownText(String text) {
+            markdownParser.parse(filePath, parserHandler, text.trim());
         }
 
         private void startParagraphIfRequired() {

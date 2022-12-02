@@ -53,6 +53,7 @@ public class JavaDocParamsIncludePlugin extends JavaIncludePluginBase {
                 .addRequired(ENTRY_KEY, PluginParamType.STRING, "entry to extract parameters definition from",
                         "\"myMethod\"")
                 .add("title", PluginParamType.STRING, "title to use for parameters block", "\"myMethod parameters\"")
+                .add(JavaDocMarkdownParameter.definition)
                 .add(CodeReferencesFeature.paramsDefinition);
     }
 

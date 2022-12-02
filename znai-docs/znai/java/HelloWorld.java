@@ -6,7 +6,7 @@
 class HelloWorld {
     /**
      * Each year we hire students from different universities to increase
-     * <code>diversity</code>
+     * {@link Diversity}
      */
     private int numberOfStudents;
 
