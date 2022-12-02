@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -90,7 +91,7 @@ public class JupyterIncludePlugin implements IncludePlugin {
             return;
         }
 
-        markdownParser.parse(path, cell.getInput(), markdownParserHandler);
+        markdownParser.parse(path, markdownParserHandler, cell.getInput());
     }
 
     private void processInputFromCell(JupyterCell cell) {

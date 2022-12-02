@@ -50,6 +50,7 @@ public class JavaEnumEntriesIncludePlugin extends JavaIncludePluginBase {
     public PluginParamsDefinition parameters() {
         return new PluginParamsDefinition()
                 .add("title", PluginParamType.STRING, "title to use for parameters block", "\"myMethod parameters\"")
+                .add(JavaDocMarkdownParameter.definition)
                 .add(EXCLUDE_DEPRECATED_KEY, PluginParamType.BOOLEAN, "exclude deprecated entries from the list", "true")
                 .add(CodeReferencesFeature.paramsDefinition);
     }

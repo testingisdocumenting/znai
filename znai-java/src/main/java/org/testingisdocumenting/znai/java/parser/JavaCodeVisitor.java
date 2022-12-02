@@ -128,8 +128,9 @@ class JavaCodeVisitor extends VoidVisitorAdapter<String> {
 
     @Override
     public void visit(FieldDeclaration fieldDeclaration, String arg) {
-        String javaDocText = fieldDeclaration.hasJavaDocComment() ?
-                fieldDeclaration.getJavadocComment().map(c -> c.parse().toText()).orElse("") : "";
+        String javaDocText = fieldDeclaration.getJavadocComment().
+                map(this::extractJavaDocDescription).
+                orElse("");
 
         fieldDeclaration.getVariables().stream().map(vd -> vd.getName().getIdentifier())
                 .forEach(name -> javaFields.add(new JavaField(new ArrayList<>(parentNames), name, javaDocText)));

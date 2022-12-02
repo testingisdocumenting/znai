@@ -19,14 +19,14 @@ package org.testingisdocumenting.znai.java.parser.html
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.testingisdocumenting.znai.reference.DocReferences
 import org.junit.Test
 
 import java.nio.file.Paths
 
 class HtmlToDocElementConverterTest {
-    private static ComponentsRegistry testComponentsRegistry = new TestComponentsRegistry()
-    private List<Map<String,Object>> elements
+    private List<Map<String, Object>> elements
     private String searchText
 
     @Test
@@ -40,11 +40,11 @@ another paragraph with
 <P>
 second paragraph
 """)
-        elements.should == [[type: 'Paragraph', content:[[text:' hello ', type: 'SimpleText'], [code:'world', type: 'InlinedCode']]],
-                            [type: 'Paragraph', content:[[text:' another paragraph with ', type: 'SimpleText'],
-                                                         [type: 'StrongEmphasis', content:[[text: 'bold', type: 'SimpleText']]],
-                                                         [type: 'Emphasis', content:[[text: 'italic', type: 'SimpleText']]]]],
-                            [type: 'Paragraph', content:[[text:' second paragraph ', type: 'SimpleText']]]]
+        elements.should == [[type: 'Paragraph', content: [[text: ' hello ', type: 'SimpleText'], [code: 'world', type: 'InlinedCode']]],
+                            [type: 'Paragraph', content: [[text: ' another paragraph with ', type: 'SimpleText'],
+                                                          [type: 'StrongEmphasis', content: [[text: 'bold', type: 'SimpleText']]],
+                                                          [type: 'Emphasis', content: [[text: 'italic', type: 'SimpleText']]]]],
+                            [type: 'Paragraph', content: [[text: ' second paragraph ', type: 'SimpleText']]]]
 
         searchText.should == 'hello world another paragraph with bolditalic second paragraph'
     }
@@ -53,7 +53,7 @@ second paragraph
     void "should replace ahref with Link element"() {
         process('<a href="http://url">text inside</a>')
 
-        elements.should == [[type: 'Paragraph', content:[[type: 'Link', isFile: false, url: 'http://url', content:
+        elements.should == [[type: 'Paragraph', content: [[type: 'Link', isFile: false, url: 'http://url', content:
                 [[text: 'text inside', type: 'SimpleText']]]]]]
 
         searchText.should == 'http://url text inside'
@@ -63,7 +63,7 @@ second paragraph
     void "should replace pre with Snippet element"() {
         process('<pre>line of code</pre>')
 
-        elements.should == [[type: 'Snippet', lang: '', lineNumber: '',
+        elements.should == [[type   : 'Snippet', lang: '', lineNumber: '',
                              snippet: 'line of code']]
 
         searchText.should == 'line of code'
@@ -73,7 +73,7 @@ second paragraph
     void "should replace ul and li with BulletList and ListItem elements"() {
         process('<ul><li>item 1</li><li>item 2</li></ul>')
 
-        elements.should == [[type: 'BulletList', bulletMarker: '*', tight: false,
+        elements.should == [[type   : 'BulletList', bulletMarker: '*', tight: false,
                              content: [
                                      [type: 'ListItem', content: [[text: 'item 1', type: 'SimpleText']]],
                                      [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]]]
@@ -85,7 +85,7 @@ second paragraph
     void "should replace ol and li with BulletList and ListItem elements"() {
         process('<ol><li>item 1</li><li>item 2</li></ol>')
 
-        elements.should == [[type: 'OrderedList', startNumber: 1, delimiter: '.',
+        elements.should == [[type   : 'OrderedList', startNumber: 1, delimiter: '.',
                              content: [
                                      [type: 'ListItem', content: [[text: 'item 1', type: 'SimpleText']]],
                                      [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]]]
@@ -105,13 +105,13 @@ some text
 World paragraph
 """)
 
-        elements.should == [[type: 'Paragraph',
+        elements.should == [[type   : 'Paragraph',
                              content: [[text: 'Hello ', type: 'SimpleText']]],
                             [bulletMarker: '*', tight: false, type: 'BulletList',
-                                content:[[type: 'ListItem', content: [[text: 'item 1', type: 'SimpleText']]],
-                                         [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]],
-                            [type: 'Paragraph', content:[[text: ' some text ', type: 'SimpleText']]],
-                            [type: 'Paragraph', content:[[text: ' World paragraph ', type: 'SimpleText']]]]
+                             content     : [[type: 'ListItem', content: [[text: 'item 1', type: 'SimpleText']]],
+                                            [type: 'ListItem', content: [[text: 'item 2', type: 'SimpleText']]]]],
+                            [type: 'Paragraph', content: [[text: ' some text ', type: 'SimpleText']]],
+                            [type: 'Paragraph', content: [[text: ' World paragraph ', type: 'SimpleText']]]]
 
         searchText.should == 'Hello item 1 item 2 some text World paragraph'
     }
@@ -120,18 +120,42 @@ World paragraph
     void "should add code references to inlined code when specified"() {
         process('<code>MyClass</code>', [MyClass: 'link/toRef'])
 
-        elements.should == [[type: 'Paragraph',
+        elements.should == [[type   : 'Paragraph',
                              content: [[code: 'MyClass', references: [MyClass: [pageUrl: 'link/toRef']], type: 'InlinedCode']]]]
 
         searchText.should == 'MyClass'
     }
 
-    private void process(String html, codeReferences = [:]) {
+    @Test
+    void "should parse markdown text if specified"() {
+        processWithMarkdownParser('hello <code>inline</code>\n```\n' +
+                'my snippet\n' +
+                '```\n', [:])
+
+        elements.should == [[type: 'Paragraph', content: [[type: 'SimpleText', text: "hello"]]],
+                             [type: 'InlinedCode', code: 'inline'],
+                             [type: 'Snippet', lineNumber: '', lang: '', snippet: 'my snippet\n']]
+        searchText.should == 'hello inline my snippet'
+
+    }
+
+    private void process(String html, codeReferences = [:], isMarkdown = false) {
+        processWithComponentsRegistry(TestComponentsRegistry.TEST_COMPONENTS_REGISTRY, html, codeReferences, isMarkdown)
+    }
+
+    private void processWithMarkdownParser(String html, codeReferences = [:]) {
+        def componentsRegistry = new TestComponentsRegistry()
+        componentsRegistry.markdownParser = new MarkdownParser(componentsRegistry)
+
+        processWithComponentsRegistry(componentsRegistry, html, codeReferences, true)
+    }
+
+    private void processWithComponentsRegistry(ComponentsRegistry componentsRegistry, String html, codeReferences = [:], isMarkdown = false) {
         def docReferences = new DocReferences()
         codeReferences.each { k, v -> docReferences.add(k, v) }
 
-        def docElementsAndSearchText = HtmlToDocElementConverter.convert(testComponentsRegistry, Paths.get(""), html,
-                docReferences)
+        def docElementsAndSearchText = HtmlToDocElementConverter.convert(componentsRegistry, Paths.get(""), html,
+                docReferences, isMarkdown)
 
         elements = docElementsAndSearchText.docElements.collect { it.toMap() }
         searchText = docElementsAndSearchText.searchText

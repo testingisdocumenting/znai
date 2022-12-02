@@ -96,7 +96,8 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
 
     protected JavaDocElementsMapsAndSearchText javaDocTextToDocElements(String html, CodeReferencesFeature codeReferencesFeature) {
         HtmlToDocElementConverter.Result converted = HtmlToDocElementConverter.convert(
-                componentsRegistry, markupPath, html, codeReferencesFeature.getReferences());
+                componentsRegistry, markupPath, html, codeReferencesFeature.getReferences(),
+                pluginParams.getOpts().get(JavaDocMarkdownParameter.KEY, false));
 
         return new JavaDocElementsMapsAndSearchText(converted.getDocElements().stream()
                 .map(DocElement::toMap).collect(toList()),

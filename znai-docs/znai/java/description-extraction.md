@@ -111,7 +111,7 @@ Use the `title` parameter to specify a title.
 
     :include-java-enum-entries: TransactionTypes.java {title: "Transaction Types"}
 
-:include-java-enum-entries: TransactionTypes.java {title: "Transaction Types"}
+:include-java-enum-entries: TransactionTypes.java {title: "Transaction Types", markdown: true}
 
 
 # Enum Entries With References
@@ -135,3 +135,13 @@ Enums are now linked with a reference section for the documentation.
 
 Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use
 [Global References](snippets/code-references#global-references).
+
+# Markdown
+
+Pass `markdown: true` parameter to the plugins to treat JavaDoc content as markdown
+
+:include-file: HelloWorldMarkdown.java {title: "with markdown javadoc"}
+
+    :include-java-doc: HelloWorld.java {markdown: true}
+
+:include-java-doc: HelloWorldMarkdown.java {markdown: true}

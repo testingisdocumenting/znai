@@ -5,7 +5,7 @@ enum Enum {
     ENTRY_ONE_WITH_A_LONG_NAME,
 
     /**
-     * description of entry two
+     * description of **entry two**
      */
     @Deprecated
     ENTRY_TWO
