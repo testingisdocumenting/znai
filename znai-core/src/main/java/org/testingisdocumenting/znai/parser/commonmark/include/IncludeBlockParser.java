@@ -17,12 +17,12 @@
 
 package org.testingisdocumenting.znai.parser.commonmark.include;
 
-import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.commonmark.internal.DocumentBlockParser;
 import org.commonmark.internal.IndentedCodeBlockParser;
 import org.commonmark.node.Block;
 import org.commonmark.parser.InlineParser;
 import org.commonmark.parser.block.*;
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
 import org.testingisdocumenting.znai.extensions.PluginsRegexp;
 
 import java.util.regex.Pattern;
@@ -31,10 +31,12 @@ public class IncludeBlockParser extends AbstractBlockParser {
     private static final Pattern SPACES_REGEXP = Pattern.compile("^\\s{4,}.*$");
 
     private final StringBuilder value;
+    private final PluginParamsFactory pluginParamsFactory;
     private final String pluginId;
     private final IncludeBlock block;
 
-    IncludeBlockParser(String pluginId, String value) {
+    IncludeBlockParser(PluginParamsFactory pluginParamsFactory, String pluginId, String value) {
+        this.pluginParamsFactory = pluginParamsFactory;
         this.pluginId = pluginId;
         this.value = new StringBuilder();
         this.block = new IncludeBlock();
@@ -49,7 +51,7 @@ public class IncludeBlockParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock() {
-        block.setParams(new PluginParams(pluginId, value.toString()));
+        block.setParams(pluginParamsFactory.create(pluginId, value.toString()));
         super.closeBlock();
     }
 
@@ -76,6 +78,12 @@ public class IncludeBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory extends AbstractBlockParserFactory {
+        private final PluginParamsFactory pluginParamsFactory;
+
+        public Factory(PluginParamsFactory pluginParamsFactory) {
+            this.pluginParamsFactory = pluginParamsFactory;
+        }
+
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             CharSequence line = state.getLine();
@@ -92,7 +100,7 @@ public class IncludeBlockParser extends AbstractBlockParser {
 
             PluginsRegexp.IdAndParams idAndParams = PluginsRegexp.parseIncludePlugin(line);
             if (idAndParams != null) {
-                return BlockStart.of(new IncludeBlockParser(idAndParams.getId(), idAndParams.getParams())).atIndex(state.getIndex());
+                return BlockStart.of(new IncludeBlockParser(pluginParamsFactory, idAndParams.getId(), idAndParams.getParams())).atIndex(state.getIndex());
             }
 
             return BlockStart.none();

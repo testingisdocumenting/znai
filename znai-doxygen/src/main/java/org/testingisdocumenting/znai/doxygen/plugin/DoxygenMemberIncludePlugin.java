@@ -98,7 +98,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
         IncludePlugin docPlugin = DoxygenDocIncludePlugin.createDocPlugin();
         parserHandler.onIncludePlugin(docPlugin,
                 docPlugin.process(componentsRegistry, parserHandler, markupPath,
-                        new PluginParams(docPlugin.id(), fullName, paramsOpts.toMap())));
+                        componentsRegistry.pluginParamsFactory().create(docPlugin.id(), fullName, paramsOpts.toMap())));
 
         if (hasParametersDesc) {
             parameters("", hasTemplateParametersDesc ? "parameters" : "");
@@ -121,7 +121,7 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
 
         parserHandler.onIncludePlugin(docParamsPlugin,
                 docParamsPlugin.process(componentsRegistry, parserHandler, markupPath,
-                        new PluginParams(docParamsPlugin.id(), fullName, paramsOpts)));
+                        componentsRegistry.pluginParamsFactory().create(docParamsPlugin.id(), fullName, paramsOpts)));
     }
 
     private void memberAnchorAndSignature(DoxygenMember member) {

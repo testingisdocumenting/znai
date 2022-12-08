@@ -113,7 +113,7 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
     private void insertDocs(String fullName) {
         IncludePlugin includePlugin = DoxygenDocIncludePlugin.createDocPlugin();
         PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, markupPath,
-                new PluginParams(includePlugin.id(), fullName));
+                componentsRegistry.pluginParamsFactory().create(includePlugin.id(), fullName));
         parserHandler.onIncludePlugin(includePlugin, pluginResult);
     }
 
@@ -136,7 +136,7 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
 
         IncludePlugin includePlugin = DoxygenMemberIncludePlugin.createMemberPlugin();
         PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, markupPath,
-                new PluginParams(includePlugin.id(), member.getFullName()));
+                componentsRegistry.pluginParamsFactory().create(includePlugin.id(), member.getFullName()));
         parserHandler.onIncludePlugin(includePlugin, pluginResult);
     }
 }

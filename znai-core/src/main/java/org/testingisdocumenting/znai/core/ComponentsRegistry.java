@@ -16,6 +16,7 @@
 
 package org.testingisdocumenting.znai.core;
 
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
@@ -41,6 +42,8 @@ public interface ComponentsRegistry {
      * @return markdown parser
      */
     MarkdownParser markdownParser();
+
+    PluginParamsFactory pluginParamsFactory();
 
     ResourcesResolver resourceResolver();
     DocStructure docStructure();

@@ -18,10 +18,7 @@
 package org.testingisdocumenting.znai.parser.commonmark;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.PluginParams;
-import org.testingisdocumenting.znai.extensions.PluginResult;
-import org.testingisdocumenting.znai.extensions.Plugins;
-import org.testingisdocumenting.znai.extensions.PluginsRegexp;
+import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
@@ -109,7 +106,7 @@ public class MarkdownVisitor extends AbstractVisitor {
         PluginsRegexp.IdAndParams idAndParams = PluginsRegexp.parseInlinedCodePlugin(literal);
 
         if (idAndParams != null) {
-            handleInlineCodePlugin(new PluginParams(idAndParams.getId(), idAndParams.getParams()));
+            handleInlineCodePlugin(componentsRegistry.pluginParamsFactory().create(idAndParams.getId(), idAndParams.getParams()));
         } else {
             parserHandler.onInlinedCode(literal, DocReferences.EMPTY);
         }
@@ -261,13 +258,13 @@ public class MarkdownVisitor extends AbstractVisitor {
                 "  opts: " + JsonUtils.serialize(params.getOpts().toMap()) + "\n\n" + e.getMessage() + "\n";
     }
 
-    private static PluginParams extractFencePluginParams(String nameAndParams) {
+    private PluginParams extractFencePluginParams(String nameAndParams) {
+        PluginParamsFactory pluginParamsFactory = componentsRegistry.pluginParamsFactory();
         int firstSpaceIdx = nameAndParams.indexOf(' ');
         return (firstSpaceIdx == -1) ?
-                new PluginParams(nameAndParams, ""):
-                new PluginParams(nameAndParams.substring(0, firstSpaceIdx),
+                pluginParamsFactory.create(nameAndParams, ""):
+                pluginParamsFactory.create(nameAndParams.substring(0, firstSpaceIdx),
                         nameAndParams.substring(firstSpaceIdx + 1));
-
     }
 
     private HeadingTextAndProps extractHeadingTextAndProps(Heading heading) {

@@ -20,6 +20,8 @@ package org.testingisdocumenting.znai.parser
 import org.testingisdocumenting.znai.core.ComponentsRegistry
 import org.testingisdocumenting.znai.core.DocConfig
 import org.testingisdocumenting.znai.core.GlobalAssetsRegistry
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
+import org.testingisdocumenting.znai.extensions.PluginParamsWithDefaultsFactory
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.testingisdocumenting.znai.resources.ResourcesResolver
 import org.testingisdocumenting.znai.time.FakeTimeService
@@ -32,7 +34,9 @@ class TestComponentsRegistry implements ComponentsRegistry {
 
     private final TestDocStructure docStructure = new TestDocStructure()
 
-    private MarkupParser markdownParser = new TestMarkdownParser()
+    private PluginParamsFactory pluginParamsFactory = new PluginParamsWithDefaultsFactory()
+
+    private MarkupParser markdownParser = new TestMarkdownParser(this)
     private MarkupParser defaultParser = new TestMarkupParser()
 
     private GlobalAssetsRegistry assetsRegistry = new GlobalAssetsRegistry()
@@ -55,6 +59,11 @@ class TestComponentsRegistry implements ComponentsRegistry {
     @Override
     MarkdownParser markdownParser() {
         return markdownParser
+    }
+
+    @Override
+    PluginParamsFactory pluginParamsFactory() {
+        return pluginParamsFactory
     }
 
     void setMarkdownParser(MarkdownParser parser) {

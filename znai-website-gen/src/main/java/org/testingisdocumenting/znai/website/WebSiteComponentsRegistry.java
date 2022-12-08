@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.website;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.core.DocConfig;
 import org.testingisdocumenting.znai.core.GlobalAssetsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
@@ -32,6 +33,7 @@ import java.nio.file.Path;
 public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private MarkupParser defaultParser;
     private MarkdownParser markdownParser;
+    private PluginParamsFactory pluginParamsFactory;
     private ResourcesResolver resourcesResolver;
     private DocStructure docStructure;
 
@@ -55,6 +57,11 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
     @Override
     public MarkdownParser markdownParser() {
         return markdownParser;
+    }
+
+    @Override
+    public PluginParamsFactory pluginParamsFactory() {
+        return pluginParamsFactory;
     }
 
     @Override
@@ -92,6 +99,10 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
 
     public void setResourcesResolver(ResourcesResolver resourcesResolver) {
         this.resourcesResolver = resourcesResolver;
+    }
+
+    public void setPluginParamsFactory(PluginParamsFactory pluginParamsFactory) {
+        this.pluginParamsFactory = pluginParamsFactory;
     }
 
     public void setDocStructure(DocStructure docStructure) {

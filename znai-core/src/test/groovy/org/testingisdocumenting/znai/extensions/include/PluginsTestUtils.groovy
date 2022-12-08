@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.include
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile
 import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.extensions.Plugins
 import org.testingisdocumenting.znai.extensions.PluginsRegexp
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin
@@ -33,6 +34,8 @@ import java.util.stream.Stream
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class PluginsTestUtils {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     static class IncludePluginAndParserHandler {
         IncludePlugin includePlugin
         DocElementCreationParserHandler parserHandler
@@ -86,7 +89,7 @@ class PluginsTestUtils {
         DocElementCreationParserHandler parserHandler = createParserHandler()
 
         def idAndParams = PluginsRegexp.parseIncludePlugin(pluginDef)
-        PluginParams includeParams = new PluginParams(idAndParams.id, idAndParams.params)
+        PluginParams includeParams = pluginParamsFactory.create(idAndParams.id, idAndParams.params)
         def includePlugin = Plugins.includePluginById(includeParams.pluginId)
 
 
@@ -131,7 +134,7 @@ class PluginsTestUtils {
         DocElementCreationParserHandler parserHandler = createParserHandler()
 
         def idAndParams = PluginsRegexp.parseInlinedCodePlugin(pluginDef)
-        PluginParams pluginParams = new PluginParams(idAndParams.id, idAndParams.params)
+        PluginParams pluginParams = pluginParamsFactory.create(idAndParams.id, idAndParams.params)
 
         def inlinedCodePlugin = Plugins.inlinedCodePluginById(idAndParams.id)
         inlinedCodePlugin.parameters().validate(pluginParams)

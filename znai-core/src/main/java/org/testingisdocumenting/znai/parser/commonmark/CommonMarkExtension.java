@@ -16,13 +16,20 @@
 
 package org.testingisdocumenting.znai.parser.commonmark;
 
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
 import org.testingisdocumenting.znai.parser.commonmark.include.IncludeBlockParser;
 import org.commonmark.parser.Parser.Builder;
 import org.commonmark.parser.Parser.ParserExtension;
 
 public class CommonMarkExtension implements ParserExtension {
+    private final PluginParamsFactory pluginParamsFactory;
+
+    public CommonMarkExtension(PluginParamsFactory pluginParamsFactory) {
+        this.pluginParamsFactory = pluginParamsFactory;
+    }
+
     @Override
     public void extend(final Builder parserBuilder) {
-        parserBuilder.customBlockParserFactory(new IncludeBlockParser.Factory());
+        parserBuilder.customBlockParserFactory(new IncludeBlockParser.Factory(pluginParamsFactory));
     }
 }
