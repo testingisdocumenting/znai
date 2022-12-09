@@ -17,11 +17,15 @@
 package org.testingisdocumenting.znai.extensions
 
 import org.junit.Test
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.*
 
 class PluginParamsDefinitionTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     static def paramsDefinition = new PluginParamsDefinition()
             .add("title", PluginParamType.STRING, "title of snippet", "\"example of API\"")
             .add("highlight", PluginParamType.LIST_OR_SINGLE_STRING_OR_NUMBER,
@@ -37,13 +41,13 @@ class PluginParamsDefinitionTest {
 
     @Test
     void "passes validation"() {
-        paramsDefinition.validate(new PluginParams("file", [id: "id1", title: "my title"]))
+        paramsDefinition.validate(pluginParamsFactory.create("file",  "", [id: "id1", title: "my title"]))
     }
 
     @Test
     void "validates param names"() {
         code {
-            paramsDefinition.validate(new PluginParams("file", [totle: "my title", id: "id1"]))
+            paramsDefinition.validate(pluginParamsFactory.create("file", "", [totle: "my title", id: "id1"]))
         } should throwException("unrecognized parameter(s): totle\n" +
                 "\n" + expectedPluginParametersHelp)
     }
@@ -51,7 +55,7 @@ class PluginParamsDefinitionTest {
     @Test
     void "validates param types"() {
         code {
-            paramsDefinition.validate(new PluginParams("file", [autoTitle: "false", id: "id2"]))
+            paramsDefinition.validate(pluginParamsFactory.create("file", "", [autoTitle: "false", id: "id2"]))
         } should throwException("type mismatches:\n" +
                 "  autoTitle given: \"false\" <string>, expected: <boolean> (e.g. true)\n" +
                 "\n" + expectedPluginParametersHelp)
@@ -60,7 +64,7 @@ class PluginParamsDefinitionTest {
     @Test
     void "validates required parameters"() {
         code {
-            paramsDefinition.validate(new PluginParams("file", [:]))
+            paramsDefinition.validate(pluginParamsFactory.create("file", "", [:]))
         } should throwException("missing required parameter(s): id\n" +
                 "\n" + expectedPluginParametersHelp)
     }
@@ -68,7 +72,7 @@ class PluginParamsDefinitionTest {
     @Test
     void "all validations at once"() {
         code {
-            paramsDefinition.validate(new PluginParams("file", [totle: "my title", autoTitle: "false"]))
+            paramsDefinition.validate(pluginParamsFactory.create("file", "", [totle: "my title", autoTitle: "false"]))
         } should throwException("missing required parameter(s): id\n" +
                 "unrecognized parameter(s): totle\n" +
                 "type mismatches:\n" +

@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry;
 import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.core.Log;
+import org.testingisdocumenting.znai.extensions.PluginParamsWithDefaultsFactory;
 import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
@@ -107,6 +108,7 @@ public class WebSite implements Log {
 
         registeredExtraJavaScripts = siteConfig.registeredExtraJavaScripts;
         componentsRegistry = new WebSiteComponentsRegistry(siteConfig.docRootPath, siteConfig.isValidateExternalLinks);
+        componentsRegistry.setPluginParamsFactory(new PluginParamsWithDefaultsFactory());
         resourceResolver = new ResourcesResolverChain();
         reactJsBundle = siteConfig.reactJsBundle;
         tocJavaScript = WebResource.withPath("toc.js");

@@ -18,8 +18,6 @@
 package org.testingisdocumenting.znai.extensions;
 
 import org.testingisdocumenting.znai.extensions.meta.MetaIncludePlugin;
-import org.testingisdocumenting.znai.utils.JsonParseException;
-import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -30,39 +28,15 @@ public class PluginParams {
     private static final String STICKY_SLIDE_OPT_NAME = "stickySlide";
 
     private final String pluginId;
-    private String freeParam;
-    private PluginParamsOpts opts;
+    private final String freeParam;
+    private final PluginParamsOpts opts;
 
-    public static final PluginParams EMPTY = new PluginParams("");
+    public static final PluginParams EMPTY = new PluginParams("", "", Collections.emptyMap());
 
-    public PluginParams(String pluginId) {
+    PluginParams(String pluginId, String freeParam, Map<String, ?> opts) {
         this.pluginId = pluginId;
-        this.opts = new PluginParamsOpts(pluginId, Collections.emptyMap());
-    }
-
-    public PluginParams(String pluginId, String value) {
-        this.pluginId = pluginId;
-
-        try {
-            this.setValue(value);
-        } catch (JsonParseException e) {
-            throw new PluginParamsParseException(pluginId, value, e.getMessage());
-        }
-    }
-
-    public PluginParams(String pluginId, Map<String, ?> opts) {
-        this.pluginId = pluginId;
+        this.freeParam = freeParam;
         this.opts = new PluginParamsOpts(pluginId, shortcutMetaOptions(opts));
-    }
-
-    public PluginParams(String pluginId, String value, Map<String, ?> opts) {
-        this(pluginId, value);
-        this.opts = new PluginParamsOpts(pluginId, shortcutMetaOptions(opts));
-    }
-
-    public void setValue(String value) {
-        this.freeParam = extractFreeParam(value);
-        this.opts = new PluginParamsOpts(pluginId, shortcutMetaOptions(extractMap(value)));
     }
 
     public String getPluginId() {
@@ -75,23 +49,6 @@ public class PluginParams {
 
     public PluginParamsOpts getOpts() {
         return opts;
-    }
-
-    private String extractFreeParam(String value) {
-        int optsStartIdx = value.indexOf('{');
-        return (optsStartIdx != -1 ?
-                value.substring(0, optsStartIdx):
-                value).trim();
-    }
-
-    private Map<String, ?> extractMap(String value) {
-        int optsStartIdx = value.indexOf('{');
-        if (optsStartIdx == -1) {
-            return Collections.emptyMap();
-        }
-
-        String json = value.substring(optsStartIdx);
-        return JsonUtils.deserializeAsMap(json);
     }
 
     private Map<String, ?> shortcutMetaOptions(Map<String, ?> opts) {

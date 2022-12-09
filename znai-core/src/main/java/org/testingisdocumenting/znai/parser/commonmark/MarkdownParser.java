@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -43,7 +44,7 @@ public class MarkdownParser implements MarkupParser {
 
     public MarkdownParser(ComponentsRegistry componentsRegistry) {
         this.componentsRegistry = componentsRegistry;
-        fullParser = createCommonMarkParser();
+        fullParser = createCommonMarkParser(componentsRegistry.pluginParamsFactory());
 
         metaOnlyParser = Parser.builder().extensions(
                 Collections.singletonList(YamlFrontMatterExtension.create())).build();
@@ -97,8 +98,8 @@ public class MarkdownParser implements MarkupParser {
         return new PageMeta(frontMatterVisitor.getData());
     }
 
-    private static Parser createCommonMarkParser() {
-        CommonMarkExtension extension = new CommonMarkExtension();
+    private static Parser createCommonMarkParser(PluginParamsFactory pluginParamsFactory) {
+        CommonMarkExtension extension = new CommonMarkExtension(pluginParamsFactory);
 
         return Parser.builder().extensions(Arrays.asList(extension,
                 TablesExtension.create(),

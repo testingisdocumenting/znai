@@ -18,13 +18,18 @@ package org.testingisdocumenting.znai.extensions.cli
 
 import org.junit.Test
 import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 
 import static org.testingisdocumenting.znai.extensions.include.PluginsTestUtils.processAndGetFencePluginAndParserHandler
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class CliFencePluginTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+    
     @Test
     void "create cli commands element from a single line"() {
-        def pluginParams = new PluginParams('cli', [highlight: "prob"])
+        def pluginParams = pluginParamsFactory.create("cli", "", [highlight: "prob"])
         def result = processAndGetFencePluginAndParserHandler(pluginParams,  " my-script prob twice\n ")
 
         result.fencePlugin.textForSearch().text.should == "my-script prob twice"
@@ -34,7 +39,7 @@ class CliFencePluginTest {
 
     @Test
     void "create cli commands element from multiple lines"() {
-        def pluginParams = new PluginParams('cli', [highlight: "prob"])
+        def pluginParams = pluginParamsFactory.create("cli", "", [highlight: "prob"])
         def result = processAndGetFencePluginAndParserHandler(pluginParams,
                 " my-script1 prob twice\n " +
                 " my-script2 three\n ")

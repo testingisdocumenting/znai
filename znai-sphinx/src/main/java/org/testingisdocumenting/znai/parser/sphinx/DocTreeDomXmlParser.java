@@ -249,7 +249,7 @@ class DocTreeDomXmlParser {
         PythonFunctionIncludePlugin includePlugin = new PythonFunctionIncludePlugin();
 
         PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, filePath,
-                new PluginParams(includePlugin.id(), pythonFunction.toMap()));
+                componentsRegistry.pluginParamsFactory().create(includePlugin.id(), "", pythonFunction.toMap()));
 
         parserHandler.onIncludePlugin(includePlugin, pluginResult);
 
@@ -265,7 +265,7 @@ class DocTreeDomXmlParser {
 
         PythonClassIncludePlugin includePlugin = new PythonClassIncludePlugin();
         PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, filePath,
-                new PluginParams(includePlugin.id(), pythonClass.toMap()));
+                componentsRegistry.pluginParamsFactory().create(includePlugin.id(), "", pythonClass.toMap()));
 
         parserHandler.onIncludePlugin(includePlugin, pluginResult);
 

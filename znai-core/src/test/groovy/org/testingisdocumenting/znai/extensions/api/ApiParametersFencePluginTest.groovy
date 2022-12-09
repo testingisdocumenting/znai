@@ -20,13 +20,17 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class ApiParametersFencePluginTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+    
     @Before
     @After
     void init() {
@@ -36,7 +40,7 @@ class ApiParametersFencePluginTest {
     @Test
     void "should work without type in csv"() {
         def props = PluginsTestUtils.processFenceAndGetProps(
-                new PluginParams('api-parameters', [:]),
+                pluginParamsFactory.create("api-parameters", "", [:]),
         "firstName,,first name")
 
         props.should == [parameters: [[name: "firstName", type:[], anchorId: "firstName",
@@ -47,25 +51,25 @@ class ApiParametersFencePluginTest {
     void "should report missing fields in csv"() {
         code {
             PluginsTestUtils.processFenceAndGetProps(
-                    new PluginParams('api-parameters', [:]), "firstName")
+                    pluginParamsFactory.create("api-parameters", "", [:]), "firstName")
         } should throwException("record mismatches header. header: [name, type, description]; record: [firstName]")
     }
 
     @Test
     void "should provide search text"() {
         def plugin = PluginsTestUtils.processAndGetFencePluginAndParserHandler(
-                new PluginParams('api-parameters', [:]),
+                pluginParamsFactory.create("api-parameters", "", [:]),
                 "firstName, String, first name").fencePlugin
 
-        plugin.textForSearch().text.should == 'firstName String first name'
+        plugin.textForSearch().text.should == "firstName String first name"
     }
 
     @Test
     void "should register local anchors"() {
         PluginsTestUtils.processAndGetFencePluginAndParserHandler(
-                new PluginParams('api-parameters', [anchorPrefix: 'myPrefix']),
+                pluginParamsFactory.create("api-parameters", "", [anchorPrefix: "myPrefix"]),
                 "firstName, String, first name").fencePlugin
 
-        TEST_COMPONENTS_REGISTRY.docStructure().registeredLocalLinks.should == ['myPrefix_firstName']
+        TEST_COMPONENTS_REGISTRY.docStructure().registeredLocalLinks.should == ["myPrefix_firstName"]
     }
 }

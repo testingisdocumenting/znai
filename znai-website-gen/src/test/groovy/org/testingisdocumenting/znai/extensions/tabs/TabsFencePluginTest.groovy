@@ -17,7 +17,7 @@
 
 package org.testingisdocumenting.znai.extensions.tabs
 
-import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.testingisdocumenting.znai.parser.TestMarkupParser
@@ -31,6 +31,8 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class TabsFencePluginTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     @Test
     void "include markup per tab"() {
         def elements = process("java:test java markup\n" +
@@ -81,7 +83,7 @@ class TabsFencePluginTest {
         def plugin = new TabsFencePlugin()
         def result = plugin.process(TEST_COMPONENTS_REGISTRY,
                 Paths.get("test.md"),
-                new PluginParams(plugin.id(), "{rightSide: true}"),
+                pluginParamsFactory.create(plugin.id(), "{rightSide: true}"),
                 "java: content for java")
 
         result.docElements*.toMap().should == [[meta: [rightSide: true], tabsContent: [
@@ -118,7 +120,7 @@ class TabsFencePluginTest {
         componentsRegistry.defaultParser = markupParser
 
         def plugin = new TabsFencePlugin()
-        def result = plugin.process(componentsRegistry, Paths.get("test.md"), new PluginParams(plugin.id(), ""),
+        def result = plugin.process(componentsRegistry, Paths.get("test.md"), pluginParamsFactory.create(plugin.id(), ""),
                 markup)
 
         return [plugin: plugin, result: result]

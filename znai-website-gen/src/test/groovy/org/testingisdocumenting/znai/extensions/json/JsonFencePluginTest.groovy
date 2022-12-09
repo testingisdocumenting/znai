@@ -18,9 +18,15 @@ package org.testingisdocumenting.znai.extensions.json
 
 import org.junit.Test
 import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
+
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class JsonFencePluginTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     private String json = '{\n' +
             '  "key1": "value1",\n' +
             '  "key2": {"key21": "value21", "key22": "value22"}\n' +
@@ -52,8 +58,8 @@ class JsonFencePluginTest {
     @Test
     void "auxiliary files should include pathsFile"() {
         def auxiliaryFilesStream =
-                PluginsTestUtils.processFenceAndGetAuxiliaryFiles(new PluginParams(
-                        "json",
+                PluginsTestUtils.processFenceAndGetAuxiliaryFiles(pluginParamsFactory.create(
+                        "json", "",
                         [pathsFile: "jsonFileWithPaths.json"]), json)
 
         auxiliaryFilesStream.collect { af -> af.path.fileName.toString() }
@@ -72,6 +78,6 @@ class JsonFencePluginTest {
     }
 
     private static def process(Map<String, ?> params, String content) {
-        return PluginsTestUtils.processFenceAndGetProps(new PluginParams("json", params), content)
+        return PluginsTestUtils.processFenceAndGetProps(pluginParamsFactory.create("json", "", params), content)
     }
 }

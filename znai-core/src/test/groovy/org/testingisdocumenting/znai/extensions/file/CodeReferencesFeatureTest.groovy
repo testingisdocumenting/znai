@@ -16,10 +16,10 @@
 
 package org.testingisdocumenting.znai.extensions.file
 
-import org.testingisdocumenting.znai.extensions.PluginParams
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 
 import java.nio.file.Paths
 
@@ -28,6 +28,8 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class CodeReferencesFeatureTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     @Before
     @After
     void init() {
@@ -79,6 +81,6 @@ class CodeReferencesFeatureTest {
 
     private static CodeReferencesFeature createCodeReferencesTrait(String includeFileParams) {
         return new CodeReferencesFeature(TEST_COMPONENTS_REGISTRY, Paths.get("doc.md"),
-                new PluginParams("include-file", includeFileParams))
+                pluginParamsFactory.create("include-file", includeFileParams))
     }
 }
