@@ -18,9 +18,15 @@ package org.testingisdocumenting.znai.extensions.table
 
 import org.junit.Test
 import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
+
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class TableFencePluginTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     @Test
     void "handle params"() {
         def props = process([title: "my table", Price: [width: 100, align: "right"]], """
@@ -45,6 +51,6 @@ Account, Price, Description
     }
 
     private static Map<String, ?> process(Map<String, ?> params, String content) {
-        return PluginsTestUtils.processFenceAndGetProps(new PluginParams("table", params), content)
+        return PluginsTestUtils.processFenceAndGetProps(pluginParamsFactory.create("table", "", params), content)
     }
 }

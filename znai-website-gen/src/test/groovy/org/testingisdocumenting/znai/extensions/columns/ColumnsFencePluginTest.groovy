@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.columns
 
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 
 import java.nio.file.Paths
@@ -26,6 +27,8 @@ import java.nio.file.Paths
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class ColumnsFencePluginTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     @Test
     void "should index text from all columns"() {
         def plugin = new ColumnsFencePlugin()
@@ -38,7 +41,7 @@ right:text on the right""")
 
     @Test
     void "render columns with links"() {
-        def props = PluginsTestUtils.processFenceAndGetProps(new PluginParams("columns"),
+        def props = PluginsTestUtils.processFenceAndGetProps(pluginParamsFactory.create("columns", ""),
         """left:
 [left link](http://localhost:3030)
 

@@ -16,14 +16,18 @@
 
 package org.testingisdocumenting.znai.extensions.twosides
 
-import org.testingisdocumenting.znai.extensions.PluginParams
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
+
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class EmptyBlockIncludePluginTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     @Test
     void "converts rightSide to meta-rightSide"() {
         def plugin = new EmptyBlockIncludePlugin()
-        def result = plugin.process(null, null, null, new PluginParams(plugin.id(),
+        def result = plugin.process(null, null, null, pluginParamsFactory.create(plugin.id(), "",
                 [rightSide: true]))
 
         result.docElements*.toMap().should == [[meta: [rightSide: true], type: 'EmptyBlock']]

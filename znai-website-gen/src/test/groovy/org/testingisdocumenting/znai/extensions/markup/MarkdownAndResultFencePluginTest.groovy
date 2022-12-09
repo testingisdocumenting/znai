@@ -16,20 +16,22 @@
 
 package org.testingisdocumenting.znai.extensions.markup
 
-import org.testingisdocumenting.znai.extensions.PluginParams
 import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 
 import java.nio.file.Paths
 
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownAndResultFencePluginTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     def plugin = new MarkdownAndResultFencePlugin()
 
     @Test
     void "should create markdown code snippets and result as one doc element"() {
         def result = plugin.process(TEST_COMPONENTS_REGISTRY, Paths.get("test.md"),
-                new PluginParams(plugin.id(), ""),
+                pluginParamsFactory.create(plugin.id(), ""),
                 "hello *world*")
 
         def asMap = result.docElements.collect { it.toMap() }
