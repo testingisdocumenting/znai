@@ -17,15 +17,18 @@
 package org.testingisdocumenting.znai.charts
 
 import org.junit.Test
-import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class ChartPluginResultTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     @Test
     void "should unpack 'all' breakpoint value into all available values but last"() {
-        def params = new PluginParams("barchart", [breakpoint: "all"])
+        def params = pluginParamsFactory.create("barchart", "", [breakpoint: "all"])
         def result = ChartPluginResult.create(params, "bar", "x, y\n" +
                 "test, 10\n" +
                 "another, 20\n" +
@@ -42,7 +45,7 @@ class ChartPluginResultTest {
 
     @Test
     void "unpacking `all` breakpoints should be forbidden for numeric main axis"() {
-        def params = new PluginParams("barchart", [breakpoint: "all"])
+        def params = pluginParamsFactory.create("barchart", "", [breakpoint: "all"])
 
         code {
             ChartPluginResult.create(params, "bar", "x, y\n" +
@@ -53,7 +56,7 @@ class ChartPluginResultTest {
 
     @Test
     void "should validate and report text breakpoints that don't match available values"() {
-        def params = new PluginParams("barchart", [breakpoint: ["test", "hello"]])
+        def params = pluginParamsFactory.create("barchart", "", [breakpoint: ["test", "hello"]])
         code {
             ChartPluginResult.create(params, "bar", "x, y\n" +
                     "test, 10\n" +
@@ -65,7 +68,7 @@ class ChartPluginResultTest {
 
     @Test
     void "should validate and report numeric breakpoints that are outside of min max values"() {
-        def params = new PluginParams("barchart", [breakpoint: [100.12, 300.5]])
+        def params = pluginParamsFactory.create("barchart", "", [breakpoint: [100.12, 300.5]])
         code {
             ChartPluginResult.create(params, "bar", "x, y\n" +
                     "90.343, 10\n" +
