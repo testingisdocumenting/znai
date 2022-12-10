@@ -75,6 +75,10 @@ synergy-with-testing
     web-UI
     REST-API
     business-logic
+plugins
+    plugin-types
+    default-parameters
+    development
 configuration
     basic
 example-references

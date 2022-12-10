@@ -1,5 +1,6 @@
 ../../znai-core/src/main/java
 ../../znai-cli/src/main/java
+../../znai-cli/src/main
 ../../znai-console/src/main/java
 ../../znai-console/src/test/groovy
 ../../znai-open-api/src/test/resources

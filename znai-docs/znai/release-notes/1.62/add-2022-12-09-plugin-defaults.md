@@ -1,1 +1,1 @@
-* Add: Plugin Defaults
+* Add: [Plugin Defaults](plugins/default-parameters)
