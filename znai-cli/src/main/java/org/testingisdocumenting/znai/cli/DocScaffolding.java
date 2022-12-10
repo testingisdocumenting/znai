@@ -42,6 +42,7 @@ public class DocScaffolding {
         createToc();
         createAuxiliaryContentFiles();
         createMeta();
+        createPluginParams();
         createIndex();
         createLookupPaths();
     }
@@ -52,6 +53,10 @@ public class DocScaffolding {
 
     private void createMeta() {
         createFileFromResource(DocMeta.META_FILE_NAME);
+    }
+
+    private void createPluginParams() {
+        createFileFromResource(ZnaiCliApp.PLUGIN_PARAMS_FILE_NAME);
     }
 
     private void createIndex() {

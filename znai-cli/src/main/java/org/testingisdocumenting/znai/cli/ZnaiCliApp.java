@@ -45,8 +45,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
+import java.util.stream.Stream;
 
 public class ZnaiCliApp {
+    protected static final String PLUGIN_PARAMS_FILE_NAME = "plugin-params.json";
+
     private final ZnaiCliConfig config;
     private final Path deployPath;
 
@@ -154,11 +157,10 @@ public class ZnaiCliApp {
     }
 
     public static void copyDir(Path source, Path target) {
-        try {
-            Files
-                .walk(source)
-                .filter(Files::isRegularFile)
-                .forEach(f -> copyFile(f, target.resolve(source.relativize(f))));
+        try (Stream<Path> discoveredFiles = Files.walk(source)) {
+            discoveredFiles
+                    .filter(Files::isRegularFile)
+                    .forEach(f -> copyFile(f, target.resolve(source.relativize(f))));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -180,6 +182,7 @@ public class ZnaiCliApp {
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
                 withGlobalReferencesPath(config.getSourceRoot().resolve("references.csv")).
+                withGlobalPluginParamsPath(config.getSourceRoot().resolve(PLUGIN_PARAMS_FILE_NAME)).
                 withWebResources(favIconResource).
                 withPageModifiedTimeStrategy(pageModifiedTimeStrategy()).
                 withEnabledPreview(config.isPreviewMode()).

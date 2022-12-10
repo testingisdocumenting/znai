@@ -16,11 +16,29 @@
 
 package org.testingisdocumenting.znai.extensions;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PluginParamsWithDefaultsFactory implements PluginParamsFactory {
+    private final Map<String, ?> emptyParams = Collections.emptyMap();
+    private final Map<String, Map<String, ?>> globalParams = new HashMap<>();
+    private final ThreadLocal<Map<String, Object>> pageLocalParams = ThreadLocal.withInitial(HashMap::new);
+
     @Override
     public PluginParams create(String pluginId, String freeParam, Map<String, ?> opts) {
-        return new PluginParams(pluginId, freeParam, opts);
+        Map<String, ?> pluginDefaults = globalParams.getOrDefault(pluginId, emptyParams);
+
+        Map<String, Object> combinedOpts = new LinkedHashMap<>();
+        combinedOpts.putAll(pluginDefaults);
+        combinedOpts.putAll(opts);
+
+        return new PluginParams(pluginId, freeParam, combinedOpts);
+    }
+
+    public void setGlobalParams(Map<String, Map<String, ?>> globalParams) {
+        this.globalParams.clear();
+        this.globalParams.putAll(globalParams);
     }
 }
