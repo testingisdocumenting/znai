@@ -20,9 +20,15 @@ package org.testingisdocumenting.znai.structure;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * custom information associated with a single page of documentation
+ * <pre>
+ * ---
+ * title: Page Titles
+ * ---
+ * </pre>
  */
 public class PageMeta {
     private final Map<String, List<String>> meta;
@@ -37,6 +43,10 @@ public class PageMeta {
 
     public boolean hasValue(String key) {
         return meta.containsKey(key);
+    }
+
+    public Set<String> keySet() {
+        return meta.keySet();
     }
 
     @SuppressWarnings("unchecked")

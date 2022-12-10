@@ -17,12 +17,35 @@
 package org.testingisdocumenting.znai.extensions
 
 import org.junit.Test
+import org.testingisdocumenting.znai.structure.PageMeta
 
 class PluginParamsWithDefaultsFactoryTest {
     @Test
-    void "global defaults values when not specified"() {
+    void "global defaults values"() {
         def paramsFactory = new PluginParamsWithDefaultsFactory()
         paramsFactory.setGlobalParams(["file": ["autoTitle": true]])
+
+        def pluginParams = paramsFactory.create("file", "", [anchorId: "my-anchor"])
+        pluginParams.opts.toMap().should == [anchorId: "my-anchor", autoTitle: true]
+    }
+
+    @Test
+    void "page local default values"() {
+        def paramsFactory = new PluginParamsWithDefaultsFactory()
+        def pageMeta = new PageMeta(["title": ["my-title"], "file": ["{autoTitle: true}"]])
+        paramsFactory.setPageLocalParams(pageMeta)
+
+        def pluginParams = paramsFactory.create("file", "", [anchorId: "my-anchor"])
+        pluginParams.opts.toMap().should == [anchorId: "my-anchor", autoTitle: true]
+    }
+
+    @Test
+    void "local default values takes precedent"() {
+        def paramsFactory = new PluginParamsWithDefaultsFactory()
+        paramsFactory.setGlobalParams(["file": ["autoTitle": false]])
+
+        def pageMeta = new PageMeta(["title": ["my-title"], "file": ["{autoTitle: true}"]])
+        paramsFactory.setPageLocalParams(pageMeta)
 
         def pluginParams = paramsFactory.create("file", "", [anchorId: "my-anchor"])
         pluginParams.opts.toMap().should == [anchorId: "my-anchor", autoTitle: true]
