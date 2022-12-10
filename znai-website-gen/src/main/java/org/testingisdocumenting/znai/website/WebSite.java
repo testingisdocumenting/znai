@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.website;
 import org.codehaus.groovy.runtime.StackTraceUtils;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry;
 import org.testingisdocumenting.znai.core.DocMeta;
@@ -61,6 +62,7 @@ import static java.util.stream.Collectors.toList;
 
 public class WebSite implements Log {
     private static final String SEARCH_INDEX_FILE_NAME = "search-index.js";
+    private final PluginParamsWithDefaultsFactory pluginParamsFactory;
 
     private PageToHtmlPageConverter pageToHtmlPageConverter;
     private MarkupParser markupParser;
@@ -108,7 +110,8 @@ public class WebSite implements Log {
 
         registeredExtraJavaScripts = siteConfig.registeredExtraJavaScripts;
         componentsRegistry = new WebSiteComponentsRegistry(siteConfig.docRootPath, siteConfig.isValidateExternalLinks);
-        componentsRegistry.setPluginParamsFactory(new PluginParamsWithDefaultsFactory());
+        pluginParamsFactory = new PluginParamsWithDefaultsFactory();
+        componentsRegistry.setPluginParamsFactory(pluginParamsFactory);
         resourceResolver = new ResourcesResolverChain();
         reactJsBundle = siteConfig.reactJsBundle;
         tocJavaScript = WebResource.withPath("toc.js");
@@ -178,6 +181,7 @@ public class WebSite implements Log {
         registerSiteResourceProviders();
         createTopLevelToc();
         createDocStructure();
+        parseAndSetPluginGlobalParams();
         parseGlobalDocReference();
         validateTocItemsPresence();
         parseMarkupsMeta();
@@ -775,6 +779,58 @@ public class WebSite implements Log {
         stream.forEach((path) -> ConsoleOutputs.out("    ", Color.PURPLE, path));
     }
 
+    private void parseAndSetPluginGlobalParams() {
+        if (!Files.exists(cfg.pluginParamsPath)) {
+            return;
+        }
+
+        reportPhase("reading plugin global parameters:");
+        ConsoleOutputs.out(Color.BLUE, "path: ", Color.PURPLE, cfg.pluginParamsPath);
+
+        Map<String, Map<String, ?>> globalPluginParams = readPluginParams(cfg.pluginParamsPath);
+        pluginParamsFactory.setGlobalParams(globalPluginParams);
+        printPluginDefaultParams(globalPluginParams);
+    }
+
+    private void printPluginDefaultParams(Map<String, Map<String, ?>> params) {
+        for (Map.Entry<String, Map<String, ?>> pluginEntry : params.entrySet()) {
+            String pluginId = pluginEntry.getKey();
+            if (!Plugins.hasPlugin(pluginId)) {
+                throw new IllegalArgumentException("no plugin found with id: " + pluginId);
+            }
+
+            Map<String, ?> pluginParams = pluginEntry.getValue();
+
+            List<Object> messageParts = new ArrayList<>(Arrays.asList(Color.YELLOW, pluginId, ": "));
+            for (Map.Entry<String, ?> paramEntry : pluginParams.entrySet()) {
+                messageParts.add(Color.PURPLE);
+                messageParts.add(paramEntry.getKey());
+                messageParts.add(":");
+                messageParts.add(FontStyle.NORMAL);
+                messageParts.add(paramEntry.getValue());
+                messageParts.add(" ");
+            }
+
+            ConsoleOutputs.out(messageParts.toArray());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<String, Map<String, ?>> readPluginParams(Path pluginParamsPath) {
+        if (!Files.exists(pluginParamsPath)) {
+            return Collections.emptyMap();
+        }
+
+        Map<String, ?> pluginParams = JsonUtils.deserializeAsMap(fileTextContent(pluginParamsPath));
+        for (Object params : pluginParams.values()) {
+            if (!(params instanceof Map)) {
+                throw new IllegalArgumentException("expected plugin parameters to be an object, given: " + params.getClass().getSimpleName());
+            }
+        }
+
+        return (Map<String, Map<String, ?>>) pluginParams;
+    }
+
     private Stream<String> readLocationsFromFile(String filesLookupFilePath) {
         Path lookupFilePath = cfg.docRootPath.resolve(filesLookupFilePath);
         if (! Files.exists(lookupFilePath)) {
@@ -824,6 +880,7 @@ public class WebSite implements Log {
         private Path footerPath;
         private Path extensionsDefPath;
         private Path globalReferencesPath;
+        private Path pluginParamsPath;
         private final List<WebResource> webResources;
         private String id;
         private String title;
@@ -873,6 +930,11 @@ public class WebSite implements Log {
         // https://github.org/testingisdocumenting/znai/issues/339
         public Configuration withGlobalReferencesPath(Path path) {
             globalReferencesPath = path.toAbsolutePath();
+            return this;
+        }
+
+        public Configuration withGlobalPluginParamsPath(Path path) {
+            pluginParamsPath = path.toAbsolutePath();
             return this;
         }
 

@@ -46,6 +46,14 @@ public class Plugins {
                 pluginsTracker.includePlugins.createParamsTracker(id));
     }
 
+    public static boolean hasPlugin(String id) {
+        return hasFencePlugin(id) || hasIncludePlugin(id) || hasInlinedCodePlugin(id);
+    }
+
+    public static boolean hasIncludePlugin(String id) {
+        return includePluginsById.containsKey(id);
+    }
+
     public static boolean hasFencePlugin(String id) {
         return fencePluginsById.containsKey(id);
     }

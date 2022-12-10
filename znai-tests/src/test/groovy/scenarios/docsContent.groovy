@@ -78,3 +78,8 @@ scenario('navigating back and forth should preserve scroll position') {
     browser.driver.navigate().forward()
     standardView.mainPanelScrollTop.waitTo == 0
 }
+
+scenario('default plugin parameters') {
+    standardView.pageTwoTocItem.click()
+    standardView.containerTitle.should == "no title (set explicitly to override)"
+}
