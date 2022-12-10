@@ -13,7 +13,7 @@ to create up-to-date, maintainable, beautiful **User Guides** and **Tutorials**.
 `Znai` extends markdown with plugins system to supercharge visuals and maintainability.
 Three categories of plugins are available for usage and creation
 
-### Include plugins {style: "api"}
+### Include {style: "api"}
 
 ```markdown {title: "json plugin example"}
 :include-json: example.json {
@@ -44,7 +44,7 @@ Three categories of plugins are available for usage and creation
 }
 
 
-### Inlined Code plugins {style: "api"}
+### Inlined Code {style: "api"}
 
 ```markdown {title: "plugin example"}
 It is a `:icon: cloud` day, `:icon: clock` is ticking
@@ -52,7 +52,7 @@ It is a `:icon: cloud` day, `:icon: clock` is ticking
 
 It is a `:icon: cloud` day, `:icon: clock` is ticking
 
-### Fence plugins {style: "api"}
+### Fenced Block {style: "api"}
 
 ````markdown {title: "plugin example"}
 ```tabs
