@@ -16,6 +16,9 @@
 
 package org.testingisdocumenting.znai.extensions;
 
+import org.testingisdocumenting.znai.structure.PageMeta;
+import org.testingisdocumenting.znai.utils.JsonUtils;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -24,14 +27,16 @@ import java.util.Map;
 public class PluginParamsWithDefaultsFactory implements PluginParamsFactory {
     private final Map<String, ?> emptyParams = Collections.emptyMap();
     private final Map<String, Map<String, ?>> globalParams = new HashMap<>();
-    private final ThreadLocal<Map<String, Object>> pageLocalParams = ThreadLocal.withInitial(HashMap::new);
+    private final ThreadLocal<Map<String, Map<String, ?>>> pageLocalParams = ThreadLocal.withInitial(HashMap::new);
 
     @Override
     public PluginParams create(String pluginId, String freeParam, Map<String, ?> opts) {
-        Map<String, ?> pluginDefaults = globalParams.getOrDefault(pluginId, emptyParams);
+        Map<String, ?> globalPluginDefaults = globalParams.getOrDefault(pluginId, emptyParams);
+        Map<String, ?> localPluginDefaults = pageLocalParams.get().getOrDefault(pluginId, emptyParams);
 
         Map<String, Object> combinedOpts = new LinkedHashMap<>();
-        combinedOpts.putAll(pluginDefaults);
+        combinedOpts.putAll(globalPluginDefaults);
+        combinedOpts.putAll(localPluginDefaults);
         combinedOpts.putAll(opts);
 
         return new PluginParams(pluginId, freeParam, combinedOpts);
@@ -40,5 +45,26 @@ public class PluginParamsWithDefaultsFactory implements PluginParamsFactory {
     public void setGlobalParams(Map<String, Map<String, ?>> globalParams) {
         this.globalParams.clear();
         this.globalParams.putAll(globalParams);
+    }
+
+    public void setPageLocalParams(PageMeta pageMeta) {
+        Map<String, Map<String, ?>> pageLocalParams = new HashMap<>();
+        for (String potentialPluginId : pageMeta.keySet()) {
+            if (!Plugins.hasPlugin(potentialPluginId)) {
+                continue;
+            }
+
+            Object value = pageMeta.getSingleValue(potentialPluginId);
+            Map<String, ?> localParams = JsonUtils.deserializeAsMap(value.toString());
+            pageLocalParams.put(potentialPluginId, localParams);
+        }
+
+        setPageLocalParams(pageLocalParams);
+    }
+
+    private void setPageLocalParams(Map<String, Map<String, ?>> pageLocalParams) {
+        Map<String, Map<String, ?>> local = this.pageLocalParams.get();
+        local.clear();
+        local.putAll(pageLocalParams);
     }
 }
