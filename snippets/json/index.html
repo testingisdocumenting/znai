@@ -106,7 +106,12 @@
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use title parameter to specify a snippet title: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;} Use autoTitle: true to automatically set title to specified file name</p>
+<p>Use title parameter to specify a snippet title: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;} Use autoTitle: true to automatically set title to specified file name :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, autoTitle: true}</p>
+</article>
+
+<article>
+<header><h1>Anchor</h1></header>
+<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;, anchorId: &quot;my-books&quot;}</p>
 </article>
 
 <article>
@@ -165,7 +170,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "previewEnabled" : false,
     "support" : {
       "link" : "https://github.com/testingisdocumenting/znai/discussions",
-      "title" : "Questions/Suggestions"
+      "title" : "GitHub"
     }
   },
   "page" : {
@@ -353,6 +358,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "data" : [ "root.store.book[1].category", "root.store.book[2].category" ],
         "paths" : [ ],
         "title" : "book-store-paths.json",
+        "anchorId" : "highlight-by-path-from-file-book-store-paths-json",
         "type" : "Json"
       }, {
         "lang" : "",
@@ -449,6 +455,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "price" : 12.99
         } ],
         "paths" : [ ],
+        "anchorId" : "title-books",
         "type" : "Json"
       }, {
         "type" : "Paragraph",
@@ -463,22 +470,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "include" : "$..book[0,1]",
-        "autoTitle" : true,
-        "data" : [ {
-          "category" : "reference",
-          "author" : "Nigel Rees",
-          "title" : "Sayings of the Century",
-          "price" : 8.95
-        }, {
-          "category" : "fiction",
-          "author" : "Evelyn Waugh",
-          "title" : "Sword of Honour",
-          "price" : 12.99
-        } ],
-        "paths" : [ ],
-        "title" : "book-store.json",
-        "type" : "Json"
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", autoTitle: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       }, {
         "include" : "$..book[0,1]",
         "autoTitle" : true,
@@ -495,7 +490,53 @@ ReactDOM.render(React.createElement(Documentation, {
         } ],
         "paths" : [ ],
         "title" : "book-store.json",
+        "anchorId" : "title-book-store-json",
         "type" : "Json"
+      } ]
+    }, {
+      "id" : "anchor",
+      "title" : "Anchor",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you specify a title, hover mouse over it to see a clickable anchor.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "anchorId",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to override auto generated identifier.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "include" : "$..book[0,1]",
+        "title" : "Books",
+        "anchorId" : "my-books",
+        "data" : [ {
+          "category" : "reference",
+          "author" : "Nigel Rees",
+          "title" : "Sayings of the Century",
+          "price" : 8.95
+        }, {
+          "category" : "fiction",
+          "author" : "Evelyn Waugh",
+          "title" : "Sword of Honour",
+          "price" : 12.99
+        } ],
+        "paths" : [ ],
+        "type" : "Json"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", title: \"Books\", anchorId: \"my-books\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "read-more",
@@ -772,6 +813,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "pageUrl" : "example-references/domain#transaction"
           }
         },
+        "anchorId" : "code-references-trader",
         "type" : "Json"
       } ]
     }, {
@@ -830,6 +872,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "city" : "New York"
         },
         "paths" : [ "root.temperature" ],
+        "anchorId" : "test-results-weather-response-example",
         "type" : "Json"
       } ]
     }, {
@@ -864,7 +907,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1666395285116,
+    "lastModifiedTime" : 1670944377995,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Json",
@@ -887,6 +930,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Title",
         "id" : "title"
+      }, {
+        "title" : "Anchor",
+        "id" : "anchor"
       }, {
         "title" : "Read More",
         "id" : "read-more"

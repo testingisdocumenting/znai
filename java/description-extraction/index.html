@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Class Level</h1></header>
-<p>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use JavaDoc strings to explain certain concepts of your system. /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } Instead of copy-and-pasting text between sources, you can refer to it inside your documentation. :include-java-doc: HelloWorld.java Text bellow is extracted from top class level JavaDoc Top level conceptual description of a CustomDomain problem. To avoid copy &amp; paste of the content consider to re-use information.</p>
+<p>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use JavaDoc strings to explain certain concepts of your system. /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * {@link Diversity} */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } Instead of copy-and-pasting text between sources, you can refer to it inside your documentation. :include-java-doc: HelloWorld.java Text bellow is extracted from top class level JavaDoc Top level conceptual description of a CustomDomain problem. To avoid copy &amp; paste of the content consider to re-use information.</p>
 </article>
 
 <article>
@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>Field Level</h1></header>
-<p>:include-java-doc: HelloWorld.java {entry: &quot;numberOfStudents&quot;} Each year we hire students from different universities to increase diversity</p>
+<p>:include-java-doc: HelloWorld.java {entry: &quot;numberOfStudents&quot;} Each year we hire students from different universities to increase Diversity</p>
 </article>
 
 <article>
@@ -128,6 +128,11 @@
 <header><h1>Enum Entries With References</h1></header>
 <p>Use a snippets/code-references Code References file to link enum entries to reference pages.To do that, define references in a CSV file, using a two column format: enum-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell package my.company; enum TransactionTypes { /** * buy intrument */ BUY, /** * sell instrument */ SELL } :include-java-enum-entries: TransactionTypes.java { title: &quot;Transaction Types&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot; } BUY buy intrument SELL sell instrument Enums are now linked with a reference section for the documentation.Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use snippets/code-references#global-references Global References.</p>
 </article>
+
+<article>
+<header><h1>Markdown</h1></header>
+<p>Pass markdown: true parameter to the plugins to treat JavaDoc content as markdown /** * Top level **conceptual** description of a `CustomDomain` problem. * * markdown *list* * * item two * ``` * code snippet * goes here * ``` */ class HelloWorld { } :include-java-doc: HelloWorld.java {markdown: true} Top level conceptual description of a CustomDomain problem.markdown list item two code snippet goes here</p>
+</article>
 </section>
 </div>
 <!--test extension added comment-->
@@ -155,7 +160,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "previewEnabled" : false,
     "support" : {
       "link" : "https://github.com/testingisdocumenting/znai/discussions",
-      "title" : "Questions/Suggestions"
+      "title" : "GitHub"
     }
   },
   "page" : {
@@ -183,7 +188,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "java",
-        "snippet" : "/**\n * Top level conceptual description of a {@link CustomDomain} problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * <code>diversity</code>\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample <i>offset</i> according to the rules of the universe\n     * @return name of the <b>best</b> sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    /**\n     * @param trader trader that performs action\n     * @param transaction transaction to perform action on\n     */\n    public void importantAction(Trader trader, Transaction transaction) {\n        // TODO important\n    }\n\n    public Data createData() {\n        // create data\n    }\n}",
+        "snippet" : "/**\n * Top level conceptual description of a {@link CustomDomain} problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * {@link Diversity}\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample <i>offset</i> according to the rules of the universe\n     * @return name of the <b>best</b> sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    /**\n     * @param trader trader that performs action\n     * @param transaction transaction to perform action on\n     */\n    public void importantAction(Trader trader, Transaction transaction) {\n        // TODO important\n    }\n\n    public Data createData() {\n        // create data\n    }\n}",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -327,7 +332,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Each year we hire students from different universities to increase ",
           "type" : "SimpleText"
         }, {
-          "code" : "diversity",
+          "code" : "Diversity",
           "type" : "InlinedCode"
         } ]
       } ]
@@ -371,7 +376,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " score based on following factors... ",
+          "text" : " score based on following factors...",
           "type" : "SimpleText"
         } ]
       } ]
@@ -947,6 +952,7 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ],
         "title" : "Transaction Types",
+        "markdown" : true,
         "type" : "ApiParameters"
       } ]
     }, {
@@ -1069,8 +1075,91 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       } ]
+    }, {
+      "id" : "markdown",
+      "title" : "Markdown",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "markdown: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to the plugins to treat JavaDoc content as markdown",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "/**\n * Top level **conceptual** description of a `CustomDomain` problem.\n * * markdown *list*\n * * item two\n * ```\n * code snippet\n * goes here\n * ```\n */\nclass HelloWorld {\n}",
+        "title" : "with markdown javadoc",
+        "anchorId" : "markdown-with-markdown-javadoc",
+        "type" : "Snippet"
+      }, {
+        "lang" : "",
+        "snippet" : ":include-java-doc: HelloWorld.java {markdown: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Top level ",
+          "type" : "SimpleText"
+        }, {
+          "type" : "StrongEmphasis",
+          "content" : [ {
+            "text" : "conceptual",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " description of a ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "CustomDomain",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " problem.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "markdown ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "list",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "item two",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "code snippet\ngoes here\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      } ]
     } ],
-    "lastModifiedTime" : 1666395285104,
+    "lastModifiedTime" : 1670944377991,
     "tocItem" : {
       "chapterTitle" : "Java",
       "pageTitle" : "Description Extraction",
@@ -1105,6 +1194,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Enum Entries With References",
         "id" : "enum-entries-with-references"
+      }, {
+        "title" : "Markdown",
+        "id" : "markdown"
       } ]
     }
   }

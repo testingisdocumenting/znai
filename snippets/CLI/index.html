@@ -125,6 +125,11 @@
 </article>
 
 <article>
+<header><h1>Anchor</h1></header>
+<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-cli-output: cli/file-path-of-captured.out { title: &quot;Captured output&quot;, anchorId: &quot;my-output&quot;, readMore: true } Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master</p>
+</article>
+
+<article>
 <header><h1>Extract Snippets</h1></header>
 <p>Use startLine , endLine to extract specific content by using marker lines. :include-cli-output: cli/file-path-of-captured.out { title: &quot;Limited captured output&quot;, startLine: &quot;git push&quot;, endLine: &quot;master -&gt; master&quot; } Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master More on snippets extractions: snippets/snippets-manipulation Snippets Manipulation.</p>
 </article>
@@ -160,7 +165,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "previewEnabled" : false,
     "support" : {
       "link" : "https://github.com/testingisdocumenting/znai/discussions",
-      "title" : "Questions/Suggestions"
+      "title" : "GitHub"
     }
   },
   "page" : {
@@ -479,6 +484,41 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Captured output",
         "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
+        "anchorId" : "title-captured-output",
+        "type" : "CliOutput"
+      } ]
+    }, {
+      "id" : "anchor",
+      "title" : "Anchor",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you specify a title, hover mouse over it to see a clickable anchor.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "anchorId",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to override auto generated identifier.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-cli-output: cli/file-path-of-captured.out {\n  title: \"Captured output\",\n  anchorId: \"my-output\",\n  readMore: true\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "Captured output",
+        "anchorId" : "my-output",
+        "readMore" : true,
+        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
         "type" : "CliOutput"
       } ]
     }, {
@@ -513,6 +553,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "startLine" : "git push",
         "endLine" : "master -> master",
         "lines" : [ "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master" ],
+        "anchorId" : "extract-snippets-limited-captured-output",
         "type" : "CliOutput"
       }, {
         "type" : "Paragraph",
@@ -584,7 +625,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliOutput"
       } ]
     } ],
-    "lastModifiedTime" : 1666395285112,
+    "lastModifiedTime" : 1670944377995,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "CLI",
@@ -616,6 +657,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Title",
         "id" : "title"
+      }, {
+        "title" : "Anchor",
+        "id" : "anchor"
       }, {
         "title" : "Extract Snippets",
         "id" : "extract-snippets"

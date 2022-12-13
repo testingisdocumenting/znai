@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Method Body</h1></header>
-<p>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code&gt;diversity&lt;/code&gt; */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+<p>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * {@link Diversity} */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
 </article>
 
 <article>
@@ -160,7 +160,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "previewEnabled" : false,
     "support" : {
       "link" : "https://github.com/testingisdocumenting/znai/discussions",
-      "title" : "Questions/Suggestions"
+      "title" : "GitHub"
     }
   },
   "page" : {
@@ -189,7 +189,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "java",
-        "snippet" : "/**\n * Top level conceptual description of a {@link CustomDomain} problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * <code>diversity</code>\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample <i>offset</i> according to the rules of the universe\n     * @return name of the <b>best</b> sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    /**\n     * @param trader trader that performs action\n     * @param transaction transaction to perform action on\n     */\n    public void importantAction(Trader trader, Transaction transaction) {\n        // TODO important\n    }\n\n    public Data createData() {\n        // create data\n    }\n}",
+        "snippet" : "/**\n * Top level conceptual description of a {@link CustomDomain} problem.\n * <p>\n * To avoid <b>copy & paste</b> of the content consider to re-use information.\n */\nclass HelloWorld {\n    /**\n     * Each year we hire students from different universities to increase\n     * {@link Diversity}\n     */\n    private int numberOfStudents;\n\n    /**\n     * Conceptual description of a <i>Domain</i> problem.\n     * <p>\n     * It will work only if you put high level description here and\n     * <b>not</b> implementation details.\n     *\n     * @param p1 important parameter of something\n     * @param p2 sample <i>offset</i> according to the rules of the universe\n     * @return name of the <b>best</b> sample\n     */\n    public String sampleMethod(String p1, int p2) {\n        validate();\n        process(p2); // important comment\n        notifyAll(p1); // very important\n\n        return bestSample();\n    }\n\n    public void sampleMethod(Map<String, Integer> p1, int p2, boolean isActive) {\n        // overloaded method\n    }\n\n    /**\n     * @param trader trader that performs action\n     * @param transaction transaction to perform action on\n     */\n    public void importantAction(Trader trader, Transaction transaction) {\n        // TODO important\n    }\n\n    public Data createData() {\n        // create data\n    }\n}",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -645,7 +645,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1666395285104,
+    "lastModifiedTime" : 1670944377991,
     "tocItem" : {
       "chapterTitle" : "Java",
       "pageTitle" : "Content Extraction",

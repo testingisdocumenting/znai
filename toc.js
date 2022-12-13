@@ -486,6 +486,9 @@ toc = [ {
       "title" : "Title",
       "id" : "title"
     }, {
+      "title" : "Anchor",
+      "id" : "anchor"
+    }, {
       "title" : "Read More",
       "id" : "read-more"
     }, {
@@ -584,6 +587,9 @@ toc = [ {
     }, {
       "title" : "Title",
       "id" : "title"
+    }, {
+      "title" : "Anchor",
+      "id" : "anchor"
     }, {
       "title" : "Extract Snippets",
       "id" : "extract-snippets"
@@ -719,6 +725,9 @@ toc = [ {
       "title" : "Partial Markdown",
       "id" : "partial-markdown"
     }, {
+      "title" : "Inlined Markdown",
+      "id" : "inlined-markdown"
+    }, {
       "title" : "Multiple Markdown Files",
       "id" : "multiple-markdown-files"
     } ]
@@ -770,7 +779,9 @@ toc = [ {
   }, {
     "chapterTitle" : "Visuals",
     "pageTitle" : "Images",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "image" : [ "{border: true, fit: false}" ]
+    },
     "dirName" : "visuals",
     "fileName" : "images",
     "viewOnRelativePath" : null,
@@ -1567,6 +1578,9 @@ toc = [ {
     }, {
       "title" : "Enum Entries With References",
       "id" : "enum-entries-with-references"
+    }, {
+      "title" : "Markdown",
+      "id" : "markdown"
     } ]
   }, {
     "chapterTitle" : "Java",
@@ -1624,6 +1638,54 @@ toc = [ {
     "pageSectionIdTitles" : [ {
       "title" : "Capture Input Example",
       "id" : "capture-input-example"
+    } ]
+  } ]
+}, {
+  "chapterTitle" : "Plugins",
+  "dirName" : "plugins",
+  "items" : [ {
+    "chapterTitle" : "Plugins",
+    "pageTitle" : "Plugin Types",
+    "pageMeta" : { },
+    "dirName" : "plugins",
+    "fileName" : "plugin-types",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Include Plugins",
+      "id" : "include-plugins"
+    }, {
+      "title" : "Inlined Code",
+      "id" : "inlined-code"
+    }, {
+      "title" : "Fenced Block",
+      "id" : "fenced-block"
+    } ]
+  }, {
+    "chapterTitle" : "Plugins",
+    "pageTitle" : "Default Parameters",
+    "pageMeta" : {
+      "image" : [ "{border: true}" ]
+    },
+    "dirName" : "plugins",
+    "fileName" : "default-parameters",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Global Defaults",
+      "id" : "global-defaults"
+    }, {
+      "title" : "Page Local Defaults",
+      "id" : "page-local-defaults"
+    } ]
+  }, {
+    "chapterTitle" : "Plugins",
+    "pageTitle" : "Development",
+    "pageMeta" : { },
+    "dirName" : "plugins",
+    "fileName" : "development",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "PlaceHolder",
+      "id" : "placeholder"
     } ]
   } ]
 }, {
@@ -1713,6 +1775,9 @@ toc = [ {
     "fileName" : "2022",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.62",
+      "id" : "1-62"
+    }, {
       "title" : "1.61.2",
       "id" : "1-61-2"
     }, {

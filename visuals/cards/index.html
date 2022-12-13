@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>Multiple Columns</h1></header>
-<p>Use layout/columns Colums to arrange cards side by side Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass Markdown content of the card goes hereitem one item two item three Easy to use API firstName String description with markdown support score Integer another description line with markdown support markdown ```````columns left: ```card diamond.svg {title: &quot;Card Title&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))&quot;} Markdown content goes here :include-file: snippets/file-name.js ``` middle: ```card small-book.png {title: &quot;Book&quot;, imageHeight: 120} Markdown content of the card goes here * item one * item two * item three ``` right: `````card star.svg {title: &quot;API for the Win&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))&quot;} Easy to use API ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ````` ```````` Note: Card plugin is designed to work with snippets/external-code-snippets code snippets and with snippets/api-parameters API Parameters by reducing spacing integrating border lines</p>
+<p>Use layout/columns Colums to arrange cards side by side Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass Markdown content of the card goes hereitem one item two item three Easy to use API firstName String description with markdown support score Integer another description line with markdown support markdown ```````columns left: ```card diamond.svg {title: &quot;Card Title&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))&quot;} Markdown content goes here :include-file: snippets/file-name.js ``` middle: ```card small-book.png {title: &quot;Book&quot;, imageHeight: 120} Markdown content of the card goes here * item one * item two * item three ``` right: `````card star.svg {title: &quot;API for the Win&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))&quot;} Easy to use API ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ````` ```````` Note: Card plugin is designed to work with snippets/external-code-snippets code snippets, layout/tables Tables and snippets/api-parameters API Parameters by reducing spacing and integrating borders List Item One List Item Two column A column B hello world of cards</p>
 </article>
 
 <article>
@@ -130,7 +130,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "previewEnabled" : false,
     "support" : {
       "link" : "https://github.com/testingisdocumenting/znai/discussions",
-      "title" : "Questions/Suggestions"
+      "title" : "GitHub"
     }
   },
   "page" : {
@@ -469,7 +469,18 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " and with ",
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/layout/tables",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Tables",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " and ",
           "type" : "SimpleText"
         }, {
           "url" : "/znai/snippets/api-parameters",
@@ -480,9 +491,73 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " by reducing spacing integrating border lines",
+          "text" : " by reducing spacing and integrating borders",
           "type" : "SimpleText"
         } ]
+      }, {
+        "title" : "With Table",
+        "imageBackground" : "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))",
+        "imageHeight" : 120,
+        "imageSrc" : "/znai/visuals/small-book.png",
+        "bodyContent" : [ {
+          "bulletMarker" : "*",
+          "tight" : true,
+          "type" : "BulletList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "List Item One",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "List Item Two",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "table" : {
+            "columns" : [ {
+              "title" : "column A"
+            }, {
+              "title" : "column B"
+            } ],
+            "data" : [ [ [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "hello",
+                "type" : "SimpleText"
+              } ]
+            } ], [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "world",
+                "type" : "SimpleText"
+              } ]
+            } ] ], [ [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "of",
+                "type" : "SimpleText"
+              } ]
+            } ], [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "cards",
+                "type" : "SimpleText"
+              } ]
+            } ] ] ]
+          },
+          "type" : "Table"
+        } ],
+        "type" : "Card"
       } ]
     }, {
       "id" : "links",
@@ -529,7 +604,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1666395285128,
+    "lastModifiedTime" : 1670944378007,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Cards",

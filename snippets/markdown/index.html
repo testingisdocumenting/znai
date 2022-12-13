@@ -91,12 +91,17 @@
 
 <article>
 <header><h1>Optional Markdown</h1></header>
-<p>When you document an open source project you may have different instructions based on where the documentation is deployed.For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like Getting Started.We build documentation twice and the differences are handled by :include-markdown: 's firstAvailable parameter. :include-markdown: {firstAvailable: [ &quot;markdown-dir/getting-started-step-internal.md&quot;, &quot;markdown-dir/getting-started-step-external.md&quot;]} command specific-to-external</p>
+<p>When you document an open source project you may have different instructions based on where the documentation is deployed.For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like Getting Started.We build documentation twice and the differences are handled by include-markdown 's firstAvailable parameter. :include-markdown: {firstAvailable: [ &quot;markdown-dir/getting-started-step-internal.md&quot;, &quot;markdown-dir/getting-started-step-external.md&quot;]} command specific-to-external</p>
 </article>
 
 <article>
 <header><h1>Partial Markdown</h1></header>
 <p>Use surroundedBy to include portion of a markdown from existing markdown file, e.g. readme.md Given an existing markdown files with markers # Section One Some text # Section Two [comment]: &lt;&gt; (marker-one) Use these parameters to setup your work environment: ``` parameter=value ``` [comment]: &lt;&gt; (marker-one) markdown :include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: &quot;&lt;&gt; (marker-one)&quot;} Use these parameters to setup your work environment: parameter=value</p>
+</article>
+
+<article>
+<header><h1>Inlined Markdown</h1></header>
+<p>To inline a piece of markdown use the inlined version of the plugin content `:markdown: path-to-file.md` content Plugin will inline text content into current paragraph. markdown Use the latest version `:markdown: markdown-dir/inlined.md` to get the feature. `:badge: 2.34` Use the latest version to get the feature.Use firstAvailable parameter to include first file that can be resolved markdown Use the latest version `:markdown: { firstAvailable: [&quot;markdown-dir/inlined-alternative.md&quot;, &quot;markdown-dir/inlined.md&quot;]}` to get the feature. `:badge: 2.44_internal` `:badge: 2.34` Use the latest version to get the feature.</p>
 </article>
 
 <article>
@@ -130,7 +135,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "previewEnabled" : false,
     "support" : {
       "link" : "https://github.com/testingisdocumenting/znai/discussions",
-      "title" : "Questions/Suggestions"
+      "title" : "GitHub"
     }
   },
   "page" : {
@@ -217,7 +222,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "We build documentation twice and the differences are handled by ",
           "type" : "SimpleText"
         }, {
-          "code" : ":include-markdown:",
+          "code" : "include-markdown",
           "type" : "InlinedCode"
         }, {
           "text" : "'s ",
@@ -287,6 +292,103 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "parameter=value\n",
         "lineNumber" : "",
         "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "inlined-markdown",
+      "title" : "Inlined Markdown",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To inline a piece of markdown use the inlined version of the plugin",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "content `:markdown: path-to-file.md` content\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Plugin will inline text content into current paragraph.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "Use the latest version `:markdown: markdown-dir/inlined.md` to get the feature.\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "md",
+        "snippet" : "`:badge: 2.34`",
+        "autoTitle" : true,
+        "title" : "markdown-dir/inlined.md",
+        "anchorId" : "inlined-markdown-markdown-dir-inlined-md",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the latest version ",
+          "type" : "SimpleText"
+        }, {
+          "text" : "2.34",
+          "type" : "TextBadge"
+        }, {
+          "text" : " to get the feature.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "firstAvailable",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to include first file that can be resolved",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "Use the latest version `:markdown: {\n  firstAvailable: [\"markdown-dir/inlined-alternative.md\", \"markdown-dir/inlined.md\"]}` to get the feature.\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "columns" : [ {
+          "content" : [ {
+            "lang" : "md",
+            "snippet" : "`:badge: 2.44_internal`",
+            "autoTitle" : true,
+            "title" : "markdown-dir/inlined-alternative.md",
+            "anchorId" : "inlined-markdown-markdown-dir-inlined-alternative-md",
+            "type" : "Snippet"
+          } ]
+        }, {
+          "content" : [ {
+            "lang" : "md",
+            "snippet" : "`:badge: 2.34`",
+            "autoTitle" : true,
+            "title" : "markdown-dir/inlined.md",
+            "anchorId" : "inlined-markdown-markdown-dir-inlined-md-2",
+            "type" : "Snippet"
+          } ]
+        } ],
+        "config" : { },
+        "type" : "Columns"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use the latest version ",
+          "type" : "SimpleText"
+        }, {
+          "text" : "2.44_internal",
+          "type" : "TextBadge"
+        }, {
+          "text" : " to get the feature.",
+          "type" : "SimpleText"
+        } ]
       } ]
     }, {
       "id" : "multiple-markdown-files",
@@ -373,7 +475,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1666395285116,
+    "lastModifiedTime" : 1670944377999,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Markdown",
@@ -393,6 +495,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Partial Markdown",
         "id" : "partial-markdown"
+      }, {
+        "title" : "Inlined Markdown",
+        "id" : "inlined-markdown"
       }, {
         "title" : "Multiple Markdown Files",
         "id" : "multiple-markdown-files"

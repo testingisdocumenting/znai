@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Files Reference Lookup</h1></header>
-<p>When you refer to a file using plugins like :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directory locations enumerated inside &lt;doc-root&gt;/lookup-paths file txt ../examples ../module/src/main/java</p>
+<p>When you refer to a file using plugins like markdown :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directory locations enumerated inside &lt;doc-root&gt;/lookup-paths file txt ../examples ../module/src/main/java</p>
 </article>
 
 <article>
@@ -135,7 +135,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "previewEnabled" : false,
     "support" : {
       "link" : "https://github.com/testingisdocumenting/znai/discussions",
-      "title" : "Questions/Suggestions"
+      "title" : "GitHub"
     }
   },
   "page" : {
@@ -151,11 +151,10 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "code" : ":include-file: my-file.cpp",
-          "type" : "InlinedCode"
-        } ]
+        "lang" : "markdown",
+        "snippet" : ":include-file: my-file.cpp\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -344,7 +343,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1666395285104,
+    "lastModifiedTime" : 1670944377987,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Lookup Paths",

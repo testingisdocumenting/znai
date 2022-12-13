@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>External File</h1></header>
-<p>If your diagram is stored in a separate file, use :include-plantuml: &lt;path&gt; . :include-plantuml: demo.plantuml @startuml package &quot;Some Group&quot; { HTTP - [First Component] [Another Component] } node &quot;Other Groups&quot; { FTP - [Second Component] [First Component] --&gt; FTP } cloud { [Example 1] } database &quot;MySql&quot; { folder &quot;This is my folder&quot; { [Folder 3] } frame &quot;Foo&quot; { [Frame 4] } } [Another Component] --&gt; [Example 1] [Example 1] --&gt; [Folder 3] [Folder 3] --&gt; [Frame 4] @enduml</p>
+<p>If your diagram is stored in a separate file, use :include-plantuml: &lt;path&gt; :include-plantuml: demo.plantuml @startuml package &quot;Some Group&quot; { HTTP - [First Component] [Another Component] } node &quot;Other Groups&quot; { FTP - [Second Component] [First Component] --&gt; FTP } cloud { [Example 1] } database &quot;MySql&quot; { folder &quot;This is my folder&quot; { [Folder 3] } frame &quot;Foo&quot; { [Frame 4] } } [Another Component] --&gt; [Example 1] [Example 1] --&gt; [Folder 3] [Folder 3] --&gt; [Frame 4] @enduml</p>
 </article>
 
 <article>
@@ -125,7 +125,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "previewEnabled" : false,
     "support" : {
       "link" : "https://github.com/testingisdocumenting/znai/discussions",
-      "title" : "Questions/Suggestions"
+      "title" : "GitHub"
     }
   },
   "page" : {
@@ -167,15 +167,14 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "If your diagram is stored in a separate file, use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : ":include-plantuml: <path>",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ".",
+          "text" : "If your diagram is stored in a separate file, use",
           "type" : "SimpleText"
         } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-plantuml: <path>\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
       }, {
         "columns" : [ {
           "content" : [ {
@@ -214,7 +213,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Svg"
       } ]
     } ],
-    "lastModifiedTime" : 1666395285120,
+    "lastModifiedTime" : 1670944377999,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "PlantUml",

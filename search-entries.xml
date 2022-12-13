@@ -11,7 +11,7 @@
     <url>/znai/introduction/what-is-this#extensive-plugins-system</url>
     <fullTitle>Znai: What Is This, Extensive Plugins System [Introduction]</fullTitle>
     <text>
-      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include plugins markdown :include-json: example.json { title: "JSON example", paths: ["root.person.id"], collapsedPaths: ["root.details"] } markdown :include-java: ../java/HelloWorld.java { entry: "sampleMethod", bodyOnly: true, commentsType: "inline" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Inlined Code plugins markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fence plugins markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</text>
+      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include markdown :include-json: example.json { title: "JSON example", paths: ["root.person.id"], collapsedPaths: ["root.details"] } markdown :include-java: ../java/HelloWorld.java { entry: "sampleMethod", bodyOnly: true, commentsType: "inline" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Inlined Code markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fenced Block markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.61.2/znai-dist-1.61.2-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.62/znai-dist-1.62-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.61.2&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.62&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.61.2&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.62&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.61.2&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.62&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -155,7 +155,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations cards charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic configuration basic example-references domain api znai-development local-build release-notes 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations cards charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic plugins plugin-types default-parameters development configuration basic example-references domain api znai-development local-build release-notes 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -171,7 +171,7 @@
     <url>/znai/flow/structure#meta</url>
     <fullTitle>Znai: Structure, Meta [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have the meta.json file in its root. This JSON file contains documentation display name, type, and optional View On information. { "title": "Znai", "type": "User Guide", "category": "Documentation", "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.", "viewOn": { "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai", "title": "View Markdown" }, "support": { "link": "https://github.com/testingisdocumenting/znai/discussions", "title": "Questions/Suggestions" } }</text>
+      <text>Each documentation must have the meta.json file in its root. This JSON file contains documentation display name, type, and optional View On information. { "title": "Znai", "type": "User Guide", "category": "Documentation", "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.", "viewOn": { "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai", "title": "View Markdown" }, "support": { "link": "https://github.com/testingisdocumenting/znai/discussions", "title": "GitHub" } }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -187,7 +187,7 @@
     <url>/znai/flow/landing#auto-redirect</url>
     <fullTitle>Znai: Landing, Auto Redirect [Flow]</fullTitle>
     <text>
-      <text>Use :include-redirect: chapter/page to automatically redirect from index page to any other page in your docs. Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.If index.md is not present, users will be redirected to the first page in your Table Of Contents.</text>
+      <text>Use include-redirect plugin to automatically redirect from index page to any other page in your docs. markdown :include-redirect: chapter/page Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.If index.md is not present, users will be redirected to the first page in your Table Of Contents.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -251,7 +251,7 @@
     <url>/znai/flow/page-toc#section-one</url>
     <fullTitle>Znai: Page Toc, Section One [Flow]</fullTitle>
     <text>
-      <text>Use :include-page-toc: to include page top level sections as links :include-page-toc: some text</text>
+      <text>Use include-page-toc to include page top level sections as links markdown :include-page-toc: some text</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -267,7 +267,7 @@
     <url>/znai/flow/lookup-paths#files-reference-lookup</url>
     <fullTitle>Znai: Lookup Paths, Files Reference Lookup [Flow]</fullTitle>
     <text>
-      <text>When you refer to a file using plugins like :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directory locations enumerated inside &lt;doc-root>/lookup-paths file txt ../examples ../module/src/main/java</text>
+      <text>When you refer to a file using plugins like markdown :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directory locations enumerated inside &lt;doc-root>/lookup-paths file txt ../examples ../module/src/main/java</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -427,7 +427,7 @@
     <url>/znai/snippets/external-code-snippets#embedding-content</url>
     <fullTitle>Znai: External Code Snippets, Embedding Content [Snippets]</fullTitle>
     <text>
-      <text>To reduce documentation maintenance burden avoid copy and paste of code snippets. Embed content by referencing existing files using the :include-file: plugin instead. :include-file: file-name.js This include- syntax will appear throughout the documentation and represents a family of custom Markdown extensions. class JsClass { constructor() { usefulAction() } } export default JsClass The file will be looked up using following rules:directory with a markup file root directory of a documentation all lookup paths listed in a lookup-paths file</text>
+      <text>To reduce documentation maintenance burden avoid copy and paste of code snippets. Embed content by referencing existing files using the include-file plugin instead. :include-file: file-name.js This include- syntax will appear throughout the documentation and represents a family of custom Markdown extensions. class JsClass { constructor() { usefulAction() } } export default JsClass The file will be looked up using following rules:directory with a markup file root directory of a documentation all lookup paths listed in a lookup-paths file</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -755,7 +755,15 @@
     <url>/znai/snippets/json#title</url>
     <fullTitle>Znai: Json, Title [Snippets]</fullTitle>
     <text>
-      <text>Use title parameter to specify a snippet title: :include-json: book-store.json {include: "$..book[0,1]", title: "Books"} Use autoTitle: true to automatically set title to specified file name</text>
+      <text>Use title parameter to specify a snippet title: :include-json: book-store.json {include: "$..book[0,1]", title: "Books"} Use autoTitle: true to automatically set title to specified file name :include-json: book-store.json {include: "$..book[0,1]", autoTitle: true}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/json#anchor</url>
+    <fullTitle>Znai: Json, Anchor [Snippets]</fullTitle>
+    <text>
+      <text>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-json: book-store.json {include: "$..book[0,1]", title: "Books", anchorId: "my-books"}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -932,6 +940,14 @@
     <fullTitle>Znai: CLI, Title [Snippets]</fullTitle>
     <text>
       <text>Use title to specify output of the output :include-cli-output: cli/file-path-of-captured.out {title: "Captured output"} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/CLI#anchor</url>
+    <fullTitle>Znai: CLI, Anchor [Snippets]</fullTitle>
+    <text>
+      <text>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-cli-output: cli/file-path-of-captured.out { title: "Captured output", anchorId: "my-output", readMore: true } Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1115,7 +1131,7 @@
     <url>/znai/snippets/markdown#optional-markdown</url>
     <fullTitle>Znai: Markdown, Optional Markdown [Snippets]</fullTitle>
     <text>
-      <text>When you document an open source project you may have different instructions based on where the documentation is deployed.For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like Getting Started.We build documentation twice and the differences are handled by :include-markdown: 's firstAvailable parameter. :include-markdown: {firstAvailable: [ "markdown-dir/getting-started-step-internal.md", "markdown-dir/getting-started-step-external.md"]} command specific-to-external</text>
+      <text>When you document an open source project you may have different instructions based on where the documentation is deployed.For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like Getting Started.We build documentation twice and the differences are handled by include-markdown 's firstAvailable parameter. :include-markdown: {firstAvailable: [ "markdown-dir/getting-started-step-internal.md", "markdown-dir/getting-started-step-external.md"]} command specific-to-external</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1124,6 +1140,14 @@
     <fullTitle>Znai: Markdown, Partial Markdown [Snippets]</fullTitle>
     <text>
       <text>Use surroundedBy to include portion of a markdown from existing markdown file, e.g. readme.md Given an existing markdown files with markers # Section One Some text # Section Two [comment]: &lt;&gt; (marker-one) Use these parameters to setup your work environment: ``` parameter=value ``` [comment]: &lt;&gt; (marker-one) markdown :include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: "&lt;&gt; (marker-one)"} Use these parameters to setup your work environment: parameter=value</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/markdown#inlined-markdown</url>
+    <fullTitle>Znai: Markdown, Inlined Markdown [Snippets]</fullTitle>
+    <text>
+      <text>To inline a piece of markdown use the inlined version of the plugin content `:markdown: path-to-file.md` content Plugin will inline text content into current paragraph. markdown Use the latest version `:markdown: markdown-dir/inlined.md` to get the feature. `:badge: 2.34` Use the latest version to get the feature.Use firstAvailable parameter to include first file that can be resolved markdown Use the latest version `:markdown: { firstAvailable: ["markdown-dir/inlined-alternative.md", "markdown-dir/inlined.md"]}` to get the feature. `:badge: 2.44_internal` `:badge: 2.34` Use the latest version to get the feature.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1235,7 +1259,7 @@
     <url>/znai/visuals/images#extension</url>
     <fullTitle>Znai: Images, Extension [Visuals]</fullTitle>
     <text>
-      <text>Znai has :include-image: extension to provide additional features:annotations fit scale alignment border presentation mode</text>
+      <text>Znai has include-image extension to provide additional features:annotations fit scale alignment border presentation mode</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1411,7 +1435,7 @@
     <url>/znai/visuals/cards#multiple-columns</url>
     <fullTitle>Znai: Cards, Multiple Columns [Visuals]</fullTitle>
     <text>
-      <text>Use layout/columns Colums to arrange cards side by side Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass Markdown content of the card goes hereitem one item two item three Easy to use API firstName String description with markdown support score Integer another description line with markdown support markdown ```````columns left: ```card diamond.svg {title: "Card Title", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"} Markdown content goes here :include-file: snippets/file-name.js ``` middle: ```card small-book.png {title: "Book", imageHeight: 120} Markdown content of the card goes here * item one * item two * item three ``` right: `````card star.svg {title: "API for the Win", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))"} Easy to use API ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ````` ```````` Note: Card plugin is designed to work with snippets/external-code-snippets code snippets and with snippets/api-parameters API Parameters by reducing spacing integrating border lines</text>
+      <text>Use layout/columns Colums to arrange cards side by side Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass Markdown content of the card goes hereitem one item two item three Easy to use API firstName String description with markdown support score Integer another description line with markdown support markdown ```````columns left: ```card diamond.svg {title: "Card Title", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"} Markdown content goes here :include-file: snippets/file-name.js ``` middle: ```card small-book.png {title: "Book", imageHeight: 120} Markdown content of the card goes here * item one * item two * item three ``` right: `````card star.svg {title: "API for the Win", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))"} Easy to use API ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ````` ```````` Note: Card plugin is designed to work with snippets/external-code-snippets code snippets, layout/tables Tables and snippets/api-parameters API Parameters by reducing spacing and integrating borders List Item One List Item Two column A column B hello world of cards</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1827,7 +1851,7 @@
     <url>/znai/visuals/PlantUml#external-file</url>
     <fullTitle>Znai: PlantUml, External File [Visuals]</fullTitle>
     <text>
-      <text>If your diagram is stored in a separate file, use :include-plantuml: &lt;path> . :include-plantuml: demo.plantuml @startuml package "Some Group" { HTTP - [First Component] [Another Component] } node "Other Groups" { FTP - [Second Component] [First Component] --> FTP } cloud { [Example 1] } database "MySql" { folder "This is my folder" { [Folder 3] } frame "Foo" { [Frame 4] } } [Another Component] --> [Example 1] [Example 1] --> [Folder 3] [Folder 3] --> [Frame 4] @enduml</text>
+      <text>If your diagram is stored in a separate file, use :include-plantuml: &lt;path> :include-plantuml: demo.plantuml @startuml package "Some Group" { HTTP - [First Component] [Another Component] } node "Other Groups" { FTP - [Second Component] [First Component] --> FTP } cloud { [Example 1] } database "MySql" { folder "This is my folder" { [Folder 3] } frame "Foo" { [Frame 4] } } [Another Component] --> [Example 1] [Example 1] --> [Folder 3] [Folder 3] --> [Frame 4] @enduml</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1907,7 +1931,7 @@
     <url>/znai/layout/tables#json</url>
     <fullTitle>Znai: Tables, JSON [Layout]</fullTitle>
     <text>
-      <text>A similar extension can be used to display data from a JSON file representing tabular data. :include-table: table.json So the following JSON file... [ { "Account": "#12BGD3", "Price": 100, "Description": "custom table with a long attachment" }, { "Account": "#12BGD3", "Price": 150, "Description": "chair" }, { "Account": "#91AGB1", "Price": 10, "Description": "lunch" } ] ...will render like so: Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <text>This extension can be used to display data from a JSON file representing tabular data. :include-table: table.json So the following JSON file... [ { "Account": "#12BGD3", "Price": 100, "Description": "custom table with a long attachment" }, { "Account": "#12BGD3", "Price": 150, "Description": "chair" }, { "Account": "#91AGB1", "Price": 10, "Description": "lunch" } ] ...will render like so: Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2427,7 +2451,7 @@
     <url>/znai/java/content-extraction#method-body</url>
     <fullTitle>Znai: Content Extraction, Method Body [Java]</fullTitle>
     <text>
-      <text>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p> * To avoid &lt;b>copy &amp; paste&lt;/b> of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code>diversity&lt;/code> */ private int numberOfStudents; /** * Conceptual description of a &lt;i>Domain&lt;/i> problem. * &lt;p> * It will work only if you put high level description here and * &lt;b>not&lt;/b> implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i>offset&lt;/i> according to the rules of the universe * @return name of the &lt;b>best&lt;/b> sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer> p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
+      <text>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p> * To avoid &lt;b>copy &amp; paste&lt;/b> of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * {@link Diversity} */ private int numberOfStudents; /** * Conceptual description of a &lt;i>Domain&lt;/i> problem. * &lt;p> * It will work only if you put high level description here and * &lt;b>not&lt;/b> implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i>offset&lt;/i> according to the rules of the universe * @return name of the &lt;b>best&lt;/b> sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer> p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2507,7 +2531,7 @@
     <url>/znai/java/description-extraction#class-level</url>
     <fullTitle>Znai: Description Extraction, Class Level [Java]</fullTitle>
     <text>
-      <text>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use JavaDoc strings to explain certain concepts of your system. /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p> * To avoid &lt;b>copy &amp; paste&lt;/b> of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * &lt;code>diversity&lt;/code> */ private int numberOfStudents; /** * Conceptual description of a &lt;i>Domain&lt;/i> problem. * &lt;p> * It will work only if you put high level description here and * &lt;b>not&lt;/b> implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i>offset&lt;/i> according to the rules of the universe * @return name of the &lt;b>best&lt;/b> sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer> p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } Instead of copy-and-pasting text between sources, you can refer to it inside your documentation. :include-java-doc: HelloWorld.java Text bellow is extracted from top class level JavaDoc Top level conceptual description of a CustomDomain problem. To avoid copy &amp; paste of the content consider to re-use information.</text>
+      <text>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use JavaDoc strings to explain certain concepts of your system. /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p> * To avoid &lt;b>copy &amp; paste&lt;/b> of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * {@link Diversity} */ private int numberOfStudents; /** * Conceptual description of a &lt;i>Domain&lt;/i> problem. * &lt;p> * It will work only if you put high level description here and * &lt;b>not&lt;/b> implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i>offset&lt;/i> according to the rules of the universe * @return name of the &lt;b>best&lt;/b> sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer> p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } Instead of copy-and-pasting text between sources, you can refer to it inside your documentation. :include-java-doc: HelloWorld.java Text bellow is extracted from top class level JavaDoc Top level conceptual description of a CustomDomain problem. To avoid copy &amp; paste of the content consider to re-use information.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2523,7 +2547,7 @@
     <url>/znai/java/description-extraction#field-level</url>
     <fullTitle>Znai: Description Extraction, Field Level [Java]</fullTitle>
     <text>
-      <text>:include-java-doc: HelloWorld.java {entry: "numberOfStudents"} Each year we hire students from different universities to increase diversity</text>
+      <text>:include-java-doc: HelloWorld.java {entry: "numberOfStudents"} Each year we hire students from different universities to increase Diversity</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2572,6 +2596,14 @@
     <fullTitle>Znai: Description Extraction, Enum Entries With References [Java]</fullTitle>
     <text>
       <text>Use a snippets/code-references Code References file to link enum entries to reference pages.To do that, define references in a CSV file, using a two column format: enum-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell package my.company; enum TransactionTypes { /** * buy intrument */ BUY, /** * sell instrument */ SELL } :include-java-enum-entries: TransactionTypes.java { title: "Transaction Types", referencesPath: "references/javadoc-references-demo.csv" } BUY buy intrument SELL sell instrument Enums are now linked with a reference section for the documentation.Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use snippets/code-references#global-references Global References.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/java/description-extraction#markdown</url>
+    <fullTitle>Znai: Description Extraction, Markdown [Java]</fullTitle>
+    <text>
+      <text>Pass markdown: true parameter to the plugins to treat JavaDoc content as markdown /** * Top level **conceptual** description of a `CustomDomain` problem. * * markdown *list* * * item two * ``` * code snippet * goes here * ``` */ class HelloWorld { } :include-java-doc: HelloWorld.java {markdown: true} Top level conceptual description of a CustomDomain problem.markdown list item two code snippet goes here</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2632,6 +2664,54 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/plugins/plugin-types#include-plugins</url>
+    <fullTitle>Znai: Plugin Types, Include Plugins [Plugins]</fullTitle>
+    <text>
+      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation: #include-plugins Include Plugins #inlined-code Inlined Code #fenced-block Fenced Block To use include plugin write following on a new line :include-&lt;pluginId>: [text param] [{key1: value1, key2: value2}] markdown :include-json: example.json { title: "JSON example", paths: ["root.person.id"], collapsedPaths: ["root.details"] } markdown :include-java: ../java/HelloWorld.java { entry: "sampleMethod", bodyOnly: true, commentsType: "inline" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/plugin-types#inlined-code</url>
+    <fullTitle>Znai: Plugin Types, Inlined Code [Plugins]</fullTitle>
+    <text>
+      <text>To use inlined code write plugin id inside backticks (`) surrounded with (:) markdown content `:&lt;pluginId>: [text param] [{key1: value1, key2: value2}]` markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/plugin-types#fenced-block</url>
+    <fullTitle>Znai: Plugin Types, Fenced Block [Plugins]</fullTitle>
+    <text>
+      <text>To use fenced block plugin specify its ids after fenced block start markdown ```&lt;pluginId> [text param] [{key1: value1, key2: value2}] content ``` markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/default-parameters#global-defaults</url>
+    <fullTitle>Znai: Default Parameters, Global Defaults [Plugins]</fullTitle>
+    <text>
+      <text>Create plugin-params.json file to specify default parameters per plugin. { "api-parameters": { "title": "no title (set explicitly to override)" } } When the parameters file is present, any time you use snippets/api-parameters API Parameters plugin without title , an implicit title will be present</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/default-parameters#page-local-defaults</url>
+    <fullTitle>Znai: Default Parameters, Page Local Defaults [Plugins]</fullTitle>
+    <text>
+      <text>Use page meta block at the start of a page to set plugin default parameters specific to the page.You may have seen meta block example to set flow/names Page Title: --- title: Custom Name --- Now we're going to use the same block to add plugin defaults local to the page. --- image: {border: true} --- Once we have a block like this, every visuals/images#extension include-image plugin on this page will have border set to true. markdown :include-image: visuals/regular-image.png</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/development#placeholder</url>
+    <fullTitle>Znai: Development, PlaceHolder [Plugins]</fullTitle>
+    <text>
+      <text>Please create https://github.com/testingisdocumenting/znai/issues GitHub Issue if you are interested in plugins creation documentation.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/configuration/basic#favicon</url>
     <fullTitle>Znai: Basic, Favicon [Configuration]</fullTitle>
     <text>
@@ -2643,7 +2723,7 @@
     <url>/znai/example-references/domain#trader</url>
     <fullTitle>Znai: Domain, Trader [Example References]</fullTitle>
     <text>
-      <text>Trader reference placeholder</text>
+      <text>This page is a dummy page to demo code reference capabilities from java/description-extraction#enum-entries-with-references Java Enums and java/description-extraction#method-params-with-references parameter typesTrader reference placeholder</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2659,7 +2739,7 @@
     <url>/znai/example-references/api#flight-api</url>
     <fullTitle>Znai: Api, Flight API [Example References]</fullTitle>
     <text>
-      <text>Flight API summary placeholder</text>
+      <text>This page is a dummy page to demo snippets/code-references code reference capabilitiesFlight API summary placeholder</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2708,6 +2788,14 @@
     <fullTitle>Znai: Local Build, Run Local Version [Znai Development]</fullTitle>
     <text>
       <text>cd znai-dist/target unzip dist-znai.zip export PATH=$(pwd)/dist:$PATH znai --version</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2022#1-62</url>
+    <fullTitle>Znai: 2022 Releases, 1.62 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: Flow Diagrams visuals/flow-diagrams#multiline-labels multi line support when color or shape is set Add: handle property title in snippets/open-API Open API Doc: add clarification to dummy code reference page for example-references/domain java and example-references/api generic Add: plugins/default-parameters#page-local-defaults Plugin Page Local Defaults Add: plugins/default-parameters#global-defaults Plugin Global Defaults Add: JavaDoc java/description-extraction#markdown markdown support Add: CLI Output snippets/CLI#anchor anchor support Add: snippets/CLI CLI Output plugin formal parameters validation Add: Report misprinted inlined code plugin Add: snippets/markdown#inlined-markdown Inlined Markdown plugin Add: layout/tables Table and visuals/cards Card integration Add: Table layout/tables#wide-mode wide mode centered title Add: JSON snippets/json#anchor anchor id support Add: enum type formal parameters for plugins</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2827,7 +2915,7 @@
     <url>/znai/release-notes/2021#1-50</url>
     <fullTitle>Znai: 2021 Releases, 1.50 [Release Notes]</fullTitle>
     <text>
-      <text>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add python/content-extraction include-python to include function's content Rename paramsToHighlight -> highlight for :include-cli-command: plugin Rename scaleRatio -> scale for :include-image: plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/snippets-manipulation#surrounded-by documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/snippets-manipulation#include-regexp snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added python/description-extraction#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</text>
+      <text>Doc: clarify introduction/getting-started Getting Started documentation section visuals/image-annotations Image badge annotation becomes transparent on hover Add python/content-extraction include-python to include function's content Rename paramsToHighlight -> highlight for include-cli-command plugin Rename scaleRatio -> scale for include-image plugin Add click to zoom image that was fit: true Preview footer change detection Add surroundedB to include-file like plugins: snippets/snippets-manipulation#surrounded-by documentaiton Add inlined code snippet with automatic identifier validation by looking into a provided file: snippets/inlined-code-snippets#validated-identifier documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets/snippets-manipulation#include-regexp snippets include/exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added python/description-extraction#doc-string include-python-doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix: extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix: auto jump to a changed page and highlight the right place. It was jumping to the right place, but was highlighting date time as the first change for pages that were last modified not in the same day. Fix: include-meta does not override plugin specific meta anymore Fix: restore scroll position on back button Fix: XML alignment and remove extra empty line</text>
       <score>STANDARD</score>
     </text>
   </entry>

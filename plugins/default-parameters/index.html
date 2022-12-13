@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Api</title>
+<title>Znai: Default Parameters</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,18 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Flight API</h1></header>
-<p>This page is a dummy page to demo snippets/code-references code reference capabilitiesFlight API summary placeholder</p>
+<header><h1>Global Defaults</h1></header>
+<p>Create plugin-params.json file to specify default parameters per plugin. { &quot;api-parameters&quot;: { &quot;title&quot;: &quot;no title (set explicitly to override)&quot; } } When the parameters file is present, any time you use snippets/api-parameters API Parameters plugin without title , an implicit title will be present</p>
 </article>
 
 <article>
-<header><h1>Book</h1></header>
-<p>Lower level explanation of fapi.book</p>
-</article>
-
-<article>
-<header><h1>Query</h1></header>
-<p>Lower level explanation of fapi.query</p>
+<header><h1>Page Local Defaults</h1></header>
+<p>Use page meta block at the start of a page to set plugin default parameters specific to the page.You may have seen meta block example to set flow/names Page Title: --- title: Custom Name --- Now we're going to use the same block to add plugin defaults local to the page. --- image: {border: true} --- Once we have a block like this, every visuals/images#extension include-image plugin on this page will have border set to true. markdown :include-image: visuals/regular-image.png</p>
 </article>
 </section>
 </div>
@@ -131,79 +126,148 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "type" : "Paragraph",
-      "content" : [ {
-        "text" : "This page is a dummy page to demo ",
-        "type" : "SimpleText"
-      }, {
-        "url" : "/znai/snippets/code-references",
-        "isFile" : false,
-        "type" : "Link",
-        "content" : [ {
-          "text" : "code reference",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "text" : " capabilities",
-        "type" : "SimpleText"
-      } ]
-    }, {
-      "id" : "flight-api",
-      "title" : "Flight API",
+      "id" : "global-defaults",
+      "title" : "Global Defaults",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Flight API summary placeholder",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "id" : "book",
-      "title" : "Book",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Lower level explanation of ",
+          "text" : "Create ",
           "type" : "SimpleText"
         }, {
-          "code" : "fapi.book",
+          "code" : "plugin-params.json",
           "type" : "InlinedCode"
+        }, {
+          "text" : " file to specify default parameters per plugin.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "json",
+        "snippet" : "{\n  \"api-parameters\": {\n    \"title\": \"no title (set explicitly to override)\"\n  }\n}",
+        "title" : "plugin-params.json",
+        "anchorId" : "global-defaults-plugin-params-json",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When the parameters file is present, any time you use ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/api-parameters",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "API Parameters",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " plugin without ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", an implicit title will be present",
+          "type" : "SimpleText"
         } ]
       } ]
     }, {
-      "id" : "query",
-      "title" : "Query",
+      "id" : "page-local-defaults",
+      "title" : "Page Local Defaults",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Lower level explanation of ",
+          "text" : "Use page meta block at the start of a page to set plugin default parameters specific to the page.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You may have seen meta block example to set ",
           "type" : "SimpleText"
         }, {
-          "code" : "fapi.query",
-          "type" : "InlinedCode"
+          "url" : "/znai/flow/names",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Page Title",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : ":",
+          "type" : "SimpleText"
         } ]
+      }, {
+        "lang" : "",
+        "snippet" : "---\ntitle: Custom Name\n---\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Now we're going to use the same block to add plugin defaults local to the page.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "md",
+        "snippet" : "---\nimage: {border: true}\n---",
+        "startLine" : "---",
+        "endLine" : "---",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Once we have a block like this, every ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/visuals/images#extension",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "include-image",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " plugin on this page will have ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "border",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " set to true.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-image: visuals/regular-image.png\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "imageSrc" : "/znai/visuals/regular-image.png",
+        "timestamp" : 1670944378015,
+        "shapes" : [ ],
+        "width" : 583.0,
+        "height" : 385.0,
+        "type" : "AnnotatedImage"
       } ]
     } ],
-    "lastModifiedTime" : 1670944377987,
+    "lastModifiedTime" : 1670944377991,
     "tocItem" : {
-      "chapterTitle" : "Example References",
-      "pageTitle" : "Api",
-      "pageMeta" : { },
-      "dirName" : "example-references",
-      "fileName" : "api",
+      "chapterTitle" : "Plugins",
+      "pageTitle" : "Default Parameters",
+      "pageMeta" : {
+        "image" : [ "{border: true}" ]
+      },
+      "dirName" : "plugins",
+      "fileName" : "default-parameters",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Flight API",
-        "id" : "flight-api"
+        "title" : "Global Defaults",
+        "id" : "global-defaults"
       }, {
-        "title" : "Book",
-        "id" : "book"
-      }, {
-        "title" : "Query",
-        "id" : "query"
+        "title" : "Page Local Defaults",
+        "id" : "page-local-defaults"
       } ]
     }
   }

@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Auto Redirect</h1></header>
-<p>Use :include-redirect: chapter/page to automatically redirect from index page to any other page in your docs. Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.If index.md is not present, users will be redirected to the first page in your Table Of Contents.</p>
+<p>Use include-redirect plugin to automatically redirect from index page to any other page in your docs. markdown :include-redirect: chapter/page Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.If index.md is not present, users will be redirected to the first page in your Table Of Contents.</p>
 </article>
 </section>
 </div>
@@ -120,7 +120,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "previewEnabled" : false,
     "support" : {
       "link" : "https://github.com/testingisdocumenting/znai/discussions",
-      "title" : "Questions/Suggestions"
+      "title" : "GitHub"
     }
   },
   "page" : {
@@ -168,14 +168,20 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : ":include-redirect: chapter/page",
+          "code" : "include-redirect",
           "type" : "InlinedCode"
         }, {
-          "text" : " to automatically redirect from index page to any other page in your docs.",
+          "text" : " plugin to automatically redirect from index page to any other page in your docs.",
           "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-redirect: chapter/page\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
           "text" : "Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.",
           "type" : "SimpleText"
         } ]
@@ -193,7 +199,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1666395285104,
+    "lastModifiedTime" : 1670944377987,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Landing",
