@@ -57,6 +57,7 @@ public class CliOutputIncludePlugin implements IncludePlugin {
     public PluginParamsDefinition parameters() {
         return new PluginParamsDefinition()
                 .add(PluginParamsDefinitionCommon.container)
+                .add(PluginParamsDefinitionCommon.snippetWide)
                 .add(PluginParamsDefinitionCommon.snippetReadMore)
                 .add(ManipulatedSnippetContentProvider.paramsDefinition)
                 .add(SnippetHighlightFeature.paramsDefinition)

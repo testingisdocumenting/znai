@@ -1,0 +1,1 @@
+* Add: [Wide Mode](snippets/CLI#wide-mode) for CLI Output

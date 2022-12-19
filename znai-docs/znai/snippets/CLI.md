@@ -144,7 +144,21 @@ Use `anchorId` to override auto generated identifier.
   anchorId: "my-output",
   readMore: true 
 }
-    
+
+# Wide Mode
+
+Use `wide` option to occupy as much horizontal space as available
+
+    :include-cli-output: cli/wide-output.out {
+      title: "Captured output",
+      wide: true
+    }
+
+:include-cli-output: cli/wide-output.out {
+  title: "Captured output",
+  wide: true
+}
+
 # Extract Snippets
 
 Use `startLine`, `endLine` to extract specific content by using marker lines.

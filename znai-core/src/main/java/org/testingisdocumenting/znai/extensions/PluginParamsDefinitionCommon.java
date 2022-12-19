@@ -44,9 +44,12 @@ public class PluginParamsDefinitionCommon {
             .add(noGap)
             .add(AnchorFeature.paramsDefinition);
 
-    public static final PluginParamsDefinition snippetRender = new PluginParamsDefinition()
+    public static final PluginParamsDefinition snippetWide = new PluginParamsDefinition()
             .add("wide", PluginParamType.BOOLEAN,
-                    "force snippet to take all the available horizontal space", "true")
+                    "force snippet to take all the available horizontal space", "true");
+
+    public static final PluginParamsDefinition snippetRender = new PluginParamsDefinition()
+            .add(snippetWide)
             .add("wrap", PluginParamType.BOOLEAN,
                     "force snippet soft wrapping", "true")
             .add(snippetReadMore)
