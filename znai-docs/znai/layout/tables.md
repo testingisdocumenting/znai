@@ -67,26 +67,24 @@ Use `noGap: true` to remove top/bottom margins when there are multiple tables in
 :include-table: table/table.json {
   title: "Monthly Report",
   collapsed: true,
-  noGap: true,
+  noGap: true
 }
 
 :include-table: table/table.json {
   title: "Weekly Report",
-  collapsed: false,
-  noGap: true,
+  collapsed: false
 }
 ```
 
 :include-table: table/table.json {
   title: "Monthly Report",
   collapsed: true,
-  noGap: true,
+  noGap: true
 }
 
 :include-table: table/table.json {
   title: "Weekly Report",
-  collapsed: false,
-  noGap: true,
+  collapsed: false
 }
 
 # Highlight

@@ -51,7 +51,8 @@ export function snippetsDemo(registry) {
             contentParagraph(false),
             compactContentSnippet("snippet one", true),
             compactContentSnippet("snippet two"),
-            compactContentSnippet("snippet three"),
+            compactContentSnippet("snippet three", true),
+            compactContentSnippet("snippet four"),
             contentParagraph(false),
         ]}/>
       ))
@@ -276,12 +277,12 @@ function textBetweenSnippetsMultipleBlocks() {
     ]
 }
 
-function compactContentSnippet(title, removeCompact) {
+function compactContentSnippet(title, noGap) {
     return {
         "type": "Snippet",
         "lang": "java",
         "title": title,
-        "noGap": !removeCompact,
+        "noGap": noGap,
         "snippet": codeWithMethodCalls(),
     }
 }
