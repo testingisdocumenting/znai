@@ -125,8 +125,7 @@ Use `noGap: true` to remove top/bottom margins when there are multiple images in
 :include-image: castle.jpg {
   fit: true,
   title: "castle",
-  collapsed: false,
-  noGap: true
+  collapsed: false
 }
 ```
 
@@ -139,8 +138,7 @@ Use `noGap: true` to remove top/bottom margins when there are multiple images in
 :include-image: castle.jpg {
   fit: true,
   title: "castle",
-  collapsed: false,
-  noGap: true
+  collapsed: false
 }
 
 # External Image

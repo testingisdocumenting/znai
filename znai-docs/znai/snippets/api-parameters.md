@@ -86,7 +86,7 @@ firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
 
-```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true, noGap: true}
+```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true}
 city, String, city name
 zipCode, String, zip code
 ```
@@ -97,7 +97,7 @@ firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
 
-```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true, noGap: true}
+```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true}
 city, String, city name
 zipCode, String, zip code
 ```

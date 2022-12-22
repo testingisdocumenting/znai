@@ -35,11 +35,22 @@ interface Props extends ContainerCommonProps {
 
 /**
  * handles things like removing gaps based on next/prev doc elements
+ *
+ * gaps logic
+ * C1 noGap
+ * C2
+ * C3 noGap
+ * C4
+ *
+ * C1 and C2 will stick together
+ * C3 and C4 will stick together
+ * gap is between C2 and C3
+ *
  * @constructor
  */
 export function Container({ className, style, onClick, noGap, next, prev, children }: Props) {
-  const noBottomMargin = noGap && next && next.noGap;
-  const noTopMargin = noGap && prev && prev.noGap;
+  const noBottomMargin = noGap && next;
+  const noTopMargin = prev && prev.noGap;
   const fullClassName =
     "znai-container znai-mobile-remove-padding " +
     className +

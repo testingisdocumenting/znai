@@ -107,11 +107,11 @@ Use `noGap: true` to remove top/bottom margins when there are multiple snippets 
 
 ```markdown
 :include-file: file-name.js {title: "part one", noGap: true, collapsed: false}
-:include-file: simple.c {title: "part two", noGap: true, collapsed: false}
+:include-file: simple.c {title: "part two", collapsed: false}
 ```
 
 :include-file: file-name.js {title: "part one", noGap: true, collapsed: false}
-:include-file: simple.c {title: "part two", noGap: true, collapsed: false}
+:include-file: simple.c {title: "part two", collapsed: false}
 
 # Highlights
 

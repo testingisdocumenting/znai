@@ -1,0 +1,2 @@
+* Add: noGap option for images, tables, snippets and API parameters is only required for the first entry, second can omit it.
+If it does, third entry will have a gap again above. This helps with groups of snippets/tables/etc.
