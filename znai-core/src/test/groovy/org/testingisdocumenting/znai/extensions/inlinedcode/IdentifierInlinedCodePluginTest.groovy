@@ -25,18 +25,37 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 class IdentifierInlinedCodePluginTest {
     @Test
     void "validates identifier"() {
-        resultingProps("myFunc", "validationCode.ext")
+        resultingProps("myFunc {validationPath: 'validationCode.ext'}")
     }
 
     @Test
     void "identifier should be a full word match"() {
         code {
-            resultingProps("myFu", "validationCode.ext")
+            resultingProps("myFu {validationPath: 'validationCode.ext'}")
         } should throwException("can't find <myFu> identifier in: validationCode.ext")
     }
 
-    private static Map<String, Object> resultingProps(String identifier, String fileName) {
+    @Test
+    void "validation checks across files"() {
+        resultingProps("myFuncTwo {validationPath: ['validationCode.ext', 'validationCode.cpp']}")
+    }
+
+    @Test
+    void "prints all validation files when fails to validate"() {
+        code {
+            resultingProps("myFunc2 {validationPath: ['validationCode.ext', 'validationCode.cpp']}")
+        } should throwException("can't find <myFunc2> identifier in: validationCode.ext, validationCode.cpp")
+    }
+
+    @Test
+    void "validation path should be present"() {
+        code {
+            resultingProps("myFu")
+        } should throwException("validationPath is missing")
+    }
+
+    private static Map<String, Object> resultingProps(String params) {
         return PluginsTestUtils.processInlinedCodeAndGetProps(
-                ":identifier: $identifier {validationPath: '$fileName'}")
+                ":identifier: $params")
     }
 }
