@@ -207,7 +207,7 @@ class FileIncludePluginTest {
 
     @Test
     void "should extract file snippet based on start line and exclude only start"() {
-        def text = resultingSnippet("file.txt", "{startLine: 'this is a', excludeStartEnd: true}")
+        def text = resultingSnippet("file.txt", "{startLine: 'this is a', excludeStart: true}")
 
         text.should == "test file in\n" +
                 "a multiple lines\n" +
@@ -219,7 +219,7 @@ class FileIncludePluginTest {
 
     @Test
     void "should extract file snippet based on end line and exclude only end"() {
-        def text = resultingSnippet("file.txt", "{endLine: '--- stop', excludeStartEnd: true}")
+        def text = resultingSnippet("file.txt", "{endLine: '--- stop', excludeEnd: true}")
 
         text.should == "this is a\n" +
                 "test file in\n" +

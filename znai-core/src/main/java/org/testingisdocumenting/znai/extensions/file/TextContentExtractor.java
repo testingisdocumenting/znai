@@ -35,6 +35,8 @@ class TextContentExtractor {
     static final String START_LINE_KEY = "startLine";
     static final String END_LINE_KEY = "endLine";
     static final String NUMBER_OF_LINES_KEY = "numberOfLines";
+    static final String EXCLUDE_START_KEY = "excludeStart";
+    static final String EXCLUDE_END_KEY = "excludeEnd";
     static final String EXCLUDE_START_END_KEY = "excludeStartEnd";
 
     static final String INCLUDE_REGEXP_KEY = "includeRegexp";
@@ -59,6 +61,10 @@ class TextContentExtractor {
                         "partial match of end line for snippet extraction", "\"class\"")
                 .add(NUMBER_OF_LINES_KEY, PluginParamType.NUMBER,
                         "number of lines to extract given start line", "10")
+                .add(EXCLUDE_START_KEY, PluginParamType.BOOLEAN,
+                        "exclude start line for snippet extraction", "true")
+                .add(EXCLUDE_END_KEY, PluginParamType.BOOLEAN,
+                        "exclude end line for snippet extraction", "true")
                 .add(EXCLUDE_START_END_KEY, PluginParamType.BOOLEAN,
                         "exclude start and end line for snippet extraction", "true")
                 .add(INCLUDE_REGEXP_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
@@ -82,7 +88,9 @@ class TextContentExtractor {
 
         Text replacedAll = replaceAll(croppedAtEnd, opts);
 
-        Text withExcludedStartEnd = excludeStartEnd(replacedAll, opts);
+        Text withExcludedStart = excludeStart(replacedAll, opts);
+        Text withExcludedStartEnd = excludeEnd(withExcludedStart, opts);
+
         Text withIncludeRegexp = includeRegexp(withExcludedStartEnd, opts);
         Text withExcludedRegexp = excludeRegexp(withIncludeRegexp, opts);
 
@@ -172,20 +180,21 @@ class TextContentExtractor {
         return text;
     }
 
-    private static Text excludeStartEnd(Text text, PluginParamsOpts opts) {
-        Boolean exclude = opts.get(EXCLUDE_START_END_KEY, false);
-        if (!exclude) {
+    private static Text excludeStart(Text text, PluginParamsOpts opts) {
+        Boolean excludeStart = opts.get(EXCLUDE_START_KEY, false);
+        Boolean excludeStartEnd = opts.get(EXCLUDE_START_END_KEY, false);
+        if (!excludeStart && !excludeStartEnd) {
             return text;
         }
 
-        boolean hasStartLine = opts.has(START_LINE_KEY);
-        boolean hasEndLine = opts.has(END_LINE_KEY);
-        if ((hasStartLine && hasEndLine) || (!hasStartLine && !hasEndLine)) {
-            return text.cropOneLineFromStartAndEnd();
-        }
+        return text.cropOneLineFromStart();
+    }
 
-        if (hasStartLine) {
-            return text.cropOneLineFromStart();
+    private static Text excludeEnd(Text text, PluginParamsOpts opts) {
+        Boolean excludeEnd = opts.get(EXCLUDE_END_KEY, false);
+        Boolean excludeStartEnd = opts.get(EXCLUDE_START_END_KEY, false);
+        if (!excludeEnd && !excludeStartEnd) {
+            return text;
         }
 
         return text.cropOneLineFromEnd();
