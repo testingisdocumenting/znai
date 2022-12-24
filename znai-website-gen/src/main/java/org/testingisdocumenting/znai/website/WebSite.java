@@ -233,7 +233,7 @@ public class WebSite implements Log {
     }
 
     public HtmlPageAndPageProps regeneratePageOnly(TocItem tocItem) {
-        parseMarkupMetaOnlyAndUpdateTocItemAndPluginParamsFactory(tocItem);
+        parseMarkupMetaOnlyAndUpdateTocItem(tocItem);
         parseMarkupAndUpdateTocItemAndSearch(tocItem);
 
         Page page = pageByTocItem.get(tocItem);
@@ -481,7 +481,7 @@ public class WebSite implements Log {
 
     private void parseMarkupsMeta() {
         reportPhase("parsing markup files meta");
-        toc.getTocItems().forEach(this::parseMarkupMetaOnlyAndUpdateTocItemAndPluginParamsFactory);
+        toc.getTocItems().forEach(this::parseMarkupMetaOnlyAndUpdateTocItem);
     }
 
     private void parseMarkups() {
@@ -489,7 +489,7 @@ public class WebSite implements Log {
         toc.getTocItems().forEach(this::parseMarkupAndUpdateTocItemAndSearch);
     }
 
-    private void parseMarkupMetaOnlyAndUpdateTocItemAndPluginParamsFactory(TocItem tocItem) {
+    private void parseMarkupMetaOnlyAndUpdateTocItem(TocItem tocItem) {
         MarkupPathWithError markupPathWithError = MarkupPathWithError.EMPTY;
 
         try {
@@ -503,9 +503,7 @@ public class WebSite implements Log {
             }
 
             PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPathWithError.path));
-
             updateTocItemWithPageMeta(tocItem, pageMeta);
-            pluginParamsFactory.setPageLocalParams(pageMeta);
         } catch(Exception e) {
             throwParsingErrorMessage(tocItem, markupPathWithError.path, e);
         }
@@ -529,6 +527,9 @@ public class WebSite implements Log {
             ConsoleOutputs.out("parsing ", Color.PURPLE, relativePathToLog);
 
             localResourceResolver.setCurrentFilePath(markupPathWithError.path);
+
+            PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPathWithError.path));
+            pluginParamsFactory.setPageLocalParams(pageMeta);
 
             MarkupParserResult parserResult = markupParser.parse(markupPathWithError.path,
                     fileTextContent(markupPathWithError.path));
