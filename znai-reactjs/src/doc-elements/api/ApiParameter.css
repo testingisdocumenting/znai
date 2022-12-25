@@ -87,6 +87,10 @@
     margin-top: 0;
 }
 
+.znai-api-param-description-cell .snippet-container:last-child {
+    margin-bottom: 0;
+}
+
 .znai-api-param-cell {
     padding-top: 16px;
     padding-bottom: 16px;

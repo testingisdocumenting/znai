@@ -1,0 +1,1 @@
+* Fix: remove extra gap from last code snippet inside [API parameters](snippets/api-parameters)
