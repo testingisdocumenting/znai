@@ -1,0 +1,1 @@
+* Fix: stop badge [image annotation](visuals/image-annotations#badge-textual-description) from pulsing when mouse moved out

@@ -108,6 +108,11 @@ export function AnnotatedImageWithOrderedList({
     // we count badge annotation and once it matches a specific bullet list idx,
     // then highlight a corresponding annotation idx
 
+    if (bulletListIdx === -1) {
+      setAnnotationToHighlightIdx(-1);
+      return;
+    }
+
     // @ts-ignore
     const annotationShapes = annotatedImageContent.shapes || [];
     let annotBadgeIdx = -1;
@@ -118,6 +123,7 @@ export function AnnotatedImageWithOrderedList({
 
       if (annotBadgeIdx === bulletListIdx) {
         setAnnotationToHighlightIdx(annotIdx);
+        break;
       }
     }
   }
