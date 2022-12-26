@@ -41,6 +41,7 @@ const code = {"type": "Snippet", "snippet": "println 'hello world'"}
 
 const multipleParagraph = [paragraph, paragraph, paragraph]
 const codeBeforeParagraph = [code, paragraph, code, paragraph, paragraph]
+const codeLast = [paragraph, code]
 
 const personLongTypeParameters = [
     {name: 'firstName', type: 'string or gstring or some union and some other long description', description: multipleParagraph},
@@ -83,6 +84,10 @@ const singleNestedParameters = [
 
 const withCodeSnippetFirst = [
     {name: 'paramOne', type: 'string', description: codeBeforeParagraph}
+]
+
+const withCodeSnippetLast = [
+  {name: 'paramOne', type: 'string', description: codeLast}
 ]
 
 const jsonExample = `
@@ -187,6 +192,11 @@ export function apiParametersDemo(registry) {
         <ParagraphText />
         <ApiParameters elementsLibrary={elementsLibrary} parameters={withCodeSnippetFirst} />
         <ParagraphText />
+      </div>
+    ))
+    .add("with code last in description", () => (
+      <div className="content-block">
+        <ApiParameters elementsLibrary={elementsLibrary} parameters={withCodeSnippetLast} />
       </div>
     ))
     .add("inside tabs", () => (
