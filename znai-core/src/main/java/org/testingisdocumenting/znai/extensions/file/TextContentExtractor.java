@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,9 @@ class TextContentExtractor {
     static final String EXCLUDE_START_KEY = "excludeStart";
     static final String EXCLUDE_END_KEY = "excludeEnd";
     static final String EXCLUDE_START_END_KEY = "excludeStartEnd";
+
+    static final String INCLUDE_KEY = "include";
+    static final String EXCLUDE_KEY = "exclude";
 
     static final String INCLUDE_REGEXP_KEY = "includeRegexp";
     static final String EXCLUDE_REGEXP_KEY = "excludeRegexp";
@@ -67,10 +71,14 @@ class TextContentExtractor {
                         "exclude end line for snippet extraction", "true")
                 .add(EXCLUDE_START_END_KEY, PluginParamType.BOOLEAN,
                         "exclude start and end line for snippet extraction", "true")
+                .add(INCLUDE_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
+                        "include only lines containing provided text(s)", "\"import\" or [\"class\", \"import\"")
+                .add(EXCLUDE_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
+                        "exclude lines containing provided text(s)", "\"// marker\" or [\"// marker1\", \"// marker2\"")
                 .add(INCLUDE_REGEXP_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
-                        "include only lines matching provided regexp(s)", "\"import\" or [\"class R*Base\", \"import B\"")
+                        "include only lines matching provided regexp(s)", "\"import org.util.*key\" or [\"class R*Base\", \"import B*One\"")
                 .add(EXCLUDE_REGEXP_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
-                        "exclude lines matching provided regexp(s)", "\"// marker\" or [\"// marker1\", \"// marker2\"")
+                        "exclude lines matching provided regexp(s)", "\"// marker-.*-fin\" or [\"// marker-.*-fin\", \"// another-.*-end\"")
                 .add(REPLACE_KEY, PluginParamType.LIST_OF_ANY,
                         "replaces values in the resulting snippet",
                         "[\"old-value\", \"new-value\"] or [[\"old-value1\", \"new-value1\"], [\"old-value2\", \"new-value2\"]]");
@@ -91,7 +99,10 @@ class TextContentExtractor {
         Text withExcludedStart = excludeStart(replacedAll, opts);
         Text withExcludedStartEnd = excludeEnd(withExcludedStart, opts);
 
-        Text withIncludeRegexp = includeRegexp(withExcludedStartEnd, opts);
+        Text withIncludeContains = includeContains(withExcludedStartEnd, opts);
+        Text withExcludeContains = excludeContains(withIncludeContains, opts);
+
+        Text withIncludeRegexp = includeRegexp(withExcludeContains, opts);
         Text withExcludedRegexp = excludeRegexp(withIncludeRegexp, opts);
 
         return withExcludedRegexp.stripIndentation().toString();
@@ -200,6 +211,24 @@ class TextContentExtractor {
         return text.cropOneLineFromEnd();
     }
 
+    private static Text includeContains(Text text, PluginParamsOpts opts) {
+        List<String> texts = opts.getList(INCLUDE_KEY);
+        if (texts.isEmpty()) {
+            return text;
+        }
+
+        return text.includeContains(texts);
+    }
+
+    private static Text excludeContains(Text text, PluginParamsOpts opts) {
+        List<String> texts = opts.getList(EXCLUDE_KEY);
+        if (texts.isEmpty()) {
+            return text;
+        }
+
+        return text.excludeContains(texts);
+    }
+
     private static Text includeRegexp(Text text, PluginParamsOpts opts) {
         List<String> includeRegexps = opts.getList(INCLUDE_REGEXP_KEY);
         if (includeRegexps.isEmpty()) {
@@ -291,29 +320,45 @@ class TextContentExtractor {
             return newText(lines.subList(0, lines.size() - 1));
         }
 
-        Text includeRegexp(List<Pattern> regexps) {
+        <E> Text include(List<E> inputs, String matchingLabel, BiFunction<String, E, Boolean> predicate) {
             List<String> newLines = lines.stream()
-                    .filter(line -> regexps.stream().anyMatch(r -> r.matcher(line).find()))
+                    .filter(line -> inputs.stream().anyMatch(input -> predicate.apply(line, input)))
                     .collect(toList());
 
             if (newLines.isEmpty()) {
-                throw new IllegalArgumentException("there are no lines matching includeRegexp " +
-                        renderListOfRegexp(regexps) + renderInContent());
+                throw new IllegalArgumentException("there are no lines " + matchingLabel + " " +
+                        renderListOfStrings(inputs) + renderInContent());
             }
             return newText(newLines);
         }
 
-        Text excludeRegexp(List<Pattern> regexps) {
+        Text includeContains(List<String> texts) {
+            return include(texts, "containing", String::contains);
+        }
+
+        Text includeRegexp(List<Pattern> regexps) {
+            return include(regexps, "matching regexp", (line, regexp) -> regexp.matcher(line).find());
+        }
+
+        <E> Text exclude(List<E> inputs, String matchingLabel, BiFunction<String, E, Boolean> predicate) {
             List<String> newLines = lines.stream()
-                    .filter(line -> regexps.stream().noneMatch(r -> r.matcher(line).find()))
+                    .filter(line -> inputs.stream().noneMatch(input -> predicate.apply(line, input)))
                     .collect(toList());
 
             if (newLines.size() == lines.size()) {
-                throw new IllegalArgumentException("there are no lines matching excludeRegexp " +
-                        renderListOfRegexp(regexps) + renderInContent());
+                throw new IllegalArgumentException("there are no lines " + matchingLabel + " " +
+                        renderListOfStrings(inputs) + renderInContent());
             }
 
             return newText(newLines);
+        }
+
+        Text excludeContains(List<String> texts) {
+            return exclude(texts, "containing", String::contains);
+        }
+
+        Text excludeRegexp(List<Pattern> regexps) {
+            return exclude(regexps, "matching regexp", (line, regexp) -> regexp.matcher(line).find());
         }
 
         private Text newText(List<String> lines) {
@@ -343,8 +388,8 @@ class TextContentExtractor {
             return " in <" + contentId + ">:\n" + this;
         }
 
-        private String renderListOfRegexp(List<Pattern> regexps) {
-            return regexps.stream().map(p -> "<" + p.toString() + ">")
+        private String renderListOfStrings(List<?> list) {
+            return list.stream().map(p -> "<" + p.toString() + ">")
                     .collect(Collectors.joining(", "));
         }
     }

@@ -113,21 +113,41 @@ By default `:identifier: startLine` and `:identifier: endLine` are included in t
 
 To exclude start or end line only use `:identifier: excludeStart` and `:identifier: excludeEnd`
 
+# Include Contains
+
+Use `:identifier: include` to include only lines containing specified text(s).
+
+    :include-file: python-examples.py { include: "import " }
+    or
+    :include-file: python-examples.py { include: ["import "] }
+
+:include-file: python-examples.py { include: ["import "], title: "include lines containing specified lines" }
+
+# Exclude Contains
+
+Use `:identifier: exclude` to exclude lines containing specified text(s).
+
+    :include-file: python-examples.py { exclude: "# example" }
+    or
+    :include-file: python-examples.py { exclude: ["# example"] }
+
+:include-file: python-examples.py { exclude: ["# example"], title: "exclude by regexp result" }
+
+
 # Include Regexp
 
 Use `:identifier: includeRegexp` to include only lines matching regexp(s).
 
-    :include-file: python-examples.py {includeRegexp: "import "}
-    :include-file: python-examples.py {includeRegexp: ["import "]}
+    :include-file: python-examples.py { includeRegexp: "market.*_trade" }
+    or
+    :include-file: python-examples.py { includeRegexp: ["market.*_trade"] }
 
-:include-file: python-examples.py { includeRegexp: ["import "], title: "include by regexp result" }
+:include-file: python-examples.py { includeRegexp: ["market.*_trade"], title: "include by regexp result" }
 
 # Exclude Regexp
 
 Use `:identifier: excludeRegexp` to exclude lines matching regexp(s).
 
-    :include-file: python-examples.py {excludeRegexp: "# example"}
-    :include-file: python-examples.py {excludeRegexp: ["# example"]}
+    :include-file: python-examples.py { excludeRegexp: ["if .* ==", "\\s+main", "# example", "^\\s*$"] }
 
-:include-file: python-examples.py { excludeRegexp: ["# example"], title: "exclude by regexp result" }
-
+:include-file: python-examples.py { excludeRegexp: ["if .* ==", "\\s+main", "# example", "^\\s*$"], title: "exclude by regexp result" }
