@@ -1,0 +1,1 @@
+* Add: [console output](snippets/CLI#output) and [code snippets](snippets/external-code-snippets) trim empty lines from start/end when no extraction specific params is set

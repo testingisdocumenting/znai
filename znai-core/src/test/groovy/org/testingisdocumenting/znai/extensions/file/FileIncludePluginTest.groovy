@@ -25,6 +25,20 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class FileIncludePluginTest {
     @Test
+    void "should trim empty lines from start and end"() {
+        def text = resultingSnippet("file-with-empty-lines.txt", "")
+        text.should == "this is a\n" +
+                "\n" +
+                "a multiple lines\n" +
+                "\n" +
+                "line number\n" +
+                "--- stop\n" +
+                "and five\n" +
+                "\n" +
+                "and then six"
+    }
+
+    @Test
     void "should extract file snippet based on start line and number of lines"() {
         def text = resultingSnippet("file.txt", "{startLine: 'multiple lines', numberOfLines: 2}")
 
