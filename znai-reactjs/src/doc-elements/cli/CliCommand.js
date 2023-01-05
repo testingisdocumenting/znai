@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,10 +43,16 @@ class CliCommand extends Component {
     }
 
     render() {
-        const {command} = this.props
+        const {command, next, prev} = this.props
+        const isNextCliCommand = next && next.type === "CliCommand"
+        const isPrevCliCommand = prev && prev.type === "CliCommand"
+
+        const className = "cli-command content-block" +
+          (isNextCliCommand ? " next-present" : "") +
+          (isPrevCliCommand ? " prev-present" : "")
 
         return (
-            <div key={command} className="cli-command content-block">
+            <div key={command} className={className}>
                 <pre>
                     <span className="prompt">$ </span>
                     <span key={command}>

@@ -20,6 +20,7 @@ import React from "react";
 import { CliCommand } from "./CliCommand";
 import { Paragraph } from "../paragraph/Paragraph";
 import { elementsLibrary } from "../DefaultElementsLibrary";
+import { contentParagraph } from "../demo-utils/contentGenerators";
 
 const shortCommand = "git meta push123";
 
@@ -30,14 +31,12 @@ export function cliCommandDemo(registry) {
   registry
     .add("multiple short commands surrounded with text", () => (
       <>
-        <ParagraphText />
-        <CliCommand command={shortCommand}
-                    paramsToHighlight={["push"]}
-                    isPresentation={false} />
-        <CliCommand command={shortCommand}
-                    paramsToHighlight={["push"]}
-                    isPresentation={false} />
-        <ParagraphText />
+        <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[
+          contentParagraph(false),
+          cliContent({command: shortCommand, paramsToHighlight: ["push"], isPresentation: false}),
+          cliContent({command: shortCommand, paramsToHighlight: ["push"], isPresentation: false}),
+          contentParagraph(false),
+        ]}/>
       </>
     ))
     .add("multiple long commands surrounded with text", () => (
@@ -72,6 +71,13 @@ function ParagraphText() {
   return (
     <Paragraph content={simpleText()} elementsLibrary={elementsLibrary} />
   );
+}
+
+function cliContent(props) {
+  return {
+    type: "CliCommand",
+    ...props
+  }
 }
 
 function simpleText() {
