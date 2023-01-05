@@ -85,11 +85,8 @@ class TextContentExtractor {
     }
 
     public static String extractText(String contentId, String content, PluginParamsOpts opts) {
-        if (opts.isEmpty()) {
-            return content;
-        }
-
         Text text = new Text(contentId, content);
+
         Text surroundedBy = cropSurroundedBy(contentId, text, opts);
         Text croppedAtStart = cropStart(surroundedBy, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);

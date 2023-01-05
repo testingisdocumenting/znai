@@ -31,6 +31,12 @@ class CliOutputIncludePluginTest {
     }
 
     @Test
+    void "should remove empty lines from start and end"() {
+        def elements = process('captured-output-empty-lines.out')
+        elements.should == ['lines': ['line one', '', 'line two', '', 'line three'], type: 'CliOutput']
+    }
+
+    @Test
     void "should error when no text to highlight found"() {
         code {
             process('captured-output.out {highlight: "line x"}')
