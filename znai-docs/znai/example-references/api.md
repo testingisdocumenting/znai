@@ -11,3 +11,7 @@ Lower level explanation of `fapi.book`
 # Query
 
 Lower level explanation of `fapi.query` 
+
+# Useful Action
+ 
+stub for useful action description

@@ -181,7 +181,7 @@ public class ZnaiCliApp {
                 withAdditionalLookupPaths(config.getLookupPaths()).
                 withFooterPath(config.getSourceRoot().resolve("footer.md")).
                 withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
-                withGlobalReferencesPath(config.getSourceRoot().resolve("references.csv")).
+                withGlobalReferencesPathNoExt(config.getSourceRoot().resolve("references")).
                 withGlobalPluginParamsPath(config.getSourceRoot().resolve(PLUGIN_PARAMS_FILE_NAME)).
                 withWebResources(favIconResource).
                 withPageModifiedTimeStrategy(pageModifiedTimeStrategy()).
