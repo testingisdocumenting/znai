@@ -16,8 +16,16 @@
  */
 
 .cli-command {
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.cli-command.next-present {
+    margin-bottom: 2px;
+}
+
+.cli-command.prev-present {
+    margin-top: 2px;
 }
 
 .cli-command .prompt {
