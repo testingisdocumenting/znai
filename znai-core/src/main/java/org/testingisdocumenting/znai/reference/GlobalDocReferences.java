@@ -27,22 +27,37 @@ import java.nio.file.Path;
 
 public class GlobalDocReferences {
     private final ComponentsRegistry componentsRegistry;
-    private final Path globalReferencesPath;
+
+    private final Path globalReferencesPathNoExt;
+    private final Path globalReferencesPathCsv;
+    private final Path globalReferencesPathJson;
+
     private DocReferences docReferences;
 
-    public GlobalDocReferences(ComponentsRegistry componentsRegistry, Path globalReferencesPath) {
+    public GlobalDocReferences(ComponentsRegistry componentsRegistry, Path globalReferencesPathNoExt) {
         this.componentsRegistry = componentsRegistry;
-        this.globalReferencesPath = globalReferencesPath;
+        this.globalReferencesPathNoExt = globalReferencesPathNoExt;
+        this.globalReferencesPathCsv = globalReferencesPathNoExt.resolveSibling(globalReferencesPathNoExt.getFileName() + ".csv");
+        this.globalReferencesPathJson = globalReferencesPathNoExt.resolveSibling(globalReferencesPathNoExt.getFileName() + ".json");
     }
 
     public boolean isPresent() {
-        return Files.exists(globalReferencesPath);
+        return isCsvPresent() || isJsonPresent();
+    }
+
+    public boolean isCsvPresent() {
+        return Files.exists(globalReferencesPathCsv);
+    }
+
+    public boolean isJsonPresent() {
+        return Files.exists(globalReferencesPathJson);
     }
 
     public void load() {
-        docReferences = isPresent() ?
-                DocReferencesParser.parse(FileUtils.fileTextContent(globalReferencesPath)):
-                new DocReferences();
+        String content = readReferenceContent();
+        docReferences = content.isEmpty() ?
+                new DocReferences() :
+                DocReferencesParser.parse(content);
 
         validateLinks();
     }
@@ -51,14 +66,26 @@ public class GlobalDocReferences {
         DocStructure docStructure = componentsRegistry.docStructure();
 
         docReferences.pageUrlsStream().forEach(pageUrl ->
-                docStructure.validateUrl(globalReferencesPath, "", new DocUrl(pageUrl)));
+                docStructure.validateUrl(globalReferencesPathNoExt, "", new DocUrl(pageUrl)));
     }
 
-    public Path getGlobalReferencesPath() {
-        return globalReferencesPath;
+    public Path getGlobalReferencesPathNoExt() {
+        return globalReferencesPathNoExt;
     }
 
     public DocReferences getDocReferences() {
         return docReferences;
+    }
+
+    private String readReferenceContent() {
+        if (isCsvPresent()) {
+            return FileUtils.fileTextContent(globalReferencesPathCsv);
+        }
+
+        if (isJsonPresent()) {
+            return FileUtils.fileTextContent(globalReferencesPathJson);
+        }
+
+        return "";
     }
 }

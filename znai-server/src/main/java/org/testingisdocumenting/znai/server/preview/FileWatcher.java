@@ -122,7 +122,7 @@ public class FileWatcher implements AuxiliaryFileListener {
             fileChangeHandler.onFooterChange(path);
         } else if (fileName.equals(DocMeta.META_FILE_NAME)) {
             fileChangeHandler.onDocMetaChange(path);
-        } else if (path.equals(siteCfg.getGlobalReferencesPath())) {
+        } else if (path.equals(siteCfg.getGlobalReferencesPathNoExt())) {
             fileChangeHandler.onGlobalDocReferencesChange(path);
         } else {
             fileChangeHandler.onChange(path);

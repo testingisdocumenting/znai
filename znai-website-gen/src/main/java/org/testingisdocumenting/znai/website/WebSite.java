@@ -125,7 +125,7 @@ public class WebSite implements Log {
         localSearchEntries = new LocalSearchEntries();
         auxiliaryFilesLastUpdateTime = new HashMap<>();
 
-        globalDocReferences = new GlobalDocReferences(componentsRegistry, cfg.globalReferencesPath);
+        globalDocReferences = new GlobalDocReferences(componentsRegistry, cfg.globalReferencesPathNoExt);
 
         docMeta.setId(siteConfig.id);
         if (siteConfig.isPreviewEnabled) {
@@ -284,7 +284,7 @@ public class WebSite implements Log {
     }
 
     public DocReferences updateDocReferences() {
-        docStructure.removeLinksForPath(globalDocReferences.getGlobalReferencesPath());
+        docStructure.removeLinksForPath(globalDocReferences.getGlobalReferencesPathNoExt());
 
         globalDocReferences.load();
         deployGlobalDocReferences();
@@ -882,7 +882,7 @@ public class WebSite implements Log {
         private Path docRootPath;
         private Path footerPath;
         private Path extensionsDefPath;
-        private Path globalReferencesPath;
+        private Path globalReferencesPathNoExt;
         private Path pluginParamsPath;
         private final List<WebResource> webResources;
         private String id;
@@ -929,10 +929,8 @@ public class WebSite implements Log {
             return this;
         }
 
-        // TODO add support for JSON
-        // https://github.org/testingisdocumenting/znai/issues/339
-        public Configuration withGlobalReferencesPath(Path path) {
-            globalReferencesPath = path.toAbsolutePath();
+        public Configuration withGlobalReferencesPathNoExt(Path path) {
+            globalReferencesPathNoExt = path.toAbsolutePath();
             return this;
         }
 
@@ -1006,8 +1004,8 @@ public class WebSite implements Log {
             return this;
         }
 
-        public Path getGlobalReferencesPath() {
-            return globalReferencesPath;
+        public Path getGlobalReferencesPathNoExt() {
+            return globalReferencesPathNoExt;
         }
 
         public Path getDocRootPath() {

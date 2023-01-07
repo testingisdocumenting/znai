@@ -1,4 +1,5 @@
 /*
+ * Copyright 2022 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +26,18 @@ class DocReferencesParserTest {
 MyClass, /reference/my-class
 YourClass, /reference/your-class
 """)
+
+        references.toMap().should == [
+                MyClass: [pageUrl: '/reference/my-class'],
+                YourClass: [pageUrl: '/reference/your-class']
+        ]
+    }
+
+    @Test
+    void "parse json"() {
+        def references = DocReferencesParser.parse("""
+{ "MyClass": "/reference/my-class",
+"YourClass": "/reference/your-class"} """)
 
         references.toMap().should == [
                 MyClass: [pageUrl: '/reference/my-class'],

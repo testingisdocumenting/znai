@@ -19,12 +19,30 @@ package org.testingisdocumenting.znai.reference;
 
 import org.testingisdocumenting.znai.parser.table.CsvTableParser;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
+import org.testingisdocumenting.znai.utils.JsonUtils;
+
+import java.util.Map;
 
 public class DocReferencesParser {
     private DocReferencesParser() {
     }
 
     public static DocReferences parse(String content) {
+        content = content.trim();
+        return content.startsWith("{") ?
+                parseJson(content) :
+                parseCsv(content);
+    }
+
+    public static DocReferences parseJson(String content) {
+        Map<String, ?> jsonReferences = JsonUtils.deserializeAsMap(content);
+        DocReferences result = new DocReferences();
+        jsonReferences.forEach((k, v) -> result.add(k, v.toString()));
+
+        return result;
+    }
+
+    public static DocReferences parseCsv(String content) {
         MarkupTableData tableData = CsvTableParser.parseWithHeader(content, "reference", "url");
 
         DocReferences result = new DocReferences();
