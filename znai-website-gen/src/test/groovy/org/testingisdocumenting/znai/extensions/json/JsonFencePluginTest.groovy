@@ -17,11 +17,11 @@
 package org.testingisdocumenting.znai.extensions.json
 
 import org.junit.Test
-import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
-import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class JsonFencePluginTest {
@@ -53,6 +53,32 @@ class JsonFencePluginTest {
                                    key22: 'value22'],
                          paths  : [],
                          include: '$.key2']
+    }
+
+    @Test
+    void "should enclose in object with one element path"() {
+        def props = process([encloseInObject: "book"], json)
+        props.data.should == [book: [key1: "value1", key2: [key21: "value21", key22: "value22"]]]
+    }
+
+    @Test
+    void "should enclose in object with multiple elements path"() {
+        def props = process([encloseInObject: "book.relocation"], json)
+        props.data.should == [book: [relocation: [key1: "value1", key2: [key21: "value21", key22: "value22"]]]]
+    }
+
+    @Test
+    void "enclose in object path should not be empty"() {
+        code {
+            process([encloseInObject: "  "], json)
+        } should throwException("encloseInObject can't be empty")
+    }
+
+    @Test
+    void "should enclose after include"() {
+        def props = process([include: '$.key2', encloseInObject: "filtered"], json)
+        props.data.should == [filtered: [key21: 'value21',
+                                         key22: 'value22']]
     }
 
     @Test

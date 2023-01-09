@@ -30,9 +30,7 @@ import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public abstract class JsonBasePlugin implements Plugin {
@@ -40,6 +38,7 @@ public abstract class JsonBasePlugin implements Plugin {
     private final static String PATHS_KEY = "paths";
     private final static String PATHS_FILE_KEY = "pathsFile";
     private final static String COLLAPSED_PATHS_KEY = "collapsedPaths";
+    private final static String ENCLOSE_IN_OBJECT_KEY = "encloseInObject";
 
     private Path pathsFilePath;
 
@@ -64,6 +63,9 @@ public abstract class JsonBasePlugin implements Plugin {
                 .add(COLLAPSED_PATHS_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
                         "path(s) to nodes to collapse initially",
                         "\"root.store.book\" or [\"root.store.book\", \"root.store.discount\"]")
+                .add(ENCLOSE_IN_OBJECT_KEY, PluginParamType.STRING,
+                        "wrap resulting json into an extra object with provided parent(s)",
+                        "\"person.address\"")
                 .add(SnippetHighlightFeature.paramsDefinition)
                 .add(PluginParamsDefinitionCommon.snippetReadMore)
                 .add(CodeReferencesFeature.paramsDefinition)
@@ -79,8 +81,11 @@ public abstract class JsonBasePlugin implements Plugin {
                                       PluginParams pluginParams,
                                       String jsonText) {
         resourcesResolver = componentsRegistry.resourceResolver();
-        String jsonPath = pluginParams.getOpts().get(INCLUDE_KEY, "$");
+        PluginParamsOpts opts = pluginParams.getOpts();
+
+        String jsonPath = opts.get(INCLUDE_KEY, "$");
         Object parsed = JsonPath.read(jsonText, jsonPath);
+        parsed = encloseInObjectIfRequired(opts, parsed);
 
         features = new PluginFeatureList(new CodeReferencesFeature(componentsRegistry, markupPath, pluginParams));
         additionalPluginFeatures().forEach(features::add);
@@ -88,18 +93,48 @@ public abstract class JsonBasePlugin implements Plugin {
 
         Set<String> existingPaths = buildPaths(parsed);
 
-        List<String> paths = extractPaths(pluginParams.getOpts());
+        List<String> paths = extractPaths(opts);
         EntryPresenceValidation.validateItemsPresence(PATHS_KEY, "JSON", existingPaths, paths);
 
-        List<String> collapsedPaths = pluginParams.getOpts().getList(COLLAPSED_PATHS_KEY);
+        List<String> collapsedPaths = opts.getList(COLLAPSED_PATHS_KEY);
         EntryPresenceValidation.validateItemsPresence(COLLAPSED_PATHS_KEY, "JSON", existingPaths, collapsedPaths);
 
-        Map<String, Object> props = pluginParams.getOpts().toMap();
+        Map<String, Object> props = opts.toMap();
         props.put("data", parsed);
         props.put("paths", paths);
         features.updateProps(props);
 
         return PluginResult.docElement("Json", props);
+    }
+
+    private Object encloseInObjectIfRequired(PluginParamsOpts opts, Object original) {
+        String enclosePath = opts.getString(ENCLOSE_IN_OBJECT_KEY);
+        if (enclosePath == null) {
+            return original;
+        }
+
+        enclosePath = enclosePath.trim();
+
+        if (enclosePath.isEmpty()) {
+            throw new IllegalArgumentException(ENCLOSE_IN_OBJECT_KEY + " can't be empty");
+        }
+
+        Map<String, Object> result = new HashMap<>();
+
+        String[] parts = enclosePath.split("\\.");
+        Map<String, Object> cursor = result;
+        for (int idx = 0; idx < parts.length - 1; idx++) {
+            String part = parts[idx];
+
+            Map<String, Object> entry = new HashMap<>();
+            cursor.put(part, entry);
+
+            cursor = entry;
+        }
+
+        cursor.put(parts[parts.length - 1], original);
+
+        return result;
     }
 
     abstract protected void updateParams(PluginParamsDefinition paramsDefinition);

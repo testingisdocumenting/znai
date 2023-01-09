@@ -1,3 +1,7 @@
+---
+identifier: {validationPath: "org/testingisdocumenting/znai/extensions/json/JsonBasePlugin.java"}
+---
+
 # Auto Formatting
 
 Use `json` fence block to render auto formatted json and use extra capabilities described below
@@ -20,7 +24,7 @@ Use `json` include plugin to read json from an external file
 
 # Highlight Values By Path
 
-Use the `paths` plugin parameter to bring attention to a certain place in a `JSON` file.
+Use the `:identifier: paths` plugin parameter to bring attention to a certain place in a `JSON` file.
 
     ```json {paths: "root[1].key2"}
     [{"key1": "value1"}, {"key2": "value2"}]
@@ -30,17 +34,17 @@ Use the `paths` plugin parameter to bring attention to a certain place in a `JSO
 [{"key1": "value1"}, {"key2": "value2"}]
 ```
 
-Pass multiple values to `paths` to highlight more than one leaf value 
+Pass multiple values to `:identifier: paths` to highlight more than one leaf value 
 
     :include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]}
 
-Comma-separated paths specified inside `paths` will be highlighted.
+Comma-separated paths specified inside `:identifier: paths` will be highlighted.
 
 :include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]}
 
 # Highlight By Path From File
 
-Use `pathsFile` to specify a file to read paths from.
+Use `:identifier: pathsFile` to specify a file to read paths from.
 
 :include-json: book-store-paths.json {autoTitle: true} 
 
@@ -49,11 +53,19 @@ Use `pathsFile` to specify a file to read paths from.
 # Json Subparts
 
 To include only a portion of your document 
-pass [Json Path](https://github.com/json-path/JsonPath) as `include` property:
+pass [Json Path](https://github.com/json-path/JsonPath) as `:identifier: include` property:
 
     :include-json: book-store.json {include: "$..book[0,1]"}
 
 :include-json: book-store.json {include: "$..book[0,1]"}
+
+# Enclose In Object
+
+Use `:identifier: encloseInObject` to wrap any JSON and include result into parent object(s)
+
+    :include-json: book-store.json {encloseInObject: "books.rare", include: "$..book[0,1]"}
+
+:include-json: book-store.json {encloseInObject: "books.rare", include: "$..book[0,1]"}
 
 # Title
 

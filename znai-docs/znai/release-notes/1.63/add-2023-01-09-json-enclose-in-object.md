@@ -1,0 +1,1 @@
+* Add: JSON [Enclose In Object](snippets/json#enclose-in-object)
