@@ -1,1 +1,1 @@
-* Add: JSON [Enclose In Object](snippets/json/#enclose-in-object)
+* Add: JSON [Enclose In Object](snippets/json#enclose-in-object)
