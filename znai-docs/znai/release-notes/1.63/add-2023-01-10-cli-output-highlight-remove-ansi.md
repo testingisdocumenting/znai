@@ -1,0 +1,1 @@
+* Add: [CLI Output Highlight](snippets/CLI#output-highlight) now matches sub-lines ignoring colors ANSI sequence

@@ -49,7 +49,9 @@ public class SnippetRevealLineStopFeature implements PluginFeature {
         }
 
         SnippetContainerEntriesConverter snippetValidator = new SnippetContainerEntriesConverter(
-                contentProvider, REVEAL_LINE_STOP_KEY);
+                contentProvider.snippetId(),
+                SnippetCleaner.removeNonAnsiCharacters(contentProvider.snippetContent()),
+                REVEAL_LINE_STOP_KEY);
         props.put(REVEAL_LINE_STOP_KEY, snippetValidator.convertAndValidate(revealLineStop));
     }
 

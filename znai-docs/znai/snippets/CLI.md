@@ -1,3 +1,7 @@
+---
+identifier: {validationPath: "org/testingisdocumenting/znai/extensions/file/SnippetHighlightFeature.java"}
+---
+
 # Parameters Highlight
 
 To bring attention to important parameters in your CLI examples use the `cli` fence plugin.
@@ -89,27 +93,7 @@ You can read a command from file.
 
 This option is useful for displaying a captured command during tests. 
 
-# Output
-
-To display console output and bring attention to certain lines use:
-
-    :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]}
-
-:include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]}
-
-You can highlight by a partial line text match:
-
-    :include-cli-output: cli/file-path-of-captured.out {highlight: "remote"}
-
-Or you can highlight by lines stored in a separate file:
-
-    :include-cli-output: cli/file-path-of-captured.out {highlightPath: "cli/file-path-of-asserted-lines.txt"}
-
-:include-file: cli/file-path-of-asserted-lines.txt {title: "cli/file-path-of-asserted-lines.txt"}
-
-:include-cli-output: cli/file-path-of-captured.out {highlightPath: "cli/file-path-of-asserted-lines.txt"}
-
-# ANSI Colors
+# ANSI Colors Output
 
 CLI renders ANSI colors automatically.
 
@@ -123,9 +107,9 @@ CLI renders ANSI colors automatically.
 
 Use `title` to specify output of the output
 
-    :include-cli-output: cli/file-path-of-captured.out {title: "Captured output"}
+    :include-cli-output: cli/ansi.out {title: "captured output"}
 
-:include-cli-output: cli/file-path-of-captured.out {title: "Captured output"}
+:include-cli-output: cli/ansi.out {title: "captured output"}
 
 # Anchor
 
@@ -133,17 +117,38 @@ When you specify a title, hover mouse over it to see a clickable anchor.
 
 Use `anchorId` to override auto generated identifier.
 
-    :include-cli-output: cli/file-path-of-captured.out {
-      title: "Captured output",
-      anchorId: "my-output",
-      readMore: true
+    :include-cli-output: cli/ansi.out {
+      title: "captured output",
+      anchorId: "my-output"
     }
 
-:include-cli-output: cli/file-path-of-captured.out { 
-  title: "Captured output",
-  anchorId: "my-output",
-  readMore: true 
+:include-cli-output: cli/ansi.out {
+  title: "captured output",
+  anchorId: "my-output"
 }
+
+# Output Highlight
+
+Use `:identifier: highlight` to highlight lines
+
+    :include-cli-output: cli/ansi.out {
+      title: "captured output",
+      "highlight": "GET https"
+    }
+
+:include-cli-output: cli/ansi.out {
+  title: "captured output",
+  "highlight": "GET https"
+}
+
+Use `:identifier: highlightPath` to highlight lines based on the content of a file
+
+    :include-cli-output: cli/ansi.out {highlightPath: "cli/file-path-of-asserted-lines.txt"}
+
+:include-file: cli/file-path-of-asserted-lines.txt {autoTitle: true}
+
+:include-cli-output: cli/ansi.out {highlightPath: "cli/file-path-of-asserted-lines.txt"}
+
 
 # Wide Mode
 
@@ -182,9 +187,9 @@ More on snippets extractions: [Snippets Manipulation](snippets/snippets-manipula
 In presentation mode, cli command related plugins will simulate typing inside the terminal.
 
 You can gradually reveal `cli-output` by providing `revealLineStop` parameter.
-  
-    :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]}
+
+    :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4], highlight: "remote"}
     
-Passed `highlight` will highlight each line as a separate slide.
+Passed `:identifier: highlight` will highlight each line as a separate slide.
 
 :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4], highlight: "remote"}

@@ -28,10 +28,10 @@ public class SnippetContainerEntriesConverter {
     private final String content;
     private final String snippetId;
 
-    public SnippetContainerEntriesConverter(SnippetContentProvider provider, String label) {
+    public SnippetContainerEntriesConverter(String snippetId, String content, String label) {
         this.label = label;
-        this.content = provider.snippetContent();
-        this.snippetId = provider.snippetId();
+        this.content = content;
+        this.snippetId = snippetId;
         this.lines = content.split("\n");
     }
 
