@@ -1,1 +1,1 @@
-* Fix: [CLI ANSI output](snippets/CLI#ansi-colors) background colors
+* Fix: [CLI ANSI output](snippets/CLI#ansi-colors-output) background colors

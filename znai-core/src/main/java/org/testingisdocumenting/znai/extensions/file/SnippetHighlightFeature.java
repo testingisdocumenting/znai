@@ -62,7 +62,10 @@ public class SnippetHighlightFeature implements PluginFeature {
             return;
         }
 
-        SnippetContainerEntriesConverter snippetValidator = new SnippetContainerEntriesConverter(contentProvider, HIGHLIGHT_KEY);
+        SnippetContainerEntriesConverter snippetValidator = new SnippetContainerEntriesConverter(
+                contentProvider.snippetId(),
+                SnippetCleaner.removeNonAnsiCharacters(contentProvider.snippetContent()),
+                HIGHLIGHT_KEY);
         props.put(HIGHLIGHT_KEY, snippetValidator.convertAndValidate(highlight));
     }
 
