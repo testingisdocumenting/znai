@@ -24,7 +24,8 @@ import org.testingisdocumenting.znai.utils.JsonUtils
 import org.testingisdocumenting.znai.utils.ResourceUtils
 
 class OpenApi3SpecTest {
-    static OpenApi3Spec spec
+    static OpenApi3Spec helloAppSpec2
+    static OpenApi3Spec spec3
 
     static def petProperties = [
             ["name": "name*", "type": [["text": "string", "url": ""]], "anchorId": "testprefix_name", "description": [["text": "pet name\n\\\n*Example*: `doggie`", "type": "testMarkdown"]]],
@@ -32,12 +33,13 @@ class OpenApi3SpecTest {
 
     @BeforeClass
     static void init() {
-        spec = OpenApi3Spec.parse(ResourceUtils.textContent("test-openapi3.json"))
+        helloAppSpec2 = OpenApi3Spec.parse(ResourceUtils.textContent("hello-app-spec2.json"))
+        spec3 = OpenApi3Spec.parse(ResourceUtils.textContent("test-openapi3.json"))
     }
 
     @Test
-    void "spec by operationId"() {
-        def findPet = spec.findById("findPetsByStatus")
+    void "spec3 by operationId"() {
+        def findPet = spec3.findById("findPetsByStatus")
         findPet.summary.should == "Finds Pets by status"
         findPet.description.should == "Multiple status values can be provided with comma separated strings"
         findPet.path.should == "/pet/findByStatus"
@@ -46,14 +48,20 @@ class OpenApi3SpecTest {
     }
 
     @Test
-    void "spec by method and path"() {
-        def getUser = spec.findByMethodAndPath("get", "/user/{username}")
+    void "spec2 by operation id"() {
+        def whoAmI = helloAppSpec2.findById("whoami")
+        whoAmI.description.should == "Return the user the request was authenticated as (HTTP REMOTE_USER)."
+    }
+
+    @Test
+    void "spec3 by method and path"() {
+        def getUser = spec3.findByMethodAndPath("get", "/user/{username}")
         getUser.summary.should == "Get user by user name"
     }
 
     @Test
     void "anyof request"() {
-        def createUser = spec.findById("createUser")
+        def createUser = spec3.findById("createUser")
 
         def jsonRequest = createUser.request.content.schemaByMimeType.get("application/json")
         def asMap = schemaAsApiParamsMap(jsonRequest)
@@ -74,7 +82,7 @@ class OpenApi3SpecTest {
 
     @Test
     void "additional properties"() {
-        def getInventory = spec.findById("getInventory")
+        def getInventory = spec3.findById("getInventory")
 
         def jsonResponse = getInventory.responses.get(0).content.schemaByMimeType.get("application/json")
         def asMap = schemaAsApiParamsMap(jsonResponse)
@@ -88,7 +96,7 @@ class OpenApi3SpecTest {
 
     @Test
     void "convert response to api parameters"() {
-        def petById = spec.findById("getPetById")
+        def petById = spec3.findById("getPetById")
         def response = petById.responses.get(0)
 
         def jsonResponse = response.content.schemaByMimeType.get("application/json")

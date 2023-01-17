@@ -149,9 +149,15 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
     }
 
     private void renderSectionIfRequired(OpenApi3Operation operation, PluginParams pluginParams) {
-        if (pluginParams.getOpts().get(AUTO_SECTION_KEY, false)) {
-            parserHandler.onSectionStart(operation.getSummary(), HeadingProps.EMPTY);
+        if (!pluginParams.getOpts().get(AUTO_SECTION_KEY, false)) {
+            return;
         }
+
+        if (operation.getSummary() == null || operation.getSummary().trim().isEmpty()) {
+            throw new IllegalArgumentException("summary is missing for operation <" + operation.getId() + ">");
+        }
+
+        parserHandler.onSectionStart(operation.getSummary(), HeadingProps.EMPTY);
     }
 
     private void renderUrl(OpenApi3Operation operation) {

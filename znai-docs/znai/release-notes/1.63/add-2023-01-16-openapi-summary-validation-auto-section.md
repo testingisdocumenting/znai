@@ -1,0 +1,1 @@
+* Add: [Open API](snippets/open-API) summary field validation when using `autoSection: true`
