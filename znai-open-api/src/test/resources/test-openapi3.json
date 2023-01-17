@@ -188,6 +188,33 @@
         ]
       }
     },
+    "/pet/findByStatusNoSummary": {
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findPetsByStatusNoSummary",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
     "/pet/findByTags": {
       "get": {
         "tags": [

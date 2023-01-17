@@ -1,0 +1,73 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "Error": {
+      "properties": {
+        "errors": {
+          "type": "object"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "title": "Error",
+      "type": "object"
+    },
+    "User": {
+      "description": "A User model.",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "User",
+      "type": "object"
+    }
+  },
+  "host": "localhost",
+  "info": {
+    "description": "HelloApp API description goes here.",
+    "title": "HelloApp API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/whoami": {
+      "get": {
+        "description": "Return the user the request was authenticated as (HTTP REMOTE_USER).",
+        "operationId": "whoami",
+        "responses": {
+          "200": {
+            "description": "A User model.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "whoami"
+        ]
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [],
+  "basePath": "/rest",
+  "securityDefinitions": {},
+  "swagger": "2.0"
+}

@@ -20,6 +20,9 @@ package org.testingisdocumenting.znai.openapi
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
 
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
+
 class OpenApi3IncludePluginTest {
     @Test
     void "should automatically create a section for summary"() {
@@ -27,6 +30,13 @@ class OpenApi3IncludePluginTest {
 
         elements[0].title.should == 'Add a new pet to the store'
         elements[0].type.should == 'Section'
+    }
+
+    @Test
+    void "should validate summary field presence when create a section"() {
+        code {
+            process('test-openapi3.json {operationId: "findPetsByStatusNoSummary", autoSection: true}')
+        } should throwException("summary is missing for operation <findPetsByStatusNoSummary>")
     }
 
     @Test
