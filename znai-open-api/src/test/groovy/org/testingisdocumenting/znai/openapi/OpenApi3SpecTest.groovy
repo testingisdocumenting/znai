@@ -54,6 +54,13 @@ class OpenApi3SpecTest {
     }
 
     @Test
+    void "spec2 by relative url basePath is not part of search or resulting url"() {
+        def whoAmI = helloAppSpec2.findByMethodAndPath("get", "/api/whoami")
+        whoAmI.path.should == "/api/whoami"
+        whoAmI.description.should == "Return the user the request was authenticated as (HTTP REMOTE_USER)."
+    }
+
+    @Test
     void "spec3 by method and path"() {
         def getUser = spec3.findByMethodAndPath("get", "/user/{username}")
         getUser.summary.should == "Get user by user name"
