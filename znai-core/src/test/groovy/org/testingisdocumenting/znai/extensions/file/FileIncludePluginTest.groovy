@@ -67,6 +67,14 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should fail when surrounded content is empty"() {
+        code {
+            resultingSnippet("file-with-similar-lines-empty.txt", "{surroundedBy: '\$prompt'}")
+        } should throwException("no content present after surroundedBy \$prompt")
+
+    }
+
+    @Test
     void "should validate start and stop end lines"() {
         code {
             resultingSnippet("file.txt", "{startLine: '1multiple lines', endLine: 'stop'}")

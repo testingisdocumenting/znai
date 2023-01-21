@@ -150,9 +150,14 @@ class TextContentExtractor {
 
             Text surroundedCrop = text.startingWithLineContaining(marker);
             surroundedCrop = surroundedCrop.limitToLineContaining(marker)
-                    .cropOneLineFromStartAndEnd();
+                    .cropOneLineFromStartAndEnd()
+                    .stripIndentation();
 
-            result = result.append(surroundedCrop.stripIndentation());
+            if (surroundedCrop.isEmpty()) {
+                throw new RuntimeException("no content present after " + SURROUNDED_BY_KEY + " " + marker);
+            }
+
+            result = result.append(surroundedCrop);
             if (!isLast && separator != null) {
                 result = result.append(separator);
             }
@@ -263,8 +268,15 @@ class TextContentExtractor {
             this.hasCroppedStart = hasCroppedStart;
         }
 
+        boolean isEmpty() {
+            return lines.isEmpty();
+        }
+
         Text stripIndentation() {
-            return new Text(contentId, StringUtils.stripIndentation(toString()));
+            String text = StringUtils.stripIndentation(toString());
+            return text.isEmpty() ?
+                    new Text(contentId, Collections.emptyList(), false) :
+                    new Text(contentId, text);
         }
 
         Text append(Text another) {
