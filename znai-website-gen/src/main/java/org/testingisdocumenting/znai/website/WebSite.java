@@ -17,7 +17,6 @@
 
 package org.testingisdocumenting.znai.website;
 
-import org.codehaus.groovy.runtime.StackTraceUtils;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
@@ -552,7 +551,7 @@ public class WebSite implements Log {
         throw new RuntimeException("\nmarkup parsing error:\n" +
                 "    TOC item: " + tocItem + "\n" +
                 "    full path: " + markupPath + "\n" +
-                "\n" + StackTraceUtils.extractRootCause(e) + "\n", e);
+                "\n" + e.getMessage(), e);
     }
 
     private void updateTocItemWithPageMeta(TocItem tocItem, PageMeta pageMeta) {
