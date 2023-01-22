@@ -1,0 +1,1 @@
+* Fix: [code reference](snippets/code-references) now turns into links parts of code that is not fully recognized by highlighter

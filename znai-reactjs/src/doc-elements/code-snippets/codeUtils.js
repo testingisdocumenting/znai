@@ -47,6 +47,8 @@ export function splitTokensIntoLines(tokens) {
             handleNewLineStringToken(token)
         } else if (isString && token.startsWith(' ')) {
             handleSpacing(token)
+        } else if (isString && token.indexOf(' ')) {
+            splitStringWithSpacesIntoMultipleTokens(token)
         } else if (!isString && typeof token.content === 'string' && token.content.indexOf('\n') > 0) {
              handleMultiLineToken(token)
         } else {
@@ -116,6 +118,13 @@ export function splitTokensIntoLines(tokens) {
             }
 
             return token.length
+        }
+    }
+
+    function splitStringWithSpacesIntoMultipleTokens(token) {
+        const parts = token.split(/(\s+)/g)
+        for (let idx = 0; idx < parts.length; idx++) {
+            pushToken(parts[idx]);
         }
     }
 
@@ -332,8 +341,18 @@ export function findTokensThatMatchExpressions(tokens, expressions) {
                 running = ''
                 startIdx = idx + 1
             } else {
+                // exact match
                 if (running.length === expression.length) {
                     return [startIdx, idx]
+                }
+
+                // case when running has more, e.g "TableData varName", but expression is "TableData", supposed to be two separate tokens
+                // but Groovy parsed this way, so this is more like a workaround
+                if (running.indexOf(" ") !== -1) {
+                    const firstPart = running.split(" ")[0]
+                    if (firstPart === running) {
+                        return [startIdx, startIdx + expression.length]
+                    }
                 }
             }
         }
