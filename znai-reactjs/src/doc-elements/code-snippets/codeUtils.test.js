@@ -219,6 +219,37 @@ describe("codeUtils", () => {
             { type: 'punctuation', content: '{' }])
     })
 
+    it("should tokenize groovy type based declared variable", () => {
+        const tokens = parseCode("groovy", "TableData table = createTable()\ntable.should == []")
+        const lines = splitTokensIntoLines(tokens)
+        const enhancedTokensLineOne = enhanceMatchedTokensWithMeta(lines[0], ["TableData"], () => 'link', (reference) => '@' + reference)
+        const enhancedTokensLineTwo = enhanceMatchedTokensWithMeta(lines[1], ["should"], () => 'link', (reference) => '@' + reference)
+
+        expect(enhancedTokensLineOne).toEqual([
+              { content: 'TableData', link: '@TableData', type: 'text link' },
+              ' ',
+              'table',
+              ' ',
+              { type: 'operator', content: '=' },
+              ' ',
+              { type: 'function', content: 'createTable' },
+              { type: 'punctuation', content: '(' },
+              { type: 'punctuation', content: ')' }
+          ]
+        )
+
+        expect(enhancedTokensLineTwo).toEqual([
+            'table',
+            { type: 'punctuation', content: '.' },
+            { content: 'should', link: '@should', type: 'text link' },
+            ' ',
+            { type: 'operator', content: '==' },
+            ' ',
+            { type: 'punctuation', content: '[' },
+            { type: 'punctuation', content: ']' }
+        ])
+    });
+
     it("splits java multi line comment into separate lines", () => {
         const tokens = parseCode('java', `  /** hello
   multi line
