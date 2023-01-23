@@ -1,0 +1,1 @@
+* Add: [Plugins](plugins/plugin-types) parameters validation error message now prints in the context of plugin name and passed params
