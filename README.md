@@ -1,3 +1,7 @@
+# Discord Server
+
+Join `Testing Is Documenting` [Discord Server](https://discord.gg/aEHbzXTX6N) to ask questions and discuss features/bugs
+
 # Znai
 
 Build functional, maintainable, beautiful User Guides with `Znai`.
