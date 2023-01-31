@@ -83,6 +83,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-console</artifactId>
             <version>${project.version}</version>
