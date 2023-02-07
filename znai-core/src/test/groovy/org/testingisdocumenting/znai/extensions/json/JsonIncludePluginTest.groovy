@@ -33,6 +33,12 @@ class JsonIncludePluginTest {
     }
 
     @Test
+    void "should handle null values"() {
+        def props = process('with-null.json')
+        props.should == [data: [key1: null, key2: [key21: 'value21', key22: 'value22']], paths: []]
+    }
+
+    @Test
     void "single paths value is automatically converted to list"() {
         def props = process('test.json {paths: "root.key1"}')
         props.should == [data: expectedFullData, paths: ['root.key1']]

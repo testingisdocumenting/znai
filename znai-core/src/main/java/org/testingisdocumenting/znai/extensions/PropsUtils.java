@@ -46,11 +46,10 @@ public class PropsUtils {
     }
 
     public static Map<String, ?> exerciseMapSuppliers(Map<String, ?> content) {
-        return content.entrySet().stream()
-                .filter(e -> e.getValue() != null)
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> exerciseSuppliers(e.getValue()),
-                        (a, b) -> b,
-                        LinkedHashMap::new));
+        Map<String, Object> result = new LinkedHashMap<>();
+        content.forEach((k, v) -> result.put(k, exerciseSuppliers(v)));
+
+        return result;
     }
 
     public static List<?> exerciseListSuppliers(List<?> content) {
