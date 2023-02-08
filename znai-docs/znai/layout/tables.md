@@ -145,6 +145,14 @@ Note: total percentage of all columns can go above 100%, in which case a scroll 
 
 :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "60%"}}
 
+# Column Names Conflict
+
+Use `_` prefix if a column name matches the plugin parameter name like `title` when setting column specific parameters.
+
+    :include-table: table/table-conflict.csv {"_title": {width: "80%"}}
+
+:include-table: table/table-conflict.csv {"_title": {width: "80%"}}
+
 # Min Width
 
 Use `minColumnWidth` to set min width for all table columns

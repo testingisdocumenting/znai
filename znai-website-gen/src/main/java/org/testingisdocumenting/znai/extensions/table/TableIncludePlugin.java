@@ -66,7 +66,10 @@ public class TableIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        docElementFromParams = new TableDocElementFromParams(componentsRegistry, tableDataFromContentAndParams, markupPath, pluginParams, componentsRegistry.defaultParser(), fullPath);
+        docElementFromParams = new TableDocElementFromParams(componentsRegistry,
+                tableDataFromContentAndParams, markupPath, pluginParams,
+                componentsRegistry.defaultParser(),
+                fullPath);
         return docElementFromParams.create();
     }
 

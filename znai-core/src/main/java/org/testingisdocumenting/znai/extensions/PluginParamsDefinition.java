@@ -67,6 +67,10 @@ public class PluginParamsDefinition {
         this.isDefined = isDefined;
     }
 
+    public boolean has(String name) {
+        return params.stream().anyMatch(p -> p.name.equals(name));
+    }
+
     public PluginParamsDefinition add(String name, PluginParamType type, String description, String example) {
         add(new Param(name, type, description, example, false));
         return this;

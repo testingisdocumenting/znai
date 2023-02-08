@@ -44,6 +44,16 @@ class TableIncludePluginTest {
     }
 
     @Test
+    void "should use underscore to distinct column names that match plugin parameter names"() {
+        def element = process('test-table-title-column.json {_title: {width: "30%"}}')
+
+        element.should == [table: [columns: [[title: "account"], [title: "title", width: "30%"]],
+                                   data:[[[[markup: "#12BGD3", type: "TestMarkup"]],
+                                          [[markup: "custom table with a long attachment", type: "TestMarkup"]]]]],
+                           type: "Table"]
+    }
+
+    @Test
     void "should filter out columns from json based on case insensitive provided names"() {
         def element = process('test-table.json', '{columns: ["account", "description"]}')
 

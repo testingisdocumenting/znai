@@ -42,8 +42,18 @@ class TablePluginParams {
         PluginParamsDefinition result = new PluginParamsDefinition();
         result.add(commonParamsDefinition);
 
-        tableData.columnNamesStream().forEach(columnName ->
-                result.add(columnName, PluginParamType.OBJECT, "column <" + columnName + "> config", "{width: \"50%\"}"));
+        tableData.columnNamesStream().forEach(columnName -> {
+            String description = "column <" + columnName + "> config";
+            String example = "{width: \"50%\"}";
+
+            // for cases when column name matches existing parameters like "title",
+            // we ask users to use _title
+            if (result.has(columnName)) {
+                result.add("_" + columnName, PluginParamType.OBJECT, description, example);
+            } else {
+                result.add(columnName, PluginParamType.OBJECT, description, example);
+            }
+        });
 
         return result;
     }
