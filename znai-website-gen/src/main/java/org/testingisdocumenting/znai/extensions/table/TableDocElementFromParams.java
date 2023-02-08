@@ -69,7 +69,11 @@ class TableDocElementFromParams {
         List<Map<String, Object>> columns = (List<Map<String, Object>>) tableAsMap.get("columns");
 
         opts.forEach((columnName, meta) -> {
-            Optional<Map<String, Object>> column = columns.stream().filter(c -> c.get("title").equals(columnName)).findFirst();
+            Optional<Map<String, Object>> column = columns.stream().filter(c -> {
+                Object columnTitle = c.get("title");
+                // we use _ for column names parameters that match plugin parameters (e.g. title)
+                return columnName.equals(columnTitle) || columnName.equals("_" + columnTitle);
+            }).findFirst();
             column.ifPresent(c -> c.putAll((Map<? extends String, ?>) meta));
         });
 

@@ -1,0 +1,1 @@
+* Fix: Table column parameters [name conflict](layout/tables#column-names-conflict)
