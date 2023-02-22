@@ -313,6 +313,16 @@ world""")
                             type: 'Image']]
     }
 
+    @Test
+    void "standalone svg image"() {
+        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000
+
+        parse("![alt text](images/test.svg \"custom title\")")
+        content.should == [[title: "custom title", destination: '/test-doc/test.svg',
+                            alt: 'alt text', inlined: false,
+                            timestamp: 200000,
+                            type: 'Image']]
+    }
 
     @Test
     void "image with external ref"() {
