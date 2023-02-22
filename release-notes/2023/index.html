@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: 2023 Releases</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>1.63</h1></header>
+<p>Fix: visuals/images Images null pointer when using with SVGs Fix: Table column parameters layout/tables#column-names-conflict name conflict Fix: snippets/json JSON regression with displaying null values Fix: stop badge visuals/image-annotations#badge-textual-description image annotation from pulsing when mouse moved out Fix: remove extra gap from last code snippet inside snippets/api-parameters API parameters Add: plugins/plugin-types Plugins parameters validation error message now prints in the context of plugin name and passed params Fix: snippets/code-references code reference now turns into links parts of code that is not fully recognized by highlighter Add: snippets/snippets-manipulation#surrounded-by surroundedBy validates that content is not empty after extraction Add: snippets/open-API Open API summary field validation when using autoSection: true Add: snippets/CLI#output-highlight CLI Output Highlight now matches sub-lines ignoring colors ANSI sequence Add: JSON snippets/json#enclose-in-object Enclose In Object Add: JSON format for snippets/code-references Code References Add: better alignment of multiple snippets/CLI CLI Commands in a row and when surrounded by text Add: snippets/CLI#output-highlight console output and snippets/external-code-snippets code snippets trim empty lines from start/end when no extraction specific params is set Add: include and exclude to snippets/snippets-manipulation#include-contains include/exclude lines using contains Add: excludeStart and excludeEnd as separate options to snippets/snippets-manipulation snippets manipulation Add: snippets/inlined-code-snippets#validated-identifier identifier support for multiple validation paths. Example of using default parameters to simplify flow. Add: noGap option for images, tables, snippets and API parameters is only required for the first entry, second can omit it. If it does, third entry will have a gap again above. This helps with groups of snippets/tables/etc. Add: snippets/CLI#wide-mode Wide Mode for CLI Output</p>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="text/javascript" src="/znai/static/main.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/search-index.js"></script>
+<script>
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "GitHub"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "1-63",
+      "title" : "1.63",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/images",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Images",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " null pointer when using with SVGs",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Table column parameters ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/tables#column-names-conflict",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "name conflict",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " regression with displaying ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "null",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " values",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: stop badge ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/image-annotations#badge-textual-description",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "image annotation",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " from pulsing when mouse moved out",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: remove extra gap from last code snippet inside ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/api-parameters",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "API parameters",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/plugins/plugin-types",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Plugins",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " parameters validation error message now prints in the context of plugin name and passed params",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/code-references",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "code reference",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " now turns into links parts of code that is not fully recognized by highlighter",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-manipulation#surrounded-by",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "surroundedBy",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " validates that content is not empty after extraction",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/open-API",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Open API",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " summary field validation when using ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "autoSection: true",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/CLI#output-highlight",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "CLI Output Highlight",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " now matches sub-lines ignoring colors ANSI sequence",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: JSON ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json#enclose-in-object",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Enclose In Object",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: JSON format for ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/code-references",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Code References",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: better alignment of multiple ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/CLI",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "CLI Commands",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " in a row and when surrounded by text",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/CLI#output-highlight",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "console output",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/external-code-snippets",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "code snippets",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " trim empty lines from start/end when no extraction specific params is set",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "include",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "exclude",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-manipulation#include-contains",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include/exclude",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " lines using contains",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "excludeStart",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "excludeEnd",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " as separate options to ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-manipulation",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "snippets manipulation",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/inlined-code-snippets#validated-identifier",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "identifier",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support for multiple validation paths. Example of using default parameters to simplify flow.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: noGap option for images, tables, snippets and API parameters is only required for the first entry, second can omit it.",
+              "type" : "SimpleText"
+            }, {
+              "type" : "SoftLineBreak"
+            }, {
+              "text" : "If it does, third entry will have a gap again above. This helps with groups of snippets/tables/etc.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/CLI#wide-mode",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Wide Mode",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " for CLI Output",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1677033896966,
+    "tocItem" : {
+      "chapterTitle" : "Release Notes",
+      "pageTitle" : "2023 Releases",
+      "pageMeta" : {
+        "title" : [ "2023 Releases" ]
+      },
+      "dirName" : "release-notes",
+      "fileName" : "2023",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "1.63",
+        "id" : "1-63"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

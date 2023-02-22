@@ -110,23 +110,28 @@
 </article>
 
 <article>
-<header><h1>Output</h1></header>
-<p>To display console output and bring attention to certain lines use: :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master You can highlight by a partial line text match: :include-cli-output: cli/file-path-of-captured.out {highlight: &quot;remote&quot;} Or you can highlight by lines stored in a separate file: :include-cli-output: cli/file-path-of-captured.out {highlightPath: &quot;cli/file-path-of-asserted-lines.txt&quot;} remote: Writing Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master</p>
-</article>
-
-<article>
-<header><h1>ANSI Colors</h1></header>
+<header><h1>ANSI Colors Output</h1></header>
 <p>CLI renders ANSI colors automatically. webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) :include-cli-output: cli/ansi.out webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms)</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use title to specify output of the output :include-cli-output: cli/file-path-of-captured.out {title: &quot;Captured output&quot;} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master</p>
+<p>Use title to specify output of the output :include-cli-output: cli/ansi.out {title: &quot;captured output&quot;} webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms)</p>
 </article>
 
 <article>
 <header><h1>Anchor</h1></header>
-<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-cli-output: cli/file-path-of-captured.out { title: &quot;Captured output&quot;, anchorId: &quot;my-output&quot;, readMore: true } Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master</p>
+<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-cli-output: cli/ansi.out { title: &quot;captured output&quot;, anchorId: &quot;my-output&quot; } webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms)</p>
+</article>
+
+<article>
+<header><h1>Output Highlight</h1></header>
+<p>Use to highlight lines :include-cli-output: cli/ansi.out { title: &quot;captured output&quot;, &quot;highlight&quot;: &quot;GET https&quot; } webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) Use to highlight lines based on the content of a file :include-cli-output: cli/ansi.out {highlightPath: &quot;cli/file-path-of-asserted-lines.txt&quot;} statusCode equals 200 executed HTTP GET webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms)</p>
+</article>
+
+<article>
+<header><h1>Wide Mode</h1></header>
+<p>Use wide option to occupy as much horizontal space as available :include-cli-output: cli/wide-output.out { title: &quot;Captured output&quot;, wide: true } long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output</p>
 </article>
 
 <article>
@@ -136,7 +141,7 @@
 
 <article>
 <header><h1>Presentation Mode</h1></header>
-<p>In presentation mode, cli command related plugins will simulate typing inside the terminal.You can gradually reveal cli-output by providing revealLineStop parameter. :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]} Passed highlight will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master</p>
+<p>In presentation mode, cli command related plugins will simulate typing inside the terminal.You can gradually reveal cli-output by providing revealLineStop parameter. :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4], highlight: &quot;remote&quot;} Passed will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master</p>
 </article>
 </section>
 </div>
@@ -383,61 +388,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "id" : "output",
-      "title" : "Output",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To display console output and bring attention to certain lines use:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]}\n",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "highlight" : [ 0, 4 ],
-        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
-        "type" : "CliOutput"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "You can highlight by a partial line text match:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-cli-output: cli/file-path-of-captured.out {highlight: \"remote\"}\n",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Or you can highlight by lines stored in a separate file:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-cli-output: cli/file-path-of-captured.out {highlightPath: \"cli/file-path-of-asserted-lines.txt\"}\n",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "txt",
-        "snippet" : "remote:\nWriting",
-        "title" : "cli/file-path-of-asserted-lines.txt",
-        "anchorId" : "output-cli-file-path-of-asserted-lines-txt",
-        "type" : "Snippet"
-      }, {
-        "highlightPath" : "cli/file-path-of-asserted-lines.txt",
-        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
-        "highlight" : [ 4, 13, 22, 2, 11, 20 ],
-        "type" : "CliOutput"
-      } ]
-    }, {
-      "id" : "ansi-colors",
-      "title" : "ANSI Colors",
+      "id" : "ansi-colors-output",
+      "title" : "ANSI Colors Output",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
@@ -449,7 +401,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "out",
         "snippet" : "\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")\n\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m\n  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200\n      matches:\n\n      header.statusCode:   actual: 200 <java.lang.Integer>\n                         expected: 200 <java.lang.Integer>\u001B[33m (\u001B[32m47ms\u001B[33m)\u001B[0m\n\u001B[36m{\u001B[0m\n  \u001B[35m\"userId\": 1\u001B[36m,\u001B[0m\n  \u001B[35m\"id\": 1\u001B[36m,\u001B[0m\n  \u001B[35m\"title\": \u001B[32m\"delectus aut autem\"\u001B[36m,\u001B[0m\n  \u001B[35m\"completed\": false\u001B[0m\n\u001B[36m}\u001B[0m\n\u001B[32m. \u001B[34mexecuted HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[33m (\u001B[32m342ms\u001B[33m)\u001B[0m",
         "title" : "cli/ansi.out - file with ANSI sequence colors",
-        "anchorId" : "ansi-colors-cli-ansi-out---file-with-ansi-sequence-colors",
+        "anchorId" : "ansi-colors-output-cli-ansi-out---file-with-ansi-sequence-colors",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -478,12 +430,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-cli-output: cli/file-path-of-captured.out {title: \"Captured output\"}\n",
+        "snippet" : ":include-cli-output: cli/ansi.out {title: \"captured output\"}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "title" : "Captured output",
-        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
+        "title" : "captured output",
+        "lines" : [ "\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")", "\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m", "  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200", "      matches:", "", "      header.statusCode:   actual: 200 <java.lang.Integer>", "                         expected: 200 <java.lang.Integer>\u001B[33m (\u001B[32m47ms\u001B[33m)\u001B[0m", "\u001B[36m{\u001B[0m", "  \u001B[35m\"userId\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"id\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"title\": \u001B[32m\"delectus aut autem\"\u001B[36m,\u001B[0m", "  \u001B[35m\"completed\": false\u001B[0m", "\u001B[36m}\u001B[0m", "\u001B[32m. \u001B[34mexecuted HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[33m (\u001B[32m342ms\u001B[33m)\u001B[0m" ],
         "anchorId" : "title-captured-output",
         "type" : "CliOutput"
       } ]
@@ -511,14 +463,98 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-cli-output: cli/file-path-of-captured.out {\n  title: \"Captured output\",\n  anchorId: \"my-output\",\n  readMore: true\n}\n",
+        "snippet" : ":include-cli-output: cli/ansi.out {\n  title: \"captured output\",\n  anchorId: \"my-output\"\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "captured output",
+        "anchorId" : "my-output",
+        "lines" : [ "\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")", "\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m", "  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200", "      matches:", "", "      header.statusCode:   actual: 200 <java.lang.Integer>", "                         expected: 200 <java.lang.Integer>\u001B[33m (\u001B[32m47ms\u001B[33m)\u001B[0m", "\u001B[36m{\u001B[0m", "  \u001B[35m\"userId\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"id\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"title\": \u001B[32m\"delectus aut autem\"\u001B[36m,\u001B[0m", "  \u001B[35m\"completed\": false\u001B[0m", "\u001B[36m}\u001B[0m", "\u001B[32m. \u001B[34mexecuted HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[33m (\u001B[32m342ms\u001B[33m)\u001B[0m" ],
+        "type" : "CliOutput"
+      } ]
+    }, {
+      "id" : "output-highlight",
+      "title" : "Output Highlight",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "highlight",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to highlight lines",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-cli-output: cli/ansi.out {\n  title: \"captured output\",\n  \"highlight\": \"GET https\"\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "captured output",
+        "highlight" : [ 1, 13 ],
+        "lines" : [ "\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")", "\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m", "  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200", "      matches:", "", "      header.statusCode:   actual: 200 <java.lang.Integer>", "                         expected: 200 <java.lang.Integer>\u001B[33m (\u001B[32m47ms\u001B[33m)\u001B[0m", "\u001B[36m{\u001B[0m", "  \u001B[35m\"userId\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"id\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"title\": \u001B[32m\"delectus aut autem\"\u001B[36m,\u001B[0m", "  \u001B[35m\"completed\": false\u001B[0m", "\u001B[36m}\u001B[0m", "\u001B[32m. \u001B[34mexecuted HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[33m (\u001B[32m342ms\u001B[33m)\u001B[0m" ],
+        "anchorId" : "output-highlight-captured-output",
+        "type" : "CliOutput"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "highlightPath",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to highlight lines based on the content of a file",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-cli-output: cli/ansi.out {highlightPath: \"cli/file-path-of-asserted-lines.txt\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "txt",
+        "snippet" : "statusCode equals 200\nexecuted HTTP GET",
+        "autoTitle" : true,
+        "title" : "cli/file-path-of-asserted-lines.txt",
+        "anchorId" : "output-highlight-cli-file-path-of-asserted-lines-txt",
+        "type" : "Snippet"
+      }, {
+        "highlightPath" : "cli/file-path-of-asserted-lines.txt",
+        "lines" : [ "\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")", "\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m", "  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200", "      matches:", "", "      header.statusCode:   actual: 200 <java.lang.Integer>", "                         expected: 200 <java.lang.Integer>\u001B[33m (\u001B[32m47ms\u001B[33m)\u001B[0m", "\u001B[36m{\u001B[0m", "  \u001B[35m\"userId\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"id\": 1\u001B[36m,\u001B[0m", "  \u001B[35m\"title\": \u001B[32m\"delectus aut autem\"\u001B[36m,\u001B[0m", "  \u001B[35m\"completed\": false\u001B[0m", "\u001B[36m}\u001B[0m", "\u001B[32m. \u001B[34mexecuted HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[33m (\u001B[32m342ms\u001B[33m)\u001B[0m" ],
+        "highlight" : [ 2, 13 ],
+        "type" : "CliOutput"
+      } ]
+    }, {
+      "id" : "wide-mode",
+      "title" : "Wide Mode",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "wide",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " option to occupy as much horizontal space as available",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-cli-output: cli/wide-output.out {\n  title: \"Captured output\",\n  wide: true\n}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "title" : "Captured output",
-        "anchorId" : "my-output",
-        "readMore" : true,
-        "lines" : [ "Delta compression using up to 8 threads.", "Compressing objects: 100% (16/16), done.", "Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done.", "Total 16 (delta 14), reused 0 (delta 0)", "remote: Resolving deltas: 100% (14/14), completed with 10 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   ea44003..e310685  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 13, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (13/13), done.", "Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done.", "Total 13 (delta 11), reused 0 (delta 0)", "remote: Resolving deltas: 100% (11/11), completed with 11 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   e310685..900e0be  master -> master", "Mykolas-MacBook-Pro:znai-reactjs mykola$ git push", "Counting objects: 33, done.", "Delta compression using up to 8 threads.", "Compressing objects: 100% (33/33), done.", "Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done.", "Total 33 (delta 28), reused 0 (delta 0)", "remote: Resolving deltas: 100% (28/28), completed with 14 local objects.", "To https://github.com/testingisdocumenting/znai.git", "   900e0be..bb9993f  master -> master" ],
+        "wide" : true,
+        "lines" : [ "long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output", "long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output", "long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output", "long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output", "long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output", "long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output" ],
+        "anchorId" : "wide-mode-captured-output",
         "type" : "CliOutput"
       } ]
     }, {
@@ -603,7 +639,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]}\n",
+        "snippet" : ":include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4], highlight: \"remote\"}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -625,11 +661,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliOutput"
       } ]
     } ],
-    "lastModifiedTime" : 1670944377995,
+    "lastModifiedTime" : 1677033896966,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "CLI",
-      "pageMeta" : { },
+      "pageMeta" : {
+        "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/extensions/file/SnippetHighlightFeature.java\"}" ]
+      },
       "dirName" : "snippets",
       "fileName" : "CLI",
       "viewOnRelativePath" : null,
@@ -649,17 +687,20 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "From File",
         "id" : "from-file"
       }, {
-        "title" : "Output",
-        "id" : "output"
-      }, {
-        "title" : "ANSI Colors",
-        "id" : "ansi-colors"
+        "title" : "ANSI Colors Output",
+        "id" : "ansi-colors-output"
       }, {
         "title" : "Title",
         "id" : "title"
       }, {
         "title" : "Anchor",
         "id" : "anchor"
+      }, {
+        "title" : "Output Highlight",
+        "id" : "output-highlight"
+      }, {
+        "title" : "Wide Mode",
+        "id" : "wide-mode"
       }, {
         "title" : "Extract Snippets",
         "id" : "extract-snippets"

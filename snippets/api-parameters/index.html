@@ -106,7 +106,7 @@
 
 <article>
 <header><h1>No Gap</h1></header>
-<p>Use noGap: true to remove top/bottom margins when there are multiple parameter instances in a row. markdown ```api-parameters { title: &quot;person definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: false, noGap: true } firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true, noGap: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code</p>
+<p>Use noGap: true to remove top/bottom margins when there are multiple parameter instances in a row. markdown ```api-parameters { title: &quot;person definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: false, noGap: true } firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code</p>
 </article>
 
 <article>
@@ -563,7 +563,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "```api-parameters { title: \"person definition\", anchorPrefix: \"title\", collapsed: false, noGap: true }\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n\n```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true, noGap: true}\ncity, String, city name\nzipCode, String, zip code\n```\n",
+        "snippet" : "```api-parameters { title: \"person definition\", anchorPrefix: \"title\", collapsed: false, noGap: true }\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n\n```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true}\ncity, String, city name\nzipCode, String, zip code\n```\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -652,7 +652,6 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "address definition",
         "anchorPrefix" : "title",
         "collapsed" : true,
-        "noGap" : true,
         "type" : "ApiParameters"
       } ]
     }, {
@@ -1332,7 +1331,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1670944377995,
+    "lastModifiedTime" : 1677033896970,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "API Parameters",

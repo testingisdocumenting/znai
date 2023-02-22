@@ -126,7 +126,7 @@
 
 <article>
 <header><h1>No Gap</h1></header>
-<p>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: &quot;part one&quot;, noGap: true, collapsed: false} :include-file: simple.c {title: &quot;part two&quot;, noGap: true, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; }</p>
+<p>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: &quot;part one&quot;, noGap: true, collapsed: false} :include-file: simple.c {title: &quot;part two&quot;, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; }</p>
 </article>
 
 <article>
@@ -627,7 +627,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: file-name.js {title: \"part one\", noGap: true, collapsed: false}\n:include-file: simple.c {title: \"part two\", noGap: true, collapsed: false}\n",
+        "snippet" : ":include-file: file-name.js {title: \"part one\", noGap: true, collapsed: false}\n:include-file: simple.c {title: \"part two\", collapsed: false}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -642,7 +642,6 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "c",
         "snippet" : "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
         "title" : "part two",
-        "noGap" : true,
         "collapsed" : false,
         "anchorId" : "no-gap-part-two",
         "type" : "Snippet"
@@ -731,7 +730,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1670944377995,
+    "lastModifiedTime" : 1677033896970,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",

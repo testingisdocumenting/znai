@@ -111,7 +111,7 @@
 
 <article>
 <header><h1>No Gap</h1></header>
-<p>Use noGap: true to remove top/bottom margins when there are multiple tables in a row. markdown :include-table: table/table.json { title: &quot;Monthly Report&quot;, collapsed: true, noGap: true, } :include-table: table/table.json { title: &quot;Weekly Report&quot;, collapsed: false, noGap: true, } Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
+<p>Use noGap: true to remove top/bottom margins when there are multiple tables in a row. markdown :include-table: table/table.json { title: &quot;Monthly Report&quot;, collapsed: true, noGap: true } :include-table: table/table.json { title: &quot;Weekly Report&quot;, collapsed: false } Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</p>
 </article>
 
 <article>
@@ -132,6 +132,11 @@
 <article>
 <header><h1>Width</h1></header>
 <p>By default, columns width is auto-calculated to fit the values inside. Use width to control the width of a column. :include-table: table.csv {Price: {width: 200}, &quot;Description&quot;: {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width. :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;30%&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;60%&quot;}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch</p>
+</article>
+
+<article>
+<header><h1>Column Names Conflict</h1></header>
+<p>Use _ prefix if a column name matches the plugin parameter name like title when setting column specific parameters. :include-table: table/table-conflict.csv {&quot;_title&quot;: {width: &quot;80%&quot;}} account title #12BGD3 custom table with a long attachment #12BGD4 custom table with a short attachment</p>
 </article>
 
 <article>
@@ -750,9 +755,9 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-table: table/table.json {\n  title: \"Monthly Report\",\n  collapsed: true,\n  noGap: true,\n}\n\n:include-table: table/table.json {\n  title: \"Weekly Report\",\n  collapsed: false,\n  noGap: true,\n}\n",
+        "snippet" : ":include-table: table/table.json {\n  title: \"Monthly Report\",\n  collapsed: true,\n  noGap: true\n}\n\n:include-table: table/table.json {\n  title: \"Weekly Report\",\n  collapsed: false\n}\n",
         "lineNumber" : "",
-        "highlight" : [ 3, 9 ],
+        "highlight" : [ 3 ],
         "type" : "Snippet"
       }, {
         "table" : {
@@ -890,7 +895,6 @@ ReactDOM.render(React.createElement(Documentation, {
           } ] ] ]
         },
         "title" : "Weekly Report",
-        "noGap" : true,
         "collapsed" : false,
         "anchorId" : "no-gap-weekly-report",
         "type" : "Table"
@@ -1601,6 +1605,69 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "lunch",
+              "type" : "SimpleText"
+            } ]
+          } ] ] ]
+        },
+        "type" : "Table"
+      } ]
+    }, {
+      "id" : "column-names-conflict",
+      "title" : "Column Names Conflict",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "_",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " prefix if a column name matches the plugin parameter name like ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " when setting column specific parameters.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-table: table/table-conflict.csv {\"_title\": {width: \"80%\"}}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "table" : {
+          "columns" : [ {
+            "title" : "account"
+          }, {
+            "title" : "title",
+            "width" : "80%"
+          } ],
+          "data" : [ [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD3",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a long attachment",
+              "type" : "SimpleText"
+            } ]
+          } ] ], [ [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "#12BGD4",
+              "type" : "SimpleText"
+            } ]
+          } ], [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom table with a short attachment",
               "type" : "SimpleText"
             } ]
           } ] ] ]
@@ -2442,7 +2509,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1670944377991,
+    "lastModifiedTime" : 1677033896962,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Tables",
@@ -2480,6 +2547,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Width",
         "id" : "width"
+      }, {
+        "title" : "Column Names Conflict",
+        "id" : "column-names-conflict"
       }, {
         "title" : "Min Width",
         "id" : "min-width"

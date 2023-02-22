@@ -343,7 +343,9 @@ toc = [ {
   }, {
     "chapterTitle" : "Snippets",
     "pageTitle" : "Snippets Manipulation",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/extensions/file/TextContentExtractor.java\"}" ]
+    },
     "dirName" : "snippets",
     "fileName" : "snippets-manipulation",
     "viewOnRelativePath" : null,
@@ -362,6 +364,12 @@ toc = [ {
     }, {
       "title" : "Start/End Line",
       "id" : "start-end-line"
+    }, {
+      "title" : "Include Contains",
+      "id" : "include-contains"
+    }, {
+      "title" : "Exclude Contains",
+      "id" : "exclude-contains"
     }, {
       "title" : "Include Regexp",
       "id" : "include-regexp"
@@ -389,7 +397,9 @@ toc = [ {
   }, {
     "chapterTitle" : "Snippets",
     "pageTitle" : "Inlined Code Snippets",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "identifier" : [ "{validationPath: [\"python/my_func_usage.py\", \"python/utils.py\"]}" ]
+    },
     "dirName" : "snippets",
     "fileName" : "inlined-code-snippets",
     "viewOnRelativePath" : null,
@@ -457,6 +467,9 @@ toc = [ {
       "title" : "Local References",
       "id" : "local-references"
     }, {
+      "title" : "Page Defaults",
+      "id" : "page-defaults"
+    }, {
       "title" : "Global References",
       "id" : "global-references"
     }, {
@@ -466,7 +479,9 @@ toc = [ {
   }, {
     "chapterTitle" : "Snippets",
     "pageTitle" : "Json",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/extensions/json/JsonBasePlugin.java\"}" ]
+    },
     "dirName" : "snippets",
     "fileName" : "json",
     "viewOnRelativePath" : null,
@@ -482,6 +497,9 @@ toc = [ {
     }, {
       "title" : "Json Subparts",
       "id" : "json-subparts"
+    }, {
+      "title" : "Enclose In Object",
+      "id" : "enclose-in-object"
     }, {
       "title" : "Title",
       "id" : "title"
@@ -559,7 +577,9 @@ toc = [ {
   }, {
     "chapterTitle" : "Snippets",
     "pageTitle" : "CLI",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/extensions/file/SnippetHighlightFeature.java\"}" ]
+    },
     "dirName" : "snippets",
     "fileName" : "CLI",
     "viewOnRelativePath" : null,
@@ -579,17 +599,20 @@ toc = [ {
       "title" : "From File",
       "id" : "from-file"
     }, {
-      "title" : "Output",
-      "id" : "output"
-    }, {
-      "title" : "ANSI Colors",
-      "id" : "ansi-colors"
+      "title" : "ANSI Colors Output",
+      "id" : "ansi-colors-output"
     }, {
       "title" : "Title",
       "id" : "title"
     }, {
       "title" : "Anchor",
       "id" : "anchor"
+    }, {
+      "title" : "Output Highlight",
+      "id" : "output-highlight"
+    }, {
+      "title" : "Wide Mode",
+      "id" : "wide-mode"
     }, {
       "title" : "Extract Snippets",
       "id" : "extract-snippets"
@@ -1209,6 +1232,9 @@ toc = [ {
       "title" : "Width",
       "id" : "width"
     }, {
+      "title" : "Column Names Conflict",
+      "id" : "column-names-conflict"
+    }, {
       "title" : "Min Width",
       "id" : "min-width"
     }, {
@@ -1736,6 +1762,9 @@ toc = [ {
     }, {
       "title" : "Query",
       "id" : "query"
+    }, {
+      "title" : "Useful Action",
+      "id" : "useful-action"
     } ]
   } ]
 }, {
@@ -1766,6 +1795,19 @@ toc = [ {
   "chapterTitle" : "Release Notes",
   "dirName" : "release-notes",
   "items" : [ {
+    "chapterTitle" : "Release Notes",
+    "pageTitle" : "2023 Releases",
+    "pageMeta" : {
+      "title" : [ "2023 Releases" ]
+    },
+    "dirName" : "release-notes",
+    "fileName" : "2023",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "1.63",
+      "id" : "1-63"
+    } ]
+  }, {
     "chapterTitle" : "Release Notes",
     "pageTitle" : "2022 Releases",
     "pageMeta" : {

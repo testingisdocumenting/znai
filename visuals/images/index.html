@@ -131,7 +131,7 @@
 
 <article>
 <header><h1>No Gap</h1></header>
-<p>Use noGap: true to remove top/bottom margins when there are multiple images in a row. markdown :include-image: books.jpg { fit: true, title: &quot;books&quot;, collapsed: true, noGap: true } :include-image: castle.jpg { fit: true, title: &quot;castle&quot;, collapsed: false, noGap: true }</p>
+<p>Use noGap: true to remove top/bottom margins when there are multiple images in a row. markdown :include-image: books.jpg { fit: true, title: &quot;books&quot;, collapsed: true, noGap: true } :include-image: castle.jpg { fit: true, title: &quot;castle&quot;, collapsed: false }</p>
 </article>
 
 <article>
@@ -193,9 +193,10 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "destination" : "/znai/visuals/regular-image.png",
         "alt" : "alt text",
-        "inlined" : false,
-        "timestamp" : 1670944378015,
         "width" : 583,
+        "title" : null,
+        "inlined" : false,
+        "timestamp" : 1677033896986,
         "height" : 385,
         "type" : "Image"
       }, {
@@ -205,12 +206,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "with title",
         "type" : "Snippet"
       }, {
-        "title" : "custom title",
         "destination" : "/znai/visuals/castle.jpg",
         "alt" : "alt text",
-        "inlined" : false,
-        "timestamp" : 1670944378007,
         "width" : 810,
+        "title" : "custom title",
+        "inlined" : false,
+        "timestamp" : 1677033896982,
         "height" : 557,
         "type" : "Image"
       } ]
@@ -315,9 +316,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
+        "border" : true,
+        "fit" : false,
         "title" : "beautiful castle",
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -352,10 +355,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
+        "border" : true,
+        "fit" : false,
         "title" : "beautiful castle",
         "anchorId" : "castle-image",
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -384,8 +389,9 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "border" : true,
+        "fit" : false,
         "imageSrc" : "/znai/visuals/regular-image.png",
-        "timestamp" : 1670944378015,
+        "timestamp" : 1677033896986,
         "shapes" : [ ],
         "width" : 583.0,
         "height" : 385.0,
@@ -402,9 +408,11 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "border" : true,
+        "fit" : false,
         "title" : "wide image",
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -434,10 +442,11 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "border" : true,
         "fit" : true,
         "title" : "auto scaled down image",
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -478,9 +487,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
+        "border" : true,
+        "fit" : false,
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -514,10 +525,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
+        "border" : true,
+        "fit" : false,
         "align" : "left",
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -528,10 +541,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
+        "border" : true,
+        "fit" : false,
         "align" : "right",
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -571,12 +586,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "highlight" : [ 4 ],
         "type" : "Snippet"
       }, {
+        "border" : true,
         "fit" : true,
         "title" : "books",
         "anchorId" : "my-books",
         "collapsed" : true,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -600,29 +616,30 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-image: books.jpg {\n  fit: true,\n  title: \"books\",\n  collapsed: true,\n  noGap: true\n}\n:include-image: castle.jpg {\n  fit: true,\n  title: \"castle\",\n  collapsed: false,\n  noGap: true\n}\n",
+        "snippet" : ":include-image: books.jpg {\n  fit: true,\n  title: \"books\",\n  collapsed: true,\n  noGap: true\n}\n:include-image: castle.jpg {\n  fit: true,\n  title: \"castle\",\n  collapsed: false\n}\n",
         "lineNumber" : "",
-        "highlight" : [ 4, 10 ],
+        "highlight" : [ 4 ],
         "type" : "Snippet"
       }, {
+        "border" : true,
         "fit" : true,
         "title" : "books",
         "collapsed" : true,
         "noGap" : true,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
         "anchorId" : "no-gap-books",
         "type" : "AnnotatedImage"
       }, {
+        "border" : true,
         "fit" : true,
         "title" : "castle",
         "collapsed" : false,
-        "noGap" : true,
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -690,21 +707,24 @@ ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
+        "border" : true,
+        "fit" : false,
         "title" : "only visible in mobile screen size",
         "mobileOnly" : true,
         "imageSrc" : "/znai/visuals/small-book.png",
-        "timestamp" : 1670944378015,
+        "timestamp" : 1677033896990,
         "shapes" : [ ],
         "width" : 256.0,
         "height" : 200.0,
         "anchorId" : "mobile-and-desktop-only-only-visible-in-mobile-screen-size",
         "type" : "AnnotatedImage"
       }, {
+        "border" : true,
+        "fit" : true,
         "title" : "only visible in desktop screen size",
         "desktopOnly" : true,
-        "fit" : true,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1670944378007,
+        "timestamp" : 1677033896982,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -712,7 +732,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "AnnotatedImage"
       } ]
     } ],
-    "lastModifiedTime" : 1670944378015,
+    "lastModifiedTime" : 1677033896986,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Images",

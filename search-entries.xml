@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.62/znai-dist-1.62-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.63/znai-dist-1.63-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.62&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.63&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.62&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.63&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.62&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.63&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -155,7 +155,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations cards charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic plugins plugin-types default-parameters development configuration basic example-references domain api znai-development local-build release-notes 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations cards charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic plugins plugin-types default-parameters development configuration basic example-references domain api znai-development local-build release-notes 2023 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -491,7 +491,7 @@
     <url>/znai/snippets/external-code-snippets#no-gap</url>
     <fullTitle>Znai: External Code Snippets, No Gap [Snippets]</fullTitle>
     <text>
-      <text>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: "part one", noGap: true, collapsed: false} :include-file: simple.c {title: "part two", noGap: true, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; }</text>
+      <text>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: "part one", noGap: true, collapsed: false} :include-file: simple.c {title: "part two", collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -507,7 +507,7 @@
     <url>/znai/snippets/snippets-manipulation#surrounded-by</url>
     <fullTitle>Znai: Snippets Manipulation, Surrounded By [Snippets]</fullTitle>
     <text>
-      <text>Use surroundedBy to extract code snippet surrounded by a marker # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py { title: "extracted example with surroundedBy", surroundedBy: "# example-cancel-trade"} market.cancel_trade(id)</text>
+      <text>Use to extract code snippet surrounded by a marker # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py { title: "extracted example with surroundedBy", surroundedBy: "# example-cancel-trade"} market.cancel_trade(id)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -515,7 +515,7 @@
     <url>/znai/snippets/snippets-manipulation#multiple-surrounded-by</url>
     <fullTitle>Znai: Snippets Manipulation, Multiple Surrounded By [Snippets]</fullTitle>
     <text>
-      <text>Pass a list to surroundedBy to extract multiple blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"]} import market market.cancel_trade(id) Use surroundedBySeparator to select separator(s) between blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"], surroundedBySeparator: ["..."] } import market ... market.cancel_trade(id) Note: surroundedBySeparator can be either single value or a list. Plugin will use a different separator for each block. Use null to have an empty line as a separator.</text>
+      <text>Pass a list to to extract multiple blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"]} import market market.cancel_trade(id) Use to select separator(s) between blocks :include-file: python-examples.py { title: "extracted example", surroundedBy: ["# example-import-block", "# example-cancel-trade"], surroundedBySeparator: ["..."] } import market ... market.cancel_trade(id) Note: can be either single value or a list. Plugin will use a different separator for each block. Use null to have an empty line as a separator.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -523,7 +523,7 @@
     <url>/znai/snippets/snippets-manipulation#replace</url>
     <fullTitle>Znai: Snippets Manipulation, Replace [Snippets]</fullTitle>
     <text>
-      <text>Use replace to replace content of the resulting snippet markdown :include-file: python-examples.py { surroundedBy: "# example-cancel-trade", replace: ['id', '"trade_id"'] } market.cancel_trade("trade_id") Pass a list of lists to replace for multiple replaces markdown :include-file: python-examples.py { surroundedBy: "# example-cancel-trade", replace: [['id', '"trade_id"'], ["market", "api"]]} api.cancel_trade("trade_id")</text>
+      <text>Use to replace content of the resulting snippet markdown :include-file: python-examples.py { surroundedBy: "# example-cancel-trade", replace: ['id', '"trade_id"'] } market.cancel_trade("trade_id") Pass a list of lists to for multiple replaces markdown :include-file: python-examples.py { surroundedBy: "# example-cancel-trade", replace: [['id', '"trade_id"'], ["market", "api"]]} api.cancel_trade("trade_id")</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -539,7 +539,23 @@
     <url>/znai/snippets/snippets-manipulation#start-end-line</url>
     <fullTitle>Znai: Snippets Manipulation, Start/End Line [Snippets]</fullTitle>
     <text>
-      <text>Use startLine , endLine to extract specific content by using marker lines. # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default startLine and endLine are included in the rendered result. Use excludeStartEnd: true to remove markers. :include-file: python-examples.py { startLine: "example: book trade", endLine: "example-end", excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100)</text>
+      <text>Use , to extract specific content by using marker lines. # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default and are included in the rendered result. Use to remove markers. :include-file: python-examples.py { startLine: "example: book trade", endLine: "example-end", excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) To exclude start or end line only use and</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#include-contains</url>
+    <fullTitle>Znai: Snippets Manipulation, Include Contains [Snippets]</fullTitle>
+    <text>
+      <text>Use to include only lines containing specified text(s). :include-file: python-examples.py { include: "import " } or :include-file: python-examples.py { include: ["import "] } import market</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#exclude-contains</url>
+    <fullTitle>Znai: Snippets Manipulation, Exclude Contains [Snippets]</fullTitle>
+    <text>
+      <text>Use to exclude lines containing specified text(s). :include-file: python-examples.py { exclude: "# example" } or :include-file: python-examples.py { exclude: ["# example"] } import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id) if __name__ == "__main__": main()</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -547,7 +563,7 @@
     <url>/znai/snippets/snippets-manipulation#include-regexp</url>
     <fullTitle>Znai: Snippets Manipulation, Include Regexp [Snippets]</fullTitle>
     <text>
-      <text>Use includeRegexp to include only lines matching regexp(s). :include-file: python-examples.py {includeRegexp: "import "} :include-file: python-examples.py {includeRegexp: ["import "]} import market</text>
+      <text>Use to include only lines matching regexp(s). :include-file: python-examples.py { includeRegexp: "market.*_trade" } or :include-file: python-examples.py { includeRegexp: ["market.*_trade"] } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -555,7 +571,7 @@
     <url>/znai/snippets/snippets-manipulation#exclude-regexp</url>
     <fullTitle>Znai: Snippets Manipulation, Exclude Regexp [Snippets]</fullTitle>
     <text>
-      <text>Use excludeRegexp to exclude lines matching regexp(s). :include-file: python-examples.py {excludeRegexp: "# example"} :include-file: python-examples.py {excludeRegexp: ["# example"]} import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id) if __name__ == "__main__": main()</text>
+      <text>Use to exclude lines matching regexp(s). :include-file: python-examples.py { excludeRegexp: ["if .* ==", "\\s+main", "# example", "^\\s*$"] } import market id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -603,7 +619,7 @@
     <url>/znai/snippets/inlined-code-snippets#validated-identifier</url>
     <fullTitle>Znai: Inlined Code Snippets, Validated Identifier [Snippets]</fullTitle>
     <text>
-      <text>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: "my_func_usage.py"}` def example(): my_func(100)</text>
+      <text>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: "my_func_usage.py"}` def example(): my_func(100) Specify multiple files via plugins/default-parameters#page-local-defaults page local or plugins/default-parameters#global-defaults global plugin defaults to avoid repeating validationPath throughout the page. --- identifier: {validationPath: ["python/my_func_usage.py", "python/utils.py"]} --- markdown my text `:identifier: my_func`</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -643,7 +659,7 @@
     <url>/znai/snippets/api-parameters#no-gap</url>
     <fullTitle>Znai: API Parameters, No Gap [Snippets]</fullTitle>
     <text>
-      <text>Use noGap: true to remove top/bottom margins when there are multiple parameter instances in a row. markdown ```api-parameters { title: "person definition", anchorPrefix: "title", collapsed: false, noGap: true } firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true, noGap: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code</text>
+      <text>Use noGap: true to remove top/bottom margins when there are multiple parameter instances in a row. markdown ```api-parameters { title: "person definition", anchorPrefix: "title", collapsed: false, noGap: true } firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: "address definition", anchorPrefix: "title", collapsed: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -699,7 +715,15 @@
     <url>/znai/snippets/code-references#local-references</url>
     <fullTitle>Znai: Code References, Local References [Snippets]</fullTitle>
     <text>
-      <text>You can turn parts of a code snippet into links to internal or external pages.To do that, define references in a CSV file, using a two column format: expression, link . constructor, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor usefulAction, flow/footer :include-file: file-name.js {referencesPath: "references/references-demo.csv"} class JsClass { constructor() { usefulAction() } } export default JsClass</text>
+      <text>You can turn parts of a code snippet into links to internal or external pages.To do that, define references in a CSV file, using a two column format: expression, link . constructor, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor usefulAction, example-references/api#useful-action :include-file: file-name.js {referencesPath: "references/references-demo.csv"} class JsClass { constructor() { usefulAction() } } export default JsClass JSON format is also supported</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/code-references#page-defaults</url>
+    <fullTitle>Znai: Code References, Page Defaults [Snippets]</fullTitle>
+    <text>
+      <text>Use plugin plugins/default-parameters#page-local-defaults Page Local Defaults to set references file that is relevant to the page at hand.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -707,7 +731,7 @@
     <url>/znai/snippets/code-references#global-references</url>
     <fullTitle>Znai: Code References, Global References [Snippets]</fullTitle>
     <text>
-      <text>Add references to references.csv if you want all your code snippets to use the same references. fapi.book, example-references/api#book fapi.query, example-references/api#query import * as fapi from 'flight-api' function bookFlight(flightInfo) { const confirmation = fapi.book(flightInfo) //... } function flightStatus(id) { const fullStatus = fapi.query(id) return fullStatus.shortStatus }</text>
+      <text>Add references to references.csv or references.json if you want all your code snippets to use the same references. { "fapi.book": "example-references/api#book", "fapi.query": "example-references/api#query" } import * as fapi from 'flight-api' function bookFlight(flightInfo) { const confirmation = fapi.book(flightInfo) //... } function flightStatus(id) { const fullStatus = fapi.query(id) return fullStatus.shortStatus }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -731,7 +755,7 @@
     <url>/znai/snippets/json#highlight-values-by-path</url>
     <fullTitle>Znai: Json, Highlight Values By Path [Snippets]</fullTitle>
     <text>
-      <text>Use the paths plugin parameter to bring attention to a certain place in a JSON file. ```json {paths: "root[1].key2"} [{"key1": "value1"}, {"key2": "value2"}] ``` Pass multiple values to paths to highlight more than one leaf value :include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]} Comma-separated paths specified inside paths will be highlighted.</text>
+      <text>Use the plugin parameter to bring attention to a certain place in a JSON file. ```json {paths: "root[1].key2"} [{"key1": "value1"}, {"key2": "value2"}] ``` Pass multiple values to to highlight more than one leaf value :include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]} Comma-separated paths specified inside will be highlighted.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -739,7 +763,7 @@
     <url>/znai/snippets/json#highlight-by-path-from-file</url>
     <fullTitle>Znai: Json, Highlight By Path From File [Snippets]</fullTitle>
     <text>
-      <text>Use pathsFile to specify a file to read paths from. :include-json: book-store.json {pathsFile: "book-store-paths.json"}</text>
+      <text>Use to specify a file to read paths from. :include-json: book-store.json {pathsFile: "book-store-paths.json"}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -747,7 +771,15 @@
     <url>/znai/snippets/json#json-subparts</url>
     <fullTitle>Znai: Json, Json Subparts [Snippets]</fullTitle>
     <text>
-      <text>To include only a portion of your document pass https://github.com/json-path/JsonPath Json Path as include property: :include-json: book-store.json {include: "$..book[0,1]"}</text>
+      <text>To include only a portion of your document pass https://github.com/json-path/JsonPath Json Path as property: :include-json: book-store.json {include: "$..book[0,1]"}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/json#enclose-in-object</url>
+    <fullTitle>Znai: Json, Enclose In Object [Snippets]</fullTitle>
+    <text>
+      <text>Use to wrap any JSON and include result into parent object(s) :include-json: book-store.json {encloseInObject: "books.rare", include: "$..book[0,1]"}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -920,16 +952,8 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/CLI#output</url>
-    <fullTitle>Znai: CLI, Output [Snippets]</fullTitle>
-    <text>
-      <text>To display console output and bring attention to certain lines use: :include-cli-output: cli/file-path-of-captured.out {highlight: [0, 4]} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master You can highlight by a partial line text match: :include-cli-output: cli/file-path-of-captured.out {highlight: "remote"} Or you can highlight by lines stored in a separate file: :include-cli-output: cli/file-path-of-captured.out {highlightPath: "cli/file-path-of-asserted-lines.txt"} remote: Writing Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
-      <score>STANDARD</score>
-    </text>
-  </entry>
-  <entry>
-    <url>/znai/snippets/CLI#ansi-colors</url>
-    <fullTitle>Znai: CLI, ANSI Colors [Snippets]</fullTitle>
+    <url>/znai/snippets/CLI#ansi-colors-output</url>
+    <fullTitle>Znai: CLI, ANSI Colors Output [Snippets]</fullTitle>
     <text>
       <text>CLI renders ANSI colors automatically. webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer> expected: 200 &lt;java.lang.Integer> (47ms) { "userId": 1, "id": 1, "title": "delectus aut autem", "completed": false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) :include-cli-output: cli/ansi.out webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer> expected: 200 &lt;java.lang.Integer> (47ms) { "userId": 1, "id": 1, "title": "delectus aut autem", "completed": false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms)</text>
       <score>STANDARD</score>
@@ -939,7 +963,7 @@
     <url>/znai/snippets/CLI#title</url>
     <fullTitle>Znai: CLI, Title [Snippets]</fullTitle>
     <text>
-      <text>Use title to specify output of the output :include-cli-output: cli/file-path-of-captured.out {title: "Captured output"} Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
+      <text>Use title to specify output of the output :include-cli-output: cli/ansi.out {title: "captured output"} webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer> expected: 200 &lt;java.lang.Integer> (47ms) { "userId": 1, "id": 1, "title": "delectus aut autem", "completed": false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -947,7 +971,23 @@
     <url>/znai/snippets/CLI#anchor</url>
     <fullTitle>Znai: CLI, Anchor [Snippets]</fullTitle>
     <text>
-      <text>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-cli-output: cli/file-path-of-captured.out { title: "Captured output", anchorId: "my-output", readMore: true } Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
+      <text>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-cli-output: cli/ansi.out { title: "captured output", anchorId: "my-output" } webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer> expected: 200 &lt;java.lang.Integer> (47ms) { "userId": 1, "id": 1, "title": "delectus aut autem", "completed": false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms)</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/CLI#output-highlight</url>
+    <fullTitle>Znai: CLI, Output Highlight [Snippets]</fullTitle>
+    <text>
+      <text>Use to highlight lines :include-cli-output: cli/ansi.out { title: "captured output", "highlight": "GET https" } webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer> expected: 200 &lt;java.lang.Integer> (47ms) { "userId": 1, "id": 1, "title": "delectus aut autem", "completed": false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) Use to highlight lines based on the content of a file :include-cli-output: cli/ansi.out {highlightPath: "cli/file-path-of-asserted-lines.txt"} statusCode equals 200 executed HTTP GET webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer> expected: 200 &lt;java.lang.Integer> (47ms) { "userId": 1, "id": 1, "title": "delectus aut autem", "completed": false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms)</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/CLI#wide-mode</url>
+    <fullTitle>Znai: CLI, Wide Mode [Snippets]</fullTitle>
+    <text>
+      <text>Use wide option to occupy as much horizontal space as available :include-cli-output: cli/wide-output.out { title: "Captured output", wide: true } long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -963,7 +1003,7 @@
     <url>/znai/snippets/CLI#presentation-mode</url>
     <fullTitle>Znai: CLI, Presentation Mode [Snippets]</fullTitle>
     <text>
-      <text>In presentation mode, cli command related plugins will simulate typing inside the terminal.You can gradually reveal cli-output by providing revealLineStop parameter. :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4]} Passed highlight will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
+      <text>In presentation mode, cli command related plugins will simulate typing inside the terminal.You can gradually reveal cli-output by providing revealLineStop parameter. :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4], highlight: "remote"} Passed will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -> master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -> master</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1323,7 +1363,7 @@
     <url>/znai/visuals/images#no-gap</url>
     <fullTitle>Znai: Images, No Gap [Visuals]</fullTitle>
     <text>
-      <text>Use noGap: true to remove top/bottom margins when there are multiple images in a row. markdown :include-image: books.jpg { fit: true, title: "books", collapsed: true, noGap: true } :include-image: castle.jpg { fit: true, title: "castle", collapsed: false, noGap: true }</text>
+      <text>Use noGap: true to remove top/bottom margins when there are multiple images in a row. markdown :include-image: books.jpg { fit: true, title: "books", collapsed: true, noGap: true } :include-image: castle.jpg { fit: true, title: "castle", collapsed: false }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1963,7 +2003,7 @@
     <url>/znai/layout/tables#no-gap</url>
     <fullTitle>Znai: Tables, No Gap [Layout]</fullTitle>
     <text>
-      <text>Use noGap: true to remove top/bottom margins when there are multiple tables in a row. markdown :include-table: table/table.json { title: "Monthly Report", collapsed: true, noGap: true, } :include-table: table/table.json { title: "Weekly Report", collapsed: false, noGap: true, } Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
+      <text>Use noGap: true to remove top/bottom margins when there are multiple tables in a row. markdown :include-table: table/table.json { title: "Monthly Report", collapsed: true, noGap: true } :include-table: table/table.json { title: "Weekly Report", collapsed: false } Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1996,6 +2036,14 @@
     <fullTitle>Znai: Tables, Width [Layout]</fullTitle>
     <text>
       <text>By default, columns width is auto-calculated to fit the values inside. Use width to control the width of a column. :include-table: table.csv {Price: {width: 200}, "Description": {width: 400}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width. :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "30%"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content :include-table: table/table.csv {Price: {width: "50%"}, "Description": {width: "60%"}} Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/tables#column-names-conflict</url>
+    <fullTitle>Znai: Tables, Column Names Conflict [Layout]</fullTitle>
+    <text>
+      <text>Use _ prefix if a column name matches the plugin parameter name like title when setting column specific parameters. :include-table: table/table-conflict.csv {"_title": {width: "80%"}} account title #12BGD3 custom table with a long attachment #12BGD4 custom table with a short attachment</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2307,7 +2355,7 @@
     <url>/znai/python/auto-reference#fin-money-money</url>
     <fullTitle>Znai: Auto Reference, fin.money.Money [Python]</fullTitle>
     <text>
-      <text>To define a class use python-class include plugin :include-python-class: fin.money.Money class Money: """ Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead """ def __init__(self, amount: int, currency: str): """ generic constructor that accepts a currency Parameters ---------- amount: amount of money currency: currency to associate with the created Money """ self._amount = amount self._currency = currency @property def amount(self) -> int: """ amount in provided currency """ return self._amount @amount.setter def amount(self, amount: int): self.amount = amount @property def currency(self) -> str: """ money currency """ return self._currency @classmethod def dollars(cls, amount: int) -> 'Money': """ creates money instance with `USD` as the currency Parameters ---------- amount: dollar amount Returns ------- new money instance with `USD` as currency """ return cls(amount, "USD") def add(self, another: 'Money'): """ add money from another money instance Parameters -------------- another : money to add """ self.amount += another.amount Note: Once you define Money class, method arguments and parameter descriptions with the same type will automatically link to the place of definition Properties Members Details dollars __init__ add Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str [readonly] money currency Money.dollars Money.__init__ Money.add Money.dollars creates money instance with `USD` as the currency returns fin.money.Money new money instance with USD as currency amount int dollar amount Money.__init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money.add add money from another money instance another fin.money.Money money to add</text>
+      <text>To define a class use python-class include plugin :include-python-class: fin.money.Money """ Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead """ def __init__(self, amount: int, currency: str): """ generic constructor that accepts a currency Parameters ---------- amount: amount of money currency: currency to associate with the created Money """ self._amount = amount self._currency = currency @property def amount(self) -> int: """ amount in provided currency """ return self._amount @amount.setter def amount(self, amount: int): self.amount = amount @property def currency(self) -> str: """ money currency """ return self._currency @classmethod def dollars(cls, amount: int) -> 'Money': """ creates money instance with `USD` as the currency Parameters ---------- amount: dollar amount Returns ------- new money instance with `USD` as currency """ return cls(amount, "USD") def add(self, another: 'Money'): """ add money from another money instance Parameters -------------- another : money to add """ self.amount += another.amount Note: Once you define Money class, method arguments and parameter descriptions with the same type will automatically link to the place of definition Properties Members Details dollars __init__ add Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str [readonly] money currency Money.dollars Money.__init__ Money.add Money.dollars creates money instance with `USD` as the currency returns fin.money.Money new money instance with USD as currency amount int dollar amount Money.__init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money.add add money from another money instance another fin.money.Money money to add</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2760,6 +2808,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/example-references/api#useful-action</url>
+    <fullTitle>Znai: Api, Useful Action [Example References]</fullTitle>
+    <text>
+      <text>stub for useful action description</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/znai-development/local-build#clone-project</url>
     <fullTitle>Znai: Local Build, Clone Project [Znai Development]</fullTitle>
     <text>
@@ -2788,6 +2844,14 @@
     <fullTitle>Znai: Local Build, Run Local Version [Znai Development]</fullTitle>
     <text>
       <text>cd znai-dist/target unzip dist-znai.zip export PATH=$(pwd)/dist:$PATH znai --version</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2023#1-63</url>
+    <fullTitle>Znai: 2023 Releases, 1.63 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: visuals/images Images null pointer when using with SVGs Fix: Table column parameters layout/tables#column-names-conflict name conflict Fix: snippets/json JSON regression with displaying null values Fix: stop badge visuals/image-annotations#badge-textual-description image annotation from pulsing when mouse moved out Fix: remove extra gap from last code snippet inside snippets/api-parameters API parameters Add: plugins/plugin-types Plugins parameters validation error message now prints in the context of plugin name and passed params Fix: snippets/code-references code reference now turns into links parts of code that is not fully recognized by highlighter Add: snippets/snippets-manipulation#surrounded-by surroundedBy validates that content is not empty after extraction Add: snippets/open-API Open API summary field validation when using autoSection: true Add: snippets/CLI#output-highlight CLI Output Highlight now matches sub-lines ignoring colors ANSI sequence Add: JSON snippets/json#enclose-in-object Enclose In Object Add: JSON format for snippets/code-references Code References Add: better alignment of multiple snippets/CLI CLI Commands in a row and when surrounded by text Add: snippets/CLI#output-highlight console output and snippets/external-code-snippets code snippets trim empty lines from start/end when no extraction specific params is set Add: include and exclude to snippets/snippets-manipulation#include-contains include/exclude lines using contains Add: excludeStart and excludeEnd as separate options to snippets/snippets-manipulation snippets manipulation Add: snippets/inlined-code-snippets#validated-identifier identifier support for multiple validation paths. Example of using default parameters to simplify flow. Add: noGap option for images, tables, snippets and API parameters is only required for the first entry, second can omit it. If it does, third entry will have a gap again above. This helps with groups of snippets/tables/etc. Add: snippets/CLI#wide-mode Wide Mode for CLI Output</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2875,7 +2939,7 @@
     <url>/znai/release-notes/2021#1-55</url>
     <fullTitle>Znai: 2021 Releases, 1.55 [Release Notes]</fullTitle>
     <text>
-      <text>Doc: moved snippets/snippets-manipulation Snippets Manipulation to its own page Doc: rewrite of introduction/what-is-this What Is This starting page Extra spacing between section title and visuals/text-badge#part-of-heading its badge Color tweaks for snippets/code-comments#callout-comments code snippet bullet points and visuals/text-badge text badge for light and dark theme Normalize doxygen member CPP/auto-reference#specific-member-by-args selection by args Add snippets/snippets-manipulation#replace Replace snippet manipulation Add snippets/snippets-manipulation#multiple-surrounded-by Surrounded By Multiple blocks support Add snippets/CLI CLI fence plugin Tweaked text selection color for dark theme Fix: snippets/CLI#ansi-colors CLI ANSI output background colors Fix: snippets highlight regression Fix: win cmd script to include passed params</text>
+      <text>Doc: moved snippets/snippets-manipulation Snippets Manipulation to its own page Doc: rewrite of introduction/what-is-this What Is This starting page Extra spacing between section title and visuals/text-badge#part-of-heading its badge Color tweaks for snippets/code-comments#callout-comments code snippet bullet points and visuals/text-badge text badge for light and dark theme Normalize doxygen member CPP/auto-reference#specific-member-by-args selection by args Add snippets/snippets-manipulation#replace Replace snippet manipulation Add snippets/snippets-manipulation#multiple-surrounded-by Surrounded By Multiple blocks support Add snippets/CLI CLI fence plugin Tweaked text selection color for dark theme Fix: snippets/CLI#ansi-colors-output CLI ANSI output background colors Fix: snippets highlight regression Fix: win cmd script to include passed params</text>
       <score>STANDARD</score>
     </text>
   </entry>

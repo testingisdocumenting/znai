@@ -91,17 +91,22 @@
 
 <article>
 <header><h1>Highlight Values By Path</h1></header>
-<p>Use the paths plugin parameter to bring attention to a certain place in a JSON file. ```json {paths: &quot;root[1].key2&quot;} [{&quot;key1&quot;: &quot;value1&quot;}, {&quot;key2&quot;: &quot;value2&quot;}] ``` Pass multiple values to paths to highlight more than one leaf value :include-json: book-store.json {paths: [&quot;root.store.book[0].category&quot;, &quot;root.store.book[2].category&quot;]} Comma-separated paths specified inside paths will be highlighted.</p>
+<p>Use the plugin parameter to bring attention to a certain place in a JSON file. ```json {paths: &quot;root[1].key2&quot;} [{&quot;key1&quot;: &quot;value1&quot;}, {&quot;key2&quot;: &quot;value2&quot;}] ``` Pass multiple values to to highlight more than one leaf value :include-json: book-store.json {paths: [&quot;root.store.book[0].category&quot;, &quot;root.store.book[2].category&quot;]} Comma-separated paths specified inside will be highlighted.</p>
 </article>
 
 <article>
 <header><h1>Highlight By Path From File</h1></header>
-<p>Use pathsFile to specify a file to read paths from. :include-json: book-store.json {pathsFile: &quot;book-store-paths.json&quot;}</p>
+<p>Use to specify a file to read paths from. :include-json: book-store.json {pathsFile: &quot;book-store-paths.json&quot;}</p>
 </article>
 
 <article>
 <header><h1>Json Subparts</h1></header>
-<p>To include only a portion of your document pass https://github.com/json-path/JsonPath Json Path as include property: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;}</p>
+<p>To include only a portion of your document pass https://github.com/json-path/JsonPath Json Path as property: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;}</p>
+</article>
+
+<article>
+<header><h1>Enclose In Object</h1></header>
+<p>Use to wrap any JSON and include result into parent object(s) :include-json: book-store.json {encloseInObject: &quot;books.rare&quot;, include: &quot;$..book[0,1]&quot;}</p>
 </article>
 
 <article>
@@ -416,6 +421,48 @@ ReactDOM.render(React.createElement(Documentation, {
           "title" : "Sword of Honour",
           "price" : 12.99
         } ],
+        "paths" : [ ],
+        "type" : "Json"
+      } ]
+    }, {
+      "id" : "enclose-in-object",
+      "title" : "Enclose In Object",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "encloseInObject",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to wrap any JSON and include result into parent object(s)",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-json: book-store.json {encloseInObject: \"books.rare\", include: \"$..book[0,1]\"}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "encloseInObject" : "books.rare",
+        "include" : "$..book[0,1]",
+        "data" : {
+          "books" : {
+            "rare" : [ {
+              "category" : "reference",
+              "author" : "Nigel Rees",
+              "title" : "Sayings of the Century",
+              "price" : 8.95
+            }, {
+              "category" : "fiction",
+              "author" : "Evelyn Waugh",
+              "title" : "Sword of Honour",
+              "price" : 12.99
+            } ]
+          }
+        },
         "paths" : [ ],
         "type" : "Json"
       } ]
@@ -907,11 +954,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1670944377995,
+    "lastModifiedTime" : 1677033896970,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Json",
-      "pageMeta" : { },
+      "pageMeta" : {
+        "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/extensions/json/JsonBasePlugin.java\"}" ]
+      },
       "dirName" : "snippets",
       "fileName" : "json",
       "viewOnRelativePath" : null,
@@ -927,6 +976,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Json Subparts",
         "id" : "json-subparts"
+      }, {
+        "title" : "Enclose In Object",
+        "id" : "enclose-in-object"
       }, {
         "title" : "Title",
         "id" : "title"

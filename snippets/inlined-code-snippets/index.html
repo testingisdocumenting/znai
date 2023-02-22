@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>Validated Identifier</h1></header>
-<p>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: &quot;my_func_usage.py&quot;}` def example(): my_func(100)</p>
+<p>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: &quot;my_func_usage.py&quot;}` def example(): my_func(100) Specify multiple files via plugins/default-parameters#page-local-defaults page local or plugins/default-parameters#global-defaults global plugin defaults to avoid repeating validationPath throughout the page. --- identifier: {validationPath: [&quot;python/my_func_usage.py&quot;, &quot;python/utils.py&quot;]} --- markdown my text `:identifier: my_func`</p>
 </article>
 </section>
 </div>
@@ -216,13 +216,68 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "my_func_usage.py",
         "anchorId" : "validated-identifier-my_func_usage-py",
         "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Specify multiple files via ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/plugins/default-parameters#page-local-defaults",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "page local",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " or ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/plugins/default-parameters#global-defaults",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "global",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " plugin defaults",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "to avoid repeating ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "validationPath",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " throughout the page.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "md",
+        "snippet" : "---\nidentifier: {validationPath: [\"python/my_func_usage.py\", \"python/utils.py\"]}\n---",
+        "title" : "page local default",
+        "startLine" : "---",
+        "endLine" : "---",
+        "anchorId" : "validated-identifier-page-local-default",
+        "type" : "Snippet"
+      }, {
+        "lang" : "markdown",
+        "snippet" : "my text `:identifier: my_func`\n",
+        "lineNumber" : "",
+        "title" : "use page default validaiton path",
+        "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1670944377995,
+    "lastModifiedTime" : 1677033896970,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Inlined Code Snippets",
-      "pageMeta" : { },
+      "pageMeta" : {
+        "identifier" : [ "{validationPath: [\"python/my_func_usage.py\", \"python/utils.py\"]}" ]
+      },
       "dirName" : "snippets",
       "fileName" : "inlined-code-snippets",
       "viewOnRelativePath" : null,
