@@ -1,0 +1,1 @@
+* Fix: [Images](visuals/images) null pointer when using with SVGs

@@ -285,13 +285,19 @@ public class DocElementCreationParserHandler implements ParserHandler {
             AuxiliaryFile auxiliaryFile = resourcesResolver.runtimeAuxiliaryFile(destination);
             BufferedImage image = resourcesResolver.imageContent(destination);
 
-            append(DocElementType.IMAGE, "title", title,
-                    "destination", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()),
-                    "alt", alt,
-                    "inlined", true,
-                    "timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()),
-                    "width", image.getWidth(),
-                    "height", image.getHeight());
+            Map<String, Object> props = new HashMap<>();
+            props.put("title", title);
+            props.put("destination", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
+            props.put("alt", alt);
+            props.put("inlined", true);
+            props.put("timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()));
+
+            if (image != null) {
+                props.put("width", image.getWidth());
+                props.put("height", image.getHeight());
+            }
+
+            append(DocElementType.IMAGE, props);
 
             auxiliaryFiles.add(auxiliaryFile);
         } else {

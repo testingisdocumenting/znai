@@ -137,6 +137,10 @@ abstract class ImagePluginBase implements Plugin {
 
     private void setWidthHeight(BufferedImage bufferedImage,
                                 Map<String, Object> props) {
+        if (bufferedImage == null) {
+            return;
+        }
+
         Double pixelRatio = pixelRatio();
 
         props.put("width", bufferedImage.getWidth() / pixelRatio);
