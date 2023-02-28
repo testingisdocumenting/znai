@@ -1,0 +1,1 @@
+* Fix: [snippets](snippets/external-code-snippets) constant color for dark and light theme

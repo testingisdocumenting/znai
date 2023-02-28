@@ -208,6 +208,7 @@
 
     --znai-default-code-block-color: var(--znai-color-black);
     --znai-code-class-color: #39397d;
+    --znai-code-constant-color: #c58fe0;
     --znai-code-function-color: #a66f2b;
     --znai-code-keyword-color: #038091;
     --znai-code-directive-color: #7e4e11;

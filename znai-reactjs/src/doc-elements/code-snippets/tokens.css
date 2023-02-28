@@ -27,6 +27,10 @@
     color: var(--znai-code-class-color);
 }
 
+.token.constant {
+    color: var(--znai-code-constant-color);
+}
+
 .token.operator {
     background: none;
 }
