@@ -1,0 +1,1 @@
+* Fix: `Grid` bullet list presentation mode is now properly hiding unrevealed boxes

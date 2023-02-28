@@ -1,4 +1,5 @@
 /*
+ * Copyright 2023 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,15 +30,16 @@
     font-size: 5vh;
     height: 50%;
     text-align: center;
-    border-bottom: 2px solid #7daeff;
-    border-right: 2px solid #7daeff;
+
+    border: 2px solid var(--znai-background-color);
+
     background-color: #1e7bbf;
-    color: #fff;
+    color: #eee;
 }
 
 .grid .cell.empty {
-    border-bottom: 2px solid #666;
-    border-right: 2px solid #666;
-    background-color: #eee;
-    color: #eee;
+    border: 2px solid var(--znai-background-color);
+
+    background-color: var(--znai-snippets-title-background-color);
+    color: var(--znai-snippets-title-background-color);
 }
