@@ -20,30 +20,38 @@ export function bulletListPresentationDemo(registry) {
     const content = createBulletContent()
 
     registry
-        .add('reveal boxes', createPresentationDemo([{
-                type: 'BulletList',
-                meta: {
-                    presentationBulletListType: 'RevealBoxes'
-                },
-                content
-            }])
-        )
-        .add('horizontal stripes', createPresentationDemo([{
-                type: 'BulletList',
-                meta: {
-                    presentationBulletListType: 'HorizontalStripes'
-                },
-                content
-            }])
-        )
-        .add('horizontal stripes with icons', createPresentationDemo([{
-                type: 'BulletList',
-                meta: {
-                    presentationBulletListType: 'HorizontalStripes'
-                },
-                content: bulletListWithIcons()
-            }])
-        )
+      .add('reveal boxes', createPresentationDemo([{
+            type: 'BulletList',
+            meta: {
+                presentationBulletListType: 'RevealBoxes'
+            },
+            content
+        }])
+      )
+      .add('grid boxes', createPresentationDemo([{
+            type: 'BulletList',
+            meta: {
+                presentationBulletListType: 'Grid'
+            },
+            content
+        }])
+      )
+      .add('horizontal stripes', createPresentationDemo([{
+            type: 'BulletList',
+            meta: {
+                presentationBulletListType: 'HorizontalStripes'
+            },
+            content
+        }])
+      )
+      .add('horizontal stripes with icons', createPresentationDemo([{
+            type: 'BulletList',
+            meta: {
+                presentationBulletListType: 'HorizontalStripes'
+            },
+            content: bulletListWithIcons()
+        }])
+      )
 }
 
 function createBulletContent() {

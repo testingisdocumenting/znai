@@ -1,4 +1,5 @@
 /*
+ * Copyright 2023 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +29,7 @@ class Grid extends Component {
 
         return (
             <div className="grid">{content.map((item, idx) => {
-                const className = "cell" + (idx > slideIdx && !isAllAtOnce(meta) ? "empty" : "")
+                const className = "cell" + (idx > slideIdx && !isAllAtOnce(meta) ? " empty" : "")
                 return <div key={idx} className={className} style={cellStyle(textLines.length)}>{textLines[idx]}</div>
             })}
             </div>
