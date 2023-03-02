@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.website;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.core.DocConfig;
 import org.testingisdocumenting.znai.core.GlobalAssetsRegistry;
+import org.testingisdocumenting.znai.core.Log;
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.parser.MarkupParser;
@@ -36,6 +37,7 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
     private PluginParamsFactory pluginParamsFactory;
     private ResourcesResolver resourcesResolver;
     private DocStructure docStructure;
+    private Log log;
 
     private final GlobalAssetsRegistry assetsRegistry;
 
@@ -89,6 +91,11 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
         return timeService;
     }
 
+    @Override
+    public Log log() {
+        return log;
+    }
+
     public void setDefaultParser(MarkupParser parser) {
         this.defaultParser = parser;
     }
@@ -107,5 +114,9 @@ public class WebSiteComponentsRegistry implements ComponentsRegistry {
 
     public void setDocStructure(DocStructure docStructure) {
         this.docStructure = docStructure;
+    }
+
+    public void setLog(Log log) {
+        this.log = log;
     }
 }

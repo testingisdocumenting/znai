@@ -35,7 +35,9 @@ import org.testingisdocumenting.znai.utils.JsonParseException;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class MarkdownVisitor extends AbstractVisitor {
     private final ComponentsRegistry componentsRegistry;
@@ -43,14 +45,25 @@ public class MarkdownVisitor extends AbstractVisitor {
     private final ParserHandler parserHandler;
     private boolean sectionStarted;
 
+    private final Set<PluginParamWarning> parameterWarnings;
+
     public MarkdownVisitor(ComponentsRegistry componentsRegistry, Path path, ParserHandler parserHandler) {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
         this.parserHandler = parserHandler;
+        this.parameterWarnings = new LinkedHashSet<>();
     }
 
     public boolean isSectionStarted() {
         return sectionStarted;
+    }
+
+    public boolean hasPluginWarnings() {
+        return !parameterWarnings.isEmpty();
+    }
+
+    public Set<PluginParamWarning> getParameterWarnings() {
+        return parameterWarnings;
     }
 
     @Override
@@ -212,7 +225,8 @@ public class MarkdownVisitor extends AbstractVisitor {
             IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());
             includePlugin.preprocess(componentsRegistry, path, params);
 
-            includePlugin.parameters().validate(params);
+            PluginParamValidationResult validationResult = includePlugin.parameters().validateParamsAndHandleRenames(params);
+            handleParamsValidationResult(validationResult);
 
             PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, path, params);
 
@@ -228,7 +242,8 @@ public class MarkdownVisitor extends AbstractVisitor {
             fencePlugin.preprocess(componentsRegistry, path, params);
             fencePlugin.preprocess(componentsRegistry, path, params, fenceContent);
 
-            fencePlugin.parameters().validate(params);
+            PluginParamValidationResult validationResult = fencePlugin.parameters().validateParamsAndHandleRenames(params);
+            handleParamsValidationResult(validationResult);
 
             PluginResult pluginResult = fencePlugin.process(componentsRegistry, path, params, fenceContent);
 
@@ -243,7 +258,9 @@ public class MarkdownVisitor extends AbstractVisitor {
         try {
             InlinedCodePlugin inlinedCodePlugin = Plugins.inlinedCodePluginById(params.getPluginId());
             inlinedCodePlugin.preprocess(componentsRegistry, path, params);
-            inlinedCodePlugin.parameters().validate(params);
+
+            PluginParamValidationResult validationResult = inlinedCodePlugin.parameters().validateParamsAndHandleRenames(params);
+            handleParamsValidationResult(validationResult);
 
             PluginResult pluginResult = inlinedCodePlugin.process(componentsRegistry, path, params);
             parserHandler.onInlinedCodePlugin(inlinedCodePlugin, pluginResult);
@@ -265,6 +282,14 @@ public class MarkdownVisitor extends AbstractVisitor {
                 pluginParamsFactory.create(nameAndParams, ""):
                 pluginParamsFactory.create(nameAndParams.substring(0, firstSpaceIdx),
                         nameAndParams.substring(firstSpaceIdx + 1));
+    }
+
+    private void handleParamsValidationResult(PluginParamValidationResult validationResult) {
+        if (!validationResult.isValid()) {
+            throw new IllegalArgumentException(validationResult.getValidationError());
+        }
+
+        parameterWarnings.addAll(validationResult.getWarnings());
     }
 
     private HeadingTextAndProps extractHeadingTextAndProps(Heading heading) {

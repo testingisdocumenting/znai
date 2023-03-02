@@ -1,0 +1,1 @@
+* Add: plugin parameter names deprecation (rename) mechanism

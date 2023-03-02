@@ -16,9 +16,7 @@
 
 package org.testingisdocumenting.znai.extensions;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class PluginParamsDefinition {
@@ -54,6 +52,9 @@ public class PluginParamsDefinition {
 
     private final boolean isDefined;
     private final List<Param> params = new ArrayList<>();
+
+    private final Map<String, String> renamesOldByNewName = new HashMap<>();
+    private final Map<String, String> renamesNewByOldName = new HashMap<>();
 
     public static PluginParamsDefinition undefined() {
         return new PluginParamsDefinition(false);
@@ -91,6 +92,13 @@ public class PluginParamsDefinition {
         return this;
     }
 
+    public PluginParamsDefinition rename(String oldName, String newName) {
+        renamesOldByNewName.put(newName, oldName);
+        renamesNewByOldName.put(oldName, newName);
+
+        return this;
+    }
+
     private void add(Param param) {
         validateNameUniqueness(param.name);
         params.add(param);
@@ -103,20 +111,23 @@ public class PluginParamsDefinition {
         }
     }
 
-    private Param findParam(String name) {
+    private Param findParamDefinition(String name) {
         return params.stream()
                 .filter(p -> p.name.equals(name))
                 .findFirst()
                 .orElse(null);
     }
 
-    public void validate(PluginParams pluginParams) {
+    public PluginParamValidationResult validateParamsAndHandleRenames(PluginParams pluginParams) {
         if (!isDefined) {
-            return;
+            return PluginParamValidationResult.EMPTY;
         }
 
         List<String> unrecognizedNames = new ArrayList<>();
         List<String> typeMismatches = new ArrayList<>();
+        List<PluginParamWarning> warnings = new ArrayList<>();
+
+        pluginParams.getOpts().setRenamesInfo(renamesOldByNewName);
 
         List<String> missingRequiredNames = params.stream()
                 .filter(Param::isRequired)
@@ -129,9 +140,16 @@ public class PluginParamsDefinition {
                 return; // ignore meta parameters for now
             }
 
-            Param param = findParam(name);
+            String newName = renamesNewByOldName.get(name);
+            if (newName != null) {
+                warnings.add(new PluginParamWarning(pluginParams.getPluginId(), name, "parameter is renamed to <" + newName + ">"));
+            }
+
+            String nameToUse = newName != null ? newName : name;
+
+            Param param = findParamDefinition(nameToUse);
             if (param == null) {
-                unrecognizedNames.add(name);
+                unrecognizedNames.add(nameToUse);
             } else {
                 boolean isTypeMatch = param.type.isValid(value);
                 if (!isTypeMatch) {
@@ -141,12 +159,8 @@ public class PluginParamsDefinition {
             }
         });
 
-        if (unrecognizedNames.isEmpty() && typeMismatches.isEmpty() && missingRequiredNames.isEmpty()) {
-            return;
-        }
-
-        throw new IllegalArgumentException(renderValidationMessage(missingRequiredNames,
-                unrecognizedNames, typeMismatches));
+        String validationError = renderValidationMessage(missingRequiredNames, unrecognizedNames, typeMismatches);
+        return new PluginParamValidationResult(warnings.stream(), validationError);
     }
 
     private String renderGiven(Object value) {
@@ -168,6 +182,10 @@ public class PluginParamsDefinition {
     private String renderValidationMessage(List<String> missingRequiredNames,
                                            List<String> unrecognizedNames,
                                            List<String> typeMismatches) {
+        if (missingRequiredNames.isEmpty() && unrecognizedNames.isEmpty() && typeMismatches.isEmpty()) {
+            return "";
+        }
+
         StringBuilder message = new StringBuilder();
         if (!missingRequiredNames.isEmpty()) {
             message.append("missing required parameter(s): ")

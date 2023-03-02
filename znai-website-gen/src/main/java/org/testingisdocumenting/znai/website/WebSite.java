@@ -109,6 +109,7 @@ public class WebSite implements Log {
 
         registeredExtraJavaScripts = siteConfig.registeredExtraJavaScripts;
         componentsRegistry = new WebSiteComponentsRegistry(siteConfig.docRootPath, siteConfig.isValidateExternalLinks);
+        componentsRegistry.setLog(this);
         pluginParamsFactory = new PluginParamsWithDefaultsFactory();
         componentsRegistry.setPluginParamsFactory(pluginParamsFactory);
         resourceResolver = new ResourcesResolverChain();
@@ -856,8 +857,8 @@ public class WebSite implements Log {
     }
 
     @Override
-    public void warn(String message) {
-        ProgressReporter.reportWarning(message);
+    public void warn(Object... styleOrValue) {
+        ConsoleOutputs.out(Stream.concat(Stream.of(Color.YELLOW, "[Warning] ", FontStyle.NORMAL), Arrays.stream(styleOrValue)).toArray());
     }
 
     private interface PageConsumer {

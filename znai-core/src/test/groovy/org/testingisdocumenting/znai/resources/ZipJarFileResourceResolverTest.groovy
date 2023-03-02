@@ -22,6 +22,7 @@ import org.junit.Test
 import org.testingisdocumenting.znai.console.ConsoleOutputs
 import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput
 import org.testingisdocumenting.znai.console.ansi.Color
+import org.testingisdocumenting.znai.console.ansi.IgnoreAnsiString
 import org.testingisdocumenting.znai.core.Log
 
 import java.nio.file.Paths
@@ -64,7 +65,7 @@ class ZipJarFileResourceResolverTest implements Log {
     }
 
     @Override
-    void warn(String message) {
-        throw new RuntimeException(message)
+    void warn(Object... styleOrValue) {
+        throw new RuntimeException(new IgnoreAnsiString(styleOrValue).toString())
     }
 }

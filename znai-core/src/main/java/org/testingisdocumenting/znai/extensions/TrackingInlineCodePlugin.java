@@ -34,6 +34,11 @@ public class TrackingInlineCodePlugin implements InlinedCodePlugin {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        return delegate.parameters();
+    }
+
+    @Override
     public String id() {
         return delegate.id();
     }
