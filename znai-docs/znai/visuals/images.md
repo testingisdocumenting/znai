@@ -74,7 +74,7 @@ To scale image up or down use `scale` option, `1` is default, `0.5` is half an i
     
     :include-image: books.jpg {scale: 0.3}
 
-:include-image: books.jpg {scaleRatio: 0.3}
+:include-image: books.jpg {scale: 0.3}
 
 Note: You can click on the scaled down images to display it full screen
 
