@@ -53,4 +53,6 @@ public interface ComponentsRegistry {
     GlobalAssetsRegistry globalAssetsRegistry();
 
     TimeService timeService();
+
+    Log log();
 }

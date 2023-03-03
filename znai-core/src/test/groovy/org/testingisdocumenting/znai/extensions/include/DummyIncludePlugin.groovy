@@ -18,7 +18,9 @@
 package org.testingisdocumenting.znai.extensions.include
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry
+import org.testingisdocumenting.znai.extensions.PluginParamType
 import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition
 import org.testingisdocumenting.znai.extensions.PluginResult
 import org.testingisdocumenting.znai.parser.ParserHandler
 import org.testingisdocumenting.znai.parser.docelement.DocElement
@@ -29,6 +31,15 @@ class DummyIncludePlugin implements IncludePlugin {
     @Override
     String id() {
         return "dummy"
+    }
+
+    @Override
+    PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .add("param1", PluginParamType.STRING, "param 1")
+                .add("param2", PluginParamType.STRING, "param 2")
+                .add("throw", PluginParamType.STRING, "param throw")
+                .rename("oldParam1", "param1")
     }
 
     @Override

@@ -18,6 +18,7 @@
 package org.testingisdocumenting.znai.extensions.include
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile
+import org.testingisdocumenting.znai.extensions.PluginParamValidationResult
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.extensions.Plugins
@@ -94,7 +95,7 @@ class PluginsTestUtils {
 
 
         includePlugin.preprocess(TEST_COMPONENTS_REGISTRY, markupPath, includeParams)
-        includePlugin.parameters().validate(includeParams)
+        throwValidationErrorIfRequired(includePlugin.parameters().validateParamsAndHandleRenames(includeParams))
 
         def pluginResult = includePlugin.process(TEST_COMPONENTS_REGISTRY, parserHandler, markupPath, includeParams)
 
@@ -122,7 +123,7 @@ class PluginsTestUtils {
         def fencePlugin = Plugins.fencePluginById(pluginParams.pluginId)
         fencePlugin.preprocess(TEST_COMPONENTS_REGISTRY, Paths.get(""),  pluginParams, textContent)
 
-        fencePlugin.parameters().validate(pluginParams)
+        throwValidationErrorIfRequired(fencePlugin.parameters().validateParamsAndHandleRenames(pluginParams))
 
         def pluginResult = fencePlugin.process(TEST_COMPONENTS_REGISTRY, Paths.get(""),  pluginParams, textContent)
         parserHandler.onFencePlugin(fencePlugin, pluginResult)
@@ -137,7 +138,7 @@ class PluginsTestUtils {
         PluginParams pluginParams = pluginParamsFactory.create(idAndParams.id, idAndParams.params)
 
         def inlinedCodePlugin = Plugins.inlinedCodePluginById(idAndParams.id)
-        inlinedCodePlugin.parameters().validate(pluginParams)
+        throwValidationErrorIfRequired(inlinedCodePlugin.parameters().validateParamsAndHandleRenames(pluginParams))
 
         def result = inlinedCodePlugin.process(TEST_COMPONENTS_REGISTRY, Paths.get(""), pluginParams)
         parserHandler.onInlinedCodePlugin(inlinedCodePlugin, result)
@@ -150,5 +151,11 @@ class PluginsTestUtils {
                 TEST_COMPONENTS_REGISTRY,
                 Paths.get(""))
         return parserHandler
+    }
+
+    static void throwValidationErrorIfRequired(PluginParamValidationResult pluginParamValidationResult) {
+        if (pluginParamValidationResult.validationError) {
+            throw new IllegalArgumentException(pluginParamValidationResult.validationError)
+        }
     }
 }

@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.parser
 import org.testingisdocumenting.znai.core.ComponentsRegistry
 import org.testingisdocumenting.znai.core.DocConfig
 import org.testingisdocumenting.znai.core.GlobalAssetsRegistry
+import org.testingisdocumenting.znai.core.Log
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.extensions.PluginParamsWithDefaultsFactory
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
@@ -43,6 +44,8 @@ class TestComponentsRegistry implements ComponentsRegistry {
     private TimeService timeService = new FakeTimeService()
 
     private DocConfig docConfig = new DocConfig(Paths.get("").toAbsolutePath(), false)
+
+    private Log log = new TestLog()
 
     TestComponentsRegistry() {
     }
@@ -93,5 +96,10 @@ class TestComponentsRegistry implements ComponentsRegistry {
     @Override
     FakeTimeService timeService() {
         return timeService
+    }
+
+    @Override
+    TestLog log() {
+        return log
     }
 }

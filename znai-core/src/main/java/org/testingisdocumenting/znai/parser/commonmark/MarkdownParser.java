@@ -20,8 +20,13 @@ package org.testingisdocumenting.znai.parser.commonmark;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
 
+import org.testingisdocumenting.znai.console.ansi.Color;
+import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.core.Log;
+import org.testingisdocumenting.znai.extensions.PluginParamWarning;
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
@@ -59,6 +64,10 @@ public class MarkdownParser implements MarkupParser {
 
         Node node = fullParser.parse(markdown);
         MarkdownVisitor visitor = parsePartial(node, path, parserHandler);
+
+        if (visitor.hasPluginWarnings()) {
+            reportWarnings(path, visitor.getParameterWarnings());
+        }
 
         if (visitor.isSectionStarted()) {
             parserHandler.onSectionEnd();
@@ -105,5 +114,15 @@ public class MarkdownParser implements MarkupParser {
                 TablesExtension.create(),
                 StrikethroughExtension.create(),
                 YamlFrontMatterExtension.create())).build();
+    }
+
+    private void reportWarnings(Path path, Set<PluginParamWarning> parameterWarnings) {
+        Log log = componentsRegistry.log();
+
+        log.warn("plugin warnings inside: ", Color.PURPLE, path);
+        for (PluginParamWarning parameterWarning : parameterWarnings) {
+            log.warn(Color.BLUE, parameterWarning.getPluginId() + " plugin:", FontStyle.NORMAL, " <" + parameterWarning.getParameterName() + "> ",
+                    Color.YELLOW, parameterWarning.getMessage());
+        }
     }
 }

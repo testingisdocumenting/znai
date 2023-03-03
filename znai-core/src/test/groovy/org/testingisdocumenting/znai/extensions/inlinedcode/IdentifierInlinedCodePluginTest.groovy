@@ -51,7 +51,7 @@ class IdentifierInlinedCodePluginTest {
     void "validation path should be present"() {
         code {
             resultingProps("myFu")
-        } should throwException("validationPath is missing")
+        } should throwException(~/missing required parameter\(s\): validationPath/)
     }
 
     private static Map<String, Object> resultingProps(String params) {

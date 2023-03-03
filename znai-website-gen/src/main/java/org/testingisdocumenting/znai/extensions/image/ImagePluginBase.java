@@ -41,7 +41,6 @@ abstract class ImagePluginBase implements Plugin {
     protected static final String CAPTION_BOTTOM_KEY = "captionBottom";
     protected static final String FIT_KEY = "fit";
     protected static final String SCALE_KEY = "scale";
-    protected static final String SCALE_DEPRECATED_KEY = "scaleRatio";
 
     private static final String PIXEL_RATIO_KEY = "pixelRatio";
 
@@ -68,13 +67,13 @@ abstract class ImagePluginBase implements Plugin {
 
         params.add(BORDER_KEY, PluginParamType.BOOLEAN, "use border around image", "true");
         params.add(FIT_KEY, PluginParamType.BOOLEAN, "fit image to the text width", "true");
-        params.add(SCALE_DEPRECATED_KEY, PluginParamType.NUMBER, "[deprecated] image scale ratio", "0.5");
         params.add(SCALE_KEY, PluginParamType.NUMBER, "image scale ratio", "0.5");
         params.add(PIXEL_RATIO_KEY, PluginParamType.NUMBER,
                 "pixel ratio for hi-dpi images, effect is similar to scale, e.g. 2.0 is the same as scale 0.5. " +
                         "The difference is pixelRatio affects annotation coordinates so they need to be " +
                         "supplied using smaller numbers ", "2.0");
         params.add(additionalParameters());
+        params.rename("scaleRatio", SCALE_KEY);
 
         return params;
     }
@@ -148,10 +147,7 @@ abstract class ImagePluginBase implements Plugin {
     }
 
     private static void updatePropsScale(Map<String, Object> props, PluginParamsOpts opts) {
-        // TODO use deprecation params API
-        if (opts.has(SCALE_DEPRECATED_KEY)) {
-            props.put(SCALE_KEY, opts.getNumber(SCALE_DEPRECATED_KEY));
-        } else if (opts.has(SCALE_KEY)) {
+        if (opts.has(SCALE_KEY)) {
             props.put(SCALE_KEY, opts.getNumber(SCALE_KEY));
         }
     }

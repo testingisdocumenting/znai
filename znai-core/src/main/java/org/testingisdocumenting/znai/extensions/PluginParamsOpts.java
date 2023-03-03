@@ -26,15 +26,18 @@ import java.util.stream.Stream;
 public class PluginParamsOpts {
     private final String pluginId;
     private final Map<String, ?> opts;
+    private final Map<String, String> renamesOldByNewName;
 
     PluginParamsOpts(String pluginId, Map<String, ?> opts) {
         this.pluginId = pluginId;
         this.opts = opts;
+        this.renamesOldByNewName = new HashMap<>();
     }
 
     @SuppressWarnings("unchecked")
     public <E> E get(String name) {
-        return (E) opts.get(name);
+        String nameToUse = renamesOldByNewName.getOrDefault(name, name);
+        return (E) opts.get(nameToUse);
     }
 
     public <E> E get(String name, E defaultValue) {
@@ -91,7 +94,7 @@ public class PluginParamsOpts {
     }
 
     public String getString(String name) {
-        Object v = opts.get(name);
+        Object v = get(name);
         if (v == null) {
             return null;
         }
@@ -100,7 +103,7 @@ public class PluginParamsOpts {
     }
 
     public String getRequiredString(String name) {
-        Object v = opts.get(name);
+        Object v = get(name);
         if (v == null) {
             throw new RuntimeException("'" + name + "' is required for plugin: " + pluginId);
         }
@@ -109,7 +112,8 @@ public class PluginParamsOpts {
     }
 
     public boolean has(String name) {
-        return opts.containsKey(name);
+        String nameToUse = renamesOldByNewName.getOrDefault(name, name);
+        return opts.containsKey(nameToUse);
     }
 
     public boolean isEmpty() {
@@ -126,5 +130,10 @@ public class PluginParamsOpts {
                 "pluginId='" + pluginId + '\'' +
                 ", opts=" + opts +
                 '}';
+    }
+
+    public void setRenamesInfo(Map<String, String> renamesNewByOldName) {
+        this.renamesOldByNewName.clear();
+        this.renamesOldByNewName.putAll(renamesNewByOldName);
     }
 }

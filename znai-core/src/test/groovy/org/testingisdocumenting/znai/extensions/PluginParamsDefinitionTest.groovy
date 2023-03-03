@@ -17,7 +17,6 @@
 package org.testingisdocumenting.znai.extensions
 
 import org.junit.Test
-import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
@@ -32,6 +31,7 @@ class PluginParamsDefinitionTest {
                     "lines to highlight", "[4, \"class\"]")
             .add("autoTitle", PluginParamType.BOOLEAN, "auto title based on path", "true")
             .addRequired("id", PluginParamType.STRING, "id of the concept", "true")
+            .rename("oldTitle", "title")
 
     static def expectedPluginParametersHelp = "available plugin parameters:\n" +
             "  autoTitle: auto title based on path <boolean> (e.g. true)\n" +
@@ -41,49 +41,60 @@ class PluginParamsDefinitionTest {
 
     @Test
     void "passes validation"() {
-        paramsDefinition.validate(pluginParamsFactory.create("file",  "", [id: "id1", title: "my title"]))
+        paramsDefinition.validateParamsAndHandleRenames(pluginParamsFactory.create("file",  "", [id: "id1", title: "my title"]))
     }
 
     @Test
     void "validates param names"() {
-        code {
-            paramsDefinition.validate(pluginParamsFactory.create("file", "", [totle: "my title", id: "id1"]))
-        } should throwException("unrecognized parameter(s): totle\n" +
-                "\n" + expectedPluginParametersHelp)
+        def result = paramsDefinition.validateParamsAndHandleRenames(pluginParamsFactory.create("file", "", [totle: "my title", id: "id1"]))
+        result.validationError.should == "unrecognized parameter(s): totle\n" +
+                "\n" + expectedPluginParametersHelp
     }
 
     @Test
     void "validates param types"() {
-        code {
-            paramsDefinition.validate(pluginParamsFactory.create("file", "", [autoTitle: "false", id: "id2"]))
-        } should throwException("type mismatches:\n" +
+        def result = paramsDefinition.validateParamsAndHandleRenames(pluginParamsFactory.create("file", "", [autoTitle: "false", id: "id2"]))
+        result.validationError.should == "type mismatches:\n" +
                 "  autoTitle given: \"false\" <string>, expected: <boolean> (e.g. true)\n" +
-                "\n" + expectedPluginParametersHelp)
+                "\n" + expectedPluginParametersHelp
     }
 
     @Test
     void "validates required parameters"() {
-        code {
-            paramsDefinition.validate(pluginParamsFactory.create("file", "", [:]))
-        } should throwException("missing required parameter(s): id\n" +
-                "\n" + expectedPluginParametersHelp)
+        def result = paramsDefinition.validateParamsAndHandleRenames(pluginParamsFactory.create("file", "", [:]))
+        result.validationError.should == "missing required parameter(s): id\n" +
+                "\n" + expectedPluginParametersHelp
     }
 
     @Test
     void "all validations at once"() {
-        code {
-            paramsDefinition.validate(pluginParamsFactory.create("file", "", [totle: "my title", autoTitle: "false"]))
-        } should throwException("missing required parameter(s): id\n" +
+        def result = paramsDefinition.validateParamsAndHandleRenames(pluginParamsFactory.create("file", "", [totle: "my title", autoTitle: "false"]))
+        result.validationError.should == "missing required parameter(s): id\n" +
                 "unrecognized parameter(s): totle\n" +
                 "type mismatches:\n" +
                 "  autoTitle given: \"false\" <string>, expected: <boolean> (e.g. true)\n" +
-                "\n" + expectedPluginParametersHelp)
+                "\n" + expectedPluginParametersHelp
+    }
+
+    @Test
+    void "parameter renames should provide value access by using new name"() {
+        def pluginParams = pluginParamsFactory.create("file", "", [oldTitle: "my title", autoTitle: "false"])
+        paramsDefinition.validateParamsAndHandleRenames(pluginParams)
+        pluginParams.getOpts().get("title").should == "my title"
+    }
+
+    @Test
+    void "parameter renames should generate warnings"() {
+        def result = paramsDefinition.validateParamsAndHandleRenames(pluginParamsFactory.create("file", "", [oldTitle: "my title", autoTitle: "false"]))
+        result.warnings.should == [
+                [message: "parameter is renamed to <title>", parameterName: "oldTitle", pluginId: "file"]
+        ]
     }
 
     @Test
     void "report name duplicate"() {
         code {
-            paramsDefinition.add("title", PluginParamType.BOOLEAN, "dummy", "true")
+            def result = paramsDefinition.add("title", PluginParamType.BOOLEAN, "dummy", "true")
         } should throwException("parameter <title> is already registered")
 
         code {

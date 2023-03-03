@@ -21,5 +21,5 @@ public interface Log {
 
     void info(Object... styleOrValue);
 
-    void warn(String message);
+    void warn(Object... styleOrValue);
 }

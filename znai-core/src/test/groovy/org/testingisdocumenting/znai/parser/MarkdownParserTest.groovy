@@ -415,12 +415,12 @@ world""")
     @Test
     void "include multiple plugins without empty line in between"() {
         parse(":include-dummy: free-form text1 {param1: 'v1', param2: 'v2'}\n" +
-                ":include-dummy: free-form text2 {param3: 'v3', param4: 'v4'}\n\n" +
+                ":include-dummy: free-form text2 {param1: 'v3', param2: 'v4'}\n\n" +
                 "hello world")
 
         content.should == [
                 [type: 'IncludeDummy', ff: 'free-form text1', opts: [param1: 'v1', param2: 'v2']],
-                [type: 'IncludeDummy', ff: 'free-form text2', opts: [param3: 'v3', param4: 'v4']],
+                [type: 'IncludeDummy', ff: 'free-form text2', opts: [param1: 'v3', param2: 'v4']],
                 [type: 'Paragraph', content: [[text: 'hello world', type: 'SimpleText']]]]
     }
 
@@ -440,6 +440,20 @@ world""")
         code {
             parse(":include-wrong-id: params")
         } should throwException(~/can't find plugin with id 'wrong-id'/)
+    }
+
+    @Test
+    void "include plugin with incorrect params should be reported"() {
+        code {
+            parse(":include-dummy: free-form text {param8: 'v1', param2: 'v2'}")
+        } should throwException(~/unrecognized parameter\(s\): param8/)
+    }
+
+    @Test
+    void "include plugin generates warning when using renamed parameter name"() {
+        TEST_COMPONENTS_REGISTRY.log().clear()
+        parse(":include-dummy: free-form text {oldParam1: 'v1', param2: 'v2'}")
+        TEST_COMPONENTS_REGISTRY.log().warnings.should == ['plugin warnings inside: test.md', 'dummy plugin: <oldParam1> parameter is renamed to <param1>']
     }
 
     @Test
@@ -506,6 +520,16 @@ world""")
     }
 
     @Test
+    void "fenced plugin with incorrect params should be reported"() {
+        code {
+            parse("~~~dummy free-form {'param8': 'v1', 'p2': 'v2'}\n" +
+                    "test\n" +
+                    "block\n" +
+                    "~~~")
+        } should throwException(~/unrecognized parameter\(s\): param8/)
+    }
+
+    @Test
     void "inlined code plugin"() {
         parse("`:dummy: free-param {p1: 'v1'}`")
 
@@ -537,6 +561,13 @@ title: custom title
 ---""")
 
         parseResult.pageMeta.toMap().title.should == ["custom title"]
+    }
+
+    @Test
+    void "inlined code plugin with incorrect params should be reported"() {
+        code {
+            parse("`:dummy: user-param {param8: 'v1'}`")
+        } should throwException(~/unrecognized parameter\(s\): param8/)
     }
 
     private void parse(String markdown, Path path = Paths.get("test.md")) {

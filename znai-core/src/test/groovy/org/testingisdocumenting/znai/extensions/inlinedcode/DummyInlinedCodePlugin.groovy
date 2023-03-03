@@ -18,7 +18,9 @@
 package org.testingisdocumenting.znai.extensions.inlinedcode
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry
+import org.testingisdocumenting.znai.extensions.PluginParamType
 import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition
 import org.testingisdocumenting.znai.extensions.PluginResult
 import org.testingisdocumenting.znai.parser.docelement.DocElement
 
@@ -28,6 +30,14 @@ class DummyInlinedCodePlugin implements InlinedCodePlugin {
     @Override
     String id() {
         return "dummy"
+    }
+
+    @Override
+    PluginParamsDefinition parameters() {
+        return new PluginParamsDefinition()
+                .add("p1", PluginParamType.STRING, "param 1")
+                .add("p2", PluginParamType.STRING, "param 2")
+                .add("throw", PluginParamType.STRING, "param throw")
     }
 
     @Override
