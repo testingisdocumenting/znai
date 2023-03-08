@@ -1,4 +1,5 @@
 /*
+ * Copyright 2023 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,11 +26,11 @@ import './Json.css'
 
 class Json extends React.Component {
     state = {
-        previouslyCollapsedPath: []
+        previouslyCollapsedPaths: []
     }
 
     render() {
-        const {previouslyCollapsedPath} = this.state
+        const {previouslyCollapsedPaths} = this.state
         const {data, paths, title, ...props} = this.props
 
         const lines = printJson({
@@ -37,7 +38,7 @@ class Json extends React.Component {
             data,
             paths,
             collapsedPaths: this.collapsedPaths,
-            previouslyCollapsedPath: previouslyCollapsedPath,
+            previouslyCollapsedPaths,
             onPathUncollapse: this.onPathUncollapse,
             onPathCollapse: this.onPathCollapse })
 
@@ -52,19 +53,19 @@ class Json extends React.Component {
     }
 
     get collapsedPaths() {
-        const {previouslyCollapsedPath} = this.state
+        const {previouslyCollapsedPaths} = this.state
         const collapsedPaths = this.props.collapsedPaths
         if (!collapsedPaths) {
             return []
         }
 
-        return collapsedPaths.filter(p => previouslyCollapsedPath.indexOf(p) === -1)
+        return collapsedPaths.filter(p => previouslyCollapsedPaths.indexOf(p) === -1)
     }
 
     onPathUncollapse = (path) => {
         this.setState(prev => {
             return {
-                previouslyCollapsedPath: [...prev.previouslyCollapsedPath, path]
+                previouslyCollapsedPaths: [...prev.previouslyCollapsedPaths, path]
             }
         })
     }
@@ -72,7 +73,7 @@ class Json extends React.Component {
     onPathCollapse = (path) => {
         this.setState(prev => {
             return {
-                previouslyCollapsedPath: prev.previouslyCollapsedPath.filter(p => p !== path),
+                previouslyCollapsedPaths: prev.previouslyCollapsedPaths.filter(p => p !== path),
             }
         })
     }
