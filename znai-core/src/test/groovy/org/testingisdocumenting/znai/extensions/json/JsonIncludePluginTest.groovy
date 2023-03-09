@@ -29,19 +29,19 @@ class JsonIncludePluginTest {
     @Test
     void "should display full json"() {
         def props = process('test.json')
-        props.should == [data: expectedFullData, paths: [], highlightKey: []]
+        props.should == [data: expectedFullData, paths: [], highlightKeys: []]
     }
 
     @Test
     void "should handle null values"() {
         def props = process('with-null.json')
-        props.should == [data: [key1: null, key2: [key21: 'value21', key22: 'value22']], paths: [], highlightKey: []]
+        props.should == [data: [key1: null, key2: [key21: 'value21', key22: 'value22']], paths: [], highlightKeys: []]
     }
 
     @Test
     void "single paths value is automatically converted to list"() {
         def props = process('test.json {paths: "root.key1"}')
-        props.should == [data: expectedFullData, paths: ['root.key1'], highlightKey: []]
+        props.should == [data: expectedFullData, paths: ['root.key1'], highlightKeys: []]
     }
 
     @Test
@@ -50,7 +50,7 @@ class JsonIncludePluginTest {
         props.should == [data     : expectedFullData,
                          pathsFile: 'jsonFileWithPaths.json',
                          paths    : ['root.key1', 'root.key2'],
-                         highlightKey: []]
+                         highlightKeys: []]
     }
 
     @Test
@@ -58,7 +58,7 @@ class JsonIncludePluginTest {
         def props = process('test.json {highlightKeyFile: "jsonFileWithPaths.json"}')
         props.should == [data     : expectedFullData,
                          highlightKeyFile: 'jsonFileWithPaths.json',
-                         highlightKey: ['root.key1', 'root.key2'],
+                         highlightKeys: ['root.key1', 'root.key2'],
                          paths: []]
     }
 
@@ -67,7 +67,7 @@ class JsonIncludePluginTest {
         def props = process('test.json {include: "$.key2"}')
         props.should == [data   : [key21: 'value21',
                                    key22: 'value22'],
-                         paths  : [], highlightKey: [],
+                         paths  : [], highlightKeys: [],
                          include: '$.key2']
     }
 
@@ -115,7 +115,7 @@ class JsonIncludePluginTest {
                          title    : "test.json",
                          anchorId : "test-json",
                          paths    : [],
-                         highlightKey: []]
+                         highlightKeys: []]
     }
 
     @Test
