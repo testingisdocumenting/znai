@@ -37,10 +37,13 @@ public abstract class JsonBasePlugin implements Plugin {
     private final static String INCLUDE_KEY = "include";
     private final static String PATHS_KEY = "paths";
     private final static String PATHS_FILE_KEY = "pathsFile";
+    private final static String HIGHLIGHT_KEYS_KEY = "highlightKey";
+    private final static String HIGHLIGHT_KEYS_FILE_KEY = "highlightKeyFile";
     private final static String COLLAPSED_PATHS_KEY = "collapsedPaths";
     private final static String ENCLOSE_IN_OBJECT_KEY = "encloseInObject";
 
     private Path pathsFilePath;
+    private Path highlightKeysFilePath;
 
     protected PluginFeatureList features;
     protected ResourcesResolver resourcesResolver;
@@ -59,7 +62,12 @@ public abstract class JsonBasePlugin implements Plugin {
                         "\"root.store.book[0].category\" or " +
                                 "[\"root.store.book[0].category\", \"root.store.book[2].category\"]")
                 .add(PATHS_FILE_KEY, PluginParamType.STRING,
-                        "path to a json file with list of paths to highlight inside", "\"paths.json\"")
+                        "path to a json file with list of paths to highlight values", "\"paths.json\"")
+                .add(HIGHLIGHT_KEYS_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "path(s) to key to highlight",
+                        "\"root.store.book[0].category\" or " +
+                                "[\"root.store.book[0].category\", \"root.store.book[2].category\"]")
+                .add(HIGHLIGHT_KEYS_FILE_KEY, PluginParamType.STRING,
+                        "path to a json file with list of paths to highlight keys", "\"paths.json\"")
                 .add(COLLAPSED_PATHS_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
                         "path(s) to nodes to collapse initially",
                         "\"root.store.book\" or [\"root.store.book\", \"root.store.discount\"]")
@@ -96,12 +104,16 @@ public abstract class JsonBasePlugin implements Plugin {
         List<String> paths = extractPaths(opts);
         EntryPresenceValidation.validateItemsPresence(PATHS_KEY, "JSON", existingPaths, paths);
 
+        List<String> highlightKeys = extractHighlightKeys(opts);
+        EntryPresenceValidation.validateItemsPresence(HIGHLIGHT_KEYS_KEY, "JSON", existingPaths, highlightKeys);
+
         List<String> collapsedPaths = opts.getList(COLLAPSED_PATHS_KEY);
         EntryPresenceValidation.validateItemsPresence(COLLAPSED_PATHS_KEY, "JSON", existingPaths, collapsedPaths);
 
         Map<String, Object> props = opts.toMap();
         props.put("data", parsed);
         props.put("paths", paths);
+        props.put("highlightKeys", highlightKeys);
         features.updateProps(props);
 
         return PluginResult.docElement("Json", props);
@@ -147,19 +159,37 @@ public abstract class JsonBasePlugin implements Plugin {
                 Stream.empty() :
                 Stream.of(AuxiliaryFile.builtTime(pathsFilePath));
 
-        return Stream.concat(pathsFile, Stream.concat(features.auxiliaryFiles(), additionalAuxiliaryFiles()));
+        Stream<AuxiliaryFile> highlightKeysFile = highlightKeysFilePath == null ?
+                Stream.empty() :
+                Stream.of(AuxiliaryFile.builtTime(highlightKeysFilePath));
+
+        return Stream.concat(pathsFile,
+                Stream.concat(highlightKeysFile,
+                        Stream.concat(features.auxiliaryFiles(), additionalAuxiliaryFiles())));
     }
 
     @SuppressWarnings("unchecked")
     private List<String> extractPaths(PluginParamsOpts opts) {
-        if (opts.has("pathsFile")) {
-            String filePath = opts.get("pathsFile");
+        if (opts.has(PATHS_FILE_KEY)) {
+            String filePath = opts.get(PATHS_FILE_KEY);
             pathsFilePath = resourcesResolver.fullPath(filePath);
 
             return (List<String>) JsonUtils.deserializeAsList(resourcesResolver.textContent(filePath));
         }
 
         return opts.getList(PATHS_KEY);
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<String> extractHighlightKeys(PluginParamsOpts opts) {
+        if (opts.has(HIGHLIGHT_KEYS_FILE_KEY)) {
+            String filePath = opts.get(HIGHLIGHT_KEYS_FILE_KEY);
+            highlightKeysFilePath = resourcesResolver.fullPath(filePath);
+
+            return (List<String>) JsonUtils.deserializeAsList(resourcesResolver.textContent(filePath));
+        }
+
+        return opts.getList(HIGHLIGHT_KEYS_KEY);
     }
 
     private static Set<String> buildPaths(Object json) {

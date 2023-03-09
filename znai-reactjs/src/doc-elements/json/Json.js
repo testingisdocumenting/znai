@@ -31,12 +31,13 @@ class Json extends React.Component {
 
     render() {
         const {previouslyCollapsedPaths} = this.state
-        const {data, paths, title, ...props} = this.props
+        const {data, paths, highlightKeys, title, ...props} = this.props
 
         const lines = printJson({
             rootPath: 'root',
             data,
-            paths,
+            pathsToHighlight: paths,
+            highlightKeys,
             collapsedPaths: this.collapsedPaths,
             previouslyCollapsedPaths,
             onPathUncollapse: this.onPathUncollapse,

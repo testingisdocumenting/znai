@@ -19,10 +19,11 @@ import { TokensPrinter } from "../code-snippets/TokensPrinter";
 
 interface JsonPrinterConfig {
   pathsToHighlight: string[];
+  highlightKeys: string[];
   collapsedPaths: string[];
   previouslyCollapsedPaths: string[];
-  onPathCollapse(path: string): void;
-  onPathUncollapse(path: string): void;
+  onPathCollapse?(path: string): void;
+  onPathUncollapse?(path: string): void;
 }
 
 interface CollapsedNode {
@@ -32,6 +33,7 @@ interface CollapsedNode {
 class JsonPrinter {
   printer = new TokensPrinter();
   _pathsToHighlight: Record<string, boolean> = {};
+  _keysToHighlight: Record<string, boolean> = {};
   _previouslyCollapsedPaths: Record<string, boolean> = {};
   _collapsedPaths: Record<string, boolean> = {};
   onPathCollapse: (path: string) => void;
@@ -39,21 +41,24 @@ class JsonPrinter {
 
   constructor({
     pathsToHighlight,
+    highlightKeys,
     collapsedPaths,
     previouslyCollapsedPaths,
     onPathUncollapse,
     onPathCollapse,
   }: JsonPrinterConfig) {
     pathsToHighlight.forEach((p) => (this._pathsToHighlight[p] = true));
+    highlightKeys.forEach((p) => (this._keysToHighlight[p] = true));
     collapsedPaths.forEach((p) => (this._collapsedPaths[p] = true));
     previouslyCollapsedPaths.forEach((p) => (this._previouslyCollapsedPaths[p] = true));
 
-    this.onPathCollapse = onPathCollapse;
-    this.onPathUncollapse = onPathUncollapse;
+    this.onPathCollapse = onPathCollapse || (() => {});
+    this.onPathUncollapse = onPathUncollapse || (() => {});
   }
 
-  printKey(key: string) {
-    this.printer.print("key", '"' + key + '"');
+  printKey(path: string, key: string) {
+    const additionalTokenType = this.isKeyHighlighted(path) ? " highlighted" : "";
+    this.printer.print("key" + additionalTokenType, '"' + key + '"');
     this.printer.printDelimiter(": ");
   }
 
@@ -177,9 +182,11 @@ class JsonPrinter {
     keys.forEach((key, idx) => {
       const isLast = idx === keys.length - 1;
 
+      const childPath = path + "." + key;
+
       this.printer.printIndentation();
-      this.printKey(key);
-      this.printValue(path + "." + key, json[key], true);
+      this.printKey(childPath, key);
+      this.printValue(childPath, json[key], true);
 
       if (!isLast) {
         this.printer.printDelimiter(",");
@@ -219,6 +226,10 @@ class JsonPrinter {
     this.printer.printDelimiter(delimiter);
   }
 
+  isKeyHighlighted(path: string) {
+    return this._keysToHighlight.hasOwnProperty(path);
+  }
+
   isHighlightedPath(path: string) {
     return this._pathsToHighlight.hasOwnProperty(path);
   }
@@ -232,7 +243,7 @@ class JsonPrinter {
   }
 }
 
-interface PrintJsonArg extends JsonPrinterConfig {
+interface PrintJsonArg extends Partial<JsonPrinterConfig> {
   data: any;
   rootPath: string;
 }
@@ -241,6 +252,7 @@ export function printJson({
   rootPath,
   data,
   pathsToHighlight,
+  highlightKeys,
   previouslyCollapsedPaths,
   collapsedPaths,
   onPathUncollapse,
@@ -248,6 +260,7 @@ export function printJson({
 }: PrintJsonArg) {
   const jsonPrinter = new JsonPrinter({
     pathsToHighlight: pathsToHighlight || [],
+    highlightKeys: highlightKeys || [],
     previouslyCollapsedPaths: previouslyCollapsedPaths || [],
     collapsedPaths: collapsedPaths || [],
     onPathUncollapse,
