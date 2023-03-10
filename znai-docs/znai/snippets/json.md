@@ -24,7 +24,7 @@ Use `json` include plugin to read json from an external file
 
 # Highlight Values By Path
 
-Use the `:identifier: paths` plugin parameter to bring attention to a certain place in a `JSON` file.
+Use the `:identifier: paths` parameter to highlight an individual value:
 
     ```json {paths: "root[1].key2"}
     [{"key1": "value1"}, {"key2": "value2"}]
@@ -49,6 +49,18 @@ Use `:identifier: pathsFile` to specify a file to read paths from.
 :include-json: book-store-paths.json {autoTitle: true} 
 
     :include-json: book-store.json {pathsFile: "book-store-paths.json"}
+
+# Highlight Keys By Path
+
+Use the `:identifier: highlightKey` parameter to highlight keys:
+
+    ```json {highlightKey: "root[1].key2"}
+    [{"key1": ["value11", "value12"]}, {"key2": ["value21", "value22"]}]
+    ```
+
+```json {highlightKey: "root[1].key2"}
+[{"key1": ["value11", "value12"]}, {"key2": ["value21", "value22"]}]
+```
 
 # Json Subparts
 

@@ -29,27 +29,37 @@ class JsonIncludePluginTest {
     @Test
     void "should display full json"() {
         def props = process('test.json')
-        props.should == [data: expectedFullData, paths: []]
+        props.should == [data: expectedFullData, paths: [], highlightKeys: []]
     }
 
     @Test
     void "should handle null values"() {
         def props = process('with-null.json')
-        props.should == [data: [key1: null, key2: [key21: 'value21', key22: 'value22']], paths: []]
+        props.should == [data: [key1: null, key2: [key21: 'value21', key22: 'value22']], paths: [], highlightKeys: []]
     }
 
     @Test
     void "single paths value is automatically converted to list"() {
         def props = process('test.json {paths: "root.key1"}')
-        props.should == [data: expectedFullData, paths: ['root.key1']]
+        props.should == [data: expectedFullData, paths: ['root.key1'], highlightKeys: []]
     }
 
     @Test
     void "should read paths from file when provided"() {
         def props = process('test.json {pathsFile: "jsonFileWithPaths.json"}')
         props.should == [data     : expectedFullData,
-                          pathsFile: 'jsonFileWithPaths.json',
-                          paths    : ['root.key1', 'root.key2']]
+                         pathsFile: 'jsonFileWithPaths.json',
+                         paths    : ['root.key1', 'root.key2'],
+                         highlightKeys: []]
+    }
+
+    @Test
+    void "should read keys to highlight from file when provided"() {
+        def props = process('test.json {highlightKeyFile: "jsonFileWithPaths.json"}')
+        props.should == [data     : expectedFullData,
+                         highlightKeyFile: 'jsonFileWithPaths.json',
+                         highlightKeys: ['root.key1', 'root.key2'],
+                         paths: []]
     }
 
     @Test
@@ -57,7 +67,7 @@ class JsonIncludePluginTest {
         def props = process('test.json {include: "$.key2"}')
         props.should == [data   : [key21: 'value21',
                                    key22: 'value22'],
-                         paths  : [],
+                         paths  : [], highlightKeys: [],
                          include: '$.key2']
     }
 
@@ -66,6 +76,18 @@ class JsonIncludePluginTest {
         code {
             process('test.json {paths: ["root.key_1", "root.key_2"]}')
         } should throwException("can't find paths: root.key_1 in JSON, available:\n" +
+                "  root\n" +
+                "  root.key1\n" +
+                "  root.key2\n" +
+                "  root.key2.key21\n" +
+                "  root.key2.key22")
+    }
+
+    @Test
+    void "should validate keys to highlight presence"() {
+        code {
+            process('test.json {highlightKey: ["root.key_1", "root.key_2"]}')
+        } should throwException("can't find highlightKey: root.key_1 in JSON, available:\n" +
                 "  root\n" +
                 "  root.key1\n" +
                 "  root.key2\n" +
@@ -92,7 +114,8 @@ class JsonIncludePluginTest {
                          autoTitle: true,
                          title    : "test.json",
                          anchorId : "test-json",
-                         paths    : []]
+                         paths    : [],
+                         highlightKeys: []]
     }
 
     @Test

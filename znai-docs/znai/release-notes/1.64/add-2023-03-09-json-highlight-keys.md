@@ -1,0 +1,1 @@
+* Add: JSON [highlight keys](snippets/json#highlight-keys-by-path)
