@@ -35,14 +35,16 @@ import java.util.stream.Stream;
 
 public abstract class JsonBasePlugin implements Plugin {
     private final static String INCLUDE_KEY = "include";
-    private final static String PATHS_KEY = "paths";
-    private final static String PATHS_FILE_KEY = "pathsFile";
     private final static String HIGHLIGHT_KEYS_KEY = "highlightKey";
     private final static String HIGHLIGHT_KEYS_FILE_KEY = "highlightKeyFile";
+    private final static String HIGHLIGHT_VALUES_KEY = "highlightValue";
+    private final static String HIGHLIGHT_VALUES_FILE_KEY = "highlightValueFile";
     private final static String COLLAPSED_PATHS_KEY = "collapsedPaths";
     private final static String ENCLOSE_IN_OBJECT_KEY = "encloseInObject";
+    private final static String HIGHLIGHT_VALUES_DEPRECATED_KEY = "paths";
+    private final static String HIGHLIGHT_VALUES_DEPRECATED_FILE_KEY = "pathsFile";
 
-    private Path pathsFilePath;
+    private Path highlightValuesFilePath;
     private Path highlightKeysFilePath;
 
     protected PluginFeatureList features;
@@ -58,10 +60,10 @@ public abstract class JsonBasePlugin implements Plugin {
         PluginParamsDefinition params = new PluginParamsDefinition()
                 .add(PluginParamsDefinitionCommon.title)
                 .add(INCLUDE_KEY, PluginParamType.STRING, "json path to include", "$..book[0,1]")
-                .add(PATHS_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "path(s) to leaf values to highlight",
+                .add(HIGHLIGHT_VALUES_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "path(s) to leaf values to highlight",
                         "\"root.store.book[0].category\" or " +
                                 "[\"root.store.book[0].category\", \"root.store.book[2].category\"]")
-                .add(PATHS_FILE_KEY, PluginParamType.STRING,
+                .add(HIGHLIGHT_VALUES_FILE_KEY, PluginParamType.STRING,
                         "path to a json file with list of paths to highlight values", "\"paths.json\"")
                 .add(HIGHLIGHT_KEYS_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "path(s) to key to highlight",
                         "\"root.store.book[0].category\" or " +
@@ -77,9 +79,11 @@ public abstract class JsonBasePlugin implements Plugin {
                 .add(SnippetHighlightFeature.paramsDefinition)
                 .add(PluginParamsDefinitionCommon.snippetReadMore)
                 .add(CodeReferencesFeature.paramsDefinition)
-                .add(AnchorFeature.paramsDefinition);
+                .add(AnchorFeature.paramsDefinition)
+                .rename(HIGHLIGHT_VALUES_DEPRECATED_KEY, HIGHLIGHT_VALUES_KEY)
+                .rename(HIGHLIGHT_VALUES_DEPRECATED_FILE_KEY, HIGHLIGHT_VALUES_FILE_KEY);
 
-        updateParams(params);
+        registerAdditionalParams(params);
 
         return params;
     }
@@ -101,8 +105,8 @@ public abstract class JsonBasePlugin implements Plugin {
 
         Set<String> existingPaths = buildPaths(parsed);
 
-        List<String> paths = extractPaths(opts);
-        EntryPresenceValidation.validateItemsPresence(PATHS_KEY, "JSON", existingPaths, paths);
+        List<String> highlightValues = extractHighlightValues(opts);
+        EntryPresenceValidation.validateItemsPresence(HIGHLIGHT_VALUES_KEY, "JSON", existingPaths, highlightValues);
 
         List<String> highlightKeys = extractHighlightKeys(opts);
         EntryPresenceValidation.validateItemsPresence(HIGHLIGHT_KEYS_KEY, "JSON", existingPaths, highlightKeys);
@@ -112,10 +116,17 @@ public abstract class JsonBasePlugin implements Plugin {
 
         Map<String, Object> props = opts.toMap();
         props.put("data", parsed);
-        props.put("paths", paths);
+        props.put("highlightValues", highlightValues);
         props.put("highlightKeys", highlightKeys);
         features.updateProps(props);
 
+        props.remove(HIGHLIGHT_KEYS_KEY);
+        props.remove(HIGHLIGHT_KEYS_FILE_KEY);
+        props.remove(HIGHLIGHT_VALUES_KEY);
+        props.remove(HIGHLIGHT_VALUES_FILE_KEY);
+        props.remove(HIGHLIGHT_VALUES_DEPRECATED_KEY);
+        props.remove(HIGHLIGHT_VALUES_DEPRECATED_FILE_KEY);
+        
         return PluginResult.docElement("Json", props);
     }
 
@@ -149,15 +160,15 @@ public abstract class JsonBasePlugin implements Plugin {
         return result;
     }
 
-    abstract protected void updateParams(PluginParamsDefinition paramsDefinition);
+    abstract protected void registerAdditionalParams(PluginParamsDefinition paramsDefinition);
     abstract protected Stream<PluginFeature> additionalPluginFeatures();
     abstract protected Stream<AuxiliaryFile> additionalAuxiliaryFiles();
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        Stream<AuxiliaryFile> pathsFile = pathsFilePath == null ?
+        Stream<AuxiliaryFile> pathsFile = highlightValuesFilePath == null ?
                 Stream.empty() :
-                Stream.of(AuxiliaryFile.builtTime(pathsFilePath));
+                Stream.of(AuxiliaryFile.builtTime(highlightValuesFilePath));
 
         Stream<AuxiliaryFile> highlightKeysFile = highlightKeysFilePath == null ?
                 Stream.empty() :
@@ -169,15 +180,15 @@ public abstract class JsonBasePlugin implements Plugin {
     }
 
     @SuppressWarnings("unchecked")
-    private List<String> extractPaths(PluginParamsOpts opts) {
-        if (opts.has(PATHS_FILE_KEY)) {
-            String filePath = opts.get(PATHS_FILE_KEY);
-            pathsFilePath = resourcesResolver.fullPath(filePath);
+    private List<String> extractHighlightValues(PluginParamsOpts opts) {
+        if (opts.has(HIGHLIGHT_VALUES_FILE_KEY)) {
+            String filePath = opts.get(HIGHLIGHT_VALUES_FILE_KEY);
+            highlightValuesFilePath = resourcesResolver.fullPath(filePath);
 
             return (List<String>) JsonUtils.deserializeAsList(resourcesResolver.textContent(filePath));
         }
 
-        return opts.getList(PATHS_KEY);
+        return opts.getList(HIGHLIGHT_VALUES_KEY);
     }
 
     @SuppressWarnings("unchecked")

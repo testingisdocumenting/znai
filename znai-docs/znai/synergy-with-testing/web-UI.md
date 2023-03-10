@@ -20,5 +20,5 @@ Here is an example of using [WebTau](https://github.com/testingisdocumenting/web
 :include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
 
 
-:include-json: doc-artifacts/duckduckgo-search.json {autoTitle: true, paths: "root.pixelRatio"}
+:include-json: doc-artifacts/duckduckgo-search.json {autoTitle: true, highlightValue: "root.pixelRatio"}
 

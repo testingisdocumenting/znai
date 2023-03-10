@@ -15,14 +15,14 @@ To use include plugin write following on a new line
 ```markdown {title: "json plugin example"}
 :include-json: example.json {
   title: "JSON example",
-  paths: ["root.person.id"],
+  highlightValue: ["root.person.id"],
   collapsedPaths: ["root.details"]
 }
 ```
 
 :include-json: introduction/example.json {
   title: "JSON example",
-  paths: ["root.person.id"],
+  highlightValue: ["root.person.id"],
   collapsedPaths: ["root.details"]
 }
 

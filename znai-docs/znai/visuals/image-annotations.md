@@ -128,7 +128,7 @@ capturing a screenshot.
 
 :include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
 
-:include-json: doc-artifacts/duckduckgo-search.json {autoTitle: true, paths: "root.pixelRatio"}
+:include-json: doc-artifacts/duckduckgo-search.json {autoTitle: true, highlightValue: "root.pixelRatio"}
 
 Note: [WebTau](https://github.com/testingisdocumenting/webtau) captures additional data such as `pixelRatio`
 

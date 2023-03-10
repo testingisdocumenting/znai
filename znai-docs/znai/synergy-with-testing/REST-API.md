@@ -37,7 +37,7 @@ left:
 right: 
 :include-json: doc-artifacts/employee-post/response.json { 
   title: "response payload", 
-  pathsFile: "doc-artifacts/employee-post/paths.json" 
+  highlightValueFile: "doc-artifacts/employee-post/paths.json" 
 }
 ```
 `````
@@ -54,7 +54,7 @@ left:
 right: 
 :include-json: doc-artifacts/employee-post/response.json { 
   title: "response payload", 
-  pathsFile: "doc-artifacts/employee-post/paths.json" 
+  highlightValueFile: "doc-artifacts/employee-post/paths.json" 
 }
 ```
 

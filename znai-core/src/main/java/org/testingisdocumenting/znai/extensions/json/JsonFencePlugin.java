@@ -42,7 +42,7 @@ public class JsonFencePlugin extends JsonBasePlugin implements FencePlugin {
     }
 
     @Override
-    protected void updateParams(PluginParamsDefinition paramsDefinition) {
+    protected void registerAdditionalParams(PluginParamsDefinition paramsDefinition) {
     }
 
     @Override

@@ -1,0 +1,1 @@
+* Add: [JSON](snippets/json) rename `paths` to `highlightValue` and `pathsFile` to `highlightValueFile` to match `highlightKey` and `highlightKeyFile` pair

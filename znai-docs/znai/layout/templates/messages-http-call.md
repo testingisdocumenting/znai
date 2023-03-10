@@ -14,6 +14,6 @@ left:
 right:
 :include-json: chat-${method}-messages/response.json {
   title: "${method?upper_case} /messages response",
-  pathsFile: "chat-post-messages/paths.json"
+  highlightValueFile: "chat-post-messages/paths.json"
 }
 ```
