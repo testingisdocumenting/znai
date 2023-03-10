@@ -37,13 +37,13 @@ class JsonFencePluginTest {
     @Test
     void "should display full json"() {
         def props = process([:], json)
-        props.should == [data: expectedFullData, paths: []]
+        props.should == [data: expectedFullData, paths: [], highlightKeys: []]
     }
 
     @Test
     void "single paths value is automatically converted to list"() {
         def props = process([paths: "root.key1"], json)
-        props.should == [data : expectedFullData, paths: ['root.key1']]
+        props.should == [data : expectedFullData, paths: ['root.key1'], highlightKeys: []]
     }
 
     @Test
@@ -52,6 +52,7 @@ class JsonFencePluginTest {
         props.should == [data   : [key21: 'value21',
                                    key22: 'value22'],
                          paths  : [],
+                         highlightKeys: [],
                          include: '$.key2']
     }
 
