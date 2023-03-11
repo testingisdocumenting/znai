@@ -39,6 +39,7 @@ class PluginParamsDefinitionTest {
             "  autoTitle: auto title based on path <boolean> (e.g. true)\n" +
             "  highlight: lines to highlight <list or a single value of either number(s) or string(s)> (e.g. [4, \"class\"])\n" +
             "  id: REQUIRED id of the concept <string> (e.g. true)\n" +
+            "  newList: list of values <list or a single value of string(s)> (e.g. \"hello\" or [\"hello\", \"text\"])\n" +
             "  title: title of snippet <string> (e.g. \"example of API\")\n"
 
     @Test
