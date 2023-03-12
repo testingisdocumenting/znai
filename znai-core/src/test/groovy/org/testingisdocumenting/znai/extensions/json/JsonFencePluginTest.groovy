@@ -43,7 +43,7 @@ class JsonFencePluginTest {
     @Test
     void "should support deprecated parameter 'paths'"() {
         def props = process([paths: "root.key1"], json)
-        props.should == [data : expectedFullData, paths: "root.key1", highlightValues: ['root.key1'], highlightKeys: []]
+        props.should == [data : expectedFullData,  highlightValues: ['root.key1'], highlightKeys: []]
     }
 
     @Test
