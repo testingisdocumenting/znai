@@ -18,7 +18,7 @@
 import { TokensPrinter } from "../code-snippets/TokensPrinter";
 
 interface JsonPrinterConfig {
-  pathsToHighlight: string[];
+  highlightValues: string[];
   highlightKeys: string[];
   collapsedPaths: string[];
   previouslyCollapsedPaths: string[];
@@ -32,7 +32,7 @@ interface CollapsedNode {
 
 class JsonPrinter {
   printer = new TokensPrinter();
-  _pathsToHighlight: Record<string, boolean> = {};
+  _valuesToHighlight: Record<string, boolean> = {};
   _keysToHighlight: Record<string, boolean> = {};
   _previouslyCollapsedPaths: Record<string, boolean> = {};
   _collapsedPaths: Record<string, boolean> = {};
@@ -40,14 +40,14 @@ class JsonPrinter {
   onPathUncollapse: (path: string) => void;
 
   constructor({
-    pathsToHighlight,
+    highlightValues,
     highlightKeys,
     collapsedPaths,
     previouslyCollapsedPaths,
     onPathUncollapse,
     onPathCollapse,
   }: JsonPrinterConfig) {
-    pathsToHighlight.forEach((p) => (this._pathsToHighlight[p] = true));
+    highlightValues.forEach((p) => (this._valuesToHighlight[p] = true));
     highlightKeys.forEach((p) => (this._keysToHighlight[p] = true));
     collapsedPaths.forEach((p) => (this._collapsedPaths[p] = true));
     previouslyCollapsedPaths.forEach((p) => (this._previouslyCollapsedPaths[p] = true));
@@ -78,7 +78,7 @@ class JsonPrinter {
   }
 
   printSingleValue(path: string, value: any) {
-    const additionalTokenType = this.isHighlightedPath(path) ? " highlighted" : "";
+    const additionalTokenType = this.isValueHighlighted(path) ? " highlighted" : "";
     this.printer.print(tokenType() + additionalTokenType, valueToPrint());
 
     function tokenType() {
@@ -230,8 +230,8 @@ class JsonPrinter {
     return this._keysToHighlight.hasOwnProperty(path);
   }
 
-  isHighlightedPath(path: string) {
-    return this._pathsToHighlight.hasOwnProperty(path);
+  isValueHighlighted(path: string) {
+    return this._valuesToHighlight.hasOwnProperty(path);
   }
 
   isCollapsedPath(path: string) {
@@ -251,7 +251,7 @@ interface PrintJsonArg extends Partial<JsonPrinterConfig> {
 export function printJson({
   rootPath,
   data,
-  pathsToHighlight,
+  highlightValues,
   highlightKeys,
   previouslyCollapsedPaths,
   collapsedPaths,
@@ -259,7 +259,7 @@ export function printJson({
   onPathCollapse,
 }: PrintJsonArg) {
   const jsonPrinter = new JsonPrinter({
-    pathsToHighlight: pathsToHighlight || [],
+    highlightValues: highlightValues || [],
     highlightKeys: highlightKeys || [],
     previouslyCollapsedPaths: previouslyCollapsedPaths || [],
     collapsedPaths: collapsedPaths || [],

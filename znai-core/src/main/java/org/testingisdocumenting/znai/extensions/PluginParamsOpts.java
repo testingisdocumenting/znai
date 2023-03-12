@@ -36,6 +36,10 @@ public class PluginParamsOpts {
 
     @SuppressWarnings("unchecked")
     public <E> E get(String name) {
+        if (opts.containsKey(name)) {
+            return (E) opts.get(name);
+
+        }
         String nameToUse = renamesOldByNewName.getOrDefault(name, name);
         return (E) opts.get(nameToUse);
     }
@@ -68,11 +72,12 @@ public class PluginParamsOpts {
 
     @SuppressWarnings("unchecked")
     public <E> List<E> getList(String name) {
-        if (!has(name)) {
+        Object v = get(name);
+
+        if (v == null) {
             return Collections.emptyList();
         }
 
-        Object v = get(name);
         if (!(v instanceof List)) {
             E casted = (E) v;
             return Collections.singletonList(casted);
@@ -112,6 +117,10 @@ public class PluginParamsOpts {
     }
 
     public boolean has(String name) {
+        if (opts.containsKey(name)) {
+            return true;
+        }
+
         String nameToUse = renamesOldByNewName.getOrDefault(name, name);
         return opts.containsKey(nameToUse);
     }

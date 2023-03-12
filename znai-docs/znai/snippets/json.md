@@ -24,31 +24,33 @@ Use `json` include plugin to read json from an external file
 
 # Highlight Values By Path
 
-Use the `:identifier: paths` parameter to highlight an individual value:
+Use the `:identifier: highlightValue` parameter to highlight an individual value:
 
-    ```json {paths: "root[1].key2"}
+    ```json {highlightValue: "root[1].key2"}
     [{"key1": "value1"}, {"key2": "value2"}]
     ```
 
-```json {paths: "root[1].key2"}
+```json {highlightValue: "root[1].key2"}
 [{"key1": "value1"}, {"key2": "value2"}]
 ```
 
-Pass multiple values to `:identifier: paths` to highlight more than one leaf value 
+Pass multiple values to `:identifier: highlightValue` to highlight more than one leaf value 
 
-    :include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]}
+    :include-json: book-store.json {highlightValue: ["root.store.book[0].category", "root.store.book[2].category"]}
 
-Comma-separated paths specified inside `:identifier: paths` will be highlighted.
+Comma-separated paths specified inside `:identifier: highlightValue` will be highlighted.
 
-:include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]}
+:include-json: book-store.json {highlightValue: ["root.store.book[0].category", "root.store.book[2].category"]}
 
-# Highlight By Path From File
+# Highlight Values By Path From File
 
-Use `:identifier: pathsFile` to specify a file to read paths from.
+Use `:identifier: highlightValueFile` to specify a file with paths to highlight values.
 
 :include-json: book-store-paths.json {autoTitle: true} 
 
-    :include-json: book-store.json {pathsFile: "book-store-paths.json"}
+    :include-json: book-store.json {highlightValueFile: "book-store-paths.json"}
+
+:include-json: book-store.json {highlightValueFile: "book-store-paths.json"}
 
 # Highlight Keys By Path
 
@@ -61,6 +63,16 @@ Use the `:identifier: highlightKey` parameter to highlight keys:
 ```json {highlightKey: "root[1].key2"}
 [{"key1": ["value11", "value12"]}, {"key2": ["value21", "value22"]}]
 ```
+
+# Highlight Keys By Path From File
+
+Use `:identifier: highlightKeyFile` to specify a file with paths to highlight keys.
+
+:include-json: book-store-paths.json {autoTitle: true}
+
+    :include-json: book-store.json {highlightKeyFile: "book-store-paths.json"}
+
+:include-json: book-store.json {highlightKeyFile: "book-store-paths.json"}
 
 # Json Subparts
 
@@ -161,13 +173,13 @@ an HTTP call, extract JSON response and information about asserted fields to hig
 ```markdown {title: "include-json using test results"}
 :include-json: weather-example/response.json {
   title: "weather response example",
-  pathsFile: "weather-example/paths.json"
+  highlightValueFile: "weather-example/paths.json"
 }
 ```
 
 :include-json: weather-example/response.json {
   title: "weather response example",
-  pathsFile: "weather-example/paths.json"
+  highlightValueFile: "weather-example/paths.json"
 }
 
 # Incomplete JSON

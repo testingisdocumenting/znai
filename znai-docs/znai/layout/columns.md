@@ -88,7 +88,7 @@ left:
 right:
 :include-json: weather-example/response.json {
   title: "weather response example",
-  pathsFile: "weather-example/paths.json"
+  highlightValueFile: "weather-example/paths.json"
 }
 ```
 
@@ -103,7 +103,7 @@ right:
     right:
     :include-json: weather-example/response.json {
       title: "weather response example",
-      pathsFile: "weather-example/paths.json"
+      highlightValueFile: "weather-example/paths.json"
     }
     ```
     

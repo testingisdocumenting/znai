@@ -18,14 +18,14 @@ Three categories of plugins are available for usage and creation
 ```markdown {title: "json plugin example"}
 :include-json: example.json {
   title: "JSON example",
-  paths: ["root.person.id"],
+  highlightValue: ["root.person.id"],
   collapsedPaths: ["root.details"]
 }
 ```
 
 :include-json: example.json {
   title: "JSON example",
-  paths: ["root.person.id"],
+  highlightValue: ["root.person.id"],
   collapsedPaths: ["root.details"] 
 }
 

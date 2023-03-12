@@ -29,27 +29,40 @@ class JsonIncludePluginTest {
     @Test
     void "should display full json"() {
         def props = process('test.json')
-        props.should == [data: expectedFullData, paths: [], highlightKeys: []]
+        props.should == [data: expectedFullData, highlightValues: [], highlightKeys: []]
     }
 
     @Test
     void "should handle null values"() {
         def props = process('with-null.json')
-        props.should == [data: [key1: null, key2: [key21: 'value21', key22: 'value22']], paths: [], highlightKeys: []]
+        props.should == [data: [key1: null, key2: [key21: 'value21', key22: 'value22']], highlightValues: [], highlightKeys: []]
     }
 
     @Test
     void "single paths value is automatically converted to list"() {
-        def props = process('test.json {paths: "root.key1"}')
-        props.should == [data: expectedFullData, paths: ['root.key1'], highlightKeys: []]
+        def props = process('test.json {highlightValue: "root.key1"}')
+        props.should == [data: expectedFullData, highlightValues: ['root.key1'], highlightKeys: []]
+    }
+
+    @Test
+    void "should allow old name for highlightValue to be used"() {
+        def props = process('test.json {highlightValue: "root.key1"}')
+        props.should == [data: expectedFullData, highlightValues: ['root.key1'], highlightKeys: []]
     }
 
     @Test
     void "should read paths from file when provided"() {
+        def props = process('test.json {highlightValueFile: "jsonFileWithPaths.json"}')
+        props.should == [data : expectedFullData,
+                         highlightValues: ['root.key1', 'root.key2'],
+                         highlightKeys: []]
+    }
+
+    @Test
+    void "should read paths from file using deprecated name when provided"() {
         def props = process('test.json {pathsFile: "jsonFileWithPaths.json"}')
-        props.should == [data     : expectedFullData,
-                         pathsFile: 'jsonFileWithPaths.json',
-                         paths    : ['root.key1', 'root.key2'],
+        props.should == [data : expectedFullData,
+                         highlightValues: ['root.key1', 'root.key2'],
                          highlightKeys: []]
     }
 
@@ -57,25 +70,24 @@ class JsonIncludePluginTest {
     void "should read keys to highlight from file when provided"() {
         def props = process('test.json {highlightKeyFile: "jsonFileWithPaths.json"}')
         props.should == [data     : expectedFullData,
-                         highlightKeyFile: 'jsonFileWithPaths.json',
                          highlightKeys: ['root.key1', 'root.key2'],
-                         paths: []]
+                         highlightValues: []]
     }
 
     @Test
     void "should display subset of json"() {
         def props = process('test.json {include: "$.key2"}')
-        props.should == [data   : [key21: 'value21',
+        props.should == [data: [key21: 'value21',
                                    key22: 'value22'],
-                         paths  : [], highlightKeys: [],
+                         highlightValues: [], highlightKeys: [],
                          include: '$.key2']
     }
 
     @Test
     void "should validate paths presence"() {
         code {
-            process('test.json {paths: ["root.key_1", "root.key_2"]}')
-        } should throwException("can't find paths: root.key_1 in JSON, available:\n" +
+            process('test.json {highlightValue: ["root.key_1", "root.key_2"]}')
+        } should throwException("can't find highlightValue: root.key_1 in JSON, available:\n" +
                 "  root\n" +
                 "  root.key1\n" +
                 "  root.key2\n" +
@@ -114,15 +126,15 @@ class JsonIncludePluginTest {
                          autoTitle: true,
                          title    : "test.json",
                          anchorId : "test-json",
-                         paths    : [],
+                         highlightValues: [],
                          highlightKeys: []]
     }
 
     @Test
-    void "auxiliary files should include pathsFile"() {
+    void "auxiliary files should include highlight value file"() {
         def auxiliaryFilesStream =
                 PluginsTestUtils.processIncludeAndGetAuxiliaryFiles(
-                        ':include-json: test.json {pathsFile: "jsonFileWithPaths.json"}')
+                        ':include-json: test.json {highlightValueFile: "jsonFileWithPaths.json"}')
 
         auxiliaryFilesStream.collect { af -> af.path.fileName.toString() }
                 .should == ['jsonFileWithPaths.json', 'test.json']

@@ -80,31 +80,33 @@ const arrayOfObject = [
 
 export function jsonDemo(registry: Registry) {
   registry
-    .add("with nulls", () => <Json data={withNulls} paths={["root.k3"]} />)
-    .add("array of simple", () => <Json data={arraySimpleData} paths={["root[1]"]} />)
-    .add("with title", () => <Json data={arraySimpleData} paths={["root[1]"]} title="Response" />)
+    .add("with nulls", () => <Json data={withNulls} highlightValues={["root.k3"]} />)
+    .add("array of simple", () => <Json data={arraySimpleData} highlightValues={["root[1]"]} />)
+    .add("with title", () => <Json data={arraySimpleData} highlightValues={["root[1]"]} title="Response" />)
     .add("highlight keys", () => <Json data={objectNestedData} highlightKeys={["root.key1", "root.key3.key31"]} />)
     .add("record", () => <Json data={objectSimpleData} />)
-    .add("nested record", () => <Json data={objectNestedData} paths={["root.key2.key22", "root.key3.key31"]} />)
+    .add("nested record", () => (
+      <Json data={objectNestedData} highlightValues={["root.key2.key22", "root.key3.key31"]} />
+    ))
     .add("nested with empty", () => <Json data={objectEmptyData} />)
     .add("nested record with collapsed entry", () => (
       <Json
         data={objectNestedData}
-        paths={["root.key2.key22", "root.key3.key31"]}
-        collapsedPaths={["root.key2", "root.key4"]}
+        highlightValues={["root.key2.key22", "root.key3.key31"]}
+        collapsedhighlightValues={["root.key2", "root.key4"]}
       />
     ))
     .add("nested record right side background", () => (
       <TwoSidesLayoutRightPart>
-        <Json data={objectNestedData} paths={["root.key2.key22", "root.key3.key31"]} />
+        <Json data={objectNestedData} highlightValues={["root.key2.key22", "root.key3.key31"]} />
       </TwoSidesLayoutRightPart>
     ))
     .add("nested record with collapsed entry right side background", () => (
       <TwoSidesLayoutRightPart>
         <Json
           data={objectNestedData}
-          paths={["root.key2.key22", "root.key3.key31"]}
-          collapsedPaths={["root.key2", "root.key4"]}
+          highlightValues={["root.key2.key22", "root.key3.key31"]}
+          collapsedhighlightValues={["root.key2", "root.key4"]}
         />
       </TwoSidesLayoutRightPart>
     ))

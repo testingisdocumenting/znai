@@ -21,7 +21,7 @@ left:
 right:
 :include-json: chat-post-messages/response.json {
   title: "POST /messages response",
-  pathsFile: "chat-post-messages/paths.json"
+  highlightValueFile: "chat-post-messages/paths.json"
 }
 ```
 
@@ -43,7 +43,7 @@ This is the source to render the layout above
     right:
     :include-json: chat-post-messages/response.json {
       title: "POST /messages response",
-      pathsFile: "chat-post-messages/paths.json"
+      highlightValueFile: "chat-post-messages/paths.json"
     }
     ```
 

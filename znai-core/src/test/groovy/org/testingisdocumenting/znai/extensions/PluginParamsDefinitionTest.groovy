@@ -30,13 +30,16 @@ class PluginParamsDefinitionTest {
             .add("highlight", PluginParamType.LIST_OR_SINGLE_STRING_OR_NUMBER,
                     "lines to highlight", "[4, \"class\"]")
             .add("autoTitle", PluginParamType.BOOLEAN, "auto title based on path", "true")
+            .add("newList", PluginParamType.LIST_OR_SINGLE_STRING, "list of values")
             .addRequired("id", PluginParamType.STRING, "id of the concept", "true")
             .rename("oldTitle", "title")
+            .rename("oldList", "newList")
 
     static def expectedPluginParametersHelp = "available plugin parameters:\n" +
             "  autoTitle: auto title based on path <boolean> (e.g. true)\n" +
             "  highlight: lines to highlight <list or a single value of either number(s) or string(s)> (e.g. [4, \"class\"])\n" +
             "  id: REQUIRED id of the concept <string> (e.g. true)\n" +
+            "  newList: list of values <list or a single value of string(s)> (e.g. \"hello\" or [\"hello\", \"text\"])\n" +
             "  title: title of snippet <string> (e.g. \"example of API\")\n"
 
     @Test
@@ -78,9 +81,23 @@ class PluginParamsDefinitionTest {
 
     @Test
     void "parameter renames should provide value access by using new name"() {
-        def pluginParams = pluginParamsFactory.create("file", "", [oldTitle: "my title", autoTitle: "false"])
+        def pluginParams = pluginParamsFactory.create("file", "", [oldTitle: "my custom title", autoTitle: "false"])
         paramsDefinition.validateParamsAndHandleRenames(pluginParams)
-        pluginParams.getOpts().get("title").should == "my title"
+        pluginParams.getOpts().get("title").should == "my custom title"
+    }
+
+    @Test
+    void "parameter should provide list value access by using new name when old name was used to set data"() {
+        def pluginParams = pluginParamsFactory.create("file", "", [oldList: ["a", "b", "c"]])
+        paramsDefinition.validateParamsAndHandleRenames(pluginParams)
+        pluginParams.getOpts().getList("newList").should == ["a", "b", "c"]
+    }
+
+    @Test
+    void "parameter should provide list value access by using new name when new name was used to set data"() {
+        def pluginParams = pluginParamsFactory.create("file", "", [newList: ["a", "b", "c"]])
+        paramsDefinition.validateParamsAndHandleRenames(pluginParams)
+        pluginParams.getOpts().getList("newList").should == ["a", "b", "c"]
     }
 
     @Test

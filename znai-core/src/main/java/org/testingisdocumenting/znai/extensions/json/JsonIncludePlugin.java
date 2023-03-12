@@ -44,7 +44,7 @@ public class JsonIncludePlugin extends JsonBasePlugin implements IncludePlugin {
     }
 
     @Override
-    protected void updateParams(PluginParamsDefinition paramsDefinition) {
+    protected void registerAdditionalParams(PluginParamsDefinition paramsDefinition) {
         paramsDefinition.add(SnippetAutoTitleFeature.paramsDefinition);
     }
 
