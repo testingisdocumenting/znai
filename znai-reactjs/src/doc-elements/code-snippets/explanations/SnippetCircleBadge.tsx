@@ -22,7 +22,7 @@ import { Tooltip } from "../../../components/Tooltip";
 
 interface Props {
   idx: number;
-  tooltip?: string;
+  tooltip?: any;
   className?: string;
 }
 

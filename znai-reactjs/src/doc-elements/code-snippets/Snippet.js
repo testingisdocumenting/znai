@@ -19,15 +19,14 @@ import * as React from "react"
 
 import {
     collapseCommentsAboveToMakeCommentOnTheCodeLine,
-    findComments,
     isCommentToken, removeCommentsFromEachLine,
-    splitTokensIntoLines
+    splitTokensIntoLines, trimComment
 } from "./codeUtils";
 import {isAllAtOnce} from '../meta/meta'
 import {convertToList} from '../propsUtils';
 
 import SnippetContainer from './SnippetContainer'
-import CodeSnippetWithInlineComments from './CodeSnippetWithInlineComments'
+import CodeSnippetWithCallouts from './CodeSnippetWithCallouts'
 import SimpleCodeSnippet from './SimpleCodeSnippet'
 
 import {parseCode} from './codeParser'
@@ -45,16 +44,17 @@ const REMOVE_COMMENT_TYPE = 'remove'
 const Snippet = (props) => {
     const tokensToUse = parseCodeWithCompatibility({lang: props.lang, snippet: props.snippet, tokens: props.tokens})
 
-    const renderBulletComments = props.commentsType === BULLETS_COMMENT_TYPE;
+    const renderBulletComments = props.commentsType === BULLETS_COMMENT_TYPE || (props.callouts && Object.keys(props.callouts).length > 0);
 
     const snippetComponent = renderBulletComments ?
-        CodeSnippetWithInlineComments :
+        CodeSnippetWithCallouts :
         SimpleCodeSnippet
 
     const lines = splitTokensIntoLines(tokensToUse);
 
-    const modifiedLines = modifyLinesOfCode()
-    const comments = findComments(modifiedLines)
+    const modifiedLines = mergeOrRemoveComments()
+    const comments = renderBulletComments ? buildCalloutsFromComments(modifiedLines) : {};
+    const mergedCallouts = {...comments, ...props.callouts}
 
     return (
         <>
@@ -62,13 +62,13 @@ const Snippet = (props) => {
                               tokens={tokensToUse}
                               linesOfCode={modifiedLines}
                               scrollToLineIdx={scrollToLineIdx(props)}
-                              comments={comments}
+                              callouts={mergedCallouts}
                               snippetComponent={snippetComponent}/>
-            <Explanations comments={comments} {...props}/>
+            <Explanations callouts={mergedCallouts} {...props}/>
         </>
     )
 
-    function modifyLinesOfCode() {
+    function mergeOrRemoveComments() {
         if (renderBulletComments) {
             return collapseCommentsAboveToMakeCommentOnTheCodeLine(lines)
         }
@@ -85,13 +85,14 @@ Snippet.defaultProps = {
     numberOfVisibleLines: defaultNumberOfVisibleLines
 }
 
-function Explanations({commentsType, spoiler, isPresentation, slideIdx, comments}) {
-    if (commentsType !== BULLETS_COMMENT_TYPE || isPresentation || comments.length === 0) {
+function Explanations({spoiler, isPresentation, callouts = {}, elementsLibrary}) {
+    if (isPresentation || Object.keys(callouts).length === 0) {
         return null
     }
 
     return <SnippetBulletExplanations spoiler={spoiler}
-                                      comments={isPresentation ? comments.slice(slideIdx, slideIdx + 1) : comments}/>
+                                      callouts={callouts}
+                                      elementsLibrary={elementsLibrary}/>
 }
 
 
@@ -189,6 +190,19 @@ function highlightNumberOfSlides({meta, highlightAsList}) {
     }
 
     return highlightAsList.length
+}
+
+function buildCalloutsFromComments(lines) {
+    const result = {}
+    lines.forEach((line, lineIdx) => {
+        line.forEach(token => {
+            if (isCommentToken(token)) {
+                result[lineIdx] = {type: "SimpleText", text: trimComment(token.content)};
+            }
+        })
+    })
+
+    return result
 }
 
 export {Snippet, presentationSnippetHandler}

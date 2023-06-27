@@ -80,7 +80,7 @@ import {paragraphPresentationDemo} from "./doc-elements/paragraph/PresentationPa
 import {snippetPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippet.demo";
 import {snippetWithScrollPresentationDemo} from "./doc-elements/code-snippets/PresentationSnippetWithScroll.demo";
 import {presentationStickySlidesDemo} from "./doc-elements/presentation/PresentationStickySlides.demo";
-import {snippetsWithInlineCommentsDemo} from "./doc-elements/code-snippets/CodeSnippetWithInlineComments.demo";
+import {snippetsWithInlineCommentsDemo} from "./doc-elements/code-snippets/CodeSnippetWithCallouts.demo";
 import {notAuthorizedDemo} from "./screens/not-authorized/NotAuthorizedScreen.demo";
 import {iframeDemo} from './doc-elements/iframe/Iframe.demo';
 import {cliCommandPresentationDemo} from './doc-elements/cli/PresentationCliCommand.demo';

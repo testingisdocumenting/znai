@@ -18,14 +18,15 @@ import React, { useState } from "react";
 
 import { SnippetCircleBadge } from "./SnippetCircleBadge";
 
-import { trimComment } from "../codeUtils";
+import { DocElementContent, ElementsLibraryMap } from "../../default-elements/DocElement";
 
 interface Props {
-  comments: { content: string }[];
+  callouts: Record<number, DocElementContent>;
+  elementsLibrary: ElementsLibraryMap;
   spoiler?: boolean;
 }
 
-export function SnippetBulletExplanations({ comments, spoiler }: Props) {
+export function SnippetBulletExplanations({ callouts, spoiler, elementsLibrary }: Props) {
   const [hidden, setHidden] = useState(spoiler);
 
   const className = "content-block code-bullets" + (hidden ? " hidden-explanation" : "");
@@ -35,8 +36,8 @@ export function SnippetBulletExplanations({ comments, spoiler }: Props) {
     <div className={className} onClick={onSpoilerClick}>
       {spoilerMessage}
 
-      {comments.map((t, idx) => (
-        <Bullet key={idx} comment={t.content} idx={idx + 1} />
+      {Object.values(callouts).map((callout, idx) => (
+        <Bullet key={idx} docElementContent={callout} idx={idx + 1} elementsLibrary={elementsLibrary} />
       ))}
     </div>
   );
@@ -46,11 +47,21 @@ export function SnippetBulletExplanations({ comments, spoiler }: Props) {
   }
 }
 
-function Bullet({ comment, idx }: { comment: string; idx: number }) {
+function Bullet({
+  docElementContent,
+  idx,
+  elementsLibrary,
+}: {
+  docElementContent: DocElementContent;
+  idx: number;
+  elementsLibrary: ElementsLibraryMap;
+}) {
   return (
     <div className="code-bullet-and-comment">
       <SnippetCircleBadge idx={idx} />
-      <span className="code-bullet-comment">{trimComment(comment)}</span>
+      <span className="code-bullet-comment">
+        <elementsLibrary.DocElement content={[docElementContent]} elementsLibrary={elementsLibrary} />
+      </span>
     </div>
   );
 }
