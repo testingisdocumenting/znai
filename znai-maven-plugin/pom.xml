@@ -37,7 +37,7 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-groovydoc</artifactId>
-            <scope>provided</scope>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
@@ -86,7 +86,7 @@
                             <goal>compile</goal>
                             <goal>generateStubs</goal>
                             <goal>addTestSources</goal>
-                            <goal>testCompile</goal>
+                            <goal>compileTests</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -95,7 +95,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.9.0</version>
             </plugin>
         </plugins>
     </build>

@@ -132,14 +132,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <groovy.version>3.0.7</groovy.version>
+        <maven.compiler.release>17</maven.compiler.release>
+        <groovy.version>3.0.15</groovy.version>
         <vertx.io.version>3.9.4</vertx.io.version>
         <commonmark.version>0.15.2</commonmark.version>
         <antlr.version>4.5</antlr.version>
         <jackson.verson>2.11.2</jackson.verson>
-        <webtau.version>1.51</webtau.version>
+        <webtau.version>2.0</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
         <ant.version>1.10.11</ant.version>
         <ant-compress.version>1.5</ant-compress.version>
@@ -421,13 +420,28 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                    <configuration>
+                        <source>17</source>
+                        <target>17</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
                     <groupId>org.codehaus.gmavenplus</groupId>
                     <artifactId>gmavenplus-plugin</artifactId>
-                    <version>1.5</version>
+                    <version>1.10.1</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.codehaus.groovy</groupId>
                             <artifactId>groovy-groovydoc</artifactId>
+                            <version>${groovy.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.codehaus.groovy</groupId>
+                            <artifactId>groovy</artifactId>
                             <version>${groovy.version}</version>
                         </dependency>
                     </dependencies>
@@ -580,7 +594,7 @@
                                 <id>compile</id>
                                 <goals>
                                     <goal>compile</goal>
-                                    <goal>testCompile</goal>
+                                    <goal>compileTests</goal>
                                 </goals>
                             </execution>
                             <execution>
@@ -590,8 +604,7 @@
                                     <goal>groovydoc</goal>
                                 </goals>
                                 <configuration>
-                                    <groovydocOutputDirectory>${project.build.directory}/apidocs
-                                    </groovydocOutputDirectory>
+                                    <groovyDocOutputDirectory>${project.build.directory}/apidocs</groovyDocOutputDirectory>
                                 </configuration>
                             </execution>
                         </executions>

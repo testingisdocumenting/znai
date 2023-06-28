@@ -104,7 +104,7 @@ public class ZipJarFileResourceResolver implements ResourcesResolver {
     }
 
     private void unarchive(Path archivePath) throws IOException {
-        try (FileSystem archiveFs = FileSystems.newFileSystem(archivePath, null)) {
+        try (FileSystem archiveFs = FileSystems.newFileSystem(archivePath, (ClassLoader) null)) {
             Iterable<Path> rootDirectories = archiveFs.getRootDirectories();
             for (Path root : rootDirectories) {
                 try (Stream<Path> files = Files.walk(root)) {
