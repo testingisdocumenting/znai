@@ -432,11 +432,16 @@
                 <plugin>
                     <groupId>org.codehaus.gmavenplus</groupId>
                     <artifactId>gmavenplus-plugin</artifactId>
-                    <version>1.5</version>
+                    <version>1.10.1</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.codehaus.groovy</groupId>
                             <artifactId>groovy-groovydoc</artifactId>
+                            <version>${groovy.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.codehaus.groovy</groupId>
+                            <artifactId>groovy</artifactId>
                             <version>${groovy.version}</version>
                         </dependency>
                     </dependencies>
@@ -589,7 +594,7 @@
                                 <id>compile</id>
                                 <goals>
                                     <goal>compile</goal>
-                                    <goal>testCompile</goal>
+                                    <goal>compileTests</goal>
                                 </goals>
                             </execution>
                             <execution>
@@ -599,8 +604,7 @@
                                     <goal>groovydoc</goal>
                                 </goals>
                                 <configuration>
-                                    <groovydocOutputDirectory>${project.build.directory}/apidocs
-                                    </groovydocOutputDirectory>
+                                    <groovyDocOutputDirectory>${project.build.directory}/apidocs</groovyDocOutputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
