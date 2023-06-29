@@ -24,7 +24,7 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class XmlIncludePluginTest {
     @Test
-    void "should validate path presence whith multiple children"() {
+    void "should validate path presence with multiple children"() {
         code {
             resultingProps("sample.xml", '{paths: ["root.child[4]"]}')
         } should throwException("can't find path: root.child[4] in XML, available:\n" +
