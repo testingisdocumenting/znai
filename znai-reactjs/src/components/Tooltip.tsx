@@ -15,6 +15,7 @@
  */
 
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
+
 import "./Tooltip.css";
 
 export type TooltipPlacement = "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center";
