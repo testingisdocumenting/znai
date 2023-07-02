@@ -48,13 +48,10 @@ export function snippetsWithInlineCommentsDemo(registry: Registry) {
           lang="java"
           snippet={javaNoComments()}
           callouts={{
-            2: {
-              type: "Paragraph",
-              content: [
-                { type: "SimpleText", text: "some code goes here " },
-                { type: "InlinedCode", code: "test-code" },
-              ],
-            },
+            2: [
+              { type: "SimpleText", text: "some code goes here " },
+              { type: "InlinedCode", code: "test-code" },
+            ],
           }}
           elementsLibrary={elementsLibrary}
         />

@@ -60,7 +60,7 @@ function Bullet({
     <div className="code-bullet-and-comment">
       <SnippetCircleBadge idx={idx} />
       <span className="code-bullet-comment">
-        <elementsLibrary.DocElement content={[docElementContent]} elementsLibrary={elementsLibrary} />
+        <elementsLibrary.DocElement content={docElementContent} elementsLibrary={elementsLibrary} />
       </span>
     </div>
   );

@@ -19,6 +19,8 @@ import React from "react";
 import Json from "./Json";
 import { TwoSidesLayoutRightPart } from "../page/two-sides/TwoSidesLayout";
 import { Registry } from "react-component-viewer";
+import { elementsLibrary } from "../DefaultElementsLibrary";
+import { TooltipRenderer } from "../../components/Tooltip";
 
 const withNulls = {
   k1: null,
@@ -84,6 +86,16 @@ export function jsonDemo(registry: Registry) {
     .add("array of simple", () => <Json data={arraySimpleData} highlightValues={["root[1]"]} />)
     .add("with title", () => <Json data={arraySimpleData} highlightValues={["root[1]"]} title="Response" />)
     .add("highlight keys", () => <Json data={objectNestedData} highlightKeys={["root.key1", "root.key3.key31"]} />)
+    .add("callouts by path", () => (
+      <>
+        <TooltipRenderer />
+        <Json
+          data={objectNestedData}
+          calloutsByPath={{ "root.key1": [{ type: "SimpleText", text: "hello world" }] }}
+          elementsLibrary={elementsLibrary}
+        />
+      </>
+    ))
     .add("record", () => <Json data={objectSimpleData} />)
     .add("nested record", () => (
       <Json data={objectNestedData} highlightValues={["root.key2.key22", "root.key3.key31"]} />

@@ -197,7 +197,7 @@ function buildCalloutsFromComments(lines) {
     lines.forEach((line, lineIdx) => {
         line.forEach(token => {
             if (isCommentToken(token)) {
-                result[lineIdx] = {type: "SimpleText", text: trimComment(token.content)};
+                result[lineIdx] = [{type: "SimpleText", text: trimComment(token.content)}]
             }
         })
     })

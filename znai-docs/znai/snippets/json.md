@@ -157,6 +157,28 @@ You can turn parts of `JSON` into links to internal or external pages.
   referencesPath: "references/json-references-demo.csv"
 }
 
+# Callouts
+
+Use `callouts` parameter to attach bullet points with explanation to a json path:
+
+```markdown {title: "callouts example", highlight: "callouts"}
+:include-json: book-store.json {
+  collapsedPaths: ['root.store.book'],
+  callouts: {
+   "root.store.bicycle.color": "subject of **availability**",
+   "root.store.bicycle.price": "*price* changes daily"
+  }}
+}
+```
+
+:include-json: book-store.json {
+  collapsedPaths: ['root.store.book'],
+  callouts: {
+   "root.store.bicycle.color": "subject of **availability**",
+   "root.store.bicycle.price": "*price* changes daily"
+  }}
+}
+
 # Test Results
 
 Below is an example of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to make 

@@ -23,6 +23,8 @@ import SnippetContainer from '../code-snippets/SnippetContainer'
 import SimpleCodeSnippet from '../code-snippets/SimpleCodeSnippet'
 
 import './Json.css'
+import CodeSnippetWithCallouts from "../code-snippets/CodeSnippetWithCallouts";
+import { SnippetBulletExplanations } from "../code-snippets/explanations/SnippetBulletExplanations";
 
 class Json extends React.Component {
     state = {
@@ -31,9 +33,9 @@ class Json extends React.Component {
 
     render() {
         const {previouslyCollapsedPaths} = this.state
-        const {data, highlightValues, highlightKeys, title, ...props} = this.props
+        const {data, highlightValues, highlightKeys, title, calloutsByPath, ...props} = this.props
 
-        const lines = printJson({
+        const {linesOfTokens, lineIdxByPath} = printJson({
             rootPath: 'root',
             data,
             highlightValues,
@@ -43,13 +45,31 @@ class Json extends React.Component {
             onPathUncollapse: this.onPathUncollapse,
             onPathCollapse: this.onPathCollapse })
 
+        const calloutsByLineIdx = {}
+        if (calloutsByPath) {
+            Object.entries(calloutsByPath).forEach(e => {
+                calloutsByLineIdx[lineIdxByPath[e[0]]] = e[1];
+            });
+        }
+
+        const snippetComponent = Object.keys(calloutsByLineIdx).length > 0 ?
+          CodeSnippetWithCallouts :
+          SimpleCodeSnippet
+
         return (
-            <SnippetContainer linesOfCode={lines}
-                              title={title}
-                              tokensForClipboardProvider={this.tokensForClipboardProvider}
-                              numberOfVisibleLines={100}
-                              snippetComponent={SimpleCodeSnippet}
-                              {...props}/>
+          <>
+              <SnippetContainer linesOfCode={linesOfTokens}
+                                title={title}
+                                tokensForClipboardProvider={this.tokensForClipboardProvider}
+                                numberOfVisibleLines={100}
+                                snippetComponent={snippetComponent}
+                                callouts={calloutsByLineIdx}
+                                {...props}/>
+              <Explanations calloutsByLineIdx={calloutsByLineIdx}
+                            elementsLibrary={props.elementsLibrary}
+                            spoiler={false}
+                            isPresentation={props.isPresentation}/>
+          </>
         )
     }
 
@@ -81,10 +101,20 @@ class Json extends React.Component {
 
     tokensForClipboardProvider = () => {
         const {data} = this.props
-        const lines = printJson({rootPath: 'root', data})
+        const {linesOfTokens} = printJson({rootPath: 'root', data})
 
-        return lines.reduce((acc, curr) => acc.concat(curr), [])
+        return linesOfTokens.reduce((acc, curr) => acc.concat(curr), [])
     }
+}
+
+function Explanations({spoiler, isPresentation, calloutsByLineIdx = {}, elementsLibrary}) {
+    if (isPresentation || Object.keys(calloutsByLineIdx).length === 0) {
+        return null
+    }
+
+    return <SnippetBulletExplanations spoiler={spoiler}
+                                      callouts={calloutsByLineIdx}
+                                      elementsLibrary={elementsLibrary}/>
 }
 
 export default Json

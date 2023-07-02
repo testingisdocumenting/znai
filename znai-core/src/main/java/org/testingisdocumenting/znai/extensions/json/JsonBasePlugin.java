@@ -26,6 +26,8 @@ import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
 import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
 import org.testingisdocumenting.znai.extensions.validation.EntryPresenceValidation;
+import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
@@ -41,6 +43,7 @@ public abstract class JsonBasePlugin implements Plugin {
     private final static String HIGHLIGHT_VALUES_FILE_KEY = "highlightValueFile";
     private final static String COLLAPSED_PATHS_KEY = "collapsedPaths";
     private final static String ENCLOSE_IN_OBJECT_KEY = "encloseInObject";
+    private final static String CALLOUTS_KEY = "callouts";
     private final static String HIGHLIGHT_VALUES_DEPRECATED_KEY = "paths";
     private final static String HIGHLIGHT_VALUES_DEPRECATED_FILE_KEY = "pathsFile";
 
@@ -76,6 +79,9 @@ public abstract class JsonBasePlugin implements Plugin {
                 .add(ENCLOSE_IN_OBJECT_KEY, PluginParamType.STRING,
                         "wrap resulting json into an extra object with provided parent(s)",
                         "\"person.address\"")
+                .add(CALLOUTS_KEY, PluginParamType.OBJECT,
+                        "callout text per json path",
+                        "{\"root.key1.nested[0]\": \"important value for config\"")
                 .add(SnippetHighlightFeature.paramsDefinition)
                 .add(PluginParamsDefinitionCommon.snippetReadMore)
                 .add(CodeReferencesFeature.paramsDefinition)
@@ -114,10 +120,18 @@ public abstract class JsonBasePlugin implements Plugin {
         List<String> collapsedPaths = opts.getList(COLLAPSED_PATHS_KEY);
         EntryPresenceValidation.validateItemsPresence(COLLAPSED_PATHS_KEY, "JSON", existingPaths, collapsedPaths);
 
+        Map<String, List<Map<String, Object>>> docElementDescByPath = extractAndParseCallouts(componentsRegistry.markdownParser(), markupPath, opts);
+        EntryPresenceValidation.validateItemsPresence(CALLOUTS_KEY, "JSON", existingPaths, docElementDescByPath.keySet());
+
         Map<String, Object> props = opts.toMap();
         props.put("data", parsed);
         props.put("highlightValues", highlightValues);
         props.put("highlightKeys", highlightKeys);
+
+        if (!docElementDescByPath.isEmpty()) {
+            props.put("calloutsByPath", docElementDescByPath);
+        }
+
         features.updateProps(props);
 
         props.remove(HIGHLIGHT_KEYS_KEY);
@@ -126,8 +140,28 @@ public abstract class JsonBasePlugin implements Plugin {
         props.remove(HIGHLIGHT_VALUES_FILE_KEY);
         props.remove(HIGHLIGHT_VALUES_DEPRECATED_KEY);
         props.remove(HIGHLIGHT_VALUES_DEPRECATED_FILE_KEY);
+        props.remove(CALLOUTS_KEY);
         
         return PluginResult.docElement("Json", props);
+    }
+
+    private Map<String, List<Map<String, Object>>> extractAndParseCallouts(MarkdownParser parser, Path parentFilePath, PluginParamsOpts opts) {
+        if (!opts.has(CALLOUTS_KEY)) {
+            return Collections.emptyMap();
+        }
+
+        Map<String, String> markdownByPath = opts.get(CALLOUTS_KEY);
+
+        Map<String, List<Map<String, Object>>> result = new LinkedHashMap<>();
+
+        markdownByPath.forEach((nodePath, markdown) -> {
+            MarkupParserResult parseResult = parser.parse(parentFilePath, markdown);
+            List<Map<String, Object>> docElements = parseResult.getDocElement().contentToListOfMaps();
+
+            result.put(nodePath, docElements);
+        });
+
+        return result;
     }
 
     private Object encloseInObjectIfRequired(PluginParamsOpts opts, Object original) {
