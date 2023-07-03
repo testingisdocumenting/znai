@@ -53,34 +53,34 @@ class JsonIncludePluginTest {
     @Test
     void "should read paths from file when provided"() {
         def props = process('test.json {highlightValueFile: "jsonFileWithPaths.json"}')
-        props.should == [data : expectedFullData,
+        props.should == [data           : expectedFullData,
                          highlightValues: ['root.key1', 'root.key2'],
-                         highlightKeys: []]
+                         highlightKeys  : []]
     }
 
     @Test
     void "should read paths from file using deprecated name when provided"() {
         def props = process('test.json {pathsFile: "jsonFileWithPaths.json"}')
-        props.should == [data : expectedFullData,
+        props.should == [data           : expectedFullData,
                          highlightValues: ['root.key1', 'root.key2'],
-                         highlightKeys: []]
+                         highlightKeys  : []]
     }
 
     @Test
     void "should read keys to highlight from file when provided"() {
         def props = process('test.json {highlightKeyFile: "jsonFileWithPaths.json"}')
-        props.should == [data     : expectedFullData,
-                         highlightKeys: ['root.key1', 'root.key2'],
+        props.should == [data           : expectedFullData,
+                         highlightKeys  : ['root.key1', 'root.key2'],
                          highlightValues: []]
     }
 
     @Test
     void "should display subset of json"() {
         def props = process('test.json {include: "$.key2"}')
-        props.should == [data: [key21: 'value21',
-                                   key22: 'value22'],
+        props.should == [data           : [key21: 'value21',
+                                           key22: 'value22'],
                          highlightValues: [], highlightKeys: [],
-                         include: '$.key2']
+                         include        : '$.key2']
     }
 
     @Test
@@ -122,12 +122,12 @@ class JsonIncludePluginTest {
     @Test
     void "should auto title"() {
         def props = process('test.json {"autoTitle": true}')
-        props.should == [data     : expectedFullData,
-                         autoTitle: true,
-                         title    : "test.json",
-                         anchorId : "test-json",
+        props.should == [data           : expectedFullData,
+                         autoTitle      : true,
+                         title          : "test.json",
+                         anchorId       : "test-json",
                          highlightValues: [],
-                         highlightKeys: []]
+                         highlightKeys  : []]
     }
 
     @Test
@@ -144,6 +144,27 @@ class JsonIncludePluginTest {
     void "should maintain original json order"() {
         def props = process('test-account.json')
         props.data.keySet().should == ["id", "price", "amount"]
+    }
+
+    @Test
+    void "should parse callouts markdown"() {
+        def props = process('test-account.json {callouts: {"root.id": "hello *world*", "root.price": "`code`"}}')
+
+        props.calloutsByPath.should == [
+            "root.id": [["markdown": "hello *world*", "type": "TestMarkdown"]],
+            "root.price": [["markdown": "`code`", "type": "TestMarkdown"]]
+        ]
+    }
+
+    @Test
+    void "should validate callouts paths"() {
+        code {
+            process('test-account.json {callouts: {"root.tid": "hello *world*", "root.price": "`code`"}}')
+        } should throwException("can't find callouts: root.tid in JSON, available:\n" +
+                "  root\n" +
+                "  root.id\n" +
+                "  root.price\n" +
+                "  root.amount")
     }
 
     private static def process(String params) {

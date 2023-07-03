@@ -16,7 +16,7 @@
 
 package org.testingisdocumenting.znai.extensions.validation;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 
 public class EntryPresenceValidation {
@@ -25,7 +25,7 @@ public class EntryPresenceValidation {
 
     public static void validateItemsPresence(String itemsLabel, String source,
                                              Set<String> existing,
-                                             List<String> toValidate) {
+                                             Collection<String> toValidate) {
         for (String item : toValidate) {
             if (!existing.contains(item)) {
                 throw new RuntimeException("can't find " + itemsLabel + ": " + item + " in " + source +

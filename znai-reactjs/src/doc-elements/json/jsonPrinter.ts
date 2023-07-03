@@ -36,6 +36,9 @@ class JsonPrinter {
   _keysToHighlight: Record<string, boolean> = {};
   _previouslyCollapsedPaths: Record<string, boolean> = {};
   _collapsedPaths: Record<string, boolean> = {};
+
+  lineIdxByPath: Record<string, number> = {};
+
   onPathCollapse: (path: string) => void;
   onPathUncollapse: (path: string) => void;
 
@@ -63,6 +66,7 @@ class JsonPrinter {
   }
 
   printValue(path: string, value: any, skipIndent: boolean) {
+    this.lineIdxByPath[path] = this.printer.linesOfTokens.length - 1;
     if (value === null) {
       this.printSingleValue(path, null);
     } else if (Array.isArray(value)) {
@@ -269,7 +273,7 @@ export function printJson({
 
   jsonPrinter.printValue(rootPath, data, false);
 
-  return jsonPrinter.printer.linesOfTokens;
+  return { linesOfTokens: jsonPrinter.printer.linesOfTokens, lineIdxByPath: jsonPrinter.lineIdxByPath };
 }
 
 function escapeQuote(text: string) {

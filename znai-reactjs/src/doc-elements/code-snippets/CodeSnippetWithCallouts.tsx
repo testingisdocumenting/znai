@@ -85,9 +85,7 @@ const CodeSnippetWithCallouts = ({
                   <SnippetCircleBadge
                     className="left-margin"
                     idx={bulletNumber++}
-                    tooltip={
-                      <elementsLibrary.DocElement content={[calloutContent]} elementsLibrary={elementsLibrary} />
-                    }
+                    tooltip={<elementsLibrary.DocElement content={calloutContent} elementsLibrary={elementsLibrary} />}
                   />
                 ) : null;
               }}

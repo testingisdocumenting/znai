@@ -34,11 +34,6 @@ public class JsonIncludePlugin extends JsonBasePlugin implements IncludePlugin {
     private String fileName;
 
     @Override
-    public String id() {
-        return "json";
-    }
-
-    @Override
     public IncludePlugin create() {
         return new JsonIncludePlugin();
     }
