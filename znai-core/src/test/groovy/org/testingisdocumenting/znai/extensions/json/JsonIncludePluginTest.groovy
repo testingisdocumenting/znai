@@ -167,6 +167,26 @@ class JsonIncludePluginTest {
                 "  root.amount")
     }
 
+    @Test
+    void "should parse callouts from json file"() {
+        def props = process('test-account.json {calloutsFile: "json-callouts.json"}}')
+
+        props.calloutsByPath.should == [
+                "root.id": [["markdown": "root id", "type": "TestMarkdown"]],
+                "root.price": [["markdown": "root *price*", "type": "TestMarkdown"]]
+        ]
+    }
+
+    @Test
+    void "should parse callouts from csv file"() {
+        def props = process('test-account.json {calloutsFile: "json-callouts.csv"}}')
+
+        props.calloutsByPath.should == [
+                "root.id": [["markdown": "root id", "type": "TestMarkdown"]],
+                "root.price": [["markdown": "root *price*", "type": "TestMarkdown"]]
+        ]
+    }
+
     private static def process(String params) {
         return PluginsTestUtils.processIncludeAndGetProps(":include-json: $params")
     }

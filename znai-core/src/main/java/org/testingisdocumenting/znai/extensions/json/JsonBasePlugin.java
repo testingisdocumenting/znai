@@ -28,6 +28,8 @@ import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
 import org.testingisdocumenting.znai.extensions.validation.EntryPresenceValidation;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
+import org.testingisdocumenting.znai.parser.table.CsvTableParser;
+import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
@@ -44,14 +46,17 @@ public abstract class JsonBasePlugin implements Plugin {
     private final static String COLLAPSED_PATHS_KEY = "collapsedPaths";
     private final static String ENCLOSE_IN_OBJECT_KEY = "encloseInObject";
     private final static String CALLOUTS_KEY = "callouts";
+    private final static String CALLOUTS_FILE_KEY = "calloutsFile";
     private final static String HIGHLIGHT_VALUES_DEPRECATED_KEY = "paths";
     private final static String HIGHLIGHT_VALUES_DEPRECATED_FILE_KEY = "pathsFile";
 
     private Path highlightValuesFilePath;
     private Path highlightKeysFilePath;
+    private Path calloutsFilePath;
 
     protected PluginFeatureList features;
     protected ResourcesResolver resourcesResolver;
+    private MarkdownParser markdownParser;
 
     @Override
     public String id() {
@@ -82,6 +87,9 @@ public abstract class JsonBasePlugin implements Plugin {
                 .add(CALLOUTS_KEY, PluginParamType.OBJECT,
                         "callout text per json path",
                         "{\"root.key1.nested[0]\": \"important value for config\"")
+                .add(CALLOUTS_FILE_KEY, PluginParamType.STRING,
+                        "json or csv file with callout text per json path",
+                        "\"common-callouts.json\"")
                 .add(SnippetHighlightFeature.paramsDefinition)
                 .add(PluginParamsDefinitionCommon.snippetReadMore)
                 .add(CodeReferencesFeature.paramsDefinition)
@@ -99,6 +107,7 @@ public abstract class JsonBasePlugin implements Plugin {
                                       PluginParams pluginParams,
                                       String jsonText) {
         resourcesResolver = componentsRegistry.resourceResolver();
+        markdownParser = componentsRegistry.markdownParser();
         PluginParamsOpts opts = pluginParams.getOpts();
 
         String jsonPath = opts.get(INCLUDE_KEY, "$");
@@ -120,7 +129,7 @@ public abstract class JsonBasePlugin implements Plugin {
         List<String> collapsedPaths = opts.getList(COLLAPSED_PATHS_KEY);
         EntryPresenceValidation.validateItemsPresence(COLLAPSED_PATHS_KEY, "JSON", existingPaths, collapsedPaths);
 
-        Map<String, List<Map<String, Object>>> docElementDescByPath = extractAndParseCallouts(componentsRegistry.markdownParser(), markupPath, opts);
+        Map<String, List<Map<String, Object>>> docElementDescByPath = extractAndParseCallouts(markupPath, opts);
         EntryPresenceValidation.validateItemsPresence(CALLOUTS_KEY, "JSON", existingPaths, docElementDescByPath.keySet());
 
         Map<String, Object> props = opts.toMap();
@@ -143,25 +152,6 @@ public abstract class JsonBasePlugin implements Plugin {
         props.remove(CALLOUTS_KEY);
         
         return PluginResult.docElement("Json", props);
-    }
-
-    private Map<String, List<Map<String, Object>>> extractAndParseCallouts(MarkdownParser parser, Path parentFilePath, PluginParamsOpts opts) {
-        if (!opts.has(CALLOUTS_KEY)) {
-            return Collections.emptyMap();
-        }
-
-        Map<String, String> markdownByPath = opts.get(CALLOUTS_KEY);
-
-        Map<String, List<Map<String, Object>>> result = new LinkedHashMap<>();
-
-        markdownByPath.forEach((nodePath, markdown) -> {
-            MarkupParserResult parseResult = parser.parse(parentFilePath, markdown);
-            List<Map<String, Object>> docElements = parseResult.getDocElement().contentToListOfMaps();
-
-            result.put(nodePath, docElements);
-        });
-
-        return result;
     }
 
     private Object encloseInObjectIfRequired(PluginParamsOpts opts, Object original) {
@@ -208,9 +198,14 @@ public abstract class JsonBasePlugin implements Plugin {
                 Stream.empty() :
                 Stream.of(AuxiliaryFile.builtTime(highlightKeysFilePath));
 
+        Stream<AuxiliaryFile> calloutsFile = calloutsFilePath == null ?
+                Stream.empty() :
+                Stream.of(AuxiliaryFile.builtTime(calloutsFilePath));
+
         return Stream.concat(pathsFile,
                 Stream.concat(highlightKeysFile,
-                        Stream.concat(features.auxiliaryFiles(), additionalAuxiliaryFiles())));
+                        Stream.concat(calloutsFile,
+                                Stream.concat(features.auxiliaryFiles(), additionalAuxiliaryFiles()))));
     }
 
     @SuppressWarnings("unchecked")
@@ -235,6 +230,55 @@ public abstract class JsonBasePlugin implements Plugin {
         }
 
         return opts.getList(HIGHLIGHT_KEYS_KEY);
+    }
+
+    private Map<String, List<Map<String, Object>>> extractAndParseCallouts(Path parentFilePath, PluginParamsOpts opts) {
+        if (opts.has(CALLOUTS_KEY)) {
+            Map<String, String> markdownByPath = opts.get(CALLOUTS_KEY);
+            return convertMarkdownToDocElements(markdownParser, parentFilePath, markdownByPath);
+        } else if (opts.has(CALLOUTS_FILE_KEY)) {
+            String filePath = opts.get(CALLOUTS_FILE_KEY);
+            calloutsFilePath = resourcesResolver.fullPath(filePath);
+
+            Map<String, ?> markdownByPath = parseCallouts(resourcesResolver.textContent(filePath));
+            return convertMarkdownToDocElements(markdownParser, parentFilePath, markdownByPath);
+        } else {
+            return Collections.emptyMap();
+        }
+    }
+
+    private Map<String, ?> parseCallouts(String content) {
+        content = content.trim();
+        return content.startsWith("{") ?
+                parseCalloutsJson(content) :
+                parseCalloutsCsv(content);
+    }
+
+    private Map<String, ?> parseCalloutsCsv(String content) {
+        MarkupTableData tableData = CsvTableParser.parseWithHeader(content, "path", "markdown");
+
+        Map<String, String> result = new LinkedHashMap<>();
+        tableData.forEachRow(row -> result.put(row.get(0), row.get(1)));
+
+        return result;
+    }
+
+    private Map<String, ?> parseCalloutsJson(String content) {
+        return JsonUtils.deserializeAsMap(content);
+    }
+
+    private Map<String, List<Map<String, Object>>> convertMarkdownToDocElements(MarkdownParser parser, Path parentFilePath,
+                                                                                Map<String, ?> markdownByPath) {
+        Map<String, List<Map<String, Object>>> result = new LinkedHashMap<>();
+
+        markdownByPath.forEach((nodePath, markdown) -> {
+            MarkupParserResult parseResult = parser.parse(parentFilePath, markdown.toString());
+            List<Map<String, Object>> docElements = parseResult.getDocElement().contentToListOfMaps();
+
+            result.put(nodePath, docElements);
+        });
+
+        return result;
     }
 
     private static Set<String> buildPaths(Object json) {
