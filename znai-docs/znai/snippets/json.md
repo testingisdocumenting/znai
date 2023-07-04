@@ -179,6 +179,28 @@ Use `callouts` parameter to attach bullet points with explanation to a json path
   }}
 }
 
+# Callouts From File
+
+Use `calloutsFile` parameter to read callouts from a separate file. Can reduce duplication and allows to generate callouts at runtime.  
+
+```markdown {title: "callouts file example", highlight: "calloutsFile"}
+:include-json: book-store.json {
+  collapsedPaths: ['root.store.book'],
+  calloutsFile: "schema-notes.json"
+}
+```
+
+:include-file: schema-notes.json {autoTitle: true}
+
+:include-json: book-store.json {
+  collapsedPaths: ['root.store.book'],
+  calloutsFile: "schema-notes.json"
+}
+
+CSV format is also supported
+
+:include-file: schema-notes.csv {autoTitle: true}
+
 # Test Results
 
 Below is an example of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to make 
