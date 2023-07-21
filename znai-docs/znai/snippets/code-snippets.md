@@ -65,6 +65,27 @@ class MyComponent extends Component {
 }
 ```
 
+# Anchor
+
+When you specify a title, hover mouse over it to see a clickable anchor.
+
+Use `anchorId` to override auto generated identifier.
+
+`````
+```javascript {title: "ReactJS Component", anchorId: "my-special-code"}
+...
+```
+`````
+```javascript {title: "ReactJS Component", anchorId: "my-special-code"}
+import React, {Component} from 'react'
+
+class MyComponent extends Component {
+  render() {
+    /// ...
+  }
+}
+```
+
 # Wide Code
 
 Use the `wide` option to stretch wide code to occupy as much horizontal real estate as possible.  
