@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.parser.docelement;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
 import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
 import org.testingisdocumenting.znai.parser.HeadingProps;
@@ -328,6 +329,9 @@ public class DocElementCreationParserHandler implements ParserHandler {
                     }
                 });
         highlightFeature.updateProps(snippetProps);
+
+        AnchorFeature anchorFeature = new AnchorFeature(componentsRegistry.docStructure(), path, pluginParams);
+        anchorFeature.updateProps(snippetProps);
 
         append(DocElementType.SNIPPET, snippetProps);
     }
