@@ -113,6 +113,16 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "surrounded by keep"() {
+        def text = resultingSnippet("file-with-surround-marker.txt", "{surroundedBy: '# concept-example', surroundedByKeep: true}")
+
+        text.should == "# concept-example\n" +
+                "   foo()\n" +
+                "   bar()\n" +
+                "# concept-example"
+    }
+
+    @Test
     void "should extract file snippet based on multiple surrounding patterns and indent each block"() {
         def text = resultingSnippet("file-with-multiple-surround-marker.txt",
                 "{surroundedBy: ['# import-list', '# concept-example']}")

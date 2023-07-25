@@ -32,6 +32,7 @@ import static java.util.stream.Collectors.toList;
 class TextContentExtractor {
     static final String SURROUNDED_BY_KEY = "surroundedBy";
     static final String SURROUNDED_BY_SEPARATOR_KEY = "surroundedBySeparator";
+    static final String SURROUNDED_BY_KEEP_KEY = "surroundedByKeep";
 
     static final String START_LINE_KEY = "startLine";
     static final String END_LINE_KEY = "endLine";
@@ -59,6 +60,9 @@ class TextContentExtractor {
                 .add(SURROUNDED_BY_SEPARATOR_KEY, PluginParamType.LIST_OR_SINGLE_STRING_WITH_NULLS,
                         "separator(s) to use for multiple surrounded by blocks",
                         "\"...\" or [\"\", \"...\"]")
+                .add(SURROUNDED_BY_KEEP_KEY, PluginParamType.BOOLEAN,
+                        "keep surrounded by text",
+                        "true")
                 .add(START_LINE_KEY, PluginParamType.STRING,
                         "partial match of start line for snippet extraction", "\"class\"")
                 .add(END_LINE_KEY, PluginParamType.STRING,
@@ -138,6 +142,8 @@ class TextContentExtractor {
             return text;
         }
 
+        boolean keepMarker = opts.get(SURROUNDED_BY_KEEP_KEY, false);
+
         List<String> surroundedBySeparator = opts.getList(SURROUNDED_BY_SEPARATOR_KEY);
         Iterator<String> separatorIt = surroundedBySeparator.iterator();
         String separator = separatorIt.hasNext() ? separatorIt.next() : null;
@@ -149,9 +155,11 @@ class TextContentExtractor {
             boolean isLast = idx == (surroundedBy.size() - 1);
 
             Text surroundedCrop = text.startingWithLineContaining(marker);
-            surroundedCrop = surroundedCrop.limitToLineContaining(marker)
-                    .cropOneLineFromStartAndEnd()
-                    .stripIndentation();
+            surroundedCrop = surroundedCrop.limitToLineContaining(marker);
+            if (!keepMarker) {
+               surroundedCrop = surroundedCrop.cropOneLineFromStartAndEnd();
+            }
+            surroundedCrop = surroundedCrop.stripIndentation();
 
             if (surroundedCrop.isEmpty()) {
                 throw new RuntimeException("no content present after " + SURROUNDED_BY_KEY + " " + marker);
