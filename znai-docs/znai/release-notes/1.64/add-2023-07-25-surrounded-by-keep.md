@@ -1,0 +1,1 @@
+* Add: [surroundedByKeep](snippets/snippets-manipulation#surrounded-by) boolean option

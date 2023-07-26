@@ -16,6 +16,24 @@ Use `:identifier: surroundedBy` to extract code snippet surrounded by a marker
   title: "extracted result",
   surroundedBy: "# example-cancel-trade"}
 
+Use `:identifier: surroundedByKeep` to keep marker lines
+
+:include-file: custom.dsl {autoTitle: true}
+
+```markdown {highlight: "surroundedByKeep"}
+:include-file: custom.dsl {
+  title: "keep marker lines",
+  surroundedBy: "block-A",
+  surroundedByKeep: true
+}
+```
+
+:include-file: custom.dsl {
+  title: "keep marker lines",
+  surroundedBy: "block-A",
+  surroundedByKeep: true
+}
+
 # Multiple Surrounded By 
 
 Pass a list to `:identifier: surroundedBy` to extract multiple blocks
