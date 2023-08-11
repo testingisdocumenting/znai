@@ -113,7 +113,12 @@ public class TableOfContents {
     }
 
     public TocItem findTocItem(Path markupFilePath) {
-        if (markupFilePath.getFileName().toString().startsWith(TocItem.INDEX + ".")) {
+        Path fileName = markupFilePath.getFileName();
+        if (fileName == null) {
+            return null;
+        }
+
+        if (fileName.toString().startsWith(TocItem.INDEX + ".")) {
             return getIndex();
         }
 

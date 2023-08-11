@@ -16,11 +16,17 @@
 
 package org.testingisdocumenting.znai.structure;
 
+import org.testingisdocumenting.znai.utils.FilePathUtils;
+
 public class DocUrl {
-    private static final String LINK_TO_SECTION_INSTRUCTION = "To refer to a section of a document page use " +
-            " dir-name/file-name-without-extension#page-section-id. #page-section-id is optional.\n" +
-            "Use #page-section-id to refer to the current page section.\n" +
-            "Use /#section-id to refer the root page of a documentation.\n";
+    private static final String LINK_TO_SECTION_INSTRUCTION = """
+            To refer to a section of a document page use either
+              dir-name/file-name-without-extension#page-section-id or
+              ../dir-name/file-name.md#page-section-id
+              (#page-section-id is optional)
+            Use #page-section-id to refer to the current page section.
+            Use /#section-id to refer the root page of a documentation.
+            """;
 
     private String dirName = "";
     private String fileName = "";
@@ -48,8 +54,6 @@ public class DocUrl {
 
     public DocUrl(String url) {
         this.url = url;
-
-        validateNoRelative();
 
         boolean handled = handleExternal() ||
                 handleIndex() ||
@@ -92,24 +96,25 @@ public class DocUrl {
 
     private boolean handleLocal() {
         String[] parts = url.split("/");
-        if (parts.length != 2) {
+        if (parts.length != 2 && parts.length != 3) {
             throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
         }
 
-        dirName = parts[0];
+        if (parts.length == 3 && !parts[0].equals("..")) {
+            throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
+        }
 
-        int idxOfAnchorSep = parts[1].indexOf('#');
+        int dirIdx = parts.length == 3 ? 1 : 0;
+        int nameIdx = parts.length == 3 ? 2 : 1;
 
-        fileName = idxOfAnchorSep == -1 ? parts[1] : parts[1].substring(0, idxOfAnchorSep);
-        anchorId = idxOfAnchorSep == -1 ? "" : parts[1].substring(idxOfAnchorSep + 1);
+        dirName = parts[dirIdx];
+
+        int idxOfAnchorSep = parts[nameIdx].indexOf('#');
+
+        fileName = FilePathUtils.fileNameWithoutExtension(idxOfAnchorSep == -1 ? parts[nameIdx] : parts[nameIdx].substring(0, idxOfAnchorSep));
+        anchorId = idxOfAnchorSep == -1 ? "" : parts[nameIdx].substring(idxOfAnchorSep + 1);
 
         return true;
-    }
-
-    private void validateNoRelative() {
-        if (url.startsWith("..")) {
-            throw new IllegalArgumentException("Do not use .. based urls: " + url + ". " + LINK_TO_SECTION_INSTRUCTION);
-        }
     }
 
     public boolean isIndexUrl() {

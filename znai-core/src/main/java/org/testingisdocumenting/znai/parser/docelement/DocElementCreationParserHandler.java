@@ -20,29 +20,30 @@ package org.testingisdocumenting.znai.parser.docelement;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
-import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
-import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
-import org.testingisdocumenting.znai.parser.HeadingProps;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.Plugin;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
+import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
+import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
+import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
+import org.testingisdocumenting.znai.structure.TocItem;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class DocElementCreationParserHandler implements ParserHandler {
     private final ComponentsRegistry componentsRegistry;
@@ -430,7 +431,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private void removeEmptyParagraphs(DocElement element) {
         List<DocElement> emptyParagraphs = element.getContent().stream()
                 .filter(e -> e.getType().equals(DocElementType.PARAGRAPH) && e.getContent().isEmpty())
-                .collect(Collectors.toList());
+                .toList();
 
         emptyParagraphs.forEach(element::removeChild);
         element.getContent().forEach(this::removeEmptyParagraphs);
@@ -499,6 +500,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     private boolean isLocalFile(String url) {
         if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("mailto:")) {
+            return false;
+        }
+
+        TocItem tocItem = componentsRegistry.docStructure().tableOfContents().findTocItem(Paths.get(url));
+        if (tocItem != null) {
             return false;
         }
 

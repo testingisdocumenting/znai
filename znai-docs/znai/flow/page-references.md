@@ -18,6 +18,10 @@ To create an `external` link use:
 To refer `internal` page within your documentation use:
 
 ```markdown
+[internal link](../dir-name/file-name.md#optional-page-section-id)
+```
+or
+```markdown
 [internal link](dir-name/file-name#optional-page-section-id)
 ```
 
@@ -25,9 +29,10 @@ Note: you can get `page-section-id` by hovering over a section title and pressin
 
 ## Links to Subsection
 
-Linking to subsections is the same as linking to a top level section. [Here is an example](flow/page-references#links-links-to-subsection)
+Linking to subsections is the same as linking to a top level section. [Here is an  example](../flow/page-references.md#links-links-to-subsection)
 
 ```markdown
+[Here is an example](../flow/page-references.md#links-links-to-subsection)
 [Here is an example](flow/page-references#links-links-to-subsection)
 ```
 
