@@ -1,0 +1,1 @@
+* Add: Support for [limited relative links](flow/page-references#links) with explicit file extension

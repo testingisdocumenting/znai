@@ -62,10 +62,6 @@ class MarkdownParserTest {
     @Test
     void "link to an unsupported location"() {
         code {
-            parse("[label](../test)")
-        } should throwException(~/Do not use .. based urls: ..\/test/)
-
-        code {
             parse("[label](dir/page/extra)")
         } should throwException(~/Unexpected url pattern: <dir\/page\/extra>/)
     }
@@ -91,7 +87,17 @@ class MarkdownParserTest {
                                                          type: 'Link',
                                                          content:[[text: 'label' , type: 'SimpleText']]]]]]
 
+        parse("[label](../valid-dir-name/page-name.md)")
+        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name', isFile: false,
+                                                         type: 'Link',
+                                                         content:[[text: 'label' , type: 'SimpleText']]]]]]
+
         parse("[label](valid-dir-name/page-name#page-section)")
+        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name#page-section',
+                                                         isFile: false, type: 'Link',
+                                                         content:[[text: 'label' , type: 'SimpleText']]]]]]
+
+        parse("[label](../valid-dir-name/page-name#page-section)")
         content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name#page-section',
                                                          isFile: false, type: 'Link',
                                                          content:[[text: 'label' , type: 'SimpleText']]]]]]

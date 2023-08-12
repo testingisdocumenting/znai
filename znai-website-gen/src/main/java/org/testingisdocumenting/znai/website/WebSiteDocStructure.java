@@ -30,7 +30,6 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
 class WebSiteDocStructure implements DocStructure {
     private final ComponentsRegistry componentsRegistry;
@@ -61,7 +60,7 @@ class WebSiteDocStructure implements DocStructure {
 
     void removeGlobalAnchorsForPath(Path path) {
         List<Map.Entry<String, GlobalAnchor>> entriesForPath =
-                globalAnchorsById.entrySet().stream().filter(kv -> kv.getValue().getFilePath().equals(path)).collect(toList());
+                globalAnchorsById.entrySet().stream().filter(kv -> kv.getValue().getFilePath().equals(path)).toList();
         entriesForPath.forEach(kv -> globalAnchorsById.remove(kv.getKey()));
     }
 
@@ -313,15 +312,5 @@ class WebSiteDocStructure implements DocStructure {
         return docUrl.getDirName() + "/" + docUrl.getFileName();
     }
 
-    private static class LinkToValidate {
-        private final Path path;
-        private final String additionalClue;
-        private final DocUrl docUrl;
-
-        LinkToValidate(Path path, String additionalClue, DocUrl docUrl) {
-            this.path = path;
-            this.additionalClue = additionalClue;
-            this.docUrl = docUrl;
-        }
-    }
+    private record LinkToValidate(Path path, String additionalClue, DocUrl docUrl) { }
 }

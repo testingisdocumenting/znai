@@ -19,9 +19,14 @@ package org.testingisdocumenting.znai.utils;
 import org.apache.commons.io.FilenameUtils;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FilePathUtils {
     private FilePathUtils() {
+    }
+
+    public static String fileNameWithoutExtension(String path) {
+        return fileNameWithoutExtension(Paths.get(path));
     }
 
     public static String fileNameWithoutExtension(Path path) {
