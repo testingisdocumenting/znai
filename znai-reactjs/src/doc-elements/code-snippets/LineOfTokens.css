@@ -23,9 +23,25 @@
 .znai-code-line.highlight {
     background: var(--znai-snippets-line-highlighted-background-color);
     margin-left: -16px;
-    padding: 4px 0 4px 16px;
+    padding-left: 16px;
 
     display: block;
+}
+
+.znai-code-line:first-child.highlight {
+    padding-top: 4px;
+}
+
+.znai-code-line:last-child.highlight {
+    padding-top: 4px;
+}
+
+.znai-code-line.highlight.no-highlight-top-neighbour {
+    padding-top: 4px;
+}
+
+.znai-code-line.highlight.no-highlight-bottom-neighbour {
+    padding-bottom: 4px;
 }
 
 .znai-code-line.wrap {

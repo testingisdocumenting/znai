@@ -21,11 +21,11 @@ import {Snippet} from './Snippet'
 
 export function syntaxHighlightSnippetDemo(registry) {
     registry
-        .add('yaml', () => <Snippet snippet={yamlCode()} lang="yaml" highlight={[3, 5]}/>)
+        .add('yaml', () => <Snippet snippet={yamlCode()} lang="yaml" highlight={[0, 3, 4, 5, 8, 10]}/>)
         .add('protobuf', () => <Snippet snippet={protoCode()} lang="proto" highlight={[5]}/>)
         .add('graphql', () => <Snippet snippet={graphqlCode()} lang="graphql" highlight={[5]}/>)
-        .add('cypher', () => <Snippet snippet={cypherCode()} lang="cyp" highlight={[5]}/>)
-        .add('sql', () => <Snippet snippet={sqlCode()} lang="sql" highlight={[5]}/>)
+        .add('cypher', () => <Snippet snippet={cypherCode()} lang="cyp" highlight={[4]}/>)
+        .add('sql', () => <Snippet snippet={sqlCode()} lang="sql" highlight={[1]}/>)
         .add('diff', () => <Snippet snippet={diffCode()} lang="diff"/>)
         .add('diff-javascript', () => <Snippet snippet={diffJavaScriptCode()} lang="diff-javascript"/>)
 }

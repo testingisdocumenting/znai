@@ -15,17 +15,19 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import {enhanceMatchedTokensWithMeta, lineWithTokensTrimmedOnRight} from './codeUtils'
+import { enhanceMatchedTokensWithMeta, lineWithTokensTrimmedOnRight } from "./codeUtils";
 
-import CodeToken from './CodeToken';
+import CodeToken from "./CodeToken";
 
-import './LineOfTokens.css'
+import "./LineOfTokens.css";
 
-const LineOfTokens = ({tokens, references, isHighlighted, isPresentation, wrap, endOfLineRender}) => {
+const LineOfTokens = ({tokens, references, isHighlighted, isPrevHighlighted, isNextHighlighted, isPresentation, wrap, endOfLineRender}) => {
     const className = "znai-code-line"
       + (isHighlighted ? " highlight" : "")
+      + (isHighlighted && !isPrevHighlighted ? " no-highlight-top-neighbour" : "")
+      + (isHighlighted && !isNextHighlighted ? " no-highlight-bottom-neighbour" : "")
       + (wrap ? " wrap": "")
 
     const trimmedOnRight = lineWithTokensTrimmedOnRight(tokens)
