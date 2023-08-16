@@ -63,6 +63,8 @@ const CodeSnippetWithCallouts = ({
     bulletNumberForCalc++;
   });
 
+  const isHighlightedByIdx = highlightIsVisible ? linesOfCode.map((_, lineIdx) => isHighlighted(lineIdx)) : [];
+
   let bulletNumber = 1;
   return (
     <div className={className}>
@@ -74,7 +76,9 @@ const CodeSnippetWithCallouts = ({
             <LineOfTokens
               key={lineIdx}
               tokens={lineToRender}
-              isHighlighted={isHighlighted(lineIdx)}
+              isPrevHighlighted={isHighlightedByIdx[lineIdx - 1]}
+              isHighlighted={isHighlightedByIdx[lineIdx]}
+              isNextHighlighted={isHighlightedByIdx[lineIdx + 1]}
               references={mergedReferences}
               isPresentation={isPresentation}
               wrap={wrap}

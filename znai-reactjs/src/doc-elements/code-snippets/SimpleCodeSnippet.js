@@ -64,6 +64,7 @@ class SimpleCodeSnippet extends Component {
         const linesToRender = this.processLinesToRender(visibleLines)
 
         const mergedReferences = mergeWithGlobalDocReferences(references)
+        const isHighlightedByIdx = highlightIsVisible ? linesToRender.map((_, lineIdx) => this.isHighlighted(lineIdx)) : []
 
         return (
             <pre>
@@ -71,7 +72,9 @@ class SimpleCodeSnippet extends Component {
                     <LineOfTokens key={lineIdx} tokens={tokens}
                                   references={mergedReferences}
                                   wrap={wrap}
-                                  isHighlighted={highlightIsVisible && this.isHighlighted(lineIdx)}
+                                  isPrevHighlighted={isHighlightedByIdx[lineIdx - 1]}
+                                  isHighlighted={isHighlightedByIdx[lineIdx]}
+                                  isNextHighlighted={isHighlightedByIdx[lineIdx + 1]}
                                   isPresentation={isPresentation}/>
                 ))}
                 <React.Fragment>{this.renderReadMore()}</React.Fragment>
