@@ -24,38 +24,47 @@ import java.util.List;
  */
 public class SnippetContainerEntriesConverter {
     private final String[] lines;
-    private final String label;
     private final String content;
     private final String snippetId;
 
-    public SnippetContainerEntriesConverter(String snippetId, String content, String label) {
-        this.label = label;
+    public SnippetContainerEntriesConverter(String snippetId, String content) {
         this.content = content;
         this.snippetId = snippetId;
         this.lines = content.split("\n");
     }
 
-    public List<Integer> convertAndValidate(List<Object> idxOrContains) {
+    public List<Integer> convertAndValidate(String label, List<Object> idxOrContains) {
         List<Integer> result = new ArrayList<>();
 
         for (Object idxOrText : idxOrContains) {
             if (idxOrText instanceof Number) {
-                result.add(validateIdx((Number) idxOrText));
+                result.add(validateIdx(label, (Number) idxOrText));
             } else {
-                result.addAll(validateContainsAndGetIdx((String) idxOrText));
+                result.addAll(validateContainsAndGetIdx(label, (String) idxOrText));
             }
         }
 
         return result;
     }
 
-    public int validateIdx(Number idx) {
+    public int validateIdx(String label, Number idx) {
         int idxInt = idx.intValue();
         if (idxInt >= lines.length || idxInt < 0) {
             throw new IllegalArgumentException(label + " idx is out of range: " + idx + exceptionIdMessage());
         }
 
         return idxInt;
+    }
+
+    public int findAndValidateFirstContain(String label, int startIdx, String partial) {
+        for (int idx = startIdx; idx < lines.length; idx++) {
+            String line = lines[idx];
+            if (line.contains(partial)) {
+                return idx;
+            }
+        }
+
+        throw new IllegalArgumentException(notFoundMessage(label, partial));
     }
 
     public List<Integer> findAllContainsIdx(String partial) {
@@ -71,15 +80,19 @@ public class SnippetContainerEntriesConverter {
         return result;
     }
 
-    public List<Integer> validateContainsAndGetIdx(String partial) {
+    public List<Integer> validateContainsAndGetIdx(String label, String partial) {
         List<Integer> containsIndexes = findAllContainsIdx(partial);
         if (containsIndexes.isEmpty()) {
-            throw new IllegalArgumentException(label + " text <" + partial + "> is not found" +
-                    exceptionIdMessage() +
-                    "\n" + content);
+            throw new IllegalArgumentException(notFoundMessage(label, partial));
         }
 
         return containsIndexes;
+    }
+
+    private String notFoundMessage(String label, String partial) {
+        return label + " text <" + partial + "> is not found" +
+                exceptionIdMessage() +
+                "\n" + content;
     }
 
     private String exceptionIdMessage() {
