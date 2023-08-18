@@ -443,7 +443,7 @@ class FileIncludePluginTest {
     void "should validate lines from a highlight text file"() {
         code {
             resultingProps("script.groovy", "{highlightPath: 'missing-highlight.txt'}")
-        } should throwException(~/highlight text <def g> is not found/)
+        } should throwException(~/highlightPath text <def g> is not found/)
     }
 
     private static String resultingSnippet(String fileName, String value) {
