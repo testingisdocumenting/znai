@@ -25,48 +25,51 @@ import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
 
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
- * Provides highlight validation, reads highlights from highlightPath when provided
+ * provides passed highlight validation and reads highlights from highlightPath when provided.
+ * converts "highlight regions" to a list of lines to highlight
  */
 public class SnippetHighlightFeature implements PluginFeature {
     public static final PluginParamsDefinition paramsDefinition = createParamsDefinition();
 
     private static final String HIGHLIGHT_KEY = "highlight";
     private static final String HIGHLIGHT_PATH_KEY = "highlightPath";
+    private static final String HIGHLIGHT_REGION_KEY = "highlightRegion";
+    private static final String HIGHLIGHT_REGION_START_SUB_KEY = "start";
+    private static final String HIGHLIGHT_REGION_END_SUB_KEY = "end";
+    private static final String HIGHLIGHT_REGION_START_FULL_KEY = HIGHLIGHT_REGION_KEY + "." + HIGHLIGHT_REGION_START_SUB_KEY;
+    private static final String HIGHLIGHT_REGION_END_FULL_KEY = HIGHLIGHT_REGION_KEY + "." + HIGHLIGHT_REGION_END_SUB_KEY;
 
     private final ComponentsRegistry componentsRegistry;
     private final Path highlightFileFullPath;
     private final String highlightPath;
-    private final List<Object> highlight;
-    private final SnippetContentProvider contentProvider;
+    private final PluginParams pluginParams;
+    private final SnippetContainerEntriesConverter snippetIdxConverter;
 
     public SnippetHighlightFeature(ComponentsRegistry componentsRegistry, PluginParams pluginParams, SnippetContentProvider contentProvider) {
         this.componentsRegistry = componentsRegistry;
+        this.pluginParams = pluginParams;
 
         this.highlightPath = pluginParams.getOpts().get("highlightPath", null);
         this.highlightFileFullPath = highlightPath != null ?
                 componentsRegistry.resourceResolver().fullPath(highlightPath) :
                 null;
 
-        this.highlight = extractHighlight(pluginParams.getOpts().getList(HIGHLIGHT_KEY));
-        this.contentProvider = contentProvider;
+        snippetIdxConverter = new SnippetContainerEntriesConverter(
+                contentProvider.snippetId(),
+                SnippetCleaner.removeNonAnsiCharacters(contentProvider.snippetContent()));
     }
 
     public void updateProps(Map<String, Object> props) {
-        if (!highlightProvided()) {
+        Set<Integer> indexes = generateHighlightIndexes(pluginParams);
+        if (indexes.isEmpty()) {
             return;
         }
 
-        SnippetContainerEntriesConverter snippetValidator = new SnippetContainerEntriesConverter(
-                contentProvider.snippetId(),
-                SnippetCleaner.removeNonAnsiCharacters(contentProvider.snippetContent()),
-                HIGHLIGHT_KEY);
-        props.put(HIGHLIGHT_KEY, snippetValidator.convertAndValidate(highlight));
+        props.put(HIGHLIGHT_KEY, indexes);
     }
 
     public Stream<AuxiliaryFile> auxiliaryFiles() {
@@ -74,27 +77,86 @@ public class SnippetHighlightFeature implements PluginFeature {
                 Stream.of(AuxiliaryFile.builtTime(highlightFileFullPath)) : Stream.empty();
     }
 
-    private List<Object> extractHighlight(List<Object> highlight) {
-        if (highlightFileFullPath == null) {
-            return highlight;
-        }
-
-        String textContent = componentsRegistry.resourceResolver().textContent(highlightPath);
-
-        List<Object> combined = Arrays.asList(textContent.split("\n"));
-        combined.addAll(highlight);
+    private Set<Integer> generateHighlightIndexes(PluginParams pluginParams) {
+        Set<Integer> combined = new TreeSet<>();
+        combined.addAll(generateHighlightIndexesFromPassed(pluginParams));
+        combined.addAll(generateHighlightIndexesFromFile());
+        combined.addAll(generateIndexesFromRegion(pluginParams));
 
         return combined;
     }
 
-    private boolean highlightProvided() {
-        return !highlight.isEmpty();
+    private List<Integer> generateHighlightIndexesFromPassed(PluginParams pluginParams) {
+        List<Object> passed = pluginParams.getOpts().getList(HIGHLIGHT_KEY);
+        return generateHighlightIndexesFromStringOrIdx(HIGHLIGHT_KEY, passed);
+   }
+
+    private List<Integer> generateHighlightIndexesFromFile() {
+        if (highlightPath == null) {
+            return Collections.emptyList();
+        }
+
+        String textContent = componentsRegistry.resourceResolver().textContent(highlightPath);
+        List<Object> fromFile = Arrays.asList(textContent.split("\n"));
+
+        return generateHighlightIndexesFromStringOrIdx(HIGHLIGHT_PATH_KEY, fromFile);
+    }
+
+    private List<Integer> generateIndexesFromRegion(PluginParams pluginParams) {
+        Object regionRaw = pluginParams.getOpts().get(HIGHLIGHT_REGION_KEY);
+        if (regionRaw == null) {
+            return Collections.emptyList();
+        }
+
+        if (!(regionRaw instanceof Map)) {
+            throw new IllegalArgumentException(regionWrongFormatMessage());
+        }
+
+        @SuppressWarnings("unchecked")
+        Map<String, Object> region = (Map<String, Object>) regionRaw;
+        Object startRaw = region.get("start");
+        if (startRaw == null || "".equals(startRaw)) {
+            throw new IllegalArgumentException(HIGHLIGHT_REGION_START_FULL_KEY + " is missing");
+        }
+        Object endRaw = region.get("end");
+        if (endRaw == null || "".equals(endRaw)) {
+            throw new IllegalArgumentException(HIGHLIGHT_REGION_END_FULL_KEY + " is missing");
+        }
+
+        if (!(startRaw instanceof String) || !(endRaw instanceof String)) {
+            throw new IllegalArgumentException(regionWrongFormatMessage());
+        }
+
+        return calculateIndexesBetween(startRaw.toString(), endRaw.toString());
+    }
+
+    private List<Integer> calculateIndexesBetween(String start, String end) {
+        int startIdx = snippetIdxConverter.findAndValidateFirstContain(HIGHLIGHT_REGION_START_FULL_KEY, 0, start);
+        int endIdx = snippetIdxConverter.findAndValidateFirstContain(HIGHLIGHT_REGION_END_FULL_KEY, startIdx + 1, end);
+
+        List<Integer> result = new ArrayList<>();
+        for (int idx = startIdx; idx <= endIdx; idx++) {
+            result.add(idx);
+        }
+
+        return result;
+    }
+
+    private List<Integer> generateHighlightIndexesFromStringOrIdx(String paramKeyForValidation, List<Object> idsOrStrings) {
+        return snippetIdxConverter.convertAndValidate(paramKeyForValidation, idsOrStrings);
     }
 
     private static PluginParamsDefinition createParamsDefinition() {
         return new PluginParamsDefinition()
                 .add(HIGHLIGHT_KEY, PluginParamType.LIST_OR_SINGLE_STRING_OR_NUMBER,
                         "lines to highlight by index or partial match", "[3, \"constructor\"] or \"class\"")
-                .add(HIGHLIGHT_PATH_KEY, PluginParamType.STRING, "path to a file with lines to highlight", "highlight.txt");
+                .add(HIGHLIGHT_PATH_KEY, PluginParamType.STRING, "path to a file with lines to highlight", "highlight.txt")
+                .add(HIGHLIGHT_REGION_KEY, PluginParamType.OBJECT,
+                        "region to highlight", "{start: \"line-a\", end: \"line-b\"}");
+    }
+
+    private static String regionWrongFormatMessage() {
+        return HIGHLIGHT_REGION_KEY + " should be in format {" + HIGHLIGHT_REGION_START_SUB_KEY + ": \"line-star\", " +
+                HIGHLIGHT_REGION_END_SUB_KEY + ": \"line-end\"}";
     }
 }

@@ -122,7 +122,7 @@ Use the `highlight` option to bring readers attention to the important lines.
 :include-file: file-name.js {highlight: "export"}
 
 It is recommended to pass a substring, but you can pass a line idx (starts from 0). 
-Additionally you can combine two approaches and pass a list of things to highlight. 
+Additionally, you can combine two approaches and pass a list of things to highlight. 
 
     :include-file: file-name.js {highlight: ["export", 1]}
 
@@ -137,3 +137,11 @@ Use the `highlightPath` option to highlight lines specified in a separate file.
 :include-file: file-name.js {highlightPath: "lines-to-highlight.txt"}
 
 :include-file: lines-to-highlight.txt {title: "lines-to-highlight.txt"}
+
+# Highlight Region
+
+Use the `highlightRegion` to highlight large portions of the code as one highlight block:
+
+    :include-file: file-name.js {highlightRegion: {start: "constructor", end: "}"}}
+
+:include-file: file-name.js {highlightRegion: {start: "constructor", end: "}"}}
