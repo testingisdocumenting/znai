@@ -56,6 +56,10 @@ public class SnippetContainerEntriesConverter {
         return idxInt;
     }
 
+    public String[] getLines() {
+        return lines;
+    }
+
     public int findAndValidateFirstContain(String label, int startIdx, String partial) {
         for (int idx = startIdx; idx < lines.length; idx++) {
             String line = lines[idx];

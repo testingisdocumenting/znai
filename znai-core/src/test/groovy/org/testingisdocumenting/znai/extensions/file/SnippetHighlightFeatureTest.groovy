@@ -44,6 +44,10 @@ class SnippetHighlightFeatureTest {
         code {
             createAndRunFeature([highlightRegion: [:]], "")
         } should throwException("highlightRegion.start is missing")
+
+        code {
+            createAndRunFeature([highlightRegion: [start: ""]], "")
+        } should throwException("highlightRegion.start can't be empty")
     }
 
     @Test
@@ -57,7 +61,7 @@ class SnippetHighlightFeatureTest {
     void "validate region start and end wrong type"() {
         code {
             createAndRunFeature([highlightRegion: [start: [:], end: [:]]], "")
-        } should throwException("highlightRegion should be in format {start: \"line-star\", end: \"line-end\"}")
+        } should throwException("highlightRegion should be in format {start: \"line-star\", end: \"line-end\"} or {\"start\": \"line-star\", scope: \"{}\"}")
     }
 
     @Test
@@ -70,6 +74,70 @@ class SnippetHighlightFeatureTest {
     void "highlight by region"() {
         def props = createAndRunFeature([highlightRegion: [start: "world", end: "and"]], "hello\nworld\nof\ndocumentation\nand\ntests")
         props.should == ["highlight": [1, 2, 3, 4]]
+    }
+
+    @Test
+    void "highlight by region and scope"() {
+        def props = createAndRunFeature([highlightRegion: [start: "if", scope: "{}"]], """hello
+if (a == 2) {
+  println "{}"
+}
+some text 
+below""")
+        props.should == ["highlight": [1, 2, 3]]
+    }
+
+    @Test
+    void "highlight by region and scope nested scope"() {
+        def props = createAndRunFeature([highlightRegion: [start: "if", scope: "{}"]], """hello
+if (a == 2) {
+  if (b == 3) {
+    println "{}"
+  }
+  println "outside"
+}
+some text 
+below""")
+        props.should == ["highlight": [1, 2, 3, 4, 5, 6]]
+    }
+
+    @Test
+    void "highlight by region and scope extra closing"() {
+        def props = createAndRunFeature([highlightRegion: [start: "if", scope: "{}"]], """hello
+if (a == 2) {
+  println "{}"
+}
+}
+some text 
+below""")
+        props.should == ["highlight": [1, 2, 3]]
+    }
+
+    @Test
+    void "highlight by region and scope separate line"() {
+        def props = createAndRunFeature([highlightRegion: [start: "if", scope: "{}"]], """hello
+if (a == 2) 
+{
+  println "{}"
+  println "more"
+}
+some text 
+below""")
+        props.should == ["highlight": [1, 2, 3, 4, 5]]
+    }
+
+    @Test
+    void "validate highlight by region and scope"() {
+        code {
+            createAndRunFeature([highlightRegion: [start: "if", scope: "{}"]], """hello
+if (a == 2) 
+{
+  println "{}"
+  println "more"
+
+some text 
+below""")
+        } should throwException("can't find region to highlight that starts with line: \"if\" and scoped with: {}")
     }
 
     @Test

@@ -145,3 +145,12 @@ Use the `highlightRegion` to highlight large portions of the code as one highlig
     :include-file: file-name.js {highlightRegion: {start: "constructor", end: "}"}}
 
 :include-file: file-name.js {highlightRegion: {start: "constructor", end: "}"}}
+
+# Highlight Region Using Scope
+
+Use the `highlightRegion.scope` to highlight region using scope like `{}`. 
+Unlike example above, highlight will not stop at first closing `}`:
+
+    :include-file: with-nested-if.js {highlightRegion: {start: "userId ===", scope: "{}"}}
+
+:include-file: with-nested-if.js {highlightRegion: {start: "userId ===", scope: "{}"}}
