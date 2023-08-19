@@ -40,8 +40,10 @@ public class SnippetHighlightFeature implements PluginFeature {
     private static final String HIGHLIGHT_REGION_KEY = "highlightRegion";
     private static final String HIGHLIGHT_REGION_START_SUB_KEY = "start";
     private static final String HIGHLIGHT_REGION_END_SUB_KEY = "end";
+    private static final String HIGHLIGHT_REGION_SCOPE_SUB_KEY = "scope";
     private static final String HIGHLIGHT_REGION_START_FULL_KEY = HIGHLIGHT_REGION_KEY + "." + HIGHLIGHT_REGION_START_SUB_KEY;
     private static final String HIGHLIGHT_REGION_END_FULL_KEY = HIGHLIGHT_REGION_KEY + "." + HIGHLIGHT_REGION_END_SUB_KEY;
+    private static final String HIGHLIGHT_REGION_SCOPE_FULL_KEY = HIGHLIGHT_REGION_KEY + "." + HIGHLIGHT_REGION_SCOPE_SUB_KEY;
 
     private final ComponentsRegistry componentsRegistry;
     private final Path highlightFileFullPath;
@@ -114,26 +116,42 @@ public class SnippetHighlightFeature implements PluginFeature {
 
         @SuppressWarnings("unchecked")
         Map<String, Object> region = (Map<String, Object>) regionRaw;
-        Object startRaw = region.get("start");
-        if (startRaw == null || "".equals(startRaw)) {
-            throw new IllegalArgumentException(HIGHLIGHT_REGION_START_FULL_KEY + " is missing");
+        if (region.containsKey(HIGHLIGHT_REGION_SCOPE_SUB_KEY)) {
+            return generateIndexesFromRegionScope(region);
+        } else {
+            return generateIndexesFromRegionStartEnd(region);
         }
-        Object endRaw = region.get("end");
-        if (endRaw == null || "".equals(endRaw)) {
-            throw new IllegalArgumentException(HIGHLIGHT_REGION_END_FULL_KEY + " is missing");
-        }
-
-        if (!(startRaw instanceof String) || !(endRaw instanceof String)) {
-            throw new IllegalArgumentException(regionWrongFormatMessage());
-        }
-
-        return calculateIndexesBetween(startRaw.toString(), endRaw.toString());
     }
 
-    private List<Integer> calculateIndexesBetween(String start, String end) {
+    private List<Integer> generateIndexesFromRegionScope(Map<String, Object> region) {
+        String start = getRequiredStringSubValue(region, HIGHLIGHT_REGION_START_SUB_KEY);
+        String scope = getRequiredStringSubValue(region, HIGHLIGHT_REGION_SCOPE_SUB_KEY);
+        if (scope.length() != 2) {
+            throw new IllegalArgumentException(HIGHLIGHT_REGION_SCOPE_FULL_KEY + " must be in format \"{}\", \"[]\", \"()\" etc");
+        }
+
+        int startIdx = snippetIdxConverter.findAndValidateFirstContain(HIGHLIGHT_REGION_START_FULL_KEY, 0, start);
+        RegionScopeExtractor regionScopeExtractor = new RegionScopeExtractor(snippetIdxConverter.getLines(), startIdx, scope.charAt(0), scope.charAt(1));
+        regionScopeExtractor.process();
+
+        if (regionScopeExtractor.getResultEndLineIdx() == -1) {
+            throw new IllegalArgumentException("can't find region to highlight that starts with line: \"" + start + "\" and scoped with: " + scope);
+        }
+
+        return generateIndexesFromStartAndEnd(regionScopeExtractor.getResultStartLineIdx(), regionScopeExtractor.getResultEndLineIdx());
+    }
+
+    private List<Integer> generateIndexesFromRegionStartEnd(Map<String, Object> region) {
+        String start = getRequiredStringSubValue(region, HIGHLIGHT_REGION_START_SUB_KEY);
+        String end = getRequiredStringSubValue(region, HIGHLIGHT_REGION_END_SUB_KEY);
+
         int startIdx = snippetIdxConverter.findAndValidateFirstContain(HIGHLIGHT_REGION_START_FULL_KEY, 0, start);
         int endIdx = snippetIdxConverter.findAndValidateFirstContain(HIGHLIGHT_REGION_END_FULL_KEY, startIdx + 1, end);
 
+        return generateIndexesFromStartAndEnd(startIdx, endIdx);
+    }
+
+    private static List<Integer> generateIndexesFromStartAndEnd(int startIdx, int endIdx) {
         List<Integer> result = new ArrayList<>();
         for (int idx = startIdx; idx <= endIdx; idx++) {
             result.add(idx);
@@ -155,8 +173,28 @@ public class SnippetHighlightFeature implements PluginFeature {
                         "region to highlight", "{start: \"line-a\", end: \"line-b\"}");
     }
 
+    private String getRequiredStringSubValue(Map<String, Object> values, String subKey) {
+        Object valueRaw = values.get(subKey);
+
+        if (valueRaw == null) {
+            throw new IllegalArgumentException(HIGHLIGHT_REGION_KEY + "." + subKey + " is missing");
+        }
+
+        if (!(valueRaw instanceof String)) {
+            throw new IllegalArgumentException(regionWrongFormatMessage());
+        }
+
+        String value = valueRaw.toString();
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException(HIGHLIGHT_REGION_KEY + "." + subKey + " can't be empty");
+        }
+
+        return value;
+    }
+
     private static String regionWrongFormatMessage() {
         return HIGHLIGHT_REGION_KEY + " should be in format {" + HIGHLIGHT_REGION_START_SUB_KEY + ": \"line-star\", " +
-                HIGHLIGHT_REGION_END_SUB_KEY + ": \"line-end\"}";
+                HIGHLIGHT_REGION_END_SUB_KEY + ": \"line-end\"} or {\"" + HIGHLIGHT_REGION_START_SUB_KEY + "\": \"line-star\", " +
+                HIGHLIGHT_REGION_SCOPE_SUB_KEY + ": \"{}\"}";
     }
 }

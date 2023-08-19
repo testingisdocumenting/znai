@@ -1,0 +1,1 @@
+* Add: code snippets [highlighting regions scope](snippets/external-code-snippets#highlight-region-using-scope) 
