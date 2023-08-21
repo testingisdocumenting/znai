@@ -83,7 +83,7 @@ public class SnippetHighlightFeature implements PluginFeature {
         Set<Integer> combined = new TreeSet<>();
         combined.addAll(generateHighlightIndexesFromPassed(pluginParams));
         combined.addAll(generateHighlightIndexesFromFile());
-        combined.addAll(generateIndexesFromRegion(pluginParams));
+        combined.addAll(generateIndexesFromRegionsList(pluginParams));
 
         return combined;
     }
@@ -104,12 +104,12 @@ public class SnippetHighlightFeature implements PluginFeature {
         return generateHighlightIndexesFromStringOrIdx(HIGHLIGHT_PATH_KEY, fromFile);
     }
 
-    private List<Integer> generateIndexesFromRegion(PluginParams pluginParams) {
-        Object regionRaw = pluginParams.getOpts().get(HIGHLIGHT_REGION_KEY);
-        if (regionRaw == null) {
-            return Collections.emptyList();
-        }
+    private List<Integer> generateIndexesFromRegionsList(PluginParams pluginParams) {
+        List<?> regionList = pluginParams.getOpts().getList(HIGHLIGHT_REGION_KEY);
+        return regionList.stream().flatMap(m -> generateIndexesFromRegionMap(m).stream()).toList();
+    }
 
+    private List<Integer> generateIndexesFromRegionMap(Object regionRaw) {
         if (!(regionRaw instanceof Map)) {
             throw new IllegalArgumentException(regionWrongFormatMessage());
         }
@@ -169,7 +169,7 @@ public class SnippetHighlightFeature implements PluginFeature {
                 .add(HIGHLIGHT_KEY, PluginParamType.LIST_OR_SINGLE_STRING_OR_NUMBER,
                         "lines to highlight by index or partial match", "[3, \"constructor\"] or \"class\"")
                 .add(HIGHLIGHT_PATH_KEY, PluginParamType.STRING, "path to a file with lines to highlight", "highlight.txt")
-                .add(HIGHLIGHT_REGION_KEY, PluginParamType.OBJECT,
+                .add(HIGHLIGHT_REGION_KEY, PluginParamType.LIST_OR_OBJECT,
                         "region to highlight", "{start: \"line-a\", end: \"line-b\"}");
     }
 

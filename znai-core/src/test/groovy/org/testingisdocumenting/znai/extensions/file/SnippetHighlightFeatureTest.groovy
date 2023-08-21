@@ -77,6 +77,20 @@ class SnippetHighlightFeatureTest {
     }
 
     @Test
+    void "highlight by multiple regions"() {
+        def props = createAndRunFeature([highlightRegion: [[start: "if", end: "print"], [start: "some", end: "and"]]],
+                """hello
+if (a == 2) {
+  println "{}"
+}
+some text 
+below
+and then
+some more""")
+        props.should == ["highlight": [1, 2, 4, 5, 6]]
+    }
+
+    @Test
     void "highlight by region and scope"() {
         def props = createAndRunFeature([highlightRegion: [start: "if", scope: "{}"]], """hello
 if (a == 2) {
@@ -85,6 +99,17 @@ if (a == 2) {
 some text 
 below""")
         props.should == ["highlight": [1, 2, 3]]
+    }
+
+    @Test
+    void "highlight by region and square brackets scope"() {
+        def props = createAndRunFeature([highlightRegion: [start: "list", scope: "[]"]], """hello
+let list = [1,
+2,
+'[]',
+4 ]
+below""")
+        props.should == ["highlight": [1, 2, 3, 4]]
     }
 
     @Test
@@ -127,6 +152,21 @@ below""")
     }
 
     @Test
+    void "highlight by multiple region and scope"() {
+        def props = createAndRunFeature([highlightRegion: [[start: "a == 2", scope: "{}"], [start: "b == 2", scope: "{}"]]],
+                """hello
+if (a == 2) {
+  println "{}"
+}
+some text 
+if (b == 2) {
+  println "{}"
+}
+below""")
+        props.should == ["highlight": [1, 2, 3, 5, 6, 7]]
+    }
+
+    @Test
     void "validate highlight by region and scope"() {
         code {
             createAndRunFeature([highlightRegion: [start: "if", scope: "{}"]], """hello
@@ -138,6 +178,22 @@ if (a == 2)
 some text 
 below""")
         } should throwException("can't find region to highlight that starts with line: \"if\" and scoped with: {}")
+    }
+
+    @Test
+    void "validate second highlight in list of regions"() {
+        code {
+            createAndRunFeature([highlightRegion: [[start: "a == 2", scope: "{}"], [start: "b == 2", scope: "{}"]]], """hello
+if (a == 2) 
+{
+  println "{}"
+  println "more"
+}
+
+if (b == 2) {
+some text 
+below""")
+        } should throwException("can't find region to highlight that starts with line: \"b == 2\" and scoped with: {}")
     }
 
     @Test
