@@ -1,1 +1,1 @@
-* Add: Improve [highlighting](snippets/external-code-snippets#highlights) of adjacent lines in code snippets 
+* Add: Improve [highlighting](snippets/snippets-highlighting) of adjacent lines in code snippets 

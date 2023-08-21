@@ -1,1 +1,1 @@
-* Add: code snippets [highlighting regions](snippets/external-code-snippets#highlight-region) 
+* Add: code snippets [highlighting regions](snippets/snippets-highlighting#region) 

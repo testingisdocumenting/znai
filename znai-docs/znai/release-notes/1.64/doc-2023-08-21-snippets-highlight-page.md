@@ -1,0 +1,1 @@
+* Doc: Move snippets highlighting into [its own page](snippets/snippets-highlighting) 

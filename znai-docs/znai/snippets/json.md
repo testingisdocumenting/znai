@@ -134,7 +134,7 @@ To hide sub-parts of your `JSON` use `collapsedPaths` property.
 
 # Highlights
 
-To highlight a specific `JSON` value using `paths`, in (similar fashion to [regular code snippets](snippets/external-code-snippets#highlights)), you can highlight 
+To highlight a specific `JSON` value using `paths`, in (similar fashion to [regular code snippets](snippets/snippets-highlighting), you can highlight 
 a line by text matching or by providing a line index.
 
     :include-json: book-store.json {highlight: ["category", 2]}
