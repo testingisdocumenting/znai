@@ -23,6 +23,7 @@ public interface PluginParamType {
     PluginParamType NUMBER = new PluginParamTypeNumber();
     PluginParamType BOOLEAN = new PluginParamTypeBoolean();
     PluginParamType OBJECT = new PluginParamTypeObject();
+    PluginParamType LIST_OR_OBJECT = new PluginParamTypeListOrObject();
     PluginParamType LIST_OR_SINGLE_NUMBER = new PluginParamTypeListOrSingleNumber();
     PluginParamType LIST_OR_SINGLE_STRING_OR_NUMBER = new PluginParamTypeListOrSingleStringOrNumber();
     PluginParamType LIST_OR_SINGLE_STRING = new PluginParamTypeListOrSingleString();

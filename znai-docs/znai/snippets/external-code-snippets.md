@@ -154,3 +154,19 @@ Unlike example above, highlight will not stop at first closing `}`:
     :include-file: with-nested-if.js {highlightRegion: {start: "userId ===", scope: "{}"}}
 
 :include-file: with-nested-if.js {highlightRegion: {start: "userId ===", scope: "{}"}}
+
+# Highlight Multiple Regions
+
+Use list to specify multiple regions to highlight: 
+
+```markdown
+:include-file: with-multiple-if.js {highlightRegion: [
+  {start: "canRead", scope: "{}"},
+  {start: "canWrite", scope: "{}"}]
+}
+```
+
+:include-file: with-multiple-if.js {highlightRegion: [
+  {start: "canRead", scope: "{}"},
+  {start: "canWrite", scope: "{}"}]
+}
