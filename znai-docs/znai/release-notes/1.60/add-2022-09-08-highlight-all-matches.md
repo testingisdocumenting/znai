@@ -1,1 +1,1 @@
-* Add: [highlight by text](snippets/external-code-snippets#highlights) highlights all matches
+* Add: [highlight by text](snippets/snippets-highlighting) highlights all matches

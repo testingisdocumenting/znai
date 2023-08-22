@@ -203,29 +203,4 @@ public class DocScaffolding {
     }
 ```
 
-Note: You will get a build-time error if the specified substring is not found in any of the snippet lines
-
-It is recommended to pass a substring, but you can pass a line idx (starts from 0). 
-Additionally you can combine two approaches and pass a list of things to highlight. 
-    
-    ```java {highlight: [2,  "..."]}
-    public class DocScaffolding {
-        private final Path workingDir;
-        private Map<String, List<String>> fileNameByDirName;
-    
-        public DocScaffolding(Path workingDir) {
-        ...
-        }
-    ```    
-
-```java {highlight: [2,  "..."]}
-public class DocScaffolding {
-    private final Path workingDir;
-    private Map<String, List<String>> fileNameByDirName;
-
-    public DocScaffolding(Path workingDir) {
-    ...
-    }
-```    
-
-Note: Order of lines to highlight is reflected during presentation mode 
+[Learn More](snippets/snippets-highlighting) about highlighting options.
