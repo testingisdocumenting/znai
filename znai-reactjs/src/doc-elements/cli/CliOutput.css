@@ -47,7 +47,7 @@
 }
 
 .znai-ansi-yellow-bg {
-    background-color: var(--znai-ansi-yellow);
+    background-color: var(--znai-ansi-yellow-bg);
 }
 
 .znai-ansi-blue-fg {
