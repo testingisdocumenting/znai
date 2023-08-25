@@ -1,0 +1,1 @@
+* Add: tweak yellow [terminal output](snippets/CLI#output-highlight) color for light theme
