@@ -21,29 +21,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class UniqueAnchorIdGenerator {
-    private final List<LevelId> headings;
-    private final Map<String, Integer> usedHeadingsCount;
-    private Path previousPath;
+    private final Map<Path, List<LevelId>> headingsByPath;
+    private final Map<Path, Map<String, Integer>> usedHeadingsCountByPath;
 
     public UniqueAnchorIdGenerator() {
-        headings = new ArrayList<>();
-        usedHeadingsCount = new HashMap<>();
+        headingsByPath = new ConcurrentHashMap<>();
+        usedHeadingsCountByPath = new ConcurrentHashMap<>();
     }
 
     public void registerSectionOrSubHeading(Path path, Integer level, String id) {
-        clearHeadingsOnPathChange(path);
+        var headings = getOrCreateHeadings(path);
         headings.removeIf(levelId -> levelId.level >= level);
-
-        previousPath = path;
         headings.add(new LevelId(level, id));
     }
 
     public String generateId(Path path, String nonUniqueId) {
-        clearHeadingsOnPathChange(path);
-
+        var headings = getOrCreateHeadings(path);
         String prefix = headings.stream()
                 .map(LevelId::getId)
                 .filter(id -> !id.isEmpty())
@@ -53,6 +50,7 @@ public class UniqueAnchorIdGenerator {
             prefix = prefix + (prefix.isEmpty() ? nonUniqueId : "-" + nonUniqueId);
         }
 
+        var usedHeadingsCount = usedHeadingsCountByPath.computeIfAbsent(path, k -> new HashMap<>());
         Integer count = usedHeadingsCount.get(prefix);
         if (count == null) {
             usedHeadingsCount.put(prefix, 1);
@@ -63,13 +61,13 @@ public class UniqueAnchorIdGenerator {
         return prefix + "-" + (count + 1);
     }
 
-    private void clearHeadingsOnPathChange(Path path) {
-        if (!path.equals(previousPath)) {
-            headings.clear();
-            usedHeadingsCount.clear();
-        }
+    private List<LevelId> getOrCreateHeadings(Path path) {
+        return headingsByPath.computeIfAbsent(path, k -> new ArrayList<>());
+    }
 
-        previousPath = path;
+    public void resetCountersIfPresent(Path path) {
+        headingsByPath.remove(path);
+        usedHeadingsCountByPath.remove(path);
     }
 
     static class LevelId {

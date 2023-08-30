@@ -1,0 +1,1 @@
+* Fix: During preview mode, [subsections](flow/page-references/#links-links-to-subsection) anchor ids are no longer increasing the counter when editing the same file.

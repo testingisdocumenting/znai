@@ -71,6 +71,7 @@ class WebSiteDocStructure implements DocStructure {
     void removeLinksForPath(Path path) {
         collectedExternalLinks.removeIf(linkToValidate -> linkToValidate.path.equals(path));
         collectedLocalLinks.removeIf(linkToValidate -> linkToValidate.path.equals(path));
+        uniqueAnchorIdGenerator.resetCountersIfPresent(path);
     }
 
     void updateToc(TableOfContents toc) {
