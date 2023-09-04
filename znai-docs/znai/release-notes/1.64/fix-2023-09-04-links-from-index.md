@@ -1,0 +1,1 @@
+* Fix: Links from `index` page are no longer always pointing to index page itself

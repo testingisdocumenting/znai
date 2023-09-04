@@ -110,16 +110,13 @@ class WebSiteDocStructure implements DocStructure {
             return docUrl.getUrl();
         }
 
-        if (isIndexPath(path, docUrl)) {
-            return "/" + docMeta.getId() + (docUrl.getAnchorId().isEmpty() ? "" : docUrl.getAnchorIdWithHash());
-        }
-
-        return fullUrl(createUrlBase(path, docUrl) + docUrl.getAnchorIdWithHash());
+        return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
     }
 
     @Override
     public String fullUrl(String relativeUrl) {
-        return  "/" + docMeta.getId() + "/" + relativeUrl;
+        boolean addSlash = !relativeUrl.isEmpty() && !relativeUrl.startsWith("#");
+        return  "/" + docMeta.getId() + (addSlash ? "/" : "") + relativeUrl;
     }
 
     @Override
@@ -301,16 +298,19 @@ class WebSiteDocStructure implements DocStructure {
         return localIds != null && localIds.contains(anchorId);
     }
 
-    private String createUrlBase(Path path, DocUrl docUrl) {
+    private String createRelativeUrl(Path path, DocUrl docUrl) {
         if (docUrl.isAnchorOnly()) {
             TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, path);
+            if (tocItem.isIndex()) {
+                return "";
+            }
 
             return tocItem == null ?
                     "<should not happen>":
                     tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension();
         }
 
-        return docUrl.getDirName() + "/" + docUrl.getFileName();
+        return docUrl.isIndexUrl() ? "" : docUrl.getDirName() + "/" + docUrl.getFileName();
     }
 
     private record LinkToValidate(Path path, String additionalClue, DocUrl docUrl) { }

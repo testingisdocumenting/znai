@@ -74,6 +74,7 @@ class WebSiteDocStructureTest {
         docStructure.createUrl(path, new DocUrl("test/page#anchor")).should == "/product/test/page#anchor"
         docStructure.createUrl(path, new DocUrl("file-system/page")).should == "/product/file-system/page"
         docStructure.createUrl(indexPath, new DocUrl("#ref")).should == "/product#ref"
+        docStructure.createUrl(indexPath, new DocUrl("file-system/page")).should == "/product/file-system/page"
         docStructure.createUrl(wrongPath, new DocUrl("file-system/page")).should == "/product/file-system/page"
     }
 
