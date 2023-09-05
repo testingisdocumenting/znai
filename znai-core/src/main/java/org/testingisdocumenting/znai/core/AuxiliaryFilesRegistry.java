@@ -1,4 +1,5 @@
 /*
+ * Copyright 2023 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,6 +56,10 @@ public class AuxiliaryFilesRegistry {
         }
 
         auxiliaryFileListeners.forEach(listener -> listener.onAuxiliaryFile(auxiliaryFile));
+    }
+
+    public void registerAdditionalAuxiliaryFiles(List<AuxiliaryFile> additionalAuxiliaryFiles) {
+        additionalAuxiliaryFiles.forEach(af -> auxiliaryFiles.put(af.getPath(), af));
     }
 
     public AuxiliaryFile auxiliaryFileByPath(Path path) {

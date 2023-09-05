@@ -1,4 +1,5 @@
 /*
+ * Copyright 2023 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,8 +22,8 @@ import java.util.Objects;
 
 public class AuxiliaryFile {
     private final Path path;
-    private Path deployRelativePath;
-    private boolean requiresDeployment;
+    private final Path deployRelativePath;
+    private final boolean requiresDeployment;
 
     public static AuxiliaryFile builtTime(Path path) {
         return new AuxiliaryFile(path, null,false);

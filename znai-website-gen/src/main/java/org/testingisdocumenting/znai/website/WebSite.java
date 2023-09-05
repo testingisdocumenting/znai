@@ -294,7 +294,7 @@ public class WebSite implements Log {
         return globalDocReferences.getDocReferences();
     }
 
-    public Footer parseFooter() {
+    public FooterAndParseResult parseFooter() {
         Path markupPath = cfg.footerPath;
 
         if (! Files.exists(markupPath)) {
@@ -306,9 +306,21 @@ public class WebSite implements Log {
         localResourceResolver.setCurrentFilePath(markupPath);
 
         MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
+        auxiliaryFilesRegistry.registerAdditionalAuxiliaryFiles(parserResult.getAuxiliaryFiles());
+
         footer = new Footer(parserResult.getDocElement());
 
-        return footer;
+        return new FooterAndParseResult(footer, parserResult);
+    }
+
+    public Footer updateFooter() {
+        FooterAndParseResult footerAndParseResult = parseFooter();
+
+        footerAndParseResult.parserResult().getAuxiliaryFiles().stream()
+                .filter(AuxiliaryFile::isDeploymentRequired)
+                .forEach(this::deployAuxiliaryFileIfOutdated);
+
+        return footerAndParseResult.footer();
     }
 
     public void redeployAuxiliaryFileIfRequired(Path path) {
@@ -654,7 +666,6 @@ public class WebSite implements Log {
 
             if (markupPathWithError.path == null && tocItem.isIndex()) {
                 deployer.deploy("auto-generated-index", pagePath, html);
-
             } else {
                 Path originalPathForLogging = cfg.docRootPath.relativize(
                         markupParsingConfiguration.fullPath(componentsRegistry, cfg.docRootPath, tocItem).toAbsolutePath());

@@ -69,7 +69,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     public void onFooterChange(Path tocPath) {
         ConsoleOutputs.out("footer changed: ", tocPath);
         execute(() -> {
-            Footer footer = previewWebSite.parseFooter();
+            Footer footer = previewWebSite.updateFooter();
             previewSocket.sendFooter(footer);
         });
     }
