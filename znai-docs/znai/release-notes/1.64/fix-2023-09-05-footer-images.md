@@ -1,0 +1,1 @@
+* Fix: Deploy images that are used in [Footer](https://testingisdocumenting.org/znai/flow/footer)
