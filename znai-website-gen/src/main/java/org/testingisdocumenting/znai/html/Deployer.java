@@ -32,11 +32,9 @@ import java.util.Set;
 
 public class Deployer {
     private final Path root;
-    private final Set<Path> deployed;
 
     public Deployer(Path root) {
         this.root = root.toAbsolutePath().normalize();
-        deployed = new HashSet<>();
     }
 
     public Path getRoot() {
@@ -83,8 +81,6 @@ public class Deployer {
 
     public void deploy(String originalPathForLogging, Path relativePath, byte[] content) {
         final Path fullPath = root.resolve(relativePath);
-        if (deployed.contains(fullPath))
-            return;
 
         printDeployMessage(originalPathForLogging, fullPath);
 

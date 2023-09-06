@@ -1,4 +1,5 @@
 /*
+ * Copyright 2023 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +25,7 @@ import java.util.Base64;
 import java.util.stream.Stream;
 
 public class WebSiteLogoExtension implements WebSiteResourcesProvider {
-    private WebResource cssLogoResource;
+    private final WebResource cssLogoResource;
 
     WebSiteLogoExtension(Path docRootPath) {
         Path logoPath = docRootPath.resolve("logo.png");

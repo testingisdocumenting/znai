@@ -50,7 +50,6 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
 import java.time.Instant;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -60,6 +59,7 @@ import static org.testingisdocumenting.znai.website.ProgressReporter.reportPhase
 import static java.util.stream.Collectors.toList;
 
 public class WebSite implements Log {
+    private static final String ROBOTS_TXT_FILE_NAME = "robots.txt";
     private static final String SEARCH_INDEX_FILE_NAME = "search-index.js";
     private final PluginParamsWithDefaultsFactory pluginParamsFactory;
 
@@ -389,7 +389,7 @@ public class WebSite implements Log {
         resourceResolver.addResolver(new ClassPathResourceResolver());
         resourceResolver.addResolver(new HttpBasedResourceResolver());
 
-        List<String> lookupLocations = findLookupLocations(cfg).collect(toList());
+        List<String> lookupLocations = findLookupLocations(cfg).toList();
         printLookupLocations(lookupLocations.stream());
         resourceResolver.initialize(lookupLocations.stream());
     }
@@ -443,6 +443,13 @@ public class WebSite implements Log {
         deployer.deploy(DocMeta.META_FILE_NAME, JsonUtils.serializePrettyPrint(docMeta.toMap()));
     }
 
+    private void deployRobotsTxtIfPresent() {
+        Path robotsPath = cfg.getDocRootPath().resolve(ROBOTS_TXT_FILE_NAME);
+        if (Files.exists(robotsPath)) {
+            deployer.deploy(ROBOTS_TXT_FILE_NAME, FileUtils.fileTextContent(robotsPath));
+        }
+    }
+
     private void deployGlobalAssets() {
         reportPhase("deploying global plugin assets");
         String globalAssetsJson = JsonUtils.serializePrettyPrint(componentsRegistry.globalAssetsRegistry().getAssets());
@@ -464,7 +471,7 @@ public class WebSite implements Log {
         reportPhase("validate TOC items presence");
         List<TocItem> missingTocItems = toc.getTocItems().stream()
                 .filter(this::isTocItemMissing)
-                .collect(toList());
+                .toList();
 
         if (!missingTocItems.isEmpty()) {
             String renderedMissingTocItems = "    " + missingTocItems.stream()
@@ -722,6 +729,7 @@ public class WebSite implements Log {
     private void deployAuxiliaryFiles() {
         reportPhase("deploying auxiliary files (e.g. images)");
         auxiliaryFilesRegistry.getAuxiliaryFilesForDeployment().forEach(this::deployAuxiliaryFile);
+        deployRobotsTxtIfPresent();
     }
 
     private void deployAuxiliaryFileIfOutdated(AuxiliaryFile auxiliaryFile) {
@@ -759,12 +767,6 @@ public class WebSite implements Log {
             Page page = pageByTocItem.get(tocItem);
             consumer.consume(tocItem, page);
         });
-    }
-
-    private <E> Stream<E> mapEachTocItemWithoutPage(Function<TocItem, E> func) {
-        return toc.getTocItems().stream()
-                .filter(tocItem -> pageByTocItem.containsKey(tocItem))
-                .map(func);
     }
 
     private void validateCollectedLinks() {
@@ -900,7 +902,6 @@ public class WebSite implements Log {
         private String title;
         private String type;
         private String fileWithLookupPaths;
-        private String logoRelativePath;
         private final List<WebResource> registeredExtraJavaScripts;
         private boolean isPreviewEnabled;
         private boolean isValidateExternalLinks;
@@ -997,11 +998,6 @@ public class WebSite implements Log {
             withTitle(docMeta.getTitle());
             withType(docMeta.getType());
 
-            return this;
-        }
-
-        public Configuration withLogoRelativePath(String logoRelativePath) {
-            this.logoRelativePath = logoRelativePath;
             return this;
         }
 
