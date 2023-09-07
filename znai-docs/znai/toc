@@ -82,6 +82,8 @@ plugins
     development
 configuration
     basic
+deployment
+    additional-files
 example-references
     domain
     api

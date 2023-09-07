@@ -27,18 +27,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Set;
 
-public class Deployer {
-    private final Path root;
-
-    public Deployer(Path root) {
-        this.root = root.toAbsolutePath().normalize();
-    }
-
-    public Path getRoot() {
-        return root;
+public record Deployer(Path docRoot, Path deployRoot) {
+    public Deployer(Path docRoot, Path deployRoot) {
+        this.docRoot = docRoot.toAbsolutePath().normalize();
+        this.deployRoot = deployRoot.toAbsolutePath().normalize();
     }
 
     public void deploy(String relativePath, byte[] content) {
@@ -58,10 +51,21 @@ public class Deployer {
     }
 
     public void deploy(Path srcPath) {
-        printDeployMessage(srcPath, root);
+        Path deployPath = deployRoot.resolve(srcPath);
+        printDeployMessage(srcPath, deployPath);
+
+        if (!Files.exists(srcPath)) {
+            throw new IllegalArgumentException("can't find file/dir: " + srcPath);
+        }
+
+        Path fullSrcPath = docRoot.resolve(srcPath);
 
         try {
-            FileUtils.copyDirectory(srcPath.toFile(), root.toFile());
+            if (Files.isDirectory(fullSrcPath)) {
+                FileUtils.copyDirectory(fullSrcPath.toFile(), deployPath.toFile());
+            } else {
+                FileUtils.copyFile(fullSrcPath.toFile(), deployPath.toFile());
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -80,7 +84,7 @@ public class Deployer {
     }
 
     public void deploy(String originalPathForLogging, Path relativePath, byte[] content) {
-        final Path fullPath = root.resolve(relativePath);
+        final Path fullPath = deployRoot.resolve(relativePath);
 
         printDeployMessage(originalPathForLogging, fullPath);
 

@@ -59,7 +59,7 @@ import static org.testingisdocumenting.znai.website.ProgressReporter.reportPhase
 import static java.util.stream.Collectors.toList;
 
 public class WebSite implements Log {
-    private static final String ROBOTS_TXT_FILE_NAME = "robots.txt";
+    private static final String UPLOAD_TXT_FILE_NAME = "upload.txt";
     private static final String SEARCH_INDEX_FILE_NAME = "search-index.js";
     private final PluginParamsWithDefaultsFactory pluginParamsFactory;
 
@@ -102,7 +102,7 @@ public class WebSite implements Log {
 
     private WebSite(Configuration siteConfig) {
         cfg = siteConfig;
-        deployer = new Deployer(siteConfig.deployPath);
+        deployer = new Deployer(siteConfig.docRootPath, siteConfig.deployPath);
         docMeta = siteConfig.docMeta;
         pageModifiedTimeStrategy = siteConfig.pageModifiedTimeStrategy != null ?
                 siteConfig.pageModifiedTimeStrategy : new FileBasedPageModifiedTime();
@@ -201,6 +201,7 @@ public class WebSite implements Log {
         deployGlobalAssets();
         deployGlobalDocReferences();
         deployAuxiliaryFiles();
+        deployUploadTxtFiles();
         deployResources();
         deployPluginsStats();
     }
@@ -441,13 +442,6 @@ public class WebSite implements Log {
     private void deployMeta() {
         reportPhase("deploying meta");
         deployer.deploy(DocMeta.META_FILE_NAME, JsonUtils.serializePrettyPrint(docMeta.toMap()));
-    }
-
-    private void deployRobotsTxtIfPresent() {
-        Path robotsPath = cfg.getDocRootPath().resolve(ROBOTS_TXT_FILE_NAME);
-        if (Files.exists(robotsPath)) {
-            deployer.deploy(ROBOTS_TXT_FILE_NAME, FileUtils.fileTextContent(robotsPath));
-        }
     }
 
     private void deployGlobalAssets() {
@@ -729,7 +723,22 @@ public class WebSite implements Log {
     private void deployAuxiliaryFiles() {
         reportPhase("deploying auxiliary files (e.g. images)");
         auxiliaryFilesRegistry.getAuxiliaryFilesForDeployment().forEach(this::deployAuxiliaryFile);
-        deployRobotsTxtIfPresent();
+    }
+
+    private void deployUploadTxtFiles() {
+        reportPhase("deploying files from " + UPLOAD_TXT_FILE_NAME);
+
+        Path uploadTxtPath = cfg.getDocRootPath().resolve(UPLOAD_TXT_FILE_NAME);
+        if (!Files.exists(uploadTxtPath)) {
+            return;
+        }
+
+        String fileNames = fileTextContent(uploadTxtPath);
+        String[] names = fileNames.split("\n");
+        Arrays.stream(names)
+                .map(String::trim)
+                .map(Paths::get)
+                .forEach(deployer::deploy);
     }
 
     private void deployAuxiliaryFileIfOutdated(AuxiliaryFile auxiliaryFile) {

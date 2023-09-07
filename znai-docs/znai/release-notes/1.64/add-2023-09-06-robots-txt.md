@@ -1,1 +1,0 @@
-* Add: Copy `robots.txt` to site root when file is present
