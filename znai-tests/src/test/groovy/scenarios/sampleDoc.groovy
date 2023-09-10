@@ -33,7 +33,7 @@ scenario("validate doxygen page") {
     docContent.paragraphs.get("list three").waitTo visible
 }
 
-sscenario("validate uploads files") {
+scenario("validate uploads files") {
     def baseUrl = "http://localhost:$port/preview"
 
     http.get("$baseUrl/extra-dir/file-three.txt") {
