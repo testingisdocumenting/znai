@@ -301,13 +301,16 @@ class WebSiteDocStructure implements DocStructure {
     private String createRelativeUrl(Path path, DocUrl docUrl) {
         if (docUrl.isAnchorOnly()) {
             TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, path);
+
+            // most likely from within footer
+            if (tocItem == null) {
+                throw new RuntimeException("can't use relative url in this context, url: #" + docUrl.getAnchorId());
+            }
             if (tocItem.isIndex()) {
                 return "";
             }
 
-            return tocItem == null ?
-                    "<should not happen>":
-                    tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension();
+            return tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension();
         }
 
         return docUrl.isIndexUrl() ? "" : docUrl.getDirName() + "/" + docUrl.getFileName();
