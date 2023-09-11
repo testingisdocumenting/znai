@@ -33,3 +33,10 @@ jobs:
           name: webtau report
           path: znai-tests/src/test/groovy/webtau.report.html
           retention-days: 3
+      - name: upload screenshots when build fails
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: doc screenshots
+          path: znai-testing-examples/**/*.png
+          retention-days: 3
