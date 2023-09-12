@@ -316,7 +316,7 @@ class TextContentExtractor {
             return newText(lines.subList(lineIdx, lines.size()), true);
         }
 
-        Text limitToLineContaining(String subLine) {
+        Text limitToLineContaining(String subLine, String errorMessage) {
             int lineIdx = findLineIdxContaining(subLine);
             return newText(lines.subList(0, lineIdx + 1));
         }
@@ -387,13 +387,17 @@ class TextContentExtractor {
         }
 
         private int findLineIdxContaining(String subLine) {
+            return findLineIdxContaining(subLine, "there is no line containing \"" + subLine + "\"" + renderInContent());
+        }
+
+        private int findLineIdxContaining(String subLine, String errorMessage) {
             for (int i = hasCroppedStart ? 1 : 0; i < lines.size(); i++) {
                 if (lines.get(i).contains(subLine)) {
                     return i;
                 }
             }
 
-            throw new IllegalArgumentException("there is no line containing \"" + subLine + "\"" + renderInContent());
+            throw new IllegalArgumentException(errorMessage);
         }
 
         @Override
