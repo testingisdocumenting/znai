@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -155,7 +156,7 @@ class TextContentExtractor {
             boolean isLast = idx == (surroundedBy.size() - 1);
 
             Text surroundedCrop = text.startingWithLineContaining(marker);
-            surroundedCrop = surroundedCrop.limitToLineContaining(marker);
+            surroundedCrop = surroundedCrop.limitToLineContaining(marker, (subLine) -> "there is no second marker \"" + subLine + "\"" + text.renderInContent());
             if (!keepMarker) {
                surroundedCrop = surroundedCrop.cropOneLineFromStartAndEnd();
             }
@@ -195,7 +196,7 @@ class TextContentExtractor {
 
         String endLine = opts.get(END_LINE_KEY);
         if (endLine != null) {
-            return text.limitToLineContaining(endLine);
+            return text.limitToLineContaining(endLine, text::defaultNoLineFoundMessage);
         }
 
         return text;
@@ -316,8 +317,8 @@ class TextContentExtractor {
             return newText(lines.subList(lineIdx, lines.size()), true);
         }
 
-        Text limitToLineContaining(String subLine, String errorMessage) {
-            int lineIdx = findLineIdxContaining(subLine);
+        Text limitToLineContaining(String subLine, Function<String, String> errorMessageFunc) {
+            int lineIdx = findLineIdxContaining(subLine, errorMessageFunc);
             return newText(lines.subList(0, lineIdx + 1));
         }
 
@@ -387,17 +388,17 @@ class TextContentExtractor {
         }
 
         private int findLineIdxContaining(String subLine) {
-            return findLineIdxContaining(subLine, "there is no line containing \"" + subLine + "\"" + renderInContent());
+            return findLineIdxContaining(subLine, this::defaultNoLineFoundMessage);
         }
 
-        private int findLineIdxContaining(String subLine, String errorMessage) {
+        private int findLineIdxContaining(String subLine, Function<String, String> errorMessageFunc) {
             for (int i = hasCroppedStart ? 1 : 0; i < lines.size(); i++) {
                 if (lines.get(i).contains(subLine)) {
                     return i;
                 }
             }
 
-            throw new IllegalArgumentException(errorMessage);
+            throw new IllegalArgumentException(errorMessageFunc.apply(subLine));
         }
 
         @Override
@@ -405,13 +406,17 @@ class TextContentExtractor {
             return String.join("\n", lines);
         }
 
-        private String renderInContent() {
-            return " in <" + contentId + ">:\n" + this;
-        }
-
         private String renderListOfStrings(List<?> list) {
             return list.stream().map(p -> "<" + p.toString() + ">")
                     .collect(Collectors.joining(", "));
+        }
+
+        private String defaultNoLineFoundMessage(String subLine) {
+            return "there is no line containing \"" + subLine + "\"" + renderInContent();
+        }
+
+        private String renderInContent() {
+            return " in <" + contentId + ">:\n" + this;
         }
     }
 }
