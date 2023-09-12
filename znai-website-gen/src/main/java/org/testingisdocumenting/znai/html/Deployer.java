@@ -50,15 +50,14 @@ public record Deployer(Path docRoot, Path deployRoot) {
         deploy(originalPathForLogging, relativePath, content.getBytes(StandardCharsets.UTF_8));
     }
 
-    public void deploy(Path srcPath) {
-        Path deployPath = deployRoot.resolve(srcPath);
-        printDeployMessage(srcPath, deployPath);
+    public void deploy(String relativePath) {
+        Path deployPath = deployRoot.resolve(relativePath);
+        printDeployMessage(relativePath, deployPath);
 
-        if (!Files.exists(srcPath)) {
-            throw new IllegalArgumentException("can't find file/dir: " + srcPath);
+        Path fullSrcPath = docRoot.resolve(relativePath);
+        if (!Files.exists(fullSrcPath)) {
+            throw new IllegalArgumentException("can't find file or directory: " + fullSrcPath);
         }
-
-        Path fullSrcPath = docRoot.resolve(srcPath);
 
         try {
             if (Files.isDirectory(fullSrcPath)) {
