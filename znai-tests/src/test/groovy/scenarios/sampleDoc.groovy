@@ -20,17 +20,31 @@ import static clicommands.CliCommands.getZnai
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 import static pages.Pages.*
 
-scenario("access doxygen files from within archive") {
-    def port = 3459
-
+def port = 3459
+scenario("run znai preview") {
     def znaiPreview = znai.runInBackground(
             "--source=${cfg.fullPath("sampledoc")} --port=$port --preview")
     znaiPreview.output.waitTo(contain("server started"), 20_000)
-
-    previewServer.openPreview(port)
 }
 
 scenario("validate doxygen page") {
+    previewServer.openPreview(port)
     standardView.tocItems.get("Doxygen From Zip").click()
     docContent.paragraphs.get("list three").waitTo visible
+}
+
+scenario("validate uploads files") {
+    def baseUrl = "http://localhost:$port/preview"
+
+    http.get("$baseUrl/extra-dir/file-three.txt") {
+        body.should == "file-three"
+    }
+
+    http.get("$baseUrl/extra-dir/file-four.json") {
+        message.should == "file-four"
+    }
+
+    http.get("$baseUrl/extra-files/file-one.txt") {
+        body.should == "file-one"
+    }
 }
