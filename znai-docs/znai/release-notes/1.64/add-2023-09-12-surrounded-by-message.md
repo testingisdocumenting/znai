@@ -1,0 +1,1 @@
+* Add: Clarify [Surrounded By](snippets/snippets-manipulation#surrounded-by) message when second marker is absent

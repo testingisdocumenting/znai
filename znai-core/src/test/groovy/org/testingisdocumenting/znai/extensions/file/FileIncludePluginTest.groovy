@@ -71,7 +71,16 @@ class FileIncludePluginTest {
         code {
             resultingSnippet("file-with-similar-lines-empty.txt", "{surroundedBy: '\$prompt'}")
         } should throwException("no content present after surroundedBy \$prompt")
+    }
 
+    @Test
+    void "should fail if one of the surroundedBy is missing"() {
+        code {
+            resultingSnippet("file-with-missing-marker.txt", "{surroundedBy: '\$prompt'}")
+        } should throwException('there is no second marker "$prompt" in <file-with-missing-marker.txt>:\n' +
+                '$prompt >\n' +
+                'some output\n' +
+                'goes here')
     }
 
     @Test
