@@ -27,6 +27,7 @@ import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
 
+import java.nio.file.Path
 import java.nio.file.Paths
 
 import static org.testingisdocumenting.webtau.Matchers.code
@@ -37,6 +38,7 @@ class WebSiteDocStructureTest {
     static DocMeta docMeta
     static TableOfContents toc
 
+    static Path markupPath = Paths.get("dir-one/file-one.md")
     WebSiteDocStructure docStructure
 
     @BeforeClass
@@ -62,20 +64,20 @@ class WebSiteDocStructureTest {
         def indexPath = Paths.get('/home/user/docs/index.md')
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
 
-        docStructure.createUrl(path, new DocUrl("http://abc")).should == "http://abc"
-        docStructure.createUrl(path, new DocUrl("https://abc")).should == "https://abc"
-        docStructure.createUrl(path, new DocUrl("mailto:/link")).should == "mailto:/link"
-        docStructure.createUrl(path, new DocUrl("file:/link")).should == "file:/link"
-        docStructure.createUrl(path, new DocUrl("/")).should == "/product"
-        docStructure.createUrl(path, new DocUrl("#anchor")).should == "/product/chapter/pageOne#anchor"
-        docStructure.createUrl(path, new DocUrl("/#anchor")).should == "/product#anchor"
-        docStructure.createUrl(path, new DocUrl("test/page")).should == "/product/test/page"
-        docStructure.createUrl(path, new DocUrl("mailto/page")).should == "/product/mailto/page"
-        docStructure.createUrl(path, new DocUrl("test/page#anchor")).should == "/product/test/page#anchor"
-        docStructure.createUrl(path, new DocUrl("file-system/page")).should == "/product/file-system/page"
-        docStructure.createUrl(indexPath, new DocUrl("#ref")).should == "/product#ref"
-        docStructure.createUrl(indexPath, new DocUrl("file-system/page")).should == "/product/file-system/page"
-        docStructure.createUrl(wrongPath, new DocUrl("file-system/page")).should == "/product/file-system/page"
+        docStructure.createUrl(path, new DocUrl(markupPath, "http://abc")).should == "http://abc"
+        docStructure.createUrl(path, new DocUrl(markupPath, "https://abc")).should == "https://abc"
+        docStructure.createUrl(path, new DocUrl(markupPath, "mailto:/link")).should == "mailto:/link"
+        docStructure.createUrl(path, new DocUrl(markupPath, "file:/link")).should == "file:/link"
+        docStructure.createUrl(path, new DocUrl(markupPath, "/")).should == "/product"
+        docStructure.createUrl(path, new DocUrl(markupPath, "#anchor")).should == "/product/chapter/pageOne#anchor"
+        docStructure.createUrl(path, new DocUrl(markupPath, "/#anchor")).should == "/product#anchor"
+        docStructure.createUrl(path, new DocUrl(markupPath, "test/page")).should == "/product/test/page"
+        docStructure.createUrl(path, new DocUrl(markupPath, "mailto/page")).should == "/product/mailto/page"
+        docStructure.createUrl(path, new DocUrl(markupPath, "test/page#anchor")).should == "/product/test/page#anchor"
+        docStructure.createUrl(path, new DocUrl(markupPath, "file-system/page")).should == "/product/file-system/page"
+        docStructure.createUrl(indexPath, new DocUrl(markupPath, "#ref")).should == "/product#ref"
+        docStructure.createUrl(indexPath, new DocUrl(markupPath, "file-system/page")).should == "/product/file-system/page"
+        docStructure.createUrl(wrongPath, new DocUrl(markupPath, "file-system/page")).should == "/product/file-system/page"
     }
 
     @Test
@@ -85,10 +87,10 @@ class WebSiteDocStructureTest {
         docStructure.registerGlobalAnchor(pageOnePath, 'functionRefId')
         docStructure.registerLocalAnchor(pageOnePath, 'localId')
         docStructure.registerLocalAnchor(pageTwoPath, 'test-section')
-        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageOne#functionRefId'))
-        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageOne#localId'))
-        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageTwo#test-section'))
-        docStructure.validateUrl(pageTwoPath, 'section title', new DocUrl('#test-section'))
+        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl(markupPath, 'chapter/pageOne#functionRefId'))
+        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl(markupPath, 'chapter/pageOne#localId'))
+        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl(markupPath, 'chapter/pageTwo#test-section'))
+        docStructure.validateUrl(pageTwoPath, 'section title', new DocUrl(markupPath, '#test-section'))
         docStructure.validateCollectedLinks()
     }
 
@@ -97,7 +99,7 @@ class WebSiteDocStructureTest {
         def indexPath = Paths.get('/home/user/docs/index.md')
         def referringPagePath = Paths.get('/home/user/docs/chapter/pageOne.md')
         docStructure.registerLocalAnchor(indexPath, 'index-id')
-        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl('/#index-id'))
+        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl(markupPath, '/#index-id'))
         docStructure.validateCollectedLinks()
     }
 
@@ -106,7 +108,7 @@ class WebSiteDocStructureTest {
         def indexPath = Paths.get('/home/user/docs/index.md')
         def referringPagePath = Paths.get('/home/user/docs/chapter/pageOne.md')
         docStructure.registerLocalAnchor(indexPath, 'index-id')
-        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl('/#index-wrong-id'))
+        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl(markupPath, '/#index-wrong-id'))
 
         code {
             docStructure.validateCollectedLinks()
@@ -117,7 +119,7 @@ class WebSiteDocStructureTest {
     @Test
     void "should reject link that has no associated toc item"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/unknown-page'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl(markupPath, 'chapter/unknown-page'))
 
         code {
             docStructure.validateCollectedLinks()
@@ -128,8 +130,8 @@ class WebSiteDocStructureTest {
     @Test
     void "should reject link that has no associated anchor"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/pageOne#wrongRefId'))
-        docStructure.validateUrl(path, 'section title: section title', new DocUrl('#anotherWrongRefId'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl(markupPath, 'chapter/pageOne#wrongRefId'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl(markupPath, '#anotherWrongRefId'))
 
         code {
             docStructure.validateCollectedLinks()
