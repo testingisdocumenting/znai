@@ -106,7 +106,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     }
 
     private void validateUrls(Path markupPath, Map<String, String> urls) {
-        urls.values().forEach(url -> docStructure.validateUrl(markupPath, "inside :include-flow-chart:", new DocUrl(url)));
+        urls.values().forEach(url -> docStructure.validateUrl(markupPath, "inside :include-flow-chart:", new DocUrl(markupPath, url)));
     }
 
     private Map<String, String> convertUrls(Map<String, String> urls) {
@@ -127,7 +127,7 @@ public class FlowChartIncludePlugin implements IncludePlugin {
     }
 
     private String buildUrl(Map.Entry<String, String> entry) {
-        return docStructure.createUrl(markupPath, new DocUrl(entry.getValue()));
+        return docStructure.createUrl(markupPath, new DocUrl(markupPath, entry.getValue()));
     }
 
     @Override

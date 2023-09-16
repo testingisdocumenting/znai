@@ -179,19 +179,6 @@ class WebSiteDocStructure implements DocStructure {
         return toc;
     }
 
-    private boolean isIndexPath(Path path, DocUrl docUrl) {
-        if (docUrl.isIndexUrl()) {
-            return true;
-        }
-
-        if (path == null) {
-            return false;
-        }
-
-        TocItem tocItem = toc.findTocItem(path);
-        return tocItem != null && tocItem.isIndex();
-    }
-
     private String validateLocalLinks() {
         return collectedLocalLinks.stream()
                 .map(this::validateLocalLink)
@@ -264,7 +251,7 @@ class WebSiteDocStructure implements DocStructure {
 
         return link.docUrl.isAnchorOnly() ?
                 parsingConfiguration.tocItemByPath(componentsRegistry, toc, link.path):
-                toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileName());
+                toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileNameWithoutExtension());
     }
 
     private String createInvalidLinkMessage(LinkToValidate link) {
@@ -274,7 +261,7 @@ class WebSiteDocStructure implements DocStructure {
             return "can't find the anchor " + link.docUrl.getAnchorIdWithHash() + checkFileMessage;
         }
 
-        String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileName() + link.docUrl.getAnchorIdWithHash();
+        String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileNameWithoutExtension() + link.docUrl.getAnchorIdWithHash();
         return "can't find a page associated with: " + url + checkFileMessage;
     }
 
@@ -313,7 +300,7 @@ class WebSiteDocStructure implements DocStructure {
             return tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension();
         }
 
-        return docUrl.isIndexUrl() ? "" : docUrl.getDirName() + "/" + docUrl.getFileName();
+        return docUrl.isIndexUrl() ? "" : docUrl.getDirName() + "/" + docUrl.getFileNameWithoutExtension();
     }
 
     private record LinkToValidate(Path path, String additionalClue, DocUrl docUrl) { }

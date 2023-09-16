@@ -79,7 +79,7 @@ public class CodeReferencesFeature implements PluginFeature {
         references.pageUrlsStream().forEach(pageUrl ->
                 docStructure.validateUrl(markupPath,
                         "reference file name: " + referencesFullPath.getFileName().toString(),
-                        new DocUrl(pageUrl))
+                        new DocUrl(markupPath, pageUrl))
         );
     }
 

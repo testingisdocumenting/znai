@@ -115,7 +115,7 @@ abstract class ImagePluginBase implements Plugin {
         if (isExternal) {
             props.put("imageSrc", imagePath);
             props.put("shapes", annotationShapes(null));
-            docStructure.validateUrl(markupPath, "<image plugin>", new DocUrl(imagePath));
+            docStructure.validateUrl(markupPath, "<image plugin>", new DocUrl(markupPath, imagePath));
         } else {
             auxiliaryFile = resourceResolver.runtimeAuxiliaryFile(imagePath);
             BufferedImage bufferedImage = resourceResolver.imageContent(imagePath);

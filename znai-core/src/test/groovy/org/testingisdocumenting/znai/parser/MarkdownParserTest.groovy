@@ -104,6 +104,15 @@ class MarkdownParserTest {
     }
 
     @Test
+    void "link to a markdown file within a current directory"() {
+        componentsRegistry.docStructure().addValidLink("valid-dir-name/page-three")
+        parse("[page 3](page-three.md)", Paths.get("valid-dir-name/page-two.md"))
+        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-three', isFile: false,
+                                                         type: 'Link',
+                                                         content:[[text: 'page 3' , type: 'SimpleText']]]]]]
+    }
+
+    @Test
     void "link to a local file"() {
         parse("[download](file.txt)")
         content.should == [[type: 'Paragraph', content:[[url: '/test-doc/file.txt',

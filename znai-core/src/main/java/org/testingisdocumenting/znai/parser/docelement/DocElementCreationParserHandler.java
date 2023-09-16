@@ -42,7 +42,6 @@ import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class DocElementCreationParserHandler implements ParserHandler {
@@ -263,11 +262,13 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onLinkStart(String url) {
-        boolean isFile = isLocalFile(url);
+    public void onLinkStart(Path markupPath, String url) {
+        DocUrl docUrl = new DocUrl(markupPath, url);
+
+        boolean isFile = isLocalFile(docUrl, url);
         String convertedUrl = isFile ?
                 convertAndRegisterLocalFileToUrl(url):
-                validateAndCovertUrl(url);
+                validateAndCovertUrl(docUrl);
 
         start(DocElementType.LINK, "url", convertedUrl, "isFile", isFile);
     }
@@ -303,7 +304,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
             auxiliaryFiles.add(auxiliaryFile);
         } else {
-            docStructure.validateUrl(path, "![]() image", new DocUrl(destination));
+            docStructure.validateUrl(path, "![]() image", new DocUrl(path, destination));
             append(DocElementType.IMAGE, "title", title,
                     "destination", destination,
                     "alt", alt,
@@ -374,7 +375,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onGlobalAnchorRefStart(String id) {
         String anchorUrl = componentsRegistry.docStructure().globalAnchorUrl(path, id);
-        onLinkStart(anchorUrl);
+        onLinkStart(path, anchorUrl);
     }
 
     @Override
@@ -490,20 +491,19 @@ public class DocElementCreationParserHandler implements ParserHandler {
         elementsStack.add(element);
     }
 
-    private String validateAndCovertUrl(String url) {
+    private String validateAndCovertUrl(DocUrl docUrl) {
         DocStructure docStructure = componentsRegistry.docStructure();
-        DocUrl docUrl = new DocUrl(url);
 
         docStructure.validateUrl(path, "section title: " + currentSectionTitle, docUrl);
         return docStructure.createUrl(path, docUrl);
     }
 
-    private boolean isLocalFile(String url) {
+    private boolean isLocalFile(DocUrl docUrl, String url) {
         if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("mailto:")) {
             return false;
         }
 
-        TocItem tocItem = componentsRegistry.docStructure().tableOfContents().findTocItem(Paths.get(url));
+        TocItem tocItem = componentsRegistry.docStructure().tableOfContents().findTocItem(docUrl.getDirName(), docUrl.getFileNameWithoutExtension());
         if (tocItem != null) {
             return false;
         }

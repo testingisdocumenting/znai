@@ -39,7 +39,7 @@ class TestDocStructure implements DocStructure {
             return
         }
 
-        def urlBase = "${docUrl.dirName}/${docUrl.fileName}"
+        def urlBase = "${docUrl.dirName}/${docUrl.fileNameWithoutExtension}"
         def url = urlBase + (docUrl.anchorId.isEmpty() ? "" : "#${docUrl.anchorId}")
 
         if (! validLinks.contains(url.toString())) {
@@ -53,7 +53,7 @@ class TestDocStructure implements DocStructure {
             return docUrl.url
         }
 
-        def base = "${docUrl.dirName}/${docUrl.fileName}"
+        def base = "${docUrl.dirName}/${docUrl.fileNameWithoutExtension}"
         return fullUrl(base + (docUrl.anchorId ? "#${docUrl.anchorId}" : ""))
     }
 
