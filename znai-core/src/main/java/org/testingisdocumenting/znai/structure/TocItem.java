@@ -36,7 +36,7 @@ public class TocItem {
     private PageMeta pageMeta;
 
     /**
-     *  relative location on github or other source.
+     *  relative location on GitHub or other source.
      *  Note it is not necessarily dirName + fileNameWithoutExtension + extension,
      *  i.e. original source can be deployed into a different location based on a {@link org.testingisdocumenting.znai.parser.MarkupParsingConfiguration}
      */

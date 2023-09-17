@@ -26,6 +26,7 @@ import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -158,8 +159,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onLinkStart(String url) {
-        list.forEach(h -> h.onLinkStart(url));
+    public void onLinkStart(Path markupPath, String url) {
+        list.forEach(h -> h.onLinkStart(markupPath, url));
     }
 
     @Override

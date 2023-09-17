@@ -199,7 +199,7 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Link link) {
-        parserHandler.onLinkStart(link.getDestination());
+        parserHandler.onLinkStart(path, link.getDestination());
         visitChildren(link);
         parserHandler.onLinkEnd();
     }

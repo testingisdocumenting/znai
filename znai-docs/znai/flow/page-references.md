@@ -19,9 +19,7 @@ To refer `internal` page within your documentation use:
 
 ```markdown
 [internal link](../dir-name/file-name.md#optional-page-section-id)
-```
-or
-```markdown
+[internal link](./file-name.md#optional-page-section-id)
 [internal link](dir-name/file-name#optional-page-section-id)
 ```
 

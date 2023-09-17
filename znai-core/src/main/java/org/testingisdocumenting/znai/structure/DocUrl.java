@@ -18,18 +18,22 @@ package org.testingisdocumenting.znai.structure;
 
 import org.testingisdocumenting.znai.utils.FilePathUtils;
 
+import java.nio.file.Path;
+
 public class DocUrl {
     private static final String LINK_TO_SECTION_INSTRUCTION = """
             To refer to a section of a document page use either
               dir-name/file-name-without-extension#page-section-id or
-              ../dir-name/file-name.md#page-section-id
+              ../dir-name/file-name.md#page-section-id or
+              ./file-name-within-chapter.md#page-section-id
               (#page-section-id is optional)
+            dir-name is not an arbitrary directory name or structure, but the TOC directory associated with a chapter
             Use #page-section-id to refer to the current page section.
             Use /#section-id to refer the root page of a documentation.
             """;
 
     private String dirName = "";
-    private String fileName = "";
+    private String fileNameWithoutExtension = "";
     private String anchorId = "";
 
     private String url;
@@ -46,19 +50,19 @@ public class DocUrl {
         this.isIndexUrl = isIndexUrl;
     }
 
-    public DocUrl(String dirName, String fileName, String anchorId) {
+    public DocUrl(String dirName, String fileNameWithoutExtension, String anchorId) {
         this.dirName = dirName;
-        this.fileName = fileName;
+        this.fileNameWithoutExtension = fileNameWithoutExtension;
         this.anchorId = anchorId;
     }
 
-    public DocUrl(String url) {
+    public DocUrl(Path markupPath, String url) {
         this.url = url;
 
         boolean handled = handleExternal() ||
                 handleIndex() ||
                 handleAnchorOnly() ||
-                handleLocal();
+                handleLocal(markupPath);
 
         if (!handled) {
             throw new IllegalStateException("couldn't parse url: " + url);
@@ -87,15 +91,19 @@ public class DocUrl {
         isAnchorOnly = url.startsWith("#");
         if (isAnchorOnly) {
             dirName = "";
-            fileName = "";
+            fileNameWithoutExtension = "";
             anchorId = url.substring(1);
         }
 
         return isAnchorOnly;
     }
 
-    private boolean handleLocal() {
+    private boolean handleLocal(Path markupPath) {
         String[] parts = url.split("/");
+        if (parts.length == 1) {
+            return handleNoDirSpecified(markupPath, parts[0]);
+        }
+
         if (parts.length != 2 && parts.length != 3) {
             throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
         }
@@ -107,14 +115,32 @@ public class DocUrl {
         int dirIdx = parts.length == 3 ? 1 : 0;
         int nameIdx = parts.length == 3 ? 2 : 1;
 
-        dirName = parts[dirIdx];
+        dirName = replaceDirNameIfRequired(markupPath, parts[dirIdx]);
 
         int idxOfAnchorSep = parts[nameIdx].indexOf('#');
 
-        fileName = FilePathUtils.fileNameWithoutExtension(idxOfAnchorSep == -1 ? parts[nameIdx] : parts[nameIdx].substring(0, idxOfAnchorSep));
+        fileNameWithoutExtension = FilePathUtils.fileNameWithoutExtension(idxOfAnchorSep == -1 ? parts[nameIdx] : parts[nameIdx].substring(0, idxOfAnchorSep));
         anchorId = idxOfAnchorSep == -1 ? "" : parts[nameIdx].substring(idxOfAnchorSep + 1);
 
         return true;
+    }
+
+    private boolean handleNoDirSpecified(Path markupPath, String part) {
+        int idxOfAnchorSep = part.indexOf('#');
+        dirName = replaceDirNameIfRequired(markupPath, "");
+        fileNameWithoutExtension = FilePathUtils.fileNameWithoutExtension(idxOfAnchorSep == -1 ? part : part.substring(0, idxOfAnchorSep));
+        anchorId = idxOfAnchorSep == -1 ? "" : part.substring(idxOfAnchorSep + 1);
+
+        return true;
+    }
+
+    private static String replaceDirNameIfRequired(Path markupPath, String currentDirName) {
+        if (currentDirName.equals(".") || currentDirName.isEmpty()) {
+            Path parentPath = markupPath.getParent();
+            return parentPath != null ? parentPath.getFileName().toString() : "";
+        } else {
+            return currentDirName;
+        }
     }
 
     public boolean isIndexUrl() {
@@ -133,8 +159,8 @@ public class DocUrl {
         return dirName;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFileNameWithoutExtension() {
+        return fileNameWithoutExtension;
     }
 
     public String getAnchorId() {

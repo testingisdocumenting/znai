@@ -26,6 +26,7 @@ import org.testingisdocumenting.znai.parser.NoOpParserHandler;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
-    public void onLinkStart(String url) {
+    public void onLinkStart(Path markupPath, String url) {
         addSeparated(url);
     }
 

@@ -136,7 +136,7 @@ public class HtmlToDocElementConverter {
             } else if (isItalic(node)) {
                 parserHandler.onEmphasisStart();
             } else if (isLink(node)) {
-                parserHandler.onLinkStart(node.attr("href"));
+                parserHandler.onLinkStart(filePath, node.attr("href"));
             } else if (isUnorderedList(node)) {
                 closeParagraphIfRequired();
                 parserHandler.onBulletListStart('*', false);
