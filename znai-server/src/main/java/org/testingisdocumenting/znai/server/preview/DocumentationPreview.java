@@ -27,6 +27,7 @@ import org.testingisdocumenting.znai.server.sockets.WebSocketHandlers;
 import org.testingisdocumenting.znai.website.WebSite;
 
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 public class DocumentationPreview {
     private final Path deployRoot;
@@ -53,10 +54,13 @@ public class DocumentationPreview {
         reportPhase("initializing file watcher");
         final FileWatcher fileWatcher = new FileWatcher(
                 webSite.getCfg(),
-                webSite.getAuxiliaryFilesRegistry().getAllPaths(),
+                Stream.concat(
+                        webSite.getAuxiliaryFilesRegistry().getAllPaths(),
+                        webSite.getToc().getResolvedPaths().stream()),
                 fileChangeHandler);
 
         webSite.getAuxiliaryFilesRegistry().registerListener(fileWatcher);
+        webSite.registerTocChangeListener(fileWatcher);
 
         onStart.run();
 

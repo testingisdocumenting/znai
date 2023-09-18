@@ -17,13 +17,10 @@
 
 package org.testingisdocumenting.znai.website;
 
+import org.testingisdocumenting.znai.core.*;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
-import org.testingisdocumenting.znai.core.AuxiliaryFile;
-import org.testingisdocumenting.znai.core.AuxiliaryFilesRegistry;
-import org.testingisdocumenting.znai.core.DocMeta;
-import org.testingisdocumenting.znai.core.Log;
 import org.testingisdocumenting.znai.extensions.PluginParamsWithDefaultsFactory;
 import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.resources.*;
@@ -62,6 +59,8 @@ public class WebSite implements Log {
     private static final String UPLOAD_FILE_NAME = "upload.txt";
     private static final String SEARCH_INDEX_FILE_NAME = "search-index.js";
     private final PluginParamsWithDefaultsFactory pluginParamsFactory;
+
+    private final Set<TocChangeListener> tocChangeListeners;
 
     private PageToHtmlPageConverter pageToHtmlPageConverter;
     private MarkupParser markupParser;
@@ -106,6 +105,8 @@ public class WebSite implements Log {
         docMeta = siteConfig.docMeta;
         pageModifiedTimeStrategy = siteConfig.pageModifiedTimeStrategy != null ?
                 siteConfig.pageModifiedTimeStrategy : new FileBasedPageModifiedTime();
+
+        tocChangeListeners = new HashSet<>();
 
         registeredExtraJavaScripts = siteConfig.registeredExtraJavaScripts;
         componentsRegistry = new WebSiteComponentsRegistry(siteConfig.docRootPath, siteConfig.isValidateExternalLinks);
@@ -183,7 +184,7 @@ public class WebSite implements Log {
         createDocStructure();
         parseAndSetPluginGlobalParams();
         parseGlobalDocReference();
-        validateTocItemsPresence();
+        resolveTocItemsPath();
         parseMarkupsMeta();
         parseMarkups();
         parseFooter();
@@ -223,14 +224,14 @@ public class WebSite implements Log {
     }
 
     public void removeLinksForTocItem(TocItem tocItem) {
-        MarkupPathWithError markupPathWithError = markupPathWithError(tocItem);
-        if (markupPathWithError.path == null) {
+        MarkupPathWithError markupPathWithError = resolveTocItem(tocItem);
+        if (markupPathWithError.path() == null) {
             return;
         }
 
-        docStructure.removeGlobalAnchorsForPath(markupPathWithError.path);
+        docStructure.removeGlobalAnchorsForPath(markupPathWithError.path());
         docStructure.removeLocalAnchorsForTocItem(tocItem);
-        docStructure.removeLinksForPath(markupPathWithError.path);
+        docStructure.removeLinksForPath(markupPathWithError.path());
     }
 
     public HtmlPageAndPageProps regeneratePageOnly(TocItem tocItem) {
@@ -263,7 +264,7 @@ public class WebSite implements Log {
 
         docStructure.updateToc(toc);
 
-        validateTocItemsPresence();
+        resolveTocItemsPath();
 
         List<TocItem> newTocItems = previousToc.detectNewTocItems(toc);
         List<TocItem> removedTocItems = previousToc.detectRemovedTocItems(toc);
@@ -461,11 +462,9 @@ public class WebSite implements Log {
         deployer.deploy(globalDocReferencesJavaScript, "docReferences = " + globalReferences);
     }
 
-    private void validateTocItemsPresence() {
-        reportPhase("validate TOC items presence");
-        List<TocItem> missingTocItems = toc.getTocItems().stream()
-                .filter(this::isTocItemMissing)
-                .toList();
+    private void resolveTocItemsPath() {
+        reportPhase("validate TOC items");
+        List<TocItem> missingTocItems = toc.resolveTocItemPathsAndReturnMissing(this::resolveTocItem);
 
         if (!missingTocItems.isEmpty()) {
             String renderedMissingTocItems = "    " + missingTocItems.stream()
@@ -476,20 +475,9 @@ public class WebSite implements Log {
             throw new RuntimeException("\nFollowing Table of Contents entries are missing associated files:\n\n" +
                     renderedMissingTocItems + "\n");
         }
-    }
 
-    private boolean isTocItemMissing(TocItem tocItem) {
-        if (tocItem.isIndex()) {
-            return false;
-        }
-
-        try {
-            markupPathWithError(tocItem);
-        } catch (UnresolvedResourceException e) {
-            return true;
-        }
-
-        return false;
+        Collection<Path> tocItemPaths = toc.getResolvedPaths();
+        tocChangeListeners.forEach(l -> l.onTocResolvedFiles(tocItemPaths));
     }
 
     private void parseMarkupsMeta() {
@@ -506,19 +494,19 @@ public class WebSite implements Log {
         MarkupPathWithError markupPathWithError = MarkupPathWithError.EMPTY;
 
         try {
-            markupPathWithError = markupPathWithError(tocItem);
-            if (markupPathWithError.path == null && tocItem.isIndex()) {
+            markupPathWithError = resolveTocItem(tocItem);
+            if (markupPathWithError.path() == null && tocItem.isIndex()) {
                 return;
             }
 
-            if (markupPathWithError.error != null) {
-                throw markupPathWithError.error;
+            if (markupPathWithError.error() != null) {
+                throw markupPathWithError.error();
             }
 
-            PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPathWithError.path));
+            PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPathWithError.path()));
             updateTocItemWithPageMeta(tocItem, pageMeta);
         } catch(Exception e) {
-            throwParsingErrorMessage(tocItem, markupPathWithError.path, e);
+            throwParsingErrorMessage(tocItem, markupPathWithError.path(), e);
         }
     }
 
@@ -526,29 +514,29 @@ public class WebSite implements Log {
         MarkupPathWithError markupPathWithError = MarkupPathWithError.EMPTY;
 
         try {
-            markupPathWithError = markupPathWithError(tocItem);
-            if (markupPathWithError.path == null) {
+            markupPathWithError = resolveTocItem(tocItem);
+            if (markupPathWithError.path() == null) {
                 if (tocItem.isIndex()) {
                     return;
                 }
 
-                throw markupPathWithError.error;
+                throw markupPathWithError.error();
             }
 
-            Path relativePathToLog = cfg.docRootPath.relativize(markupPathWithError.path);
+            Path relativePathToLog = cfg.docRootPath.relativize(markupPathWithError.path());
 
             ConsoleOutputs.out("parsing ", Color.PURPLE, relativePathToLog);
 
-            localResourceResolver.setCurrentFilePath(markupPathWithError.path);
+            localResourceResolver.setCurrentFilePath(markupPathWithError.path());
 
-            PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPathWithError.path));
+            PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPathWithError.path()));
             pluginParamsFactory.setPageLocalParams(pageMeta);
 
-            MarkupParserResult parserResult = markupParser.parse(markupPathWithError.path,
-                    fileTextContent(markupPathWithError.path));
+            MarkupParserResult parserResult = markupParser.parse(markupPathWithError.path(),
+                    fileTextContent(markupPathWithError.path()));
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
 
-            Instant lastModifiedTime = pageModifiedTimeStrategy.lastModifiedTime(tocItem, markupPathWithError.path);
+            Instant lastModifiedTime = pageModifiedTimeStrategy.lastModifiedTime(tocItem, markupPathWithError.path());
             Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getPageMeta());
             pageByTocItem.put(tocItem, page);
 
@@ -557,7 +545,7 @@ public class WebSite implements Log {
 
             updateSearchEntries(tocItem, parserResult);
         } catch(Exception e) {
-            throwParsingErrorMessage(tocItem, markupPathWithError.path, e);
+            throwParsingErrorMessage(tocItem, markupPathWithError.path(), e);
         }
     }
 
@@ -616,7 +604,7 @@ public class WebSite implements Log {
         newAuxiliaryFiles.forEach((af) -> auxiliaryFilesRegistry.updateFileAssociations(tocItem, af));
     }
 
-    private MarkupPathWithError markupPathWithError(TocItem tocItem) {
+    private MarkupPathWithError resolveTocItem(TocItem tocItem) {
         try {
             return new MarkupPathWithError(
                     markupParsingConfiguration.fullPath(componentsRegistry, cfg.docRootPath, tocItem),
@@ -663,9 +651,9 @@ public class WebSite implements Log {
             Path pagePath = tocItem.isIndex() ? Paths.get("index.html") :
                     Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");
 
-            MarkupPathWithError markupPathWithError = markupPathWithError(tocItem);
+            MarkupPathWithError markupPathWithError = resolveTocItem(tocItem);
 
-            if (markupPathWithError.path == null && tocItem.isIndex()) {
+            if (markupPathWithError.path() == null && tocItem.isIndex()) {
                 deployer.deploy("auto-generated-index", pagePath, html);
             } else {
                 Path originalPathForLogging = cfg.docRootPath.relativize(
@@ -882,20 +870,16 @@ public class WebSite implements Log {
         ConsoleOutputs.out(Stream.concat(Stream.of(Color.YELLOW, "[Warning] ", FontStyle.NORMAL), Arrays.stream(styleOrValue)).toArray());
     }
 
-    private interface PageConsumer {
-        void consume(TocItem tocItem, Page page);
+    public void registerTocChangeListener(TocChangeListener listener) {
+        tocChangeListeners.add(listener);
     }
 
-    private static class MarkupPathWithError {
-        private final Path path;
-        private final RuntimeException error;
+    public void unregisterTocChangeListener(TocChangeListener listener) {
+        tocChangeListeners.remove(listener);
+    }
 
-        private static final MarkupPathWithError EMPTY = new MarkupPathWithError(null, null);
-
-        public MarkupPathWithError(Path path, RuntimeException error) {
-            this.path = path;
-            this.error = error;
-        }
+    private interface PageConsumer {
+        void consume(TocItem tocItem, Page page);
     }
 
     public static class Configuration {

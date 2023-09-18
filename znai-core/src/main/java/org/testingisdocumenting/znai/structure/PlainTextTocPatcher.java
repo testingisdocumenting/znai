@@ -52,20 +52,12 @@ public class PlainTextTocPatcher {
         TocNameAndOpts chapter2 = new TocNameAndOpts(arg2.dirName);
 
         switch (command) {
-            case "remove":
-                toc.removeTocItem(arg1.dirName, arg1.fileName);
-                break;
-            case "add":
-                toc.addTocItem(chapter1, arg1.fileName);
-                break;
-            case "replace":
-                toc.replaceTocItem(arg1.dirName, arg1.fileName,
-                        chapter2, arg2.fileName);
-                break;
-            default:
-                throw new IllegalArgumentException("unrecognized command: " + command);
+            case "remove" -> toc.removeTocItem(arg1.dirName, arg1.fileName);
+            case "add" -> toc.addTocItem(chapter1, arg1.fileName);
+            case "replace" -> toc.replaceTocItem(arg1.dirName, arg1.fileName,
+                    chapter2, arg2.fileName);
+            default -> throw new IllegalArgumentException("unrecognized command: " + command);
         }
-
     }
 
     private static class DirNameFileName {

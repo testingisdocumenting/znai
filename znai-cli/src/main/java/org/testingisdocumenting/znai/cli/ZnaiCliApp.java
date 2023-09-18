@@ -194,14 +194,11 @@ public class ZnaiCliApp {
     }
 
     private PageModifiedTimeStrategy pageModifiedTimeStrategy() {
-        switch (config.getModifiedTimeStrategy()) {
-            case FILE:
-                return new FileBasedPageModifiedTime();
-            case CONSTANT:
-                return new ConstantPageModifiedTime(Instant.now());
-            default:
-                return null;
-        }
+        return switch (config.getModifiedTimeStrategy()) {
+            case FILE -> new FileBasedPageModifiedTime();
+            case CONSTANT -> new ConstantPageModifiedTime(Instant.now());
+            default -> null;
+        };
     }
 
     private void createNew() {

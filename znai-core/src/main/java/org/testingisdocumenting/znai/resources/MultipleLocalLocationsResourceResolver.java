@@ -45,7 +45,7 @@ public class MultipleLocalLocationsResourceResolver implements ResourcesResolver
         lookupPaths.clear();
         lookupPaths.addAll(filteredLookupPaths
                 .map(docRootPath::resolve)
-                .collect(Collectors.toList()));
+                .toList());
     }
 
     @Override

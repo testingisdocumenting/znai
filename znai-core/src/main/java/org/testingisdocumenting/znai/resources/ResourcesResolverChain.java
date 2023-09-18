@@ -38,7 +38,7 @@ public class ResourcesResolverChain implements ResourcesResolver {
 
     @Override
     public void initialize(Stream<String> filteredLookupPaths) {
-        List<String> lookupPaths = filteredLookupPaths.collect(Collectors.toList());
+        List<String> lookupPaths = filteredLookupPaths.toList();
         resolvers.forEach(r -> initializeWithFilteredPaths(r, lookupPaths.stream()));
     }
 
@@ -105,7 +105,7 @@ public class ResourcesResolverChain implements ResourcesResolver {
     private void initializeWithFilteredPaths(ResourcesResolver r, Stream<String> filteredLookupPaths) {
         r.initialize(filteredLookupPaths
                 .filter(r::supportsLookupPath)
-                .collect(Collectors.toList())
+                .toList()
                 .stream());
     }
 

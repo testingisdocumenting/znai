@@ -1,6 +1,5 @@
 /*
  * Copyright 2023 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +14,10 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.website;
+package org.testingisdocumenting.znai.core;
 
-import org.testingisdocumenting.znai.html.HtmlPageAndPageProps;
-import org.testingisdocumenting.znai.structure.TableOfContents;
-import org.testingisdocumenting.znai.structure.TocItem;
+import java.nio.file.Path;
 
-import java.util.List;
-
-public record TocAddedAndRemovedPages(TableOfContents tableOfContents, List<HtmlPageAndPageProps> addedPagesProps,
-                                      List<TocItem> removedTocItems) {
+public record MarkupPathWithError(Path path, RuntimeException error) {
+    public static final MarkupPathWithError EMPTY = new MarkupPathWithError(null, null);
 }

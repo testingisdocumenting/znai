@@ -17,18 +17,21 @@
 
 package org.testingisdocumenting.znai.structure;
 
-import org.testingisdocumenting.znai.utils.FilePathUtils;
+import org.testingisdocumenting.znai.core.MarkupPathWithError;
 
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Function;
 
 import static java.util.stream.Collectors.*;
 
 public class TableOfContents {
     private final List<TocItem> tocItems;
+    private final Map<Path, TocItem> tocItemByPath;
 
     public TableOfContents() {
         this.tocItems = new ArrayList<>();
+        this.tocItemByPath = new LinkedHashMap<>();
     }
 
     public TocItem addTocItem(TocNameAndOpts chapter, String fileNameWithoutExtension) {
@@ -43,6 +46,25 @@ public class TableOfContents {
         tocItems.add(tocItem);
 
         return tocItem;
+    }
+
+    public List<TocItem> resolveTocItemPathsAndReturnMissing(Function<TocItem, MarkupPathWithError> filePathResolver) {
+        tocItemByPath.clear();
+        List<TocItem> missing = new ArrayList<>();
+        for (TocItem tocItem : tocItems) {
+            if (tocItem.isIndex()) {
+                continue;
+            }
+
+            MarkupPathWithError pathWithError = filePathResolver.apply(tocItem);
+            if (pathWithError.error() != null) {
+                missing.add(tocItem);
+            } else {
+                tocItemByPath.put(pathWithError.path(), tocItem);
+            }
+        }
+
+        return missing;
     }
 
     public void addIndex() {
@@ -100,6 +122,10 @@ public class TableOfContents {
         return Collections.unmodifiableList(tocItems);
     }
 
+    public Collection<Path> getResolvedPaths() {
+        return tocItemByPath.keySet();
+    }
+
     public boolean contains(String dirName, String fileName, String pageSectionId) {
         TocItem tocItem = findTocItem(dirName, fileName);
 
@@ -113,17 +139,7 @@ public class TableOfContents {
     }
 
     public TocItem findTocItem(Path markupFilePath) {
-        Path fileName = markupFilePath.getFileName();
-        if (fileName == null) {
-            return null;
-        }
-
-        if (fileName.toString().startsWith(TocItem.INDEX + ".")) {
-            return getIndex();
-        }
-
-        return findTocItem(markupFilePath.toAbsolutePath().getParent().getFileName().toString(),
-                FilePathUtils.fileNameWithoutExtension(markupFilePath));
+        return tocItemByPath.get(markupFilePath);
     }
 
     public List<Map<String, Object>> toListOfMaps() {
@@ -134,6 +150,11 @@ public class TableOfContents {
         bySectionTitle.forEach((sectionTitle, items) -> result.add(createChapterWithItems(sectionTitle, items)));
 
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return tocItems.stream().map(TocItem::toString).collect(joining("\n"));
     }
 
     private int findTocItemIdx(String dirName, String fileNameWithoutExtension) {
@@ -158,10 +179,5 @@ public class TableOfContents {
         result.put("items", items.stream().map(TocItem::toMap).collect(toList()));
 
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return tocItems.stream().map(TocItem::toString).collect(joining("\n"));
     }
 }

@@ -1,0 +1,1 @@
+* Add: Preview and real time updates for TOC items that are outside main documentation directory

@@ -52,15 +52,15 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
         ConsoleOutputs.out("toc changed: ", tocPath);
         execute(() -> {
             TocAddedAndRemovedPages tocAddedAndRemovedPages = previewWebSite.updateToc();
-            previewSocket.sendToc(tocAddedAndRemovedPages.getTableOfContents());
+            previewSocket.sendToc(tocAddedAndRemovedPages.tableOfContents());
 
-            if (!tocAddedAndRemovedPages.getAddedPagesProps().isEmpty()) {
-                previewSocket.sendPages(tocAddedAndRemovedPages.getAddedPagesProps().stream()
+            if (!tocAddedAndRemovedPages.addedPagesProps().isEmpty()) {
+                previewSocket.sendPages(tocAddedAndRemovedPages.addedPagesProps().stream()
                         .map(HtmlPageAndPageProps::getProps));
             }
 
-            if (!tocAddedAndRemovedPages.getRemovedTocItems().isEmpty()) {
-                previewSocket.sendPagesRemove(tocAddedAndRemovedPages.getRemovedTocItems().stream());
+            if (!tocAddedAndRemovedPages.removedTocItems().isEmpty()) {
+                previewSocket.sendPagesRemove(tocAddedAndRemovedPages.removedTocItems().stream());
             }
         });
     }

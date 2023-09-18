@@ -22,17 +22,19 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.AuxiliaryFileListener;
 import org.testingisdocumenting.znai.core.DocMeta;
+import org.testingisdocumenting.znai.website.TocChangeListener;
 import org.testingisdocumenting.znai.website.WebSite;
 
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 
-public class FileWatcher implements AuxiliaryFileListener {
+public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
     private final WebSite.Configuration siteCfg;
     private final FileChangeHandler fileChangeHandler;
     private final WatchService watchService;
@@ -40,7 +42,7 @@ public class FileWatcher implements AuxiliaryFileListener {
 
     private static final Path tempDirPath = detectTempFilesDir();
 
-    public FileWatcher(WebSite.Configuration siteCfg, Stream<Path> auxiliaryFiles, FileChangeHandler fileChangeHandler) {
+    public FileWatcher(WebSite.Configuration siteCfg, Stream<Path> pathsToWatch, FileChangeHandler fileChangeHandler) {
         this.siteCfg = siteCfg;
         this.fileChangeHandler = fileChangeHandler;
 
@@ -49,8 +51,7 @@ public class FileWatcher implements AuxiliaryFileListener {
 
         Path absoluteRoot = siteCfg.getDocRootPath().toAbsolutePath();
         register(absoluteRoot);
-        registerDirs(absoluteRoot);
-        auxiliaryFiles.forEach(this::register);
+        pathsToWatch.forEach(this::register);
     }
 
     public void start() {
@@ -64,6 +65,11 @@ public class FileWatcher implements AuxiliaryFileListener {
     @Override
     public void onAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
         register(auxiliaryFile.getPath());
+    }
+
+    @Override
+    public void onTocResolvedFiles(Collection<Path> files) {
+        files.forEach(this::register);
     }
 
     private void startWatchLoop() throws InterruptedException {
@@ -139,7 +145,7 @@ public class FileWatcher implements AuxiliaryFileListener {
                 path = path.getParent();
             }
 
-            if (path.endsWith(".vertx")) {
+            if (path.endsWith(".vertx") || path.endsWith(".idea")) {
                 return;
             }
 
@@ -163,8 +169,9 @@ public class FileWatcher implements AuxiliaryFileListener {
 
     private void registerDirs(final Path rootPath) {
         try {
-            final Stream<Path> pathStream = Files.list(rootPath);
-            pathStream.filter(Files::isDirectory).forEach(this::register);
+            try (Stream<Path> pathStream = Files.list(rootPath)) {
+                pathStream.filter(Files::isDirectory).forEach(this::register);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -189,6 +196,5 @@ public class FileWatcher implements AuxiliaryFileListener {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
