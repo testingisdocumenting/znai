@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.toc
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.testingisdocumenting.znai.core.MarkupPathWithError
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle
 import org.testingisdocumenting.znai.structure.TableOfContents
@@ -41,9 +42,17 @@ class PageTocIncludePluginTest {
         toc = new TableOfContents()
         TEST_COMPONENTS_REGISTRY.docStructure().setToc(toc)
 
+        def pageOne = toc.addTocItem(new TocNameAndOpts("chapter-one"), "page-one")
         toc.addIndex()
-        def tocItem = toc.addTocItem(new TocNameAndOpts("chapter-one"), "page-one")
-        tocItem.setPageSectionIdTitles([
+        toc.resolveTocItemPathsAndReturnMissing { tocItem ->
+            if (tocItem == pageOne) {
+                return new MarkupPathWithError(Paths.get("/home/my-dir/chapter-one/page-one.md"), null)
+            }
+
+            return new MarkupPathWithError(null, new RuntimeException("no file"))
+        }
+
+        pageOne.setPageSectionIdTitles([
                 new PageSectionIdTitle("Section One", [:]),
                 new PageSectionIdTitle("Section Two", [:])
         ])

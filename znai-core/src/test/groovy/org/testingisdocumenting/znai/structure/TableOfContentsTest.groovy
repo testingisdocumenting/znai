@@ -17,8 +17,13 @@
 
 package org.testingisdocumenting.znai.structure
 
-import org.testingisdocumenting.znai.parser.PageSectionIdTitle
 import org.junit.Test
+import org.testingisdocumenting.znai.core.MarkupPathWithError
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle
+import org.testingisdocumenting.znai.resources.UnresolvedResourceException
+
+import java.nio.file.Paths
+import java.util.stream.Stream
 
 class TableOfContentsTest {
     @Test
@@ -93,5 +98,39 @@ class TableOfContentsTest {
                                ________________________________________
                                 'chapter1' | 'page-e'
                                 'chapter2' | 'page-d'  }
+    }
+
+    @Test
+    void "should resolve toc item paths and detect missing"() {
+        def pathA = Paths.get("/path/a")
+        def pathC = Paths.get("/path/c")
+        def pathD = Paths.get("/path/d")
+
+        def toc = new TableOfContents()
+
+        def tocItemA = toc.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
+        toc.addTocItem(new TocNameAndOpts("chapter1"), "page-e")
+        def tocItemC = toc.addTocItem(new TocNameAndOpts("chapter2"), "page-c")
+        toc.addTocItem(new TocNameAndOpts("chapter2"), "page-d")
+
+        def filePathResolver = { tocItem ->
+            if (tocItem == tocItemA) {
+                return new MarkupPathWithError(pathA, null)
+            }
+            if (tocItem == tocItemC)  {
+                return new MarkupPathWithError(pathC, null)
+            }
+
+            return new MarkupPathWithError(null, new UnresolvedResourceException(Stream.empty(), "files"))
+        }
+
+        def missing = toc.resolveTocItemPathsAndReturnMissing(filePathResolver)
+        missing.should == ['dirName'  | 'fileNameWithoutExtension'] {
+                           ________________________________________
+                           'chapter1' | 'page-e'
+                           'chapter2' | 'page-d'  }
+
+        toc.findTocItem(pathC).should == [dirName: "chapter2", fileNameWithoutExtension: "page-c"]
+        toc.findTocItem(pathD).should == null
     }
 }
