@@ -27,7 +27,7 @@ public class RegexpUtils {
 
     public static String replaceAll(String source, Pattern regexp, Function<Matcher, String> replacement) {
         Matcher matcher = regexp.matcher(source);
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
         while (matcher.find()) {
             matcher.appendReplacement(result, replacement.apply(matcher).replace("\\", "\\\\"));

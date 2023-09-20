@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.extensions.PluginParamsWithDefaultsFactory;
 import org.testingisdocumenting.znai.extensions.Plugins;
+import org.testingisdocumenting.znai.preprocessor.RegexpBasedPreprocessor;
 import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
@@ -98,6 +99,8 @@ public class WebSite implements Log {
     private final Map<AuxiliaryFile, Long> auxiliaryFilesLastUpdateTime;
 
     private final PageModifiedTimeStrategy pageModifiedTimeStrategy;
+
+    private RegexpBasedPreprocessor regexpBasedPreprocessor;
 
     private WebSite(Configuration siteConfig) {
         cfg = siteConfig;
@@ -179,6 +182,7 @@ public class WebSite implements Log {
 
     public void parse() {
         createResourceResolvers();
+        registerPreprocessor();
         registerSiteResourceProviders();
         createTopLevelToc();
         createDocStructure();
@@ -190,6 +194,12 @@ public class WebSite implements Log {
         parseFooter();
         updateTocWithPageSections();
         validateCollectedLinks();
+    }
+
+    private void registerPreprocessor() {
+        regexpBasedPreprocessor = resourceResolver.canResolve("preprocessor.csv") ?
+                new RegexpBasedPreprocessor(resourceResolver.textContent("preprocessor.csv")) :
+                new RegexpBasedPreprocessor(Collections.emptyList());
     }
 
     public void deploy() {
@@ -510,6 +520,9 @@ public class WebSite implements Log {
         }
     }
 
+    private final String preprocessCsv =
+            "```\\{=html}.*?```,";
+
     private void parseMarkupAndUpdateTocItemAndSearch(TocItem tocItem) {
         MarkupPathWithError markupPathWithError = MarkupPathWithError.EMPTY;
 
@@ -529,11 +542,14 @@ public class WebSite implements Log {
 
             localResourceResolver.setCurrentFilePath(markupPathWithError.path());
 
-            PageMeta pageMeta = markupParser.parsePageMetaOnly(fileTextContent(markupPathWithError.path()));
+            String markupContent = fileTextContent(markupPathWithError.path());
+            markupContent = regexpBasedPreprocessor.preprocess(markupContent);
+
+            PageMeta pageMeta = markupParser.parsePageMetaOnly(markupContent);
             pluginParamsFactory.setPageLocalParams(pageMeta);
 
             MarkupParserResult parserResult = markupParser.parse(markupPathWithError.path(),
-                    fileTextContent(markupPathWithError.path()));
+                    markupContent);
             updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
 
             Instant lastModifiedTime = pageModifiedTimeStrategy.lastModifiedTime(tocItem, markupPathWithError.path());
