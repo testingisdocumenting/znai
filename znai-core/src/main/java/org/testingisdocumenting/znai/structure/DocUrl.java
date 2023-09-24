@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.structure;
 
 import org.testingisdocumenting.znai.utils.FilePathUtils;
+import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.nio.file.Path;
 
@@ -70,10 +71,7 @@ public class DocUrl {
     }
 
     private boolean handleExternal() {
-        return isExternalUrl = url.startsWith("http:") ||
-                url.startsWith("https:") ||
-                url.startsWith("file:") ||
-                url.startsWith("mailto:");
+        return isExternalUrl = UrlUtils.isExternal(url);
     }
 
     private boolean handleIndex() {
