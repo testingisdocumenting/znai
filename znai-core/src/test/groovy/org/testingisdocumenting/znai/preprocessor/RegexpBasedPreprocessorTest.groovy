@@ -68,6 +68,65 @@ some lines here"""
     }
 
     @Test
+    void "todo"() {
+        def input = """
+This wouldn't be a programming tutorial without a hello world example,
+which introduces the `Vdom.Node.text` node constructor.
+
+```{=html}
+<!-- \$MDX file=../../examples/bonsai_guide_code/vdom_examples.ml,part=hello_world -->
+```
+
+``` ocaml
+let hello_world : Vdom.Node.t = Vdom.Node.text "hello world!"
+```
+
+```{=html}
+<aside>
+```
+hello
+contributions back to the main library!
+```{=html}
+</aside>
+```
+
+```{=html}
+<iframe data-external="1" src="https://bonsai:8535#hello_world">
+```
+```{=html}
+</iframe>
+```
+The text node will frequently be the "leaf" of a view (there are no
+"children" of a text node). Let's put some text inside a bulleted list
+by using some more node constructors:
+
+```{=html}
+<!-- \$MDX file=../../examples/bonsai_guide_code/vdom_examples.ml,part=hello_world -->
+```
+
+``` ocaml
+let hello_world2 : Vdom.Node.t = Vdom.Node.text "hello world!"
+```
+
+```{=html}
+<iframe data-external="1" src="https://bonsai:8535#hello_world">
+```
+```{=html}
+</iframe>
+```
+"""
+        def result = new RegexpBasedPreprocessor("```\\{=html}[^`]*?MDX[^']*?```,\n"  +
+                "```\\{=html}\\s*<iframe.*?src=\"https://bonsai:8535([^\"]+)\"[^`]*?```, :include-iframe: ../../bonsai-build/\$1 {fit: true}\n" +
+                "```\\{=html}\\s*</iframe[^`]*?```,\n" +
+                "```\\{=html}\\s*<aside>\\s*```,```attention-note\n" +
+                "```\\{=html}\\s*</aside>\\s*```,```\n" +
+                "").preprocess(input)
+//                "```\\{=html}.*?```,\n").preprocess(input)
+
+        println result
+    }
+
+    @Test
     void "multi line extract and multiple regexp"() {
         def input = """Hello World
 

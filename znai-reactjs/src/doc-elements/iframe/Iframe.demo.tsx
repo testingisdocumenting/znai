@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React from "react";
 
-import { Registry } from 'react-component-viewer';
-import { Iframe } from './Iframe';
+import { Registry } from "react-component-viewer";
+import { Iframe } from "./Iframe";
 
 export function iframeDemo(registry: Registry) {
-  registry.add('default aspect', () => <Iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"
-                                               title="demo title"/>);
-  registry.add('4:3 aspect', () => <Iframe aspectRatio="4:3" src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title"/>);
+  registry.add("non video content", () => <Iframe src="/frame-content.html" title="demo title" fit={true} />);
+  registry.add("default aspect", () => <Iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />);
+  registry.add("4:3 aspect", () => (
+    <Iframe aspectRatio="4:3" src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />
+  ));
 }

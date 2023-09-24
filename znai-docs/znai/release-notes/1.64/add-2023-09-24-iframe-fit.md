@@ -1,0 +1,1 @@
+* Add: [iframe fit parameter](visuals/iframe#embedding-supporting-content) to auto adjust height of the iframe 

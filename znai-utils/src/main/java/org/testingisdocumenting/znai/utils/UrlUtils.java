@@ -43,6 +43,9 @@ public class UrlUtils {
     }
 
     public static boolean isExternal(String url) {
-        return url.startsWith("http:") || url.startsWith("https:");
+        return url.startsWith("http:") ||
+                url.startsWith("https:") ||
+                url.startsWith("file:") ||
+                url.startsWith("mailto:");
     }
 }

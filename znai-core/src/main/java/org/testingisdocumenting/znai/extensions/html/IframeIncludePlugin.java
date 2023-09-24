@@ -16,16 +16,22 @@
 
 package org.testingisdocumenting.znai.extensions.html;
 
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 public class IframeIncludePlugin implements IncludePlugin {
+    private String userUrl;
+
     @Override
     public String id() {
         return "iframe";
@@ -39,9 +45,21 @@ public class IframeIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         DocElement iframe = new DocElement("Iframe");
-        iframe.addProp("src", pluginParams.getFreeParam());
+        userUrl = pluginParams.getFreeParam();
+        String urlToUse = UrlUtils.isExternal(userUrl) ? userUrl :
+                componentsRegistry.docStructure().fullUrl(userUrl);
+        iframe.addProp("src", urlToUse);
         pluginParams.getOpts().assignToDocElement(iframe);
 
         return PluginResult.docElement(iframe);
+    }
+
+    @Override
+    public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
+        if (!UrlUtils.isExternal(userUrl)) {
+            return Stream.of(AuxiliaryFile.runTime(componentsRegistry.resourceResolver().fullPath(userUrl), Paths.get(userUrl)));
+        }
+
+        return Stream.empty();
     }
 }
