@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>Documentation Pipeline</h1></header>
-<p>Documentation pipeline can look like markdown # Create Employee :include-open-api: openapi/api-spec.json {operationId: &quot;createEmployee&quot; } ```columns left: :include-json: doc-artifacts/employee-post/request.json { title: &quot;request payload&quot; } right: :include-json: doc-artifacts/employee-post/response.json { title: &quot;response payload&quot;, pathsFile: &quot;doc-artifacts/employee-post/paths.json&quot; } ```</p>
+<p>Documentation pipeline can look like markdown # Create Employee :include-open-api: openapi/api-spec.json {operationId: &quot;createEmployee&quot; } ```columns left: :include-json: doc-artifacts/employee-post/request.json { title: &quot;request payload&quot; } right: :include-json: doc-artifacts/employee-post/response.json { title: &quot;response payload&quot;, highlightValueFile: &quot;doc-artifacts/employee-post/paths.json&quot; } ```</p>
 </article>
 
 <article>
@@ -233,9 +233,10 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "GraphVizDiagram"
       }, {
         "lang" : "markdown",
-        "snippet" : "# Create Employee\n\n:include-open-api: openapi/api-spec.json {operationId: \"createEmployee\" }\n\n```columns\nleft: \n:include-json: doc-artifacts/employee-post/request.json { title: \"request payload\" }\n\nright: \n:include-json: doc-artifacts/employee-post/response.json { \n  title: \"response payload\", \n  pathsFile: \"doc-artifacts/employee-post/paths.json\" \n}\n```\n",
+        "snippet" : "# Create Employee\n\n:include-open-api: openapi/api-spec.json {operationId: \"createEmployee\" }\n\n```columns\nleft: \n:include-json: doc-artifacts/employee-post/request.json { title: \"request payload\" }\n\nright: \n:include-json: doc-artifacts/employee-post/response.json { \n  title: \"response payload\", \n  highlightValueFile: \"doc-artifacts/employee-post/paths.json\" \n}\n```\n",
         "lineNumber" : "",
         "title" : "znai example of using test artifacts",
+        "anchorId" : "documentation-pipeline-znai-example-of-using-test-artifacts",
         "type" : "Snippet"
       } ]
     }, {
@@ -370,18 +371,19 @@ ReactDOM.render(React.createElement(Documentation, {
               "firstName" : "FN",
               "lastName" : "LN"
             },
-            "paths" : [ ],
+            "highlightValues" : [ ],
+            "highlightKeys" : [ ],
             "anchorId" : "create-employee-responses-201-request-payload",
             "type" : "Json"
           } ]
         }, {
           "content" : [ {
             "title" : "response payload",
-            "pathsFile" : "doc-artifacts/employee-post/paths.json",
             "data" : {
               "id" : "employee-id"
             },
-            "paths" : [ "root.id" ],
+            "highlightValues" : [ "root.id" ],
+            "highlightKeys" : [ ],
             "anchorId" : "create-employee-responses-201-response-payload",
             "type" : "Json"
           } ]
@@ -390,7 +392,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       } ]
     } ],
-    "lastModifiedTime" : 1677033896970,
+    "lastModifiedTime" : 1695573442097,
     "tocItem" : {
       "chapterTitle" : "Synergy With Testing",
       "pageTitle" : "REST API",

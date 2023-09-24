@@ -85,6 +85,11 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.64</h1></header>
+<p>Fix: Deploy images that are used in https://testingisdocumenting.org/znai/flow/footer Footer Fix: Links from index page are no longer always pointing to index page itself Fix: During preview mode, flow/page-references#links-links-to-subsection subsections anchor ids are no longer increasing the counter when editing the same file. Fix: Grid bullet list presentation mode is now properly hiding unrevealed boxes Fix: snippets/external-code-snippets snippets constant color for dark and light theme Doc: flow/testing-is-documenting Testing Is Documenting intro page rework Doc: Move snippets highlighting into snippets/snippets-highlighting its own page Add: visuals/iframe#embedding-supporting-content iframe fit parameter to auto adjust height of the iframe Add: regexp based preprocessor to modify markdown files before parsing (to work with existing custom markdowns) Add: Preview and real time updates for TOC items that are outside main documentation directory Add: OCaml syntax highlight Add: Clarify snippets/snippets-manipulation#surrounded-by Surrounded By message when second marker is absent Add: deployment/additional-files upload.txt Add: tweak yellow snippets/CLI#output-highlight terminal output color for light theme Add: code snippets snippets/snippets-highlighting#region highlighting regions scope Add: code snippets snippets/snippets-highlighting#region highlighting regions Add: Improve snippets/snippets-highlighting highlighting of adjacent lines in code snippets Add: Support for flow/page-references#links limited relative links with explicit file extension Add: snippets/snippets-manipulation#surrounded-by surroundedByKeep boolean option Add: snippets/code-snippets#anchor Anchor support for embedded code blocks Add: snippets/json#callouts-from-file JSON callouts from file Add: snippets/json#callouts JSON callouts Add: Java 17 is a minimum java version required to run Add: snippets/json JSON rename paths to highlightValue and pathsFile to highlightValueFile to match highlightKey and highlightKeyFile pair Add: JSON snippets/json#highlight-keys-by-path highlight keys Add: plugin parameter names deprecation (rename) mechanism</p>
+</article>
+
+<article>
 <header><h1>1.63</h1></header>
 <p>Fix: visuals/images Images null pointer when using with SVGs Fix: Table column parameters layout/tables#column-names-conflict name conflict Fix: snippets/json JSON regression with displaying null values Fix: stop badge visuals/image-annotations#badge-textual-description image annotation from pulsing when mouse moved out Fix: remove extra gap from last code snippet inside snippets/api-parameters API parameters Add: plugins/plugin-types Plugins parameters validation error message now prints in the context of plugin name and passed params Fix: snippets/code-references code reference now turns into links parts of code that is not fully recognized by highlighter Add: snippets/snippets-manipulation#surrounded-by surroundedBy validates that content is not empty after extraction Add: snippets/open-API Open API summary field validation when using autoSection: true Add: snippets/CLI#output-highlight CLI Output Highlight now matches sub-lines ignoring colors ANSI sequence Add: JSON snippets/json#enclose-in-object Enclose In Object Add: JSON format for snippets/code-references Code References Add: better alignment of multiple snippets/CLI CLI Commands in a row and when surrounded by text Add: snippets/CLI#output-highlight console output and snippets/external-code-snippets code snippets trim empty lines from start/end when no extraction specific params is set Add: include and exclude to snippets/snippets-manipulation#include-contains include/exclude lines using contains Add: excludeStart and excludeEnd as separate options to snippets/snippets-manipulation snippets manipulation Add: snippets/inlined-code-snippets#validated-identifier identifier support for multiple validation paths. Example of using default parameters to simplify flow. Add: noGap option for images, tables, snippets and API parameters is only required for the first entry, second can omit it. If it does, third entry will have a gap again above. This helps with groups of snippets/tables/etc. Add: snippets/CLI#wide-mode Wide Mode for CLI Output</p>
 </article>
@@ -121,6 +126,608 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "1-64",
+      "title" : "1.64",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Deploy images that are used in ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "https://testingisdocumenting.org/znai/flow/footer",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Footer",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Links from ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "index",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " page are no longer always pointing to index page itself",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: During preview mode, ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/page-references#links-links-to-subsection",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "subsections",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " anchor ids are no longer increasing the counter when editing the same file.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "Grid",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " bullet list presentation mode is now properly hiding unrevealed boxes",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/external-code-snippets",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "snippets",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " constant color for dark and light theme",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/testing-is-documenting",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Testing Is Documenting",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " intro page rework",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: Move snippets highlighting into ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-highlighting",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "its own page",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/iframe#embedding-supporting-content",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "iframe fit parameter",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to auto adjust height of the iframe",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: regexp based preprocessor to modify markdown files before parsing (to work with existing custom markdowns)",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Preview and real time updates for TOC items that are outside main documentation directory",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: OCaml syntax highlight",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Clarify ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-manipulation#surrounded-by",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Surrounded By",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " message when second marker is absent",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/deployment/additional-files",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "upload.txt",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: tweak yellow ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/CLI#output-highlight",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "terminal output",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " color for light theme",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: code snippets ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-highlighting#region",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "highlighting regions scope",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: code snippets ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-highlighting#region",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "highlighting regions",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Improve ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-highlighting",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "highlighting",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " of adjacent lines in code snippets",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Support for ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/page-references#links",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "limited relative links",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " with explicit file extension",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-manipulation#surrounded-by",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "surroundedByKeep",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " boolean option",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/code-snippets#anchor",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Anchor",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support for embedded code blocks",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json#callouts-from-file",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON callouts from file",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json#callouts",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON callouts",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Java 17 is a minimum java version required to run",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "JSON",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " rename ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "paths",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "highlightValue",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "pathsFile",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "highlightValueFile",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to match ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "highlightKey",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "highlightKeyFile",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " pair",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: JSON ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/json#highlight-keys-by-path",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "highlight keys",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: plugin parameter names deprecation (rename) mechanism",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "1-63",
       "title" : "1.63",
       "type" : "Section",
@@ -624,7 +1231,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1677033896966,
+    "lastModifiedTime" : 1695573442093,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2023 Releases",
@@ -635,6 +1242,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "2023",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.64",
+        "id" : "1-64"
+      }, {
         "title" : "1.63",
         "id" : "1-63"
       } ]

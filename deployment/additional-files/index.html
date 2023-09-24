@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Support</title>
+<title>Znai: Additional Files</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,8 +85,7 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Linking To Support Site</h1></header>
-<p>To provide a support link to your users add link and title to the meta.json file.Take a look at the example at the top of this page.</p>
+<p>Znai automatically copies files like images to deploy location when you use them.Create upload.txt next to toc file and list all the additional files/directories you want to be copied to the deployment location. txt my-extra-files/fileone.xml my-extra-dir</p>
 </article>
 </section>
 </div>
@@ -121,59 +120,46 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "linking-to-support-site",
-      "title" : "Linking To Support Site",
-      "type" : "Section",
+      "type" : "Paragraph",
       "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To provide a support link to your users add link and title to the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "meta.json",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " file.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "data" : {
-          "title" : "Znai",
-          "type" : "User Guide",
-          "category" : "Documentation",
-          "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
-          "viewOn" : {
-            "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-            "title" : "View Markdown"
-          },
-          "support" : {
-            "link" : "https://github.com/testingisdocumenting/znai/discussions",
-            "title" : "GitHub"
-          }
-        },
-        "highlightValues" : [ "root.support.link" ],
-        "highlightKeys" : [ ],
-        "type" : "Json"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Take a look at the example at the top of this page.",
-          "type" : "SimpleText"
-        } ]
+        "text" : "Znai automatically copies files like images to deploy location when you use them.",
+        "type" : "SimpleText"
       } ]
+    }, {
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Create ",
+        "type" : "SimpleText"
+      }, {
+        "code" : "upload.txt",
+        "type" : "InlinedCode"
+      }, {
+        "text" : " next to ",
+        "type" : "SimpleText"
+      }, {
+        "code" : "toc",
+        "type" : "InlinedCode"
+      }, {
+        "text" : " file and list all the additional files/directories you want to be copied to the deployment location.",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "lang" : "txt",
+      "snippet" : "my-extra-files/fileone.xml\nmy-extra-dir\n",
+      "lineNumber" : "",
+      "title" : "upload.txt",
+      "anchorId" : "upload-txt",
+      "type" : "Snippet"
     } ],
-    "lastModifiedTime" : 1695573442085,
+    "lastModifiedTime" : 1695573442081,
     "tocItem" : {
-      "chapterTitle" : "Flow",
-      "pageTitle" : "Support",
+      "chapterTitle" : "Deployment",
+      "pageTitle" : "Additional Files",
       "pageMeta" : { },
-      "dirName" : "flow",
-      "fileName" : "support",
+      "dirName" : "deployment",
+      "fileName" : "additional-files",
       "viewOnRelativePath" : null,
-      "pageSectionIdTitles" : [ {
-        "title" : "Linking To Support Site",
-        "id" : "linking-to-support-site"
-      } ]
+      "pageSectionIdTitles" : [ ]
     }
   }
 }), document.getElementById("znai"));

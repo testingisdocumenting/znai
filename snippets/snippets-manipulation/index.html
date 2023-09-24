@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Surrounded By</h1></header>
-<p>Use to extract code snippet surrounded by a marker # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py { title: &quot;extracted example with surroundedBy&quot;, surroundedBy: &quot;# example-cancel-trade&quot;} market.cancel_trade(id)</p>
+<p>Use to extract code snippet surrounded by a marker # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py { title: &quot;extracted example with surroundedBy&quot;, surroundedBy: &quot;# example-cancel-trade&quot;} market.cancel_trade(id) Use to keep marker lines block-A-start: event-one-handler: ... block-A-end block-B-start ... block-B-end markdown :include-file: custom.dsl { title: &quot;keep marker lines&quot;, surroundedBy: &quot;block-A&quot;, surroundedByKeep: true } block-A-start: event-one-handler: ... block-A-end</p>
 </article>
 
 <article>
@@ -193,6 +193,39 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "extracted result",
         "surroundedBy" : "# example-cancel-trade",
         "anchorId" : "surrounded-by-extracted-result",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "surroundedByKeep",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to keep marker lines",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "dsl",
+        "snippet" : "block-A-start:\n    event-one-handler:\n        ...\nblock-A-end\n\nblock-B-start\n    ...\nblock-B-end",
+        "autoTitle" : true,
+        "title" : "custom.dsl",
+        "anchorId" : "surrounded-by-custom-dsl",
+        "type" : "Snippet"
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-file: custom.dsl {\n  title: \"keep marker lines\",\n  surroundedBy: \"block-A\",\n  surroundedByKeep: true\n}\n",
+        "lineNumber" : "",
+        "highlight" : [ 3 ],
+        "type" : "Snippet"
+      }, {
+        "lang" : "dsl",
+        "snippet" : "block-A-start:\n    event-one-handler:\n        ...\nblock-A-end",
+        "title" : "keep marker lines",
+        "surroundedBy" : "block-A",
+        "surroundedByKeep" : true,
+        "anchorId" : "surrounded-by-keep-marker-lines",
         "type" : "Snippet"
       } ]
     }, {
@@ -584,7 +617,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1677033896970,
+    "lastModifiedTime" : 1695573442097,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Snippets Manipulation",

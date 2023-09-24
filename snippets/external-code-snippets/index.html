@@ -131,7 +131,12 @@
 
 <article>
 <header><h1>Highlights</h1></header>
-<p>Use the highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: &quot;export&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: [&quot;export&quot;, 1]} class JsClass { constructor() { usefulAction() } } export default JsClass Note: Order of lines to highlight is reflected during presentation modeUse the highlightPath option to highlight lines specified in a separate file. :include-file: file-name.js {highlightPath: &quot;lines-to-highlight.txt&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass class usefulAction</p>
+<p>snippets/snippets-highlighting Learn More about highlighting snippets lines.</p>
+</article>
+
+<article>
+<header><h1>Snippets Manipulation</h1></header>
+<p>Read page on snippets/snippets-manipulation Snippets Manipulation to learn more about extracting/modifying snippets before displaying them.</p>
 </article>
 </section>
 </div>
@@ -653,84 +658,47 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use the ",
-          "type" : "SimpleText"
+          "url" : "/znai/snippets/snippets-highlighting",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Learn More",
+            "type" : "SimpleText"
+          } ]
         }, {
-          "code" : "highlight",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " option to bring readers attention to the important lines.",
+          "text" : " about highlighting snippets lines.",
           "type" : "SimpleText"
         } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-file: file-name.js {highlight: \"export\"}\n",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlight" : [ 6 ],
-        "type" : "Snippet"
-      }, {
+      } ]
+    }, {
+      "id" : "snippets-manipulation",
+      "title" : "Snippets Manipulation",
+      "type" : "Section",
+      "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "It is recommended to pass a substring, but you can pass a line idx (starts from 0).",
+          "text" : "Read page on ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/snippets/snippets-manipulation",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Snippets Manipulation",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " to learn more about extracting/modifying",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "Additionally you can combine two approaches and pass a list of things to highlight.",
+          "text" : "snippets before displaying them.",
           "type" : "SimpleText"
         } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-file: file-name.js {highlight: [\"export\", 1]}\n",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlight" : [ 6, 1 ],
-        "type" : "Snippet"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Note: Order of lines to highlight is reflected during presentation mode",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "highlightPath",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " option to highlight lines specified in a separate file.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-file: file-name.js {highlightPath: \"lines-to-highlight.txt\"}\n",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlightPath" : "lines-to-highlight.txt",
-        "highlight" : [ 0, 2 ],
-        "type" : "Snippet"
-      }, {
-        "lang" : "txt",
-        "snippet" : "class\nusefulAction",
-        "title" : "lines-to-highlight.txt",
-        "anchorId" : "highlights-lines-to-highlight-txt",
-        "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1677033896970,
+    "lastModifiedTime" : 1695573442093,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
@@ -768,6 +736,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Highlights",
         "id" : "highlights"
+      }, {
+        "title" : "Snippets Manipulation",
+        "id" : "snippets-manipulation"
       } ]
     }
   }

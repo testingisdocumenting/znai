@@ -85,6 +85,11 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>Embedding Supporting Content</h1></header>
+<p>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter will automatically set the height of the iframe to fit the content &lt;html lang=&quot;en&quot;&gt; &lt;head&gt; &lt;style&gt; .content { background-color: #444; border: 2px solid #888; color: #eee; font-size: 20px; padding: 16px; } &lt;/style&gt; &lt;title&gt;generated content&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div class=&quot;content&quot;&gt;Custom content&lt;/div&gt; &lt;/body&gt; &lt;/html&gt; Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</p>
+</article>
+
+<article>
 <header><h1>Embedding Video</h1></header>
 <p>Use include-iframe to embed content from other place. By default, aspect ratio set to 16:9 . :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY</p>
 </article>
@@ -126,6 +131,104 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "embedding-supporting-content",
+      "title" : "Embedding Supporting Content",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "include-iframe",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " plugin to embed HTML content that supports your documentation. Some examples:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "generated React JS index.html with components that get rendered based on url anchor",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "custom plot functions",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-iframe: iframe/custom.html {\n  fit: true\n}\n",
+        "lineNumber" : "",
+        "highlight" : [ 1 ],
+        "type" : "Snippet"
+      }, {
+        "src" : "/znai/iframe/custom.html",
+        "fit" : true,
+        "type" : "Iframe"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "fit",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter will automatically set the height of the iframe to fit the content",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "html",
+        "snippet" : "<html lang=\"en\">\n<head>\n  <style>\n    .content {\n        background-color: #444;\n        border: 2px solid #888;\n        color: #eee;\n        font-size: 20px;\n        padding: 16px;\n    }\n  </style>\n  <title>generated content</title>\n</head>\n\n<body>\n  <div class=\"content\">Custom content</div>\n</body>\n</html>",
+        "autoTitle" : true,
+        "title" : "iframe/custom.html",
+        "anchorId" : "embedding-supporting-content-iframe-custom-html",
+        "type" : "Snippet"
+      }, {
+        "attentionType" : "warning",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Only ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "iframe/custom.html",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " will be automatically copied to the deploy destination during documentation build step.",
+            "type" : "SimpleText"
+          }, {
+            "type" : "SoftLineBreak"
+          }, {
+            "text" : "If you need other supporting files you need to use ",
+            "type" : "SimpleText"
+          }, {
+            "url" : "/znai/deployment/additional-files",
+            "isFile" : false,
+            "type" : "Link",
+            "content" : [ {
+              "text" : "upload.txt",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "AttentionBlock"
+      } ]
+    }, {
       "id" : "embedding-video",
       "title" : "Embedding Video",
       "type" : "Section",
@@ -183,7 +286,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Iframe"
       } ]
     } ],
-    "lastModifiedTime" : 1677033896986,
+    "lastModifiedTime" : 1695573442113,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Iframe",
@@ -192,6 +295,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "iframe",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "Embedding Supporting Content",
+        "id" : "embedding-supporting-content"
+      }, {
         "title" : "Embedding Video",
         "id" : "embedding-video"
       }, {

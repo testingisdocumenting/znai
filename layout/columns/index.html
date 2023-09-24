@@ -101,7 +101,7 @@
 
 <article>
 <header><h1>Sizes</h1></header>
-<p>Size can be specified for a column as a portion . By default, both portions are assigned a value of 10 . If you specify right column portion to be 5 , then left will be left as 10 by default, leaving right side to be roughly 33% in size. http.get(&quot;/weather&quot;) { temperature.shouldBe &lt; 100 } http.doc.capture(&quot;weather-example&quot;) ```columns {right: {portion: 5}} left: :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;WebTau REST API test example&quot;, entry: &quot;weather&quot;, bodyOnly: true } right: :include-json: weather-example/response.json { title: &quot;weather response example&quot;, pathsFile: &quot;weather-example/paths.json&quot; } ```</p>
+<p>Size can be specified for a column as a portion . By default, both portions are assigned a value of 10 . If you specify right column portion to be 5 , then left will be left as 10 by default, leaving right side to be roughly 33% in size. http.get(&quot;/weather&quot;) { temperature.shouldBe &lt; 100 } http.doc.capture(&quot;weather-example&quot;) ```columns {right: {portion: 5}} left: :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;WebTau REST API test example&quot;, entry: &quot;weather&quot;, bodyOnly: true } right: :include-json: weather-example/response.json { title: &quot;weather response example&quot;, highlightValueFile: &quot;weather-example/paths.json&quot; } ```</p>
 </article>
 
 <article>
@@ -443,12 +443,12 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "content" : [ {
             "title" : "weather response example",
-            "pathsFile" : "weather-example/paths.json",
             "data" : {
               "temperature" : 90,
               "city" : "New York"
             },
-            "paths" : [ "root.temperature" ],
+            "highlightValues" : [ "root.temperature" ],
+            "highlightKeys" : [ ],
             "anchorId" : "sizes-weather-response-example",
             "type" : "Json"
           } ]
@@ -461,7 +461,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       }, {
         "lang" : "",
-        "snippet" : "```columns {right: {portion: 5}}\nleft: \n:include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"WebTau REST API test example\",\n  entry: \"weather\",\n  bodyOnly: true\n}\n\nright:\n:include-json: weather-example/response.json {\n  title: \"weather response example\",\n  pathsFile: \"weather-example/paths.json\"\n}\n```\n",
+        "snippet" : "```columns {right: {portion: 5}}\nleft: \n:include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"WebTau REST API test example\",\n  entry: \"weather\",\n  bodyOnly: true\n}\n\nright:\n:include-json: weather-example/response.json {\n  title: \"weather response example\",\n  highlightValueFile: \"weather-example/paths.json\"\n}\n```\n",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -604,7 +604,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1677033896962,
+    "lastModifiedTime" : 1695573442085,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Columns",

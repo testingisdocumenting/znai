@@ -86,12 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Re-usable patterns</h1></header>
-<p>Let's consider a chat REST API example where we want to display a sample input, example code snippet, and sample output. Here how documentation may look like.Use to send a new message http.post(&quot;/messages&quot;, [message: &quot;Hello all&quot;]) { id.should == &quot;mid1&quot; } This is the source to render the layout above :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;POST messages&quot;, entry: &quot;postMessages&quot;, bodyOnly: true, excludeRegexp: &quot;http.doc&quot; } ```columns left: :include-json: chat-post-messages/request.json { title: &quot;POST /messages request&quot; } right: :include-json: chat-post-messages/response.json { title: &quot;POST /messages response&quot;, pathsFile: &quot;chat-post-messages/paths.json&quot; } ``` Note: request and response were automatically captured using synergy-with-testing/REST-API WebTau testing framework.We need to document other methods as well, and as you can imagine, the repetition will take place.</p>
+<p>Let's consider a chat REST API example where we want to display a sample input, example code snippet, and sample output. Here how documentation may look like.Use to send a new message http.post(&quot;/messages&quot;, [message: &quot;Hello all&quot;]) { id.should == &quot;mid1&quot; } This is the source to render the layout above :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;POST messages&quot;, entry: &quot;postMessages&quot;, bodyOnly: true, excludeRegexp: &quot;http.doc&quot; } ```columns left: :include-json: chat-post-messages/request.json { title: &quot;POST /messages request&quot; } right: :include-json: chat-post-messages/response.json { title: &quot;POST /messages response&quot;, highlightValueFile: &quot;chat-post-messages/paths.json&quot; } ``` Note: request and response were automatically captured using synergy-with-testing/REST-API WebTau testing framework.We need to document other methods as well, and as you can imagine, the repetition will take place.</p>
 </article>
 
 <article>
 <header><h1>Extract A Pattern</h1></header>
-<p>Let's move a block we plan to repeat into a separate file and replace hardcoding of entries like post with placeholders. Znai uses the https://freemarker.apache.org FreeMarker template engine. :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;${method?upper_case} messages&quot;, entry: &quot;${method}Messages&quot;, bodyOnly: true, excludeRegexp: &quot;http.doc&quot; } ```columns left: :include-json: chat-${method}-messages/request.json { title: &quot;${method?upper_case} /messages request&quot; } right: :include-json: chat-${method}-messages/response.json { title: &quot;${method?upper_case} /messages response&quot;, pathsFile: &quot;chat-post-messages/paths.json&quot; } ```</p>
+<p>Let's move a block we plan to repeat into a separate file and replace hardcoding of entries like post with placeholders. Znai uses the https://freemarker.apache.org FreeMarker template engine. :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;${method?upper_case} messages&quot;, entry: &quot;${method}Messages&quot;, bodyOnly: true, excludeRegexp: &quot;http.doc&quot; } ```columns left: :include-json: chat-${method}-messages/request.json { title: &quot;${method?upper_case} /messages request&quot; } right: :include-json: chat-${method}-messages/response.json { title: &quot;${method?upper_case} /messages response&quot;, highlightValueFile: &quot;chat-post-messages/paths.json&quot; } ```</p>
 </article>
 
 <article>
@@ -178,19 +178,20 @@ ReactDOM.render(React.createElement(Documentation, {
             "data" : {
               "message" : "Hello all"
             },
-            "paths" : [ ],
+            "highlightValues" : [ ],
+            "highlightKeys" : [ ],
             "anchorId" : "re-usable-patterns-post-messages-request",
             "type" : "Json"
           } ]
         }, {
           "content" : [ {
             "title" : "POST /messages response",
-            "pathsFile" : "chat-post-messages/paths.json",
             "data" : {
               "id" : "mid1",
               "status" : "SUCCESS"
             },
-            "paths" : [ "root.id" ],
+            "highlightValues" : [ "root.id" ],
+            "highlightKeys" : [ ],
             "anchorId" : "re-usable-patterns-post-messages-response",
             "type" : "Json"
           } ]
@@ -205,7 +206,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"POST messages\",\n  entry: \"postMessages\",\n  bodyOnly: true,\n  excludeRegexp: \"http.doc\"\n}\n\n```columns\nleft:\n:include-json: chat-post-messages/request.json {\n  title: \"POST /messages request\"\n}\n  \nright:\n:include-json: chat-post-messages/response.json {\n  title: \"POST /messages response\",\n  pathsFile: \"chat-post-messages/paths.json\"\n}\n```\n",
+        "snippet" : ":include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"POST messages\",\n  entry: \"postMessages\",\n  bodyOnly: true,\n  excludeRegexp: \"http.doc\"\n}\n\n```columns\nleft:\n:include-json: chat-post-messages/request.json {\n  title: \"POST /messages request\"\n}\n  \nright:\n:include-json: chat-post-messages/response.json {\n  title: \"POST /messages response\",\n  highlightValueFile: \"chat-post-messages/paths.json\"\n}\n```\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -269,7 +270,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "md",
-        "snippet" : ":include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"${method?upper_case} messages\",\n  entry: \"${method}Messages\",\n  bodyOnly: true,\n  excludeRegexp: \"http.doc\"\n}\n\n```columns\nleft:\n:include-json: chat-${method}-messages/request.json {\n  title: \"${method?upper_case} /messages request\"\n}\n  \nright:\n:include-json: chat-${method}-messages/response.json {\n  title: \"${method?upper_case} /messages response\",\n  pathsFile: \"chat-post-messages/paths.json\"\n}\n```",
+        "snippet" : ":include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"${method?upper_case} messages\",\n  entry: \"${method}Messages\",\n  bodyOnly: true,\n  excludeRegexp: \"http.doc\"\n}\n\n```columns\nleft:\n:include-json: chat-${method}-messages/request.json {\n  title: \"${method?upper_case} /messages request\"\n}\n  \nright:\n:include-json: chat-${method}-messages/response.json {\n  title: \"${method?upper_case} /messages response\",\n  highlightValueFile: \"chat-post-messages/paths.json\"\n}\n```",
         "autoTitle" : true,
         "title" : "templates/messages-http-call.md",
         "anchorId" : "extract-a-pattern-templates-messages-http-call-md",
@@ -299,19 +300,20 @@ ReactDOM.render(React.createElement(Documentation, {
             "data" : {
               "message" : "Hello all!"
             },
-            "paths" : [ ],
+            "highlightValues" : [ ],
+            "highlightKeys" : [ ],
             "anchorId" : "use-a-pattern-put-messages-request",
             "type" : "Json"
           } ]
         }, {
           "content" : [ {
             "title" : "PUT /messages response",
-            "pathsFile" : "chat-post-messages/paths.json",
             "data" : {
               "id" : "mid1",
               "status" : "SUCCESS"
             },
-            "paths" : [ "root.id" ],
+            "highlightValues" : [ "root.id" ],
+            "highlightKeys" : [ ],
             "anchorId" : "use-a-pattern-put-messages-response",
             "type" : "Json"
           } ]
@@ -320,7 +322,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       } ]
     } ],
-    "lastModifiedTime" : 1677033896962,
+    "lastModifiedTime" : 1695573442085,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Templates",

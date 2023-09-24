@@ -100,6 +100,11 @@
 </article>
 
 <article>
+<header><h1>Anchor</h1></header>
+<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. ```javascript {title: &quot;ReactJS Component&quot;, anchorId: &quot;my-special-code&quot;} ... ``` javascript import React, {Component} from 'react' class MyComponent extends Component { render() { /// ... } }</p>
+</article>
+
+<article>
 <header><h1>Wide Code</h1></header>
 <p>Use the wide option to stretch wide code to occupy as much horizontal real estate as possible. ```java {wide: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } ``` java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Without the wide option code will be aligned with the rest of the text and users can use scrollbars. java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Note: Good placement of a Wide Code element is at the end of a page or a section to show the full version of a code sample.</p>
 </article>
@@ -116,7 +121,7 @@
 
 <article>
 <header><h1>Highlights</h1></header>
-<p>Use the highlight option to bring readers attention to important lines. ```java {highlight: &quot;workingDir&quot;} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } Note: You will get a build-time error if the specified substring is not found in any of the snippet linesIt is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. ```java {highlight: [2, &quot;...&quot;]} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } Note: Order of lines to highlight is reflected during presentation mode</p>
+<p>Use the highlight option to bring readers attention to important lines. ```java {highlight: &quot;workingDir&quot;} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } snippets/snippets-highlighting Learn More about highlighting options.</p>
 </article>
 </section>
 </div>
@@ -325,6 +330,42 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n",
         "lineNumber" : "",
         "title" : "ReactJS Component",
+        "anchorId" : "title-reactjs-component",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "anchor",
+      "title" : "Anchor",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When you specify a title, hover mouse over it to see a clickable anchor.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "anchorId",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to override auto generated identifier.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```javascript {title: \"ReactJS Component\", anchorId: \"my-special-code\"}\n...\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "javascript",
+        "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n  render() {\n    /// ...\n  }\n}\n",
+        "lineNumber" : "",
+        "title" : "ReactJS Component",
+        "anchorId" : "my-special-code",
         "type" : "Snippet"
       } ]
     }, {
@@ -488,40 +529,20 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: You will get a build-time error if the specified substring is not found in any of the snippet lines",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "It is recommended to pass a substring, but you can pass a line idx (starts from 0).",
-          "type" : "SimpleText"
+          "url" : "/znai/snippets/snippets-highlighting",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Learn More",
+            "type" : "SimpleText"
+          } ]
         }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Additionally you can combine two approaches and pass a list of things to highlight.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : "```java {highlight: [2,  \"...\"]}\npublic class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }\n```    \n",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "java",
-        "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }\n",
-        "lineNumber" : "",
-        "highlight" : [ 2, 5 ],
-        "type" : "Snippet"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Note: Order of lines to highlight is reflected during presentation mode",
+          "text" : " about highlighting options.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1677033896970,
+    "lastModifiedTime" : 1695573442093,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Code Snippets",
@@ -538,6 +559,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Title",
         "id" : "title"
+      }, {
+        "title" : "Anchor",
+        "id" : "anchor"
       }, {
         "title" : "Wide Code",
         "id" : "wide-code"

@@ -11,7 +11,7 @@
     <url>/znai/introduction/what-is-this#extensive-plugins-system</url>
     <fullTitle>Znai: What Is This, Extensive Plugins System [Introduction]</fullTitle>
     <text>
-      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include markdown :include-json: example.json { title: "JSON example", paths: ["root.person.id"], collapsedPaths: ["root.details"] } markdown :include-java: ../java/HelloWorld.java { entry: "sampleMethod", bodyOnly: true, commentsType: "inline" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Inlined Code markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fenced Block markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</text>
+      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include markdown :include-json: example.json { title: "JSON example", highlightValue: ["root.person.id"], collapsedPaths: ["root.details"] } markdown :include-java: ../java/HelloWorld.java { entry: "sampleMethod", bodyOnly: true, commentsType: "inline" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Inlined Code markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fenced Block markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.63/znai-dist-1.63-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.64/znai-dist-1.64-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.63&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.64&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.63&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.64&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.63&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.64&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -155,7 +155,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing shortcuts snippets code-snippets external-code-snippets snippets-manipulation code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations cards charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic plugins plugin-types default-parameters development configuration basic example-references domain api znai-development local-build release-notes 2023 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing-is-documenting shortcuts snippets code-snippets external-code-snippets snippets-manipulation snippets-highlighting code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations cards charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic plugins plugin-types default-parameters development configuration basic deployment additional-files example-references domain api znai-development local-build release-notes 2023 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -227,7 +227,7 @@
     <url>/znai/flow/page-references#links</url>
     <fullTitle>Znai: Page References, Links [Flow]</fullTitle>
     <text>
-      <text>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link. Links to Subsection Linking to subsections is the same as linking to a top level section. flow/page-references#links-links-to-subsection Here is an example markdown [Here is an example](flow/page-references#links-links-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Index Page Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation PanelTo refer back to the top-level index page use: markdown [index page](/) [index page](/#link-to-subsection)</text>
+      <text>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](../dir-name/file-name.md#optional-page-section-id) [internal link](./file-name.md#optional-page-section-id) [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link. Links to Subsection Linking to subsections is the same as linking to a top level section. ../flow/page-references.md#links-links-to-subsection Here is an example markdown [Here is an example](../flow/page-references.md#links-links-to-subsection) [Here is an example](flow/page-references#links-links-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Index Page Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation PanelTo refer back to the top-level index page use: markdown [index page](/) [index page](/#link-to-subsection)</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -352,10 +352,26 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/flow/testing#user-scenarios</url>
-    <fullTitle>Znai: Testing, User Scenarios [Flow]</fullTitle>
+    <url>/znai/flow/testing-is-documenting#auto-maintainable-content</url>
+    <fullTitle>Znai: Testing Is Documenting, Auto Maintainable Content [Flow]</fullTitle>
     <text>
-      <text>Focus your documentation on scenarios users can perform. Before documenting them, you need to make sure that they actually work. You could perform a manual test every time you release your software, but it is time consuming and error-prone.Alternatively, you could write automated tests to make sure that scenarios you are writing about are validated. At test run time, capture test produced artifacts:Command line output Screenshots Business logic calculation REST responses Config files Script snippets Runtime dependencies DAGs ... Include the captured artifacts inside your documentation to keep it up to date.As you write your documentation you will come up with new scenarios to test. As you write tests, think about your documentation and what test-produced artifacts can improve it.In this documentation you will learn how to include artifacts. There are also examples of synergy between tests and documentation in the later chapters.</text>
+      <text>There is a lot of content you can get by leveraging automated testing. And most importantly that content is going to be auto maintained.Let's say you document a command line tool, and you want to provide an example of some operation output. You can copy and paste the output risking it being outdated. Or, you can write a test that exercises a command line and also captures its output.You end up getting a lot of benefits:your app is tested your documentation is auto updated</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/testing-is-documenting#examples</url>
+    <fullTitle>Znai: Testing Is Documenting, Examples [Flow]</fullTitle>
+    <text>
+      <text>In addition to command line tools, here are some common scenarios you should consider:Test Web UI - application screenshots Test Business Logic - tabular data Test REST API - API JSON real examples Config files Script snippets Runtime dependencies DAGs ...</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/testing-is-documenting#self-powering-cycle</url>
+    <fullTitle>Znai: Testing Is Documenting, Self Powering Cycle [Flow]</fullTitle>
+    <text>
+      <text>As you write your documentation you will come up with new scenarios to test. As you write tests, think about your documentation and what test-produced artifacts can improve it.Znai provides a lot of utilities to include test artifacts.In synergy-with-testing/web-UI Synergy With Testing chapter you will see examples of UI, REST API and Business Logic.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -392,6 +408,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/code-snippets#anchor</url>
+    <fullTitle>Znai: Code Snippets, Anchor [Snippets]</fullTitle>
+    <text>
+      <text>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. ```javascript {title: "ReactJS Component", anchorId: "my-special-code"} ... ``` javascript import React, {Component} from 'react' class MyComponent extends Component { render() { /// ... } }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/code-snippets#wide-code</url>
     <fullTitle>Znai: Code Snippets, Wide Code [Snippets]</fullTitle>
     <text>
@@ -419,7 +443,7 @@
     <url>/znai/snippets/code-snippets#highlights</url>
     <fullTitle>Znai: Code Snippets, Highlights [Snippets]</fullTitle>
     <text>
-      <text>Use the highlight option to bring readers attention to important lines. ```java {highlight: "workingDir"} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String>> fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String>> fileNameByDirName; public DocScaffolding(Path workingDir) { ... } Note: You will get a build-time error if the specified substring is not found in any of the snippet linesIt is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. ```java {highlight: [2, "..."]} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String>> fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String>> fileNameByDirName; public DocScaffolding(Path workingDir) { ... } Note: Order of lines to highlight is reflected during presentation mode</text>
+      <text>Use the highlight option to bring readers attention to important lines. ```java {highlight: "workingDir"} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String>> fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String>> fileNameByDirName; public DocScaffolding(Path workingDir) { ... } snippets/snippets-highlighting Learn More about highlighting options.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -499,7 +523,15 @@
     <url>/znai/snippets/external-code-snippets#highlights</url>
     <fullTitle>Znai: External Code Snippets, Highlights [Snippets]</fullTitle>
     <text>
-      <text>Use the highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: "export"} class JsClass { constructor() { usefulAction() } } export default JsClass It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: ["export", 1]} class JsClass { constructor() { usefulAction() } } export default JsClass Note: Order of lines to highlight is reflected during presentation modeUse the highlightPath option to highlight lines specified in a separate file. :include-file: file-name.js {highlightPath: "lines-to-highlight.txt"} class JsClass { constructor() { usefulAction() } } export default JsClass class usefulAction</text>
+      <text>snippets/snippets-highlighting Learn More about highlighting snippets lines.</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/external-code-snippets#snippets-manipulation</url>
+    <fullTitle>Znai: External Code Snippets, Snippets Manipulation [Snippets]</fullTitle>
+    <text>
+      <text>Read page on snippets/snippets-manipulation Snippets Manipulation to learn more about extracting/modifying snippets before displaying them.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -507,7 +539,7 @@
     <url>/znai/snippets/snippets-manipulation#surrounded-by</url>
     <fullTitle>Znai: Snippets Manipulation, Surrounded By [Snippets]</fullTitle>
     <text>
-      <text>Use to extract code snippet surrounded by a marker # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py { title: "extracted example with surroundedBy", surroundedBy: "# example-cancel-trade"} market.cancel_trade(id)</text>
+      <text>Use to extract code snippet surrounded by a marker # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py { title: "extracted example with surroundedBy", surroundedBy: "# example-cancel-trade"} market.cancel_trade(id) Use to keep marker lines block-A-start: event-one-handler: ... block-A-end block-B-start ... block-B-end markdown :include-file: custom.dsl { title: "keep marker lines", surroundedBy: "block-A", surroundedByKeep: true } block-A-start: event-one-handler: ... block-A-end</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -572,6 +604,54 @@
     <fullTitle>Znai: Snippets Manipulation, Exclude Regexp [Snippets]</fullTitle>
     <text>
       <text>Use to exclude lines matching regexp(s). :include-file: python-examples.py { excludeRegexp: ["if .* ==", "\\s+main", "# example", "^\\s*$"] } import market id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id)</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-highlighting#line-by-text</url>
+    <fullTitle>Znai: Snippets Highlighting, Line By Text [Snippets]</fullTitle>
+    <text>
+      <text>Use the highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: "export"} class JsClass { constructor() { usefulAction() } } export default JsClass</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-highlighting#line-by-index</url>
+    <fullTitle>Znai: Snippets Highlighting, Line By Index [Snippets]</fullTitle>
+    <text>
+      <text>It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally, you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: ["export", 1]} class JsClass { constructor() { usefulAction() } } export default JsClass Note: Order of lines to highlight is reflected during presentation mode</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-highlighting#text-from-file</url>
+    <fullTitle>Znai: Snippets Highlighting, Text From File [Snippets]</fullTitle>
+    <text>
+      <text>Use the highlightPath option to highlight lines specified in a separate file. :include-file: file-name.js {highlightPath: "lines-to-highlight.txt"} class JsClass { constructor() { usefulAction() } } export default JsClass class usefulAction</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-highlighting#region</url>
+    <fullTitle>Znai: Snippets Highlighting, Region [Snippets]</fullTitle>
+    <text>
+      <text>Use the highlightRegion to highlight large portions of the code as one highlight block: :include-file: file-name.js {highlightRegion: {start: "constructor", end: "}"}} class JsClass { constructor() { usefulAction() } } export default JsClass</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-highlighting#region-using-scope</url>
+    <fullTitle>Znai: Snippets Highlighting, Region Using Scope [Snippets]</fullTitle>
+    <text>
+      <text>Use the highlightRegion.scope to highlight region using scope like {} . Unlike example above, highlight will not stop at first closing } : :include-file: with-nested-if.js {highlightRegion: {start: "userId ===", scope: "{}"}} class JsClass { usefulAction() { if (userId === "user-a") { if (canRead(userId)) { // ... } } } }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-highlighting#multiple-regions</url>
+    <fullTitle>Znai: Snippets Highlighting, Multiple Regions [Snippets]</fullTitle>
+    <text>
+      <text>Use list to specify multiple regions to highlight: markdown :include-file: with-multiple-if.js {highlightRegion: [ {start: "canRead", scope: "{}"}, {start: "canWrite", scope: "{}"}] } class JsClass { usefulAction() { if (userId === "user-a") { if (canRead(userId)) { // ... } } if (userId === "user-b") { if (canWrite(userId)) { // ... } } } }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -755,15 +835,31 @@
     <url>/znai/snippets/json#highlight-values-by-path</url>
     <fullTitle>Znai: Json, Highlight Values By Path [Snippets]</fullTitle>
     <text>
-      <text>Use the plugin parameter to bring attention to a certain place in a JSON file. ```json {paths: "root[1].key2"} [{"key1": "value1"}, {"key2": "value2"}] ``` Pass multiple values to to highlight more than one leaf value :include-json: book-store.json {paths: ["root.store.book[0].category", "root.store.book[2].category"]} Comma-separated paths specified inside will be highlighted.</text>
+      <text>Use the parameter to highlight an individual value: ```json {highlightValue: "root[1].key2"} [{"key1": "value1"}, {"key2": "value2"}] ``` Pass multiple values to to highlight more than one leaf value :include-json: book-store.json {highlightValue: ["root.store.book[0].category", "root.store.book[2].category"]} Comma-separated paths specified inside will be highlighted.</text>
       <score>STANDARD</score>
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/json#highlight-by-path-from-file</url>
-    <fullTitle>Znai: Json, Highlight By Path From File [Snippets]</fullTitle>
+    <url>/znai/snippets/json#highlight-values-by-path-from-file</url>
+    <fullTitle>Znai: Json, Highlight Values By Path From File [Snippets]</fullTitle>
     <text>
-      <text>Use to specify a file to read paths from. :include-json: book-store.json {pathsFile: "book-store-paths.json"}</text>
+      <text>Use to specify a file with paths to highlight values. :include-json: book-store.json {highlightValueFile: "book-store-paths.json"}</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/json#highlight-keys-by-path</url>
+    <fullTitle>Znai: Json, Highlight Keys By Path [Snippets]</fullTitle>
+    <text>
+      <text>Use the parameter to highlight keys: ```json {highlightKey: "root[1].key2"} [{"key1": ["value11", "value12"]}, {"key2": ["value21", "value22"]}] ```</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/json#highlight-keys-by-path-from-file</url>
+    <fullTitle>Znai: Json, Highlight Keys By Path From File [Snippets]</fullTitle>
+    <text>
+      <text>Use to specify a file with paths to highlight keys. :include-json: book-store.json {highlightKeyFile: "book-store-paths.json"}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -819,7 +915,7 @@
     <url>/znai/snippets/json#highlights</url>
     <fullTitle>Znai: Json, Highlights [Snippets]</fullTitle>
     <text>
-      <text>To highlight a specific JSON value using paths , in (similar fashion to snippets/external-code-snippets#highlights regular code snippets), you can highlight a line by text matching or by providing a line index. :include-json: book-store.json {highlight: ["category", 2]}</text>
+      <text>To highlight a specific JSON value using paths , in (similar fashion to snippets/snippets-highlighting regular code snippets, you can highlight a line by text matching or by providing a line index. :include-json: book-store.json {highlight: ["category", 2]}</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -832,10 +928,26 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/json#callouts</url>
+    <fullTitle>Znai: Json, Callouts [Snippets]</fullTitle>
+    <text>
+      <text>Use callouts parameter to attach bullet points with explanation to a json path: markdown :include-json: book-store.json { collapsedPaths: ['root.store.book'], callouts: { "root.store.bicycle.color": "subject of **availability**", "root.store.bicycle.price": "*price* changes daily" }} }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/json#callouts-from-file</url>
+    <fullTitle>Znai: Json, Callouts From File [Snippets]</fullTitle>
+    <text>
+      <text>Use calloutsFile parameter to read callouts from a separate file. Can reduce duplication and allows to generate callouts at runtime. markdown :include-json: book-store.json { collapsedPaths: ['root.store.book'], calloutsFile: "schema-notes.json" } { "root.store.bicycle.color": "subject of **availability**", "root.store.bicycle.price": "*price* changes daily" } CSV format is also supported root.store.bicycle.color, subject of **availability** root.store.bicycle.price, *price* changes daily</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/json#test-results</url>
     <fullTitle>Znai: Json, Test Results [Snippets]</fullTitle>
     <text>
-      <text>Below is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to make an HTTP call, extract JSON response and information about asserted fields to highlight. http.get("/weather") { temperature.shouldBe &lt; 100 } http.doc.capture("weather-example") http.doc.capture captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json (validated paths). markdown :include-json: weather-example/response.json { title: "weather response example", pathsFile: "weather-example/paths.json" }</text>
+      <text>Below is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to make an HTTP call, extract JSON response and information about asserted fields to highlight. http.get("/weather") { temperature.shouldBe &lt; 100 } http.doc.capture("weather-example") http.doc.capture captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json (validated paths). markdown :include-json: weather-example/response.json { title: "weather response example", highlightValueFile: "weather-example/paths.json" }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1904,6 +2016,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/iframe#embedding-supporting-content</url>
+    <fullTitle>Znai: Iframe, Embedding Supporting Content [Visuals]</fullTitle>
+    <text>
+      <text>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter will automatically set the height of the iframe to fit the content &lt;html lang="en"> &lt;head> &lt;style> .content { background-color: #444; border: 2px solid #888; color: #eee; font-size: 20px; padding: 16px; } &lt;/style> &lt;title>generated content&lt;/title> &lt;/head> &lt;body> &lt;div class="content">Custom content&lt;/div> &lt;/body> &lt;/html> Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/iframe#embedding-video</url>
     <fullTitle>Znai: Iframe, Embedding Video [Visuals]</fullTitle>
     <text>
@@ -2139,7 +2259,7 @@
     <url>/znai/layout/columns#sizes</url>
     <fullTitle>Znai: Columns, Sizes [Layout]</fullTitle>
     <text>
-      <text>Size can be specified for a column as a portion . By default, both portions are assigned a value of 10 . If you specify right column portion to be 5 , then left will be left as 10 by default, leaving right side to be roughly 33% in size. http.get("/weather") { temperature.shouldBe &lt; 100 } http.doc.capture("weather-example") ```columns {right: {portion: 5}} left: :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: "WebTau REST API test example", entry: "weather", bodyOnly: true } right: :include-json: weather-example/response.json { title: "weather response example", pathsFile: "weather-example/paths.json" } ```</text>
+      <text>Size can be specified for a column as a portion . By default, both portions are assigned a value of 10 . If you specify right column portion to be 5 , then left will be left as 10 by default, leaving right side to be roughly 33% in size. http.get("/weather") { temperature.shouldBe &lt; 100 } http.doc.capture("weather-example") ```columns {right: {portion: 5}} left: :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: "WebTau REST API test example", entry: "weather", bodyOnly: true } right: :include-json: weather-example/response.json { title: "weather response example", highlightValueFile: "weather-example/paths.json" } ```</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2171,7 +2291,7 @@
     <url>/znai/layout/templates#re-usable-patterns</url>
     <fullTitle>Znai: Templates, Re-usable patterns [Layout]</fullTitle>
     <text>
-      <text>Let's consider a chat REST API example where we want to display a sample input, example code snippet, and sample output. Here how documentation may look like.Use to send a new message http.post("/messages", [message: "Hello all"]) { id.should == "mid1" } This is the source to render the layout above :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: "POST messages", entry: "postMessages", bodyOnly: true, excludeRegexp: "http.doc" } ```columns left: :include-json: chat-post-messages/request.json { title: "POST /messages request" } right: :include-json: chat-post-messages/response.json { title: "POST /messages response", pathsFile: "chat-post-messages/paths.json" } ``` Note: request and response were automatically captured using synergy-with-testing/REST-API WebTau testing framework.We need to document other methods as well, and as you can imagine, the repetition will take place.</text>
+      <text>Let's consider a chat REST API example where we want to display a sample input, example code snippet, and sample output. Here how documentation may look like.Use to send a new message http.post("/messages", [message: "Hello all"]) { id.should == "mid1" } This is the source to render the layout above :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: "POST messages", entry: "postMessages", bodyOnly: true, excludeRegexp: "http.doc" } ```columns left: :include-json: chat-post-messages/request.json { title: "POST /messages request" } right: :include-json: chat-post-messages/response.json { title: "POST /messages response", highlightValueFile: "chat-post-messages/paths.json" } ``` Note: request and response were automatically captured using synergy-with-testing/REST-API WebTau testing framework.We need to document other methods as well, and as you can imagine, the repetition will take place.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2179,7 +2299,7 @@
     <url>/znai/layout/templates#extract-a-pattern</url>
     <fullTitle>Znai: Templates, Extract A Pattern [Layout]</fullTitle>
     <text>
-      <text>Let's move a block we plan to repeat into a separate file and replace hardcoding of entries like post with placeholders. Znai uses the https://freemarker.apache.org FreeMarker template engine. :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: "${method?upper_case} messages", entry: "${method}Messages", bodyOnly: true, excludeRegexp: "http.doc" } ```columns left: :include-json: chat-${method}-messages/request.json { title: "${method?upper_case} /messages request" } right: :include-json: chat-${method}-messages/response.json { title: "${method?upper_case} /messages response", pathsFile: "chat-post-messages/paths.json" } ```</text>
+      <text>Let's move a block we plan to repeat into a separate file and replace hardcoding of entries like post with placeholders. Znai uses the https://freemarker.apache.org FreeMarker template engine. :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: "${method?upper_case} messages", entry: "${method}Messages", bodyOnly: true, excludeRegexp: "http.doc" } ```columns left: :include-json: chat-${method}-messages/request.json { title: "${method?upper_case} /messages request" } right: :include-json: chat-${method}-messages/response.json { title: "${method?upper_case} /messages response", highlightValueFile: "chat-post-messages/paths.json" } ```</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2691,7 +2811,7 @@
     <url>/znai/synergy-with-testing/REST-API#documentation-pipeline</url>
     <fullTitle>Znai: REST API, Documentation Pipeline [Synergy With Testing]</fullTitle>
     <text>
-      <text>Documentation pipeline can look like markdown # Create Employee :include-open-api: openapi/api-spec.json {operationId: "createEmployee" } ```columns left: :include-json: doc-artifacts/employee-post/request.json { title: "request payload" } right: :include-json: doc-artifacts/employee-post/response.json { title: "response payload", pathsFile: "doc-artifacts/employee-post/paths.json" } ```</text>
+      <text>Documentation pipeline can look like markdown # Create Employee :include-open-api: openapi/api-spec.json {operationId: "createEmployee" } ```columns left: :include-json: doc-artifacts/employee-post/request.json { title: "request payload" } right: :include-json: doc-artifacts/employee-post/response.json { title: "response payload", highlightValueFile: "doc-artifacts/employee-post/paths.json" } ```</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2715,7 +2835,7 @@
     <url>/znai/plugins/plugin-types#include-plugins</url>
     <fullTitle>Znai: Plugin Types, Include Plugins [Plugins]</fullTitle>
     <text>
-      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation: #include-plugins Include Plugins #inlined-code Inlined Code #fenced-block Fenced Block To use include plugin write following on a new line :include-&lt;pluginId>: [text param] [{key1: value1, key2: value2}] markdown :include-json: example.json { title: "JSON example", paths: ["root.person.id"], collapsedPaths: ["root.details"] } markdown :include-java: ../java/HelloWorld.java { entry: "sampleMethod", bodyOnly: true, commentsType: "inline" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
+      <text>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation: #include-plugins Include Plugins #inlined-code Inlined Code #fenced-block Fenced Block To use include plugin write following on a new line :include-&lt;pluginId>: [text param] [{key1: value1, key2: value2}] markdown :include-json: example.json { title: "JSON example", highlightValue: ["root.person.id"], collapsedPaths: ["root.details"] } markdown :include-java: ../java/HelloWorld.java { entry: "sampleMethod", bodyOnly: true, commentsType: "inline" } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2764,6 +2884,14 @@
     <fullTitle>Znai: Basic, Favicon [Configuration]</fullTitle>
     <text>
       <text>Put a favicon.png file inside the root of your docs (next to your toc file)</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/deployment/additional-files</url>
+    <fullTitle>Znai: Additional Files,  [Deployment]</fullTitle>
+    <text>
+      <text>Znai automatically copies files like images to deploy location when you use them.Create upload.txt next to toc file and list all the additional files/directories you want to be copied to the deployment location. txt my-extra-files/fileone.xml my-extra-dir</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2848,6 +2976,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/release-notes/2023#1-64</url>
+    <fullTitle>Znai: 2023 Releases, 1.64 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: Deploy images that are used in https://testingisdocumenting.org/znai/flow/footer Footer Fix: Links from index page are no longer always pointing to index page itself Fix: During preview mode, flow/page-references#links-links-to-subsection subsections anchor ids are no longer increasing the counter when editing the same file. Fix: Grid bullet list presentation mode is now properly hiding unrevealed boxes Fix: snippets/external-code-snippets snippets constant color for dark and light theme Doc: flow/testing-is-documenting Testing Is Documenting intro page rework Doc: Move snippets highlighting into snippets/snippets-highlighting its own page Add: visuals/iframe#embedding-supporting-content iframe fit parameter to auto adjust height of the iframe Add: regexp based preprocessor to modify markdown files before parsing (to work with existing custom markdowns) Add: Preview and real time updates for TOC items that are outside main documentation directory Add: OCaml syntax highlight Add: Clarify snippets/snippets-manipulation#surrounded-by Surrounded By message when second marker is absent Add: deployment/additional-files upload.txt Add: tweak yellow snippets/CLI#output-highlight terminal output color for light theme Add: code snippets snippets/snippets-highlighting#region highlighting regions scope Add: code snippets snippets/snippets-highlighting#region highlighting regions Add: Improve snippets/snippets-highlighting highlighting of adjacent lines in code snippets Add: Support for flow/page-references#links limited relative links with explicit file extension Add: snippets/snippets-manipulation#surrounded-by surroundedByKeep boolean option Add: snippets/code-snippets#anchor Anchor support for embedded code blocks Add: snippets/json#callouts-from-file JSON callouts from file Add: snippets/json#callouts JSON callouts Add: Java 17 is a minimum java version required to run Add: snippets/json JSON rename paths to highlightValue and pathsFile to highlightValueFile to match highlightKey and highlightKeyFile pair Add: JSON snippets/json#highlight-keys-by-path highlight keys Add: plugin parameter names deprecation (rename) mechanism</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/release-notes/2023#1-63</url>
     <fullTitle>Znai: 2023 Releases, 1.63 [Release Notes]</fullTitle>
     <text>
@@ -2891,7 +3027,7 @@
     <url>/znai/release-notes/2022#1-60</url>
     <fullTitle>Znai: 2022 Releases, 1.60 [Release Notes]</fullTitle>
     <text>
-      <text>Fix: visuals/images#fit Fit Image in mobile view Doc: znai-development/local-build Local Build instructions Add: Three columns layout/columns#three-columns Layout**** Add: visuals/cards Cards Add: Auto anchor id from title for layout/tables#title Tables Add: Auto anchor id from title for snippets/external-code-snippets#title Snippets Add: Auto anchor id from title for visuals/images#title Images Add: Table layout/tables#no-gap No Gap Add: Table layout/tables#collapse Collapse Add: snippets/external-code-snippets#highlights highlight by text highlights all matches Add: API Parameters snippets/api-parameters#no-gap No Gap Remove visuals/images Image padding in mobile view Add: Image visuals/images#collapse Collapse Add: Image visuals/images#no-gap No Gap Add: Mobile and Desktop only visuals/images#mobile-and-desktop-only Images Add: Python content python/content-extraction#anchor Anchor Add: Java content java/content-extraction#anchor Anchor Rename: compact property is now snippets/external-code-snippets#no-gap noGap Add: layout/tables Table formal parameters support Add: Table layout/tables#anchor Anchor Add: Image visuals/images#anchor Anchor Add: snippets/external-code-snippets#my-code-anchor External Snippet Anchor Add: Attention Sign visuals/attention-signs#fence-block Fence Block</text>
+      <text>Fix: visuals/images#fit Fit Image in mobile view Doc: znai-development/local-build Local Build instructions Add: Three columns layout/columns#three-columns Layout**** Add: visuals/cards Cards Add: Auto anchor id from title for layout/tables#title Tables Add: Auto anchor id from title for snippets/external-code-snippets#title Snippets Add: Auto anchor id from title for visuals/images#title Images Add: Table layout/tables#no-gap No Gap Add: Table layout/tables#collapse Collapse Add: snippets/snippets-highlighting highlight by text highlights all matches Add: API Parameters snippets/api-parameters#no-gap No Gap Remove visuals/images Image padding in mobile view Add: Image visuals/images#collapse Collapse Add: Image visuals/images#no-gap No Gap Add: Mobile and Desktop only visuals/images#mobile-and-desktop-only Images Add: Python content python/content-extraction#anchor Anchor Add: Java content java/content-extraction#anchor Anchor Rename: compact property is now snippets/external-code-snippets#no-gap noGap Add: layout/tables Table formal parameters support Add: Table layout/tables#anchor Anchor Add: Image visuals/images#anchor Anchor Add: snippets/external-code-snippets#my-code-anchor External Snippet Anchor Add: Attention Sign visuals/attention-signs#fence-block Fence Block</text>
       <score>STANDARD</score>
     </text>
   </entry>

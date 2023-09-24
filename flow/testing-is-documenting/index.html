@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Testing</title>
+<title>Znai: Testing Is Documenting</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,8 +85,18 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>User Scenarios</h1></header>
-<p>Focus your documentation on scenarios users can perform. Before documenting them, you need to make sure that they actually work. You could perform a manual test every time you release your software, but it is time consuming and error-prone.Alternatively, you could write automated tests to make sure that scenarios you are writing about are validated. At test run time, capture test produced artifacts:Command line output Screenshots Business logic calculation REST responses Config files Script snippets Runtime dependencies DAGs ... Include the captured artifacts inside your documentation to keep it up to date.As you write your documentation you will come up with new scenarios to test. As you write tests, think about your documentation and what test-produced artifacts can improve it.In this documentation you will learn how to include artifacts. There are also examples of synergy between tests and documentation in the later chapters.</p>
+<header><h1>Auto Maintainable Content</h1></header>
+<p>There is a lot of content you can get by leveraging automated testing. And most importantly that content is going to be auto maintained.Let's say you document a command line tool, and you want to provide an example of some operation output. You can copy and paste the output risking it being outdated. Or, you can write a test that exercises a command line and also captures its output.You end up getting a lot of benefits:your app is tested your documentation is auto updated</p>
+</article>
+
+<article>
+<header><h1>Examples</h1></header>
+<p>In addition to command line tools, here are some common scenarios you should consider:Test Web UI - application screenshots Test Business Logic - tabular data Test REST API - API JSON real examples Config files Script snippets Runtime dependencies DAGs ...</p>
+</article>
+
+<article>
+<header><h1>Self Powering Cycle</h1></header>
+<p>As you write your documentation you will come up with new scenarios to test. As you write tests, think about your documentation and what test-produced artifacts can improve it.Znai provides a lot of utilities to include test artifacts.In synergy-with-testing/web-UI Synergy With Testing chapter you will see examples of UI, REST API and Business Logic.</p>
 </article>
 </section>
 </div>
@@ -121,34 +131,30 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "user-scenarios",
-      "title" : "User Scenarios",
+      "id" : "auto-maintainable-content",
+      "title" : "Auto Maintainable Content",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Focus your documentation on scenarios users can perform.",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Before documenting them, you need to make sure that they actually work.",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "You could perform a manual test every time you release your software, but it is time consuming and error-prone.",
+          "text" : "There is a lot of content you can get by leveraging automated testing. And most importantly that content is going to be auto maintained.",
           "type" : "SimpleText"
         } ]
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Alternatively, you could write automated tests to make sure that scenarios you are writing about are validated.",
+          "text" : "Let's say you document a command line tool, and you want to provide an example of some operation output.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "At test run time, capture test produced artifacts:",
+          "text" : "You can copy and paste the output risking it being outdated. Or, you can write a test that exercises a command line and also captures its output.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You end up getting a lot of benefits:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -160,7 +166,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Command line output",
+              "text" : "your app is tested",
               "type" : "SimpleText"
             } ]
           } ]
@@ -169,8 +175,39 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Screenshots",
+              "text" : "your documentation is auto updated",
               "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "examples",
+      "title" : "Examples",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "In addition to command line tools, here are some common scenarios you should consider:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Test Web UI - ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "application screenshots",
+                "type" : "SimpleText"
+              } ]
             } ]
           } ]
         }, {
@@ -178,8 +215,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Business logic calculation",
+              "text" : "Test Business Logic - ",
               "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "tabular data",
+                "type" : "SimpleText"
+              } ]
             } ]
           } ]
         }, {
@@ -187,8 +230,14 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "REST responses",
+              "text" : "Test REST API - ",
               "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "API JSON real examples",
+                "type" : "SimpleText"
+              } ]
             } ]
           } ]
         }, {
@@ -228,13 +277,12 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Include the captured artifacts inside your documentation to keep it up to date.",
-          "type" : "SimpleText"
-        } ]
-      }, {
+      } ]
+    }, {
+      "id" : "self-powering-cycle",
+      "title" : "Self Powering Cycle",
+      "type" : "Section",
+      "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
           "text" : "As you write your documentation you will come up with new scenarios to test. As you write tests, think about your documentation and what test-produced artifacts can improve it.",
@@ -243,27 +291,45 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "In this documentation you will learn how to include artifacts.",
+          "text" : "Znai provides a lot of utilities to include test artifacts.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "In ",
           "type" : "SimpleText"
         }, {
-          "type" : "SoftLineBreak"
+          "url" : "/znai/synergy-with-testing/web-UI",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Synergy With Testing",
+            "type" : "SimpleText"
+          } ]
         }, {
-          "text" : "There are also examples of synergy between tests and documentation in the later chapters.",
+          "text" : " chapter you will see examples of UI, REST API and Business Logic.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1677033896962,
+    "lastModifiedTime" : 1695573442085,
     "tocItem" : {
       "chapterTitle" : "Flow",
-      "pageTitle" : "Testing",
+      "pageTitle" : "Testing Is Documenting",
       "pageMeta" : { },
       "dirName" : "flow",
-      "fileName" : "testing",
+      "fileName" : "testing-is-documenting",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "User Scenarios",
-        "id" : "user-scenarios"
+        "title" : "Auto Maintainable Content",
+        "id" : "auto-maintainable-content"
+      }, {
+        "title" : "Examples",
+        "id" : "examples"
+      }, {
+        "title" : "Self Powering Cycle",
+        "id" : "self-powering-cycle"
       } ]
     }
   }

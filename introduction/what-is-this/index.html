@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Extensive Plugins System</h1></header>
-<p>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include markdown :include-json: example.json { title: &quot;JSON example&quot;, paths: [&quot;root.person.id&quot;], collapsedPaths: [&quot;root.details&quot;] } markdown :include-java: ../java/HelloWorld.java { entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot; } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Inlined Code markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fenced Block markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</p>
+<p>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include markdown :include-json: example.json { title: &quot;JSON example&quot;, highlightValue: [&quot;root.person.id&quot;], collapsedPaths: [&quot;root.details&quot;] } markdown :include-java: ../java/HelloWorld.java { entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot; } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Inlined Code markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fenced Block markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</p>
 </article>
 
 <article>
@@ -269,13 +269,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "SubHeading"
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-json: example.json {\n  title: \"JSON example\",\n  paths: [\"root.person.id\"],\n  collapsedPaths: [\"root.details\"]\n}\n",
+        "snippet" : ":include-json: example.json {\n  title: \"JSON example\",\n  highlightValue: [\"root.person.id\"],\n  collapsedPaths: [\"root.details\"]\n}\n",
         "lineNumber" : "",
         "title" : "json plugin example",
+        "anchorId" : "extensive-plugins-system-include-json-plugin-example",
         "type" : "Snippet"
       }, {
         "title" : "JSON example",
-        "paths" : [ "root.person.id" ],
         "collapsedPaths" : [ "root.details" ],
         "data" : {
           "person" : {
@@ -286,6 +286,8 @@ ReactDOM.render(React.createElement(Documentation, {
             "extra" : "info"
           }
         },
+        "highlightValues" : [ "root.person.id" ],
+        "highlightKeys" : [ ],
         "anchorId" : "extensive-plugins-system-include-json-example",
         "type" : "Json"
       }, {
@@ -293,6 +295,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : ":include-java: ../java/HelloWorld.java {\n  entry: \"sampleMethod\", \n  bodyOnly: true,\n  commentsType: \"inline\"\n}\n",
         "lineNumber" : "",
         "title" : "java plugin example",
+        "anchorId" : "extensive-plugins-system-include-java-plugin-example",
         "type" : "Snippet"
       }, {
         "lang" : "java",
@@ -312,6 +315,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "It is a `:icon: cloud` day, `:icon: clock` is ticking\n",
         "lineNumber" : "",
         "title" : "plugin example",
+        "anchorId" : "extensive-plugins-system-inlined-code-plugin-example",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -342,6 +346,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "```tabs\nC++: \n    content of C++ tab\nJava:\n    content of Java tab\nPython:\n    content of Python tab\n```\n",
         "lineNumber" : "",
         "title" : "plugin example",
+        "anchorId" : "extensive-plugins-system-fenced-block-plugin-example",
         "type" : "Snippet"
       }, {
         "tabsContent" : [ {
@@ -384,7 +389,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-charts.png",
-        "timestamp" : 1677033896918,
+        "timestamp" : 1695573442045,
         "shapes" : [ ],
         "width" : 1399.0,
         "height" : 1127.0,
@@ -392,7 +397,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-cards.png",
-        "timestamp" : 1677033896910,
+        "timestamp" : 1695573442041,
         "shapes" : [ ],
         "width" : 1401.0,
         "height" : 1120.0,
@@ -411,7 +416,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-flow-diagram.png",
-        "timestamp" : 1677033896930,
+        "timestamp" : 1695573442057,
         "shapes" : [ ],
         "width" : 1399.0,
         "height" : 1127.0,
@@ -446,7 +451,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-two-sides-tabs.png",
-        "timestamp" : 1677033896958,
+        "timestamp" : 1695573442081,
         "shapes" : [ ],
         "width" : 1395.0,
         "height" : 1132.0,
@@ -465,7 +470,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-search.png",
-        "timestamp" : 1677033896950,
+        "timestamp" : 1695573442073,
         "shapes" : [ ],
         "width" : 1399.0,
         "height" : 1127.0,
@@ -510,7 +515,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-presentation.png",
-        "timestamp" : 1677033896942,
+        "timestamp" : 1695573442069,
         "shapes" : [ ],
         "width" : 1399.0,
         "height" : 1127.0,
@@ -646,7 +651,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1677033896962,
+    "lastModifiedTime" : 1695573442085,
     "tocItem" : {
       "chapterTitle" : "Introduction",
       "pageTitle" : "What Is This",
