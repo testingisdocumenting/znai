@@ -1,0 +1,1 @@
+* Add: Automatically add index.html if [iframe](visuals/iframe) src points to documentation content and ends with `/`

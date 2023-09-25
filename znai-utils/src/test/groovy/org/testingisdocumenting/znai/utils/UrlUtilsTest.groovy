@@ -23,7 +23,6 @@ import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class UrlUtilsTest {
-
     @Test
     void "url concatenation validates passed url on the left to be non null"() {
         code {
@@ -56,5 +55,19 @@ class UrlUtilsTest {
         UrlUtils.isExternal("mailto://hello").should == true
         UrlUtils.isExternal("file://hello.txt").should == true
         UrlUtils.isExternal("httphello").should == false
+    }
+
+    @Test
+    void "remove anchor"() {
+        UrlUtils.removeAnchor("no-anchor").should == "no-anchor"
+        UrlUtils.removeAnchor("my-relative#hello").should == "my-relative"
+        UrlUtils.removeAnchor("multiple#anchor-one#anchor-one").should == "multiple"
+        UrlUtils.removeAnchor("my-relative/#hello").should == "my-relative/"
+    }
+
+    @Test
+    void "attach index html"() {
+        UrlUtils.attachIndexHtmlIfEndsWithSlash("my-dir/").should == "my-dir/index.html"
+        UrlUtils.attachIndexHtmlIfEndsWithSlash("my-dir/other").should == "my-dir/other"
     }
 }

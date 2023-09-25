@@ -56,10 +56,14 @@ public class IframeIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        if (!UrlUtils.isExternal(userUrl)) {
-            return Stream.of(AuxiliaryFile.runTime(componentsRegistry.resourceResolver().fullPath(userUrl), Paths.get(userUrl)));
+        if (UrlUtils.isExternal(userUrl)) {
+            return Stream.empty();
         }
 
-        return Stream.empty();
+        var withoutAnchor = UrlUtils.removeAnchor(userUrl);
+        var withIndexHtmlIfRequired = UrlUtils.attachIndexHtmlIfEndsWithSlash(withoutAnchor);
+
+        return Stream.of(AuxiliaryFile.runTime(componentsRegistry.resourceResolver().fullPath(withIndexHtmlIfRequired),
+                Paths.get(withIndexHtmlIfRequired)));
     }
 }

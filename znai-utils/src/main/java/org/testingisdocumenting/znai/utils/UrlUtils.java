@@ -48,4 +48,21 @@ public class UrlUtils {
                 url.startsWith("file:") ||
                 url.startsWith("mailto:");
     }
+
+    public static String removeAnchor(String url) {
+        var idx = url.indexOf('#');
+        if (idx == -1) {
+            return url;
+        }
+
+        return url.substring(0, idx);
+    }
+
+    public static String attachIndexHtmlIfEndsWithSlash(String url) {
+        if (!url.endsWith("/")) {
+            return url;
+        }
+
+        return url + "index.html";
+    }
 }
