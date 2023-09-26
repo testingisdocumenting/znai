@@ -33,9 +33,17 @@ export function Iframe(props: Props) {
   }
 }
 
+let activeElement: any = null;
 export function IframeFit({ src, title, height }: Props) {
+  const [extracClassName, setExtraClassName] = useState("");
   const [calculatedIframeHeight, setCalculatedIframeHeight] = useState(14);
   const ref = useRef<HTMLIFrameElement>(null);
+  const fullClassName = "znai-iframe fit " + extracClassName;
+
+  if (document.activeElement?.tagName !== "IFRAME") {
+    activeElement = document.activeElement;
+  }
+
   return (
     <div className="content-block">
       <iframe
@@ -43,7 +51,7 @@ export function IframeFit({ src, title, height }: Props) {
         src={src}
         style={{ height: height ? height : calculatedIframeHeight }}
         width="100%"
-        className="znai-iframe fit"
+        className={fullClassName}
         ref={ref}
         onLoad={handleSize}
       />
@@ -55,6 +63,14 @@ export function IframeFit({ src, title, height }: Props) {
       const htmlEl = ref!.current!.contentWindow!.document.getElementsByTagName("html")[0];
       const height = htmlEl.offsetHeight + 1;
       setCalculatedIframeHeight(height);
+      setExtraClassName("visible");
+      if (activeElement != null) {
+        if (activeElement.tagName === "INPUT") {
+          activeElement.focus();
+        } else {
+          window.focus();
+        }
+      }
     }, 0);
   }
 }

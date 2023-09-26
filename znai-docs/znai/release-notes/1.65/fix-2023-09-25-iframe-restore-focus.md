@@ -1,0 +1,1 @@
+* Fix: Restore search focus when [iframe](visuals/iframe) is present in search preview 
