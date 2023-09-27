@@ -21,6 +21,8 @@ interface Props {
   src: string;
   title: string;
   aspectRatio?: string;
+  light?: any;
+  dark?: any;
   fit?: boolean;
   height?: number;
 }
@@ -34,10 +36,24 @@ export function Iframe(props: Props) {
 }
 
 let activeElement: any = null;
-export function IframeFit({ src, title, height }: Props) {
+export function IframeFit({ src, title, height, light, dark }: Props) {
+  const ref = useRef<HTMLIFrameElement>(null);
   const [extracClassName, setExtraClassName] = useState("");
   const [calculatedIframeHeight, setCalculatedIframeHeight] = useState(14);
-  const ref = useRef<HTMLIFrameElement>(null);
+
+  React.useEffect(() => {
+    // TODO theme integration via context
+    // @ts-ignore
+    window.znaiTheme.addChangeHandler(onThemeChange);
+
+    // @ts-ignore
+    return () => window.znaiTheme.removeChangeHandler(onThemeChange);
+
+    function onThemeChange() {
+      injectCssVars(ref, dark, light);
+    }
+  }, [dark, light]);
+
   const fullClassName = "znai-iframe fit " + extracClassName;
 
   if (document.activeElement?.tagName !== "IFRAME") {
@@ -60,8 +76,11 @@ export function IframeFit({ src, title, height }: Props) {
 
   function handleSize() {
     setTimeout(() => {
-      const htmlEl = ref!.current!.contentWindow!.document.getElementsByTagName("html")[0];
+      const document = ref!.current!.contentWindow!.document;
+      const htmlEl = document.getElementsByTagName("html")[0];
       const height = htmlEl.offsetHeight + 1;
+      // @ts-ignore
+      injectCssVars(ref, dark, light);
       setCalculatedIframeHeight(height);
       setExtraClassName("visible");
       if (activeElement != null) {
@@ -73,6 +92,26 @@ export function IframeFit({ src, title, height }: Props) {
       }
     }, 0);
   }
+}
+
+function queryIsDarkTheme() {
+  // @ts-ignore
+  return window.znaiTheme.name === "znai-dark";
+}
+
+function injectCssVars(iframeRef: any, dark: any, light: any) {
+  const vars = queryIsDarkTheme() ? dark : light;
+
+  if (!vars) {
+    return;
+  }
+
+  const document = iframeRef!.current!.contentWindow!.document;
+  const documentEl = document.documentElement;
+
+  Object.keys(vars).forEach((k) => {
+    documentEl.style.setProperty(k, vars[k]);
+  });
 }
 
 export function IframeVideo({ src, title, aspectRatio = "16:9" }: Props) {

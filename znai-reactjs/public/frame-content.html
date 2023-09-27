@@ -1,21 +1,21 @@
 <html lang="en">
 <head>
-  <title>iframe content</title>
   <style>
-      body {
-          margin: 0;
+      :root {
+          --backgroundColor: #eee;
+          --color: #222;
       }
-    .block {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 4px solid black;
-        margin: 0;
-        padding: 8px;
-    }
+      .content {
+          background-color: var(--backgroundColor);
+          border: 2px solid var(--color);
+          color: var(--color);
+          font-size: 20px;
+          padding: 16px;
+      }
   </style>
+  <title>generated content</title>
 </head>
+
 <body>
-<div class="block">hello world</div>
+<div class="content">Custom content</div>
 </body>
-</html>

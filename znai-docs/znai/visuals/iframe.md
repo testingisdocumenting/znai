@@ -14,7 +14,7 @@ Use `include-iframe` plugin to embed HTML content that supports your documentati
   fit: true
 }
 
-Note: Use `fit` parameter will automatically set the height of the iframe to fit the content
+Note: Use `fit` parameter to automatically set the height of the iframe to fit its content
 
 :include-file: iframe/custom.html {autoTitle: true}
 
@@ -22,6 +22,17 @@ Note: Use `fit` parameter will automatically set the height of the iframe to fit
 Only `iframe/custom.html` will be automatically copied to the deploy destination during documentation build step. 
 If you need other supporting files you need to use [upload.txt](deployment/additional-files)
 ```
+
+# Properties Override
+
+Use `light` and `dark` to override CSS properties inside iframe content for light and dark modes respectively.
+Switch mode now to see the effect.
+
+:include-iframe: iframe/custom.html {
+  fit: true,
+  light: { "--color": "#333", "--backgroundColor": "#eee" },
+  dark: { "--color": "#eee", "--backgroundColor": "#333" },
+}
 
 # Embedding Video
 

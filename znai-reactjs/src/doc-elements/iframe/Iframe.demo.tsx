@@ -21,6 +21,15 @@ import { Iframe } from "./Iframe";
 
 export function iframeDemo(registry: Registry) {
   registry.add("non video content", () => <Iframe src="/frame-content.html" title="demo title" fit={true} />);
+  registry.add("content css vars override", () => (
+    <Iframe
+      src="/frame-content.html"
+      title="demo title"
+      fit={true}
+      light={{ "--backgroundColor": "#abc" }}
+      dark={{ "--backgroundColor": "#eee" }}
+    />
+  ));
   registry.add("default aspect", () => <Iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />);
   registry.add("4:3 aspect", () => (
     <Iframe aspectRatio="4:3" src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />
