@@ -50,7 +50,7 @@ export function IframeFit({ src, title, height, light, dark }: Props) {
     return () => window.znaiTheme.removeChangeHandler(onThemeChange);
 
     function onThemeChange() {
-      injectCssVars(ref, dark, light);
+      injectCssProperties(ref, dark, light);
     }
   }, [dark, light]);
 
@@ -80,7 +80,7 @@ export function IframeFit({ src, title, height, light, dark }: Props) {
       const htmlEl = document.getElementsByTagName("html")[0];
       const height = htmlEl.offsetHeight + 1;
       // @ts-ignore
-      injectCssVars(ref, dark, light);
+      injectCssProperties(ref, dark, light);
       setCalculatedIframeHeight(height);
       setExtraClassName("visible");
       if (activeElement != null) {
@@ -99,7 +99,7 @@ function queryIsDarkTheme() {
   return window.znaiTheme.name === "znai-dark";
 }
 
-function injectCssVars(iframeRef: any, dark: any, light: any) {
+function injectCssProperties(iframeRef: any, dark: any, light: any) {
   const vars = queryIsDarkTheme() ? dark : light;
 
   if (!vars) {
