@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.file
 
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
+import org.testingisdocumenting.znai.utils.ResourceUtils
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
@@ -159,6 +160,41 @@ class FileIncludePluginTest {
                 "%\n" +
                 "finish()"
     }
+
+    @Test
+    void "should extract using surrounded with scope"() {
+        def text = resultingSnippet("file-with-scopes.txt",
+                "{surroundedByScope: {start: 'if', scope: '{}'}}")
+
+        text.should == "if (condition) {\n" +
+                "   print \"inside\"\n" +
+                "}"
+    }
+
+    @Test
+    void "surrounded with scope validates presence of start line"() {
+        code {
+            resultingSnippet("file-with-scopes.txt",
+                    "{surroundedByScope: {start: 'if-else', scope: '{}'}}")
+        } should throwException("there is no line containing \"if-else\" in <file-with-scopes.txt>:\n" +
+                ResourceUtils.textContent("file-with-scopes.txt").trim())
+    }
+
+    @Test
+    void "surrounded with scope validates presence of markers"() {
+        code {
+            resultingSnippet("file-with-scopes.txt",
+                    "{surroundedByScope: {start: 'if (anotherCondition)', scope: '{}'}}")
+        } should throwException("can't find scope start \"{\" after line \"if (anotherCondition)\" in <file-with-scopes.txt>:\n" +
+               ResourceUtils.textContent("file-with-scopes.txt").trim())
+
+        code {
+            resultingSnippet("file-with-scopes.txt",
+                    "{surroundedByScope: {start: 'if (someCondition)', scope: '{}'}}")
+        } should throwException("can't find scope end \"}\" after line \"if (someCondition)\" in <file-with-scopes.txt>:\n" +
+                ResourceUtils.textContent("file-with-scopes.txt").trim())
+    }
+
 
     @Test
     void "should replace text by exact match"() {

@@ -25,6 +25,7 @@ import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
+import org.testingisdocumenting.znai.text.TextContentExtractor;
 
 import java.nio.file.Path;
 import java.util.Collections;

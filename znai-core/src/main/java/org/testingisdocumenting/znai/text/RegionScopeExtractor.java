@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.extensions.file;
+package org.testingisdocumenting.znai.text;
 
-class RegionScopeExtractor {
-    private final String[] lines;
+public class RegionScopeExtractor {
     private final int startLineIdx;
     private final char scopeStart;
     private final char scopeEnd;
+    private final TextLinesAccessor linesAccessor;
     private boolean insideSingleQuote;
     private boolean insideDoubleQuote;
     private int resultStartLineIdx;
     private int resultEndLineIdx;
 
-    RegionScopeExtractor(String[] lines, int startLineIdx, char scopeStart, char scopeEnd) {
-        this.lines = lines;
+    public RegionScopeExtractor(TextLinesAccessor linesAccessor, int startLineIdx, char scopeStart, char scopeEnd) {
+        this.linesAccessor = linesAccessor;
         this.startLineIdx = startLineIdx;
         this.scopeStart = scopeStart;
         this.scopeEnd = scopeEnd;
@@ -41,14 +41,14 @@ class RegionScopeExtractor {
         return resultEndLineIdx;
     }
 
-    void process() {
+    public void process() {
         int scopeBalance = 0;
         boolean encounteredScopeStart = false;
-        resultStartLineIdx = startLineIdx;
+        resultStartLineIdx = -1;
         resultEndLineIdx = -1;
 
-        for (int lineIdx = startLineIdx; lineIdx < lines.length; lineIdx++) {
-            String line = lines[lineIdx];
+        for (int lineIdx = startLineIdx; lineIdx < linesAccessor.numberOfLines(); lineIdx++) {
+            String line = linesAccessor.lineAtIdx(lineIdx);
 
             char previousChar = ' ';
             for (int charIdx = 0; charIdx < line.length(); charIdx++) {
@@ -56,11 +56,17 @@ class RegionScopeExtractor {
 
                 if (!insideSingleQuote && !insideDoubleQuote) {
                     if (c == scopeStart) {
-                        encounteredScopeStart = true;
+                        if (!encounteredScopeStart) {
+                            resultStartLineIdx = lineIdx;
+                            encounteredScopeStart = true;
+                        }
                         scopeBalance++;
                     } else if (c == scopeEnd) {
                         scopeBalance--;
-                        if (scopeBalance == 0 && encounteredScopeStart) {
+                        if (scopeBalance < 0) {
+                            return;
+                        }
+                        else if (scopeBalance == 0 && encounteredScopeStart) {
                             resultEndLineIdx = lineIdx;
                             return;
                         }
