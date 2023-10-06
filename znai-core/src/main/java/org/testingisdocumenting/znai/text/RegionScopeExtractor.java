@@ -1,5 +1,6 @@
 /*
- * Copyright 2023 znai maintainers
+ * Copyright 2020 znai maintainers
+ * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +58,7 @@ public class RegionScopeExtractor {
                 if (!insideSingleQuote && !insideDoubleQuote) {
                     if (c == scopeStart) {
                         if (!encounteredScopeStart) {
-                            resultStartLineIdx = lineIdx;
+                            resultStartLineIdx = Math.min(startLineIdx, lineIdx);
                             encounteredScopeStart = true;
                         }
                         scopeBalance++;
