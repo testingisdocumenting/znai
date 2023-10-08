@@ -1,1 +1,1 @@
-* Add: [Surrounded By Scope](snippets/snippets-manipulation#surrounded-by-region) text manipulation
+* Add: [Surrounded By Scope](snippets/snippets-manipulation#surrounded-by-scope) text manipulation

@@ -38,8 +38,6 @@ public class TextContentExtractor {
     static final String SURROUNDED_BY_SCOPE_START_SUB_KEY = "start";
     static final String SURROUNDED_BY_SCOPE_SCOPE_SUB_KEY = "scope";
 
-    static final String SURROUNDED_BY_SCOPE_SCOPE_FULL_KEY = SURROUNDED_BY_SCOPE_KEY + "." + SURROUNDED_BY_SCOPE_SCOPE_SUB_KEY;
-
     static final String START_LINE_KEY = "startLine";
     static final String END_LINE_KEY = "endLine";
     static final String NUMBER_OF_LINES_KEY = "numberOfLines";
@@ -207,19 +205,11 @@ public class TextContentExtractor {
         }
 
         String scope = region.getOrDefault(SURROUNDED_BY_SCOPE_SCOPE_SUB_KEY, "").toString();
-        if (scope.isEmpty()) {
-            throw new IllegalArgumentException(regionWrongFormatMessage());
-        }
-
-        if (scope.length() != 2) {
-            throw new IllegalArgumentException(SURROUNDED_BY_SCOPE_SCOPE_FULL_KEY + " must be in format \"{}\", \"[]\", \"()\" etc");
-        }
-
         Text croppedFromStart = originalText.startingWithLineContaining(start);
         TextLinesAccessor linesAccessor = TextLinesAccessor.createFromList(croppedFromStart.lines);
         char scopeStart = scope.charAt(0);
         char scopeEnd = scope.charAt(1);
-        RegionScopeExtractor extractor = new RegionScopeExtractor(linesAccessor, 0, scopeStart, scopeEnd);
+        RegionScopeExtractor extractor = new RegionScopeExtractor(linesAccessor, 0, scope);
         extractor.process();
 
         int scopeStartLineIdx = extractor.getResultStartLineIdx();

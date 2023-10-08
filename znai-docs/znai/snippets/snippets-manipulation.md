@@ -62,7 +62,7 @@ Use `:identifier: surroundedBySeparator` to select separator(s) between blocks
 
 Note: `:identifier: surroundedBySeparator` can be either single value or a list. Plugin will use a different separator for each block. Use `null` to have an empty line as a separator.  
 
-# Surrounded By Region
+# Surrounded By Scope
 
 Use `:identifier: surroundedByScope` to extract text using scopes like `{}`, `[]`, etc:
 
@@ -73,6 +73,18 @@ Use `:identifier: surroundedByScope` to extract text using scopes like `{}`, `[]
 ```
 
 :include-file: MyClass.java {title: "extraction result", surroundedByScope: {start: "if (condition)", scope: "{}"}}
+
+# Surrounded By Multi-chars scope
+
+Pass comma separated multi char region definition to `:identifier: surroundedByScope` to handle scopes defined with keywords:
+
+:include-file: model.mli {autoTitle: true}
+
+```markdown
+:include-file: model.mli {surroundedByScope: {start: "module ModelA", scope: "sig,end"}}
+```
+
+:include-file: model.mli {title: "extraction result", surroundedByScope: {start: "module ModelA", scope: "sig,end"}}
 
 # Replace
 
