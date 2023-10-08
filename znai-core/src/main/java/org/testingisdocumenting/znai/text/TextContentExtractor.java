@@ -1,6 +1,5 @@
 /*
- * Copyright 2020 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2023 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.extensions.file;
+package org.testingisdocumenting.znai.text;
 
 import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
@@ -30,10 +29,16 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-class TextContentExtractor {
+public class TextContentExtractor {
     static final String SURROUNDED_BY_KEY = "surroundedBy";
     static final String SURROUNDED_BY_SEPARATOR_KEY = "surroundedBySeparator";
     static final String SURROUNDED_BY_KEEP_KEY = "surroundedByKeep";
+    static final String SURROUNDED_BY_SCOPE_KEY = "surroundedByScope";
+
+    static final String SURROUNDED_BY_SCOPE_START_SUB_KEY = "start";
+    static final String SURROUNDED_BY_SCOPE_SCOPE_SUB_KEY = "scope";
+
+    static final String SURROUNDED_BY_SCOPE_SCOPE_FULL_KEY = SURROUNDED_BY_SCOPE_KEY + "." + SURROUNDED_BY_SCOPE_SCOPE_SUB_KEY;
 
     static final String START_LINE_KEY = "startLine";
     static final String END_LINE_KEY = "endLine";
@@ -64,6 +69,9 @@ class TextContentExtractor {
                 .add(SURROUNDED_BY_KEEP_KEY, PluginParamType.BOOLEAN,
                         "keep surrounded by text",
                         "true")
+                .add(SURROUNDED_BY_SCOPE_KEY, PluginParamType.OBJECT,
+                        "extract text based on start line and scope boundaries like {}",
+                        "{start: \"if (myCondition)\", scope: \"{}\"}")
                 .add(START_LINE_KEY, PluginParamType.STRING,
                         "partial match of start line for snippet extraction", "\"class\"")
                 .add(END_LINE_KEY, PluginParamType.STRING,
@@ -95,8 +103,9 @@ class TextContentExtractor {
         Text surroundedBy = cropSurroundedBy(contentId, text, opts);
         Text croppedAtStart = cropStart(surroundedBy, opts);
         Text croppedAtEnd = cropEnd(croppedAtStart, opts);
+        Text croppedByScope = cropSurroundedByRegion(croppedAtEnd, opts);
 
-        Text replacedAll = replaceAll(croppedAtEnd, opts);
+        Text replacedAll = replaceAll(croppedByScope, opts);
 
         Text withExcludedStart = excludeStart(replacedAll, opts);
         Text withExcludedStartEnd = excludeEnd(withExcludedStart, opts);
@@ -179,6 +188,59 @@ class TextContentExtractor {
         return result;
     }
 
+    private static Text cropSurroundedByRegion(Text originalText, PluginParamsOpts opts) {
+        Object surroundedByRaw = opts.get(SURROUNDED_BY_SCOPE_KEY);
+        if (surroundedByRaw == null) {
+            return originalText;
+        }
+
+        if (!(surroundedByRaw instanceof Map)) {
+            throw new IllegalArgumentException(regionWrongFormatMessage());
+        }
+
+        @SuppressWarnings("unchecked")
+        Map<String, Object> region = (Map<String, Object>) surroundedByRaw;
+
+        String start = region.getOrDefault(SURROUNDED_BY_SCOPE_START_SUB_KEY, "").toString();
+        if (start.isEmpty()) {
+            throw new IllegalArgumentException(regionWrongFormatMessage());
+        }
+
+        String scope = region.getOrDefault(SURROUNDED_BY_SCOPE_SCOPE_SUB_KEY, "").toString();
+        if (scope.isEmpty()) {
+            throw new IllegalArgumentException(regionWrongFormatMessage());
+        }
+
+        if (scope.length() != 2) {
+            throw new IllegalArgumentException(SURROUNDED_BY_SCOPE_SCOPE_FULL_KEY + " must be in format \"{}\", \"[]\", \"()\" etc");
+        }
+
+        Text croppedFromStart = originalText.startingWithLineContaining(start);
+        TextLinesAccessor linesAccessor = TextLinesAccessor.createFromList(croppedFromStart.lines);
+        char scopeStart = scope.charAt(0);
+        char scopeEnd = scope.charAt(1);
+        RegionScopeExtractor extractor = new RegionScopeExtractor(linesAccessor, 0, scopeStart, scopeEnd);
+        extractor.process();
+
+        int scopeStartLineIdx = extractor.getResultStartLineIdx();
+        if (scopeStartLineIdx == -1) {
+            throw new IllegalArgumentException("can't find scope start \"" + scopeStart + "\" after line \"" + start + "\"" + originalText.renderInContent());
+
+        }
+        int scopeEndLineIdx = extractor.getResultEndLineIdx();
+
+        if (scopeEndLineIdx == -1) {
+            throw new IllegalArgumentException("can't find scope end \"" + scopeEnd + "\" after line \"" + start + "\"" + originalText.renderInContent());
+        }
+
+        return croppedFromStart.limitToSize(scopeEndLineIdx + 1);
+    }
+
+    private static String regionWrongFormatMessage() {
+        return SURROUNDED_BY_SCOPE_KEY + " should be in format {" + SURROUNDED_BY_SCOPE_START_SUB_KEY + ": \"line-star\", " +
+                SURROUNDED_BY_SCOPE_SCOPE_SUB_KEY + ": \"{}\"}";
+    }
+
     private static Text cropStart(Text text, PluginParamsOpts opts) {
         String startLine = opts.get(START_LINE_KEY);
         if (startLine == null) {
@@ -191,7 +253,7 @@ class TextContentExtractor {
     private static Text cropEnd(Text text, PluginParamsOpts opts) {
         Number numberOfLines = opts.get(NUMBER_OF_LINES_KEY);
         if (numberOfLines != null) {
-            return text.limitTo(numberOfLines);
+            return text.limitToSize(numberOfLines);
         }
 
         String endLine = opts.get(END_LINE_KEY);
@@ -322,7 +384,7 @@ class TextContentExtractor {
             return newText(lines.subList(0, lineIdx + 1));
         }
 
-        Text limitTo(Number numberOfLines) {
+        Text limitToSize(Number numberOfLines) {
             return newText(lines.subList(0, numberOfLines.intValue()));
         }
 

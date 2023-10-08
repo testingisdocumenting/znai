@@ -23,6 +23,8 @@ import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
+import org.testingisdocumenting.znai.text.RegionScopeExtractor;
+import org.testingisdocumenting.znai.text.TextLinesAccessor;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -131,7 +133,8 @@ public class SnippetHighlightFeature implements PluginFeature {
         }
 
         int startIdx = snippetIdxConverter.findAndValidateFirstContain(HIGHLIGHT_REGION_START_FULL_KEY, 0, start);
-        RegionScopeExtractor regionScopeExtractor = new RegionScopeExtractor(snippetIdxConverter.getLines(), startIdx, scope.charAt(0), scope.charAt(1));
+        RegionScopeExtractor regionScopeExtractor = new RegionScopeExtractor(TextLinesAccessor.createFromArray(snippetIdxConverter.getLines()),
+                startIdx, scope.charAt(0), scope.charAt(1));
         regionScopeExtractor.process();
 
         if (regionScopeExtractor.getResultEndLineIdx() == -1) {

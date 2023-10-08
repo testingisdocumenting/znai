@@ -1,5 +1,5 @@
 ---
-identifier: {validationPath: "org/testingisdocumenting/znai/extensions/file/TextContentExtractor.java"}
+identifier: {validationPath: "org/testingisdocumenting/znai/text/TextContentExtractor.java"}
 ---
 
 # Surrounded By
@@ -61,6 +61,18 @@ Use `:identifier: surroundedBySeparator` to select separator(s) between blocks
 }
 
 Note: `:identifier: surroundedBySeparator` can be either single value or a list. Plugin will use a different separator for each block. Use `null` to have an empty line as a separator.  
+
+# Surrounded By Region
+
+Use `:identifier: surroundedByScope` to extract text using scopes like `{}`, `[]`, etc:
+
+:include-file: MyClass.java {autoTitle: true}
+
+```markdown
+:include-file: MyClass.java {surroundedByScope: {start: "if (condition)", scope: "{}"}}
+```
+
+:include-file: MyClass.java {title: "extraction result", surroundedByScope: {start: "if (condition)", scope: "{}"}}
 
 # Replace
 

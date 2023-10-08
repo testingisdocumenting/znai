@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.extensions.file;
 
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.text.TextContentExtractor;
 
 public class ManipulatedSnippetContentProvider implements SnippetContentProvider {
     public static final PluginParamsDefinition paramsDefinition = TextContentExtractor.createParamsDefinition();

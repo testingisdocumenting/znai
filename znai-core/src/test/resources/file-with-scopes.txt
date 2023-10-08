@@ -1,0 +1,11 @@
+print "hello"
+// some comment
+if (condition) {
+   print "inside"
+}
+print "outside"
+if (anotherCondition)
+   print "another inside"
+}
+if (someCondition) {
+   print "another } inside"
