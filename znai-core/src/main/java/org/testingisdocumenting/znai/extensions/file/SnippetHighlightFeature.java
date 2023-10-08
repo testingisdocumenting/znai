@@ -45,7 +45,6 @@ public class SnippetHighlightFeature implements PluginFeature {
     private static final String HIGHLIGHT_REGION_SCOPE_SUB_KEY = "scope";
     private static final String HIGHLIGHT_REGION_START_FULL_KEY = HIGHLIGHT_REGION_KEY + "." + HIGHLIGHT_REGION_START_SUB_KEY;
     private static final String HIGHLIGHT_REGION_END_FULL_KEY = HIGHLIGHT_REGION_KEY + "." + HIGHLIGHT_REGION_END_SUB_KEY;
-    private static final String HIGHLIGHT_REGION_SCOPE_FULL_KEY = HIGHLIGHT_REGION_KEY + "." + HIGHLIGHT_REGION_SCOPE_SUB_KEY;
 
     private final ComponentsRegistry componentsRegistry;
     private final Path highlightFileFullPath;
@@ -128,13 +127,10 @@ public class SnippetHighlightFeature implements PluginFeature {
     private List<Integer> generateIndexesFromRegionScope(Map<String, Object> region) {
         String start = getRequiredStringSubValue(region, HIGHLIGHT_REGION_START_SUB_KEY);
         String scope = getRequiredStringSubValue(region, HIGHLIGHT_REGION_SCOPE_SUB_KEY);
-        if (scope.length() != 2) {
-            throw new IllegalArgumentException(HIGHLIGHT_REGION_SCOPE_FULL_KEY + " must be in format \"{}\", \"[]\", \"()\" etc");
-        }
 
         int startIdx = snippetIdxConverter.findAndValidateFirstContain(HIGHLIGHT_REGION_START_FULL_KEY, 0, start);
         RegionScopeExtractor regionScopeExtractor = new RegionScopeExtractor(TextLinesAccessor.createFromArray(snippetIdxConverter.getLines()),
-                startIdx, scope.charAt(0), scope.charAt(1));
+                startIdx, scope);
         regionScopeExtractor.process();
 
         if (regionScopeExtractor.getResultEndLineIdx() == -1) {
