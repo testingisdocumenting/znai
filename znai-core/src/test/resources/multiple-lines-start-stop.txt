@@ -1,0 +1,18 @@
+if (conditionA) {
+    // inside condition A
+}
+
+if (conditionB) {
+    // inside condition B
+}
+
+if (conditionA) {
+  if (conditionB) {
+    // inside condition A and condition B
+    doAction()
+  }
+}
+
+if (conditionC) {
+    // inside condition C
+}

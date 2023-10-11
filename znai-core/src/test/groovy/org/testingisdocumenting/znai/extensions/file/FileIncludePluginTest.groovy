@@ -115,6 +115,32 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "multiple start lines"() {
+        def text = resultingSnippet("multiple-lines-start-stop.txt", "{startLine: ['if (conditionA)', 'if (conditionB)']}")
+
+        text.should == "if (conditionA) {\n" +
+                "  if (conditionB) {\n" +
+                "    // inside condition A and condition B\n" +
+                "    doAction()\n" +
+                "  }\n" +
+                "}\n" +
+                "\n" +
+                "if (conditionC) {\n" +
+                "    // inside condition C\n" +
+                "}"
+    }
+
+    @Test
+    void "multiple start lines no match"() {
+        code {
+            resultingSnippet("multiple-lines-start-stop.txt", "{startLine: ['if (conditionA)', 'if (conditionD)']}")
+        } should throwException("can't find sequence of start lines:\n" +
+                "  if (conditionA)\n" +
+                "  if (conditionD) in <multiple-lines-start-stop.txt>:\n" +
+                ResourceUtils.textContent("multiple-lines-start-stop.txt").trim())
+    }
+
+    @Test
     void "should extract file snippet based on surrounding pattern and exclude the pattern"() {
         def text = resultingSnippet("file-with-surround-marker.txt", "{surroundedBy: '# concept-example'}")
 
