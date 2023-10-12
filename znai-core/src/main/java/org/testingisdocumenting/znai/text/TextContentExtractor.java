@@ -70,8 +70,8 @@ public class TextContentExtractor {
                 .add(SURROUNDED_BY_SCOPE_KEY, PluginParamType.OBJECT,
                         "extract text based on start line and scope boundaries like {}",
                         "{start: \"if (myCondition)\", scope: \"{}\"}")
-                .add(START_LINE_KEY, PluginParamType.STRING,
-                        "partial match of start line for snippet extraction", "\"class\"")
+                .add(START_LINE_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
+                        "partial match of start line(s) for snippet extraction", "\"class\" or [\"if (conditionA)\", \"nested-sub-line\"]")
                 .add(END_LINE_KEY, PluginParamType.STRING,
                         "partial match of end line for snippet extraction", "\"class\"")
                 .add(NUMBER_OF_LINES_KEY, PluginParamType.NUMBER,
@@ -232,12 +232,51 @@ public class TextContentExtractor {
     }
 
     private static Text cropStart(Text text, PluginParamsOpts opts) {
-        String startLine = opts.get(START_LINE_KEY);
-        if (startLine == null) {
+        List<String> startLines = opts.getList(START_LINE_KEY);
+        if (startLines.isEmpty()) {
             return text;
         }
 
-        return text.startingWithLineContaining(startLine);
+        if (startLines.size() == 1) {
+            return text.startingWithLineContaining(startLines.get(0));
+        }
+
+        int idx = findStartIdxForMultiLines(text, startLines);
+        if (idx == -1) {
+            throw new IllegalArgumentException("can't find sequence of start lines:\n  " + String.join("\n  ", startLines) + text.renderInContent());
+        }
+
+        return text.subList(idx, text.lines.size());
+    }
+
+    private static int findStartIdxForMultiLines(Text text, List<String> matchLines) {
+        for (int idx = 0; idx < text.lines.size() - matchLines.size(); idx++) {
+            if (matchLinesContaining(text, idx, matchLines)) {
+                return idx;
+            }
+        }
+
+        return -1;
+    }
+
+    private static boolean matchLinesContaining(Text text, int startIdx, List<String> matchLines) {
+        int idx = startIdx;
+        int len = text.lines.size();
+        int matchLen = matchLines.size();
+        if (idx + matchLen > len) {
+            return false;
+        }
+
+        for (int matchIdx = 0;idx < len && matchIdx < matchLen; idx++, matchIdx++) {
+            String line = text.lines.get(idx);
+            String matchLine = matchLines.get(matchIdx);
+
+            if (!line.contains(matchLine)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static Text cropEnd(Text text, PluginParamsOpts opts) {
@@ -365,29 +404,33 @@ public class TextContentExtractor {
         }
 
         Text startingWithLineContaining(String subLine) {
-            int lineIdx = findLineIdxContaining(subLine);
+            int lineIdx = findLineIdxContainingThrow(subLine);
             return newText(lines.subList(lineIdx, lines.size()), true);
         }
 
         Text limitToLineContaining(String subLine, Function<String, String> errorMessageFunc) {
-            int lineIdx = findLineIdxContaining(subLine, errorMessageFunc);
-            return newText(lines.subList(0, lineIdx + 1));
+            int lineIdx = findLineIdxContainingThrow(subLine, errorMessageFunc);
+            return subList(0, lineIdx + 1);
         }
 
         Text limitToSize(Number numberOfLines) {
-            return newText(lines.subList(0, numberOfLines.intValue()));
+            return subList(0, numberOfLines.intValue());
         }
 
         Text cropOneLineFromStartAndEnd() {
-            return newText(lines.subList(1, lines.size() - 1));
+            return subList(1, lines.size() - 1);
         }
 
         Text cropOneLineFromStart() {
-            return newText(lines.subList(1, lines.size()));
+            return subList(1, lines.size());
         }
 
         Text cropOneLineFromEnd() {
-            return newText(lines.subList(0, lines.size() - 1));
+            return subList(0, lines.size() - 1);
+        }
+
+        Text subList(int from, int to) {
+            return newText(lines.subList(from, to));
         }
 
         <E> Text include(List<E> inputs, String matchingLabel, BiFunction<String, E, Boolean> predicate) {
@@ -439,18 +482,27 @@ public class TextContentExtractor {
             return new Text(contentId, lines, hasCroppedStart);
         }
 
-        private int findLineIdxContaining(String subLine) {
-            return findLineIdxContaining(subLine, this::defaultNoLineFoundMessage);
+        private int findLineIdxContainingThrow(String subLine) {
+            return findLineIdxContainingThrow(subLine, this::defaultNoLineFoundMessage);
         }
 
-        private int findLineIdxContaining(String subLine, Function<String, String> errorMessageFunc) {
-            for (int i = hasCroppedStart ? 1 : 0; i < lines.size(); i++) {
-                if (lines.get(i).contains(subLine)) {
-                    return i;
+        private int findLineIdxContainingThrow(String subLine, Function<String, String> errorMessageFunc) {
+            int idx = findLineIdxContaining(subLine);
+            if (idx == -1) {
+                throw new IllegalArgumentException(errorMessageFunc.apply(subLine));
+            }
+
+            return idx;
+        }
+
+        private int findLineIdxContaining(String subLine) {
+            for (int idx = hasCroppedStart ? 1 : 0; idx < lines.size(); idx++) {
+                if (lines.get(idx).contains(subLine)) {
+                    return idx;
                 }
             }
 
-            throw new IllegalArgumentException(errorMessageFunc.apply(subLine));
+            return -1;
         }
 
         @Override
