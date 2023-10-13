@@ -7,6 +7,7 @@ if (conditionB) {
 }
 
 if (conditionA) {
+  // line between
   if (conditionB) {
     // inside condition A and condition B
     doAction()

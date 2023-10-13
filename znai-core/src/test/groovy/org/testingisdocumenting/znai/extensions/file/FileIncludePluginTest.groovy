@@ -119,6 +119,7 @@ class FileIncludePluginTest {
         def text = resultingSnippet("multiple-lines-start-stop.txt", "{startLine: ['if (conditionA)', 'if (conditionB)']}")
 
         text.should == "if (conditionA) {\n" +
+                "  // line between\n" +
                 "  if (conditionB) {\n" +
                 "    // inside condition A and condition B\n" +
                 "    doAction()\n" +
