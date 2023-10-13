@@ -241,7 +241,7 @@ public class TextContentExtractor {
             return text.startingWithLineContaining(startLines.get(0));
         }
 
-        int idx = findStartIdxForMultiLines(text, startLines);
+        int idx = findStartIdxForMultiLinesShortestDistanceBetween(text, startLines);
         if (idx == -1) {
             throw new IllegalArgumentException("can't find sequence of start lines:\n  " + String.join("\n  ", startLines) + text.renderInContent());
         }
@@ -249,34 +249,52 @@ public class TextContentExtractor {
         return text.subList(idx, text.lines.size());
     }
 
-    private static int findStartIdxForMultiLines(Text text, List<String> matchLines) {
+    private static int findStartIdxForMultiLinesShortestDistanceBetween(Text text, List<String> matchLines) {
+        int minDistanceIdx = -1;
+        int minDistance = Integer.MAX_VALUE;
         for (int idx = 0; idx < text.lines.size() - matchLines.size(); idx++) {
-            if (matchLinesContaining(text, idx, matchLines)) {
-                return idx;
+            int distance = matchLinesContaining(text, idx, matchLines);
+            if (distance != -1 && distance < minDistance) {
+                minDistanceIdx = idx;
+                minDistance = distance;
             }
         }
 
-        return -1;
+        return minDistanceIdx;
     }
 
-    private static boolean matchLinesContaining(Text text, int startIdx, List<String> matchLines) {
+    // returns total distance between matched lines
+    // or -1 when is not found
+    private static int matchLinesContaining(Text text, int startIdx, List<String> matchLines) {
         int idx = startIdx;
         int len = text.lines.size();
         int matchLen = matchLines.size();
-        if (idx + matchLen > len) {
-            return false;
+
+        if (len == 0 || matchLen == 0) {
+            return -1;
         }
 
-        for (int matchIdx = 0;idx < len && matchIdx < matchLen; idx++, matchIdx++) {
-            String line = text.lines.get(idx);
-            String matchLine = matchLines.get(matchIdx);
+        if (idx + matchLen > len) {
+            return -1;
+        }
 
-            if (!line.contains(matchLine)) {
-                return false;
+        if (!text.lines.get(idx).contains(matchLines.get(0))) {
+            return -1;
+        }
+
+        int numberOfMatched = 1;
+        idx++;
+        for (int matchIdx = 1; matchIdx < matchLen && idx < len - matchLen; idx++) {
+            String matchLine = matchLines.get(matchIdx);
+            String line = text.lines.get(idx);
+
+            if (line.contains(matchLine)) {
+                matchIdx++;
+                numberOfMatched++;
             }
         }
 
-        return true;
+        return numberOfMatched == matchLen ? (idx - startIdx) : -1;
     }
 
     private static Text cropEnd(Text text, PluginParamsOpts opts) {
