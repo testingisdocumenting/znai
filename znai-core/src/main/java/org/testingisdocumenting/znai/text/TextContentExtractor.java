@@ -72,7 +72,7 @@ public class TextContentExtractor {
                         "{start: \"if (myCondition)\", scope: \"{}\"}")
                 .add(START_LINE_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
                         "partial match of start line(s) for snippet extraction", "\"class\" or [\"if (conditionA)\", \"nested-sub-line\"]")
-                .add(END_LINE_KEY, PluginParamType.STRING,
+                .add(END_LINE_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
                         "partial match of end line for snippet extraction", "\"class\"")
                 .add(NUMBER_OF_LINES_KEY, PluginParamType.NUMBER,
                         "number of lines to extract given start line", "10")
@@ -241,15 +241,38 @@ public class TextContentExtractor {
             return text.startingWithLineContaining(startLines.get(0));
         }
 
-        int idx = findStartIdxForMultiLinesShortestDistanceBetween(text, startLines);
-        if (idx == -1) {
+        StartEndIdx startEndIdx = findIdxForMultiLinesShortestDistanceBetween(text, startLines);
+        if (startEndIdx.startIdx == -1) {
             throw new IllegalArgumentException("can't find sequence of start lines:\n  " + String.join("\n  ", startLines) + text.renderInContent());
         }
 
-        return text.subList(idx, text.lines.size());
+        return text.subList(startEndIdx.startIdx, text.lines.size());
     }
 
-    private static int findStartIdxForMultiLinesShortestDistanceBetween(Text text, List<String> matchLines) {
+    private static Text cropEnd(Text text, PluginParamsOpts opts) {
+        Number numberOfLines = opts.get(NUMBER_OF_LINES_KEY);
+        if (numberOfLines != null) {
+            return text.limitToSize(numberOfLines);
+        }
+
+        List<String> endLines = opts.getList(END_LINE_KEY);
+        if (endLines.isEmpty()) {
+            return text;
+        }
+
+        if (endLines.size() == 1) {
+            return text.limitToLineContaining(endLines.get(0), text::defaultNoLineFoundMessage);
+        }
+
+        StartEndIdx startEndIdx = findIdxForMultiLinesShortestDistanceBetween(text, endLines);
+        if (startEndIdx.startIdx == -1) {
+            throw new IllegalArgumentException("can't find sequence of end lines:\n  " + String.join("\n  ", endLines) + text.renderInContent());
+        }
+
+        return text.subList(0, startEndIdx.endIdx);
+    }
+
+    private static StartEndIdx findIdxForMultiLinesShortestDistanceBetween(Text text, List<String> matchLines) {
         int minDistanceIdx = -1;
         int minDistance = Integer.MAX_VALUE;
         for (int idx = 0; idx < text.lines.size() - matchLines.size(); idx++) {
@@ -260,7 +283,7 @@ public class TextContentExtractor {
             }
         }
 
-        return minDistanceIdx;
+        return new StartEndIdx(minDistanceIdx, minDistanceIdx + minDistance);
     }
 
     // returns total distance between matched lines
@@ -295,20 +318,6 @@ public class TextContentExtractor {
         }
 
         return numberOfMatched == matchLen ? (idx - startIdx) : -1;
-    }
-
-    private static Text cropEnd(Text text, PluginParamsOpts opts) {
-        Number numberOfLines = opts.get(NUMBER_OF_LINES_KEY);
-        if (numberOfLines != null) {
-            return text.limitToSize(numberOfLines);
-        }
-
-        String endLine = opts.get(END_LINE_KEY);
-        if (endLine != null) {
-            return text.limitToLineContaining(endLine, text::defaultNoLineFoundMessage);
-        }
-
-        return text;
     }
 
     private static Text excludeStart(Text text, PluginParamsOpts opts) {
@@ -541,4 +550,6 @@ public class TextContentExtractor {
             return " in <" + contentId + ">:\n" + this;
         }
     }
+
+    private record StartEndIdx(int startIdx, int endIdx) { }
 }
