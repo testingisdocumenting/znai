@@ -343,6 +343,37 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should extract file snippet based on multiple end lines"() {
+        def text = resultingSnippet("multiple-lines-start-stop.txt", "{endLine: ['if (conditionB)', '}', '}']}")
+
+        text.should == "if (conditionA) {\n" +
+                "    // inside condition A\n" +
+                "}\n" +
+                "\n" +
+                "if (conditionB) {\n" +
+                "    // inside condition B\n" +
+                "}\n" +
+                "\n" +
+                "if (conditionA) {\n" +
+                "  // line between\n" +
+                "  if (conditionB) {\n" +
+                "    // inside condition A and condition B\n" +
+                "    doAction()\n" +
+                "  }\n" +
+                "}"
+    }
+
+    @Test
+    void "should extract file snippet based on multiple end lines no match"() {
+        code {
+            resultingSnippet("multiple-lines-start-stop.txt", "{endLine: ['if (conditionA)', 'if (conditionD)']}")
+        } should throwException("can't find sequence of end lines:\n" +
+                "  if (conditionA)\n" +
+                "  if (conditionD) in <multiple-lines-start-stop.txt>:\n" +
+                ResourceUtils.textContent("multiple-lines-start-stop.txt").trim())
+    }
+
+    @Test
     void "should automatically strip extra indentation"() {
         def text = resultingSnippet("script.groovy", "{startLine: 'class', endLine: '}', excludeStartEnd: true}")
 
