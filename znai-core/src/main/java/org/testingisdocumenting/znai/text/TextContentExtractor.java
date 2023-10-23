@@ -105,10 +105,7 @@ public class TextContentExtractor {
 
         Text replacedAll = replaceAll(croppedByScope, opts);
 
-        Text withExcludedStart = excludeStart(replacedAll, opts);
-        Text withExcludedStartEnd = excludeEnd(withExcludedStart, opts);
-
-        Text withIncludeContains = includeContains(withExcludedStartEnd, opts);
+        Text withIncludeContains = includeContains(replacedAll, opts);
         Text withExcludeContains = excludeContains(withIncludeContains, opts);
 
         Text withIncludeRegexp = includeRegexp(withExcludeContains, opts);
@@ -234,11 +231,11 @@ public class TextContentExtractor {
     private static Text cropStart(Text text, PluginParamsOpts opts) {
         List<String> startLines = opts.getList(START_LINE_KEY);
         if (startLines.isEmpty()) {
-            return text;
+            return excludeStart(text, opts, 1);
         }
 
         if (startLines.size() == 1) {
-            return text.startingWithLineContaining(startLines.get(0));
+            return excludeStart(text.startingWithLineContaining(startLines.get(0)), opts, 1);
         }
 
         StartEndIdx startEndIdx = findIdxForMultiLinesShortestDistanceBetween(text, startLines);
@@ -246,22 +243,22 @@ public class TextContentExtractor {
             throw new IllegalArgumentException("can't find sequence of start lines:\n  " + String.join("\n  ", startLines) + text.renderInContent());
         }
 
-        return text.subList(startEndIdx.startIdx, text.lines.size());
+        return excludeStart(text.subList(startEndIdx.startIdx, text.lines.size()), opts, startEndIdx.distance());
     }
 
     private static Text cropEnd(Text text, PluginParamsOpts opts) {
         Number numberOfLines = opts.get(NUMBER_OF_LINES_KEY);
         if (numberOfLines != null) {
-            return text.limitToSize(numberOfLines);
+            return excludeEnd(text.limitToSize(numberOfLines), opts, 1);
         }
 
         List<String> endLines = opts.getList(END_LINE_KEY);
         if (endLines.isEmpty()) {
-            return text;
+            return excludeEnd(text, opts, 1);
         }
 
         if (endLines.size() == 1) {
-            return text.limitToLineContaining(endLines.get(0), text::defaultNoLineFoundMessage);
+            return excludeEnd(text.limitToLineContaining(endLines.get(0), text::defaultNoLineFoundMessage), opts, 1);
         }
 
         StartEndIdx startEndIdx = findIdxForMultiLinesShortestDistanceBetween(text, endLines);
@@ -269,7 +266,7 @@ public class TextContentExtractor {
             throw new IllegalArgumentException("can't find sequence of end lines:\n  " + String.join("\n  ", endLines) + text.renderInContent());
         }
 
-        return text.subList(0, startEndIdx.endIdx);
+        return excludeEnd(text.subList(0, startEndIdx.endIdx + 1), opts, startEndIdx.distance());
     }
 
     private static StartEndIdx findIdxForMultiLinesShortestDistanceBetween(Text text, List<String> matchLines) {
@@ -283,7 +280,7 @@ public class TextContentExtractor {
             }
         }
 
-        return new StartEndIdx(minDistanceIdx, minDistanceIdx + minDistance);
+        return new StartEndIdx(minDistanceIdx, minDistanceIdx + minDistance - 1);
     }
 
     // returns total distance between matched lines
@@ -320,24 +317,24 @@ public class TextContentExtractor {
         return numberOfMatched == matchLen ? (idx - startIdx) : -1;
     }
 
-    private static Text excludeStart(Text text, PluginParamsOpts opts) {
+    private static Text excludeStart(Text text, PluginParamsOpts opts, int numberOfLines) {
         Boolean excludeStart = opts.get(EXCLUDE_START_KEY, false);
         Boolean excludeStartEnd = opts.get(EXCLUDE_START_END_KEY, false);
         if (!excludeStart && !excludeStartEnd) {
             return text;
         }
 
-        return text.cropOneLineFromStart();
+        return text.subList(numberOfLines, text.lines.size());
     }
 
-    private static Text excludeEnd(Text text, PluginParamsOpts opts) {
+    private static Text excludeEnd(Text text, PluginParamsOpts opts, int numberOfLines) {
         Boolean excludeEnd = opts.get(EXCLUDE_END_KEY, false);
         Boolean excludeStartEnd = opts.get(EXCLUDE_START_END_KEY, false);
         if (!excludeEnd && !excludeStartEnd) {
             return text;
         }
 
-        return text.cropOneLineFromEnd();
+        return text.subList(0, text.lines.size() - numberOfLines);
     }
 
     private static Text includeContains(Text text, PluginParamsOpts opts) {
@@ -448,14 +445,6 @@ public class TextContentExtractor {
             return subList(1, lines.size() - 1);
         }
 
-        Text cropOneLineFromStart() {
-            return subList(1, lines.size());
-        }
-
-        Text cropOneLineFromEnd() {
-            return subList(0, lines.size() - 1);
-        }
-
         Text subList(int from, int to) {
             return newText(lines.subList(from, to));
         }
@@ -551,5 +540,9 @@ public class TextContentExtractor {
         }
     }
 
-    private record StartEndIdx(int startIdx, int endIdx) { }
+    private record StartEndIdx(int startIdx, int endIdx) {
+        int distance() {
+            return endIdx - startIdx + 1;
+        }
+    }
 }
