@@ -41,7 +41,7 @@
 
         <dependency>
             <groupId>net.sourceforge.plantuml</groupId>
-            <artifactId>plantuml</artifactId>
+            <artifactId>plantuml-bsd</artifactId>
         </dependency>
 
         <dependency>
