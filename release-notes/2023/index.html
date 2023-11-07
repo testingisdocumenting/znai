@@ -85,6 +85,11 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.65</h1></header>
+<p>Fix: Restore search focus when visuals/iframe iframe is present in search preview Add: visuals/PlantUml Plant UML use BSD license as dependency Add: snippets/snippets-manipulation#surrounded-by-multi-chars-scope Surrounded By Multi-chars Scope text manipulation Add: snippets/snippets-manipulation#surrounded-by-scope Surrounded By Scope text manipulation Add: visuals/iframe#properties-override Properties override for iframe content based on active dark/light mode selection Add: Automatically add index.html if visuals/iframe iframe src points to documentation content and ends with /</p>
+</article>
+
+<article>
 <header><h1>1.64</h1></header>
 <p>Fix: Deploy images that are used in https://testingisdocumenting.org/znai/flow/footer Footer Fix: Links from index page are no longer always pointing to index page itself Fix: During preview mode, flow/page-references#links-links-to-subsection subsections anchor ids are no longer increasing the counter when editing the same file. Fix: Grid bullet list presentation mode is now properly hiding unrevealed boxes Fix: snippets/external-code-snippets snippets constant color for dark and light theme Doc: flow/testing-is-documenting Testing Is Documenting intro page rework Doc: Move snippets highlighting into snippets/snippets-highlighting its own page Add: visuals/iframe#embedding-supporting-content iframe fit parameter to auto adjust height of the iframe Add: regexp based preprocessor to modify markdown files before parsing (to work with existing custom markdowns) Add: Preview and real time updates for TOC items that are outside main documentation directory Add: OCaml syntax highlight Add: Clarify snippets/snippets-manipulation#surrounded-by Surrounded By message when second marker is absent Add: deployment/additional-files upload.txt Add: tweak yellow snippets/CLI#output-highlight terminal output color for light theme Add: code snippets snippets/snippets-highlighting#region highlighting regions scope Add: code snippets snippets/snippets-highlighting#region highlighting regions Add: Improve snippets/snippets-highlighting highlighting of adjacent lines in code snippets Add: Support for flow/page-references#links limited relative links with explicit file extension Add: snippets/snippets-manipulation#surrounded-by surroundedByKeep boolean option Add: snippets/code-snippets#anchor Anchor support for embedded code blocks Add: snippets/json#callouts-from-file JSON callouts from file Add: snippets/json#callouts JSON callouts Add: Java 17 is a minimum java version required to run Add: snippets/json JSON rename paths to highlightValue and pathsFile to highlightValueFile to match highlightKey and highlightKeyFile pair Add: JSON snippets/json#highlight-keys-by-path highlight keys Add: plugin parameter names deprecation (rename) mechanism</p>
 </article>
@@ -126,6 +131,170 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "1-65",
+      "title" : "1.65",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Restore search focus when ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/iframe",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "iframe",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " is present in search preview",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/PlantUml",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Plant UML",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " use ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "BSD",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " license as dependency",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-manipulation#surrounded-by-multi-chars-scope",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Surrounded By Multi-chars Scope",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " text manipulation",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-manipulation#surrounded-by-scope",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Surrounded By Scope",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " text manipulation",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/iframe#properties-override",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Properties override",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " for iframe content based on active dark/light mode selection",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Automatically add index.html if ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/iframe",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "iframe",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " src points to documentation content and ends with ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "/",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "1-64",
       "title" : "1.64",
       "type" : "Section",
@@ -1231,7 +1400,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1695573442093,
+    "lastModifiedTime" : 1699364610884,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2023 Releases",
@@ -1242,6 +1411,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileName" : "2023",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.65",
+        "id" : "1-65"
+      }, {
         "title" : "1.64",
         "id" : "1-64"
       }, {

@@ -552,6 +552,22 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/snippets-manipulation#surrounded-by-scope</url>
+    <fullTitle>Znai: Snippets Manipulation, Surrounded By Scope [Snippets]</fullTitle>
+    <text>
+      <text>Use to extract text using scopes like {} , [] , etc: class MyClass { void action() { if (condition) { importantExample(); } if (anotherCondition) { anotherImportantExample(); } } } markdown :include-file: MyClass.java {surroundedByScope: {start: "if (condition)", scope: "{}"}} if (condition) { importantExample(); }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#surrounded-by-multi-chars-scope</url>
+    <fullTitle>Znai: Snippets Manipulation, Surrounded By Multi-chars scope [Snippets]</fullTitle>
+    <text>
+      <text>Pass comma separated multi char region definition to to handle scopes defined with keywords: module ModelZero : sig type t end module ModelA : sig type t val calc: t -> int module Nested : sig type t end end module ModelC : sig type t end markdown :include-file: model.mli {surroundedByScope: {start: "module ModelA", scope: "sig,end"}} module ModelA : sig type t val calc: t -> int module Nested : sig type t end end</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/snippets-manipulation#replace</url>
     <fullTitle>Znai: Snippets Manipulation, Replace [Snippets]</fullTitle>
     <text>
@@ -2019,7 +2035,15 @@
     <url>/znai/visuals/iframe#embedding-supporting-content</url>
     <fullTitle>Znai: Iframe, Embedding Supporting Content [Visuals]</fullTitle>
     <text>
-      <text>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter will automatically set the height of the iframe to fit the content &lt;html lang="en"> &lt;head> &lt;style> .content { background-color: #444; border: 2px solid #888; color: #eee; font-size: 20px; padding: 16px; } &lt;/style> &lt;title>generated content&lt;/title> &lt;/head> &lt;body> &lt;div class="content">Custom content&lt;/div> &lt;/body> &lt;/html> Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</text>
+      <text>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter to automatically set the height of the iframe to fit its content &lt;html lang="en"> &lt;head> &lt;style> :root { --backgroundColor: #eee; --color: #222; } .content { background-color: var(--backgroundColor); border: 2px solid #555; color: var(--color); font-size: 20px; padding: 16px; } &lt;/style> &lt;title>generated content&lt;/title> &lt;/head> &lt;body> &lt;div class="content">Custom content&lt;/div> &lt;/body> &lt;/html> Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/iframe#properties-override</url>
+    <fullTitle>Znai: Iframe, Properties Override [Visuals]</fullTitle>
+    <text>
+      <text>Use light and dark to override CSS properties inside iframe content for light and dark modes respectively. Switch mode now to see the effect.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2972,6 +2996,14 @@
     <fullTitle>Znai: Local Build, Run Local Version [Znai Development]</fullTitle>
     <text>
       <text>cd znai-dist/target unzip dist-znai.zip export PATH=$(pwd)/dist:$PATH znai --version</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2023#1-65</url>
+    <fullTitle>Znai: 2023 Releases, 1.65 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: Restore search focus when visuals/iframe iframe is present in search preview Add: visuals/PlantUml Plant UML use BSD license as dependency Add: snippets/snippets-manipulation#surrounded-by-multi-chars-scope Surrounded By Multi-chars Scope text manipulation Add: snippets/snippets-manipulation#surrounded-by-scope Surrounded By Scope text manipulation Add: visuals/iframe#properties-override Properties override for iframe content based on active dark/light mode selection Add: Automatically add index.html if visuals/iframe iframe src points to documentation content and ends with /</text>
       <score>STANDARD</score>
     </text>
   </entry>

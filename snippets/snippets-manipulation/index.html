@@ -95,6 +95,16 @@
 </article>
 
 <article>
+<header><h1>Surrounded By Scope</h1></header>
+<p>Use to extract text using scopes like {} , [] , etc: class MyClass { void action() { if (condition) { importantExample(); } if (anotherCondition) { anotherImportantExample(); } } } markdown :include-file: MyClass.java {surroundedByScope: {start: &quot;if (condition)&quot;, scope: &quot;{}&quot;}} if (condition) { importantExample(); }</p>
+</article>
+
+<article>
+<header><h1>Surrounded By Multi-chars scope</h1></header>
+<p>Pass comma separated multi char region definition to to handle scopes defined with keywords: module ModelZero : sig type t end module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end module ModelC : sig type t end markdown :include-file: model.mli {surroundedByScope: {start: &quot;module ModelA&quot;, scope: &quot;sig,end&quot;}} module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end</p>
+</article>
+
+<article>
 <header><h1>Replace</h1></header>
 <p>Use to replace content of the resulting snippet markdown :include-file: python-examples.py { surroundedBy: &quot;# example-cancel-trade&quot;, replace: ['id', '&quot;trade_id&quot;'] } market.cancel_trade(&quot;trade_id&quot;) Pass a list of lists to for multiple replaces markdown :include-file: python-examples.py { surroundedBy: &quot;# example-cancel-trade&quot;, replace: [['id', '&quot;trade_id&quot;'], [&quot;market&quot;, &quot;api&quot;]]} api.cancel_trade(&quot;trade_id&quot;)</p>
 </article>
@@ -299,6 +309,96 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : " to have an empty line as a separator.",
           "type" : "SimpleText"
         } ]
+      } ]
+    }, {
+      "id" : "surrounded-by-scope",
+      "title" : "Surrounded By Scope",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "surroundedByScope",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to extract text using scopes like ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "{}",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "[]",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", etc:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "java",
+        "snippet" : "class MyClass {\n    void action() {\n        if (condition) {\n           importantExample();\n        }\n\n        if (anotherCondition) {\n            anotherImportantExample();\n        }\n    }\n}",
+        "autoTitle" : true,
+        "title" : "MyClass.java",
+        "anchorId" : "surrounded-by-scope-myclass-java",
+        "type" : "Snippet"
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-file: MyClass.java {surroundedByScope: {start: \"if (condition)\", scope: \"{}\"}}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "java",
+        "snippet" : "if (condition) {\n   importantExample();\n}",
+        "title" : "extraction result",
+        "surroundedByScope" : {
+          "start" : "if (condition)",
+          "scope" : "{}"
+        },
+        "anchorId" : "surrounded-by-scope-extraction-result",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "surrounded-by-multi-chars-scope",
+      "title" : "Surrounded By Multi-chars scope",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass comma separated multi char region definition to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "surroundedByScope",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to handle scopes defined with keywords:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "mli",
+        "snippet" : "module ModelZero : sig\n  type t\nend\n\nmodule ModelA : sig\n  type t\n  val calc: t -> int\n  module Nested : sig\n    type t\n  end\nend\n\nmodule ModelC : sig\n type t\nend",
+        "autoTitle" : true,
+        "title" : "model.mli",
+        "anchorId" : "surrounded-by-multi-chars-scope-model-mli",
+        "type" : "Snippet"
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-file: model.mli {surroundedByScope: {start: \"module ModelA\", scope: \"sig,end\"}}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "mli",
+        "snippet" : "module ModelA : sig\n  type t\n  val calc: t -> int\n  module Nested : sig\n    type t\n  end\nend",
+        "title" : "extraction result",
+        "surroundedByScope" : {
+          "start" : "module ModelA",
+          "scope" : "sig,end"
+        },
+        "anchorId" : "surrounded-by-multi-chars-scope-extraction-result",
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "replace",
@@ -617,12 +717,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1695573442097,
+    "lastModifiedTime" : 1699364610884,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Snippets Manipulation",
       "pageMeta" : {
-        "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/extensions/file/TextContentExtractor.java\"}" ]
+        "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/text/TextContentExtractor.java\"}" ]
       },
       "dirName" : "snippets",
       "fileName" : "snippets-manipulation",
@@ -633,6 +733,12 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Multiple Surrounded By",
         "id" : "multiple-surrounded-by"
+      }, {
+        "title" : "Surrounded By Scope",
+        "id" : "surrounded-by-scope"
+      }, {
+        "title" : "Surrounded By Multi-chars scope",
+        "id" : "surrounded-by-multi-chars-scope"
       }, {
         "title" : "Replace",
         "id" : "replace"

@@ -356,7 +356,7 @@ toc = [ {
     "chapterTitle" : "Snippets",
     "pageTitle" : "Snippets Manipulation",
     "pageMeta" : {
-      "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/extensions/file/TextContentExtractor.java\"}" ]
+      "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/text/TextContentExtractor.java\"}" ]
     },
     "dirName" : "snippets",
     "fileName" : "snippets-manipulation",
@@ -367,6 +367,12 @@ toc = [ {
     }, {
       "title" : "Multiple Surrounded By",
       "id" : "multiple-surrounded-by"
+    }, {
+      "title" : "Surrounded By Scope",
+      "id" : "surrounded-by-scope"
+    }, {
+      "title" : "Surrounded By Multi-chars scope",
+      "id" : "surrounded-by-multi-chars-scope"
     }, {
       "title" : "Replace",
       "id" : "replace"
@@ -1214,6 +1220,9 @@ toc = [ {
       "title" : "Embedding Supporting Content",
       "id" : "embedding-supporting-content"
     }, {
+      "title" : "Properties Override",
+      "id" : "properties-override"
+    }, {
       "title" : "Embedding Video",
       "id" : "embedding-video"
     }, {
@@ -1869,6 +1878,9 @@ toc = [ {
     "fileName" : "2023",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.65",
+      "id" : "1-65"
+    }, {
       "title" : "1.64",
       "id" : "1-64"
     }, {

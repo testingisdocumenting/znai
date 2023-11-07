@@ -86,7 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Embedding Supporting Content</h1></header>
-<p>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter will automatically set the height of the iframe to fit the content &lt;html lang=&quot;en&quot;&gt; &lt;head&gt; &lt;style&gt; .content { background-color: #444; border: 2px solid #888; color: #eee; font-size: 20px; padding: 16px; } &lt;/style&gt; &lt;title&gt;generated content&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div class=&quot;content&quot;&gt;Custom content&lt;/div&gt; &lt;/body&gt; &lt;/html&gt; Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</p>
+<p>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter to automatically set the height of the iframe to fit its content &lt;html lang=&quot;en&quot;&gt; &lt;head&gt; &lt;style&gt; :root { --backgroundColor: #eee; --color: #222; } .content { background-color: var(--backgroundColor); border: 2px solid #555; color: var(--color); font-size: 20px; padding: 16px; } &lt;/style&gt; &lt;title&gt;generated content&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div class=&quot;content&quot;&gt;Custom content&lt;/div&gt; &lt;/body&gt; &lt;/html&gt; Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</p>
+</article>
+
+<article>
+<header><h1>Properties Override</h1></header>
+<p>Use light and dark to override CSS properties inside iframe content for light and dark modes respectively. Switch mode now to see the effect.</p>
 </article>
 
 <article>
@@ -188,12 +193,12 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "fit",
           "type" : "InlinedCode"
         }, {
-          "text" : " parameter will automatically set the height of the iframe to fit the content",
+          "text" : " parameter to automatically set the height of the iframe to fit its content",
           "type" : "SimpleText"
         } ]
       }, {
         "lang" : "html",
-        "snippet" : "<html lang=\"en\">\n<head>\n  <style>\n    .content {\n        background-color: #444;\n        border: 2px solid #888;\n        color: #eee;\n        font-size: 20px;\n        padding: 16px;\n    }\n  </style>\n  <title>generated content</title>\n</head>\n\n<body>\n  <div class=\"content\">Custom content</div>\n</body>\n</html>",
+        "snippet" : "<html lang=\"en\">\n<head>\n  <style>\n      :root {\n          --backgroundColor: #eee;\n          --color: #222;\n      }\n      .content {\n          background-color: var(--backgroundColor);\n          border: 2px solid #555;\n          color: var(--color);\n          font-size: 20px;\n          padding: 16px;\n      }\n  </style>\n  <title>generated content</title>\n</head>\n\n<body>\n<div class=\"content\">Custom content</div>\n</body>\n</html>",
         "autoTitle" : true,
         "title" : "iframe/custom.html",
         "anchorId" : "embedding-supporting-content-iframe-custom-html",
@@ -227,6 +232,46 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         } ],
         "type" : "AttentionBlock"
+      } ]
+    }, {
+      "id" : "properties-override",
+      "title" : "Properties Override",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "light",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "dark",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to override CSS properties inside iframe content for light and dark modes respectively.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Switch mode now to see the effect.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "src" : "/znai/iframe/custom.html",
+        "fit" : true,
+        "light" : {
+          "--color" : "#333",
+          "--backgroundColor" : "#eee"
+        },
+        "dark" : {
+          "--color" : "#eee",
+          "--backgroundColor" : "#333"
+        },
+        "type" : "Iframe"
       } ]
     }, {
       "id" : "embedding-video",
@@ -286,7 +331,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Iframe"
       } ]
     } ],
-    "lastModifiedTime" : 1695573442113,
+    "lastModifiedTime" : 1699364610904,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Iframe",
@@ -297,6 +342,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "pageSectionIdTitles" : [ {
         "title" : "Embedding Supporting Content",
         "id" : "embedding-supporting-content"
+      }, {
+        "title" : "Properties Override",
+        "id" : "properties-override"
       }, {
         "title" : "Embedding Video",
         "id" : "embedding-video"
