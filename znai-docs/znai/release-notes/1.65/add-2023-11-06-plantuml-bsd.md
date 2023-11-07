@@ -1,0 +1,1 @@
+* Add: [Plant UML](visuals/PlantUml) use `BSD` license as dependency 
