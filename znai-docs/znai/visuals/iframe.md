@@ -28,6 +28,14 @@ If you need other supporting files you need to use [upload.txt](deployment/addit
 Use `light` and `dark` to override CSS properties inside iframe content for light and dark modes respectively.
 Switch mode now to see the effect.
 
+```markdown
+:include-iframe: iframe/custom.html {
+  fit: true,
+  light: { "--color": "#333", "--backgroundColor": "#eee" },
+  dark: { "--color": "#eee", "--backgroundColor": "#333" },
+}
+```
+
 :include-iframe: iframe/custom.html {
   fit: true,
   light: { "--color": "#333", "--backgroundColor": "#eee" },
@@ -36,7 +44,7 @@ Switch mode now to see the effect.
 
 # Embedding Video
 
-Use `include-iframe` to embed content from other place. By default, aspect ratio set to `16:9`.
+Use `include-iframe` to embed media from other places. By default, aspect ratio is set to `16:9`.
 
     :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY
 

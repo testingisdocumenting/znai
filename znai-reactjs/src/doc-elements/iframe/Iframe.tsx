@@ -15,6 +15,7 @@
  */
 
 import React, { useRef, useState } from "react";
+import { Container } from "../container/Container";
 import "./Iframe.css";
 
 interface Props {
@@ -61,7 +62,7 @@ export function IframeFit({ src, title, height, light, dark }: Props) {
   }
 
   return (
-    <div className="content-block">
+    <Container className="content-block">
       <iframe
         title={title}
         src={src}
@@ -71,7 +72,7 @@ export function IframeFit({ src, title, height, light, dark }: Props) {
         ref={ref}
         onLoad={handleSize}
       />
-    </div>
+    </Container>
   );
 
   function handleSize() {
