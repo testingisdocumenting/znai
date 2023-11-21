@@ -196,6 +196,7 @@ library.Svg = Svg
 presentationElementHandlers.Svg = presentationSvgHandler
 
 library.Iframe = Iframe
+presentationElementHandlers.Iframe = {component: Iframe, numberOfSlides: () => 1}
 
 library.Page = Page
 presentationElementHandlers.Page = presentationPageHandler
