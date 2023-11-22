@@ -137,7 +137,7 @@
         <vertx.io.version>3.9.4</vertx.io.version>
         <commonmark.version>0.15.2</commonmark.version>
         <antlr.version>4.5</antlr.version>
-        <jackson.verson>2.11.2</jackson.verson>
+        <jackson.version>2.16.0</jackson.version>
         <webtau.version>2.2</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
         <ant.version>1.10.11</ant.version>
@@ -345,25 +345,25 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson.verson}</version>
+                <version>${jackson.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>${jackson.verson}</version>
+                <version>${jackson.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-xml</artifactId>
-                <version>${jackson.verson}</version>
+                <version>${jackson.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-yaml</artifactId>
-                <version>${jackson.verson}</version>
+                <version>${jackson.version}</version>
             </dependency>
 
             <dependency>
