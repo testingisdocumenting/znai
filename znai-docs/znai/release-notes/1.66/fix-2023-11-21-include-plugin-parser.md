@@ -1,0 +1,1 @@
+* Fix: Text right after [Include Plugin](introduction/what-is-this#extensive-plugins-system-include) is no longer ignored

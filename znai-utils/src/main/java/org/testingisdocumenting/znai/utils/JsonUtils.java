@@ -1,4 +1,5 @@
 /*
+ * Copyright 2023 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -92,6 +93,45 @@ public class JsonUtils {
         } catch (IOException e) {
             throw new JsonParseException(e.getMessage());
         }
+    }
+
+    /**
+     * check if a potential json string has matching {}
+     * @param json potential json string
+     * @return true if scope is fully closed
+     */
+    public static boolean isObjectScopeClosed(String json) {
+        char previousChar = ' ';
+        int scopeBalance = 0;
+        boolean insideSingleQuote = false;
+        boolean insideDoubleQuote = false;
+        boolean metScope = false;
+        for (int idx = 0; idx < json.length(); idx++) {
+            char c = json.charAt(idx);
+
+            boolean isPreviousCharEscape = previousChar == '\\';
+            if (!isPreviousCharEscape) {
+                if (c == '\'') {
+                    insideSingleQuote = !insideSingleQuote;
+                }
+                if (c == '"') {
+                    insideDoubleQuote = !insideDoubleQuote;
+                }
+            }
+
+            if (!insideDoubleQuote && !insideSingleQuote) {
+                if (c == '{') {
+                    metScope = true;
+                    scopeBalance++;
+                } else if (c == '}') {
+                    scopeBalance--;
+                }
+            }
+
+            previousChar = c;
+        }
+
+        return metScope && scopeBalance == 0;
     }
 
     private static ObjectMapper createDeserializeMapper() {

@@ -25,6 +25,7 @@ import java.nio.file.Paths
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
+import static org.testingisdocumenting.webtau.WebTauCore.trace
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownParserTest {
@@ -428,6 +429,12 @@ world""")
     }
 
     @Test
+    void "include plugin with opts starting on new line"() {
+        parse(":include-dummy:\nfree-form text\n{param1: 'v1',\n param2: 'v2'}\n")
+        content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
+    }
+
+    @Test
     void "include multiple plugins without empty line in between"() {
         parse(":include-dummy: free-form text1 {param1: 'v1', param2: 'v2'}\n" +
                 ":include-dummy: free-form text2 {param1: 'v3', param2: 'v4'}\n\n" +
@@ -436,6 +443,16 @@ world""")
         content.should == [
                 [type: 'IncludeDummy', ff: 'free-form text1', opts: [param1: 'v1', param2: 'v2']],
                 [type: 'IncludeDummy', ff: 'free-form text2', opts: [param1: 'v3', param2: 'v4']],
+                [type: 'Paragraph', content: [[text: 'hello world', type: 'SimpleText']]]]
+    }
+
+    @Test
+    void "text right after include plugin definition"() {
+        parse(":include-dummy: free-form text1 {param1: 'v1',\nparam2: 'v2'}\n" +
+                "hello world")
+
+        content.should == [
+                [type: 'IncludeDummy', ff: 'free-form text1', opts: [param1: 'v1', param2: 'v2']],
                 [type: 'Paragraph', content: [[text: 'hello world', type: 'SimpleText']]]]
     }
 
