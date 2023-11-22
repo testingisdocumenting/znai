@@ -22,14 +22,13 @@ class JsonUtilsTest {
     @Test
     void "should serialize json using compact print"() {
         def asText = JsonUtils.serialize([k1: "v1", k2: ["v2", "v3"]])
-        assert asText == '{"k1":"v1","k2":["v2","v3"]}'
+        asText.should == '{"k1":"v1","k2":["v2","v3"]}'
     }
 
     @Test
     void "should serialize json using pretty print"() {
         def asText = JsonUtils.serializePrettyPrint([k1: "v1", k2: ["v2", "v3"]])
-        println asText
-        assert asText == '{\n' +
+        asText.should == '{\n' +
                 '  "k1" : "v1",\n' +
                 '  "k2" : [ "v2", "v3" ]\n' +
                 '}'
@@ -42,7 +41,7 @@ class JsonUtilsTest {
             "another": {"nested": "value"}} """
 
         def map = JsonUtils.deserializeAsMap(json)
-        assert map == [hello: "world", another: [nested: "value"]]
+        map.should == [hello: "world", another: [nested: "value"]]
     }
 
     @Test
@@ -52,7 +51,7 @@ class JsonUtilsTest {
             'another': {'nested': 'value'}} """
 
         def map = JsonUtils.deserializeAsMap(json)
-        assert map == [hello: "world", another: [nested: "value"]]
+        map.should == [hello: "world", another: [nested: "value"]]
     }
 
     @Test
@@ -62,7 +61,7 @@ class JsonUtilsTest {
             another: {'nested': 'value'}} """
 
         def map = JsonUtils.deserializeAsMap(json)
-        assert map == [hello: "world", another: [nested: "value"]]
+        map.should == [hello: "world", another: [nested: "value"]]
     }
 
     @Test
@@ -70,7 +69,7 @@ class JsonUtilsTest {
         def json = """["hello", "world"] """
 
         def list = JsonUtils.deserializeAsList(json)
-        assert list == ["hello", "world"]
+        list.should == ["hello", "world"]
     }
 
     @Test
@@ -85,5 +84,16 @@ class JsonUtilsTest {
     "another": {"nested": "value"}} """
         def map = JsonUtils.deserialize(mapJson)
         assert map instanceof Map
+    }
+
+    @Test
+    void "validate is object scope closed"() {
+        JsonUtils.isObjectScopeClosed("").should == false
+        JsonUtils.isObjectScopeClosed("{}").should == true
+        JsonUtils.isObjectScopeClosed("{").should == false
+        JsonUtils.isObjectScopeClosed("{key: \"}\"").should == false
+        JsonUtils.isObjectScopeClosed("{key: '}'").should == false
+        JsonUtils.isObjectScopeClosed("{key:\n'}'").should == false
+        JsonUtils.isObjectScopeClosed("{key:\n'}value'}").should == true
     }
 }

@@ -24,6 +24,7 @@ import org.commonmark.parser.InlineParser;
 import org.commonmark.parser.block.*;
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
 import org.testingisdocumenting.znai.extensions.PluginsRegexp;
+import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.util.regex.Pattern;
 
@@ -66,6 +67,10 @@ public class IncludeBlockParser extends AbstractBlockParser {
     @Override
     public BlockContinue tryContinue(ParserState parserState) {
         CharSequence line = parserState.getLine();
+
+        if (JsonUtils.isObjectScopeClosed(value.toString())) {
+            return BlockContinue.none();
+        }
 
         if (line.toString().trim().isEmpty() ||
                 PluginsRegexp.INCLUDE_PLUGIN_PATTERN.matcher(line).matches()) {
