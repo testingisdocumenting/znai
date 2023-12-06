@@ -34,7 +34,7 @@ interface Props extends ContainerTitleCommonProps {
 }
 
 /**
- * title strip for snippets, api parameters, tables, images, etc
+ * title strip for snippets, api parameters, tables, images, etc.
  * with collapse option, noGap and anchor
  */
 export function ContainerTitle({

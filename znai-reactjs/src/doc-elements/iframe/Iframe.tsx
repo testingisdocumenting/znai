@@ -16,11 +16,13 @@
 
 import React, { useRef, useState } from "react";
 import { Container } from "../container/Container";
+import { ContainerTitle } from "../container/ContainerTitle";
+
 import "./Iframe.css";
 
 interface Props {
   src: string;
-  title: string;
+  title?: string;
   aspectRatio?: string;
   light?: any;
   dark?: any;
@@ -61,18 +63,23 @@ export function IframeFit({ src, title, height, light, dark }: Props) {
     activeElement = document.activeElement;
   }
 
+  const renderedTitle = title ? <ContainerTitle title={title} /> : null;
+
   return (
-    <Container className="content-block">
-      <iframe
-        title={title}
-        src={src}
-        style={{ height: height ? height : calculatedIframeHeight }}
-        width="100%"
-        className={fullClassName}
-        ref={ref}
-        onLoad={handleSize}
-      />
-    </Container>
+    <>
+      <Container className="content-block">
+        {renderedTitle}
+        <iframe
+          title={title}
+          src={src}
+          style={{ height: height ? height : calculatedIframeHeight }}
+          width="100%"
+          className={fullClassName}
+          ref={ref}
+          onLoad={handleSize}
+        />
+      </Container>
+    </>
   );
 
   function handleSize() {
