@@ -42,6 +42,26 @@ Switch mode now to see the effect.
   dark: { "--color": "#eee", "--backgroundColor": "#333" },
 }
 
+# Title
+
+Use `title` parameter to display title bar on top of the embedded content:
+
+```markdown {highlight: "title"}
+:include-iframe: iframe/custom.html {
+  title: "rendered example",
+  light: { "--color": "#333", "--backgroundColor": "#eee" },
+  dark: { "--color": "#eee", "--backgroundColor": "#333" },
+  fit: true
+}
+```
+
+:include-iframe: iframe/custom.html {
+  title: "rendered example",
+  light: { "--color": "#333", "--backgroundColor": "#eee" },
+  dark: { "--color": "#eee", "--backgroundColor": "#333" },
+  fit: true
+}
+
 # Embedding Video
 
 Use `include-iframe` to embed media from other places. By default, aspect ratio is set to `16:9`.

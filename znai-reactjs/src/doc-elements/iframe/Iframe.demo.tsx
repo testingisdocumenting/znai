@@ -20,7 +20,10 @@ import { Registry } from "react-component-viewer";
 import { Iframe } from "./Iframe";
 
 export function iframeDemo(registry: Registry) {
-  registry.add("non video content", () => <Iframe src="/frame-content.html" title="demo title" fit={true} />);
+  registry.add("non video content", () => <Iframe src="/frame-content.html" fit={true} />);
+  registry.add("non video content with title", () => (
+    <Iframe src="/frame-content.html" title="demo title" fit={true} />
+  ));
   registry.add("content css vars override", () => (
     <Iframe
       src="/frame-content.html"
