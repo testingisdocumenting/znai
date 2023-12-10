@@ -27,6 +27,7 @@ import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 public class IframeIncludePlugin implements IncludePlugin {
@@ -49,6 +50,7 @@ public class IframeIncludePlugin implements IncludePlugin {
         String urlToUse = UrlUtils.isExternal(userUrl) ? userUrl :
                 componentsRegistry.docStructure().fullUrl(userUrl);
         iframe.addProp("src", urlToUse);
+        iframe.addProp("previewMarker", generatePreviewMarker());
         pluginParams.getOpts().assignToDocElement(iframe);
 
         return PluginResult.docElement(iframe);
@@ -65,5 +67,9 @@ public class IframeIncludePlugin implements IncludePlugin {
 
         return Stream.of(AuxiliaryFile.runTime(componentsRegistry.resourceResolver().fullPath(withIndexHtmlIfRequired),
                 Paths.get(withIndexHtmlIfRequired)));
+    }
+
+    private String generatePreviewMarker() {
+        return UUID.randomUUID().toString();
     }
 }

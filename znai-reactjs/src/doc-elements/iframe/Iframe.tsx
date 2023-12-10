@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Container } from "../container/Container";
+import { ContainerTitle } from "../container/ContainerTitle";
+
 import "./Iframe.css";
 
 interface Props {
   src: string;
-  title: string;
+  title?: string;
   aspectRatio?: string;
   light?: any;
   dark?: any;
   fit?: boolean;
   height?: number;
+  // changes on every page regen to force iframe reload
+  previewMarker?: string;
 }
 
 export function Iframe(props: Props) {
@@ -37,12 +41,22 @@ export function Iframe(props: Props) {
 }
 
 let activeElement: any = null;
-export function IframeFit({ src, title, height, light, dark }: Props) {
+export function IframeFit({ src, title, height, light, dark, previewMarker }: Props) {
   const ref = useRef<HTMLIFrameElement>(null);
   const [extracClassName, setExtraClassName] = useState("");
   const [calculatedIframeHeight, setCalculatedIframeHeight] = useState(14);
 
-  React.useEffect(() => {
+  // iframe reload on mount
+  useEffect(() => {
+    if (!ref) {
+      return;
+    }
+
+    ref!.current!.src += "";
+  }, [previewMarker]);
+
+  // handle site theme switching
+  useEffect(() => {
     // TODO theme integration via context
     // @ts-ignore
     window.znaiTheme.addChangeHandler(onThemeChange);
@@ -57,22 +71,29 @@ export function IframeFit({ src, title, height, light, dark }: Props) {
 
   const fullClassName = "znai-iframe fit " + extracClassName;
 
+  // remembering what is a current active element
+  // so when iframe mounts we can restore focus back
   if (document.activeElement?.tagName !== "IFRAME") {
     activeElement = document.activeElement;
   }
 
+  const renderedTitle = title ? <ContainerTitle title={title} /> : null;
+
   return (
-    <Container className="content-block">
-      <iframe
-        title={title}
-        src={src}
-        style={{ height: height ? height : calculatedIframeHeight }}
-        width="100%"
-        className={fullClassName}
-        ref={ref}
-        onLoad={handleSize}
-      />
-    </Container>
+    <>
+      <Container className="content-block">
+        {renderedTitle}
+        <iframe
+          title={title}
+          src={src}
+          style={{ height: height ? height : calculatedIframeHeight }}
+          width="100%"
+          className={fullClassName}
+          ref={ref}
+          onLoad={handleSize}
+        />
+      </Container>
+    </>
   );
 
   function handleSize() {
