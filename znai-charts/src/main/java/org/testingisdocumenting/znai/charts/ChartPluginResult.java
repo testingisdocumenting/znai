@@ -32,6 +32,13 @@ class ChartPluginResult {
 
         List<Object> columns = pluginParams.getOpts().getList(ChartIncludeBasePlugin.COLUMNS);
         if (!columns.isEmpty()) {
+            // ensure columns exist
+            for (Object column : columns) {
+                if (!chartData.getLabels().contains(column.toString())) {
+                    throw new IllegalArgumentException("column <" + column + "> does not exist");
+                }
+            }
+
             // first we need to create indexes of the columns to be removed
             // sort decending, so we can call remove without fear
             List<Integer> indexesToDelete = chartData.getLabels().stream()

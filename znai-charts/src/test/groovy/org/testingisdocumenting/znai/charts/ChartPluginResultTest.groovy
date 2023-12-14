@@ -88,4 +88,14 @@ class ChartPluginResultTest {
         props["data"].should == [["test", 10, 1000], ["another", 20, 2000], ["last", 30, 3000]]
         props["labels"].should == ["a", "c", "y"]
     }
+
+    @Test
+    void "should fail on non existing filtering columns"() {
+        def params = pluginParamsFactory.create("barchart", "", [columns: ["x", "non-existing"]])
+        code {
+            ChartPluginResult.create(params, "bar", "x, y\n" +
+                    "90.343, 10\n" +
+                    "100.54454, 20\n")
+        } should throwException("column <non-existing> does not exist")
+    }
 }
