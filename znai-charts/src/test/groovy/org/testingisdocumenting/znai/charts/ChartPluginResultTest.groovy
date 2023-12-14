@@ -86,5 +86,6 @@ class ChartPluginResultTest {
 
         def props = result.docElements[0].toMap()
         props["data"].should == [["test", 10, 1000], ["another", 20, 2000], ["last", 30, 3000]]
+        props["labels"].should == ["a", "c", "y"]
     }
 }
