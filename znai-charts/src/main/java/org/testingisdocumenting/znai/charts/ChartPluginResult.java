@@ -40,13 +40,14 @@ class ChartPluginResult {
                     .sorted(Comparator.reverseOrder())
                     .toList();
 
-            // remove labels
-            for (int idx : indexesToDelete) {
-                chartData.getLabels().remove(idx);
-            }
 
-            // remove data
             if (!indexesToDelete.isEmpty()) {
+                // remove labels
+                for (int idx : indexesToDelete) {
+                    chartData.getLabels().remove(idx);
+                }
+
+                // remove data
                 for (List<Object> row : chartData.getData()) {
                     for (int idx : indexesToDelete) {
                         row.remove(idx);
