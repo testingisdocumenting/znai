@@ -26,8 +26,6 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
 import java.nio.file.Path;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.stream.Stream;
 
 abstract public class ChartIncludeBasePlugin implements IncludePlugin {
@@ -38,6 +36,7 @@ abstract public class ChartIncludeBasePlugin implements IncludePlugin {
     protected static String LEGEND_KEY = "legend";
     protected static String TIME_KEY = "time";
     protected static String BREAKPOINT_KEY = "breakpoint";
+    protected static String COLUMNS = "columns";
 
     private Path fullPath;
 
@@ -52,7 +51,8 @@ abstract public class ChartIncludeBasePlugin implements IncludePlugin {
                 .add(WIDE_KEY, PluginParamType.BOOLEAN, "use all horizontal space", "true")
                 .add(LEGEND_KEY, PluginParamType.BOOLEAN, "show legend", "true")
                 .add(TIME_KEY, PluginParamType.BOOLEAN, "treat X axis data as time series", "true")
-                .add(BREAKPOINT_KEY, PluginParamType.LIST_OR_SINGLE_STRING_OR_NUMBER, "list of X values to use for presentation mode breakpoint", "\"Thursday\" or [10, 54]");
+                .add(BREAKPOINT_KEY, PluginParamType.LIST_OR_SINGLE_STRING_OR_NUMBER, "list of X values to use for presentation mode breakpoint", "\"Thursday\" or [10, 54]")
+                .add(COLUMNS, PluginParamType.LIST_OR_SINGLE_STRING, "columns to display");
     }
 
     @Override

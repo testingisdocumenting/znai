@@ -30,6 +30,39 @@ class ChartPluginResult {
     static PluginResult create(PluginParams pluginParams, String type, String csvContent) {
         ChartData chartData = ChartDataCsvParser.parse(csvContent);
 
+        List<Object> columns = pluginParams.getOpts().getList(ChartIncludeBasePlugin.COLUMNS);
+        if (!columns.isEmpty()) {
+            // ensure columns exist
+            for (Object column : columns) {
+                if (!chartData.getLabels().contains(column.toString())) {
+                    throw new IllegalArgumentException("column <" + column + "> does not exist");
+                }
+            }
+
+            // first we need to create indexes of the columns to be removed
+            // sort decending, so we can call remove without fear
+            List<Integer> indexesToDelete = chartData.getLabels().stream()
+                    .filter(col -> !columns.contains(col))
+                    .map(col -> chartData.getLabels().indexOf(col))
+                    .sorted(Comparator.reverseOrder())
+                    .toList();
+
+
+            if (!indexesToDelete.isEmpty()) {
+                // remove labels
+                for (int idx : indexesToDelete) {
+                    chartData.getLabels().remove(idx);
+                }
+
+                // remove data
+                for (List<Object> row : chartData.getData()) {
+                    for (int idx : indexesToDelete) {
+                        row.remove(idx);
+                    }
+                }
+            }
+        }
+
         List<List<Object>> data = chartData.getData();
         List<Object> breakpoints = pluginParams.getOpts().getList(ChartIncludeBasePlugin.BREAKPOINT_KEY);
         boolean isTimeSeries = pluginParams.getOpts().get(ChartIncludeBasePlugin.TIME_KEY, false);

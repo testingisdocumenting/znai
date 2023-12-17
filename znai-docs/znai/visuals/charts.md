@@ -149,6 +149,28 @@ RTS, 40
 FPS, 50
 ```
 
+# Filtering columns
+
+You can filter for specific columns from a CSV input by using the `columns`
+parameter.
+
+    ```barchart {columns: ["genre", "rating"]}
+    genre, preference, rating
+    RPG, 75, 8
+    Action, 50, 9
+    RTS, 40, 1
+    FPS, 50, 1
+    ```
+
+```barchart {columns: ["genre", "rating"]}
+genre, preference, rating
+RPG, 75, 8
+Action, 50, 9
+RTS, 40, 1
+FPS, 50, 1
+```
+
+
 # Presentation
 
 Charts automatically participate in slides.
