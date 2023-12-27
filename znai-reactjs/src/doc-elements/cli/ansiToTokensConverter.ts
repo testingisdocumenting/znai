@@ -20,7 +20,7 @@ import { TokensPrinter } from "../code-snippets/TokensPrinter";
 export function convertAnsiToTokenLines(lines: string[]): any[] {
   const ansiUp = createAnsiUp();
 
-  const html = ansiUp.ansi_to_html(lines.join("\n"));
+  const html = ansiUp.ansi_to_html(lines.join("\n")).replace(/^ +/, (match) => "&nbsp;".repeat(match.length));
   const domParser = new DOMParser();
 
   const printer = new TokensPrinter();

@@ -32,6 +32,9 @@ export function cliOutputDemo(registry) {
         .add('with ansi', () => (
             <CliOutput lines={generateAnsiLines()}/>
         ))
+        .add('with ansi and space in front', () => (
+          <CliOutput lines={generateAnsiLinesWithSpaceInFront()}/>
+        ))
         .add('ansi colors', () => (
             <CliOutput lines={generateAnsiColors()}/>
         ))
@@ -78,6 +81,12 @@ function generateNonAnsiWithEmptyLines() {
 
 function generateAnsiLines() {
     return ['\u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get("https://jsonplaceholder.typicode.com/todos/1")',
+        '\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m',
+        '  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200']
+}
+
+function generateAnsiLinesWithSpaceInFront() {
+    return ['    \u001B[1mwebtau:\u001B[m000\u001B[1m>\u001B[m http.get("https://jsonplaceholder.typicode.com/todos/1")',
         '\u001B[33m> \u001B[34mexecuting HTTP GET \u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[0m',
         '  \u001B[32m. \u001B[1mheader.statusCode \u001B[32mequals 200']
 }

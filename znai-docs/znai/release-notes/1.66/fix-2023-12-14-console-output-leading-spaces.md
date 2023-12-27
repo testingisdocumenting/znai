@@ -1,0 +1,1 @@
+* Fix: Properly render leading spaces when using [include-cli-output](snippets/CLI#ansi-colors-output)
