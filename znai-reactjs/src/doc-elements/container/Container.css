@@ -21,3 +21,7 @@
 .znai-container.no-top-margin {
     margin-top: 0;
 }
+
+.znai-container.no-gap-separator {
+   border-bottom: 1px solid var(--znai-snippets-outer-border-color);
+}

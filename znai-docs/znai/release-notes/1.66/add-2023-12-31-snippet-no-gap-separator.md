@@ -1,0 +1,1 @@
+* Add: [noGapSeparator](snippets/external-code-snippets#no-gap-game) to add a separator between code snippets with `noGap`

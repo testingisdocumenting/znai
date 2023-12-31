@@ -47,13 +47,13 @@ class SnippetContainer extends React.Component {
     }
 
     renderNormalMode() {
-        const {title, className, noGap, next, prev} = this.props
+        const {title, className, noGap, noGapSeparator, next, prev} = this.props
 
         const fullClassName = "snippet-container content-block"
           + (className ? " " + className : "")
 
         return (
-            <Container className={fullClassName} next={next} prev={prev} noGap={noGap}>
+            <Container className={fullClassName} next={next} prev={prev} noGap={noGap} noGapSeparator={noGapSeparator}>
                 {this.renderTitle(title)}
                 {this.renderSnippet()}
             </Container>
