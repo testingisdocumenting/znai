@@ -22,6 +22,7 @@ import "./Container.css";
 
 export interface ContainerCommonProps {
   noGap?: boolean;
+  noGapSeparator?: boolean;
   next?: DocElementPayload;
   prev?: DocElementPayload;
 }
@@ -48,14 +49,15 @@ interface Props extends ContainerCommonProps {
  *
  * @constructor
  */
-export function Container({ className, style, onClick, noGap, next, prev, children }: Props) {
+export function Container({ className, style, onClick, noGap, noGapSeparator, next, prev, children }: Props) {
   const noBottomMargin = noGap && next;
   const noTopMargin = prev && prev.noGap;
   const fullClassName =
     "znai-container znai-mobile-remove-padding " +
     className +
     (noBottomMargin ? " no-bottom-margin" : "") +
-    (noTopMargin ? " no-top-margin" : "");
+    (noTopMargin ? " no-top-margin" : "") +
+    (noBottomMargin && noGapSeparator ? " no-gap-separator" : "");
 
   return (
     <div className={fullClassName} style={style} onClick={onClick}>
