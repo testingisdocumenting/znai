@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.65/znai-dist-1.65-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.66/znai-dist-1.66-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.65&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.66&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.65&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.66&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.65&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.66&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -3019,7 +3019,7 @@
     <url>/znai/release-notes/2023#1-66</url>
     <fullTitle>Znai: 2023 Releases, 1.66 [Release Notes]</fullTitle>
     <text>
-      <text>Fix: Restore search focus when visuals/iframe iframe is present in search preview Add: visuals/PlantUml Plant UML use BSD license as dependency Add: snippets/snippets-manipulation#surrounded-by-multi-chars-scope Surrounded By Multi-chars Scope text manipulation Add: snippets/snippets-manipulation#surrounded-by-scope Surrounded By Scope text manipulation Add: visuals/iframe#properties-override Properties override for iframe content based on active dark/light mode selection Add: Automatically add index.html if visuals/iframe iframe src points to documentation content and ends with /</text>
+      <text>Fix: Properly render leading spaces when using snippets/CLI#ansi-colors-output include-cli-output Fix: Text right after introduction/what-is-this#extensive-plugins-system-include Include Plugin is no longer ignored Add: snippets/external-code-snippets#no-gap noGapSeparator to add a separator between code snippets with noGap Add visuals/charts#filtering-columns Charts columns parameter Add: visuals/iframe IFrame auto reload on html content change during preview Add: visuals/iframe#title IFrame title parameter Add: visuals/iframe IFrame content now participates in presentation mode Add: visuals/iframe IFrame content no gap on mobile</text>
       <score>STANDARD</score>
     </text>
   </entry>

@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>1.66</h1></header>
-<p>Fix: Restore search focus when visuals/iframe iframe is present in search preview Add: visuals/PlantUml Plant UML use BSD license as dependency Add: snippets/snippets-manipulation#surrounded-by-multi-chars-scope Surrounded By Multi-chars Scope text manipulation Add: snippets/snippets-manipulation#surrounded-by-scope Surrounded By Scope text manipulation Add: visuals/iframe#properties-override Properties override for iframe content based on active dark/light mode selection Add: Automatically add index.html if visuals/iframe iframe src points to documentation content and ends with /</p>
+<p>Fix: Properly render leading spaces when using snippets/CLI#ansi-colors-output include-cli-output Fix: Text right after introduction/what-is-this#extensive-plugins-system-include Include Plugin is no longer ignored Add: snippets/external-code-snippets#no-gap noGapSeparator to add a separator between code snippets with noGap Add visuals/charts#filtering-columns Charts columns parameter Add: visuals/iframe IFrame auto reload on html content change during preview Add: visuals/iframe#title IFrame title parameter Add: visuals/iframe IFrame content now participates in presentation mode Add: visuals/iframe IFrame content no gap on mobile</p>
 </article>
 
 <article>
@@ -148,18 +148,110 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Fix: Restore search focus when ",
+              "text" : "Fix: Properly render leading spaces when using ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/CLI#ansi-colors-output",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include-cli-output",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Text right after ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/introduction/what-is-this#extensive-plugins-system-include",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Include Plugin",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " is no longer ignored",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/external-code-snippets#no-gap",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "noGapSeparator",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to add a separator between code snippets with ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "noGap",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Add ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/visuals/charts#filtering-columns",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Charts columns",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " parameter",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
               "type" : "SimpleText"
             }, {
               "url" : "/znai/visuals/iframe",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
-                "text" : "iframe",
+                "text" : "IFrame",
                 "type" : "SimpleText"
               } ]
             }, {
-              "text" : " is present in search preview",
+              "text" : " auto reload on html content change during preview",
               "type" : "SimpleText"
             } ]
           } ]
@@ -176,21 +268,15 @@ ReactDOM.render(React.createElement(Documentation, {
               "text" : "Add: ",
               "type" : "SimpleText"
             }, {
-              "url" : "/znai/visuals/PlantUml",
+              "url" : "/znai/visuals/iframe#title",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
-                "text" : "Plant UML",
+                "text" : "IFrame title",
                 "type" : "SimpleText"
               } ]
             }, {
-              "text" : " use ",
-              "type" : "SimpleText"
-            }, {
-              "code" : "BSD",
-              "type" : "InlinedCode"
-            }, {
-              "text" : " license as dependency",
+              "text" : " parameter",
               "type" : "SimpleText"
             } ]
           } ]
@@ -205,96 +291,43 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "Add: ",
-              "type" : "SimpleText"
-            }, {
-              "url" : "/znai/snippets/snippets-manipulation#surrounded-by-multi-chars-scope",
-              "isFile" : false,
-              "type" : "Link",
-              "content" : [ {
-                "text" : "Surrounded By Multi-chars Scope",
-                "type" : "SimpleText"
-              } ]
-            }, {
-              "text" : " text manipulation",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        } ]
-      }, {
-        "bulletMarker" : "*",
-        "tight" : true,
-        "type" : "BulletList",
-        "content" : [ {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Add: ",
-              "type" : "SimpleText"
-            }, {
-              "url" : "/znai/snippets/snippets-manipulation#surrounded-by-scope",
-              "isFile" : false,
-              "type" : "Link",
-              "content" : [ {
-                "text" : "Surrounded By Scope",
-                "type" : "SimpleText"
-              } ]
-            }, {
-              "text" : " text manipulation",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        } ]
-      }, {
-        "bulletMarker" : "*",
-        "tight" : true,
-        "type" : "BulletList",
-        "content" : [ {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Add: ",
-              "type" : "SimpleText"
-            }, {
-              "url" : "/znai/visuals/iframe#properties-override",
-              "isFile" : false,
-              "type" : "Link",
-              "content" : [ {
-                "text" : "Properties override",
-                "type" : "SimpleText"
-              } ]
-            }, {
-              "text" : " for iframe content based on active dark/light mode selection",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        } ]
-      }, {
-        "bulletMarker" : "*",
-        "tight" : true,
-        "type" : "BulletList",
-        "content" : [ {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Add: Automatically add index.html if ",
               "type" : "SimpleText"
             }, {
               "url" : "/znai/visuals/iframe",
               "isFile" : false,
               "type" : "Link",
               "content" : [ {
-                "text" : "iframe",
+                "text" : "IFrame content",
                 "type" : "SimpleText"
               } ]
             }, {
-              "text" : " src points to documentation content and ends with ",
+              "text" : " now participates in presentation mode",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
               "type" : "SimpleText"
             }, {
-              "code" : "/",
-              "type" : "InlinedCode"
+              "url" : "/znai/visuals/iframe",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "IFrame content",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " no gap on mobile",
+              "type" : "SimpleText"
             } ]
           } ]
         } ]
@@ -1569,7 +1602,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1704073374570,
+    "lastModifiedTime" : 1704076357536,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2023 Releases",
