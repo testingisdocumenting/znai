@@ -1,1 +1,1 @@
-Add [Charts columns](visuals/charts#filtering-columns) parameter
+* Add [Charts columns](visuals/charts#filtering-columns) parameter
