@@ -120,6 +120,11 @@
 </article>
 
 <article>
+<header><h1>Filtering columns</h1></header>
+<p>You can filter for specific columns from a CSV input by using the columns parameter. ```barchart {columns: [&quot;genre&quot;, &quot;rating&quot;]} genre, preference, rating RPG, 75, 8 Action, 50, 9 RTS, 40, 1 FPS, 50, 1 ```</p>
+</article>
+
+<article>
 <header><h1>Presentation</h1></header>
 <p>Charts automatically participate in slides. Each chart becomes an individual slide.Use breakpoint to add extra slides transitions. :include-linechart: charts/competitors.csv { legend: true, breakpoint: [17, 42] } To try it, press on icon next to the Presentation header :include-piechart: charts/genres.csv {breakpoint: &quot;Action&quot;} Use all as breakpoint value to create a slide for each textual entry :include-barchart: charts/genres.csv { legend: true, breakpoint: &quot;all&quot; }</p>
 </article>
@@ -533,6 +538,37 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "EchartGeneric"
       } ]
     }, {
+      "id" : "filtering-columns",
+      "title" : "Filtering columns",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "You can filter for specific columns from a CSV input by using the ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "columns",
+          "type" : "InlinedCode"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "parameter.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```barchart {columns: [\"genre\", \"rating\"]}\ngenre, preference, rating\nRPG, 75, 8\nAction, 50, 9\nRTS, 40, 1\nFPS, 50, 1\n```\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "columns" : [ "genre", "rating" ],
+        "chartType" : "bar",
+        "isTimeSeries" : false,
+        "data" : [ [ "RPG", 8 ], [ "Action", 9 ], [ "RTS", 1 ], [ "FPS", 1 ] ],
+        "labels" : [ "genre", "rating" ],
+        "type" : "EchartGeneric"
+      } ]
+    }, {
       "id" : "presentation",
       "title" : "Presentation",
       "type" : "Section",
@@ -657,7 +693,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1699364610896,
+    "lastModifiedTime" : 1704073374582,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Charts",
@@ -686,6 +722,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Inlined Data",
         "id" : "inlined-data"
+      }, {
+        "title" : "Filtering columns",
+        "id" : "filtering-columns"
       }, {
         "title" : "Presentation",
         "id" : "presentation"

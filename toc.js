@@ -985,6 +985,9 @@ toc = [ {
       "title" : "Inlined Data",
       "id" : "inlined-data"
     }, {
+      "title" : "Filtering columns",
+      "id" : "filtering-columns"
+    }, {
       "title" : "Presentation",
       "id" : "presentation"
     }, {
@@ -1222,6 +1225,9 @@ toc = [ {
     }, {
       "title" : "Properties Override",
       "id" : "properties-override"
+    }, {
+      "title" : "Title",
+      "id" : "title"
     }, {
       "title" : "Embedding Video",
       "id" : "embedding-video"
@@ -1878,6 +1884,9 @@ toc = [ {
     "fileName" : "2023",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.66",
+      "id" : "1-66"
+    }, {
       "title" : "1.65",
       "id" : "1-65"
     }, {

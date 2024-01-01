@@ -151,7 +151,7 @@
 
 <article>
 <header><h1>Callouts</h1></header>
-<p>Use callouts parameter to attach bullet points with explanation to a json path: markdown :include-json: book-store.json { collapsedPaths: ['root.store.book'], callouts: { &quot;root.store.bicycle.color&quot;: &quot;subject of **availability**&quot;, &quot;root.store.bicycle.price&quot;: &quot;*price* changes daily&quot; }} }</p>
+<p>Use callouts parameter to attach bullet points with explanation to a json path: markdown :include-json: book-store.json { collapsedPaths: ['root.store.book'], callouts: { &quot;root.store.bicycle.color&quot;: &quot;subject of **availability**&quot;, &quot;root.store.bicycle.price&quot;: &quot;*price* changes daily&quot; }} } }</p>
 </article>
 
 <article>
@@ -1113,6 +1113,12 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         },
         "type" : "Json"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "}",
+          "type" : "SimpleText"
+        } ]
       } ]
     }, {
       "id" : "callouts-from-file",
@@ -1317,7 +1323,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1699364610884,
+    "lastModifiedTime" : 1704073374570,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Json",

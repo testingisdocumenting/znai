@@ -86,17 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Embedding Supporting Content</h1></header>
-<p>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter to automatically set the height of the iframe to fit its content &lt;html lang=&quot;en&quot;&gt; &lt;head&gt; &lt;style&gt; :root { --backgroundColor: #eee; --color: #222; } .content { background-color: var(--backgroundColor); border: 2px solid #555; color: var(--color); font-size: 20px; padding: 16px; } &lt;/style&gt; &lt;title&gt;generated content&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div class=&quot;content&quot;&gt;Custom content&lt;/div&gt; &lt;/body&gt; &lt;/html&gt; Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</p>
+<p>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter to automatically set the height of the iframe to fit its content &lt;html lang=&quot;en&quot;&gt; &lt;head&gt; &lt;style&gt; :root { --backgroundColor: #eee; --color: #222; } body { margin: 0 } .content { background-color: var(--backgroundColor); border: 2px solid #555; color: var(--color); font-size: 20px; padding: 16px; } &lt;/style&gt; &lt;title&gt;generated content&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div class=&quot;content&quot;&gt;Custom content&lt;/div&gt; &lt;/body&gt; &lt;/html&gt; Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</p>
 </article>
 
 <article>
 <header><h1>Properties Override</h1></header>
-<p>Use light and dark to override CSS properties inside iframe content for light and dark modes respectively. Switch mode now to see the effect.</p>
+<p>Use light and dark to override CSS properties inside iframe content for light and dark modes respectively. Switch mode now to see the effect. markdown :include-iframe: iframe/custom.html { fit: true, light: { &quot;--color&quot;: &quot;#333&quot;, &quot;--backgroundColor&quot;: &quot;#eee&quot; }, dark: { &quot;--color&quot;: &quot;#eee&quot;, &quot;--backgroundColor&quot;: &quot;#333&quot; }, }</p>
+</article>
+
+<article>
+<header><h1>Title</h1></header>
+<p>Use title parameter to display title bar on top of the embedded content: markdown :include-iframe: iframe/custom.html { title: &quot;rendered example&quot;, light: { &quot;--color&quot;: &quot;#333&quot;, &quot;--backgroundColor&quot;: &quot;#eee&quot; }, dark: { &quot;--color&quot;: &quot;#eee&quot;, &quot;--backgroundColor&quot;: &quot;#333&quot; }, fit: true }</p>
 </article>
 
 <article>
 <header><h1>Embedding Video</h1></header>
-<p>Use include-iframe to embed content from other place. By default, aspect ratio set to 16:9 . :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY</p>
+<p>Use include-iframe to embed media from other places. By default, aspect ratio is set to 16:9 . :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY</p>
 </article>
 
 <article>
@@ -182,6 +187,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
+        "previewMarker" : "96f5d5cb-8c97-47f7-a8d5-92c47cce3b9c",
         "fit" : true,
         "type" : "Iframe"
       }, {
@@ -198,7 +204,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "html",
-        "snippet" : "<html lang=\"en\">\n<head>\n  <style>\n      :root {\n          --backgroundColor: #eee;\n          --color: #222;\n      }\n      .content {\n          background-color: var(--backgroundColor);\n          border: 2px solid #555;\n          color: var(--color);\n          font-size: 20px;\n          padding: 16px;\n      }\n  </style>\n  <title>generated content</title>\n</head>\n\n<body>\n<div class=\"content\">Custom content</div>\n</body>\n</html>",
+        "snippet" : "<html lang=\"en\">\n<head>\n  <style>\n      :root {\n          --backgroundColor: #eee;\n          --color: #222;\n      }\n\n      body { margin: 0 }\n\n      .content {\n          background-color: var(--backgroundColor);\n          border: 2px solid #555;\n          color: var(--color);\n          font-size: 20px;\n          padding: 16px;\n      }\n  </style>\n  <title>generated content</title>\n</head>\n\n<body>\n<div class=\"content\">Custom content</div>\n</body>\n</html>",
         "autoTitle" : true,
         "title" : "iframe/custom.html",
         "anchorId" : "embedding-supporting-content-iframe-custom-html",
@@ -261,7 +267,13 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "markdown",
+        "snippet" : ":include-iframe: iframe/custom.html {\n  fit: true,\n  light: { \"--color\": \"#333\", \"--backgroundColor\": \"#eee\" },\n  dark: { \"--color\": \"#eee\", \"--backgroundColor\": \"#333\" },\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
         "src" : "/znai/iframe/custom.html",
+        "previewMarker" : "186c61e5-6e05-43a4-9f58-d47c2443cf73",
         "fit" : true,
         "light" : {
           "--color" : "#333",
@@ -271,6 +283,43 @@ ReactDOM.render(React.createElement(Documentation, {
           "--color" : "#eee",
           "--backgroundColor" : "#333"
         },
+        "type" : "Iframe"
+      } ]
+    }, {
+      "id" : "title",
+      "title" : "Title",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " parameter to display title bar on top of the embedded content:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-iframe: iframe/custom.html {\n  title: \"rendered example\",\n  light: { \"--color\": \"#333\", \"--backgroundColor\": \"#eee\" },\n  dark: { \"--color\": \"#eee\", \"--backgroundColor\": \"#333\" },\n  fit: true\n}\n",
+        "lineNumber" : "",
+        "highlight" : [ 1 ],
+        "type" : "Snippet"
+      }, {
+        "src" : "/znai/iframe/custom.html",
+        "previewMarker" : "0e4bbf97-c308-42ea-ad0c-d969a9c51cc7",
+        "title" : "rendered example",
+        "light" : {
+          "--color" : "#333",
+          "--backgroundColor" : "#eee"
+        },
+        "dark" : {
+          "--color" : "#eee",
+          "--backgroundColor" : "#333"
+        },
+        "fit" : true,
         "type" : "Iframe"
       } ]
     }, {
@@ -286,7 +335,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "code" : "include-iframe",
           "type" : "InlinedCode"
         }, {
-          "text" : " to embed content from other place. By default, aspect ratio set to ",
+          "text" : " to embed media from other places. By default, aspect ratio is set to ",
           "type" : "SimpleText"
         }, {
           "code" : "16:9",
@@ -302,6 +351,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
+        "previewMarker" : "28a451d8-7a9d-4308-9262-9d9740a7916d",
         "type" : "Iframe"
       } ]
     }, {
@@ -327,11 +377,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
+        "previewMarker" : "d90e5e28-d67b-4797-9a01-e4e01ef8e519",
         "aspectRatio" : "4:3",
         "type" : "Iframe"
       } ]
     } ],
-    "lastModifiedTime" : 1699364610904,
+    "lastModifiedTime" : 1704073374586,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Iframe",
@@ -345,6 +396,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Properties Override",
         "id" : "properties-override"
+      }, {
+        "title" : "Title",
+        "id" : "title"
       }, {
         "title" : "Embedding Video",
         "id" : "embedding-video"

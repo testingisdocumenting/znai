@@ -83,7 +83,7 @@
     <url>/znai/introduction/getting-started#command-line</url>
     <fullTitle>Znai: Getting Started, Command Line [Introduction]</fullTitle>
     <text>
-      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.64/znai-dist-1.64-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
+      <text>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.65/znai-dist-1.65-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -91,7 +91,7 @@
     <url>/znai/introduction/getting-started#maven-plugin</url>
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
-      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.64&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
+      <text>&lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.65&lt;/version> &lt;/plugin> Note: consider adding a separate module for documentation in the multi module maven project</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -107,7 +107,7 @@
     <url>/znai/introduction/getting-started#preview-mode</url>
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
-      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.64&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
+      <text>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.65&lt;/version> &lt;configuration> &lt;port>3334&lt;/port> &lt;!-- optional override of default value 3333--> &lt;/configuration> &lt;/plugin> Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -115,7 +115,7 @@
     <url>/znai/introduction/getting-started#static-site-generation</url>
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
-      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.64&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
+      <text>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin> &lt;groupId>org.testingisdocumenting.znai&lt;/groupId> &lt;artifactId>znai-maven-plugin&lt;/artifactId> &lt;version>1.65&lt;/version> &lt;configuration> &lt;docId>project-name&lt;/docId> &lt;deployRoot>/path/to/static-content&lt;/deployRoot> &lt;!-- default is ${project.build.directory} --> &lt;/configuration> &lt;/plugin></text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -515,7 +515,7 @@
     <url>/znai/snippets/external-code-snippets#no-gap</url>
     <fullTitle>Znai: External Code Snippets, No Gap [Snippets]</fullTitle>
     <text>
-      <text>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: "part one", noGap: true, collapsed: false} :include-file: simple.c {title: "part two", collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; }</text>
+      <text>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: "part one", noGap: true, collapsed: false} :include-file: simple.c {title: "part two", collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream> using namespace std; int main() { cout &lt;&lt; "hello"; } Use noGapSeparator: true to add a delimiter between code snippets: module Game : sig type t end module Game = struct type t = { name: string } end</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -947,7 +947,7 @@
     <url>/znai/snippets/json#callouts</url>
     <fullTitle>Znai: Json, Callouts [Snippets]</fullTitle>
     <text>
-      <text>Use callouts parameter to attach bullet points with explanation to a json path: markdown :include-json: book-store.json { collapsedPaths: ['root.store.book'], callouts: { "root.store.bicycle.color": "subject of **availability**", "root.store.bicycle.price": "*price* changes daily" }} }</text>
+      <text>Use callouts parameter to attach bullet points with explanation to a json path: markdown :include-json: book-store.json { collapsedPaths: ['root.store.book'], callouts: { "root.store.bicycle.color": "subject of **availability**", "root.store.bicycle.price": "*price* changes daily" }} } }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1672,6 +1672,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/charts#filtering-columns</url>
+    <fullTitle>Znai: Charts, Filtering columns [Visuals]</fullTitle>
+    <text>
+      <text>You can filter for specific columns from a CSV input by using the columns parameter. ```barchart {columns: ["genre", "rating"]} genre, preference, rating RPG, 75, 8 Action, 50, 9 RTS, 40, 1 FPS, 50, 1 ```</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/charts#presentation</url>
     <fullTitle>Znai: Charts, Presentation [Visuals]</fullTitle>
     <text>
@@ -2035,7 +2043,7 @@
     <url>/znai/visuals/iframe#embedding-supporting-content</url>
     <fullTitle>Znai: Iframe, Embedding Supporting Content [Visuals]</fullTitle>
     <text>
-      <text>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter to automatically set the height of the iframe to fit its content &lt;html lang="en"> &lt;head> &lt;style> :root { --backgroundColor: #eee; --color: #222; } .content { background-color: var(--backgroundColor); border: 2px solid #555; color: var(--color); font-size: 20px; padding: 16px; } &lt;/style> &lt;title>generated content&lt;/title> &lt;/head> &lt;body> &lt;div class="content">Custom content&lt;/div> &lt;/body> &lt;/html> Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</text>
+      <text>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter to automatically set the height of the iframe to fit its content &lt;html lang="en"> &lt;head> &lt;style> :root { --backgroundColor: #eee; --color: #222; } body { margin: 0 } .content { background-color: var(--backgroundColor); border: 2px solid #555; color: var(--color); font-size: 20px; padding: 16px; } &lt;/style> &lt;title>generated content&lt;/title> &lt;/head> &lt;body> &lt;div class="content">Custom content&lt;/div> &lt;/body> &lt;/html> Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2043,7 +2051,15 @@
     <url>/znai/visuals/iframe#properties-override</url>
     <fullTitle>Znai: Iframe, Properties Override [Visuals]</fullTitle>
     <text>
-      <text>Use light and dark to override CSS properties inside iframe content for light and dark modes respectively. Switch mode now to see the effect.</text>
+      <text>Use light and dark to override CSS properties inside iframe content for light and dark modes respectively. Switch mode now to see the effect. markdown :include-iframe: iframe/custom.html { fit: true, light: { "--color": "#333", "--backgroundColor": "#eee" }, dark: { "--color": "#eee", "--backgroundColor": "#333" }, }</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/iframe#title</url>
+    <fullTitle>Znai: Iframe, Title [Visuals]</fullTitle>
+    <text>
+      <text>Use title parameter to display title bar on top of the embedded content: markdown :include-iframe: iframe/custom.html { title: "rendered example", light: { "--color": "#333", "--backgroundColor": "#eee" }, dark: { "--color": "#eee", "--backgroundColor": "#333" }, fit: true }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2051,7 +2067,7 @@
     <url>/znai/visuals/iframe#embedding-video</url>
     <fullTitle>Znai: Iframe, Embedding Video [Visuals]</fullTitle>
     <text>
-      <text>Use include-iframe to embed content from other place. By default, aspect ratio set to 16:9 . :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY</text>
+      <text>Use include-iframe to embed media from other places. By default, aspect ratio is set to 16:9 . :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2996,6 +3012,14 @@
     <fullTitle>Znai: Local Build, Run Local Version [Znai Development]</fullTitle>
     <text>
       <text>cd znai-dist/target unzip dist-znai.zip export PATH=$(pwd)/dist:$PATH znai --version</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2023#1-66</url>
+    <fullTitle>Znai: 2023 Releases, 1.66 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: Restore search focus when visuals/iframe iframe is present in search preview Add: visuals/PlantUml Plant UML use BSD license as dependency Add: snippets/snippets-manipulation#surrounded-by-multi-chars-scope Surrounded By Multi-chars Scope text manipulation Add: snippets/snippets-manipulation#surrounded-by-scope Surrounded By Scope text manipulation Add: visuals/iframe#properties-override Properties override for iframe content based on active dark/light mode selection Add: Automatically add index.html if visuals/iframe iframe src points to documentation content and ends with /</text>
       <score>STANDARD</score>
     </text>
   </entry>
