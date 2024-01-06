@@ -1,0 +1,1 @@
+* Fix: auto generated anchor from [title](snippets/external-code-snippets#title) can now be referenced from other pages
