@@ -56,10 +56,10 @@ export function snippetsDemo(registry) {
             contentParagraph(false),
         ]}/>
       ))
-      .add('separator no gap', () => (
+      .add('separator no gap border', () => (
         <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={[
             contentParagraph(false),
-            compactContentSnippet("examples", {noGap: true, noGapSeparator: true}),
+            compactContentSnippet("examples", {noGap: true, noGapBorder: true}),
             compactContentSnippet(undefined),
             contentParagraph(false),
         ]}/>
@@ -285,13 +285,13 @@ function textBetweenSnippetsMultipleBlocks() {
     ]
 }
 
-function compactContentSnippet(title, {noGap, noGapSeparator} = {}) {
+function compactContentSnippet(title, {noGap, noGapBorder} = {}) {
     return {
         "type": "Snippet",
         "lang": "java",
         "title": title,
         "noGap": noGap,
-        "noGapSeparator": noGapSeparator,
+        "noGapBorder": noGapBorder,
         "snippet": codeWithMethodCalls(),
     }
 }

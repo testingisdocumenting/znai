@@ -1,0 +1,1 @@
+* Rename: `noGapSeparator` to [noGapBorder](snippets/external-code-snippets#no-gap) 

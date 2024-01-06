@@ -22,6 +22,6 @@
     margin-top: 0;
 }
 
-.znai-container.no-gap-separator {
+.znai-container.no-gap-border {
    border-bottom: 1px solid var(--znai-snippets-outer-border-color);
 }

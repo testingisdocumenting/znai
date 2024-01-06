@@ -32,9 +32,9 @@ public class PluginParamsDefinitionCommon {
             .add("noGap", PluginParamType.BOOLEAN,
                     "remove margins when multiple snippets in a row", "true");
 
-    public static final PluginParamsDefinition noGapSeparator = new PluginParamsDefinition()
-            .add("noGapSeparator", PluginParamType.BOOLEAN,
-                    "add line delimiter between snippets", "true");
+    public static final PluginParamsDefinition noGapBorder = new PluginParamsDefinition()
+            .add("noGapBorder", PluginParamType.BOOLEAN,
+                    "add border line between containers", "true");
 
     public static final PluginParamsDefinition snippetReadMore = new PluginParamsDefinition()
             .add("readMore", PluginParamType.BOOLEAN,
@@ -46,7 +46,7 @@ public class PluginParamsDefinitionCommon {
             .add(title)
             .add(collapsible)
             .add(noGap)
-            .add(noGapSeparator)
+            .add(noGapBorder)
             .add(AnchorFeature.paramsDefinition);
 
     public static final PluginParamsDefinition snippetWide = new PluginParamsDefinition()
