@@ -113,9 +113,14 @@ Use `noGap: true` to remove top/bottom margins when there are multiple snippets 
 :include-file: file-name.js {title: "part one", noGap: true, collapsed: false}
 :include-file: simple.c {title: "part two", collapsed: false}
 
-Use `noGapSeparator: true` to add a delimiter between code snippets:
+Use `noGapBorder: true` to add a delimiter between code snippets:
 
-:include-file: ocaml/api.mli {title: "Game", noGap: true, noGapSeparator: true}
+```markdown
+:include-file: ocaml/api.mli {title: "Game", noGap: true, noGapBorder: true}
+:include-file: ocaml/api.ml
+```
+
+:include-file: ocaml/api.mli {title: "Game", noGap: true, noGapBorder: true}
 :include-file: ocaml/api.ml
 
 # Highlights
