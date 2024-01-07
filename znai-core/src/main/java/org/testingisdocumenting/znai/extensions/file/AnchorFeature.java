@@ -53,9 +53,8 @@ public class AnchorFeature implements PluginFeature {
 
         String title = pluginParams.getOpts().get(TITLE_KEY, props.getOrDefault(TITLE_KEY, "").toString());
         if (!title.isEmpty()) {
-            String idFromTitle = NameUtils.idFromTitle(title);
-            String uniqueAnchorId = docStructure.generateUniqueAnchor(markupPath, idFromTitle);
-            docStructure.registerLocalAnchor(markupPath, idFromTitle);
+            String uniqueAnchorId = docStructure.generateUniqueAnchor(markupPath, NameUtils.idFromTitle(title));
+            docStructure.registerLocalAnchor(markupPath, uniqueAnchorId);
 
             props.put(ANCHOR_ID_KEY, uniqueAnchorId);
         }
