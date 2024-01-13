@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +19,21 @@
     margin-top: 20px;
     margin-bottom: 30px;
     border-bottom: 1px solid var(--znai-snippets-outer-border-color);
+}
+
+.tabs-area.single-element-container .tabs-content {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tabs-area.single-element-container .znai-api-parameters {
+    border-top: none;
+    border-bottom: none;
+}
+
+.tabs-area.single-element-container .znai-container {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .tabs-content {

@@ -17,18 +17,37 @@
 import React from 'react'
 import {Tabs} from './Tabs'
 import {elementsLibrary} from '../DefaultElementsLibrary'
+import { personApiParameters } from "../demo-utils/contentGenerators";
 
 export function tabsDemo(registry) {
     registry
-        .add('with code', () => <Tabs tabsContent={shortTabsContent()} elementsLibrary={elementsLibrary}/>, '')
-        .add('tabs to test switch 1', () => <Tabs tabsContent={contentToSwitch()}
-                                                  elementsLibrary={elementsLibrary}/>, '')
-        .add('tabs to test switch 2', () => <Tabs tabsContent={contentToSwitch()}
-                                                  elementsLibrary={elementsLibrary}/>, '')
-        .add('tabs to test switch 3', () => <Tabs tabsContent={contentToSwitch()}
-                                                  elementsLibrary={elementsLibrary}/>, '')
-        .add('tabs to test switch 4', () => <Tabs tabsContent={contentToSwitch()}
-                                                  elementsLibrary={elementsLibrary}/>, '')
+      .add('with code', () => <Tabs tabsContent={shortTabsContent()} elementsLibrary={elementsLibrary}/>, '')
+      .add("with api parameters ", () => (
+        <Tabs tabsContent={apiParametersContent()} elementsLibrary={elementsLibrary} />
+      ))
+      .add("tabs to test switch 1", () => <Tabs tabsContent={contentToSwitch()}
+                                                elementsLibrary={elementsLibrary}/>, "")
+      .add("tabs to test switch 2", () => <Tabs tabsContent={contentToSwitch()}
+                                                elementsLibrary={elementsLibrary}/>, "")
+      .add("tabs to test switch 3", () => <Tabs tabsContent={contentToSwitch()}
+                                                elementsLibrary={elementsLibrary}/>, "")
+      .add("tabs to test switch 4", () => <Tabs tabsContent={contentToSwitch()}
+                                                elementsLibrary={elementsLibrary}/>, "")
+}
+
+function apiParametersContent() {
+    return [
+        {
+            "name": "tab name",
+            "content": [
+                {
+                    "parameters": personApiParameters,
+                    "type": "ApiParameters",
+                    "title": "person definition"
+                },
+            ]
+        }
+    ]
 }
 
 function shortTabsContent() {

@@ -70,14 +70,26 @@ class Tabs extends Component {
         const names = tabsContent.map(t => t.name)
         const tabContent = tabsContent[activeIdx].content
 
+        const className = "tabs-area" + (isOnlyElementContainer() ? " single-element-container" : "")
+
         return (
-            <div className="tabs-area" ref={this.saveNode}>
+            <div className={className} ref={this.saveNode}>
                 <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick}/>
                 <div className="tabs-content">
                     <elementsLibrary.DocElement {...this.props} content={tabContent}/>
                 </div>
             </div>
         )
+
+        function isOnlyElementContainer() {
+            if (tabContent.length === 1) {
+                const type = tabContent[0].type;
+                return type === "Snippet" || type === "ApiParameters" || type === "Table";
+            } else {
+                return false;
+            }
+
+        }
     }
 
     saveNode = (node) => {
