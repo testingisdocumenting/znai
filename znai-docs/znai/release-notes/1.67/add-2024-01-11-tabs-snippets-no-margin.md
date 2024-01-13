@@ -1,0 +1,1 @@
+* Add: [Tabs](layout/tabs) remove vertical margin when the only content inside is a code snippet or api parameters
