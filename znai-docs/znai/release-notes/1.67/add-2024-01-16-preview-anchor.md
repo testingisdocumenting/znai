@@ -1,0 +1,1 @@
+* Add: automatic preview navigation to the most recent change ignores previous user clicked anchors
