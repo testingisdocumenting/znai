@@ -615,7 +615,17 @@ export class Documentation extends Component {
     }
 
     navigateToPageAndDisplayChange(pageProps, updatePagesReference) {
+        // we force remove url hash so when there are changes on the page
+        // preview can jump to them and not be stuck in a selected page section
+        function removeHashFromUrl() {
+            if (window.location.hash.length > 0) {
+                window.history.pushState("", document.title, window.location.pathname
+                  + window.location.search);
+            }
+        }
+
         this.navigateToPageIfRequired(pageProps.tocItem).then(() => {
+            removeHashFromUrl();
             this.updatePageAndDetectChangePosition(() => {
                 updatePagesReference().then(() => {
                         this.changePage({page: pageProps})
