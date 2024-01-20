@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +15,12 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
-import {tabsRegistration} from './TabsRegistration'
-import {findParentWithScroll} from '../../utils/domNodes'
+import { tabsRegistration } from "./TabsRegistration";
+import { findParentWithScroll } from "../../utils/domNodes";
 
-import './Tabs.css'
+import "./Tabs.css";
 
 const TabNames = ({names, activeIdx, onClick}) => {
     return (
@@ -70,7 +71,7 @@ class Tabs extends Component {
         const names = tabsContent.map(t => t.name)
         const tabContent = tabsContent[activeIdx].content
 
-        const className = "tabs-area" + (isOnlyElementContainer() ? " single-element-container" : "")
+        const className = "tabs-area" + (areOnlyElementsContainer() ? " single-element-container" : "")
 
         return (
             <div className={className} ref={this.saveNode}>
@@ -81,14 +82,26 @@ class Tabs extends Component {
             </div>
         )
 
-        function isOnlyElementContainer() {
-            if (tabContent.length === 1) {
-                const type = tabContent[0].type;
+        function areOnlyElementsContainer() {
+            function isSupportedContainer(type) {
                 return type === "Snippet" || type === "ApiParameters" || type === "Table";
-            } else {
-                return false;
             }
 
+            function allContainersWithNoGap() {
+                return tabContent.every((v, idx) => {
+                    // no gap for the last element is not required
+                    const isLast = idx === tabContent.length - 1
+                    return isSupportedContainer(v.type) && (isLast || v.noGap)
+                })
+            }
+
+            if (tabContent.length === 0) {
+                return false
+            } else if (tabContent.length === 1) {
+                return isSupportedContainer(tabContent[0].type);
+            } else {
+                return allContainersWithNoGap()
+            }
         }
     }
 
