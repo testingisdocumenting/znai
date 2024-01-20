@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,13 +18,19 @@
 import React from 'react'
 import {Tabs} from './Tabs'
 import {elementsLibrary} from '../DefaultElementsLibrary'
-import { personApiParameters } from "../demo-utils/contentGenerators";
+import { codeWithMethodCalls, personApiParameters } from "../demo-utils/contentGenerators";
 
 export function tabsDemo(registry) {
     registry
-      .add('with code', () => <Tabs tabsContent={shortTabsContent()} elementsLibrary={elementsLibrary}/>, '')
+      .add('with code and text', () => <Tabs tabsContent={shortTabsContent()} elementsLibrary={elementsLibrary}/>, '')
       .add("with api parameters ", () => (
-        <Tabs tabsContent={apiParametersContent()} elementsLibrary={elementsLibrary} />
+        <Tabs tabsContent={apiParametersTabContent()} elementsLibrary={elementsLibrary} />
+      ))
+      .add("with noGap code snippets ", () => (
+        <Tabs tabsContent={snippetsNoGapTabContent()} elementsLibrary={elementsLibrary} />
+      ))
+      .add("two code snippets ", () => (
+        <Tabs tabsContent={snippetsTabContent()} elementsLibrary={elementsLibrary} />
       ))
       .add("tabs to test switch 1", () => <Tabs tabsContent={contentToSwitch()}
                                                 elementsLibrary={elementsLibrary}/>, "")
@@ -35,7 +42,7 @@ export function tabsDemo(registry) {
                                                 elementsLibrary={elementsLibrary}/>, "")
 }
 
-function apiParametersContent() {
+function apiParametersTabContent() {
     return [
         {
             "name": "tab name",
@@ -48,6 +55,33 @@ function apiParametersContent() {
             ]
         }
     ]
+}
+
+function snippetsNoGapTabContent() {
+    return [
+        {
+            "name": "tab name",
+            "content": [snippet(true), snippet(false)]
+        }
+    ]
+}
+
+function snippetsTabContent() {
+    return [
+        {
+            "name": "tab name",
+            "content": [snippet(false), snippet(false)]
+        }
+    ]
+}
+
+export function snippet(noGap) {
+    return {
+        type: "Snippet",
+        lang: "java",
+        snippet: codeWithMethodCalls(),
+        noGap: noGap
+    };
 }
 
 function shortTabsContent() {
