@@ -36,6 +36,10 @@
     margin-bottom: 0;
 }
 
+.tabs-area.single-element-container .snippet {
+    border-left: none
+}
+
 .tabs-content {
     margin: 20px 0;
 }

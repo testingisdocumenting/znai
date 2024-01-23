@@ -32,6 +32,9 @@ export function tabsDemo(registry) {
       .add("two code snippets ", () => (
         <Tabs tabsContent={snippetsTabContent()} elementsLibrary={elementsLibrary} />
       ))
+      .add("wide code snippet", () => (
+        <Tabs tabsContent={wideSnippetsTabContent()} elementsLibrary={elementsLibrary} />
+      ))
       .add("tabs to test switch 1", () => <Tabs tabsContent={contentToSwitch()}
                                                 elementsLibrary={elementsLibrary}/>, "")
       .add("tabs to test switch 2", () => <Tabs tabsContent={contentToSwitch()}
@@ -75,11 +78,31 @@ function snippetsTabContent() {
     ]
 }
 
+function wideSnippetsTabContent() {
+    return [
+        {
+            "name": "tab name",
+            "content": [wideSnippet(false)]
+        }
+    ]
+}
+
+
 export function snippet(noGap) {
     return {
         type: "Snippet",
         lang: "java",
         snippet: codeWithMethodCalls(),
+        noGap: noGap
+    };
+}
+
+export function wideSnippet(noGap) {
+    return {
+        type: "Snippet",
+        lang: "java",
+        snippet: codeWithMethodCalls(),
+        wide: true,
         noGap: noGap
     };
 }
