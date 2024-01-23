@@ -1,0 +1,1 @@
+* Add: Shorten [Tabs](layout/tabs) dividers when content inside is not wide 

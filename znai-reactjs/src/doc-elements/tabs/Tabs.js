@@ -22,10 +22,11 @@ import { findParentWithScroll } from "../../utils/domNodes";
 
 import "./Tabs.css";
 
-const TabNames = ({names, activeIdx, onClick}) => {
+const TabNames = ({names, activeIdx, isWide, onClick}) => {
+    const tabsNameAreaClassName = "tabs-names-area" + (isWide ? "" : " content-block")
     return (
         <div className="tabs">
-            <div className="tabs-names-area">
+            <div className={tabsNameAreaClassName}>
                 <div className="tabs-names content-block">
                     {names.map((name, idx) => {
                         const className = "tab-name" + (idx === activeIdx ? " active" : "")
@@ -71,11 +72,13 @@ class Tabs extends Component {
         const names = tabsContent.map(t => t.name)
         const tabContent = tabsContent[activeIdx].content
 
-        const className = "tabs-area" + (areOnlyElementsContainer() ? " single-element-container" : "")
+        const isWide = isWideElementsPresent();
+        const singleElement = areOnlyElementsContainer();
+        const className = "tabs-area" + (singleElement ? " single-element-container" : "") + (!isWide ? " content-block" : "")
 
         return (
             <div className={className} ref={this.saveNode}>
-                <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick}/>
+                <TabNames names={names} activeIdx={activeIdx} onClick={this.onClick} isWide={isWide}/>
                 <div className="tabs-content">
                     <elementsLibrary.DocElement {...this.props} content={tabContent}/>
                 </div>
@@ -101,6 +104,16 @@ class Tabs extends Component {
                 return isSupportedContainer(tabContent[0].type);
             } else {
                 return allContainersWithNoGap()
+            }
+        }
+
+        function isWideElementsPresent() {
+            if (tabContent.length === 0) {
+                return false
+            } else {
+                return tabContent.some(v  => {
+                    return v.wide
+                })
             }
         }
     }
