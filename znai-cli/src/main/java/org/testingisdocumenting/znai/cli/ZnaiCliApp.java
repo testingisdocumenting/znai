@@ -122,12 +122,13 @@ public class ZnaiCliApp {
 
     private void preview() {
         DocumentationPreview preview = new DocumentationPreview(config.getDeployRoot());
-        preview.start(webSite, config.getPort(), () -> reportHostPort(config.getPort(), "/preview"));
+        preview.start(webSite, config.createSslConfig(), config.getPort(), () -> reportHostPort(config.getPort(), "/preview"));
     }
 
     private void serve() {
         HttpServer server = new ZnaiServer(reactJsBundle, config.getDeployRoot(),
-                new AuthorizationHeaderBasedAuthenticationHandler()).create();
+                new AuthorizationHeaderBasedAuthenticationHandler(),
+                config.createSslConfig()).create();
         HttpServerUtils.listen(server, config.getPort());
 
         reportHostPort(config.getPort(), "");
@@ -216,9 +217,9 @@ public class ZnaiCliApp {
         ConsoleOutputs.out(Color.BLUE, "znai ", Color.YELLOW, name + " mode");
     }
 
-    private static void reportHostPort(int port, String relativeUrl) {
+    private void reportHostPort(int port, String relativeUrl) {
         try {
-            ConsoleOutputs.out(Color.BLUE, "server started ", FontStyle.NORMAL, "http://", InetAddress.getLocalHost().getHostName(), ":",
+            ConsoleOutputs.out(Color.BLUE, "server started ", FontStyle.NORMAL, config.isSsl() ? "https://" : "http://", InetAddress.getLocalHost().getHostName(), ":",
                     port, relativeUrl.isEmpty() ? "" : relativeUrl);
         } catch (UnknownHostException e) {
             ConsoleOutputs.err("Cannot extract host name");

@@ -21,6 +21,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
@@ -45,11 +46,13 @@ public class ZnaiServer {
     private final ReactJsBundle reactJsBundle;
     private final ZnaiServerConfig serverConfig;
     private final AuthenticationHandler authenticationHandler;
+    private final SslConfig sslConfig;
 
-    public ZnaiServer(ReactJsBundle reactJsBundle, Path deployRoot, AuthenticationHandler authenticationHandler) {
+    public ZnaiServer(ReactJsBundle reactJsBundle, Path deployRoot, AuthenticationHandler authenticationHandler, SslConfig sslConfig) {
         this.reactJsBundle = reactJsBundle;
         this.serverConfig = new ZnaiServerConfig(deployRoot);
         this.authenticationHandler = authenticationHandler;
+        this.sslConfig = sslConfig;
 
         System.setProperty("vertx.cwd", deployRoot.toString());
         System.setProperty("file.encoding","UTF-8");
@@ -61,7 +64,10 @@ public class ZnaiServer {
     }
 
     public HttpServer create() {
-        HttpServer server = vertx.createHttpServer(new HttpServerOptions().setCompressionSupported(true));
+        HttpServerOptions httpServerOptions = new HttpServerOptions()
+                .setCompressionSupported(true);
+        updateServerOptionsWithSsl(httpServerOptions, sslConfig);
+        HttpServer server = vertx.createHttpServer(httpServerOptions);
 
         Router router = Router.router(vertx);
 
@@ -90,6 +96,16 @@ public class ZnaiServer {
         server.requestHandler(router::accept);
 
         return server;
+    }
+
+    private void updateServerOptionsWithSsl(HttpServerOptions serverOptions, SslConfig sslConfig) {
+        if (!sslConfig.isSpecified()) {
+            return;
+        }
+
+        serverOptions
+                .setSsl(true)
+                .setKeyStoreOptions(new JksOptions().setPath(sslConfig.jksPath().toString()).setPassword(sslConfig.jksPassword()));
     }
 
     private void registerCustomHandlersAndRoutes(Router router) {
