@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.parser.MarkupTypes;
 import org.apache.commons.cli.*;
+import org.testingisdocumenting.znai.server.SslConfig;
 import org.testingisdocumenting.znai.version.ZnaiVersion;
 
 import java.nio.file.Path;
@@ -48,7 +49,9 @@ public class ZnaiCliConfig {
     private static final String PORT_KEY = "port";
     private static final String ACTOR_KEY = "actor";
     private static final String LOOKUP_PATHS_KEY = "lookup-paths";
-    private static final String VALIDATE_EXTERNAL_LINKS = "validate-external-links";
+    private static final String VALIDATE_EXTERNAL_LINKS_KEY = "validate-external-links";
+    private static final String JKS_SSL_PATH_KEY = "jks-path";
+    private static final String JKS_SSL_PASSWORD_KEY = "jks-password";
 
     private static final String HELP_KEY = "help";
     private static final String VERSION_KEY = "version";
@@ -94,6 +97,9 @@ public class ZnaiCliConfig {
     private List<String> lookupPaths;
 
     private boolean isValidateExternalLinks;
+    private boolean isSsl;
+    private Path jksPath;
+    private String jksPassword;
 
     private ModifiedTimeStrategy modifiedTimeStrategy;
 
@@ -161,8 +167,16 @@ public class ZnaiCliConfig {
         return port;
     }
 
+    public SslConfig createSslConfig() {
+        return new SslConfig(jksPath, jksPassword);
+    }
+
     public String getHost() {
         return host;
+    }
+
+    public boolean isSsl() {
+        return isSsl;
     }
 
     public String getDocId() {
@@ -247,7 +261,13 @@ public class ZnaiCliConfig {
 
         markupType = commandLine.hasOption(MARKUP_TYPE_KEY) ? commandLine.getOptionValue(MARKUP_TYPE_KEY) : MarkupTypes.MARKDOWN;
 
-        isValidateExternalLinks = commandLine.hasOption(VALIDATE_EXTERNAL_LINKS);
+        isValidateExternalLinks = commandLine.hasOption(VALIDATE_EXTERNAL_LINKS_KEY);
+        isSsl = commandLine.hasOption(JKS_SSL_PATH_KEY);
+
+        if (isSsl) {
+            jksPath = Paths.get(commandLine.getOptionValue(JKS_SSL_PATH_KEY));
+            jksPassword = commandLine.getOptionValue(JKS_SSL_PASSWORD_KEY);
+        }
 
         isSourceRootSet = commandLine.hasOption(SOURCE_KEY);
         sourceRoot = Paths.get(isSourceRootSet ? commandLine.getOptionValue(SOURCE_KEY) : "")
@@ -306,14 +326,12 @@ public class ZnaiCliConfig {
         }
 
         String modifiedTime = commandLine.getOptionValue(MODIFIED_TIME_KEY);
-        switch (modifiedTime) {
-            case "constant":
-                return ModifiedTimeStrategy.CONSTANT;
-            case "file":
-                return ModifiedTimeStrategy.FILE;
-            default:
-                throw new IllegalArgumentException("unsupported " + MODIFIED_TIME_KEY + " value: " + modifiedTime);
-        }
+        return switch (modifiedTime) {
+            case "constant" -> ModifiedTimeStrategy.CONSTANT;
+            case "file" -> ModifiedTimeStrategy.FILE;
+            default ->
+                    throw new IllegalArgumentException("unsupported " + MODIFIED_TIME_KEY + " value: " + modifiedTime);
+        };
     }
 
     private void validateMode(CommandLine commandLine) {
@@ -354,11 +372,15 @@ public class ZnaiCliConfig {
         options.addOption(null, PORT_KEY, true, "server port");
         options.addOption(null, HOST_KEY, true, "server host");
         options.addOption(null, MARKUP_TYPE_KEY, true, "markup type");
-        options.addOption(null, VALIDATE_EXTERNAL_LINKS, false, "validate external links");
+        options.addOption(null, VALIDATE_EXTERNAL_LINKS_KEY, false, "validate external links");
         options.addOption(null, SOURCE_KEY, true, "documentation source dir");
         options.addOption(null, DOC_ID_KEY, true, "documentation id");
         options.addOption(null, MODIFIED_TIME_KEY, true,
                 "strategy of modified time for each page: constant or file last update time: constant, file (default)");
+        options.addOption(null, JKS_SSL_PATH_KEY, true,
+                "path to JKS cert. when specified SSL will be enabled for preview server");
+        options.addOption(null, JKS_SSL_PASSWORD_KEY, true,
+                "JSK cert password");
 
         Option lookupPaths = Option.builder()
                 .desc("additional lookup paths separated by colon(:)")
