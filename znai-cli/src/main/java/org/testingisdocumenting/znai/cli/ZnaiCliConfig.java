@@ -50,8 +50,10 @@ public class ZnaiCliConfig {
     private static final String ACTOR_KEY = "actor";
     private static final String LOOKUP_PATHS_KEY = "lookup-paths";
     private static final String VALIDATE_EXTERNAL_LINKS_KEY = "validate-external-links";
-    private static final String JKS_SSL_PATH_KEY = "jks-path";
-    private static final String JKS_SSL_PASSWORD_KEY = "jks-password";
+    private static final String SSL_JKS_PATH_KEY = "jks-path";
+    private static final String SSL_JSK_PASSWORD_KEY = "jks-password";
+    private static final String SSL_PEM_CERT_PATH_KEY = "pem-cert-path";
+    private static final String SSL_PEM_KEY_PATH_KEY = "pem-key-path";
 
     private static final String HELP_KEY = "help";
     private static final String VERSION_KEY = "version";
@@ -97,9 +99,10 @@ public class ZnaiCliConfig {
     private List<String> lookupPaths;
 
     private boolean isValidateExternalLinks;
-    private boolean isSsl;
-    private Path jksPath;
+    private String jksPath;
     private String jksPassword;
+    private String pemCertPath;
+    private String pemKeyPath;
 
     private ModifiedTimeStrategy modifiedTimeStrategy;
 
@@ -168,15 +171,11 @@ public class ZnaiCliConfig {
     }
 
     public SslConfig createSslConfig() {
-        return new SslConfig(jksPath, jksPassword);
+        return new SslConfig(jksPath, jksPassword, pemCertPath, pemKeyPath);
     }
 
     public String getHost() {
         return host;
-    }
-
-    public boolean isSsl() {
-        return isSsl;
     }
 
     public String getDocId() {
@@ -262,12 +261,11 @@ public class ZnaiCliConfig {
         markupType = commandLine.hasOption(MARKUP_TYPE_KEY) ? commandLine.getOptionValue(MARKUP_TYPE_KEY) : MarkupTypes.MARKDOWN;
 
         isValidateExternalLinks = commandLine.hasOption(VALIDATE_EXTERNAL_LINKS_KEY);
-        isSsl = commandLine.hasOption(JKS_SSL_PATH_KEY);
 
-        if (isSsl) {
-            jksPath = Paths.get(commandLine.getOptionValue(JKS_SSL_PATH_KEY));
-            jksPassword = commandLine.getOptionValue(JKS_SSL_PASSWORD_KEY);
-        }
+        jksPath = commandLine.getOptionValue(SSL_JKS_PATH_KEY);
+        jksPassword = commandLine.getOptionValue(SSL_JSK_PASSWORD_KEY);
+        pemCertPath = commandLine.getOptionValue(SSL_PEM_CERT_PATH_KEY);
+        pemKeyPath = commandLine.getOptionValue(SSL_PEM_KEY_PATH_KEY);
 
         isSourceRootSet = commandLine.hasOption(SOURCE_KEY);
         sourceRoot = Paths.get(isSourceRootSet ? commandLine.getOptionValue(SOURCE_KEY) : "")
@@ -377,10 +375,14 @@ public class ZnaiCliConfig {
         options.addOption(null, DOC_ID_KEY, true, "documentation id");
         options.addOption(null, MODIFIED_TIME_KEY, true,
                 "strategy of modified time for each page: constant or file last update time: constant, file (default)");
-        options.addOption(null, JKS_SSL_PATH_KEY, true,
+        options.addOption(null, SSL_JKS_PATH_KEY, true,
                 "path to JKS cert. when specified SSL will be enabled for preview server");
-        options.addOption(null, JKS_SSL_PASSWORD_KEY, true,
+        options.addOption(null, SSL_JSK_PASSWORD_KEY, true,
                 "JSK cert password");
+        options.addOption(null, SSL_PEM_CERT_PATH_KEY, true,
+                "path to PEM cert. when specified SSL will be enabled for preview server");
+        options.addOption(null, SSL_PEM_KEY_PATH_KEY, true,
+                "path to key pem file. when specified SSL will be enabled for preview server");
 
         Option lookupPaths = Option.builder()
                 .desc("additional lookup paths separated by colon(:)")

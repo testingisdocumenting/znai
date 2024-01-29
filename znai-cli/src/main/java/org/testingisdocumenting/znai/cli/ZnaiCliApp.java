@@ -26,6 +26,7 @@ import org.testingisdocumenting.znai.html.HtmlPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
 import org.testingisdocumenting.znai.server.AuthorizationHeaderBasedAuthenticationHandler;
 import org.testingisdocumenting.znai.server.HttpServerUtils;
+import org.testingisdocumenting.znai.server.SslConfig;
 import org.testingisdocumenting.znai.server.ZnaiServer;
 import org.testingisdocumenting.znai.server.preview.DocumentationPreview;
 import org.testingisdocumenting.znai.core.DocMeta;
@@ -52,6 +53,7 @@ public class ZnaiCliApp {
 
     private final ZnaiCliConfig config;
     private final Path deployPath;
+    private final SslConfig sslConfig;
 
     private WebSite webSite;
     private ReactJsBundle reactJsBundle;
@@ -59,6 +61,7 @@ public class ZnaiCliApp {
     public ZnaiCliApp(ZnaiCliConfig cliConfig) {
         System.setProperty("java.awt.headless", "true");
         this.config = cliConfig;
+        this.sslConfig = cliConfig.createSslConfig();
         this.deployPath = config.getDeployRoot().resolve(getDocId());
     }
 
@@ -219,7 +222,7 @@ public class ZnaiCliApp {
 
     private void reportHostPort(int port, String relativeUrl) {
         try {
-            ConsoleOutputs.out(Color.BLUE, "server started ", FontStyle.NORMAL, config.isSsl() ? "https://" : "http://", InetAddress.getLocalHost().getHostName(), ":",
+            ConsoleOutputs.out(Color.BLUE, "server started ", FontStyle.NORMAL, sslConfig.isSpecified() ? "https://" : "http://", InetAddress.getLocalHost().getHostName(), ":",
                     port, relativeUrl.isEmpty() ? "" : relativeUrl);
         } catch (UnknownHostException e) {
             ConsoleOutputs.err("Cannot extract host name");
