@@ -66,7 +66,7 @@ public class ZnaiServer {
     public HttpServer create() {
         HttpServerOptions httpServerOptions = new HttpServerOptions()
                 .setCompressionSupported(true);
-        updateServerOptionsWithSsl(httpServerOptions, sslConfig);
+        sslConfig.updateServerOptions(httpServerOptions);
         HttpServer server = vertx.createHttpServer(httpServerOptions);
 
         Router router = Router.router(vertx);
@@ -98,7 +98,7 @@ public class ZnaiServer {
         return server;
     }
 
-    private void updateServerOptionsWithSsl(HttpServerOptions serverOptions, SslConfig sslConfig) {
+    private void updateServerOptiaonsWithSsl(HttpServerOptions serverOptions, SslConfig sslConfig) {
         if (!sslConfig.isSpecified()) {
             return;
         }

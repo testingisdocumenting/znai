@@ -16,10 +16,26 @@
 
 package org.testingisdocumenting.znai.server;
 
-import java.nio.file.Path;
+import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.net.JksOptions;
+import io.vertx.core.net.PemKeyCertOptions;
 
-public record SslConfig(Path jksPath, String jksPassword) {
-    boolean isSpecified() {
-        return jksPath != null && jksPassword != null;
+public record SslConfig(String jksPath, String jksPassword, String pemCertPath, String pemKeyPath) {
+    public boolean isSpecified() {
+        return (jksPath != null && jksPassword != null) || (pemCertPath != null && pemKeyPath != null);
+    }
+
+    public void updateServerOptions(HttpServerOptions serverOptions) {
+        if (!isSpecified()) {
+            return;
+        }
+
+        serverOptions.setSsl(true);
+
+        if (jksPath != null) {
+            serverOptions.setKeyStoreOptions(new JksOptions().setPath(jksPath()).setPassword(jksPassword()));
+        } else {
+            serverOptions.setPemKeyCertOptions(new PemKeyCertOptions().setCertPath(pemCertPath).setKeyPath(pemKeyPath));
+        }
     }
 }
