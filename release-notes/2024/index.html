@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Page Titles</title>
+<title>Znai: 2024 Releases</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,18 +85,8 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Automatic Names</h1></header>
-<p>By default, page names are automatically derived from file names. file-name.md has the page title File Name .</p>
-</article>
-
-<article>
-<header><h1>Name Overrides</h1></header>
-<p>To override the default, add the following syntax to the top of your Markdown file: --- title: Custom Name --- To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:Need to use special characters in title Want to avoid auto-capitalization</p>
-</article>
-
-<article>
-<header><h1>Chapter Names</h1></header>
-<p>By default, a chapter name is derived from dir name. Dir name my-chapter becomes My Chapter chapter name.To override a chapter name, use {title: &quot;chapter title&quot;} inside toc file text chapter-one {title: &quot;Chapter ONE explicit&quot;} structure setup</p>
+<header><h1>1.67</h1></header>
+<p>Fix: auto generated anchor from snippets/external-code-snippets#title title can now be referenced from other pages Add: --pem-cert-path and --pem-key-path to enable SSL during preview that you run inside orgs that prefer to host SSL content Add: --jks-path and --jks-password to enable SSL during preview that you run inside orgs that prefer to host SSL content Add: Shorten layout/tabs Tabs dividers when content inside is not wide Add: automatic preview navigation to the most recent change ignores previous user clicked anchors Add: layout/tabs Tabs remove vertical margin when the only content inside is a code snippet or api parameters Rename: noGapSeparator to snippets/external-code-snippets#no-gap noGapBorder</p>
 </article>
 </section>
 </div>
@@ -131,48 +121,33 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "automatic-names",
-      "title" : "Automatic Names",
+      "id" : "1-67",
+      "title" : "1.67",
       "type" : "Section",
       "content" : [ {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "By default, page names are automatically derived from file names. ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "file-name.md",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " has the page title ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "File Name",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ".",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "id" : "name-overrides",
-      "title" : "Name Overrides",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To override the default, add the following syntax to the top of your Markdown file:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : "---\ntitle: Custom Name\n---\n",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: auto generated anchor from ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/external-code-snippets#title",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "title",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " can now be referenced from other pages",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
       }, {
         "bulletMarker" : "*",
@@ -183,89 +158,156 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Need to use special characters in title",
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "--pem-cert-path",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "--pem-key-path",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to enable SSL during preview that you run inside orgs that prefer to host SSL content",
               "type" : "SimpleText"
             } ]
           } ]
-        }, {
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Want to avoid auto-capitalization",
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "--jks-path",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "--jks-password",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to enable SSL during preview that you run inside orgs that prefer to host SSL content",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
-      } ]
-    }, {
-      "id" : "chapter-names",
-      "title" : "Chapter Names",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "By default, a chapter name is derived from dir name. Dir name ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "my-chapter",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " becomes ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "My Chapter",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " chapter name.",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Shorten ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/tabs",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Tabs",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " dividers when content inside is not wide",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
       }, {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "To override a chapter name, use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "{title: \"chapter title\"}",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " inside ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "toc",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " file",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: automatic preview navigation to the most recent change ignores previous user clicked anchors",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
       }, {
-        "lang" : "text",
-        "snippet" : "chapter-one {title: \"Chapter ONE explicit\"} \n    structure\n    setup\n",
-        "lineNumber" : "",
-        "title" : "toc",
-        "anchorId" : "chapter-names-toc",
-        "type" : "Snippet"
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/tabs",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Tabs",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " remove vertical margin when the only content inside is a code snippet or api parameters",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Rename: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "noGapSeparator",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/external-code-snippets#no-gap",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "noGapBorder",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
       } ]
     } ],
-    "lastModifiedTime" : 1706577734377,
+    "lastModifiedTime" : 1706577734393,
     "tocItem" : {
-      "chapterTitle" : "Flow",
-      "pageTitle" : "Page Titles",
+      "chapterTitle" : "Release Notes",
+      "pageTitle" : "2024 Releases",
       "pageMeta" : {
-        "title" : [ "Page Titles" ]
+        "title" : [ "2024 Releases" ]
       },
-      "dirName" : "flow",
-      "fileName" : "names",
+      "dirName" : "release-notes",
+      "fileName" : "2024",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Automatic Names",
-        "id" : "automatic-names"
-      }, {
-        "title" : "Name Overrides",
-        "id" : "name-overrides"
-      }, {
-        "title" : "Chapter Names",
-        "id" : "chapter-names"
+        "title" : "1.67",
+        "id" : "1-67"
       } ]
     }
   }

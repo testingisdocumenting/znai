@@ -1876,6 +1876,19 @@ toc = [ {
   "dirName" : "release-notes",
   "items" : [ {
     "chapterTitle" : "Release Notes",
+    "pageTitle" : "2024 Releases",
+    "pageMeta" : {
+      "title" : [ "2024 Releases" ]
+    },
+    "dirName" : "release-notes",
+    "fileName" : "2024",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "1.67",
+      "id" : "1-67"
+    } ]
+  }, {
+    "chapterTitle" : "Release Notes",
     "pageTitle" : "2023 Releases",
     "pageMeta" : {
       "title" : [ "2023 Releases" ]

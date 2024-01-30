@@ -155,7 +155,7 @@
     <url>/znai/flow/structure#table-of-contents</url>
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
-      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing-is-documenting shortcuts snippets code-snippets external-code-snippets snippets-manipulation snippets-highlighting code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations cards charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic plugins plugin-types default-parameters development configuration basic deployment additional-files example-references domain api znai-development local-build release-notes 2023 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
+      <text>Each documentation must have toc file in its root. This file contains chapters and pages.This is a toc file for this documentation. introduction what-is-this getting-started flow structure landing names page-references page-toc lookup-paths search footer support presentation testing-is-documenting shortcuts snippets code-snippets external-code-snippets snippets-manipulation snippets-highlighting code-comments inlined-code-snippets api-parameters code-references json xml open-API CLI math jupyter-notebook cpp python java groovy markdown visuals attention-signs images image-annotations cards charts mermaid-diagrams SVG icons headings text-badge spoilers keyboard-shortcuts smart-bullet-points flow-diagrams graphviz-diagrams PlantUml iframe layout tabs tables columns templates two-sides-pages two-sides-tabs jupyter-notebook-two-sides python content-extraction description-extraction auto-reference CPP doxygen-setup description-extraction auto-reference java content-extraction description-extraction auto-reference synergy-with-testing web-UI REST-API business-logic plugins plugin-types default-parameters development configuration basic deployment additional-files example-references domain api znai-development local-build release-notes 2024 2023 2022 2021 Take a look at the left side bar and compare it with the file content.The top entry, introduction , corresponds to the directory of the same name. The nested entry, rationale , corresponds to the file rationale.md .</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -3012,6 +3012,14 @@
     <fullTitle>Znai: Local Build, Run Local Version [Znai Development]</fullTitle>
     <text>
       <text>cd znai-dist/target unzip dist-znai.zip export PATH=$(pwd)/dist:$PATH znai --version</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2024#1-67</url>
+    <fullTitle>Znai: 2024 Releases, 1.67 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: auto generated anchor from snippets/external-code-snippets#title title can now be referenced from other pages Add: --pem-cert-path and --pem-key-path to enable SSL during preview that you run inside orgs that prefer to host SSL content Add: --jks-path and --jks-password to enable SSL during preview that you run inside orgs that prefer to host SSL content Add: Shorten layout/tabs Tabs dividers when content inside is not wide Add: automatic preview navigation to the most recent change ignores previous user clicked anchors Add: layout/tabs Tabs remove vertical margin when the only content inside is a code snippet or api parameters Rename: noGapSeparator to snippets/external-code-snippets#no-gap noGapBorder</text>
       <score>STANDARD</score>
     </text>
   </entry>
