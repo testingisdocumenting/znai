@@ -126,7 +126,7 @@
 
 <article>
 <header><h1>No Gap</h1></header>
-<p>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: &quot;part one&quot;, noGap: true, collapsed: false} :include-file: simple.c {title: &quot;part two&quot;, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } Use noGapSeparator: true to add a delimiter between code snippets: module Game : sig type t end module Game = struct type t = { name: string } end</p>
+<p>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: &quot;part one&quot;, noGap: true, collapsed: false} :include-file: simple.c {title: &quot;part two&quot;, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } Use noGapBorder: true to add a delimiter between code snippets: markdown :include-file: ocaml/api.mli {title: &quot;Game&quot;, noGap: true, noGapBorder: true} :include-file: ocaml/api.ml module Game : sig type t end module Game = struct type t = { name: string } end</p>
 </article>
 
 <article>
@@ -656,18 +656,23 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Use ",
           "type" : "SimpleText"
         }, {
-          "code" : "noGapSeparator: true",
+          "code" : "noGapBorder: true",
           "type" : "InlinedCode"
         }, {
           "text" : " to add a delimiter between code snippets:",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "markdown",
+        "snippet" : ":include-file: ocaml/api.mli {title: \"Game\", noGap: true, noGapBorder: true}\n:include-file: ocaml/api.ml\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
         "lang" : "mli",
         "snippet" : "module Game : sig\n  type t\nend",
         "title" : "Game",
         "noGap" : true,
-        "noGapSeparator" : true,
+        "noGapBorder" : true,
         "anchorId" : "no-gap-game",
         "type" : "Snippet"
       }, {
@@ -722,7 +727,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1704077807822,
+    "lastModifiedTime" : 1706576513131,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
