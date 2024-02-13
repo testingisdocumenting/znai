@@ -78,13 +78,13 @@ Use `:identifier: surroundedByScope` to extract text using scopes like `{}`, `[]
 
 Pass comma separated multi char region definition to `:identifier: surroundedByScope` to handle scopes defined with keywords:
 
-:include-file: model.mli {autoTitle: true}
+:include-file: ocaml/model.mli {autoTitle: true}
 
 ```markdown
-:include-file: model.mli {surroundedByScope: {start: "module ModelA", scope: "sig,end"}}
+:include-file: ocaml/model.mli {surroundedByScope: {start: "module ModelA", scope: "sig,end"}}
 ```
 
-:include-file: model.mli {title: "extraction result", surroundedByScope: {start: "module ModelA", scope: "sig,end"}}
+:include-file: ocaml/model.mli {title: "extraction result", surroundedByScope: {start: "module ModelA", scope: "sig,end"}}
 
 # Replace
 
@@ -154,6 +154,29 @@ By default `:identifier: startLine` and `:identifier: endLine` are included in t
   excludeStartEnd: true }
 
 To exclude start or end line only use `:identifier: excludeStart` and `:identifier: excludeEnd`
+
+# Start/End Multiple Lines
+
+Pass multiple values to `startLine` and `endLine` to specify more precisely a block of code to extract.
+
+As example, let's extract a second `match` block from the code snippets below without adding extra markers:
+
+:include-file: ocaml/seasons.ml {autoTitle: true}
+
+if we use `startLine: "match season"`, we can't guarantee what block will it pick, and it will depend on
+functions order.
+
+To hit the exact one use multiple start lines. Znai will attempt to find a combination of start lines with the smallest distance between them:
+
+```
+:include-file: ocaml/seasons.ml {startLine: ["let describe_season", "match season"], startLineKeepLast: true}
+```
+
+:include-file: ocaml/seasons.ml {title: "result", startLine: ["let describe_season", "match season"], startLineKeepLast: true}
+
+Note: Use `endLine` and `endLineKeepFirst` to limit lines from the bottom. `excludeStart` removes all the lines between specified start lines, including the lines. 
+`excludeEnd` removes all the lines between specified end lines, including the lines.
+
 
 # Include Contains
 

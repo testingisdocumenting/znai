@@ -156,6 +156,21 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "multiple start lines with include last start line"() {
+        def text = resultingSnippet("multiple-lines-start-stop.txt", "{startLine: ['if (conditionA)', 'if (conditionB)'], startLineKeepLast: true}")
+
+        text.should == "  if (conditionB) {\n" +
+                "    // inside condition A and condition B\n" +
+                "    doAction()\n" +
+                "  }\n" +
+                "}\n" +
+                "\n" +
+                "if (conditionC) {\n" +
+                "    // inside condition C\n" +
+                "}"
+    }
+
+    @Test
     void "should extract file snippet based on surrounding pattern and exclude the pattern"() {
         def text = resultingSnippet("file-with-surround-marker.txt", "{surroundedBy: '# concept-example'}")
 
@@ -394,6 +409,38 @@ class FileIncludePluginTest {
                 "  if (conditionB) {\n" +
                 "    // inside condition A and condition B\n" +
                 "    doAction()"
+    }
+
+    @Test
+    void "should extract file snippet based on multiple end lines with exclude end and keep first end line"() {
+        def text = resultingSnippet("multiple-lines-start-stop.txt", "{endLine: ['}', '}'], excludeEnd: true, endLineKeepFirst: true}")
+
+        text.should == "if (conditionA) {\n" +
+                "    // inside condition A\n" +
+                "}\n" +
+                "\n" +
+                "if (conditionB) {\n" +
+                "    // inside condition B\n" +
+                "}\n" +
+                "\n" +
+                "if (conditionA) {\n" +
+                "  // line between\n" +
+                "  if (conditionB) {\n" +
+                "    // inside condition A and condition B\n" +
+                "    doAction()\n" +
+                "  }"
+    }
+
+    @Test
+    void "should extract file snippet based on multiple start and end lines with exclude end and keep first and last lines"() {
+        def text = resultingSnippet("multiple-lines-start-stop.txt", "{startLine: ['if (conditionA)', 'if (conditionB)'], endLine: ['}', '}'], excludeStartEnd: true, " +
+                "startLineKeepLast: true, endLineKeepFirst: true}")
+
+        text.should ==
+                "if (conditionB) {\n" +
+                "  // inside condition A and condition B\n" +
+                "  doAction()\n" +
+                "}"
     }
 
     @Test
