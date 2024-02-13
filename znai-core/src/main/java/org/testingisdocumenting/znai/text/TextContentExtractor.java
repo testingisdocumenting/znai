@@ -44,7 +44,8 @@ public class TextContentExtractor {
     static final String EXCLUDE_START_KEY = "excludeStart";
     static final String EXCLUDE_END_KEY = "excludeEnd";
     static final String EXCLUDE_START_END_KEY = "excludeStartEnd";
-
+    static final String START_LINE_KEEP_LAST_KEY = "startLineKeepLast";
+    static final String END_LINE_KEEP_FIRST_KEY = "endLineKeepFirst";
     static final String INCLUDE_KEY = "include";
     static final String EXCLUDE_KEY = "exclude";
 
@@ -82,6 +83,10 @@ public class TextContentExtractor {
                         "exclude end line for snippet extraction", "true")
                 .add(EXCLUDE_START_END_KEY, PluginParamType.BOOLEAN,
                         "exclude start and end line for snippet extraction", "true")
+                .add(START_LINE_KEEP_LAST_KEY, PluginParamType.BOOLEAN,
+                        "keep the last start line when multiple start lines are specified", "true")
+                .add(END_LINE_KEEP_FIRST_KEY, PluginParamType.BOOLEAN,
+                        "keep the first end line when multiple end lines are specified", "true")
                 .add(INCLUDE_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
                         "include only lines containing provided text(s)", "\"import\" or [\"class\", \"import\"")
                 .add(EXCLUDE_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
@@ -243,7 +248,10 @@ public class TextContentExtractor {
             throw new IllegalArgumentException("can't find sequence of start lines:\n  " + String.join("\n  ", startLines) + text.renderInContent());
         }
 
-        return excludeStart(text.subList(startEndIdx.startIdx, text.lines.size()), opts, startEndIdx.distance());
+        boolean keepLastStartLine = opts.get(START_LINE_KEEP_LAST_KEY, false);
+        int numberOfLinesToExclude = startEndIdx.distance() - (keepLastStartLine ? 1 : 0);
+
+        return excludeStart(text.subList(startEndIdx.startIdx, text.lines.size()), opts, numberOfLinesToExclude);
     }
 
     private static Text cropEnd(Text text, PluginParamsOpts opts) {
@@ -266,7 +274,10 @@ public class TextContentExtractor {
             throw new IllegalArgumentException("can't find sequence of end lines:\n  " + String.join("\n  ", endLines) + text.renderInContent());
         }
 
-        return excludeEnd(text.subList(0, startEndIdx.endIdx + 1), opts, startEndIdx.distance());
+        boolean keepFirstEndLine = opts.get(END_LINE_KEEP_FIRST_KEY, false);
+        int numberOfLinesToExclude = startEndIdx.distance() - (keepFirstEndLine ? 1 : 0);
+
+        return excludeEnd(text.subList(0, startEndIdx.endIdx + 1), opts, numberOfLinesToExclude);
     }
 
     private static StartEndIdx findIdxForMultiLinesShortestDistanceBetween(Text text, List<String> matchLines) {
@@ -318,8 +329,8 @@ public class TextContentExtractor {
     }
 
     private static Text excludeStart(Text text, PluginParamsOpts opts, int numberOfLines) {
-        Boolean excludeStart = opts.get(EXCLUDE_START_KEY, false);
-        Boolean excludeStartEnd = opts.get(EXCLUDE_START_END_KEY, false);
+        boolean excludeStart = opts.get(EXCLUDE_START_KEY, false) || opts.get(START_LINE_KEEP_LAST_KEY, false);
+        boolean excludeStartEnd = opts.get(EXCLUDE_START_END_KEY, false);
         if (!excludeStart && !excludeStartEnd) {
             return text;
         }
