@@ -61,7 +61,7 @@ class SnippetHighlightFeatureTest {
     void "validate region start and end wrong type"() {
         code {
             createAndRunFeature([highlightRegion: [start: [:], end: [:]]], "")
-        } should throwException("highlightRegion should be in format {start: \"line-star\", end: \"line-end\"} or {\"start\": \"line-star\", scope: \"{}\"}")
+        } should throwException("highlightRegion should be in format {start: \"line-star\" (or : [\"line-start1\", \"line-start2\"]) end: \"line-end\"} or {\"start\": \"line-star\", scope: \"{}\"}")
     }
 
     @Test
@@ -201,7 +201,7 @@ if (a == 2)
 
 some text 
 below""")
-        } should throwException("can't find region to highlight that starts with line: \"if\" and scoped with: {}")
+        } should throwException("can't find region to highlight that starts with line: [if] and scoped with: {}")
     }
 
     @Test
@@ -217,7 +217,7 @@ if (a == 2)
 if (b == 2) {
 some text 
 below""")
-        } should throwException("can't find region to highlight that starts with line: \"b == 2\" and scoped with: {}")
+        } should throwException("can't find region to highlight that starts with line: [b == 2] and scoped with: {}")
     }
 
     @Test

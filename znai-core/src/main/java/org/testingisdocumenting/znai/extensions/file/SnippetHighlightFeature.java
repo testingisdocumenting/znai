@@ -152,7 +152,7 @@ public class SnippetHighlightFeature implements PluginFeature {
         regionScopeExtractor.process();
 
         if (regionScopeExtractor.getResultEndLineIdx() == -1) {
-            throw new IllegalArgumentException("can't find region to highlight that starts with line: \"" + start + "\" and scoped with: " + scope);
+            throw new IllegalArgumentException("can't find region to highlight that starts with line: " + start + " and scoped with: " + scope);
         }
 
         return generateIndexesFromStartAndEnd(regionScopeExtractor.getResultStartLineIdx(), regionScopeExtractor.getResultEndLineIdx());
