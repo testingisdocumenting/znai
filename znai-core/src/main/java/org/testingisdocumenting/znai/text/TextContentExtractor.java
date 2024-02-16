@@ -243,15 +243,17 @@ public class TextContentExtractor {
             return excludeStart(text.startingWithLineContaining(startLines.get(0)), opts, 1);
         }
 
-        StartEndIdx startEndIdx = findIdxForMultiLinesShortestDistanceBetween(text, startLines);
-        if (startEndIdx.startIdx == -1) {
+        MultilineIndexFinder.StartEndIdx startEndIdx = MultilineIndexFinder.findIdxForMultiLinesShortestDistanceBetween(
+                TextLinesAccessor.createFromList(text.lines), startLines);
+
+        if (startEndIdx.startIdx() == -1) {
             throw new IllegalArgumentException("can't find sequence of start lines:\n  " + String.join("\n  ", startLines) + text.renderInContent());
         }
 
         boolean keepLastStartLine = opts.get(START_LINE_KEEP_LAST_KEY, false);
         int numberOfLinesToExclude = startEndIdx.distance() - (keepLastStartLine ? 1 : 0);
 
-        return excludeStart(text.subList(startEndIdx.startIdx, text.lines.size()), opts, numberOfLinesToExclude);
+        return excludeStart(text.subList(startEndIdx.startIdx(), text.lines.size()), opts, numberOfLinesToExclude);
     }
 
     private static Text cropEnd(Text text, PluginParamsOpts opts) {
@@ -269,29 +271,17 @@ public class TextContentExtractor {
             return excludeEnd(text.limitToLineContaining(endLines.get(0), text::defaultNoLineFoundMessage), opts, 1);
         }
 
-        StartEndIdx startEndIdx = findIdxForMultiLinesShortestDistanceBetween(text, endLines);
-        if (startEndIdx.startIdx == -1) {
+        MultilineIndexFinder.StartEndIdx startEndIdx = MultilineIndexFinder.findIdxForMultiLinesShortestDistanceBetween(
+                TextLinesAccessor.createFromList(text.lines), endLines);
+
+        if (startEndIdx.startIdx() == -1) {
             throw new IllegalArgumentException("can't find sequence of end lines:\n  " + String.join("\n  ", endLines) + text.renderInContent());
         }
 
         boolean keepFirstEndLine = opts.get(END_LINE_KEEP_FIRST_KEY, false);
         int numberOfLinesToExclude = startEndIdx.distance() - (keepFirstEndLine ? 1 : 0);
 
-        return excludeEnd(text.subList(0, startEndIdx.endIdx + 1), opts, numberOfLinesToExclude);
-    }
-
-    private static StartEndIdx findIdxForMultiLinesShortestDistanceBetween(Text text, List<String> matchLines) {
-        int minDistanceIdx = -1;
-        int minDistance = Integer.MAX_VALUE;
-        for (int idx = 0; idx < text.lines.size() - matchLines.size(); idx++) {
-            int distance = matchLinesContaining(text, idx, matchLines);
-            if (distance != -1 && distance < minDistance) {
-                minDistanceIdx = idx;
-                minDistance = distance;
-            }
-        }
-
-        return new StartEndIdx(minDistanceIdx, minDistanceIdx + minDistance - 1);
+        return excludeEnd(text.subList(0, startEndIdx.endIdx() + 1), opts, numberOfLinesToExclude);
     }
 
     // returns total distance between matched lines
@@ -548,12 +538,6 @@ public class TextContentExtractor {
 
         private String renderInContent() {
             return " in <" + contentId + ">:\n" + this;
-        }
-    }
-
-    private record StartEndIdx(int startIdx, int endIdx) {
-        int distance() {
-            return endIdx - startIdx + 1;
         }
     }
 }

@@ -113,6 +113,30 @@ below""")
     }
 
     @Test
+    void "highlight by region, multi start line and scope"() {
+        def props = createAndRunFeature([highlightRegion: [start: ["if (c == 3)", "if (a == 2)"], scope: "{}"]], """hello
+if (c == 3) {
+  println "outside if c"
+}
+
+if (a == 2) {
+  println "first if candidate"
+}
+
+if (c == 3) {
+  println "c that is closer"
+    if (a == 2) {
+    println "{}"
+  }
+}
+
+some text 
+below""")
+        props.should == ["highlight": [11, 12, 13]]
+    }
+
+
+    @Test
     void "highlight by region and scope nested scope"() {
         def props = createAndRunFeature([highlightRegion: [start: "if", scope: "{}"]], """hello
 if (a == 2) {

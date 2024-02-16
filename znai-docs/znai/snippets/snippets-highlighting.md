@@ -44,6 +44,19 @@ Unlike example above, highlight will not stop at first closing `}`:
 
 :include-file: with-nested-if.js {highlightRegion: {start: "userId ===", scope: "{}"}}
 
+Use multiple start lines to narrow down a specific region
+
+    :include-file: with-multiple-if-clarify.js {highlightRegion: {
+      start: ["if (userId ===", "canRead"], scope: "{}"}
+    }
+
+Znai will find a smallest text block that contains all specified lines and then highlight the most inner one:
+
+:include-file: with-multiple-if-clarify.js {highlightRegion: {
+  start: ["if (userId ===", "canRead"], scope: "{}"}
+}
+
+
 # Multiple Regions
 
 Use list to specify multiple regions to highlight:

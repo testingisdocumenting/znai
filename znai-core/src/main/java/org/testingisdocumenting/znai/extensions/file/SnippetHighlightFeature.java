@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.features.PluginFeature;
+import org.testingisdocumenting.znai.text.MultilineIndexFinder;
 import org.testingisdocumenting.znai.text.RegionScopeExtractor;
 import org.testingisdocumenting.znai.text.TextLinesAccessor;
 
@@ -51,6 +52,7 @@ public class SnippetHighlightFeature implements PluginFeature {
     private final String highlightPath;
     private final PluginParams pluginParams;
     private final SnippetContainerEntriesConverter snippetIdxConverter;
+    private final SnippetContentProvider contentProvider;
 
     public SnippetHighlightFeature(ComponentsRegistry componentsRegistry, PluginParams pluginParams, SnippetContentProvider contentProvider) {
         this.componentsRegistry = componentsRegistry;
@@ -61,6 +63,7 @@ public class SnippetHighlightFeature implements PluginFeature {
                 componentsRegistry.resourceResolver().fullPath(highlightPath) :
                 null;
 
+        this.contentProvider = contentProvider;
         snippetIdxConverter = new SnippetContainerEntriesConverter(
                 contentProvider.snippetId(),
                 SnippetCleaner.removeNonAnsiCharacters(contentProvider.snippetContent()));
@@ -124,12 +127,27 @@ public class SnippetHighlightFeature implements PluginFeature {
         }
     }
 
+    private int findStartIdxAndValidate(TextLinesAccessor textLines, List<String> startLines) {
+        if (startLines.size() == 1) {
+            return snippetIdxConverter.findAndValidateFirstContain(HIGHLIGHT_REGION_START_FULL_KEY, 0, startLines.get(0));
+        }
+
+        MultilineIndexFinder.StartEndIdx startEndIdx = MultilineIndexFinder.findIdxForMultiLinesShortestDistanceBetween(textLines, startLines);
+        if (startEndIdx.startIdx() == -1) {
+            throw new IllegalArgumentException("can't find sequence of start lines:\n  " + String.join("\n  ", startLines) + " in <" + contentProvider.snippetId() + ">");
+        }
+
+        return startEndIdx.endIdx();
+    }
+
     private List<Integer> generateIndexesFromRegionScope(Map<String, Object> region) {
-        String start = getRequiredStringSubValue(region, HIGHLIGHT_REGION_START_SUB_KEY);
+        List<String> start = getRequiredListOrStringSubValue(region, HIGHLIGHT_REGION_START_SUB_KEY);
         String scope = getRequiredStringSubValue(region, HIGHLIGHT_REGION_SCOPE_SUB_KEY);
 
-        int startIdx = snippetIdxConverter.findAndValidateFirstContain(HIGHLIGHT_REGION_START_FULL_KEY, 0, start);
-        RegionScopeExtractor regionScopeExtractor = new RegionScopeExtractor(TextLinesAccessor.createFromArray(snippetIdxConverter.getLines()),
+        TextLinesAccessor textLines = TextLinesAccessor.createFromArray(snippetIdxConverter.getLines());
+
+        int startIdx = findStartIdxAndValidate(textLines, start);
+        RegionScopeExtractor regionScopeExtractor = new RegionScopeExtractor(textLines,
                 startIdx, scope);
         regionScopeExtractor.process();
 
@@ -191,8 +209,37 @@ public class SnippetHighlightFeature implements PluginFeature {
         return value;
     }
 
+    private List<String> getRequiredListOrStringSubValue(Map<String, Object> values, String subKey) {
+        Object valueRaw = values.get(subKey);
+
+        if (valueRaw == null) {
+            throw new IllegalArgumentException(HIGHLIGHT_REGION_KEY + "." + subKey + " is missing");
+        }
+
+        return convertToListAndValidateNoneEmpty(subKey, valueRaw);
+    }
+
+    private List<String> convertToListAndValidateNoneEmpty(String subKey, Object valueRaw) {
+        List<String> result;
+        if (valueRaw instanceof String value) {
+            result = Collections.singletonList(value);
+        } else if (valueRaw instanceof List<?> value) {
+           result = value.stream().map(Objects::toString).toList();
+        } else {
+            throw new IllegalArgumentException(regionWrongFormatMessage());
+        }
+
+        for (String value : result) {
+            if (value.isEmpty()) {
+                throw new IllegalArgumentException(HIGHLIGHT_REGION_KEY + "." + subKey + " can't be empty");
+            }
+        }
+
+        return result;
+    }
+
     private static String regionWrongFormatMessage() {
-        return HIGHLIGHT_REGION_KEY + " should be in format {" + HIGHLIGHT_REGION_START_SUB_KEY + ": \"line-star\", " +
+        return HIGHLIGHT_REGION_KEY + " should be in format {" + HIGHLIGHT_REGION_START_SUB_KEY + ": \"line-star\" (or : [\"line-start1\", \"line-start2\"]) " +
                 HIGHLIGHT_REGION_END_SUB_KEY + ": \"line-end\"} or {\"" + HIGHLIGHT_REGION_START_SUB_KEY + "\": \"line-star\", " +
                 HIGHLIGHT_REGION_SCOPE_SUB_KEY + ": \"{}\"}";
     }

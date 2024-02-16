@@ -1,0 +1,1 @@
+* Add: multiple `start` lines to [Highlight Region With Scope](snippets/snippets-highlighting#region-using-scope)
