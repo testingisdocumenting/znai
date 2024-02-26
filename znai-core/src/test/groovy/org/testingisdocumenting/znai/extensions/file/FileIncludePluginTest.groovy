@@ -339,6 +339,17 @@ class FileIncludePluginTest {
     }
 
     @Test
+    void "should throw when start line is empty"() {
+        code {
+            resultingSnippet("file.txt", "{startLine: ''}")
+        } should throwException("<startLine> contains empty line")
+
+        code {
+            resultingSnippet("file.txt", "{startLine: ['line', '']}")
+        } should throwException("<startLine> contains empty line")
+    }
+
+    @Test
     void "should extract file snippet based on start line and exclude only start"() {
         def text = resultingSnippet("file.txt", "{startLine: 'this is a', excludeStart: true}")
 
@@ -359,6 +370,18 @@ class FileIncludePluginTest {
                 "a multiple lines\n" +
                 "line number"
     }
+
+    @Test
+    void "should throw when end line is empty"() {
+        code {
+            resultingSnippet("file.txt", "{endLine: ''}")
+        } should throwException("<endLine> contains empty line")
+
+        code {
+            resultingSnippet("file.txt", "{endLine: ['line', '']}")
+        } should throwException("<endLine> contains empty line")
+    }
+
 
     @Test
     void "should extract file snippet based on end line only"() {
