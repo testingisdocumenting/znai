@@ -61,7 +61,7 @@ class SnippetHighlightFeatureTest {
     void "validate region start and end wrong type"() {
         code {
             createAndRunFeature([highlightRegion: [start: [:], end: [:]]], "")
-        } should throwException("highlightRegion should be in format {start: \"line-star\", end: \"line-end\"} or {\"start\": \"line-star\", scope: \"{}\"}")
+        } should throwException("highlightRegion should be in format {start: \"line-star\" (or : [\"line-start1\", \"line-start2\"]) end: \"line-end\"} or {\"start\": \"line-star\", scope: \"{}\"}")
     }
 
     @Test
@@ -111,6 +111,30 @@ let list = [1,
 below""")
         props.should == ["highlight": [1, 2, 3, 4]]
     }
+
+    @Test
+    void "highlight by region, multi start line and scope"() {
+        def props = createAndRunFeature([highlightRegion: [start: ["if (c == 3)", "if (a == 2)"], scope: "{}"]], """hello
+if (c == 3) {
+  println "outside if c"
+}
+
+if (a == 2) {
+  println "first if candidate"
+}
+
+if (c == 3) {
+  println "c that is closer"
+    if (a == 2) {
+    println "{}"
+  }
+}
+
+some text 
+below""")
+        props.should == ["highlight": [11, 12, 13]]
+    }
+
 
     @Test
     void "highlight by region and scope nested scope"() {
@@ -177,7 +201,7 @@ if (a == 2)
 
 some text 
 below""")
-        } should throwException("can't find region to highlight that starts with line: \"if\" and scoped with: {}")
+        } should throwException("can't find region to highlight that starts with line: [if] and scoped with: {}")
     }
 
     @Test
@@ -193,7 +217,7 @@ if (a == 2)
 if (b == 2) {
 some text 
 below""")
-        } should throwException("can't find region to highlight that starts with line: \"b == 2\" and scoped with: {}")
+        } should throwException("can't find region to highlight that starts with line: [b == 2] and scoped with: {}")
     }
 
     @Test
