@@ -239,6 +239,8 @@ public class TextContentExtractor {
             return excludeStart(text, opts, 1);
         }
 
+        validateNonEmpty(START_LINE_KEY, startLines);
+
         if (startLines.size() == 1) {
             return excludeStart(text.startingWithLineContaining(startLines.get(0)), opts, 1);
         }
@@ -256,6 +258,13 @@ public class TextContentExtractor {
         return excludeStart(text.subList(startEndIdx.startIdx(), text.lines.size()), opts, numberOfLinesToExclude);
     }
 
+    private static void validateNonEmpty(String optKey, List<String> lines) {
+        boolean hasEmtpy = lines.stream().anyMatch(String::isEmpty);
+        if (hasEmtpy) {
+            throw new IllegalArgumentException("<" + optKey + "> contains empty line");
+        }
+    }
+
     private static Text cropEnd(Text text, PluginParamsOpts opts) {
         Number numberOfLines = opts.get(NUMBER_OF_LINES_KEY);
         if (numberOfLines != null) {
@@ -266,6 +275,8 @@ public class TextContentExtractor {
         if (endLines.isEmpty()) {
             return excludeEnd(text, opts, 1);
         }
+
+        validateNonEmpty(END_LINE_KEY, endLines);
 
         if (endLines.size() == 1) {
             return excludeEnd(text.limitToLineContaining(endLines.get(0), text::defaultNoLineFoundMessage), opts, 1);

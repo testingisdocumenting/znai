@@ -10,7 +10,8 @@ scenario("capture screenshot") {
     browser.open("https://duckduckgo.com/")
 
     homeSearchInput.waitToBe visible
-    homeSearchInput.setValue("testing is documenting\n")
+    homeSearchInput.setValue("testing is documenting")
+    homeSearchInput.sendKeys(browser.keys.enter)
 
     result.waitTo visible
 
