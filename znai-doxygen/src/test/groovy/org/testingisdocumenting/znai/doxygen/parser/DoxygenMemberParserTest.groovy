@@ -43,6 +43,7 @@ class DoxygenMemberParserTest {
         member.static.should == false
         member.virtual.should == false
         member.const.should == true
+        member.noExcept.should == true
 
         member.normalizedParamsSignature.should == "const utils::second::MyClass&,const utils::second::AnotherClass*"
 

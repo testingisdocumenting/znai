@@ -32,6 +32,7 @@ interface Props {
   isStatic: boolean;
   isVirtual: boolean;
   isConst: boolean;
+  isNoExcept: boolean;
   returnType: ApiLinkedText;
   parameters?: DoxygenParameter[];
   templateParameters?: DoxygenParameter[];
@@ -46,6 +47,7 @@ export function DoxygenMember({
   isStatic,
   isVirtual,
   isConst,
+  isNoExcept,
   parameters,
   templateParameters,
 }: Props) {
@@ -112,6 +114,7 @@ export function DoxygenMember({
               })}
               {isFunction && <div className="znai-doxygen-member-params-separator">)</div>}
               {isConst && <div className="znai-doxygen-member-classifier"> const</div>}
+              {isNoExcept && <div className="znai-doxygen-member-classifier"> noexcept</div>}
             </div>
           )}
         </div>
