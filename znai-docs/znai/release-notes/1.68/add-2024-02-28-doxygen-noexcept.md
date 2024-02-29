@@ -1,0 +1,1 @@
+* Add: Display [Doxygen](CPP/doxygen-setup) `noexcept`

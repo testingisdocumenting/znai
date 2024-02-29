@@ -63,6 +63,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isVirtual={false}
       isConst={false}
       isStatic={false}
+      isNoExcept={false}
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
     />
@@ -76,6 +77,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isVirtual={false}
       isConst={false}
       isStatic={false}
+      isNoExcept={false}
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
       templateParameters={templateParameters}
@@ -88,6 +90,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isVirtual={false}
       isConst={false}
       isStatic={false}
+      isNoExcept={false}
       compoundName=""
       name="my_func"
       url="#test_link"
@@ -102,6 +105,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isVirtual={false}
       isConst={true}
       isStatic={true}
+      isNoExcept={false}
       compoundName="utils::MyClass"
       name="my_func"
       url="#test_link"
@@ -116,6 +120,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isVirtual={false}
       isConst={false}
       isStatic={true}
+      isNoExcept={false}
       compoundName="utils::MyClass"
       name="var_name"
       url="#test_link"
@@ -130,6 +135,22 @@ export function doxygenMemberDemo(registry: Registry) {
       isVirtual={true}
       isConst={false}
       isStatic={false}
+      isNoExcept={false}
+      compoundName="utils::MyClass"
+      name="my_func"
+      url="#test_link"
+      returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
+      parameters={parameters}
+    />
+  ));
+
+  registry.add("noexcept", () => (
+    <DoxygenMember
+      isFunction={true}
+      isVirtual={false}
+      isConst={false}
+      isStatic={false}
+      isNoExcept={true}
       compoundName="utils::MyClass"
       name="my_func"
       url="#test_link"

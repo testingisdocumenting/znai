@@ -38,6 +38,7 @@ public class DoxygenMember {
     private boolean isVirtual;
     private boolean isStatic;
     private boolean isConst;
+    private boolean isNoExcept;
 
     public DoxygenMember() {
         parameters = new DoxygenParameterList();
@@ -136,6 +137,14 @@ public class DoxygenMember {
         isConst = aConst;
     }
 
+    public boolean isNoExcept() {
+        return isNoExcept;
+    }
+
+    public void setNoExcept(boolean noExcept) {
+        isNoExcept = noExcept;
+    }
+
     public boolean isPublic() {
         return "public".equals(visibility);
     }
@@ -186,6 +195,7 @@ public class DoxygenMember {
         result.put("isVirtual", isVirtual);
         result.put("isFunction", isFunction());
         result.put("isConst", isConst);
+        result.put("isNoExcept", isNoExcept);
         result.put("isStatic", isStatic);
         result.put("returnType", returnType.toListOfMaps());
         result.put("parameters", parameters.toListOfMaps());
@@ -193,6 +203,4 @@ public class DoxygenMember {
 
         return result;
     }
-
-
 }

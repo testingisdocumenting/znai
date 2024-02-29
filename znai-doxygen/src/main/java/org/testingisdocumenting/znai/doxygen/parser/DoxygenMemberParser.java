@@ -52,6 +52,7 @@ public class DoxygenMemberParser {
         member.setStatic("yes".equals(XmlUtils.getAttributeText(memberNode, "static")));
         member.setVirtual("virtual".equals(XmlUtils.getAttributeText(memberNode, "virt")));
         member.setConst("yes".equals(XmlUtils.getAttributeText(memberNode, "const")));
+        member.setNoExcept("yes".equals(XmlUtils.getAttributeText(memberNode, "noexcept")));
 
         DocStructure docStructure = componentsRegistry.docStructure();
         member.setReturnType(DoxygenTextWithLinksParser.parse(docStructure,
