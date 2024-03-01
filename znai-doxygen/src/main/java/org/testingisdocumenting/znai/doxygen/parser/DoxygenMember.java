@@ -28,6 +28,7 @@ public class DoxygenMember {
     private DoxygenCompound compound;
     private String id;
     private String name;
+    private String declType;
     private ApiLinkedText returnType;
     private DoxygenDescription description;
     private String visibility;
@@ -95,6 +96,14 @@ public class DoxygenMember {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDeclType() {
+        return declType;
+    }
+
+    public void setDeclType(String declType) {
+        this.declType = declType;
     }
 
     public boolean matchesArgs(String normalizedArgsToMatch) {
@@ -192,6 +201,7 @@ public class DoxygenMember {
         result.put("name", name);
         result.put("visibility", visibility);
         result.put("kind", kind);
+        result.put("declType", declType);
         result.put("isVirtual", isVirtual);
         result.put("isFunction", isFunction());
         result.put("isConst", isConst);

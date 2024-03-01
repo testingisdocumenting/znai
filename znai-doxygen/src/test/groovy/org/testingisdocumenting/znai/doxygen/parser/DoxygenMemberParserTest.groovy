@@ -40,6 +40,7 @@ class DoxygenMemberParserTest {
 
         member.id.should == 'funcs_8h_1a9fcf12f40086d563b0227b6d39b3ade7'
         member.name.should == 'my_func'
+        member.declType.should == 'decltype(par1)'
         member.static.should == false
         member.virtual.should == false
         member.const.should == true

@@ -53,6 +53,7 @@ public class DoxygenMemberParser {
         member.setVirtual("virtual".equals(XmlUtils.getAttributeText(memberNode, "virt")));
         member.setConst("yes".equals(XmlUtils.getAttributeText(memberNode, "const")));
         member.setNoExcept("yes".equals(XmlUtils.getAttributeText(memberNode, "noexcept")));
+        member.setDeclType(extractDeclType(XmlUtils.nextLevelNodeByName(memberNode, "argsstring").getTextContent()));
 
         DocStructure docStructure = componentsRegistry.docStructure();
         member.setReturnType(DoxygenTextWithLinksParser.parse(docStructure,
@@ -80,5 +81,17 @@ public class DoxygenMemberParser {
                         XmlUtils.anyNestedNodeByName(memberNode, "briefdescription")),
                 DoxygenDescriptionParser.parseFull(componentsRegistry, member.getParameters(), member.getName(),
                         XmlUtils.anyNestedNodeByName(memberNode, "detaileddescription"))));
+    }
+
+    /*
+      extracting decltype(expression) from argsstring. assumption that it is the last thing in the argstring xml node
+     */
+    private String extractDeclType(String args) {
+        int idx = args.indexOf("decltype(");
+        if (idx == -1) {
+            return "";
+        }
+
+        return args.substring(idx).trim();
     }
 }

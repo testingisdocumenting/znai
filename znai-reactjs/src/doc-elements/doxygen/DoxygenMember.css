@@ -81,3 +81,8 @@ a .znai-doxygen-member-name {
     color: var(--znai-code-keyword-color);
     white-space: pre;
 }
+
+.znai-doxygen-member-decltype {
+    color: var(--znai-code-class-color);
+    white-space: pre;
+}
