@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.2" xml:lang="en-US">
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.10.0" xml:lang="en-US">
   <compound refid="classutils_1_1second_1_1AnotherClass" kind="class"><name>utils::second::AnotherClass</name>
     <member refid="classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114" kind="variable"><name>number_of_sounds</name></member>
     <member refid="classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14" kind="variable"><name>counter</name></member>
@@ -19,6 +19,10 @@
   </compound>
   <compound refid="namespacemath" kind="namespace"><name>math</name>
     <member refid="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" kind="function"><name>add</name></member>
+  </compound>
+  <compound refid="namespacerepro__case" kind="namespace"><name>repro_case</name>
+    <member refid="functional_8hpp_1ad744a75285a42e1302c54835d7298b4a" kind="function"><name>test1</name></member>
+    <member refid="functional_8hpp_1a94dc84af595394eb083b42d92233bc8d" kind="function"><name>test2</name></member>
   </compound>
   <compound refid="namespaceutils" kind="namespace"><name>utils</name>
   </compound>
@@ -49,6 +53,8 @@
   <compound refid="funcs__three_8h" kind="file"><name>funcs_three.h</name>
   </compound>
   <compound refid="funcs__two_8h" kind="file"><name>funcs_two.h</name>
+  </compound>
+  <compound refid="functional_8hpp" kind="file"><name>functional.hpp</name>
   </compound>
   <compound refid="math_8h" kind="file"><name>math.h</name>
   </compound>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
   <compounddef id="structMyStruct" kind="struct" language="C++" prot="public">
     <compoundname>MyStruct</compoundname>
     <includes refid="structs_8h" local="no">structs.h</includes>
@@ -8,12 +8,13 @@
         <type>typename T</type>
       </param>
     </templateparamlist>
-      <sectiondef kind="public-type">
+    <sectiondef kind="public-type">
       <memberdef kind="typedef" id="structMyStruct_1aa372b7473fe51ce2784d8653e17bc591" prot="public" static="no">
         <type>T::type</type>
         <definition>typedef T::type MyStruct&lt; T &gt;::type</definition>
         <argsstring></argsstring>
         <name>type</name>
+        <qualifiedname>MyStruct::type</qualifiedname>
         <briefdescription>
 <para>type explanation <computeroutput>code</computeroutput> </para>
         </briefdescription>
@@ -23,7 +24,7 @@
         </inbodydescription>
         <location file="src/structs.h" line="11" column="19" bodyfile="src/structs.h" bodystart="11" bodyend="-1"/>
       </memberdef>
-      </sectiondef>
+    </sectiondef>
     <briefdescription>
 <para>my brief description </para>
     </briefdescription>

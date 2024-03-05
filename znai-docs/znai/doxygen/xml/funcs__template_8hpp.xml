@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
   <compounddef id="funcs__template_8hpp" kind="file" language="C++">
     <compoundname>funcs_template.hpp</compoundname>
-      <sectiondef kind="func">
+    <sectiondef kind="func">
       <memberdef kind="function" id="funcs__template_8hpp_1af969a1dd1f0b5ebd1b4380a42cd0f66f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
@@ -221,28 +221,28 @@
         </inbodydescription>
         <location file="src/funcs_template.hpp" line="44" column="6" bodyfile="src/funcs_template.hpp" bodystart="44" bodyend="45"/>
       </memberdef>
-      </sectiondef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
 <para>utilities template functions </para>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1"></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline lineno="13" refid="funcs__template_8hpp_1af969a1dd1f0b5ebd1b4380a42cd0f66f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="funcs__template_8hpp_1af969a1dd1f0b5ebd1b4380a42cd0f66f" kindref="member">println</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>v)<sp/>{</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>v<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="15"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>multi_println</highlight></codeline>
-<codeline lineno="25"><highlight class="comment"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline lineno="25"><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
 <codeline lineno="26" refid="funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2" kindref="member">multi_println</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T1&amp;<sp/>v1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T2&amp;<sp/>v2)<sp/>{</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>v1<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;,<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>v2<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//<sp/>multi_println</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ignore_template</highlight></codeline>
-<codeline lineno="43"><highlight class="comment"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T3,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T4,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T5_doc_ignore&gt;</highlight></codeline>
+<codeline lineno="43"><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T3,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T4,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T5_doc_ignore&gt;</highlight></codeline>
 <codeline lineno="44" refid="funcs__template_8hpp_1aa9b71ec13f0f9fe185a26b7e07e818ca" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="funcs__template_8hpp_1aa9b71ec13f0f9fe185a26b7e07e818ca" kindref="member">long_template_func</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T1&amp;<sp/>v1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T2&amp;<sp/>v2,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T3&amp;<sp/>v3,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T4&amp;<sp/>v4)<sp/>{</highlight></codeline>
 <codeline lineno="45"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ignore_template</highlight><highlight class="normal"></highlight></codeline>
