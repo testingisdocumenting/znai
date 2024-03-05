@@ -1,13 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
   <compounddef id="namespacemath" kind="namespace" language="C++">
     <compoundname>math</compoundname>
-      <sectiondef kind="func">
+    <sectiondef kind="func">
       <memberdef kind="function" id="math_8h_1a0b2d8c3d7f189b107fcdfb5e40ab694c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
         <definition>int math::add</definition>
         <argsstring>(int a, int b)</argsstring>
         <name>add</name>
+        <qualifiedname>math::add</qualifiedname>
         <param>
           <type>int</type>
           <declname>a</declname>
@@ -44,7 +45,7 @@
         </inbodydescription>
         <location file="src/math.h" line="15" column="5" declfile="src/math.h" declline="15" declcolumn="5"/>
       </memberdef>
-      </sectiondef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

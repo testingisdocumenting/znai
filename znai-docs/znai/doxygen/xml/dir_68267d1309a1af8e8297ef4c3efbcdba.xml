@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
   <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
     <compoundname>src</compoundname>
     <innerfile refid="classes_8h">classes.h</innerfile>
@@ -8,6 +8,7 @@
     <innerfile refid="funcs__template_8hpp">funcs_template.hpp</innerfile>
     <innerfile refid="funcs__three_8h">funcs_three.h</innerfile>
     <innerfile refid="funcs__two_8h">funcs_two.h</innerfile>
+    <innerfile refid="functional_8hpp">functional.hpp</innerfile>
     <innerfile refid="math_8h">math.h</innerfile>
     <innerfile refid="structs_8h">structs.h</innerfile>
     <briefdescription>

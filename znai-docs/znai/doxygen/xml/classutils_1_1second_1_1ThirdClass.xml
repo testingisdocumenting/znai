@@ -1,14 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
   <compounddef id="classutils_1_1second_1_1ThirdClass" kind="class" language="C++" prot="public">
     <compoundname>utils::second::ThirdClass</compoundname>
     <includes refid="classes_8h" local="no">classes.h</includes>
-      <sectiondef kind="public-func">
+    <sectiondef kind="public-func">
       <memberdef kind="function" id="classutils_1_1second_1_1ThirdClass_1a0b8841f3d07edf14f592150dab8f0046" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void utils::second::ThirdClass::bark</definition>
         <argsstring>()</argsstring>
         <name>bark</name>
+        <qualifiedname>utils::second::ThirdClass::bark</qualifiedname>
         <briefdescription>
 <para>bark </para>
         </briefdescription>
@@ -18,7 +19,7 @@
         </inbodydescription>
         <location file="src/classes.h" line="19" column="10"/>
       </memberdef>
-      </sectiondef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

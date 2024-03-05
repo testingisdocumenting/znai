@@ -59,6 +59,7 @@ export function doxygenMemberDemo(registry: Registry) {
     <DoxygenMember
       compoundName="utils::nested"
       name="my_func"
+      declType=""
       isFunction={true}
       isVirtual={false}
       isConst={false}
@@ -73,6 +74,7 @@ export function doxygenMemberDemo(registry: Registry) {
     <DoxygenMember
       compoundName="utils::nested"
       name="my_func"
+      declType=""
       isFunction={true}
       isVirtual={false}
       isConst={false}
@@ -93,6 +95,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isNoExcept={false}
       compoundName=""
       name="my_func"
+      declType=""
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
@@ -108,6 +111,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isNoExcept={false}
       compoundName="utils::MyClass"
       name="my_func"
+      declType=""
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
@@ -123,6 +127,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isNoExcept={false}
       compoundName="utils::MyClass"
       name="var_name"
+      declType=""
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={[]}
@@ -138,6 +143,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isNoExcept={false}
       compoundName="utils::MyClass"
       name="my_func"
+      declType=""
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}
@@ -153,6 +159,39 @@ export function doxygenMemberDemo(registry: Registry) {
       isNoExcept={true}
       compoundName="utils::MyClass"
       name="my_func"
+      declType=""
+      url="#test_link"
+      returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
+      parameters={parameters}
+    />
+  ));
+
+  registry.add("noexcept const", () => (
+    <DoxygenMember
+      isFunction={true}
+      isVirtual={false}
+      isConst={true}
+      isStatic={false}
+      isNoExcept={true}
+      compoundName="utils::MyClass"
+      name="my_func"
+      declType=""
+      url="#test_link"
+      returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
+      parameters={parameters}
+    />
+  ));
+
+  registry.add("decltype", () => (
+    <DoxygenMember
+      isFunction={true}
+      isVirtual={false}
+      isConst={false}
+      isStatic={false}
+      isNoExcept={true}
+      compoundName="utils::MyClass"
+      name="my_func"
+      declType="decltype(p1)"
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
       parameters={parameters}

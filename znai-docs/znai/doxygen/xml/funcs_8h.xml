@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
   <compounddef id="funcs_8h" kind="file" language="C++">
     <compoundname>funcs.h</compoundname>
     <innernamespace refid="namespaceutils">utils</innernamespace>
     <innernamespace refid="namespaceutils_1_1nested">utils::nested</innernamespace>
-      <sectiondef kind="func">
+    <sectiondef kind="func">
       <memberdef kind="function" id="funcs_8h_1a451470a505617c5422faf2b6df5e2d43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void free_func</definition>
@@ -18,7 +18,7 @@
         </inbodydescription>
         <location file="src/funcs.h" line="31" column="6" bodyfile="src/funcs.h" bodystart="31" bodyend="32"/>
       </memberdef>
-      </sectiondef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

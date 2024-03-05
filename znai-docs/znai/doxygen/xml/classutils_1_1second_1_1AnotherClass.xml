@@ -1,14 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.2" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
   <compounddef id="classutils_1_1second_1_1AnotherClass" kind="class" language="C++" prot="public">
     <compoundname>utils::second::AnotherClass</compoundname>
     <includes refid="classes__two_8h" local="no">classes_two.h</includes>
-      <sectiondef kind="public-attrib">
+    <sectiondef kind="public-attrib">
       <memberdef kind="variable" id="classutils_1_1second_1_1AnotherClass_1a5126e99df34cb7a3d702193dc3511114" prot="public" static="no" mutable="no">
         <type>int</type>
         <definition>int utils::second::AnotherClass::number_of_sounds</definition>
         <argsstring></argsstring>
         <name>number_of_sounds</name>
+        <qualifiedname>utils::second::AnotherClass::number_of_sounds</qualifiedname>
         <briefdescription>
 <para>current number of <computeroutput>sounds</computeroutput> made </para>
         </briefdescription>
@@ -18,13 +19,14 @@
         </inbodydescription>
         <location file="src/classes_two.h" line="10" column="9" bodyfile="src/classes_two.h" bodystart="10" bodyend="-1"/>
       </memberdef>
-      </sectiondef>
-      <sectiondef kind="public-static-attrib">
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="classutils_1_1second_1_1AnotherClass_1a2e1d6f6f0aa0f88ba790bbd1e49a1d14" prot="public" static="yes" mutable="no">
         <type>int</type>
         <definition>int utils::second::AnotherClass::counter</definition>
         <argsstring></argsstring>
         <name>counter</name>
+        <qualifiedname>utils::second::AnotherClass::counter</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -33,13 +35,14 @@
         </inbodydescription>
         <location file="src/classes_two.h" line="12" column="16" bodyfile="src/classes_two.h" bodystart="12" bodyend="-1"/>
       </memberdef>
-      </sectiondef>
-      <sectiondef kind="public-func">
+    </sectiondef>
+    <sectiondef kind="public-func">
       <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a2221a3c49e7c701f5a1829249c53078d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void utils::second::AnotherClass::sing</definition>
         <argsstring>(int tone, int volume) const</argsstring>
         <name>sing</name>
+        <qualifiedname>utils::second::AnotherClass::sing</qualifiedname>
         <param>
           <type>int</type>
           <declname>tone</declname>
@@ -79,6 +82,7 @@
         <definition>void utils::second::AnotherClass::bark</definition>
         <argsstring>(const MyClass &amp;myClass, int tone, int volume)</argsstring>
         <name>bark</name>
+        <qualifiedname>utils::second::AnotherClass::bark</qualifiedname>
         <param>
           <type>const <ref refid="classutils_1_1second_1_1MyClass" kindref="compound">MyClass</ref> &amp;</type>
           <declname>myClass</declname>
@@ -125,13 +129,14 @@
         </inbodydescription>
         <location file="src/classes_two.h" line="27" column="10"/>
       </memberdef>
-      </sectiondef>
-      <sectiondef kind="public-static-func">
+    </sectiondef>
+    <sectiondef kind="public-static-func">
       <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1a7f879de76a89c99be528367721e77526" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>static void utils::second::AnotherClass::smile</definition>
         <argsstring>(int volume)</argsstring>
         <name>smile</name>
+        <qualifiedname>utils::second::AnotherClass::smile</qualifiedname>
         <param>
           <type>int</type>
           <declname>volume</declname>
@@ -154,13 +159,14 @@
         </inbodydescription>
         <location file="src/classes_two.h" line="33" column="17" bodyfile="src/classes_two.h" bodystart="33" bodyend="34"/>
       </memberdef>
-      </sectiondef>
-      <sectiondef kind="protected-func">
+    </sectiondef>
+    <sectiondef kind="protected-func">
       <memberdef kind="function" id="classutils_1_1second_1_1AnotherClass_1aa9be1f583ecdf7dd3d1e32a752c67006" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
         <definition>virtual void utils::second::AnotherClass::help</definition>
         <argsstring>(int tone, int volume)</argsstring>
         <name>help</name>
+        <qualifiedname>utils::second::AnotherClass::help</qualifiedname>
         <param>
           <type>int</type>
           <declname>tone</declname>
@@ -197,7 +203,7 @@
         </inbodydescription>
         <location file="src/classes_two.h" line="47" column="18"/>
       </memberdef>
-      </sectiondef>
+    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

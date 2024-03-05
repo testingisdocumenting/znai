@@ -27,6 +27,7 @@ import "./DoxygenMember.css";
 interface Props {
   compoundName: string;
   name: string;
+  declType: string;
   url?: string;
   isFunction: boolean;
   isStatic: boolean;
@@ -41,6 +42,7 @@ interface Props {
 export function DoxygenMember({
   compoundName,
   name,
+  declType,
   url,
   returnType,
   isFunction,
@@ -115,6 +117,7 @@ export function DoxygenMember({
               {isFunction && <div className="znai-doxygen-member-params-separator">)</div>}
               {isConst && <div className="znai-doxygen-member-classifier"> const</div>}
               {isNoExcept && <div className="znai-doxygen-member-classifier"> noexcept</div>}
+              {declType && <div className="znai-doxygen-member-decltype"> -&gt; {declType}</div>}
             </div>
           )}
         </div>
