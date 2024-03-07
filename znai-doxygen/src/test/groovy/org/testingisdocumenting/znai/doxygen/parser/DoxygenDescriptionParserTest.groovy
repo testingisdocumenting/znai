@@ -50,6 +50,30 @@ class DoxygenDescriptionParserTest {
     }
 
     @Test
+    void "should parse description with note"() {
+        DoxygenFullDescription desc = parseDescription("doxygen-description-with-note.xml")
+        def descMaps = desc.descriptionElements.stream().map(DocElement::toMap).collect(Collectors.toList())
+        descMaps.should == [["type"   : "Paragraph",
+                             "content": [["type": "StrongEmphasis", "content": [["text": "Domain", "type": "SimpleText"]]],
+                                         ["text": " specific context setting. Describes business setting and requirements.",
+                                          "type": "SimpleText"]]],
+                            ["type"   : "Paragraph",
+                             "content": [["attentionType": "note",
+                                          "type"         : "AttentionBlock",
+                                          "content"      : [["type"   : "Paragraph",
+                                                             "content": [["text": "Do not reveal your password. Use alternatives:", "type": "SimpleText"],
+                                                                         ["delimiter"  : " ",
+                                                                          "startNumber": 1,
+                                                                          "type"       : "OrderedList",
+                                                                          "content"    : [["type"   : "ListItem",
+                                                                                           "content": [["type": "Paragraph", "content": [["text": "option one", "type": "SimpleText"]]]]],
+                                                                                          ["type"   : "ListItem",
+                                                                                           "content": [["type": "Paragraph", "content": [["text": "option two", "type": "SimpleText"]]]]]]]]]]],
+                                         ["text": "\n        more context ",
+                                          "type": "SimpleText"]]]]
+    }
+
+    @Test
     void "should parse and convert params to api parameters"() {
         DoxygenFullDescription desc = parseDescription("doxygen-description.xml")
 

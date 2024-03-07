@@ -17,15 +17,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes.h" line="10" column="10"/>
+        <location file="src/classes.h" line="17" column="10"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para><bold>Domain</bold> specific context setting. Describes business setting and requirements. </para>
+<para><bold>Domain</bold> specific context setting. Describes business setting and requirements.</para>
+<para><simplesect kind="note"><para>Do not reveal your password. Use alternatives:<orderedlist>
+<listitem><para>option one</para>
+</listitem><listitem><para>option two</para>
+</listitem></orderedlist>
+</para>
+</simplesect>
+more context </para>
     </detaileddescription>
-    <location file="src/classes.h" line="7" column="1" bodyfile="src/classes.h" bodystart="7" bodyend="11"/>
+    <location file="src/classes.h" line="14" column="1" bodyfile="src/classes.h" bodystart="14" bodyend="18"/>
     <listofallmembers>
       <member refid="classutils_1_1second_1_1MyClass_1abeb796dd3e5c66f28340fdfe978007b1" prot="public" virt="non-virtual"><scope>utils::second::MyClass</scope><name>bark</name></member>
     </listofallmembers>

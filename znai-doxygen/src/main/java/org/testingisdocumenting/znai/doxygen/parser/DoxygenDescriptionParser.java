@@ -28,7 +28,9 @@ import org.w3c.dom.Node;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DoxygenDescriptionParser {
@@ -133,8 +135,17 @@ public class DoxygenDescriptionParser {
             String textContent = node.getTextContent();
             parserHandler.onInlinedCode(textContent, DocReferences.EMPTY);
             textParts.add(textContent);
-        } else if (nodeName.equals("simplesect") && "return".equals(XmlUtils.getAttributeText(node, "kind"))) {
-            doxygenReturn = DoxygenReturnParser.parse(componentsRegistry, node);
+        } else if (nodeName.equals("simplesect")) {
+            String kind = XmlUtils.getAttributeText(node, "kind");
+            if ("return".equals(kind)) {
+                doxygenReturn = DoxygenReturnParser.parse(componentsRegistry, node);
+            } else if ("note".equals(kind)) {
+                Map<String, Object> attrs = new LinkedHashMap<>();
+                attrs.put("attentionType", "note");
+                parserHandler.onCustomNodeStart("AttentionBlock", attrs);
+                parseChildren(node);
+                parserHandler.onCustomNodeEnd("AttentionBlock");
+            }
         } else if (nodeName.equals("bold")) {
             parserHandler.onStrongEmphasisStart();
             parseChildren(node);
