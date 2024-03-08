@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/classes.h" line="19" column="10"/>
+        <location file="src/classes.h" line="26" column="10"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -25,7 +25,7 @@
     <detaileddescription>
 <para><bold>Domain</bold> specific context setting. Describes business setting and requirements. </para>
     </detaileddescription>
-    <location file="src/classes.h" line="16" column="1" bodyfile="src/classes.h" bodystart="16" bodyend="20"/>
+    <location file="src/classes.h" line="23" column="1" bodyfile="src/classes.h" bodystart="23" bodyend="27"/>
     <listofallmembers>
       <member refid="classutils_1_1second_1_1ThirdClass_1a0b8841f3d07edf14f592150dab8f0046" prot="public" virt="non-virtual"><scope>utils::second::ThirdClass</scope><name>bark</name></member>
     </listofallmembers>
