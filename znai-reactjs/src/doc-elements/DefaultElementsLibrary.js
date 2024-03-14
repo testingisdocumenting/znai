@@ -79,7 +79,7 @@ import {Redirect} from '../structure/Redirect';
 import {SimpleText} from './default-elements/SimpleText';
 import { PageToc } from "./page/PageToc";
 import { TextBadge } from "./badge/TextBadge";
-import { DoxygenMember } from "./doxygen/DoxygenMember";
+import { DoxygenMember, presentationDoxygenMember } from "./doxygen/DoxygenMember";
 import { AnnotatedImage } from "./images/AnnotatedImage";
 import { AnnotatedImageWithOrderedList } from "./images/AnnotatedImageWithOrderedList";
 import { OrderedList } from "./default-elements/OrderedList";
@@ -187,6 +187,7 @@ library.Xml = Xml
 presentationElementHandlers.Xml = presentationXml
 
 library.DoxygenMember = DoxygenMember
+presentationElementHandlers.DoxygenMember = presentationDoxygenMember
 
 library.PythonMethod = PythonMethod
 

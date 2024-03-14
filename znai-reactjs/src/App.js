@@ -100,6 +100,7 @@ import { attentionBlockDemo } from "./doc-elements/paragraph/AttentionBlock.demo
 import { attentionBlockPresentationDemo } from "./doc-elements/paragraph/PresentationAttentionBlock.demo";
 import { containerTitleDemo } from "./doc-elements/container/ContainerTitle.demo";
 import { cardsDemo } from "./doc-elements/card/CardsDemo";
+import { doxygenPresentationDemo } from "./doc-elements/doxygen/PresentationDoxygen.demo";
 
 const docMeta = {
     id: 'preview',
@@ -202,6 +203,7 @@ registries.add('presentation')
     .registerAsTabs('Image', imagePresentationDemo)
     .registerAsTabs('Code Snippets', snippetPresentationDemo)
     .registerAsTabs('Code Snippets With Scroll', snippetWithScrollPresentationDemo)
+    .registerAsTabs('Doxygen', doxygenPresentationDemo)
     .registerAsTabs('Cli Command', cliCommandPresentationDemo)
     .registerAsTabs('Cli Output', cliOutputPresentationDemo)
     .registerAsTabs('Charts', chartsPresentationDemo)
