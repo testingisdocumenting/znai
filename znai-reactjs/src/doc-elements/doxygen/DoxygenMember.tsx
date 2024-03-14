@@ -99,29 +99,72 @@ export function DoxygenMember({
           )}
 
           {nameWrappedInOptionalLink}
-          {parameters && (
-            <div className="znai-doxygen-member-params">
-              {isFunction && <div className="znai-doxygen-member-params-separator">(</div>}
-              {parameters.map((param, idx) => {
-                const needSeparator = idx !== parameters.length - 1;
-                return (
-                  <div className="znai-doxygen-member-param" key={idx}>
-                    <div className="znai-doxygen-member-param-type">
-                      <ApiLinkedTextBlock linkedText={param.type} />
-                    </div>
-                    <div className="znai-doxygen-member-param-name">{param.name}</div>
-                    {needSeparator && <div className="znai-doxygen-member-params-separator">, </div>}
-                  </div>
-                );
-              })}
-              {isFunction && <div className="znai-doxygen-member-params-separator">)</div>}
-              {isConst && <div className="znai-doxygen-member-classifier"> const</div>}
-              {isNoExcept && <div className="znai-doxygen-member-classifier"> noexcept</div>}
-              {declType && <div className="znai-doxygen-member-decltype"> -&gt; {declType}</div>}
-            </div>
-          )}
+          {parameters && renderParametersAndClassifiers(parameters)}
         </div>
       </div>
     </div>
   );
+
+  function renderParametersAndClassifiers(parameters: DoxygenParameter[]) {
+    if (parameters.length === 0) {
+      return (
+        <div className="znai-doxygen-member-params-and-classifiers">
+          <div className="znai-doxygen-member-params-separator">()</div>
+        </div>
+      );
+    }
+
+    if (parameters.length === 1) {
+      return (
+        <div className="znai-doxygen-member-params-and-classifiers">
+          <div className="znai-doxygen-member-params-single">
+            <div className="znai-doxygen-member-params-separator">(</div>
+            {renderParameter(parameters[0], 0, false)}
+            <div className="znai-doxygen-member-params-separator">)</div>
+          </div>
+
+          {renderClassifiers()}
+        </div>
+      );
+    }
+
+    return (
+      <div className="znai-doxygen-member-params-and-classifiers">
+        {isFunction && <div className="znai-doxygen-member-params-separator">(</div>}
+        {parameters.map((param, idx) => {
+          const needSeparator = idx !== parameters.length - 1;
+          return renderParameter(param, idx, needSeparator);
+        })}
+        {isFunction && <div className="znai-doxygen-member-params-separator">)</div>}
+        {renderClassifiers()}
+      </div>
+    );
+
+    function renderParameter(param: DoxygenParameter, idx: number, needSeparator: boolean) {
+      return (
+        <div className="znai-doxygen-member-param" key={idx}>
+          <div className="znai-doxygen-member-param-type">
+            <ApiLinkedTextBlock linkedText={param.type} />
+          </div>
+          <div className="znai-doxygen-member-param-name">{param.name}</div>
+          {needSeparator && <div className="znai-doxygen-member-params-separator">, </div>}
+        </div>
+      );
+    }
+
+    function renderClassifiers() {
+      return (
+        <>
+          {isConst && <div className="znai-doxygen-member-classifier"> const</div>}
+          {isNoExcept && <div className="znai-doxygen-member-classifier"> noexcept</div>}
+          {declType && <div className="znai-doxygen-member-decltype"> -&gt; {declType}</div>}
+        </>
+      );
+    }
+  }
 }
+
+export const presentationDoxygenMember = {
+  component: DoxygenMember,
+  numberOfSlides: () => 1,
+};

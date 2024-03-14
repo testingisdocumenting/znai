@@ -18,43 +18,9 @@ import React from "react";
 
 import { Registry } from "react-component-viewer";
 import { DoxygenMember } from "./DoxygenMember";
+import { doxygenMethodParameters, doxygenMethodTemplateParameters } from "../demo-utils/contentGenerators";
 
 export function doxygenMemberDemo(registry: Registry) {
-  const parameters = [
-    {
-      name: "p_one",
-      type: [
-        { text: "const ", refId: "" },
-        { text: "MyClass", refId: "MyClass__8x" },
-      ],
-    },
-    {
-      name: "p_two",
-      type: [
-        { text: "const ", refId: "" },
-        { text: "AnotherClass", refId: "AnotherClass__9x" },
-      ],
-    },
-    {
-      name: "p_three",
-      type: [
-        { text: "const ", refId: "" },
-        { text: "AnotherClass2", refId: "AnotherClass2__9x" },
-      ],
-    },
-  ];
-
-  const templateParameters = [
-    {
-      name: "",
-      type: [{ text: "T1", refId: "" }],
-    },
-    {
-      name: "",
-      type: [{ text: "T2", refId: "" }],
-    },
-  ];
-
   registry.add("default", () => (
     <DoxygenMember
       compoundName="utils::nested"
@@ -66,7 +32,7 @@ export function doxygenMemberDemo(registry: Registry) {
       isStatic={false}
       isNoExcept={false}
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
-      parameters={parameters}
+      parameters={doxygenMethodParameters}
     />
   ));
 
@@ -81,8 +47,8 @@ export function doxygenMemberDemo(registry: Registry) {
       isStatic={false}
       isNoExcept={false}
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
-      parameters={parameters}
-      templateParameters={templateParameters}
+      parameters={doxygenMethodParameters}
+      templateParameters={doxygenMethodTemplateParameters}
     />
   ));
 
@@ -98,7 +64,7 @@ export function doxygenMemberDemo(registry: Registry) {
       declType=""
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
-      parameters={parameters}
+      parameters={doxygenMethodParameters}
     />
   ));
 
@@ -114,7 +80,7 @@ export function doxygenMemberDemo(registry: Registry) {
       declType=""
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
-      parameters={parameters}
+      parameters={doxygenMethodParameters}
     />
   ));
 
@@ -146,7 +112,7 @@ export function doxygenMemberDemo(registry: Registry) {
       declType=""
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
-      parameters={parameters}
+      parameters={doxygenMethodParameters}
     />
   ));
 
@@ -162,7 +128,7 @@ export function doxygenMemberDemo(registry: Registry) {
       declType=""
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
-      parameters={parameters}
+      parameters={doxygenMethodParameters}
     />
   ));
 
@@ -178,7 +144,7 @@ export function doxygenMemberDemo(registry: Registry) {
       declType=""
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
-      parameters={parameters}
+      parameters={doxygenMethodParameters}
     />
   ));
 
@@ -194,7 +160,7 @@ export function doxygenMemberDemo(registry: Registry) {
       declType="decltype(p1)"
       url="#test_link"
       returnType={[{ text: "MyClass", url: "#MyClass__8x" }]}
-      parameters={parameters}
+      parameters={doxygenMethodParameters}
     />
   ));
 }

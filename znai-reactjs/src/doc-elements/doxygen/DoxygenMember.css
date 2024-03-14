@@ -20,6 +20,11 @@
     margin-bottom: 8px;
 }
 
+.presentation .znai-doxygen-member {
+    max-width: 85%;
+    margin: 0 auto;
+}
+
 .znai-doxygen-member-full-name {
     display: flex;
 }
@@ -50,12 +55,16 @@ a .znai-doxygen-member-name {
     display: flex;
 }
 
-.znai-doxygen-member-params,
+.znai-doxygen-member-params-and-classifiers,
 .znai-doxygen-member-param {
     display: flex;
 }
 
-.znai-doxygen-member-params {
+.znai-doxygen-member-params-single {
+    display: flex;
+}
+
+.znai-doxygen-member-params-and-classifiers {
     flex-wrap: wrap;
 }
 

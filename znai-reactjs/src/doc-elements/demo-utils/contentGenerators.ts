@@ -161,3 +161,78 @@ export function contentTableTwoColumnsData() {
     ],
   ];
 }
+export const doxygenMethodParameters = [
+  {
+    name: "p_one",
+    type: [
+      { text: "const ", refId: "" },
+      { text: "MyClass", refId: "MyClass__8x" },
+    ],
+  },
+  {
+    name: "p_two",
+    type: [
+      { text: "const ", refId: "" },
+      { text: "AnotherClass", refId: "AnotherClass__9x" },
+    ],
+  },
+  {
+    name: "p_three",
+    type: [
+      { text: "const ", refId: "" },
+      { text: "AnotherClass2", refId: "AnotherClass2__9x" },
+    ],
+  },
+];
+
+export const doxygenMethodParametersSingle = [
+  {
+    name: "p_one",
+    type: [
+      { text: "const ", refId: "" },
+      { text: "MyClass", refId: "MyClass__8x" },
+    ],
+  },
+];
+
+export const doxygenMethodParametersLong = [
+  {
+    name: "p_one",
+    type: [
+      { text: "const ", refId: "" },
+      { text: "MyClass", refId: "MyClass__8x" },
+    ],
+  },
+  {
+    name: "p_two",
+    type: [
+      { text: "const ", refId: "" },
+      { text: "AnotherClass", refId: "AnotherClass__9x" },
+    ],
+  },
+  {
+    name: "p_three",
+    type: [
+      { text: "const ", refId: "" },
+      { text: "AnotherClass2", refId: "AnotherClass2__9x" },
+    ],
+  },
+  {
+    name: "p_four",
+    type: [
+      { text: "const ", refId: "" },
+      { text: "AnotherClass2", refId: "AnotherClass2__9x" },
+    ],
+  },
+];
+
+export const doxygenMethodTemplateParameters = [
+  {
+    name: "",
+    type: [{ text: "T1", refId: "" }],
+  },
+  {
+    name: "",
+    type: [{ text: "T2", refId: "" }],
+  },
+];
