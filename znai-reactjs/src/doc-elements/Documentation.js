@@ -43,8 +43,6 @@ import {pageContentProcessor} from './pageContentProcessor.js'
 import {DocumentationModes} from './DocumentationModes'
 import {pageTypesRegistry} from './page/PageTypesRegistry'
 
-import {injectGlobalOverridesCssLink} from './CssOverrides'
-
 import {updateGlobalDocReferences} from './references/globalDocReferences'
 import {areTocItemEquals} from '../structure/TocItem'
 
@@ -261,8 +259,6 @@ export class Documentation extends Component {
     }
 
     componentDidMount() {
-        injectGlobalOverridesCssLink()
-
         this.enableScrollListener()
         this.onPageLoad()
 

@@ -58,7 +58,7 @@ function isPreviewEnabled() {
 }
 
 function getDocId() {
-  return docMeta.id;
+  return docMeta.id || "";
 }
 
 let supportLinkPromise: Promise<SupportMeta> | undefined = undefined;
@@ -71,30 +71,25 @@ function getSupportLinkAndTitlePromise(): Promise<SupportMeta> {
   }
   const support = docMeta.support;
   if (support && support.link) {
-    supportLinkPromise = new Promise((resolve) => resolve({
-      link: support.link!,
-      title: support.title || defaultSupportTitle}));
+    supportLinkPromise = new Promise((resolve) =>
+      resolve({
+        link: support.link!,
+        title: support.title || defaultSupportTitle,
+      })
+    );
   } else if (support && support.urlToFetchSupportLink) {
     // @ts-ignore
-    supportLinkPromise = jsonPromise<string, SupportMeta>(
-      support.urlToFetchSupportLink(getDocMeta())
-    )
+    supportLinkPromise = jsonPromise<string, SupportMeta>(support.urlToFetchSupportLink(getDocMeta()))
       // @ts-ignore
       .then((supportMeta) => ({
         link: supportMeta.link,
-        title: defaultSupportTitle }));
+        title: defaultSupportTitle,
+      }));
   } else {
-    supportLinkPromise = new Promise((resolve) => resolve({link: "", title: ""}));
+    supportLinkPromise = new Promise((resolve) => resolve({ link: "", title: "" }));
   }
 
   return supportLinkPromise!;
 }
 
-export {
-  setDocMeta,
-  mergeDocMeta,
-  getDocMeta,
-  isPreviewEnabled,
-  getDocId,
-  getSupportLinkAndTitlePromise,
-};
+export { setDocMeta, mergeDocMeta, getDocMeta, isPreviewEnabled, getDocId, getSupportLinkAndTitlePromise };
