@@ -27,6 +27,14 @@ describe("DocumentationNavigation", () => {
         expect(location.anchorId).toEqual("page-section")
     })
 
+    it("extracts page location from url when doc-id is empty", () => {
+        const location = documentationNavigation.extractPageLocation("/section-name/page-title#page-section")
+
+        expect(location.dirName).toEqual("section-name")
+        expect(location.fileName).toEqual("page-title")
+        expect(location.anchorId).toEqual("page-section")
+    })
+
     it("extracts page location from url without hash", () => {
         const location = documentationNavigation.extractPageLocation("/something/section-name/page-title")
 
@@ -58,11 +66,27 @@ describe("DocumentationNavigation", () => {
         expect(location.fileName).toEqual("index")
     })
 
+    it("extracts page location for root where doc id is empty", () => {
+        setDocMeta({id: ''})
+        const location = documentationNavigation.extractPageLocation("/")
+
+        expect(location.dirName).toEqual("")
+        expect(location.fileName).toEqual("index")
+    })
+
     it("builds full doc url given a relative url", () => {
         setDocMeta({id: 'my-doc'})
 
         expect(documentationNavigation.fullPageUrl('#anchor')).toEqual('#anchor')
         expect(documentationNavigation.fullPageUrl('/chapter/page')).toEqual('/my-doc/chapter/page')
         expect(documentationNavigation.fullPageUrl('chapter/page')).toEqual('/my-doc/chapter/page')
+    })
+
+    it("builds full doc url given a relative url when doc id is empty", () => {
+        setDocMeta({id: ''})
+
+        expect(documentationNavigation.fullPageUrl('#anchor')).toEqual('#anchor')
+        expect(documentationNavigation.fullPageUrl('/chapter/page')).toEqual('/chapter/page')
+        expect(documentationNavigation.fullPageUrl('chapter/page')).toEqual('/chapter/page')
     })
 })

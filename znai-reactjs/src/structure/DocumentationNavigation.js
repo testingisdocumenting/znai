@@ -26,12 +26,9 @@ class DocumentationNavigation {
     constructor() {
         this.listeners = []
 
-        // server side rendering guard
-        if (window.addEventListener) {
-            window.addEventListener('popstate', (e) => {
-                this.notifyNewUrl(document.location.pathname + (document.location.hash), e.state)
-            })
-        }
+        window.addEventListener('popstate', (e) => {
+            this.notifyNewUrl(document.location.pathname + (document.location.hash), e.state)
+        })
     }
 
     addUrlChangeListener(listener) {
@@ -52,9 +49,14 @@ class DocumentationNavigation {
             return relativePageUrl
         }
 
-        return "/" + (getDocId()  ? getDocId() : "") +
-            (relativePageUrl.indexOf('/') === 0 ? '' : '/') +
-            relativePageUrl
+        const relativePageUrlWithoutLeadingSlash = relativePageUrl.indexOf('/') === 0 ?
+          relativePageUrl.substring(1) : relativePageUrl
+
+        const docIdIsEmpty = getDocId().length === 0
+
+        return "/" + getDocId() +
+            (docIdIsEmpty ? '' : '/') +
+            relativePageUrlWithoutLeadingSlash
     }
 
     buildUrl(id) {
@@ -103,21 +105,19 @@ class DocumentationNavigation {
     }
 
     currentPageLocation() {
-        return window.location ?
-            {...this.extractPageLocation(window.location.pathname),
-                anchorId: window.location.hash.length ? window.location.hash.substr(1) : ""}:
-            "/server/side"
+        return {...this.extractPageLocation(window.location.pathname),
+                anchorId: window.location.hash.length ? window.location.hash.substring(1) : ""}
     }
 
     extractPageLocation(url) {
         const hashIdx = url.indexOf("#");
-        const anchorId = hashIdx >= 0 ? url.substr(hashIdx + 1) : ""
-        url = hashIdx >= 0 ? url.substr(0, hashIdx) : url
+        const anchorId = hashIdx >= 0 ? url.substring(hashIdx + 1) : ""
+        url = hashIdx >= 0 ? url.substring(0, hashIdx) : url
 
         const parts = url.split("/").filter(p => p !== ".." && p.length > 0)
 
         // url starts with /<doc-id> ?
-        if (url.substr(1) === getDocId()) {
+        if (url.substring(1) === getDocId()) {
             return index
         }
 
