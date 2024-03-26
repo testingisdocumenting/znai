@@ -26,23 +26,25 @@ import java.util.function.Function;
 import static java.util.stream.Collectors.*;
 
 public class TableOfContents {
+    private final String defaultFileExtension;
     private final List<TocItem> tocItems;
     private final Map<Path, TocItem> tocItemByPath;
 
-    public TableOfContents() {
+    public TableOfContents(String defaultFileExtension) {
+        this.defaultFileExtension = defaultFileExtension;
         this.tocItems = new ArrayList<>();
         this.tocItemByPath = new LinkedHashMap<>();
     }
 
-    public TocItem addTocItem(TocNameAndOpts chapter, String fileNameWithoutExtension) {
-        TocItem tocItem = new TocItem(chapter, fileNameWithoutExtension);
+    public TocItem addTocItem(TocNameAndOpts chapter, String fileNameWithOptionalExtension) {
+        TocItem tocItem = new TocItem(chapter, fileNameWithOptionalExtension, defaultFileExtension);
         tocItems.add(tocItem);
 
         return tocItem;
     }
 
-    public TocItem addTocItem(String dirName, String fileNameWithoutExtension, String sectionTitle) {
-        TocItem tocItem = new TocItem(dirName, fileNameWithoutExtension, sectionTitle);
+    public TocItem addTocItem(String dirName, String fileNameWithOptionalExtension) {
+        TocItem tocItem = new TocItem(dirName, fileNameWithOptionalExtension, defaultFileExtension);
         tocItems.add(tocItem);
 
         return tocItem;
@@ -83,14 +85,14 @@ public class TableOfContents {
     }
 
     public void replaceTocItem(String originalDirName, String originalFileNameWithoutExtension,
-                               TocNameAndOpts newChapter, String newFileNameWithoutExtension) {
+                               TocNameAndOpts newChapter, String newFileNameWithOptionalExtension) {
         int idx = findTocItemIdx(originalDirName, originalFileNameWithoutExtension);
         if (idx == -1) {
             throw new IllegalArgumentException("can't find toc item: " +
                     originalDirName + "/" + originalFileNameWithoutExtension);
         }
 
-        tocItems.set(idx, new TocItem(newChapter, newFileNameWithoutExtension));
+        tocItems.set(idx, new TocItem(newChapter, newFileNameWithOptionalExtension, defaultFileExtension));
     }
 
     public List<TocItem> detectNewTocItems(TableOfContents newToc) {

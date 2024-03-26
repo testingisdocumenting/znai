@@ -1,0 +1,1 @@
+* Add: Support explicit file name extension in `toc` file

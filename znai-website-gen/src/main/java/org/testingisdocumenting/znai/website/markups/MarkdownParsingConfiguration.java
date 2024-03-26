@@ -41,7 +41,7 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
 
     @Override
     public TableOfContents createToc(String docTitle, ComponentsRegistry componentsRegistry) {
-        TableOfContents toc = new PlainTextTocGenerator().generate(
+        TableOfContents toc = new PlainTextTocGenerator(filesExtension()).generate(
                 componentsRegistry.resourceResolver().textContent("toc"));
         toc.addIndex();
 
@@ -62,7 +62,7 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
     public String tocItemResourceName(TocItem tocItem) {
         return tocItem.getDirName()
                 + (tocItem.getDirName().isEmpty() ? "" : File.separator) +
-                (tocItem.getFileNameWithoutExtension() + "." + filesExtension());
+                (tocItem.getFileNameWithoutExtension() + "." + tocItem.getFileExtension());
     }
 
     @Override
@@ -72,12 +72,18 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
 
     @Override
     public TocItem tocItemByPath(ComponentsRegistry componentsRegistry, TableOfContents toc, Path path) {
-        if (path.getFileName().toString().equals("index.md")) {
+        String fileNameWithoutExtension = FilePathUtils.fileNameWithoutExtension(path);
+        TocItem tocItem = toc.findTocItem(path.toAbsolutePath().getParent().getFileName().toString(), fileNameWithoutExtension);
+
+        if (tocItem != null) {
+            return tocItem;
+        }
+
+        if (fileNameWithoutExtension.equals("index")) {
             return toc.getIndex();
         }
 
-        return toc.findTocItem(path.toAbsolutePath().getParent().getFileName().toString(),
-                FilePathUtils.fileNameWithoutExtension(path));
+        return null;
     }
 
     private String filesExtension() {
