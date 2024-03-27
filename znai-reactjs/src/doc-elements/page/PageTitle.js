@@ -77,7 +77,7 @@ function ViewOn({docMeta, tocItem}) {
 function buildViewOnLink(tocItem, link) {
     return tocItem.viewOnRelativePath ?
         `${link}/${tocItem.viewOnRelativePath}` :
-        `${link}/${tocItem.dirName}/${tocItem.fileName}.md`
+        `${link}/${tocItem.dirName}/${tocItem.fileName}.${tocItem.fileExtension}`
 }
 
 export default PageTitle

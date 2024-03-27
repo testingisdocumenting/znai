@@ -32,6 +32,7 @@ public class TocItem {
 
     private final TocNameAndOpts chapter;
     private final String fileNameWithoutExtension;
+    private final String fileExtension;
     private String pageTitle;
     private PageMeta pageMeta;
 
@@ -45,12 +46,14 @@ public class TocItem {
     private List<PageSectionIdTitle> pageSectionIdTitles;
 
     static TocItem createIndex() {
-        return new TocItem(new TocNameAndOpts(""), INDEX);
+        return new TocItem(new TocNameAndOpts(""), INDEX, "");
     }
 
-    public TocItem(TocNameAndOpts chapter, String fileNameWithoutExtension) {
+    public TocItem(TocNameAndOpts chapter, String fileNameWithOptionalExtension, String defaultExtension) {
         this.chapter = chapter;
-        this.fileNameWithoutExtension = fileNameWithoutExtension;
+
+        this.fileNameWithoutExtension = extractName(fileNameWithOptionalExtension);
+        this.fileExtension = extractExtension(fileNameWithOptionalExtension, defaultExtension);
         validateFileName(chapter.getGivenName());
         validateFileName(this.fileNameWithoutExtension);
 
@@ -60,8 +63,11 @@ public class TocItem {
         this.pageSectionIdTitles = new ArrayList<>();
     }
 
-    public TocItem(String dirName, String fileNameWithoutExtension, String chapterTitle) {
-        this(new TocNameAndOpts(dirName), fileNameWithoutExtension);
+    public TocItem(String dirName, String fileNameWithOptionalExtension, String defaultExtension) {
+        this(new TocNameAndOpts(dirName), fileNameWithOptionalExtension, defaultExtension);
+    }
+
+    public void setChapterTitle(String chapterTitle) {
         this.chapter.setHumanReadableName(chapterTitle);
     }
 
@@ -71,6 +77,10 @@ public class TocItem {
 
     public String getFileNameWithoutExtension() {
         return fileNameWithoutExtension;
+    }
+
+    public String getFileExtension() {
+        return fileExtension;
     }
 
     public String getChapterTitle() {
@@ -124,6 +134,7 @@ public class TocItem {
         result.put("pageMeta", pageMeta.toMap());
         result.put("dirName", getDirName());
         result.put("fileName", getFileNameWithoutExtension());
+        result.put("fileExtension", getFileExtension());
         result.put("viewOnRelativePath", viewOnRelativePath);
         result.put("pageSectionIdTitles",
                 getPageSectionIdTitles().stream().map(PageSectionIdTitle::toMap).collect(toList()));
@@ -164,5 +175,15 @@ public class TocItem {
                     name + "\n" +
                     "use\n---\ntitle: my custom title with any symbols like !#?\n---\nto override the title for your page");
         }
+    }
+
+    private static String extractExtension(String fileName, String defaultExtension) {
+        int dotIdx = fileName.lastIndexOf('.');
+        return dotIdx == -1 ? defaultExtension : fileName.substring(dotIdx + 1);
+    }
+
+    private static String extractName(String fileName) {
+        int dotIdx = fileName.lastIndexOf('.');
+        return dotIdx == -1 ? fileName : fileName.substring(0, dotIdx);
     }
 }

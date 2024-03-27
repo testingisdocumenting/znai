@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.parser.sphinx;
 
 import org.testingisdocumenting.znai.structure.TableOfContents;
 import org.testingisdocumenting.znai.structure.TocGenerator;
+import org.testingisdocumenting.znai.structure.TocItem;
 import org.testingisdocumenting.znai.utils.XmlUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,7 +30,7 @@ public class DocTreeTocGenerator implements TocGenerator {
     private final TableOfContents toc;
 
     public DocTreeTocGenerator() {
-        toc = new TableOfContents();
+        toc = new TableOfContents("xml");
     }
 
     @Override
@@ -94,6 +95,7 @@ public class DocTreeTocGenerator implements TocGenerator {
             return;
         }
 
-        toc.addTocItem(parts[0], parts[1], sectionTitle);
+        TocItem tocItem = toc.addTocItem(parts[0], parts[1]);
+        tocItem.setChapterTitle(sectionTitle);
     }
 }

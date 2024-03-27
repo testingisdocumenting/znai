@@ -21,9 +21,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PlainTextTocGenerator implements TocGenerator {
+    public PlainTextTocGenerator(String defaultExtension) {
+        this.defaultExtension = defaultExtension;
+    }
+
+    private final String defaultExtension;
+
     @Override
     public TableOfContents generate(String textContent) {
-        return new Parser(textContent).parse();
+        return new Parser(defaultExtension, textContent).parse();
     }
 
     private static class Parser {
@@ -32,9 +38,9 @@ public class PlainTextTocGenerator implements TocGenerator {
         private TocNameAndOpts currentChapter;
         private final TableOfContents toc;
 
-        public Parser(final String nestedText) {
+        public Parser(String defaultExtension, String nestedText) {
             lines = Arrays.asList(nestedText.replace("\r", "").split("\n"));
-            toc = new TableOfContents();
+            toc = new TableOfContents(defaultExtension);
         }
 
         public TableOfContents parse() {

@@ -25,16 +25,32 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 class TocItemTest {
     @Test
     void "should not allow special symbols in file name"() {
-        def okTocItem = new TocItem(new TocNameAndOpts('dir-name'), 'file-name')
+        def okTocItem = new TocItem(new TocNameAndOpts('dir-name'), 'file-name', 'md')
 
         shouldThrow('dir-name', 'fileName?')
         shouldThrow('dir-name?', 'fileName')
         shouldThrow('dir!-name#', 'fileName!')
     }
 
+    @Test
+    void "should use default file name extension"() {
+        def tocItem = new TocItem(new TocNameAndOpts('dir-name'), 'file-name', 'mdx')
+        tocItem.dirName.should == "dir-name"
+        tocItem.fileNameWithoutExtension.should == "file-name"
+        tocItem.fileExtension.should == "mdx"
+    }
+
+    @Test
+    void "should extract optional file name extension"() {
+        def tocItem = new TocItem(new TocNameAndOpts('dir-name'), 'file-name.mdx', 'md')
+        tocItem.dirName.should == "dir-name"
+        tocItem.fileNameWithoutExtension.should == "file-name"
+        tocItem.fileExtension.should == "mdx"
+    }
+
     private static void shouldThrow(String dirName, String fileName) {
         code {
-            new TocItem(new TocNameAndOpts(dirName), fileName)
+            new TocItem(new TocNameAndOpts(dirName), fileName, 'md')
         } should throwException(IllegalArgumentException)
     }
 }

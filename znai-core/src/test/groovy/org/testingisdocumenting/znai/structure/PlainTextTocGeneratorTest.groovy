@@ -22,7 +22,7 @@ import org.junit.Test
 class PlainTextTocGeneratorTest {
     @Test
     void "should create top level TOC from nested text structure"() {
-        def toc = new PlainTextTocGenerator().generate("""
+        def toc = new PlainTextTocGenerator("md").generate("""
 chapter1
     page-a
     page-b
@@ -31,18 +31,21 @@ chapter2
 
         toc.toListOfMaps().should == [[chapterTitle: 'Chapter1', dirName: 'chapter1',
                                        items       : [[chapterTitle       : 'Chapter1', pageTitle: 'Page A', fileName: 'page-a', dirName: 'chapter1',
+                                                       fileExtension: "md",
                                                        pageSectionIdTitles: [], pageMeta: [:], viewOnRelativePath: null],
                                                       [chapterTitle       : 'Chapter1', pageTitle: 'Page B', fileName: 'page-b', dirName: 'chapter1',
+                                                       fileExtension: "md",
                                                        pageSectionIdTitles: [], pageMeta: [:],  viewOnRelativePath: null]]],
                                       [chapterTitle: 'Chapter2', dirName: 'chapter2',
                                        items       :
                                                [[chapterTitle       : 'Chapter2', pageTitle: 'Page C', fileName: 'page-c', dirName: 'chapter2',
+                                                 fileExtension: "md",
                                                  pageSectionIdTitles: [], pageMeta: [:],  viewOnRelativePath: null]]]]
     }
 
     @Test
     void "should override chapter title"() {
-        def toc = new PlainTextTocGenerator().generate("""
+        def toc = new PlainTextTocGenerator("md").generate("""
 chapter1 
     page-a
     page-b

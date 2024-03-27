@@ -28,7 +28,7 @@ import java.util.stream.Stream
 class TableOfContentsTest {
     @Test
     void "should know which toc item is defined and which is not"() {
-        def toc = new TableOfContents()
+        def toc = new TableOfContents("md")
         toc.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
         toc.addTocItem(new TocNameAndOpts("chapter1"), "page-b")
 
@@ -48,7 +48,7 @@ class TableOfContentsTest {
 
     @Test
     void "index page title should be empty"() {
-        def toc = new TableOfContents()
+        def toc = new TableOfContents("md")
         toc.addIndex()
 
         toc.index.pageTitle.should == ""
@@ -56,8 +56,8 @@ class TableOfContentsTest {
 
     @Test
     void "should detect newly added items by comparing with another toc"() {
-        def toc = new TableOfContents()
-        def updated = new TableOfContents()
+        def toc = new TableOfContents("md")
+        def updated = new TableOfContents("md")
 
         toc.detectNewTocItems(updated).should == []
 
@@ -79,8 +79,8 @@ class TableOfContentsTest {
 
     @Test
     void "should detect removed items by comparing with another toc"() {
-        def toc = new TableOfContents()
-        def updated = new TableOfContents()
+        def toc = new TableOfContents("md")
+        def updated = new TableOfContents("md")
 
         toc.detectRemovedTocItems(updated).should == []
 
@@ -106,7 +106,7 @@ class TableOfContentsTest {
         def pathC = Paths.get("/path/c")
         def pathD = Paths.get("/path/d")
 
-        def toc = new TableOfContents()
+        def toc = new TableOfContents("md")
 
         def tocItemA = toc.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
         toc.addTocItem(new TocNameAndOpts("chapter1"), "page-e")
