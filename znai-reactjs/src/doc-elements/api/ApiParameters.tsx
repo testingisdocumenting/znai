@@ -181,3 +181,8 @@ function ApiParametersExample({ example, isNested }: ExampleProps) {
     return undefined;
   }
 }
+
+export const presentationApiParameters = {
+  component: ApiParameters,
+  numberOfSlides: () => 1,
+};

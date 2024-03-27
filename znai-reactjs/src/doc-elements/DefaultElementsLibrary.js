@@ -64,7 +64,7 @@ import {MarkdownAndResult, presentationMarkdownAndResultHandler} from './markdow
 import WebTauRest from './test-results/WebTauRest'
 import LangClass from './lang/LangClass'
 import LangFunction from './lang/LangFunction'
-import ApiParameters from './api/ApiParameters'
+import ApiParameters, { presentationApiParameters } from "./api/ApiParameters";
 import {Iframe} from './iframe/Iframe';
 import JupyterCell from './jupyter/JupyterCell'
 import {Spoiler} from './spoiler/Spoiler'
@@ -220,6 +220,7 @@ presentationElementHandlers.CliOutput = presentationCliOutput
 library.Spoiler = Spoiler
 
 library.ApiParameters = ApiParameters
+presentationElementHandlers.ApiParameters = presentationApiParameters
 
 library.JupyterCell = JupyterCell
 
