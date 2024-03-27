@@ -159,3 +159,8 @@ export function calcAspectRatioPaddingTop(aspectRatio: string): string {
 
   return ((Number(height) / Number(width)) * 100.0).toFixed(2) + "%";
 }
+
+export const presentationIframe = {
+  component: Iframe,
+  numberOfSlides: () => 1,
+};
