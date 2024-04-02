@@ -29,8 +29,8 @@ class TableOfContentsTest {
     @Test
     void "should know which toc item is defined and which is not"() {
         def toc = new TableOfContents("md")
-        toc.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
-        toc.addTocItem(new TocNameAndOpts("chapter1"), "page-b")
+        toc.addTocItem("chapter1", "page-a")
+        toc.addTocItem("chapter1", "page-b")
 
         toc.contains("chapter1", "page-a", "").should == true
         toc.contains("chapter1", "page-c", "").should == false
@@ -61,14 +61,14 @@ class TableOfContentsTest {
 
         toc.detectNewTocItems(updated).should == []
 
-        toc.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
-        toc.addTocItem(new TocNameAndOpts("chapter1"), "page-b")
-        toc.addTocItem(new TocNameAndOpts("chapter2"), "page-c")
+        toc.addTocItem("chapter1", "page-a")
+        toc.addTocItem("chapter1", "page-b")
+        toc.addTocItem("chapter2", "page-c")
 
-        updated.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
-        updated.addTocItem(new TocNameAndOpts("chapter1"), "page-e")
-        updated.addTocItem(new TocNameAndOpts("chapter2"), "page-c")
-        updated.addTocItem(new TocNameAndOpts("chapter2"), "page-d")
+        updated.addTocItem("chapter1", "page-a")
+        updated.addTocItem("chapter1", "page-e")
+        updated.addTocItem("chapter2", "page-c")
+        updated.addTocItem("chapter2", "page-d")
 
         def newItems = toc.detectNewTocItems(updated)
         newItems.should == ['dirName'  | 'fileNameWithoutExtension'] {
@@ -84,14 +84,14 @@ class TableOfContentsTest {
 
         toc.detectRemovedTocItems(updated).should == []
 
-        toc.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
-        toc.addTocItem(new TocNameAndOpts("chapter1"), "page-e")
-        toc.addTocItem(new TocNameAndOpts("chapter2"), "page-c")
-        toc.addTocItem(new TocNameAndOpts("chapter2"), "page-d")
+        toc.addTocItem("chapter1", "page-a")
+        toc.addTocItem("chapter1", "page-e")
+        toc.addTocItem("chapter2", "page-c")
+        toc.addTocItem("chapter2", "page-d")
 
-        updated.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
-        updated.addTocItem(new TocNameAndOpts("chapter1"), "page-b")
-        updated.addTocItem(new TocNameAndOpts("chapter2"), "page-c")
+        updated.addTocItem("chapter1", "page-a")
+        updated.addTocItem("chapter1", "page-b")
+        updated.addTocItem("chapter2", "page-c")
 
         def removedItems = toc.detectRemovedTocItems(updated)
         removedItems.should == ['dirName'  | 'fileNameWithoutExtension'] {
@@ -108,10 +108,10 @@ class TableOfContentsTest {
 
         def toc = new TableOfContents("md")
 
-        def tocItemA = toc.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
-        toc.addTocItem(new TocNameAndOpts("chapter1"), "page-e")
-        def tocItemC = toc.addTocItem(new TocNameAndOpts("chapter2"), "page-c")
-        toc.addTocItem(new TocNameAndOpts("chapter2"), "page-d")
+        def tocItemA = toc.addTocItem("chapter1", "page-a")
+        toc.addTocItem("chapter1", "page-e")
+        def tocItemC = toc.addTocItem("chapter2", "page-c")
+        toc.addTocItem("chapter2", "page-d")
 
         def filePathResolver = { tocItem ->
             if (tocItem == tocItemA) {

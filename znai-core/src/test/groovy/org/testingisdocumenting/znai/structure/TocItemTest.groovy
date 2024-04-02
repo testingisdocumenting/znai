@@ -25,7 +25,7 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 class TocItemTest {
     @Test
     void "should not allow special symbols in file name"() {
-        def okTocItem = new TocItem(new TocNameAndOpts('dir-name'), 'file-name', 'md')
+        def okTocItem = new TocItem('dir-name', 'file-name', 'md')
 
         shouldThrow('dir-name', 'fileName?')
         shouldThrow('dir-name?', 'fileName')
@@ -34,7 +34,7 @@ class TocItemTest {
 
     @Test
     void "should use default file name extension"() {
-        def tocItem = new TocItem(new TocNameAndOpts('dir-name'), 'file-name', 'mdx')
+        def tocItem = new TocItem('dir-name', 'file-name', 'mdx')
         tocItem.dirName.should == "dir-name"
         tocItem.fileNameWithoutExtension.should == "file-name"
         tocItem.fileExtension.should == "mdx"
@@ -42,15 +42,27 @@ class TocItemTest {
 
     @Test
     void "should extract optional file name extension"() {
-        def tocItem = new TocItem(new TocNameAndOpts('dir-name'), 'file-name.mdx', 'md')
+        def tocItem = new TocItem('dir-name', 'file-name.mdx', 'md')
         tocItem.dirName.should == "dir-name"
         tocItem.fileNameWithoutExtension.should == "file-name"
         tocItem.fileExtension.should == "mdx"
     }
 
+    @Test
+    void "should allow title override that is not overridable from outside"() {
+        def tocItem = new TocItem(new TocNameAndOpts('dir-name {title: "my chapter"}'),
+                new TocNameAndOpts('file-name.mdx {title: "my page"}'), 'md')
+
+        tocItem.chapterTitle.should == "my chapter"
+        tocItem.pageTitle.should == "my page"
+
+        tocItem.setPageTitle("override inside markdown")
+        tocItem.pageTitle.should == "my page"
+    }
+
     private static void shouldThrow(String dirName, String fileName) {
         code {
-            new TocItem(new TocNameAndOpts(dirName), fileName, 'md')
+            new TocItem(dirName, fileName, 'md')
         } should throwException(IllegalArgumentException)
     }
 }

@@ -36,8 +36,8 @@ public class TableOfContents {
         this.tocItemByPath = new LinkedHashMap<>();
     }
 
-    public TocItem addTocItem(TocNameAndOpts chapter, String fileNameWithOptionalExtension) {
-        TocItem tocItem = new TocItem(chapter, fileNameWithOptionalExtension, defaultFileExtension);
+    public TocItem addTocItem(TocNameAndOpts chapter, TocNameAndOpts page) {
+        TocItem tocItem = new TocItem(chapter, page, defaultFileExtension);
         tocItems.add(tocItem);
 
         return tocItem;
@@ -85,14 +85,14 @@ public class TableOfContents {
     }
 
     public void replaceTocItem(String originalDirName, String originalFileNameWithoutExtension,
-                               TocNameAndOpts newChapter, String newFileNameWithOptionalExtension) {
+                               TocNameAndOpts newChapter, TocNameAndOpts newPage) {
         int idx = findTocItemIdx(originalDirName, originalFileNameWithoutExtension);
         if (idx == -1) {
             throw new IllegalArgumentException("can't find toc item: " +
                     originalDirName + "/" + originalFileNameWithoutExtension);
         }
 
-        tocItems.set(idx, new TocItem(newChapter, newFileNameWithOptionalExtension, defaultFileExtension));
+        tocItems.set(idx, new TocItem(newChapter, newPage, defaultFileExtension));
     }
 
     public List<TocItem> detectNewTocItems(TableOfContents newToc) {

@@ -19,13 +19,12 @@ package org.testingisdocumenting.znai.search
 
 import org.testingisdocumenting.znai.structure.TocItem
 import org.junit.Test
-import org.testingisdocumenting.znai.structure.TocNameAndOpts
 
 class PageSearchEntriesTest {
     @Test
     void "should generate list representation of entries for local search indexer"() {
         def searchEntries = new PageSearchEntries(
-                new TocItem(new TocNameAndOpts('dir-name'), 'file-name', 'md'),
+                new TocItem('dir-name', 'file-name', 'md'),
                 [new PageSearchEntry('section one', SearchScore.STANDARD.text('hello world')),
                  new PageSearchEntry('section two', SearchScore.STANDARD.text('how is the weather')),
                 ])

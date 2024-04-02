@@ -49,13 +49,15 @@ public class PlainTextTocPatcher {
 
     private void apply(String command, DirNameFileName arg1, DirNameFileName arg2) {
         TocNameAndOpts chapter1 = new TocNameAndOpts(arg1.dirName);
+        TocNameAndOpts page1 = new TocNameAndOpts(arg1.fileName);
         TocNameAndOpts chapter2 = new TocNameAndOpts(arg2.dirName);
+        TocNameAndOpts page2 = new TocNameAndOpts(arg2.fileName);
 
         switch (command) {
             case "remove" -> toc.removeTocItem(arg1.dirName, arg1.fileName);
-            case "add" -> toc.addTocItem(chapter1, arg1.fileName);
+            case "add" -> toc.addTocItem(chapter1, page1);
             case "replace" -> toc.replaceTocItem(arg1.dirName, arg1.fileName,
-                    chapter2, arg2.fileName);
+                    chapter2, page2);
             default -> throw new IllegalArgumentException("unrecognized command: " + command);
         }
     }
