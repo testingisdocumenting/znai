@@ -23,6 +23,6 @@ import org.testingisdocumenting.znai.structure.TocItem;
 
 import java.util.List;
 
-public record TocAddedAndRemovedPages(TableOfContents tableOfContents, List<HtmlPageAndPageProps> addedPagesProps,
-                                      List<TocItem> removedTocItems) {
+public record TocAddedUpdatedAndRemovedPages(TableOfContents tableOfContents, List<HtmlPageAndPageProps> addedOrUpdatedPagesProps,
+                                             List<TocItem> removedTocItems) {
 }
