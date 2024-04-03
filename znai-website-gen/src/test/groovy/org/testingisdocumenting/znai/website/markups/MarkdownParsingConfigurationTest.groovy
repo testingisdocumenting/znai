@@ -28,8 +28,8 @@ class MarkdownParsingConfigurationTest {
     @Test
     void "should detect index toc item"() {
         def toc = new TableOfContents("md")
-        toc.addTocItem(new TocNameAndOpts("chapter1"), "page-a")
-        toc.addTocItem(new TocNameAndOpts("chapter1"), "index")
+        toc.addTocItem("chapter1", "page-a")
+        toc.addTocItem("chapter1", "index")
         toc.addIndex()
 
         def config = new MarkdownParsingConfiguration()
