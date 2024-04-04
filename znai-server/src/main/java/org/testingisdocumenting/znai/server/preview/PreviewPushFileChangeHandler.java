@@ -25,7 +25,7 @@ import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.structure.Footer;
 import org.testingisdocumenting.znai.structure.TocItem;
 import org.testingisdocumenting.znai.utils.FileUtils;
-import org.testingisdocumenting.znai.website.TocAddedAndRemovedPages;
+import org.testingisdocumenting.znai.website.TocAddedUpdatedAndRemovedPages;
 import org.testingisdocumenting.znai.website.WebSite;
 
 import java.io.PrintWriter;
@@ -51,16 +51,16 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     public void onTocChange(Path tocPath) {
         ConsoleOutputs.out("toc changed: ", tocPath);
         execute(() -> {
-            TocAddedAndRemovedPages tocAddedAndRemovedPages = previewWebSite.updateToc();
-            previewSocket.sendToc(tocAddedAndRemovedPages.tableOfContents());
+            TocAddedUpdatedAndRemovedPages tocAddedUpdatedAndRemovedPages = previewWebSite.updateToc();
+            previewSocket.sendToc(tocAddedUpdatedAndRemovedPages.tableOfContents());
 
-            if (!tocAddedAndRemovedPages.addedPagesProps().isEmpty()) {
-                previewSocket.sendPages(tocAddedAndRemovedPages.addedPagesProps().stream()
+            if (!tocAddedUpdatedAndRemovedPages.addedOrUpdatedPagesProps().isEmpty()) {
+                previewSocket.sendPages(tocAddedUpdatedAndRemovedPages.addedOrUpdatedPagesProps().stream()
                         .map(HtmlPageAndPageProps::getProps));
             }
 
-            if (!tocAddedAndRemovedPages.removedTocItems().isEmpty()) {
-                previewSocket.sendPagesRemove(tocAddedAndRemovedPages.removedTocItems().stream());
+            if (!tocAddedUpdatedAndRemovedPages.removedTocItems().isEmpty()) {
+                previewSocket.sendPagesRemove(tocAddedUpdatedAndRemovedPages.removedTocItems().stream());
             }
         });
     }

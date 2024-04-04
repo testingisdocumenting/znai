@@ -268,7 +268,7 @@ public class WebSite implements Log {
         return toc;
     }
 
-    public TocAddedAndRemovedPages updateToc() {
+    public TocAddedUpdatedAndRemovedPages updateToc() {
         TableOfContents previousToc = toc;
         createTopLevelToc();
 
@@ -278,10 +278,11 @@ public class WebSite implements Log {
 
         List<TocItem> newTocItems = previousToc.detectNewTocItems(toc);
         List<TocItem> removedTocItems = previousToc.detectRemovedTocItems(toc);
+        List<TocItem> changedTocItems = previousToc.detectChangedTocItems(toc);
 
         removedTocItems.forEach(this::removeLinksForTocItem);
 
-        List<HtmlPageAndPageProps> newPages = newTocItems.stream().map(tocItem -> {
+        List<HtmlPageAndPageProps> addedOrUpdatedPages = Stream.concat(newTocItems.stream(), changedTocItems.stream()).map(tocItem -> {
             parseMarkupAndUpdateTocItemAndSearch(tocItem);
             return regeneratePageOnly(tocItem);
         }).collect(toList());
@@ -292,7 +293,7 @@ public class WebSite implements Log {
 
         deployToc();
 
-        return new TocAddedAndRemovedPages(toc, newPages, removedTocItems);
+        return new TocAddedUpdatedAndRemovedPages(toc, addedOrUpdatedPages, removedTocItems);
     }
 
     public DocReferences updateDocReferences() {

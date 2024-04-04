@@ -65,9 +65,11 @@ class TableOfContentsTest {
         toc.addTocItem("chapter1", "page-b")
         toc.addTocItem("chapter2", "page-c")
 
+        def chapter2 = new TocNameAndOpts("chapter2 {title: 'Chapter Two'}")
+        def pageC = new TocNameAndOpts("page-c {title: 'Page See'}")
         updated.addTocItem("chapter1", "page-a")
         updated.addTocItem("chapter1", "page-e")
-        updated.addTocItem("chapter2", "page-c")
+        updated.addTocItem(chapter2, pageC)
         updated.addTocItem("chapter2", "page-d")
 
         def newItems = toc.detectNewTocItems(updated)
@@ -98,6 +100,27 @@ class TableOfContentsTest {
                                ________________________________________
                                 'chapter1' | 'page-e'
                                 'chapter2' | 'page-d'  }
+    }
+
+    @Test
+    void "should detect changed toc items"() {
+        def toc = new TableOfContents("md")
+        def updated = new TableOfContents("md")
+
+        toc.addTocItem("chapter1", "page-a")
+        toc.addTocItem("chapter1", "page-b")
+        toc.addTocItem("chapter2", "page-c")
+
+        def chapter2 = new TocNameAndOpts("chapter2 {title: 'Chapter Two'}")
+        def pageC = new TocNameAndOpts("page-c {title: 'Page See'}")
+        updated.addTocItem("chapter1", "page-a")
+        updated.addTocItem("chapter1", "page-e")
+        updated.addTocItem(chapter2, pageC)
+
+        def changedItems = toc.detectChangedTocItems(updated)
+        changedItems.should == ['dirName'  | 'fileNameWithoutExtension'] {
+                               ________________________________________
+                                'chapter2' | 'page-c'  }
     }
 
     @Test

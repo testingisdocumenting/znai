@@ -111,6 +111,21 @@ public class TableOfContents {
         return new ArrayList<>(existingItems);
     }
 
+    public List<TocItem> detectChangedTocItems(TableOfContents newToc) {
+        List<TocItem> result = new ArrayList<>();
+        for (TocItem tocItem : newToc.tocItems) {
+            TocItem existingTocItem = findTocItem(tocItem.getDirName(), tocItem.getFileNameWithoutExtension());
+            if (existingTocItem == null) {
+                continue;
+            }
+
+            if (areTocItemsDifferent(existingTocItem, tocItem)) {
+                result.add(tocItem);
+            }
+        }
+        return result;
+    }
+
     public TocItem getIndex() {
         if (tocItems.isEmpty()) {
             return null;
@@ -181,5 +196,10 @@ public class TableOfContents {
         result.put("items", items.stream().map(TocItem::toMap).collect(toList()));
 
         return result;
+    }
+
+    /* we need equals function to be by original dir/file names. This function is to detect changes in associated meta information */
+    private boolean areTocItemsDifferent(TocItem a, TocItem b) {
+        return !a.getChapterTitle().equals(b.getChapterTitle()) || !a.getPageTitle().equals(b.getPageTitle());
     }
 }
