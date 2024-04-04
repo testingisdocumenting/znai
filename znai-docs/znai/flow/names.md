@@ -18,6 +18,16 @@ To keep things easy for future documentation owners, it's good practice to keep 
 * Need to use special characters in title
 * Want to avoid auto-capitalization
 
+Another way to override a page title is by adding a `title` to `toc` file
+
+```text {title: "toc"}
+chapter-one
+    structure {title: "Underlying Structure"} 
+    setup
+```
+
+Note: Title defined in `toc` takes precedence over `title` inside markup file
+
 # Chapter Names
 
 By default, a chapter name is derived from dir name. Dir name `my-chapter` becomes `My Chapter` chapter name.

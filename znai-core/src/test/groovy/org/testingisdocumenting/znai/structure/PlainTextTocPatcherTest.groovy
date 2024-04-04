@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,11 +25,11 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 class PlainTextTocPatcherTest {
     @Test
     void "should remove, replace and add items based on patch instructions"() {
-        def toc = new TableOfContents()
-        toc.addTocItem(new TocNameAndOpts('ch1'), 'p1')
-        toc.addTocItem(new TocNameAndOpts('ch1'), 'p2')
-        toc.addTocItem(new TocNameAndOpts('ch2'), 'p3')
-        toc.addTocItem(new TocNameAndOpts('ch2'), 'p4')
+        def toc = new TableOfContents("md")
+        toc.addTocItem('ch1', 'p1')
+        toc.addTocItem('ch1', 'p2')
+        toc.addTocItem('ch2', 'p3')
+        toc.addTocItem('ch2', 'p4')
 
         def patcher = new PlainTextTocPatcher(toc)
         patcher.patch("remove ch1/p2\n" +
@@ -42,7 +43,7 @@ class PlainTextTocPatcherTest {
 
     @Test
     void "should clarify path format when format mismatches"() {
-        def toc = new TableOfContents()
+        def toc = new TableOfContents("md")
         def patcher = new PlainTextTocPatcher(toc)
 
         code {

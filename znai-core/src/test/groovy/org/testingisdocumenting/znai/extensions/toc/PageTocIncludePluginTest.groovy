@@ -39,10 +39,10 @@ class PageTocIncludePluginTest {
     @Before
     void setup() {
         prevToc = TEST_COMPONENTS_REGISTRY.docStructure().tableOfContents()
-        toc = new TableOfContents()
+        toc = new TableOfContents("md")
         TEST_COMPONENTS_REGISTRY.docStructure().setToc(toc)
 
-        def pageOne = toc.addTocItem(new TocNameAndOpts("chapter-one"), "page-one")
+        def pageOne = toc.addTocItem("chapter-one", "page-one")
         toc.addIndex()
         toc.resolveTocItemPathsAndReturnMissing { tocItem ->
             if (tocItem == pageOne) {

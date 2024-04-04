@@ -22,9 +22,16 @@ import org.testingisdocumenting.znai.utils.NameUtils;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * Name and optional JSON provided options, main use case is to be able to override
+ * given name from Table of Content. Supersede title overrides inside markup files.
+ */
 public class TocNameAndOpts {
+    private final String TITLE_KEY = "title";
+
     private final String givenName;
     private final Map<String, ?> opts;
+    private final boolean hasTitleOverride;
 
     private String humanReadableName;
 
@@ -34,6 +41,7 @@ public class TocNameAndOpts {
         boolean hasOpenBracket = openBracketIdx != -1;
         this.givenName = hasOpenBracket ? trimmed.substring(0, openBracketIdx).trim() : trimmed;
         this.opts = hasOpenBracket ? extractOpts(trimmed, openBracketIdx) : Collections.emptyMap();
+        this.hasTitleOverride = opts.containsKey(TITLE_KEY);
 
         this.humanReadableName = buildHumanReadableName();
     }
@@ -54,6 +62,10 @@ public class TocNameAndOpts {
         return opts;
     }
 
+    public boolean hasTitleOverride() {
+        return hasTitleOverride;
+    }
+
     private Map<String, ?> extractOpts(String trimmed, int openBracketIdx) {
         int closeBracketIdx = trimmed.indexOf('}');
         if (closeBracketIdx == -1) {
@@ -64,7 +76,7 @@ public class TocNameAndOpts {
     }
 
     private String buildHumanReadableName() {
-        Object title = opts.get("title");
+        Object title = opts.get(TITLE_KEY);
         if (title != null) {
             return title.toString();
         }

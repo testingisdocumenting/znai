@@ -18,7 +18,6 @@
 package org.testingisdocumenting.znai.structure;
 
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
-import org.testingisdocumenting.znai.utils.NameUtils;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -31,6 +30,7 @@ public class TocItem {
     public static final String INDEX = "index";
 
     private final TocNameAndOpts chapter;
+    private final TocNameAndOpts page;
     private final String fileNameWithoutExtension;
     private final String fileExtension;
     private String pageTitle;
@@ -46,25 +46,26 @@ public class TocItem {
     private List<PageSectionIdTitle> pageSectionIdTitles;
 
     static TocItem createIndex() {
-        return new TocItem(new TocNameAndOpts(""), INDEX, "");
+        return new TocItem(new TocNameAndOpts(""), new TocNameAndOpts(INDEX), "");
     }
 
-    public TocItem(TocNameAndOpts chapter, String fileNameWithOptionalExtension, String defaultExtension) {
+    public TocItem(TocNameAndOpts chapter, TocNameAndOpts page, String defaultExtension) {
         this.chapter = chapter;
+        this.page = page;
 
-        this.fileNameWithoutExtension = extractName(fileNameWithOptionalExtension);
-        this.fileExtension = extractExtension(fileNameWithOptionalExtension, defaultExtension);
+        this.fileNameWithoutExtension = extractName(page.getGivenName());
+        this.fileExtension = extractExtension(page.getGivenName(), defaultExtension);
         validateFileName(chapter.getGivenName());
         validateFileName(this.fileNameWithoutExtension);
 
-        this.pageTitle = isIndex() ? "" : NameUtils.dashToCamelCaseWithSpaces(fileNameWithoutExtension);
+        this.pageTitle = isIndex() ? "" : page.getHumanReadableName();
         this.pageMeta = new PageMeta(Collections.emptyMap());
 
         this.pageSectionIdTitles = new ArrayList<>();
     }
 
     public TocItem(String dirName, String fileNameWithOptionalExtension, String defaultExtension) {
-        this(new TocNameAndOpts(dirName), fileNameWithOptionalExtension, defaultExtension);
+        this(new TocNameAndOpts(dirName), new TocNameAndOpts(fileNameWithOptionalExtension), defaultExtension);
     }
 
     public void setChapterTitle(String chapterTitle) {
@@ -116,7 +117,9 @@ public class TocItem {
     }
 
     public void setPageTitle(String pageTitle) {
-        this.pageTitle = pageTitle;
+        if (!page.hasTitleOverride()) {
+            this.pageTitle = pageTitle;
+        }
     }
 
     public boolean isIndex() {

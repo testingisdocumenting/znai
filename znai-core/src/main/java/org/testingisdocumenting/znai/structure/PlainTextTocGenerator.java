@@ -77,7 +77,7 @@ public class PlainTextTocGenerator implements TocGenerator {
                 throw new IllegalArgumentException(
                         "chapter is not specified, use a line without indentation to specify a chapter");
             } else {
-                toc.addTocItem(currentChapter, line);
+                toc.addTocItem(currentChapter, new TocNameAndOpts(line));
             }
         }
     }
