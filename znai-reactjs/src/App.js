@@ -101,6 +101,7 @@ import { attentionBlockPresentationDemo } from "./doc-elements/paragraph/Present
 import { containerTitleDemo } from "./doc-elements/container/ContainerTitle.demo";
 import { cardsDemo } from "./doc-elements/card/CardsDemo";
 import { doxygenPresentationDemo } from "./doc-elements/doxygen/PresentationDoxygen.demo";
+import { jsonPresentationDemo } from "./doc-elements/json/PresentationJson.demo";
 
 const docMeta = {
     id: 'preview',
@@ -193,7 +194,8 @@ registries.add('presentation')
     .registerAsTabs('Layout', presentationDemo)
     .registerAsTabs('Sticky Slides', presentationStickySlidesDemo)
     .registerAsTabs('SubHeading', subHeadingPresentationDemo)
-    .registerAsTabs('Xml Presentation', xmlPresentationDemo)
+    .registerAsTabs('Xml', xmlPresentationDemo)
+    .registerAsTabs('Json', jsonPresentationDemo)
     .registerAsTabs('SVG', svgPresentationDemo)
     .registerAsTabs('GraphViz SVG', graphVizSvgPresentationDemo)
     .registerAsTabs('Blockquote', blockQuotePresentationDemo)

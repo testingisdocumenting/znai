@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,9 +18,9 @@
 import React from 'react'
 import Json from './Json'
 
-const PresentationJson = ({data, paths, slideIdx, ...props}) => {
-    const pathsToDisplay = paths.slice(0, slideIdx)
-    return <Json data={data} paths={pathsToDisplay} {...props}/>
+const PresentationJson = ({data, highlightValues, slideIdx, ...props}) => {
+    const highlightValuesToDisplay = (highlightValues || []).slice(0, slideIdx)
+    return <Json data={data} highlightValues={highlightValuesToDisplay} {...props}/>
 }
 
-export default {component: PresentationJson, numberOfSlides: ({data, paths}) => paths ? (paths.length + 1): 1}
+export default {component: PresentationJson, numberOfSlides: ({highlightValues}) => highlightValues ? (highlightValues.length + 1): 1}
