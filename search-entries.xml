@@ -203,7 +203,7 @@
     <url>/znai/flow/names#name-overrides</url>
     <fullTitle>Znai: Page Titles, Name Overrides [Flow]</fullTitle>
     <text>
-      <text>To override the default, add the following syntax to the top of your Markdown file: --- title: Custom Name --- To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:Need to use special characters in title Want to avoid auto-capitalization</text>
+      <text>To override the default, add the following syntax to the top of your Markdown file: --- title: Custom Name --- To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:Need to use special characters in title Want to avoid auto-capitalization Another way to override a page title is by adding a title to toc file text chapter-one structure {title: "Underlying Structure"} setup Note: Title defined in toc takes precedence over title inside markup file</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -563,7 +563,7 @@
     <url>/znai/snippets/snippets-manipulation#surrounded-by-multi-chars-scope</url>
     <fullTitle>Znai: Snippets Manipulation, Surrounded By Multi-chars scope [Snippets]</fullTitle>
     <text>
-      <text>Pass comma separated multi char region definition to to handle scopes defined with keywords: module ModelZero : sig type t end module ModelA : sig type t val calc: t -> int module Nested : sig type t end end module ModelC : sig type t end markdown :include-file: model.mli {surroundedByScope: {start: "module ModelA", scope: "sig,end"}} module ModelA : sig type t val calc: t -> int module Nested : sig type t end end</text>
+      <text>Pass comma separated multi char region definition to to handle scopes defined with keywords: module ModelZero : sig type t end module ModelA : sig type t val calc: t -> int module Nested : sig type t end end module ModelC : sig type t end markdown :include-file: ocaml/model.mli {surroundedByScope: {start: "module ModelA", scope: "sig,end"}} module ModelA : sig type t val calc: t -> int module Nested : sig type t end end</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -588,6 +588,14 @@
     <fullTitle>Znai: Snippets Manipulation, Start/End Line [Snippets]</fullTitle>
     <text>
       <text>Use , to extract specific content by using marker lines. # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == "__main__": main() :include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default and are included in the rendered result. Use to remove markers. :include-file: python-examples.py { startLine: "example: book trade", endLine: "example-end", excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) To exclude start or end line only use and</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/snippets-manipulation#start-end-multiple-lines</url>
+    <fullTitle>Znai: Snippets Manipulation, Start/End Multiple Lines [Snippets]</fullTitle>
+    <text>
+      <text>Pass multiple values to startLine and endLine to specify more precisely a block of code to extract.As example, let's extract a second match block from the code snippets below without adding extra markers: type weather_season = | Spring | Summer | Autumn | Winter let weight_season season = match season with | Spring -> 4 | Summer -> 5 | Autumn -> 3 | Winter -> -1 let describe_season season = (** human readable season description *) match season with | Spring -> "It's springtime! Flowers are blooming." | Summer -> "It's summertime! Enjoy the warm weather." | Autumn -> "It's autumn! Leaves are changing colors." | Winter -> "It's winter! Time to bundle up and enjoy the snow." if we use startLine: "match season" , we can't guarantee what block will it pick, and it will depend on functions order.To hit the exact one use multiple start lines. Znai will attempt to find a combination of start lines with the smallest distance between them: :include-file: ocaml/seasons.ml {startLine: ["let describe_season", "match season"], startLineKeepLast: true} match season with | Spring -> "It's springtime! Flowers are blooming." | Summer -> "It's summertime! Enjoy the warm weather." | Autumn -> "It's autumn! Leaves are changing colors." | Winter -> "It's winter! Time to bundle up and enjoy the snow." Note: Use endLine and endLineKeepFirst to limit lines from the bottom. excludeStart removes all the lines between specified start lines, including the lines. excludeEnd removes all the lines between specified end lines, including the lines.</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -659,7 +667,7 @@
     <url>/znai/snippets/snippets-highlighting#region-using-scope</url>
     <fullTitle>Znai: Snippets Highlighting, Region Using Scope [Snippets]</fullTitle>
     <text>
-      <text>Use the highlightRegion.scope to highlight region using scope like {} . Unlike example above, highlight will not stop at first closing } : :include-file: with-nested-if.js {highlightRegion: {start: "userId ===", scope: "{}"}} class JsClass { usefulAction() { if (userId === "user-a") { if (canRead(userId)) { // ... } } } }</text>
+      <text>Use the highlightRegion.scope to highlight region using scope like {} . Unlike example above, highlight will not stop at first closing } : :include-file: with-nested-if.js {highlightRegion: {start: "userId ===", scope: "{}"}} class JsClass { usefulAction() { if (userId === "user-a") { if (canRead(userId)) { // ... } } } } Use multiple start lines to narrow down a specific region :include-file: with-multiple-if-clarify.js {highlightRegion: { start: ["if (userId ===", "canRead"], scope: "{}"} } Znai will find a smallest text block that contains all specified lines and then highlight the most inner one: class JsClass { usefulAction() { if (userId === "user-a") { // ... } if (canRead(userId)) { // ... } if (userId === "user-a") { // ... if (canRead(userId)) { // ... } } } }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -1571,7 +1579,7 @@
     <url>/znai/visuals/image-annotations#integration-with-testing</url>
     <fullTitle>Znai: Image Annotations, Integration With Testing [Visuals]</fullTitle>
     <text>
-      <text>Use UI testing frameworks to automatically generate annotations file and capture screenshot.For example https://github.com/testingisdocumenting/webtau WebTau automatically generates an annotations file in addition to capturing a screenshot. package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*="search"]') def resultSearchInput = $("#search_form_input") def result = $('article[data-testid="result"]') scenario("capture screenshot") { browser.open("https://duckduckgo.com/") homeSearchInput.waitToBe visible homeSearchInput.setValue("testing is documenting\n") result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture("duckduckgo-search") } :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one Note: https://github.com/testingisdocumenting/webtau WebTau captures additional data such as pixelRatio</text>
+      <text>Use UI testing frameworks to automatically generate annotations file and capture screenshot.For example https://github.com/testingisdocumenting/webtau WebTau automatically generates an annotations file in addition to capturing a screenshot. package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*="search"]') def resultSearchInput = $("#search_form_input") def result = $('article[data-testid="result"]') scenario("capture screenshot") { browser.open("https://duckduckgo.com/") homeSearchInput.waitToBe visible homeSearchInput.setValue("testing is documenting") homeSearchInput.sendKeys(browser.keys.enter) result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture("duckduckgo-search") } :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one Note: https://github.com/testingisdocumenting/webtau WebTau captures additional data such as pixelRatio</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2563,7 +2571,7 @@
     <url>/znai/CPP/description-extraction#classes-comment-text</url>
     <fullTitle>Znai: Description Extraction, Classes Comment Text [CPP]</fullTitle>
     <text>
-      <text>To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements.</text>
+      <text>To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. * * @note Do not reveal your password. * Use alternatives: * 1. option one * 2. option two * * more context */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements. Do not reveal your password. Use alternatives: option one option two more context</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2619,7 +2627,7 @@
     <url>/znai/CPP/auto-reference#member-signature-only</url>
     <fullTitle>Znai: Auto Reference, Member Signature Only [CPP]</fullTitle>
     <text>
-      <text>Use signatureOnly: true parameter to render only member signature namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }</text>
+      <text>Use signatureOnly: true parameter to render only member signature namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. * * @note Do not reveal your password. * Use alternatives: * 1. option one * 2. option two * * more context */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2651,7 +2659,7 @@
     <url>/znai/CPP/auto-reference#utilssecondmyclass</url>
     <fullTitle>Znai: Auto Reference, utils::second::MyClass [CPP]</fullTitle>
     <text>
-      <text>Znai uses doxygen cross-reference to link definitions together. Class above references MyClass in its parameters. After you include definition of that class, MyClass reference above becomes a link. :include-doxygen-compound: utils::second::MyClass Domain specific context setting. Describes business setting and requirements. Public Functions Definitions bark bark utils::second::MyClass</text>
+      <text>Znai uses doxygen cross-reference to link definitions together. Class above references MyClass in its parameters. After you include definition of that class, MyClass reference above becomes a link. :include-doxygen-compound: utils::second::MyClass Domain specific context setting. Describes business setting and requirements. Do not reveal your password. Use alternatives: option one option two more context Public Functions Definitions bark bark utils::second::MyClass</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -2827,7 +2835,7 @@
     <url>/znai/synergy-with-testing/web-UI#screenshots-and-annotations</url>
     <fullTitle>Znai: Web UI, Screenshots And Annotations [Synergy With Testing]</fullTitle>
     <text>
-      <text>In visuals/image-annotations Image Annotations you can specify annotations in an external file.Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to capture a screenshot and annotations package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*="search"]') def resultSearchInput = $("#search_form_input") def result = $('article[data-testid="result"]') scenario("capture screenshot") { browser.open("https://duckduckgo.com/") homeSearchInput.waitToBe visible homeSearchInput.setValue("testing is documenting\n") result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture("duckduckgo-search") } markdown 1. Type question you want to be answered anonymously 2. Scan through results and pick the most relevant one :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one</text>
+      <text>In visuals/image-annotations Image Annotations you can specify annotations in an external file.Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to capture a screenshot and annotations package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*="search"]') def resultSearchInput = $("#search_form_input") def result = $('article[data-testid="result"]') scenario("capture screenshot") { browser.open("https://duckduckgo.com/") homeSearchInput.waitToBe visible homeSearchInput.setValue("testing is documenting") homeSearchInput.sendKeys(browser.keys.enter) result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture("duckduckgo-search") } markdown 1. Type question you want to be answered anonymously 2. Scan through results and pick the most relevant one :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one</text>
       <score>STANDARD</score>
     </text>
   </entry>
@@ -3012,6 +3020,14 @@
     <fullTitle>Znai: Local Build, Run Local Version [Znai Development]</fullTitle>
     <text>
       <text>cd znai-dist/target unzip dist-znai.zip export PATH=$(pwd)/dist:$PATH znai --version</text>
+      <score>STANDARD</score>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2024#1-68</url>
+    <fullTitle>Znai: 2024 Releases, 1.68 [Release Notes]</fullTitle>
+    <text>
+      <text>Fix: snippets/json Json presentation mode correctly highlights value nodes Add: Page flow/names title overrides via toc file Add: Presentation mode handling for snippets/api-parameters API Parameters members Add: Support explicit file name extension in toc file Add: Empty --doc-id "" support to deploy documentation to a site root Add: Presentation mode handling for CPP/doxygen-setup Doxygen members Add: Display CPP/doxygen-setup Doxygen @note Add: Display CPP/doxygen-setup Doxygen decltype Add: Display CPP/doxygen-setup Doxygen noexcept Add: validate non-empty snippets/snippets-manipulation#start-end-line startLine and snippets/snippets-manipulation#start-end-line endLine Add: snippets/snippets-manipulation#start-end-multiple-lines Keep Last/First Line for multi start/end lines Add: multiple start lines to snippets/snippets-highlighting#region-using-scope Highlight Region With Scope</text>
       <score>STANDARD</score>
     </text>
   </entry>

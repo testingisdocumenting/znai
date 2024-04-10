@@ -106,7 +106,7 @@
 
 <article>
 <header><h1>Region Using Scope</h1></header>
-<p>Use the highlightRegion.scope to highlight region using scope like {} . Unlike example above, highlight will not stop at first closing } : :include-file: with-nested-if.js {highlightRegion: {start: &quot;userId ===&quot;, scope: &quot;{}&quot;}} class JsClass { usefulAction() { if (userId === &quot;user-a&quot;) { if (canRead(userId)) { // ... } } } }</p>
+<p>Use the highlightRegion.scope to highlight region using scope like {} . Unlike example above, highlight will not stop at first closing } : :include-file: with-nested-if.js {highlightRegion: {start: &quot;userId ===&quot;, scope: &quot;{}&quot;}} class JsClass { usefulAction() { if (userId === &quot;user-a&quot;) { if (canRead(userId)) { // ... } } } } Use multiple start lines to narrow down a specific region :include-file: with-multiple-if-clarify.js {highlightRegion: { start: [&quot;if (userId ===&quot;, &quot;canRead&quot;], scope: &quot;{}&quot;} } Znai will find a smallest text block that contains all specified lines and then highlight the most inner one: class JsClass { usefulAction() { if (userId === &quot;user-a&quot;) { // ... } if (canRead(userId)) { // ... } if (userId === &quot;user-a&quot;) { // ... if (canRead(userId)) { // ... } } } }</p>
 </article>
 
 <article>
@@ -316,6 +316,32 @@ ReactDOM.render(React.createElement(Documentation, {
         },
         "highlight" : [ 2, 3, 4, 5, 6 ],
         "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use multiple start lines to narrow down a specific region",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: with-multiple-if-clarify.js {highlightRegion: {\n  start: [\"if (userId ===\", \"canRead\"], scope: \"{}\"}\n}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Znai will find a smallest text block that contains all specified lines and then highlight the most inner one:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "js",
+        "snippet" : "class JsClass {\n    usefulAction() {\n        if (userId === \"user-a\") {\n            // ...\n        }\n\n        if (canRead(userId)) {\n            // ...\n        }\n\n        if (userId === \"user-a\") {\n            // ...\n            if (canRead(userId)) {\n                // ...\n            }\n        }\n    }\n}",
+        "highlightRegion" : {
+          "start" : [ "if (userId ===", "canRead" ],
+          "scope" : "{}"
+        },
+        "highlight" : [ 12, 13, 14 ],
+        "type" : "Snippet"
       } ]
     }, {
       "id" : "multiple-regions",
@@ -346,13 +372,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1706577734397,
+    "lastModifiedTime" : 1712714981519,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Snippets Highlighting",
       "pageMeta" : { },
       "dirName" : "snippets",
       "fileName" : "snippets-highlighting",
+      "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Line By Text",

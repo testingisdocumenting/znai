@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>Classes Comment Text</h1></header>
-<p>To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements.</p>
+<p>To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. * * @note Do not reveal your password. * Use alternatives: * 1. option one * 2. option two * * more context */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements. Do not reveal your password. Use alternatives: option one option two more context</p>
 </article>
 
 <article>
@@ -319,7 +319,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "h",
-        "snippet" : "namespace utils {\nnamespace second {\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass MyClass {\npublic:\n    /// bark\n    void bark();\n};\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass ThirdClass {\npublic:\n    /// bark\n    void bark();\n};\n\n}\n}",
+        "snippet" : "namespace utils {\nnamespace second {\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n *\n * @note Do not reveal your password.\n * Use alternatives:\n * 1. option one\n * 2. option two\n *\n * more context\n */\nclass MyClass {\npublic:\n    /// bark\n    void bark();\n};\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass ThirdClass {\npublic:\n    /// bark\n    void bark();\n};\n\n}\n}",
         "title" : "src/classes.h",
         "anchorId" : "classes-comment-text-src-classes-h",
         "type" : "Snippet"
@@ -337,7 +337,46 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         }, {
-          "text" : " specific context setting. Describes business setting and requirements. ",
+          "text" : " specific context setting. Describes business setting and requirements.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "attentionType" : "note",
+          "type" : "AttentionBlock",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Do not reveal your password. Use alternatives:",
+              "type" : "SimpleText"
+            }, {
+              "delimiter" : " ",
+              "startNumber" : 1,
+              "type" : "OrderedList",
+              "content" : [ {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "option one",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              }, {
+                "type" : "ListItem",
+                "content" : [ {
+                  "type" : "Paragraph",
+                  "content" : [ {
+                    "text" : "option two",
+                    "type" : "SimpleText"
+                  } ]
+                } ]
+              } ]
+            } ]
+          } ]
+        }, {
+          "text" : "\nmore context ",
           "type" : "SimpleText"
         } ]
       } ]
@@ -667,6 +706,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "visibility" : "public",
         "isFunction" : true,
         "kind" : "function",
+        "declType" : "",
+        "isNoExcept" : false,
         "isConst" : false,
         "templateParameters" : [ {
           "name" : "",
@@ -809,13 +850,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1706577734373,
+    "lastModifiedTime" : 1712714981499,
     "tocItem" : {
       "chapterTitle" : "CPP",
       "pageTitle" : "Description Extraction",
       "pageMeta" : { },
       "dirName" : "CPP",
       "fileName" : "description-extraction",
+      "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Members Comment Text",

@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Name Overrides</h1></header>
-<p>To override the default, add the following syntax to the top of your Markdown file: --- title: Custom Name --- To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:Need to use special characters in title Want to avoid auto-capitalization</p>
+<p>To override the default, add the following syntax to the top of your Markdown file: --- title: Custom Name --- To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:Need to use special characters in title Want to avoid auto-capitalization Another way to override a page title is by adding a title to toc file text chapter-one structure {title: &quot;Underlying Structure&quot;} setup Note: Title defined in toc takes precedence over title inside markup file</p>
 </article>
 
 <article>
@@ -197,6 +197,49 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           } ]
         } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Another way to override a page title is by adding a ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "toc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " file",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "text",
+        "snippet" : "chapter-one\n    structure {title: \"Underlying Structure\"} \n    setup\n",
+        "lineNumber" : "",
+        "title" : "toc",
+        "anchorId" : "name-overrides-toc",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Title defined in ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "toc",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " takes precedence over ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " inside markup file",
+          "type" : "SimpleText"
+        } ]
       } ]
     }, {
       "id" : "chapter-names",
@@ -247,7 +290,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1706577734377,
+    "lastModifiedTime" : 1712714981503,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Page Titles",
@@ -256,6 +299,7 @@ ReactDOM.render(React.createElement(Documentation, {
       },
       "dirName" : "flow",
       "fileName" : "names",
+      "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Automatic Names",

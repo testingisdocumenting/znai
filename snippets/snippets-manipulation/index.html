@@ -101,7 +101,7 @@
 
 <article>
 <header><h1>Surrounded By Multi-chars scope</h1></header>
-<p>Pass comma separated multi char region definition to to handle scopes defined with keywords: module ModelZero : sig type t end module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end module ModelC : sig type t end markdown :include-file: model.mli {surroundedByScope: {start: &quot;module ModelA&quot;, scope: &quot;sig,end&quot;}} module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end</p>
+<p>Pass comma separated multi char region definition to to handle scopes defined with keywords: module ModelZero : sig type t end module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end module ModelC : sig type t end markdown :include-file: ocaml/model.mli {surroundedByScope: {start: &quot;module ModelA&quot;, scope: &quot;sig,end&quot;}} module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end</p>
 </article>
 
 <article>
@@ -117,6 +117,11 @@
 <article>
 <header><h1>Start/End Line</h1></header>
 <p>Use , to extract specific content by using marker lines. # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py {startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default and are included in the rendered result. Use to remove markers. :include-file: python-examples.py { startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;, excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) To exclude start or end line only use and</p>
+</article>
+
+<article>
+<header><h1>Start/End Multiple Lines</h1></header>
+<p>Pass multiple values to startLine and endLine to specify more precisely a block of code to extract.As example, let's extract a second match block from the code snippets below without adding extra markers: type weather_season = | Spring | Summer | Autumn | Winter let weight_season season = match season with | Spring -&gt; 4 | Summer -&gt; 5 | Autumn -&gt; 3 | Winter -&gt; -1 let describe_season season = (** human readable season description *) match season with | Spring -&gt; &quot;It's springtime! Flowers are blooming.&quot; | Summer -&gt; &quot;It's summertime! Enjoy the warm weather.&quot; | Autumn -&gt; &quot;It's autumn! Leaves are changing colors.&quot; | Winter -&gt; &quot;It's winter! Time to bundle up and enjoy the snow.&quot; if we use startLine: &quot;match season&quot; , we can't guarantee what block will it pick, and it will depend on functions order.To hit the exact one use multiple start lines. Znai will attempt to find a combination of start lines with the smallest distance between them: :include-file: ocaml/seasons.ml {startLine: [&quot;let describe_season&quot;, &quot;match season&quot;], startLineKeepLast: true} match season with | Spring -&gt; &quot;It's springtime! Flowers are blooming.&quot; | Summer -&gt; &quot;It's summertime! Enjoy the warm weather.&quot; | Autumn -&gt; &quot;It's autumn! Leaves are changing colors.&quot; | Winter -&gt; &quot;It's winter! Time to bundle up and enjoy the snow.&quot; Note: Use endLine and endLineKeepFirst to limit lines from the bottom. excludeStart removes all the lines between specified start lines, including the lines. excludeEnd removes all the lines between specified end lines, including the lines.</p>
 </article>
 
 <article>
@@ -381,12 +386,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "mli",
         "snippet" : "module ModelZero : sig\n  type t\nend\n\nmodule ModelA : sig\n  type t\n  val calc: t -> int\n  module Nested : sig\n    type t\n  end\nend\n\nmodule ModelC : sig\n type t\nend",
         "autoTitle" : true,
-        "title" : "model.mli",
-        "anchorId" : "surrounded-by-multi-chars-scope-model-mli",
+        "title" : "ocaml/model.mli",
+        "anchorId" : "surrounded-by-multi-chars-scope-ocaml-model-mli",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: model.mli {surroundedByScope: {start: \"module ModelA\", scope: \"sig,end\"}}\n",
+        "snippet" : ":include-file: ocaml/model.mli {surroundedByScope: {start: \"module ModelA\", scope: \"sig,end\"}}\n",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -601,6 +606,116 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
+      "id" : "start-end-multiple-lines",
+      "title" : "Start/End Multiple Lines",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass multiple values to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "startLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "endLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to specify more precisely a block of code to extract.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "As example, let's extract a second ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "match",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " block from the code snippets below without adding extra markers:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "ml",
+        "snippet" : "type weather_season =\n  | Spring\n  | Summer\n  | Autumn\n  | Winter\n\nlet weight_season season =\n  match season with\n  | Spring -> 4\n  | Summer -> 5\n  | Autumn -> 3\n  | Winter -> -1\n\nlet describe_season season =\n(** human readable season description *)\n  match season with\n  | Spring -> \"It's springtime! Flowers are blooming.\"\n  | Summer -> \"It's summertime! Enjoy the warm weather.\"\n  | Autumn -> \"It's autumn! Leaves are changing colors.\"\n  | Winter -> \"It's winter! Time to bundle up and enjoy the snow.\"",
+        "autoTitle" : true,
+        "title" : "ocaml/seasons.ml",
+        "anchorId" : "start-end-multiple-lines-ocaml-seasons-ml",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "if we use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "startLine: \"match season\"",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", we can't guarantee what block will it pick, and it will depend on",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "functions order.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "To hit the exact one use multiple start lines. Znai will attempt to find a combination of start lines with the smallest distance between them:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-file: ocaml/seasons.ml {startLine: [\"let describe_season\", \"match season\"], startLineKeepLast: true}\n",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "ml",
+        "snippet" : "match season with\n| Spring -> \"It's springtime! Flowers are blooming.\"\n| Summer -> \"It's summertime! Enjoy the warm weather.\"\n| Autumn -> \"It's autumn! Leaves are changing colors.\"\n| Winter -> \"It's winter! Time to bundle up and enjoy the snow.\"",
+        "title" : "result",
+        "startLine" : [ "let describe_season", "match season" ],
+        "startLineKeepLast" : true,
+        "anchorId" : "start-end-multiple-lines-result",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "endLine",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "endLineKeepFirst",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to limit lines from the bottom. ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "excludeStart",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " removes all the lines between specified start lines, including the lines.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "code" : "excludeEnd",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " removes all the lines between specified end lines, including the lines.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
       "id" : "include-contains",
       "title" : "Include Contains",
       "type" : "Section",
@@ -717,7 +832,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1706577734397,
+    "lastModifiedTime" : 1712714981519,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Snippets Manipulation",
@@ -726,6 +841,7 @@ ReactDOM.render(React.createElement(Documentation, {
       },
       "dirName" : "snippets",
       "fileName" : "snippets-manipulation",
+      "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Surrounded By",
@@ -748,6 +864,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Start/End Line",
         "id" : "start-end-line"
+      }, {
+        "title" : "Start/End Multiple Lines",
+        "id" : "start-end-multiple-lines"
       }, {
         "title" : "Include Contains",
         "id" : "include-contains"

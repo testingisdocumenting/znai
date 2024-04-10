@@ -121,7 +121,7 @@
 
 <article>
 <header><h1>Integration With Testing</h1></header>
-<p>Use UI testing frameworks to automatically generate annotations file and capture screenshot.For example https://github.com/testingisdocumenting/webtau WebTau automatically generates an annotations file in addition to capturing a screenshot. package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*=&quot;search&quot;]') def resultSearchInput = $(&quot;#search_form_input&quot;) def result = $('article[data-testid=&quot;result&quot;]') scenario(&quot;capture screenshot&quot;) { browser.open(&quot;https://duckduckgo.com/&quot;) homeSearchInput.waitToBe visible homeSearchInput.setValue(&quot;testing is documenting\n&quot;) result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture(&quot;duckduckgo-search&quot;) } :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one Note: https://github.com/testingisdocumenting/webtau WebTau captures additional data such as pixelRatio</p>
+<p>Use UI testing frameworks to automatically generate annotations file and capture screenshot.For example https://github.com/testingisdocumenting/webtau WebTau automatically generates an annotations file in addition to capturing a screenshot. package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*=&quot;search&quot;]') def resultSearchInput = $(&quot;#search_form_input&quot;) def result = $('article[data-testid=&quot;result&quot;]') scenario(&quot;capture screenshot&quot;) { browser.open(&quot;https://duckduckgo.com/&quot;) homeSearchInput.waitToBe visible homeSearchInput.setValue(&quot;testing is documenting&quot;) homeSearchInput.sendKeys(browser.keys.enter) result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture(&quot;duckduckgo-search&quot;) } :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one Note: https://github.com/testingisdocumenting/webtau WebTau captures additional data such as pixelRatio</p>
 </article>
 
 <article>
@@ -184,7 +184,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scale" : 0.5,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1706577734421,
+        "timestamp" : 1712714981543,
         "shapes" : [ {
           "invertedColors" : true,
           "x" : 840.0,
@@ -286,7 +286,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scale" : 0.5,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1706577734421,
+        "timestamp" : 1712714981543,
         "shapes" : [ {
           "invertedColors" : true,
           "x" : 840.0,
@@ -328,7 +328,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1706577734421,
+        "timestamp" : 1712714981543,
         "shapes" : [ {
           "invertedColors" : true,
           "x" : 420.0,
@@ -387,7 +387,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1706577734421,
+        "timestamp" : 1712714981543,
         "shapes" : [ {
           "endY" : 430.0,
           "endX" : 420.0,
@@ -453,7 +453,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "annotationsPath" : "testingisdocumenting.json",
         "pixelRatio" : 2,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1706577734421,
+        "timestamp" : 1712714981543,
         "shapes" : [ {
           "type" : "rect",
           "beginX" : 60.0,
@@ -613,7 +613,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "groovy",
-        "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[id*=\"search\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\\n\")\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
+        "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[id*=\"search\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\")\n    homeSearchInput.sendKeys(browser.keys.enter)\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
         "autoTitle" : true,
         "title" : "webtauexamples/imageCapture.groovy",
         "anchorId" : "integration-with-testing-webtauexamples-imagecapture-groovy",
@@ -649,7 +649,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "annotate" : true,
         "imageSrc" : "/znai/doc-artifacts/duckduckgo-search.png",
-        "timestamp" : 1706577809369,
+        "timestamp" : 1712715068855,
         "shapes" : [ {
           "type" : "badge",
           "text" : "1",
@@ -661,12 +661,12 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "badge",
           "text" : "2",
           "x" : 367,
-          "y" : 219,
+          "y" : 273,
           "align" : "Center",
           "invertedColors" : false
         } ],
         "width" : 1000.0,
-        "height" : 679.0,
+        "height" : 715.0,
         "type" : "AnnotatedImage"
       }, {
         "autoTitle" : true,
@@ -681,7 +681,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "badge",
             "text" : "2",
             "x" : 367,
-            "y" : 219,
+            "y" : 273,
             "align" : "Center"
           } ],
           "pixelRatio" : 1
@@ -724,13 +724,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1706577734413,
+    "lastModifiedTime" : 1712714981535,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Image Annotations",
       "pageMeta" : { },
       "dirName" : "visuals",
       "fileName" : "image-annotations",
+      "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Badges",

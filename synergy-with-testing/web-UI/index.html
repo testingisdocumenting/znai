@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Screenshots And Annotations</h1></header>
-<p>In visuals/image-annotations Image Annotations you can specify annotations in an external file.Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to capture a screenshot and annotations package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*=&quot;search&quot;]') def resultSearchInput = $(&quot;#search_form_input&quot;) def result = $('article[data-testid=&quot;result&quot;]') scenario(&quot;capture screenshot&quot;) { browser.open(&quot;https://duckduckgo.com/&quot;) homeSearchInput.waitToBe visible homeSearchInput.setValue(&quot;testing is documenting\n&quot;) result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture(&quot;duckduckgo-search&quot;) } markdown 1. Type question you want to be answered anonymously 2. Scan through results and pick the most relevant one :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one</p>
+<p>In visuals/image-annotations Image Annotations you can specify annotations in an external file.Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to capture a screenshot and annotations package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*=&quot;search&quot;]') def resultSearchInput = $(&quot;#search_form_input&quot;) def result = $('article[data-testid=&quot;result&quot;]') scenario(&quot;capture screenshot&quot;) { browser.open(&quot;https://duckduckgo.com/&quot;) homeSearchInput.waitToBe visible homeSearchInput.setValue(&quot;testing is documenting&quot;) homeSearchInput.sendKeys(browser.keys.enter) result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture(&quot;duckduckgo-search&quot;) } markdown 1. Type question you want to be answered anonymously 2. Scan through results and pick the most relevant one :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one</p>
 </article>
 </section>
 </div>
@@ -165,7 +165,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "groovy",
-        "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[id*=\"search\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\\n\")\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
+        "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[id*=\"search\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\")\n    homeSearchInput.sendKeys(browser.keys.enter)\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
         "autoTitle" : true,
         "title" : "webtauexamples/imageCapture.groovy",
         "anchorId" : "screenshots-and-annotations-webtauexamples-imagecapture-groovy",
@@ -203,7 +203,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "annotate" : true,
         "imageSrc" : "/znai/doc-artifacts/duckduckgo-search.png",
-        "timestamp" : 1706577809369,
+        "timestamp" : 1712715068855,
         "shapes" : [ {
           "type" : "badge",
           "text" : "1",
@@ -215,12 +215,12 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "badge",
           "text" : "2",
           "x" : 367,
-          "y" : 219,
+          "y" : 273,
           "align" : "Center",
           "invertedColors" : false
         } ],
         "width" : 1000.0,
-        "height" : 679.0,
+        "height" : 715.0,
         "type" : "AnnotatedImage"
       }, {
         "autoTitle" : true,
@@ -235,7 +235,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "badge",
             "text" : "2",
             "x" : 367,
-            "y" : 219,
+            "y" : 273,
             "align" : "Center"
           } ],
           "pixelRatio" : 1
@@ -247,13 +247,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Json"
       } ]
     } ],
-    "lastModifiedTime" : 1706577734397,
+    "lastModifiedTime" : 1712714981519,
     "tocItem" : {
       "chapterTitle" : "Synergy With Testing",
       "pageTitle" : "Web UI",
       "pageMeta" : { },
       "dirName" : "synergy-with-testing",
       "fileName" : "web-UI",
+      "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Screenshots And Annotations",
