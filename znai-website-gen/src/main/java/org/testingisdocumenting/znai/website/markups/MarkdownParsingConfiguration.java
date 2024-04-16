@@ -60,8 +60,11 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
 
     @Override
     public String tocItemResourceName(TocItem tocItem) {
-        return tocItem.getDirName()
-                + (tocItem.getDirName().isEmpty() ? "" : File.separator) +
+        if (tocItem.isIndex()) {
+            return "index.md";
+        }
+
+        return tocItem.getDirName() + File.separator +
                 (tocItem.getFileNameWithoutExtension() + "." + tocItem.getFileExtension());
     }
 

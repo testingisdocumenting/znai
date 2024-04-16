@@ -521,9 +521,6 @@ public class WebSite implements Log {
         }
     }
 
-    private final String preprocessCsv =
-            "```\\{=html}.*?```,";
-
     private void parseMarkupAndUpdateTocItemAndSearch(TocItem tocItem) {
         MarkupPathWithError markupPathWithError = MarkupPathWithError.EMPTY;
 
