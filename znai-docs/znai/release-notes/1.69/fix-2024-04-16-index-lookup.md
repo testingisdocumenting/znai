@@ -1,0 +1,1 @@
+* Fix: documentation root index.md file is detected again (instead of automatic redirection)

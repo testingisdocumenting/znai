@@ -47,5 +47,7 @@ class MarkdownParsingConfigurationTest {
         tocItem.isIndex().should == true
         tocItem.dirName.should == ""
         tocItem.fileNameWithoutExtension.should == "index"
+
+        config.tocItemResourceName(tocItem).should == "index.md"
     }
 }
