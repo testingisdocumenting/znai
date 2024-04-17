@@ -117,7 +117,8 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
         }
     }
 
-    private void handleModify(final Path path) {
+    private void handleModify(Path path) {
+        path = path.normalize();
         final String fileName = path.getFileName().toString();
 
         if (Files.isDirectory(path)) {
@@ -162,16 +163,6 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
             pathByKey.put(key, path);
 
             ConsoleOutputs.out("watching: ", path);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void registerDirs(final Path rootPath) {
-        try {
-            try (Stream<Path> pathStream = Files.list(rootPath)) {
-                pathStream.filter(Files::isDirectory).forEach(this::register);
-            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

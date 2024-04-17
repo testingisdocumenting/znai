@@ -1,0 +1,1 @@
+* Fix: normalize file watching path during preview mode to correctly detect documentation page change when file path contains extra "/./" in it
