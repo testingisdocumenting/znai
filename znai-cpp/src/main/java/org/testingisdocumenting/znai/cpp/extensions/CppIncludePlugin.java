@@ -18,7 +18,6 @@
 package org.testingisdocumenting.znai.cpp.extensions;
 
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
-import org.testingisdocumenting.znai.codesnippets.CodeTokenizer;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.cpp.parser.CodePart;
@@ -89,7 +88,7 @@ public class CppIncludePlugin implements IncludePlugin {
 
     private Stream<DocElement> parseComments(String data) {
         MarkupParserResult parserResult = markupParser.parse(cppPath, data);
-        return parserResult.getDocElement().getContent().stream();
+        return parserResult.docElement().getContent().stream();
     }
 
     private Stream<DocElement> createSnippet(String snippet) {

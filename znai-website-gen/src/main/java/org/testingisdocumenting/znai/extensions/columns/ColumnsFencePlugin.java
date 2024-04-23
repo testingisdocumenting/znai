@@ -86,14 +86,14 @@ public class ColumnsFencePlugin implements FencePlugin {
         columnsParserResult.add(parserResult);
 
         Map<String, Object> column = new LinkedHashMap<>();
-        column.put("content", parserResult.getDocElement().contentToListOfMaps());
+        column.put("content", parserResult.docElement().contentToListOfMaps());
 
         return column;
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return columnsParserResult.stream().flatMap(pr -> pr.getAuxiliaryFiles().stream());
+        return columnsParserResult.stream().flatMap(pr -> pr.auxiliaryFiles().stream());
     }
 
     @Override

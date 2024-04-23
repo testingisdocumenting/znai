@@ -153,8 +153,7 @@ public class MarkdownVisitor extends AbstractVisitor {
             return;
         }
 
-        if (customBlock instanceof IncludeBlock) {
-            final IncludeBlock includeBlock = (IncludeBlock) customBlock;
+        if (customBlock instanceof IncludeBlock includeBlock) {
             handleIncludePlugin(includeBlock.getParams());
         } else if (customBlock instanceof TableBlock) {
             GfmTableToTableConverter gfmTableToTableConverter = new GfmTableToTableConverter(componentsRegistry, path, (TableBlock) customBlock);

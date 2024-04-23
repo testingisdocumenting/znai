@@ -33,7 +33,7 @@ public class MarkdownInlinedCodePlugin extends MarkdownBasePlugin implements Inl
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        DocElement page = parserResult.getDocElement();
+        DocElement page = parserResult.docElement();
         if (page.getContent().isEmpty()) {
             return PluginResult.empty();
         }

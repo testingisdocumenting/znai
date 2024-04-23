@@ -18,7 +18,6 @@ package org.testingisdocumenting.znai.parser.commonmark.include;
 
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.commonmark.node.CustomBlock;
-import org.commonmark.node.Visitor;
 
 public class IncludeBlock extends CustomBlock {
     private PluginParams params;
@@ -36,10 +35,5 @@ public class IncludeBlock extends CustomBlock {
 
     public PluginParams getParams() {
         return params;
-    }
-
-    @Override
-    public void accept(final Visitor visitor) {
-        visitor.visit(this);
     }
 }

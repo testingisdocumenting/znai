@@ -99,7 +99,7 @@ public class TypeScriptIncludePlugin implements IncludePlugin {
         TypeScriptFunction function = typeScriptCode.findFunction(funcName);
         List<? extends Map<String, ?>> declarations = function.getJsxDeclarations().stream()
                 .map(TypeScriptJsxDeclaration::toMap)
-                .collect(toList());
+                .toList();
 
         return PluginResult.docElement( "JsxGroup", Collections.singletonMap("declarations", declarations));
     }
@@ -111,7 +111,7 @@ public class TypeScriptIncludePlugin implements IncludePlugin {
         map.put("type", p.getType());
 
         MarkupParserResult markupParserResult = markdownParser.parse(fullPath, p.getDocumentation());
-        map.put("description", markupParserResult.getDocElement().contentToListOfMaps());
+        map.put("description", markupParserResult.docElement().contentToListOfMaps());
 
         return map;
     }

@@ -58,7 +58,7 @@ public class CppCommentsIncludePlugin implements IncludePlugin {
 
         String comments = extractComments(text, pluginParams.getOpts());
         MarkupParserResult parserResult = componentsRegistry.defaultParser().parse(cppPath, comments);
-        return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
+        return PluginResult.docElements(parserResult.docElement().getContent().stream());
     }
 
     @Override

@@ -90,7 +90,7 @@ public class StringUtils {
     public static String removeQuotes(String text) {
         if ((text.startsWith("\"") || text.startsWith("'")) &&
                 text.endsWith("\"") || text.endsWith("'")) {
-            return text.substring(1, text.length() - 1);
+            return removeEscapeFromQuotes(text.substring(1, text.length() - 1));
         }
 
         return text;
@@ -154,5 +154,11 @@ public class StringUtils {
         }
 
         return -1;
+    }
+
+    private static String removeEscapeFromQuotes(String withEscapes) {
+        return withEscapes
+                .replace("\\\"", "\"")
+                .replace("\\'", "'");
     }
 }

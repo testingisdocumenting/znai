@@ -56,7 +56,7 @@ public class SpoilerFencePlugin implements FencePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return parserResult.getAuxiliaryFiles().stream();
+        return parserResult.auxiliaryFiles().stream();
     }
 
     @Override

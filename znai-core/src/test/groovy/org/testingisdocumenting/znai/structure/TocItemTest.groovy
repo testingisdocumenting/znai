@@ -25,7 +25,7 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 class TocItemTest {
     @Test
     void "should not allow special symbols in file name"() {
-        def okTocItem = new TocItem('dir-name', 'file-name', 'md')
+        def ignore = new TocItem('dir-name', 'file-name', 'md')
 
         shouldThrow('dir-name', 'fileName?')
         shouldThrow('dir-name?', 'fileName')
@@ -56,7 +56,7 @@ class TocItemTest {
         tocItem.chapterTitle.should == "my chapter"
         tocItem.pageTitle.should == "my page"
 
-        tocItem.setPageTitle("override inside markdown")
+        tocItem.setPageTitleIfNoTocOverridePresent("override inside markdown")
         tocItem.pageTitle.should == "my page"
     }
 

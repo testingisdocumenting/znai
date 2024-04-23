@@ -17,10 +17,13 @@
 
 package org.testingisdocumenting.znai.structure;
 
+import org.testingisdocumenting.znai.utils.StringUtils;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * custom information associated with a single page of documentation
@@ -38,7 +41,7 @@ public class PageMeta {
     }
 
     public PageMeta(Map<String, List<String>> meta) {
-        this.meta = meta;
+        this.meta = removeQuotes(meta);
     }
 
     public boolean hasValue(String key) {
@@ -61,5 +64,10 @@ public class PageMeta {
 
     public Map<String, ?> toMap() {
         return meta;
+    }
+
+    private Map<String, List<String>> removeQuotes(Map<String, List<String>> map) {
+        return map.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, (entry) ->
+                entry.getValue().stream().map(StringUtils::removeQuotes).toList()));
     }
 }

@@ -64,6 +64,6 @@ text
 
     private void parse(String markdown) {
         parseResult = parser.parse(Paths.get("test.md"), markdown)
-        content = parseResult.docElement.getContent().collect { it.toMap() }
+        content = parseResult.docElement().getContent().collect { it.toMap() }
     }
 }

@@ -25,7 +25,6 @@ import java.nio.file.Paths
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
-import static org.testingisdocumenting.webtau.WebTauCore.trace
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownParserTest {
@@ -588,11 +587,12 @@ world""")
 
     @Test
     void "custom page data"() {
-        parse("""---
-title: custom title
----""")
+        parse("---\ntitle: custom title\n" +
+"description: \"quoted \\\"inside\\\" text\"\n---")
 
-        parseResult.pageMeta.toMap().title.should == ["custom title"]
+        parseResult.pageMeta().toMap().should == [
+                title: ["custom title"],
+                description: ["quoted \"inside\" text"]]
     }
 
     @Test
@@ -604,6 +604,6 @@ title: custom title
 
     private void parse(String markdown, Path path = Paths.get("test.md")) {
         parseResult = parser.parse(path, markdown)
-        content = parseResult.docElement.getContent().collect { it.toMap() }
+        content = parseResult.docElement().getContent().collect { it.toMap() }
     }
 }

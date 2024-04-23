@@ -56,7 +56,7 @@ public class TemplateFencePlugin implements FencePlugin {
         parserResult = parser.parse(markupPath, processTemplate(resourcesResolver.textContent(fullPath),
                 new ColonDelimitedKeyValues(content)));
 
-        return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
+        return PluginResult.docElements(parserResult.docElement().getContent().stream());
     }
 
     private String processTemplate(String template, ColonDelimitedKeyValues keyValues) {
@@ -66,7 +66,7 @@ public class TemplateFencePlugin implements FencePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.concat(parserResult.getAuxiliaryFiles().stream(),
+        return Stream.concat(parserResult.auxiliaryFiles().stream(),
                 Stream.of(AuxiliaryFile.builtTime(fullPath)));
     }
 

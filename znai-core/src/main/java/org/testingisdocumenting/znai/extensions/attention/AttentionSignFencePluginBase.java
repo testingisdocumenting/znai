@@ -55,14 +55,14 @@ public abstract class AttentionSignFencePluginBase implements FencePlugin {
 
         Map<String, Object> props = pluginParams.getOpts().toMap();
         props.put("attentionType", type());
-        props.put("content", parserResult.getDocElement().contentToListOfMaps());
+        props.put("content", parserResult.docElement().contentToListOfMaps());
 
         return PluginResult.docElement("AttentionBlock", props);
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return parserResult.getAuxiliaryFiles().stream();
+        return parserResult.auxiliaryFiles().stream();
     }
 
     @Override
