@@ -107,7 +107,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
     }
 
     @Override
-    public void onChange(final Path path) {
+    public void onChange(Path path) {
         ConsoleOutputs.out("file changed: ", path);
 
         final TocItem tocItem = previewWebSite.tocItemByPath(path);
