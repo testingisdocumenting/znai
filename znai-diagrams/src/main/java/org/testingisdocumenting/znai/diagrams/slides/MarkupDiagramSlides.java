@@ -50,12 +50,12 @@ public class MarkupDiagramSlides {
     }
 
     public List<AuxiliaryFile> getAuxiliaryFiles() {
-        return parserResult.getAuxiliaryFiles();
+        return parserResult.auxiliaryFiles();
     }
 
     private void parse(Path path, String markupContent) {
         parserResult = parser.parse(path, markupContent);
-        sections = parserResult.getDocElement().getContent().stream().
+        sections = parserResult.docElement().getContent().stream().
                 filter(e -> e.getType().equals(DocElementType.SECTION)).collect(toList());
     }
 

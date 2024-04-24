@@ -116,7 +116,7 @@ public class TocItem {
         this.pageSectionIdTitles = pageSectionIdTitles;
     }
 
-    public void setPageTitle(String pageTitle) {
+    public void setPageTitleIfNoTocOverridePresent(String pageTitle) {
         if (!page.hasTitleOverride()) {
             this.pageTitle = pageTitle;
         }

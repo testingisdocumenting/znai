@@ -148,22 +148,18 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
             if (text != null && !text.toString().isEmpty() && !type.equals(ShapeTypes.BADGE)) {
                 String markdown = text.toString();
                 MarkupParserResult parserResult = componentsRegistry.markdownParser().parse(markupPath, markdown);
-                shape.put("tooltip", parserResult.getDocElement().contentToListOfMaps());
+                shape.put("tooltip", parserResult.docElement().contentToListOfMaps());
             }
         });
     }
 
     private Boolean isInvertedColor(ShapeColorAnalyzer colorAnalyzer, String type, Map<String, ?> shape) {
-        switch (type) {
-            case ShapeTypes.BADGE:
-                return colorAnalyzer.isDarkCoordinate((Number) shape.get("x"), (Number) shape.get("y"));
-            case ShapeTypes.ARROW:
-                return colorAnalyzer.isDarkBasedOnOppositeCorners(new RectCoord(shape));
-            case ShapeTypes.RECT:
-                return colorAnalyzer.isDarkBasedOnAllCorners(new RectCoord(shape));
-            default:
-                return false;
-        }
+        return switch (type) {
+            case ShapeTypes.BADGE -> colorAnalyzer.isDarkCoordinate((Number) shape.get("x"), (Number) shape.get("y"));
+            case ShapeTypes.ARROW -> colorAnalyzer.isDarkBasedOnOppositeCorners(new RectCoord(shape));
+            case ShapeTypes.RECT -> colorAnalyzer.isDarkBasedOnAllCorners(new RectCoord(shape));
+            default -> false;
+        };
     }
 
     private Path determineAnnotationsPath(String imagePath, PluginParams pluginParams) {

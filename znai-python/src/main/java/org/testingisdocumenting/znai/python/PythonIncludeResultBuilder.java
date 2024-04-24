@@ -22,7 +22,6 @@ import org.testingisdocumenting.znai.extensions.api.ApiParameters;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.python.pydoc.ParsedPythonDoc;
-import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -120,7 +119,7 @@ class PythonIncludeResultBuilder {
         ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
 
         componentsRegistry.markdownParser().parse(markupPath, parsedPythonDoc.getPyDocDescriptionOnly())
-                .getDocElement().getContent().forEach(parserHandler::onDocElement);
+                .docElement().getContent().forEach(parserHandler::onDocElement);
 
         searchText.add(parsedPythonDoc.getPyDocDescriptionOnly());
     }

@@ -138,6 +138,6 @@ class TableDocElementFromParams {
         }
 
         MarkupParserResult parserResult = parser.parse(fullPath, cell.toString());
-        return (List<Object>) parserResult.getDocElement().toMap().get("content");
+        return (List<Object>) parserResult.docElement().toMap().get("content");
     }
 }

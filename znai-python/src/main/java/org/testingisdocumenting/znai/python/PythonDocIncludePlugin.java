@@ -43,7 +43,7 @@ public class PythonDocIncludePlugin extends PythonIncludePluginBase {
         ParsedPythonDoc parsedPythonDoc = new ParsedPythonDoc(codeEntry.getDocString());
         return new PythonIncludeResult(
                 componentsRegistry.markdownParser().parse(fullPath, parsedPythonDoc.getPyDocDescriptionOnly())
-                        .getDocElement().getContent(),
+                        .docElement().getContent(),
                 parsedPythonDoc.getPyDocDescriptionOnly());
     }
 }

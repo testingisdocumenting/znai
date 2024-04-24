@@ -71,14 +71,11 @@ class CsvAnnotations {
             return createBadge(record);
         }
 
-        switch (xCoordOrType) {
-            case "arrow":
-                return createArrow(record);
-            case "rect":
-                return createRect(record);
-            default:
-                throw new IllegalArgumentException("unsupported annotation type: " + xCoordOrType);
-        }
+        return switch (xCoordOrType) {
+            case "arrow" -> createArrow(record);
+            case "rect" -> createRect(record);
+            default -> throw new IllegalArgumentException("unsupported annotation type: " + xCoordOrType);
+        };
     }
 
     private Map<String, Object> createBadge(CSVRecord record) {
@@ -130,7 +127,7 @@ class CsvAnnotations {
             String markdown = record.get(RECT_ARROW_TEXT_POS_IDX).trim();
             MarkupParserResult parserResult = markdownParser.parse(markupPath, markdown);
 
-            map.put("tooltip", parserResult.getDocElement().contentToListOfMaps());
+            map.put("tooltip", parserResult.docElement().contentToListOfMaps());
         }
 
         return map;

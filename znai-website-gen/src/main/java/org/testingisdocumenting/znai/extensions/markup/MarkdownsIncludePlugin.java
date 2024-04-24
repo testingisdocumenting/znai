@@ -78,7 +78,7 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
                 .map(p -> parser.parse(markupPath, FileUtils.fileTextContent(p)))
                 .collect(Collectors.toList());
         Stream<DocElement> elements = parserResults.stream()
-                .flatMap(r -> r.getDocElement().getContent().stream());
+                .flatMap(r -> r.docElement().getContent().stream());
 
         return PluginResult.docElements(elements);
     }

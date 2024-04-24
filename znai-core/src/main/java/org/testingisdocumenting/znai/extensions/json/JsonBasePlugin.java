@@ -273,7 +273,7 @@ public abstract class JsonBasePlugin implements Plugin {
 
         markdownByPath.forEach((nodePath, markdown) -> {
             MarkupParserResult parseResult = parser.parse(parentFilePath, markdown.toString());
-            List<Map<String, Object>> docElements = parseResult.getDocElement().contentToListOfMaps();
+            List<Map<String, Object>> docElements = parseResult.docElement().contentToListOfMaps();
 
             result.put(nodePath, docElements);
         });

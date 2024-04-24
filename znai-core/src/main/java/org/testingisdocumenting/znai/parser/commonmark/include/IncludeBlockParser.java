@@ -20,7 +20,7 @@ package org.testingisdocumenting.znai.parser.commonmark.include;
 import org.commonmark.internal.DocumentBlockParser;
 import org.commonmark.internal.IndentedCodeBlockParser;
 import org.commonmark.node.Block;
-import org.commonmark.parser.InlineParser;
+import org.commonmark.parser.SourceLine;
 import org.commonmark.parser.block.*;
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
 import org.testingisdocumenting.znai.extensions.PluginsRegexp;
@@ -57,16 +57,8 @@ public class IncludeBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line) {
-    }
-
-    @Override
-    public void parseInlines(InlineParser inlineParser) {
-    }
-
-    @Override
     public BlockContinue tryContinue(ParserState parserState) {
-        CharSequence line = parserState.getLine();
+        CharSequence line = parserState.getLine().getContent();
 
         if (JsonUtils.isObjectScopeClosed(value.toString())) {
             return BlockContinue.none();
@@ -91,11 +83,11 @@ public class IncludeBlockParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            CharSequence line = state.getLine();
+            SourceLine line = state.getLine();
 
             BlockParser parentParser = matchedBlockParser.getMatchedBlockParser();
 
-            if (parentParser instanceof DocumentBlockParser && SPACES_REGEXP.matcher(line).matches()) {
+            if (parentParser instanceof DocumentBlockParser && SPACES_REGEXP.matcher(line.getContent()).matches()) {
                 return BlockStart.none();
             }
 
@@ -103,7 +95,7 @@ public class IncludeBlockParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
-            PluginsRegexp.IdAndParams idAndParams = PluginsRegexp.parseIncludePlugin(line);
+            PluginsRegexp.IdAndParams idAndParams = PluginsRegexp.parseIncludePlugin(line.getContent());
             if (idAndParams != null) {
                 return BlockStart.of(new IncludeBlockParser(pluginParamsFactory, idAndParams.getId(), idAndParams.getParams())).atIndex(state.getIndex());
             }

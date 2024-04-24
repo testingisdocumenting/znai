@@ -319,9 +319,9 @@ public class WebSite implements Log {
         localResourceResolver.setCurrentFilePath(markupPath);
 
         MarkupParserResult parserResult = markupParser.parse(markupPath, fileTextContent(markupPath));
-        auxiliaryFilesRegistry.registerAdditionalAuxiliaryFiles(parserResult.getAuxiliaryFiles());
+        auxiliaryFilesRegistry.registerAdditionalAuxiliaryFiles(parserResult.auxiliaryFiles());
 
-        footer = new Footer(parserResult.getDocElement());
+        footer = new Footer(parserResult.docElement());
 
         return new FooterAndParseResult(footer, parserResult);
     }
@@ -329,7 +329,7 @@ public class WebSite implements Log {
     public Footer updateFooter() {
         FooterAndParseResult footerAndParseResult = parseFooter();
 
-        footerAndParseResult.parserResult().getAuxiliaryFiles().stream()
+        footerAndParseResult.parserResult().auxiliaryFiles().stream()
                 .filter(AuxiliaryFile::isDeploymentRequired)
                 .forEach(this::deployAuxiliaryFileIfOutdated);
 
@@ -548,10 +548,10 @@ public class WebSite implements Log {
 
             MarkupParserResult parserResult = markupParser.parse(markupPathWithError.path(),
                     markupContent);
-            updateFilesAssociation(tocItem, parserResult.getAuxiliaryFiles());
+            updateFilesAssociation(tocItem, parserResult.auxiliaryFiles());
 
             Instant lastModifiedTime = pageModifiedTimeStrategy.lastModifiedTime(tocItem, markupPathWithError.path());
-            Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getPageMeta());
+            Page page = new Page(parserResult.docElement(), lastModifiedTime, parserResult.pageMeta());
             pageByTocItem.put(tocItem, page);
 
             updateTocItemWithPageMeta(tocItem, page.getPageMeta());
@@ -574,14 +574,14 @@ public class WebSite implements Log {
         tocItem.setPageMeta(pageMeta);
 
         if (pageMeta.hasValue("title")) {
-            tocItem.setPageTitle(pageMeta.getSingleValue("title"));
+            tocItem.setPageTitleIfNoTocOverridePresent(pageMeta.getSingleValue("title"));
         } else if (tocItem.isIndex()) {
-            tocItem.setPageTitle("");
+            tocItem.setPageTitleIfNoTocOverridePresent("");
         }
     }
 
     private void updateSearchEntries(TocItem tocItem, MarkupParserResult parserResult) {
-        List<GlobalSearchEntry> siteSearchEntries = parserResult.getSearchEntries().stream()
+        List<GlobalSearchEntry> siteSearchEntries = parserResult.searchEntries().stream()
                 .map(pageSearchEntry ->
                         new GlobalSearchEntry(
                                 searchEntryUrl(tocItem, pageSearchEntry),
@@ -590,7 +590,7 @@ public class WebSite implements Log {
                 .collect(toList());
 
         globalSearchEntries.addAll(siteSearchEntries);
-        localSearchEntries.add(new PageSearchEntries(tocItem, parserResult.getSearchEntries()));
+        localSearchEntries.add(new PageSearchEntries(tocItem, parserResult.searchEntries()));
     }
 
     private String searchEntryUrl(TocItem tocItem, PageSearchEntry pageSearchEntry) {
@@ -705,7 +705,7 @@ public class WebSite implements Log {
                 ":include-redirect: " + url);
 
         Instant lastModifiedTime = Instant.ofEpochSecond(0);
-        Page page = new Page(parserResult.getDocElement(), lastModifiedTime, parserResult.getPageMeta());
+        Page page = new Page(parserResult.docElement(), lastModifiedTime, parserResult.pageMeta());
 
         return pageToHtmlPageConverter.convert(
                 toc.getIndex(), page, createServerSideRenderer(firstNonIndexPage));

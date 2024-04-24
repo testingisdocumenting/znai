@@ -27,52 +27,23 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
 
-public class MarkupParserResult {
-    private final DocElement docElement;
-    private final List<String> globalAnchorIds;
-    private final List<AuxiliaryFile> auxiliaryFiles;
-    private final PageMeta pageMeta;
-    private final List<PageSearchEntry> searchEntries;
-
-    public MarkupParserResult(DocElement docElement,
-                              List<String> globalAnchorIds,
-                              List<PageSearchEntry> searchEntries,
-                              List<AuxiliaryFile> auxiliaryFiles,
-                              PageMeta pageMeta) {
-        this.docElement = docElement;
-        this.globalAnchorIds = globalAnchorIds;
-        this.searchEntries = searchEntries;
-        this.auxiliaryFiles = auxiliaryFiles;
-        this.pageMeta = pageMeta;
-    }
-
+public record MarkupParserResult(DocElement docElement,
+                                 List<String> globalAnchorIds,
+                                 List<PageSearchEntry> searchEntries,
+                                 List<AuxiliaryFile> auxiliaryFiles,
+                                 PageMeta pageMeta) {
     /**
      * Top level page element. use get content to get access to the children
      *
      * @return top level page element
      */
-    public DocElement getDocElement() {
+    @Override
+    public DocElement docElement() {
         return docElement;
-    }
-
-    public List<String> getGlobalAnchorIds() {
-        return globalAnchorIds;
-    }
-
-    public PageMeta getPageMeta() {
-        return pageMeta;
-    }
-
-    public List<PageSearchEntry> getSearchEntries() {
-        return searchEntries;
     }
 
     public List<Map<String, Object>> contentToListOfMaps() {
         return docElement.contentToListOfMaps();
-    }
-
-    public List<AuxiliaryFile> getAuxiliaryFiles() {
-        return auxiliaryFiles;
     }
 
     public String getAllText() {

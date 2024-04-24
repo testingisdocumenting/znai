@@ -64,7 +64,7 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
         PythonParsedFile pythonParseResult = Python.INSTANCE.parseFileOrGetCached(fullPath, context);
         pythonResult = process(pythonParseResult, parserHandler, markupPath);
 
-        return PluginResult.docElements(pythonResult.getDocElements().stream());
+        return PluginResult.docElements(pythonResult.docElements().stream());
     }
 
     protected String getEntryName() {
@@ -112,6 +112,6 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.HIGH.text(pythonResult.getText());
+        return SearchScore.HIGH.text(pythonResult.text());
     }
 }

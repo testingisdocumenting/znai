@@ -62,7 +62,7 @@ public class TabsFencePlugin implements FencePlugin {
         this.auxiliaryFiles = new ArrayList<>();
 
         ColonDelimitedKeyValues tabsDefinitions = new ColonDelimitedKeyValues(content);
-        List<ParsedTab> parsedTabs = tabsDefinitions.map(this::parseTab).collect(toList());
+        List<ParsedTab> parsedTabs = tabsDefinitions.map(this::parseTab).toList();
 
         if (parsedTabs.isEmpty()) {
             throw new IllegalStateException("no tabs are defined. if your tab names have spaces quote the tab name");
@@ -91,7 +91,7 @@ public class TabsFencePlugin implements FencePlugin {
     }
 
     private void collectAuxiliaryFiles(ParsedTab parsedTab) {
-        auxiliaryFiles.addAll(parsedTab.parserResult.getAuxiliaryFiles());
+        auxiliaryFiles.addAll(parsedTab.parserResult.auxiliaryFiles());
     }
 
     private ParsedTab parseTab(String tabName, String markup) {

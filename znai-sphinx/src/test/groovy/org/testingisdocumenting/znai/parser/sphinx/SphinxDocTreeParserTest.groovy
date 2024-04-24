@@ -166,6 +166,6 @@ linenos="False" xml:space="preserve">System.out.println("hello world");</literal
 
     private void parse(String xml) {
         def parseResult = parser.parse(Paths.get("test.xml"), xml)
-        content = parseResult.docElement.getContent().collect { it.toMap() }
+        content = parseResult.docElement().getContent().collect { it.toMap() }
     }
 }

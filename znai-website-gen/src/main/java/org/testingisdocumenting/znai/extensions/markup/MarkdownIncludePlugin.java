@@ -35,6 +35,6 @@ public class MarkdownIncludePlugin extends MarkdownBasePlugin implements Include
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
+        return PluginResult.docElements(parserResult.docElement().getContent().stream());
     }
 }

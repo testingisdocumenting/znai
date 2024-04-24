@@ -95,7 +95,7 @@ public abstract class MarkdownBasePlugin implements Plugin {
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.concat(
                 Stream.of(AuxiliaryFile.builtTime(markdownPathUsed)),
-                parserResult.getAuxiliaryFiles().stream());
+                parserResult.auxiliaryFiles().stream());
     }
 
     @Override

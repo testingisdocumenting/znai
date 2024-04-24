@@ -74,6 +74,7 @@ line #_3\r""")
         StringUtils.removeQuotes("''").should == ""
         StringUtils.removeQuotes("'hello world'").should == "hello world"
         StringUtils.removeQuotes('"hello world"').should == "hello world"
+        StringUtils.removeQuotes('"hello\\" world\\\'s"').should == "hello\" world's"
     }
 
     @Test

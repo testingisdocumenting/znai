@@ -65,7 +65,7 @@ public class TemplateIncludePlugin implements IncludePlugin {
         parserResult = parser.parse(markupPath, processTemplate(resourcesResolver.textContent(fullPath),
                 pluginParams.getOpts()));
 
-        return PluginResult.docElements(parserResult.getDocElement().getContent().stream());
+        return PluginResult.docElements(parserResult.docElement().getContent().stream());
     }
 
     private String processTemplate(String template, PluginParamsOpts opts) {
@@ -81,7 +81,7 @@ public class TemplateIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        Stream<AuxiliaryFile> files = Stream.concat(parserResult.getAuxiliaryFiles().stream(),
+        Stream<AuxiliaryFile> files = Stream.concat(parserResult.auxiliaryFiles().stream(),
                 Stream.of(AuxiliaryFile.builtTime(fullPath)));
 
         return (paramsPath != null) ?

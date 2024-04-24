@@ -77,7 +77,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
         this.markdownParser = componentsRegistry.markdownParser();
         this.parserHandler = parserHandler;
 
-        openApiMarkdownParser = description -> markdownParser.parse(markupPath, description).getDocElement();
+        openApiMarkdownParser = description -> markdownParser.parse(markupPath, description).docElement();
 
         specPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
         String specContent = componentsRegistry.resourceResolver().textContent(specPath);

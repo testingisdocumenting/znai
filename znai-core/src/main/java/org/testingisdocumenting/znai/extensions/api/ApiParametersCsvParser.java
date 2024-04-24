@@ -57,7 +57,7 @@ public class ApiParametersCsvParser {
         ApiLinkedText type = new ApiLinkedText(row.get(1));
 
         MarkupParserResult markupParserResult = markupParser.parse(path, row.get(2));
-        List<Map<String, Object>> description = markupParserResult.getDocElement().contentToListOfMaps();
+        List<Map<String, Object>> description = markupParserResult.docElement().contentToListOfMaps();
 
         boolean escapedName = name.startsWith("'") && name.endsWith("'");
         if (name.contains(".") && !name.contains("..") && !escapedName) {
