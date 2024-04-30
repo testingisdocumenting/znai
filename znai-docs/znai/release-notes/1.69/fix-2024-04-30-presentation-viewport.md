@@ -1,0 +1,1 @@
+* Fix: Presentation mode viewport explicit width to force full screen
