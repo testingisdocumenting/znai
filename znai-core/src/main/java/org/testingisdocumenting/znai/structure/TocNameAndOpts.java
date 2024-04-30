@@ -81,6 +81,8 @@ public class TocNameAndOpts {
             return title.toString();
         }
 
-        return NameUtils.dashToCamelCaseWithSpaces(givenName);
+        int dotIdx = givenName.indexOf('.');
+        String withoutExtension = dotIdx == -1 ? givenName : givenName.substring(0, dotIdx);
+        return NameUtils.dashToCamelCaseWithSpaces(withoutExtension);
     }
 }

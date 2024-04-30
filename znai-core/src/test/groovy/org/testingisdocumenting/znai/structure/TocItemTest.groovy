@@ -41,6 +41,15 @@ class TocItemTest {
     }
 
     @Test
+    void "should create title from file name ignoring extension"() {
+        def tocItem = new TocItem('dir-name', 'file-name.mdx', 'md')
+        tocItem.dirName.should == "dir-name"
+        tocItem.fileNameWithoutExtension.should == "file-name"
+        tocItem.pageTitle.should == "File Name"
+        tocItem.fileExtension.should == "mdx"
+    }
+
+    @Test
     void "should extract optional file name extension"() {
         def tocItem = new TocItem('dir-name', 'file-name.mdx', 'md')
         tocItem.dirName.should == "dir-name"
