@@ -1,0 +1,1 @@
+* Fix: [auto title](flow/names) now correctly ignores specified extension.
