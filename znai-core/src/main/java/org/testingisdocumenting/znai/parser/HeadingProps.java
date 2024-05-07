@@ -24,11 +24,9 @@ import java.util.Map;
  * Sections do not support bold text, images, bullet points, etc.
  * To customize headings style you can pass JSON block at the end of section text
  */
-public class HeadingProps {
+public record HeadingProps(Map<String, ?> props) {
     public static HeadingProps EMPTY = new HeadingProps(Collections.emptyMap());
     public static HeadingProps STYLE_API = new HeadingProps(Collections.singletonMap("style", "api"));
-
-    private final Map<String, ?> props;
 
     public static HeadingProps styleApiWithBadge(String badgeText) {
         Map<String, Object> props = new HashMap<>();
@@ -38,11 +36,8 @@ public class HeadingProps {
         return new HeadingProps(props);
     }
 
-    public HeadingProps(Map<String, ?> props) {
-        this.props = props;
-    }
-
-    public Map<String, ?> getProps() {
+    @Override
+    public Map<String, ?> props() {
         return Collections.unmodifiableMap(props);
     }
 

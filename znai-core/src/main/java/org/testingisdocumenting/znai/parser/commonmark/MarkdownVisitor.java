@@ -35,9 +35,7 @@ import org.testingisdocumenting.znai.utils.JsonParseException;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class MarkdownVisitor extends AbstractVisitor {
     private final ComponentsRegistry componentsRegistry;
@@ -293,28 +291,29 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     private HeadingTextAndProps extractHeadingTextAndProps(Heading heading) {
         heading.accept(ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor.INSTANCE);
-        Node firstChild = heading.getFirstChild();
 
-        if (firstChild == null) {
-            return new HeadingTextAndProps("", HeadingProps.EMPTY);
-        }
+        List<String> textParts = new ArrayList<>();
+        heading.accept(new AbstractVisitor() {
+            @Override
+            public void visit(Text text) {
+                HeadingTextAndProps headingTextAndProps = HeadingTextAndProps.extractTextAndProps(text.getLiteral());
+                textParts.add(headingTextAndProps.text());
+            }
 
-        String extractedText = extractText(firstChild);
+            @Override
+            public void visit(Code code) {
+                textParts.add(code.getLiteral());
+            }
+        });
 
-        int startOfCurlyIdx = extractedText.indexOf('{');
-        if (startOfCurlyIdx == -1) {
-            return new HeadingTextAndProps(extractedText, HeadingProps.EMPTY);
-        }
+        String combinedText = String.join("", textParts).trim();
 
-
-        try {
-            String jsonStart = extractedText.substring(startOfCurlyIdx);
-
-            Map<String, ?> props = JsonUtils.deserializeAsMap(jsonStart);
-            String headingTextOnly = extractedText.substring(0, startOfCurlyIdx).trim();
-            return new HeadingTextAndProps(headingTextOnly, new HeadingProps(props));
-        } catch (JsonParseException e) {
-            throw new RuntimeException("Can't parse props of heading: " + extractedText, e);
+        Node lastChild = heading.getLastChild();
+        if (lastChild instanceof Text textNode) {
+            HeadingTextAndProps headingTextAndProps = HeadingTextAndProps.extractTextAndProps(textNode.getLiteral());
+            return new HeadingTextAndProps(combinedText, headingTextAndProps.props);
+        } else {
+            return new HeadingTextAndProps(combinedText, HeadingProps.EMPTY);
         }
     }
 
@@ -326,13 +325,22 @@ public class MarkdownVisitor extends AbstractVisitor {
         return ((Text) node).getLiteral().trim();
     }
 
-    private static class HeadingTextAndProps {
-        private final String text;
-        private final HeadingProps props;
+    private record HeadingTextAndProps(String text, HeadingProps props) {
+        public static HeadingTextAndProps extractTextAndProps(String text) {
+                int startOfCurlyIdx = text.indexOf('{');
+                if (startOfCurlyIdx == -1) {
+                    return new HeadingTextAndProps(text, HeadingProps.EMPTY);
+                }
 
-        public HeadingTextAndProps(String text, HeadingProps props) {
-            this.text = text;
-            this.props = props;
+                try {
+                    String jsonStart = text.substring(startOfCurlyIdx);
+
+                    Map<String, ?> props = JsonUtils.deserializeAsMap(jsonStart);
+                    String headingTextOnly = text.substring(0, startOfCurlyIdx);
+                    return new HeadingTextAndProps(headingTextOnly, new HeadingProps(props));
+                } catch (JsonParseException e) {
+                    throw new RuntimeException("Can't parse props of heading: " + text, e);
+                }
+            }
         }
-    }
 }

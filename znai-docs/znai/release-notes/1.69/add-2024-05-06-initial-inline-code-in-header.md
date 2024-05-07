@@ -1,0 +1,1 @@
+* Add: Initial support for `inlined-code` in headers. For now it displays it as a regular text.

@@ -100,7 +100,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
             onSectionEnd();
         }
 
-        Map<String, ?> headingPropsMap = headingProps.getProps();
+        Map<String, ?> headingPropsMap = headingProps.props();
 
         String id = new PageSectionIdTitle(title, headingPropsMap).getId();
         Map<String, Object> props = new LinkedHashMap<>(headingPropsMap);
@@ -132,7 +132,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSubHeading(int level, String title, HeadingProps headingProps) {
-        Map<String, ?> headingPropsMap = headingProps.getProps();
+        Map<String, ?> headingPropsMap = headingProps.props();
 
         String idByTitle = new PageSectionIdTitle(title, headingPropsMap).getId();
 
