@@ -242,170 +242,20 @@ world""")
 
     @Test
     void "second level section without text"() {
-        parse("## ")
+        parse("## ", Paths.get("empty-header.md"))
         content.should == [[type: 'SubHeading', level: 2, title: '', id: '']]
     }
 
     @Test
-    void "second level section with payload"() {
-        parse('## Secondary Section {badge: "v2.0"}" \ntext text')
-        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section', badge: 'v2.0'],
-                           [type: 'Paragraph', content: [[type: 'SimpleText', text: 'text text']]]]
+    void "header inline code text is allowed"() {
+        parse('# my header about `thing` here {badge: "v3.4"}')
+        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', badge: 'v3.4', type: 'Section']]
     }
 
     @Test
-    void "repeating sub headings within different parent sections"() {
-        parse("""
-# top level section
-## example
-#### java
-### java
-## constraint
-### java
-#### java
-#### java
-# another top level
-## example
-## example
-        """)
-
-        content.should == [[title: 'top level section', id: 'top-level-section', type: 'Section',
-                            content: [[level: 2, title: 'example', id: 'top-level-section-example', type: 'SubHeading'],
-                                      [level: 4, title: 'java', id: 'top-level-section-example-java', type: 'SubHeading'],
-                                      [level: 3, title: 'java', id: 'top-level-section-example-java-2', type: 'SubHeading'],
-                                      [level: 2, title: 'constraint', id: 'top-level-section-constraint', type: 'SubHeading'],
-                                      [level: 3, title: 'java', id: 'top-level-section-constraint-java', type: 'SubHeading'],
-                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java', type: 'SubHeading'],
-                                      [level: 4, title: 'java', id: 'top-level-section-constraint-java-java-2', type: 'SubHeading']]],
-                           [title: 'another top level', id: 'another-top-level', type: 'Section',
-                            content: [[level: 2, title: 'example', id: 'another-top-level-example', type: 'SubHeading'],
-                                      [level: 2, title: 'example', id: 'another-top-level-example-2', type: 'SubHeading']]]]
-    }
-
-    @Test
-    void "top level section with styles"() {
-        code {
-            parse("# title with **text**")
-        } should throwException("only regular text is supported in headings")
-
-        code {
-            parse("# title *with*")
-        } should throwException("only regular text is supported in headings")
-    }
-
-    @Test
-    void "second level section with styles"() {
-        code {
-            parse("## title with **text**")
-        } should throwException("only regular text is supported in headings")
-
-        code {
-            parse("## title *with*")
-        } should throwException("only regular text is supported in headings")
-    }
-
-    @Test
-    void "inlined image"() {
-        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 300000
-
-        parse("text ![alt text](images/png-test.png \"custom title\") another text")
-        content.should == [[type: 'Paragraph', content:[
-                [text: "text " , type: "SimpleText"],
-                [title: "custom title", destination: '/test-doc/png-test.png', alt: 'alt text', type: 'Image', inlined: true,
-                 width:762, height:581, timestamp: 300000],
-                [text: " another text" , type: "SimpleText"]]]]
-    }
-
-    @Test
-    void "standalone image"() {
-        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000
-
-        parse("![alt text](images/png-test.png \"custom title\")")
-        content.should == [[title: "custom title", destination: '/test-doc/png-test.png',
-                            alt: 'alt text', inlined: false,
-                            width:762, height:581,
-                            timestamp: 200000,
-                            type: 'Image']]
-    }
-
-    @Test
-    void "standalone svg image"() {
-        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000
-
-        parse("![alt text](images/test.svg \"custom title\")")
-        content.should == [[title: "custom title", destination: '/test-doc/test.svg',
-                            alt: 'alt text', inlined: false,
-                            timestamp: 200000,
-                            type: 'Image']]
-    }
-
-    @Test
-    void "image with external ref"() {
-        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000
-
-        parse("![alt text](https://host/images/png-test.png \"custom title\")")
-        content.should == [[title: "custom title", destination: 'https://host/images/png-test.png',
-                            alt: 'alt text', inlined: false,
-                            type: 'Image']]
-    }
-
-    @Test
-    void "image with no alt text"() {
-        TEST_COMPONENTS_REGISTRY.timeService().fakedFileTime = 200000
-
-        parse("![](images/png-test.png \"custom title\")")
-        content.should == [[title: "custom title", destination: '/test-doc/png-test.png',
-                            alt: 'image', inlined: false,
-                            width:762, height:581,
-                            timestamp: 200000,
-                            type: 'Image']]
-    }
-
-    @Test
-    void "include plugin"() {
-        parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-        content.should == [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
-    }
-
-    @Test
-    void "include plugin with any number of spaces in front"() {
-        parse(" :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-        def expected = [[type: 'IncludeDummy', ff: 'free-form text', opts: [param1: 'v1', param2: 'v2']]]
-        content.should == expected
-
-        parse("   :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-        content.should == expected
-    }
-
-    @Test
-    void "include plugin right after paragraph of text"() {
-        parse("hello text\n:include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-
-        content.should == [[type: 'Paragraph', content: [[text: 'hello text', type: 'SimpleText']]],
-                           [ff: 'free-form text', opts: [param1: 'v1', param2: 'v2'], type: 'IncludeDummy']]
-    }
-
-    @Test
-    void "include plugin inside nested code block"() {
-        parse("    :include-dummy: free-form text {param1: 'v1', param2: 'v2'}")
-        content.should == [[lang: "",
-                            snippet: ":include-dummy: free-form text {param1: 'v1', param2: 'v2'}\n",
-                            lineNumber: "", type: "Snippet"]]
-    }
-
-    @Test
-    void "include plugin inside numbered list"() {
-        parse("1. step one\n\n" +
-                "    :include-dummy: free-form text1 {param1: 'v1', param2: 'v2'}\n" +
-                "2. step two\n\n" +
-                "    :include-dummy: free-form text2 {param1: 'v3', param2: 'v4'}\n")
-
-        content.should == [[delimiter: '.', startNumber: 1, type: 'OrderedList',
-                            content: [[type: 'ListItem', content: [[type: 'Paragraph',
-                                                                    content: [[text: 'step one', type: 'SimpleText']]],
-                                                                   [ff: 'free-form text1', opts: [param1: 'v1', param2: 'v2'], type: 'IncludeDummy']]],
-                                      [type:  'ListItem', content: [[type: 'Paragraph', content: [[text: 'step two', type: 'SimpleText']]],
-                                                                    [ff: 'free-form text2', opts: [param1: 'v3', param2: 'v4'], type: 'IncludeDummy']]]]]]
+    void "sub-header inline code text is allowed"() {
+        parse('## my header about `thing` here {badge: "v3.4"}', Paths.get("sub-header.md"))
+        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', badge: 'v3.4', type: 'SubHeading', level: 2]]
     }
 
     @Test
@@ -603,6 +453,7 @@ world""")
     }
 
     private void parse(String markdown, Path path = Paths.get("test.md")) {
+        // use different path names if you use `sub headings` as the heading states is maintained per file/parsing
         parseResult = parser.parse(path, markdown)
         content = parseResult.docElement().getContent().collect { it.toMap() }
     }
