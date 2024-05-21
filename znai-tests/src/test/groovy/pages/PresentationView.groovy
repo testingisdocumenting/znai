@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 znai maintainers
+ * Copyright 2024 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,8 @@
 
 package pages
 
-class Pages {
-    static StandardView standardView = new StandardView()
-    static PresentationView presentationView = new PresentationView()
-    static HubPortal hubPortal = new HubPortal()
-    static PreviewServer previewServer = new PreviewServer()
-    static DocContent docContent = new DocContent()
-    static PresentationContent presentationContent = new PresentationContent()
+import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
+
+class PresentationView {
+    def closeButton = $(".znai-presentation-controls .close")
 }

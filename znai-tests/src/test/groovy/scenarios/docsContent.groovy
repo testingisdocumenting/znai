@@ -45,7 +45,7 @@ scenario('navigate to next page and validate prev page') {
 }
 
 scenario('check generated plugin stats') {
-    http.get(http.concatUrl(scaffoldServerUrl.get(), '/my-product/plugin-stats.json')) {
+    http.get(http.concatUrl(scaffoldServerUrl.get().toString(), '/my-product/plugin-stats.json')) {
         includePlugins.file.count.shouldBe > 1
         includePlugins.file.params.should contain("title")
     }
@@ -70,12 +70,10 @@ scenario('navigating back and forth should preserve scroll position') {
     standardView.pageTitle.waitTo == "Page Three"
     standardView.mainPanelScrollTop.should == 0
 
-    // TODO replace with webtau shorcut
-    browser.driver.navigate().back()
+    browser.back()
     standardView.mainPanelScrollTop.waitTo == scrollTopBeforeClick
 
-    // TODO replace with webtau shorcut
-    browser.driver.navigate().forward()
+    browser.forward()
     standardView.mainPanelScrollTop.waitTo == 0
 }
 
