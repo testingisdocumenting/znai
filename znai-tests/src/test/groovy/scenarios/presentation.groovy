@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 znai maintainers
+ * Copyright 2024 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,27 @@
  * limitations under the License.
  */
 
-package pages
+package scenarios
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
+import static pages.Pages.*
 
-class DocContent {
-    def title = $(".page-content .page-title")
-    def paragraphs = $(".paragraph")
+def contentPort = 4901
+
+scenario("host znai docs as static content") {
+    staticServer = server.serve("main-znai-docs", "../../../../znai-docs/target", contentPort)
+}
+
+scenario("open browser with docs") {
+   browser.open("http://localhost:$contentPort/znai")
+}
+
+scenario("switch to presentation mode and validate title") {
+    standardView.presentationButton.click()
+    presentationContent.title.waitTo == "What Is This"
+}
+
+scenario("close presentation") {
+    presentationView.closeButton.click()
+    docContent.title.waitTo == "What Is This"
 }

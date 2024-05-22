@@ -16,11 +16,8 @@
 
 package pages
 
-class Pages {
-    static StandardView standardView = new StandardView()
-    static PresentationView presentationView = new PresentationView()
-    static HubPortal hubPortal = new HubPortal()
-    static PreviewServer previewServer = new PreviewServer()
-    static DocContent docContent = new DocContent()
-    static PresentationContent presentationContent = new PresentationContent()
+import static org.testingisdocumenting.webtau.WebTauDsl.$
+
+class PresentationContent {
+    def title = $("h1.presentation-title")
 }

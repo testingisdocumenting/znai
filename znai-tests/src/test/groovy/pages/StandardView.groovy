@@ -40,4 +40,6 @@ class StandardView {
     def prevPage = $(".next-prev-page-title.prev")
 
     def containerTitle = $(".znai-container-title")
+
+    def presentationButton = $(".presentation-button")
 }
