@@ -1,0 +1,1 @@
+* Fix: `viewOn` link correctly adds `.md` to the index page
