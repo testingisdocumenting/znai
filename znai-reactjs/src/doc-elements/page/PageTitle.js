@@ -75,9 +75,16 @@ function ViewOn({docMeta, tocItem}) {
 }
 
 function buildViewOnLink(tocItem, link) {
-    return tocItem.viewOnRelativePath ?
-        `${link}/${tocItem.viewOnRelativePath}` :
-        `${link}/${tocItem.dirName}/${tocItem.fileName}.${tocItem.fileExtension}`
+  if (tocItem.viewOnRelativePath) {
+    return `${link}/${tocItem.viewOnRelativePath}`
+  }
+
+  const fileName = (tocItem.fileExtension === "" && tocItem.fileName === "index") ? "index.md" :
+    `${tocItem.fileName}.${tocItem.fileExtension}`
+
+  return tocItem.dirName ?
+    `${link}/${tocItem.dirName}/${fileName}`:
+    `${link}/${fileName}`
 }
 
 export default PageTitle
