@@ -34,7 +34,6 @@
                 </templateparamlist>
                 <param>
                     <type>const <ref refid="classutils_1_1second_1_1MyClass" kindref="compound">utils::second::MyClass</ref> &amp;</type>
-                    <declname>one</declname>
                 </param>
                 <param>
                     <type>const <ref refid="classutils_1_1second_1_1AnotherClass" kindref="compound">utils::second::AnotherClass</ref> *</type>

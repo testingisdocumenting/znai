@@ -49,7 +49,7 @@ class DoxygenMemberParserTest {
         member.normalizedParamsSignature.should == "const utils::second::MyClass&,const utils::second::AnotherClass*"
 
         PropsUtils.exerciseSuppliers(member.returnType.toListOfMaps()).should == [[text: "utils::second::MyClass", url: "/ref/my-class"]]
-        PropsUtils.exerciseSuppliers(member.parameters.toListOfMaps()).should == [[name: "one", type: [[text: "const ", url: ""],
+        PropsUtils.exerciseSuppliers(member.parameters.toListOfMaps()).should == [[name: "", type: [[text: "const ", url: ""],
                                                                    [text: "utils::second::MyClass", url: "/ref/my-class"],
                                                                    [text: " &", url: ""]]],
                                               [name: "two", type: [[text: "const ", url: ""],
