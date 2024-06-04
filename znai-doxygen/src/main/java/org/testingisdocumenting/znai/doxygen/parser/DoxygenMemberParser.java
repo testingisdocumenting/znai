@@ -60,7 +60,9 @@ public class DoxygenMemberParser {
                 XmlUtils.nextLevelNodeByName(memberNode, "type")));
 
         XmlUtils.childrenNodesStreamByName(memberNode, "param").forEach((paramNode) -> {
-            String name = XmlUtils.nextLevelNodeByName(paramNode, "declname").getTextContent();
+            String name = XmlUtils.hasNodeByName(paramNode, "declname") ?
+                    XmlUtils.nextLevelNodeByName(paramNode, "declname").getTextContent():
+                    "";
             ApiLinkedText type = DoxygenTextWithLinksParser.parse(docStructure, XmlUtils.nextLevelNodeByName(paramNode, "type"));
             member.addParameter(name, type);
         });

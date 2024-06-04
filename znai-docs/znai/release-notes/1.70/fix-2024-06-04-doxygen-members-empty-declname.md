@@ -1,0 +1,1 @@
+* Fix: [Doxygen](CPP/doxygen-setup) now handles empty `declname` in method parameters
