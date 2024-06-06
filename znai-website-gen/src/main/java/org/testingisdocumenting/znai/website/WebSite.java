@@ -739,7 +739,10 @@ public class WebSite implements Log {
         String[] names = fileNames.split("\n");
         Arrays.stream(names)
                 .map(String::trim)
-                .forEach(deployer::deploy);
+                .forEach((uploadEntry) -> {
+                    Path fullPathToUpload = resourceResolver.fullPath(uploadEntry);
+                    deployer.deployFile(fullPathToUpload, uploadEntry);
+                });
     }
 
     private void deployAuxiliaryFileIfOutdated(AuxiliaryFile auxiliaryFile) {
