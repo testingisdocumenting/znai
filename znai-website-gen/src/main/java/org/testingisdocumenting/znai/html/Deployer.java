@@ -34,10 +34,6 @@ public record Deployer(Path docRoot, Path deployRoot) {
         this.deployRoot = deployRoot.toAbsolutePath().normalize();
     }
 
-    public void deploy(String relativePath, byte[] content) {
-        deploy(Paths.get(relativePath), content);
-    }
-
     public void deploy(String relativePath, String content) {
         deploy(Paths.get(relativePath), content);
     }
@@ -50,11 +46,10 @@ public record Deployer(Path docRoot, Path deployRoot) {
         deploy(originalPathForLogging, relativePath, content.getBytes(StandardCharsets.UTF_8));
     }
 
-    public void deploy(String relativePath) {
+    public void deployFile(Path fullSrcPath, String relativePath) {
         Path deployPath = deployRoot.resolve(relativePath);
         printDeployMessage(relativePath, deployPath);
 
-        Path fullSrcPath = docRoot.resolve(relativePath);
         if (!Files.exists(fullSrcPath)) {
             throw new IllegalArgumentException("can't find file or directory: " + fullSrcPath);
         }
