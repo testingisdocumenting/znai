@@ -1966,6 +1966,9 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.70",
+      "id" : "1-70"
+    }, {
       "title" : "1.69",
       "id" : "1-69"
     }, {
