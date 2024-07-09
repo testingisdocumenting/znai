@@ -1,0 +1,1 @@
+* Add: Search better recognizes dot separated code snippet entries
