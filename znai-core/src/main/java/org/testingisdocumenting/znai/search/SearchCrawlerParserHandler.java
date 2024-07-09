@@ -57,47 +57,47 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onSubHeading(int level, String title, HeadingProps headingProps) {
-        addSeparated(title);
+        addWithSpaceSeparator(title);
     }
 
     @Override
     public void onTable(MarkupTableData tableData) {
-        addSeparated(tableData.allText());
+        addWithSpaceSeparator(tableData.allText());
     }
 
     @Override
     public void onSimpleText(String value) {
-        add(value);
+        add(replaceCommonSeparatorsWithSpace(value));
     }
 
     @Override
     public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
-        addSeparated(inlinedCode);
+        addWithSpaceSeparator(replaceCommonSeparatorsWithSpace(inlinedCode));
     }
 
     @Override
     public void onLinkStart(Path markupPath, String url) {
-        addSeparated(url);
+        addWithSpaceSeparator(url);
     }
 
     @Override
     public void onImage(String title, String destination, String alt) {
-        addSeparated(title);
-        addSeparated(destination);
-        addSeparated(alt);
+        addWithSpaceSeparator(title);
+        addWithSpaceSeparator(destination);
+        addWithSpaceSeparator(alt);
     }
 
     @Override
     public void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet) {
-        addSeparated(lang);
-        addSeparated(snippet);
+        addWithSpaceSeparator(lang);
+        addWithSpaceSeparator(snippet);
     }
 
     @Override
     public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
         SearchText searchText = includePlugin.textForSearch();
         if (searchText != null) {
-            addSeparated(searchText.getText());
+            addWithSpaceSeparator(searchText.getText());
         }
     }
 
@@ -105,7 +105,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     public void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult) {
         SearchText searchText = fencePlugin.textForSearch();
         if (searchText != null) {
-            addSeparated(searchText.getText());
+            addWithSpaceSeparator(searchText.getText());
         }
     }
 
@@ -133,8 +133,17 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
         currentTextParts.add(part);
     }
 
-    private void addSeparated(String part) {
-        currentTextParts.add(' ' + part + ' ');
+    private void addWithSpaceSeparator(String part) {
+        if (part == null) {
+            return;
+        }
+
+        currentTextParts.add(' ' + replaceCommonSeparatorsWithSpace(part) + ' ');
+    }
+
+    private String replaceCommonSeparatorsWithSpace(String text) {
+        return text.replaceAll("[.,();:\\-+]", " ")
+                .replaceAll("\\s+", " ").trim();
     }
 
     private void flushTextParts() {

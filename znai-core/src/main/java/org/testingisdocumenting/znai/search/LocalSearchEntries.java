@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +27,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LocalSearchEntries {
-    private Map<TocItem, PageSearchEntries> entries;
+    private final Map<TocItem, PageSearchEntries> entries;
 
     public LocalSearchEntries() {
         this.entries = new LinkedHashMap<>();

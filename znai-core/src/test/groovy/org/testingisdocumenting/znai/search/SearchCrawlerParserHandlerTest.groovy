@@ -24,6 +24,8 @@ import org.testingisdocumenting.znai.reference.DocReferences
 import org.junit.Before
 import org.junit.Test
 
+import static org.testingisdocumenting.webtau.WebTauCore.*
+
 class SearchCrawlerParserHandlerTest {
     SearchCrawlerParserHandler parserHandler
 
@@ -34,63 +36,74 @@ class SearchCrawlerParserHandlerTest {
 
     @Test
     void "should create search entry per section"() {
-        parserHandler.onSectionStart('section one', HeadingProps.EMPTY)
-        parserHandler.onSimpleText('hello')
-        parserHandler.onSnippet(PluginParams.EMPTY, '', '', 'source code')
-        parserHandler.onInlinedCode('inlined term', DocReferences.EMPTY)
+        parserHandler.onSectionStart("section one", HeadingProps.EMPTY)
+        parserHandler.onSimpleText("hello")
+        parserHandler.onSnippet(PluginParams.EMPTY, "", "", "source code")
+        parserHandler.onInlinedCode("inlined term", DocReferences.EMPTY)
         parserHandler.onSectionEnd()
 
-        parserHandler.onSectionStart('section two', HeadingProps.EMPTY)
-        parserHandler.onSimpleText('world')
-        parserHandler.onSnippet(PluginParams.EMPTY, '', '', 'code')
-        parserHandler.onInlinedCode('broker', DocReferences.EMPTY)
+        parserHandler.onSectionStart("section two", HeadingProps.EMPTY)
+        parserHandler.onSimpleText("world")
+        parserHandler.onSnippet(PluginParams.EMPTY, "", "", "code")
+        parserHandler.onInlinedCode("broker", DocReferences.EMPTY)
         parserHandler.onSectionEnd()
 
-        parserHandler.getSearchEntries().should == [ 'pageSectionTitle' | 'searchText'] {
+        parserHandler.getSearchEntries().should == [ "pageSectionTitle" | "searchText"] {
                                                      _______________________________
-                                                     'section one'      | [text: 'hello source code inlined term', score: SearchScore.STANDARD]
-                                                     'section two'      | [text: 'world code broker', score: SearchScore.STANDARD] }
+                                                     "section one"      | [text: "hello source code inlined term", score: SearchScore.STANDARD]
+                                                     "section two"      | [text: "world code broker", score: SearchScore.STANDARD] }
     }
 
     @Test
     void "should connect mixed styles characters within a word without extra spaces"() {
         def searchEntries = withinSection {
-            parserHandler.onSimpleText('H')
+            parserHandler.onSimpleText("H")
             parserHandler.onEmphasisStart()
-            parserHandler.onSimpleText('el')
+            parserHandler.onSimpleText("el")
             parserHandler.onEmphasisEnd()
             parserHandler.onStrongEmphasisStart()
-            parserHandler.onSimpleText('lo')
+            parserHandler.onSimpleText("lo")
             parserHandler.onStrongEmphasisEnd()
         }
 
-        searchEntries.searchText.text.should == ['Hello']
+        searchEntries.searchText.text.should == ["Hello"]
     }
 
     @Test
     void "should separate entries based on soft line break"() {
         def searchEntries = withinSection {
-            parserHandler.onSimpleText('entry one.')
+            parserHandler.onSimpleText("entry one.")
             parserHandler.onSoftLineBreak()
-            parserHandler.onSimpleText('entry two.')
+            parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.searchText.text.should == ['entry one. entry two.']
+        searchEntries.searchText.text.should == ["entry one entry two"]
     }
 
     @Test
     void "should separate entries based on hard line break"() {
         def searchEntries = withinSection {
-            parserHandler.onSimpleText('entry one.')
+            parserHandler.onSimpleText("entry one.")
             parserHandler.onHardLineBreak()
-            parserHandler.onSimpleText('entry two.')
+            parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.searchText.text.should == ['entry one. entry two.']
+        searchEntries.searchText.text.should == ["entry one entry two"]
+    }
+
+    @Test
+    void "should split on separators in code snippets"() {
+        def searchEntries = withinSection {
+            parserHandler.onInlinedCode("record.access", DocReferences.EMPTY)
+            parserHandler.onHardLineBreak()
+            parserHandler.onSimpleText("entry two ")
+        }
+
+        searchEntries.searchText.text.should == ["record access entry two"]
     }
 
     private withinSection(Closure setupCode) {
-        parserHandler.onSectionStart('section', HeadingProps.EMPTY)
+        parserHandler.onSectionStart("section", HeadingProps.EMPTY)
         setupCode()
         parserHandler.onSectionEnd()
 
