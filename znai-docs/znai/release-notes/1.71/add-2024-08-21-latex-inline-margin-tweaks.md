@@ -1,0 +1,1 @@
+* Add: Adjust inlined [Latex](snippets/math#latex-inline) horizontal spacing 

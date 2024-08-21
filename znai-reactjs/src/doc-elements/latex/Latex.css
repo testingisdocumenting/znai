@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +15,14 @@
  * limitations under the License.
  */
 
-.latex {
+.znai-latex {
     flex-direction: column;
     padding: 10px 0;
 }
 
-div.latex {
+.znai-latex.content-block {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-span.latex {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-}
 
