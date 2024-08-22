@@ -35,5 +35,9 @@ export default function Latex({ inline, latex }: LatexProps) {
     });
   }, [inline, latex]);
 
-  return inline ? <span className="latex" ref={latexNode} /> : <div className="latex content-block" ref={latexNode} />;
+  return inline ? (
+    <span className="znai-latex" ref={latexNode} />
+  ) : (
+    <div className="znai-latex content-block" ref={latexNode} />
+  );
 }
