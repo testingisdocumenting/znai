@@ -111,6 +111,15 @@ Java: :include-markdown: instructions/java-install.md
 Cpp: :include-markdown: instructions/cpp-install.md
 ```
 
+# Default Tab
+
+Use `default: "tab name"` to set which tab will be initially active. First Tab is active otherwise. 
+
+```tabs {default: "JUnit 5"}
+"JUnit 4": instructions for JUnit4
+"JUnit 5": instructions for JUnit5
+```
+
 # Attention Signs
 
 Use extra space(s) in front of `Note:` or other attention sign keywords to put attention signs inside a tab. 
