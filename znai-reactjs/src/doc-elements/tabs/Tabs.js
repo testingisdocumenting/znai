@@ -42,7 +42,7 @@ class Tabs extends Component {
     constructor(props) {
         super(props)
 
-        const {tabsContent, forcedTabIdx} = this.props
+        const {tabsContent, forcedTabIdx, defaultTabIdx} = this.props
         const names = tabsContent.map(t => t.name)
 
         const tabName = tabsRegistration.firstMatchFromHistory(names);
@@ -51,7 +51,10 @@ class Tabs extends Component {
             forcedTabIdx:
             names.indexOf(tabName)
 
-        this.state = {activeIdx: idx >= 0 ? idx : 0}
+        const defaultTabIdxToUse = typeof  defaultTabIdx !== 'undefined' ?
+          defaultTabIdx : 0
+
+        this.state = {activeIdx: idx !== -1 ? idx : defaultTabIdxToUse}
     }
 
     componentDidMount() {

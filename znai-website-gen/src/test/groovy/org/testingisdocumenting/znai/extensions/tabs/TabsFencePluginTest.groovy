@@ -98,6 +98,19 @@ class TabsFencePluginTest {
         } should throwException("no tabs are defined. if your tab names have spaces quote the tab name")
     }
 
+    @Test
+    void "default tab name"() {
+        def result = processAndGetPluginWithResult("junit4: text\njunit5: another text", true, "{default: \"junit5\"}").result
+        result.docElements[0].toMap().defaultTabIdx.should == 1
+    }
+
+    @Test
+    void "validate default tab name"() {
+        code {
+            processAndGetPluginWithResult("junit4: text\njunit5: another text", true, "{default: \"junit8\"}").result
+        } should throwException("can't find default tab name <junit8>, available tab names: junit4, junit5")
+    }
+
     private static List<Map> processWithFakeMarkupParser(String markup) {
         def pluginWithResult = processAndGetPluginWithResult(markup)
 
@@ -110,7 +123,7 @@ class TabsFencePluginTest {
         return pluginWithResult.result.docElements.collect { it.toMap() }
     }
 
-    private static Map processAndGetPluginWithResult(String markup, boolean isFakeParser = true) {
+    private static Map processAndGetPluginWithResult(String markup, boolean isFakeParser = true, String freeParamsAndOptsUnparsed = "") {
         def componentsRegistry = new TestComponentsRegistry()
 
         def markupParser = isFakeParser ?
@@ -120,7 +133,7 @@ class TabsFencePluginTest {
         componentsRegistry.defaultParser = markupParser
 
         def plugin = new TabsFencePlugin()
-        def result = plugin.process(componentsRegistry, Paths.get("test.md"), pluginParamsFactory.create(plugin.id(), ""),
+        def result = plugin.process(componentsRegistry, Paths.get("test.md"), pluginParamsFactory.create(plugin.id(), freeParamsAndOptsUnparsed),
                 markup)
 
         return [plugin: plugin, result: result]

@@ -29,10 +29,7 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -70,11 +67,28 @@ public class TabsFencePlugin implements FencePlugin {
 
         Map<String, Object> tabsProps = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         tabsProps.put("tabsContent", parsedTabs.stream().map(this::tabProps).collect(toList()));
+        validateDefaultTabIdxOrNull(parsedTabs, pluginParams).ifPresent((idx) ->
+                tabsProps.put("defaultTabIdx", idx));
 
         parsedTabs.forEach(this::generateSearchText);
         parsedTabs.forEach(this::collectAuxiliaryFiles);
 
         return PluginResult.docElement("Tabs", tabsProps);
+    }
+
+    private Optional<Integer> validateDefaultTabIdxOrNull(List<ParsedTab> parsedTabs, PluginParams pluginParams) {
+        String defaultTabName = pluginParams.getOpts().get("default");
+        if (defaultTabName == null) {
+            return Optional.empty();
+        }
+        List<String> tabNames = parsedTabs.stream().map(ParsedTab::name).toList();
+        int idx = tabNames.indexOf(defaultTabName);
+        if (idx == -1) {
+            throw new IllegalArgumentException("can't find default tab name <" + defaultTabName +
+                    ">, available tab names: " + String.join(", ", tabNames));
+        }
+
+        return Optional.of(idx);
     }
 
     private Map<String, Object> tabProps(ParsedTab parsedTab) {
@@ -109,13 +123,6 @@ public class TabsFencePlugin implements FencePlugin {
         return SearchScore.STANDARD.text(String.join(" ", texts));
     }
 
-    private static class ParsedTab {
-        private String name;
-        private MarkupParserResult parserResult;
-
-        private ParsedTab(String name, MarkupParserResult parserResult) {
-            this.name = name;
-            this.parserResult = parserResult;
-        }
+    private record ParsedTab(String name, MarkupParserResult parserResult) {
     }
 }
