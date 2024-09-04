@@ -82,6 +82,7 @@ plugins
     development
 configuration
     basic
+    styling
 deployment
     additional-files
 example-references
