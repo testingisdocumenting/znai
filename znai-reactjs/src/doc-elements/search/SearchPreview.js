@@ -16,12 +16,20 @@
  */
 
 import React, {Component} from 'react'
+const Mark = require('mark.js/dist/mark.js')
 
 class SearchPreview extends Component {
-    componentDidMount() {
-        const Mark = require('mark.js/dist/mark.js') // need to hide from server side rendering
+    triggerHighlight() {
         this.mark = new Mark(this.dom)
         this.highlight()
+    }
+
+    componentDidMount() {
+        this.triggerHighlight()
+    }
+
+    componentDidUpdate(_prevProp, _prevState) {
+        this.triggerHighlight()
     }
 
     render() {
@@ -38,11 +46,12 @@ class SearchPreview extends Component {
         const {snippets} = this.props
 
         this.mark.mark(snippets, {
-            acrossElements: true,
-            separateWordSearch: false,
-            caseSensitive: true,
-            ignoreJoiners: true,
+            acrossElements: false,
+            separateWordSearch: true,
+            caseSensitive: false,
+            ignoreJoiners: false,
             diacritics: false,
+            ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", "\"", "'"],
             accuracy: "exactly",
             done: () => {
                 const marked = document.querySelector(".znai-search-result-preview mark");

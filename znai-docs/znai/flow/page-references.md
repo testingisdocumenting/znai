@@ -1,6 +1,6 @@
 # Follow the Order
 
-The best documentation should be arranged with a natural order to follow. 
+Good documentation flows naturally.
 Links to navigate to the next page are at the end of each page.
 
 Create links to remind users of *essential* concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them. 

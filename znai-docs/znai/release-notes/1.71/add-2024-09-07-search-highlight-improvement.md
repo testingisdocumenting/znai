@@ -1,0 +1,1 @@
+* Add: Improve [Search Result Preview](flow/search) highlighting

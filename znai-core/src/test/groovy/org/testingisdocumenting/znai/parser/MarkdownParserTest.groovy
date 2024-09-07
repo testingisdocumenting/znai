@@ -452,6 +452,15 @@ world""")
         } should throwException(~/unrecognized parameter\(s\): param8/)
     }
 
+    @Test
+    void "creates search entries"() {
+        parse("Best\n" +
+                "\n" +
+                "To create an `external` link use:\n")
+
+        parseResult.searchEntries().collect { it -> it.searchText.text}.join(" ").should == "Best To create an external link use"
+    }
+
     private void parse(String markdown, Path path = Paths.get("test.md")) {
         // use different path names if you use `sub headings` as the heading states is maintained per file/parsing
         parseResult = parser.parse(path, markdown)

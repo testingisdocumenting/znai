@@ -67,7 +67,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onSimpleText(String value) {
-        add(replaceCommonSeparatorsWithSpace(value));
+        addWithSpaceSeparator(replaceCommonSeparatorsWithSpace(value));
     }
 
     @Override
@@ -111,17 +111,17 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onSoftLineBreak() {
-        add(" ");
+        addSeparator();
     }
 
     @Override
     public void onHardLineBreak() {
-        add(" ");
+        addSeparator();
     }
 
     @Override
     public void onListItemEnd() {
-        add(" ");
+        addSeparator();
     }
 
     @Override
@@ -129,8 +129,8 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
         flushTextParts();
     }
 
-    private void add(String part) {
-        currentTextParts.add(part);
+    private void addSeparator() {
+        currentTextParts.add(" ");
     }
 
     private void addWithSpaceSeparator(String part) {
