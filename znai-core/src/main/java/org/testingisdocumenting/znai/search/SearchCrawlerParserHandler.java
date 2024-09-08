@@ -71,6 +71,11 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
+    public void onParagraphEnd() {
+        addSeparator();
+    }
+
+    @Override
     public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
         addWithSpaceSeparator(replaceCommonSeparatorsWithSpace(inlinedCode));
     }
@@ -111,22 +116,26 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onSoftLineBreak() {
-        add(" ");
+        addSeparator();
     }
 
     @Override
     public void onHardLineBreak() {
-        add(" ");
+        addSeparator();
     }
 
     @Override
     public void onListItemEnd() {
-        add(" ");
+        addSeparator();
     }
 
     @Override
     public void onParsingEnd() {
         flushTextParts();
+    }
+
+    private void addSeparator() {
+        add(" ");
     }
 
     private void add(String part) {

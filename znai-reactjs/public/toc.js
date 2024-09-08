@@ -3,10 +3,11 @@ toc = [ {
   "dirName" : "",
   "items" : [ {
     "chapterTitle" : "",
-    "pageTitle" : "Znai",
+    "pageTitle" : "",
     "pageMeta" : { },
     "dirName" : "",
     "fileName" : "index",
+    "fileExtension" : "",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ ]
   } ]
@@ -19,6 +20,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "introduction",
     "fileName" : "what-is-this",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Beautiful and Maintainable User Guide",
@@ -31,7 +33,7 @@ toc = [ {
       "id" : "rich-visuals"
     }, {
       "title" : "Dark/Light Runtime Mode",
-      "id" : "darklight-runtime-mode"
+      "id" : "dark-light-runtime-mode"
     }, {
       "title" : "Two Sides Page Layout",
       "id" : "two-sides-page-layout"
@@ -51,6 +53,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "introduction",
     "fileName" : "getting-started",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Markdown",
@@ -90,6 +93,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "structure",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Building Blocks",
@@ -113,6 +117,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "landing",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Optional Index Landing Page",
@@ -129,6 +134,7 @@ toc = [ {
     },
     "dirName" : "flow",
     "fileName" : "names",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Automatic Names",
@@ -146,6 +152,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "page-references",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Follow the Order",
@@ -166,6 +173,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "page-toc",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Section One",
@@ -180,6 +188,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "lookup-paths",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Files Reference Lookup",
@@ -203,6 +212,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "search",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Local",
@@ -217,6 +227,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "footer",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Definition",
@@ -228,6 +239,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "support",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Linking To Support Site",
@@ -239,6 +251,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "presentation",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Equal Flow",
@@ -249,14 +262,21 @@ toc = [ {
     } ]
   }, {
     "chapterTitle" : "Flow",
-    "pageTitle" : "Testing",
+    "pageTitle" : "Testing Is Documenting",
     "pageMeta" : { },
     "dirName" : "flow",
-    "fileName" : "testing",
+    "fileName" : "testing-is-documenting",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "User Scenarios",
-      "id" : "user-scenarios"
+      "title" : "Auto Maintainable Content",
+      "id" : "auto-maintainable-content"
+    }, {
+      "title" : "Examples",
+      "id" : "examples"
+    }, {
+      "title" : "Self Powering Cycle",
+      "id" : "self-powering-cycle"
     } ]
   }, {
     "chapterTitle" : "Flow",
@@ -264,6 +284,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "flow",
     "fileName" : "shortcuts",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Keyboard shortcuts",
@@ -279,6 +300,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "code-snippets",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Simple Snippet",
@@ -289,6 +311,9 @@ toc = [ {
     }, {
       "title" : "Title",
       "id" : "title"
+    }, {
+      "title" : "Anchor",
+      "id" : "anchor"
     }, {
       "title" : "Wide Code",
       "id" : "wide-code"
@@ -308,6 +333,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "external-code-snippets",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Embedding Content",
@@ -318,6 +344,9 @@ toc = [ {
     }, {
       "title" : "Title",
       "id" : "title"
+    }, {
+      "title" : "Anchor",
+      "id" : "anchor"
     }, {
       "title" : "Wide Code",
       "id" : "wide-code"
@@ -331,15 +360,24 @@ toc = [ {
       "title" : "Collapse",
       "id" : "collapse"
     }, {
+      "title" : "No Gap",
+      "id" : "no-gap"
+    }, {
       "title" : "Highlights",
       "id" : "highlights"
+    }, {
+      "title" : "Snippets Manipulation",
+      "id" : "snippets-manipulation"
     } ]
   }, {
     "chapterTitle" : "Snippets",
     "pageTitle" : "Snippets Manipulation",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/text/TextContentExtractor.java\"}" ]
+    },
     "dirName" : "snippets",
     "fileName" : "snippets-manipulation",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Surrounded By",
@@ -348,6 +386,12 @@ toc = [ {
       "title" : "Multiple Surrounded By",
       "id" : "multiple-surrounded-by"
     }, {
+      "title" : "Surrounded By Scope",
+      "id" : "surrounded-by-scope"
+    }, {
+      "title" : "Surrounded By Multi-chars scope",
+      "id" : "surrounded-by-multi-chars-scope"
+    }, {
       "title" : "Replace",
       "id" : "replace"
     }, {
@@ -355,7 +399,16 @@ toc = [ {
       "id" : "replace-regexp-groups"
     }, {
       "title" : "Start/End Line",
-      "id" : "startend-line"
+      "id" : "start-end-line"
+    }, {
+      "title" : "Start/End Multiple Lines",
+      "id" : "start-end-multiple-lines"
+    }, {
+      "title" : "Include Contains",
+      "id" : "include-contains"
+    }, {
+      "title" : "Exclude Contains",
+      "id" : "exclude-contains"
     }, {
       "title" : "Include Regexp",
       "id" : "include-regexp"
@@ -365,10 +418,38 @@ toc = [ {
     } ]
   }, {
     "chapterTitle" : "Snippets",
+    "pageTitle" : "Snippets Highlighting",
+    "pageMeta" : { },
+    "dirName" : "snippets",
+    "fileName" : "snippets-highlighting",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Line By Text",
+      "id" : "line-by-text"
+    }, {
+      "title" : "Line By Index",
+      "id" : "line-by-index"
+    }, {
+      "title" : "Text From File",
+      "id" : "text-from-file"
+    }, {
+      "title" : "Region",
+      "id" : "region"
+    }, {
+      "title" : "Region Using Scope",
+      "id" : "region-using-scope"
+    }, {
+      "title" : "Multiple Regions",
+      "id" : "multiple-regions"
+    } ]
+  }, {
+    "chapterTitle" : "Snippets",
     "pageTitle" : "Code Comments",
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "code-comments",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Callout Comments",
@@ -383,9 +464,12 @@ toc = [ {
   }, {
     "chapterTitle" : "Snippets",
     "pageTitle" : "Inlined Code Snippets",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "identifier" : [ "{validationPath: [\"python/my_func_usage.py\", \"python/utils.py\"]}" ]
+    },
     "dirName" : "snippets",
     "fileName" : "inlined-code-snippets",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Backtick",
@@ -405,6 +489,7 @@ toc = [ {
     },
     "dirName" : "snippets",
     "fileName" : "api-parameters",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Inlined CSV",
@@ -418,6 +503,9 @@ toc = [ {
     }, {
       "title" : "Collapsing Parameters",
       "id" : "collapsing-parameters"
+    }, {
+      "title" : "No Gap",
+      "id" : "no-gap"
     }, {
       "title" : "Size",
       "id" : "size"
@@ -443,10 +531,14 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "code-references",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Local References",
       "id" : "local-references"
+    }, {
+      "title" : "Page Defaults",
+      "id" : "page-defaults"
     }, {
       "title" : "Global References",
       "id" : "global-references"
@@ -457,9 +549,12 @@ toc = [ {
   }, {
     "chapterTitle" : "Snippets",
     "pageTitle" : "Json",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/extensions/json/JsonBasePlugin.java\"}" ]
+    },
     "dirName" : "snippets",
     "fileName" : "json",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Auto Formatting",
@@ -468,14 +563,26 @@ toc = [ {
       "title" : "Highlight Values By Path",
       "id" : "highlight-values-by-path"
     }, {
-      "title" : "Highlight By Path From File",
-      "id" : "highlight-by-path-from-file"
+      "title" : "Highlight Values By Path From File",
+      "id" : "highlight-values-by-path-from-file"
+    }, {
+      "title" : "Highlight Keys By Path",
+      "id" : "highlight-keys-by-path"
+    }, {
+      "title" : "Highlight Keys By Path From File",
+      "id" : "highlight-keys-by-path-from-file"
     }, {
       "title" : "Json Subparts",
       "id" : "json-subparts"
     }, {
+      "title" : "Enclose In Object",
+      "id" : "enclose-in-object"
+    }, {
       "title" : "Title",
       "id" : "title"
+    }, {
+      "title" : "Anchor",
+      "id" : "anchor"
     }, {
       "title" : "Read More",
       "id" : "read-more"
@@ -489,6 +596,12 @@ toc = [ {
       "title" : "Code References",
       "id" : "code-references"
     }, {
+      "title" : "Callouts",
+      "id" : "callouts"
+    }, {
+      "title" : "Callouts From File",
+      "id" : "callouts-from-file"
+    }, {
       "title" : "Test Results",
       "id" : "test-results"
     }, {
@@ -501,6 +614,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "xml",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Highlight Parts",
@@ -518,19 +632,20 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "open-API",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Operation definition",
-      "id" : "operation-definition"
+      "title" : "Operation By Method And Path",
+      "id" : "operation-by-method-and-path"
     }, {
-      "title" : "Produces/Consumes",
-      "id" : "producesconsumes"
+      "title" : "Operation By ID",
+      "id" : "operation-by-id"
     }, {
       "title" : "Auto Section",
       "id" : "auto-section"
     }, {
-      "title" : "Time Estimates",
-      "id" : "time-estimates"
+      "title" : "Add a new pet to the store",
+      "id" : "add-a-new-pet-to-the-store"
     }, {
       "title" : "Tags",
       "id" : "tags"
@@ -540,13 +655,19 @@ toc = [ {
     }, {
       "title" : "Time Estimates",
       "id" : "time-estimates"
+    }, {
+      "title" : "Two Sides Layout",
+      "id" : "two-sides-layout"
     } ]
   }, {
     "chapterTitle" : "Snippets",
     "pageTitle" : "CLI",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "identifier" : [ "{validationPath: \"org/testingisdocumenting/znai/extensions/file/SnippetHighlightFeature.java\"}" ]
+    },
     "dirName" : "snippets",
     "fileName" : "CLI",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Parameters Highlight",
@@ -564,14 +685,20 @@ toc = [ {
       "title" : "From File",
       "id" : "from-file"
     }, {
-      "title" : "Output",
-      "id" : "output"
-    }, {
-      "title" : "ANSI Colors",
-      "id" : "ansi-colors"
+      "title" : "ANSI Colors Output",
+      "id" : "ansi-colors-output"
     }, {
       "title" : "Title",
       "id" : "title"
+    }, {
+      "title" : "Anchor",
+      "id" : "anchor"
+    }, {
+      "title" : "Output Highlight",
+      "id" : "output-highlight"
+    }, {
+      "title" : "Wide Mode",
+      "id" : "wide-mode"
     }, {
       "title" : "Extract Snippets",
       "id" : "extract-snippets"
@@ -585,6 +712,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "math",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "LaTeX Block",
@@ -605,6 +733,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "jupyter-notebook",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Code and Output",
@@ -625,6 +754,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "cpp",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Description Extraction",
@@ -639,6 +769,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "python",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Content Extraction",
@@ -656,6 +787,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "java",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Content Extraction",
@@ -673,6 +805,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "groovy",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Method Body",
@@ -693,6 +826,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "snippets",
     "fileName" : "markdown",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Single Markdown File",
@@ -707,6 +841,9 @@ toc = [ {
       "title" : "Partial Markdown",
       "id" : "partial-markdown"
     }, {
+      "title" : "Inlined Markdown",
+      "id" : "inlined-markdown"
+    }, {
       "title" : "Multiple Markdown Files",
       "id" : "multiple-markdown-files"
     } ]
@@ -720,6 +857,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "attention-signs",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Speed Bump",
@@ -731,24 +869,39 @@ toc = [ {
       "title" : "Warning",
       "id" : "warning"
     }, {
+      "title" : "Question",
+      "id" : "question"
+    }, {
+      "title" : "Exercise",
+      "id" : "exercise"
+    }, {
       "title" : "Avoid",
       "id" : "avoid"
     }, {
       "title" : "Do Not",
       "id" : "do-not"
     }, {
-      "title" : "Question",
-      "id" : "question"
+      "title" : "Tip",
+      "id" : "tip"
     }, {
-      "title" : "Exercise",
-      "id" : "exercise"
+      "title" : "Recommendation",
+      "id" : "recommendation"
+    }, {
+      "title" : "Fence Block",
+      "id" : "fence-block"
+    }, {
+      "title" : "Attention Block Types",
+      "id" : "attention-block-types"
     } ]
   }, {
     "chapterTitle" : "Visuals",
     "pageTitle" : "Images",
-    "pageMeta" : { },
+    "pageMeta" : {
+      "image" : [ "{border: true, fit: false}" ]
+    },
     "dirName" : "visuals",
     "fileName" : "images",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Standard Markdown",
@@ -759,6 +912,9 @@ toc = [ {
     }, {
       "title" : "Title",
       "id" : "title"
+    }, {
+      "title" : "Anchor",
+      "id" : "anchor"
     }, {
       "title" : "Border",
       "id" : "border"
@@ -772,8 +928,17 @@ toc = [ {
       "title" : "Align",
       "id" : "align"
     }, {
+      "title" : "Collapse",
+      "id" : "collapse"
+    }, {
+      "title" : "No Gap",
+      "id" : "no-gap"
+    }, {
       "title" : "External Image",
       "id" : "external-image"
+    }, {
+      "title" : "Mobile And Desktop Only",
+      "id" : "mobile-and-desktop-only"
     } ]
   }, {
     "chapterTitle" : "Visuals",
@@ -781,6 +946,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "image-annotations",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Badges",
@@ -812,10 +978,32 @@ toc = [ {
     } ]
   }, {
     "chapterTitle" : "Visuals",
+    "pageTitle" : "Cards",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "cards",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Image And Title",
+      "id" : "image-and-title"
+    }, {
+      "title" : "Image Height And Background",
+      "id" : "image-height-and-background"
+    }, {
+      "title" : "Multiple Columns",
+      "id" : "multiple-columns"
+    }, {
+      "title" : "Links",
+      "id" : "links"
+    } ]
+  }, {
+    "chapterTitle" : "Visuals",
     "pageTitle" : "Charts",
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "charts",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Pie",
@@ -827,6 +1015,9 @@ toc = [ {
       "title" : "Line",
       "id" : "line"
     }, {
+      "title" : "Time Series",
+      "id" : "time-series"
+    }, {
       "title" : "Legend",
       "id" : "legend"
     }, {
@@ -835,6 +1026,9 @@ toc = [ {
     }, {
       "title" : "Inlined Data",
       "id" : "inlined-data"
+    }, {
+      "title" : "Filtering columns",
+      "id" : "filtering-columns"
     }, {
       "title" : "Presentation",
       "id" : "presentation"
@@ -848,6 +1042,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "mermaid-diagrams",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Fenced Block",
@@ -865,6 +1060,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "SVG",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Retina Displays",
@@ -885,6 +1081,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "icons",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Feather Icons",
@@ -905,6 +1102,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "headings",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Heading Types",
@@ -920,6 +1118,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "text-badge",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Part Of Text",
@@ -934,6 +1133,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "spoilers",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Hidden Content",
@@ -948,6 +1148,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "keyboard-shortcuts",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Inlined Keyboard Shorcuts",
@@ -962,6 +1163,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "smart-bullet-points",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Types",
@@ -988,6 +1190,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "flow-diagrams",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Nodes and Edges",
@@ -1032,6 +1235,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "graphviz-diagrams",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Fenced Block",
@@ -1049,6 +1253,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "PlantUml",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "In Place",
@@ -1066,8 +1271,18 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "visuals",
     "fileName" : "iframe",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "Embedding Supporting Content",
+      "id" : "embedding-supporting-content"
+    }, {
+      "title" : "Properties Override",
+      "id" : "properties-override"
+    }, {
+      "title" : "Title",
+      "id" : "title"
+    }, {
       "title" : "Embedding Video",
       "id" : "embedding-video"
     }, {
@@ -1084,6 +1299,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "layout",
     "fileName" : "tabs",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Primary Use Case",
@@ -1098,6 +1314,9 @@ toc = [ {
       "title" : "Separate Markdown Files",
       "id" : "separate-markdown-files"
     }, {
+      "title" : "Default Tab",
+      "id" : "default-tab"
+    }, {
       "title" : "Attention Signs",
       "id" : "attention-signs"
     } ]
@@ -1107,6 +1326,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "layout",
     "fileName" : "tables",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "CSV",
@@ -1118,14 +1338,29 @@ toc = [ {
       "title" : "Title",
       "id" : "title"
     }, {
+      "title" : "Anchor",
+      "id" : "anchor"
+    }, {
+      "title" : "Collapse",
+      "id" : "collapse"
+    }, {
+      "title" : "No Gap",
+      "id" : "no-gap"
+    }, {
       "title" : "Highlight",
       "id" : "highlight"
     }, {
-      "title" : "Arrange and Filter",
-      "id" : "arrange-and-filter"
+      "title" : "Arrange and Remove Columns",
+      "id" : "arrange-and-remove-columns"
+    }, {
+      "title" : "Filter Rows",
+      "id" : "filter-rows"
     }, {
       "title" : "Width",
       "id" : "width"
+    }, {
+      "title" : "Column Names Conflict",
+      "id" : "column-names-conflict"
     }, {
       "title" : "Min Width",
       "id" : "min-width"
@@ -1142,6 +1377,9 @@ toc = [ {
       "title" : "Inlined",
       "id" : "inlined"
     }, {
+      "title" : "Multiline Content",
+      "id" : "multiline-content"
+    }, {
       "title" : "Markdown in Cells",
       "id" : "markdown-in-cells"
     }, {
@@ -1154,13 +1392,17 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "layout",
     "fileName" : "columns",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Information Layout",
       "id" : "information-layout"
     }, {
-      "title" : "Definition",
-      "id" : "definition"
+      "title" : "Two Columns",
+      "id" : "two-columns"
+    }, {
+      "title" : "Three Columns",
+      "id" : "three-columns"
     }, {
       "title" : "Sizes",
       "id" : "sizes"
@@ -1170,6 +1412,9 @@ toc = [ {
     }, {
       "title" : "Alignment",
       "id" : "alignment"
+    }, {
+      "title" : "Presentation Mode",
+      "id" : "presentation-mode"
     } ]
   }, {
     "chapterTitle" : "Layout",
@@ -1177,6 +1422,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "layout",
     "fileName" : "templates",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Re-usable patterns",
@@ -1196,6 +1442,7 @@ toc = [ {
     },
     "dirName" : "layout",
     "fileName" : "two-sides-pages",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Setup",
@@ -1207,11 +1454,11 @@ toc = [ {
       "title" : "Open API Example",
       "id" : "open-api-example"
     }, {
-      "title" : "Aligning Data in Columns",
-      "id" : "aligning-data-in-columns"
-    }, {
       "title" : "Single Data Block Shortcut",
       "id" : "single-data-block-shortcut"
+    }, {
+      "title" : "Aligning Data in Columns",
+      "id" : "aligning-data-in-columns"
     } ]
   }, {
     "chapterTitle" : "Layout",
@@ -1221,6 +1468,7 @@ toc = [ {
     },
     "dirName" : "layout",
     "fileName" : "two-sides-tabs",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Unified Tabs",
@@ -1240,6 +1488,7 @@ toc = [ {
     },
     "dirName" : "layout",
     "fileName" : "jupyter-notebook-two-sides",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Code First",
@@ -1261,6 +1510,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "python",
     "fileName" : "content-extraction",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Content",
@@ -1268,6 +1518,12 @@ toc = [ {
     }, {
       "title" : "Function",
       "id" : "function"
+    }, {
+      "title" : "Title",
+      "id" : "title"
+    }, {
+      "title" : "Anchor",
+      "id" : "anchor"
     }, {
       "title" : "Variable",
       "id" : "variable"
@@ -1281,6 +1537,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "python",
     "fileName" : "description-extraction",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Doc String",
@@ -1298,27 +1555,28 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "python",
     "fileName" : "auto-reference",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Method/Function Definition",
-      "id" : "methodfunction-definition"
+      "id" : "method-function-definition"
     }, {
       "title" : "Class Definition",
       "id" : "class-definition"
     }, {
       "title" : "fin.money.Money",
-      "id" : "finmoneymoney",
+      "id" : "fin-money-money",
       "style" : "api"
     }, {
       "title" : "Inheritance",
       "id" : "inheritance"
     }, {
       "title" : "executive_department.WorkerCTO",
-      "id" : "executive_departmentworkercto",
+      "id" : "executive_department-workercto",
       "style" : "api"
     }, {
       "title" : "department.Worker",
-      "id" : "departmentworker",
+      "id" : "department-worker",
       "style" : "api"
     } ]
   } ]
@@ -1331,6 +1589,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "CPP",
     "fileName" : "doxygen-setup",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Doxygen",
@@ -1345,6 +1604,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "CPP",
     "fileName" : "description-extraction",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Members Comment Text",
@@ -1377,6 +1637,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "CPP",
     "fileName" : "auto-reference",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Member Signature, Comment And Parameters",
@@ -1415,6 +1676,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "java",
     "fileName" : "content-extraction",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Method Body",
@@ -1422,6 +1684,12 @@ toc = [ {
     }, {
       "title" : "Callout Comments",
       "id" : "callout-comments"
+    }, {
+      "title" : "Title",
+      "id" : "title"
+    }, {
+      "title" : "Anchor",
+      "id" : "anchor"
     }, {
       "title" : "Signature Only",
       "id" : "signature-only"
@@ -1447,6 +1715,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "java",
     "fileName" : "description-extraction",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Class Level",
@@ -1475,6 +1744,9 @@ toc = [ {
     }, {
       "title" : "Enum Entries With References",
       "id" : "enum-entries-with-references"
+    }, {
+      "title" : "Markdown",
+      "id" : "markdown"
     } ]
   }, {
     "chapterTitle" : "Java",
@@ -1482,6 +1754,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "java",
     "fileName" : "auto-reference",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Coming Soon",
@@ -1497,6 +1770,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "synergy-with-testing",
     "fileName" : "web-UI",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Screenshots And Annotations",
@@ -1508,6 +1782,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "synergy-with-testing",
     "fileName" : "REST-API",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Request and Response Capture",
@@ -1528,10 +1803,62 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "synergy-with-testing",
     "fileName" : "business-logic",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Capture Input Example",
       "id" : "capture-input-example"
+    } ]
+  } ]
+}, {
+  "chapterTitle" : "Plugins",
+  "dirName" : "plugins",
+  "items" : [ {
+    "chapterTitle" : "Plugins",
+    "pageTitle" : "Plugin Types",
+    "pageMeta" : { },
+    "dirName" : "plugins",
+    "fileName" : "plugin-types",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Include Plugins",
+      "id" : "include-plugins"
+    }, {
+      "title" : "Inlined Code",
+      "id" : "inlined-code"
+    }, {
+      "title" : "Fenced Block",
+      "id" : "fenced-block"
+    } ]
+  }, {
+    "chapterTitle" : "Plugins",
+    "pageTitle" : "Default Parameters",
+    "pageMeta" : {
+      "image" : [ "{border: true}" ]
+    },
+    "dirName" : "plugins",
+    "fileName" : "default-parameters",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Global Defaults",
+      "id" : "global-defaults"
+    }, {
+      "title" : "Page Local Defaults",
+      "id" : "page-local-defaults"
+    } ]
+  }, {
+    "chapterTitle" : "Plugins",
+    "pageTitle" : "Development",
+    "pageMeta" : { },
+    "dirName" : "plugins",
+    "fileName" : "development",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "PlaceHolder",
+      "id" : "placeholder"
     } ]
   } ]
 }, {
@@ -1543,11 +1870,25 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "configuration",
     "fileName" : "basic",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Favicon",
       "id" : "favicon"
     } ]
+  } ]
+}, {
+  "chapterTitle" : "Deployment",
+  "dirName" : "deployment",
+  "items" : [ {
+    "chapterTitle" : "Deployment",
+    "pageTitle" : "Additional Files",
+    "pageMeta" : { },
+    "dirName" : "deployment",
+    "fileName" : "additional-files",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ ]
   } ]
 }, {
   "chapterTitle" : "Example References",
@@ -1558,6 +1899,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "example-references",
     "fileName" : "domain",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Trader",
@@ -1572,6 +1914,7 @@ toc = [ {
     "pageMeta" : { },
     "dirName" : "example-references",
     "fileName" : "api",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "Flight API",
@@ -1582,6 +1925,34 @@ toc = [ {
     }, {
       "title" : "Query",
       "id" : "query"
+    }, {
+      "title" : "Useful Action",
+      "id" : "useful-action"
+    } ]
+  } ]
+}, {
+  "chapterTitle" : "Znai Development",
+  "dirName" : "znai-development",
+  "items" : [ {
+    "chapterTitle" : "Znai Development",
+    "pageTitle" : "Local Build",
+    "pageMeta" : { },
+    "dirName" : "znai-development",
+    "fileName" : "local-build",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Clone Project",
+      "id" : "clone-project"
+    }, {
+      "title" : "Build Tools Setup",
+      "id" : "build-tools-setup"
+    }, {
+      "title" : "Build",
+      "id" : "build"
+    }, {
+      "title" : "Run Local Version",
+      "id" : "run-local-version"
     } ]
   } ]
 }, {
@@ -1589,25 +1960,93 @@ toc = [ {
   "dirName" : "release-notes",
   "items" : [ {
     "chapterTitle" : "Release Notes",
+    "pageTitle" : "2024 Releases",
+    "pageMeta" : {
+      "title" : [ "2024 Releases" ]
+    },
+    "dirName" : "release-notes",
+    "fileName" : "2024",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "1.71",
+      "id" : "1-71"
+    }, {
+      "title" : "1.70",
+      "id" : "1-70"
+    }, {
+      "title" : "1.69",
+      "id" : "1-69"
+    }, {
+      "title" : "1.68",
+      "id" : "1-68"
+    }, {
+      "title" : "1.67",
+      "id" : "1-67"
+    } ]
+  }, {
+    "chapterTitle" : "Release Notes",
+    "pageTitle" : "2023 Releases",
+    "pageMeta" : {
+      "title" : [ "2023 Releases" ]
+    },
+    "dirName" : "release-notes",
+    "fileName" : "2023",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "1.66",
+      "id" : "1-66"
+    }, {
+      "title" : "1.65",
+      "id" : "1-65"
+    }, {
+      "title" : "1.64",
+      "id" : "1-64"
+    }, {
+      "title" : "1.63",
+      "id" : "1-63"
+    } ]
+  }, {
+    "chapterTitle" : "Release Notes",
     "pageTitle" : "2022 Releases",
     "pageMeta" : {
       "title" : [ "2022 Releases" ]
     },
     "dirName" : "release-notes",
     "fileName" : "2022",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.62",
+      "id" : "1-62"
+    }, {
+      "title" : "1.61.2",
+      "id" : "1-61-2"
+    }, {
+      "title" : "1.61.1",
+      "id" : "1-61-1"
+    }, {
+      "title" : "1.61",
+      "id" : "1-61"
+    }, {
+      "title" : "1.60",
+      "id" : "1-60"
+    }, {
+      "title" : "1.59.1",
+      "id" : "1-59-1"
+    }, {
       "title" : "1.59",
-      "id" : "159"
+      "id" : "1-59"
     }, {
       "title" : "1.58",
-      "id" : "158"
+      "id" : "1-58"
     }, {
       "title" : "1.57",
-      "id" : "157"
+      "id" : "1-57"
     }, {
       "title" : "1.56",
-      "id" : "156"
+      "id" : "1-56"
     } ]
   }, {
     "chapterTitle" : "Release Notes",
@@ -1617,37 +2056,38 @@ toc = [ {
     },
     "dirName" : "release-notes",
     "fileName" : "2021",
+    "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "1.55",
-      "id" : "155"
+      "id" : "1-55"
     }, {
       "title" : "1.54",
-      "id" : "154"
+      "id" : "1-54"
     }, {
       "title" : "1.53",
-      "id" : "153"
+      "id" : "1-53"
     }, {
       "title" : "1.52",
-      "id" : "152"
+      "id" : "1-52"
     }, {
       "title" : "1.51",
-      "id" : "151"
+      "id" : "1-51"
     }, {
       "title" : "1.50",
-      "id" : "150"
+      "id" : "1-50"
     }, {
       "title" : "1.49",
-      "id" : "149"
+      "id" : "1-49"
     }, {
       "title" : "1.48",
-      "id" : "148"
+      "id" : "1-48"
     }, {
       "title" : "1.47",
-      "id" : "147"
+      "id" : "1-47"
     }, {
       "title" : "1.46",
-      "id" : "146"
+      "id" : "1-46"
     } ]
   } ]
 } ]
