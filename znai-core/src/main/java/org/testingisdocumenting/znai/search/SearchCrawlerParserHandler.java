@@ -67,7 +67,12 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onSimpleText(String value) {
-        addWithSpaceSeparator(replaceCommonSeparatorsWithSpace(value));
+        add(replaceCommonSeparatorsWithSpace(value));
+    }
+
+    @Override
+    public void onParagraphEnd() {
+        addSeparator();
     }
 
     @Override
@@ -130,7 +135,11 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     private void addSeparator() {
-        currentTextParts.add(" ");
+        add(" ");
+    }
+
+    private void add(String part) {
+        currentTextParts.add(part);
     }
 
     private void addWithSpaceSeparator(String part) {
