@@ -19,24 +19,19 @@ import React, {Component} from 'react'
 const Mark = require('mark.js/dist/mark.js')
 
 class SearchPreview extends Component {
-    triggerHighlight() {
-        this.mark = new Mark(this.dom)
+    componentDidMount() {
         this.highlight()
     }
 
-    componentDidMount() {
-        this.triggerHighlight()
-    }
-
     componentDidUpdate(_prevProp, _prevState) {
-        this.triggerHighlight()
+        this.highlight()
     }
 
     render() {
         const {section, elementsLibrary} = this.props
-
+        const key = section.id + "#" + section.title
         return (
-            <div className="znai-search-result-preview" ref={(dom) => this.dom = dom}>
+            <div key={key} className="znai-search-result-preview" ref={(dom) => this.dom = dom}>
                 <elementsLibrary.DocElement {...this.props} content={section.content}/>
             </div>
         )
@@ -45,14 +40,15 @@ class SearchPreview extends Component {
     highlight() {
         const {snippets} = this.props
 
-        this.mark.mark(snippets, {
+        const mark = new Mark(this.dom)
+        mark.mark(snippets, {
             acrossElements: false,
             separateWordSearch: true,
             caseSensitive: false,
             ignoreJoiners: false,
             diacritics: false,
             ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", "\"", "'"],
-            accuracy: "exactly",
+            accuracy: "partially",
             done: () => {
                 const marked = document.querySelector(".znai-search-result-preview mark");
                 if (marked) {

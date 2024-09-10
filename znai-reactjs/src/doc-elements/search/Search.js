@@ -30,8 +30,26 @@ class Search {
     }
 
     search(term) {
-        const quoted = term.replaceAll(/([:+-^*])/g, "\\$1")
-        return new QueryResult(this.searchIdx.search(quoted))
+        const lunr = window.lunr
+        const highestBoost = 2
+        const defaultBoost = 0.5
+        const lowestBoost = 0.05
+        const matches = this.searchIdx.query(q => {
+            term.split(lunr.tokenizer.separator).forEach(function (term) {
+                q.term(term, { fields: [ 'pageTitle' ], boost: highestBoost })
+                q.term(term, { fields: [ 'pageSection' ], boost: highestBoost })
+                q.term(term, { fields: [ 'text' ], boost: defaultBoost })
+
+                // add wildcard search for long enough queries that don't have * in them
+                if (term.length >= 3 && term.indexOf('*') === -1) {
+                    q.term(term, { fields: ['pageTitle'], boost: highestBoost, wildcard: lunr.Query.wildcard.TRAILING })
+                    q.term(term, { fields: ['pageSection'], boost: highestBoost, wildcard: lunr.Query.wildcard.TRAILING })
+                    q.term(term, { fields: ['text'], boost: lowestBoost, wildcard: lunr.Query.wildcard.TRAILING })
+                }
+            })
+        })
+
+        return new QueryResult(matches)
     }
 
     findSearchEntryById(id) {
