@@ -81,11 +81,6 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
-    public void onLinkStart(Path markupPath, String url) {
-        addWithSpaceSeparator(url);
-    }
-
-    @Override
     public void onImage(String title, String destination, String alt) {
         addWithSpaceSeparator(title);
         addWithSpaceSeparator(destination);
@@ -151,7 +146,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     private String replaceCommonSeparatorsWithSpace(String text) {
-        return text.replaceAll("[.,();:\\-+\\\\/\"'!?\\[\\]{}]", " ");
+        return text.replaceAll("[.,();:\\-+=\\\\/\"'!?\\[\\]{}]", " ");
     }
 
     private void flushTextParts() {

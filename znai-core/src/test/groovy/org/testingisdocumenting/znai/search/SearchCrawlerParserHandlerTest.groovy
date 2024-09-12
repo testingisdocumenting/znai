@@ -105,10 +105,12 @@ class SearchCrawlerParserHandlerTest {
     @Test
     void "should remove delimiters"() {
         def searchEntries = withinSection {
-            parserHandler.onSimpleText("\"hello\" world of 'quotes'. and separators,like!and?maybe/backward\\and[inside]different{brackets}and(other)")
+            parserHandler.onSimpleText("\"hello\" world of 'quotes'. and separators,like!and?maybe/backward\\and[inside]different{brackets}and(other)" +
+                    " --key=value")
         }
 
-        searchEntries.searchText.text.should == ["hello world of quotes and separators like and maybe backward and inside different brackets and other"]
+        searchEntries.searchText.text.should == ["hello world of quotes and separators like and maybe backward and " +
+                                                         "inside different brackets and other key value"]
     }
 
     private withinSection(Closure setupCode) {
