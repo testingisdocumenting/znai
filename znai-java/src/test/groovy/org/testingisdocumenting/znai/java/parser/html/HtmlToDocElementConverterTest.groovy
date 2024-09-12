@@ -56,7 +56,7 @@ second paragraph
         elements.should == [[type: 'Paragraph', content: [[type: 'Link', isFile: false, url: 'http://url', content:
                 [[text: 'text inside', type: 'SimpleText']]]]]]
 
-        searchText.should == 'http url text inside'
+        searchText.should == 'text inside'
     }
 
     @Test
