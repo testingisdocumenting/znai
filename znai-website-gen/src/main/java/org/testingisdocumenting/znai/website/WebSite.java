@@ -590,7 +590,7 @@ public class WebSite implements Log {
                 .collect(toList());
 
         globalSearchEntries.addAll(siteSearchEntries);
-        localSearchEntries.add(new PageSearchEntries(tocItem, parserResult.searchEntries()));
+        localSearchEntries.add(new PageLocalSearchEntries(tocItem, parserResult.searchEntries()));
     }
 
     private String searchEntryUrl(TocItem tocItem, PageSearchEntry pageSearchEntry) {
@@ -712,7 +712,7 @@ public class WebSite implements Log {
     }
 
     private RenderSupplier createServerSideRenderer(TocItem tocItem) {
-        PageSearchEntries pageSearchEntries = localSearchEntries.searchEntriesByTocItem(tocItem);
+        PageLocalSearchEntries pageSearchEntries = localSearchEntries.searchEntriesByTocItem(tocItem);
 
         if (tocItem.isIndex()) {
             return () -> ServerSideSimplifiedRenderer.renderPageTextContent(pageSearchEntries) +

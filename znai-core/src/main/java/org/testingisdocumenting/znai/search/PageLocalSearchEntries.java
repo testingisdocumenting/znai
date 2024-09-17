@@ -23,23 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PageSearchEntries {
-    private final TocItem tocItem;
-    private final List<PageSearchEntry> entries;
-
-    public PageSearchEntries(TocItem tocItem, List<PageSearchEntry> entries) {
-        this.tocItem = tocItem;
-        this.entries = entries;
-    }
-
-    public TocItem getTocItem() {
-        return tocItem;
-    }
-
-    public List<PageSearchEntry> getEntries() {
-        return entries;
-    }
-
+public record PageLocalSearchEntries(TocItem tocItem, List<PageSearchEntry> entries) {
     public List<List<String>> toListOfLists() {
         return entries.stream()
                 .map(this::createList)
@@ -47,12 +31,19 @@ public class PageSearchEntries {
     }
 
     private List<String> createList(PageSearchEntry pageSearchEntry) {
+        String standardText = pageSearchEntry.getSearchText().getScore() == SearchScore.STANDARD ?
+                pageSearchEntry.getSearchText().getText() : "";
+
+        String highText = pageSearchEntry.getSearchText().getScore() == SearchScore.HIGH ?
+                pageSearchEntry.getSearchText().getText() : "";
+
         return Arrays.asList(
                 genId(pageSearchEntry),
                 tocItem.getChapterTitle(),
                 tocItem.getPageTitle(),
                 pageSearchEntry.getPageSectionTitle(),
-                pageSearchEntry.getSearchText().getText());
+                standardText,
+                highText);
     }
 
     private String genId(PageSearchEntry pageSearchEntry) {

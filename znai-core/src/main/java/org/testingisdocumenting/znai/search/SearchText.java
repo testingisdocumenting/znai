@@ -21,15 +21,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class SearchText {
-    private String text;
     private SearchScore score;
+    private String text;
 
     public SearchText() {
     }
 
-    public SearchText(String text, SearchScore score) {
-        this.text = removeNonReadableSymbols(text);
+    public SearchText(SearchScore score, String text ) {
         this.score = score;
+        this.text = removeNonReadableSymbols(text);
     }
 
     public String getText() {
@@ -54,5 +54,13 @@ public class SearchText {
         }
 
         return text.replaceAll("\\e\\[[\\d;]*[^\\d;]","");
+    }
+
+    @Override
+    public String toString() {
+        return "SearchText{" +
+                "score=" + score +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

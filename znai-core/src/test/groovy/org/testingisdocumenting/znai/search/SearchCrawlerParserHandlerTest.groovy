@@ -49,9 +49,11 @@ class SearchCrawlerParserHandlerTest {
         parserHandler.onSectionEnd()
 
         parserHandler.getSearchEntries().should == [ "pageSectionTitle" | "searchText"] {
-                                                     _______________________________
-                                                     "section one"      | [text: "hello source code inlined term", score: SearchScore.STANDARD]
-                                                     "section two"      | [text: "world code broker", score: SearchScore.STANDARD] }
+                                                     ______________________________________________________________________________
+                                                     "section one"      | [text: "hello", score: SearchScore.STANDARD]
+                                                     "section one"      | [text: "source code inlined term", score: SearchScore.HIGH]
+                                                     "section two"      | [text: "world", score: SearchScore.STANDARD]
+                                                     "section two"      | [text: "code broker", score: SearchScore.HIGH] }
     }
 
     @Test
@@ -95,11 +97,9 @@ class SearchCrawlerParserHandlerTest {
     void "should split on separators in code snippets"() {
         def searchEntries = withinSection {
             parserHandler.onInlinedCode("record.access", DocReferences.EMPTY)
-            parserHandler.onHardLineBreak()
-            parserHandler.onSimpleText("entry two ")
         }
 
-        searchEntries.searchText.text.should == ["record access entry two"]
+        searchEntries.searchText.text.should == ["record access"]
     }
 
     @Test

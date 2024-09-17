@@ -26,19 +26,20 @@ import org.testingisdocumenting.znai.parser.NoOpParserHandler;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCrawlerParserHandler extends NoOpParserHandler {
     private final List<PageSearchEntry> searchEntries;
     private String pageSectionTitle;
-    private final List<String> currentTextParts;
+    private final List<String> standardScoreParts;
+    private final List<String> highScoreParts;
 
     public SearchCrawlerParserHandler() {
         this.searchEntries = new ArrayList<>();
         this.pageSectionTitle = "";
-        this.currentTextParts = new ArrayList<>();
+        this.standardScoreParts = new ArrayList<>();
+        this.highScoreParts = new ArrayList<>();
     }
 
     public List<PageSearchEntry> getSearchEntries() {
@@ -52,114 +53,126 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onSectionEnd() {
-        flushTextParts();
+        flush();
     }
 
     @Override
     public void onSubHeading(int level, String title, HeadingProps headingProps) {
-        addWithSpaceSeparator(title);
+        addStandardWithSpaceSeparator(title);
     }
 
     @Override
     public void onTable(MarkupTableData tableData) {
-        addWithSpaceSeparator(tableData.allText());
+        addStandardWithSpaceSeparator(tableData.allText());
     }
 
     @Override
     public void onSimpleText(String value) {
-        add(replaceCommonSeparatorsWithSpace(value));
+        addStandard(replaceCommonSeparatorsWithSpace(value));
     }
 
     @Override
     public void onParagraphEnd() {
-        addSeparator();
+        addStandard(" ");
     }
 
     @Override
     public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
-        addWithSpaceSeparator(replaceCommonSeparatorsWithSpace(inlinedCode));
+        addHighWithSpaceSeparator(replaceCommonSeparatorsWithSpace(inlinedCode));
     }
 
     @Override
     public void onImage(String title, String destination, String alt) {
-        addWithSpaceSeparator(title);
-        addWithSpaceSeparator(destination);
-        addWithSpaceSeparator(alt);
+        addStandardWithSpaceSeparator(title);
+        addStandardWithSpaceSeparator(alt);
     }
 
     @Override
     public void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet) {
-        addWithSpaceSeparator(lang);
-        addWithSpaceSeparator(snippet);
+        addHighWithSpaceSeparator(snippet);
     }
 
     @Override
     public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
-        SearchText searchText = includePlugin.textForSearch();
-        if (searchText != null) {
-            addWithSpaceSeparator(searchText.getText());
-        }
+        processPluginSearchText(includePlugin.textForSearch());
     }
 
     @Override
     public void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult) {
-        SearchText searchText = fencePlugin.textForSearch();
-        if (searchText != null) {
-            addWithSpaceSeparator(searchText.getText());
-        }
+        processPluginSearchText(fencePlugin.textForSearch());
     }
 
     @Override
     public void onSoftLineBreak() {
-        addSeparator();
+        addStandard(" ");
     }
 
     @Override
     public void onHardLineBreak() {
-        addSeparator();
+        addStandard(" ");
     }
 
     @Override
     public void onListItemEnd() {
-        addSeparator();
+        addStandard(" ");
     }
 
     @Override
     public void onParsingEnd() {
-        flushTextParts();
+        flush();
     }
 
-    private void addSeparator() {
-        add(" ");
+    private void flush() {
+        flushTextParts(SearchScore.STANDARD, standardScoreParts);
+        flushTextParts(SearchScore.HIGH, highScoreParts);
     }
 
-    private void add(String part) {
-        currentTextParts.add(part);
+    private void processPluginSearchText(SearchText searchText) {
+        if (searchText == null) {
+            return;
+        }
+
+        switch (searchText.getScore()) {
+            case HIGH -> addHighWithSpaceSeparator(searchText.getText());
+            case STANDARD -> addStandardWithSpaceSeparator(searchText.getText());
+        }
     }
 
-    private void addWithSpaceSeparator(String part) {
+    private void addStandard(String part) {
+        standardScoreParts.add(part);
+    }
+
+    private void addStandardWithSpaceSeparator(String part) {
         if (part == null) {
             return;
         }
 
-        currentTextParts.add(' ' + replaceCommonSeparatorsWithSpace(part) + ' ');
+        standardScoreParts.add(' ' + replaceCommonSeparatorsWithSpace(part) + ' ');
+    }
+
+    private void addHighWithSpaceSeparator(String part) {
+        if (part == null) {
+            return;
+        }
+
+        highScoreParts.add(' ' + replaceCommonSeparatorsWithSpace(part) + ' ');
     }
 
     private String replaceCommonSeparatorsWithSpace(String text) {
         return text.replaceAll("[.,();:\\-+=\\\\/\"'!?\\[\\]{}]", " ");
     }
 
-    private void flushTextParts() {
-        if (currentTextParts.isEmpty()) {
+    private void flushTextParts(SearchScore score, List<String> parts) {
+        if (parts.isEmpty()) {
             return;
         }
 
-        SearchText searchText = SearchScore.STANDARD.text(
-                String.join("", currentTextParts)
+        SearchText searchText = new SearchText(score,
+                String.join("", parts)
                         .replaceAll("\\s+", " ")
                         .trim());
 
         searchEntries.add(new PageSearchEntry(pageSectionTitle, searchText));
-        currentTextParts.clear();
+        parts.clear();
     }
 }
