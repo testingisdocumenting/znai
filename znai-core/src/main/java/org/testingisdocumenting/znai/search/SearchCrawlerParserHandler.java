@@ -173,7 +173,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
         }
 
         searchEntries.add(new PageSearchEntry(pageSectionTitle, List.of(
-                createSearchText(SearchScore.HIGH, highScoreParts),
-                createSearchText(SearchScore.STANDARD, standardScoreParts))));
+                createSearchText(SearchScore.STANDARD, standardScoreParts),
+                createSearchText(SearchScore.HIGH, highScoreParts))));
     }
 }
