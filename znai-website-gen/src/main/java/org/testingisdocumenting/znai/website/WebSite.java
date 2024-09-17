@@ -586,7 +586,7 @@ public class WebSite implements Log {
                         new GlobalSearchEntry(
                                 searchEntryUrl(tocItem, pageSearchEntry),
                                 searchEntryTitle(tocItem, pageSearchEntry),
-                                pageSearchEntry.getSearchText()))
+                                pageSearchEntry.extractText()))
                 .collect(toList());
 
         globalSearchEntries.addAll(siteSearchEntries);

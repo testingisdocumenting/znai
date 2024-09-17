@@ -79,7 +79,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
         JavaCode javaCode = new JavaCode(componentsRegistry.resourceResolver().textContent(path));
         javaIncludeResult = process(javaCode);
 
-        return PluginResult.docElements(javaIncludeResult.getDocElements().stream());
+        return PluginResult.docElements(javaIncludeResult.docElements().stream());
     }
 
     abstract public JavaIncludeResult process(JavaCode javaCode);
@@ -91,7 +91,7 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.HIGH.text(javaIncludeResult.getText());
+        return SearchScore.HIGH.text(javaIncludeResult.text());
     }
 
     protected JavaDocElementsMapsAndSearchText javaDocTextToDocElements(String html, CodeReferencesFeature codeReferencesFeature) {

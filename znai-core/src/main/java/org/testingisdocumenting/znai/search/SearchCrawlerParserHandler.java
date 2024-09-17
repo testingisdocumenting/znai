@@ -123,8 +123,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     private void flush() {
-        flushTextParts(SearchScore.STANDARD, standardScoreParts);
-        flushTextParts(SearchScore.HIGH, highScoreParts);
+        flushTextParts();
     }
 
     private void processPluginSearchText(SearchText searchText) {
@@ -162,17 +161,19 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
         return text.replaceAll("[.,();:\\-+=\\\\/\"'!?\\[\\]{}]", " ");
     }
 
-    private void flushTextParts(SearchScore score, List<String> parts) {
-        if (parts.isEmpty()) {
-            return;
-        }
-
-        SearchText searchText = new SearchText(score,
+    private SearchText createSearchText(SearchScore score, List<String> parts) {
+        return new SearchText(score,
                 String.join("", parts)
                         .replaceAll("\\s+", " ")
                         .trim());
+    }
+    private void flushTextParts() {
+        if (standardScoreParts.isEmpty() && highScoreParts.isEmpty()) {
+            return;
+        }
 
-        searchEntries.add(new PageSearchEntry(pageSectionTitle, searchText));
-        parts.clear();
+        searchEntries.add(new PageSearchEntry(pageSectionTitle, List.of(
+                createSearchText(SearchScore.HIGH, highScoreParts),
+                createSearchText(SearchScore.STANDARD, standardScoreParts))));
     }
 }

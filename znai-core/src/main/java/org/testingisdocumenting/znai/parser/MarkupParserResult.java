@@ -47,7 +47,7 @@ public record MarkupParserResult(DocElement docElement,
     }
 
     public String getAllText() {
-        return searchEntries.stream().map(se -> se.getSearchText().getText())
+        return searchEntries.stream().map(PageSearchEntry::extractText)
                 .collect(joining(" "));
     }
 }

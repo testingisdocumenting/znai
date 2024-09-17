@@ -66,7 +66,7 @@ public class ServerSideSimplifiedRenderer {
                 "" :
                 "<header><h1>" + entry.getPageSectionTitle() + "</h1></header>\n";
 
-        String paragraph = "<p>" + StringEscapeUtils.escapeHtml4(entry.getSearchText().getText()) + "</p>\n";
+        String paragraph = "<p>" + StringEscapeUtils.escapeHtml4(entry.extractText()) + "</p>\n";
 
         return article(optionalHeader + paragraph);
     }

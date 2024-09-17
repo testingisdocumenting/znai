@@ -458,7 +458,7 @@ world""")
                 "\n" +
                 "To create an `external` link use:\n")
 
-        parseResult.searchEntries().collect { it -> it.searchText.text}.join(" ").should == "Best To create an external link use"
+        parseResult.searchEntries().collect { it -> it.extractText() }.join(" ").should == "external Best To create an link use"
     }
 
     private void parse(String markdown, Path path = Paths.get("test.md")) {

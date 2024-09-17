@@ -24,13 +24,14 @@ class PageLocalSearchEntriesTest {
     @Test
     void "should generate list representation of entries for local search indexer"() {
         def searchEntries = new PageLocalSearchEntries(
-                new TocItem('dir-name', 'file-name', 'md'),
-                [new PageSearchEntry('section one', SearchScore.STANDARD.text('hello world')),
-                 new PageSearchEntry('section two', SearchScore.STANDARD.text('how is the weather')),
+                new TocItem("dir-name", "file-name", "md"),
+                [
+                        new PageSearchEntry("section one", [SearchScore.STANDARD.text("hello world"), SearchScore.HIGH.text("snippet-one")]),
+                        new PageSearchEntry("section two", [SearchScore.STANDARD.text("how is the weather")]),
                 ])
 
         searchEntries.toListOfLists().should == [
-                ['dir-name@@file-name@@section-one', 'Dir Name', 'File Name', 'section one', 'hello world'],
-                ['dir-name@@file-name@@section-two', 'Dir Name', 'File Name', 'section two', 'how is the weather']]
+                ["dir-name@@file-name@@section-one", "Dir Name", "File Name", "section one", "hello world", "snippet-one"],
+                ["dir-name@@file-name@@section-two", "Dir Name", "File Name", "section two", "how is the weather", ""]]
     }
 }

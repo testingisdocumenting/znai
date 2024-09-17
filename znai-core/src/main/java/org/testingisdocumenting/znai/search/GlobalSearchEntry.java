@@ -24,12 +24,12 @@ import java.util.Objects;
 public class GlobalSearchEntry {
     private String url;
     private String fullTitle;
-    private SearchText text;
+    private String text;
 
     public GlobalSearchEntry() {
     }
 
-    public GlobalSearchEntry(String url, String fullTitle, SearchText text) {
+    public GlobalSearchEntry(String url, String fullTitle, String text) {
         this.url = url;
         this.fullTitle = fullTitle;
         this.text = text;
@@ -51,11 +51,11 @@ public class GlobalSearchEntry {
         this.fullTitle = fullTitle;
     }
 
-    public SearchText getText() {
+    public String getText() {
         return text;
     }
 
-    public void setText(SearchText text) {
+    public void setText(String text) {
         this.text = text;
     }
 

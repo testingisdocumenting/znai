@@ -30,20 +30,20 @@ public record PageLocalSearchEntries(TocItem tocItem, List<PageSearchEntry> entr
                 .collect(Collectors.toList());
     }
 
+    private String extractText(PageSearchEntry entry, SearchScore score) {
+        return entry.getSearchTextList().stream()
+                .filter(e -> e.getScore() == score)
+                .map(SearchText::getText).collect(Collectors.joining(" "));
+    }
+
     private List<String> createList(PageSearchEntry pageSearchEntry) {
-        String standardText = pageSearchEntry.getSearchText().getScore() == SearchScore.STANDARD ?
-                pageSearchEntry.getSearchText().getText() : "";
-
-        String highText = pageSearchEntry.getSearchText().getScore() == SearchScore.HIGH ?
-                pageSearchEntry.getSearchText().getText() : "";
-
         return Arrays.asList(
                 genId(pageSearchEntry),
                 tocItem.getChapterTitle(),
                 tocItem.getPageTitle(),
                 pageSearchEntry.getPageSectionTitle(),
-                standardText,
-                highText);
+                extractText(pageSearchEntry, SearchScore.STANDARD),
+                extractText(pageSearchEntry, SearchScore.HIGH));
     }
 
     private String genId(PageSearchEntry pageSearchEntry) {

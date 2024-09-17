@@ -68,7 +68,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onStrongEmphasisEnd()
         }
 
-        searchEntries.searchText.text.should == ["Hello"]
+        searchEntries.searchTextList.text.should == ["Hello"]
     }
 
     @Test
@@ -79,7 +79,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.searchText.text.should == ["entry one entry two"]
+        searchEntries.searchTextList.text.should == ["entry one entry two"]
     }
 
     @Test
@@ -90,7 +90,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.searchText.text.should == ["entry one entry two"]
+        searchEntries.searchTextList.text.should == ["entry one entry two"]
     }
 
     @Test
@@ -99,7 +99,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onInlinedCode("record.access", DocReferences.EMPTY)
         }
 
-        searchEntries.searchText.text.should == ["record access"]
+        searchEntries.searchTextList.text.should == ["record access"]
     }
 
     @Test
@@ -109,7 +109,7 @@ class SearchCrawlerParserHandlerTest {
                     " --key=value")
         }
 
-        searchEntries.searchText.text.should == ["hello world of quotes and separators like and maybe backward and " +
+        searchEntries.searchTextList.text.should == ["hello world of quotes and separators like and maybe backward and " +
                                                          "inside different brackets and other key value"]
     }
 

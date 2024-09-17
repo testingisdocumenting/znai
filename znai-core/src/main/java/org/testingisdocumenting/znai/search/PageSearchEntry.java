@@ -20,17 +20,19 @@ package org.testingisdocumenting.znai.search;
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * search entry local to a single page
+ * search entry local to a single page section
  */
 public class PageSearchEntry {
     private final PageSectionIdTitle pageSectionIdTitle;
-    private final SearchText searchText;
+    private final List<SearchText> searchTextList;
 
-    public PageSearchEntry(String pageSectionTitle, SearchText searchText) {
+    public PageSearchEntry(String pageSectionTitle, List<SearchText> searchTextList) {
         this.pageSectionIdTitle = new PageSectionIdTitle(pageSectionTitle, Collections.emptyMap());
-        this.searchText = searchText;
+        this.searchTextList = searchTextList;
     }
 
     public String getPageSectionId() {
@@ -41,7 +43,11 @@ public class PageSearchEntry {
         return pageSectionIdTitle.getTitle();
     }
 
-    public SearchText getSearchText() {
-        return searchText;
+    public List<SearchText> getSearchTextList() {
+        return searchTextList;
+    }
+
+    public String extractText() {
+        return searchTextList.stream().map(SearchText::getText).collect(Collectors.joining(" "));
     }
 }
