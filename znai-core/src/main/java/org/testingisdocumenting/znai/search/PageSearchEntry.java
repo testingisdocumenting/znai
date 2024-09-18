@@ -48,6 +48,9 @@ public class PageSearchEntry {
     }
 
     public String extractText() {
-        return searchTextList.stream().map(SearchText::getText).collect(Collectors.joining(" "));
+        return searchTextList.stream()
+                .map(SearchText::getText)
+                .filter(text -> !text.isEmpty())
+                .collect(Collectors.joining(" "));
     }
 }

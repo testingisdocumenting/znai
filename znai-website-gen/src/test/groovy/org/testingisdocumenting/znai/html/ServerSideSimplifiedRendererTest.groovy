@@ -54,8 +54,8 @@ class ServerSideSimplifiedRendererTest {
     void "should render simple page for crawl indexing"() {
         def searchEntries = new PageLocalSearchEntries(
                 toc.tocItems[0], [
-                new PageSearchEntry('PS0', SearchScore.STANDARD.text('hello \' " <> [] & world')),
-                new PageSearchEntry('PS1', SearchScore.STANDARD.text('of search'))])
+                new PageSearchEntry('PS0', [SearchScore.STANDARD.text('hello \' " <> [] & world')]),
+                new PageSearchEntry('PS1', [SearchScore.STANDARD.text('of search')])])
 
         ServerSideSimplifiedRenderer.renderPageTextContent(searchEntries).should ==
                 ServerSideSimplifiedRenderer.LOADING_INDICATOR +

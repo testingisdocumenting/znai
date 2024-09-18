@@ -24,7 +24,7 @@ import java.util.Objects;
 public class GlobalSearchEntry {
     private String url;
     private String fullTitle;
-    private String text;
+    private SearchText text;
 
     public GlobalSearchEntry() {
     }
@@ -32,7 +32,7 @@ public class GlobalSearchEntry {
     public GlobalSearchEntry(String url, String fullTitle, String text) {
         this.url = url;
         this.fullTitle = fullTitle;
-        this.text = text;
+        this.text = SearchScore.STANDARD.text(text);
     }
 
     public String getUrl() {
@@ -51,11 +51,11 @@ public class GlobalSearchEntry {
         this.fullTitle = fullTitle;
     }
 
-    public String getText() {
+    public SearchText getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(SearchText text) {
         this.text = text;
     }
 

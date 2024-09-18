@@ -46,7 +46,7 @@ second paragraph
                                                           [type: 'Emphasis', content: [[text: 'italic', type: 'SimpleText']]]]],
                             [type: 'Paragraph', content: [[text: ' second paragraph ', type: 'SimpleText']]]]
 
-        searchText.should == 'hello world another paragraph with bolditalic second paragraph'
+        searchText.should == 'hello another paragraph with bolditalic second paragraph world'
     }
 
     @Test

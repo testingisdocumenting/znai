@@ -24,8 +24,8 @@ class GlobalSearchEntriesTest {
     void "should generate XML document"() {
         def entries = new GlobalSearchEntries()
         entries.addAll([
-                new GlobalSearchEntry('/doc-id/title1', 'full title 1', new SearchText('text 1', SearchScore.HIGH)),
-                new GlobalSearchEntry('/doc-id/title2', 'full title 2', new SearchText('text 2', SearchScore.STANDARD))])
+                new GlobalSearchEntry('/doc-id/title1', 'full title 1', 'text 1'),
+                new GlobalSearchEntry('/doc-id/title2', 'full title 2', 'text 2')])
 
         println entries.toXml()
         entries.toXml().should == '<znai>\n' +
@@ -33,16 +33,16 @@ class GlobalSearchEntriesTest {
                 '    <url>/doc-id/title1</url>\n' +
                 '    <fullTitle>full title 1</fullTitle>\n' +
                 '    <text>\n' +
+                '      <score>STANDARD</score>\n' +
                 '      <text>text 1</text>\n' +
-                '      <score>HIGH</score>\n' +
                 '    </text>\n' +
                 '  </entry>\n' +
                 '  <entry>\n' +
                 '    <url>/doc-id/title2</url>\n' +
                 '    <fullTitle>full title 2</fullTitle>\n' +
                 '    <text>\n' +
-                '      <text>text 2</text>\n' +
                 '      <score>STANDARD</score>\n' +
+                '      <text>text 2</text>\n' +
                 '    </text>\n' +
                 '  </entry>\n' +
                 '</znai>\n'
@@ -52,18 +52,18 @@ class GlobalSearchEntriesTest {
     void "should handle ansi sequences"() {
         def entries = new GlobalSearchEntries()
         entries.addAll([
-                new GlobalSearchEntry('/doc-id/title', 'title', new SearchText(
+                new GlobalSearchEntry('/doc-id/title', 'title',
                         "\u001B[1mwebtau:\u001B[m000\u001B" +
                                 "[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\")" +
-                                " \u001B[33m> (\u001B[32m342ms\u001B[33m)\u001B[0m", SearchScore.STANDARD))])
+                                " \u001B[33m> (\u001B[32m342ms\u001B[33m)\u001B[0m")])
 
         entries.toXml().should == '<znai>\n' +
                 '  <entry>\n' +
                 '    <url>/doc-id/title</url>\n' +
                 '    <fullTitle>title</fullTitle>\n' +
                 '    <text>\n' +
-                '      <text>webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > (342ms)</text>\n' +
                 '      <score>STANDARD</score>\n' +
+                '      <text>webtau:000> http.get("https://jsonplaceholder.typicode.com/todos/1") > (342ms)</text>\n' +
                 '    </text>\n' +
                 '  </entry>\n' +
                 '</znai>\n'

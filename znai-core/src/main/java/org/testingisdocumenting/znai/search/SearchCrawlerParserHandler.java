@@ -167,6 +167,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
                         .replaceAll("\\s+", " ")
                         .trim());
     }
+
     private void flushTextParts() {
         if (standardScoreParts.isEmpty() && highScoreParts.isEmpty()) {
             return;
@@ -175,5 +176,8 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
         searchEntries.add(new PageSearchEntry(pageSectionTitle, List.of(
                 createSearchText(SearchScore.STANDARD, standardScoreParts),
                 createSearchText(SearchScore.HIGH, highScoreParts))));
+
+        standardScoreParts.clear();
+        highScoreParts.clear();
     }
 }

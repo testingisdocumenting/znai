@@ -48,12 +48,10 @@ class SearchCrawlerParserHandlerTest {
         parserHandler.onInlinedCode("broker", DocReferences.EMPTY)
         parserHandler.onSectionEnd()
 
-        parserHandler.getSearchEntries().should == [ "pageSectionTitle" | "searchText"] {
+        parserHandler.getSearchEntries().should == [ "pageSectionTitle" | "searchTextList"] {
                                                      ______________________________________________________________________________
-                                                     "section one"      | [text: "hello", score: SearchScore.STANDARD]
-                                                     "section one"      | [text: "source code inlined term", score: SearchScore.HIGH]
-                                                     "section two"      | [text: "world", score: SearchScore.STANDARD]
-                                                     "section two"      | [text: "code broker", score: SearchScore.HIGH] }
+                                                     "section one"      | [[text: "hello", score: SearchScore.STANDARD], [text: "source code inlined term", score: SearchScore.HIGH]]
+                                                     "section two"      | [[text: "world", score: SearchScore.STANDARD], [text: "code broker", score: SearchScore.HIGH]] }
     }
 
     @Test
@@ -68,7 +66,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onStrongEmphasisEnd()
         }
 
-        searchEntries.searchTextList.text.should == ["Hello"]
+        searchEntries.collect { it.extractText() }.should == ["Hello"]
     }
 
     @Test
@@ -79,7 +77,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.searchTextList.text.should == ["entry one entry two"]
+        searchEntries.collect { it.extractText() }.should == ["entry one entry two"]
     }
 
     @Test
@@ -90,7 +88,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.searchTextList.text.should == ["entry one entry two"]
+        searchEntries.collect { it.extractText() }.should == ["entry one entry two"]
     }
 
     @Test
@@ -99,7 +97,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onInlinedCode("record.access", DocReferences.EMPTY)
         }
 
-        searchEntries.searchTextList.text.should == ["record access"]
+        searchEntries.collect { it.extractText() }.should == ["record access"]
     }
 
     @Test
@@ -109,7 +107,7 @@ class SearchCrawlerParserHandlerTest {
                     " --key=value")
         }
 
-        searchEntries.searchTextList.text.should == ["hello world of quotes and separators like and maybe backward and " +
+        searchEntries.collect { it.extractText() }.should == ["hello world of quotes and separators like and maybe backward and " +
                                                          "inside different brackets and other key value"]
     }
 

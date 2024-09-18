@@ -27,7 +27,7 @@ public class SearchText {
     public SearchText() {
     }
 
-    public SearchText(SearchScore score, String text ) {
+    public SearchText(SearchScore score, String text) {
         this.score = score;
         this.text = removeNonReadableSymbols(text);
     }
