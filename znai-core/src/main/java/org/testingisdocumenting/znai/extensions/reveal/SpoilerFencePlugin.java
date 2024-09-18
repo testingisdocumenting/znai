@@ -61,6 +61,6 @@ public class SpoilerFencePlugin implements FencePlugin {
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.LOW.text(parserResult.getAllText());
+        return SearchScore.STANDARD.text(parserResult.getAllText());
     }
 }

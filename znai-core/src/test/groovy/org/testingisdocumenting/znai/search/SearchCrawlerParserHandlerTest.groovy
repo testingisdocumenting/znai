@@ -48,10 +48,10 @@ class SearchCrawlerParserHandlerTest {
         parserHandler.onInlinedCode("broker", DocReferences.EMPTY)
         parserHandler.onSectionEnd()
 
-        parserHandler.getSearchEntries().should == [ "pageSectionTitle" | "searchText"] {
-                                                     _______________________________
-                                                     "section one"      | [text: "hello source code inlined term", score: SearchScore.STANDARD]
-                                                     "section two"      | [text: "world code broker", score: SearchScore.STANDARD] }
+        parserHandler.getSearchEntries().should == [ "pageSectionTitle" | "searchTextList"] {
+                                                     ______________________________________________________________________________
+                                                     "section one"      | [[text: "hello", score: SearchScore.STANDARD], [text: "source code inlined term", score: SearchScore.HIGH]]
+                                                     "section two"      | [[text: "world", score: SearchScore.STANDARD], [text: "code broker", score: SearchScore.HIGH]] }
     }
 
     @Test
@@ -66,7 +66,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onStrongEmphasisEnd()
         }
 
-        searchEntries.searchText.text.should == ["Hello"]
+        searchEntries.collect { it.extractText() }.should == ["Hello"]
     }
 
     @Test
@@ -77,7 +77,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.searchText.text.should == ["entry one entry two"]
+        searchEntries.collect { it.extractText() }.should == ["entry one entry two"]
     }
 
     @Test
@@ -88,18 +88,16 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.searchText.text.should == ["entry one entry two"]
+        searchEntries.collect { it.extractText() }.should == ["entry one entry two"]
     }
 
     @Test
     void "should split on separators in code snippets"() {
         def searchEntries = withinSection {
             parserHandler.onInlinedCode("record.access", DocReferences.EMPTY)
-            parserHandler.onHardLineBreak()
-            parserHandler.onSimpleText("entry two ")
         }
 
-        searchEntries.searchText.text.should == ["record access entry two"]
+        searchEntries.collect { it.extractText() }.should == ["record access"]
     }
 
     @Test
@@ -109,7 +107,7 @@ class SearchCrawlerParserHandlerTest {
                     " --key=value")
         }
 
-        searchEntries.searchText.text.should == ["hello world of quotes and separators like and maybe backward and " +
+        searchEntries.collect { it.extractText() }.should == ["hello world of quotes and separators like and maybe backward and " +
                                                          "inside different brackets and other key value"]
     }
 

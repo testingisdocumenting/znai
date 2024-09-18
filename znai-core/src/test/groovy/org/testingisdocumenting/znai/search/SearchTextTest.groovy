@@ -21,7 +21,7 @@ import org.junit.Test
 class SearchTextTest {
     @Test
     void "should remove non readable symbols"() {
-        def searchText = new SearchText(
+        def searchText = new SearchText(SearchScore.STANDARD,
                 "CLI renders ANSI colors automatically. \u001B[1mwebtau:\u001B[m000\u001B" +
                         "[1m>\u001B[m http.get(\"https://jsonplaceholder.typicode.com/todos/1\") \u001B[33m>" +
                         " \u001B[34mexecuting HTTP GET" +
@@ -44,7 +44,7 @@ class SearchTextTest {
                         "\u001B[32m\"delectus aut autem\"\u001B[36m,\u001B[0m \u001B[35m\"completed\": " +
                         "false\u001B[0m \u001B[36m}\u001B[0m \u001B[32m. \u001B[34mexecuted HTTP GET " +
                         "\u001B[35mhttps://jsonplaceholder.typicode.com/todos/1\u001B[33m" +
-                        " (\u001B[32m342ms\u001B[33m)\u001B[0m", SearchScore.STANDARD)
+                        " (\u001B[32m342ms\u001B[33m)\u001B[0m")
 
         searchText.text.should == "CLI renders ANSI colors automatically. webtau:000> " +
                 "http.get(\"https://jsonplaceholder.typicode.com/todos/1\") " +

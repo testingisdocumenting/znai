@@ -29,10 +29,10 @@ public class GlobalSearchEntry {
     public GlobalSearchEntry() {
     }
 
-    public GlobalSearchEntry(String url, String fullTitle, SearchText text) {
+    public GlobalSearchEntry(String url, String fullTitle, String text) {
         this.url = url;
         this.fullTitle = fullTitle;
-        this.text = text;
+        this.text = SearchScore.STANDARD.text(text);
     }
 
     public String getUrl() {

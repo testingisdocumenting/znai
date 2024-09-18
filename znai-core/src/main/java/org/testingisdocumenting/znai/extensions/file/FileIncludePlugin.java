@@ -94,7 +94,7 @@ public class FileIncludePlugin implements IncludePlugin {
 
     @Override
     public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(contentProvider.snippetContent());
+        return SearchScore.HIGH.text(contentProvider.snippetContent());
     }
 
     private static String langFromFileName(String fileName) {

@@ -27,17 +27,17 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LocalSearchEntries {
-    private final Map<TocItem, PageSearchEntries> entries;
+    private final Map<TocItem, PageLocalSearchEntries> entries;
 
     public LocalSearchEntries() {
         this.entries = new LinkedHashMap<>();
     }
 
-    public void add(PageSearchEntries entries) {
-        this.entries.put(entries.getTocItem(), entries);
+    public void add(PageLocalSearchEntries entries) {
+        this.entries.put(entries.tocItem(), entries);
     }
 
-    public PageSearchEntries searchEntriesByTocItem(TocItem tocItem) {
+    public PageLocalSearchEntries searchEntriesByTocItem(TocItem tocItem) {
         return entries.get(tocItem);
     }
 

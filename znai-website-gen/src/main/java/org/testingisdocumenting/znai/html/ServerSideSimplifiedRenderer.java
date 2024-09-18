@@ -17,7 +17,7 @@
 package org.testingisdocumenting.znai.html;
 
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
-import org.testingisdocumenting.znai.search.PageSearchEntries;
+import org.testingisdocumenting.znai.search.PageLocalSearchEntries;
 import org.testingisdocumenting.znai.search.PageSearchEntry;
 import org.testingisdocumenting.znai.structure.TableOfContents;
 import org.testingisdocumenting.znai.structure.TocItem;
@@ -36,9 +36,9 @@ public class ServerSideSimplifiedRenderer {
                         .collect(Collectors.joining("\n")));
     }
 
-    public static String renderPageTextContent(PageSearchEntries pageSearchEntries) {
+    public static String renderPageTextContent(PageLocalSearchEntries pageSearchEntries) {
         return LOADING_INDICATOR + section(
-                pageSearchEntries.getEntries().stream()
+                pageSearchEntries.entries().stream()
                         .map(ServerSideSimplifiedRenderer::renderPageEntry)
                         .collect(Collectors.joining("\n")));
     }
@@ -66,7 +66,7 @@ public class ServerSideSimplifiedRenderer {
                 "" :
                 "<header><h1>" + entry.getPageSectionTitle() + "</h1></header>\n";
 
-        String paragraph = "<p>" + StringEscapeUtils.escapeHtml4(entry.getSearchText().getText()) + "</p>\n";
+        String paragraph = "<p>" + StringEscapeUtils.escapeHtml4(entry.extractText()) + "</p>\n";
 
         return article(optionalHeader + paragraph);
     }

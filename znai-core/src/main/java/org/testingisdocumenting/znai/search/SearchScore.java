@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,14 +21,10 @@ package org.testingisdocumenting.znai.search;
  * how likely text will be found by a search
  */
 public enum SearchScore {
-    HIGHEST,
-    HIGHER,
     HIGH,
-    STANDARD,
-    LOW,
-    LOWEST;
+    STANDARD;
 
     public SearchText text(String text) {
-        return new SearchText(text, this);
+        return new SearchText(this, text);
     }
 }

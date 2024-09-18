@@ -18,7 +18,7 @@
 package org.testingisdocumenting.znai.html
 
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle
-import org.testingisdocumenting.znai.search.PageSearchEntries
+import org.testingisdocumenting.znai.search.PageLocalSearchEntries
 import org.testingisdocumenting.znai.search.PageSearchEntry
 import org.testingisdocumenting.znai.search.SearchScore
 import org.testingisdocumenting.znai.structure.TableOfContents
@@ -52,10 +52,10 @@ class ServerSideSimplifiedRendererTest {
 
     @Test
     void "should render simple page for crawl indexing"() {
-        def searchEntries = new PageSearchEntries(
+        def searchEntries = new PageLocalSearchEntries(
                 toc.tocItems[0], [
-                new PageSearchEntry('PS0', SearchScore.STANDARD.text('hello \' " <> [] & world')),
-                new PageSearchEntry('PS1', SearchScore.STANDARD.text('of search'))])
+                new PageSearchEntry('PS0', [SearchScore.STANDARD.text('hello \' " <> [] & world')]),
+                new PageSearchEntry('PS1', [SearchScore.STANDARD.text('of search')])])
 
         ServerSideSimplifiedRenderer.renderPageTextContent(searchEntries).should ==
                 ServerSideSimplifiedRenderer.LOADING_INDICATOR +

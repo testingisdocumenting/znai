@@ -30,6 +30,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.NodeVisitor;
+import org.testingisdocumenting.znai.search.PageSearchEntry;
 import org.testingisdocumenting.znai.search.SearchCrawlerParserHandler;
 
 import java.nio.file.Path;
@@ -86,7 +87,7 @@ public class HtmlToDocElementConverter {
         parserHandlersList.onParsingEnd();
 
         return new Result(parserHandler.getDocElement().getContent(),
-                searchCrawler.getSearchEntries().stream().map(se -> se.getSearchText().getText())
+                searchCrawler.getSearchEntries().stream().map(PageSearchEntry::extractText)
                         .collect(joining(" ")));
     }
 

@@ -20,7 +20,8 @@ znaiSearchIdx = lunr(function () {
     this.field('section')
     this.field('pageTitle')
     this.field('pageSection')
-    this.field('text')
+    this.field('textStandard')
+    this.field('textHigh')
 
     this.metadataWhitelist = ['position']
 
@@ -30,7 +31,8 @@ znaiSearchIdx = lunr(function () {
             section: e[1],
             pageTitle: e[2],
             pageSection: e[3],
-            text: e[4],
+            textStandard: e[4],
+            textHigh: e[5],
         })
     }, this)
 })
