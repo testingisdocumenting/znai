@@ -39,6 +39,7 @@ class SearchPreview extends Component {
 
     highlight() {
         const {snippets} = this.props
+        console.log("highlight snippets", snippets)
 
         const mark = new Mark(this.dom)
         mark.mark(snippets, {
