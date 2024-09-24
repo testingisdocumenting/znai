@@ -17,9 +17,11 @@
 package org.testingisdocumenting.znai.extensions.api;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.structure.AnchorIds;
 import org.testingisdocumenting.znai.structure.DocStructure;
 
 import java.nio.file.Path;
+import java.util.Collections;
 
 class ApiParametersAnchors {
     private ApiParametersAnchors() {
@@ -29,7 +31,8 @@ class ApiParametersAnchors {
                                      Path markupPath,
                                      ApiParameters apiParameters) {
         DocStructure docStructure = componentsRegistry.docStructure();
-        apiParameters.collectAllAnchors().forEach(anchorId -> docStructure.registerLocalAnchor(markupPath, anchorId));
+        apiParameters.collectAllAnchors().forEach(anchorId -> docStructure.registerLocalAnchors(markupPath,
+                new AnchorIds(anchorId, Collections.emptyList())));
     }
 
     static String anchorIdFromNameAndPrefix(String prefix, String name) {

@@ -35,6 +35,7 @@ import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.structure.AnchorIds;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
 import org.testingisdocumenting.znai.structure.TocItem;
@@ -102,16 +103,17 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
         Map<String, ?> headingPropsMap = headingProps.props();
 
-        String id = new PageSectionIdTitle(title, headingPropsMap).getId();
+        DocStructure docStructure = componentsRegistry.docStructure();
+        String sectionId = new PageSectionIdTitle(title, headingPropsMap).getId();
+        docStructure.onSectionOrSubHeading(path, 1, sectionId);
+
+        var anchorIds = docStructure.generateUniqueAnchors(path, "");
         Map<String, Object> props = new LinkedHashMap<>(headingPropsMap);
-        props.put("id", id);
+        addAnchorIdsToProps(props, anchorIds);
         props.put("title", title);
 
         start(DocElementType.SECTION, props);
-
-        DocStructure docStructure = componentsRegistry.docStructure();
-        docStructure.registerLocalAnchor(path, id);
-        docStructure.onSectionOrSubHeading(path, 1, id);
+        docStructure.registerLocalAnchors(path, anchorIds);
 
         isSectionStarted = true;
     }
@@ -139,11 +141,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
         DocStructure docStructure = componentsRegistry.docStructure();
         docStructure.onSectionOrSubHeading(path, level, idByTitle);
 
-        String id = docStructure.generateUniqueAnchor(path, "");
-        docStructure.registerLocalAnchor(path, id);
+        var ids = docStructure.generateUniqueAnchors(path, "");
+        docStructure.registerLocalAnchors(path, ids);
 
         Map<String, Object> props = new LinkedHashMap<>(headingPropsMap);
-        props.put("id", id);
+        addAnchorIdsToProps(props, ids);
         props.put("level", level);
         props.put("title", title);
         append(DocElementType.SUB_HEADING, props);
@@ -520,6 +522,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
         auxiliaryFiles.add(auxiliaryFile);
 
         return docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString());
+    }
+
+    private void addAnchorIdsToProps(Map<String, Object> props, AnchorIds ids) {
+        props.put("id", ids.main());
+        props.put("additionalIds", ids.additional());
     }
 }
 

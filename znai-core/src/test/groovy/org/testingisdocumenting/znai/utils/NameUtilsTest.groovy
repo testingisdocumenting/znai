@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,18 +26,19 @@ class NameUtilsTest {
     @Test
     void "converts title to id stripping spaces and punctuation"() {
         assert idFromTitle(null) == null
-        assert idFromTitle('') == ''
-        assert idFromTitle('word') == 'word'
-        assert idFromTitle('Hello DearWorld') == 'hello-dearworld'
-        assert idFromTitle('Hello!. %#$ Dear/World?') == 'hello-dear-world'
-        assert idFromTitle('Negative-Value Tests') == 'negative-value-tests'
+        assert idFromTitle("") == ""
+        assert idFromTitle("word") == "word"
+        assert idFromTitle("Hello DearWorld") == "hello-dearworld"
+        assert idFromTitle("Hello!. %#\$ Dear/World?") == "hello-dear-world"
+        assert idFromTitle("Negative-Value Tests") == "negative-value-tests"
+        assert idFromTitle("don't") == "dont"
     }
 
     @Test
     void "converts dashes to camel case with spaces"() {
         assert dashToCamelCaseWithSpaces(null) == null
-        assert dashToCamelCaseWithSpaces('') == ''
-        assert dashToCamelCaseWithSpaces('word') == 'Word'
-        assert dashToCamelCaseWithSpaces('hello-dear-world') == 'Hello Dear World'
+        assert dashToCamelCaseWithSpaces("") == ""
+        assert dashToCamelCaseWithSpaces("word") == "Word"
+        assert dashToCamelCaseWithSpaces("hello-dear-world") == "Hello Dear World"
     }
 }
