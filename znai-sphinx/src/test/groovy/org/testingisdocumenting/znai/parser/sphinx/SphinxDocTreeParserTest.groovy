@@ -48,7 +48,7 @@ class SphinxDocTreeParserTest {
 </document>
 """)
 
-        content.should == [[title: 'Indices and tables', id: 'indices-and-tables', type: 'Section',
+        content.should == [[title: 'Indices and tables', id: 'indices-and-tables', additionalIds: [], type: 'Section',
                             content:[[type: 'Paragraph', content: [[text: 'Hello World for real', type: 'SimpleText']]]]]]
     }
 
