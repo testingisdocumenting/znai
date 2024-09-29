@@ -56,6 +56,8 @@ class Search {
             })
         })
 
+        console.log("term", term, "matches", matches)
+
         return new QueryResult(matches)
     }
 

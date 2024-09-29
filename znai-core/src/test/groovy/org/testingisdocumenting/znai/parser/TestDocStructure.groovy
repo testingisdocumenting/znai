@@ -17,6 +17,7 @@
 
 package org.testingisdocumenting.znai.parser
 
+import org.testingisdocumenting.znai.structure.AnchorIds
 import org.testingisdocumenting.znai.structure.DocStructure
 import org.testingisdocumenting.znai.structure.DocUrl
 import org.testingisdocumenting.znai.structure.TableOfContents
@@ -68,8 +69,8 @@ class TestDocStructure implements DocStructure {
     }
 
     @Override
-    String generateUniqueAnchor(Path path, String localId) {
-        return uniqueAnchorIdGenerator.generateId(path, localId)
+    AnchorIds generateUniqueAnchors(Path path, String localId) {
+        return uniqueAnchorIdGenerator.generateIds(path, localId)
     }
 
     @Override
@@ -77,8 +78,9 @@ class TestDocStructure implements DocStructure {
     }
 
     @Override
-    void registerLocalAnchor(Path path, String anchorId) {
-        registeredLocalLinks.add(anchorId)
+    void registerLocalAnchors(Path path, AnchorIds anchorIds) {
+        registeredLocalLinks.add(anchorIds.main())
+        anchorIds.additional().forEach(registeredLocalLinks::add)
     }
 
     @Override

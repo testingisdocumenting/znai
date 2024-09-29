@@ -125,8 +125,8 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     @Override
-    public String generateUniqueAnchor(Path path, String localId) {
-        return uniqueAnchorIdGenerator.generateId(path, localId);
+    public AnchorIds generateUniqueAnchors(Path path, String localId) {
+        return uniqueAnchorIdGenerator.generateIds(path, localId);
     }
 
     @Override
@@ -145,14 +145,15 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     @Override
-    public void registerLocalAnchor(Path path, String anchorId) {
+    public void registerLocalAnchors(Path path, AnchorIds anchorIds) {
         TocItem tocItem = parsingConfiguration.tocItemByPath(componentsRegistry, toc, path);
         if (tocItem == null) {
             throw new RuntimeException("Can't find TocItem associated with path: " + path);
         }
 
         List<String> anchors = localAnchorIdsByTocItem.computeIfAbsent(tocItem, k -> new ArrayList<>());
-        anchors.add(anchorId);
+        anchors.add(anchorIds.main());
+        anchors.addAll(anchorIds.additional());
     }
 
     @Override

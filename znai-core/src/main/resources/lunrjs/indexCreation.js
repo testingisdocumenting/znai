@@ -15,6 +15,26 @@
  * limitations under the License.
  */
 
+var createStopWordFilter = function (stopWords) {
+    var words = stopWords.reduce(function (memo, stopWord) {
+        memo[stopWord] = stopWord
+        return memo
+    }, {})
+    return function (token) {
+        if (token && words[token.toString()] !== token.toString()) return token
+    }
+}
+
+var stopWordFilter = createStopWordFilter([
+    'a',
+    'am',
+    'an',
+    'at',
+    'be',
+    'so',
+    'to'
+])
+
 znaiSearchIdx = lunr(function () {
     this.pipeline.remove(lunr.stemmer)
     this.ref('id')

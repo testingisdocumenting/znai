@@ -17,10 +17,7 @@
 package org.testingisdocumenting.znai.structure;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -39,26 +36,57 @@ public class UniqueAnchorIdGenerator {
         headings.add(new LevelId(level, id));
     }
 
-    public String generateId(Path path, String nonUniqueId) {
+    public AnchorIds generateIds(Path path, String nonUniqueId) {
+        // we create multiple ids: long version and short version
+        // both ids should work and be recognizable, but we visually expose the long version
+        var prefixes = buildPrefixes(path, nonUniqueId);
+        var main = updateWithCountSuffixIfRequired(path, prefixes.usingAllHeadings);
+        var alternative = updateWithCountSuffixIfRequired(path, prefixes.usingLastHeading);
+
+        boolean arePrefixesEqual = prefixes.usingAllHeadings.equals(prefixes.usingLastHeading);
+        var alternativeList = arePrefixesEqual ?
+                Collections.<String>emptyList():
+                Collections.singletonList(alternative);
+        return new AnchorIds(main, alternativeList);
+    }
+
+    private String updateWithCountSuffixIfRequired(Path path, String prefix) {
+        var pathsCounts = usedHeadingsCountByPath.computeIfAbsent(path, k -> new HashMap<>());
+
+        Integer count = pathsCounts.getOrDefault(prefix, 0);
+        pathsCounts.put(prefix, count + 1);
+
+        if (count == 0) {
+            return prefix;
+        }
+
+        return prefix + "-" + (count + 1);
+    }
+
+    private Prefixes buildPrefixes(Path path, String nonUniqueId) {
         var headings = getOrCreateHeadings(path);
-        String prefix = headings.stream()
+
+        String fullPrefix = headings.stream()
                 .map(LevelId::getId)
                 .filter(id -> !id.isEmpty())
                 .collect(Collectors.joining("-"));
 
-        if (!nonUniqueId.isEmpty()) {
-            prefix = prefix + (prefix.isEmpty() ? nonUniqueId : "-" + nonUniqueId);
+        String lastHeadingOnly = headings.isEmpty() ? "" : headings.get(headings.size() - 1).id;
+
+        return new Prefixes(combinePrefixAndId(fullPrefix, nonUniqueId),
+                combinePrefixAndId(lastHeadingOnly, nonUniqueId));
+    }
+
+    private String combinePrefixAndId(String prefix, String id) {
+        if (prefix.isEmpty()) {
+            return id;
         }
 
-        var usedHeadingsCount = usedHeadingsCountByPath.computeIfAbsent(path, k -> new HashMap<>());
-        Integer count = usedHeadingsCount.get(prefix);
-        if (count == null) {
-            usedHeadingsCount.put(prefix, 1);
+        if (id.isEmpty()) {
             return prefix;
         }
 
-        usedHeadingsCount.put(prefix, count + 1);
-        return prefix + "-" + (count + 1);
+        return prefix + "-" + id;
     }
 
     private List<LevelId> getOrCreateHeadings(Path path) {
@@ -83,4 +111,6 @@ public class UniqueAnchorIdGenerator {
             return id;
         }
     }
+
+    record Prefixes (String usingAllHeadings, String usingLastHeading) {}
 }

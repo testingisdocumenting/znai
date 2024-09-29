@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.website
 
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle
 import org.testingisdocumenting.znai.core.DocMeta
+import org.testingisdocumenting.znai.structure.AnchorIds
 import org.testingisdocumenting.znai.structure.DocUrl
 import org.testingisdocumenting.znai.structure.TableOfContents
 import org.testingisdocumenting.znai.structure.TocNameAndOpts
@@ -85,8 +86,8 @@ class WebSiteDocStructureTest {
         def pageOnePath = Paths.get('/home/user/docs/chapter/pageOne.md')
         def pageTwoPath = Paths.get('/home/user/docs/chapter/pageTwo.md')
         docStructure.registerGlobalAnchor(pageOnePath, 'functionRefId')
-        docStructure.registerLocalAnchor(pageOnePath, 'localId')
-        docStructure.registerLocalAnchor(pageTwoPath, 'test-section')
+        docStructure.registerLocalAnchors(pageOnePath, new AnchorIds('localId', []))
+        docStructure.registerLocalAnchors(pageTwoPath, new AnchorIds('test-section', []))
         docStructure.validateUrl(pageOnePath, 'section title', new DocUrl(markupPath, 'chapter/pageOne#functionRefId'))
         docStructure.validateUrl(pageOnePath, 'section title', new DocUrl(markupPath, 'chapter/pageOne#localId'))
         docStructure.validateUrl(pageOnePath, 'section title', new DocUrl(markupPath, 'chapter/pageTwo#test-section'))
@@ -98,7 +99,7 @@ class WebSiteDocStructureTest {
     void "should handle index page with anchor as forward slash"() {
         def indexPath = Paths.get('/home/user/docs/index.md')
         def referringPagePath = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.registerLocalAnchor(indexPath, 'index-id')
+        docStructure.registerLocalAnchors(indexPath, new AnchorIds('index-id', []))
         docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl(markupPath, '/#index-id'))
         docStructure.validateCollectedLinks()
     }
@@ -107,7 +108,7 @@ class WebSiteDocStructureTest {
     void "should validate index page anchors"() {
         def indexPath = Paths.get('/home/user/docs/index.md')
         def referringPagePath = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.registerLocalAnchor(indexPath, 'index-id')
+        docStructure.registerLocalAnchors(indexPath, new AnchorIds('index-id', []))
         docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl(markupPath, '/#index-wrong-id'))
 
         code {

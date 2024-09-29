@@ -125,7 +125,7 @@ class JsonIncludePluginTest {
         props.should == [data           : expectedFullData,
                          autoTitle      : true,
                          title          : "test.json",
-                         anchorId       : "test-json",
+                         anchorId       : "testjson",
                          highlightValues: [],
                          highlightKeys  : []]
     }
