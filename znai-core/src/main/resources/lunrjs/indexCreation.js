@@ -15,30 +15,8 @@
  * limitations under the License.
  */
 
-var createStopWordFilter = function (stopWords) {
-    var words = stopWords.reduce(function (memo, stopWord) {
-        memo[stopWord] = stopWord
-        return memo
-    }, {})
-    return function (token) {
-        if (token && words[token.toString()] !== token.toString()) return token
-    }
-}
-
-var stopWordFilter = createStopWordFilter([
-    'a',
-    'am',
-    'an',
-    'at',
-    'be',
-    'so',
-    'to'
-])
-
 znaiSearchIdx = lunr(function () {
     this.pipeline.remove(lunr.stemmer)
-    this.pipeline.remove(lunr.stopWordFilter)
-    this.pipeline.add(stopWordFilter)
     this.ref('id')
     this.field('section')
     this.field('pageTitle')
