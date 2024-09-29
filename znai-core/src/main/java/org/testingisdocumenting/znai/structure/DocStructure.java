@@ -25,10 +25,10 @@ public interface DocStructure {
     String fullUrl(String relativeUrl);
 
     void onSectionOrSubHeading(Path path, int level, String id);
-    String generateUniqueAnchor(Path path, String localId);
+    AnchorIds generateUniqueAnchors(Path path, String localId);
 
     void registerGlobalAnchor(Path sourcePath, String anchorId);
-    void registerLocalAnchor(Path path, String anchorId);
+    void registerLocalAnchors(Path path, AnchorIds anchorIds);
     String globalAnchorUrl(Path clientPath, String anchorId);
     Optional<String> findGlobalAnchorUrl(String globalAnchorId);
 

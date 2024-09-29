@@ -28,12 +28,13 @@ import "./HeadingStyles.css";
 interface Props {
   level: number;
   id: string;
+  additionalIds: string[];
   title: string;
   badge?: string;
   style?: string;
 }
 
-export function SubHeading({ level, title, id, badge, style }: Props) {
+export function SubHeading({ level, title, id, additionalIds, badge, style }: Props) {
   const Element = `h${level}`;
   const className = "content-block znai-heading" + (style ? " " + style : "");
 
@@ -45,6 +46,9 @@ export function SubHeading({ level, title, id, badge, style }: Props) {
       <a href={"#" + id}>
         <Icon id="link" />
       </a>
+      {additionalIds.map((id) => (
+        <span id={id} />
+      ))}
     </Element>
   );
 }

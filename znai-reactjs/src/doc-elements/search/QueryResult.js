@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,19 +28,22 @@ export default class QueryResult {
         return Object.keys(this.snippetsCallbacksById)
     }
 
-    getSnippetsToHighlight(id, text) {
+    getSnippetsToHighlight(id, searchEntry) {
         const snippets = []
 
         const snippetsById = this.snippetsCallbacksById[id]
         const snippetsTypeById = this.snippetsTypeById[id]
 
         const len = snippetsById.length
-        for (let i = 0; i < len; i++) {
-            const callback = snippetsById[i]
-            const type = snippetsTypeById[i]
+        for (let idx = 0; idx < len; idx++) {
+            const callback = snippetsById[idx]
+            const type = snippetsTypeById[idx]
 
-            if (type === 'text') {
-                snippets.push(...callback(text))
+            console.log("@@type", type, "searchEntry", searchEntry)
+            if (type === 'textStandard') {
+                snippets.push(...callback(searchEntry.textStandard))
+            } else if (type === 'textHigh') {
+                snippets.push(...callback(searchEntry.textHigh))
             }
         }
 

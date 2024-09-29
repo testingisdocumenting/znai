@@ -21,34 +21,41 @@ import org.junit.Test
 import java.nio.file.Paths
 
 class UniqueAnchorIdGeneratorTest {
+    def path = Paths.get("")
+
     @Test
     void "same anchor id"() {
-        def path = Paths.get("")
-
         def generator = new UniqueAnchorIdGenerator()
-        generator.generateId(path, "my-image").should == "my-image"
+        generator.generateIds(path, "my-image").should == [main: "my-image"]
 
         generator.registerSectionOrSubHeading(path, 1, "section")
         generator.registerSectionOrSubHeading(path, 2, "sub-section")
-        generator.generateId(path, "my-image").should == "section-sub-section-my-image"
-        generator.generateId(path, "my-image").should == "section-sub-section-my-image-2"
+        generator.generateIds(path, "my-image").should == [main: "section-sub-section-my-image", additional: ["sub-section-my-image"]]
+        generator.generateIds(path, "my-image").should == [main: "section-sub-section-my-image-2", additional: ["sub-section-my-image-2"]]
 
         generator.registerSectionOrSubHeading(path, 2, "another-sub-section")
-        generator.generateId(path, "my-image").should == "section-another-sub-section-my-image"
+        generator.generateIds(path, "my-image").should == [main: "section-another-sub-section-my-image", additional: ["another-sub-section-my-image"]]
 
         generator.registerSectionOrSubHeading(path, 1, "another-section")
-        generator.generateId(path, "my-image").should == "another-section-my-image"
+        generator.generateIds(path, "my-image").should == [main: "another-section-my-image", additional: []]
     }
 
     @Test
     void "different paths"() {
         def generator = new UniqueAnchorIdGenerator()
 
-        def path = Paths.get("")
         generator.registerSectionOrSubHeading(path, 1, "section")
         generator.registerSectionOrSubHeading(path, 2, "sub-section")
 
         def anotherPath = Paths.get("my-file.md")
-        generator.generateId(anotherPath, "my-image").should == "my-image"
+        generator.generateIds(anotherPath, "my-image").main().should == "my-image"
+    }
+
+    @Test
+    void "empty non unique id"() {
+        def generator = new UniqueAnchorIdGenerator()
+        generator.registerSectionOrSubHeading(path, 1, "section")
+        generator.registerSectionOrSubHeading(path, 2, "sub-section")
+        generator.generateIds(path, "").should == [main: "section-sub-section", additional: ["sub-section"]]
     }
 }

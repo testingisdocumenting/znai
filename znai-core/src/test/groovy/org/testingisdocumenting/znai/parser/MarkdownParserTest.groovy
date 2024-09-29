@@ -130,7 +130,7 @@ class MarkdownParserTest {
     @Test
     void "header badge"() {
         parse('# my header {badge: "v1.32"}')
-        content.should == [[title: 'my header' , id: 'my-header', badge: 'v1.32', type: 'Section']]
+        content.should == [[title: 'my header' , id: 'my-header', additionalIds: [], badge: 'v1.32', type: 'Section']]
     }
 
     @Test
@@ -223,39 +223,39 @@ world""")
     @Test
     void "top level sections"() {
         parse("# Section\ntext text")
-        content.should == [[type: 'Section', id: "section", title: "Section", content:[
+        content.should == [[type: 'Section', id: "section", additionalIds: [], title: "Section", content:[
                 [type: "Paragraph", content: [[type: "SimpleText", text: "text text"]]]]]]
     }
 
     @Test
     void "top level section without text"() {
         parse("# ")
-        content.should == [[type: 'Section', id: "", title: ""]]
+        content.should == [[type: 'Section', id: "", additionalIds: [], title: ""]]
     }
 
     @Test
     void "second level section"() {
         parse("## Secondary Section \ntext text", Paths.get("new-file.md"))
-        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section'],
+        content.should == [[type: 'SubHeading', level: 2, title: 'Secondary Section', id: 'secondary-section', additionalIds: []],
                            [type: 'Paragraph', content: [[type: 'SimpleText', text: 'text text']]]]
     }
 
     @Test
     void "second level section without text"() {
         parse("## ", Paths.get("empty-header.md"))
-        content.should == [[type: 'SubHeading', level: 2, title: '', id: '']]
+        content.should == [[type: 'SubHeading', level: 2, title: '', id: '', additionalIds: []]]
     }
 
     @Test
     void "header inline code text is allowed"() {
         parse('# my header about `thing` here {badge: "v3.4"}')
-        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', badge: 'v3.4', type: 'Section']]
+        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', additionalIds: [], badge: 'v3.4', type: 'Section']]
     }
 
     @Test
     void "sub-header inline code text is allowed"() {
         parse('## my header about `thing` here {badge: "v3.4"}', Paths.get("sub-header.md"))
-        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', badge: 'v3.4', type: 'SubHeading', level: 2]]
+        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', additionalIds: [], badge: 'v3.4', type: 'SubHeading', level: 2]]
     }
 
     @Test

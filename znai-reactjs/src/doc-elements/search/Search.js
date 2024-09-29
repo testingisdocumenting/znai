@@ -37,6 +37,10 @@ class Search {
         const lowestBoost = 0.05
         const matches = this.searchIdx.query(q => {
             term.split(lunr.tokenizer.separator).forEach(function (term) {
+                // if (term.length <= 2) {
+                //     return
+                // }
+
                 q.term(term, { fields: [ 'pageTitle' ], boost: highestBoost })
                 q.term(term, { fields: [ 'pageSection' ], boost: highestBoost })
                 q.term(term, { fields: [ 'textStandard' ], boost: defaultBoost })
@@ -52,6 +56,8 @@ class Search {
             })
         })
 
+        console.log("term", term, "matches", matches)
+
         return new QueryResult(matches)
     }
 
@@ -61,7 +67,7 @@ class Search {
 
     previewDetails(id, queryResult) {
         const section = this._findSectionById(id)
-        const snippets = queryResult.getSnippetsToHighlight(id, this.findSearchEntryById(id).text)
+        const snippets = queryResult.getSnippetsToHighlight(id, this.findSearchEntryById(id))
 
         return {section, snippets}
     }
@@ -92,8 +98,8 @@ class Search {
 
 function mapById(searchData) {
     const result = {}
-    searchData.forEach(([id, section, pageTitle, pageSection, text]) => {
-        result[id] = {section, pageTitle, pageSection, text}
+    searchData.forEach(([id, section, pageTitle, pageSection, textStandard, textHigh]) => {
+        result[id] = {section, pageTitle, pageSection, textStandard, textHigh}
     })
 
     return result
