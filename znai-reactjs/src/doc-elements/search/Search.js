@@ -37,9 +37,9 @@ class Search {
         const lowestBoost = 0.05
         const matches = this.searchIdx.query(q => {
             term.split(lunr.tokenizer.separator).forEach(function (term) {
-                // if (term.length <= 2) {
-                //     return
-                // }
+                if (term.length <= 2) {
+                    return
+                }
 
                 q.term(term, { fields: [ 'pageTitle' ], boost: highestBoost })
                 q.term(term, { fields: [ 'pageSection' ], boost: highestBoost })
