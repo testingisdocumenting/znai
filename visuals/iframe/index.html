@@ -86,27 +86,27 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Embedding Supporting Content</h1></header>
-<p>Use include-iframe plugin to embed HTML content that supports your documentation. Some examples:generated React JS index.html with components that get rendered based on url anchor custom plot functions markdown :include-iframe: iframe/custom.html { fit: true } Note: Use fit parameter to automatically set the height of the iframe to fit its content &lt;html lang=&quot;en&quot;&gt; &lt;head&gt; &lt;style&gt; :root { --backgroundColor: #eee; --color: #222; } body { margin: 0 } .content { background-color: var(--backgroundColor); border: 2px solid #555; color: var(--color); font-size: 20px; padding: 16px; } &lt;/style&gt; &lt;title&gt;generated content&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div class=&quot;content&quot;&gt;Custom content&lt;/div&gt; &lt;/body&gt; &lt;/html&gt; Only iframe/custom.html will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use deployment/additional-files upload.txt</p>
+<p>Use plugin to embed HTML content that supports your documentation Some examples generated React JS index html with components that get rendered based on url anchor custom plot functions Note Use parameter to automatically set the height of the iframe to fit its content Only will be automatically copied to the deploy destination during documentation build step If you need other supporting files you need to use upload txt iframe custom html include iframe include iframe iframe custom html fit true fit &lt;html lang en &gt; &lt;head&gt; &lt;style&gt; root backgroundColor #eee color #222 body margin 0 content background color var backgroundColor border 2px solid #555 color var color font size 20px padding 16px &lt; style&gt; &lt;title&gt;generated content&lt; title&gt; &lt; head&gt; &lt;body&gt; &lt;div class content &gt;Custom content&lt; div&gt; &lt; body&gt; &lt; html&gt;</p>
 </article>
 
 <article>
 <header><h1>Properties Override</h1></header>
-<p>Use light and dark to override CSS properties inside iframe content for light and dark modes respectively. Switch mode now to see the effect. markdown :include-iframe: iframe/custom.html { fit: true, light: { &quot;--color&quot;: &quot;#333&quot;, &quot;--backgroundColor&quot;: &quot;#eee&quot; }, dark: { &quot;--color&quot;: &quot;#eee&quot;, &quot;--backgroundColor&quot;: &quot;#333&quot; }, }</p>
+<p>Use and to override CSS properties inside iframe content for light and dark modes respectively Switch mode now to see the effect light dark include iframe iframe custom html fit true light color #333 backgroundColor #eee dark color #eee backgroundColor #333</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use title parameter to display title bar on top of the embedded content: markdown :include-iframe: iframe/custom.html { title: &quot;rendered example&quot;, light: { &quot;--color&quot;: &quot;#333&quot;, &quot;--backgroundColor&quot;: &quot;#eee&quot; }, dark: { &quot;--color&quot;: &quot;#eee&quot;, &quot;--backgroundColor&quot;: &quot;#333&quot; }, fit: true }</p>
+<p>Use parameter to display title bar on top of the embedded content title include iframe iframe custom html title rendered example light color #333 backgroundColor #eee dark color #eee backgroundColor #333 fit true</p>
 </article>
 
 <article>
 <header><h1>Embedding Video</h1></header>
-<p>Use include-iframe to embed media from other places. By default, aspect ratio is set to 16:9 . :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY</p>
+<p>Use to embed media from other places By default aspect ratio is set to include iframe 16 9 include iframe https www youtube com embed tgbNymZ7vqY</p>
 </article>
 
 <article>
 <header><h1>Aspect Ratio</h1></header>
-<p>Use aspectRatio to change aspect ratio of the embedded content :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {aspectRatio: &quot;4:3&quot;}</p>
+<p>Use to change aspect ratio of the embedded content aspectRatio include iframe https www youtube com embed tgbNymZ7vqY aspectRatio 4 3</p>
 </article>
 </section>
 </div>
@@ -142,6 +142,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "embedding-supporting-content",
+      "additionalIds" : [ ],
       "title" : "Embedding Supporting Content",
       "type" : "Section",
       "content" : [ {
@@ -187,7 +188,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "ae7970ff-fd71-41c6-9e2e-a103420fc8e2",
+        "previewMarker" : "f14acfb7-d608-4d65-ae6c-17bb617bbbc1",
         "fit" : true,
         "type" : "Iframe"
       }, {
@@ -207,7 +208,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "<html lang=\"en\">\n<head>\n  <style>\n      :root {\n          --backgroundColor: #eee;\n          --color: #222;\n      }\n\n      body { margin: 0 }\n\n      .content {\n          background-color: var(--backgroundColor);\n          border: 2px solid #555;\n          color: var(--color);\n          font-size: 20px;\n          padding: 16px;\n      }\n  </style>\n  <title>generated content</title>\n</head>\n\n<body>\n<div class=\"content\">Custom content</div>\n</body>\n</html>",
         "autoTitle" : true,
         "title" : "iframe/custom.html",
-        "anchorId" : "embedding-supporting-content-iframe-custom-html",
+        "anchorId" : "embedding-supporting-content-iframe-customhtml",
         "type" : "Snippet"
       }, {
         "attentionType" : "warning",
@@ -241,6 +242,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "properties-override",
+      "additionalIds" : [ ],
       "title" : "Properties Override",
       "type" : "Section",
       "content" : [ {
@@ -273,7 +275,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "7cbdceae-0f28-481f-8a98-01b271afee36",
+        "previewMarker" : "b4925f2c-5aeb-4b84-a874-d3ed6aab7a59",
         "fit" : true,
         "light" : {
           "--color" : "#333",
@@ -287,6 +289,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "title",
+      "additionalIds" : [ ],
       "title" : "Title",
       "type" : "Section",
       "content" : [ {
@@ -309,7 +312,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "39eb7e7f-a043-4e5d-9d48-5db04c40b8e0",
+        "previewMarker" : "9d12ad51-78ca-4931-ae59-d6f455e987b1",
         "title" : "rendered example",
         "light" : {
           "--color" : "#333",
@@ -324,6 +327,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "embedding-video",
+      "additionalIds" : [ ],
       "title" : "Embedding Video",
       "type" : "Section",
       "content" : [ {
@@ -351,11 +355,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
-        "previewMarker" : "9fff61c8-860f-4525-9191-72b48d195081",
+        "previewMarker" : "1ffa49e9-94de-426f-8198-b6ae95dea12d",
         "type" : "Iframe"
       } ]
     }, {
       "id" : "aspect-ratio",
+      "additionalIds" : [ ],
       "title" : "Aspect Ratio",
       "type" : "Section",
       "content" : [ {
@@ -377,12 +382,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
-        "previewMarker" : "c8d3c974-1b50-4b94-8d3e-667f05ddb974",
+        "previewMarker" : "00aa2b7e-80b6-4fa7-81bc-c678d93a1fdd",
         "aspectRatio" : "4:3",
         "type" : "Iframe"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052817,
+    "lastModifiedTime" : 1727735409513,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Iframe",

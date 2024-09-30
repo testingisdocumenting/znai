@@ -86,22 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>1.66</h1></header>
-<p>Fix: Properly render leading spaces when using snippets/CLI#ansi-colors-output include-cli-output Fix: Text right after introduction/what-is-this#extensive-plugins-system-include Include Plugin is no longer ignored Add: snippets/external-code-snippets#no-gap noGapSeparator to add a separator between code snippets with noGap Add visuals/charts#filtering-columns Charts columns parameter Add: visuals/iframe IFrame auto reload on html content change during preview Add: visuals/iframe#title IFrame title parameter Add: visuals/iframe IFrame content now participates in presentation mode Add: visuals/iframe IFrame content no gap on mobile</p>
+<p>Fix Properly render leading spaces when using include cli output Fix Text right after Include Plugin is no longer ignored Add noGapSeparator to add a separator between code snippets with noGap Add Charts columns parameter Add IFrame auto reload on html content change during preview Add IFrame title parameter Add IFrame content now participates in presentation mode Add IFrame content no gap on mobile</p>
 </article>
 
 <article>
 <header><h1>1.65</h1></header>
-<p>Fix: Restore search focus when visuals/iframe iframe is present in search preview Add: visuals/PlantUml Plant UML use BSD license as dependency Add: snippets/snippets-manipulation#surrounded-by-multi-chars-scope Surrounded By Multi-chars Scope text manipulation Add: snippets/snippets-manipulation#surrounded-by-scope Surrounded By Scope text manipulation Add: visuals/iframe#properties-override Properties override for iframe content based on active dark/light mode selection Add: Automatically add index.html if visuals/iframe iframe src points to documentation content and ends with /</p>
+<p>Fix Restore search focus when iframe is present in search preview Add Plant UML use license as dependency BSD Add Surrounded By Multi chars Scope text manipulation Add Surrounded By Scope text manipulation Add Properties override for iframe content based on active dark light mode selection Add Automatically add index html if iframe src points to documentation content and ends with</p>
 </article>
 
 <article>
 <header><h1>1.64</h1></header>
-<p>Fix: Deploy images that are used in https://testingisdocumenting.org/znai/flow/footer Footer Fix: Links from index page are no longer always pointing to index page itself Fix: During preview mode, flow/page-references#links-links-to-subsection subsections anchor ids are no longer increasing the counter when editing the same file. Fix: Grid bullet list presentation mode is now properly hiding unrevealed boxes Fix: snippets/external-code-snippets snippets constant color for dark and light theme Doc: flow/testing-is-documenting Testing Is Documenting intro page rework Doc: Move snippets highlighting into snippets/snippets-highlighting its own page Add: visuals/iframe#embedding-supporting-content iframe fit parameter to auto adjust height of the iframe Add: regexp based preprocessor to modify markdown files before parsing (to work with existing custom markdowns) Add: Preview and real time updates for TOC items that are outside main documentation directory Add: OCaml syntax highlight Add: Clarify snippets/snippets-manipulation#surrounded-by Surrounded By message when second marker is absent Add: deployment/additional-files upload.txt Add: tweak yellow snippets/CLI#output-highlight terminal output color for light theme Add: code snippets snippets/snippets-highlighting#region highlighting regions scope Add: code snippets snippets/snippets-highlighting#region highlighting regions Add: Improve snippets/snippets-highlighting highlighting of adjacent lines in code snippets Add: Support for flow/page-references#links limited relative links with explicit file extension Add: snippets/snippets-manipulation#surrounded-by surroundedByKeep boolean option Add: snippets/code-snippets#anchor Anchor support for embedded code blocks Add: snippets/json#callouts-from-file JSON callouts from file Add: snippets/json#callouts JSON callouts Add: Java 17 is a minimum java version required to run Add: snippets/json JSON rename paths to highlightValue and pathsFile to highlightValueFile to match highlightKey and highlightKeyFile pair Add: JSON snippets/json#highlight-keys-by-path highlight keys Add: plugin parameter names deprecation (rename) mechanism</p>
+<p>Fix Deploy images that are used in Footer Fix Links from page are no longer always pointing to index page itself index Fix During preview mode subsections anchor ids are no longer increasing the counter when editing the same file Fix bullet list presentation mode is now properly hiding unrevealed boxes Grid Fix snippets constant color for dark and light theme Doc Testing Is Documenting intro page rework Doc Move snippets highlighting into its own page Add iframe fit parameter to auto adjust height of the iframe Add regexp based preprocessor to modify markdown files before parsing to work with existing custom markdowns Add Preview and real time updates for TOC items that are outside main documentation directory Add OCaml syntax highlight Add Clarify Surrounded By message when second marker is absent Add upload txt Add tweak yellow terminal output color for light theme Add code snippets highlighting regions scope Add code snippets highlighting regions Add Improve highlighting of adjacent lines in code snippets Add Support for limited relative links with explicit file extension Add surroundedByKeep boolean option Add Anchor support for embedded code blocks Add JSON callouts from file Add JSON callouts Add Java 17 is a minimum java version required to run Add JSON rename to and to to match and pair paths highlightValue pathsFile highlightValueFile highlightKey highlightKeyFile Add JSON highlight keys Add plugin parameter names deprecation rename mechanism</p>
 </article>
 
 <article>
 <header><h1>1.63</h1></header>
-<p>Fix: visuals/images Images null pointer when using with SVGs Fix: Table column parameters layout/tables#column-names-conflict name conflict Fix: snippets/json JSON regression with displaying null values Fix: stop badge visuals/image-annotations#badge-textual-description image annotation from pulsing when mouse moved out Fix: remove extra gap from last code snippet inside snippets/api-parameters API parameters Add: plugins/plugin-types Plugins parameters validation error message now prints in the context of plugin name and passed params Fix: snippets/code-references code reference now turns into links parts of code that is not fully recognized by highlighter Add: snippets/snippets-manipulation#surrounded-by surroundedBy validates that content is not empty after extraction Add: snippets/open-API Open API summary field validation when using autoSection: true Add: snippets/CLI#output-highlight CLI Output Highlight now matches sub-lines ignoring colors ANSI sequence Add: JSON snippets/json#enclose-in-object Enclose In Object Add: JSON format for snippets/code-references Code References Add: better alignment of multiple snippets/CLI CLI Commands in a row and when surrounded by text Add: snippets/CLI#output-highlight console output and snippets/external-code-snippets code snippets trim empty lines from start/end when no extraction specific params is set Add: include and exclude to snippets/snippets-manipulation#include-contains include/exclude lines using contains Add: excludeStart and excludeEnd as separate options to snippets/snippets-manipulation snippets manipulation Add: snippets/inlined-code-snippets#validated-identifier identifier support for multiple validation paths. Example of using default parameters to simplify flow. Add: noGap option for images, tables, snippets and API parameters is only required for the first entry, second can omit it. If it does, third entry will have a gap again above. This helps with groups of snippets/tables/etc. Add: snippets/CLI#wide-mode Wide Mode for CLI Output</p>
+<p>Fix Images null pointer when using with SVGs Fix Table column parameters name conflict Fix JSON regression with displaying values null Fix stop badge image annotation from pulsing when mouse moved out Fix remove extra gap from last code snippet inside API parameters Add Plugins parameters validation error message now prints in the context of plugin name and passed params Fix code reference now turns into links parts of code that is not fully recognized by highlighter Add surroundedBy validates that content is not empty after extraction Add Open API summary field validation when using autoSection true Add CLI Output Highlight now matches sub lines ignoring colors ANSI sequence Add JSON Enclose In Object Add JSON format for Code References Add better alignment of multiple CLI Commands in a row and when surrounded by text Add console output and code snippets trim empty lines from start end when no extraction specific params is set Add and to include exclude lines using contains include exclude Add and as separate options to snippets manipulation excludeStart excludeEnd Add identifier support for multiple validation paths Example of using default parameters to simplify flow Add noGap option for images tables snippets and API parameters is only required for the first entry second can omit it If it does third entry will have a gap again above This helps with groups of snippets tables etc Add Wide Mode for CLI Output</p>
 </article>
 </section>
 </div>
@@ -136,7 +136,8 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "1-66",
+      "id" : "166",
+      "additionalIds" : [ ],
       "title" : "1.66",
       "type" : "Section",
       "content" : [ {
@@ -341,7 +342,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "id" : "1-65",
+      "id" : "165",
+      "additionalIds" : [ ],
       "title" : "1.65",
       "type" : "Section",
       "content" : [ {
@@ -505,7 +507,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "id" : "1-64",
+      "id" : "164",
+      "additionalIds" : [ ],
       "title" : "1.64",
       "type" : "Section",
       "content" : [ {
@@ -1116,7 +1119,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "id" : "1-63",
+      "id" : "163",
+      "additionalIds" : [ ],
       "title" : "1.63",
       "type" : "Section",
       "content" : [ {
@@ -1622,7 +1626,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409497,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2023 Releases",
@@ -1635,16 +1639,16 @@ ReactDOM.render(React.createElement(Documentation, {
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "1.66",
-        "id" : "1-66"
+        "id" : "166"
       }, {
         "title" : "1.65",
-        "id" : "1-65"
+        "id" : "165"
       }, {
         "title" : "1.64",
-        "id" : "1-64"
+        "id" : "164"
       }, {
         "title" : "1.63",
-        "id" : "1-63"
+        "id" : "163"
       } ]
     }
   }

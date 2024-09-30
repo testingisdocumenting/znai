@@ -86,47 +86,47 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Badges</h1></header>
-<p>Use image fence plugin to display Image and manually provide badge coordinates ```image testingisdocumenting.png {scale: 0.5} 840,600 1680,1400 ``` Note: Color of badges change based on the background color</p>
+<p>Use fence plugin to display Image and manually provide badge coordinates Note Color of badges change based on the background color image ```image testingisdocumenting png scale 0 5 840 600 1680 1400 ```</p>
 </article>
 
 <article>
 <header><h1>Manual Coordinates</h1></header>
-<p>Hover mouse over image during introduction/getting-started#preview-mode Preview Mode to display coordinates under the cursor. Use the displayed coordinates to update the position.</p>
+<p>Hover mouse over image during Preview Mode to display coordinates under the cursor Use the displayed coordinates to update the position</p>
 </article>
 
 <article>
 <header><h1>Badge Textual Description</h1></header>
-<p>Put ordered list right before or after an annotated image to associate text with the badges. markdown 1. Use automated testing to exercise happy paths and capture test artifacts 2. Use captured test artifacts to supercharge your documentation ```image testingisdocumenting.png {scale: 0.5} 840,600 1680,1400 ``` Note: Hover over image annotations to display automatic tooltip. Hover over an item text to highlight the annotation on the image.Use automated testing to exercise happy paths and capture test artifacts Use captured test artifacts to supercharge your documentation</p>
+<p>Put ordered list right before or after an annotated image to associate text with the badges Note Hover over image annotations to display automatic tooltip Hover over an item text to highlight the annotation on the image Use automated testing to exercise happy paths and capture test artifacts Use captured test artifacts to supercharge your documentation 1 Use automated testing to exercise happy paths and capture test artifacts 2 Use captured test artifacts to supercharge your documentation ```image testingisdocumenting png scale 0 5 840 600 1680 1400 ```</p>
 </article>
 
 <article>
 <header><h1>Pixel Ratio</h1></header>
-<p>Use pixelRatio to display HiDPI images and use logical coordinates for the annotations ```image testingisdocumenting.png {pixelRatio: 2} 420,300 840,700 ```</p>
+<p>Use to display HiDPI images and use logical coordinates for the annotations pixelRatio ```image testingisdocumenting png pixelRatio 2 420 300 840 700 ```</p>
 </article>
 
 <article>
 <header><h1>Rectangles And Arrows</h1></header>
-<p>Use rect and arrow as first column value to render arrow or rectangle annotation ```image testingisdocumenting.png {pixelRatio: 2} rect,60,110,420,430 arrow,485,810,310,474 ``` Add a text block after coordinates to provide tooltip data. Markdown is supported. ```image testingisdocumenting.png {pixelRatio: 2} rect,60,110,420,430,Note: zone description arrow,485,810,310,474,destination **description** ``` Note: Hover over image annotations to display automatic tooltip.</p>
+<p>Use and as first column value to render arrow or rectangle annotation Add a text block after coordinates to provide tooltip data Markdown is supported Note Hover over image annotations to display automatic tooltip rect arrow ```image testingisdocumenting png pixelRatio 2 rect 60 110 420 430 arrow 485 810 310 474 ``` ```image testingisdocumenting png pixelRatio 2 rect 60 110 420 430 Note zone description arrow 485 810 310 474 destination **description** ```</p>
 </article>
 
 <article>
 <header><h1>Annotations File</h1></header>
-<p>:include-image: testingisdocumenting.png { annotationsPath: &quot;testingisdocumenting.csv&quot;, pixelRatio: 2, } rect,60,110,420,430,Note: zone description arrow,485,810,310,474,destination **description** include-image also supports JSON file format</p>
+<p>also supports file format include image testingisdocumenting png annotationsPath testingisdocumenting csv pixelRatio 2 rect 60 110 420 430 Note zone description arrow 485 810 310 474 destination **description** include image JSON</p>
 </article>
 
 <article>
 <header><h1>Annotations Path Shortcut</h1></header>
-<p>You don't need to specify annotations path, if annotations file matches file name and path of the image and has json or csv extension.Add annotate: true to automatically use matching annotations file :include-image: testingisdocumenting.png { annotate: true, pixelRatio: 2, }</p>
+<p>You don t need to specify annotations path if annotations file matches file name and path of the image and has or extension Add to automatically use matching annotations file json csv annotate true include image testingisdocumenting png annotate true pixelRatio 2</p>
 </article>
 
 <article>
 <header><h1>Integration With Testing</h1></header>
-<p>Use UI testing frameworks to automatically generate annotations file and capture screenshot.For example https://github.com/testingisdocumenting/webtau WebTau automatically generates an annotations file in addition to capturing a screenshot. package webtauexamples import static org.testingisdocumenting.webtau.WebTauGroovyDsl.* def homeSearchInput = $('input[id*=&quot;search&quot;]') def resultSearchInput = $(&quot;#search_form_input&quot;) def result = $('article[data-testid=&quot;result&quot;]') scenario(&quot;capture screenshot&quot;) { browser.open(&quot;https://duckduckgo.com/&quot;) homeSearchInput.waitToBe visible homeSearchInput.setValue(&quot;testing is documenting&quot;) homeSearchInput.sendKeys(browser.keys.enter) result.waitTo visible browser.doc.withAnnotations(resultSearchInput, result) .capture(&quot;duckduckgo-search&quot;) } :include-image: doc-artifacts/duckduckgo-search.png {annotate: true} Type question you want to be answered anonymously Scan through results and pick the most relevant one Note: https://github.com/testingisdocumenting/webtau WebTau captures additional data such as pixelRatio</p>
+<p>Use UI testing frameworks to automatically generate annotations file and capture screenshot For example WebTau automatically generates an annotations file in addition to capturing a screenshot Type question you want to be answered anonymously Scan through results and pick the most relevant one Note WebTau captures additional data such as package webtauexamples import static org testingisdocumenting webtau WebTauGroovyDsl * def homeSearchInput $ input id* search def resultSearchInput $ #search_form_input def result $ article data testid result scenario capture screenshot browser open https duckduckgo com homeSearchInput waitToBe visible homeSearchInput setValue testing is documenting homeSearchInput sendKeys browser keys enter result waitTo visible browser doc withAnnotations resultSearchInput result capture duckduckgo search include image doc artifacts duckduckgo search png annotate true pixelRatio</p>
 </article>
 
 <article>
 <header><h1>Presentation Mode</h1></header>
-<p>Annotated images automatically participate in presentation mode. Annotations will appear one by one.</p>
+<p>Annotated images automatically participate in presentation mode Annotations will appear one by one</p>
 </article>
 </section>
 </div>
@@ -162,6 +162,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "badges",
+      "additionalIds" : [ ],
       "title" : "Badges",
       "type" : "Section",
       "content" : [ {
@@ -184,7 +185,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scale" : 0.5,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1718071052829,
+        "timestamp" : 1727735409523,
         "shapes" : [ {
           "invertedColors" : true,
           "x" : 840.0,
@@ -210,6 +211,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "manual-coordinates",
+      "additionalIds" : [ ],
       "title" : "Manual Coordinates",
       "type" : "Section",
       "content" : [ {
@@ -232,6 +234,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "badge-textual-description",
+      "additionalIds" : [ ],
       "title" : "Badge Textual Description",
       "type" : "Section",
       "content" : [ {
@@ -286,7 +289,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scale" : 0.5,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1718071052829,
+        "timestamp" : 1727735409523,
         "shapes" : [ {
           "invertedColors" : true,
           "x" : 840.0,
@@ -306,6 +309,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "pixel-ratio",
+      "additionalIds" : [ ],
       "title" : "Pixel Ratio",
       "type" : "Section",
       "content" : [ {
@@ -328,7 +332,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1718071052829,
+        "timestamp" : 1727735409523,
         "shapes" : [ {
           "invertedColors" : true,
           "x" : 420.0,
@@ -348,6 +352,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "rectangles-and-arrows",
+      "additionalIds" : [ ],
       "title" : "Rectangles And Arrows",
       "type" : "Section",
       "content" : [ {
@@ -387,7 +392,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1718071052829,
+        "timestamp" : 1727735409523,
         "shapes" : [ {
           "endY" : 430.0,
           "endX" : 420.0,
@@ -435,6 +440,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "annotations-file",
+      "additionalIds" : [ ],
       "title" : "Annotations File",
       "type" : "Section",
       "content" : [ {
@@ -447,13 +453,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "rect,60,110,420,430,Note: zone description\narrow,485,810,310,474,destination **description**",
         "autoTitle" : true,
         "title" : "testingisdocumenting.csv",
-        "anchorId" : "annotations-file-testingisdocumenting-csv",
+        "anchorId" : "annotations-file-testingisdocumentingcsv",
         "type" : "Snippet"
       }, {
         "annotationsPath" : "testingisdocumenting.json",
         "pixelRatio" : 2,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1718071052829,
+        "timestamp" : 1727735409523,
         "shapes" : [ {
           "type" : "rect",
           "beginX" : 60.0,
@@ -531,11 +537,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "highlightValues" : [ ],
         "highlightKeys" : [ ],
         "title" : "testingisdocumenting.json",
-        "anchorId" : "annotations-file-testingisdocumenting-json",
+        "anchorId" : "annotations-file-testingisdocumentingjson",
         "type" : "Json"
       } ]
     }, {
       "id" : "annotations-path-shortcut",
+      "additionalIds" : [ ],
       "title" : "Annotations Path Shortcut",
       "type" : "Section",
       "content" : [ {
@@ -581,6 +588,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "integration-with-testing",
+      "additionalIds" : [ ],
       "title" : "Integration With Testing",
       "type" : "Section",
       "content" : [ {
@@ -616,7 +624,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[id*=\"search\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\")\n    homeSearchInput.sendKeys(browser.keys.enter)\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
         "autoTitle" : true,
         "title" : "webtauexamples/imageCapture.groovy",
-        "anchorId" : "integration-with-testing-webtauexamples-imagecapture-groovy",
+        "anchorId" : "integration-with-testing-webtauexamples-imagecapturegroovy",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -649,7 +657,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "annotate" : true,
         "imageSrc" : "/znai/doc-artifacts/duckduckgo-search.png",
-        "timestamp" : 1718071126593,
+        "timestamp" : 1727735504991,
         "shapes" : [ {
           "type" : "badge",
           "text" : "1",
@@ -661,7 +669,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "type" : "badge",
           "text" : "2",
           "x" : 367,
-          "y" : 273,
+          "y" : 269,
           "align" : "Center",
           "invertedColors" : false
         } ],
@@ -681,7 +689,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "badge",
             "text" : "2",
             "x" : 367,
-            "y" : 273,
+            "y" : 269,
             "align" : "Center"
           } ],
           "pixelRatio" : 1
@@ -689,7 +697,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "highlightValues" : [ "root.pixelRatio" ],
         "highlightKeys" : [ ],
         "title" : "doc-artifacts/duckduckgo-search.json",
-        "anchorId" : "integration-with-testing-doc-artifacts-duckduckgo-search-json",
+        "anchorId" : "integration-with-testing-doc-artifacts-duckduckgo-searchjson",
         "type" : "Json"
       }, {
         "type" : "Paragraph",
@@ -714,6 +722,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "presentation-mode",
+      "additionalIds" : [ ],
       "title" : "Presentation Mode",
       "type" : "Section",
       "content" : [ {
@@ -724,7 +733,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052817,
+    "lastModifiedTime" : 1727735409513,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Image Annotations",

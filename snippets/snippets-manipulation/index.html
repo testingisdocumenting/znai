@@ -86,62 +86,62 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Surrounded By</h1></header>
-<p>Use to extract code snippet surrounded by a marker # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py { title: &quot;extracted example with surroundedBy&quot;, surroundedBy: &quot;# example-cancel-trade&quot;} market.cancel_trade(id) Use to keep marker lines block-A-start: event-one-handler: ... block-A-end block-B-start ... block-B-end markdown :include-file: custom.dsl { title: &quot;keep marker lines&quot;, surroundedBy: &quot;block-A&quot;, surroundedByKeep: true } block-A-start: event-one-handler: ... block-A-end</p>
+<p>Use to extract code snippet surrounded by a marker Use to keep marker lines # example import block import market # example import block def main # example book trade id market book_trade symbol market CURRENT_PRICE 100 # example end # example cancel trade market cancel_trade id # example cancel trade if __name__ __main__ main include file python examples py title extracted example with surroundedBy surroundedBy # example cancel trade market cancel_trade id block A start event one handler block A end block B start block B end include file custom dsl title keep marker lines surroundedBy block A surroundedByKeep true block A start event one handler block A end</p>
 </article>
 
 <article>
 <header><h1>Multiple Surrounded By</h1></header>
-<p>Pass a list to to extract multiple blocks :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;]} import market market.cancel_trade(id) Use to select separator(s) between blocks :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;], surroundedBySeparator: [&quot;...&quot;] } import market ... market.cancel_trade(id) Note: can be either single value or a list. Plugin will use a different separator for each block. Use null to have an empty line as a separator.</p>
+<p>Pass a list to to extract multiple blocks Use to select separator s between blocks Note can be either single value or a list Plugin will use a different separator for each block Use to have an empty line as a separator include file python examples py title extracted example surroundedBy # example import block # example cancel trade import market market cancel_trade id include file python examples py title extracted example surroundedBy # example import block # example cancel trade surroundedBySeparator import market market cancel_trade id null</p>
 </article>
 
 <article>
 <header><h1>Surrounded By Scope</h1></header>
-<p>Use to extract text using scopes like {} , [] , etc: class MyClass { void action() { if (condition) { importantExample(); } if (anotherCondition) { anotherImportantExample(); } } } markdown :include-file: MyClass.java {surroundedByScope: {start: &quot;if (condition)&quot;, scope: &quot;{}&quot;}} if (condition) { importantExample(); }</p>
+<p>Use to extract text using scopes like etc class MyClass void action if condition importantExample if anotherCondition anotherImportantExample include file MyClass java surroundedByScope start if condition scope if condition importantExample</p>
 </article>
 
 <article>
 <header><h1>Surrounded By Multi-chars scope</h1></header>
-<p>Pass comma separated multi char region definition to to handle scopes defined with keywords: module ModelZero : sig type t end module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end module ModelC : sig type t end markdown :include-file: ocaml/model.mli {surroundedByScope: {start: &quot;module ModelA&quot;, scope: &quot;sig,end&quot;}} module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end</p>
+<p>Pass comma separated multi char region definition to to handle scopes defined with keywords module ModelZero sig type t end module ModelA sig type t val calc t &gt; int module Nested sig type t end end module ModelC sig type t end include file ocaml model mli surroundedByScope start module ModelA scope sig end module ModelA sig type t val calc t &gt; int module Nested sig type t end end</p>
 </article>
 
 <article>
 <header><h1>Replace</h1></header>
-<p>Use to replace content of the resulting snippet markdown :include-file: python-examples.py { surroundedBy: &quot;# example-cancel-trade&quot;, replace: ['id', '&quot;trade_id&quot;'] } market.cancel_trade(&quot;trade_id&quot;) Pass a list of lists to for multiple replaces markdown :include-file: python-examples.py { surroundedBy: &quot;# example-cancel-trade&quot;, replace: [['id', '&quot;trade_id&quot;'], [&quot;market&quot;, &quot;api&quot;]]} api.cancel_trade(&quot;trade_id&quot;)</p>
+<p>Use to replace content of the resulting snippet Pass a list of lists to for multiple replaces include file python examples py surroundedBy # example cancel trade replace id trade_id market cancel_trade trade_id include file python examples py surroundedBy # example cancel trade replace id trade_id market api api cancel_trade trade_id</p>
 </article>
 
 <article>
 <header><h1>Replace Regexp Groups</h1></header>
-<p>Use $1 regexp capture groups to create derived content hello1 world2 another3 line4 :include-file: replace-all-group.txt {replace: [&quot;(\\w+)(\\d+)&quot;, &quot;$2-$1&quot;]} 1-hello 2-world 3-another 4-line</p>
+<p>Use regexp capture groups to create derived content $1 hello1 world2 another3 line4 include file replace all group txt replace w d $2 $1 1 hello 2 world 3 another 4 line</p>
 </article>
 
 <article>
 <header><h1>Start/End Line</h1></header>
-<p>Use , to extract specific content by using marker lines. # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py {startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end Note: Lines match doesn't have to be exact, contains is used.By default and are included in the rendered result. Use to remove markers. :include-file: python-examples.py { startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;, excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) To exclude start or end line only use and</p>
+<p>Use to extract specific content by using marker lines Note Lines match doesn t have to be exact is used By default and are included in the rendered result Use to remove markers To exclude start or end line only use and # example import block import market # example import block def main # example book trade id market book_trade symbol market CURRENT_PRICE 100 # example end # example cancel trade market cancel_trade id # example cancel trade if __name__ __main__ main include file python examples py startLine example book trade endLine example end # example book trade id market book_trade symbol market CURRENT_PRICE 100 # example end contains include file python examples py startLine example book trade endLine example end excludeStartEnd true id market book_trade symbol market CURRENT_PRICE 100</p>
 </article>
 
 <article>
 <header><h1>Start/End Multiple Lines</h1></header>
-<p>Pass multiple values to startLine and endLine to specify more precisely a block of code to extract.As example, let's extract a second match block from the code snippets below without adding extra markers: type weather_season = | Spring | Summer | Autumn | Winter let weight_season season = match season with | Spring -&gt; 4 | Summer -&gt; 5 | Autumn -&gt; 3 | Winter -&gt; -1 let describe_season season = (** human readable season description *) match season with | Spring -&gt; &quot;It's springtime! Flowers are blooming.&quot; | Summer -&gt; &quot;It's summertime! Enjoy the warm weather.&quot; | Autumn -&gt; &quot;It's autumn! Leaves are changing colors.&quot; | Winter -&gt; &quot;It's winter! Time to bundle up and enjoy the snow.&quot; if we use startLine: &quot;match season&quot; , we can't guarantee what block will it pick, and it will depend on functions order.To hit the exact one use multiple start lines. Znai will attempt to find a combination of start lines with the smallest distance between them: :include-file: ocaml/seasons.ml {startLine: [&quot;let describe_season&quot;, &quot;match season&quot;], startLineKeepLast: true} match season with | Spring -&gt; &quot;It's springtime! Flowers are blooming.&quot; | Summer -&gt; &quot;It's summertime! Enjoy the warm weather.&quot; | Autumn -&gt; &quot;It's autumn! Leaves are changing colors.&quot; | Winter -&gt; &quot;It's winter! Time to bundle up and enjoy the snow.&quot; Note: Use endLine and endLineKeepFirst to limit lines from the bottom. excludeStart removes all the lines between specified start lines, including the lines. excludeEnd removes all the lines between specified end lines, including the lines.</p>
+<p>Pass multiple values to and to specify more precisely a block of code to extract As example let s extract a second block from the code snippets below without adding extra markers if we use we can t guarantee what block will it pick and it will depend on functions order To hit the exact one use multiple start lines Znai will attempt to find a combination of start lines with the smallest distance between them Note Use and to limit lines from the bottom removes all the lines between specified start lines including the lines removes all the lines between specified end lines including the lines startLine endLine match type weather_season | Spring | Summer | Autumn | Winter let weight_season season match season with | Spring &gt; 4 | Summer &gt; 5 | Autumn &gt; 3 | Winter &gt; 1 let describe_season season ** human readable season description * match season with | Spring &gt; It s springtime Flowers are blooming | Summer &gt; It s summertime Enjoy the warm weather | Autumn &gt; It s autumn Leaves are changing colors | Winter &gt; It s winter Time to bundle up and enjoy the snow startLine match season include file ocaml seasons ml startLine let describe_season match season startLineKeepLast true match season with | Spring &gt; It s springtime Flowers are blooming | Summer &gt; It s summertime Enjoy the warm weather | Autumn &gt; It s autumn Leaves are changing colors | Winter &gt; It s winter Time to bundle up and enjoy the snow endLine endLineKeepFirst excludeStart excludeEnd</p>
 </article>
 
 <article>
 <header><h1>Include Contains</h1></header>
-<p>Use to include only lines containing specified text(s). :include-file: python-examples.py { include: &quot;import &quot; } or :include-file: python-examples.py { include: [&quot;import &quot;] } import market</p>
+<p>Use to include only lines containing specified text s include file python examples py include import or include file python examples py include import import market</p>
 </article>
 
 <article>
 <header><h1>Exclude Contains</h1></header>
-<p>Use to exclude lines containing specified text(s). :include-file: python-examples.py { exclude: &quot;# example&quot; } or :include-file: python-examples.py { exclude: [&quot;# example&quot;] } import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id) if __name__ == &quot;__main__&quot;: main()</p>
+<p>Use to exclude lines containing specified text s include file python examples py exclude # example or include file python examples py exclude # example import market def main id market book_trade symbol market CURRENT_PRICE 100 market cancel_trade id if __name__ __main__ main</p>
 </article>
 
 <article>
 <header><h1>Include Regexp</h1></header>
-<p>Use to include only lines matching regexp(s). :include-file: python-examples.py { includeRegexp: &quot;market.*_trade&quot; } or :include-file: python-examples.py { includeRegexp: [&quot;market.*_trade&quot;] } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id)</p>
+<p>Use to include only lines matching regexp s include file python examples py includeRegexp market *_trade or include file python examples py includeRegexp market *_trade id market book_trade symbol market CURRENT_PRICE 100 market cancel_trade id</p>
 </article>
 
 <article>
 <header><h1>Exclude Regexp</h1></header>
-<p>Use to exclude lines matching regexp(s). :include-file: python-examples.py { excludeRegexp: [&quot;if .* ==&quot;, &quot;\\s+main&quot;, &quot;# example&quot;, &quot;^\\s*$&quot;] } import market id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id)</p>
+<p>Use to exclude lines matching regexp s include file python examples py excludeRegexp if * s main # example ^ s*$ import market id market book_trade symbol market CURRENT_PRICE 100 market cancel_trade id</p>
 </article>
 </section>
 </div>
@@ -177,6 +177,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "surrounded-by",
+      "additionalIds" : [ ],
       "title" : "Surrounded By",
       "type" : "Section",
       "content" : [ {
@@ -226,7 +227,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "block-A-start:\n    event-one-handler:\n        ...\nblock-A-end\n\nblock-B-start\n    ...\nblock-B-end",
         "autoTitle" : true,
         "title" : "custom.dsl",
-        "anchorId" : "surrounded-by-custom-dsl",
+        "anchorId" : "surrounded-by-customdsl",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
@@ -245,6 +246,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multiple-surrounded-by",
+      "additionalIds" : [ ],
       "title" : "Multiple Surrounded By",
       "type" : "Section",
       "content" : [ {
@@ -294,7 +296,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "extracted result",
         "surroundedBy" : [ "# example-import-block", "# example-cancel-trade" ],
         "surroundedBySeparator" : [ "..." ],
-        "anchorId" : "multiple-surrounded-by-extracted-result-2",
+        "anchorId" : "multiple-surrounded-by-extracted-result-3",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -317,6 +319,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "surrounded-by-scope",
+      "additionalIds" : [ ],
       "title" : "Surrounded By Scope",
       "type" : "Section",
       "content" : [ {
@@ -348,7 +351,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "class MyClass {\n    void action() {\n        if (condition) {\n           importantExample();\n        }\n\n        if (anotherCondition) {\n            anotherImportantExample();\n        }\n    }\n}",
         "autoTitle" : true,
         "title" : "MyClass.java",
-        "anchorId" : "surrounded-by-scope-myclass-java",
+        "anchorId" : "surrounded-by-scope-myclassjava",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
@@ -368,6 +371,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "surrounded-by-multi-chars-scope",
+      "additionalIds" : [ ],
       "title" : "Surrounded By Multi-chars scope",
       "type" : "Section",
       "content" : [ {
@@ -387,7 +391,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "module ModelZero : sig\n  type t\nend\n\nmodule ModelA : sig\n  type t\n  val calc: t -> int\n  module Nested : sig\n    type t\n  end\nend\n\nmodule ModelC : sig\n type t\nend",
         "autoTitle" : true,
         "title" : "ocaml/model.mli",
-        "anchorId" : "surrounded-by-multi-chars-scope-ocaml-model-mli",
+        "anchorId" : "surrounded-by-multi-chars-scope-ocaml-modelmli",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
@@ -407,6 +411,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "replace",
+      "additionalIds" : [ ],
       "title" : "Replace",
       "type" : "Section",
       "content" : [ {
@@ -464,6 +469,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "replace-regexp-groups",
+      "additionalIds" : [ ],
       "title" : "Replace Regexp Groups",
       "type" : "Section",
       "content" : [ {
@@ -483,7 +489,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "hello1 world2\nanother3 line4",
         "autoTitle" : true,
         "title" : "replace-all-group.txt",
-        "anchorId" : "replace-regexp-groups-replace-all-group-txt",
+        "anchorId" : "replace-regexp-groups-replace-all-grouptxt",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -500,6 +506,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "start-end-line",
+      "additionalIds" : [ ],
       "title" : "Start/End Line",
       "type" : "Section",
       "content" : [ {
@@ -607,6 +614,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "start-end-multiple-lines",
+      "additionalIds" : [ ],
       "title" : "Start/End Multiple Lines",
       "type" : "Section",
       "content" : [ {
@@ -644,7 +652,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "type weather_season =\n  | Spring\n  | Summer\n  | Autumn\n  | Winter\n\nlet weight_season season =\n  match season with\n  | Spring -> 4\n  | Summer -> 5\n  | Autumn -> 3\n  | Winter -> -1\n\nlet describe_season season =\n(** human readable season description *)\n  match season with\n  | Spring -> \"It's springtime! Flowers are blooming.\"\n  | Summer -> \"It's summertime! Enjoy the warm weather.\"\n  | Autumn -> \"It's autumn! Leaves are changing colors.\"\n  | Winter -> \"It's winter! Time to bundle up and enjoy the snow.\"",
         "autoTitle" : true,
         "title" : "ocaml/seasons.ml",
-        "anchorId" : "start-end-multiple-lines-ocaml-seasons-ml",
+        "anchorId" : "start-end-multiple-lines-ocaml-seasonsml",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -717,6 +725,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "include-contains",
+      "additionalIds" : [ ],
       "title" : "Include Contains",
       "type" : "Section",
       "content" : [ {
@@ -746,6 +755,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "exclude-contains",
+      "additionalIds" : [ ],
       "title" : "Exclude Contains",
       "type" : "Section",
       "content" : [ {
@@ -775,6 +785,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "include-regexp",
+      "additionalIds" : [ ],
       "title" : "Include Regexp",
       "type" : "Section",
       "content" : [ {
@@ -804,6 +815,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "exclude-regexp",
+      "additionalIds" : [ ],
       "title" : "Exclude Regexp",
       "type" : "Section",
       "content" : [ {
@@ -832,7 +844,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052805,
+    "lastModifiedTime" : 1727735409500,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Snippets Manipulation",

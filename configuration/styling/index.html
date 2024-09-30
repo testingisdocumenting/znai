@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Development</title>
+<title>Znai: Styling</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,8 +85,13 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>PlaceHolder</h1></header>
-<p>Please create GitHub Issue if you are interested in plugins creation documentation</p>
+<header><h1>CSS Variables</h1></header>
+<p>Add next to file to change look and feel of the resulting documentation website There are dozens of css variables you can target directly first before considering more cascading options with class names Use your browser inspector tool to see which ones are used For example to change font sizes use Note consider only targeting variables and classes that starts with prefix Those are considered to be public API style css toc root znai regular text size 16px znai smaller text size 14px znai code text size 13px znai code font family Menlo Monaco Consolas Courier New monospace znai</p>
+</article>
+
+<article>
+<header><h1>Dark Light Themes Overrides</h1></header>
+<p>Example above targets both light and dark theme If you want to target dark theme specifically use theme znai dark znai code keyword color #5050af</p>
 </article>
 </section>
 </div>
@@ -121,41 +126,100 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "placeholder",
+      "type" : "Paragraph",
+      "content" : [ {
+        "text" : "Add ",
+        "type" : "SimpleText"
+      }, {
+        "code" : "style.css",
+        "type" : "InlinedCode"
+      }, {
+        "text" : " next to ",
+        "type" : "SimpleText"
+      }, {
+        "code" : "toc",
+        "type" : "InlinedCode"
+      }, {
+        "text" : " file to change look and feel of the resulting documentation website.",
+        "type" : "SimpleText"
+      } ]
+    }, {
+      "id" : "css-variables",
       "additionalIds" : [ ],
-      "title" : "PlaceHolder",
+      "title" : "CSS Variables",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Please create ",
+          "text" : "There are dozens of css variables you can target directly first, before considering more cascading options with class names.",
           "type" : "SimpleText"
         }, {
-          "url" : "https://github.com/testingisdocumenting/znai/issues",
-          "isFile" : false,
-          "type" : "Link",
-          "content" : [ {
-            "text" : "GitHub Issue",
-            "type" : "SimpleText"
-          } ]
+          "type" : "SoftLineBreak"
         }, {
-          "text" : " if you are interested in plugins creation documentation.",
+          "text" : "Use your browser inspector tool to see which ones are used.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "For example, to change font sizes, use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "css",
+        "snippet" : ":root {\n    --znai-regular-text-size: 16px;\n    --znai-smaller-text-size: 14px;\n    --znai-code-text-size: 13px;\n    --znai-code-font-family: Menlo, Monaco, Consolas, \"Courier New\", monospace;\n}\n",
+        "lineNumber" : "",
+        "title" : "style.css",
+        "anchorId" : "css-variables-stylecss",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: consider only targeting variables and classes that starts with ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "znai-",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " prefix. Those are considered to be public API.",
           "type" : "SimpleText"
         } ]
       } ]
+    }, {
+      "id" : "dark-light-themes-overrides",
+      "additionalIds" : [ ],
+      "title" : "Dark Light Themes Overrides",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Example above targets both light and dark theme. If you want to target dark theme specifically, use:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "css",
+        "snippet" : ".theme-znai-dark {\n    --znai-code-keyword-color: #5050af;\n}\n",
+        "lineNumber" : "",
+        "title" : "style.css",
+        "anchorId" : "dark-light-themes-overrides-stylecss",
+        "type" : "Snippet"
+      } ]
     } ],
-    "lastModifiedTime" : 1727735409487,
+    "lastModifiedTime" : 1727735409482,
     "tocItem" : {
-      "chapterTitle" : "Plugins",
-      "pageTitle" : "Development",
+      "chapterTitle" : "Configuration",
+      "pageTitle" : "Styling",
       "pageMeta" : { },
-      "dirName" : "plugins",
-      "fileName" : "development",
+      "dirName" : "configuration",
+      "fileName" : "styling",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "PlaceHolder",
-        "id" : "placeholder"
+        "title" : "CSS Variables",
+        "id" : "css-variables"
+      }, {
+        "title" : "Dark Light Themes Overrides",
+        "id" : "dark-light-themes-overrides"
       } ]
     }
   }

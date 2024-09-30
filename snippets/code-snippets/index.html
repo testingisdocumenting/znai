@@ -86,42 +86,42 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Simple Snippet</h1></header>
-<p>It is very easy to add a code snippet or an output result. All you have to do is indent your code with 4 spaces inside your Markdown document and your code will be rendered like this. interface PriceService { Money calcPrice(String cuips, Integer quantity); } # Simple Snippet It is very easy to add a code snippet or an output result. All you have to do is indent your code with 4 spaces inside your Markdown document and your code will be rendered like this. interface PriceService { Money calcPrice(String cuips, Integer quantity); } Note: this method doesn't highlight code.</p>
+<p>It is very easy to add a code snippet or an output result All you have to do is indent your code with 4 spaces inside your Markdown document and your code will be rendered like this Note this method doesn t highlight code interface PriceService Money calcPrice String cuips Integer quantity # Simple Snippet It is very easy to add a code snippet or an output result All you have to do is indent your code with 4 spaces inside your Markdown document and your code will be rendered like this interface PriceService Money calcPrice String cuips Integer quantity</p>
 </article>
 
 <article>
 <header><h1>Specifying Language</h1></header>
-<p>You can also specify a language to enable syntax highlighting for your snippet. ```javascript import React, {Component} from 'react' class MyComponent extends Component { render() { /// ... } } ``` javascript import React, {Component} from 'react' class MyComponent extends Component { render() { /// ... } } The following languages are supported:Java JavaScript Groovy C++ Python Bash Znai uses http://prismjs.com prismjs library to provide syntax highlighting. Note that it is not being executed inside the browser, but rather applied during HTML generation.</p>
+<p>You can also specify a language to enable syntax highlighting for your snippet The following languages are supported Java JavaScript Groovy C Python Bash uses prismjs library to provide syntax highlighting Note that it is not being executed inside the browser but rather applied during HTML generation ```javascript import React Component from react class MyComponent extends Component render ``` import React Component from react class MyComponent extends Component render Znai</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use the title property to specify a title. ```javascript {title: &quot;ReactJS Component&quot;} ... ``` javascript import React, {Component} from 'react' class MyComponent extends Component { render() { /// ... } }</p>
+<p>Use the property to specify a title title ```javascript title ReactJS Component ``` import React Component from react class MyComponent extends Component render</p>
 </article>
 
 <article>
 <header><h1>Anchor</h1></header>
-<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. ```javascript {title: &quot;ReactJS Component&quot;, anchorId: &quot;my-special-code&quot;} ... ``` javascript import React, {Component} from 'react' class MyComponent extends Component { render() { /// ... } }</p>
+<p>When you specify a title hover mouse over it to see a clickable anchor Use to override auto generated identifier anchorId ```javascript title ReactJS Component anchorId my special code ``` import React Component from react class MyComponent extends Component render</p>
 </article>
 
 <article>
 <header><h1>Wide Code</h1></header>
-<p>Use the wide option to stretch wide code to occupy as much horizontal real estate as possible. ```java {wide: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } ``` java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Without the wide option code will be aligned with the rest of the text and users can use scrollbars. java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Note: Good placement of a Wide Code element is at the end of a page or a section to show the full version of a code sample.</p>
+<p>Use the option to stretch wide code to occupy as much horizontal real estate as possible Without the option code will be aligned with the rest of the text and users can use scrollbars Note Good placement of a Wide Code element is at the end of a page or a section to show the full version of a code sample wide ```java wide true class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar ``` class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar wide class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar</p>
 </article>
 
 <article>
 <header><h1>Wrap Code</h1></header>
-<p>Use the wrap option to stretch wide code to occupy as much horizontal real estate as possible. ```java {wrap: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } ``` java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } }</p>
+<p>Use the option to stretch wide code to occupy as much horizontal real estate as possible wrap ```java wrap true class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar ``` class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar</p>
 </article>
 
 <article>
 <header><h1>Read More</h1></header>
-<p>If you have a large code snippet and you want to initially display only a small fraction use the readMore option with an optional readMoreVisibleLines option to specify a number of initial lines displayed (default is 8). ```java {readMore: true, readMoreVisibleLines: 3} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; ... ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { this.workingDir = workingDir; this.fileNameByDirName = new LinkedHashMap&lt;&gt;(); } public void create() { createPages(); createToc(); createMeta(); createIndex(); createLookupPaths(); } private void createLookupPaths() { createFileFromResource(&quot;lookup-paths&quot;); } private void createMeta() { createFileFromResource(&quot;meta.json&quot;); } }</p>
+<p>If you have a large code snippet and you want to initially display only a small fraction use the option with an optional option to specify a number of initial lines displayed default is 8 readMore readMoreVisibleLines ```java readMore true readMoreVisibleLines 3 public class DocScaffolding private final Path workingDir private Map&lt;String List&lt;String&gt;&gt; fileNameByDirName ``` public class DocScaffolding private final Path workingDir private Map&lt;String List&lt;String&gt;&gt; fileNameByDirName public DocScaffolding Path workingDir this workingDir workingDir this fileNameByDirName new LinkedHashMap&lt;&gt; public void create createPages createToc createMeta createIndex createLookupPaths private void createLookupPaths createFileFromResource lookup paths private void createMeta createFileFromResource meta json</p>
 </article>
 
 <article>
 <header><h1>Highlights</h1></header>
-<p>Use the highlight option to bring readers attention to important lines. ```java {highlight: &quot;workingDir&quot;} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } ``` java public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { ... } snippets/snippets-highlighting Learn More about highlighting options.</p>
+<p>Use the option to bring readers attention to important lines Learn More about highlighting options highlight ```java highlight workingDir public class DocScaffolding private final Path workingDir private Map&lt;String List&lt;String&gt;&gt; fileNameByDirName public DocScaffolding Path workingDir ``` public class DocScaffolding private final Path workingDir private Map&lt;String List&lt;String&gt;&gt; fileNameByDirName public DocScaffolding Path workingDir</p>
 </article>
 </section>
 </div>
@@ -157,6 +157,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "simple-snippet",
+      "additionalIds" : [ ],
       "title" : "Simple Snippet",
       "type" : "Section",
       "content" : [ {
@@ -195,6 +196,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "specifying-language",
+      "additionalIds" : [ ],
       "title" : "Specifying Language",
       "type" : "Section",
       "content" : [ {
@@ -306,6 +308,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "title",
+      "additionalIds" : [ ],
       "title" : "Title",
       "type" : "Section",
       "content" : [ {
@@ -335,6 +338,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "anchor",
+      "additionalIds" : [ ],
       "title" : "Anchor",
       "type" : "Section",
       "content" : [ {
@@ -370,6 +374,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "wide-code",
+      "additionalIds" : [ ],
       "title" : "Wide Code",
       "type" : "Section",
       "content" : [ {
@@ -430,6 +435,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "wrap-code",
+      "additionalIds" : [ ],
       "title" : "Wrap Code",
       "type" : "Section",
       "content" : [ {
@@ -458,6 +464,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "read-more",
+      "additionalIds" : [ ],
       "title" : "Read More",
       "type" : "Section",
       "content" : [ {
@@ -501,6 +508,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "highlights",
+      "additionalIds" : [ ],
       "title" : "Highlights",
       "type" : "Section",
       "content" : [ {
@@ -542,7 +550,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409498,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Code Snippets",

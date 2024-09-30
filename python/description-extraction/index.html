@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Doc String</h1></header>
-<p>Use include-python-doc plugin to embed py doc string with markdown into documentation. Znai uses https://pandas.pydata.org/docs/development/contributing_docstring.html Pandas style doc string to parse description and parameters. my_var = &quot;a variable&quot; def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) :include-python-doc: python/example.py {entry: &quot;my_func&quot;} text inside my *func* doc * list one * list two Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include parameters :include-python-doc: python/example.py {entry: &quot;Animal&quot;} animal top level class doc string ``` code block ``` :include-python-doc: python/example.py {entry: &quot;Animal.says&quot;} animal **talks** `code`</p>
+<p>Use plugin to embed py doc string with markdown into documentation Znai uses Pandas style doc string to parse description and parameters Note Plugin ignores parameters block and only includes the description text Check next section to see how to include parameters include python doc my_var a variable def my_func p1 p2 text inside my *func* doc * list one * list two Parameters p1 String parameter one description p2 String parameter two description return 2 2 class Animal animal top level class doc string ``` code block ``` def says self animal **talks** `code` print hello include python doc python example py entry my_func text inside my *func* doc * list one * list two include python doc python example py entry Animal animal top level class doc string ``` code block ``` include python doc python example py entry Animal says animal **talks** `code`</p>
 </article>
 
 <article>
 <header><h1>Doc Parameters</h1></header>
-<p>Use include-python-doc-params plugin to render parameters extracted from pydoc text def my_func(label, price): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- label : str label to use to *render* item in the store price : fin.money.Money price associated with the **item** Returns ------- str status of the operation `OK` for good &quot;&quot;&quot; return &quot;OK&quot; :include-python-doc-params: python/pydoc-params.py {entry: &quot;my_func&quot;, title: &quot;result and parameters&quot;} text inside my *func* doc * list one * list two Parameters ---------- label : str label to use to *render* item in the store price : fin.money.Money price associated with the **item** Returns ------- str status of the operation `OK` for good Note: read more about snippets/api-parameters API parameters for additional properties</p>
+<p>Use plugin to render parameters extracted from pydoc text Note read more about API parameters for additional properties include python doc params def my_func label price text inside my *func* doc * list one * list two Parameters label str label to use to *render* item in the store price fin money Money price associated with the **item** Returns str status of the operation `OK` for good return OK include python doc params python pydoc params py entry my_func title result and parameters text inside my *func* doc * list one * list two Parameters label str label to use to *render* item in the store price fin money Money price associated with the **item** Returns str status of the operation `OK` for good</p>
 </article>
 
 <article>
 <header><h1>Type Hints</h1></header>
-<p>If you define https://docs.python.org/3/library/typing.html Type Hints, you can omit types from PyDoc text and Znai will take the types from the signature import fin def my_func(label: str, price: fin.money.Money) -&gt; str: &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters -------------- label : label to use to *render* item in the store price : price associated with the **item** Returns ------- status of the operation `OK` for good &quot;&quot;&quot; return &quot;OK&quot; :include-python-doc-params: python/pydoc-params-type-hints.py {entry: &quot;my_func&quot;, title: &quot;result and parameters&quot;} text inside my *func* doc * list one * list two Parameters -------------- label : label to use to *render* item in the store price : price associated with the **item** Returns ------- status of the operation `OK` for good</p>
+<p>If you define Type Hints you can omit types from PyDoc text and Znai will take the types from the signature import fin def my_func label str price fin money Money &gt; str text inside my *func* doc * list one * list two Parameters label label to use to *render* item in the store price price associated with the **item** Returns status of the operation `OK` for good return OK include python doc params python pydoc params type hints py entry my_func title result and parameters text inside my *func* doc * list one * list two Parameters label label to use to *render* item in the store price price associated with the **item** Returns status of the operation `OK` for good</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "doc-string",
+      "additionalIds" : [ ],
       "title" : "Doc String",
       "type" : "Section",
       "content" : [ {
@@ -166,7 +167,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "py",
         "snippet" : "my_var = \"a variable\"\n\n\ndef my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2\n\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
         "title" : "example.py",
-        "anchorId" : "doc-string-example-py",
+        "anchorId" : "doc-string-examplepy",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -264,6 +265,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "doc-parameters",
+      "additionalIds" : [ ],
       "title" : "Doc Parameters",
       "type" : "Section",
       "content" : [ {
@@ -283,7 +285,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "def my_func(label, price):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    label : str\n      label to use to *render* item in the store\n\n    price : fin.money.Money\n      price associated with the **item**\n\n    Returns\n    -------\n    str\n      status of the operation\n\n      `OK` for good\n    \"\"\"\n\n    return \"OK\"",
         "autoTitle" : true,
         "title" : "python/pydoc-params.py",
-        "anchorId" : "doc-parameters-python-pydoc-params-py",
+        "anchorId" : "doc-parameters-python-pydoc-paramspy",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -381,6 +383,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "type-hints",
+      "additionalIds" : [ ],
       "title" : "Type Hints",
       "type" : "Section",
       "content" : [ {
@@ -405,7 +408,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "import fin\n\n\ndef my_func(label: str, price: fin.money.Money) -> str:\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    --------------\n    label :\n      label to use to *render* item in the store\n\n    price :\n      price associated with the **item**\n\n    Returns\n    -------\n      status of the operation\n\n      `OK` for good\n    \"\"\"\n\n    return \"OK\"",
         "autoTitle" : true,
         "title" : "python/pydoc-params-type-hints.py",
-        "anchorId" : "type-hints-python-pydoc-params-type-hints-py",
+        "anchorId" : "type-hints-python-pydoc-params-type-hintspy",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -485,7 +488,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409487,
     "tocItem" : {
       "chapterTitle" : "Python",
       "pageTitle" : "Description Extraction",

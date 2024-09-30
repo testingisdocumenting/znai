@@ -86,32 +86,32 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Content</h1></header>
-<p>Note: Function Content support requires running znai in an environment with Python 3.8 or later.All the examples below are from the following example Python file: my_var = &quot;a variable&quot; def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Use include-python plugin to extract function, class or global variable content.</p>
+<p>Note Function Content support requires running znai in an environment with Python 3 8 or later All the examples below are from the following example Python file Use plugin to extract function class or global variable content my_var a variable def my_func p1 p2 text inside my *func* doc * list one * list two Parameters p1 String parameter one description p2 String parameter two description return 2 2 class Animal animal top level class doc string ``` code block ``` def says self animal **talks** `code` print hello include python</p>
 </article>
 
 <article>
 <header><h1>Function</h1></header>
-<p>To show the full contents of a function: :include-python: python/example.py {entry: &quot;Animal.says&quot;} def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) This also works for global functions: :include-python: python/example.py {entry: &quot;my_func&quot;} def my_func(p1, p2): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- p1: String parameter one description p2: String parameter two description &quot;&quot;&quot; return 2 + 2 To show a function's body, without signature or doc string: :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true} print(&quot;hello&quot;) This also works for global functions: :include-python: python/example.py {entry: &quot;my_func&quot;, bodyOnly: true} return 2 + 2</p>
+<p>To show the full contents of a function This also works for global functions To show a function s body without signature or doc string This also works for global functions include python python example py entry Animal says def says self animal **talks** `code` print hello include python python example py entry my_func def my_func p1 p2 text inside my *func* doc * list one * list two Parameters p1 String parameter one description p2 String parameter two description return 2 2 include python python example py entry Animal says bodyOnly true print hello include python python example py entry my_func bodyOnly true return 2 2</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use the title property to specify an extracted snippet title. :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true, title: &quot;extracted snippet&quot;} print(&quot;hello&quot;)</p>
+<p>Use the property to specify an extracted snippet title title include python python example py entry Animal says bodyOnly true title extracted snippet print hello</p>
 </article>
 
 <article>
 <header><h1>Anchor</h1></header>
-<p>Use anchorId to make a code snippet linkable. Hover mouse over title to see a clickable anchor. :include-python: python/example.py { entry: &quot;Animal.says&quot;, bodyOnly: true, title: &quot;extracted snippet&quot;, anchorId: &quot;my-extracted-snippet&quot; } print(&quot;hello&quot;)</p>
+<p>Use to make a code snippet linkable Hover mouse over title to see a clickable anchor anchorId include python python example py entry Animal says bodyOnly true title extracted snippet anchorId my extracted snippet print hello</p>
 </article>
 
 <article>
 <header><h1>Variable</h1></header>
-<p>To show a variable's definition and assignment: :include-python: python/example.py {entry: &quot;my_var&quot;} my_var = &quot;a variable&quot; To show only a variable's value: :include-python: python/example.py {entry: &quot;my_var&quot;, bodyOnly: true} &quot;a variable&quot;</p>
+<p>To show a variable s definition and assignment To show only a variable s value include python python example py entry my_var my_var a variable include python python example py entry my_var bodyOnly true a variable</p>
 </article>
 
 <article>
 <header><h1>Class</h1></header>
-<p>To show the full class definition: :include-python: python/example.py {entry: &quot;Animal&quot;} class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) To show the contents of a class without the class declaration or doc string: :include-python: python/example.py {entry: &quot;Animal&quot;, bodyOnly: true} def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;)</p>
+<p>To show the full class definition To show the contents of a class without the class declaration or doc string include python python example py entry Animal class Animal animal top level class doc string ``` code block ``` def says self animal **talks** `code` print hello include python python example py entry Animal bodyOnly true def says self animal **talks** `code` print hello</p>
 </article>
 </section>
 </div>
@@ -147,6 +147,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "content",
+      "additionalIds" : [ ],
       "title" : "Content",
       "type" : "Section",
       "content" : [ {
@@ -166,7 +167,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "my_var = \"a variable\"\n\n\ndef my_func(p1, p2):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    p1: String\n        parameter one description\n    p2: String\n        parameter two description\n    \"\"\"\n\n    return 2 + 2\n\n\nclass Animal:\n    \"\"\"\n    animal top level class doc string\n\n    ```\n    code block\n    ```\n    \"\"\"\n\n    def says(self):\n        \"\"\"\n        animal **talks** `code`\n        \"\"\"\n        print(\"hello\")",
         "autoTitle" : true,
         "title" : "python/example.py",
-        "anchorId" : "content-python-example-py",
+        "anchorId" : "content-python-examplepy",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -183,6 +184,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "function",
+      "additionalIds" : [ ],
       "title" : "Function",
       "type" : "Section",
       "content" : [ {
@@ -254,6 +256,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "title",
+      "additionalIds" : [ ],
       "title" : "Title",
       "type" : "Section",
       "content" : [ {
@@ -284,6 +287,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "anchor",
+      "additionalIds" : [ ],
       "title" : "Anchor",
       "type" : "Section",
       "content" : [ {
@@ -314,6 +318,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "variable",
+      "additionalIds" : [ ],
       "title" : "Variable",
       "type" : "Section",
       "content" : [ {
@@ -352,6 +357,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "class",
+      "additionalIds" : [ ],
       "title" : "Class",
       "type" : "Section",
       "content" : [ {
@@ -389,7 +395,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409487,
     "tocItem" : {
       "chapterTitle" : "Python",
       "pageTitle" : "Content Extraction",

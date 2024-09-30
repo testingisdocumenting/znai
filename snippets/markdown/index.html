@@ -86,27 +86,27 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Single Markdown File</h1></header>
-<p>To reuse Markdown in several places without duplication, use the include-markdown plugin. # Included Markdown This markdown, and the sub-heading above, were included using the `include-markdown` plugin. :include-markdown: markdown-dir/md-to-include.md This markdown, and the sub-heading above, were included using the include-markdown plugin.</p>
+<p>To reuse Markdown in several places without duplication use the plugin This markdown and the sub heading above were included using the plugin include markdown include markdown # Included Markdown This markdown and the sub heading above were included using the `include markdown` plugin include markdown markdown dir md to include md</p>
 </article>
 
 <article>
 <header><h1>Optional Markdown</h1></header>
-<p>When you document an open source project you may have different instructions based on where the documentation is deployed.For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like Getting Started.We build documentation twice and the differences are handled by include-markdown 's firstAvailable parameter. :include-markdown: {firstAvailable: [ &quot;markdown-dir/getting-started-step-internal.md&quot;, &quot;markdown-dir/getting-started-step-external.md&quot;]} command specific-to-external</p>
+<p>When you document an open source project you may have different instructions based on where the documentation is deployed For example this documentation has two versions one deployed internally at Two Sigma and one deployed externally using GitHub Pages Most of the documentation parts are the same but there are differences in sections like Getting Started We build documentation twice and the differences are handled by s parameter command specific to external include markdown firstAvailable include markdown firstAvailable markdown dir getting started step internal md markdown dir getting started step external md</p>
 </article>
 
 <article>
 <header><h1>Partial Markdown</h1></header>
-<p>Use surroundedBy to include portion of a markdown from existing markdown file, e.g. readme.md Given an existing markdown files with markers # Section One Some text # Section Two [comment]: &lt;&gt; (marker-one) Use these parameters to setup your work environment: ``` parameter=value ``` [comment]: &lt;&gt; (marker-one) markdown :include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: &quot;&lt;&gt; (marker-one)&quot;} Use these parameters to setup your work environment: parameter=value</p>
+<p>Use to include portion of a markdown from existing markdown file e g Given an existing markdown files with markers Use these parameters to setup your work environment parameter value surroundedBy readme md # Section One Some text # Section Two comment &lt;&gt; marker one Use these parameters to setup your work environment ``` parameter value ``` comment &lt;&gt; marker one include markdown markdown dir markdown with markers md surroundedBy &lt;&gt; marker one</p>
 </article>
 
 <article>
 <header><h1>Inlined Markdown</h1></header>
-<p>To inline a piece of markdown use the inlined version of the plugin content `:markdown: path-to-file.md` content Plugin will inline text content into current paragraph. markdown Use the latest version `:markdown: markdown-dir/inlined.md` to get the feature. `:badge: 2.34` Use the latest version to get the feature.Use firstAvailable parameter to include first file that can be resolved markdown Use the latest version `:markdown: { firstAvailable: [&quot;markdown-dir/inlined-alternative.md&quot;, &quot;markdown-dir/inlined.md&quot;]}` to get the feature. `:badge: 2.44_internal` `:badge: 2.34` Use the latest version to get the feature.</p>
+<p>To inline a piece of markdown use the inlined version of the plugin Plugin will inline text content into current paragraph Use the latest version to get the feature Use parameter to include first file that can be resolved ` badge 2 44_internal` ` badge 2 34` Use the latest version to get the feature content ` markdown path to file md` content Use the latest version ` markdown markdown dir inlined md` to get the feature ` badge 2 34` firstAvailable Use the latest version ` markdown firstAvailable markdown dir inlined alternative md markdown dir inlined md ` to get the feature</p>
 </article>
 
 <article>
 <header><h1>Multiple Markdown Files</h1></header>
-<p>You can also include all the Markdown files within a directory by using include-markdowns .This plugin can be used to generate release notes or an FAQ page. ### How to install Znai? To install Znai use ```cli brew install testingisdocumenting/brew/znai ``` ### How to run preview mode? To run Znai in preview mode ```cli znai --preview ``` :include-markdowns: faq-collection {sort: &quot;ascending&quot;} How to install Znai? To install Znai use brew install testingisdocumenting/brew/znai How to run preview mode? To run Znai in preview mode znai --preview Note: include-markdowns renders files of the specified directory based on the filename (by default in descending alphabetical order).</p>
+<p>You can also include all the Markdown files within a directory by using This plugin can be used to generate release notes or an FAQ page How to install Znai To install Znai use brew install testingisdocumenting brew znai How to run preview mode To run Znai in preview mode znai preview Note renders files of the specified directory based on the filename by default in descending alphabetical order include markdowns ### How to install Znai To install Znai use ```cli brew install testingisdocumenting brew znai ``` ### How to run preview mode To run Znai in preview mode ```cli znai preview ``` include markdowns faq collection sort ascending include markdowns</p>
 </article>
 </section>
 </div>
@@ -142,6 +142,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "single-markdown-file",
+      "additionalIds" : [ ],
       "title" : "Single Markdown File",
       "type" : "Section",
       "content" : [ {
@@ -161,7 +162,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "# Included Markdown\n\nThis markdown, and the sub-heading above, were included using the `include-markdown` plugin.",
         "autoTitle" : true,
         "title" : "markdown-dir/md-to-include.md",
-        "anchorId" : "single-markdown-file-markdown-dir-md-to-include-md",
+        "anchorId" : "single-markdown-file-markdown-dir-md-to-includemd",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -171,6 +172,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "included-markdown",
+      "additionalIds" : [ ],
       "title" : "Included Markdown",
       "type" : "Section",
       "content" : [ {
@@ -188,6 +190,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "optional-markdown",
+      "additionalIds" : [ ],
       "title" : "Optional Markdown",
       "type" : "Section",
       "content" : [ {
@@ -246,6 +249,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "partial-markdown",
+      "additionalIds" : [ ],
       "title" : "Partial Markdown",
       "type" : "Section",
       "content" : [ {
@@ -276,7 +280,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "md",
         "snippet" : "# Section One\n\nSome text\n\n# Section Two\n\n[comment]: <> (marker-one)\n\nUse these parameters to setup your work environment:\n```\nparameter=value\n```\n\n[comment]: <> (marker-one)",
         "title" : "readme.md",
-        "anchorId" : "partial-markdown-readme-md",
+        "anchorId" : "partial-markdown-readmemd",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
@@ -299,6 +303,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "inlined-markdown",
+      "additionalIds" : [ ],
       "title" : "Inlined Markdown",
       "type" : "Section",
       "content" : [ {
@@ -328,7 +333,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "`:badge: 2.34`",
         "autoTitle" : true,
         "title" : "markdown-dir/inlined.md",
-        "anchorId" : "inlined-markdown-markdown-dir-inlined-md",
+        "anchorId" : "inlined-markdown-markdown-dir-inlinedmd",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -366,7 +371,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "snippet" : "`:badge: 2.44_internal`",
             "autoTitle" : true,
             "title" : "markdown-dir/inlined-alternative.md",
-            "anchorId" : "inlined-markdown-markdown-dir-inlined-alternative-md",
+            "anchorId" : "inlined-markdown-markdown-dir-inlined-alternativemd",
             "type" : "Snippet"
           } ]
         }, {
@@ -375,7 +380,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "snippet" : "`:badge: 2.34`",
             "autoTitle" : true,
             "title" : "markdown-dir/inlined.md",
-            "anchorId" : "inlined-markdown-markdown-dir-inlined-md-2",
+            "anchorId" : "inlined-markdown-markdown-dir-inlinedmd-3",
             "type" : "Snippet"
           } ]
         } ],
@@ -396,6 +401,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multiple-markdown-files",
+      "additionalIds" : [ ],
       "title" : "Multiple Markdown Files",
       "type" : "Section",
       "content" : [ {
@@ -421,14 +427,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "### How to install Znai?\n\nTo install Znai use\n\n```cli\nbrew install testingisdocumenting/brew/znai\n```",
         "autoTitle" : true,
         "title" : "faq-collection/2022-07-14-install.md",
-        "anchorId" : "multiple-markdown-files-faq-collection-2022-07-14-install-md",
+        "anchorId" : "multiple-markdown-files-faq-collection-2022-07-14-installmd",
         "type" : "Snippet"
       }, {
         "lang" : "md",
         "snippet" : "### How to run preview mode?\n\nTo run Znai in preview mode\n\n```cli\nznai --preview\n```",
         "autoTitle" : true,
         "title" : "faq-collection/2022-07-15-preview.md",
-        "anchorId" : "multiple-markdown-files-faq-collection-2022-07-15-preview-md",
+        "anchorId" : "multiple-markdown-files-faq-collection-2022-07-15-previewmd",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -437,6 +443,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "id" : "multiple-markdown-files-how-to-install-znai",
+        "additionalIds" : [ "how-to-install-znai" ],
         "level" : 3,
         "title" : "How to install Znai?",
         "type" : "SubHeading"
@@ -452,6 +459,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliCommand"
       }, {
         "id" : "multiple-markdown-files-how-to-run-preview-mode",
+        "additionalIds" : [ "how-to-run-preview-mode" ],
         "level" : 3,
         "title" : "How to run preview mode?",
         "type" : "SubHeading"
@@ -479,7 +487,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409499,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Markdown",

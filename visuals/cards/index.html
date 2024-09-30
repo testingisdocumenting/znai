@@ -86,22 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Image And Title</h1></header>
-<p>Use card fenced block plugin to render a card. markdown ```card books.jpg {title: &quot;My Card&quot;} Markdown content of the card goes here * item one * item two * item three ``` Markdown content of the card goes hereitem one item two item three Note: Card scales down large image to fit</p>
+<p>Use fenced block plugin to render a card Markdown content of the card goes here item one item two item three Note Card scales down large image to fit card ```card books jpg title My Card Markdown content of the card goes here * item one * item two * item three ```</p>
 </article>
 
 <article>
 <header><h1>Image Height And Background</h1></header>
-<p>When you use icon like images, e.g. SVGs, then they will take all the horizontal available space, and it may not be ideal.Use imageHeight to force image height. Use imageBackground to specify a https://www.w3schools.com/css/css3_gradients.asp background color/gradient. markdown ```card diamond.svg {title: &quot;My Card&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))&quot;} Markdown content of the card goes here * item one * item two * item three ``` Markdown content of the card goes hereitem one item two item three</p>
+<p>When you use icon like images e g SVGs then they will take all the horizontal available space and it may not be ideal Use to force image height Use to specify a background color gradient Markdown content of the card goes here item one item two item three imageHeight imageBackground ```card diamond svg title My Card imageHeight 120 imageBackground linear gradient to right rgb 29 41 41 rgb 145 152 229 Markdown content of the card goes here * item one * item two * item three ```</p>
 </article>
 
 <article>
 <header><h1>Multiple Columns</h1></header>
-<p>Use layout/columns Colums to arrange cards side by side Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass Markdown content of the card goes hereitem one item two item three Easy to use API firstName String description with markdown support score Integer another description line with markdown support markdown ```````columns left: ```card diamond.svg {title: &quot;Card Title&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))&quot;} Markdown content goes here :include-file: snippets/file-name.js ``` middle: ```card small-book.png {title: &quot;Book&quot;, imageHeight: 120} Markdown content of the card goes here * item one * item two * item three ``` right: `````card star.svg {title: &quot;API for the Win&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(154 128 145 / 0%), rgb(255 206 206))&quot;} Easy to use API ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ````` ```````` Note: Card plugin is designed to work with snippets/external-code-snippets code snippets, layout/tables Tables and snippets/api-parameters API Parameters by reducing spacing and integrating borders List Item One List Item Two column A column B hello world of cards</p>
+<p>Use Colums to arrange cards side by side Markdown content goes here class JsClass constructor usefulAction export default JsClass Markdown content of the card goes here item one item two item three Easy to use API firstName String description with markdown support score Integer another description line with markdown support Note Card plugin is designed to work with code snippets Tables and API Parameters by reducing spacing and integrating borders List Item One List Item Two column A column B hello world of cards ```````columns left ```card diamond svg title Card Title imageHeight 120 imageBackground linear gradient to right rgb 29 41 41 rgb 145 152 229 Markdown content goes here include file snippets file name js ``` middle ```card small book png title Book imageHeight 120 Markdown content of the card goes here * item one * item two * item three ``` right `````card star svg title API for the Win imageHeight 120 imageBackground linear gradient to right rgb 154 128 145 0% rgb 255 206 206 Easy to use API ```api parameters firstName String description with *markdown* support score Integer another description line with *markdown* support ``` ````` ````````</p>
 </article>
 
 <article>
 <header><h1>Links</h1></header>
-<p>Card plugin automatically converts links at the end of the fenced block content into dedicated card links. Markdown content goes here class JsClass { constructor() { usefulAction() } } export default JsClass snippets/external-code-snippets Learn More markdown ```card diamond.svg {title: &quot;Card Title&quot;, imageHeight: 120, imageBackground: &quot;linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))&quot;} Markdown content goes here :include-file: snippets/file-name.js [Learn More](snippets/external-code-snippets) ```</p>
+<p>Card plugin automatically converts links at the end of the fenced block content into dedicated card links Markdown content goes here Learn More class JsClass constructor usefulAction export default JsClass ```card diamond svg title Card Title imageHeight 120 imageBackground linear gradient to right rgb 29 41 41 rgb 145 152 229 Markdown content goes here include file snippets file name js Learn More snippets external code snippets ```</p>
 </article>
 </section>
 </div>
@@ -137,6 +137,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "image-and-title",
+      "additionalIds" : [ ],
       "title" : "Image And Title",
       "type" : "Section",
       "content" : [ {
@@ -208,6 +209,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "image-height-and-background",
+      "additionalIds" : [ ],
       "title" : "Image Height And Background",
       "type" : "Section",
       "content" : [ {
@@ -298,6 +300,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multiple-columns",
+      "additionalIds" : [ ],
       "title" : "Multiple Columns",
       "type" : "Section",
       "content" : [ {
@@ -561,6 +564,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "links",
+      "additionalIds" : [ ],
       "title" : "Links",
       "type" : "Section",
       "content" : [ {
@@ -604,7 +608,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052813,
+    "lastModifiedTime" : 1727735409508,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Cards",

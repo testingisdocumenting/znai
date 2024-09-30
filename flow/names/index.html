@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Automatic Names</h1></header>
-<p>By default, page names are automatically derived from file names. file-name.md has the page title File Name .</p>
+<p>By default page names are automatically derived from file names has the page title file name md File Name</p>
 </article>
 
 <article>
 <header><h1>Name Overrides</h1></header>
-<p>To override the default, add the following syntax to the top of your Markdown file: --- title: Custom Name --- To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:Need to use special characters in title Want to avoid auto-capitalization Another way to override a page title is by adding a title to toc file text chapter-one structure {title: &quot;Underlying Structure&quot;} setup Note: Title defined in toc takes precedence over title inside markup file</p>
+<p>To override the default add the following syntax to the top of your Markdown file To keep things easy for future documentation owners it s good practice to keep page and file names the same In some cases however you want to make exceptions for example in cases where you Need to use special characters in title Want to avoid auto capitalization Another way to override a page title is by adding a to file Note Title defined in takes precedence over inside markup file title Custom Name title toc chapter one structure title Underlying Structure setup toc title</p>
 </article>
 
 <article>
 <header><h1>Chapter Names</h1></header>
-<p>By default, a chapter name is derived from dir name. Dir name my-chapter becomes My Chapter chapter name.To override a chapter name, use {title: &quot;chapter title&quot;} inside toc file text chapter-one {title: &quot;Chapter ONE explicit&quot;} structure setup</p>
+<p>By default a chapter name is derived from dir name Dir name becomes chapter name To override a chapter name use inside file my chapter My Chapter title chapter title toc chapter one title Chapter ONE explicit structure setup</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "automatic-names",
+      "additionalIds" : [ ],
       "title" : "Automatic Names",
       "type" : "Section",
       "content" : [ {
@@ -155,6 +156,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "name-overrides",
+      "additionalIds" : [ ],
       "title" : "Name Overrides",
       "type" : "Section",
       "content" : [ {
@@ -243,6 +245,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "chapter-names",
+      "additionalIds" : [ ],
       "title" : "Chapter Names",
       "type" : "Section",
       "content" : [ {
@@ -290,7 +293,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052785,
+    "lastModifiedTime" : 1727735409485,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Page Titles",

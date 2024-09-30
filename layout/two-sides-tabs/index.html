@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Unified Tabs</h1></header>
-<p>In two sides layout tabs selection is moved to a single place (default is top right panel).</p>
+<p>In two sides layout tabs selection is moved to a single place default is top right panel</p>
 </article>
 
 <article>
 <header><h1>Definition</h1></header>
-<p>To define multiple tabs we use fenced code block ```tabs JavaScript: :include-file: snippets/file-name.js Java: :include-file: snippets/WideCode.java Cpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true} ``` This will generate a multi-tab widget with an include plugin content per tab.Note: Selecting a tab will switch all the tabs on every page. JavaScript class JsClass { constructor() { usefulAction() } } export default JsClass Java class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Cpp</p>
+<p>To define multiple tabs we use fenced code block This will generate a multi tab widget with an include plugin content per tab Note Selecting a tab will switch all the tabs on every page JavaScript class JsClass constructor usefulAction export default JsClass Java class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar Cpp ```tabs JavaScript include file snippets file name js Java include file snippets WideCode java Cpp include cpp snippets simple cpp entry main bodyOnly true ```</p>
 </article>
 
 <article>
 <header><h1>Markdown Per Tab</h1></header>
-<p>Any valid Markdown can be used as the content of each tab. Typical use case for installation instructions: extract differences per language or environment ````tabs JavaScript: First you need to download WebStorm and then run the following using your terminal ```bash $ yarn install $ yarn start ``` Java: First you need to download Intellij IDEA and then run the following using your terminal ```bash $ mvn install $ mvn exec:exec ``` Cpp: First you need to download CLion and then run the following using your terminal ```bash $ pwd $ whoamis ``` ```` JavaScript First you need to download WebStorm and then run the following using your terminal bash $ yarn install $ yarn start Java First you need to download Intellij IDEA and then run the following using your terminal bash $ mvn install $ mvn exec:exec Cpp First you need to download CLion and then run the following using your terminal bash $ pwd $ whoamis</p>
+<p>Any valid Markdown can be used as the content of each tab Typical use case for installation instructions extract differences per language or environment JavaScript First you need to download WebStorm and then run the following using your terminal $ yarn install $ yarn start Java First you need to download Intellij IDEA and then run the following using your terminal $ mvn install $ mvn exec exec Cpp First you need to download CLion and then run the following using your terminal $ pwd $ whoamis ````tabs JavaScript First you need to download WebStorm and then run the following using your terminal ```bash $ yarn install $ yarn start ``` Java First you need to download Intellij IDEA and then run the following using your terminal ```bash $ mvn install $ mvn exec exec ``` Cpp First you need to download CLion and then run the following using your terminal ```bash $ pwd $ whoamis ``` ````</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "unified-tabs",
+      "additionalIds" : [ ],
       "title" : "Unified Tabs",
       "type" : "Section",
       "content" : [ {
@@ -143,6 +144,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "definition",
+      "additionalIds" : [ ],
       "title" : "Definition",
       "type" : "Section",
       "content" : [ {
@@ -198,6 +200,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "markdown-per-tab",
+      "additionalIds" : [ ],
       "title" : "Markdown Per Tab",
       "type" : "Section",
       "content" : [ {
@@ -275,7 +278,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Tabs"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409487,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Two Sides Tabs",

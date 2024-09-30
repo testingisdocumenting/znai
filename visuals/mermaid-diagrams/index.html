@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Fenced Block</h1></header>
-<p>Use https://mermaid-js.github.io/mermaid/#/ Mermaid to create diagrams using text and code, written in a Markdown style. Surround Mermaid expressions with a fenced block and specify mermaid as a language ```mermaid flowchart TD A[Start] --&gt; B{Is it?} B -- Yes --&gt; C[OK] C --&gt; D[Rethink] D --&gt; B B -- No ----&gt; E[End] ``` The result will be a diagram. flowchart TD A[Start] --&gt; B{Is it?} B -- Yes --&gt; C[OK] C --&gt; D[Rethink] D --&gt; B B -- No ----&gt; E[End] In presentation mode, rendered expressions will automatically scale to make use of the screen space.Note: Rendering is done by using https://mermaid-js.github.io/mermaid/#/ Mermaid library.</p>
+<p>Use Mermaid to create diagrams using text and code written in a Markdown style Surround Mermaid expressions with a fenced block and specify as a language The result will be a diagram flowchart TD A Start &gt; B Is it B Yes &gt; C OK C &gt; D Rethink D &gt; B B No &gt; E End In presentation mode rendered expressions will automatically scale to make use of the screen space Note Rendering is done by using Mermaid library mermaid ```mermaid flowchart TD A Start &gt; B Is it B Yes &gt; C OK C &gt; D Rethink D &gt; B B No &gt; E End ```</p>
 </article>
 
 <article>
 <header><h1>External File</h1></header>
-<p>Use include plugin to render a Mermaid diagram from a file. :include-mermaid: mermaid/class-diagram.mmd classDiagram Animal &lt;|-- Duck Animal &lt;|-- Fish Animal &lt;|-- Zebra Animal : +int age Animal : +String gender Animal: +isMammal() Animal: +mate() class Duck{ +String beakColor +swim() +quack() } class Fish{ -int sizeInFeet -canEat() } class Zebra{ +bool is_wild +run() } classDiagram Animal &lt;|-- Duck Animal &lt;|-- Fish Animal &lt;|-- Zebra Animal : +int age Animal : +String gender Animal: +isMammal() Animal: +mate() class Duck{ +String beakColor +swim() +quack() } class Fish{ -int sizeInFeet -canEat() } class Zebra{ +bool is_wild +run() }</p>
+<p>Use include plugin to render a Mermaid diagram from a file classDiagram Animal &lt;| Duck Animal &lt;| Fish Animal &lt;| Zebra Animal int age Animal String gender Animal isMammal Animal mate class Duck String beakColor swim quack class Fish int sizeInFeet canEat class Zebra bool is_wild run include mermaid mermaid class diagram mmd classDiagram Animal &lt;| Duck Animal &lt;| Fish Animal &lt;| Zebra Animal int age Animal String gender Animal isMammal Animal mate class Duck String beakColor swim quack class Fish int sizeInFeet canEat class Zebra bool is_wild run</p>
 </article>
 
 <article>
 <header><h1>Wide Mode</h1></header>
-<p>Use wide: true to use as much horizontal space as required and available. ```mermaid {wide: true} sequenceDiagram par Alice to Bob Alice-&gt;&gt;Bob: Go help John and Alice to John Alice-&gt;&gt;John: I want this done today par John to Charlie John-&gt;&gt;Charlie: Can we do this today? and John to Diana John-&gt;&gt;Diana: Can you help us today? and Alice to Carl Alice-&gt;&gt;Carl: I also want this done today end end ``` or :include-mermaid: mermaid/sequence-diagram.mmd { wide: true } sequenceDiagram par Alice to Bob Alice-&gt;&gt;Bob: Go help John and Alice to John Alice-&gt;&gt;John: I want this done today par John to Charlie John-&gt;&gt;Charlie: Can we do this today? and John to Diana John-&gt;&gt;Diana: Can you help us today? and Alice to Carl Alice-&gt;&gt;Carl: I also want this done today end end</p>
+<p>Use to use as much horizontal space as required and available or sequenceDiagram par Alice to Bob Alice &gt;&gt;Bob Go help John and Alice to John Alice &gt;&gt;John I want this done today par John to Charlie John &gt;&gt;Charlie Can we do this today and John to Diana John &gt;&gt;Diana Can you help us today and Alice to Carl Alice &gt;&gt;Carl I also want this done today end end wide true ```mermaid wide true sequenceDiagram par Alice to Bob Alice &gt;&gt;Bob Go help John and Alice to John Alice &gt;&gt;John I want this done today par John to Charlie John &gt;&gt;Charlie Can we do this today and John to Diana John &gt;&gt;Diana Can you help us today and Alice to Carl Alice &gt;&gt;Carl I also want this done today end end ``` include mermaid mermaid sequence diagram mmd wide true</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "fenced-block",
+      "additionalIds" : [ ],
       "title" : "Fenced Block",
       "type" : "Section",
       "content" : [ {
@@ -202,6 +203,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "external-file",
+      "additionalIds" : [ ],
       "title" : "External File",
       "type" : "Section",
       "content" : [ {
@@ -223,11 +225,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "classDiagram\n    Animal <|-- Duck\n    Animal <|-- Fish\n    Animal <|-- Zebra\n    Animal : +int age\n    Animal : +String gender\n    Animal: +isMammal()\n    Animal: +mate()\n    class Duck{\n        +String beakColor\n        +swim()\n        +quack()\n    }\n    class Fish{\n        -int sizeInFeet\n        -canEat()\n    }\n    class Zebra{\n        +bool is_wild\n        +run()\n    }",
         "autoTitle" : true,
         "title" : "mermaid/class-diagram.mmd",
-        "anchorId" : "external-file-mermaid-class-diagram-mmd",
+        "anchorId" : "external-file-mermaid-class-diagrammmd",
         "type" : "Snippet"
       } ]
     }, {
       "id" : "wide-mode",
+      "additionalIds" : [ ],
       "title" : "Wide Mode",
       "type" : "Section",
       "content" : [ {
@@ -264,7 +267,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Mermaid"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052817,
+    "lastModifiedTime" : 1727735409514,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Mermaid Diagrams",

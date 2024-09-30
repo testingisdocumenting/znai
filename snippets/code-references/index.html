@@ -86,22 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Local References</h1></header>
-<p>You can turn parts of a code snippet into links to internal or external pages.To do that, define references in a CSV file, using a two column format: expression, link . constructor, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor usefulAction, example-references/api#useful-action :include-file: file-name.js {referencesPath: &quot;references/references-demo.csv&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass JSON format is also supported</p>
+<p>You can turn parts of a code snippet into links to internal or external pages To do that define references in a CSV file using a two column format JSON format is also supported expression link constructor https developer mozilla org en US docs Web JavaScript Reference Classes constructor usefulAction example references api#useful action include file file name js referencesPath references references demo csv class JsClass constructor usefulAction export default JsClass</p>
 </article>
 
 <article>
 <header><h1>Page Defaults</h1></header>
-<p>Use plugin plugins/default-parameters#page-local-defaults Page Local Defaults to set references file that is relevant to the page at hand.</p>
+<p>Use plugin Page Local Defaults to set references file that is relevant to the page at hand</p>
 </article>
 
 <article>
 <header><h1>Global References</h1></header>
-<p>Add references to references.csv or references.json if you want all your code snippets to use the same references. { &quot;fapi.book&quot;: &quot;example-references/api#book&quot;, &quot;fapi.query&quot;: &quot;example-references/api#query&quot; } import * as fapi from 'flight-api' function bookFlight(flightInfo) { const confirmation = fapi.book(flightInfo) //... } function flightStatus(id) { const fullStatus = fapi.query(id) return fullStatus.shortStatus }</p>
+<p>Add references to or if you want all your code snippets to use the same references references csv references json fapi book example references api#book fapi query example references api#query import * as fapi from flight api function bookFlight flightInfo const confirmation fapi book flightInfo function flightStatus id const fullStatus fapi query id return fullStatus shortStatus</p>
 </article>
 
 <article>
 <header><h1>Inlined Code</h1></header>
-<p>snippets/inlined-code-snippets Inlined code is automatically converted into a link if its content matches one of the global references entries: Use `fapi.book` to book a flight. Use fapi.book to book a flight.</p>
+<p>Inlined code is automatically converted into a link if its content matches one of the global references entries Use to book a flight fapi book Use `fapi book` to book a flight</p>
 </article>
 </section>
 </div>
@@ -137,6 +137,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "local-references",
+      "additionalIds" : [ ],
       "title" : "Local References",
       "type" : "Section",
       "content" : [ {
@@ -162,7 +163,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "constructor, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor\nusefulAction, example-references/api#useful-action",
         "autoTitle" : true,
         "title" : "references/references-demo.csv",
-        "anchorId" : "local-references-references-references-demo-csv",
+        "anchorId" : "local-references-references-references-democsv",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -197,11 +198,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "highlightValues" : [ ],
         "highlightKeys" : [ ],
         "title" : "references/references-demo.json",
-        "anchorId" : "local-references-references-references-demo-json",
+        "anchorId" : "local-references-references-references-demojson",
         "type" : "Json"
       } ]
     }, {
       "id" : "page-defaults",
+      "additionalIds" : [ ],
       "title" : "Page Defaults",
       "type" : "Section",
       "content" : [ {
@@ -224,6 +226,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "global-references",
+      "additionalIds" : [ ],
       "title" : "Global References",
       "type" : "Section",
       "content" : [ {
@@ -249,7 +252,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "{\n  \"fapi.book\": \"example-references/api#book\",\n  \"fapi.query\": \"example-references/api#query\"\n}",
         "autoTitle" : true,
         "title" : "references.json",
-        "anchorId" : "global-references-references-json",
+        "anchorId" : "global-references-referencesjson",
         "type" : "Snippet"
       }, {
         "lang" : "js",
@@ -260,6 +263,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "inlined-code",
+      "additionalIds" : [ ],
       "title" : "Inlined Code",
       "type" : "Section",
       "content" : [ {
@@ -301,7 +305,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409498,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Code References",

@@ -86,22 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>LaTeX Block</h1></header>
-<p>To render math you can use https://en.wikibooks.org/wiki/LaTeX/Mathematics LaTeX math expressions. Surround LaTeX expression with fenced block and specify latex as a language ```latex \forall x \in X, \quad \exists y \leq \epsilon ``` The result will be a following math expression. \forall x \in X, \quad \exists y \leq \epsilon ```latex x = \begin{cases} a &amp;\text{if } b \\ c &amp;\text{if } d \\ x &amp;\text{if } z \end{cases} ``` x = \begin{cases} a &amp;\text{if } b \\ c &amp;\text{if } d \\ x &amp;\text{if } z \end{cases}</p>
+<p>To render math you can use LaTeX math expressions Surround LaTeX expression with fenced block and specify as a language The result will be a following math expression forall x in X quad exists y leq epsilon x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases latex ```latex forall x in X quad exists y leq epsilon ``` ```latex x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases ```</p>
 </article>
 
 <article>
 <header><h1>LaTeX Inline</h1></header>
-<p>Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly. It holds that `:latex: {src: &quot;\\frac{1}{2} &lt; \\sqrt{2}&quot;}`. The result will be a following math expression.It holds that .</p>
+<p>Znai also supports inline LaTeX Use single backticks instead of three to render math expressions inline JSON parameters are used to allow LaTeX braces to be parsed correctly The result will be a following math expression It holds that It holds that ` latex src frac 1 2 &lt; sqrt 2 `</p>
 </article>
 
 <article>
 <header><h1>Presentation Mode</h1></header>
-<p>In presentation mode, rendered expressions will automatically scale to make use of the screen space.</p>
+<p>In presentation mode rendered expressions will automatically scale to make use of the screen space</p>
 </article>
 
 <article>
 <header><h1>KaTex</h1></header>
-<p>Rendering is done by using awesome https://github.com/Khan/KaTeX KaTeX library. https://github.com/Khan/KaTeX KaTeX fonts are copied to generated documentation resources.</p>
+<p>Rendering is done by using awesome KaTeX library KaTeX fonts are copied to generated documentation resources</p>
 </article>
 </section>
 </div>
@@ -137,6 +137,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "latex-block",
+      "additionalIds" : [ ],
       "title" : "LaTeX Block",
       "type" : "Section",
       "content" : [ {
@@ -192,6 +193,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "latex-inline",
+      "additionalIds" : [ ],
       "title" : "LaTeX Inline",
       "type" : "Section",
       "content" : [ {
@@ -226,6 +228,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "presentation-mode",
+      "additionalIds" : [ ],
       "title" : "Presentation Mode",
       "type" : "Section",
       "content" : [ {
@@ -237,6 +240,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "katex",
+      "additionalIds" : [ ],
       "title" : "KaTex",
       "type" : "Section",
       "content" : [ {
@@ -272,7 +276,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409499,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Math",

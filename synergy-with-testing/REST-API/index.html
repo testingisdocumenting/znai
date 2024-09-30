@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Request and Response Capture</h1></header>
-<p>snippets/open-API Open API helps to define a formal API specification. And real examples of request/response helps to clarify.Instead of manually copy-and-pasting the responses to your documentation, consider running tests and automatically capturing the relevant artifacts.</p>
+<p>Open API helps to define a formal API specification And real examples of request response helps to clarify Instead of manually copy and pasting the responses to your documentation consider running tests and automatically capturing the relevant artifacts</p>
 </article>
 
 <article>
 <header><h1>WebTau</h1></header>
-<p>https://testingisdocumenting.org/webtau WebTau (short for web test automation) is a testing API, command line tool and a framework to write unit, integration and end-to-end tests. Test across REST-API, Graph QL, Browser, Database, CLI and Business Logic with consistent set of matchers and concepts.Here is an example of REST API test with test artifacts capture scenario(&quot;create and access employee&quot;) { def id = http.post(&quot;/employee&quot;, [firstName: 'FN', lastName: 'LN']) { id.shouldNot == &quot;&quot; return id } http.doc.capture('employee-post') // capture previous HTTP call into &lt;docDir&gt;/employee-post http.get(&quot;/employee/$id&quot;) { firstName.should == &quot;FN&quot; lastName.should == &quot;LN&quot; } http.doc.capture('employee-get') // capture previous HTTP call into &lt;docDir&gt;/employee-get }</p>
+<p>WebTau short for web test automation is a testing API command line tool and a framework to write unit integration and end to end tests Test across REST API Graph QL Browser Database CLI and Business Logic with consistent set of matchers and concepts Here is an example of REST API test with test artifacts capture scenario create and access employee def id http post employee firstName FN lastName LN id shouldNot return id http doc capture employee post capture previous HTTP call into &lt;docDir&gt; employee post http get employee $id firstName should FN lastName should LN http doc capture employee get capture previous HTTP call into &lt;docDir&gt; employee get</p>
 </article>
 
 <article>
 <header><h1>Documentation Pipeline</h1></header>
-<p>Documentation pipeline can look like markdown # Create Employee :include-open-api: openapi/api-spec.json {operationId: &quot;createEmployee&quot; } ```columns left: :include-json: doc-artifacts/employee-post/request.json { title: &quot;request payload&quot; } right: :include-json: doc-artifacts/employee-post/response.json { title: &quot;response payload&quot;, highlightValueFile: &quot;doc-artifacts/employee-post/paths.json&quot; } ```</p>
+<p>Documentation pipeline can look like # Create Employee include open api openapi api spec json operationId createEmployee ```columns left include json doc artifacts employee post request json title request payload right include json doc artifacts employee post response json title response payload highlightValueFile doc artifacts employee post paths json ```</p>
 </article>
 
 <article>
@@ -137,6 +137,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "request-and-response-capture",
+      "additionalIds" : [ ],
       "title" : "Request and Response Capture",
       "type" : "Section",
       "content" : [ {
@@ -172,6 +173,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "webtau",
+      "additionalIds" : [ ],
       "title" : "WebTau",
       "type" : "Section",
       "content" : [ {
@@ -210,6 +212,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "documentation-pipeline",
+      "additionalIds" : [ ],
       "title" : "Documentation Pipeline",
       "type" : "Section",
       "content" : [ {
@@ -241,6 +244,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "create-employee",
+      "additionalIds" : [ ],
       "title" : "Create Employee",
       "type" : "Section",
       "content" : [ {
@@ -256,6 +260,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "create-employee-request",
+        "additionalIds" : [ "request" ],
         "level" : 2,
         "title" : "Request",
         "type" : "SubHeading"
@@ -296,12 +301,14 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "create-employee-responses",
+        "additionalIds" : [ "responses" ],
         "level" : 2,
         "title" : "Responses",
         "type" : "SubHeading"
       }, {
         "style" : "api",
         "id" : "create-employee-responses-200",
+        "additionalIds" : [ "200" ],
         "level" : 4,
         "title" : "200",
         "type" : "SubHeading"
@@ -334,6 +341,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "create-employee-responses-201",
+        "additionalIds" : [ "201" ],
         "level" : 4,
         "title" : "201",
         "type" : "SubHeading"
@@ -392,7 +400,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052805,
+    "lastModifiedTime" : 1727735409501,
     "tocItem" : {
       "chapterTitle" : "Synergy With Testing",
       "pageTitle" : "REST API",

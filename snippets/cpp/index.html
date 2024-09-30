@@ -86,12 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Description Extraction</h1></header>
-<p>In addition to snippets/snippets-manipulation snippets manipulation that is applicable to any language, Znai can extract description of methods and convert parameters into snippets/api-parameters API Parameters :include-doxygen-doc-params: utils::nested::my_func { title: &quot;My Params&quot; } first_param int description of first param item a item b second_param bool description of second param Head over to CPP/description-extraction CPP Description Extraction to learn more</p>
+<p>In addition to snippets manipulation that is applicable to any language Znai can extract description of methods and convert parameters into API Parameters Head over to CPP Description Extraction to learn more include doxygen doc params utils nested my_func title My Params first_param int description of first param item a item b second_param bool description of second param</p>
 </article>
 
 <article>
 <header><h1>Auto Reference</h1></header>
-<p>Znai provides plugins to automatically create reference documentation for methods and classes. :include-doxygen-member: multi_println prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print */ template&lt;typename T1, typename T2&gt; void multi_println(const T1&amp; v1, const T2&amp; v2) { std::cout &lt;&lt; v1 &lt;&lt; &quot;, &quot; &lt;&lt; v2 &lt;&lt; &quot;\n&quot;; } Head over to CPP/auto-reference CPP Auto Reference to learn more</p>
+<p>Znai provides plugins to automatically create reference documentation for methods and classes Head over to CPP Auto Reference to learn more include doxygen member multi_println prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * template&lt;typename T1 typename T2&gt; void multi_println const T1&amp; v1 const T2&amp; v2 std cout &lt;&lt; v1 &lt;&lt; &lt;&lt; v2 &lt;&lt; n</p>
 </article>
 </section>
 </div>
@@ -127,6 +127,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "description-extraction",
+      "additionalIds" : [ ],
       "title" : "Description Extraction",
       "type" : "Section",
       "content" : [ {
@@ -245,6 +246,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "auto-reference",
+      "additionalIds" : [ ],
       "title" : "Auto Reference",
       "type" : "Section",
       "content" : [ {
@@ -375,7 +377,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n */\ntemplate<typename T1, typename T2>\nvoid multi_println(const T1& v1, const T2& v2) {\n    std::cout << v1 << \", \" << v2 << \"\\n\";\n}",
         "title" : "source.hpp",
         "surroundedBy" : "// multi_println",
-        "anchorId" : "auto-reference-source-hpp",
+        "anchorId" : "auto-reference-sourcehpp",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -396,7 +398,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409498,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Cpp",

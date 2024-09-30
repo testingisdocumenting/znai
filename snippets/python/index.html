@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Content Extraction</h1></header>
-<p>In addition to snippets/snippets-manipulation snippets manipulation that is applicable to any language, Znai can extract content of methods. :include-python: python/example.py {entry: &quot;Animal.says&quot;, bodyOnly: true} print(&quot;hello&quot;) class Animal: &quot;&quot;&quot; animal top level class doc string ``` code block ``` &quot;&quot;&quot; def says(self): &quot;&quot;&quot; animal **talks** `code` &quot;&quot;&quot; print(&quot;hello&quot;) Head over to python/content-extraction Python Content Extraction to learn more</p>
+<p>In addition to snippets manipulation that is applicable to any language Znai can extract content of methods Head over to Python Content Extraction to learn more include python python example py entry Animal says bodyOnly true print hello class Animal animal top level class doc string ``` code block ``` def says self animal **talks** `code` print hello</p>
 </article>
 
 <article>
 <header><h1>Description Extraction</h1></header>
-<p>Znai provides plugin to extract PyDoc content. Use it to extract high level description and merge it with the rest of the documentation. Convert method parameters into snippets/api-parameters API Parameters :include-python-doc-params: python/pydoc-params.py {entry: &quot;my_func&quot;, title: &quot;result and parameters&quot;} text inside my *func* doc * list one * list two Parameters ---------- label : str label to use to *render* item in the store price : fin.money.Money price associated with the **item** Returns ------- str status of the operation `OK` for good def my_func(label, price): &quot;&quot;&quot; text inside my *func* doc * list one * list two Parameters ---------- label : str label to use to *render* item in the store price : fin.money.Money price associated with the **item** Returns ------- str status of the operation `OK` for good &quot;&quot;&quot; return &quot;OK&quot; Head over to python/description-extraction Python Description Extraction to learn more</p>
+<p>Znai provides plugin to extract PyDoc content Use it to extract high level description and merge it with the rest of the documentation Convert method parameters into API Parameters Head over to Python Description Extraction to learn more include python doc params python pydoc params py entry my_func title result and parameters text inside my *func* doc * list one * list two Parameters label str label to use to *render* item in the store price fin money Money price associated with the **item** Returns str status of the operation `OK` for good def my_func label price text inside my *func* doc * list one * list two Parameters label str label to use to *render* item in the store price fin money Money price associated with the **item** Returns str status of the operation `OK` for good return OK</p>
 </article>
 
 <article>
 <header><h1>Auto Reference</h1></header>
-<p>Znai provides plugins to automatically create reference documentation for methods and classes. :include-python-method: fin.money.render_money render_money render money to a string returns str money represented as text amount fin.money.Money amount to print message str message to use for audit def render_money(amount: Money, message: str = &quot;&quot;) -&gt; str: &quot;&quot;&quot; render money to a string Parameters -------------- amount: amount to print message: message to use for audit Returns ------- money represented as text &quot;&quot;&quot; return f&quot;{message} {amount.amount} {amount.currency}&quot; Head over to python/auto-reference Python Auto Reference to learn more</p>
+<p>Znai provides plugins to automatically create reference documentation for methods and classes Head over to Python Auto Reference to learn more include python method fin money render_money render_money render money to a string returns str money represented as text amount fin money Money amount to print message str message to use for audit def render_money amount Money message str &gt; str render money to a string Parameters amount amount to print message message to use for audit Returns money represented as text return f message amount amount amount currency</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "content-extraction",
+      "additionalIds" : [ ],
       "title" : "Content Extraction",
       "type" : "Section",
       "content" : [ {
@@ -173,7 +174,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "autoTitle" : true,
         "startLine" : "class Animal",
         "title" : "python/example.py",
-        "anchorId" : "content-extraction-python-example-py",
+        "anchorId" : "content-extraction-python-examplepy",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -195,6 +196,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "description-extraction",
+      "additionalIds" : [ ],
       "title" : "Description Extraction",
       "type" : "Section",
       "content" : [ {
@@ -297,7 +299,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "def my_func(label, price):\n    \"\"\"\n    text inside my *func* doc\n    * list one\n    * list two\n\n    Parameters\n    ----------\n    label : str\n      label to use to *render* item in the store\n\n    price : fin.money.Money\n      price associated with the **item**\n\n    Returns\n    -------\n    str\n      status of the operation\n\n      `OK` for good\n    \"\"\"\n\n    return \"OK\"",
         "autoTitle" : true,
         "title" : "python/pydoc-params.py",
-        "anchorId" : "description-extraction-python-pydoc-params-py",
+        "anchorId" : "description-extraction-python-pydoc-paramspy",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -319,6 +321,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "auto-reference",
+      "additionalIds" : [ ],
       "title" : "Auto Reference",
       "type" : "Section",
       "content" : [ {
@@ -418,7 +421,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "autoTitle" : true,
         "startLine" : "render_money",
         "title" : "fin/money.py",
-        "anchorId" : "auto-reference-fin-money-py",
+        "anchorId" : "auto-reference-fin-moneypy",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -439,7 +442,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409500,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Python",

@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Content Extraction</h1></header>
-<p>In addition to snippets/snippets-manipulation snippets manipulation that is applicable to any language, Znai can extract content of methods. :include-java: HelloWorld.java { entry: &quot;sampleMethod&quot;, commentsType: &quot;inline&quot;, bodyOnly: true } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Head over to java/content-extraction Java Content Extraction to learn more</p>
+<p>In addition to snippets manipulation that is applicable to any language Znai can extract content of methods Head over to Java Content Extraction to learn more include java HelloWorld java entry sampleMethod commentsType inline bodyOnly true validate process p2 important comment notifyAll p1 very important return bestSample</p>
 </article>
 
 <article>
 <header><h1>Description Extraction</h1></header>
-<p>Znai provides plugin to extract JavaDoc content. Use it to extract high level description and merge it with the rest of the documentation. Convert Enums and method parameters into snippets/api-parameters API Parameters :include-java-doc-params: HelloWorld.java { entry: &quot;importantAction&quot;, title: &quot;Trading Required Parameters&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot; } trader Trader trader that performs action transaction Transaction transaction to perform action on Head over to java/description-extraction Java Description Extraction to learn more</p>
+<p>Znai provides plugin to extract JavaDoc content Use it to extract high level description and merge it with the rest of the documentation Convert Enums and method parameters into API Parameters Head over to Java Description Extraction to learn more include java doc params HelloWorld java entry importantAction title Trading Required Parameters referencesPath references javadoc references demo csv trader Trader trader that performs action transaction Transaction transaction to perform action on</p>
 </article>
 
 <article>
 <header><h1>Auto Reference</h1></header>
-<p>Auto reference similar to python/content-extraction Python is planned for the future releases.Create a https://github.com/testingisdocumenting/znai/issues GitHub Issue or https://github.com/testingisdocumenting/znai/discussions Discussion to help prioritize</p>
+<p>Auto reference similar to Python is planned for the future releases Create a GitHub Issue or Discussion to help prioritize</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "content-extraction",
+      "additionalIds" : [ ],
       "title" : "Content Extraction",
       "type" : "Section",
       "content" : [ {
@@ -188,6 +189,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "description-extraction",
+      "additionalIds" : [ ],
       "title" : "Description Extraction",
       "type" : "Section",
       "content" : [ {
@@ -285,6 +287,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "auto-reference",
+      "additionalIds" : [ ],
       "title" : "Auto Reference",
       "type" : "Section",
       "content" : [ {
@@ -336,7 +339,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409498,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Java",

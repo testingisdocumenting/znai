@@ -86,57 +86,57 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Inlined CSV</h1></header>
-<p>Use api-parameters fenced code plugin to document API parameters. ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support</p>
+<p>Use fenced code plugin to document API parameters firstName String description with markdown support score Integer another description line with markdown support api parameters ```api parameters firstName String description with *markdown* support score Integer another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>Nested</h1></header>
-<p>Use parent.child syntax to define nested objects like this: ```api-parameters sessionId, Integer, session Id person, Person, person to login with person.firstName, String, first name of the person person.lastName, String, last name of the person roles, List&lt;Role&gt;, list of authorized roles roles.id, String, role id roles.description, String, role description ``` Note: when using this approach it is necessary to explicitly define a root entry, such as person in this example. sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note: if a parameter name actually contains a period (&quot;.&quot;), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. &quot;person.firstName&quot;</p>
+<p>Use syntax to define nested objects like this Note when using this approach it is necessary to explicitly define a entry such as in this example sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note if a parameter name actually contains a period you can prevent this nesting behavior by putting the parameter name in single quotes e g person firstName parent child ```api parameters sessionId Integer session Id person Person person to login with person firstName String first name of the person person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles roles id String role id roles description String role description ``` root person</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use the title parameter to specify a title. ```api-parameters {title: &quot;person definition&quot;} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support</p>
+<p>Use the parameter to specify a title firstName String description with markdown support score Integer another description line with markdown support title ```api parameters title person definition firstName String description with *markdown* support score Integer another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>Collapsing Parameters</h1></header>
-<p>Use collapsed: true|false to make api-parameters collapsible. markdown ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true} city, String, city name zipCode, String, zip code ``` city String city name zipCode String zip code Note: collapsed requires title to be present</p>
+<p>Use to make collapsible city String city name zipCode String zip code Note requires to be present collapsed true|false api parameters ```api parameters title address definition anchorPrefix title collapsed true city String city name zipCode String zip code ``` collapsed title</p>
 </article>
 
 <article>
 <header><h1>No Gap</h1></header>
-<p>Use noGap: true to remove top/bottom margins when there are multiple parameter instances in a row. markdown ```api-parameters { title: &quot;person definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: false, noGap: true } firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true} city, String, city name zipCode, String, zip code ``` firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code</p>
+<p>Use to remove top bottom margins when there are multiple parameter instances in a row firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code noGap true ```api parameters title person definition anchorPrefix title collapsed false noGap true firstName String description with *markdown* support score Integer another description line with *markdown* support ``` ```api parameters title address definition anchorPrefix title collapsed true city String city name zipCode String zip code ```</p>
 </article>
 
 <article>
 <header><h1>Size</h1></header>
-<p>Use the small parameter to render API Parameters using smaller font size and occupying less width ```api-parameters {small: true} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support</p>
+<p>Use the parameter to render API Parameters using smaller font size and occupying less width firstName String description with markdown support score Integer another description line with markdown support small ```api parameters small true firstName String description with *markdown* support score Integer another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>Multi-line CSV Description</h1></header>
-<p>Use quotes &quot; to wrap a multiline description. Here is an example of description including multiple lines and nested code block example. `````api-parameters cores, String, &quot; ``` execute(cores: 10) ``` Specify how many cores to allocate for execution &quot; gpu, Boolean, &quot; ``` execute(cores: 10, gpu: true) ``` Specify whether to use gpu &quot; ````` cores String execute(cores: 10) Specify how many cores to allocate for execution gpu Boolean execute(cores: 10, gpu: true) Specify whether to use gpu Note: Use larger number of backticks on outside then inside to distinct between api-parameters plugin boundaries and nested code blocks</p>
+<p>Use quotes to wrap a multiline description Here is an example of description including multiple lines and nested code block example cores String Specify how many cores to allocate for execution execute cores 10 gpu Boolean Specify whether to use gpu execute cores 10 gpu true Note Use larger number of backticks on outside then inside to distinct between plugin boundaries and nested code blocks `````api parameters cores String ``` execute cores 10 ``` Specify how many cores to allocate for execution gpu Boolean ``` execute cores 10 gpu true ``` Specify whether to use gpu ````` api parameters</p>
 </article>
 
 <article>
 <header><h1>External JSON File</h1></header>
-<p>Instead of hard-coding your parameters inside markdown files, you can specify an external JSON file. JSON could be generated based on the data you have. Some examples:build time annotation processor test time command line parameters generation Given the above file, use :include-api-parameters: api-parameters.json {title: &quot;Person Definition&quot;} to display it as API Parameters sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note: description field in JSON file is treated as Markdown</p>
+<p>Instead of hard coding your parameters inside markdown files you can specify an external JSON file JSON could be generated based on the data you have Some examples build time annotation processor test time command line parameters generation Given the above file use to display it as API Parameters sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note field in JSON file is treated as Markdown include api parameters api parameters json title Person Definition description</p>
 </article>
 
 <article>
 <header><h1>Anchors</h1></header>
-<p>Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear. Use anchorPrefix parameter to avoid conflict of anchor ids when using the same API parameter names within a single page: ```api-parameters {anchorPrefix: &quot;customPrefix&quot;} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` firstName String description with markdown support score Integer another description line with markdown support In the example above customPrefix is added to each parameter link.</p>
+<p>Each API parameter has an anchor associated with it You need to hover over parameter name for it to appear Use parameter to avoid conflict of anchor ids when using the same API parameter names within a single page firstName String description with markdown support score Integer another description line with markdown support In the example above is added to each parameter link anchorPrefix ```api parameters anchorPrefix customPrefix firstName String description with *markdown* support score Integer another description line with *markdown* support ``` customPrefix</p>
 </article>
 
 <article>
 <header><h1>Long Parameter Names</h1></header>
-<p>Znai hard wraps long parameter names to leave more space to description. VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support Use noWrap: true to remove hard wrap enforcement ```api-parameters {anchorPrefix: &quot;customPrefix&quot;, noWrap: true} VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support ``` VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support</p>
+<p>Znai hard wraps long parameter names to leave more space to description VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support Use to remove hard wrap enforcement VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support noWrap true ```api parameters anchorPrefix customPrefix noWrap true VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>Wide Mode</h1></header>
-<p>Use wide: true to use all the available horizontal space ```api-parameters {anchorPrefix: &quot;customPrefix&quot;, noWrap: true, wide: true} VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, &quot;longer line longer line, description with *markdown* support&quot; VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, &quot;longer line longer line, another description line with *markdown* support and few moe lines&quot; ``` VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line, description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line, another description line with markdown support and few moe lines</p>
+<p>Use to use all the available horizontal space VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line another description line with markdown support and few moe lines wide true ```api parameters anchorPrefix customPrefix noWrap true wide true VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line another description line with *markdown* support and few moe lines ```</p>
 </article>
 </section>
 </div>
@@ -172,6 +172,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "inlined-csv",
+      "additionalIds" : [ ],
       "title" : "Inlined CSV",
       "type" : "Section",
       "content" : [ {
@@ -244,6 +245,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "nested",
+      "additionalIds" : [ ],
       "title" : "Nested",
       "type" : "Section",
       "content" : [ {
@@ -394,6 +396,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "title",
+      "additionalIds" : [ ],
       "title" : "Title",
       "type" : "Section",
       "content" : [ {
@@ -467,6 +470,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "collapsing-parameters",
+      "additionalIds" : [ ],
       "title" : "Collapsing Parameters",
       "type" : "Section",
       "content" : [ {
@@ -547,6 +551,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "no-gap",
+      "additionalIds" : [ ],
       "title" : "No Gap",
       "type" : "Section",
       "content" : [ {
@@ -656,6 +661,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "size",
+      "additionalIds" : [ ],
       "title" : "Size",
       "type" : "Section",
       "content" : [ {
@@ -729,6 +735,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multi-line-csv-description",
+      "additionalIds" : [ ],
       "title" : "Multi-line CSV Description",
       "type" : "Section",
       "content" : [ {
@@ -814,6 +821,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "external-json-file",
+      "additionalIds" : [ ],
       "title" : "External JSON File",
       "type" : "Section",
       "content" : [ {
@@ -885,7 +893,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ],
         "highlightValues" : [ ],
         "highlightKeys" : [ ],
-        "anchorId" : "external-json-file-api-parameters-json",
+        "anchorId" : "external-json-file-api-parametersjson",
         "type" : "Json"
       }, {
         "type" : "Paragraph",
@@ -1036,6 +1044,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "anchors",
+      "additionalIds" : [ ],
       "title" : "Anchors",
       "type" : "Section",
       "content" : [ {
@@ -1125,6 +1134,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "long-parameter-names",
+      "additionalIds" : [ ],
       "title" : "Long Parameter Names",
       "type" : "Section",
       "content" : [ {
@@ -1254,6 +1264,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "wide-mode",
+      "additionalIds" : [ ],
       "title" : "Wide Mode",
       "type" : "Section",
       "content" : [ {
@@ -1332,7 +1343,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409497,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "API Parameters",

@@ -86,12 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Global Defaults</h1></header>
-<p>Create plugin-params.json file to specify default parameters per plugin. { &quot;api-parameters&quot;: { &quot;title&quot;: &quot;no title (set explicitly to override)&quot; } } When the parameters file is present, any time you use snippets/api-parameters API Parameters plugin without title , an implicit title will be present</p>
+<p>Create file to specify default parameters per plugin When the parameters file is present any time you use API Parameters plugin without an implicit title will be present plugin params json api parameters title no title set explicitly to override title</p>
 </article>
 
 <article>
 <header><h1>Page Local Defaults</h1></header>
-<p>Use page meta block at the start of a page to set plugin default parameters specific to the page.You may have seen meta block example to set flow/names Page Title: --- title: Custom Name --- Now we're going to use the same block to add plugin defaults local to the page. --- image: {border: true} --- Once we have a block like this, every visuals/images#extension include-image plugin on this page will have border set to true. markdown :include-image: visuals/regular-image.png</p>
+<p>Use page meta block at the start of a page to set plugin default parameters specific to the page You may have seen meta block example to set Page Title Now we re going to use the same block to add plugin defaults local to the page Once we have a block like this every include image plugin on this page will have set to true title Custom Name image border true border include image visuals regular image png</p>
 </article>
 </section>
 </div>
@@ -127,6 +127,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "global-defaults",
+      "additionalIds" : [ ],
       "title" : "Global Defaults",
       "type" : "Section",
       "content" : [ {
@@ -145,7 +146,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "json",
         "snippet" : "{\n  \"api-parameters\": {\n    \"title\": \"no title (set explicitly to override)\"\n  }\n}",
         "title" : "plugin-params.json",
-        "anchorId" : "global-defaults-plugin-params-json",
+        "anchorId" : "global-defaults-plugin-paramsjson",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -173,6 +174,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "page-local-defaults",
+      "additionalIds" : [ ],
       "title" : "Page Local Defaults",
       "type" : "Section",
       "content" : [ {
@@ -246,14 +248,14 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "border" : true,
         "imageSrc" : "/znai/visuals/regular-image.png",
-        "timestamp" : 1718071052817,
+        "timestamp" : 1727735409514,
         "shapes" : [ ],
         "width" : 583.0,
         "height" : 385.0,
         "type" : "AnnotatedImage"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409487,
     "tocItem" : {
       "chapterTitle" : "Plugins",
       "pageTitle" : "Default Parameters",

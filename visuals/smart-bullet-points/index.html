@@ -86,32 +86,32 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Types</h1></header>
-<p>Bullet points are an essential tool in the presentation of information. Frequent use of bullet points however may make documentation and presentation boring.You can change the way bullet points are rendered by using the meta plugin. :include-meta: {bulletListType: &quot;BulletsListType&quot;} * Testing * Design * Code Review * Documentation</p>
+<p>Bullet points are an essential tool in the presentation of information Frequent use of bullet points however may make documentation and presentation boring You can change the way bullet points are rendered by using the plugin meta include meta bulletListType BulletsListType * Testing * Design * Code Review * Documentation</p>
 </article>
 
 <article>
 <header><h1>Left Right Timeline</h1></header>
-<p>Use LeftRightTimeLine to outline your flow. This also splits related things by moving odd points to the left and even to the right. :include-meta: {bulletListType: &quot;LeftRightTimeLine&quot;} * Testing * Design * Code Review * Documentation Testing Design Code Review Documentation</p>
+<p>Use to outline your flow This also splits related things by moving odd points to the left and even to the right Testing Design Code Review Documentation LeftRightTimeLine include meta bulletListType LeftRightTimeLine * Testing * Design * Code Review * Documentation</p>
 </article>
 
 <article>
 <header><h1>Venn</h1></header>
-<p>Use Venn to display overlapping relationships.Velocity Volume Variety</p>
+<p>Use to display overlapping relationships Velocity Volume Variety Venn</p>
 </article>
 
 <article>
 <header><h1>Steps</h1></header>
-<p>Use Steps to outline a procedure.Install IDEA Learn Java Learn Machine Learning Use differentColors: true to use distinct colors for each step :include-meta: {bulletListType: &quot;Steps&quot;, differentColors: true} Install IDEA Learn Java Learn Machine Learning Use align: &quot;left&quot; to align steps to the left :include-meta: {bulletListType: &quot;Steps&quot;, differentColors: true, align: &quot;left&quot;} Install IDEA Learn Java Learn Machine Learning</p>
+<p>Use to outline a procedure Install IDEA Learn Java Learn Machine Learning Use to use distinct colors for each step Install IDEA Learn Java Learn Machine Learning Use to align steps to the left Install IDEA Learn Java Learn Machine Learning Steps differentColors true include meta bulletListType Steps differentColors true align left include meta bulletListType Steps differentColors true align left</p>
 </article>
 
 <article>
 <header><h1>Presentation Only</h1></header>
-<p>If you want to change bullets type only for presentation use: :include-meta: {presentationBulletListType: &quot;BulletsListType&quot;}</p>
+<p>If you want to change bullets type only for presentation use include meta presentationBulletListType BulletsListType</p>
 </article>
 
 <article>
 <header><h1>Horizontal Stripes</h1></header>
-<p>The following bullet points will be rendered as horizontal striped, but only in presentation mode. :include-meta: {presentationBulletListType: &quot;HorizontalStripes&quot;} Lessons Learned Future Plans Backup Strategy</p>
+<p>The following bullet points will be rendered as horizontal striped but only in presentation mode Lessons Learned Future Plans Backup Strategy include meta presentationBulletListType HorizontalStripes</p>
 </article>
 </section>
 </div>
@@ -147,6 +147,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "types",
+      "additionalIds" : [ ],
       "title" : "Types",
       "type" : "Section",
       "content" : [ {
@@ -180,6 +181,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "left-right-timeline",
+      "additionalIds" : [ ],
       "title" : "Left Right Timeline",
       "type" : "Section",
       "content" : [ {
@@ -251,6 +253,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "venn",
+      "additionalIds" : [ ],
       "title" : "Venn",
       "type" : "Section",
       "content" : [ {
@@ -303,6 +306,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "steps",
+      "additionalIds" : [ ],
       "title" : "Steps",
       "type" : "Section",
       "content" : [ {
@@ -462,6 +466,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "presentation-only",
+      "additionalIds" : [ ],
       "title" : "Presentation Only",
       "type" : "Section",
       "content" : [ {
@@ -478,6 +483,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "horizontal-stripes",
+      "additionalIds" : [ ],
       "title" : "Horizontal Stripes",
       "type" : "Section",
       "content" : [ {
@@ -528,7 +534,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052817,
+    "lastModifiedTime" : 1727735409514,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Smart Bullet Points",

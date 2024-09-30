@@ -1314,6 +1314,9 @@ toc = [ {
       "title" : "Separate Markdown Files",
       "id" : "separate-markdown-files"
     }, {
+      "title" : "Default Tab",
+      "id" : "default-tab"
+    }, {
       "title" : "Attention Signs",
       "id" : "attention-signs"
     } ]
@@ -1562,18 +1565,18 @@ toc = [ {
       "id" : "class-definition"
     }, {
       "title" : "fin.money.Money",
-      "id" : "fin-money-money",
+      "id" : "finmoneymoney",
       "style" : "api"
     }, {
       "title" : "Inheritance",
       "id" : "inheritance"
     }, {
       "title" : "executive_department.WorkerCTO",
-      "id" : "executive_department-workercto",
+      "id" : "executive_departmentworkercto",
       "style" : "api"
     }, {
       "title" : "department.Worker",
-      "id" : "department-worker",
+      "id" : "departmentworker",
       "style" : "api"
     } ]
   } ]
@@ -1873,6 +1876,21 @@ toc = [ {
       "title" : "Favicon",
       "id" : "favicon"
     } ]
+  }, {
+    "chapterTitle" : "Configuration",
+    "pageTitle" : "Styling",
+    "pageMeta" : { },
+    "dirName" : "configuration",
+    "fileName" : "styling",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "CSS Variables",
+      "id" : "css-variables"
+    }, {
+      "title" : "Dark Light Themes Overrides",
+      "id" : "dark-light-themes-overrides"
+    } ]
   } ]
 }, {
   "chapterTitle" : "Deployment",
@@ -1966,17 +1984,20 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.71",
+      "id" : "171"
+    }, {
       "title" : "1.70",
-      "id" : "1-70"
+      "id" : "170"
     }, {
       "title" : "1.69",
-      "id" : "1-69"
+      "id" : "169"
     }, {
       "title" : "1.68",
-      "id" : "1-68"
+      "id" : "168"
     }, {
       "title" : "1.67",
-      "id" : "1-67"
+      "id" : "167"
     } ]
   }, {
     "chapterTitle" : "Release Notes",
@@ -1990,16 +2011,16 @@ toc = [ {
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "1.66",
-      "id" : "1-66"
+      "id" : "166"
     }, {
       "title" : "1.65",
-      "id" : "1-65"
+      "id" : "165"
     }, {
       "title" : "1.64",
-      "id" : "1-64"
+      "id" : "164"
     }, {
       "title" : "1.63",
-      "id" : "1-63"
+      "id" : "163"
     } ]
   }, {
     "chapterTitle" : "Release Notes",
@@ -2013,34 +2034,34 @@ toc = [ {
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "1.62",
-      "id" : "1-62"
+      "id" : "162"
     }, {
       "title" : "1.61.2",
-      "id" : "1-61-2"
+      "id" : "1612"
     }, {
       "title" : "1.61.1",
-      "id" : "1-61-1"
+      "id" : "1611"
     }, {
       "title" : "1.61",
-      "id" : "1-61"
+      "id" : "161"
     }, {
       "title" : "1.60",
-      "id" : "1-60"
+      "id" : "160"
     }, {
       "title" : "1.59.1",
-      "id" : "1-59-1"
+      "id" : "1591"
     }, {
       "title" : "1.59",
-      "id" : "1-59"
+      "id" : "159"
     }, {
       "title" : "1.58",
-      "id" : "1-58"
+      "id" : "158"
     }, {
       "title" : "1.57",
-      "id" : "1-57"
+      "id" : "157"
     }, {
       "title" : "1.56",
-      "id" : "1-56"
+      "id" : "156"
     } ]
   }, {
     "chapterTitle" : "Release Notes",
@@ -2054,34 +2075,34 @@ toc = [ {
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
       "title" : "1.55",
-      "id" : "1-55"
+      "id" : "155"
     }, {
       "title" : "1.54",
-      "id" : "1-54"
+      "id" : "154"
     }, {
       "title" : "1.53",
-      "id" : "1-53"
+      "id" : "153"
     }, {
       "title" : "1.52",
-      "id" : "1-52"
+      "id" : "152"
     }, {
       "title" : "1.51",
-      "id" : "1-51"
+      "id" : "151"
     }, {
       "title" : "1.50",
-      "id" : "1-50"
+      "id" : "150"
     }, {
       "title" : "1.49",
-      "id" : "1-49"
+      "id" : "149"
     }, {
       "title" : "1.48",
-      "id" : "1-48"
+      "id" : "148"
     }, {
       "title" : "1.47",
-      "id" : "1-47"
+      "id" : "147"
     }, {
       "title" : "1.46",
-      "id" : "1-46"
+      "id" : "146"
     } ]
   } ]
 } ]

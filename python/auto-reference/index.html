@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Method/Function Definition</h1></header>
-<p>Use python-method to include function/method definition with signature, documentation and parameters list :include-python-method: fin.money.render_money render_money render money to a string returns str money represented as text amount fin.money.Money amount to print message str message to use for audit def render_money(amount: Money, message: str = &quot;&quot;) -&gt; str: &quot;&quot;&quot; render money to a string Parameters -------------- amount: amount to print message: message to use for audit Returns ------- money represented as text &quot;&quot;&quot; return f&quot;{message} {amount.amount} {amount.currency}&quot;</p>
+<p>Use to include function method definition with signature documentation and parameters list python method include python method fin money render_money render_money render money to a string returns str money represented as text amount fin money Money amount to print message str message to use for audit def render_money amount Money message str &gt; str render money to a string Parameters amount amount to print message message to use for audit Returns money represented as text return f message amount amount amount currency</p>
 </article>
 
 <article>
 <header><h1>fin.money.Money</h1></header>
-<p>To define a class use python-class include plugin :include-python-class: fin.money.Money &quot;&quot;&quot; Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead &quot;&quot;&quot; def __init__(self, amount: int, currency: str): &quot;&quot;&quot; generic constructor that accepts a currency Parameters ---------- amount: amount of money currency: currency to associate with the created Money &quot;&quot;&quot; self._amount = amount self._currency = currency @property def amount(self) -&gt; int: &quot;&quot;&quot; amount in provided currency &quot;&quot;&quot; return self._amount @amount.setter def amount(self, amount: int): self.amount = amount @property def currency(self) -&gt; str: &quot;&quot;&quot; money currency &quot;&quot;&quot; return self._currency @classmethod def dollars(cls, amount: int) -&gt; 'Money': &quot;&quot;&quot; creates money instance with `USD` as the currency Parameters ---------- amount: dollar amount Returns ------- new money instance with `USD` as currency &quot;&quot;&quot; return cls(amount, &quot;USD&quot;) def add(self, another: 'Money'): &quot;&quot;&quot; add money from another money instance Parameters -------------- another : money to add &quot;&quot;&quot; self.amount += another.amount Note: Once you define Money class, method arguments and parameter descriptions with the same type will automatically link to the place of definition Properties Members Details dollars __init__ add Money representation. Encapsulates money type, combining amount and currency. Deals with precision errors. Warning: avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str [readonly] money currency Money.dollars Money.__init__ Money.add Money.dollars creates money instance with `USD` as the currency returns fin.money.Money new money instance with USD as currency amount int dollar amount Money.__init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money.add add money from another money instance another fin.money.Money money to add</p>
+<p>To define a class use include plugin Note Once you define class method arguments and parameter descriptions with the same type will automatically link to the place of definition Properties Members Details dollars __init__ add python class include python class fin money Money Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead def __init__ self amount int currency str generic constructor that accepts a currency Parameters amount amount of money currency currency to associate with the created Money self _amount amount self _currency currency @property def amount self &gt; int amount in provided currency return self _amount @amount setter def amount self amount int self amount amount @property def currency self &gt; str money currency return self _currency @classmethod def dollars cls amount int &gt; Money creates money instance with `USD` as the currency Parameters amount dollar amount Returns new money instance with `USD` as currency return cls amount USD def add self another Money add money from another money instance Parameters another money to add self amount another amount Money Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str readonly money currency Money dollars Money __init__ Money add Money dollars creates money instance with `USD` as the currency returns fin money Money new money instance with as currency USD amount int dollar amount Money __init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money add add money from another money instance another fin money Money money to add</p>
 </article>
 
 <article>
 <header><h1>department.Worker</h1></header>
-<p>Example of inheritance from fin.money import Money class Person: &quot;&quot;&quot; Person, the root of all &quot;&quot;&quot; def __init__(self, name): self._name = name self._desire = &quot;&quot; @property def name(self) -&gt; str: &quot;&quot;&quot; Person name, you'd better use it when talking to them &quot;&quot;&quot; return self._name @property def desire(self) -&gt; str: &quot;&quot;&quot; Person desire, can change over time &quot;&quot;&quot; return self._desire @desire.setter def desire(self, new_desire: str): self._desire = new_desire def talk(self): &quot;&quot;&quot; person talks &quot;&quot;&quot; print(f&quot;{self.name} talks&quot;) class Worker(Person): &quot;&quot;&quot; Works and improves the world &quot;&quot;&quot; def __init__(self, name: str, salary: Money): Person.__init__(self, name) self._salary = salary def work(self): &quot;&quot;&quot; work to the best ability &quot;&quot;&quot; pass @property def salary(self) -&gt; Money: &quot;&quot;&quot; Annual non-yet-taxed salary &quot;&quot;&quot; return self._salary from department import Worker as Wo from fin.money import Money class WorkerCTO(Wo): &quot;&quot;&quot; CTO worker with all the qualities and attributes required for a successful business &quot;&quot;&quot; def __init__(self, name: str, salary: Money, goal: str): &quot;&quot;&quot; Create a new instance of CTO with provided name, salary and the goal Parameters ---------- name: CTO name salary: CTO salary goal: top priority goal to achieve &quot;&quot;&quot; Wo.__init__(self, name=name, salary=salary) self._goal = goal def work_hard(self, level: int): &quot;&quot;&quot; work as hard as possible to observe Parameters ---------- level: effort level from 0 to 100 &quot;&quot;&quot; pass @property def goal(self) -&gt; str: &quot;&quot;&quot; CTO's top priority goal to achieve &quot;&quot;&quot; return self._goal @goal.setter def goal(self, new_goal: str): self._goal = new_goal :include-python-class: executive_department.WorkerCTO :include-python-class: department.Worker Note: Base classes that are defined somewhere in the documentation will turn into linksBase classes: , Properties WorkerCTO Members Worker Members Person Members WorkerCTO Details __init__ work_hard CTO worker with all the qualities and attributes required for a successful business Worker Person goal str CTO's top priority goal to achieve salary fin.money.Money [readonly] Annual non-yet-taxed salary desire str Person desire, can change over time name str [readonly] Person name, you'd better use it when talking to them WorkerCTO.__init__ WorkerCTO.work_hard Worker.work Person.talk WorkerCTO.__init__ Create a new instance of CTO with provided name, salary and the goal name str CTO name salary fin.money.Money CTO salary goal str top priority goal to achieve WorkerCTO.work_hard work as hard as possible to observe level int effort level from 0 to 100 Base classes: Properties Worker Members Person Members Worker Details __init__ work Works and improves the world Person salary fin.money.Money [readonly] Annual non-yet-taxed salary desire str Person desire, can change over time name str [readonly] Person name, you'd better use it when talking to them Worker.__init__ Worker.work Person.talk Worker.__init__ Worker.work work to the best ability</p>
+<p>Example of inheritance Note Base classes that are defined somewhere in the documentation will turn into links Base classes Properties WorkerCTO Members Worker Members Person Members WorkerCTO Details __init__ work_hard Base classes Properties Worker Members Person Members Worker Details __init__ work from fin money import Money class Person Person the root of all def __init__ self name self _name name self _desire @property def name self &gt; str Person name you d better use it when talking to them return self _name @property def desire self &gt; str Person desire can change over time return self _desire @desire setter def desire self new_desire str self _desire new_desire def talk self person talks print f self name talks class Worker Person Works and improves the world def __init__ self name str salary Money Person __init__ self name self _salary salary def work self work to the best ability pass @property def salary self &gt; Money Annual non yet taxed salary return self _salary from department import Worker as Wo from fin money import Money class WorkerCTO Wo CTO worker with all the qualities and attributes required for a successful business def __init__ self name str salary Money goal str Create a new instance of CTO with provided name salary and the goal Parameters name CTO name salary CTO salary goal top priority goal to achieve Wo __init__ self name name salary salary self _goal goal def work_hard self level int work as hard as possible to observe Parameters level effort level from 0 to 100 pass @property def goal self &gt; str CTO s top priority goal to achieve return self _goal @goal setter def goal self new_goal str self _goal new_goal include python class executive_department WorkerCTO include python class department Worker CTO worker with all the qualities and attributes required for a successful business Worker Person goal str CTO s top priority goal to achieve salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them WorkerCTO __init__ WorkerCTO work_hard Worker work Person talk WorkerCTO __init__ Create a new instance of CTO with provided name salary and the goal name str CTO name salary fin money Money CTO salary goal str top priority goal to achieve WorkerCTO work_hard work as hard as possible to observe level int effort level from 0 to 100 Works and improves the world Person salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them Worker __init__ Worker work Person talk Worker __init__ Worker work work to the best ability</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "method-function-definition",
+      "additionalIds" : [ ],
       "title" : "Method/Function Definition",
       "type" : "Section",
       "content" : [ {
@@ -237,11 +238,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "autoTitle" : true,
         "startLine" : "render_money",
         "title" : "fin/money.py",
-        "anchorId" : "method-function-definition-fin-money-py",
+        "anchorId" : "method-function-definition-fin-moneypy",
         "type" : "Snippet"
       } ]
     }, {
       "id" : "class-definition",
+      "additionalIds" : [ ],
       "title" : "Class Definition",
       "type" : "Section",
       "content" : [ {
@@ -268,7 +270,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "endLine" : "class Debt",
         "excludeStartEnd" : true,
         "title" : "fin/money.py",
-        "anchorId" : "class-definition-fin-money-py",
+        "anchorId" : "class-definition-fin-moneypy",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -289,7 +291,8 @@ ReactDOM.render(React.createElement(Documentation, {
     }, {
       "badge" : "class",
       "style" : "api",
-      "id" : "fin-money-money",
+      "id" : "finmoneymoney",
+      "additionalIds" : [ ],
       "title" : "fin.money.Money",
       "type" : "Section",
       "content" : [ {
@@ -317,7 +320,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "style" : "api",
-        "id" : "fin-money-money-properties",
+        "id" : "finmoneymoney-properties",
+        "additionalIds" : [ "properties" ],
         "level" : 3,
         "title" : "Properties",
         "type" : "SubHeading"
@@ -360,7 +364,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "fin-money-money-members",
+        "id" : "finmoneymoney-members",
+        "additionalIds" : [ "members" ],
         "level" : 3,
         "title" : "Members",
         "type" : "SubHeading"
@@ -446,13 +451,15 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : "/znai/python/auto-reference#python_api_fin_money_Money_add"
       }, {
         "style" : "api",
-        "id" : "fin-money-money-details",
+        "id" : "finmoneymoney-details",
+        "additionalIds" : [ "details" ],
         "level" : 3,
         "title" : "Details",
         "type" : "SubHeading"
       }, {
         "style" : "api",
-        "id" : "fin-money-money-details-dollars",
+        "id" : "finmoneymoney-details-dollars",
+        "additionalIds" : [ "dollars" ],
         "level" : 4,
         "title" : "dollars",
         "type" : "SubHeading"
@@ -536,7 +543,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "fin-money-money-details-__init__",
+        "id" : "finmoneymoney-details-__init__",
+        "additionalIds" : [ "__init__" ],
         "level" : 4,
         "title" : "__init__",
         "type" : "SubHeading"
@@ -613,7 +621,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "fin-money-money-details-add",
+        "id" : "finmoneymoney-details-add",
+        "additionalIds" : [ "add" ],
         "level" : 4,
         "title" : "add",
         "type" : "SubHeading"
@@ -669,6 +678,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "inheritance",
+      "additionalIds" : [ ],
       "title" : "Inheritance",
       "type" : "Section",
       "content" : [ {
@@ -682,14 +692,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "from fin.money import Money\n\n\nclass Person:\n    \"\"\"\n    Person, the root of all\n    \"\"\"\n    def __init__(self, name):\n        self._name = name\n        self._desire = \"\"\n\n    @property\n    def name(self) -> str:\n        \"\"\"\n        Person name, you'd better use it when talking to them\n        \"\"\"\n        return self._name\n\n    @property\n    def desire(self) -> str:\n        \"\"\"\n        Person desire, can change over time\n        \"\"\"\n        return self._desire\n\n    @desire.setter\n    def desire(self, new_desire: str):\n        self._desire = new_desire\n\n    def talk(self):\n        \"\"\"\n        person talks\n        \"\"\"\n        print(f\"{self.name} talks\")\n\n\nclass Worker(Person):\n    \"\"\"\n    Works and improves the world\n    \"\"\"\n    def __init__(self, name: str, salary: Money):\n        Person.__init__(self, name)\n        self._salary = salary\n\n    def work(self):\n        \"\"\"\n        work to the best ability\n        \"\"\"\n        pass\n\n    @property\n    def salary(self) -> Money:\n        \"\"\"\n        Annual non-yet-taxed salary\n        \"\"\"\n        return self._salary",
         "autoTitle" : true,
         "title" : "department.py",
-        "anchorId" : "inheritance-department-py",
+        "anchorId" : "inheritance-departmentpy",
         "type" : "Snippet"
       }, {
         "lang" : "py",
         "snippet" : "from department import Worker as Wo\nfrom fin.money import Money\n\n\nclass WorkerCTO(Wo):\n    \"\"\"\n    CTO worker with all the qualities and attributes required for a successful business\n    \"\"\"\n    def __init__(self, name: str, salary: Money, goal: str):\n        \"\"\"\n        Create a new instance of CTO with provided name, salary and the goal\n\n        Parameters\n        ----------\n        name:\n          CTO name\n        salary:\n          CTO salary\n        goal:\n          top priority goal to achieve\n        \"\"\"\n        Wo.__init__(self, name=name, salary=salary)\n        self._goal = goal\n\n    def work_hard(self, level: int):\n        \"\"\"\n        work as hard as possible to observe\n\n        Parameters\n        ----------\n        level:\n          effort level from 0 to 100\n        \"\"\"\n        pass\n\n    @property\n    def goal(self) -> str:\n        \"\"\"\n        CTO's top priority goal to achieve\n        \"\"\"\n        return self._goal\n\n    @goal.setter\n    def goal(self, new_goal: str):\n        self._goal = new_goal",
         "autoTitle" : true,
         "title" : "executive_department.py",
-        "anchorId" : "inheritance-executive_department-py",
+        "anchorId" : "inheritance-executive_departmentpy",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -709,7 +719,8 @@ ReactDOM.render(React.createElement(Documentation, {
     }, {
       "badge" : "class",
       "style" : "api",
-      "id" : "executive_department-workercto",
+      "id" : "executive_departmentworkercto",
+      "additionalIds" : [ ],
       "title" : "executive_department.WorkerCTO",
       "type" : "Section",
       "content" : [ {
@@ -744,7 +755,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "style" : "api",
-        "id" : "executive_department-workercto-properties",
+        "id" : "executive_departmentworkercto-properties",
+        "additionalIds" : [ "properties-2" ],
         "level" : 3,
         "title" : "Properties",
         "type" : "SubHeading"
@@ -830,7 +842,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "executive_department-workercto-workercto-members",
+        "id" : "executive_departmentworkercto-workercto-members",
+        "additionalIds" : [ "workercto-members" ],
         "level" : 3,
         "title" : "WorkerCTO Members",
         "type" : "SubHeading"
@@ -898,7 +911,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : "/znai/python/auto-reference#python_api_executive_department_WorkerCTO_work_hard"
       }, {
         "style" : "api",
-        "id" : "executive_department-workercto-worker-members",
+        "id" : "executive_departmentworkercto-worker-members",
+        "additionalIds" : [ "worker-members" ],
         "level" : 3,
         "title" : "Worker Members",
         "type" : "SubHeading"
@@ -919,7 +933,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : "/znai/python/auto-reference#python_api_department_Worker_work"
       }, {
         "style" : "api",
-        "id" : "executive_department-workercto-person-members",
+        "id" : "executive_departmentworkercto-person-members",
+        "additionalIds" : [ "person-members" ],
         "level" : 3,
         "title" : "Person Members",
         "type" : "SubHeading"
@@ -940,13 +955,15 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : ""
       }, {
         "style" : "api",
-        "id" : "executive_department-workercto-workercto-details",
+        "id" : "executive_departmentworkercto-workercto-details",
+        "additionalIds" : [ "workercto-details" ],
         "level" : 3,
         "title" : "WorkerCTO Details",
         "type" : "SubHeading"
       }, {
         "style" : "api",
-        "id" : "executive_department-workercto-workercto-details-__init__",
+        "id" : "executive_departmentworkercto-workercto-details-__init__",
+        "additionalIds" : [ "__init__-2" ],
         "level" : 4,
         "title" : "__init__",
         "type" : "SubHeading"
@@ -1045,7 +1062,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "executive_department-workercto-workercto-details-work_hard",
+        "id" : "executive_departmentworkercto-workercto-details-work_hard",
+        "additionalIds" : [ "work_hard" ],
         "level" : 4,
         "title" : "work_hard",
         "type" : "SubHeading"
@@ -1105,7 +1123,8 @@ ReactDOM.render(React.createElement(Documentation, {
     }, {
       "badge" : "class",
       "style" : "api",
-      "id" : "department-worker",
+      "id" : "departmentworker",
+      "additionalIds" : [ ],
       "title" : "department.Worker",
       "type" : "Section",
       "content" : [ {
@@ -1131,7 +1150,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "style" : "api",
-        "id" : "department-worker-properties",
+        "id" : "departmentworker-properties",
+        "additionalIds" : [ "properties-3" ],
         "level" : 3,
         "title" : "Properties",
         "type" : "SubHeading"
@@ -1199,7 +1219,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       }, {
         "style" : "api",
-        "id" : "department-worker-worker-members",
+        "id" : "departmentworker-worker-members",
+        "additionalIds" : [ "worker-members-2" ],
         "level" : 3,
         "title" : "Worker Members",
         "type" : "SubHeading"
@@ -1251,7 +1272,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : "/znai/python/auto-reference#python_api_department_Worker_work"
       }, {
         "style" : "api",
-        "id" : "department-worker-person-members",
+        "id" : "departmentworker-person-members",
+        "additionalIds" : [ "person-members-2" ],
         "level" : 3,
         "title" : "Person Members",
         "type" : "SubHeading"
@@ -1272,13 +1294,15 @@ ReactDOM.render(React.createElement(Documentation, {
         "url" : ""
       }, {
         "style" : "api",
-        "id" : "department-worker-worker-details",
+        "id" : "departmentworker-worker-details",
+        "additionalIds" : [ "worker-details" ],
         "level" : 3,
         "title" : "Worker Details",
         "type" : "SubHeading"
       }, {
         "style" : "api",
-        "id" : "department-worker-worker-details-__init__",
+        "id" : "departmentworker-worker-details-__init__",
+        "additionalIds" : [ "__init__-3" ],
         "level" : 4,
         "title" : "__init__",
         "type" : "SubHeading"
@@ -1316,7 +1340,8 @@ ReactDOM.render(React.createElement(Documentation, {
         "removeSelf" : true
       }, {
         "style" : "api",
-        "id" : "department-worker-worker-details-work",
+        "id" : "departmentworker-worker-details-work",
+        "additionalIds" : [ "work" ],
         "level" : 4,
         "title" : "work",
         "type" : "SubHeading"
@@ -1345,7 +1370,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409487,
     "tocItem" : {
       "chapterTitle" : "Python",
       "pageTitle" : "Auto Reference",
@@ -1362,18 +1387,18 @@ ReactDOM.render(React.createElement(Documentation, {
         "id" : "class-definition"
       }, {
         "title" : "fin.money.Money",
-        "id" : "fin-money-money",
+        "id" : "finmoneymoney",
         "style" : "api"
       }, {
         "title" : "Inheritance",
         "id" : "inheritance"
       }, {
         "title" : "executive_department.WorkerCTO",
-        "id" : "executive_department-workercto",
+        "id" : "executive_departmentworkercto",
         "style" : "api"
       }, {
         "title" : "department.Worker",
-        "id" : "department-worker",
+        "id" : "departmentworker",
         "style" : "api"
       } ]
     }

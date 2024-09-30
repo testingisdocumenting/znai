@@ -86,52 +86,52 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Class Level</h1></header>
-<p>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use JavaDoc strings to explain certain concepts of your system. /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * {@link Diversity} */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } Instead of copy-and-pasting text between sources, you can refer to it inside your documentation. :include-java-doc: HelloWorld.java Text bellow is extracted from top class level JavaDoc Top level conceptual description of a CustomDomain problem. To avoid copy &amp; paste of the content consider to re-use information.</p>
+<p>Documentation maintenance is one of the main goals of this documentation system In the case of Java you may already use strings to explain certain concepts of your system Instead of copy and pasting text between sources you can refer to it inside your documentation Text bellow is extracted from top class level JavaDoc ** * Top level conceptual description of a @link CustomDomain problem * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt; b&gt; of the content consider to re use information * class HelloWorld ** * Each year we hire students from different universities to increase * @link Diversity * private int numberOfStudents ** * Conceptual description of a &lt;i&gt;Domain&lt; i&gt; problem * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt; b&gt; implementation details * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt; i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt; b&gt; sample * public String sampleMethod String p1 int p2 validate process p2 important comment notifyAll p1 very important return bestSample public void sampleMethod Map&lt;String Integer&gt; p1 int p2 boolean isActive overloaded method ** * @param trader trader that performs action * @param transaction transaction to perform action on * public void importantAction Trader trader Transaction transaction TODO important public Data createData create data include java doc HelloWorld java JavaDoc Top level conceptual description of a problem To avoid copy &amp; paste of the content consider to re use information CustomDomain</p>
 </article>
 
 <article>
 <header><h1>Method Level</h1></header>
-<p>Method level JavaDoc text can be referred to as well by specifying the entry parameter. :include-java-doc: HelloWorld.java {entry: &quot;sampleMethod&quot;} Text bellow is extracted from sampleMethod method JavaDoc Conceptual description of a Domain problem. It will work only if you put high level description here and not implementation details.</p>
+<p>Method level text can be referred to as well by specifying the parameter Text bellow is extracted from method JavaDoc entry include java doc HelloWorld java entry sampleMethod sampleMethod JavaDoc Conceptual description of a Domain problem It will work only if you put high level description here and not implementation details</p>
 </article>
 
 <article>
 <header><h1>Field Level</h1></header>
-<p>:include-java-doc: HelloWorld.java {entry: &quot;numberOfStudents&quot;} Each year we hire students from different universities to increase Diversity</p>
+<p>include java doc HelloWorld java entry numberOfStudents Each year we hire students from different universities to increase Diversity</p>
 </article>
 
 <article>
 <header><h1>Inner Classes</h1></header>
-<p>Use NestedName.entityName to disambiguate a field or a method name class HelloWorld { private int importantScore; public static class Nested { /** * system caclulates &lt;b&gt;importance&lt;/b&gt; score based on following factors... */ private int importantScore; } } :include-java-doc: HelloWorldWithInner.java {entry: &quot;Nested.importantScore&quot;} system caclulates importance score based on following factors...</p>
+<p>Use to disambiguate a field or a method name NestedName entityName class HelloWorld private int importantScore public static class Nested ** * system caclulates &lt;b&gt;importance&lt; b&gt; score based on following factors * private int importantScore include java doc HelloWorldWithInner java entry Nested importantScore system caclulates importance score based on following factors</p>
 </article>
 
 <article>
 <header><h1>Handling Links</h1></header>
-<p>Links defined with {@link MyClass} are automatically converted to snippets/inlined-code-snippets Inlined Code and become MyClass . To turn MyClass into a link you need to use snippets/code-references Code References.Use the referencesPath value to associate {@link CustomDomain} with the documentation link: CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell Alternatively you can define snippets/code-references#global-references Global References to turn MyClass into a link.</p>
+<p>Links defined with are automatically converted to Inlined Code and become To turn into a link you need to use Code References Use the value to associate with the documentation link Alternatively you can define Global References to turn into a link @link MyClass MyClass MyClass referencesPath @link CustomDomain CustomDomain example references domain Trader example references domain#trader Transaction example references domain#transaction BUY example references domain#transaction buy SELL example references domain#transaction sell MyClass</p>
 </article>
 
 <article>
 <header><h1>Method Params</h1></header>
-<p>:include-java-doc-params: HelloWorld.java {entry: &quot;sampleMethod&quot;} p1 String important parameter of something p2 int sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe return String name of the &lt;b&gt;best&lt;/b&gt; sample Use the title parameter to specify a title. :include-java-doc-params: HelloWorld.java {entry: &quot;importantAction&quot;, title: &quot;Trading Required Parameters&quot;} trader Trader trader that performs action transaction Transaction transaction to perform action on</p>
+<p>Use the parameter to specify a title include java doc params HelloWorld java entry sampleMethod p1 String important parameter of something p2 int sample &lt;i&gt;offset&lt; i&gt; according to the rules of the universe return String name of the &lt;b&gt;best&lt; b&gt; sample title include java doc params HelloWorld java entry importantAction title Trading Required Parameters trader Trader trader that performs action transaction Transaction transaction to perform action on</p>
 </article>
 
 <article>
 <header><h1>Method Params With References</h1></header>
-<p>Use the snippets/code-references Code References file to link method parameters to reference pages.To do that, define references in a CSV file, using a two column format: type-or-variable-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell :include-java-doc-params: HelloWorld.java { entry: &quot;importantAction&quot;, title: &quot;Trading Required Parameters&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot;} trader Trader trader that performs action transaction Transaction transaction to perform action on Parameters are now linked with a reference section for the documentation.</p>
+<p>Use the Code References file to link method parameters to reference pages To do that define references in a CSV file using a two column format Parameters are now linked with a reference section for the documentation type or variable name link CustomDomain example references domain Trader example references domain#trader Transaction example references domain#transaction BUY example references domain#transaction buy SELL example references domain#transaction sell include java doc params HelloWorld java entry importantAction title Trading Required Parameters referencesPath references javadoc references demo csv trader Trader trader that performs action transaction Transaction transaction to perform action on</p>
 </article>
 
 <article>
 <header><h1>Enum Entries</h1></header>
-<p>Use include-java-enum-entries to enumerate entries of a enum from a file. package my.company; enum MyEnum { /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE } :include-java-enum-entries: MyEnum.java ENTRY_ONE description of &lt;b&gt;entry one&lt;/b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt;/li&gt; &lt;li&gt;item two&lt;/li&gt; &lt;/ul&gt; ENTRY_THREE Don't use, instead use ENTRY_TWO You can exclude deprecated entries from the list by setting the excludeDeprecated parameter. :include-java-enum-entries: MyEnum.java {excludeDeprecated: true} ENTRY_ONE description of &lt;b&gt;entry one&lt;/b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt;/li&gt; &lt;li&gt;item two&lt;/li&gt; &lt;/ul&gt; ENTRY_THREE Don't use, instead use ENTRY_TWO Use the title parameter to specify a title. :include-java-enum-entries: TransactionTypes.java {title: &quot;Transaction Types&quot;} BUY buy intrument SELL sell instrument</p>
+<p>Use to enumerate entries of a enum from a file You can exclude deprecated entries from the list by setting the parameter Use the parameter to specify a title include java enum entries package my company enum MyEnum ** * description of &lt;b&gt;entry one&lt; b&gt; * ENTRY_ONE ** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt; li&gt; * &lt;li&gt;item two&lt; li&gt; * &lt; ul&gt; * ENTRY_TWO ** * Don t use instead use ENTRY_TWO * @Deprecated ENTRY_THREE include java enum entries MyEnum java ENTRY_ONE description of &lt;b&gt;entry one&lt; b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt; li&gt; &lt;li&gt;item two&lt; li&gt; &lt; ul&gt; ENTRY_THREE Don t use instead use ENTRY_TWO excludeDeprecated include java enum entries MyEnum java excludeDeprecated true ENTRY_ONE description of &lt;b&gt;entry one&lt; b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt; li&gt; &lt;li&gt;item two&lt; li&gt; &lt; ul&gt; ENTRY_THREE Don t use instead use ENTRY_TWO title include java enum entries TransactionTypes java title Transaction Types BUY buy intrument SELL sell instrument</p>
 </article>
 
 <article>
 <header><h1>Enum Entries With References</h1></header>
-<p>Use a snippets/code-references Code References file to link enum entries to reference pages.To do that, define references in a CSV file, using a two column format: enum-name, link . CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell package my.company; enum TransactionTypes { /** * buy intrument */ BUY, /** * sell instrument */ SELL } :include-java-enum-entries: TransactionTypes.java { title: &quot;Transaction Types&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot; } BUY buy intrument SELL sell instrument Enums are now linked with a reference section for the documentation.Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use snippets/code-references#global-references Global References.</p>
+<p>Use a Code References file to link enum entries to reference pages To do that define references in a CSV file using a two column format Enums are now linked with a reference section for the documentation Note you can reuse the same CSV file for Enums Parameters Code Snippets Alternatively you can use Global References enum name link CustomDomain example references domain Trader example references domain#trader Transaction example references domain#transaction BUY example references domain#transaction buy SELL example references domain#transaction sell package my company enum TransactionTypes ** * buy intrument * BUY ** * sell instrument * SELL include java enum entries TransactionTypes java title Transaction Types referencesPath references javadoc references demo csv BUY buy intrument SELL sell instrument</p>
 </article>
 
 <article>
 <header><h1>Markdown</h1></header>
-<p>Pass markdown: true parameter to the plugins to treat JavaDoc content as markdown /** * Top level **conceptual** description of a `CustomDomain` problem. * * markdown *list* * * item two * ``` * code snippet * goes here * ``` */ class HelloWorld { } :include-java-doc: HelloWorld.java {markdown: true} Top level conceptual description of a CustomDomain problem.markdown list item two code snippet goes here</p>
+<p>Pass parameter to the plugins to treat JavaDoc content as markdown markdown true ** * Top level **conceptual** description of a `CustomDomain` problem * * markdown *list* * * item two * ``` * code snippet * goes here * ``` * class HelloWorld include java doc HelloWorld java markdown true Top level conceptual description of a problem markdown list item two CustomDomain code snippet goes here</p>
 </article>
 </section>
 </div>
@@ -167,6 +167,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "class-level",
+      "additionalIds" : [ ],
       "title" : "Class Level",
       "type" : "Section",
       "content" : [ {
@@ -243,6 +244,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "method-level",
+      "additionalIds" : [ ],
       "title" : "Method Level",
       "type" : "Section",
       "content" : [ {
@@ -319,6 +321,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "field-level",
+      "additionalIds" : [ ],
       "title" : "Field Level",
       "type" : "Section",
       "content" : [ {
@@ -338,6 +341,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "inner-classes",
+      "additionalIds" : [ ],
       "title" : "Inner Classes",
       "type" : "Section",
       "content" : [ {
@@ -357,7 +361,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "class HelloWorld {\n    private int importantScore;\n\n    public static class Nested {\n        /**\n         * system caclulates <b>importance</b> score based on following factors...\n         */\n        private int importantScore;\n    }\n}",
         "autoTitle" : true,
         "title" : "HelloWorldWithInner.java",
-        "anchorId" : "inner-classes-helloworldwithinner-java",
+        "anchorId" : "inner-classes-helloworldwithinnerjava",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -382,6 +386,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "handling-links",
+      "additionalIds" : [ ],
       "title" : "Handling Links",
       "type" : "Section",
       "content" : [ {
@@ -506,7 +511,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "csv",
         "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#transaction-buy\nSELL, example-references/domain#transaction-sell",
         "title" : "references/javadoc-references-demo.csv",
-        "anchorId" : "handling-links-references-javadoc-references-demo-csv",
+        "anchorId" : "handling-links-references-javadoc-references-democsv",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -534,6 +539,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "method-params",
+      "additionalIds" : [ ],
       "title" : "Method Params",
       "type" : "Section",
       "content" : [ {
@@ -658,6 +664,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "method-params-with-references",
+      "additionalIds" : [ ],
       "title" : "Method Params With References",
       "type" : "Section",
       "content" : [ {
@@ -693,7 +700,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "csv",
         "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#transaction-buy\nSELL, example-references/domain#transaction-sell",
         "title" : "references/javadoc-references-demo.csv",
-        "anchorId" : "method-params-with-references-references-javadoc-references-demo-csv",
+        "anchorId" : "method-params-with-references-references-javadoc-references-democsv",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -760,6 +767,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "enum-entries",
+      "additionalIds" : [ ],
       "title" : "Enum Entries",
       "type" : "Section",
       "content" : [ {
@@ -778,7 +786,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "java",
         "snippet" : "package my.company;\n\nenum MyEnum {\n    /**\n     * description of <b>entry one</b>\n     */\n    ENTRY_ONE,\n\n    /**\n     * description of entry two\n     * <ul>\n     *     <li>item one</li>\n     *     <li>item two</li>\n     * </ul>\n     */\n    ENTRY_TWO,\n\n    /**\n     * Don't use, instead use ENTRY_TWO\n     */\n    @Deprecated\n    ENTRY_THREE\n}",
         "title" : "MyEnum.java",
-        "anchorId" : "enum-entries-myenum-java",
+        "anchorId" : "enum-entries-myenumjava",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -957,6 +965,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "enum-entries-with-references",
+      "additionalIds" : [ ],
       "title" : "Enum Entries With References",
       "type" : "Section",
       "content" : [ {
@@ -992,13 +1001,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "csv",
         "snippet" : "CustomDomain, example-references/domain\nTrader, example-references/domain#trader\nTransaction, example-references/domain#transaction\nBUY, example-references/domain#transaction-buy\nSELL, example-references/domain#transaction-sell",
         "title" : "references/javadoc-references-demo.csv",
-        "anchorId" : "enum-entries-with-references-references-javadoc-references-demo-csv",
+        "anchorId" : "enum-entries-with-references-references-javadoc-references-democsv",
         "type" : "Snippet"
       }, {
         "lang" : "java",
         "snippet" : "package my.company;\n\nenum TransactionTypes {\n    /**\n     * buy intrument\n     */\n    BUY,\n\n    /**\n     * sell instrument\n     */\n    SELL\n}",
         "title" : "TransactionTypes.java",
-        "anchorId" : "enum-entries-with-references-transactiontypes-java",
+        "anchorId" : "enum-entries-with-references-transactiontypesjava",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -1077,6 +1086,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "markdown",
+      "additionalIds" : [ ],
       "title" : "Markdown",
       "type" : "Section",
       "content" : [ {
@@ -1159,7 +1169,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409486,
     "tocItem" : {
       "chapterTitle" : "Java",
       "pageTitle" : "Description Extraction",

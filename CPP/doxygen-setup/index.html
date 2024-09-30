@@ -86,12 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Doxygen</h1></header>
-<p>Znai parses generated https://www.doxygen.nl/index.html Doxygen XML files to extract and embedComments Signatures Parameters Use the building blocks to mix and match API documentation with visuals and other artifacts. Or use the built-in plugins to generate the whole blocks of API reference.</p>
+<p>Znai parses generated Doxygen XML files to extract and embed Comments Signatures Parameters Use the building blocks to mix and match API documentation with visuals and other artifacts Or use the built in plugins to generate the whole blocks of API reference</p>
 </article>
 
 <article>
 <header><h1>Setup</h1></header>
-<p>Specify index.xml location inside &lt;docroot&gt;/doxygen.json { &quot;indexPath&quot;: &quot;doxygen/xml/index.xml&quot; } Note: To read doxygen XMLs from zip, add path to the zip to flow/lookup-paths#zip-and-jar-lookup lookup-paths</p>
+<p>Specify location inside Note To read doxygen XMLs from zip add path to the zip to lookup paths index xml &lt;docroot&gt; doxygen json indexPath doxygen xml index xml</p>
 </article>
 </section>
 </div>
@@ -127,6 +127,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "doxygen",
+      "additionalIds" : [ ],
       "title" : "Doxygen",
       "type" : "Section",
       "content" : [ {
@@ -192,6 +193,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "setup",
+      "additionalIds" : [ ],
       "title" : "Setup",
       "type" : "Section",
       "content" : [ {
@@ -214,7 +216,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "{\n  \"indexPath\": \"doxygen/xml/index.xml\"\n}",
         "autoTitle" : true,
         "title" : "doxygen.json",
-        "anchorId" : "setup-doxygen-json",
+        "anchorId" : "setup-doxygenjson",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -232,7 +234,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052785,
+    "lastModifiedTime" : 1727735409482,
     "tocItem" : {
       "chapterTitle" : "CPP",
       "pageTitle" : "Doxygen Setup",

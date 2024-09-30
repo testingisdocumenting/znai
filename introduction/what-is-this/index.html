@@ -86,27 +86,27 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Beautiful and Maintainable User Guide</h1></header>
-<p>Znai combines human written text with artifacts such as code , graphs , REST API , Java Docs , Doxygen , etc. to create up-to-date, maintainable, beautiful User Guides and Tutorials. # Beautiful and Maintainable User Guide `Znai` combines human written text with artifacts such as `code`, `graphs`, `REST API`, `Java Docs`, `Doxygen`, etc. to create up-to-date, maintainable, beautiful **User Guides** and **Tutorials**. :include-flow-chart: artifacts-flow.json {vertical: true, highlight: &quot;userguide&quot;}</p>
+<p>combines human written text with artifacts such as etc to create up to date maintainable beautiful User Guides and Tutorials Znai code graphs REST API Java Docs Doxygen # Beautiful and Maintainable User Guide `Znai` combines human written text with artifacts such as `code` `graphs` `REST API` `Java Docs` `Doxygen` etc to create up to date maintainable beautiful **User Guides** and **Tutorials** include flow chart artifacts flow json vertical true highlight userguide</p>
 </article>
 
 <article>
 <header><h1>Extensive Plugins System</h1></header>
-<p>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation Include markdown :include-json: example.json { title: &quot;JSON example&quot;, highlightValue: [&quot;root.person.id&quot;], collapsedPaths: [&quot;root.details&quot;] } markdown :include-java: ../java/HelloWorld.java { entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot; } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); Inlined Code markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking Fenced Block markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</p>
+<p>extends markdown with plugins system to supercharge visuals and maintainability Three categories of plugins are available for usage and creation Include Inlined Code It is a day is ticking Fenced Block C content of C tab Java content of Java tab Python content of Python tab Znai include json example json title JSON example highlightValue root person id collapsedPaths root details include java java HelloWorld java entry sampleMethod bodyOnly true commentsType inline validate process p2 important comment notifyAll p1 very important return bestSample It is a ` icon cloud` day ` icon clock` is ticking ```tabs C content of C tab Java content of Java tab Python content of Python tab ```</p>
 </article>
 
 <article>
 <header><h1>Rich Visuals</h1></header>
-<p>Leverage multiple out-of-the box plugins to render charts, flow diagrams, annotated images, dynamic SVGs, etc</p>
+<p>Leverage multiple out of the box plugins to render charts flow diagrams annotated images dynamic SVGs etc</p>
 </article>
 
 <article>
 <header><h1>Dark/Light Runtime Mode</h1></header>
-<p>Generate one documentation and let your users switch Dark/Light theme at runtime</p>
+<p>Generate one documentation and let your users switch Dark Light theme at runtime</p>
 </article>
 
 <article>
 <header><h1>Two Sides Page Layout</h1></header>
-<p>Use layout/two-sides-tabs two sides layout option to render examples and supporting information side by side with convenient examples language switch</p>
+<p>Use two sides layout option to render examples and supporting information side by side with convenient examples language switch</p>
 </article>
 
 <article>
@@ -116,12 +116,12 @@
 
 <article>
 <header><h1>Auto Presentation</h1></header>
-<p>With a click of a button, Znai turns User Guide content to presentation slides. Single source of truth and minimal effort.Present a feature in a meeting and then share the same content as a link to the documentation.</p>
+<p>With a click of a button turns User Guide content to presentation slides Single source of truth and minimal effort Present a feature in a meeting and then share the same content as a link to the documentation Znai</p>
 </article>
 
 <article>
 <header><h1>Batteries Included</h1></header>
-<p>Znai comes withMarkdown with custom extensions and dozens of plugins:Content from external files with markers and filters support Simplified extraction of a function body content (working with examples) Embedding of JavaDoc/PyDoc documentation text, preserving styles Beautiful API documentation capabilities Two Sides Page Layout with convenient examples language switch Rich visuals like flow diagrams and charts etc Dev server mode with changes highlight and auto-jump to a change Local search (with full preview) Dark/light mode runtime switch Presentation Mode to automatically turn your documentation into slides, using the same content</p>
+<p>Znai comes with Markdown with custom extensions and dozens of plugins Content from external files with markers and filters support Simplified extraction of a function body content working with examples Embedding of JavaDoc PyDoc documentation text preserving styles Beautiful API documentation capabilities Two Sides Page Layout with convenient examples language switch Rich visuals like flow diagrams and charts etc Dev server mode with changes highlight and auto jump to a change Local search with full preview Dark light mode runtime switch Presentation Mode to automatically turn your documentation into slides using the same content</p>
 </article>
 </section>
 </div>
@@ -157,6 +157,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "beautiful-and-maintainable-user-guide",
+      "additionalIds" : [ ],
       "title" : "Beautiful and Maintainable User Guide",
       "type" : "Section",
       "content" : [ {
@@ -245,6 +246,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "extensive-plugins-system",
+      "additionalIds" : [ ],
       "title" : "Extensive Plugins System",
       "type" : "Section",
       "content" : [ {
@@ -264,6 +266,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "extensive-plugins-system-include",
+        "additionalIds" : [ "include" ],
         "level" : 3,
         "title" : "Include",
         "type" : "SubHeading"
@@ -307,6 +310,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "extensive-plugins-system-inlined-code",
+        "additionalIds" : [ "inlined-code" ],
         "level" : 3,
         "title" : "Inlined Code",
         "type" : "SubHeading"
@@ -338,6 +342,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "extensive-plugins-system-fenced-block",
+        "additionalIds" : [ "fenced-block" ],
         "level" : 3,
         "title" : "Fenced Block",
         "type" : "SubHeading"
@@ -378,6 +383,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "rich-visuals",
+      "additionalIds" : [ ],
       "title" : "Rich Visuals",
       "type" : "Section",
       "content" : [ {
@@ -389,7 +395,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-charts.png",
-        "timestamp" : 1718071052753,
+        "timestamp" : 1727735409453,
         "shapes" : [ ],
         "width" : 1399.0,
         "height" : 1127.0,
@@ -397,7 +403,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-cards.png",
-        "timestamp" : 1718071052745,
+        "timestamp" : 1727735409448,
         "shapes" : [ ],
         "width" : 1401.0,
         "height" : 1120.0,
@@ -405,6 +411,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "dark-light-runtime-mode",
+      "additionalIds" : [ ],
       "title" : "Dark/Light Runtime Mode",
       "type" : "Section",
       "content" : [ {
@@ -416,7 +423,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-flow-diagram.png",
-        "timestamp" : 1718071052761,
+        "timestamp" : 1727735409462,
         "shapes" : [ ],
         "width" : 1399.0,
         "height" : 1127.0,
@@ -424,6 +431,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "two-sides-page-layout",
+      "additionalIds" : [ ],
       "title" : "Two Sides Page Layout",
       "type" : "Section",
       "content" : [ {
@@ -451,7 +459,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-two-sides-tabs.png",
-        "timestamp" : 1718071052785,
+        "timestamp" : 1727735409482,
         "shapes" : [ ],
         "width" : 1395.0,
         "height" : 1132.0,
@@ -459,6 +467,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "local-search",
+      "additionalIds" : [ ],
       "title" : "Local Search",
       "type" : "Section",
       "content" : [ {
@@ -470,7 +479,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-search.png",
-        "timestamp" : 1718071052777,
+        "timestamp" : 1727735409476,
         "shapes" : [ ],
         "width" : 1399.0,
         "height" : 1127.0,
@@ -478,6 +487,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "auto-presentation",
+      "additionalIds" : [ ],
       "title" : "Auto Presentation",
       "type" : "Section",
       "content" : [ {
@@ -515,7 +525,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2.0,
         "imageSrc" : "/znai/znai-presentation.png",
-        "timestamp" : 1718071052773,
+        "timestamp" : 1727735409471,
         "shapes" : [ ],
         "width" : 1399.0,
         "height" : 1127.0,
@@ -523,6 +533,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "batteries-included",
+      "additionalIds" : [ ],
       "title" : "Batteries Included",
       "type" : "Section",
       "content" : [ {
@@ -651,7 +662,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052785,
+    "lastModifiedTime" : 1727735409485,
     "tocItem" : {
       "chapterTitle" : "Introduction",
       "pageTitle" : "What Is This",

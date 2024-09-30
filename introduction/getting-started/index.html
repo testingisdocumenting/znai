@@ -86,47 +86,47 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Markdown</h1></header>
-<p>The fastest way to learn Markdown is to go to https://commonmark.org/help/ CommonMark website and go through a 60 second cheatsheet or 10 minute tutorial.</p>
+<p>The fastest way to learn Markdown is to go to CommonMark website and go through a 60 second cheatsheet or 10 minute tutorial</p>
 </article>
 
 <article>
 <header><h1>Running Znai</h1></header>
-<p>Znai is available as #command-line Command Line #maven-plugin Maven Plugin Both command line and maven plugin lets you to build documentation website and also run preview server during documentation writing process.</p>
+<p>Znai is available as Command Line Maven Plugin Both command line and maven plugin lets you to build documentation website and also run preview server during documentation writing process</p>
 </article>
 
 <article>
 <header><h1>Command Line</h1></header>
-<p>CLI download Download and unzip https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.70/znai-dist-1.70-znai.zip znai. Add it to your PATH . Brew brew install testingisdocumenting/brew/znai</p>
+<p>CLI download Download and unzip znai Add it to your PATH Brew brew install testingisdocumenting brew znai</p>
 </article>
 
 <article>
 <header><h1>Maven Plugin</h1></header>
-<p>&lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.70&lt;/version&gt; &lt;/plugin&gt; Note: consider adding a separate module for documentation in the multi module maven project</p>
+<p>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 71&lt; version&gt; &lt; plugin&gt;</p>
 </article>
 
 <article>
 <header><h1>Scaffolding</h1></header>
-<p>To create a minimum set of files for your documentation execute CLI znai --new Maven mvn znai:new znai |--chapter-one |--page-one.md |--page-two.md |--chapter-two |--page-three.md |--page-four.md |--toc |--lookup-paths |--meta.json Listed above directories and files will be generated in the current directory.</p>
+<p>To create a minimum set of files for your documentation execute CLI znai new Maven mvn znai new Listed above directories and files will be generated in the current directory znai | chapter one | page one md | page two md | chapter two | page three md | page four md | toc | lookup paths | meta json</p>
 </article>
 
 <article>
 <header><h1>Preview Mode</h1></header>
-<p>Znai comes with preview mode. In preview mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.To start preview mode, navigate to the documentation directory ( znai if you used scaffold) and run CLI znai --preview [--port port-number] Maven mvn znai:preview &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.70&lt;/version&gt; &lt;configuration&gt; &lt;port&gt;3334&lt;/port&gt; &lt;!-- optional override of default value 3333--&gt; &lt;/configuration&gt; &lt;/plugin&gt; Open URL output by the command and open in a browser. Blue eye icon in the top right corner indicates that preview is on.Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.</p>
+<p>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 71&lt; version&gt; &lt;configuration&gt; &lt;port&gt;3334&lt; port&gt; &lt; optional override of default value 3333 &gt; &lt; configuration&gt; &lt; plugin&gt; Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</p>
 </article>
 
 <article>
 <header><h1>Static Site Generation</h1></header>
-<p>To build static documentation site you need to provide documentation id . Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.For example, znai original documentation is hosted on https://testingisdocumenting.org/znai https://testingisdocumenting.org/znai and documentation id is znai .This original page is hosted on https://testingisdocumenting.org/znai/introduction/getting-started https://testingisdocumenting.org/znai/introduction/getting-started. znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide documentation id during the site generation.To generate static site, use CLI znai --doc-id my-docs --deploy /path/to/static-content Maven &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.70&lt;/version&gt; &lt;configuration&gt; &lt;docId&gt;project-name&lt;/docId&gt; &lt;deployRoot&gt;/path/to/static-content&lt;/deployRoot&gt; &lt;!-- default is ${project.build.directory} --&gt; &lt;/configuration&gt; &lt;/plugin&gt;</p>
+<p>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 71&lt; version&gt; &lt;configuration&gt; &lt;docId&gt;project name&lt; docId&gt; &lt;deployRoot&gt; path to static content&lt; deployRoot&gt; &lt; default is $ project build directory &gt; &lt; configuration&gt; &lt; plugin&gt; documentation id znai documentation id</p>
 </article>
 
 <article>
 <header><h1>GitHub Pages</h1></header>
-<p>To deploy to https://pages.github.com GitHub Pages use https://github.com/peaceiris/actions-gh-pages GitHub Pages Action.Here is an example of znai publishing its documentation to github pages - name: deploy documentation uses: peaceiris/actions-gh-pages@v3 with: github_token: ${{ secrets.GITHUB_TOKEN }} publish_dir: ./znai-docs/target/znai</p>
+<p>To deploy to GitHub Pages use GitHub Pages Action Here is an example of znai publishing its documentation to github pages name deploy documentation uses peaceiris actions gh pages@v3 with github_token $ secrets GITHUB_TOKEN publish_dir znai docs target znai</p>
 </article>
 
 <article>
 <header><h1>On-site Central Hub Deployment</h1></header>
-<p>Znai has enterprise mode that lets you run Documentation hub inside your organization. It is completely free and open sourced.Please create a GitHub issue if you want to try it out. I don't document it yet as I only have a couple of scenarios I tried it on, and I need more input.</p>
+<p>Znai has enterprise mode that lets you run Documentation hub inside your organization It is completely free and open sourced Please create a GitHub issue if you want to try it out I don t document it yet as I only have a couple of scenarios I tried it on and I need more input</p>
 </article>
 </section>
 </div>
@@ -162,6 +162,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "markdown",
+      "additionalIds" : [ ],
       "title" : "Markdown",
       "type" : "Section",
       "content" : [ {
@@ -189,6 +190,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "running-znai",
+      "additionalIds" : [ ],
       "title" : "Running Znai",
       "type" : "Section",
       "content" : [ {
@@ -244,10 +246,12 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "command-line",
+      "additionalIds" : [ ],
       "title" : "Command Line",
       "type" : "Section",
       "content" : [ {
         "id" : "command-line-cli-download",
+        "additionalIds" : [ "cli-download" ],
         "level" : 2,
         "title" : "CLI download",
         "type" : "SubHeading"
@@ -257,7 +261,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "Download and unzip ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.70/znai-dist-1.70-znai.zip",
+          "url" : "https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.71/znai-dist-1.71-znai.zip",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -281,6 +285,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "id" : "command-line-brew",
+        "additionalIds" : [ "brew" ],
         "level" : 2,
         "title" : "Brew",
         "type" : "SubHeading"
@@ -291,11 +296,12 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "maven-plugin",
+      "additionalIds" : [ ],
       "title" : "Maven Plugin",
       "type" : "Section",
       "content" : [ {
         "lang" : "xml",
-        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.70</version>\n</plugin>",
+        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.71</version>\n</plugin>",
         "title" : "maven plugin",
         "anchorId" : "maven-plugin-maven-plugin",
         "type" : "Snippet"
@@ -308,6 +314,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "scaffolding",
+      "additionalIds" : [ ],
       "title" : "Scaffolding",
       "type" : "Section",
       "content" : [ {
@@ -347,6 +354,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "preview-mode",
+      "additionalIds" : [ ],
       "title" : "Preview Mode",
       "type" : "Section",
       "content" : [ {
@@ -400,7 +408,7 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "CliCommand"
           }, {
             "lang" : "xml",
-            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.70</version>\n    <configuration>\n        <port>3334</port> <!-- optional override of default value 3333-->\n    </configuration>\n</plugin>",
+            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.71</version>\n    <configuration>\n        <port>3334</port> <!-- optional override of default value 3333-->\n    </configuration>\n</plugin>",
             "title" : "preview port",
             "excludeRegexp" : [ "docId" ],
             "highlight" : [ 5 ],
@@ -443,6 +451,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "static-site-generation",
+      "additionalIds" : [ ],
       "title" : "Static Site Generation",
       "type" : "Section",
       "content" : [ {
@@ -549,7 +558,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "name" : "Maven",
           "content" : [ {
             "lang" : "xml",
-            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.70</version>\n    <configuration>\n        <docId>project-name</docId>\n        <deployRoot>/path/to/static-content</deployRoot>  <!-- default is ${project.build.directory} -->\n    </configuration>\n</plugin>",
+            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.71</version>\n    <configuration>\n        <docId>project-name</docId>\n        <deployRoot>/path/to/static-content</deployRoot>  <!-- default is ${project.build.directory} -->\n    </configuration>\n</plugin>",
             "title" : "maven plugin",
             "highlight" : [ 5 ],
             "anchorId" : "static-site-generation-maven-plugin",
@@ -560,6 +569,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "github-pages",
+      "additionalIds" : [ ],
       "title" : "GitHub Pages",
       "type" : "Section",
       "content" : [ {
@@ -607,6 +617,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "on-site-central-hub-deployment",
+      "additionalIds" : [ ],
       "title" : "On-site Central Hub Deployment",
       "type" : "Section",
       "content" : [ {
@@ -633,7 +644,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052785,
+    "lastModifiedTime" : 1727735409485,
     "tocItem" : {
       "chapterTitle" : "Introduction",
       "pageTitle" : "Getting Started",

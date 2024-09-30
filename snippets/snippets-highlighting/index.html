@@ -86,32 +86,32 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Line By Text</h1></header>
-<p>Use the highlight option to bring readers attention to the important lines. :include-file: file-name.js {highlight: &quot;export&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass</p>
+<p>Use the option to bring readers attention to the important lines highlight include file file name js highlight export class JsClass constructor usefulAction export default JsClass</p>
 </article>
 
 <article>
 <header><h1>Line By Index</h1></header>
-<p>It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally, you can combine two approaches and pass a list of things to highlight. :include-file: file-name.js {highlight: [&quot;export&quot;, 1]} class JsClass { constructor() { usefulAction() } } export default JsClass Note: Order of lines to highlight is reflected during presentation mode</p>
+<p>It is recommended to pass a substring but you can pass a line idx starts from 0 Additionally you can combine two approaches and pass a list of things to highlight Note Order of lines to highlight is reflected during presentation mode include file file name js highlight export 1 class JsClass constructor usefulAction export default JsClass</p>
 </article>
 
 <article>
 <header><h1>Text From File</h1></header>
-<p>Use the highlightPath option to highlight lines specified in a separate file. :include-file: file-name.js {highlightPath: &quot;lines-to-highlight.txt&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass class usefulAction</p>
+<p>Use the option to highlight lines specified in a separate file highlightPath include file file name js highlightPath lines to highlight txt class JsClass constructor usefulAction export default JsClass class usefulAction</p>
 </article>
 
 <article>
 <header><h1>Region</h1></header>
-<p>Use the highlightRegion to highlight large portions of the code as one highlight block: :include-file: file-name.js {highlightRegion: {start: &quot;constructor&quot;, end: &quot;}&quot;}} class JsClass { constructor() { usefulAction() } } export default JsClass</p>
+<p>Use the to highlight large portions of the code as one highlight block highlightRegion include file file name js highlightRegion start constructor end class JsClass constructor usefulAction export default JsClass</p>
 </article>
 
 <article>
 <header><h1>Region Using Scope</h1></header>
-<p>Use the highlightRegion.scope to highlight region using scope like {} . Unlike example above, highlight will not stop at first closing } : :include-file: with-nested-if.js {highlightRegion: {start: &quot;userId ===&quot;, scope: &quot;{}&quot;}} class JsClass { usefulAction() { if (userId === &quot;user-a&quot;) { if (canRead(userId)) { // ... } } } } Use multiple start lines to narrow down a specific region :include-file: with-multiple-if-clarify.js {highlightRegion: { start: [&quot;if (userId ===&quot;, &quot;canRead&quot;], scope: &quot;{}&quot;} } Znai will find a smallest text block that contains all specified lines and then highlight the most inner one: class JsClass { usefulAction() { if (userId === &quot;user-a&quot;) { // ... } if (canRead(userId)) { // ... } if (userId === &quot;user-a&quot;) { // ... if (canRead(userId)) { // ... } } } }</p>
+<p>Use the to highlight region using scope like Unlike example above highlight will not stop at first closing Use multiple start lines to narrow down a specific region Znai will find a smallest text block that contains all specified lines and then highlight the most inner one highlightRegion scope include file with nested if js highlightRegion start userId scope class JsClass usefulAction if userId user a if canRead userId include file with multiple if clarify js highlightRegion start if userId canRead scope class JsClass usefulAction if userId user a if canRead userId if userId user a if canRead userId</p>
 </article>
 
 <article>
 <header><h1>Multiple Regions</h1></header>
-<p>Use list to specify multiple regions to highlight: markdown :include-file: with-multiple-if.js {highlightRegion: [ {start: &quot;canRead&quot;, scope: &quot;{}&quot;}, {start: &quot;canWrite&quot;, scope: &quot;{}&quot;}] } class JsClass { usefulAction() { if (userId === &quot;user-a&quot;) { if (canRead(userId)) { // ... } } if (userId === &quot;user-b&quot;) { if (canWrite(userId)) { // ... } } } }</p>
+<p>Use list to specify multiple regions to highlight include file with multiple if js highlightRegion start canRead scope start canWrite scope class JsClass usefulAction if userId user a if canRead userId if userId user b if canWrite userId</p>
 </article>
 </section>
 </div>
@@ -147,6 +147,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "line-by-text",
+      "additionalIds" : [ ],
       "title" : "Line By Text",
       "type" : "Section",
       "content" : [ {
@@ -174,6 +175,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "line-by-index",
+      "additionalIds" : [ ],
       "title" : "Line By Index",
       "type" : "Section",
       "content" : [ {
@@ -206,6 +208,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "text-from-file",
+      "additionalIds" : [ ],
       "title" : "Text From File",
       "type" : "Section",
       "content" : [ {
@@ -235,11 +238,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "txt",
         "snippet" : "class\nusefulAction",
         "title" : "lines-to-highlight.txt",
-        "anchorId" : "text-from-file-lines-to-highlight-txt",
+        "anchorId" : "text-from-file-lines-to-highlighttxt",
         "type" : "Snippet"
       } ]
     }, {
       "id" : "region",
+      "additionalIds" : [ ],
       "title" : "Region",
       "type" : "Section",
       "content" : [ {
@@ -271,6 +275,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "region-using-scope",
+      "additionalIds" : [ ],
       "title" : "Region Using Scope",
       "type" : "Section",
       "content" : [ {
@@ -345,6 +350,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multiple-regions",
+      "additionalIds" : [ ],
       "title" : "Multiple Regions",
       "type" : "Section",
       "content" : [ {
@@ -372,7 +378,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409500,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Snippets Highlighting",

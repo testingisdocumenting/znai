@@ -86,12 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Local</h1></header>
-<p>To perform a local search of your documentation press / key or click the search section in the side panel on the left.In flow/structure documentation structure we learned that documentation consist ofChapters Pages Page Sections These entities play different and important roles in search. Search treats each Page Section as an independent unit. Each Page Section has an internally defined title that is a combination of all three titles.Title match during search yields the highest score.For example this current section full title is: Flow Search Local.As your documentation grows, keep checking how easy it is to navigate to a section of your documentation using / .Avoid: using generic names in your page titles and page section titles. You should not have dozens of pages called Introduction</p>
+<p>To perform a local search of your documentation press key or click the search section in the side panel on the left In documentation structure we learned that documentation consist of Chapters Pages Page Sections These entities play different and important roles in search Search treats each Page Section as an independent unit Each Page Section has an internally defined title that is a combination of all three titles Title match during search yields the highest score For example this current section full title is Flow Search Local As your documentation grows keep checking how easy it is to navigate to a section of your documentation using Avoid using generic names in your page titles and page section titles You should not have dozens of pages called Introduction</p>
 </article>
 
 <article>
 <header><h1>Global</h1></header>
-<p>Besides local search capabilities, Znai provides a search entry XML file for your documentation. This file can be crawled to expose your documentation to external search engines.Your search entry file can be located at the following endpoint: &lt;base-url&gt;/&lt;doc-id&gt;/search-entries.xml For example, the search entry for the Znai documentation on Github is located at https://testingisdocumenting.org/znai/search-entries.xml https://testingisdocumenting.org/znai/search-entries.xml</p>
+<p>Besides local search capabilities provides a search entry file for your documentation This file can be crawled to expose your documentation to external search engines Your search entry file can be located at the following endpoint For example the search entry for the documentation on Github is located at https testingisdocumenting org znai search entries xml Znai XML &lt;base url&gt; &lt;doc id&gt; search entries xml Znai</p>
 </article>
 </section>
 </div>
@@ -127,6 +127,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "local",
+      "additionalIds" : [ ],
       "title" : "Local",
       "type" : "Section",
       "content" : [ {
@@ -270,6 +271,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "global",
+      "additionalIds" : [ ],
       "title" : "Global",
       "type" : "Section",
       "content" : [ {
@@ -321,7 +323,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052785,
+    "lastModifiedTime" : 1727735409485,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Search",

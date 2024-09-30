@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Include Plugins</h1></header>
-<p>Znai extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation: #include-plugins Include Plugins #inlined-code Inlined Code #fenced-block Fenced Block To use include plugin write following on a new line :include-&lt;pluginId&gt;: [text param] [{key1: value1, key2: value2}] markdown :include-json: example.json { title: &quot;JSON example&quot;, highlightValue: [&quot;root.person.id&quot;], collapsedPaths: [&quot;root.details&quot;] } markdown :include-java: ../java/HelloWorld.java { entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot; } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+<p>extends markdown with plugins system to supercharge visuals and maintainability Three categories of plugins are available for usage and creation Include Plugins Inlined Code Fenced Block To use include plugin write following on a new line Znai include &lt;pluginId&gt; text param key1 value1 key2 value2 include json example json title JSON example highlightValue root person id collapsedPaths root details include java java HelloWorld java entry sampleMethod bodyOnly true commentsType inline validate process p2 important comment notifyAll p1 very important return bestSample</p>
 </article>
 
 <article>
 <header><h1>Inlined Code</h1></header>
-<p>To use inlined code write plugin id inside backticks (`) surrounded with (:) markdown content `:&lt;pluginId&gt;: [text param] [{key1: value1, key2: value2}]` markdown It is a `:icon: cloud` day, `:icon: clock` is ticking It is a day, is ticking</p>
+<p>To use inlined code write plugin id inside backticks ` surrounded with It is a day is ticking content ` &lt;pluginId&gt; text param key1 value1 key2 value2 ` It is a ` icon cloud` day ` icon clock` is ticking</p>
 </article>
 
 <article>
 <header><h1>Fenced Block</h1></header>
-<p>To use fenced block plugin specify its ids after fenced block start markdown ```&lt;pluginId&gt; [text param] [{key1: value1, key2: value2}] content ``` markdown ```tabs C++: content of C++ tab Java: content of Java tab Python: content of Python tab ``` C++ content of C++ tab Java content of Java tab Python content of Python tab</p>
+<p>To use fenced block plugin specify its ids after fenced block start C content of C tab Java content of Java tab Python content of Python tab ```&lt;pluginId&gt; text param key1 value1 key2 value2 content ``` ```tabs C content of C tab Java content of Java tab Python content of Python tab ```</p>
 </article>
 </section>
 </div>
@@ -193,6 +193,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "include-plugins",
+      "additionalIds" : [ ],
       "title" : "Include Plugins",
       "type" : "Section",
       "content" : [ {
@@ -246,6 +247,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "inlined-code",
+      "additionalIds" : [ ],
       "title" : "Inlined Code",
       "type" : "Section",
       "content" : [ {
@@ -287,6 +289,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "fenced-block",
+      "additionalIds" : [ ],
       "title" : "Fenced Block",
       "type" : "Section",
       "content" : [ {
@@ -336,7 +339,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Tabs"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409487,
     "tocItem" : {
       "chapterTitle" : "Plugins",
       "pageTitle" : "Plugin Types",

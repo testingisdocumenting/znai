@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Callout Comments</h1></header>
-<p>Use commentsType: &quot;inline&quot; to extract comments from a code and render them as bullet pointsGiven a file with comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;} class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules Multiple comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line. order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order) order = fetch_order() # explanation of why # strategic price calculation # is important here price = strategic_price_calc(order)</p>
+<p>Use to extract comments from a code and render them as bullet points Given a file with comments Multiple comment lines can be put above a code line All the comment lines will be merged and applied to the next code line commentsType inline class JsClass constructor new syntax for constructor export default JsClass new syntax for ES6 modules include file file name with comments js commentsType inline class JsClass constructor new syntax for constructor export default JsClass new syntax for ES6 modules order fetch_order # explanation of why # strategic price calculation # is important here price strategic_price_calc order order fetch_order # explanation of why # strategic price calculation # is important here price strategic_price_calc order</p>
 </article>
 
 <article>
 <header><h1>Spoilers</h1></header>
-<p>Set the spoiler property to initially hide explanations. It may be useful when teaching. :include-file: file-name-with-comments.js {commentsType: &quot;inline&quot;, spoiler: true} Click on the spoiler to reveal the explanations: class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</p>
+<p>Set the property to initially hide explanations It may be useful when teaching Click on the spoiler to reveal the explanations spoiler include file file name with comments js commentsType inline spoiler true class JsClass constructor new syntax for constructor export default JsClass new syntax for ES6 modules</p>
 </article>
 
 <article>
 <header><h1>Remove Comments</h1></header>
-<p>Use commentsType: &quot;remove&quot; to hide all the comments from a code snippet Given a file with comments class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules :include-file: file-name-with-comments.js {commentsType: &quot;remove&quot;} class JsClass { constructor() { // new syntax for constructor } } export default JsClass // new syntax for ES6 modules</p>
+<p>Use to hide all the comments from a code snippet Given a file with comments commentsType remove class JsClass constructor new syntax for constructor export default JsClass new syntax for ES6 modules include file file name with comments js commentsType remove class JsClass constructor new syntax for constructor export default JsClass new syntax for ES6 modules</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "callout-comments",
+      "additionalIds" : [ ],
       "title" : "Callout Comments",
       "type" : "Section",
       "content" : [ {
@@ -186,6 +187,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "spoilers",
+      "additionalIds" : [ ],
       "title" : "Spoilers",
       "type" : "Section",
       "content" : [ {
@@ -220,6 +222,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "remove-comments",
+      "additionalIds" : [ ],
       "title" : "Remove Comments",
       "type" : "Section",
       "content" : [ {
@@ -255,7 +258,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409498,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Code Comments",

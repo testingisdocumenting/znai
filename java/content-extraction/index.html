@@ -86,52 +86,52 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Method Body</h1></header>
-<p>When you need to extract a specific method body, use the include-java plugin.Consider the file below: /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * {@link Diversity} */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } You can specify a method name to extract its full definition, or display only its body. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+<p>When you need to extract a specific method body use the plugin Consider the file below You can specify a method name to extract its full definition or display only its body If is specified signature will be omitted include java ** * Top level conceptual description of a @link CustomDomain problem * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt; b&gt; of the content consider to re use information * class HelloWorld ** * Each year we hire students from different universities to increase * @link Diversity * private int numberOfStudents ** * Conceptual description of a &lt;i&gt;Domain&lt; i&gt; problem * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt; b&gt; implementation details * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt; i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt; b&gt; sample * public String sampleMethod String p1 int p2 validate process p2 important comment notifyAll p1 very important return bestSample public void sampleMethod Map&lt;String Integer&gt; p1 int p2 boolean isActive overloaded method ** * @param trader trader that performs action * @param transaction transaction to perform action on * public void importantAction Trader trader Transaction transaction TODO important public Data createData create data include java HelloWorld java entry sampleMethod bodyOnly true bodyOnly validate process p2 important comment notifyAll p1 very important return bestSample</p>
 </article>
 
 <article>
 <header><h1>Callout Comments</h1></header>
-<p>Similar to how you snippets/code-comments#callout-comments specify comments type for a regular file, you can specify commentsType option for include-java . :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true, commentsType: &quot;inline&quot;} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+<p>Similar to how you specify comments type for a regular file you can specify option for commentsType include java include java HelloWorld java entry sampleMethod bodyOnly true commentsType inline validate process p2 important comment notifyAll p1 very important return bestSample</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use title property to specify extracted code snippet title :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, bodyOnly: true, title: &quot;my snippet&quot;} validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+<p>Use property to specify extracted code snippet title title include java HelloWorld java entry sampleMethod bodyOnly true title my snippet validate process p2 important comment notifyAll p1 very important return bestSample</p>
 </article>
 
 <article>
 <header><h1>Anchor</h1></header>
-<p>Use anchorId to make a code snippet linkable. Hover mouse over title to see a clickable anchor. :include-java: HelloWorld.java { entry: &quot;sampleMethod&quot;, bodyOnly: true, title: &quot;my snippet&quot;, anchorId: &quot;my-java-snippet&quot; } validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample();</p>
+<p>Use to make a code snippet linkable Hover mouse over title to see a clickable anchor anchorId include java HelloWorld java entry sampleMethod bodyOnly true title my snippet anchorId my java snippet validate process p2 important comment notifyAll p1 very important return bestSample</p>
 </article>
 
 <article>
 <header><h1>Signature Only</h1></header>
-<p>You can also specify a method name and extract only its signature. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} If signatureOnly is specified, body will be omitted. public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) Pass entrySeparator: &quot;&lt;separator&gt;&quot; to have a provided line in between entries as a separator. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true, entrySeparator: &quot;...&quot;} public String sampleMethod(String p1, int p2) ... public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive)</p>
+<p>You can also specify a method name and extract only its signature If is specified body will be omitted Pass to have a provided line in between entries as a separator include java HelloWorld java entry sampleMethod signatureOnly true signatureOnly public String sampleMethod String p1 int p2 public void sampleMethod Map&lt;String Integer&gt; p1 int p2 boolean isActive entrySeparator &lt;separator&gt; include java HelloWorld java entry sampleMethod signatureOnly true entrySeparator public String sampleMethod String p1 int p2 public void sampleMethod Map&lt;String Integer&gt; p1 int p2 boolean isActive</p>
 </article>
 
 <article>
 <header><h1>Overloads</h1></header>
-<p>Specify types inside brackets to select an overloaded versions of your methods.Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version inside the plugin. :include-java: HelloWorld.java {entry: &quot;sampleMethod(Map, int, boolean)&quot;} Note: Generic types are erased and spaces after commas are optional public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method }</p>
+<p>Specify types inside brackets to select an overloaded versions of your methods Types should appear as they are in the file i e if you use the short version of a type you need to use the short version inside the plugin Note Generic types are erased and spaces after commas are optional include java HelloWorld java entry sampleMethod Map int boolean public void sampleMethod Map&lt;String Integer&gt; p1 int p2 boolean isActive overloaded method</p>
 </article>
 
 <article>
 <header><h1>Type Body</h1></header>
-<p>To extract class , interface or enum body use: :include-java: MyEnum.java {entry: &quot;MyEnum&quot;} enum MyEnum { /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE } Use bodyOnly to only display body of your type. :include-java: MyEnum.java {entry: &quot;MyEnum&quot;, bodyOnly: true} /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE</p>
+<p>To extract or body use Use to only display body of your type class interface enum include java MyEnum java entry MyEnum enum MyEnum ** * description of &lt;b&gt;entry one&lt; b&gt; * ENTRY_ONE ** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt; li&gt; * &lt;li&gt;item two&lt; li&gt; * &lt; ul&gt; * ENTRY_TWO ** * Don t use instead use ENTRY_TWO * @Deprecated ENTRY_THREE bodyOnly include java MyEnum java entry MyEnum bodyOnly true ** * description of &lt;b&gt;entry one&lt; b&gt; * ENTRY_ONE ** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt; li&gt; * &lt;li&gt;item two&lt; li&gt; * &lt; ul&gt; * ENTRY_TWO ** * Don t use instead use ENTRY_TWO * @Deprecated ENTRY_THREE</p>
 </article>
 
 <article>
 <header><h1>Multiple Entries</h1></header>
-<p>To display multiple methods at once pass a list to entry parameter :include-java: HelloWorld.java {entry: [&quot;createData&quot;, &quot;importantAction&quot;]} This will render: public Data createData() { // create data } public void importantAction(Trader trader, Transaction transaction) { // TODO important } List important methods signatures at one place by passing signatureOnly: true . :include-java: HelloWorld.java {entry: [&quot;createData&quot;, &quot;importantAction&quot;], signatureOnly: true} This will render: public Data createData() public void importantAction(Trader trader, Transaction transaction)</p>
+<p>To display multiple methods at once pass a list to parameter This will render List important methods signatures at one place by passing This will render entry include java HelloWorld java entry createData importantAction public Data createData create data public void importantAction Trader trader Transaction transaction TODO important signatureOnly true include java HelloWorld java entry createData importantAction signatureOnly true public Data createData public void importantAction Trader trader Transaction transaction</p>
 </article>
 
 <article>
 <header><h1>Multiple Overloads</h1></header>
-<p>To list of the overloads of a method, specify method name using the entry parameter. :include-java: HelloWorld.java {entry: &quot;sampleMethod&quot;, signatureOnly: true} public String sampleMethod(String p1, int p2) public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive)</p>
+<p>To list of the overloads of a method specify method name using the parameter entry include java HelloWorld java entry sampleMethod signatureOnly true public String sampleMethod String p1 int p2 public void sampleMethod Map&lt;String Integer&gt; p1 int p2 boolean isActive</p>
 </article>
 
 <article>
 <header><h1>Multiple Bodies</h1></header>
-<p>Pass multiple entries and bodyOnly to extract example of usage from unit tests public class HelloWorldTest { @Test public void exampleOfA() { a.action(); } @Test public void exampleOfB() { b.action(); } } :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action(); Pass entrySeparator: &quot;&lt;separator&gt;&quot; to have a provided line in between entries as a separator. markdown :include-java: HelloWorldTest.java { entry: [&quot;exampleOfA&quot;, &quot;exampleOfB&quot;], entrySeparator: &quot;&quot;, bodyOnly: true, title: &quot;example of actions&quot;} a.action(); b.action();</p>
+<p>Pass multiple entries and to extract example of usage from unit tests Pass to have a provided line in between entries as a separator bodyOnly public class HelloWorldTest @Test public void exampleOfA a action @Test public void exampleOfB b action include java HelloWorldTest java entry exampleOfA exampleOfB bodyOnly true title example of actions a action b action entrySeparator &lt;separator&gt; include java HelloWorldTest java entry exampleOfA exampleOfB entrySeparator bodyOnly true title example of actions a action b action</p>
 </article>
 </section>
 </div>
@@ -167,6 +167,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "method-body",
+      "additionalIds" : [ ],
       "title" : "Method Body",
       "type" : "Section",
       "content" : [ {
@@ -223,6 +224,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "callout-comments",
+      "additionalIds" : [ ],
       "title" : "Callout Comments",
       "type" : "Section",
       "content" : [ {
@@ -274,6 +276,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "title",
+      "additionalIds" : [ ],
       "title" : "Title",
       "type" : "Section",
       "content" : [ {
@@ -304,6 +307,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "anchor",
+      "additionalIds" : [ ],
       "title" : "Anchor",
       "type" : "Section",
       "content" : [ {
@@ -334,6 +338,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "signature-only",
+      "additionalIds" : [ ],
       "title" : "Signature Only",
       "type" : "Section",
       "content" : [ {
@@ -392,6 +397,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "overloads",
+      "additionalIds" : [ ],
       "title" : "Overloads",
       "type" : "Section",
       "content" : [ {
@@ -430,6 +436,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "type-body",
+      "additionalIds" : [ ],
       "title" : "Type Body",
       "type" : "Section",
       "content" : [ {
@@ -492,6 +499,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multiple-entries",
+      "additionalIds" : [ ],
       "title" : "Multiple Entries",
       "type" : "Section",
       "content" : [ {
@@ -554,6 +562,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multiple-overloads",
+      "additionalIds" : [ ],
       "title" : "Multiple Overloads",
       "type" : "Section",
       "content" : [ {
@@ -582,6 +591,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multiple-bodies",
+      "additionalIds" : [ ],
       "title" : "Multiple Bodies",
       "type" : "Section",
       "content" : [ {
@@ -601,7 +611,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "public class HelloWorldTest {\n    @Test\n    public void exampleOfA() {\n        a.action();\n    }\n\n    @Test\n    public void exampleOfB() {\n        b.action();\n    }\n}",
         "autoTitle" : true,
         "title" : "HelloWorldTest.java",
-        "anchorId" : "multiple-bodies-helloworldtest-java",
+        "anchorId" : "multiple-bodies-helloworldtestjava",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -641,11 +651,11 @@ ReactDOM.render(React.createElement(Documentation, {
         "entrySeparator" : "",
         "bodyOnly" : true,
         "title" : "example of actions",
-        "anchorId" : "multiple-bodies-example-of-actions-2",
+        "anchorId" : "multiple-bodies-example-of-actions-3",
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409486,
     "tocItem" : {
       "chapterTitle" : "Java",
       "pageTitle" : "Content Extraction",

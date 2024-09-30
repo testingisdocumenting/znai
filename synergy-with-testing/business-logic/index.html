@@ -86,7 +86,7 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Capture Input Example</h1></header>
-<p>Your business logic tests can greatly improve maintainability of your documentation. The example below tests what account types are allowed to perform Trading Activities.Test is using https://github.com/testingisdocumenting/webtau WebTau testing framework to define and capture test data. package org.testingisdocumenting.testing.examples import org.junit.Test import org.testingisdocumenting.webtau.data.table.TableData import static org.testingisdocumenting.webtau.WebTauCore.* class TestToDocExample { @Test void shouldRestrictAccountsActivity() { def rules = [&quot;Account Type&quot; | &quot;Operation&quot; | &quot;Restriction&quot;] { _________________________________________________ &quot;SPB3&quot; | &quot;Buy Options&quot; | &quot;weekends only&quot; &quot;TR&quot; | &quot;Sell Futures&quot; | &quot;except holidays&quot; &quot;BOSS&quot; | &quot;Buy Stocks&quot; | &quot;none&quot; } validateRules(rules) } private static void validateRules(TableData rules) { doc.capture(&quot;account-rules&quot;, rules) // capture table data as JSON } } As part of validation of account types, the test also captures data that was used for testing. We can refer to this data later in our documentation by using the layout/tables include-table plugin :include-table: account-rules.json Your test data and user-facing documentation is now linked. Account Type Operation Restriction SPB3 Buy Options weekends only TR Sell Futures except holidays BOSS Buy Stocks none</p>
+<p>Your business logic tests can greatly improve maintainability of your documentation The example below tests what account types are allowed to perform Trading Activities Test is using WebTau testing framework to define and capture test data As part of validation of account types the test also captures data that was used for testing We can refer to this data later in our documentation by using the include table plugin Your test data and user facing documentation is now linked Account Type Operation Restriction SPB3 Buy Options weekends only TR Sell Futures except holidays BOSS Buy Stocks none package org testingisdocumenting testing examples import org junit Test import org testingisdocumenting webtau data table TableData import static org testingisdocumenting webtau WebTauCore * class TestToDocExample @Test void shouldRestrictAccountsActivity def rules Account Type | Operation | Restriction _________________________________________________ SPB3 | Buy Options | weekends only TR | Sell Futures | except holidays BOSS | Buy Stocks | none validateRules rules private static void validateRules TableData rules doc capture account rules rules capture table data as JSON include table account rules json</p>
 </article>
 </section>
 </div>
@@ -122,6 +122,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "capture-input-example",
+      "additionalIds" : [ ],
       "title" : "Capture Input Example",
       "type" : "Section",
       "content" : [ {
@@ -269,7 +270,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052805,
+    "lastModifiedTime" : 1727735409501,
     "tocItem" : {
       "chapterTitle" : "Synergy With Testing",
       "pageTitle" : "Business Logic",

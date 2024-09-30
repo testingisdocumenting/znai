@@ -86,32 +86,32 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Information Layout</h1></header>
-<p>Use columns plugin to render content in two columns:Before-and-after transition Action and its result Input and output Result comparison</p>
+<p>Use plugin to render content in two columns Before and after transition Action and its result Input and output Result comparison columns</p>
 </article>
 
 <article>
 <header><h1>Two Columns</h1></header>
-<p>To define two columns layout use fenced code block and left: and right: labels markdown ```columns left: this content goes to the left and can span multiple lines right: this content goes to the right and can span multiple lines ``` this content goes to the leftand can span multiple lines this content goes to the right and can span multiple lines</p>
+<p>To define two columns layout use fenced code block and and labels this content goes to the left and can span multiple lines this content goes to the right and can span multiple lines left right ```columns left this content goes to the left and can span multiple lines right this content goes to the right and can span multiple lines ```</p>
 </article>
 
 <article>
 <header><h1>Three Columns</h1></header>
-<p>To define three columns layout use fenced code block and left: , middle: and right: labels markdown ```columns left: ### Pros {style: &quot;api&quot;} * Item One middle: ### Undecided {style: &quot;api&quot;} * Item Two * Item Three right: ### Cons {style: &quot;api&quot;} * Item Four ``` Pros Item One Undecided Item Two Item Three Cons Item Four</p>
+<p>To define three columns layout use fenced code block and and labels Pros Item One Undecided Item Two Item Three Cons Item Four left middle right ```columns left ### Pros style api * Item One middle ### Undecided style api * Item Two * Item Three right ### Cons style api * Item Four ```</p>
 </article>
 
 <article>
 <header><h1>Sizes</h1></header>
-<p>Size can be specified for a column as a portion . By default, both portions are assigned a value of 10 . If you specify right column portion to be 5 , then left will be left as 10 by default, leaving right side to be roughly 33% in size. http.get(&quot;/weather&quot;) { temperature.shouldBe &lt; 100 } http.doc.capture(&quot;weather-example&quot;) ```columns {right: {portion: 5}} left: :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;WebTau REST API test example&quot;, entry: &quot;weather&quot;, bodyOnly: true } right: :include-json: weather-example/response.json { title: &quot;weather response example&quot;, highlightValueFile: &quot;weather-example/paths.json&quot; } ```</p>
+<p>Size can be specified for a column as a By default both portions are assigned a value of If you specify right column to be then left will be left as by default leaving right side to be roughly 33% in size http get weather temperature shouldBe &lt; 100 http doc capture weather example portion 10 portion 5 10 ```columns right portion 5 left include groovy org testingisdocumenting testing examples restapi WebTauRestAPIGroovyTest groovy title WebTau REST API test example entry weather bodyOnly true right include json weather example response json title weather response example highlightValueFile weather example paths json ```</p>
 </article>
 
 <article>
 <header><h1>Border</h1></header>
-<p>Use border to add a border separator between columns BeforeHello World AfterWorld Of Hellos ```columns {border: true} left: **Before** Hello World right: **After** World Of Hellos ```</p>
+<p>Use to add a border separator between columns Before Hello World After World Of Hellos border ```columns border true left **Before** Hello World right **After** World Of Hellos ```</p>
 </article>
 
 <article>
 <header><h1>Alignment</h1></header>
-<p>Use align to change a column content alignment. BeforeHello World AfterWorld Of Hellos ```columns {border: true, left: {align: &quot;right&quot;}} left: **Before** Hello World right: **After** World Of Hellos ```</p>
+<p>Use to change a column content alignment Before Hello World After World Of Hellos align ```columns border true left align right left **Before** Hello World right **After** World Of Hellos ```</p>
 </article>
 
 <article>
@@ -152,6 +152,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "information-layout",
+      "additionalIds" : [ ],
       "title" : "Information Layout",
       "type" : "Section",
       "content" : [ {
@@ -210,6 +211,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "two-columns",
+      "additionalIds" : [ ],
       "title" : "Two Columns",
       "type" : "Section",
       "content" : [ {
@@ -269,6 +271,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "three-columns",
+      "additionalIds" : [ ],
       "title" : "Three Columns",
       "type" : "Section",
       "content" : [ {
@@ -305,6 +308,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "style" : "api",
             "id" : "three-columns-pros",
+            "additionalIds" : [ "pros" ],
             "level" : 3,
             "title" : "Pros",
             "type" : "SubHeading"
@@ -327,6 +331,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "style" : "api",
             "id" : "three-columns-undecided",
+            "additionalIds" : [ "undecided" ],
             "level" : 3,
             "title" : "Undecided",
             "type" : "SubHeading"
@@ -358,6 +363,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "style" : "api",
             "id" : "three-columns-cons",
+            "additionalIds" : [ "cons" ],
             "level" : 3,
             "title" : "Cons",
             "type" : "SubHeading"
@@ -382,6 +388,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "sizes",
+      "additionalIds" : [ ],
       "title" : "Sizes",
       "type" : "Section",
       "content" : [ {
@@ -467,6 +474,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "border",
+      "additionalIds" : [ ],
       "title" : "Border",
       "type" : "Section",
       "content" : [ {
@@ -529,6 +537,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "alignment",
+      "additionalIds" : [ ],
       "title" : "Alignment",
       "type" : "Section",
       "content" : [ {
@@ -594,6 +603,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "presentation-mode",
+      "additionalIds" : [ ],
       "title" : "Presentation Mode",
       "type" : "Section",
       "content" : [ {
@@ -604,7 +614,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409486,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Columns",

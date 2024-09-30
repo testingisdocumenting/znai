@@ -86,62 +86,62 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Nodes and Edges</h1></header>
-<p>Specify a JSON file to define a flow chart. { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;input one&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;input two&quot; }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;processor&quot; }, { &quot;id&quot;: &quot;n4&quot;, &quot;label&quot;: &quot;output one&quot; }, { &quot;id&quot;: &quot;n5&quot;, &quot;label&quot;: &quot;output two&quot; }, { &quot;id&quot;: &quot;n6&quot;, &quot;label&quot;: &quot;output three&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n3&quot;], [&quot;n2&quot;, &quot;n3&quot;], [&quot;n3&quot;, &quot;n4&quot;], [&quot;n3&quot;, &quot;n5&quot;], [&quot;n3&quot;, &quot;n6&quot;] ] } At the minimum edges must be provided. :include-flow-chart: simple-dag.json</p>
+<p>Specify a file to define a flow chart At the minimum must be provided JSON nodes id n1 label input one id n2 label input two id n3 label processor id n4 label output one id n5 label output two id n6 label output three edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6 edges include flow chart simple dag json</p>
 </article>
 
 <article>
 <header><h1>Multiline Labels</h1></header>
-<p>Use \n to split your label into multiple lines. { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;input\none&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;output\ntwo&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n2&quot;] ] }</p>
+<p>Use to split your label into multiple lines n nodes id n1 label input none id n2 label output ntwo edges n1 n2</p>
 </article>
 
 <article>
 <header><h1>Nodes Size</h1></header>
-<p>Add config section to specify a common size for all the nodesNote: Size unit is not based on pixels. It is sized in inches (assuming correct DPI). It is the size units used by https://graphviz.gitlab.io/ Graphviz)Use width and height property on a node itself to control individual nodes size:</p>
+<p>Add section to specify a common size for all the nodes Note Size unit is not based on pixels It is sized in inches assuming correct DPI It is the size units used by Graphviz Use and property on a node itself to control individual nodes size config width height</p>
 </article>
 
 <article>
 <header><h1>Highlight</h1></header>
-<p>{ &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;label 1&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;label 2&quot;, &quot;highlight&quot;: true }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;label 3&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n2&quot;], [&quot;n2&quot;, &quot;n3&quot;], [&quot;n1&quot;, &quot;n3&quot;] ] } Use highlight to highlight a node.Or use highlight property of a flow-chart include plugin. :include-flow-chart: simple-dag.json {highlight: &quot;n3&quot;} Note: To highlight more than one element use {highlight: [&quot;n3&quot;, &quot;n4&quot;]}</p>
+<p>Use to highlight a node Or use property of a include plugin Note To highlight more than one element use nodes id n1 label label 1 id n2 label label 2 highlight true id n3 label label 3 edges n1 n2 n2 n3 n1 n3 highlight highlight flow chart include flow chart simple dag json highlight n3 highlight n3 n4</p>
 </article>
 
 <article>
 <header><h1>Color Groups</h1></header>
-<p>Use colorGroup to assign a color group to a node. There are four color groups out of the box: a (default), b , c , d . { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;input one&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;input two&quot; }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;processor&quot;, &quot;colorGroup&quot;: &quot;b&quot; }, { &quot;id&quot;: &quot;n4&quot;, &quot;label&quot;: &quot;output one&quot;, &quot;colorGroup&quot;: &quot;c&quot; }, { &quot;id&quot;: &quot;n5&quot;, &quot;label&quot;: &quot;output two&quot;, &quot;colorGroup&quot;: &quot;c&quot; }, { &quot;id&quot;: &quot;n6&quot;, &quot;label&quot;: &quot;output three&quot;, &quot;colorGroup&quot;: &quot;d&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n3&quot;], [&quot;n2&quot;, &quot;n3&quot;], [&quot;n3&quot;, &quot;n4&quot;], [&quot;n3&quot;, &quot;n5&quot;], [&quot;n3&quot;, &quot;n6&quot;] ] }</p>
+<p>Use to assign a color group to a node There are four color groups out of the box default colorGroup a b c d nodes id n1 label input one id n2 label input two id n3 label processor colorGroup b id n4 label output one colorGroup c id n5 label output two colorGroup c id n6 label output three colorGroup d edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6</p>
 </article>
 
 <article>
 <header><h1>Shapes</h1></header>
-<p>Use shape to assign one of the predefined shapes. { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;researcher&quot;, &quot;label&quot;: &quot;researcher&quot;, &quot;shape&quot;: &quot;actor&quot; }, { &quot;id&quot;: &quot;db&quot;, &quot;label&quot;: &quot;two&quot;, &quot;shape&quot;: &quot;database&quot; }, { &quot;id&quot;: &quot;another-db&quot;, &quot;label&quot;: &quot;three input&quot;, &quot;shape&quot;: &quot;database-bottom-label&quot; }, { &quot;id&quot;: &quot;processor&quot;, &quot;label&quot;: &quot;processor&quot;, &quot;colorGroup&quot;: &quot;b&quot; }, { &quot;id&quot;: &quot;outcome&quot;, &quot;colorGroup&quot;: &quot;c&quot;, &quot;shape&quot;: &quot;world&quot; }, { &quot;id&quot;: &quot;config&quot;, &quot;label&quot;: &quot;config file&quot;, &quot;colorGroup&quot;: &quot;b&quot;, &quot;shape&quot;: &quot;document&quot; } ], &quot;edges&quot;: [ [&quot;researcher&quot;, &quot;processor&quot;], [&quot;researcher&quot;, &quot;config&quot;], [&quot;db&quot;, &quot;processor&quot;], [&quot;another-db&quot;, &quot;processor&quot;], [&quot;config&quot;, &quot;outcome&quot;], [&quot;processor&quot;, &quot;outcome&quot;] ] }</p>
+<p>Use to assign one of the predefined shapes shape nodes id researcher label researcher shape actor id db label two shape database id another db label three input shape database bottom label id processor label processor colorGroup b id outcome colorGroup c shape world id config label config file colorGroup b shape document edges researcher processor researcher config db processor another db processor config outcome processor outcome</p>
 </article>
 
 <article>
 <header><h1>Legend</h1></header>
-<p>Use include-diagram-legend to add a legend to your diagram. Optionally add clickableNodes: true to insert a message that the nodes are clickable (in case you use urls). :include-diagram-legend: {a: &quot;inputs&quot;, b: &quot;optimization process&quot;, c: &quot;outcome&quot;, d: &quot;unknown&quot;, clickableNodes: true} :include-flow-chart: flow-diagrams/simple-dag-colors.json inputs optimization process outcome unknown</p>
+<p>Use to add a legend to your diagram Optionally add to insert a message that the nodes are clickable in case you use urls inputs optimization process outcome unknown include diagram legend clickableNodes true include diagram legend a inputs b optimization process c outcome d unknown clickableNodes true include flow chart flow diagrams simple dag colors json</p>
 </article>
 
 <article>
 <header><h1>Presentation</h1></header>
-<p>In presentation mode nodes will be highlighted one at a time.To force all highlights to appear at once add this before (either in the same section, or at the start of a document). :include-meta: {allAtOnce: true}</p>
+<p>In presentation mode nodes will be highlighted one at a time To force all highlights to appear at once add this before either in the same section or at the start of a document include meta allAtOnce true</p>
 </article>
 
 <article>
 <header><h1>Vertical Layout</h1></header>
-<p>To switch layout from horizontal to vertical use vertical: true .</p>
+<p>To switch layout from horizontal to vertical use vertical true</p>
 </article>
 
 <article>
 <header><h1>Layout Types</h1></header>
-<p>Use layout to specify a different underlying layout engine. Only dot (default) and neato is supported at the moment. :include-flow-chart: simple-dag.json {layout: &quot;neato&quot;} https://www.graphviz.org/pdf/neatoguide.pdf Neato layout guide from Graphviz</p>
+<p>Use to specify a different underlying layout engine Only default and is supported at the moment Neato layout guide from Graphviz layout dot neato include flow chart simple dag json layout neato</p>
 </article>
 
 <article>
 <header><h1>Links</h1></header>
-<p>To attach links to nodes use url property.Combine links and highlights to create a sub navigation for your product. { &quot;nodes&quot;: [ { &quot;id&quot;: &quot;n1&quot;, &quot;label&quot;: &quot;No Link&quot; }, { &quot;id&quot;: &quot;n2&quot;, &quot;label&quot;: &quot;Link To Java&quot;, &quot;url&quot;: &quot;java/content-extraction&quot; }, { &quot;id&quot;: &quot;n3&quot;, &quot;label&quot;: &quot;Link to External&quot;, &quot;url&quot;: &quot;http://commonmark.org&quot; } ], &quot;edges&quot;: [ [&quot;n1&quot;, &quot;n2&quot;], [&quot;n3&quot;, &quot;n2&quot;] ] }</p>
+<p>To attach links to nodes use property Combine links and highlights to create a sub navigation for your product url nodes id n1 label No Link id n2 label Link To Java url java content extraction id n3 label Link to External url http commonmark org edges n1 n2 n3 n2</p>
 </article>
 
 <article>
 <header><h1>Reusable Nodes</h1></header>
-<p>Move node definitions to a one or more separate files if you use them across multiple diagrams. { &quot;edges&quot;: [ [&quot;a1&quot;, &quot;a2&quot;], [&quot;b1&quot;, &quot;b2&quot;], [&quot;b1&quot;, &quot;a2&quot;] ] } [ { &quot;id&quot;: &quot;a1&quot;, &quot;label&quot;: &quot;Label A 1&quot; }, { &quot;id&quot;: &quot;a2&quot;, &quot;label&quot;: &quot;Label A 2&quot; }, { &quot;id&quot;: &quot;a3&quot;, &quot;label&quot;: &quot;Label A 3&quot; } ] [ { &quot;id&quot;: &quot;b1&quot;, &quot;label&quot;: &quot;Label B 1&quot; }, { &quot;id&quot;: &quot;b2&quot;, &quot;label&quot;: &quot;Label B 2&quot; }, { &quot;id&quot;: &quot;b3&quot;, &quot;label&quot;: &quot;Label B 3&quot; } ] :include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: &quot;nodes/set-a.json&quot;} :include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: [&quot;nodes/set-a.json&quot;, &quot;nodes/set-b.json&quot;]}</p>
+<p>Move node definitions to a one or more separate files if you use them across multiple diagrams edges a1 a2 b1 b2 b1 a2 id a1 label Label A 1 id a2 label Label A 2 id a3 label Label A 3 id b1 label Label B 1 id b2 label Label B 2 id b3 label Label B 3 include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json nodes set b json</p>
 </article>
 </section>
 </div>
@@ -177,6 +177,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "nodes-and-edges",
+      "additionalIds" : [ ],
       "title" : "Nodes and Edges",
       "type" : "Section",
       "content" : [ {
@@ -206,7 +207,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "json",
         "snippet" : "{\n  \"nodes\": [\n    {\n      \"id\": \"n1\",\n      \"label\": \"input one\"\n    },\n    {\n      \"id\": \"n2\",\n      \"label\": \"input two\"\n    },\n    {\n      \"id\": \"n3\",\n      \"label\": \"processor\"\n    },\n    {\n      \"id\": \"n4\",\n      \"label\": \"output one\"\n    },\n    {\n      \"id\": \"n5\",\n      \"label\": \"output two\"\n    },\n    {\n      \"id\": \"n6\",\n      \"label\": \"output three\"\n    }\n  ],\n  \"edges\": [\n    [\"n1\", \"n3\"],\n    [\"n2\", \"n3\"],\n    [\"n3\", \"n4\"],\n    [\"n3\", \"n5\"],\n    [\"n3\", \"n6\"]\n  ]\n}",
         "title" : "simple-dag.json",
-        "anchorId" : "nodes-and-edges-simple-dag-json",
+        "anchorId" : "nodes-and-edges-simple-dagjson",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -228,6 +229,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multiline-labels",
+      "additionalIds" : [ ],
       "title" : "Multiline Labels",
       "type" : "Section",
       "content" : [ {
@@ -260,6 +262,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "nodes-size",
+      "additionalIds" : [ ],
       "title" : "Nodes Size",
       "type" : "Section",
       "content" : [ {
@@ -388,6 +391,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "highlight",
+      "additionalIds" : [ ],
       "title" : "Highlight",
       "type" : "Section",
       "content" : [ {
@@ -465,6 +469,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "color-groups",
+      "additionalIds" : [ ],
       "title" : "Color Groups",
       "type" : "Section",
       "content" : [ {
@@ -526,6 +531,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "shapes",
+      "additionalIds" : [ ],
       "title" : "Shapes",
       "type" : "Section",
       "content" : [ {
@@ -570,6 +576,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "legend",
+      "additionalIds" : [ ],
       "title" : "Legend",
       "type" : "Section",
       "content" : [ {
@@ -628,6 +635,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "presentation",
+      "additionalIds" : [ ],
       "title" : "Presentation",
       "type" : "Section",
       "content" : [ {
@@ -650,6 +658,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "vertical-layout",
+      "additionalIds" : [ ],
       "title" : "Vertical Layout",
       "type" : "Section",
       "content" : [ {
@@ -678,6 +687,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "layout-types",
+      "additionalIds" : [ ],
       "title" : "Layout Types",
       "type" : "Section",
       "content" : [ {
@@ -739,6 +749,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "links",
+      "additionalIds" : [ ],
       "title" : "Links",
       "type" : "Section",
       "content" : [ {
@@ -780,6 +791,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "reusable-nodes",
+      "additionalIds" : [ ],
       "title" : "Reusable Nodes",
       "type" : "Section",
       "content" : [ {
@@ -798,13 +810,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "json",
         "snippet" : "[\n  {\n    \"id\": \"a1\",\n    \"label\": \"Label A 1\"\n  },\n  {\n    \"id\": \"a2\",\n    \"label\": \"Label A 2\"\n  },\n  {\n    \"id\": \"a3\",\n    \"label\": \"Label A 3\"\n  }\n]",
         "title" : "nodes/set-a.json",
-        "anchorId" : "reusable-nodes-nodes-set-a-json",
+        "anchorId" : "reusable-nodes-nodes-set-ajson",
         "type" : "Snippet"
       }, {
         "lang" : "json",
         "snippet" : "[\n  {\n    \"id\": \"b1\",\n    \"label\": \"Label B 1\"\n  },\n  {\n    \"id\": \"b2\",\n    \"label\": \"Label B 2\"\n  },\n  {\n    \"id\": \"b3\",\n    \"label\": \"Label B 3\"\n  }\n]",
         "title" : "nodes/set-b.json",
-        "anchorId" : "reusable-nodes-nodes-set-b-json",
+        "anchorId" : "reusable-nodes-nodes-set-bjson",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -840,7 +852,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "GraphVizDiagram"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052813,
+    "lastModifiedTime" : 1727735409510,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Flow Diagrams",

@@ -86,12 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Setup</h1></header>
-<p>To enable two-sided layout as seen on this page, add the following at the beginning of a Markdown file: markdown --- type: two-sides ---</p>
+<p>To enable two sided layout as seen on this page add the following at the beginning of a Markdown file type two sides</p>
 </article>
 
 <article>
 <header><h1>Details Side</h1></header>
-<p>Use the right pane to display additional details. It could be a REST response or a code snippet.Use include-meta in front of some content to place it on the right side of the page. All the following content will go to the right side. At the start of a new section it will be reset. markdown :include-open-api: snippets/open-api/uber.json {method: &quot;get&quot;, path: &quot;/v1/estimates/time&quot;} :include-meta: {rightSide: true} :include-json: two-sides/price-estimate.json</p>
+<p>Use the right pane to display additional details It could be a REST response or a code snippet Use in front of some content to place it on the right side of the page All the following content will go to the right side At the start of a new section it will be reset include meta include open api snippets open api uber json method get path v1 estimates time include meta rightSide true include json two sides price estimate json</p>
 </article>
 
 <article>
@@ -101,12 +101,12 @@
 
 <article>
 <header><h1>Single Data Block Shortcut</h1></header>
-<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD4, 90, custom table with a short attachment #12BGD5, 150, chair #91AGB1, 10, lunch Use rightSide: true as a parameter to include- plugins to move result to the right side. # Single Data Block Shortcut :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
+<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Use as a parameter to plugins to move result to the right side Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch rightSide true include # Single Data Block Shortcut include table layout table table csv include file layout table table csv rightSide true</p>
 </article>
 
 <article>
 <header><h1>Aligning Data in Columns</h1></header>
-<p>Use an include-empty-block to align code snippets or other data block on both sides when there is an extra text on either side. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD4, 90, custom table with a short attachment #12BGD5, 150, chair #91AGB1, 10, lunch Table and code snippets above are aligned by using an empty block on the right side. markdown :include-empty-block: {rightSide: true} :include-table: layout/table/table.csv :include-file: layout/table/table.csv {rightSide: true}</p>
+<p>Use an to align code snippets or other data block on both sides when there is an extra text on either side Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Table and code snippets above are aligned by using an empty block on the right side include empty block Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch include empty block rightSide true include table layout table table csv include file layout table table csv rightSide true</p>
 </article>
 </section>
 </div>
@@ -142,6 +142,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "setup",
+      "additionalIds" : [ ],
       "title" : "Setup",
       "type" : "Section",
       "content" : [ {
@@ -158,6 +159,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "details-side",
+      "additionalIds" : [ ],
       "title" : "Details Side",
       "type" : "Section",
       "content" : [ {
@@ -191,6 +193,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "open-api-example",
+      "additionalIds" : [ ],
       "title" : "Open API Example",
       "type" : "Section",
       "content" : [ {
@@ -268,12 +271,14 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "open-api-example-responses",
+        "additionalIds" : [ "responses" ],
         "level" : 2,
         "title" : "Responses",
         "type" : "SubHeading"
       }, {
         "style" : "api",
         "id" : "open-api-example-responses-200",
+        "additionalIds" : [ "200" ],
         "level" : 4,
         "title" : "200",
         "type" : "SubHeading"
@@ -371,6 +376,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "open-api-example-responses-default",
+        "additionalIds" : [ "default" ],
         "level" : 4,
         "title" : "default",
         "type" : "SubHeading"
@@ -468,6 +474,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "single-data-block-shortcut",
+      "additionalIds" : [ ],
       "title" : "Single Data Block Shortcut",
       "type" : "Section",
       "content" : [ {
@@ -588,6 +595,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "aligning-data-in-columns",
+      "additionalIds" : [ ],
       "title" : "Aligning Data in Columns",
       "type" : "Section",
       "content" : [ {
@@ -711,7 +719,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409487,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Two Sides Pages",

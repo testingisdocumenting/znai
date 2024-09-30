@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Backtick</h1></header>
-<p>To display inline code within a text, put it inside a backtick. Example: To check if an Exchange is closed, you need to use `ExchangeCalendar` Example: To check if an Exchange is closed, you need to use ExchangeCalendar</p>
+<p>To display inline code within a text put it inside a backtick Example To check if an Exchange is closed you need to use Example To check if an Exchange is closed you need to use `ExchangeCalendar` ExchangeCalendar</p>
 </article>
 
 <article>
 <header><h1>From File</h1></header>
-<p>To display inline code from a file, use the file inlined code plugin. Example: To access this feature, navigate to `:file: urlsample.txt`. Example: To access this feature, navigate to .</p>
+<p>To display inline code from a file use the inlined code plugin Example To access this feature navigate to file Example To access this feature navigate to ` file urlsample txt`</p>
 </article>
 
 <article>
 <header><h1>Validated Identifier</h1></header>
-<p>Use identifier inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match. Use it to make sure your documentation reflects the API changes and do not use outdated identifier names `:identifier: my_func {validationPath: &quot;my_func_usage.py&quot;}` def example(): my_func(100) Specify multiple files via plugins/default-parameters#page-local-defaults page local or plugins/default-parameters#global-defaults global plugin defaults to avoid repeating validationPath throughout the page. --- identifier: {validationPath: [&quot;python/my_func_usage.py&quot;, &quot;python/utils.py&quot;]} --- markdown my text `:identifier: my_func`</p>
+<p>Specify multiple files via page local or global plugin defaults to avoid repeating throughout the page Use inlined code plugin to render inlined code and validate its spelling by looking at the provided file for match Use it to make sure your documentation reflects the API changes and do not use outdated identifier names identifier ` identifier my_func validationPath my_func_usage py ` def example my_func 100 validationPath identifier validationPath python my_func_usage py python utils py my text ` identifier my_func`</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "backtick",
+      "additionalIds" : [ ],
       "title" : "Backtick",
       "type" : "Section",
       "content" : [ {
@@ -157,6 +158,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "from-file",
+      "additionalIds" : [ ],
       "title" : "From File",
       "type" : "Section",
       "content" : [ {
@@ -191,6 +193,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "validated-identifier",
+      "additionalIds" : [ ],
       "title" : "Validated Identifier",
       "type" : "Section",
       "content" : [ {
@@ -214,7 +217,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "py",
         "snippet" : "def example():\n    my_func(100)",
         "title" : "my_func_usage.py",
-        "anchorId" : "validated-identifier-my_func_usage-py",
+        "anchorId" : "validated-identifier-my_func_usagepy",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
@@ -272,7 +275,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409498,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Inlined Code Snippets",

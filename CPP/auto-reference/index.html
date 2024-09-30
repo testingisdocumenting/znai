@@ -86,32 +86,32 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Member Signature, Comment And Parameters</h1></header>
-<p>Use include-doxygen-member to render member signature, its description and parameters list namespace utils { namespace nested { /** * top **level** comment *of* important * * list one * * list two * * list three * * 1. number one * 2. number two * * @param first_param description of first *param* * 1. item a * 2. item b * @param second_param description of second param */ void my_func(int first_param, bool second_param) { } /** * specific description for single param version * @param first_param description of first *param* * 1. item a * 2. item b */ void my_func(int first_param) { } } } void free_func() { } :include-doxygen-member: utils::nested::my_func top level comment of important list one list two list three number one number two first_param int description of first param item a item b second_param bool description of second param markdown :include-doxygen-member: multi_println /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print */ template&lt;typename T1, typename T2&gt; void multi_println(const T1&amp; v1, const T2&amp; v2) { std::cout &lt;&lt; v1 &lt;&lt; &quot;, &quot; &lt;&lt; v2 &lt;&lt; &quot;\n&quot;; } prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print</p>
+<p>Use to render member signature its description and parameters list include doxygen member namespace utils namespace nested ** * top **level** comment *of* important * * list one * * list two * * list three * * 1 number one * 2 number two * * @param first_param description of first *param* * 1 item a * 2 item b * @param second_param description of second param * void my_func int first_param bool second_param ** * specific description for single param version * @param first_param description of first *param* * 1 item a * 2 item b * void my_func int first_param void free_func include doxygen member utils nested my_func top level comment of important list one list two list three number one number two first_param int description of first param item a item b second_param bool description of second param include doxygen member multi_println ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * template&lt;typename T1 typename T2&gt; void multi_println const T1&amp; v1 const T2&amp; v2 std cout &lt;&lt; v1 &lt;&lt; &lt;&lt; v2 &lt;&lt; n prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print</p>
 </article>
 
 <article>
 <header><h1>Member Signature Only</h1></header>
-<p>Use signatureOnly: true parameter to render only member signature namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. * * @note Do not reveal your password. * Use alternatives: * 1. option one * 2. option two * * more context */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }</p>
+<p>Use parameter to render only member signature signatureOnly true namespace utils namespace second ** * **Domain** specific context setting Describes business setting and requirements * * @note Do not reveal your password * Use alternatives * 1 option one * 2 option two * * more context * class MyClass public bark void bark ** * **Domain** specific context setting Describes business setting and requirements * class ThirdClass public bark void bark include doxygen member utils second ThirdClass bark signatureOnly true</p>
 </article>
 
 <article>
 <header><h1>All Matching Signatures</h1></header>
-<p>namespace utils { namespace nested { void their_func(long param1, std::string param2, bool param3) { } /** * Description of *what* and *why* for their_func * * @param param1 description of param1 * @param param3 description of param3 */ void their_func(long param1, bool param3) { } void their_func(long param1) { } } } :include-doxygen-member: utils::nested::their_func { signatureOnly: true, includeAllMatches: true }</p>
+<p>namespace utils namespace nested void their_func long param1 std string param2 bool param3 ** * Description of *what* and *why* for their_func * * @param param1 description of param1 * @param param3 description of param3 * void their_func long param1 bool param3 void their_func long param1 include doxygen member utils nested their_func signatureOnly true includeAllMatches true</p>
 </article>
 
 <article>
 <header><h1>Specific Member By Args</h1></header>
-<p>Use args to select a specific overload by providing parameters string :include-doxygen-member: utils::nested::their_func { args: &quot;long, bool&quot; } Description of what and why for their_func param1 long description of param1 param3 bool description of param3 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.</p>
+<p>Use to select a specific overload by providing parameters string Note Args are coma and spaces sensitive Znai will print available args variants in case of mismatch for you to copy and paste args include doxygen member utils nested their_func args long bool Description of what and why for their_func param1 long description of param1 param3 bool description of param3</p>
 </article>
 
 <article>
 <header><h1>utils::second::AnotherClass</h1></header>
-<p>Use include-doxygen-compound to render a definition of a class/struct :include-doxygen-compound: utils::second::AnotherClass Domain specific context setting. Describes business setting and requirements. Public Functions Static Public Functions Public Attributes Static Public Attributes Protected Functions Definitions sing sing out loud tone int tone at which to sing volume int volume at which to sing bark bark out loud myClass const MyClass &amp; to test reference tone int tone at which to sing volume int volume at which to sing smile global smile volume int smile volume number_of_sounds current number of sounds made counter help ask for help out loud example tone int tone at which to sing volume int volume at which to sing utils::second::AnotherClass</p>
+<p>Use to render a definition of a class struct Public Functions Static Public Functions Public Attributes Static Public Attributes Protected Functions Definitions sing bark smile number_of_sounds counter help include doxygen compound include doxygen compound utils second AnotherClass Domain specific context setting Describes business setting and requirements sing out loud tone int tone at which to sing volume int volume at which to sing bark out loud myClass const MyClass &amp; to test reference tone int tone at which to sing volume int volume at which to sing global smile volume int smile volume current number of sounds made ask for help out loud example tone int tone at which to sing volume int volume at which to sing utils second AnotherClass</p>
 </article>
 
 <article>
 <header><h1>utils::second::MyClass</h1></header>
-<p>Znai uses doxygen cross-reference to link definitions together. Class above references MyClass in its parameters. After you include definition of that class, MyClass reference above becomes a link. :include-doxygen-compound: utils::second::MyClass Domain specific context setting. Describes business setting and requirements. Do not reveal your password. Use alternatives: option one option two more context Public Functions Definitions bark bark utils::second::MyClass</p>
+<p>Znai uses doxygen cross reference to link definitions together Class above references in its parameters After you include definition of that class reference above becomes a link Public Functions Definitions bark MyClass MyClass include doxygen compound utils second MyClass Domain specific context setting Describes business setting and requirements Do not reveal your password Use alternatives option one option two more context bark utils second MyClass</p>
 </article>
 </section>
 </div>
@@ -147,6 +147,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "member-signature-comment-and-parameters",
+      "additionalIds" : [ ],
       "title" : "Member Signature, Comment And Parameters",
       "type" : "Section",
       "content" : [ {
@@ -165,7 +166,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace nested {\n/**\n * top **level** comment *of* important\n * * list one\n * * list two\n * * list three\n *\n * 1. number one\n * 2. number two\n *\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n * @param second_param description of second param\n */\nvoid my_func(int first_param, bool second_param) {\n}\n\n/**\n * specific description for single param version\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n */\nvoid my_func(int first_param) {\n}\n}\n}\n\nvoid free_func() {\n}",
         "title" : "src/funcs.h",
-        "anchorId" : "member-signature-comment-and-parameters-src-funcs-h",
+        "anchorId" : "member-signature-comment-and-parameters-src-funcsh",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -358,7 +359,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n */\ntemplate<typename T1, typename T2>\nvoid multi_println(const T1& v1, const T2& v2) {\n    std::cout << v1 << \", \" << v2 << \"\\n\";\n}",
         "title" : "source.hpp",
         "surroundedBy" : "// multi_println",
-        "anchorId" : "member-signature-comment-and-parameters-source-hpp",
+        "anchorId" : "member-signature-comment-and-parameters-sourcehpp",
         "type" : "Snippet"
       }, {
         "id" : "funcs__template_8hpp_1adbf4cefb343f576f1f3ba2e4a73738b2",
@@ -475,6 +476,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "member-signature-only",
+      "additionalIds" : [ ],
       "title" : "Member Signature Only",
       "type" : "Section",
       "content" : [ {
@@ -493,7 +495,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace second {\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n *\n * @note Do not reveal your password.\n * Use alternatives:\n * 1. option one\n * 2. option two\n *\n * more context\n */\nclass MyClass {\npublic:\n    /// bark\n    void bark();\n};\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass ThirdClass {\npublic:\n    /// bark\n    void bark();\n};\n\n}\n}",
         "title" : "src/classes.h",
-        "anchorId" : "member-signature-only-src-classes-h",
+        "anchorId" : "member-signature-only-src-classesh",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -525,13 +527,14 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "all-matching-signatures",
+      "additionalIds" : [ ],
       "title" : "All Matching Signatures",
       "type" : "Section",
       "content" : [ {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace nested {\n\nvoid their_func(long param1, std::string param2, bool param3) {\n}\n\n/**\n * Description of *what* and *why* for their_func\n *\n * @param param1 description of param1\n * @param param3 description of param3\n */\nvoid their_func(long param1, bool param3) {\n}\n\nvoid their_func(long param1) {\n}\n\n}\n}",
         "title" : "src/funcs.h",
-        "anchorId" : "all-matching-signatures-src-funcs-h",
+        "anchorId" : "all-matching-signatures-src-funcsh",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -643,6 +646,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "specific-member-by-args",
+      "additionalIds" : [ ],
       "title" : "Specific Member By Args",
       "type" : "Section",
       "content" : [ {
@@ -765,6 +769,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "compound",
+      "additionalIds" : [ ],
       "title" : "Compound",
       "type" : "Section",
       "content" : [ {
@@ -792,6 +797,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "badge" : "class",
       "style" : "api",
       "id" : "utilssecondanotherclass",
+      "additionalIds" : [ ],
       "title" : "utils::second::AnotherClass",
       "type" : "Section",
       "content" : [ {
@@ -809,6 +815,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-public-functions",
+        "additionalIds" : [ "public-functions" ],
         "level" : 3,
         "title" : "Public Functions",
         "type" : "SubHeading"
@@ -891,6 +898,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-static-public-functions",
+        "additionalIds" : [ "static-public-functions" ],
         "level" : 3,
         "title" : "Static Public Functions",
         "type" : "SubHeading"
@@ -923,6 +931,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-public-attributes",
+        "additionalIds" : [ "public-attributes" ],
         "level" : 3,
         "title" : "Public Attributes",
         "type" : "SubHeading"
@@ -949,6 +958,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-static-public-attributes",
+        "additionalIds" : [ "static-public-attributes" ],
         "level" : 3,
         "title" : "Static Public Attributes",
         "type" : "SubHeading"
@@ -975,6 +985,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-protected-functions",
+        "additionalIds" : [ "protected-functions" ],
         "level" : 3,
         "title" : "Protected Functions",
         "type" : "SubHeading"
@@ -1013,12 +1024,14 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-definitions",
+        "additionalIds" : [ "definitions" ],
         "level" : 3,
         "title" : "Definitions",
         "type" : "SubHeading"
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-definitions-sing",
+        "additionalIds" : [ "sing" ],
         "level" : 4,
         "title" : "sing",
         "type" : "SubHeading"
@@ -1097,6 +1110,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-definitions-bark",
+        "additionalIds" : [ "bark" ],
         "level" : 4,
         "title" : "bark",
         "type" : "SubHeading"
@@ -1207,6 +1221,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-definitions-smile",
+        "additionalIds" : [ "smile" ],
         "level" : 4,
         "title" : "smile",
         "type" : "SubHeading"
@@ -1265,6 +1280,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-definitions-number_of_sounds",
+        "additionalIds" : [ "number_of_sounds" ],
         "level" : 4,
         "title" : "number_of_sounds",
         "type" : "SubHeading"
@@ -1305,6 +1321,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-definitions-counter",
+        "additionalIds" : [ "counter" ],
         "level" : 4,
         "title" : "counter",
         "type" : "SubHeading"
@@ -1333,6 +1350,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondanotherclass-definitions-help",
+        "additionalIds" : [ "help" ],
         "level" : 4,
         "title" : "help",
         "type" : "SubHeading"
@@ -1422,6 +1440,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "cross-reference",
+      "additionalIds" : [ ],
       "title" : "Cross-Reference",
       "type" : "Section",
       "content" : [ {
@@ -1462,6 +1481,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "badge" : "class",
       "style" : "api",
       "id" : "utilssecondmyclass",
+      "additionalIds" : [ ],
       "title" : "utils::second::MyClass",
       "type" : "Section",
       "content" : [ {
@@ -1518,6 +1538,7 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondmyclass-public-functions",
+        "additionalIds" : [ "public-functions-2" ],
         "level" : 3,
         "title" : "Public Functions",
         "type" : "SubHeading"
@@ -1544,12 +1565,14 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "style" : "api",
         "id" : "utilssecondmyclass-definitions",
+        "additionalIds" : [ "definitions-2" ],
         "level" : 3,
         "title" : "Definitions",
         "type" : "SubHeading"
       }, {
         "style" : "api",
         "id" : "utilssecondmyclass-definitions-bark",
+        "additionalIds" : [ "bark-2" ],
         "level" : 4,
         "title" : "bark",
         "type" : "SubHeading"
@@ -1583,7 +1606,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052785,
+    "lastModifiedTime" : 1727735409482,
     "tocItem" : {
       "chapterTitle" : "CPP",
       "pageTitle" : "Auto Reference",

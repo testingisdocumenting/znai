@@ -86,22 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Method Body</h1></header>
-<p>When you need to extract a specific method body use the include-groovy plugin.Consider the following file: class HelloWorldTest { @Test void &quot;should calculate risk based on epsilon&quot;() { generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 } @Test void &quot;should calculate risk without quantity&quot;() { generateStatement(price: 10, epsilon: 2) calcRisk().should == 108 } } Specify a method name to extract it from the file. :include-groovy: HelloWorldTest.groovy {entry: &quot;should calculate risk based on epsilon&quot;, bodyOnly: true} If bodyOnly is specified, signature will be omitted. generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108</p>
+<p>When you need to extract a specific method body use the plugin Consider the following file class HelloWorldTest @Test void should calculate risk based on epsilon generateStatement price 10 quantity 10 epsilon 2 calcRisk should 108 @Test void should calculate risk without quantity generateStatement price 10 epsilon 2 calcRisk should 108 Specify a method name to extract it from the file If is specified signature will be omitted generateStatement price 10 quantity 10 epsilon 2 calcRisk should 108 include groovy include groovy HelloWorldTest groovy entry should calculate risk based on epsilon bodyOnly true bodyOnly</p>
 </article>
 
 <article>
 <header><h1>Multiple Bodies</h1></header>
-<p>Pass list as entry to extract multiple method bodies markdown :include-groovy: HelloWorldTest.groovy { title: &quot;api example&quot;, entry: [&quot;should calculate risk based on epsilon&quot;, &quot;should calculate risk based on epsilon&quot;], bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 Pass entrySeparator: &quot;&lt;separator&gt;&quot; to have a provided line in between entries as a separator. markdown :include-groovy: HelloWorldTest.groovy { title: &quot;api example&quot;, entry: [&quot;should calculate risk based on epsilon&quot;, &quot;should calculate risk based on epsilon&quot;], entrySeparator: &quot;&quot;, bodyOnly: true } generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108 generateStatement(price: 10, quantity: 10, epsilon: 2) calcRisk().should == 108</p>
+<p>Pass as to extract multiple method bodies generateStatement price 10 quantity 10 epsilon 2 calcRisk should 108 generateStatement price 10 quantity 10 epsilon 2 calcRisk should 108 Pass to have a provided line in between entries as a separator generateStatement price 10 quantity 10 epsilon 2 calcRisk should 108 generateStatement price 10 quantity 10 epsilon 2 calcRisk should 108 list entry include groovy HelloWorldTest groovy title api example entry should calculate risk based on epsilon should calculate risk based on epsilon bodyOnly true entrySeparator &lt;separator&gt; include groovy HelloWorldTest groovy title api example entry should calculate risk based on epsilon should calculate risk based on epsilon entrySeparator bodyOnly true</p>
 </article>
 
 <article>
 <header><h1>Overloads</h1></header>
-<p>Specify types inside brackets to select an overloaded versions of your methods.Types should appear as they do in the file, i.e., if you use the short version of a type, you need to use the short version inside the plugin. import your.company.com.util.* /* groovy docs on top */ class HelloWorld { void methodName(List&lt;String&gt; a, Map&lt;String, Integer&gt; b) { actionA() } void methodName(List&lt;String&gt; a, Boolean b) { actionB() } void methodName(def a, def b) { actionC() } } :include-groovy: HelloWorld.groovy {entry: &quot;methodName(List, Map)&quot;} :include-groovy: HelloWorld.groovy {entry: &quot;methodName(def,def)&quot;} Note: Generic types are erased and spaces after commas are optional void methodName(List&lt;String&gt; a, Map&lt;String, Integer&gt; b) { actionA() } Note: def type remains def and not Object void methodName(def a, def b) { actionC() }</p>
+<p>Specify types inside brackets to select an overloaded versions of your methods Types should appear as they do in the file i e if you use the short version of a type you need to use the short version inside the plugin import your company com util * * groovy docs on top * class HelloWorld void methodName List&lt;String&gt; a Map&lt;String Integer&gt; b actionA void methodName List&lt;String&gt; a Boolean b actionB void methodName def a def b actionC Note Generic types are erased and spaces after commas are optional void methodName List&lt;String&gt; a Map&lt;String Integer&gt; b actionA Note type remains and not void methodName def a def b actionC include groovy HelloWorld groovy entry methodName List Map include groovy HelloWorld groovy entry methodName def def def def Object</p>
 </article>
 
 <article>
 <header><h1>Class Body</h1></header>
-<p>import your.company.com.util.* /* groovy docs on top */ class HelloWorld { void methodName(List&lt;String&gt; a, Map&lt;String, Integer&gt; b) { actionA() } void methodName(List&lt;String&gt; a, Boolean b) { actionB() } void methodName(def a, def b) { actionC() } } To extract class body use: :include-groovy: HelloWorld.groovy {entry: &quot;HelloWorld&quot;} class HelloWorld { void methodName(List&lt;String&gt; a, Map&lt;String, Integer&gt; b) { actionA() } void methodName(List&lt;String&gt; a, Boolean b) { actionB() } void methodName(def a, def b) { actionC() } } Use bodyOnly to only display only the body of your class. :include-groovy: HelloWorld.groovy {entry: &quot;HelloWorld&quot;, bodyOnly: true} void methodName(List&lt;String&gt; a, Map&lt;String, Integer&gt; b) { actionA() } void methodName(List&lt;String&gt; a, Boolean b) { actionB() } void methodName(def a, def b) { actionC() }</p>
+<p>To extract body use class HelloWorld void methodName List&lt;String&gt; a Map&lt;String Integer&gt; b actionA void methodName List&lt;String&gt; a Boolean b actionB void methodName def a def b actionC Use to only display only the body of your class void methodName List&lt;String&gt; a Map&lt;String Integer&gt; b actionA void methodName List&lt;String&gt; a Boolean b actionB void methodName def a def b actionC import your company com util * * groovy docs on top * class HelloWorld void methodName List&lt;String&gt; a Map&lt;String Integer&gt; b actionA void methodName List&lt;String&gt; a Boolean b actionB void methodName def a def b actionC class include groovy HelloWorld groovy entry HelloWorld bodyOnly include groovy HelloWorld groovy entry HelloWorld bodyOnly true</p>
 </article>
 </section>
 </div>
@@ -137,6 +137,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "method-body",
+      "additionalIds" : [ ],
       "title" : "Method Body",
       "type" : "Section",
       "content" : [ {
@@ -193,6 +194,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "multiple-bodies",
+      "additionalIds" : [ ],
       "title" : "Multiple Bodies",
       "type" : "Section",
       "content" : [ {
@@ -255,6 +257,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "overloads",
+      "additionalIds" : [ ],
       "title" : "Overloads",
       "type" : "Section",
       "content" : [ {
@@ -323,6 +326,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "class-body",
+      "additionalIds" : [ ],
       "title" : "Class Body",
       "type" : "Section",
       "content" : [ {
@@ -376,7 +380,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409498,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Groovy",

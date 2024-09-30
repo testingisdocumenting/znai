@@ -85,23 +85,28 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.71</h1></header>
+<p>Doc How to style Add support for additional hidden anchor ids when referencing Other Pages to be backward compatible with existing markdowns Add Search Result Preview code snippets have higher weight Add Search Result Preview wildcard and stronger boost to page titles Add Improve Search Result Preview highlighting Add Default Tab Add Adjust inlined Latex horizontal spacing Add Search better recognizes dot separated code snippet entries</p>
+</article>
+
+<article>
 <header><h1>1.70</h1></header>
-<p>Fix: CPP/doxygen-setup Doxygen now handles empty declname in method parameters Fix: viewOn link correctly adds .md to the index page Add: Use lookup-paths to find files from deployment/additional-files upload.txt</p>
+<p>Fix Doxygen now handles empty in method parameters declname Fix link correctly adds to the index page viewOn md Add Use to find files from upload txt lookup paths</p>
 </article>
 
 <article>
 <header><h1>1.69</h1></header>
-<p>Fix: Presentation mode viewport explicit width to force full screen Fix: flow/names auto title now correctly ignores specified extension. Fix: Page flow/names title overrides automatically removes quotes around Fix: normalize file watching path during preview mode to correctly detect documentation page change when file path contains extra &quot;/./&quot; in it Fix: documentation root index.md file is detected again (instead of automatic redirection) Add: Initial support for inlined-code in headers. For now it displays it as a regular text.</p>
+<p>Fix Presentation mode viewport explicit width to force full screen Fix auto title now correctly ignores specified extension Fix Page title overrides automatically removes quotes around Fix normalize file watching path during preview mode to correctly detect documentation page change when file path contains extra in it Fix documentation root index md file is detected again instead of automatic redirection Add Initial support for in headers For now it displays it as a regular text inlined code</p>
 </article>
 
 <article>
 <header><h1>1.68</h1></header>
-<p>Fix: snippets/json Json presentation mode correctly highlights value nodes Add: Page flow/names title overrides via toc file Add: Presentation mode handling for snippets/api-parameters API Parameters members Add: Support explicit file name extension in toc file Add: Empty --doc-id &quot;&quot; support to deploy documentation to a site root Add: Presentation mode handling for CPP/doxygen-setup Doxygen members Add: Display CPP/doxygen-setup Doxygen @note Add: Display CPP/doxygen-setup Doxygen decltype Add: Display CPP/doxygen-setup Doxygen noexcept Add: validate non-empty snippets/snippets-manipulation#start-end-line startLine and snippets/snippets-manipulation#start-end-line endLine Add: snippets/snippets-manipulation#start-end-multiple-lines Keep Last/First Line for multi start/end lines Add: multiple start lines to snippets/snippets-highlighting#region-using-scope Highlight Region With Scope</p>
+<p>Fix Json presentation mode correctly highlights value nodes Add Page title overrides via file toc Add Presentation mode handling for API Parameters members Add Support explicit file name extension in file toc Add Empty support to deploy documentation to a site root doc id Add Presentation mode handling for Doxygen members Add Display Doxygen @note Add Display Doxygen decltype Add Display Doxygen noexcept Add validate non empty startLine and endLine Add Keep Last First Line for multi start end lines Add multiple lines to Highlight Region With Scope start</p>
 </article>
 
 <article>
 <header><h1>1.67</h1></header>
-<p>Fix: auto generated anchor from snippets/external-code-snippets#title title can now be referenced from other pages Add: --pem-cert-path and --pem-key-path to enable SSL during preview that you run inside orgs that prefer to host SSL content Add: --jks-path and --jks-password to enable SSL during preview that you run inside orgs that prefer to host SSL content Add: Shorten layout/tabs Tabs dividers when content inside is not wide Add: automatic preview navigation to the most recent change ignores previous user clicked anchors Add: layout/tabs Tabs remove vertical margin when the only content inside is a code snippet or api parameters Rename: noGapSeparator to snippets/external-code-snippets#no-gap noGapBorder</p>
+<p>Fix auto generated anchor from title can now be referenced from other pages Add and to enable SSL during preview that you run inside orgs that prefer to host SSL content pem cert path pem key path Add and to enable SSL during preview that you run inside orgs that prefer to host SSL content jks path jks password Add Shorten Tabs dividers when content inside is not wide Add automatic preview navigation to the most recent change ignores previous user clicked anchors Add Tabs remove vertical margin when the only content inside is a code snippet or api parameters Rename to noGapBorder noGapSeparator</p>
 </article>
 </section>
 </div>
@@ -136,7 +141,197 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "1-70",
+      "id" : "171",
+      "additionalIds" : [ ],
+      "title" : "1.71",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Doc: How to ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/configuration/styling",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "style",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: support for additional \"hidden\" anchor ids when referencing ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/page-references",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Other Pages",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to be backward compatible with existing markdowns.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Search Result Preview",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " code snippets have higher weight",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Search Result Preview",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " wildcard and stronger boost to page titles",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Improve ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Search Result Preview",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " highlighting",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/tabs#default-tab",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Default Tab",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Adjust inlined ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/math#latex-inline",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Latex",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " horizontal spacing",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Search better recognizes dot separated code snippet entries",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "170",
+      "additionalIds" : [ ],
       "title" : "1.70",
       "type" : "Section",
       "content" : [ {
@@ -226,7 +421,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "id" : "1-69",
+      "id" : "169",
+      "additionalIds" : [ ],
       "title" : "1.69",
       "type" : "Section",
       "content" : [ {
@@ -343,7 +539,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "id" : "1-68",
+      "id" : "168",
+      "additionalIds" : [ ],
       "title" : "1.68",
       "type" : "Section",
       "content" : [ {
@@ -664,7 +861,8 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     }, {
-      "id" : "1-67",
+      "id" : "167",
+      "additionalIds" : [ ],
       "title" : "1.67",
       "type" : "Section",
       "content" : [ {
@@ -841,7 +1039,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409497,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2024 Releases",
@@ -853,17 +1051,20 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.71",
+        "id" : "171"
+      }, {
         "title" : "1.70",
-        "id" : "1-70"
+        "id" : "170"
       }, {
         "title" : "1.69",
-        "id" : "1-69"
+        "id" : "169"
       }, {
         "title" : "1.68",
-        "id" : "1-68"
+        "id" : "168"
       }, {
         "title" : "1.67",
-        "id" : "1-67"
+        "id" : "167"
       } ]
     }
   }

@@ -86,22 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Follow the Order</h1></header>
-<p>The best documentation should be arranged with a natural order to follow. Links to navigate to the next page are at the end of each page.Create links to remind users of essential concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them.Avoid: links that navigate users forward. It may break the flow of a documentation.</p>
+<p>Good documentation flows naturally Links to navigate to the next page are at the end of each page Create links to remind users of essential concepts introduced previously There is a good chance that a reader skipped over these or forgot about them Avoid links that navigate users forward It may break the flow of a documentation</p>
 </article>
 
 <article>
 <header><h1>Links</h1></header>
-<p>To create an external link use: markdown [Link Title](http://external/reference) To refer internal page within your documentation use: markdown [internal link](../dir-name/file-name.md#optional-page-section-id) [internal link](./file-name.md#optional-page-section-id) [internal link](dir-name/file-name#optional-page-section-id) Note: you can get page-section-id by hovering over a section title and pressing link icon. Your browser URL display the updated link. Links to Subsection Linking to subsections is the same as linking to a top level section. ../flow/page-references.md#links-links-to-subsection Here is an example markdown [Here is an example](../flow/page-references.md#links-links-to-subsection) [Here is an example](flow/page-references#links-links-to-subsection) Use #links Subsection Shortcut if a subsection is within the same page: markdown [Subsection Shortcut](#links) Index Page Clicking this / index page link will have the same effect as clicking the documentation title at the top of the Navigation PanelTo refer back to the top-level index page use: markdown [index page](/) [index page](/#link-to-subsection)</p>
+<p>To create an link use To refer page within your documentation use Note you can get by hovering over a section title and pressing link icon Your browser URL display the updated link Links to Subsection Linking to subsections is the same as linking to a top level section Here is an example Use Subsection Shortcut if a subsection is within the same page Index Page Clicking this index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel To refer back to the top level page use external Link Title http external reference internal internal link dir name file name md#optional page section id internal link file name md#optional page section id internal link dir name file name#optional page section id page section id Here is an example flow page references md#links links to subsection Here is an example flow page references#links links to subsection Subsection Shortcut #links index index page index page #link to subsection</p>
 </article>
 
 <article>
 <header><h1>Downloads</h1></header>
-<p>Linking to a local file will deploy the file along with the generated documentation. Clicking the link will open a file using the browser's default method. Download [test json file](data/test.json) Download data/test.json test json file</p>
+<p>Linking to a local file will deploy the file along with the generated documentation Clicking the link will open a file using the browser s default method Download test json file Download test json file data test json</p>
 </article>
 
 <article>
 <header><h1>Validation</h1></header>
-<p>Local links are automatically validated during documentation build time. You will get a build time error if you refer to a page or a section/sub-section that does not exist.Pass --validate-external-links to enable external links validation.</p>
+<p>Local links are automatically validated during documentation build time You will get a build time error if you refer to a page or a section sub section that does not exist Pass to enable external links validation validate external links</p>
 </article>
 </section>
 </div>
@@ -137,12 +137,13 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "follow-the-order",
+      "additionalIds" : [ ],
       "title" : "Follow the Order",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "The best documentation should be arranged with a natural order to follow.",
+          "text" : "Good documentation flows naturally.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
@@ -174,6 +175,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "links",
+      "additionalIds" : [ ],
       "title" : "Links",
       "type" : "Section",
       "content" : [ {
@@ -224,6 +226,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "id" : "links-links-to-subsection",
+        "additionalIds" : [ "links-to-subsection" ],
         "level" : 2,
         "title" : "Links to Subsection",
         "type" : "SubHeading"
@@ -270,6 +273,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "id" : "links-index-page",
+        "additionalIds" : [ "index-page" ],
         "level" : 2,
         "title" : "Index Page",
         "type" : "SubHeading"
@@ -316,6 +320,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "downloads",
+      "additionalIds" : [ ],
       "title" : "Downloads",
       "type" : "Section",
       "content" : [ {
@@ -351,6 +356,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "validation",
+      "additionalIds" : [ ],
       "title" : "Validation",
       "type" : "Section",
       "content" : [ {
@@ -378,7 +384,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052785,
+    "lastModifiedTime" : 1727735409485,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Page References",

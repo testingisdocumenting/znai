@@ -86,27 +86,27 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Files Reference Lookup</h1></header>
-<p>When you refer to a file using plugins like markdown :include-file: my-file.cpp Znai tries to find the file in following locations:directory with the markup file that refers my-file.cpp documentation root directory locations enumerated inside &lt;doc-root&gt;/lookup-paths file txt ../examples ../module/src/main/java</p>
+<p>When you refer to a file using plugins like tries to find the file in following locations directory with the markup file that refers documentation root directory locations enumerated inside file include file my file cpp Znai my file cpp &lt;doc root&gt; lookup paths examples module src main java</p>
 </article>
 
 <article>
 <header><h1>CLI parameter</h1></header>
-<p>Use --lookup-paths CLI parameter to add additional paths to lookup files. znai --lookup-paths /extra/path-one /extra/path-two</p>
+<p>Use CLI parameter to add additional paths to lookup files lookup paths znai lookup paths extra path one extra path two</p>
 </article>
 
 <article>
 <header><h1>Zip and Jar Lookup</h1></header>
-<p>When Znai encounters zip or jar file listed inside lookup-paths it will unpack the archives into a temporary location and will use those locations to resolve files txt ../sources.zip ../module/archive.jar :include-file: dir/inside-zip-b.txt inside zip B</p>
+<p>When Znai encounters zip or jar file listed inside it will unpack the archives into a temporary location and will use those locations to resolve files lookup paths sources zip module archive jar include file dir inside zip b txt inside zip B</p>
 </article>
 
 <article>
 <header><h1>HTTP Lookup Location</h1></header>
-<p>If files you want to include are not part of your project, you can add an HTTP base URL to lookup-paths . txt ../examples ../module/src/main/java https://raw.githubusercontent.com/testingisdocumenting/webtau/master If the file is not found using local locations, it will be fetched from the provided urls. :include-file: .travis.yml language: java jdk: - openjdk8 - openjdk11 cache: directories: - $HOME/.m2 - $HOME/.npm - node_modules dist: xenial services: - xvfb addons: chrome: stable firefox: latest apt: packages: - graphviz # disables the default install step which is mvn install skipping tests install: true script: mvn -B verify -P code-coverage</p>
+<p>If files you want to include are not part of your project you can add an HTTP base URL to If the file is not found using local locations it will be fetched from the provided urls lookup paths examples module src main java https raw githubusercontent com testingisdocumenting webtau master include file travis yml language java jdk openjdk8 openjdk11 cache directories $HOME m2 $HOME npm node_modules dist xenial services xvfb addons chrome stable firefox latest apt packages graphviz # disables the default install step which is mvn install skipping tests install true script mvn B verify P code coverage</p>
 </article>
 
 <article>
 <header><h1>Class Path Lookup</h1></header>
-<p>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central. &lt;plugin&gt; &lt;groupId&gt;org.testingisdocumenting.znai&lt;/groupId&gt; &lt;artifactId&gt;znai-maven-plugin&lt;/artifactId&gt; &lt;version&gt;${project.version}&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;${junit.version}&lt;/version&gt; &lt;classifier&gt;sources&lt;/classifier&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;/plugin&gt; :include-java: org/junit/Assert.java {entry: &quot;fail(String)&quot;} public static void fail(String message) { if (message == null) { throw new AssertionError(); } throw new AssertionError(message); }</p>
+<p>Znai is written using Java and can access resources from the classpath Using class path lookup you can include snippets from projects deployed to for example Maven Central &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;$ project version &lt; version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt; groupId&gt; &lt;artifactId&gt;junit&lt; artifactId&gt; &lt;version&gt;$ junit version &lt; version&gt; &lt;classifier&gt;sources&lt; classifier&gt; &lt; dependency&gt; &lt; dependencies&gt; &lt; plugin&gt; include java org junit Assert java entry fail String public static void fail String message if message null throw new AssertionError throw new AssertionError message</p>
 </article>
 </section>
 </div>
@@ -142,6 +142,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "files-reference-lookup",
+      "additionalIds" : [ ],
       "title" : "Files Reference Lookup",
       "type" : "Section",
       "content" : [ {
@@ -215,6 +216,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "cli-parameter",
+      "additionalIds" : [ ],
       "title" : "CLI parameter",
       "type" : "Section",
       "content" : [ {
@@ -236,6 +238,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "zip-and-jar-lookup",
+      "additionalIds" : [ ],
       "title" : "Zip and Jar Lookup",
       "type" : "Section",
       "content" : [ {
@@ -272,11 +275,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "inside\nzip\nB",
         "autoTitle" : true,
         "title" : "dir/inside-zip-b.txt",
-        "anchorId" : "zip-and-jar-lookup-dir-inside-zip-b-txt",
+        "anchorId" : "zip-and-jar-lookup-dir-inside-zip-btxt",
         "type" : "Snippet"
       } ]
     }, {
       "id" : "http-lookup-location",
+      "additionalIds" : [ ],
       "title" : "HTTP Lookup Location",
       "type" : "Section",
       "content" : [ {
@@ -316,6 +320,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "class-path-lookup",
+      "additionalIds" : [ ],
       "title" : "Class Path Lookup",
       "type" : "Section",
       "content" : [ {
@@ -346,7 +351,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052785,
+    "lastModifiedTime" : 1727735409485,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Lookup Paths",

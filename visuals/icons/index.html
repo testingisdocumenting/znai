@@ -86,22 +86,22 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Feather Icons</h1></header>
-<p>Znai has integration with https://feathericons.com/ Feather Icons. Icons can be included using the inlined code plugin. `:icon: cloud` The result will appear in-lined in the current text Head over to https://feathericons.com/ https://feathericons.com/ to find the icon id.</p>
+<p>Znai has integration with Feather Icons Icons can be included using the inlined code plugin The result will appear in lined in the current text Head over to https feathericons com to find the icon id ` icon cloud`</p>
 </article>
 
 <article>
 <header><h1>Bullet Points</h1></header>
-<p>Icons can also be used as bullet points replacement: * `:icon: time` Time is important * `:icon: settings` Setup must be easy Time is important Setup must be easy</p>
+<p>Icons can also be used as bullet points replacement Time is important Setup must be easy * ` icon time` Time is important * ` icon settings` Setup must be easy</p>
 </article>
 
 <article>
 <header><h1>Colors</h1></header>
-<p>Stroke Use stroke parameter to set outline color. * `:icon: time {stroke: 'green'}` stroke: `green` * `:icon: cloud {stroke: 'blue'}` stroke: `blue` * `:icon: settings {stroke: 'yellow'}` stroke: `yellow` * `:icon: x-octagon {stroke: 'red'}` stroke: `red` stroke: green stroke: blue stroke: yellow stroke: red Fill Use stroke parameter to set fill color. fill: red fill: red , stroke: 'black' Note: default stroke color is a text color, which may not look good in Dark theme. Use black color explicitly if you want the stroke color to be black in both Light and Dark themes.</p>
+<p>Stroke Use parameter to set outline color stroke stroke stroke stroke Fill Use parameter to set fill color fill fill stroke black Note default stroke color is a text color which may not look good in Dark theme Use color explicitly if you want the stroke color to be black in both Light and Dark themes stroke * ` icon time stroke green ` stroke `green` * ` icon cloud stroke blue ` stroke `blue` * ` icon settings stroke yellow ` stroke `yellow` * ` icon x octagon stroke red ` stroke `red` green blue yellow red stroke red red black</p>
 </article>
 
 <article>
 <header><h1>Inside Tables</h1></header>
-<p>Znai provides a shortcut to use icons inside layout/tables Tables. Feature Name, V1, V2 featureA, +, + featureB, -, + +, `:icon: check {stroke: &quot;green&quot;}` -, `:icon: slash {stroke: &quot;red&quot;}` :include-table: table.csv {mappingPath: &quot;mapping.csv&quot;} Feature Name V1 V2 featureA `:icon: check {stroke: &quot;green&quot;}` `:icon: check {stroke: &quot;green&quot;}` featureB `:icon: slash {stroke: &quot;red&quot;}` `:icon: check {stroke: &quot;green&quot;}`</p>
+<p>Znai provides a shortcut to use icons inside Tables Feature Name V1 V2 featureA ` icon check stroke green ` ` icon check stroke green ` featureB ` icon slash stroke red ` ` icon check stroke green ` Feature Name V1 V2 featureA featureB ` icon check stroke green ` ` icon slash stroke red ` include table table csv mappingPath mapping csv</p>
 </article>
 </section>
 </div>
@@ -137,6 +137,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "feather-icons",
+      "additionalIds" : [ ],
       "title" : "Feather Icons",
       "type" : "Section",
       "content" : [ {
@@ -204,6 +205,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "bullet-points",
+      "additionalIds" : [ ],
       "title" : "Bullet Points",
       "type" : "Section",
       "content" : [ {
@@ -249,10 +251,12 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "colors",
+      "additionalIds" : [ ],
       "title" : "Colors",
       "type" : "Section",
       "content" : [ {
         "id" : "colors-stroke",
+        "additionalIds" : [ "stroke" ],
         "level" : 2,
         "title" : "Stroke",
         "type" : "SubHeading"
@@ -344,6 +348,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "id" : "colors-fill",
+        "additionalIds" : [ "fill" ],
         "level" : 2,
         "title" : "Fill",
         "type" : "SubHeading"
@@ -420,6 +425,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "inside-tables",
+      "additionalIds" : [ ],
       "title" : "Inside Tables",
       "type" : "Section",
       "content" : [ {
@@ -443,13 +449,13 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "csv",
         "snippet" : "Feature Name, V1, V2\nfeatureA, +, +\nfeatureB, -, +",
         "title" : "table.csv",
-        "anchorId" : "inside-tables-table-csv",
+        "anchorId" : "inside-tables-tablecsv",
         "type" : "Snippet"
       }, {
         "lang" : "csv",
         "snippet" : "+, `:icon: check {stroke: \"green\"}`\n-, `:icon: slash {stroke: \"red\"}`",
         "title" : "mapping.csv",
-        "anchorId" : "inside-tables-mapping-csv",
+        "anchorId" : "inside-tables-mappingcsv",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -510,7 +516,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052813,
+    "lastModifiedTime" : 1727735409511,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Icons",

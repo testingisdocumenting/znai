@@ -86,87 +86,87 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Auto Formatting</h1></header>
-<p>Use json fence block to render auto formatted json and use extra capabilities described below ```json [{&quot;key1&quot;: &quot;value1&quot;}, {&quot;key2&quot;: &quot;value2&quot;}] ``` Use json include plugin to read json from an external file [{&quot;key1&quot;: &quot;value1&quot;}, {&quot;key2&quot;: &quot;value2&quot;}] :include-json: simple.json</p>
+<p>Use fence block to render auto formatted json and use extra capabilities described below Use include plugin to read json from an external file json ```json key1 value1 key2 value2 ``` json key1 value1 key2 value2 include json simple json</p>
 </article>
 
 <article>
 <header><h1>Highlight Values By Path</h1></header>
-<p>Use the parameter to highlight an individual value: ```json {highlightValue: &quot;root[1].key2&quot;} [{&quot;key1&quot;: &quot;value1&quot;}, {&quot;key2&quot;: &quot;value2&quot;}] ``` Pass multiple values to to highlight more than one leaf value :include-json: book-store.json {highlightValue: [&quot;root.store.book[0].category&quot;, &quot;root.store.book[2].category&quot;]} Comma-separated paths specified inside will be highlighted.</p>
+<p>Use the parameter to highlight an individual value Pass multiple values to to highlight more than one leaf value Comma separated paths specified inside will be highlighted ```json highlightValue root 1 key2 key1 value1 key2 value2 ``` include json book store json highlightValue root store book 0 category root store book 2 category</p>
 </article>
 
 <article>
 <header><h1>Highlight Values By Path From File</h1></header>
-<p>Use to specify a file with paths to highlight values. :include-json: book-store.json {highlightValueFile: &quot;book-store-paths.json&quot;}</p>
+<p>Use to specify a file with paths to highlight values include json book store json highlightValueFile book store paths json</p>
 </article>
 
 <article>
 <header><h1>Highlight Keys By Path</h1></header>
-<p>Use the parameter to highlight keys: ```json {highlightKey: &quot;root[1].key2&quot;} [{&quot;key1&quot;: [&quot;value11&quot;, &quot;value12&quot;]}, {&quot;key2&quot;: [&quot;value21&quot;, &quot;value22&quot;]}] ```</p>
+<p>Use the parameter to highlight keys ```json highlightKey root 1 key2 key1 value11 value12 key2 value21 value22 ```</p>
 </article>
 
 <article>
 <header><h1>Highlight Keys By Path From File</h1></header>
-<p>Use to specify a file with paths to highlight keys. :include-json: book-store.json {highlightKeyFile: &quot;book-store-paths.json&quot;}</p>
+<p>Use to specify a file with paths to highlight keys include json book store json highlightKeyFile book store paths json</p>
 </article>
 
 <article>
 <header><h1>Json Subparts</h1></header>
-<p>To include only a portion of your document pass https://github.com/json-path/JsonPath Json Path as property: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;}</p>
+<p>To include only a portion of your document pass Json Path as property include json book store json include $ book 0 1</p>
 </article>
 
 <article>
 <header><h1>Enclose In Object</h1></header>
-<p>Use to wrap any JSON and include result into parent object(s) :include-json: book-store.json {encloseInObject: &quot;books.rare&quot;, include: &quot;$..book[0,1]&quot;}</p>
+<p>Use to wrap any JSON and include result into parent object s include json book store json encloseInObject books rare include $ book 0 1</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use title parameter to specify a snippet title: :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;} Use autoTitle: true to automatically set title to specified file name :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, autoTitle: true}</p>
+<p>Use parameter to specify a snippet title Use to automatically set title to specified file name title include json book store json include $ book 0 1 title Books autoTitle true include json book store json include $ book 0 1 autoTitle true</p>
 </article>
 
 <article>
 <header><h1>Anchor</h1></header>
-<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-json: book-store.json {include: &quot;$..book[0,1]&quot;, title: &quot;Books&quot;, anchorId: &quot;my-books&quot;}</p>
+<p>When you specify a title hover mouse over it to see a clickable anchor Use to override auto generated identifier anchorId include json book store json include $ book 0 1 title Books anchorId my books</p>
 </article>
 
 <article>
 <header><h1>Read More</h1></header>
-<p>Use readMore to show only first lines of JSON . Optional readMoreVisibleLines can be specified to set the initial number of lines to display :include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}</p>
+<p>Use to show only first lines of Optional can be specified to set the initial number of lines to display readMore JSON readMoreVisibleLines include json book store json readMore true readMoreVisibleLines 5</p>
 </article>
 
 <article>
 <header><h1>Hidden Parts</h1></header>
-<p>To hide sub-parts of your JSON use collapsedPaths property. :include-json: book-store.json {collapsedPaths: ['root.store.book']}</p>
+<p>To hide sub parts of your use property JSON collapsedPaths include json book store json collapsedPaths root store book</p>
 </article>
 
 <article>
 <header><h1>Highlights</h1></header>
-<p>To highlight a specific JSON value using paths , in (similar fashion to snippets/snippets-highlighting regular code snippets, you can highlight a line by text matching or by providing a line index. :include-json: book-store.json {highlight: [&quot;category&quot;, 2]}</p>
+<p>To highlight a specific value using in similar fashion to regular code snippets you can highlight a line by text matching or by providing a line index JSON paths include json book store json highlight category 2</p>
 </article>
 
 <article>
 <header><h1>Code References</h1></header>
-<p>You can turn parts of JSON into links to internal or external pages. :include-json: trader.json { title: &quot;trader&quot;, referencesPath: &quot;references/json-references-demo.csv&quot; } trader, example-references/domain#trader transaction, example-references/domain#transaction</p>
+<p>You can turn parts of into links to internal or external pages JSON include json trader json title trader referencesPath references json references demo csv trader example references domain#trader transaction example references domain#transaction</p>
 </article>
 
 <article>
 <header><h1>Callouts</h1></header>
-<p>Use callouts parameter to attach bullet points with explanation to a json path: markdown :include-json: book-store.json { collapsedPaths: ['root.store.book'], callouts: { &quot;root.store.bicycle.color&quot;: &quot;subject of **availability**&quot;, &quot;root.store.bicycle.price&quot;: &quot;*price* changes daily&quot; }} } }</p>
+<p>Use parameter to attach bullet points with explanation to a json path callouts include json book store json collapsedPaths root store book callouts root store bicycle color subject of **availability** root store bicycle price *price* changes daily</p>
 </article>
 
 <article>
 <header><h1>Callouts From File</h1></header>
-<p>Use calloutsFile parameter to read callouts from a separate file. Can reduce duplication and allows to generate callouts at runtime. markdown :include-json: book-store.json { collapsedPaths: ['root.store.book'], calloutsFile: &quot;schema-notes.json&quot; } { &quot;root.store.bicycle.color&quot;: &quot;subject of **availability**&quot;, &quot;root.store.bicycle.price&quot;: &quot;*price* changes daily&quot; } CSV format is also supported root.store.bicycle.color, subject of **availability** root.store.bicycle.price, *price* changes daily</p>
+<p>Use parameter to read callouts from a separate file Can reduce duplication and allows to generate callouts at runtime CSV format is also supported calloutsFile include json book store json collapsedPaths root store book calloutsFile schema notes json root store bicycle color subject of **availability** root store bicycle price *price* changes daily root store bicycle color subject of **availability** root store bicycle price *price* changes daily</p>
 </article>
 
 <article>
 <header><h1>Test Results</h1></header>
-<p>Below is an example of using https://github.com/testingisdocumenting/webtau WebTau testing framework to make an HTTP call, extract JSON response and information about asserted fields to highlight. http.get(&quot;/weather&quot;) { temperature.shouldBe &lt; 100 } http.doc.capture(&quot;weather-example&quot;) http.doc.capture captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json (validated paths). markdown :include-json: weather-example/response.json { title: &quot;weather response example&quot;, highlightValueFile: &quot;weather-example/paths.json&quot; }</p>
+<p>Below is an example of using WebTau testing framework to make an HTTP call extract JSON response and information about asserted fields to highlight http get weather temperature shouldBe &lt; 100 http doc capture weather example captures multiple test artifacts into separate files request response json url txt paths json validated paths http doc capture include json weather example response json title weather response example highlightValueFile weather example paths json</p>
 </article>
 
 <article>
 <header><h1>Incomplete JSON</h1></header>
-<p>All the features above require fully formed JSON. If you need only syntax highlighting use snippets/external-code-snippets include-file plugin :include-file: incomplete.json { &quot;config&quot;: { ... } }</p>
+<p>All the features above require fully formed JSON If you need only syntax highlighting use include file plugin include file incomplete json config</p>
 </article>
 </section>
 </div>
@@ -202,6 +202,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "auto-formatting",
+      "additionalIds" : [ ],
       "title" : "Auto Formatting",
       "type" : "Section",
       "content" : [ {
@@ -247,7 +248,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "[{\"key1\": \"value1\"}, {\"key2\": \"value2\"}]",
         "autoTitle" : true,
         "title" : "simple.json",
-        "anchorId" : "auto-formatting-simple-json",
+        "anchorId" : "auto-formatting-simplejson",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -266,6 +267,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "highlight-values-by-path",
+      "additionalIds" : [ ],
       "title" : "Highlight Values By Path",
       "type" : "Section",
       "content" : [ {
@@ -362,6 +364,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "highlight-values-by-path-from-file",
+      "additionalIds" : [ ],
       "title" : "Highlight Values By Path From File",
       "type" : "Section",
       "content" : [ {
@@ -382,7 +385,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "highlightValues" : [ ],
         "highlightKeys" : [ ],
         "title" : "book-store-paths.json",
-        "anchorId" : "highlight-values-by-path-from-file-book-store-paths-json",
+        "anchorId" : "highlight-values-by-path-from-file-book-store-pathsjson",
         "type" : "Json"
       }, {
         "lang" : "",
@@ -428,6 +431,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "highlight-keys-by-path",
+      "additionalIds" : [ ],
       "title" : "Highlight Keys By Path",
       "type" : "Section",
       "content" : [ {
@@ -459,6 +463,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "highlight-keys-by-path-from-file",
+      "additionalIds" : [ ],
       "title" : "Highlight Keys By Path From File",
       "type" : "Section",
       "content" : [ {
@@ -479,7 +484,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "highlightValues" : [ ],
         "highlightKeys" : [ ],
         "title" : "book-store-paths.json",
-        "anchorId" : "highlight-keys-by-path-from-file-book-store-paths-json",
+        "anchorId" : "highlight-keys-by-path-from-file-book-store-pathsjson",
         "type" : "Json"
       }, {
         "lang" : "",
@@ -525,6 +530,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "json-subparts",
+      "additionalIds" : [ ],
       "title" : "Json Subparts",
       "type" : "Section",
       "content" : [ {
@@ -579,6 +585,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "enclose-in-object",
+      "additionalIds" : [ ],
       "title" : "Enclose In Object",
       "type" : "Section",
       "content" : [ {
@@ -622,6 +629,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "title",
+      "additionalIds" : [ ],
       "title" : "Title",
       "type" : "Section",
       "content" : [ {
@@ -693,11 +701,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "highlightValues" : [ ],
         "highlightKeys" : [ ],
         "title" : "book-store.json",
-        "anchorId" : "title-book-store-json",
+        "anchorId" : "title-book-storejson",
         "type" : "Json"
       } ]
     }, {
       "id" : "anchor",
+      "additionalIds" : [ ],
       "title" : "Anchor",
       "type" : "Section",
       "content" : [ {
@@ -744,6 +753,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "read-more",
+      "additionalIds" : [ ],
       "title" : "Read More",
       "type" : "Section",
       "content" : [ {
@@ -830,6 +840,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "hidden-parts",
+      "additionalIds" : [ ],
       "title" : "Hidden Parts",
       "type" : "Section",
       "content" : [ {
@@ -895,6 +906,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "highlights",
+      "additionalIds" : [ ],
       "title" : "Highlights",
       "type" : "Section",
       "content" : [ {
@@ -976,6 +988,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "code-references",
+      "additionalIds" : [ ],
       "title" : "Code References",
       "type" : "Section",
       "content" : [ {
@@ -1000,7 +1013,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "trader, example-references/domain#trader\ntransaction, example-references/domain#transaction",
         "autoTitle" : true,
         "title" : "references/json-references-demo.csv",
-        "anchorId" : "code-references-references-json-references-demo-csv",
+        "anchorId" : "code-references-references-json-references-democsv",
         "type" : "Snippet"
       }, {
         "title" : "trader",
@@ -1026,6 +1039,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "callouts",
+      "additionalIds" : [ ],
       "title" : "Callouts",
       "type" : "Section",
       "content" : [ {
@@ -1122,6 +1136,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "callouts-from-file",
+      "additionalIds" : [ ],
       "title" : "Callouts From File",
       "type" : "Section",
       "content" : [ {
@@ -1149,7 +1164,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "{\n  \"root.store.bicycle.color\": \"subject of **availability**\",\n  \"root.store.bicycle.price\": \"*price* changes daily\"\n}",
         "autoTitle" : true,
         "title" : "schema-notes.json",
-        "anchorId" : "callouts-from-file-schema-notes-json",
+        "anchorId" : "callouts-from-file-schema-notesjson",
         "type" : "Snippet"
       }, {
         "collapsedPaths" : [ "root.store.book" ],
@@ -1228,11 +1243,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "root.store.bicycle.color, subject of **availability**\nroot.store.bicycle.price, *price* changes daily",
         "autoTitle" : true,
         "title" : "schema-notes.csv",
-        "anchorId" : "callouts-from-file-schema-notes-csv",
+        "anchorId" : "callouts-from-file-schema-notescsv",
         "type" : "Snippet"
       } ]
     }, {
       "id" : "test-results",
+      "additionalIds" : [ ],
       "title" : "Test Results",
       "type" : "Section",
       "content" : [ {
@@ -1293,6 +1309,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "incomplete-json",
+      "additionalIds" : [ ],
       "title" : "Incomplete JSON",
       "type" : "Section",
       "content" : [ {
@@ -1323,7 +1340,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409498,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Json",

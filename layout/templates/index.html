@@ -86,17 +86,17 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Re-usable patterns</h1></header>
-<p>Let's consider a chat REST API example where we want to display a sample input, example code snippet, and sample output. Here how documentation may look like.Use to send a new message http.post(&quot;/messages&quot;, [message: &quot;Hello all&quot;]) { id.should == &quot;mid1&quot; } This is the source to render the layout above :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;POST messages&quot;, entry: &quot;postMessages&quot;, bodyOnly: true, excludeRegexp: &quot;http.doc&quot; } ```columns left: :include-json: chat-post-messages/request.json { title: &quot;POST /messages request&quot; } right: :include-json: chat-post-messages/response.json { title: &quot;POST /messages response&quot;, highlightValueFile: &quot;chat-post-messages/paths.json&quot; } ``` Note: request and response were automatically captured using synergy-with-testing/REST-API WebTau testing framework.We need to document other methods as well, and as you can imagine, the repetition will take place.</p>
+<p>Let s consider a chat REST API example where we want to display a sample input example code snippet and sample output Here how documentation may look like Use to send a new message http post messages message Hello all id should mid1 This is the source to render the layout above Note request and response were automatically captured using WebTau testing framework We need to document other methods as well and as you can imagine the repetition will take place include groovy org testingisdocumenting testing examples restapi WebTauRestAPIGroovyTest groovy title POST messages entry postMessages bodyOnly true excludeRegexp http doc ```columns left include json chat post messages request json title POST messages request right include json chat post messages response json title POST messages response highlightValueFile chat post messages paths json ```</p>
 </article>
 
 <article>
 <header><h1>Extract A Pattern</h1></header>
-<p>Let's move a block we plan to repeat into a separate file and replace hardcoding of entries like post with placeholders. Znai uses the https://freemarker.apache.org FreeMarker template engine. :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy { title: &quot;${method?upper_case} messages&quot;, entry: &quot;${method}Messages&quot;, bodyOnly: true, excludeRegexp: &quot;http.doc&quot; } ```columns left: :include-json: chat-${method}-messages/request.json { title: &quot;${method?upper_case} /messages request&quot; } right: :include-json: chat-${method}-messages/response.json { title: &quot;${method?upper_case} /messages response&quot;, highlightValueFile: &quot;chat-post-messages/paths.json&quot; } ```</p>
+<p>Let s move a block we plan to repeat into a separate file and replace hardcoding of entries like post with placeholders Znai uses the FreeMarker template engine include groovy org testingisdocumenting testing examples restapi WebTauRestAPIGroovyTest groovy title $ method upper_case messages entry $ method Messages bodyOnly true excludeRegexp http doc ```columns left include json chat $ method messages request json title $ method upper_case messages request right include json chat $ method messages response json title $ method upper_case messages response highlightValueFile chat post messages paths json ```</p>
 </article>
 
 <article>
 <header><h1>Use A Pattern</h1></header>
-<p>:include-template: templates/messages-http-call.md {method: &quot;put&quot;} http.post(&quot;/messages/mid1&quot;, [message: &quot;Hello all!&quot;]) { status.should == &quot;SUCCESS&quot; }</p>
+<p>http post messages mid1 message Hello all status should SUCCESS include template templates messages http call md method put</p>
 </article>
 </section>
 </div>
@@ -132,6 +132,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "re-usable-patterns",
+      "additionalIds" : [ ],
       "title" : "Re-usable patterns",
       "type" : "Section",
       "content" : [ {
@@ -235,6 +236,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "extract-a-pattern",
+      "additionalIds" : [ ],
       "title" : "Extract A Pattern",
       "type" : "Section",
       "content" : [ {
@@ -273,11 +275,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : ":include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"${method?upper_case} messages\",\n  entry: \"${method}Messages\",\n  bodyOnly: true,\n  excludeRegexp: \"http.doc\"\n}\n\n```columns\nleft:\n:include-json: chat-${method}-messages/request.json {\n  title: \"${method?upper_case} /messages request\"\n}\n  \nright:\n:include-json: chat-${method}-messages/response.json {\n  title: \"${method?upper_case} /messages response\",\n  highlightValueFile: \"chat-post-messages/paths.json\"\n}\n```",
         "autoTitle" : true,
         "title" : "templates/messages-http-call.md",
-        "anchorId" : "extract-a-pattern-templates-messages-http-call-md",
+        "anchorId" : "extract-a-pattern-templates-messages-http-callmd",
         "type" : "Snippet"
       } ]
     }, {
       "id" : "use-a-pattern",
+      "additionalIds" : [ ],
       "title" : "Use A Pattern",
       "type" : "Section",
       "content" : [ {
@@ -322,7 +325,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052789,
+    "lastModifiedTime" : 1727735409486,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Templates",

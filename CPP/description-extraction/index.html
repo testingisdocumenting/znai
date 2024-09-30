@@ -86,42 +86,42 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Members Comment Text</h1></header>
-<p>Use include-doxygen-doc to extract a function description namespace utils { namespace nested { /** * top **level** comment *of* important * * list one * * list two * * list three * * 1. number one * 2. number two * * @param first_param description of first *param* * 1. item a * 2. item b * @param second_param description of second param */ void my_func(int first_param, bool second_param) { } /** * specific description for single param version * @param first_param description of first *param* * 1. item a * 2. item b */ void my_func(int first_param) { } } } void free_func() { } :include-doxygen-doc: utils::nested::my_func top level comment of important list one list two list three number one number two Note: Plugin ignores parameters block and only includes the description text</p>
+<p>Use to extract a function description Note Plugin ignores parameters block and only includes the description text include doxygen doc namespace utils namespace nested ** * top **level** comment *of* important * * list one * * list two * * list three * * 1 number one * 2 number two * * @param first_param description of first *param* * 1 item a * 2 item b * @param second_param description of second param * void my_func int first_param bool second_param ** * specific description for single param version * @param first_param description of first *param* * 1 item a * 2 item b * void my_func int first_param void free_func include doxygen doc utils nested my_func top level comment of important list one list two list three number one number two</p>
 </article>
 
 <article>
 <header><h1>Member Args Selection</h1></header>
-<p>Use args param to pick an overload to use for comments extraction :include-doxygen-doc: utils::nested::my_func { title: &quot;My Params&quot;, args: &quot;int&quot; } specific description for single param version Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.</p>
+<p>Use param to pick an overload to use for comments extraction Note Args are coma and spaces sensitive Znai will print available args variants in case of mismatch for you to copy and paste args include doxygen doc utils nested my_func title My Params args int specific description for single param version</p>
 </article>
 
 <article>
 <header><h1>Classes Comment Text</h1></header>
-<p>To extract class top level comment, provide full class name namespace utils { namespace second { /** * **Domain** specific context setting. Describes business setting and requirements. * * @note Do not reveal your password. * Use alternatives: * 1. option one * 2. option two * * more context */ class MyClass { public: /// bark void bark(); }; /** * **Domain** specific context setting. Describes business setting and requirements. */ class ThirdClass { public: /// bark void bark(); }; } } :include-doxygen-doc: utils::second::MyClass Domain specific context setting. Describes business setting and requirements. Do not reveal your password. Use alternatives: option one option two more context</p>
+<p>To extract class top level comment provide full class name namespace utils namespace second ** * **Domain** specific context setting Describes business setting and requirements * * @note Do not reveal your password * Use alternatives * 1 option one * 2 option two * * more context * class MyClass public bark void bark ** * **Domain** specific context setting Describes business setting and requirements * class ThirdClass public bark void bark include doxygen doc utils second MyClass Domain specific context setting Describes business setting and requirements Do not reveal your password Use alternatives option one option two more context</p>
 </article>
 
 <article>
 <header><h1>Extract Parameters</h1></header>
-<p>Use include-doxygen-doc-params to extract parameters description from doxygen comments :include-doxygen-doc-params: utils::nested::my_func { title: &quot;My Params&quot; } first_param int description of first param item a item b second_param bool description of second param Use small: true option to make parameters smaller first_param int description of first param item a item b second_param bool description of second param</p>
+<p>Use to extract parameters description from doxygen comments Use option to make parameters smaller include doxygen doc params include doxygen doc params utils nested my_func title My Params first_param int description of first param item a item b second_param bool description of second param small true first_param int description of first param item a item b second_param bool description of second param</p>
 </article>
 
 <article>
 <header><h1>Extract Parameters By Args</h1></header>
-<p>Use args to select a specific overload by providing parameters string :include-doxygen-doc-params: utils::nested::my_func { title: &quot;My Params&quot;, args: &quot;int&quot; } first_param int description of first param item a item b</p>
+<p>Use to select a specific overload by providing parameters string args include doxygen doc params utils nested my_func title My Params args int first_param int description of first param item a item b</p>
 </article>
 
 <article>
 <header><h1>Extract Template Parameters</h1></header>
-<p>Pass type: &quot;template&quot; parameter to include-doxygen-doc-params plugin to extract template parameters /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print */ template&lt;typename T1, typename T2&gt; void multi_println(const T1&amp; v1, const T2&amp; v2) { std::cout &lt;&lt; v1 &lt;&lt; &quot;, &quot; &lt;&lt; v2 &lt;&lt; &quot;\n&quot;; } :include-doxygen-doc-params: multi_println { title: &quot;Template parameters&quot;, type: &quot;template&quot; } v1 const T1 &amp; value to print v2 const T2 &amp; value to print</p>
+<p>Pass parameter to plugin to extract template parameters type template include doxygen doc params ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * template&lt;typename T1 typename T2&gt; void multi_println const T1&amp; v1 const T2&amp; v2 std cout &lt;&lt; v1 &lt;&lt; &lt;&lt; v2 &lt;&lt; n include doxygen doc params multi_println title Template parameters type template v1 const T1 &amp; value to print v2 const T2 &amp; value to print</p>
 </article>
 
 <article>
 <header><h1>Ignore Template Parameters</h1></header>
-<p>Use doc_ignore as part of template parameter name to remove it from signature /** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @param v3 value to print * @param v4 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * @tparam T3 type of the value three to print * @tparam T4 type of the value four to print */ template&lt;typename T1, typename T2, typename T3, typename T4, typename T5_doc_ignore&gt; void long_template_func(const T1&amp; v1, const T2&amp; v2, const T3&amp; v3, const T4&amp; v4) { } markdown :include-doxygen-member: long_template_func {signatureOnly: true}</p>
+<p>Use as part of template parameter name to remove it from signature doc_ignore ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @param v3 value to print * @param v4 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * @tparam T3 type of the value three to print * @tparam T4 type of the value four to print * template&lt;typename T1 typename T2 typename T3 typename T4 typename T5_doc_ignore&gt; void long_template_func const T1&amp; v1 const T2&amp; v2 const T3&amp; v3 const T4&amp; v4 include doxygen member long_template_func signatureOnly true</p>
 </article>
 
 <article>
 <header><h1>Return Description</h1></header>
-<p>Return description is part of parameters list /** * sums two numbers * @param a number to add to * @param b number that is added * @return *sum* of **two** numbers */ int add(int a, int b); :include-doxygen-doc-params: math::add return sum of two numbers a int number to add to b int number that is added</p>
+<p>Return description is part of parameters list ** * sums two numbers * @param a number to add to * @param b number that is added * @return *sum* of **two** numbers * int add int a int b include doxygen doc params math add return sum of two numbers a int number to add to b int number that is added</p>
 </article>
 </section>
 </div>
@@ -157,6 +157,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "members-comment-text",
+      "additionalIds" : [ ],
       "title" : "Members Comment Text",
       "type" : "Section",
       "content" : [ {
@@ -175,7 +176,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace nested {\n/**\n * top **level** comment *of* important\n * * list one\n * * list two\n * * list three\n *\n * 1. number one\n * 2. number two\n *\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n * @param second_param description of second param\n */\nvoid my_func(int first_param, bool second_param) {\n}\n\n/**\n * specific description for single param version\n * @param first_param description of first *param*\n *   1. item a\n *   2. item b\n */\nvoid my_func(int first_param) {\n}\n}\n}\n\nvoid free_func() {\n}",
         "title" : "src/funcs.h",
-        "anchorId" : "members-comment-text-src-funcs-h",
+        "anchorId" : "members-comment-text-src-funcsh",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -270,6 +271,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "member-args-selection",
+      "additionalIds" : [ ],
       "title" : "Member Args Selection",
       "type" : "Section",
       "content" : [ {
@@ -309,6 +311,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "classes-comment-text",
+      "additionalIds" : [ ],
       "title" : "Classes Comment Text",
       "type" : "Section",
       "content" : [ {
@@ -321,7 +324,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "lang" : "h",
         "snippet" : "namespace utils {\nnamespace second {\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n *\n * @note Do not reveal your password.\n * Use alternatives:\n * 1. option one\n * 2. option two\n *\n * more context\n */\nclass MyClass {\npublic:\n    /// bark\n    void bark();\n};\n\n/**\n * **Domain** specific context setting. Describes business setting and requirements.\n */\nclass ThirdClass {\npublic:\n    /// bark\n    void bark();\n};\n\n}\n}",
         "title" : "src/classes.h",
-        "anchorId" : "classes-comment-text-src-classes-h",
+        "anchorId" : "classes-comment-text-src-classesh",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -382,6 +385,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "extract-parameters",
+      "additionalIds" : [ ],
       "title" : "Extract Parameters",
       "type" : "Section",
       "content" : [ {
@@ -539,6 +543,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "extract-parameters-by-args",
+      "additionalIds" : [ ],
       "title" : "Extract Parameters By Args",
       "type" : "Section",
       "content" : [ {
@@ -609,6 +614,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "extract-template-parameters",
+      "additionalIds" : [ ],
       "title" : "Extract Template Parameters",
       "type" : "Section",
       "content" : [ {
@@ -634,7 +640,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n */\ntemplate<typename T1, typename T2>\nvoid multi_println(const T1& v1, const T2& v2) {\n    std::cout << v1 << \", \" << v2 << \"\\n\";\n}",
         "title" : "source.hpp",
         "surroundedBy" : "// multi_println",
-        "anchorId" : "extract-template-parameters-source-hpp",
+        "anchorId" : "extract-template-parameters-sourcehpp",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -670,6 +676,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "ignore-template-parameters",
+      "additionalIds" : [ ],
       "title" : "Ignore Template Parameters",
       "type" : "Section",
       "content" : [ {
@@ -689,7 +696,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "/**\n * prints a value and a new line\n * @param v1 value to print\n * @param v2 value to print\n * @param v3 value to print\n * @param v4 value to print\n * @tparam T1 type of the value one to print\n * @tparam T2 type of the value two to print\n * @tparam T3 type of the value three to print\n * @tparam T4 type of the value four to print\n */\ntemplate<typename T1, typename T2, typename T3, typename T4, typename T5_doc_ignore>\nvoid long_template_func(const T1& v1, const T2& v2, const T3& v3, const T4& v4) {\n}",
         "title" : "source.hpp",
         "surroundedBy" : "// ignore_template",
-        "anchorId" : "ignore-template-parameters-source-hpp",
+        "anchorId" : "ignore-template-parameters-sourcehpp",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
@@ -771,6 +778,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "return-description",
+      "additionalIds" : [ ],
       "title" : "Return Description",
       "type" : "Section",
       "content" : [ {
@@ -784,7 +792,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "/**\n * sums two numbers\n * @param a number to add to\n * @param b number that is added\n * @return *sum* of **two** numbers\n */\nint add(int a, int b);",
         "title" : "math.h",
         "surroundedBy" : "// math-add",
-        "anchorId" : "return-description-math-h",
+        "anchorId" : "return-description-mathh",
         "type" : "Snippet"
       }, {
         "lang" : "",
@@ -850,7 +858,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1718071052785,
+    "lastModifiedTime" : 1727735409482,
     "tocItem" : {
       "chapterTitle" : "CPP",
       "pageTitle" : "Description Extraction",

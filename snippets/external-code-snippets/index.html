@@ -86,57 +86,57 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Embedding Content</h1></header>
-<p>To reduce documentation maintenance burden avoid copy and paste of code snippets. Embed content by referencing existing files using the include-file plugin instead. :include-file: file-name.js This include- syntax will appear throughout the documentation and represents a family of custom Markdown extensions. class JsClass { constructor() { usefulAction() } } export default JsClass The file will be looked up using following rules:directory with a markup file root directory of a documentation all lookup paths listed in a lookup-paths file</p>
+<p>To reduce documentation maintenance burden avoid copy and paste of code snippets Embed content by referencing existing files using the plugin instead This syntax will appear throughout the documentation and represents a family of custom Markdown extensions The file will be looked up using following rules directory with a markup file root directory of a documentation all lookup paths listed in a file include file include file file name js include class JsClass constructor usefulAction export default JsClass lookup paths</p>
 </article>
 
 <article>
 <header><h1>Syntax highlighting</h1></header>
-<p>Syntax highlighting is automatically selected based file extension. E.g. extensions .c , .h , .cpp , .hpp are treated as C++. :include-file: simple.c #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } :include-file: Hello.sc object Hello { def main(args: Array[String]) = { println(&quot;Hello, world&quot;) } } Use lang to force a different syntax highlighting :include-file: simple.c {lang: &quot;java&quot;} #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } Note: File extensions and lang are case-insensitive.</p>
+<p>Syntax highlighting is automatically selected based file extension E g extensions are treated as C Use to force a different syntax highlighting Note File extensions and are case insensitive c h cpp hpp include file simple c #include &lt;iostream&gt; using namespace std int main cout &lt;&lt; hello include file Hello sc object Hello def main args Array String println Hello world lang include file simple c lang java #include &lt;iostream&gt; using namespace std int main cout &lt;&lt; hello lang</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>:include-file: file-name.js {title: &quot;ES6 class&quot;} Use the title property to specify a title. class JsClass { constructor() { usefulAction() } } export default JsClass Use the autoTitle property to set title to be the file name. :include-file: file-name.js {autoTitle: true} class JsClass { constructor() { usefulAction() } } export default JsClass</p>
+<p>Use the property to specify a title Use the property to set to be the file name include file file name js title ES6 class title class JsClass constructor usefulAction export default JsClass autoTitle title include file file name js autoTitle true class JsClass constructor usefulAction export default JsClass</p>
 </article>
 
 <article>
 <header><h1>Anchor</h1></header>
-<p>When you specify a title, hover mouse over it to see a clickable anchor.Use anchorId to override auto generated identifier. :include-file: file-name.js {autoTitle: true, anchorId: &quot;my-code-anchor&quot;} class JsClass { constructor() { usefulAction() } } export default JsClass</p>
+<p>When you specify a title hover mouse over it to see a clickable anchor Use to override auto generated identifier anchorId include file file name js autoTitle true anchorId my code anchor class JsClass constructor usefulAction export default JsClass</p>
 </article>
 
 <article>
 <header><h1>Wide Code</h1></header>
-<p>Use the wide option to stretch wide code to occupy as much horizontal screen real estate as possible. :include-file: WideCode.java {wide: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Without the wide option code will be aligned with the rest of the text and users can use scrollbars. class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } } Note: Good placement of a Wide Code element is at the end of a page or a section to show the full version of a code sample.</p>
+<p>Use the option to stretch wide code to occupy as much horizontal screen real estate as possible Without the option code will be aligned with the rest of the text and users can use scrollbars Note Good placement of a Wide Code element is at the end of a page or a section to show the full version of a code sample wide include file WideCode java wide true class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar wide class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar</p>
 </article>
 
 <article>
 <header><h1>Wrap Code</h1></header>
-<p>Use the wrap option to enable long lines wrapping. :include-file: WideCode.java {wrap: true} class InternationalPriceService implements PriceService { private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) { ... } }</p>
+<p>Use the option to enable long lines wrapping wrap include file WideCode java wrap true class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar</p>
 </article>
 
 <article>
 <header><h1>Read More</h1></header>
-<p>If you have a file with large code snippet and you want to initially display only a small fraction use readMore option with an optional readMoreVisibleLines option to specify a number of initial lines displayed (default is 8). :include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3} public class DocScaffolding { private final Path workingDir; private Map&lt;String, List&lt;String&gt;&gt; fileNameByDirName; public DocScaffolding(Path workingDir) { this.workingDir = workingDir; this.fileNameByDirName = new LinkedHashMap&lt;&gt;(); } public void create() { createPages(); createToc(); createMeta(); createIndex(); createLookupPaths(); } private void createLookupPaths() { createFileFromResource(&quot;lookup-paths&quot;); } private void createMeta() { createFileFromResource(&quot;meta.json&quot;); } }</p>
+<p>If you have a file with large code snippet and you want to initially display only a small fraction use option with an optional option to specify a number of initial lines displayed default is 8 readMore readMoreVisibleLines include file LongFile java readMore true readMoreVisibleLines 3 public class DocScaffolding private final Path workingDir private Map&lt;String List&lt;String&gt;&gt; fileNameByDirName public DocScaffolding Path workingDir this workingDir workingDir this fileNameByDirName new LinkedHashMap&lt;&gt; public void create createPages createToc createMeta createIndex createLookupPaths private void createLookupPaths createFileFromResource lookup paths private void createMeta createFileFromResource meta json</p>
 </article>
 
 <article>
 <header><h1>Collapse</h1></header>
-<p>Use collapsed: true|false to make code snippet collapsible. Note: title option is required markdown :include-file: file-name.js {title: &quot;collapsible snippet&quot;, collapsed: true} class JsClass { constructor() { usefulAction() } } export default JsClass</p>
+<p>Use to make code snippet collapsible Note option is required collapsed true|false title include file file name js title collapsible snippet collapsed true class JsClass constructor usefulAction export default JsClass</p>
 </article>
 
 <article>
 <header><h1>No Gap</h1></header>
-<p>Use noGap: true to remove top/bottom margins when there are multiple snippets in a row. markdown :include-file: file-name.js {title: &quot;part one&quot;, noGap: true, collapsed: false} :include-file: simple.c {title: &quot;part two&quot;, collapsed: false} class JsClass { constructor() { usefulAction() } } export default JsClass #include &lt;iostream&gt; using namespace std; int main() { cout &lt;&lt; &quot;hello&quot;; } Use noGapBorder: true to add a delimiter between code snippets: markdown :include-file: ocaml/api.mli {title: &quot;Game&quot;, noGap: true, noGapBorder: true} :include-file: ocaml/api.ml module Game : sig type t end module Game = struct type t = { name: string } end</p>
+<p>Use to remove top bottom margins when there are multiple snippets in a row Use to add a delimiter between code snippets noGap true include file file name js title part one noGap true collapsed false include file simple c title part two collapsed false class JsClass constructor usefulAction export default JsClass #include &lt;iostream&gt; using namespace std int main cout &lt;&lt; hello noGapBorder true include file ocaml api mli title Game noGap true noGapBorder true include file ocaml api ml module Game sig type t end module Game struct type t name string end</p>
 </article>
 
 <article>
 <header><h1>Highlights</h1></header>
-<p>snippets/snippets-highlighting Learn More about highlighting snippets lines.</p>
+<p>Learn More about highlighting snippets lines</p>
 </article>
 
 <article>
 <header><h1>Snippets Manipulation</h1></header>
-<p>Read page on snippets/snippets-manipulation Snippets Manipulation to learn more about extracting/modifying snippets before displaying them.</p>
+<p>Read page on Snippets Manipulation to learn more about extracting modifying snippets before displaying them</p>
 </article>
 </section>
 </div>
@@ -172,6 +172,7 @@ ReactDOM.render(React.createElement(Documentation, {
     "type" : "Page",
     "content" : [ {
       "id" : "embedding-content",
+      "additionalIds" : [ ],
       "title" : "Embedding Content",
       "type" : "Section",
       "content" : [ {
@@ -259,6 +260,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "syntax-highlighting",
+      "additionalIds" : [ ],
       "title" : "Syntax highlighting",
       "type" : "Section",
       "content" : [ {
@@ -350,6 +352,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "title",
+      "additionalIds" : [ ],
       "title" : "Title",
       "type" : "Section",
       "content" : [ {
@@ -403,11 +406,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
         "autoTitle" : true,
         "title" : "file-name.js",
-        "anchorId" : "title-file-name-js",
+        "anchorId" : "title-file-namejs",
         "type" : "Snippet"
       } ]
     }, {
       "id" : "anchor",
+      "additionalIds" : [ ],
       "title" : "Anchor",
       "type" : "Section",
       "content" : [ {
@@ -443,6 +447,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "wide-code",
+      "additionalIds" : [ ],
       "title" : "Wide Code",
       "type" : "Section",
       "content" : [ {
@@ -501,6 +506,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "wrap-code",
+      "additionalIds" : [ ],
       "title" : "Wrap Code",
       "type" : "Section",
       "content" : [ {
@@ -528,6 +534,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "read-more",
+      "additionalIds" : [ ],
       "title" : "Read More",
       "type" : "Section",
       "content" : [ {
@@ -576,6 +583,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "collapse",
+      "additionalIds" : [ ],
       "title" : "Collapse",
       "type" : "Section",
       "content" : [ {
@@ -616,6 +624,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "no-gap",
+      "additionalIds" : [ ],
       "title" : "No Gap",
       "type" : "Section",
       "content" : [ {
@@ -682,6 +691,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "highlights",
+      "additionalIds" : [ ],
       "title" : "Highlights",
       "type" : "Section",
       "content" : [ {
@@ -701,6 +711,7 @@ ReactDOM.render(React.createElement(Documentation, {
       } ]
     }, {
       "id" : "snippets-manipulation",
+      "additionalIds" : [ ],
       "title" : "Snippets Manipulation",
       "type" : "Section",
       "content" : [ {
@@ -727,7 +738,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1718071052801,
+    "lastModifiedTime" : 1727735409498,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",
