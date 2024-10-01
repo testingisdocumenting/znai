@@ -91,6 +91,8 @@
     --znai-toc-panel-width: 280px;
     --znai-toc-panel-background-color: #f8fafc;
     --znai-toc-panel-border-color: #e9e9e9;
+    --znai-toc-panel-hotkey-border-color: #c5c3c3;
+
     --znai-toc-selected-text-color: var(--znai-brand-primary-color);
     --znai-toc-selected-border-color: var(--znai-brand-primary-color);
     --znai-toc-chapter-title-color: #5a6872;

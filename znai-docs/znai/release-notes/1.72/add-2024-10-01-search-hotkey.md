@@ -1,0 +1,1 @@
+* Add: [Search](flow/search) hotkey indicator

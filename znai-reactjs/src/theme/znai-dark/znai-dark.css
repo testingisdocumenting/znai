@@ -55,6 +55,7 @@
     --znai-toc-title-background-color: #272f33;
     --znai-toc-panel-background-color: #272f33;
     --znai-toc-panel-border-color: #3e3e3e;
+    --znai-toc-panel-hotkey-border-color: #3e3e3e;
     --znai-toc-selected-text-color: var(--znai-brand-primary-color);
     --znai-toc-selected-border-color: var(--znai-brand-primary-color);
     --znai-toc-chapter-title-color: #7f8284;
