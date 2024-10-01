@@ -21,6 +21,10 @@
 }
 
 .znai-toc-panel-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     font-size: 14px;
 
     background-color: var(--znai-search-box-background-color);
@@ -36,8 +40,23 @@
 .znai-toc-panel-search-icon-and-text {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .znai-toc-panel-search-icon-and-text .znai-icon {
     margin-right: 8px;
+}
+
+.znai-search-hotkey {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2px;
+
+    border: 1px var(--znai-toc-panel-hotkey-border-color) solid;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
 }

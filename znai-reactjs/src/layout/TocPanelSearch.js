@@ -25,15 +25,17 @@ class TocPanelSearch extends Component {
     render() {
         return (
             <div className="znai-toc-panel-search-area">
-                <div className="znai-toc-panel-search" onClick={this.props.onClick} title="hotkey /">
+                <div className="znai-toc-panel-search" onClick={this.props.onClick}>
                     <div className="znai-toc-panel-search-icon-and-text">
-                        <Icon id="search"/>
+                        <Icon id="search" />
                         <div>Search...</div>
                     </div>
+
+                    <div className="znai-search-hotkey">/</div>
                 </div>
             </div>
         )
     }
 }
 
-export default TocPanelSearch
+export default TocPanelSearch;
