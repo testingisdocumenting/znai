@@ -62,6 +62,18 @@ Use `title` parameter to display title bar on top of the embedded content:
   fit: true
 }
 
+# Height
+
+Use `height` to force container height. Use `maxHeight` to limit the automatically calculated height.
+
+:include-iframe: iframe/custom-tall.html {
+   title: "rendered example",
+   light: { "--color": "#333", "--backgroundColor": "#eee" },
+   dark: { "--color": "#eee", "--backgroundColor": "#333" },
+   fit: true,
+   maxHeight: 64
+}
+
 # Embedding Video
 
 Use `include-iframe` to embed media from other places. By default, aspect ratio is set to `16:9`.

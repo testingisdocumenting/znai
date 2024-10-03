@@ -33,6 +33,9 @@ export function iframeDemo(registry: Registry) {
       dark={{ "--backgroundColor": "#eee" }}
     />
   ));
+  registry.add("content max height and scroll", () => (
+    <Iframe src="/frame-content.html" title="demo title" fit={true} maxHeight={40} />
+  ));
   registry.add("default aspect", () => <Iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />);
   registry.add("4:3 aspect", () => (
     <Iframe aspectRatio="4:3" src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />

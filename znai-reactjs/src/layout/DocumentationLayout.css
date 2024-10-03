@@ -46,8 +46,8 @@
 }
 
 ::-webkit-scrollbar {
-    width: 7px;
-    height: 5px;
+    width: var(--znai-scrollbar-width);
+    height: var(--znai-scrollbar-height);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -57,7 +57,6 @@
 ::-webkit-scrollbar-track {
     background: var(--znai-scrollbar-background-color);
 }
-
 
 .znai-main-panel.mobile {
     display: block;

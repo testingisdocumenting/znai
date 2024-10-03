@@ -28,6 +28,7 @@ interface Props {
   dark?: any;
   fit?: boolean;
   height?: number;
+  maxHeight?: number;
   // changes on every page regen to force iframe reload
   previewMarker?: string;
 }
@@ -41,18 +42,19 @@ export function Iframe(props: Props) {
 }
 
 let activeElement: any = null;
-export function IframeFit({ src, title, height, light, dark, previewMarker }: Props) {
-  const ref = useRef<HTMLIFrameElement>(null);
+export function IframeFit({ src, title, height, maxHeight, light, dark, previewMarker }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [extracClassName, setExtraClassName] = useState("");
   const [calculatedIframeHeight, setCalculatedIframeHeight] = useState(14);
 
   // iframe reload on mount
   useEffect(() => {
-    if (!ref) {
+    if (!iframeRef) {
       return;
     }
 
-    ref!.current!.src += "";
+    iframeRef!.current!.src += "";
   }, [previewMarker]);
 
   // handle site theme switching
@@ -65,7 +67,8 @@ export function IframeFit({ src, title, height, light, dark, previewMarker }: Pr
     return () => window.znaiTheme.removeChangeHandler(onThemeChange);
 
     function onThemeChange() {
-      injectCssProperties(ref, dark, light);
+      injectCssProperties(iframeRef, dark, light);
+      updateScrollBarToMatch(containerRef, iframeRef);
     }
   }, [dark, light]);
 
@@ -83,26 +86,32 @@ export function IframeFit({ src, title, height, light, dark, previewMarker }: Pr
     <>
       <Container className="content-block">
         {renderedTitle}
+        <div ref={containerRef}></div>
         <iframe
           title={title}
           src={src}
-          style={{ height: height ? height : calculatedIframeHeight }}
+          style={{ height: height ? height : calculatedIframeHeight, maxHeight }}
           width="100%"
           className={fullClassName}
-          ref={ref}
-          onLoad={handleSize}
+          ref={iframeRef}
+          onLoad={onLoad}
         />
       </Container>
     </>
   );
 
+  function onLoad() {
+    handleSize();
+    updateScrollBarToMatch(containerRef, iframeRef);
+  }
+
   function handleSize() {
     setTimeout(() => {
-      const document = ref!.current!.contentWindow!.document;
+      const document = iframeRef!.current!.contentWindow!.document;
       const htmlEl = document.getElementsByTagName("html")[0];
       const height = htmlEl.offsetHeight + 1;
       // @ts-ignore
-      injectCssProperties(ref, dark, light);
+      injectCssProperties(iframeRef, dark, light);
       setCalculatedIframeHeight(height);
       setExtraClassName("visible");
       if (activeElement != null) {
@@ -114,6 +123,54 @@ export function IframeFit({ src, title, height, light, dark, previewMarker }: Pr
       }
     }, 0);
   }
+}
+
+function updateScrollBarToMatch(containerRef: any, iframeRef: any) {
+  const div = containerRef!.current;
+
+  function styleValue(varName: string) {
+    return getComputedStyle(div!).getPropertyValue("--" + varName);
+  }
+
+  const widthKey = "znai-scrollbar-width";
+  const heightKey = "znai-scrollbar-height";
+  const bgKey = "znai-scrollbar-background-color";
+  const fgKey = "znai-scrollbar-thumb-color";
+
+  const scrollbarWidth = styleValue(widthKey);
+  const scrollbarHeight = styleValue(heightKey);
+  const scrollbarBg = styleValue(bgKey);
+  const scrollbarFg = styleValue(fgKey);
+
+  const iframeDocument = iframeRef!.current!.contentWindow!.document;
+  const iframeEl = iframeDocument.documentElement;
+
+  function setStyle(varName: string, value: string) {
+    console.log("el", iframeEl, varName, value);
+    iframeEl.style.setProperty("--" + varName, value);
+  }
+
+  setStyle(widthKey, scrollbarWidth);
+  setStyle(heightKey, scrollbarHeight);
+  setStyle(bgKey, scrollbarBg);
+  setStyle(fgKey, scrollbarFg);
+
+  const style = document.createElement("style");
+  style.innerHTML = `
+::-webkit-scrollbar {
+    width: var(--znai-scrollbar-width);
+    height: var(--znai-scrollbar-height);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--znai-scrollbar-thumb-color);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--znai-scrollbar-background-color);
+}
+    `;
+  iframeDocument.head.appendChild(style);
 }
 
 function queryIsDarkTheme() {

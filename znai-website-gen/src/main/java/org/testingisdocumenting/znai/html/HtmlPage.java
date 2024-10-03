@@ -96,7 +96,7 @@ public class HtmlPage {
                 cssResources.stream().map(r -> r.generateCssLink(documentationId)).collect(joining("\n")) +
                 "\n</head>\n" +
                 "<link rel=\"shortcut icon\" href=" + favIconPath(documentationId) + "type=\"image/ico\"/>\n" +
-                "<body class=\"theme-znai-dark\">\n" +
+                "<body class=\"znai-theme theme-znai-dark\">\n" +
                 "<script>" + themeCode + "</script>\n" +
                 bodySuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
                 javaScriptResources.stream().map(r -> r.generateJavaScriptLink(documentationId)).collect(joining("\n")) + "\n" +
