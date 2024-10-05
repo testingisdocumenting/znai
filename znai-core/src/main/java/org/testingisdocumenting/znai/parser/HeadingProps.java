@@ -19,12 +19,15 @@ package org.testingisdocumenting.znai.parser;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Sections do not support bold text, images, bullet points, etc.
  * To customize headings style you can pass JSON block at the end of section text
  */
 public record HeadingProps(Map<String, ?> props) {
+    public static final String ANCHOR_ID_KEY = "customAnchorId";
+
     public static HeadingProps EMPTY = new HeadingProps(Collections.emptyMap());
     public static HeadingProps STYLE_API = new HeadingProps(Collections.singletonMap("style", "api"));
 
@@ -34,6 +37,14 @@ public record HeadingProps(Map<String, ?> props) {
         props.put("style", "api");
 
         return new HeadingProps(props);
+    }
+
+    public boolean isCustomAnchorIdSet() {
+        return props.containsKey(ANCHOR_ID_KEY);
+    }
+
+    public String getAnchorId() {
+        return Objects.toString(props.get(ANCHOR_ID_KEY));
     }
 
     @Override

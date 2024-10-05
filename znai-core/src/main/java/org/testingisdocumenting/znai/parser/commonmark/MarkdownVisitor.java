@@ -327,20 +327,38 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     private record HeadingTextAndProps(String text, HeadingProps props) {
         public static HeadingTextAndProps extractTextAndProps(String text) {
-                int startOfCurlyIdx = text.indexOf('{');
-                if (startOfCurlyIdx == -1) {
-                    return new HeadingTextAndProps(text, HeadingProps.EMPTY);
-                }
+            int startOfCurlyIdx = text.indexOf('{');
+            int endOfCurlyIdx = text.lastIndexOf('}');
+            if (startOfCurlyIdx == -1 || endOfCurlyIdx == -1) {
+                return new HeadingTextAndProps(text, HeadingProps.EMPTY);
+            }
 
-                try {
-                    String jsonStart = text.substring(startOfCurlyIdx);
+            String json = text.substring(startOfCurlyIdx);
+            // empty braces
+            if (json.length() < 3) {
+                return new HeadingTextAndProps(text, HeadingProps.EMPTY);
+            }
 
-                    Map<String, ?> props = JsonUtils.deserializeAsMap(jsonStart);
-                    String headingTextOnly = text.substring(0, startOfCurlyIdx);
-                    return new HeadingTextAndProps(headingTextOnly, new HeadingProps(props));
-                } catch (JsonParseException e) {
-                    throw new RuntimeException("Can't parse props of heading: " + text, e);
-                }
+            Map<String, ?> props = json.charAt(1) == '#' ?
+                    parseCustomAnchorId(json):
+                    parseJson(json);
+
+            String headingTextOnly = text.substring(0, startOfCurlyIdx);
+            return new HeadingTextAndProps(headingTextOnly, new HeadingProps(props));
+        }
+
+        private static Map<String, ?> parseCustomAnchorId(String anchorExpression) {
+            int endOfCurlyIdx = anchorExpression.lastIndexOf('}');
+            var anchorId = anchorExpression.substring(2, endOfCurlyIdx);
+            return Collections.singletonMap(HeadingProps.ANCHOR_ID_KEY, anchorId);
+        }
+
+        private static Map<String, ?> parseJson(String json) {
+            try {
+                return JsonUtils.deserializeAsMap(json);
+            } catch (JsonParseException e) {
+                throw new RuntimeException("Can't parse props of heading: " + json, e);
             }
         }
+    }
 }

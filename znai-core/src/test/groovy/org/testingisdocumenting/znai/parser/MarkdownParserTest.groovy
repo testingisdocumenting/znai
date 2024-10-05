@@ -134,6 +134,15 @@ class MarkdownParserTest {
     }
 
     @Test
+    void "header custom anchor"() {
+        parse('# my header {#my-id}')
+        content.should == [[title: 'my header' , id: 'my-id', customAnchorId: 'my-id', additionalIds: [], type: 'Section']]
+
+        parse('### nested header {#another-id}')
+        content.should == [[title: 'nested header' , id: 'another-id', customAnchorId: 'another-id', additionalIds: [], type: 'SubHeading', level: 3]]
+    }
+
+    @Test
     void "bullet list"() {
         parse("""* entry
 * another entry
