@@ -135,7 +135,7 @@
         <maven.compiler.release>17</maven.compiler.release>
         <groovy.version>3.0.15</groovy.version>
         <vertx.io.version>3.9.4</vertx.io.version>
-        <commonmark.version>0.17.0</commonmark.version>
+        <commonmark.version>0.23.0</commonmark.version>
         <antlr.version>4.5</antlr.version>
         <jackson.version>2.16.0</jackson.version>
         <webtau.version>2.2</webtau.version>
@@ -295,25 +295,31 @@
             </dependency>
 
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
+                <groupId>org.commonmark</groupId>
                 <artifactId>commonmark</artifactId>
                 <version>${commonmark.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
+                <groupId>org.commonmark</groupId>
+                <artifactId>commonmark-java</artifactId>
+                <version>${commonmark.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.commonmark</groupId>
                 <artifactId>commonmark-ext-gfm-tables</artifactId>
                 <version>${commonmark.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
+                <groupId>org.commonmark</groupId>
                 <artifactId>commonmark-ext-yaml-front-matter</artifactId>
                 <version>${commonmark.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
+                <groupId>org.commonmark</groupId>
                 <artifactId>commonmark-ext-gfm-strikethrough</artifactId>
                 <version>${commonmark.version}</version>
             </dependency>
