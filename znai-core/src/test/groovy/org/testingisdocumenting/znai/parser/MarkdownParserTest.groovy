@@ -17,6 +17,7 @@
 
 package org.testingisdocumenting.znai.parser
 
+import org.testingisdocumenting.webtau.WebTauCore
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
@@ -442,6 +443,17 @@ world""")
                 "  opts: {\"p1\":\"v1\",\"throw\":\"process error\"}\n" +
                 "\n" +
                 "process error\n")
+    }
+
+    @Test
+    void "inline latext formulas with dollar"() {
+        parse('hello $a=2$ world')
+        content.should ==   [
+                [ "type": "Paragraph", "content": [
+                        ["text": "hello ", "type": "SimpleText"],
+                        ["latex": "a=2", "type": "InlinedLatex"],
+                        ["text": " world", "type": "SimpleText"]
+                        ] ] ]
     }
 
     @Test

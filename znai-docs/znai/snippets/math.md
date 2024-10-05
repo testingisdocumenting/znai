@@ -39,6 +39,12 @@ The result will be a following math expression.
 
 It holds that `:latex: {src: "\\frac{1}{2} < \\sqrt{2}"}`.
 
+Alternatively you can surround latex expression with `$`.
+
+    It holds that $\frac{1}{2} < \sqrt{2}$
+
+It holds that $\frac{1}{2} < \sqrt{2}$
+
 # Presentation Mode
 
 In presentation mode, rendered expressions will automatically scale to make use of the screen space.

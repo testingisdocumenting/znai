@@ -25,11 +25,12 @@ import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import java.nio.file.Path;
 
 public class LatexInlinedCodePlugin implements InlinedCodePlugin {
-    private String latex;
+    public static final String ID = "latex";
+    public static final String SRC_KEY = "src";
 
     @Override
     public String id() {
-        return "latex";
+        return ID;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class LatexInlinedCodePlugin implements InlinedCodePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        latex = pluginParams.getOpts().getRequiredString("src");
+        String latex = pluginParams.getOpts().getRequiredString(SRC_KEY);
         return PluginResult.docElement(new DocElement("InlinedLatex", "latex", latex));
     }
 }
