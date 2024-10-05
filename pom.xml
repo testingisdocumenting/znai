@@ -144,7 +144,7 @@
         <ant-compress.version>1.5</ant-compress.version>
         <jsoup.version>1.15.3</jsoup.version>
         <freemarker.version>2.3.30</freemarker.version>
-        <commons-io.version>2.7</commons-io.version>
+        <commons-io.version>2.14.0</commons-io.version>
         <commons-cli.version>1.4</commons-cli.version>
         <commons-csv.version>1.8</commons-csv.version>
         <commons-compress.version>1.21</commons-compress.version>
