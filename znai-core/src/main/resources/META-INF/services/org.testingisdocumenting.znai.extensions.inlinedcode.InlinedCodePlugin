@@ -17,3 +17,4 @@
 org.testingisdocumenting.znai.extensions.file.FileInlinedCodePlugin
 org.testingisdocumenting.znai.extensions.inlinedcode.IdentifierInlinedCodePlugin
 org.testingisdocumenting.znai.extensions.textbadge.TextBadgeInlinedCodePlugin
+org.testingisdocumenting.znai.extensions.latex.LatexInlinedCodePlugin

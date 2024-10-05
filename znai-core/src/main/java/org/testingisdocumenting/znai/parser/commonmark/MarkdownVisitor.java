@@ -22,9 +22,11 @@ import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
+import org.testingisdocumenting.znai.extensions.latex.LatexInlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.include.IncludeBlock;
+import org.testingisdocumenting.znai.parser.commonmark.include.LatexDollarInline;
 import org.testingisdocumenting.znai.parser.table.GfmTableToTableConverter;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
@@ -167,6 +169,10 @@ public class MarkdownVisitor extends AbstractVisitor {
             parserHandler.onStrikeThroughStart();
             visitChildren(customNode);
             parserHandler.onStrikeThroughEnd();
+        } else if (customNode instanceof LatexDollarInline dollarInline) {
+            handleInlineCodePlugin(componentsRegistry.pluginParamsFactory().create(LatexInlinedCodePlugin.ID,
+                    "",
+                    Collections.singletonMap(LatexInlinedCodePlugin.SRC_KEY, dollarInline.getLiteral())));
         } else {
             super.visit(customNode);
         }
