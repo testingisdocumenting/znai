@@ -141,7 +141,9 @@ public class DocElementCreationParserHandler implements ParserHandler {
         DocStructure docStructure = componentsRegistry.docStructure();
         docStructure.onSectionOrSubHeading(path, level, idByTitle);
 
-        var ids = docStructure.generateUniqueAnchors(path, "");
+        var ids = headingProps.isCustomAnchorIdSet() ?
+                new AnchorIds(headingProps.getAnchorId(), Collections.emptyList()):
+                docStructure.generateUniqueAnchors(path, "");
         docStructure.registerLocalAnchors(path, ids);
 
         Map<String, Object> props = new LinkedHashMap<>(headingPropsMap);

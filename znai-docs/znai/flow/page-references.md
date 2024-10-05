@@ -46,6 +46,7 @@ Clicking this [index page](/) link will have the same effect as clicking the doc
 
 To refer back to the top-level `index` page use:   
 
+
 ```markdown
 [index page](/)
 [index page](/#link-to-subsection)
@@ -59,6 +60,16 @@ Clicking the link will open a file using the browser's default method.
     Download [test json file](data/test.json)
     
 Download [test json file](data/test.json)
+
+# Custom Anchor Id
+
+Use `{#anchori-id}` after section title to set a custom anchor:
+
+```markdown
+## Section With Custom Anchor {#my-custom-id}
+```
+
+## Section With Custom Anchor {#my-custom-id}
 
 # Validation
 

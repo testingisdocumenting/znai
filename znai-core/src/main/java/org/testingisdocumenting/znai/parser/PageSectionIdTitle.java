@@ -19,9 +19,10 @@ package org.testingisdocumenting.znai.parser;
 
 import org.testingisdocumenting.znai.utils.NameUtils;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static org.testingisdocumenting.znai.parser.HeadingProps.ANCHOR_ID_KEY;
 
 public class PageSectionIdTitle {
     private final String title;
@@ -30,7 +31,7 @@ public class PageSectionIdTitle {
 
     public PageSectionIdTitle(String title, Map<String, ?> headingProps) {
         this.title = title;
-        this.id = NameUtils.idFromTitle(title);
+        this.id = buildOrGetId(title, headingProps);
         this.headingProps = headingProps;
     }
 
@@ -53,5 +54,10 @@ public class PageSectionIdTitle {
         result.putAll(getHeadingProps());
 
         return result;
+    }
+
+    private static String buildOrGetId(String title, Map<String, ?> headingProps) {
+        Object anchorId = headingProps.get(ANCHOR_ID_KEY);
+        return anchorId == null ? NameUtils.idFromTitle(title) : anchorId.toString();
     }
 }
