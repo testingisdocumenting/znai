@@ -16,10 +16,7 @@
 
 package org.testingisdocumenting.znai.parser.commonmark.include;
 
-import org.commonmark.parser.beta.InlineContentParser;
-import org.commonmark.parser.beta.InlineContentParserFactory;
-import org.commonmark.parser.beta.InlineParserState;
-import org.commonmark.parser.beta.ParsedInline;
+import org.commonmark.parser.beta.*;
 
 import java.util.Set;
 
@@ -30,14 +27,30 @@ public class LatexDollarInlineParser implements InlineContentParser {
         scanner.next();
         var pos = scanner.position();
 
-        var end = scanner.find('$');
-        if (end == -1) {
+        int numberOfWhiteSpaces = scanner.whitespace();
+        if (numberOfWhiteSpaces > 0) {
             return ParsedInline.none();
         }
-        
-        var content = scanner.getSource(pos, scanner.position()).getContent();
-        scanner.next();
-        return ParsedInline.of(new LatexDollarInline(content), scanner.position());
+
+        for (;;) {
+            var prevChar = scanner.peek();
+            if (prevChar == Scanner.END) {
+                break;
+            }
+
+            var whitespaceCount = scanner.whitespace();
+            var currChar = scanner.peek();
+
+            if (currChar == '$' && whitespaceCount == 0) {
+                var content = scanner.getSource(pos, scanner.position()).getContent();
+                scanner.next();
+                return ParsedInline.of(new LatexDollarInline(content), scanner.position());
+            } else {
+                scanner.next();
+            }
+        }
+
+        return ParsedInline.none();
     }
 
     static public class Factory implements InlineContentParserFactory {
