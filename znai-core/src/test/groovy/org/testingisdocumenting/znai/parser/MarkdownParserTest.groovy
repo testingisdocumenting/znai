@@ -457,6 +457,27 @@ world""")
     }
 
     @Test
+    void "normal dollar signs in a text"() {
+        parse('hello $2 and $3 prices')
+
+        content.should ==   [
+                [ "type": "Paragraph", "content": [
+                        ["text": 'hello $2 and $3 prices', "type": "SimpleText"],
+                ] ] ]
+    }
+
+    @Test
+    void "do not trigger inline latex if space after dollar sign"() {
+        parse('hello $ *2* and 3$ prices')
+
+        content.should ==  [ [ "type": "Paragraph",
+                    "content": [
+                        ["text": 'hello $ ', "type": "SimpleText"],
+                        ["type": "Emphasis", "content": [["text": "2", "type": "SimpleText"]]],
+                        ["text": ' and 3$ prices', "type": "SimpleText"] ] ] ]
+    }
+
+    @Test
     void "custom page data"() {
         parse("---\ntitle: custom title\n" +
 "description: \"quoted \\\"inside\\\" text\"\n---")
