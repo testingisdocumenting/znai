@@ -1,0 +1,1 @@
+* Add: [Latex Math](snippets/math) block `$$` shortcut support

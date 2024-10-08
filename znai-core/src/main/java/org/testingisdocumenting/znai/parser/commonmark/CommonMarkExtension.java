@@ -17,10 +17,10 @@
 package org.testingisdocumenting.znai.parser.commonmark;
 
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
+import org.testingisdocumenting.znai.extensions.latex.LatexDollarParser;
 import org.testingisdocumenting.znai.parser.commonmark.include.IncludeBlockParser;
 import org.commonmark.parser.Parser.Builder;
 import org.commonmark.parser.Parser.ParserExtension;
-import org.testingisdocumenting.znai.parser.commonmark.include.LatexDollarInlineParser;
 
 public class CommonMarkExtension implements ParserExtension {
     private final PluginParamsFactory pluginParamsFactory;
@@ -32,6 +32,6 @@ public class CommonMarkExtension implements ParserExtension {
     @Override
     public void extend(final Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new IncludeBlockParser.Factory(pluginParamsFactory))
-                .customInlineContentParserFactory(new LatexDollarInlineParser.Factory()).build();
+                .customInlineContentParserFactory(new LatexDollarParser.Factory()).build();
     }
 }

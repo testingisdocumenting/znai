@@ -26,6 +26,7 @@ import java.nio.file.Paths
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
+import static org.testingisdocumenting.webtau.WebTauCore.trace
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownParserTest {
@@ -475,6 +476,18 @@ world""")
                         ["text": 'hello $ ', "type": "SimpleText"],
                         ["type": "Emphasis", "content": [["text": "2", "type": "SimpleText"]]],
                         ["text": ' and 3$ prices', "type": "SimpleText"] ] ] ]
+    }
+
+    @Test
+    void "latex block with double dollar"() {
+        parse('some $$a=2$$ math expression')
+
+        content.should ==   [
+                [ "type": "Paragraph", "content": [
+                        ["text": "some ", "type": "SimpleText"],
+                        ["latex": "a=2", "type": "Latex"],
+                        ["text": " math expression", "type": "SimpleText"]
+                ] ] ]
     }
 
     @Test

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.latexmath;
+package org.testingisdocumenting.znai.extensions.latex;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
@@ -27,11 +28,13 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 public class LatexFencePlugin implements FencePlugin {
+    public static final String ID = "latex";
+
     private String content;
 
     @Override
     public String id() {
-        return "latex";
+        return ID;
     }
 
     @Override
