@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.parser.commonmark.include;
+package org.testingisdocumenting.znai.extensions.latex;
 
 import org.commonmark.node.CustomNode;
 

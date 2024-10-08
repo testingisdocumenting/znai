@@ -29,6 +29,16 @@ x &\text{if } z
 \end{cases}
 ```
 
+Alternatively surround a match expression with double dollar `$$` sign to render it into a latex block.
+
+```markdown
+Given: 
+$$x=y$$ and $$y=z$$
+```
+
+Given:
+$$x=y$$ and $$y=z$$
+
 # LaTeX Inline
 
 Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly.
