@@ -17,7 +17,6 @@
 
 package org.testingisdocumenting.znai.parser
 
-import org.testingisdocumenting.webtau.WebTauCore
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 

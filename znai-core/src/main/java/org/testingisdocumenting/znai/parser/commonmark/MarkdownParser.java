@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
+import org.commonmark.ext.footnotes.FootnotesExtension;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
@@ -113,6 +114,7 @@ public class MarkdownParser implements MarkupParser {
         return Parser.builder().extensions(Arrays.asList(extension,
                 TablesExtension.create(),
                 StrikethroughExtension.create(),
+                FootnotesExtension.create(),
                 YamlFrontMatterExtension.create())).build();
     }
 
