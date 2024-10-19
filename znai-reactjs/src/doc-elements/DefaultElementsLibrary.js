@@ -87,6 +87,7 @@ import { PythonMethod } from "./python/PythonMethod";
 import { ApiLinkedTextBlock } from "./api/ApiLinkedTextBlock";
 import { OpenApiMethodAndUrl } from "./open-api/OpenApiMethodAndUrl";
 import { Card } from "./card/Card";
+import {FootnoteReference} from "./footnote/FootnoteReference";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -173,6 +174,8 @@ presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 library.AnnotatedImageWithOrderedList = AnnotatedImageWithOrderedList
 
 library.Card = Card;
+
+library.FootnoteReference = FootnoteReference;
 
 library.Tabs = Tabs
 presentationElementHandlers.Tabs = presentationTabsHandler

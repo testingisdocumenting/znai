@@ -17,7 +17,7 @@
 
 package org.testingisdocumenting.znai.parser
 
-import org.testingisdocumenting.webtau.WebTauCore
+import org.testingisdocumenting.znai.extensions.PropsUtils
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
@@ -492,6 +492,36 @@ world""")
         code {
             parse("`:dummy: user-param {param8: 'v1'}`")
         } should throwException(~/unrecognized parameter\(s\): param8/)
+    }
+
+    @Test
+    void "footnotes"() {
+        parse("""
+Main text [^1]
+
+[^1]: additional text footnote
+    more text here
+    ```
+    code block
+    ```
+    
+after footnote
+""")
+
+        def content = PropsUtils.exerciseSuppliers(content)
+        content.should == [
+                [ "type": "Paragraph",
+                  "content": [
+                          ["text": "Main text ", "type": "SimpleText"],
+                          ["label": "1", "content": [ [ "type": "Paragraph", "content": [
+                                  ["text": "additional text footnote", "type": "SimpleText"],
+                                  ["type": "SoftLineBreak"],
+                                  ["text": "more text here", "type": "SimpleText"] ] ],
+                                         [ "lang": "", "snippet":"code block\n", "lineNumber": "", "type": "Snippet" ] ],
+                            "type": "FootnoteReference" ] ]
+                ],
+                ["type": "Paragraph", "content": [["text": "after footnote", "type": "SimpleText"]]]
+        ]
     }
 
     @Test

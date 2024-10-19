@@ -22,6 +22,10 @@
     position: fixed;
     transform: translate(-50%, -100%);
 
+    z-index: 1000;
+}
+
+.znai-tooltip-default-style {
     font-size: var(--znai-smaller-text-size);
 
     color: var(--znai-tooltip-text-color);
@@ -30,8 +34,6 @@
     padding: 2px 8px;
     border: 1px solid var(--znai-tooltip-border-color);
     border-radius: 6px;
-
-    z-index: 1000;
 }
 
 .znai-tooltip.bottom-right,
@@ -41,4 +43,8 @@
 
 .znai-tooltip.center {
     transform: translate(-50%, -50%);
+}
+
+.znai-tooltip.parent-content-block {
+    transform: translate(0, 0);
 }

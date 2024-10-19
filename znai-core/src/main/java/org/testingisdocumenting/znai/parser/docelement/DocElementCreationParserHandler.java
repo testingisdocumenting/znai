@@ -27,6 +27,8 @@ import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
 import org.testingisdocumenting.znai.extensions.file.SnippetContentProvider;
 import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
+import org.testingisdocumenting.znai.extensions.footnote.FootnoteId;
+import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
@@ -44,6 +46,7 @@ import org.testingisdocumenting.znai.utils.UrlUtils;
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Supplier;
 
 public class DocElementCreationParserHandler implements ParserHandler {
     private final ComponentsRegistry componentsRegistry;
@@ -57,6 +60,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private final DocElement docElement;
     private final Deque<DocElement> elementsStack;
 
+    private final Map<FootnoteId, ParsedFootnote> parsedFootnotes;
     private String currentSectionTitle;
 
     private boolean isSectionStarted;
@@ -68,6 +72,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
         this.auxiliaryFiles = new ArrayList<>();
 
         this.globalAnchorIds = new ArrayList<>();
+
+        this.parsedFootnotes = new HashMap<>();
 
         this.docElement = new DocElement(DocElementType.PAGE);
         this.elementsStack = new ArrayDeque<>();
@@ -207,6 +213,18 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onTable(MarkupTableData tableData) {
         append(new DocElement(DocElementType.TABLE, "table", tableData.toMap()));
+    }
+
+    @Override
+    public void onFootnoteDefinition(ParsedFootnote footnote) {
+        parsedFootnotes.put(footnote.id(), footnote);
+    }
+
+    @Override
+    public void onFootnoteReference(FootnoteId footnoteId) {
+        append(new DocElement( "FootnoteReference",
+                "label", footnoteId.id(),
+                "content", (Supplier<?>) (() -> footnoteContent(footnoteId))));
     }
 
     @Override
@@ -529,6 +547,15 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private void addAnchorIdsToProps(Map<String, Object> props, AnchorIds ids) {
         props.put("id", ids.main());
         props.put("additionalIds", ids.additional());
+    }
+
+    private List<Map<String, Object>> footnoteContent(FootnoteId footnoteId) {
+        ParsedFootnote parsedFootnote = parsedFootnotes.get(footnoteId);
+        if (parsedFootnote == null) {
+            throw new IllegalArgumentException("can't find footnote with id <" + footnoteId + ">");
+        }
+
+        return parsedFootnote.docElement().contentToListOfMaps();
     }
 }
 

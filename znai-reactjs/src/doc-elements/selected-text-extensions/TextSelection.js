@@ -44,7 +44,7 @@ export class TextSelection {
     }
 
     get selectedPageSectionId() {
-        return this.selectionSectionInfo.pageSectionId
+        return this.selectionSectionInfo?.pageSectionId
     }
 
     clear() {
