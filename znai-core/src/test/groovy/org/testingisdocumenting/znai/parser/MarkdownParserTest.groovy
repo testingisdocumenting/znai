@@ -513,7 +513,7 @@ after footnote
                 [ "type": "Paragraph",
                   "content": [
                           ["text": "Main text ", "type": "SimpleText"],
-                          [ "content": [ [ "type": "Paragraph", "content": [
+                          ["label": "1", "content": [ [ "type": "Paragraph", "content": [
                                   ["text": "additional text footnote", "type": "SimpleText"],
                                   ["type": "SoftLineBreak"],
                                   ["text": "more text here", "type": "SimpleText"] ] ],
