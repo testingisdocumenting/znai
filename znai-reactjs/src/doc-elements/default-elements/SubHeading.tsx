@@ -28,7 +28,7 @@ import "./HeadingStyles.css";
 interface Props {
   level: number;
   id: string;
-  additionalIds: string[];
+  additionalIds?: string[];
   title: string;
   badge?: string;
   style?: string;
@@ -46,7 +46,7 @@ export function SubHeading({ level, title, id, additionalIds, badge, style }: Pr
       <a href={"#" + id}>
         <Icon id="link" />
       </a>
-      {additionalIds.map((id) => (
+      {(additionalIds || []).map((id) => (
         <span id={id} />
       ))}
     </Element>

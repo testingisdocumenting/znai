@@ -38,30 +38,35 @@ function headingDemo() {
                 "type": "SubHeading",
                 "title": "Sub-Section Heading",
                 "id": "sub-section-heading",
+                "additionalIds": []
             },
             {
                 "level": 3,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Section Heading",
                 "id": "sub-sub-section-heading",
+                "additionalIds": []
             },
             {
                 "level": 4,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Section Heading",
                 "id": "sub-sub-sub-section-heading",
+                "additionalIds": []
             },
             {
                 "level": 5,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Sub-Section Heading",
                 "id": "sub-sub-sub-sub-section-heading",
+                "additionalIds": []
             },
             {
                 "level": 6,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
-                "id": "sub-sub-sub-sub-sub-section-heading"
+                "id": "sub-sub-sub-sub-sub-section-heading",
+                "additionalIds": []
             }
         ]
     }
@@ -79,12 +84,14 @@ function headingDemoWithBadge() {
                 "type": "SubHeading",
                 "title": "Sub-Section Heading",
                 "id": "sub-section-heading",
+                "additionalIds": [],
                 "badge": "v2.38"
             },
             {
                 "level": 3,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Section Heading",
+                "additionalIds": [],
                 "id": "sub-sub-section-heading",
             },
             {
@@ -92,18 +99,21 @@ function headingDemoWithBadge() {
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Section Heading",
                 "id": "sub-sub-sub-section-heading",
+                "additionalIds": [],
                 "badge": "v2.38"
             },
             {
                 "level": 5,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Sub-Section Heading",
+                "additionalIds": [],
                 "id": "sub-sub-sub-sub-section-heading",
             },
             {
                 "level": 6,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
+                "additionalIds": [],
                 "id": "sub-sub-sub-sub-sub-section-heading"
             }
         ]
@@ -122,6 +132,7 @@ function headingDemoTypes() {
                 "type": "SubHeading",
                 "title": "Sub-Section Heading",
                 "id": "sub-section-heading",
+                "additionalIds": [],
                 "style": "api"
             },
             {
@@ -129,6 +140,7 @@ function headingDemoTypes() {
                 "type": "SubHeading",
                 "title": "Sub-Sub-Section Heading",
                 "id": "sub-sub-section-heading",
+                "additionalIds": [],
                 "style": "api"
             },
             {
@@ -136,6 +148,7 @@ function headingDemoTypes() {
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Section Heading",
                 "id": "sub-sub-sub-section-heading",
+                "additionalIds": [],
                 "style": "api"
             },
             {
@@ -143,6 +156,7 @@ function headingDemoTypes() {
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Sub-Section Heading",
                 "id": "sub-sub-sub-sub-section-heading",
+                "additionalIds": [],
                 "style": "api"
             },
             {
@@ -150,6 +164,7 @@ function headingDemoTypes() {
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
                 "id": "sub-sub-sub-sub-sub-section-heading",
+                "additionalIds": [],
                 "style": "api"
             }
         ]
@@ -160,6 +175,7 @@ function headingTextDemo() {
     return {
         "title": "Section Heading",
         "id": "section-heading",
+        "additionalIds": [],
         "type": "Section",
         "content": [
             {
@@ -235,6 +251,7 @@ function headingTextDemo() {
                 "type": "SubHeading",
                 "title": "Sub-Sub-Section Heading",
                 "id": "sub-sub-section-heading",
+                "additionalIds": [],
             },
             {
                 "type": "Paragraph",
@@ -253,7 +270,8 @@ function headingTextDemo() {
                 "level": 4,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Section Heading",
-                "id": "sub-sub-sub-section-heading"
+                "id": "sub-sub-sub-section-heading",
+                "additionalIds": [],
             },
             {
                 "type": "Paragraph",
@@ -268,7 +286,8 @@ function headingTextDemo() {
                 "level": 5,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Sub-Section Heading",
-                "id": "sub-sub-sub-sub-section-heading"
+                "id": "sub-sub-sub-sub-section-heading",
+                "additionalIds": [],
             },
             {
                 "type": "Paragraph",
@@ -283,7 +302,8 @@ function headingTextDemo() {
                 "level": 6,
                 "type": "SubHeading",
                 "title": "Sub-Sub-Sub-Sub-Sub-Section Heading",
-                "id": "sub-sub-sub-sub-sub-section-heading"
+                "id": "sub-sub-sub-sub-sub-section-heading",
+                "additionalIds": [],
             },
             {
                 "type": "Paragraph",

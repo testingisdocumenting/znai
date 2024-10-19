@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.search;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.NoOpParserHandler;
@@ -64,6 +65,11 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     @Override
     public void onTable(MarkupTableData tableData) {
         addStandardWithSpaceSeparator(tableData.allText());
+    }
+
+    @Override
+    public void onFootnoteDefinition(ParsedFootnote footnote) {
+        addStandardWithSpaceSeparator(footnote.allText());
     }
 
     @Override

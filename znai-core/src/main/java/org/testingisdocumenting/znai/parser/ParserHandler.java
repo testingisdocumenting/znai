@@ -20,6 +20,8 @@ package org.testingisdocumenting.znai.parser;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.extensions.footnote.FootnoteId;
+import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
@@ -55,6 +57,8 @@ public interface ParserHandler {
     void onListItemStart();
     void onListItemEnd();
     void onTable(MarkupTableData tableData);
+    void onFootnoteDefinition(ParsedFootnote footnote);
+    void onFootnoteReference(FootnoteId footnoteId);
     void onEmphasisStart();
     void onEmphasisEnd();
     void onStrongEmphasisStart();

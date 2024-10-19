@@ -20,6 +20,8 @@ package org.testingisdocumenting.znai.parser;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.extensions.footnote.FootnoteId;
+import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
@@ -106,6 +108,16 @@ public class ParserHandlersList implements ParserHandler {
     @Override
     public void onTable(MarkupTableData tableData) {
         list.forEach(h -> h.onTable(tableData));
+    }
+
+    @Override
+    public void onFootnoteDefinition(ParsedFootnote footnote) {
+        list.forEach(h -> h.onFootnoteDefinition(footnote));
+    }
+
+    @Override
+    public void onFootnoteReference(FootnoteId footnoteId) {
+        list.forEach(h -> h.onFootnoteReference(footnoteId));
     }
 
     @Override

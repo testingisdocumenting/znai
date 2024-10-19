@@ -1,0 +1,1 @@
+* Add: Initial [Footnotes](flow/footnotes) support

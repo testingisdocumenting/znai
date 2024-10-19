@@ -20,6 +20,8 @@ package org.testingisdocumenting.znai.parser;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.extensions.footnote.FootnoteId;
+import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
@@ -84,6 +86,14 @@ public class NoOpParserHandler implements ParserHandler {
 
     @Override
     public void onTable(MarkupTableData tableData) {
+    }
+
+    @Override
+    public void onFootnoteDefinition(ParsedFootnote parsed) {
+    }
+
+    @Override
+    public void onFootnoteReference(FootnoteId footnoteId) {
     }
 
     @Override
