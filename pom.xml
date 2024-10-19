@@ -103,7 +103,6 @@
         <module>znai-core</module>
         <module>znai-enterprise</module>
         <module>znai-charts</module>
-        <module>znai-latex</module>
         <module>znai-java</module>
         <module>znai-groovy</module>
         <module>znai-cpp</module>
