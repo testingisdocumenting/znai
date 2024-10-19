@@ -48,12 +48,6 @@
 
         <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
-            <artifactId>znai-latex</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-python</artifactId>
             <version>${project.version}</version>
         </dependency>
