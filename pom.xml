@@ -324,6 +324,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.commonmark</groupId>
+                <artifactId>commonmark-ext-footnotes</artifactId>
+                <version>${commonmark.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.github.javaparser</groupId>
                 <artifactId>javaparser-core</artifactId>
                 <version>${javaparser-core.version}</version>

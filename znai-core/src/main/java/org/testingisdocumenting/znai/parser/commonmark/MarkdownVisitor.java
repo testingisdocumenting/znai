@@ -17,9 +17,13 @@
 
 package org.testingisdocumenting.znai.parser.commonmark;
 
+import org.commonmark.ext.footnotes.FootnoteDefinition;
+import org.commonmark.ext.footnotes.FootnoteReference;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.extensions.footnote.FootnoteId;
+import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.extensions.latex.LatexDollarBlock;
@@ -160,6 +164,9 @@ public class MarkdownVisitor extends AbstractVisitor {
         } else if (customBlock instanceof TableBlock) {
             GfmTableToTableConverter gfmTableToTableConverter = new GfmTableToTableConverter(componentsRegistry, path, (TableBlock) customBlock);
             parserHandler.onTable(gfmTableToTableConverter.convert());
+        } else if (customBlock instanceof FootnoteDefinition footnote) {
+            ParsedFootnote parsed = ParsedFootnote.parse(componentsRegistry, path, footnote);
+            parserHandler.onFootnoteDefinition(parsed);
         } else {
             throw new UnsupportedOperationException("unsupported custom block: " + customBlock);
         }
@@ -178,6 +185,8 @@ public class MarkdownVisitor extends AbstractVisitor {
         } else if (customNode instanceof LatexDollarBlock dollarBlock) {
             handleFencePlugin(componentsRegistry.pluginParamsFactory().create(LatexFencePlugin.ID,
                     "", Collections.emptyMap()), dollarBlock.getLiteral());
+        } else if (customNode instanceof FootnoteReference reference) {
+            parserHandler.onFootnoteReference(new FootnoteId(reference.getLabel()));
         } else {
             super.visit(customNode);
         }

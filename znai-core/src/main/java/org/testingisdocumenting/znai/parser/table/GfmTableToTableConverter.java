@@ -1,4 +1,5 @@
 /*
+ * Copyright 2024 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,10 +29,10 @@ import java.util.List;
 import java.util.Map;
 
 public class GfmTableToTableConverter extends AbstractVisitor {
-    private ComponentsRegistry componentsRegistry;
-    private Path markdownPath;
+    private final ComponentsRegistry componentsRegistry;
+    private final Path markdownPath;
 
-    private MarkupTableData tableData;
+    private final MarkupTableData tableData;
     private Row row;
     private boolean isHeader;
 
@@ -86,14 +87,11 @@ public class GfmTableToTableConverter extends AbstractVisitor {
             return "left";
         }
 
-        switch (headerCell.getAlignment()) {
-            case CENTER:
-                return "center";
-            case RIGHT:
-                return "right";
-            default:
-                return "left";
-        }
+        return switch (headerCell.getAlignment()) {
+            case CENTER -> "center";
+            case RIGHT -> "right";
+            default -> "left";
+        };
     }
 
     private void handleBodyCell(TableCell bodyCell) {
