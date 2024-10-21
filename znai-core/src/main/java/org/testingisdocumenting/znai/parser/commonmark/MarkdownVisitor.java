@@ -26,11 +26,13 @@ import org.testingisdocumenting.znai.extensions.footnote.FootnoteId;
 import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
+import org.testingisdocumenting.znai.extensions.latex.LatexDollarBlock;
+import org.testingisdocumenting.znai.extensions.latex.LatexDollarInline;
+import org.testingisdocumenting.znai.extensions.latex.LatexFencePlugin;
 import org.testingisdocumenting.znai.extensions.latex.LatexInlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.include.IncludeBlock;
-import org.testingisdocumenting.znai.parser.commonmark.include.LatexDollarInline;
 import org.testingisdocumenting.znai.parser.table.GfmTableToTableConverter;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
@@ -180,6 +182,9 @@ public class MarkdownVisitor extends AbstractVisitor {
             handleInlineCodePlugin(componentsRegistry.pluginParamsFactory().create(LatexInlinedCodePlugin.ID,
                     "",
                     Collections.singletonMap(LatexInlinedCodePlugin.SRC_KEY, dollarInline.getLiteral())));
+        } else if (customNode instanceof LatexDollarBlock dollarBlock) {
+            handleFencePlugin(componentsRegistry.pluginParamsFactory().create(LatexFencePlugin.ID,
+                    "", Collections.emptyMap()), dollarBlock.getLiteral());
         } else if (customNode instanceof FootnoteReference reference) {
             parserHandler.onFootnoteReference(new FootnoteId(reference.getLabel()));
         } else {
