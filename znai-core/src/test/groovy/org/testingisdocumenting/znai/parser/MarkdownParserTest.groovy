@@ -547,11 +547,28 @@ hello world
 non html
 """)
 
-        content.should ==   [
+        content.should == [
                 ["type": "Paragraph", "content": [["text": "hello world", "type": "SimpleText"]]],
                 ["html": "<ul><li>hello <b>`test`</b></li></ul>", "isInlined": false, "type": "EmbeddedHtml"],
-                ["type": "Paragraph", "content": [["text": "non html", "type": "SimpleText"]]]
-        ]
+                ["type": "Paragraph", "content": [["text": "non html", "type": "SimpleText"]]]]
+    }
+
+    @Test
+    void "embedded html inline br"() {
+        parse("""
+hello world<br><br> of line breaks
+""")
+
+        trace("content", content)
+        content.should ==  [
+                [
+                    "type": "Paragraph",
+                    "content": [
+                        ["text": "hello world", "type": "SimpleText"],
+                        ["html": "<br>", "isInlined": true, "type": "EmbeddedHtml"],
+                        ["html": "<br>", "isInlined": true, "type": "EmbeddedHtml"],
+                        ["text": " of line breaks", "type": "SimpleText"]
+                ]]]
     }
 
     @Test
