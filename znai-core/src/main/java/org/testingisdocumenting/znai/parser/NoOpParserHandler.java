@@ -157,6 +157,10 @@ public class NoOpParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onHtml(String html, boolean isInlined) {
+    }
+
+    @Override
     public void onCustomNodeStart(String nodeName, Map<String, ?> attrs) {
     }
 

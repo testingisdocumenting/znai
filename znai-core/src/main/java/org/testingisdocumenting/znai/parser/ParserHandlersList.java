@@ -196,6 +196,11 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
+    public void onHtml(String html, boolean isInlined) {
+        list.forEach(h -> h.onHtml(html, isInlined));
+    }
+
+    @Override
     public void onCustomNodeStart(String nodeName, Map<String, ?> attrs) {
         list.forEach(h -> h.onCustomNodeStart(nodeName, attrs));
     }

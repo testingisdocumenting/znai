@@ -1,7 +1,3 @@
-Main text [^1]
-
-[^1]: additional text footnote
-
 # Building Blocks
 
 `Znai` has three levels of documentation organization:

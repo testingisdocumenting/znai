@@ -538,6 +538,23 @@ after footnote
     }
 
     @Test
+    void "embedded html block"() {
+        parse("""
+hello world 
+
+<ul><li>hello <b>`test`</b></li></ul>
+
+non html
+""")
+
+        content.should ==   [
+                ["type": "Paragraph", "content": [["text": "hello world", "type": "SimpleText"]]],
+                ["html": "<ul><li>hello <b>`test`</b></li></ul>", "isInlined": false, "type": "EmbeddedHtml"],
+                ["type": "Paragraph", "content": [["text": "non html", "type": "SimpleText"]]]
+        ]
+    }
+
+    @Test
     void "creates search entries"() {
         parse("Best\n" +
                 "\n" +

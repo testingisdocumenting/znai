@@ -87,7 +87,8 @@ import { PythonMethod } from "./python/PythonMethod";
 import { ApiLinkedTextBlock } from "./api/ApiLinkedTextBlock";
 import { OpenApiMethodAndUrl } from "./open-api/OpenApiMethodAndUrl";
 import { Card } from "./card/Card";
-import {FootnoteReference} from "./footnote/FootnoteReference";
+import { FootnoteReference } from "./footnote/FootnoteReference";
+import { EmbeddedHtml } from "./html/EmbeddedHtml";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -219,6 +220,8 @@ presentationElementHandlers.CliCommand = presentationCliCommandHandler
 
 library.CliOutput = CliOutput
 presentationElementHandlers.CliOutput = presentationCliOutput
+
+library.EmbeddedHtml = EmbeddedHtml
 
 library.Spoiler = Spoiler
 

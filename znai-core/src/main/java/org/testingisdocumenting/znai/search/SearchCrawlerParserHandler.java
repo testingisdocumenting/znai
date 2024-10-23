@@ -17,6 +17,7 @@
 
 package org.testingisdocumenting.znai.search;
 
+import org.jsoup.Jsoup;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
@@ -121,6 +122,11 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     @Override
     public void onListItemEnd() {
         addStandard(" ");
+    }
+
+    @Override
+    public void onHtml(String html, boolean isInlined) {
+        addStandard(Jsoup.parse(html).text());
     }
 
     @Override

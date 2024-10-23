@@ -75,6 +75,8 @@ public interface ParserHandler {
     void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet);
     void onThematicBreak();
 
+    void onHtml(String html, boolean isInlined);
+
     void onCustomNodeStart(String nodeName, Map<String, ?> attrs);
     void onCustomNode(String nodeName, Map<String, ?> attrs);
     void onCustomNodeEnd(String nodeName);
