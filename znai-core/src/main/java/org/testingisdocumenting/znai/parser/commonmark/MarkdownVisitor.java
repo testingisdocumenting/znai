@@ -237,6 +237,20 @@ public class MarkdownVisitor extends AbstractVisitor {
         }
     }
 
+    @Override
+    public void visit(HtmlInline htmlInline) {
+        if (htmlInline.getLiteral().equals("<br>")) {
+            parserHandler.onHtml(htmlInline.getLiteral(), true);
+        } else {
+            throw new UnsupportedOperationException("inlined html is not supported: " + htmlInline.getLiteral());
+        }
+    }
+
+    @Override
+    public void visit(HtmlBlock htmlBlock) {
+        parserHandler.onHtml(htmlBlock.getLiteral(), false);
+    }
+
     private void handleIncludePlugin(PluginParams params) {
         try {
             IncludePlugin includePlugin = Plugins.includePluginById(params.getPluginId());

@@ -28,6 +28,7 @@ import static org.testingisdocumenting.webtau.WebTauCore.*
 
 class SearchCrawlerParserHandlerTest {
     SearchCrawlerParserHandler parserHandler
+    List<String> searchText
 
     @Before
     void init() {
@@ -56,7 +57,7 @@ class SearchCrawlerParserHandlerTest {
 
     @Test
     void "should connect mixed styles characters within a word without extra spaces"() {
-        def searchEntries = withinSection {
+        withinSection {
             parserHandler.onSimpleText("H")
             parserHandler.onEmphasisStart()
             parserHandler.onSimpleText("el")
@@ -66,49 +67,58 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onStrongEmphasisEnd()
         }
 
-        searchEntries.collect { it.extractText() }.should == ["Hello"]
+        searchText.should == ["Hello"]
     }
 
     @Test
     void "should separate entries based on soft line break"() {
-        def searchEntries = withinSection {
+        withinSection {
             parserHandler.onSimpleText("entry one.")
             parserHandler.onSoftLineBreak()
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.collect { it.extractText() }.should == ["entry one entry two"]
+        searchText.should == ["entry one entry two"]
     }
 
     @Test
     void "should separate entries based on hard line break"() {
-        def searchEntries = withinSection {
+        withinSection {
             parserHandler.onSimpleText("entry one.")
             parserHandler.onHardLineBreak()
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchEntries.collect { it.extractText() }.should == ["entry one entry two"]
+        searchText.should == ["entry one entry two"]
     }
 
     @Test
     void "should split on separators in code snippets"() {
-        def searchEntries = withinSection {
+        withinSection {
             parserHandler.onInlinedCode("record.access", DocReferences.EMPTY)
         }
 
-        searchEntries.collect { it.extractText() }.should == ["record access"]
+        searchText.should == ["record access"]
     }
 
     @Test
     void "should remove delimiters"() {
-        def searchEntries = withinSection {
+        withinSection {
             parserHandler.onSimpleText("\"hello\" world of 'quotes'. and separators,like!and?maybe/backward\\and[inside]different{brackets}and(other)" +
                     " --key=value")
         }
 
-        searchEntries.collect { it.extractText() }.should == ["hello world of quotes and separators like and maybe backward and " +
+        searchText.should == ["hello world of quotes and separators like and maybe backward and " +
                                                          "inside different brackets and other key value"]
+    }
+
+    @Test
+    void "should index text from inlined html"() {
+        withinSection {
+            parserHandler.onHtml("<ul><li>why use</li><li>it though</li></ul>", true)
+        }
+
+        searchText.should == ["why use it though"]
     }
 
     private withinSection(Closure setupCode) {
@@ -116,6 +126,7 @@ class SearchCrawlerParserHandlerTest {
         setupCode()
         parserHandler.onSectionEnd()
 
-        return parserHandler.getSearchEntries()
+        def searchEntries = parserHandler.getSearchEntries()
+        searchText = searchEntries.collect { it.extractText() }
     }
 }

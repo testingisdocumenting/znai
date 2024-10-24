@@ -366,6 +366,11 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
+    public void onHtml(String html, boolean isInlined) {
+        append("EmbeddedHtml", "html", html, "isInlined", isInlined);
+    }
+
+    @Override
     public void onCustomNodeStart(String nodeName, Map<String, ?> attrs) {
         DocElement docElement = new DocElement(nodeName);
         docElement.addProps(attrs);
