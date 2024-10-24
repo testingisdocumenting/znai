@@ -51,7 +51,7 @@ public class LatexDollarParser implements InlineContentParser {
 
         char peek = scanner.peek();
         if (peek == '$') {
-            var content = scanner.getSource(pos, scanner.position()).getContent();
+            var content = scanner.getSource(pos, scanner.position()).getContent().trim();
             scanner.next();
             scanner.next();
             return ParsedInline.of(new LatexDollarBlock(content), scanner.position());
@@ -84,7 +84,7 @@ public class LatexDollarParser implements InlineContentParser {
             var whitespaceCount = scanner.whitespace();
             var currChar = scanner.peek();
 
-            if (currChar == '$' && whitespaceCount == 0) {
+            if (currChar == '$' && (whitespaceCount == 0 || (whitespaceCount == 1 && prevChar == '\n')) ) {
                 return true;
             } else {
                 scanner.next();

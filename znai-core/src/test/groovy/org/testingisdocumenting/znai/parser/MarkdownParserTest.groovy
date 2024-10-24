@@ -479,10 +479,23 @@ world""")
     }
 
     @Test
-    void "latex block with double dollar"() {
+    void "latex block standalone"() {
+       parse('''
+$$
+x = y
+$$
+''')
+
+        content.should == [
+                [ "type": "Paragraph", "content": [
+                        ["latex": "x = y", "type": "Latex"]]]]
+    }
+
+    @Test
+    void "latex block inlined"() {
         parse('some $$a=2$$ math expression')
 
-        content.should ==   [
+        content.should == [
                 [ "type": "Paragraph", "content": [
                         ["text": "some ", "type": "SimpleText"],
                         ["latex": "a=2", "type": "Latex"],
