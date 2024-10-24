@@ -25,7 +25,7 @@ function RawHTML({ html }: { html: string }) {
   const ref = React.useRef<HTMLElement>(null);
 
   // @ts-ignore
-  React.useEffect(() => (ref.current!.outerHTML = html), []);
+  React.useEffect(() => (ref.current!.outerHTML = html), [html]);
   return <span ref={ref} />;
 }
 
