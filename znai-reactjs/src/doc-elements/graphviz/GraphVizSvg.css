@@ -27,6 +27,21 @@
     width: 100%;
 }
 
+.graphviz-diagram.center {
+    display: flex;
+    justify-content: center;
+}
+
+.graphviz-diagram.left {
+    display: flex;
+    justify-content: start;
+}
+
+.graphviz-diagram.right {
+    display: flex;
+    justify-content: end;
+}
+
 .graphviz-diagram a {
     text-decoration: none;
 }

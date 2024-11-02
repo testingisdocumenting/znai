@@ -41,6 +41,9 @@ class GraphvizPlugin {
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("diagram", diagram.toMap());
         props.put("urls", Collections.emptyList());
+        if (pluginParams.getOpts().has(GraphvizPluginParams.ALIGN_KEY)) {
+            props.put(GraphvizPluginParams.ALIGN_KEY, pluginParams.getOpts().get(GraphvizPluginParams.ALIGN_KEY));
+        }
 
         return PluginResult.docElement("GraphVizDiagram", props);
 

@@ -20,13 +20,32 @@ digraph {
 }
 ```
 
+# Alignment
+
+Use `align` parameter to change diagram alignment:
+````markdown
+```graphviz {align: "center"}
+digraph {
+ a -> b;
+...
+````
+
+```graphviz {align: "center"}
+digraph {
+ a -> b;
+ b -> c;
+ d -> b;
+ b -> e;
+}
+```
+
 # External File
 
 Use include plugin to render a diagram from a file
 
-    :include-graphviz: graphviz.dot
+    :include-graphviz: graphviz.dot {align: "center"}
 
-:include-graphviz: graphviz.dot
+:include-graphviz: graphviz.dot {align: "center"}
 
 :include-file: graphviz.dot {autoTitle: true}
 
