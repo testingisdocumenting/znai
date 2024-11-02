@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.diagrams.graphviz;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -38,6 +39,11 @@ public class GraphvizIncludePlugin implements IncludePlugin {
     @Override
     public IncludePlugin create() {
         return new GraphvizIncludePlugin();
+    }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        return GraphvizPluginParams.definition;
     }
 
     @Override

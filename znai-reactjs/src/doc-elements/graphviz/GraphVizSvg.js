@@ -26,13 +26,13 @@ import './GraphVizSvg.css'
 
 class GraphVizSvg extends Component {
     render() {
-        const {diagram, idsToDisplay, idsToHighlight, urls, wide} = this.props
+        const {diagram, idsToDisplay, idsToHighlight, urls, wide, align = "left"} = this.props
 
         if (typeof DOMParser === 'undefined') {
             return null
         }
 
-        const className = "graphviz-diagram " + (wide ? "wide" : "content-block")
+        const className = "graphviz-diagram " + (wide ? "wide" : "content-block") + " " + align
 
         const parser = new DOMParser()
         const dom = parser.parseFromString(diagram.svg, 'application/xml')

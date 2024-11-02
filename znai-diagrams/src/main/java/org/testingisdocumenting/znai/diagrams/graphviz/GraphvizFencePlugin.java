@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.diagrams.graphviz;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 
@@ -32,6 +33,11 @@ public class GraphvizFencePlugin implements FencePlugin {
     @Override
     public FencePlugin create() {
         return new GraphvizFencePlugin();
+    }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        return GraphvizPluginParams.definition;
     }
 
     @Override

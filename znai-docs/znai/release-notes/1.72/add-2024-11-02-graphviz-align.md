@@ -1,0 +1,1 @@
+* Add: [Graphviz](visuals/graphviz-diagrams) `align` option
