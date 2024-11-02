@@ -41,6 +41,7 @@ import org.testingisdocumenting.znai.structure.AnchorIds;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
 import org.testingisdocumenting.znai.structure.TocItem;
+import org.testingisdocumenting.znai.utils.StringUtils;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.awt.image.BufferedImage;
@@ -336,7 +337,9 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet) {
-        Map<String, Object> snippetProps = CodeSnippetsProps.create(lang, snippet);
+        String stripped = StringUtils.stripIndentation(snippet);
+
+        Map<String, Object> snippetProps = CodeSnippetsProps.create(lang, stripped);
         snippetProps.put("lineNumber", lineNumber);
         snippetProps.putAll(pluginParams.getOpts().toMap());
 
@@ -344,7 +347,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
                 new SnippetContentProvider() {
                     @Override
                     public String snippetContent() {
-                        return snippet;
+                        return stripped;
                     }
 
                     @Override

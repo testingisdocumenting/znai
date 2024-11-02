@@ -36,12 +36,17 @@ class MyComponent extends Component {
 }
 ```
 
-The following languages are supported:
+The following languages/formats are supported:
+* C++
+* OCaml
+* Python
+* TypeScript
 * Java
+* SQL
+* JSON
+* Protobuf
 * JavaScript
 * Groovy
-* C++
-* Python
 * Bash
 
 `Znai` uses [prismjs](http://prismjs.com) library to provide syntax highlighting. 

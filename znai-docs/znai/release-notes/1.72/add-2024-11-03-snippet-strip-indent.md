@@ -1,0 +1,1 @@
+* Add: [Code Snippets](snippets/code-snippets) automatically strip extra indentation
