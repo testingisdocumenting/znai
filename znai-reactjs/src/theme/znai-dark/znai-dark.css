@@ -190,7 +190,12 @@
     --znai-annotated-image-ordered-list-number-text-color: var(--znai-image-annotation-inverted-text-color);
     --znai-annotated-image-ordered-list-number-border-color: var(--znai-image-annotation-inverted-line-color);
 
-    --znai-diagram-node-shadow-color: #444;
+    --znai-diagram-node-shadow-color: #333;
+
+    --znai-diagram-black-line: #ccc;
+    --znai-diagram-black-fill: #ccc;
+    --znai-diagram-black-text: #444;
+    --znai-diagram-black-text-inverse: #eee;
 
     color: var(--znai-regular-text-color);
     background-color: var(--znai-background-color);

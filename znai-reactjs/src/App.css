@@ -262,15 +262,27 @@
     --znai-annotated-image-ordered-list-number-text-color: var(--znai-image-annotation-text-color);
     --znai-annotated-image-ordered-list-number-border-color: var(--znai-image-annotation-line-color);
 
+    --znai-diagram-black-line: #222;
+    --znai-diagram-black-fill: #222;
+    --znai-diagram-black-text: #eee;
+    --znai-diagram-black-text-inverse: #222;
+
+    --znai-diagram-blue-line: #286eea;
+    --znai-diagram-blue-fill: #84a3e5;
+    --znai-diagram-blue-text: #172654;
+    --znai-diagram-blue-text-inverse: #538bb3;
+
     --znai-diagram-node-shadow-color: #e6e6e6;
+
+    /* TODO: remove all the a,b,c,d,h styles and use explicit color names*/
     --znai-diagram-a-line: #AA8E39;
     --znai-diagram-a-fill: #FFEAAA;
     --znai-diagram-a-text: #806515;
     --znai-diagram-a-text-inverse: #AA8E39;
-    --znai-diagram-b-line: #123752;
-    --znai-diagram-b-fill: #708EA4;
-    --znai-diagram-b-text: #eeeeee;
-    --znai-diagram-b-text-inverse: #538bb3;
+    --znai-diagram-b-line: var(--znai-diagram-blue-line);
+    --znai-diagram-b-fill: var(--znai-diagram-blue-fill);
+    --znai-diagram-b-text: var(--znai-diagram-blue-text);
+    --znai-diagram-b-text-inverse: var(--znai-diagram-blue-text-inverse);
     --znai-diagram-c-line: #409318;
     --znai-diagram-c-fill: #c8e4a8;
     --znai-diagram-c-text: #1e231e;
