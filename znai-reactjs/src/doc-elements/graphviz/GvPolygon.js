@@ -43,7 +43,15 @@ class GvPolygon extends Component {
         } else {
             const style = createNodeOnlyStyle(this.props.diagramId, this.props.parentClassName)
             const cleanedUpProps = {...this.props}
+
             removeCustomPropsNoCopy(cleanedUpProps)
+
+            // came from circle dot
+            if (this.props.hasOwnProperty("rx") &&
+              (Math.abs(this.props.rx - this.props.ry) < 0.0001)) {
+                return <ellipse {...cleanedUpProps} {...colorsOverride}/>
+            }
+
             removeRadiusPropsNoCopy(cleanedUpProps)
 
             if (this.props.parentClassName === 'node') {

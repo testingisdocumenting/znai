@@ -91,22 +91,7 @@ export default class GraphVizReactElementsBuilder {
     }
 
     createReactElement(domNode, props, attrProps) {
-        if (this.currentParentClass) {
-            // styles is a mix list of one-char color groups and/or shape-names
-            if (this.currentStyles) {
-                const colorGroup = this.currentStyles.find(style => style.length === 1)
-
-                if (this.currentSelected) {
-                    props.colors = this.highlightColors()
-                } else if (colorGroup) {
-                    props.colors = this.colorsByColorGroup(colorGroup)
-                } else {
-                    props.colors = this.defaultColors()
-                }
-            } else {
-                props.colors = this.currentSelected ? this.highlightColors() : this.defaultColors()
-            }
-        }
+        props.colors = this.createColors(attrProps)
 
         props.svg = this.customSvgShape()
         props.isInvertedTextColor = this.isInvertedTextColor()
@@ -119,9 +104,46 @@ export default class GraphVizReactElementsBuilder {
         return React.createElement(component, propsToUse, this.childrenReactElementsFromDomNode(domNode))
     }
 
+    createColors(attrProps) {
+        if (!this.currentParentClass) {
+            return undefined;
+        }
+
+        // styles is a mix list of one-char color groups and/or shape-names
+        if (this.currentStyles && Array.isArray(this.currentStyles)) {
+            const colorGroup = this.currentStyles.find(style => style.length === 1)
+
+            if (this.currentSelected) {
+                return this.highlightColors()
+            } else if (colorGroup) {
+                return this.colorsByColorGroup(colorGroup)
+            } else {
+                return this.defaultColors()
+            }
+        } else {
+            if (this.currentSelected) {
+                return this.highlightColors()
+            }
+
+            const {fill, stroke} = attrProps
+            const isNodeOrEdge = this.currentParentClass === "node" || this.currentParentClass === "edge";
+            if (fill && stroke) {
+                if (fill === "#000000" || stroke === "#000000" ||
+                  (fill === "none" && stroke === "black" && isNodeOrEdge) ||
+                  (fill === "black" && stroke === "black" && isNodeOrEdge)) {
+                    return this.defaultColors();
+                }
+
+                return this.colorsByExplicitColors(attrProps.stroke, attrProps.fill, attrProps.stroke);
+            }
+
+            return this.defaultColors()
+        }
+    }
+
     customSvgShape() {
-        if (! this.currentStyles) {
-            return null
+        if (!this.currentStyles || !Array.isArray(this.currentStyles)) {
+            return false
         }
 
         if (!globalAssets.assets.graphvizDiagram) {
@@ -133,7 +155,7 @@ export default class GraphVizReactElementsBuilder {
     }
 
     isInvertedTextColor() {
-        if (! this.currentStyles) {
+        if (!this.currentStyles || !Array.isArray(this.currentStyles)) {
             return false
         }
 
@@ -141,7 +163,6 @@ export default class GraphVizReactElementsBuilder {
     }
 
     reactComponentForDom(domNode, props) {
-        console.log(props)
         switch (domNode.nodeName) {
             case 'polygon': {
                 if (props.parentClassName === 'graph') {
@@ -186,16 +207,24 @@ export default class GraphVizReactElementsBuilder {
         return children
     }
 
-    colorsByColorGroup(colorGroup) {
-        colorGroup = colorGroup.toLowerCase()
+    colorsByExplicitColors(line, fill, text) {
+        function noneOrColor(passedValue, transformedValue) {
+            return passedValue === "none" ? "none" :
+              transformedValue
+        }
 
         return {
-            line: `var(--znai-diagram-${colorGroup}-line)`,
-            fill: `var(--znai-diagram-${colorGroup}-fill)`,
-            text: this.isInvertedTextColor() ?
-                `var(--znai-diagram-${colorGroup}-text-inverse)`:
-                `var(--znai-diagram-${colorGroup}-text)`
+            line: noneOrColor(line, `var(--znai-diagram-${line}-line)`),
+            fill: noneOrColor(fill, `var(--znai-diagram-${fill}-fill)`),
+            text: noneOrColor(text, this.isInvertedTextColor() ?
+              `var(--znai-diagram-${text}-text-inverse)`:
+              `var(--znai-diagram-${text}-text)`)
         }
+    }
+
+    colorsByColorGroup(colorGroup) {
+        colorGroup = colorGroup.toLowerCase()
+        return this.colorsByExplicitColors(colorGroup, colorGroup, colorGroup);
     }
 
     defaultColors() {
