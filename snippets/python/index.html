@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -159,7 +159,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\", bodyOnly: true}\n",
+        "snippet" : ":include-python: python/example.py {entry: \"Animal.says\", bodyOnly: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -220,7 +220,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-python-doc-params: python/pydoc-params.py {entry: \"my_func\", title: \"result and parameters\"}\n",
+        "snippet" : ":include-python-doc-params: python/pydoc-params.py {entry: \"my_func\", title: \"result and parameters\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -332,7 +332,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-python-method: fin.money.render_money\n",
+        "snippet" : ":include-python-method: fin.money.render_money",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -442,7 +442,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409500,
+    "lastModifiedTime" : 1730676651007,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Python",

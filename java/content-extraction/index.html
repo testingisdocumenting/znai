@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -200,7 +200,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -263,7 +263,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true, commentsType: \"inline\"}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true, commentsType: \"inline\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -293,7 +293,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true, title: \"my snippet\"}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", bodyOnly: true, title: \"my snippet\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -324,7 +324,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {\n  entry: \"sampleMethod\",\n  bodyOnly: true,\n  title: \"my snippet\",\n  anchorId: \"my-java-snippet\"\n}\n",
+        "snippet" : ":include-java: HelloWorld.java {\n  entry: \"sampleMethod\",\n  bodyOnly: true,\n  title: \"my snippet\",\n  anchorId: \"my-java-snippet\"\n}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -349,7 +349,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -384,7 +384,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true, entrySeparator: \"...\"}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true, entrySeparator: \"...\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -419,7 +419,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod(Map, int, boolean)\"}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod(Map, int, boolean)\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -465,7 +465,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\"}\n",
+        "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -487,7 +487,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\", bodyOnly: true}\n",
+        "snippet" : ":include-java: MyEnum.java {entry: \"MyEnum\", bodyOnly: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -516,7 +516,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {entry: [\"createData\", \"importantAction\"]}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: [\"createData\", \"importantAction\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -544,7 +544,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {entry: [\"createData\", \"importantAction\"], signatureOnly: true}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: [\"createData\", \"importantAction\"], signatureOnly: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -579,7 +579,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true}\n",
+        "snippet" : ":include-java: HelloWorld.java {entry: \"sampleMethod\", signatureOnly: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -615,7 +615,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-java: HelloWorldTest.java {\n  entry: [\"exampleOfA\", \"exampleOfB\"],\n  bodyOnly: true,\n  title: \"example of actions\"}\n",
+        "snippet" : ":include-java: HelloWorldTest.java {\n  entry: [\"exampleOfA\", \"exampleOfB\"],\n  bodyOnly: true,\n  title: \"example of actions\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -640,7 +640,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-java: HelloWorldTest.java {\n  entry: [\"exampleOfA\", \"exampleOfB\"],\n  entrySeparator: \"\",\n  bodyOnly: true,\n  title: \"example of actions\"}\n",
+        "snippet" : ":include-java: HelloWorldTest.java {\n  entry: [\"exampleOfA\", \"exampleOfB\"],\n  entrySeparator: \"\",\n  bodyOnly: true,\n  title: \"example of actions\"}",
         "lineNumber" : "",
         "highlight" : [ 2 ],
         "type" : "Snippet"
@@ -655,7 +655,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409486,
+    "lastModifiedTime" : 1730676650991,
     "tocItem" : {
       "chapterTitle" : "Java",
       "pageTitle" : "Content Extraction",

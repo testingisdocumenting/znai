@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -97,6 +97,11 @@
 <article>
 <header><h1>Title</h1></header>
 <p>Use parameter to display title bar on top of the embedded content title include iframe iframe custom html title rendered example light color #333 backgroundColor #eee dark color #eee backgroundColor #333 fit true</p>
+</article>
+
+<article>
+<header><h1>Height</h1></header>
+<p>Use to force container height Use to limit the automatically calculated height height maxHeight</p>
 </article>
 
 <article>
@@ -182,13 +187,13 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-iframe: iframe/custom.html {\n  fit: true\n}\n",
+        "snippet" : ":include-iframe: iframe/custom.html {\n  fit: true\n}",
         "lineNumber" : "",
         "highlight" : [ 1 ],
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "f14acfb7-d608-4d65-ae6c-17bb617bbbc1",
+        "previewMarker" : "7ce974ab-d51d-4add-984e-47dd9d54c46c",
         "fit" : true,
         "type" : "Iframe"
       }, {
@@ -270,12 +275,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-iframe: iframe/custom.html {\n  fit: true,\n  light: { \"--color\": \"#333\", \"--backgroundColor\": \"#eee\" },\n  dark: { \"--color\": \"#eee\", \"--backgroundColor\": \"#333\" },\n}\n",
+        "snippet" : ":include-iframe: iframe/custom.html {\n  fit: true,\n  light: { \"--color\": \"#333\", \"--backgroundColor\": \"#eee\" },\n  dark: { \"--color\": \"#eee\", \"--backgroundColor\": \"#333\" },\n}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "b4925f2c-5aeb-4b84-a874-d3ed6aab7a59",
+        "previewMarker" : "4855672d-ea61-4590-8d2b-719ecd947fb7",
         "fit" : true,
         "light" : {
           "--color" : "#333",
@@ -306,13 +311,13 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-iframe: iframe/custom.html {\n  title: \"rendered example\",\n  light: { \"--color\": \"#333\", \"--backgroundColor\": \"#eee\" },\n  dark: { \"--color\": \"#eee\", \"--backgroundColor\": \"#333\" },\n  fit: true\n}\n",
+        "snippet" : ":include-iframe: iframe/custom.html {\n  title: \"rendered example\",\n  light: { \"--color\": \"#333\", \"--backgroundColor\": \"#eee\" },\n  dark: { \"--color\": \"#eee\", \"--backgroundColor\": \"#333\" },\n  fit: true\n}",
         "lineNumber" : "",
         "highlight" : [ 1 ],
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "9d12ad51-78ca-4931-ae59-d6f455e987b1",
+        "previewMarker" : "8d185e6d-8648-42c7-963f-4c1d37289034",
         "title" : "rendered example",
         "light" : {
           "--color" : "#333",
@@ -323,6 +328,45 @@ ReactDOM.render(React.createElement(Documentation, {
           "--backgroundColor" : "#333"
         },
         "fit" : true,
+        "type" : "Iframe"
+      } ]
+    }, {
+      "id" : "height",
+      "additionalIds" : [ ],
+      "title" : "Height",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "height",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to force container height. Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "maxHeight",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to limit the automatically calculated height.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "src" : "/znai/iframe/custom-tall.html",
+        "previewMarker" : "a30ab279-ec52-497c-874e-466826892321",
+        "title" : "rendered example",
+        "light" : {
+          "--color" : "#333",
+          "--backgroundColor" : "#eee"
+        },
+        "dark" : {
+          "--color" : "#eee",
+          "--backgroundColor" : "#333"
+        },
+        "fit" : true,
+        "maxHeight" : 64,
         "type" : "Iframe"
       } ]
     }, {
@@ -350,12 +394,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY\n",
+        "snippet" : ":include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
-        "previewMarker" : "1ffa49e9-94de-426f-8198-b6ae95dea12d",
+        "previewMarker" : "9e16c99a-591d-46c1-9555-21147c855bf5",
         "type" : "Iframe"
       } ]
     }, {
@@ -377,17 +421,17 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {aspectRatio: \"4:3\"}\n",
+        "snippet" : ":include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {aspectRatio: \"4:3\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
-        "previewMarker" : "00aa2b7e-80b6-4fa7-81bc-c678d93a1fdd",
+        "previewMarker" : "6a7e6c2c-8d2d-4d61-a8d2-7a390ddb4b64",
         "aspectRatio" : "4:3",
         "type" : "Iframe"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409513,
+    "lastModifiedTime" : 1730676651019,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Iframe",
@@ -405,6 +449,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Title",
         "id" : "title"
+      }, {
+        "title" : "Height",
+        "id" : "height"
       }, {
         "title" : "Embedding Video",
         "id" : "embedding-video"

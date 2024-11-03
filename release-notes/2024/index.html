@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -84,6 +84,11 @@
 <div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>1.72</h1></header>
+<p>Add Code Snippets automatically strip extra indentation Add Experimental top header Add Headings support for links inside Add Graphviz better black color support in subgraph Add Graphviz option align Add Support for HTML block Add Initial Footnotes support Add Latex Math block shortcut support $$ Add Latex Math inline shortcut support $ Add Custom Anchor Id Add iframe to add scrollbars that match in style the main document maxHeight Add Search hotkey indicator</p>
+</article>
+
 <article>
 <header><h1>1.71</h1></header>
 <p>Doc How to style Add support for additional hidden anchor ids when referencing Other Pages to be backward compatible with existing markdowns Add Search Result Preview code snippets have higher weight Add Search Result Preview wildcard and stronger boost to page titles Add Improve Search Result Preview highlighting Add Default Tab Add Adjust inlined Latex horizontal spacing Add Search better recognizes dot separated code snippet entries</p>
@@ -141,6 +146,311 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "172",
+      "additionalIds" : [ ],
+      "title" : "1.72",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/code-snippets",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Code Snippets",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " automatically strip extra indentation",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Experimental top header",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/structure",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Headings",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support for links inside",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/graphviz-diagrams",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Graphviz",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " better black color support in subgraph",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/graphviz-diagrams",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Graphviz",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "align",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " option",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Support for HTML block",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Initial ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/footnotes",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Footnotes",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/math",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Latex Math",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " block ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "$$",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " shortcut support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/math",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Latex Math",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " inline ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "$",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " shortcut support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Custom ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/page-references#custom-anchor-id",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Anchor Id",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/iframe",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "iframe",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "maxHeight",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to add scrollbars that match in style the main document",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Search",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " hotkey indicator",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "171",
       "additionalIds" : [ ],
       "title" : "1.71",
@@ -1039,7 +1349,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409497,
+    "lastModifiedTime" : 1730676651003,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2024 Releases",
@@ -1051,6 +1361,9 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.72",
+        "id" : "172"
+      }, {
         "title" : "1.71",
         "id" : "171"
       }, {

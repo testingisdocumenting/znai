@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -167,7 +167,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-xml: menu.html {paths: [\"ul.@class\", \"ul.li[1].@class\", \"ul.li[2]\"]}\n",
+        "snippet" : ":include-xml: menu.html {paths: [\"ul.@class\", \"ul.li[1].@class\", \"ul.li[2]\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -225,7 +225,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-xml: simple.xml {paths: [\"root.a[1]\", \"root.b[0]\", \"root.c[0]\"]}\n",
+        "snippet" : ":include-xml: simple.xml {paths: [\"root.a[1]\", \"root.b[0]\", \"root.c[0]\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -359,7 +359,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-xml: menu.html {title: \"Menu snippet\"}\n",
+        "snippet" : ":include-xml: menu.html {title: \"Menu snippet\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -406,7 +406,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Xml"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409500,
+    "lastModifiedTime" : 1730676651007,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Xml",

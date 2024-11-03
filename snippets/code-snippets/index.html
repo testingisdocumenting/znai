@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Specifying Language</h1></header>
-<p>You can also specify a language to enable syntax highlighting for your snippet The following languages are supported Java JavaScript Groovy C Python Bash uses prismjs library to provide syntax highlighting Note that it is not being executed inside the browser but rather applied during HTML generation ```javascript import React Component from react class MyComponent extends Component render ``` import React Component from react class MyComponent extends Component render Znai</p>
+<p>You can also specify a language to enable syntax highlighting for your snippet The following languages formats are supported C OCaml Python TypeScript Java SQL JSON Protobuf JavaScript Groovy Bash uses prismjs library to provide syntax highlighting Note that it is not being executed inside the browser but rather applied during HTML generation ```javascript import React Component from react class MyComponent extends Component render ``` import React Component from react class MyComponent extends Component render Znai</p>
 </article>
 
 <article>
@@ -178,7 +178,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "interface PriceService {\n    Money calcPrice(String cuips, Integer quantity);\n}\n",
+        "snippet" : "interface PriceService {\n    Money calcPrice(String cuips, Integer quantity);\n}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -207,18 +207,18 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```javascript\nimport React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n```\n",
+        "snippet" : "```javascript\nimport React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "javascript",
-        "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n",
+        "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "The following languages are supported:",
+          "text" : "The following languages/formats are supported:",
           "type" : "SimpleText"
         } ]
       }, {
@@ -230,7 +230,70 @@ ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
+              "text" : "C++",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "OCaml",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Python",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "TypeScript",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
               "text" : "Java",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "SQL",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "JSON",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Protobuf",
               "type" : "SimpleText"
             } ]
           } ]
@@ -249,24 +312,6 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "Paragraph",
             "content" : [ {
               "text" : "Groovy",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "C++",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Python",
               "type" : "SimpleText"
             } ]
           } ]
@@ -325,12 +370,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```javascript {title: \"ReactJS Component\"}\n...\n```\n",
+        "snippet" : "```javascript {title: \"ReactJS Component\"}\n...\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "javascript",
-        "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}\n",
+        "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n    render() {\n        /// ...\n    }\n}",
         "lineNumber" : "",
         "title" : "ReactJS Component",
         "anchorId" : "title-reactjs-component",
@@ -361,12 +406,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```javascript {title: \"ReactJS Component\", anchorId: \"my-special-code\"}\n...\n```\n",
+        "snippet" : "```javascript {title: \"ReactJS Component\", anchorId: \"my-special-code\"}\n...\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "javascript",
-        "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n  render() {\n    /// ...\n  }\n}\n",
+        "snippet" : "import React, {Component} from 'react'\n\nclass MyComponent extends Component {\n  render() {\n    /// ...\n  }\n}",
         "lineNumber" : "",
         "title" : "ReactJS Component",
         "anchorId" : "my-special-code",
@@ -391,12 +436,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```java {wide: true}\nclass InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n```\n",
+        "snippet" : "```java {wide: true}\nclass InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "java",
-        "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n",
+        "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
         "lineNumber" : "",
         "wide" : true,
         "type" : "Snippet"
@@ -414,7 +459,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "java",
-        "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n",
+        "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -452,12 +497,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```java {wrap: true}\nclass InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n```\n",
+        "snippet" : "```java {wrap: true}\nclass InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "java",
-        "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}\n",
+        "snippet" : "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
         "lineNumber" : "",
         "wrap" : true,
         "type" : "Snippet"
@@ -495,12 +540,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```java {readMore: true, readMoreVisibleLines: 3}\npublic class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n    ...\n```\n",
+        "snippet" : "```java {readMore: true, readMoreVisibleLines: 3}\npublic class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n    ...\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "java",
-        "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n        this.workingDir = workingDir;\n        this.fileNameByDirName = new LinkedHashMap<>();\n    }\n\n    public void create() {\n        createPages();\n        createToc();\n        createMeta();\n        createIndex();\n        createLookupPaths();\n    }\n\n    private void createLookupPaths() {\n        createFileFromResource(\"lookup-paths\");\n    }\n\n    private void createMeta() {\n        createFileFromResource(\"meta.json\");\n    }\n}\n",
+        "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n        this.workingDir = workingDir;\n        this.fileNameByDirName = new LinkedHashMap<>();\n    }\n\n    public void create() {\n        createPages();\n        createToc();\n        createMeta();\n        createIndex();\n        createLookupPaths();\n    }\n\n    private void createLookupPaths() {\n        createFileFromResource(\"lookup-paths\");\n    }\n\n    private void createMeta() {\n        createFileFromResource(\"meta.json\");\n    }\n}",
         "lineNumber" : "",
         "readMore" : true,
         "readMoreVisibleLines" : 3,
@@ -525,12 +570,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```java {highlight: \"workingDir\"}\npublic class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }\n```\n",
+        "snippet" : "```java {highlight: \"workingDir\"}\npublic class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "java",
-        "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }\n",
+        "snippet" : "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n    ...\n    }",
         "lineNumber" : "",
         "highlight" : [ 1, 4 ],
         "type" : "Snippet"
@@ -550,7 +595,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409498,
+    "lastModifiedTime" : 1730676651003,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Code Snippets",

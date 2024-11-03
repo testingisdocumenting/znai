@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -204,12 +204,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-<pluginId>: [text param] [{key1: value1, key2: value2}]\n",
+        "snippet" : ":include-<pluginId>: [text param] [{key1: value1, key2: value2}]",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-json: example.json {\n  title: \"JSON example\",\n  highlightValue: [\"root.person.id\"],\n  collapsedPaths: [\"root.details\"]\n}\n",
+        "snippet" : ":include-json: example.json {\n  title: \"JSON example\",\n  highlightValue: [\"root.person.id\"],\n  collapsedPaths: [\"root.details\"]\n}",
         "lineNumber" : "",
         "title" : "json plugin example",
         "anchorId" : "include-plugins-json-plugin-example",
@@ -232,7 +232,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Json"
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-java: ../java/HelloWorld.java {\n  entry: \"sampleMethod\", \n  bodyOnly: true,\n  commentsType: \"inline\"\n}\n",
+        "snippet" : ":include-java: ../java/HelloWorld.java {\n  entry: \"sampleMethod\", \n  bodyOnly: true,\n  commentsType: \"inline\"\n}",
         "lineNumber" : "",
         "title" : "java plugin example",
         "anchorId" : "include-plugins-java-plugin-example",
@@ -258,12 +258,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "content `:<pluginId>: [text param] [{key1: value1, key2: value2}]`\n",
+        "snippet" : "content `:<pluginId>: [text param] [{key1: value1, key2: value2}]`",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
-        "snippet" : "It is a `:icon: cloud` day, `:icon: clock` is ticking\n",
+        "snippet" : "It is a `:icon: cloud` day, `:icon: clock` is ticking",
         "lineNumber" : "",
         "title" : "plugin example",
         "anchorId" : "inlined-code-plugin-example",
@@ -300,12 +300,12 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "```<pluginId> [text param] [{key1: value1, key2: value2}]\ncontent\n```\n",
+        "snippet" : "```<pluginId> [text param] [{key1: value1, key2: value2}]\ncontent\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
-        "snippet" : "```tabs\nC++: \n    content of C++ tab\nJava:\n    content of Java tab\nPython:\n    content of Python tab\n```\n",
+        "snippet" : "```tabs\nC++: \n    content of C++ tab\nJava:\n    content of Java tab\nPython:\n    content of Python tab\n```",
         "lineNumber" : "",
         "title" : "plugin example",
         "anchorId" : "fenced-block-plugin-example",
@@ -315,7 +315,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "name" : "C++",
           "content" : [ {
             "lang" : "",
-            "snippet" : "content of C++ tab\n",
+            "snippet" : "content of C++ tab",
             "lineNumber" : "",
             "type" : "Snippet"
           } ]
@@ -323,7 +323,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "name" : "Java",
           "content" : [ {
             "lang" : "",
-            "snippet" : "content of Java tab\n",
+            "snippet" : "content of Java tab",
             "lineNumber" : "",
             "type" : "Snippet"
           } ]
@@ -331,7 +331,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "name" : "Python",
           "content" : [ {
             "lang" : "",
-            "snippet" : "content of Python tab\n",
+            "snippet" : "content of Python tab",
             "lineNumber" : "",
             "type" : "Snippet"
           } ]
@@ -339,7 +339,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Tabs"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409487,
+    "lastModifiedTime" : 1730676650991,
     "tocItem" : {
       "chapterTitle" : "Plugins",
       "pageTitle" : "Plugin Types",

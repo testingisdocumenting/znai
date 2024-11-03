@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -218,7 +218,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-open-api: open-api/uber.json {method: \"get\", path: \"/estimates/time\"}\n",
+        "snippet" : ":include-open-api: open-api/uber.json {method: \"get\", path: \"/estimates/time\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -478,7 +478,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-open-api: petstore-openapi3.json {operationId: \"updatePet\"}\n",
+        "snippet" : ":include-open-api: petstore-openapi3.json {operationId: \"updatePet\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1784,7 +1784,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-open-api: petstore-openapi3.json {operationId: \"addPet\", autoSection: true}\n",
+        "snippet" : ":include-open-api: petstore-openapi3.json {operationId: \"addPet\", autoSection: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -3081,7 +3081,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-open-api: open-api/uber.yaml {tags: \"Estimates\", autoSection: true}\n",
+        "snippet" : ":include-open-api: open-api/uber.yaml {tags: \"Estimates\", autoSection: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -3111,6 +3111,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "content" : [ {
           "text" : "The Price Estimates endpoint returns an estimated price range for each product offered at a given location. The price estimate is provided as a formatted string with the full price range and the localized currency symbol.",
           "type" : "SimpleText"
+        }, {
+          "html" : "<br>",
+          "isInlined" : true,
+          "type" : "EmbeddedHtml"
+        }, {
+          "html" : "<br>",
+          "isInlined" : true,
+          "type" : "EmbeddedHtml"
         }, {
           "text" : "The response also includes low and high estimates, and the ",
           "type" : "SimpleText"
@@ -3634,7 +3642,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409499,
+    "lastModifiedTime" : 1730676651007,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Open API",

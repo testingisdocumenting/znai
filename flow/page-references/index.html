@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -97,6 +97,11 @@
 <article>
 <header><h1>Downloads</h1></header>
 <p>Linking to a local file will deploy the file along with the generated documentation Clicking the link will open a file using the browser s default method Download test json file Download test json file data test json</p>
+</article>
+
+<article>
+<header><h1>Custom Anchor Id</h1></header>
+<p>Use after section title to set a custom anchor Section With Custom Anchor #anchori id ## Section With Custom Anchor #my custom id</p>
 </article>
 
 <article>
@@ -192,7 +197,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "[Link Title](http://external/reference)\n",
+        "snippet" : "[Link Title](http://external/reference)",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -209,7 +214,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "[internal link](../dir-name/file-name.md#optional-page-section-id)\n[internal link](./file-name.md#optional-page-section-id)\n[internal link](dir-name/file-name#optional-page-section-id)\n",
+        "snippet" : "[internal link](../dir-name/file-name.md#optional-page-section-id)\n[internal link](./file-name.md#optional-page-section-id)\n[internal link](dir-name/file-name#optional-page-section-id)",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -246,7 +251,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "[Here is an example](../flow/page-references.md#links-links-to-subsection)\n[Here is an example](flow/page-references#links-links-to-subsection)\n",
+        "snippet" : "[Here is an example](../flow/page-references.md#links-links-to-subsection)\n[Here is an example](flow/page-references#links-links-to-subsection)",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -268,7 +273,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "[Subsection Shortcut](#links)\n",
+        "snippet" : "[Subsection Shortcut](#links)",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -314,7 +319,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "[index page](/)\n[index page](/#link-to-subsection)\n",
+        "snippet" : "[index page](/)\n[index page](/#link-to-subsection)",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -336,7 +341,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "Download [test json file](data/test.json)\n",
+        "snippet" : "Download [test json file](data/test.json)",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -353,6 +358,36 @@ ReactDOM.render(React.createElement(Documentation, {
             "type" : "SimpleText"
           } ]
         } ]
+      } ]
+    }, {
+      "id" : "custom-anchor-id",
+      "additionalIds" : [ ],
+      "title" : "Custom Anchor Id",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "{#anchori-id}",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " after section title to set a custom anchor:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "## Section With Custom Anchor {#my-custom-id}",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "customAnchorId" : "my-custom-id",
+        "id" : "my-custom-id",
+        "additionalIds" : [ ],
+        "level" : 2,
+        "title" : "Section With Custom Anchor",
+        "type" : "SubHeading"
       } ]
     }, {
       "id" : "validation",
@@ -384,7 +419,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409485,
+    "lastModifiedTime" : 1730676650987,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Page References",
@@ -402,6 +437,9 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "title" : "Downloads",
         "id" : "downloads"
+      }, {
+        "title" : "Custom Anchor Id",
+        "id" : "custom-anchor-id"
       }, {
         "title" : "Validation",
         "id" : "validation"

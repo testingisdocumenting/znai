@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -219,7 +219,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```json\n[{\"key1\": \"value1\"}, {\"key2\": \"value2\"}]\n```\n",
+        "snippet" : "```json\n[{\"key1\": \"value1\"}, {\"key2\": \"value2\"}]\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -252,7 +252,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-json: simple.json\n",
+        "snippet" : ":include-json: simple.json",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -284,7 +284,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```json {highlightValue: \"root[1].key2\"}\n[{\"key1\": \"value1\"}, {\"key2\": \"value2\"}]\n```\n",
+        "snippet" : "```json {highlightValue: \"root[1].key2\"}\n[{\"key1\": \"value1\"}, {\"key2\": \"value2\"}]\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -310,7 +310,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {highlightValue: [\"root.store.book[0].category\", \"root.store.book[2].category\"]}\n",
+        "snippet" : ":include-json: book-store.json {highlightValue: [\"root.store.book[0].category\", \"root.store.book[2].category\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -389,7 +389,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Json"
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {highlightValueFile: \"book-store-paths.json\"}\n",
+        "snippet" : ":include-json: book-store.json {highlightValueFile: \"book-store-paths.json\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -448,7 +448,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```json {highlightKey: \"root[1].key2\"}\n[{\"key1\": [\"value11\", \"value12\"]}, {\"key2\": [\"value21\", \"value22\"]}]\n```\n",
+        "snippet" : "```json {highlightKey: \"root[1].key2\"}\n[{\"key1\": [\"value11\", \"value12\"]}, {\"key2\": [\"value21\", \"value22\"]}]\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -488,7 +488,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Json"
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {highlightKeyFile: \"book-store-paths.json\"}\n",
+        "snippet" : ":include-json: book-store.json {highlightKeyFile: \"book-store-paths.json\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -563,7 +563,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\"}\n",
+        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -602,7 +602,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {encloseInObject: \"books.rare\", include: \"$..book[0,1]\"}\n",
+        "snippet" : ":include-json: book-store.json {encloseInObject: \"books.rare\", include: \"$..book[0,1]\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -646,7 +646,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", title: \"Books\"}\n",
+        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", title: \"Books\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -681,7 +681,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", autoTitle: true}\n",
+        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", autoTitle: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -747,7 +747,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Json"
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", title: \"Books\", anchorId: \"my-books\"}\n",
+        "snippet" : ":include-json: book-store.json {include: \"$..book[0,1]\", title: \"Books\", anchorId: \"my-books\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -796,7 +796,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}\n",
+        "snippet" : ":include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -863,7 +863,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {collapsedPaths: ['root.store.book']}\n",
+        "snippet" : ":include-json: book-store.json {collapsedPaths: ['root.store.book']}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -945,7 +945,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-json: book-store.json {highlight: [\"category\", 2]}\n",
+        "snippet" : ":include-json: book-store.json {highlight: [\"category\", 2]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1005,7 +1005,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-json: trader.json {\n  title: \"trader\",\n  referencesPath: \"references/json-references-demo.csv\"\n}\n",
+        "snippet" : ":include-json: trader.json {\n  title: \"trader\",\n  referencesPath: \"references/json-references-demo.csv\"\n}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1056,7 +1056,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-json: book-store.json {\n  collapsedPaths: ['root.store.book'],\n  callouts: {\n   \"root.store.bicycle.color\": \"subject of **availability**\",\n   \"root.store.bicycle.price\": \"*price* changes daily\"\n  }}\n}\n",
+        "snippet" : ":include-json: book-store.json {\n  collapsedPaths: ['root.store.book'],\n  callouts: {\n   \"root.store.bicycle.color\": \"subject of **availability**\",\n   \"root.store.bicycle.price\": \"*price* changes daily\"\n  }}\n}",
         "lineNumber" : "",
         "title" : "callouts example",
         "highlight" : [ 2 ],
@@ -1153,7 +1153,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-json: book-store.json {\n  collapsedPaths: ['root.store.book'],\n  calloutsFile: \"schema-notes.json\"\n}\n",
+        "snippet" : ":include-json: book-store.json {\n  collapsedPaths: ['root.store.book'],\n  calloutsFile: \"schema-notes.json\"\n}",
         "lineNumber" : "",
         "title" : "callouts file example",
         "highlight" : [ 2 ],
@@ -1291,7 +1291,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-json: weather-example/response.json {\n  title: \"weather response example\",\n  highlightValueFile: \"weather-example/paths.json\"\n}\n",
+        "snippet" : ":include-json: weather-example/response.json {\n  title: \"weather response example\",\n  highlightValueFile: \"weather-example/paths.json\"\n}",
         "lineNumber" : "",
         "title" : "include-json using test results",
         "anchorId" : "test-results-include-json-using-test-results",
@@ -1331,7 +1331,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: incomplete.json\n",
+        "snippet" : ":include-file: incomplete.json",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1340,7 +1340,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409498,
+    "lastModifiedTime" : 1730676651003,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Json",

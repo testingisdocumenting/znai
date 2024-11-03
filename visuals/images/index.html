@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -188,7 +188,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "![alt text](regular-image.png)\n",
+        "snippet" : "![alt text](regular-image.png)",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -197,12 +197,12 @@ ReactDOM.render(React.createElement(Documentation, {
         "width" : 583,
         "title" : null,
         "inlined" : false,
-        "timestamp" : 1727735409514,
+        "timestamp" : 1730676651023,
         "height" : 385,
         "type" : "Image"
       }, {
         "lang" : "markdown",
-        "snippet" : "![alt text](castle.jpg \"custom title\")\n",
+        "snippet" : "![alt text](castle.jpg \"custom title\")",
         "lineNumber" : "",
         "title" : "with title",
         "anchorId" : "standard-markdown-with-title",
@@ -213,7 +213,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "width" : 810,
         "title" : "custom title",
         "inlined" : false,
-        "timestamp" : 1727735409509,
+        "timestamp" : 1730676651015,
         "height" : 557,
         "type" : "Image"
       } ]
@@ -316,7 +316,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-image: castle.jpg {title: \"beautiful castle\"}\n",
+        "snippet" : ":include-image: castle.jpg {title: \"beautiful castle\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -324,7 +324,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "fit" : false,
         "title" : "beautiful castle",
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1727735409509,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -356,7 +356,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-image: castle.jpg {title: \"beautiful castle\", anchorId: \"castle-image\"}\n",
+        "snippet" : ":include-image: castle.jpg {title: \"beautiful castle\", anchorId: \"castle-image\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -365,7 +365,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "beautiful castle",
         "anchorId" : "castle-image",
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1727735409509,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -390,14 +390,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-image: image.png {border: true}\n",
+        "snippet" : ":include-image: image.png {border: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "border" : true,
         "fit" : false,
         "imageSrc" : "/znai/visuals/regular-image.png",
-        "timestamp" : 1727735409514,
+        "timestamp" : 1730676651023,
         "shapes" : [ ],
         "width" : 583.0,
         "height" : 385.0,
@@ -419,7 +419,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "fit" : false,
         "title" : "wide image",
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1727735409508,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -439,7 +439,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-image: books.jpg {fit: true}\n",
+        "snippet" : ":include-image: books.jpg {fit: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -453,7 +453,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "fit" : true,
         "title" : "auto scaled down image",
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1727735409508,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -491,7 +491,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-image: books.jpg {scale: 0.3}\n",
+        "snippet" : ":include-image: books.jpg {scale: 0.3}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -499,7 +499,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "fit" : false,
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1727735409508,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -530,7 +530,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-image: books.jpg {align: \"left\", scale: 0.3}\n",
+        "snippet" : ":include-image: books.jpg {align: \"left\", scale: 0.3}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -539,14 +539,14 @@ ReactDOM.render(React.createElement(Documentation, {
         "align" : "left",
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1727735409508,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
         "type" : "AnnotatedImage"
       }, {
         "lang" : "",
-        "snippet" : ":include-image: books.jpg {align: \"right\", scale: 0.3}\n",
+        "snippet" : ":include-image: books.jpg {align: \"right\", scale: 0.3}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -555,7 +555,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "align" : "right",
         "scale" : 0.3,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1727735409508,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -591,7 +591,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-image: books.jpg {\n  fit: true, \n  title: \"books\", \n  anchorId: \"my-books\", \n  collapsed: true\n}\n",
+        "snippet" : ":include-image: books.jpg {\n  fit: true, \n  title: \"books\", \n  anchorId: \"my-books\", \n  collapsed: true\n}",
         "lineNumber" : "",
         "highlight" : [ 4 ],
         "type" : "Snippet"
@@ -602,7 +602,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "anchorId" : "my-books",
         "collapsed" : true,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1727735409508,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -627,7 +627,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-image: books.jpg {\n  fit: true,\n  title: \"books\",\n  collapsed: true,\n  noGap: true\n}\n:include-image: castle.jpg {\n  fit: true,\n  title: \"castle\",\n  collapsed: false\n}\n",
+        "snippet" : ":include-image: books.jpg {\n  fit: true,\n  title: \"books\",\n  collapsed: true,\n  noGap: true\n}\n:include-image: castle.jpg {\n  fit: true,\n  title: \"castle\",\n  collapsed: false\n}",
         "lineNumber" : "",
         "highlight" : [ 4 ],
         "type" : "Snippet"
@@ -638,7 +638,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "collapsed" : true,
         "noGap" : true,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1727735409508,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -650,7 +650,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "castle",
         "collapsed" : false,
         "imageSrc" : "/znai/visuals/castle.jpg",
-        "timestamp" : 1727735409509,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 810.0,
         "height" : 557.0,
@@ -670,7 +670,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "![text](https://external-url)\n\n:include-image: https://external-url { align: \"left\" }\n",
+        "snippet" : "![text](https://external-url)\n\n:include-image: https://external-url { align: \"left\" }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -716,7 +716,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-image: small-book.png {title: \"only visible in mobile screen size\", mobileOnly: true}\n:include-image: books.jpg {title: \"only visible in desktop screen size\", desktopOnly: true, fit: true}\n",
+        "snippet" : ":include-image: small-book.png {title: \"only visible in mobile screen size\", mobileOnly: true}\n:include-image: books.jpg {title: \"only visible in desktop screen size\", desktopOnly: true, fit: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -725,7 +725,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "only visible in mobile screen size",
         "mobileOnly" : true,
         "imageSrc" : "/znai/visuals/small-book.png",
-        "timestamp" : 1727735409514,
+        "timestamp" : 1730676651023,
         "shapes" : [ ],
         "width" : 256.0,
         "height" : 200.0,
@@ -737,7 +737,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "title" : "only visible in desktop screen size",
         "desktopOnly" : true,
         "imageSrc" : "/znai/visuals/books.jpg",
-        "timestamp" : 1727735409508,
+        "timestamp" : 1730676651015,
         "shapes" : [ ],
         "width" : 1698.0,
         "height" : 1131.0,
@@ -745,7 +745,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "AnnotatedImage"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409513,
+    "lastModifiedTime" : 1730676651019,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Images",

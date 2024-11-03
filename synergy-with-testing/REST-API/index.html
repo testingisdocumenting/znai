@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -236,7 +236,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "GraphVizDiagram"
       }, {
         "lang" : "markdown",
-        "snippet" : "# Create Employee\n\n:include-open-api: openapi/api-spec.json {operationId: \"createEmployee\" }\n\n```columns\nleft: \n:include-json: doc-artifacts/employee-post/request.json { title: \"request payload\" }\n\nright: \n:include-json: doc-artifacts/employee-post/response.json { \n  title: \"response payload\", \n  highlightValueFile: \"doc-artifacts/employee-post/paths.json\" \n}\n```\n",
+        "snippet" : "# Create Employee\n\n:include-open-api: openapi/api-spec.json {operationId: \"createEmployee\" }\n\n```columns\nleft: \n:include-json: doc-artifacts/employee-post/request.json { title: \"request payload\" }\n\nright: \n:include-json: doc-artifacts/employee-post/response.json { \n  title: \"response payload\", \n  highlightValueFile: \"doc-artifacts/employee-post/paths.json\" \n}\n```",
         "lineNumber" : "",
         "title" : "znai example of using test artifacts",
         "anchorId" : "documentation-pipeline-znai-example-of-using-test-artifacts",
@@ -400,7 +400,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409501,
+    "lastModifiedTime" : 1730676651007,
     "tocItem" : {
       "chapterTitle" : "Synergy With Testing",
       "pageTitle" : "REST API",

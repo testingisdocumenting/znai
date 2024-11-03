@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -194,7 +194,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: file-name.js\n",
+        "snippet" : ":include-file: file-name.js",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -300,7 +300,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: simple.c\n",
+        "snippet" : ":include-file: simple.c",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -309,7 +309,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-file: Hello.sc\n",
+        "snippet" : ":include-file: Hello.sc",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -330,7 +330,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: simple.c {lang: \"java\"}\n",
+        "snippet" : ":include-file: simple.c {lang: \"java\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -357,7 +357,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "type" : "Section",
       "content" : [ {
         "lang" : "",
-        "snippet" : ":include-file: file-name.js {title: \"ES6 class\"} \n",
+        "snippet" : ":include-file: file-name.js {title: \"ES6 class\"} ",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -398,7 +398,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: file-name.js {autoTitle: true} \n",
+        "snippet" : ":include-file: file-name.js {autoTitle: true} ",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -434,7 +434,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: file-name.js {autoTitle: true, anchorId: \"my-code-anchor\"}\n",
+        "snippet" : ":include-file: file-name.js {autoTitle: true, anchorId: \"my-code-anchor\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -464,7 +464,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: WideCode.java {wide: true}\n",
+        "snippet" : ":include-file: WideCode.java {wide: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -523,7 +523,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: WideCode.java {wrap: true}\n",
+        "snippet" : ":include-file: WideCode.java {wrap: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -571,7 +571,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3}\n",
+        "snippet" : ":include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -611,7 +611,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: file-name.js {title: \"collapsible snippet\", collapsed: true}\n",
+        "snippet" : ":include-file: file-name.js {title: \"collapsible snippet\", collapsed: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -641,7 +641,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: file-name.js {title: \"part one\", noGap: true, collapsed: false}\n:include-file: simple.c {title: \"part two\", collapsed: false}\n",
+        "snippet" : ":include-file: file-name.js {title: \"part one\", noGap: true, collapsed: false}\n:include-file: simple.c {title: \"part two\", collapsed: false}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -673,7 +673,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: ocaml/api.mli {title: \"Game\", noGap: true, noGapBorder: true}\n:include-file: ocaml/api.ml\n",
+        "snippet" : ":include-file: ocaml/api.mli {title: \"Game\", noGap: true, noGapBorder: true}\n:include-file: ocaml/api.ml",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -738,7 +738,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409498,
+    "lastModifiedTime" : 1730676651003,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "External Code Snippets",

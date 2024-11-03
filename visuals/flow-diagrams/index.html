@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -223,7 +223,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-flow-chart: simple-dag.json\n",
+        "snippet" : ":include-flow-chart: simple-dag.json",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -443,7 +443,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-flow-chart: simple-dag.json {highlight: \"n3\"}\n",
+        "snippet" : ":include-flow-chart: simple-dag.json {highlight: \"n3\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -604,7 +604,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-diagram-legend: {a: \"inputs\", b: \"optimization process\", c: \"outcome\", d: \"unknown\",\n    clickableNodes: true}\n\n:include-flow-chart: flow-diagrams/simple-dag-colors.json\n",
+        "snippet" : ":include-diagram-legend: {a: \"inputs\", b: \"optimization process\", c: \"outcome\", d: \"unknown\",\n    clickableNodes: true}\n\n:include-flow-chart: flow-diagrams/simple-dag-colors.json",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -652,7 +652,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-meta: {allAtOnce: true}\n",
+        "snippet" : ":include-meta: {allAtOnce: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -721,7 +721,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-flow-chart: simple-dag.json {layout: \"neato\"}\n",
+        "snippet" : ":include-flow-chart: simple-dag.json {layout: \"neato\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -820,7 +820,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: \"nodes/set-a.json\"}\n",
+        "snippet" : ":include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: \"nodes/set-a.json\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -836,7 +836,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "GraphVizDiagram"
       }, {
         "lang" : "",
-        "snippet" : ":include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: [\"nodes/set-a.json\", \"nodes/set-b.json\"]}\n",
+        "snippet" : ":include-flow-chart: flow-diagrams/graph-using-lib.json {nodeLibPath: [\"nodes/set-a.json\", \"nodes/set-b.json\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -852,7 +852,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "GraphVizDiagram"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409510,
+    "lastModifiedTime" : 1730676651019,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Flow Diagrams",

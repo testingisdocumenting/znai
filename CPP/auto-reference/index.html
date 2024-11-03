@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -170,7 +170,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-doxygen-member: utils::nested::my_func\n",
+        "snippet" : ":include-doxygen-member: utils::nested::my_func",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -349,7 +349,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-doxygen-member: multi_println\n",
+        "snippet" : ":include-doxygen-member: multi_println",
         "lineNumber" : "",
         "title" : "template example",
         "anchorId" : "member-signature-comment-and-parameters-template-example",
@@ -499,7 +499,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }\n",
+        "snippet" : ":include-doxygen-member: utils::second::ThirdClass::bark { signatureOnly: true }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -538,7 +538,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-doxygen-member: utils::nested::their_func { signatureOnly: true, includeAllMatches: true }\n",
+        "snippet" : ":include-doxygen-member: utils::nested::their_func { signatureOnly: true, includeAllMatches: true }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -663,7 +663,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-doxygen-member: utils::nested::their_func { args: \"long, bool\" }\n",
+        "snippet" : ":include-doxygen-member: utils::nested::their_func { args: \"long, bool\" }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -786,7 +786,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-doxygen-compound: utils::second::AnotherClass\n",
+        "snippet" : ":include-doxygen-compound: utils::second::AnotherClass",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1401,7 +1401,7 @@ ReactDOM.render(React.createElement(Documentation, {
           } ]
         }, {
           "lang" : "cpp",
-          "snippet" : "utils::second::AnotherClass* instance;\ninstance->help(10, 20);\n",
+          "snippet" : "utils::second::AnotherClass* instance;\ninstance->help(10, 20);",
           "lineNumber" : "",
           "type" : "Snippet"
         } ]
@@ -1470,7 +1470,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-doxygen-compound: utils::second::MyClass\n",
+        "snippet" : ":include-doxygen-compound: utils::second::MyClass",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1606,7 +1606,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409482,
+    "lastModifiedTime" : 1730676650987,
     "tocItem" : {
       "chapterTitle" : "CPP",
       "pageTitle" : "Auto Reference",

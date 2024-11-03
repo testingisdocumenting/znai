@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -166,7 +166,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-markdown: markdown-dir/md-to-include.md\n",
+        "snippet" : ":include-markdown: markdown-dir/md-to-include.md",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -239,7 +239,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-markdown: {firstAvailable: [\n    \"markdown-dir/getting-started-step-internal.md\", \n    \"markdown-dir/getting-started-step-external.md\"]}\n",
+        "snippet" : ":include-markdown: {firstAvailable: [\n    \"markdown-dir/getting-started-step-internal.md\", \n    \"markdown-dir/getting-started-step-external.md\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -284,7 +284,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: \"<> (marker-one)\"}\n",
+        "snippet" : ":include-markdown: markdown-dir/markdown-with-markers.md {surroundedBy: \"<> (marker-one)\"}",
         "lineNumber" : "",
         "title" : "partial include",
         "anchorId" : "partial-markdown-partial-include",
@@ -297,7 +297,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "parameter=value\n",
+        "snippet" : "parameter=value",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -314,7 +314,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "content `:markdown: path-to-file.md` content\n",
+        "snippet" : "content `:markdown: path-to-file.md` content",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -325,7 +325,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "Use the latest version `:markdown: markdown-dir/inlined.md` to get the feature.\n",
+        "snippet" : "Use the latest version `:markdown: markdown-dir/inlined.md` to get the feature.",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -361,7 +361,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "Use the latest version `:markdown: {\n  firstAvailable: [\"markdown-dir/inlined-alternative.md\", \"markdown-dir/inlined.md\"]}` to get the feature.\n",
+        "snippet" : "Use the latest version `:markdown: {\n  firstAvailable: [\"markdown-dir/inlined-alternative.md\", \"markdown-dir/inlined.md\"]}` to get the feature.",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -438,7 +438,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-markdowns: faq-collection {sort: \"ascending\"}\n",
+        "snippet" : ":include-markdowns: faq-collection {sort: \"ascending\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -487,7 +487,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409499,
+    "lastModifiedTime" : 1730676651007,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Markdown",

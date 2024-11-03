@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -178,7 +178,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-piechart: charts/genres.csv\n",
+        "snippet" : ":include-piechart: charts/genres.csv",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -208,7 +208,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-barchart: charts/genres.csv\n",
+        "snippet" : ":include-barchart: charts/genres.csv",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -232,7 +232,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-barchart: charts/game-activities.csv\n",
+        "snippet" : ":include-barchart: charts/game-activities.csv",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -262,7 +262,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-barchart: charts/game-activities.csv {stack: true}\n",
+        "snippet" : ":include-barchart: charts/game-activities.csv {stack: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -292,7 +292,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 250}\n",
+        "snippet" : ":include-barchart: charts/game-activities.csv {stack: true, horizontal: true, height: 250}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -318,7 +318,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-linechart: charts/genres.csv\n",
+        "snippet" : ":include-linechart: charts/genres.csv",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -342,7 +342,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-linechart: charts/daily-genres.csv\n",
+        "snippet" : ":include-linechart: charts/daily-genres.csv",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -366,7 +366,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-linechart: charts/competitors.csv\n",
+        "snippet" : ":include-linechart: charts/competitors.csv",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -415,7 +415,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-linechart: charts/time-series.csv {time: true}\n",
+        "snippet" : ":include-linechart: charts/time-series.csv {time: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -438,7 +438,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-linechart: charts/daily-genres.csv {legend: true}\n",
+        "snippet" : ":include-linechart: charts/daily-genres.csv {legend: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -468,7 +468,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-linechart: charts/daily-genres.csv {wide: true}\n",
+        "snippet" : ":include-linechart: charts/daily-genres.csv {wide: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -486,7 +486,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-linechart: charts/daily-genres.csv {wide: true, height: 800}\n",
+        "snippet" : ":include-linechart: charts/daily-genres.csv {wide: true, height: 800}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -511,7 +511,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```piechart\ngenre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50\n```\n",
+        "snippet" : "```piechart\ngenre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -522,7 +522,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "EchartGeneric"
       }, {
         "lang" : "",
-        "snippet" : "```linechart {legend: true}\nday, RPG, RTS, FPS\nMonday, 100, 10, 0\nTuesday, 50, 50, 20\nWednesday, 10, 30, 50\nThursday, 5, 5, 100\nFriday, 0, 100, 10\n```\n",
+        "snippet" : "```linechart {legend: true}\nday, RPG, RTS, FPS\nMonday, 100, 10, 0\nTuesday, 50, 50, 20\nWednesday, 10, 30, 50\nThursday, 5, 5, 100\nFriday, 0, 100, 10\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -534,7 +534,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "EchartGeneric"
       }, {
         "lang" : "",
-        "snippet" : "```barchart\ngenre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50\n```\n",
+        "snippet" : "```barchart\ngenre, preference\nRPG, 75\nAction, 50\nRTS, 40\nFPS, 50\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -565,7 +565,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```barchart {columns: [\"genre\", \"rating\"]}\ngenre, preference, rating\nRPG, 75, 8\nAction, 50, 9\nRTS, 40, 1\nFPS, 50, 1\n```\n",
+        "snippet" : "```barchart {columns: [\"genre\", \"rating\"]}\ngenre, preference, rating\nRPG, 75, 8\nAction, 50, 9\nRTS, 40, 1\nFPS, 50, 1\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -606,7 +606,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-linechart: charts/competitors.csv {\n  legend: true,\n  breakpoint: [17, 42]\n}\n",
+        "snippet" : ":include-linechart: charts/competitors.csv {\n  legend: true,\n  breakpoint: [17, 42]\n}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -640,7 +640,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-piechart: charts/genres.csv {breakpoint: \"Action\"}\n",
+        "snippet" : ":include-piechart: charts/genres.csv {breakpoint: \"Action\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -664,7 +664,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-barchart: charts/genres.csv {\n  legend: true,\n  breakpoint: \"all\"\n}\n",
+        "snippet" : ":include-barchart: charts/genres.csv {\n  legend: true,\n  breakpoint: \"all\"\n}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -703,7 +703,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409509,
+    "lastModifiedTime" : 1730676651015,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Charts",

@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -200,7 +200,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-file: python-examples.py {\n    title: \"extracted example with surroundedBy\",\n    surroundedBy: \"# example-cancel-trade\"}\n",
+        "snippet" : ":include-file: python-examples.py {\n    title: \"extracted example with surroundedBy\",\n    surroundedBy: \"# example-cancel-trade\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -231,7 +231,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: custom.dsl {\n  title: \"keep marker lines\",\n  surroundedBy: \"block-A\",\n  surroundedByKeep: true\n}\n",
+        "snippet" : ":include-file: custom.dsl {\n  title: \"keep marker lines\",\n  surroundedBy: \"block-A\",\n  surroundedByKeep: true\n}",
         "lineNumber" : "",
         "highlight" : [ 3 ],
         "type" : "Snippet"
@@ -263,7 +263,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: python-examples.py {\n  title: \"extracted example\",\n  surroundedBy: [\"# example-import-block\", \"# example-cancel-trade\"]}\n",
+        "snippet" : ":include-file: python-examples.py {\n  title: \"extracted example\",\n  surroundedBy: [\"# example-import-block\", \"# example-cancel-trade\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -287,7 +287,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: python-examples.py {\n  title: \"extracted example\",\n  surroundedBy: [\"# example-import-block\", \"# example-cancel-trade\"],\n  surroundedBySeparator: [\"...\"]\n}\n",
+        "snippet" : ":include-file: python-examples.py {\n  title: \"extracted example\",\n  surroundedBy: [\"# example-import-block\", \"# example-cancel-trade\"],\n  surroundedBySeparator: [\"...\"]\n}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -355,7 +355,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: MyClass.java {surroundedByScope: {start: \"if (condition)\", scope: \"{}\"}}\n",
+        "snippet" : ":include-file: MyClass.java {surroundedByScope: {start: \"if (condition)\", scope: \"{}\"}}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -395,7 +395,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: ocaml/model.mli {surroundedByScope: {start: \"module ModelA\", scope: \"sig,end\"}}\n",
+        "snippet" : ":include-file: ocaml/model.mli {surroundedByScope: {start: \"module ModelA\", scope: \"sig,end\"}}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -428,7 +428,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: python-examples.py {\n  surroundedBy: \"# example-cancel-trade\",\n  replace: ['id', '\"trade_id\"'] }\n",
+        "snippet" : ":include-file: python-examples.py {\n  surroundedBy: \"# example-cancel-trade\",\n  replace: ['id', '\"trade_id\"'] }",
         "lineNumber" : "",
         "highlight" : [ 2 ],
         "type" : "Snippet"
@@ -454,7 +454,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-file: python-examples.py {\n  surroundedBy: \"# example-cancel-trade\",\n  replace: [['id', '\"trade_id\"'], [\"market\", \"api\"]]}\n",
+        "snippet" : ":include-file: python-examples.py {\n  surroundedBy: \"# example-cancel-trade\",\n  replace: [['id', '\"trade_id\"'], [\"market\", \"api\"]]}",
         "lineNumber" : "",
         "highlight" : [ 2 ],
         "type" : "Snippet"
@@ -493,7 +493,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-file: replace-all-group.txt {replace: [\"(\\\\w+)(\\\\d+)\", \"$2-$1\"]}\n",
+        "snippet" : ":include-file: replace-all-group.txt {replace: [\"(\\\\w+)(\\\\d+)\", \"$2-$1\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -535,7 +535,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-file: python-examples.py {startLine: \"example: book trade\", endLine: \"example-end\"}\n",
+        "snippet" : ":include-file: python-examples.py {startLine: \"example: book trade\", endLine: \"example-end\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -584,7 +584,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: python-examples.py { \n    startLine: \"example: book trade\",\n    endLine: \"example-end\",\n    excludeStartEnd: true }\n",
+        "snippet" : ":include-file: python-examples.py { \n    startLine: \"example: book trade\",\n    endLine: \"example-end\",\n    excludeStartEnd: true }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -679,7 +679,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: ocaml/seasons.ml {startLine: [\"let describe_season\", \"match season\"], startLineKeepLast: true}\n",
+        "snippet" : ":include-file: ocaml/seasons.ml {startLine: [\"let describe_season\", \"match season\"], startLineKeepLast: true}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -742,7 +742,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: python-examples.py { include: \"import \" }\nor\n:include-file: python-examples.py { include: [\"import \"] }\n",
+        "snippet" : ":include-file: python-examples.py { include: \"import \" }\nor\n:include-file: python-examples.py { include: [\"import \"] }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -772,7 +772,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: python-examples.py { exclude: \"# example\" }\nor\n:include-file: python-examples.py { exclude: [\"# example\"] }\n",
+        "snippet" : ":include-file: python-examples.py { exclude: \"# example\" }\nor\n:include-file: python-examples.py { exclude: [\"# example\"] }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -802,7 +802,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: python-examples.py { includeRegexp: \"market.*_trade\" }\nor\n:include-file: python-examples.py { includeRegexp: [\"market.*_trade\"] }\n",
+        "snippet" : ":include-file: python-examples.py { includeRegexp: \"market.*_trade\" }\nor\n:include-file: python-examples.py { includeRegexp: [\"market.*_trade\"] }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -832,7 +832,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-file: python-examples.py { excludeRegexp: [\"if .* ==\", \"\\\\s+main\", \"# example\", \"^\\\\s*$\"] }\n",
+        "snippet" : ":include-file: python-examples.py { excludeRegexp: [\"if .* ==\", \"\\\\s+main\", \"# example\", \"^\\\\s*$\"] }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -844,7 +844,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409500,
+    "lastModifiedTime" : 1730676651007,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Snippets Manipulation",

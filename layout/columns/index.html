@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -234,7 +234,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "```columns\nleft: \nthis content goes to the left\n\nand can span multiple lines\n\nright: \nthis content goes to the right\nand can span multiple lines\n```\n",
+        "snippet" : "```columns\nleft: \nthis content goes to the left\n\nand can span multiple lines\n\nright: \nthis content goes to the right\nand can span multiple lines\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -300,7 +300,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "```columns\nleft: \n### Pros {style: \"api\"}\n* Item One\n\nmiddle: \n### Undecided {style: \"api\"}\n* Item Two\n* Item Three\n\nright:\n### Cons {style: \"api\"}\n* Item Four\n```\n",
+        "snippet" : "```columns\nleft: \n### Pros {style: \"api\"}\n* Item One\n\nmiddle: \n### Undecided {style: \"api\"}\n* Item Two\n* Item Three\n\nright:\n### Cons {style: \"api\"}\n* Item Four\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -468,7 +468,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       }, {
         "lang" : "",
-        "snippet" : "```columns {right: {portion: 5}}\nleft: \n:include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"WebTau REST API test example\",\n  entry: \"weather\",\n  bodyOnly: true\n}\n\nright:\n:include-json: weather-example/response.json {\n  title: \"weather response example\",\n  highlightValueFile: \"weather-example/paths.json\"\n}\n```\n",
+        "snippet" : "```columns {right: {portion: 5}}\nleft: \n:include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {\n  title: \"WebTau REST API test example\",\n  entry: \"weather\",\n  bodyOnly: true\n}\n\nright:\n:include-json: weather-example/response.json {\n  title: \"weather response example\",\n  highlightValueFile: \"weather-example/paths.json\"\n}\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -531,7 +531,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       }, {
         "lang" : "",
-        "snippet" : "```columns {border: true}\nleft: \n**Before**\n\nHello World\n\nright:\n**After**\n\nWorld Of Hellos\n```\n",
+        "snippet" : "```columns {border: true}\nleft: \n**Before**\n\nHello World\n\nright:\n**After**\n\nWorld Of Hellos\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -597,7 +597,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Columns"
       }, {
         "lang" : "",
-        "snippet" : "```columns {border: true, left: {align: \"right\"}}\nleft: \n**Before**\n\nHello World\n\nright:\n**After**\n\nWorld Of Hellos\n```\n",
+        "snippet" : "```columns {border: true, left: {align: \"right\"}}\nleft: \n**Before**\n\nHello World\n\nright:\n**After**\n\nWorld Of Hellos\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       } ]
@@ -614,7 +614,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409486,
+    "lastModifiedTime" : 1730676650991,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Columns",

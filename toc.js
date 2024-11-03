@@ -108,6 +108,9 @@ toc = [ {
       "title" : "Sub Headings",
       "id" : "sub-headings"
     }, {
+      "title" : "Heading Allowed Content",
+      "id" : "heading-allowed-content"
+    }, {
       "title" : "Meta",
       "id" : "meta"
     } ]
@@ -163,6 +166,9 @@ toc = [ {
     }, {
       "title" : "Downloads",
       "id" : "downloads"
+    }, {
+      "title" : "Custom Anchor Id",
+      "id" : "custom-anchor-id"
     }, {
       "title" : "Validation",
       "id" : "validation"
@@ -244,6 +250,21 @@ toc = [ {
     "pageSectionIdTitles" : [ {
       "title" : "Linking To Support Site",
       "id" : "linking-to-support-site"
+    } ]
+  }, {
+    "chapterTitle" : "Flow",
+    "pageTitle" : "Footnotes",
+    "pageMeta" : { },
+    "dirName" : "flow",
+    "fileName" : "footnotes",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Definition",
+      "id" : "definition"
+    }, {
+      "title" : "Preview",
+      "id" : "preview"
     } ]
   }, {
     "chapterTitle" : "Flow",
@@ -1241,6 +1262,9 @@ toc = [ {
       "title" : "Fenced Block",
       "id" : "fenced-block"
     }, {
+      "title" : "Alignment",
+      "id" : "alignment"
+    }, {
       "title" : "External File",
       "id" : "external-file"
     }, {
@@ -1282,6 +1306,9 @@ toc = [ {
     }, {
       "title" : "Title",
       "id" : "title"
+    }, {
+      "title" : "Height",
+      "id" : "height"
     }, {
       "title" : "Embedding Video",
       "id" : "embedding-video"
@@ -1984,6 +2011,9 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.72",
+      "id" : "172"
+    }, {
       "title" : "1.71",
       "id" : "171"
     }, {

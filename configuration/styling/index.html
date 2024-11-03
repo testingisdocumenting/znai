@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -167,7 +167,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "css",
-        "snippet" : ":root {\n    --znai-regular-text-size: 16px;\n    --znai-smaller-text-size: 14px;\n    --znai-code-text-size: 13px;\n    --znai-code-font-family: Menlo, Monaco, Consolas, \"Courier New\", monospace;\n}\n",
+        "snippet" : ":root {\n    --znai-regular-text-size: 16px;\n    --znai-smaller-text-size: 14px;\n    --znai-code-text-size: 13px;\n    --znai-code-font-family: Menlo, Monaco, Consolas, \"Courier New\", monospace;\n}",
         "lineNumber" : "",
         "title" : "style.css",
         "anchorId" : "css-variables-stylecss",
@@ -198,14 +198,14 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "css",
-        "snippet" : ".theme-znai-dark {\n    --znai-code-keyword-color: #5050af;\n}\n",
+        "snippet" : ".theme-znai-dark {\n    --znai-code-keyword-color: #5050af;\n}",
         "lineNumber" : "",
         "title" : "style.css",
         "anchorId" : "dark-light-themes-overrides-stylecss",
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409482,
+    "lastModifiedTime" : 1730676650987,
     "tocItem" : {
       "chapterTitle" : "Configuration",
       "pageTitle" : "Styling",

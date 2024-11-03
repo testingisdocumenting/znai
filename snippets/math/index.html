@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -86,12 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>LaTeX Block</h1></header>
-<p>To render math you can use LaTeX math expressions Surround LaTeX expression with fenced block and specify as a language The result will be a following math expression forall x in X quad exists y leq epsilon x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases latex ```latex forall x in X quad exists y leq epsilon ``` ```latex x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases ```</p>
+<p>To render math you can use LaTeX math expressions Surround LaTeX expression with fenced block and specify as a language The result will be a following math expression forall x in X quad exists y leq epsilon x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases Alternatively surround a match expression with double dollar sign to render it into a latex block Given x y and y z latex ```latex forall x in X quad exists y leq epsilon ``` ```latex x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases ``` $$ Given $$x y$$ and $$y z$$</p>
 </article>
 
 <article>
 <header><h1>LaTeX Inline</h1></header>
-<p>Znai also supports inline LaTeX Use single backticks instead of three to render math expressions inline JSON parameters are used to allow LaTeX braces to be parsed correctly The result will be a following math expression It holds that It holds that ` latex src frac 1 2 &lt; sqrt 2 `</p>
+<p>Znai also supports inline LaTeX Use single backticks instead of three to render math expressions inline JSON parameters are used to allow LaTeX braces to be parsed correctly The result will be a following math expression It holds that Alternatively you can surround latex expression with It holds that It holds that ` latex src frac 1 2 &lt; sqrt 2 ` $ It holds that $ frac 1 2 &lt; sqrt 2 $</p>
 </article>
 
 <article>
@@ -170,7 +170,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```latex\n\\forall x \\in X, \\quad \\exists y \\leq \\epsilon\n```\n",
+        "snippet" : "```latex\n\\forall x \\in X, \\quad \\exists y \\leq \\epsilon\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -184,12 +184,46 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Latex"
       }, {
         "lang" : "",
-        "snippet" : "```latex\nx = \\begin{cases}\na &\\text{if } b \\\\\nc &\\text{if } d \\\\\nx &\\text{if } z\n\\end{cases}\n```\n",
+        "snippet" : "```latex\nx = \\begin{cases}\na &\\text{if } b \\\\\nc &\\text{if } d \\\\\nx &\\text{if } z\n\\end{cases}\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "latex" : "x = \\begin{cases}\na &\\text{if } b \\\\\nc &\\text{if } d \\\\\nx &\\text{if } z\n\\end{cases}\n",
         "type" : "Latex"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Alternatively surround a match expression with double dollar ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "$$",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " sign to render it into a latex block.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "Given: \n$$x=y$$ and $$y=z$$",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Given:",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "latex" : "x=y",
+          "type" : "Latex"
+        }, {
+          "text" : " and ",
+          "type" : "SimpleText"
+        }, {
+          "latex" : "y=z",
+          "type" : "Latex"
+        } ]
       } ]
     }, {
       "id" : "latex-inline",
@@ -204,7 +238,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "It holds that `:latex: {src: \"\\\\frac{1}{2} < \\\\sqrt{2}\"}`.\n",
+        "snippet" : "It holds that `:latex: {src: \"\\\\frac{1}{2} < \\\\sqrt{2}\"}`.",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -224,6 +258,32 @@ ReactDOM.render(React.createElement(Documentation, {
         }, {
           "text" : ".",
           "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Alternatively you can surround latex expression with ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "$",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ".",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "It holds that $\\frac{1}{2} < \\sqrt{2}$",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "It holds that ",
+          "type" : "SimpleText"
+        }, {
+          "latex" : "\\frac{1}{2} < \\sqrt{2}",
+          "type" : "InlinedLatex"
         } ]
       } ]
     }, {
@@ -276,7 +336,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409499,
+    "lastModifiedTime" : 1730676651007,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Math",

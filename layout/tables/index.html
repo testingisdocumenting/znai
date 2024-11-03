@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -229,7 +229,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table.csv \n",
+        "snippet" : ":include-table: table.csv ",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -358,7 +358,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table.json \n",
+        "snippet" : ":include-table: table.json ",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -469,7 +469,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table.json {title: \"Monthly Report\"}\n",
+        "snippet" : ":include-table: table.json {title: \"Monthly Report\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -566,7 +566,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table.json {title: \"Monthly Report\", anchorId: \"my-super-table\"}\n",
+        "snippet" : ":include-table: table/table.json {title: \"Monthly Report\", anchorId: \"my-super-table\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -668,7 +668,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-table: table/table.json {\n  title: \"Monthly Report\",\n  collapsed: true\n}\n",
+        "snippet" : ":include-table: table/table.json {\n  title: \"Monthly Report\",\n  collapsed: true\n}",
         "lineNumber" : "",
         "highlight" : [ 2 ],
         "type" : "Snippet"
@@ -761,7 +761,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : ":include-table: table/table.json {\n  title: \"Monthly Report\",\n  collapsed: true,\n  noGap: true\n}\n\n:include-table: table/table.json {\n  title: \"Weekly Report\",\n  collapsed: false\n}\n",
+        "snippet" : ":include-table: table/table.json {\n  title: \"Monthly Report\",\n  collapsed: true,\n  noGap: true\n}\n\n:include-table: table/table.json {\n  title: \"Weekly Report\",\n  collapsed: false\n}",
         "lineNumber" : "",
         "highlight" : [ 3 ],
         "type" : "Snippet"
@@ -924,7 +924,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table.json {title: \"Highlight multiple rows\", highlightRow: [0, 2]}\n",
+        "snippet" : ":include-table: table/table.json {title: \"Highlight multiple rows\", highlightRow: [0, 2]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -998,7 +998,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table.json {title: \"Highlight single row\", highlightRow: 1}\n",
+        "snippet" : ":include-table: table/table.json {title: \"Highlight single row\", highlightRow: 1}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1090,7 +1090,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table.csv {columns: [\"Description\", \"Price\"]}\n",
+        "snippet" : ":include-table: table.csv {columns: [\"Description\", \"Price\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1176,7 +1176,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table.csv {includeRowsRegexp: [\"table\", \"cha..\"]}\n",
+        "snippet" : ":include-table: table/table.csv {includeRowsRegexp: [\"table\", \"cha..\"]}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1261,7 +1261,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table.csv {includeRowsRegexp: [\"table\", \"cha..\"], excludeRowsRegexp: \"short\"}\n",
+        "snippet" : ":include-table: table/table.csv {includeRowsRegexp: [\"table\", \"cha..\"], excludeRowsRegexp: \"short\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1337,7 +1337,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table.csv {Price: {width: 200}, \"Description\": {width: 400}}\n",
+        "snippet" : ":include-table: table.csv {Price: {width: 200}, \"Description\": {width: 400}}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1434,7 +1434,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table.csv {Price: {width: \"50%\"}, \"Description\": {width: \"30%\"}}\n",
+        "snippet" : ":include-table: table/table.csv {Price: {width: \"50%\"}, \"Description\": {width: \"30%\"}}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1531,7 +1531,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table.csv {Price: {width: \"50%\"}, \"Description\": {width: \"60%\"}}\n",
+        "snippet" : ":include-table: table/table.csv {Price: {width: \"50%\"}, \"Description\": {width: \"60%\"}}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1646,7 +1646,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table-conflict.csv {\"_title\": {width: \"80%\"}}\n",
+        "snippet" : ":include-table: table/table-conflict.csv {\"_title\": {width: \"80%\"}}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1704,7 +1704,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table.csv {minColumnWidth: 400, \"Description\": {width: 500}}\n",
+        "snippet" : ":include-table: table/table.csv {minColumnWidth: 400, \"Description\": {width: 500}}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1813,7 +1813,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table/table.csv {wide: true, minColumnWidth: 400, title: \"My Items\"}\n",
+        "snippet" : ":include-table: table/table.csv {wide: true, minColumnWidth: 400, title: \"My Items\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1946,7 +1946,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table.csv {Price: {width: 200, align: \"right\"}}\n",
+        "snippet" : ":include-table: table.csv {Price: {width: 200, align: \"right\"}}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -2046,7 +2046,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table.json {Price: {width: 100, align: \"right\"}}\n",
+        "snippet" : ":include-table: table.json {Price: {width: 100, align: \"right\"}}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -2149,7 +2149,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "lang" : "",
-        "snippet" : ":include-table: table.csv {mappingPath: \"mapping.csv\"}\n",
+        "snippet" : ":include-table: table.csv {mappingPath: \"mapping.csv\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -2229,7 +2229,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "type" : "Section",
       "content" : [ {
         "lang" : "",
-        "snippet" : "```table {title: \"my table\", Price: {width: 100, align: \"right\"}}\nAccount, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch\n```\n",
+        "snippet" : "```table {title: \"my table\", Price: {width: 100, align: \"right\"}}\nAccount, Price, Description\n#12BGD3, 100, custom table with a long attachment\n#12BGD3, 150, chair\n#91AGB1, 10, lunch\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -2388,7 +2388,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           }, {
             "lang" : "java",
-            "snippet" : "class HelloWorld {\n}\n",
+            "snippet" : "class HelloWorld {\n}",
             "lineNumber" : "",
             "type" : "Snippet"
           } ] ] ]
@@ -2490,7 +2490,7 @@ ReactDOM.render(React.createElement(Documentation, {
       "type" : "Section",
       "content" : [ {
         "lang" : "",
-        "snippet" : "| Github        | Flavored      | Table |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |\n",
+        "snippet" : "| Github        | Flavored      | Table |\n| ------------- |:-------------:| -----:|\n| col 3 is      | right-aligned | $1600 |\n| col 2 is      | centered      |   $12 |",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -2528,7 +2528,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409486,
+    "lastModifiedTime" : 1730676650991,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Tables",

@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -155,7 +155,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```tabs\nJavaScript: :include-file: snippets/file-name.js\nJava: :include-file: snippets/WideCode.java \nCpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}\n```\n",
+        "snippet" : "```tabs\nJavaScript: :include-file: snippets/file-name.js\nJava: :include-file: snippets/WideCode.java \nCpp: :include-cpp: snippets/simple.cpp {entry: 'main', bodyOnly: true}\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -225,7 +225,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "````tabs\nJavaScript: \nFirst you need to download WebStorm and then run the following using your terminal\n\n```bash\n$ yarn install\n$ yarn start\n```\n    \nJava: \nFirst you need to download Intellij IDEA and then run the following using your terminal\n    \n```bash\n$ mvn install\n$ mvn exec:exec\n```\n    \nCpp: \nFirst you need to download CLion and then run the following using your terminal\n\n```bash\n$ pwd\n$ whoamis\n```\n````\n",
+        "snippet" : "````tabs\nJavaScript: \nFirst you need to download WebStorm and then run the following using your terminal\n\n```bash\n$ yarn install\n$ yarn start\n```\n    \nJava: \nFirst you need to download Intellij IDEA and then run the following using your terminal\n    \n```bash\n$ mvn install\n$ mvn exec:exec\n```\n    \nCpp: \nFirst you need to download CLion and then run the following using your terminal\n\n```bash\n$ pwd\n$ whoamis\n```\n````",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -242,7 +242,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           }, {
             "lang" : "bash",
-            "snippet" : "$ yarn install\n$ yarn start\n",
+            "snippet" : "$ yarn install\n$ yarn start",
             "lineNumber" : "",
             "type" : "Snippet"
           } ]
@@ -256,7 +256,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           }, {
             "lang" : "bash",
-            "snippet" : "$ mvn install\n$ mvn exec:exec\n",
+            "snippet" : "$ mvn install\n$ mvn exec:exec",
             "lineNumber" : "",
             "type" : "Snippet"
           } ]
@@ -270,7 +270,7 @@ ReactDOM.render(React.createElement(Documentation, {
             } ]
           }, {
             "lang" : "bash",
-            "snippet" : "$ pwd\n$ whoamis\n",
+            "snippet" : "$ pwd\n$ whoamis",
             "lineNumber" : "",
             "type" : "Snippet"
           } ]
@@ -278,7 +278,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "Tabs"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409487,
+    "lastModifiedTime" : 1730676650991,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Two Sides Tabs",

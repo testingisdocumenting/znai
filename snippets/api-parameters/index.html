@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -189,7 +189,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```api-parameters\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
+        "snippet" : "```api-parameters\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -262,7 +262,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```api-parameters\nsessionId, Integer, session Id\nperson, Person, person to login with\nperson.firstName, String, first name of the person\nperson.lastName, String, last name of the person\nroles, List<Role>, list of authorized roles\nroles.id, String, role id \nroles.description, String, role description\n```\n",
+        "snippet" : "```api-parameters\nsessionId, Integer, session Id\nperson, Person, person to login with\nperson.firstName, String, first name of the person\nperson.lastName, String, last name of the person\nroles, List<Role>, list of authorized roles\nroles.id, String, role id \nroles.description, String, role description\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -413,7 +413,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```api-parameters {title: \"person definition\"}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
+        "snippet" : "```api-parameters {title: \"person definition\"}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -493,7 +493,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true}\ncity, String, city name\nzipCode, String, zip code\n```\n",
+        "snippet" : "```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true}\ncity, String, city name\nzipCode, String, zip code\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -568,7 +568,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "```api-parameters { title: \"person definition\", anchorPrefix: \"title\", collapsed: false, noGap: true }\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n\n```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true}\ncity, String, city name\nzipCode, String, zip code\n```\n",
+        "snippet" : "```api-parameters { title: \"person definition\", anchorPrefix: \"title\", collapsed: false, noGap: true }\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n\n```api-parameters {title: \"address definition\", anchorPrefix: \"title\", collapsed: true}\ncity, String, city name\nzipCode, String, zip code\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -678,7 +678,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```api-parameters {small: true}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
+        "snippet" : "```api-parameters {small: true}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -757,7 +757,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "`````api-parameters \ncores, String, \"\n```\nexecute(cores: 10)\n```\nSpecify how many cores to allocate for execution\n\"\n\ngpu, Boolean, \"\n```\nexecute(cores: 10, gpu: true)\n```\nSpecify whether to use gpu\n\"\n`````\n",
+        "snippet" : "`````api-parameters \ncores, String, \"\n```\nexecute(cores: 10)\n```\nSpecify how many cores to allocate for execution\n\"\n\ngpu, Boolean, \"\n```\nexecute(cores: 10, gpu: true)\n```\nSpecify whether to use gpu\n\"\n`````",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -770,7 +770,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "anchorId" : "cores",
           "description" : [ {
             "lang" : "",
-            "snippet" : "execute(cores: 10)\n",
+            "snippet" : "execute(cores: 10)",
             "lineNumber" : "",
             "type" : "Snippet"
           }, {
@@ -789,7 +789,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "anchorId" : "gpu",
           "description" : [ {
             "lang" : "",
-            "snippet" : "execute(cores: 10, gpu: true)\n",
+            "snippet" : "execute(cores: 10, gpu: true)",
             "lineNumber" : "",
             "type" : "Snippet"
           }, {
@@ -903,7 +903,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-api-parameters: api-parameters.json {title: \"Person Definition\"}\n",
+        "snippet" : ":include-api-parameters: api-parameters.json {title: \"Person Definition\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1066,7 +1066,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```api-parameters {anchorPrefix: \"customPrefix\"}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```\n",
+        "snippet" : "```api-parameters {anchorPrefix: \"customPrefix\"}\nfirstName, String, description with *markdown* support\nscore, Integer, another description line with *markdown* support\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1207,7 +1207,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```api-parameters {anchorPrefix: \"customPrefix\", noWrap: true}\nVERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support\nVERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support\n```\n",
+        "snippet" : "```api-parameters {anchorPrefix: \"customPrefix\", noWrap: true}\nVERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support\nVERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1281,7 +1281,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "```api-parameters {anchorPrefix: \"customPrefix\", noWrap: true, wide: true}\nVERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, \"longer line longer line, description with *markdown* support\"\nVERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, \"longer line longer line, another description \nline with *markdown* support and few moe lines\"\n```\n",
+        "snippet" : "```api-parameters {anchorPrefix: \"customPrefix\", noWrap: true, wide: true}\nVERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, \"longer line longer line, description with *markdown* support\"\nVERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, \"longer line longer line, another description \nline with *markdown* support and few moe lines\"\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -1343,7 +1343,7 @@ ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1727735409497,
+    "lastModifiedTime" : 1730676651003,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "API Parameters",

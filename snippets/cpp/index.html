@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/znai/custom.css">
 </head>
 <link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
-<body class="theme-znai-dark">
+<body class="znai-theme theme-znai-dark">
 <script>(function() {
     var themeNameKey = 'znaiTheme';
     var darkThemeName = 'znai-dark';
@@ -28,7 +28,7 @@
         },
         set(name) {
             this.name = name;
-            document.body.className = 'theme-' + name;
+            document.body.className = 'znai-theme theme-' + name;
 
             var idx = 0;
             var len = this.changeHandlers.length;
@@ -162,7 +162,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-doxygen-doc-params: utils::nested::my_func { title: \"My Params\" }\n",
+        "snippet" : ":include-doxygen-doc-params: utils::nested::my_func { title: \"My Params\" }",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -257,7 +257,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : ":include-doxygen-member: multi_println\n",
+        "snippet" : ":include-doxygen-member: multi_println",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -398,7 +398,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1727735409498,
+    "lastModifiedTime" : 1730676651003,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Cpp",

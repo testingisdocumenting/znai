@@ -92,7 +92,7 @@
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 71&lt; version> &lt; plugin></text>
+      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 72&lt; version> &lt; plugin></text>
     </text>
   </entry>
   <entry>
@@ -108,7 +108,7 @@
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 71&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
+      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 72&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
     </text>
   </entry>
   <entry>
@@ -116,7 +116,7 @@
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 71&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
+      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 72&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
     </text>
   </entry>
   <entry>
@@ -156,7 +156,7 @@
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling deployment additional files example references domain api znai development local build release notes 2024 2023 2022 2021 introduction rationale rationale md</text>
+      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling deployment additional files example references domain api znai development local build release notes 2024 2023 2022 2021 introduction rationale rationale md</text>
     </text>
   </entry>
   <entry>
@@ -165,6 +165,14 @@
     <text>
       <score>STANDARD</score>
       <text>Only a first level heading is treated as a first class citizen Part of TOC Smallest unit of search result Nested sub headings only add visual distinction within a page Sub heading content of sub heading Sub Sub heading content of sub sub heading # First Class Citizen ## Sub heading content of sub heading ### Sub Sub heading content of sub sub heading</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/structure#heading-allowed-content</url>
+    <fullTitle>Znai: Structure, Heading Allowed Content [Flow]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Keep headings text simple and short Try to avoid putting extra formatting into headings inconsistent heading look and feel can feel distracting Note Only inlined code and Links are allowed as part of the heading content Consider sticking to a regular text</text>
     </text>
   </entry>
   <entry>
@@ -237,6 +245,14 @@
     <text>
       <score>STANDARD</score>
       <text>Linking to a local file will deploy the file along with the generated documentation Clicking the link will open a file using the browser s default method Download test json file Download test json file data test json</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/page-references#custom-anchor-id</url>
+    <fullTitle>Znai: Page References, Custom Anchor Id [Flow]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use after section title to set a custom anchor Section With Custom Anchor #anchori id ## Section With Custom Anchor #my custom id</text>
     </text>
   </entry>
   <entry>
@@ -336,6 +352,22 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/flow/footnotes#definition</url>
+    <fullTitle>Znai: Footnotes, Definition [Flow]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>To define a footnote use To add a reference to the footnote use which will result in ^1 extra content for my footnote goes here potentially including code blocks ``` Constructor ``` ^1</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/footnotes#preview</url>
+    <fullTitle>Znai: Footnotes, Preview [Flow]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Hover mouse over footnote reference see its content</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/flow/presentation#equal-flow</url>
     <fullTitle>Znai: Presentation, Equal Flow [Flow]</fullTitle>
     <text>
@@ -396,7 +428,7 @@
     <fullTitle>Znai: Code Snippets, Specifying Language [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>You can also specify a language to enable syntax highlighting for your snippet The following languages are supported Java JavaScript Groovy C Python Bash uses prismjs library to provide syntax highlighting Note that it is not being executed inside the browser but rather applied during HTML generation ```javascript import React Component from react class MyComponent extends Component render ``` import React Component from react class MyComponent extends Component render Znai</text>
+      <text>You can also specify a language to enable syntax highlighting for your snippet The following languages formats are supported C OCaml Python TypeScript Java SQL JSON Protobuf JavaScript Groovy Bash uses prismjs library to provide syntax highlighting Note that it is not being executed inside the browser but rather applied during HTML generation ```javascript import React Component from react class MyComponent extends Component render ``` import React Component from react class MyComponent extends Component render Znai</text>
     </text>
   </entry>
   <entry>
@@ -1148,7 +1180,7 @@
     <fullTitle>Znai: Math, LaTeX Block [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To render math you can use LaTeX math expressions Surround LaTeX expression with fenced block and specify as a language The result will be a following math expression forall x in X quad exists y leq epsilon x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases latex ```latex forall x in X quad exists y leq epsilon ``` ```latex x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases ```</text>
+      <text>To render math you can use LaTeX math expressions Surround LaTeX expression with fenced block and specify as a language The result will be a following math expression forall x in X quad exists y leq epsilon x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases Alternatively surround a match expression with double dollar sign to render it into a latex block Given x y and y z latex ```latex forall x in X quad exists y leq epsilon ``` ```latex x begin cases a &amp; text if b c &amp; text if d x &amp; text if z end cases ``` $$ Given $$x y$$ and $$y z$$</text>
     </text>
   </entry>
   <entry>
@@ -1156,7 +1188,7 @@
     <fullTitle>Znai: Math, LaTeX Inline [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai also supports inline LaTeX Use single backticks instead of three to render math expressions inline JSON parameters are used to allow LaTeX braces to be parsed correctly The result will be a following math expression It holds that It holds that ` latex src frac 1 2 &lt; sqrt 2 `</text>
+      <text>Znai also supports inline LaTeX Use single backticks instead of three to render math expressions inline JSON parameters are used to allow LaTeX braces to be parsed correctly The result will be a following math expression It holds that Alternatively you can surround latex expression with It holds that It holds that ` latex src frac 1 2 &lt; sqrt 2 ` $ It holds that $ frac 1 2 &lt; sqrt 2 $</text>
     </text>
   </entry>
   <entry>
@@ -2008,11 +2040,19 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/graphviz-diagrams#alignment</url>
+    <fullTitle>Znai: Graphviz Diagrams, Alignment [Visuals]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use parameter to change diagram alignment align ```graphviz align center digraph a > b</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/graphviz-diagrams#external-file</url>
     <fullTitle>Znai: Graphviz Diagrams, External File [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use include plugin to render a diagram from a file include graphviz graphviz dot digraph a > b b > c d > b b > e</text>
+      <text>Use include plugin to render a diagram from a file include graphviz graphviz dot align center digraph a > b b > c d > b b > e</text>
     </text>
   </entry>
   <entry>
@@ -2069,6 +2109,14 @@
     <text>
       <score>STANDARD</score>
       <text>Use parameter to display title bar on top of the embedded content title include iframe iframe custom html title rendered example light color #333 backgroundColor #eee dark color #eee backgroundColor #333 fit true</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/iframe#height</url>
+    <fullTitle>Znai: Iframe, Height [Visuals]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use to force container height Use to limit the automatically calculated height height maxHeight</text>
     </text>
   </entry>
   <entry>
@@ -3045,6 +3093,14 @@
     <text>
       <score>STANDARD</score>
       <text>cd znai dist target unzip dist znai zip export PATH $ pwd dist $PATH znai version</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2024#172</url>
+    <fullTitle>Znai: 2024 Releases, 1.72 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Add Code Snippets automatically strip extra indentation Add Experimental top header Add Headings support for links inside Add Graphviz better black color support in subgraph Add Graphviz option align Add Support for HTML block Add Initial Footnotes support Add Latex Math block shortcut support $$ Add Latex Math inline shortcut support $ Add Custom Anchor Id Add iframe to add scrollbars that match in style the main document maxHeight Add Search hotkey indicator</text>
     </text>
   </entry>
   <entry>
