@@ -17,11 +17,18 @@
 
 .documentation {
     display: flex;
+    flex-direction: column;
     position: fixed; /* using fixed to avoid 100vh ipad issue */
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    overflow: hidden;
+}
+
+.znai-side-panel-and-content {
+    display: flex;
+    flex: 1;
     overflow: hidden;
 }
 
@@ -253,7 +260,7 @@
     position: fixed;
     font-size: 20px;
     right: 24px;
-    top: 24px;
+    top: 72px;
     z-index: 1000;
 }
 

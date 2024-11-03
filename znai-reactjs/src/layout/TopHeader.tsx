@@ -1,0 +1,51 @@
+/*
+ * Copyright 2024 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import React from "react";
+import { DocMeta } from "../structure/docMeta";
+import TocPanelSearch from "./TocPanelSearch";
+import { DarkLightThemeSwitcher } from "./DarkLightThemeSwitcher";
+
+import "./TopHeader.css";
+
+interface Props {
+  docMeta: DocMeta;
+  onTitleClick: () => void;
+  onSearchClick: () => void;
+}
+
+export function TopHeader({ docMeta, onTitleClick, onSearchClick }: Props) {
+  return (
+    <div className="znai-top-header">
+      <div className="znai-top-header-logo-and-title">
+        <div className="znai-documentation-logo" />
+        <div className="znai-top-header-title" onClick={onTitleClick}>
+          {docMeta.title + " " + docMeta.type}
+        </div>
+      </div>
+
+      <div className="znai-top-header-right-toolbar">
+        <div className="znai-top-header-search-area">
+          <TocPanelSearch onClick={onSearchClick} />
+        </div>
+
+        <div className="znai-top-header-theme-switcher">
+          <DarkLightThemeSwitcher />
+        </div>
+      </div>
+    </div>
+  );
+}

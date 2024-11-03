@@ -50,24 +50,29 @@ class TocPanel extends Component {
             (collapsed ? ' collapsed' : '') +
             (selected ? ' selected' : '')
 
+        const displayTocExtra = !docMeta?.useTopHeader
+
         return (
-            <div className={panelClass}>
-                <TocHeader docMeta={docMeta}
-                           collapsed={collapsed}
-                           onHeaderClick={onHeaderClick}
-                           onCollapseToggle={this.collapseToggle}/>
+          <div className={panelClass}>
+              {displayTocExtra && <TocHeader docMeta={docMeta}
+                                              collapsed={collapsed}
+                                              onHeaderClick={onHeaderClick}
+                                              onCollapseToggle={this.collapseToggle}/>}
 
-                {onSearchClick && <TocPanelSearch onClick={onSearchClick}/>}
+              {displayTocExtra && onSearchClick &&
+                <div className="znai-toc-panel-search-area">
+                    <TocPanelSearch onClick={onSearchClick}/>
+                </div>}
 
-                <TocMenu toc={toc}
-                         selected={selectedItem}
-                         onTocItemPageSectionClick={onTocItemPageSectionClick}
-                         onTocItemClick={onTocItemClick}/>
+              <TocMenu toc={toc}
+                       selected={selectedItem}
+                       onTocItemPageSectionClick={onTocItemPageSectionClick}
+                       onTocItemClick={onTocItemClick}/>
 
-                <div className="znai-toc-bottom-panel">
-                    <DarkLightThemeSwitcher/>
-                </div>
-            </div>
+              {displayTocExtra && <div className="znai-toc-bottom-panel">
+                  <DarkLightThemeSwitcher/>
+              </div>}
+          </div>
         )
     }
 
