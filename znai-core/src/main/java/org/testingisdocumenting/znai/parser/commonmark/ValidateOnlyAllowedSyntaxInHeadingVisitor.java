@@ -18,8 +18,8 @@ package org.testingisdocumenting.znai.parser.commonmark;
 
 import org.commonmark.node.*;
 
-class ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor extends AbstractVisitor {
-    static final ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor INSTANCE = new ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor();
+class ValidateOnlyAllowedSyntaxInHeadingVisitor extends AbstractVisitor {
+    static final ValidateOnlyAllowedSyntaxInHeadingVisitor INSTANCE = new ValidateOnlyAllowedSyntaxInHeadingVisitor();
 
     @Override
     public void visit(BlockQuote blockQuote) {
@@ -82,7 +82,6 @@ class ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor extends AbstractVisi
 
     @Override
     public void visit(Link link) {
-        onlyRegularTextAllowed();
     }
 
     @Override
@@ -121,6 +120,6 @@ class ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor extends AbstractVisi
     }
 
     private static void onlyRegularTextAllowed() {
-        throw new RuntimeException("only regular text is supported in headings");
+        throw new RuntimeException("this is not allowed in the header at this point");
     }
 }

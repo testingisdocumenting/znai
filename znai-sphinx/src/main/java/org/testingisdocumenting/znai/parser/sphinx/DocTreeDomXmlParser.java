@@ -148,7 +148,7 @@ class DocTreeDomXmlParser {
     }
 
     private boolean parseSection(Node node) {
-        parserHandler.onSectionStart(extractTitle(node), HeadingProps.EMPTY);
+        parserHandler.onSectionStart(extractTitle(node), HeadingProps.EMPTY, null);
         parseChildren(node);
         parserHandler.onSectionEnd();
 

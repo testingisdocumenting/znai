@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DoxygenCompoundIncludePlugin implements IncludePlugin {
@@ -70,7 +69,7 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
         }
 
         parserHandler.onGlobalAnchor(compound.getId());
-        parserHandler.onSectionStart(compound.getName(), HeadingProps.styleApiWithBadge(compound.getKind()));
+        parserHandler.onSectionStart(compound.getName(), HeadingProps.styleApiWithBadge(compound.getKind()), null);
 
         insertDocs(fullName);
 
@@ -80,7 +79,7 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
         declBlock("Static Public Attributes", compound.publicStaticAttributesStream());
         declBlock("Protected Functions", compound.protectedFunctionsStream());
 
-        parserHandler.onSubHeading(3, "Definitions", HeadingProps.STYLE_API);
+        parserHandler.onSubHeading(3, "Definitions", HeadingProps.STYLE_API, null);
         compound.publicNonStaticFunctionsStream().forEach(this::createMemberDef);
         compound.publicStaticFunctionsStream().forEach(this::createMemberDef);
         compound.publicNonStaticAttributesStream().forEach(this::createMemberDef);
@@ -101,12 +100,12 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
     }
 
     private void declBlock(String name, Stream<DoxygenMember> memberStream) {
-        List<DoxygenMember> members = memberStream.collect(Collectors.toList());
+        List<DoxygenMember> members = memberStream.toList();
         if (members.isEmpty()) {
             return;
         }
 
-        parserHandler.onSubHeading(3, name, HeadingProps.STYLE_API);
+        parserHandler.onSubHeading(3, name, HeadingProps.STYLE_API, null);
         members.forEach(this::createMemberDecl);
     }
 
@@ -132,7 +131,7 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
     }
 
     private void createMemberDef(DoxygenMember member) {
-        parserHandler.onSubHeading(4, member.getName(), HeadingProps.STYLE_API);
+        parserHandler.onSubHeading(4, member.getName(), HeadingProps.STYLE_API, null);
 
         IncludePlugin includePlugin = DoxygenMemberIncludePlugin.createMemberPlugin();
         PluginResult pluginResult = includePlugin.process(componentsRegistry, parserHandler, markupPath,

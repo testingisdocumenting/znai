@@ -20,10 +20,11 @@ import { elementsLibrary } from "../DefaultElementsLibrary";
 
 export function typographyDemo(registry) {
     registry
-        .add('headings', () => <elementsLibrary.DocElement content={[headingDemo()]} elementsLibrary={elementsLibrary}/>)
-        .add('headings with badges', () => <elementsLibrary.DocElement content={[headingDemoWithBadge()]} elementsLibrary={elementsLibrary}/>)
-        .add('headings types', () => <elementsLibrary.DocElement content={[headingDemoTypes()]} elementsLibrary={elementsLibrary}/>)
-        .add('headings with text', () => <elementsLibrary.DocElement content={[headingTextDemo()]}
+      .add('headings', () => <elementsLibrary.DocElement content={[headingDemo()]} elementsLibrary={elementsLibrary}/>)
+      .add('top heading as link', () => <elementsLibrary.DocElement content={[headingAsLinkDemo()]} elementsLibrary={elementsLibrary}/>)
+      .add('headings with badges', () => <elementsLibrary.DocElement content={[headingDemoWithBadge()]} elementsLibrary={elementsLibrary}/>)
+      .add('headings types', () => <elementsLibrary.DocElement content={[headingDemoTypes()]} elementsLibrary={elementsLibrary}/>)
+      .add('headings with text', () => <elementsLibrary.DocElement content={[headingTextDemo()]}
                                                                      elementsLibrary={elementsLibrary}/>)
 }
 
@@ -38,6 +39,19 @@ function headingDemo() {
                 "type": "SubHeading",
                 "title": "Sub-Section Heading",
                 "id": "sub-section-heading",
+                "additionalIds": []
+            },
+            {
+                "level": 2,
+                "type": "SubHeading",
+                "title": "Sub-Section Heading",
+                "id": "sub-section-heading",
+                "headingContent": [{
+                    "url": "https://example.com",
+                    "isFile": false,
+                    "type": "Link",
+                    "content": [{ "text": "my header as link", "type": "SimpleText" }]
+                }],
                 "additionalIds": []
             },
             {
@@ -69,6 +83,21 @@ function headingDemo() {
                 "additionalIds": []
             }
         ]
+    }
+}
+
+function headingAsLinkDemo() {
+    return {
+        "title": "Section Heading",
+        "id": "section-heading",
+        "type": "Section",
+        "content": [],
+        "headingContent": [{
+            "url": "https://example.com",
+            "isFile": false,
+            "type": "Link",
+            "content": [{ "text": "my header as link", "type": "SimpleText" }]
+        }],
     }
 }
 

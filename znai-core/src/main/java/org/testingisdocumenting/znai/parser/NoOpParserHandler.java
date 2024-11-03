@@ -17,6 +17,7 @@
 
 package org.testingisdocumenting.znai.parser;
 
+import org.commonmark.node.Heading;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
@@ -33,7 +34,7 @@ import java.util.Map;
 
 public class NoOpParserHandler implements ParserHandler {
     @Override
-    public void onSectionStart(String title, HeadingProps headingProps) {
+    public void onSectionStart(String title, HeadingProps headingProps, Heading heading) {
     }
 
     @Override
@@ -41,7 +42,7 @@ public class NoOpParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSubHeading(int level, String title, HeadingProps headingProps) {
+    public void onSubHeading(int level, String title, HeadingProps headingProps, Heading heading) {
     }
 
     @Override

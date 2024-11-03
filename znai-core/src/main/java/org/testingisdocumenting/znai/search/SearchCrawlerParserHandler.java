@@ -17,6 +17,7 @@
 
 package org.testingisdocumenting.znai.search;
 
+import org.commonmark.node.Heading;
 import org.jsoup.Jsoup;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
@@ -49,7 +50,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
-    public void onSectionStart(String title, HeadingProps headingProps) {
+    public void onSectionStart(String title, HeadingProps headingProps, Heading heading) {
         pageSectionTitle = title;
     }
 
@@ -59,7 +60,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
-    public void onSubHeading(int level, String title, HeadingProps headingProps) {
+    public void onSubHeading(int level, String title, HeadingProps headingProps, Heading heading) {
         addStandardWithSpaceSeparator(title);
     }
 

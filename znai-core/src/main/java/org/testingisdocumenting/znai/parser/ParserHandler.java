@@ -17,6 +17,7 @@
 
 package org.testingisdocumenting.znai.parser;
 
+import org.commonmark.node.Heading;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
@@ -39,13 +40,15 @@ import java.util.Map;
 public interface ParserHandler {
     /**
      * top level section start handler. Should be responsible for handle of closing current section (if required)
-     * @param title title of a new section
+     *
+     * @param title        title of a new section
      * @param headingProps heading props to change look and feel
+     * @param heading      heading to visit for additional info
      */
-    void onSectionStart(String title, HeadingProps headingProps);
+    void onSectionStart(String title, HeadingProps headingProps, Heading heading);
     void onSectionEnd();
 
-    void onSubHeading(int level, String title, HeadingProps headingProps);
+    void onSubHeading(int level, String title, HeadingProps headingProps, Heading heading);
     void onHardLineBreak();
     void onSoftLineBreak();
     void onParagraphStart();

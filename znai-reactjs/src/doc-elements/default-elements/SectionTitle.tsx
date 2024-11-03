@@ -22,22 +22,28 @@ import { presentationModeListeners } from "../presentation/PresentationModeListe
 
 import { TextBadge } from "../badge/TextBadge";
 
+import { DocElementContent, ElementsLibraryMap } from "./DocElement";
+import { HeadingContent } from "./HeadingContent";
+import { elementsLibrary } from "../DefaultElementsLibrary";
+
 import "./SectionTitle.css";
 import "./HeadingStyles.css";
 
 interface Props {
   id: string;
   title: string;
+  headingContent?: DocElementContent;
   badge?: string;
   style?: string;
+  elementsLibrary?: ElementsLibraryMap;
 }
 
-export function SectionTitle({ id, title, badge, style }: Props) {
+export function SectionTitle({ id, title, headingContent, badge, style }: Props) {
   const className = "content-block znai-section-title znai-heading" + (style ? " " + style : "");
   return id ? (
     // @ts-ignore
     <h1 className={className} id={id}>
-      {title}
+      <HeadingContent title={title} headingContent={headingContent} elementsLibrary={elementsLibrary} />
       {badge && <TextBadge text={badge} useExtraLeftMargin={true} />}
       <div className="znai-section-title-actions">
         <a href={"#" + id}>

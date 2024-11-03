@@ -69,15 +69,15 @@ class PythonIncludeResultBuilder {
     public void addClassHeader() {
         String globalAnchorId = PythonUtils.globalAnchorId(qualifiedName);
         parserHandler.onGlobalAnchor(globalAnchorId);
-        parserHandler.onSectionStart(qualifiedName, HeadingProps.styleApiWithBadge("class"));
+        parserHandler.onSectionStart(qualifiedName, HeadingProps.styleApiWithBadge("class"), null);
     }
 
     public void addSubSection(String title) {
-        parserHandler.onSubHeading(3, title, entryNameHeadingProps);
+        parserHandler.onSubHeading(3, title, entryNameHeadingProps, null);
     }
 
     public void addEntryHeader(String name) {
-        parserHandler.onSubHeading(4, name, entryNameHeadingProps);
+        parserHandler.onSubHeading(4, name, entryNameHeadingProps, null);
     }
 
     public void addMethodSignature(String packageName,

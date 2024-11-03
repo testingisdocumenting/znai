@@ -59,6 +59,14 @@ content of sub heading
 ### Sub Sub heading
 content of sub sub heading
 
+# Heading Allowed Content
+
+Keep headings text simple and short.
+
+Try to avoid putting extra formatting into headings: inconsistent heading look and feel can feel distracting. 
+
+Note: Only inlined code and Links are allowed as part of the heading content. Consider sticking to a regular text.
+
 # Meta
 
 Each documentation must have the `meta.json` file in its root.

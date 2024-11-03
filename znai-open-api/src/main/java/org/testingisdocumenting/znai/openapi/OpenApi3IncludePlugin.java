@@ -157,7 +157,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
             throw new IllegalArgumentException("summary is missing for operation <" + operation.getId() + ">");
         }
 
-        parserHandler.onSectionStart(operation.getSummary(), HeadingProps.EMPTY);
+        parserHandler.onSectionStart(operation.getSummary(), HeadingProps.EMPTY, null);
     }
 
     private void renderUrl(OpenApi3Operation operation) {
@@ -169,7 +169,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
             return;
         }
 
-        parserHandler.onSubHeading(2, "Request", HeadingProps.STYLE_API);
+        parserHandler.onSubHeading(2, "Request", HeadingProps.STYLE_API, null);
         renderDescription(operation.getRequest().getDescription());
         renderContent(operation, operation.getRequest().getContent());
     }
@@ -179,10 +179,10 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
             return;
         }
 
-        parserHandler.onSubHeading(2, renderResponsesTitle(operation), HeadingProps.STYLE_API);
+        parserHandler.onSubHeading(2, renderResponsesTitle(operation), HeadingProps.STYLE_API, null);
 
         for (OpenApi3Response response : operation.getResponses()) {
-            parserHandler.onSubHeading(4, response.getCode(), HeadingProps.STYLE_API);
+            parserHandler.onSubHeading(4, response.getCode(), HeadingProps.STYLE_API, null);
             renderDescription(response.getDescription());
 
             renderContent(operation, response.getContent());
