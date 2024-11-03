@@ -260,13 +260,32 @@ world""")
     @Test
     void "header inline code text is allowed"() {
         parse('# my header about `thing` here {badge: "v3.4"}')
-        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', additionalIds: [], badge: 'v3.4', type: 'Section']]
+        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', additionalIds: [], badge: 'v3.4', type: 'Section',
+                            headingContent: [["text": "my header about ", "type": "SimpleText"],
+                                      ["code": "thing", "type": "InlinedCode"],
+                                      ["text": " here ", "type": "SimpleText"]
+                            ]]]
+    }
+
+    @Test
+    void "header as link is allowed"() {
+        parse('# [my header](https://example.com)', Paths.get("header-link.md"))
+        content.should == [[title: 'my header', id: 'my-header', additionalIds: [], type: 'Section',
+                            headingContent: [["url": "https://example.com",
+                              "isFile": false,
+                              "type": "Link",
+                              "content": [["text": "my header", "type": "SimpleText"]]
+                            ]]]]
     }
 
     @Test
     void "sub-header inline code text is allowed"() {
         parse('## my header about `thing` here {badge: "v3.4"}', Paths.get("sub-header.md"))
-        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', additionalIds: [], badge: 'v3.4', type: 'SubHeading', level: 2]]
+        content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', additionalIds: [], badge: 'v3.4', type: 'SubHeading', level: 2,
+                            headingContent: [["text": "my header about ", "type": "SimpleText"],
+                                      ["code": "thing", "type": "InlinedCode"],
+                                      ["text": " here ", "type": "SimpleText"]
+                           ]]]
     }
 
     @Test
@@ -343,9 +362,9 @@ world""")
 
     @Test
     void "include plugin generates warning when using renamed parameter name"() {
-        TEST_COMPONENTS_REGISTRY.log().clear()
+        componentsRegistry.log().clear()
         parse(":include-dummy: free-form text {oldParam1: 'v1', param2: 'v2'}")
-        TEST_COMPONENTS_REGISTRY.log().warnings.should == ['plugin warnings inside: test.md', 'dummy plugin: <oldParam1> parameter is renamed to <param1>']
+        componentsRegistry.log().warnings.should == ['plugin warnings inside: test.md', 'dummy plugin: <oldParam1> parameter is renamed to <param1>']
     }
 
     @Test

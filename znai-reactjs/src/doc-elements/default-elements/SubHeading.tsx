@@ -24,24 +24,31 @@ import { Icon } from "../icons/Icon";
 
 import "./SubHeading.css";
 import "./HeadingStyles.css";
+import { DocElementContent, ElementsLibraryMap } from "./DocElement";
+import { HeadingContent } from "./HeadingContent";
+import { elementsLibrary } from "../DefaultElementsLibrary";
 
 interface Props {
   level: number;
   id: string;
+  headingContent?: DocElementContent;
   additionalIds?: string[];
   title: string;
   badge?: string;
   style?: string;
+  elementsLibrary: ElementsLibraryMap;
 }
 
-export function SubHeading({ level, title, id, additionalIds, badge, style }: Props) {
+export function SubHeading({ level, title, headingContent, id, additionalIds, badge, style, elementsLibrary }: Props) {
   const Element = `h${level}`;
   const className = "content-block znai-heading" + (style ? " " + style : "");
 
   return (
     // @ts-ignore
     <Element className={className} id={id}>
-      <span className="znai-heading-title">{title}</span>
+      <span className="znai-heading-title">
+        <HeadingContent title={title} headingContent={headingContent} elementsLibrary={elementsLibrary} />
+      </span>
       {badge && <TextBadge text={badge} useExtraLeftMargin={true} />}
       <a href={"#" + id}>
         <Icon id="link" />

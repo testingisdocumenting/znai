@@ -33,13 +33,13 @@ import org.testingisdocumenting.znai.extensions.latex.LatexInlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.include.IncludeBlock;
+import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
 import org.testingisdocumenting.znai.parser.table.GfmTableToTableConverter;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
 import org.commonmark.ext.gfm.strikethrough.Strikethrough;
 import org.commonmark.ext.gfm.tables.TableBlock;
 import org.commonmark.node.*;
-import org.testingisdocumenting.znai.utils.JsonParseException;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
@@ -230,10 +230,10 @@ public class MarkdownVisitor extends AbstractVisitor {
                 parserHandler.onSectionEnd();
             }
 
-            parserHandler.onSectionStart(headingTextAndProps.text, headingTextAndProps.props);
+            parserHandler.onSectionStart(headingTextAndProps.text(), headingTextAndProps.props(), heading);
             sectionStarted = true;
         } else {
-            parserHandler.onSubHeading(heading.getLevel(), headingTextAndProps.text, headingTextAndProps.props);
+            parserHandler.onSubHeading(heading.getLevel(), headingTextAndProps.text(), headingTextAndProps.props(), heading);
         }
     }
 
@@ -324,7 +324,9 @@ public class MarkdownVisitor extends AbstractVisitor {
     }
 
     private HeadingTextAndProps extractHeadingTextAndProps(Heading heading) {
-        heading.accept(ValidateNoExtraSyntaxExceptInlineCodeInHeadingVisitor.INSTANCE);
+        heading.accept(ValidateOnlyAllowedSyntaxInHeadingVisitor.INSTANCE);
+
+        var parserHandler = new DocElementCreationParserHandler(componentsRegistry, path);
 
         List<String> textParts = new ArrayList<>();
         heading.accept(new AbstractVisitor() {
@@ -337,6 +339,7 @@ public class MarkdownVisitor extends AbstractVisitor {
             @Override
             public void visit(Code code) {
                 textParts.add(code.getLiteral());
+                parserHandler.onInlinedCode(code.getLiteral(), DocReferences.EMPTY);
             }
         });
 
@@ -345,7 +348,7 @@ public class MarkdownVisitor extends AbstractVisitor {
         Node lastChild = heading.getLastChild();
         if (lastChild instanceof Text textNode) {
             HeadingTextAndProps headingTextAndProps = HeadingTextAndProps.extractTextAndProps(textNode.getLiteral());
-            return new HeadingTextAndProps(combinedText, headingTextAndProps.props);
+            return new HeadingTextAndProps(combinedText, headingTextAndProps.props());
         } else {
             return new HeadingTextAndProps(combinedText, HeadingProps.EMPTY);
         }
@@ -357,42 +360,5 @@ public class MarkdownVisitor extends AbstractVisitor {
         }
 
         return ((Text) node).getLiteral().trim();
-    }
-
-    private record HeadingTextAndProps(String text, HeadingProps props) {
-        public static HeadingTextAndProps extractTextAndProps(String text) {
-            int startOfCurlyIdx = text.indexOf('{');
-            int endOfCurlyIdx = text.lastIndexOf('}');
-            if (startOfCurlyIdx == -1 || endOfCurlyIdx == -1) {
-                return new HeadingTextAndProps(text, HeadingProps.EMPTY);
-            }
-
-            String json = text.substring(startOfCurlyIdx);
-            // empty braces
-            if (json.length() < 3) {
-                return new HeadingTextAndProps(text, HeadingProps.EMPTY);
-            }
-
-            Map<String, ?> props = json.charAt(1) == '#' ?
-                    parseCustomAnchorId(json):
-                    parseJson(json);
-
-            String headingTextOnly = text.substring(0, startOfCurlyIdx);
-            return new HeadingTextAndProps(headingTextOnly, new HeadingProps(props));
-        }
-
-        private static Map<String, ?> parseCustomAnchorId(String anchorExpression) {
-            int endOfCurlyIdx = anchorExpression.lastIndexOf('}');
-            var anchorId = anchorExpression.substring(2, endOfCurlyIdx);
-            return Collections.singletonMap(HeadingProps.ANCHOR_ID_KEY, anchorId);
-        }
-
-        private static Map<String, ?> parseJson(String json) {
-            try {
-                return JsonUtils.deserializeAsMap(json);
-            } catch (JsonParseException e) {
-                throw new RuntimeException("Can't parse props of heading: " + json, e);
-            }
-        }
     }
 }

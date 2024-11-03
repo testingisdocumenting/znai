@@ -17,6 +17,7 @@
 
 package org.testingisdocumenting.znai.parser.docelement;
 
+import org.commonmark.node.*;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
@@ -34,6 +35,7 @@ import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.parser.commonmark.HeadingTextAndProps;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
@@ -100,7 +102,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSectionStart(String title, HeadingProps headingProps) {
+    public void onSectionStart(String title, HeadingProps headingProps, Heading heading) {
         currentSectionTitle = title;
 
         if (isSectionStarted) {
@@ -117,6 +119,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
         Map<String, Object> props = new LinkedHashMap<>(headingPropsMap);
         addAnchorIdsToProps(props, anchorIds);
         props.put("title", title);
+        addHeadingContentWhenNotSimple(props, heading);
 
         start(DocElementType.SECTION, props);
         docStructure.registerLocalAnchors(path, anchorIds);
@@ -139,7 +142,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onSubHeading(int level, String title, HeadingProps headingProps) {
+    public void onSubHeading(int level, String title, HeadingProps headingProps, Heading heading) {
         Map<String, ?> headingPropsMap = headingProps.props();
 
         String idByTitle = new PageSectionIdTitle(title, headingPropsMap).getId();
@@ -156,6 +159,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
         addAnchorIdsToProps(props, ids);
         props.put("level", level);
         props.put("title", title);
+        addHeadingContentWhenNotSimple(props, heading);
         append(DocElementType.SUB_HEADING, props);
     }
 
@@ -561,6 +565,40 @@ public class DocElementCreationParserHandler implements ParserHandler {
         }
 
         return parsedFootnote.docElement().contentToListOfMaps();
+    }
+
+    private void addHeadingContentWhenNotSimple(Map<String, Object> props, Heading heading) {
+        var parserHandler = new DocElementCreationParserHandler(componentsRegistry, path);
+
+        if (heading == null) {
+            return;
+        }
+
+        heading.accept(new AbstractVisitor() {
+            @Override
+            public void visit(Text text) {
+                parserHandler.onSimpleText(HeadingTextAndProps.extractTextAndProps(text.getLiteral()).text());
+            }
+
+            @Override
+            public void visit(Link link) {
+                parserHandler.onLinkStart(path, link.getDestination());
+                visitChildren(link);
+                parserHandler.onLinkEnd();
+            }
+
+            @Override
+            public void visit(Code code) {
+                parserHandler.onInlinedCode(code.getLiteral(), DocReferences.EMPTY);
+            }
+        });
+
+        List<Map<String, Object>> content = parserHandler.docElement.contentToListOfMaps();
+        if (content.isEmpty() || (content.size() == 1 && content.get(0).get("type").equals("SimpleText"))) {
+            return;
+        }
+
+        props.put("headingContent", content);
     }
 }
 

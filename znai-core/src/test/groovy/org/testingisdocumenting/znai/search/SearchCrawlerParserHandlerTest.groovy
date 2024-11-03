@@ -37,13 +37,13 @@ class SearchCrawlerParserHandlerTest {
 
     @Test
     void "should create search entry per section"() {
-        parserHandler.onSectionStart("section one", HeadingProps.EMPTY)
+        parserHandler.onSectionStart("section one", HeadingProps.EMPTY,)
         parserHandler.onSimpleText("hello")
         parserHandler.onSnippet(PluginParams.EMPTY, "", "", "source code")
         parserHandler.onInlinedCode("inlined term", DocReferences.EMPTY)
         parserHandler.onSectionEnd()
 
-        parserHandler.onSectionStart("section two", HeadingProps.EMPTY)
+        parserHandler.onSectionStart("section two", HeadingProps.EMPTY,)
         parserHandler.onSimpleText("world")
         parserHandler.onSnippet(PluginParams.EMPTY, "", "", "code")
         parserHandler.onInlinedCode("broker", DocReferences.EMPTY)
@@ -122,7 +122,7 @@ class SearchCrawlerParserHandlerTest {
     }
 
     private withinSection(Closure setupCode) {
-        parserHandler.onSectionStart("section", HeadingProps.EMPTY)
+        parserHandler.onSectionStart("section", HeadingProps.EMPTY,)
         setupCode()
         parserHandler.onSectionEnd()
 

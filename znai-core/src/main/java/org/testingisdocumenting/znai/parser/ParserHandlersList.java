@@ -17,6 +17,7 @@
 
 package org.testingisdocumenting.znai.parser;
 
+import org.commonmark.node.Heading;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
@@ -41,8 +42,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onSectionStart(String title, HeadingProps headingProps) {
-        list.forEach(h -> h.onSectionStart(title, headingProps));
+    public void onSectionStart(String title, HeadingProps headingProps, Heading heading) {
+        list.forEach(h -> h.onSectionStart(title, headingProps, heading));
     }
 
     @Override
@@ -51,8 +52,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onSubHeading(int level, String title, HeadingProps headingProps) {
-        list.forEach(h -> h.onSubHeading(level, title, headingProps));
+    public void onSubHeading(int level, String title, HeadingProps headingProps, Heading heading) {
+        list.forEach(h -> h.onSubHeading(level, title, headingProps, heading));
     }
 
     @Override
