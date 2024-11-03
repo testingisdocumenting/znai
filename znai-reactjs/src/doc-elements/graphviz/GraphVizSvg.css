@@ -34,12 +34,12 @@
 
 .graphviz-diagram.left {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .graphviz-diagram.right {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .graphviz-diagram a {
