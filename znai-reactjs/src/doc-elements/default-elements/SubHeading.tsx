@@ -26,7 +26,6 @@ import "./SubHeading.css";
 import "./HeadingStyles.css";
 import { DocElementContent, ElementsLibraryMap } from "./DocElement";
 import { HeadingContent } from "./HeadingContent";
-import { elementsLibrary } from "../DefaultElementsLibrary";
 
 interface Props {
   level: number;
