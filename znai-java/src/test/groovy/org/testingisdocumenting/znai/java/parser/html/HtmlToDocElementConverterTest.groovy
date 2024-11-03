@@ -134,7 +134,7 @@ World paragraph
 
         elements.should == [[type: 'Paragraph', content: [[type: 'SimpleText', text: "hello"]]],
                              [type: 'InlinedCode', code: 'inline'],
-                             [type: 'Snippet', lineNumber: '', lang: '', snippet: 'my snippet\n']]
+                             [type: 'Snippet', lineNumber: '', lang: '', snippet: 'my snippet']]
         searchText.should == 'hello inline my snippet'
 
     }

@@ -350,8 +350,8 @@ world""")
 
     @Test
     void "code snippets by indentation"() {
-        parse("    println 'hello world'")
-        content.should == [[lang: '', snippet:"println 'hello world'\n", lineNumber: '', type: 'Snippet']]
+        parse("      println 'hello world'")
+        content.should == [[lang: '', snippet:"println 'hello world'", lineNumber: '', type: 'Snippet']]
     }
 
     @Test
@@ -359,7 +359,7 @@ world""")
         parse("```\n" +
                 "println 'hello world'\n" +
                 "```")
-        content.should == [[lang: '', snippet:"println 'hello world'\n", lineNumber: '', type: 'Snippet']]
+        content.should == [[lang: '', snippet:"println 'hello world'", lineNumber: '', type: 'Snippet']]
     }
 
     @Test
@@ -367,8 +367,17 @@ world""")
         parse("```script {highlight: \"hello\"}\n" +
                 "println 'hello world'\n" +
                 "```")
-        content.should == [[lang: 'script', snippet:"println 'hello world'\n", lineNumber: '',
+        content.should == [[lang: 'script', snippet:"println 'hello world'", lineNumber: '',
                             highlight: [0], type: 'Snippet']]
+    }
+
+    @Test
+    void "code snippets by fence strip common indentation"() {
+        parse("```\n" +
+                "  println 'hello'\n" +
+                "    println 'world'\n" +
+                "```")
+        content.should == [[lang: '', snippet:"println 'hello'\n  println 'world'", lineNumber: '', type: 'Snippet']]
     }
 
     @Test
@@ -543,7 +552,7 @@ after footnote
                                   ["text": "additional text footnote", "type": "SimpleText"],
                                   ["type": "SoftLineBreak"],
                                   ["text": "more text here", "type": "SimpleText"] ] ],
-                                         [ "lang": "", "snippet":"code block\n", "lineNumber": "", "type": "Snippet" ] ],
+                                         [ "lang": "", "snippet":"code block", "lineNumber": "", "type": "Snippet" ] ],
                             "type": "FootnoteReference" ] ]
                 ],
                 ["type": "Paragraph", "content": [["text": "after footnote", "type": "SimpleText"]]]
