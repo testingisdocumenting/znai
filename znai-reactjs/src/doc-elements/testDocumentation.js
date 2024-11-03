@@ -24,6 +24,7 @@ export const testDocumentation = {
             "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
             "title": "Questions/Suggestions"
         },
+        "useTopHeader": true,
         "description": "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
         "id": "preview",
         "title": "Znai",

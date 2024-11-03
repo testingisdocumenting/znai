@@ -22,6 +22,7 @@ export interface DocMeta {
   title: string;
   type: string;
   previewEnabled: boolean;
+  useTopHeader?: boolean;
   support?: DocMetaSupport;
   supportMeta?: SupportMeta;
 }

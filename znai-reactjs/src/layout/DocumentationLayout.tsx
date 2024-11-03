@@ -29,6 +29,7 @@ import { TocMobilePanel } from "./mobile/TocMobilePanel";
 
 import { mainPanelClassName } from "./classNames";
 
+import { TopHeader } from "./TopHeader";
 import "./DocumentationLayout.css";
 import "./mobile/MobileLayoutOverrides.css";
 
@@ -77,63 +78,71 @@ export function DocumentationLayout({
   const [isMobileTocVisible, setMobileTocVisible] = useState(false);
   const isMobile = useIsMobile();
 
-  const pageGenErrorPanel = pageGenError ? (
-    <PageGenError error={pageGenError} />
-  ) : null;
+  const pageGenErrorPanel = pageGenError ? <PageGenError error={pageGenError} /> : null;
 
   const panelFullClassName = mainPanelClassName + (isMobile ? " mobile" : "");
-  const DocumentationWrapper = isMobile ? React.Fragment : Documentation;
 
-  return (
-    <DocumentationWrapper>
-      {!isMobile && (
-        <div className="side-panel">
-          <TocPanel
-            toc={toc}
-            docMeta={docMeta}
-            selectedItem={selectedTocItem}
-            onHeaderClick={onHeaderClick}
-            onTocItemClick={onTocItemClick}
-            onTocItemPageSectionClick={onTocItemPageSectionClick}
-            onSearchClick={onSearchClick}
-            onNextPage={onNextPage}
-            onPrevPage={onPrevPage}
-          />
+  return isMobile ? renderMobile() : renderDesktop();
+
+  function renderPageContent() {
+    return (
+      <div className={panelFullClassName}>
+        {renderedPage}
+
+        <div className="page-bottom">
+          {renderedNextPrevNavigation}
+          {renderedFooter}
         </div>
-      )}
+      </div>
+    );
+  }
 
-      {searchPopup}
-
-      {!isMobile && zoomOverlay}
-
-      {isMobile && (
-        <TocMobileHeader
-          docMeta={docMeta}
-          onHeaderClick={onHeaderClickAndCloseMenu}
-          onMenuClick={toggleMobileToc}
-        />
-      )}
-
-      {isMobileTocVisible ? (
-        <TocMobilePanel
-          toc={toc}
-          onTocItemClick={selectTocItem}
-          onTocItemPageSectionClick={selectPageSection}
-        />
-      ) : (
-        <div className={panelFullClassName}>
-          {renderedPage}
-
-          <div className="page-bottom">
-            {renderedNextPrevNavigation}
-            {renderedFooter}
+  function renderDesktop() {
+    const displayTocHeader = docMeta?.useTopHeader;
+    return (
+      <Documentation>
+        {displayTocHeader && <TopHeader docMeta={docMeta} onTitleClick={onHeaderClick} onSearchClick={onSearchClick} />}
+        <div className="znai-side-panel-and-content">
+          <div className="side-panel">
+            <TocPanel
+              toc={toc}
+              docMeta={docMeta}
+              selectedItem={selectedTocItem}
+              onHeaderClick={onHeaderClick}
+              onTocItemClick={onTocItemClick}
+              onTocItemPageSectionClick={onTocItemPageSectionClick}
+              onSearchClick={onSearchClick}
+              onNextPage={onNextPage}
+              onPrevPage={onPrevPage}
+            />
           </div>
-        </div>
-      )}
 
-      {pageGenErrorPanel}
-    </DocumentationWrapper>
-  );
+          {searchPopup}
+
+          {zoomOverlay}
+          {renderPageContent()}
+
+          {pageGenErrorPanel}
+        </div>
+      </Documentation>
+    );
+  }
+
+  function renderMobile() {
+    return (
+      <>
+        <TocMobileHeader docMeta={docMeta} onHeaderClick={onHeaderClickAndCloseMenu} onMenuClick={toggleMobileToc} />
+
+        {isMobileTocVisible ? (
+          <TocMobilePanel toc={toc} onTocItemClick={selectTocItem} onTocItemPageSectionClick={selectPageSection} />
+        ) : (
+          renderPageContent()
+        )}
+
+        {pageGenErrorPanel}
+      </>
+    );
+  }
 
   function selectTocItem(dirName: string, fileName: string) {
     hideMobileToc();
