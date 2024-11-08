@@ -17,10 +17,11 @@
 package org.testingisdocumenting.znai.structure;
 
 import java.time.Instant;
-import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
@@ -65,11 +66,18 @@ public class Page {
 
     private PageSectionIdTitle createSectionIdTitle(DocElement docElement) {
         String title = docElement.getProp("title").toString();
-        Object style = docElement.getProp("style");
 
-        Map<String, Object> headingProps = style == null ?
-                Collections.emptyMap() :
-                Collections.singletonMap("style", style);
+        Map<String, Object> headingProps = new LinkedHashMap<>();
+
+        Object style = docElement.getProp("style");
+        if (style != null) {
+            headingProps.put(HeadingProps.STYLE_KEY, style);
+        }
+
+        Object id = docElement.getProp("id");
+        if (id != null) {
+            headingProps.put(HeadingProps.ANCHOR_ID_KEY, id);
+        }
 
         return new PageSectionIdTitle(title, headingProps);
     }
