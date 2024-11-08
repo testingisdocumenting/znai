@@ -19,7 +19,6 @@ package org.testingisdocumenting.znai.search;
 
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,8 +29,8 @@ public class PageSearchEntry {
     private final PageSectionIdTitle pageSectionIdTitle;
     private final List<SearchText> searchTextList;
 
-    public PageSearchEntry(String pageSectionTitle, List<SearchText> searchTextList) {
-        this.pageSectionIdTitle = new PageSectionIdTitle(pageSectionTitle, Collections.emptyMap());
+    public PageSearchEntry(PageSectionIdTitle pageSectionIdTitle, List<SearchText> searchTextList) {
+        this.pageSectionIdTitle = pageSectionIdTitle;
         this.searchTextList = searchTextList;
     }
 
