@@ -48,6 +48,8 @@ export function documentationLayoutDemo(registry: Registry) {
           onSearchClick={noOp}
           onTocItemClick={noOp}
           onTocItemPageSectionClick={noOp}
+          scrollToTop={noOp}
+          scrollToPageSection={noOp}
           onNextPage={noOp}
           onPrevPage={noOp}
         />
