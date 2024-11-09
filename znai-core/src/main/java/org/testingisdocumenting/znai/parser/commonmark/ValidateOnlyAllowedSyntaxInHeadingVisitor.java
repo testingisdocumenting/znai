@@ -22,62 +22,15 @@ class ValidateOnlyAllowedSyntaxInHeadingVisitor extends AbstractVisitor {
     static final ValidateOnlyAllowedSyntaxInHeadingVisitor INSTANCE = new ValidateOnlyAllowedSyntaxInHeadingVisitor();
 
     @Override
-    public void visit(BlockQuote blockQuote) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
-    public void visit(BulletList bulletList) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
     public void visit(Code code) {
     }
 
     @Override
-    public void visit(Document document) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
     public void visit(Emphasis emphasis) {
-        onlyRegularTextAllowed();
     }
 
     @Override
-    public void visit(FencedCodeBlock fencedCodeBlock) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
-    public void visit(HardLineBreak hardLineBreak) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
-    public void visit(ThematicBreak thematicBreak) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
-    public void visit(HtmlInline htmlInline) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
-    public void visit(HtmlBlock htmlBlock) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
-    public void visit(Image image) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
-    public void visit(IndentedCodeBlock indentedCodeBlock) {
-        onlyRegularTextAllowed();
+    public void visit(StrongEmphasis strongEmphasis) {
     }
 
     @Override
@@ -85,13 +38,63 @@ class ValidateOnlyAllowedSyntaxInHeadingVisitor extends AbstractVisitor {
     }
 
     @Override
+    public void visit(BlockQuote blockQuote) {
+        thisIsNotAllowed(blockQuote);
+    }
+
+    @Override
+    public void visit(BulletList bulletList) {
+        thisIsNotAllowed(bulletList);
+    }
+
+    @Override
+    public void visit(Document document) {
+        thisIsNotAllowed(document);
+    }
+
+    @Override
+    public void visit(FencedCodeBlock fencedCodeBlock) {
+        thisIsNotAllowed(fencedCodeBlock);
+    }
+
+    @Override
+    public void visit(HardLineBreak hardLineBreak) {
+        thisIsNotAllowed(hardLineBreak);
+    }
+
+    @Override
+    public void visit(ThematicBreak thematicBreak) {
+        thisIsNotAllowed(thematicBreak);
+    }
+
+    @Override
+    public void visit(HtmlInline htmlInline) {
+        thisIsNotAllowed(htmlInline);
+    }
+
+    @Override
+    public void visit(HtmlBlock htmlBlock) {
+        thisIsNotAllowed(htmlBlock);
+    }
+
+    @Override
+    public void visit(Image image) {
+        thisIsNotAllowed(image);
+    }
+
+    @Override
+    public void visit(IndentedCodeBlock indentedCodeBlock) {
+        thisIsNotAllowed(indentedCodeBlock);
+    }
+
+    @Override
     public void visit(ListItem listItem) {
-        onlyRegularTextAllowed();
+        thisIsNotAllowed(listItem);
     }
 
     @Override
     public void visit(OrderedList orderedList) {
-        onlyRegularTextAllowed();
+        thisIsNotAllowed(orderedList);
     }
 
     @Override
@@ -101,25 +104,20 @@ class ValidateOnlyAllowedSyntaxInHeadingVisitor extends AbstractVisitor {
 
     @Override
     public void visit(SoftLineBreak softLineBreak) {
-        onlyRegularTextAllowed();
-    }
-
-    @Override
-    public void visit(StrongEmphasis strongEmphasis) {
-        onlyRegularTextAllowed();
+        thisIsNotAllowed(softLineBreak);
     }
 
     @Override
     public void visit(CustomBlock customBlock) {
-        onlyRegularTextAllowed();
+        thisIsNotAllowed(customBlock);
     }
 
     @Override
     public void visit(CustomNode customNode) {
-        onlyRegularTextAllowed();
+        thisIsNotAllowed(customNode);
     }
 
-    private static void onlyRegularTextAllowed() {
-        throw new RuntimeException("this is not allowed in the header at this point");
+    private static void thisIsNotAllowed(Node node) {
+        throw new RuntimeException("this is not allowed in the header at this point: " + node);
     }
 }
