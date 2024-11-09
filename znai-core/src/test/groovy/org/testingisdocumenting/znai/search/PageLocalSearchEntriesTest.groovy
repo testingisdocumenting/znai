@@ -17,6 +17,7 @@
 
 package org.testingisdocumenting.znai.search
 
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle
 import org.testingisdocumenting.znai.structure.TocItem
 import org.junit.Test
 
@@ -26,8 +27,8 @@ class PageLocalSearchEntriesTest {
         def searchEntries = new PageLocalSearchEntries(
                 new TocItem("dir-name", "file-name", "md"),
                 [
-                        new PageSearchEntry("section one", [SearchScore.STANDARD.text("hello world"), SearchScore.HIGH.text("snippet-one")]),
-                        new PageSearchEntry("section two", [SearchScore.STANDARD.text("how is the weather")]),
+                        new PageSearchEntry(new PageSectionIdTitle("section one", [:]), [SearchScore.STANDARD.text("hello world"), SearchScore.HIGH.text("snippet-one")]),
+                        new PageSearchEntry(new PageSectionIdTitle("section two", [:]), [SearchScore.STANDARD.text("how is the weather")]),
                 ])
 
         searchEntries.toListOfLists().should == [

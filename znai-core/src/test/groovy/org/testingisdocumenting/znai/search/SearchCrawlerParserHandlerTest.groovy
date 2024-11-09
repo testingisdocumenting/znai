@@ -56,6 +56,16 @@ class SearchCrawlerParserHandlerTest {
     }
 
     @Test
+    void "should use custom anchor ids from sections"() {
+        parserHandler.onSectionStart("section one", HeadingProps.customAnchorId("my-anchor"), null)
+        parserHandler.onSimpleText("hello")
+        parserHandler.onSectionEnd()
+
+        parserHandler.getSearchEntries().should == [ "pageSectionId" | "pageSectionTitle" | "searchTextList"] {
+                                                      "my-anchor"    | "section one"      | [[text: "hello", score: SearchScore.STANDARD], [text: "", score: SearchScore.HIGH]] }
+    }
+
+    @Test
     void "should connect mixed styles characters within a word without extra spaces"() {
         withinSection {
             parserHandler.onSimpleText("H")

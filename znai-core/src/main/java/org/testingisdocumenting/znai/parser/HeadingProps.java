@@ -31,6 +31,12 @@ public record HeadingProps(Map<String, ?> props) {
     public static HeadingProps EMPTY = new HeadingProps(Collections.emptyMap());
     public static HeadingProps STYLE_API = new HeadingProps(Collections.singletonMap("style", "api"));
 
+    public static HeadingProps customAnchorId(String id) {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ANCHOR_ID_KEY, id);
+
+        return new HeadingProps(props);
+    }
     public static HeadingProps styleApiWithBadge(String badgeText) {
         Map<String, Object> props = new HashMap<>();
         props.put("badge", badgeText);

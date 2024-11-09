@@ -26,21 +26,23 @@ import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.NoOpParserHandler;
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SearchCrawlerParserHandler extends NoOpParserHandler {
     private final List<PageSearchEntry> searchEntries;
-    private String pageSectionTitle;
+    private PageSectionIdTitle pageSectionIdTitle;
     private final List<String> standardScoreParts;
     private final List<String> highScoreParts;
 
     public SearchCrawlerParserHandler() {
         this.searchEntries = new ArrayList<>();
-        this.pageSectionTitle = "";
+        this.pageSectionIdTitle = new PageSectionIdTitle("", Collections.emptyMap());
         this.standardScoreParts = new ArrayList<>();
         this.highScoreParts = new ArrayList<>();
     }
@@ -51,7 +53,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onSectionStart(String title, HeadingProps headingProps, Heading heading) {
-        pageSectionTitle = title;
+        pageSectionIdTitle = new PageSectionIdTitle(title, headingProps.props());
     }
 
     @Override
@@ -186,7 +188,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
             return;
         }
 
-        searchEntries.add(new PageSearchEntry(pageSectionTitle, List.of(
+        searchEntries.add(new PageSearchEntry(pageSectionIdTitle, List.of(
                 createSearchText(SearchScore.STANDARD, standardScoreParts),
                 createSearchText(SearchScore.HIGH, highScoreParts))));
 

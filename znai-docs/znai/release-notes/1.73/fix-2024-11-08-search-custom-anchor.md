@@ -1,0 +1,1 @@
+* Fix: Search result section with custom anchor id no longer crash the page
