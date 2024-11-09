@@ -36,7 +36,7 @@ class TestMarkdownParser extends MarkdownParser {
         def element = new DocElement('TestMarkdown', 'markdown', markdown)
         page.addChild(element)
 
-        def searchEntry = new PageSearchEntry('dummy page section title', [SearchScore.STANDARD.text(markdown)])
+        def searchEntry = new PageSearchEntry(new PageSectionIdTitle('dummy page section title', [:]), [SearchScore.STANDARD.text(markdown)])
 
         return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta())
     }

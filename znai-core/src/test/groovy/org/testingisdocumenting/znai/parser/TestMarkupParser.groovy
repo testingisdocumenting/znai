@@ -30,7 +30,7 @@ class TestMarkupParser implements MarkupParser {
         def element = new DocElement("TestMarkup", "markup", markup)
         page.addChild(element)
 
-        def searchEntry = new PageSearchEntry('dummy page section title', [SearchScore.STANDARD.text(markup)])
+        def searchEntry = new PageSearchEntry(new PageSectionIdTitle('dummy page section title', [:]), [SearchScore.STANDARD.text(markup)])
 
         return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta())
     }
