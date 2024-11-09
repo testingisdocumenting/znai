@@ -26,7 +26,6 @@ import java.nio.file.Paths
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
-import static org.testingisdocumenting.webtau.WebTauCore.trace
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownParserTest {
@@ -606,12 +605,22 @@ non html
     }
 
     @Test
+    void "html block comment before section only"() {
+        parse("""
+<!-- test -->
+
+# sub title
+""")
+
+        content.should == [["id": "sub-title", "additionalIds": [], "title": "sub title", "type": "Section"]]
+    }
+
+    @Test
     void "embedded html inline br"() {
         parse("""
 hello world<br><br> of line breaks
 """)
 
-        trace("content", content)
         content.should ==  [
                 [
                     "type": "Paragraph",
