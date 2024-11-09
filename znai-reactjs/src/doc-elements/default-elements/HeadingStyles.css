@@ -14,6 +14,20 @@
  * limitations under the License.
  */
 
+.znai-heading {
+    white-space: pre;
+}
+
+.znai-heading .znai-inlined-code {
+    font-size: unset;
+}
+
+.znai-heading-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
 .znai-heading.api {
     font-family: var(--znai-code-font-family);
     font-weight: normal;

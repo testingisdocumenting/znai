@@ -41,14 +41,12 @@ interface Props {
 
 export function SubHeading({ level, title, headingContent, id, additionalIds, badge, style, elementsLibrary }: Props) {
   const Element = `h${level}`;
-  const className = "content-block znai-heading" + (style ? " " + style : "");
+  const className = "content-block znai-heading-title znai-heading" + (style ? " " + style : "");
 
   return (
     // @ts-ignore
     <Element className={className} id={id}>
-      <span className="znai-heading-title">
-        <HeadingContent title={title} headingContent={headingContent} elementsLibrary={elementsLibrary} />
-      </span>
+      <HeadingContent title={title} headingContent={headingContent} elementsLibrary={elementsLibrary} />
       {badge && <TextBadge text={badge} useExtraLeftMargin={true} />}
       <a href={"#" + id}>
         <Icon id="link" />

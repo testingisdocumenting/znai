@@ -594,6 +594,20 @@ public class DocElementCreationParserHandler implements ParserHandler {
             public void visit(Code code) {
                 parserHandler.onInlinedCode(code.getLiteral(), DocReferences.EMPTY);
             }
+
+            @Override
+            public void visit(Emphasis emphasis) {
+                parserHandler.onEmphasisStart();
+                visitChildren(emphasis);
+                parserHandler.onEmphasisEnd();
+            }
+
+            @Override
+            public void visit(StrongEmphasis strongEmphasis) {
+                parserHandler.onStrongEmphasisStart();
+                visitChildren(strongEmphasis);
+                parserHandler.onStrongEmphasisEnd();
+            }
         });
 
         List<Map<String, Object>> content = parserHandler.docElement.contentToListOfMaps();

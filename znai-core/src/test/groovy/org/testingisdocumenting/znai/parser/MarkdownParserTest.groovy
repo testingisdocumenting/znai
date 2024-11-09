@@ -279,6 +279,17 @@ world""")
     }
 
     @Test
+    void "emphasis in header is allowed"() {
+        parse('# header *and* important **note**', Paths.get("header-emphasis.md"))
+        content.should == [[title: 'header and important note', id: 'header-and-important-note', additionalIds: [], type: 'Section',
+                            headingContent: [
+                                    ["text": "header ", "type": "SimpleText"],
+                                    ["type": "Emphasis", "content": [["text": "and", "type": "SimpleText"]]],
+                                    ["text": " important ", "type": "SimpleText"],
+                                    ["type": "StrongEmphasis", "content": [["text": "note", "type": "SimpleText"]]]]]]
+    }
+
+    @Test
     void "sub-header inline code text is allowed"() {
         parse('## my header about `thing` here {badge: "v3.4"}', Paths.get("sub-header.md"))
         content.should == [[title: 'my header about thing here', id: 'my-header-about-thing-here', additionalIds: [], badge: 'v3.4', type: 'SubHeading', level: 2,
