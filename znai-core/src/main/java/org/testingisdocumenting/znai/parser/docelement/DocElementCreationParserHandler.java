@@ -374,6 +374,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onHtml(String html, boolean isInlined) {
+        if (html.startsWith("<!--")) {
+            return;
+        }
+
         append("EmbeddedHtml", "html", html, "isInlined", isInlined);
     }
 
