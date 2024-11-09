@@ -27,9 +27,10 @@ import java.util.Objects;
  */
 public record HeadingProps(Map<String, ?> props) {
     public static final String ANCHOR_ID_KEY = "customAnchorId";
+    public static final String STYLE_KEY = "style";
 
     public static HeadingProps EMPTY = new HeadingProps(Collections.emptyMap());
-    public static HeadingProps STYLE_API = new HeadingProps(Collections.singletonMap("style", "api"));
+    public static HeadingProps STYLE_API = new HeadingProps(Collections.singletonMap(STYLE_KEY, "api"));
 
     public static HeadingProps customAnchorId(String id) {
         Map<String, Object> props = new HashMap<>();
@@ -40,7 +41,7 @@ public record HeadingProps(Map<String, ?> props) {
     public static HeadingProps styleApiWithBadge(String badgeText) {
         Map<String, Object> props = new HashMap<>();
         props.put("badge", badgeText);
-        props.put("style", "api");
+        props.put(STYLE_KEY, "api");
 
         return new HeadingProps(props);
     }
@@ -59,7 +60,7 @@ public record HeadingProps(Map<String, ?> props) {
     }
 
     public String getStyle() {
-        Object style = props.get("style");
+        Object style = props.get(STYLE_KEY);
         return style == null ? "" : style.toString();
     }
 }

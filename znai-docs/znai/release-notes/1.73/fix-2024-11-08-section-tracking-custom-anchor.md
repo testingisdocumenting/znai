@@ -1,0 +1,1 @@
+* Fix: Correctly highlight page sections with custom anchor id as you scroll through a page
