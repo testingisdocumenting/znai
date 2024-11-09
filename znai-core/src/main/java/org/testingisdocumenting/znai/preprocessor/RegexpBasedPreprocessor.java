@@ -39,7 +39,10 @@ public class RegexpBasedPreprocessor {
                 CsvTableParser.parseWithHeader(csvRegexpReplacementDefinition, "regexp", "replacement");
 
         replacementList = tableData.getData().stream()
-                .map(row -> new RegexpAndReplacement(row.get(0).toString(), row.get(1).toString()))
+                .map(row -> {
+                    String replaceWith = row.get(1).toString().replace("\\n", "\n");
+                    return new RegexpAndReplacement(row.get(0).toString(), replaceWith);
+                })
                 .toList();
     }
 

@@ -68,6 +68,20 @@ some lines here"""
     }
 
     @Test
+    void "replace with multiline"() {
+        def input = """<div>test line one
+test line two
+</div>"""
+
+        def regexp = '<div>(.*?)</div>'
+        def replacement = /```attention-note\n$1```/
+        def csv = "$regexp,$replacement"
+        def result = new RegexpBasedPreprocessor(csv).preprocess(input)
+
+        result.should == """```attention-note\ntest line one\ntest line two\n```"""
+    }
+
+    @Test
     void "multi line extract and multiple regexp"() {
         def input = """Hello World
 
