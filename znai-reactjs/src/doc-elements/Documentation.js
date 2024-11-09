@@ -225,6 +225,8 @@ export class Documentation extends Component {
                                          onNextPage={this.onNextPage}
                                          onPrevPage={this.onPrevPage}
                                          textSelection={textSelection}
+                                         scrollToTop={this.scrollTop}
+                                         scrollToPageSection={this.scrollToPageSection}
                                          pageGenError={pageGenError}/>
                     {preview}
                 </PreviewTrackerWrapper>

@@ -22,10 +22,11 @@ import { PresentationHeading } from "./PresentationHeading";
 import { TextBadge } from "../badge/TextBadge";
 import { Icon } from "../icons/Icon";
 
-import "./SubHeading.css";
-import "./HeadingStyles.css";
 import { DocElementContent, ElementsLibraryMap } from "./DocElement";
 import { HeadingContent } from "./HeadingContent";
+
+import "./SubHeading.css";
+import "./HeadingStyles.css";
 
 interface Props {
   level: number;
@@ -53,7 +54,7 @@ export function SubHeading({ level, title, headingContent, id, additionalIds, ba
         <Icon id="link" />
       </a>
       {(additionalIds || []).map((id) => (
-        <span id={id} />
+        <span key={id} id={id} />
       ))}
     </Element>
   );

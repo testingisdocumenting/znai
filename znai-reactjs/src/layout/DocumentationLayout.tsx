@@ -40,7 +40,7 @@ interface Props {
   renderedNextPrevNavigation: React.ReactNode;
   renderedFooter: React.ReactNode;
   docMeta: DocMeta;
-  toc: Partial<TocItem>[];
+  toc: TocItem[];
   selectedTocItem?: TocItem;
 
   onHeaderClick(): void;
@@ -54,6 +54,9 @@ interface Props {
   onNextPage(): void;
 
   onPrevPage(): void;
+
+  scrollToTop(): void;
+  scrollToPageSection(id: string): void;
 
   pageGenError?: string;
 }
@@ -74,6 +77,8 @@ export function DocumentationLayout({
   onNextPage,
   onPrevPage,
   pageGenError,
+  scrollToTop,
+  scrollToPageSection,
 }: Props) {
   const [isMobileTocVisible, setMobileTocVisible] = useState(false);
   const isMobile = useIsMobile();
@@ -101,7 +106,18 @@ export function DocumentationLayout({
     const displayTocHeader = docMeta?.useTopHeader;
     return (
       <Documentation>
-        {displayTocHeader && <TopHeader docMeta={docMeta} onTitleClick={onHeaderClick} onSearchClick={onSearchClick} />}
+        {displayTocHeader && (
+          <TopHeader
+            docMeta={docMeta}
+            toc={toc}
+            selectedTocItem={selectedTocItem}
+            onTocItemClick={onTocItemClick}
+            scrollToTop={scrollToTop}
+            scrollToPageSection={scrollToPageSection}
+            onTitleClick={onHeaderClick}
+            onSearchClick={onSearchClick}
+          />
+        )}
         <div className="znai-side-panel-and-content">
           <div className="side-panel">
             <TocPanel

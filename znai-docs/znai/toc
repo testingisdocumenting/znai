@@ -84,6 +84,7 @@ plugins
 configuration
     basic
     styling
+    top-header
 deployment
     additional-files
 example-references

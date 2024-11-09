@@ -24,6 +24,8 @@
     padding-right: 16px;
     background-color: #2b2f58;
     border-bottom: 1px solid var(--znai-toc-panel-border-color);
+
+    overflow-x: hidden;
 }
 
 .theme-znai-dark .znai-top-header {
@@ -31,10 +33,12 @@
     border-bottom: 1px solid #111;
 }
 
-.znai-top-header-logo-and-title {
+.znai-top-header-logo-and-title-and-selected-toc-item {
     display: flex;
     align-items: center;
     gap: 16px;
+    white-space: nowrap;
+    overflow-x: hidden;
 }
 
 .znai-top-header-search-area {
@@ -55,4 +59,28 @@
 .znai-top-header-theme-switcher .znai-theme-switcher-panel {
     height: auto;
     padding: 0;
+}
+
+.znai-top-header-selected-toc-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: var(--znai-inversed-text-color);
+    font-size: 14px;
+    gap: 8px;
+    margin-left: 16px;
+    margin-right: 16px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.znai-top-header-selected-section-title a {
+    text-decoration: none;
+    color: var(--znai-inversed-text-color);
+}
+
+.znai-top-header-selected-delimiter {
+    color: var(--znai-meta-color);
+    cursor: auto;
 }

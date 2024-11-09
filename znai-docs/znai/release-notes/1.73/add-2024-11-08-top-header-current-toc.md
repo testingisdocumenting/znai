@@ -1,0 +1,1 @@
+* Add: [Top Header](configuration/top-header) displays current chapter/page/section

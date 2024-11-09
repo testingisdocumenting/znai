@@ -18,10 +18,11 @@
 export interface TocItem {
   dirName: string;
   fileName: string;
-  sectionTitle?: string;
+  chapterTitle?: string;
   pageTitle?: string;
   pageMeta?: object;
   anchorId?: string;
+  fileExtension?: string;
   items?: TocItem[];
   pageSectionIdTitles?: TocItemPageSections[];
 }
@@ -29,9 +30,9 @@ export interface TocItem {
 export interface TocItemPageSections {
   id: string;
   title: string;
+  style?: string;
 }
 
 export function areTocItemEquals(a: TocItem, b: TocItem) {
-  return a.dirName === b.dirName &&
-    a.fileName === b.fileName
+  return a.dirName === b.dirName && a.fileName === b.fileName;
 }
