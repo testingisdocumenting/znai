@@ -1,0 +1,1 @@
+* Fix: Remove more non printable characters when creating global search index to avoid crash

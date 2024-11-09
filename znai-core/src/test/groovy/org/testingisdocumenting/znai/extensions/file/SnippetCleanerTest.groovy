@@ -21,8 +21,12 @@ import org.junit.Test
 class SnippetCleanerTest {
     @Test
     void "remove non ansi characters"() {
-        SnippetCleaner.removeNonAnsiCharacters(
+        SnippetCleaner.removeNonPrintable("helloWorld(a, b, c) 123").should == "helloWorld(a, b, c) 123"
+        SnippetCleaner.removeNonPrintable(
                 "\u001B[34mconfig: \u001B[33mscenarios/ui/webtau.cfg.groovy\u001B[0m // from command line argument\u001B[0m")
                 .should == "config: scenarios/ui/webtau.cfg.groovy // from command line argument"
+
+        SnippetCleaner.removeNonPrintable("\u001B]7;file://host.localdomain/Users/user\u0007\u001B[1m\u001B[7m%\u001B[27m\u001B[1m\u001B[0m")
+                .should == "]7;file://host.localdomain/Users/user%"
     }
 }
