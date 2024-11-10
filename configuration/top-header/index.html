@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Headings</title>
+<title>Znai: Top Header</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,13 +85,7 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Heading Types</h1></header>
-<p>Use at the end of heading title to change style of the heading to one monospace and different subheading styles Use it to hand craft reference documentation style api API # Heading API Type style api badge class ## Heading API Type style api ### Heading API Type style api #### Heading API Type style api ##### Heading API Type style api ###### Heading API Type style api</p>
-</article>
-
-<article>
-<header><h1>Heading API Type</h1></header>
-<p>Heading API Type Heading API Type Heading API Type Heading API Type Heading API Type</p>
+<p>To enable Top Header navigation bar add to useTopHeader meta json useTopHeader true</p>
 </article>
 </section>
 </div>
@@ -126,108 +120,39 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "heading-types",
-      "additionalIds" : [ ],
-      "title" : "Heading Types",
-      "type" : "Section",
+      "type" : "Paragraph",
       "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "{style: \"api\"}",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " at the end of heading title to change style of the heading to ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "API",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " one: monospace and",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "different subheading styles.",
-          "type" : "SimpleText"
-        } ]
+        "text" : "To enable Top Header navigation bar, add ",
+        "type" : "SimpleText"
       }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use it to hand-craft reference documentation",
-          "type" : "SimpleText"
-        } ]
+        "code" : "useTopHeader",
+        "type" : "InlinedCode"
       }, {
-        "lang" : "",
-        "snippet" : "# Heading API Type {style: \"api\", badge: \"class\"}\n## Heading API Type {style: \"api\"}\n### Heading API Type {style: \"api\"}\n#### Heading API Type {style: \"api\"}\n##### Heading API Type {style: \"api\"}\n###### Heading API Type {style: \"api\"}",
-        "lineNumber" : "",
-        "type" : "Snippet"
+        "text" : " to ",
+        "type" : "SimpleText"
+      }, {
+        "code" : "meta.json",
+        "type" : "InlinedCode"
+      }, {
+        "text" : ":",
+        "type" : "SimpleText"
       } ]
     }, {
-      "style" : "api",
-      "badge" : "class",
-      "id" : "heading-api-type",
-      "additionalIds" : [ ],
-      "title" : "Heading API Type",
-      "type" : "Section",
-      "content" : [ {
-        "style" : "api",
-        "id" : "heading-api-type-heading-api-type",
-        "additionalIds" : [ "heading-api-type-3" ],
-        "level" : 2,
-        "title" : "Heading API Type",
-        "type" : "SubHeading"
-      }, {
-        "style" : "api",
-        "id" : "heading-api-type-heading-api-type-heading-api-type",
-        "additionalIds" : [ "heading-api-type-4" ],
-        "level" : 3,
-        "title" : "Heading API Type",
-        "type" : "SubHeading"
-      }, {
-        "style" : "api",
-        "id" : "heading-api-type-heading-api-type-heading-api-type-heading-api-type",
-        "additionalIds" : [ "heading-api-type-5" ],
-        "level" : 4,
-        "title" : "Heading API Type",
-        "type" : "SubHeading"
-      }, {
-        "style" : "api",
-        "id" : "heading-api-type-heading-api-type-heading-api-type-heading-api-type-heading-api-type",
-        "additionalIds" : [ "heading-api-type-6" ],
-        "level" : 5,
-        "title" : "Heading API Type",
-        "type" : "SubHeading"
-      }, {
-        "style" : "api",
-        "id" : "heading-api-type-heading-api-type-heading-api-type-heading-api-type-heading-api-type-heading-api-type",
-        "additionalIds" : [ "heading-api-type-7" ],
-        "level" : 6,
-        "title" : "Heading API Type",
-        "type" : "SubHeading"
-      } ]
+      "lang" : "",
+      "snippet" : "\"useTopHeader\": true",
+      "lineNumber" : "",
+      "type" : "Snippet"
     } ],
-    "lastModifiedTime" : 1731277427098,
+    "lastModifiedTime" : 1731277427066,
     "tocItem" : {
-      "chapterTitle" : "Visuals",
-      "pageTitle" : "Headings",
+      "chapterTitle" : "Configuration",
+      "pageTitle" : "Top Header",
       "pageMeta" : { },
-      "dirName" : "visuals",
-      "fileName" : "headings",
+      "dirName" : "configuration",
+      "fileName" : "top-header",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
-      "pageSectionIdTitles" : [ {
-        "title" : "Heading Types",
-        "id" : "heading-types",
-        "customAnchorId" : "heading-types"
-      }, {
-        "title" : "Heading API Type",
-        "id" : "heading-api-type",
-        "style" : "api",
-        "customAnchorId" : "heading-api-type"
-      } ]
+      "pageSectionIdTitles" : [ ]
     }
   }
 }), document.getElementById("znai"));

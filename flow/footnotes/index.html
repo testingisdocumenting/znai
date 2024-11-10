@@ -86,12 +86,12 @@
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Definition</h1></header>
-<p>To define a footnote use To add a reference to the footnote use which will result in ^1 extra content for my footnote goes here potentially including code blocks ``` Constructor ``` ^1</p>
+<p>To define a footnote use To add a reference to the footnote use which will result in ^my id extra content for my footnote goes here potentially including code blocks ``` Constructor ``` ^my id</p>
 </article>
 
 <article>
 <header><h1>Preview</h1></header>
-<p>Hover mouse over footnote reference see its content</p>
+<p>Hover mouse over a footnote reference see its content in a tooltip</p>
 </article>
 </section>
 </div>
@@ -138,7 +138,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "",
-        "snippet" : "[^1]: extra content for my footnote goes here\npotentially including code blocks\n```\nConstructor()\n```",
+        "snippet" : "[^my-id]: extra content for my footnote goes here\npotentially including code blocks\n```\nConstructor()\n```",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -147,7 +147,7 @@ ReactDOM.render(React.createElement(Documentation, {
           "text" : "To add a reference to the footnote use ",
           "type" : "SimpleText"
         }, {
-          "code" : "[^1]",
+          "code" : "[^my-id]",
           "type" : "InlinedCode"
         }, {
           "text" : " which will result in ",
@@ -182,12 +182,12 @@ ReactDOM.render(React.createElement(Documentation, {
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Hover mouse over footnote reference see its content",
+          "text" : "Hover mouse over a footnote reference see its content in a tooltip.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1730676650987,
+    "lastModifiedTime" : 1731277427070,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Footnotes",
@@ -198,10 +198,12 @@ ReactDOM.render(React.createElement(Documentation, {
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
         "title" : "Definition",
-        "id" : "definition"
+        "id" : "definition",
+        "customAnchorId" : "definition"
       }, {
         "title" : "Preview",
-        "id" : "preview"
+        "id" : "preview",
+        "customAnchorId" : "preview"
       } ]
     }
   }

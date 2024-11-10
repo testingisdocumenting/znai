@@ -85,6 +85,11 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.73</h1></header>
+<p>Fix Remove more non printable characters when creating global search index to avoid crash Fix html comment block when used before first no longer creates extra spacing Fix Correctly highlight page sections with custom anchor id as you scroll through a page Fix Search result section with custom anchor id no longer crash the page Add Footnote update styles Add Footnote references uses normalized labels like instead of a user specified custom ids 1 2 3 Add explicit new line support in replacement preprocessor csv Add Page sections allow bold and italic Add Better error message when unsupported styling is used in page sections Add Better handling of longer page sections Add Inlined code font size match when used inside page sections Add Graphviz expose hex colors for override via css variables Add Footnote preview uses fixed width to match content width Add Top Header displays current chapter page section</p>
+</article>
+
+<article>
 <header><h1>1.72</h1></header>
 <p>Add Code Snippets automatically strip extra indentation Add Experimental top header Add Headings support for links inside Add Graphviz better black color support in subgraph Add Graphviz option align Add Support for HTML block Add Initial Footnotes support Add Latex Math block shortcut support $$ Add Latex Math inline shortcut support $ Add Custom Anchor Id Add iframe to add scrollbars that match in style the main document maxHeight Add Search hotkey indicator</p>
 </article>
@@ -146,6 +151,287 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "173",
+      "additionalIds" : [ ],
+      "title" : "1.73",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Remove more non printable characters when creating global search index to avoid crash",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: html comment block when used before first no longer creates extra spacing",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Correctly highlight page sections with custom anchor id as you scroll through a page",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Search result section with custom anchor id no longer crash the page",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/footnotes",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Footnote",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " update styles",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/footnotes",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Footnote",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " references uses normalized labels like ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "1",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "2",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "3",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " instead of a user specified custom ids",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "preprocessor.csv",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " explicit new line support in replacement",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Page sections allow ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "StrongEmphasis",
+              "content" : [ {
+                "text" : "bold",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "type" : "Emphasis",
+              "content" : [ {
+                "text" : "italic",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Better error message when unsupported styling is used in page sections",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Better handling of longer page sections",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Inlined code font size match when used inside page sections",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/graphviz-diagrams",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Graphviz",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " expose hex colors for override via css variables",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/footnotes",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Footnote preview",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " uses fixed width to match content width",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/configuration/top-header",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Top Header",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " displays current chapter/page/section",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "172",
       "additionalIds" : [ ],
       "title" : "1.72",
@@ -1349,7 +1635,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1730676651003,
+    "lastModifiedTime" : 1731277427082,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2024 Releases",
@@ -1361,23 +1647,33 @@ ReactDOM.render(React.createElement(Documentation, {
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.73",
+        "id" : "173",
+        "customAnchorId" : "173"
+      }, {
         "title" : "1.72",
-        "id" : "172"
+        "id" : "172",
+        "customAnchorId" : "172"
       }, {
         "title" : "1.71",
-        "id" : "171"
+        "id" : "171",
+        "customAnchorId" : "171"
       }, {
         "title" : "1.70",
-        "id" : "170"
+        "id" : "170",
+        "customAnchorId" : "170"
       }, {
         "title" : "1.69",
-        "id" : "169"
+        "id" : "169",
+        "customAnchorId" : "169"
       }, {
         "title" : "1.68",
-        "id" : "168"
+        "id" : "168",
+        "customAnchorId" : "168"
       }, {
         "title" : "1.67",
-        "id" : "167"
+        "id" : "167",
+        "customAnchorId" : "167"
       } ]
     }
   }

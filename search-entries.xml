@@ -92,7 +92,7 @@
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 72&lt; version> &lt; plugin></text>
+      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 73&lt; version> &lt; plugin></text>
     </text>
   </entry>
   <entry>
@@ -108,7 +108,7 @@
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 72&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
+      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 73&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
     </text>
   </entry>
   <entry>
@@ -116,7 +116,7 @@
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 72&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
+      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 73&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
     </text>
   </entry>
   <entry>
@@ -156,7 +156,7 @@
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling deployment additional files example references domain api znai development local build release notes 2024 2023 2022 2021 introduction rationale rationale md</text>
+      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling top header deployment additional files example references domain api znai development local build release notes 2024 2023 2022 2021 introduction rationale rationale md</text>
     </text>
   </entry>
   <entry>
@@ -356,7 +356,7 @@
     <fullTitle>Znai: Footnotes, Definition [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To define a footnote use To add a reference to the footnote use which will result in ^1 extra content for my footnote goes here potentially including code blocks ``` Constructor ``` ^1</text>
+      <text>To define a footnote use To add a reference to the footnote use which will result in ^my id extra content for my footnote goes here potentially including code blocks ``` Constructor ``` ^my id</text>
     </text>
   </entry>
   <entry>
@@ -364,7 +364,7 @@
     <fullTitle>Znai: Footnotes, Preview [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Hover mouse over footnote reference see its content</text>
+      <text>Hover mouse over a footnote reference see its content in a tooltip</text>
     </text>
   </entry>
   <entry>
@@ -3008,6 +3008,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/configuration/top-header</url>
+    <fullTitle>Znai: Top Header,  [Configuration]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>To enable Top Header navigation bar add to useTopHeader meta json useTopHeader true</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/deployment/additional-files</url>
     <fullTitle>Znai: Additional Files,  [Deployment]</fullTitle>
     <text>
@@ -3093,6 +3101,14 @@
     <text>
       <score>STANDARD</score>
       <text>cd znai dist target unzip dist znai zip export PATH $ pwd dist $PATH znai version</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2024#173</url>
+    <fullTitle>Znai: 2024 Releases, 1.73 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Fix Remove more non printable characters when creating global search index to avoid crash Fix html comment block when used before first no longer creates extra spacing Fix Correctly highlight page sections with custom anchor id as you scroll through a page Fix Search result section with custom anchor id no longer crash the page Add Footnote update styles Add Footnote references uses normalized labels like instead of a user specified custom ids 1 2 3 Add explicit new line support in replacement preprocessor csv Add Page sections allow bold and italic Add Better error message when unsupported styling is used in page sections Add Better handling of longer page sections Add Inlined code font size match when used inside page sections Add Graphviz expose hex colors for override via css variables Add Footnote preview uses fixed width to match content width Add Top Header displays current chapter page section</text>
     </text>
   </entry>
   <entry>
