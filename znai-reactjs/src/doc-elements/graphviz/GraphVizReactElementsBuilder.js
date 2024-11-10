@@ -208,17 +208,34 @@ export default class GraphVizReactElementsBuilder {
     }
 
     colorsByExplicitColors(line, fill, text) {
+        function replaceHexColor(color) {
+            const startsWithHash = color.startsWith('#')
+            if (!startsWithHash) {
+                return color
+            }
+
+            if (color === "#0000ff") {
+                return "blue"
+            }
+
+            if (startsWithHash) {
+                return "hex_" + color.substring(1)
+            }
+
+            return color
+        }
+
         function noneOrColor(passedValue, transformedValue) {
             return passedValue === "none" ? "none" :
               transformedValue
         }
 
         return {
-            line: noneOrColor(line, `var(--znai-diagram-${line}-line)`),
-            fill: noneOrColor(fill, `var(--znai-diagram-${fill}-fill)`),
+            line: noneOrColor(line, `var(--znai-diagram-${replaceHexColor(line)}-line)`),
+            fill: noneOrColor(fill, `var(--znai-diagram-${replaceHexColor(fill)}-fill)`),
             text: noneOrColor(text, this.isInvertedTextColor() ?
-              `var(--znai-diagram-${text}-text-inverse)`:
-              `var(--znai-diagram-${text}-text)`)
+              `var(--znai-diagram-${replaceHexColor(text)}-text-inverse)`:
+              `var(--znai-diagram-${replaceHexColor(text)}-text)`)
         }
     }
 
