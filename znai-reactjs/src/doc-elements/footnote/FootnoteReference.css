@@ -3,6 +3,7 @@
 }
 
 .znai-footnote-preview-container {
+   width: var(--znai-single-column-render-width);
    background-color: var(--znai-background-color);
    border: 1px solid;
    border-radius: 8px;
