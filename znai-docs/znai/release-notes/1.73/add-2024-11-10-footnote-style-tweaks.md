@@ -1,0 +1,1 @@
+* Add: [Footnote](flow/footnotes) update styles

@@ -16,10 +16,8 @@
 
 import React from "react";
 import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
-import { Tooltip } from "../../components/Tooltip";
-import { FootnotePreview } from "./FootnotePreview";
 
-import "./FootnoteReference.css";
+import "./FootnotePreview.css";
 
 interface Props {
   label: string;
@@ -27,19 +25,11 @@ interface Props {
   elementsLibrary: ElementsLibraryMap;
 }
 
-export function FootnoteReference({ label, content, elementsLibrary }: Props) {
-  const tooltipContent = <FootnotePreview label={label} content={content} elementsLibrary={elementsLibrary} />;
-
-  const referenceClassName =
-    "znai-footnote-reference " + (label.length === 1 ? "single-char-label" : "multi-char-label");
-
+export function FootnotePreview({ label, content, elementsLibrary }: Props) {
   return (
-    <Tooltip
-      content={tooltipContent}
-      placement="parent-content-block"
-      contentClassName="znai-footnote-preview-container"
-    >
-      <sup className={referenceClassName}>{label}</sup>
-    </Tooltip>
+    <div className="znai-footnote-preview">
+      <div className="znai-footnote-preview-label">{label}</div>
+      <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={content} />
+    </div>
   );
 }

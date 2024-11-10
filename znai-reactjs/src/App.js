@@ -102,7 +102,7 @@ import { containerTitleDemo } from "./doc-elements/container/ContainerTitle.demo
 import { cardsDemo } from "./doc-elements/card/CardsDemo";
 import { doxygenPresentationDemo } from "./doc-elements/doxygen/PresentationDoxygen.demo";
 import { jsonPresentationDemo } from "./doc-elements/json/PresentationJson.demo";
-import { footnoteReferenceDemo } from "./doc-elements/footnote/FootnoteReference.demo";
+import { footnoteDemo } from "./doc-elements/footnote/Footnote.demo";
 
 const docMeta = {
     id: 'preview',
@@ -187,7 +187,7 @@ registries.add('layout')
     .registerAsGrid('Columns', 0, columnsDemo)
     .registerAsTabs('TOC', tocPanelDemo)
     .registerAsTabs('Mobile Header', tocMobileHeaderDemo)
-    .registerAsRows('Footnote', footnoteReferenceDemo)
+    .registerAsRows('Footnote', footnoteDemo)
     .registerAsTabs('Layout', documentationLayoutDemo)
     .registerAsRows('Next/Prev navigation', defaultNextPrevNavigationDemo)
     .registerAsRows('Two Sides Next/Prev navigation', twoSidesNextPrevNavigationDemo)
