@@ -1,0 +1,1 @@
+* Add: [Footnote preview](flow/footnotes) uses fixed width to match content width

@@ -25,19 +25,43 @@ export function footnoteReferenceDemo(registry: Registry) {
   registry.add("default", () => (
     <>
       <TooltipRenderer />
-      <FootnoteReference label="1" elementsLibrary={elementsLibrary} content={footnoteContent()} />
+      <div className="content-block">
+        <p>
+          hello world some longer text and even further apart
+          <FootnoteReference label="1" elementsLibrary={elementsLibrary} content={footnoteContent()} />
+        </p>
+      </div>
     </>
   ));
 
   registry.add("longer label", () => (
     <>
       <TooltipRenderer />
-      <FootnoteReference label="my-note" elementsLibrary={elementsLibrary} content={footnoteContent()} />
+      <div className="content-block">
+        <p>
+          hello world some longer text and even further apart and some more
+          <FootnoteReference label="my-note" elementsLibrary={elementsLibrary} content={longerFootnoteContent()} />
+        </p>
+      </div>
     </>
   ));
 }
 
 function footnoteContent() {
+  return [
+    {
+      type: "Paragraph",
+      content: [
+        {
+          text: "experimentational footnote",
+          type: "SimpleText",
+        },
+      ],
+    },
+  ];
+}
+
+function longerFootnoteContent() {
   return [
     {
       type: "Paragraph",

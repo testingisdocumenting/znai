@@ -34,11 +34,12 @@ export function FootnoteReference({ label, content, elementsLibrary }: Props) {
 
   const referenceClassName =
     "znai-footnote-reference " + (label.length === 1 ? "single-char-label" : "multi-char-label");
+
   return (
     <Tooltip
       content={tooltipContent}
       placement="parent-content-block"
-      contentClassName="znai-footnote-preview-container"
+      contentClassName="znai-footnote-preview-container content-block"
     >
       <sup className={referenceClassName}>{label}</sup>
     </Tooltip>
