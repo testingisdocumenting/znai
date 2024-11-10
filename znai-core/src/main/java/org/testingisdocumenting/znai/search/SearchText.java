@@ -17,6 +17,8 @@
 
 package org.testingisdocumenting.znai.search;
 
+import org.testingisdocumenting.znai.extensions.file.SnippetCleaner;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -53,7 +55,7 @@ public class SearchText {
             return null;
         }
 
-        return text.replaceAll("\\e\\[[\\d;]*[^\\d;]","");
+        return SnippetCleaner.removeNonPrintable(text);
     }
 
     @Override

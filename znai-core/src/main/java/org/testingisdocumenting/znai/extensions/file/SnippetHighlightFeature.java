@@ -66,7 +66,7 @@ public class SnippetHighlightFeature implements PluginFeature {
         this.contentProvider = contentProvider;
         snippetIdxConverter = new SnippetContainerEntriesConverter(
                 contentProvider.snippetId(),
-                SnippetCleaner.removeNonAnsiCharacters(contentProvider.snippetContent()));
+                SnippetCleaner.removeNonPrintable(contentProvider.snippetContent()));
     }
 
     public void updateProps(Map<String, Object> props) {

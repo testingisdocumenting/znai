@@ -20,7 +20,9 @@ public class SnippetCleaner {
     private SnippetCleaner() {
     }
 
-    public static String removeNonAnsiCharacters(String content) {
-        return content.replaceAll("\\e\\[[\\d;]*[^\\d;]","");
+    public static String removeNonPrintable(String content) {
+        return content
+                .replaceAll("\\e\\[[\\d;]*[^\\d;]","")
+                .replaceAll("[^\\x20-\\x7E\\n\\t\\r]", "");
     }
 }
