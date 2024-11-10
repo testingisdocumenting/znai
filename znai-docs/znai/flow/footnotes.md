@@ -3,16 +3,16 @@
 To define a footnote use
 
 `````
-[^1]: extra content for my footnote goes here
+[^my-id]: extra content for my footnote goes here
 potentially including code blocks
 ```
 Constructor()
 ```
 `````
 
-To add a reference to the footnote use `[^1]` which will result in [^1]
+To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
 
-[^1]: extra content for my footnote goes here
+[^my-id]: extra content for my footnote goes here
     potentially including code blocks
     ```
     Constructor()
@@ -20,4 +20,4 @@ To add a reference to the footnote use `[^1]` which will result in [^1]
 
 # Preview
 
-Hover mouse over footnote reference see its content
+Hover mouse over a footnote reference see its content in a tooltip.
