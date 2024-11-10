@@ -1,0 +1,1 @@
+* Add: [Footnote](flow/footnotes) references uses normalized labels like `1`, `2`, `3` instead of a user specified custom ids

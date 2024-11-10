@@ -561,13 +561,15 @@ $$
     @Test
     void "footnotes"() {
         parse("""
-Main text [^1]
+Main text [^my-footnote] and another [^secret]
 
-[^1]: additional text footnote
+[^my-footnote]: additional text footnote
     more text here
     ```
     code block
     ```
+    
+[^secret]: no secret here
     
 after footnote
 """)
@@ -581,8 +583,13 @@ after footnote
                                   ["text": "additional text footnote", "type": "SimpleText"],
                                   ["type": "SoftLineBreak"],
                                   ["text": "more text here", "type": "SimpleText"] ] ],
-                                         [ "lang": "", "snippet":"code block", "lineNumber": "", "type": "Snippet" ] ],
-                            "type": "FootnoteReference" ] ]
+                                                      [ "lang": "", "snippet":"code block", "lineNumber": "", "type": "Snippet" ] ],
+                           "type": "FootnoteReference" ],
+                          ["text": " and another ", "type": "SimpleText"],
+                          [ "label": "2", "content": [["type": "Paragraph", "content": [["text": "no secret here", "type": "SimpleText"]]]],
+                            "type": "FootnoteReference"
+                          ]
+                  ]
                 ],
                 ["type": "Paragraph", "content": [["text": "after footnote", "type": "SimpleText"]]]
         ]

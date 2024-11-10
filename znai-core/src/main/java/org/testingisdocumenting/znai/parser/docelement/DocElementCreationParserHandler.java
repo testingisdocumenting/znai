@@ -64,6 +64,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private final Deque<DocElement> elementsStack;
 
     private final Map<FootnoteId, ParsedFootnote> parsedFootnotes;
+    private final Map<FootnoteId, Integer> footnoteIdxById;
+    private int footnoteIdx;
     private String currentSectionTitle;
 
     private boolean isSectionStarted;
@@ -77,6 +79,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
         this.globalAnchorIds = new ArrayList<>();
 
         this.parsedFootnotes = new HashMap<>();
+        this.footnoteIdx = 0;
+        this.footnoteIdxById = new HashMap<>();
 
         this.docElement = new DocElement(DocElementType.PAGE);
         this.elementsStack = new ArrayDeque<>();
@@ -223,12 +227,13 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onFootnoteDefinition(ParsedFootnote footnote) {
         parsedFootnotes.put(footnote.id(), footnote);
+        footnoteIdxById.put(footnote.id(), footnoteIdx++);
     }
 
     @Override
     public void onFootnoteReference(FootnoteId footnoteId) {
         append(new DocElement( "FootnoteReference",
-                "label", footnoteId.id(),
+                "label", (Supplier<?>) (() -> Integer.toString(footnoteIdxById.getOrDefault(footnoteId, 0) + 1)),
                 "content", (Supplier<?>) (() -> footnoteContent(footnoteId))));
     }
 
