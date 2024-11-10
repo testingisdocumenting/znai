@@ -126,6 +126,10 @@
     --znai-footer-color: #818a8f;
     --znai-footer-background-color: #f5f6f7;
 
+    --znai-footnote-preview-background-color: hsl(212, 95%, 94%);
+    --znai-footnote-preview-label-background-color: hsl(212, 95%, 90%);
+    --znai-footnote-preview-border-color: hsl(212, 95%, 77%);
+
     --znai-search-box-text-color: #777;
     --znai-search-box-background-color: #eee;
     --znai-search-overlay-background-color: rgba(150, 150, 150, 0.5);

@@ -20,8 +20,9 @@ import { elementsLibrary } from "../DefaultElementsLibrary";
 import { FootnoteReference } from "./FootnoteReference";
 import { Registry } from "react-component-viewer";
 import { TooltipRenderer } from "../../components/Tooltip";
+import { FootnotePreview } from "./FootnotePreview";
 
-export function footnoteReferenceDemo(registry: Registry) {
+export function footnoteDemo(registry: Registry) {
   registry.add("default", () => (
     <>
       <TooltipRenderer />
@@ -40,11 +41,19 @@ export function footnoteReferenceDemo(registry: Registry) {
       <div className="content-block">
         <p>
           hello world some longer text and even further apart and some more
-          <FootnoteReference label="my-note" elementsLibrary={elementsLibrary} content={longerFootnoteContent()} />
+          <FootnoteReference label="23" elementsLibrary={elementsLibrary} content={longerFootnoteContent()} />
         </p>
       </div>
     </>
   ));
+
+  registry.add("preview", () => {
+    return (
+      <div className="znai-footnote-preview-container">
+        <FootnotePreview label="1" elementsLibrary={elementsLibrary} content={footnoteContent()} />
+      </div>
+    );
+  });
 }
 
 function footnoteContent() {
