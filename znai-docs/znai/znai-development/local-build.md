@@ -12,10 +12,10 @@ Easy way to maintain Java specific dependencies below is by using [SDKMAN](https
 
 ## Java And Maven 
 
-You need Java 8 and Maven to build Znai.
+You need Java 17 and Maven to build Znai.
 
 ```cli 
-sdk install java 8.0.342-amzn 
+sdk install java 17.0.13-amzn 
 sdk install maven
 ```
 
