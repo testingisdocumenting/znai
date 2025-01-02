@@ -156,6 +156,7 @@
         <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
         <httpcore.version>4.4.13</httpcore.version>
         <httpclient.version>4.5.13</httpclient.version>
+        <frontend-maven-plugin.installDirectory>.mvn</frontend-maven-plugin.installDirectory>
     </properties>
 
     <dependencyManagement>
@@ -514,7 +515,7 @@
                     </executions>
                     <configuration>
                         <nodeVersion>v12.16.3</nodeVersion>
-                        <installDirectory>.mvn</installDirectory>
+                        <installDirectory>${frontend-maven-plugin.installDirectory}</installDirectory>
                         <workingDirectory>src</workingDirectory>
                     </configuration>
                 </plugin>
