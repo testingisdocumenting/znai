@@ -29,6 +29,20 @@ Use [brew](https://brew.sh) to install [GraphViz](http://www.graphviz.org/)
 brew install graphviz
 ```
 
+## Firefox
+
+Some automated tests in znai are using [WebTau](https://testingisdocumenting.org/webtau/getting-started/what-is-this),
+which in turn use Selenium WebDriver and firefox.
+
+A firefox executable has to be on the system path.
+
+Use [brew](https://brew.sh) to install [Firefox](https://www.mozilla.org/en-US/firefox/).
+
+```cli
+brew install firefox
+```
+
+
 # Build
 
 ```cli
