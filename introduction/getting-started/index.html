@@ -126,7 +126,7 @@
 
 <article>
 <header><h1>On-site Central Hub Deployment</h1></header>
-<p>Znai has enterprise mode that lets you run Documentation hub inside your organization It is completely free and open sourced Please create a GitHub issue if you want to try it out I don t document it yet as I only have a couple of scenarios I tried it on and I need more input</p>
+<p>Znai has enterprise mode that lets you run Documentation hub inside your organization It is completely free and open sourced Please create a GitHub Issue if you want to try it out I don t document it yet as I only have a couple of scenarios I tried it on and I need more input</p>
 </article>
 </section>
 </div>
@@ -634,7 +634,18 @@ ReactDOM.render(React.createElement(Documentation, {
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Please create a GitHub issue if you want to try it out. I don't document it yet as I only have a couple of scenarios",
+          "text" : "Please create a ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "https://github.com/testingisdocumenting/znai/issues",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "GitHub Issue",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " if you want to try it out. I don't document it yet as I only have a couple of scenarios",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
@@ -644,7 +655,7 @@ ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1731277427070,
+    "lastModifiedTime" : 1736626383699,
     "tocItem" : {
       "chapterTitle" : "Introduction",
       "pageTitle" : "Getting Started",

@@ -421,6 +421,10 @@ toc = [ {
       "id" : "embedding-content",
       "customAnchorId" : "embedding-content"
     }, {
+      "title" : "Long Section Name Long Section NameLong Section NameLong Section NameLong Section NameLong Section NameLong Section NameLong Section Name",
+      "id" : "long-section-name-long-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-name",
+      "customAnchorId" : "long-section-name-long-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-name"
+    }, {
       "title" : "Syntax highlighting",
       "id" : "syntax-highlighting",
       "customAnchorId" : "syntax-highlighting"
@@ -2327,6 +2331,53 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ ]
+  } ]
+}, {
+  "chapterTitle" : "Hub",
+  "dirName" : "hub",
+  "items" : [ {
+    "chapterTitle" : "Hub",
+    "pageTitle" : "Introduction",
+    "pageMeta" : { },
+    "dirName" : "hub",
+    "fileName" : "introduction",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ ]
+  }, {
+    "chapterTitle" : "Hub",
+    "pageTitle" : "Setup",
+    "pageMeta" : { },
+    "dirName" : "hub",
+    "fileName" : "setup",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Config File",
+      "id" : "config-file",
+      "customAnchorId" : "config-file"
+    }, {
+      "title" : "Run In Server Mode",
+      "id" : "run-in-server-mode",
+      "customAnchorId" : "run-in-server-mode"
+    }, {
+      "title" : "Upload Documentation",
+      "id" : "upload-documentation",
+      "customAnchorId" : "upload-documentation"
+    } ]
+  }, {
+    "chapterTitle" : "Hub",
+    "pageTitle" : "Build Artifacts Watch",
+    "pageMeta" : { },
+    "dirName" : "hub",
+    "fileName" : "build-artifacts-watch",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Todo",
+      "id" : "todo",
+      "customAnchorId" : "todo"
+    } ]
   } ]
 }, {
   "chapterTitle" : "Example References",

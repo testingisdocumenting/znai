@@ -132,7 +132,7 @@
     <fullTitle>Znai: Getting Started, On-site Central Hub Deployment [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai has enterprise mode that lets you run Documentation hub inside your organization It is completely free and open sourced Please create a GitHub issue if you want to try it out I don t document it yet as I only have a couple of scenarios I tried it on and I need more input</text>
+      <text>Znai has enterprise mode that lets you run Documentation hub inside your organization It is completely free and open sourced Please create a GitHub Issue if you want to try it out I don t document it yet as I only have a couple of scenarios I tried it on and I need more input</text>
     </text>
   </entry>
   <entry>
@@ -156,7 +156,7 @@
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling top header deployment additional files example references domain api znai development local build release notes 2024 2023 2022 2021 introduction rationale rationale md</text>
+      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling top header deployment additional files hub introduction setup build artifacts watch example references domain api znai development local build release notes 2024 2023 2022 2021 introduction rationale rationale md</text>
     </text>
   </entry>
   <entry>
@@ -480,8 +480,8 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/external-code-snippets#embedding-content</url>
-    <fullTitle>Znai: External Code Snippets, Embedding Content [Snippets]</fullTitle>
+    <url>/znai/snippets/external-code-snippets#long-section-name-long-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-name</url>
+    <fullTitle>Znai: External Code Snippets, Long Section Name Long Section NameLong Section NameLong Section NameLong Section NameLong Section NameLong Section NameLong Section Name [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>To reduce documentation maintenance burden avoid copy and paste of code snippets Embed content by referencing existing files using the plugin instead This syntax will appear throughout the documentation and represents a family of custom Markdown extensions The file will be looked up using following rules directory with a markup file root directory of a documentation all lookup paths listed in a file include file include file file name js include class JsClass constructor usefulAction export default JsClass lookup paths</text>
@@ -3021,6 +3021,46 @@
     <text>
       <score>STANDARD</score>
       <text>Znai automatically copies files like images to deploy location when you use them Create next to file and list all the additional files directories you want to be copied to the deployment location upload txt toc my extra files fileone xml my extra dir</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/hub/introduction</url>
+    <fullTitle>Znai: Introduction,  [Hub]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Znai has a server mode that can act as a Hub for your company documentations In addition to serving static content Hub provides Landing page with all the documentations separated by sections On demand upload via CLI Automatic build artifacts watching to grab the latest docs</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/hub/setup#config-file</url>
+    <fullTitle>Znai: Setup, Config File [Hub]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Create the enterprise config file and set the path where Znai will store uploaded documentation</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/hub/setup#run-in-server-mode</url>
+    <fullTitle>Znai: Setup, Run In Server Mode [Hub]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Run Znai in server mode in the directory with the config file znai serve port &lt;port></text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/hub/setup#upload-documentation</url>
+    <fullTitle>Znai: Setup, Upload Documentation [Hub]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Set environment variable to the full url of the server e g Now you can run command to build and upload a documentation ZNAI_SERVER_URL export ZNAI_SERVER_URL http localhost 7070 upload znai deploy path where docresources generate doc id my doc id upload</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/hub/build-artifacts-watch#todo</url>
+    <fullTitle>Znai: Build Artifacts Watch, Todo [Hub]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Please create GitHub Issue if you are interested in automatically watching a set of directories for built documentations to automatically upload them to Hub</text>
     </text>
   </entry>
   <entry>

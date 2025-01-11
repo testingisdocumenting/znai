@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Presentation</title>
+<title>Znai: Setup</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,13 +85,18 @@
     <div></div>
 </div><section style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Equal Flow</h1></header>
-<p>When people build presentations there should be great focus on the flow of information making sure that those newly introduced to the topic are not lost A poorly organized presentation might drive users seeking clarification to documentation which too often is just as unfriendly to neophytes Presentation mode in is meant to help with both issues mutually reinforcing good flow in presentations and documentation Znai</p>
+<header><h1>Config File</h1></header>
+<p>Create the enterprise config file and set the path where Znai will store uploaded documentation</p>
 </article>
 
 <article>
-<header><h1>Presentation Mode</h1></header>
-<p>can turn any page into a presentation Simply click to the far right of each page title In presentation mode only certain documentation elements are converted to slides Headings Bullets Images and graphics Code snippets Command line input Math Tables If you write your documentation with a presentation in mind it should improve the flow of your documentation Znai</p>
+<header><h1>Run In Server Mode</h1></header>
+<p>Run Znai in server mode in the directory with the config file znai serve port &lt;port&gt;</p>
+</article>
+
+<article>
+<header><h1>Upload Documentation</h1></header>
+<p>Set environment variable to the full url of the server e g Now you can run command to build and upload a documentation ZNAI_SERVER_URL export ZNAI_SERVER_URL http localhost 7070 upload znai deploy path where docresources generate doc id my doc id upload</p>
 </article>
 </section>
 </div>
@@ -126,151 +131,102 @@ ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "equal-flow",
+      "id" : "config-file",
       "additionalIds" : [ ],
-      "title" : "Equal Flow",
+      "title" : "Config File",
       "type" : "Section",
       "content" : [ {
-        "presentationParagraph" : "default",
-        "type" : "Meta"
-      }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "When people build presentations, there should be great focus on the flow of information, making sure that those newly introduced to the topic are not lost. A poorly organized presentation might drive users seeking clarification to documentation, which too often is just as unfriendly to neophytes.",
+          "text" : "Create the enterprise config file and set the path where Znai will store uploaded documentation:",
           "type" : "SimpleText"
         } ]
       }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Presentation mode in ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "Znai",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " is meant to help with both issues, mutually reinforcing good flow in presentations and documentation.",
-          "type" : "SimpleText"
-        } ]
+        "title" : "znai-enterprise.cfg",
+        "data" : {
+          "znaiDocStoragePath" : "/path/to-store-docs-to-serve"
+        },
+        "highlightValues" : [ ],
+        "highlightKeys" : [ ],
+        "anchorId" : "config-file-znai-enterprisecfg",
+        "type" : "Json"
       } ]
     }, {
-      "id" : "presentation-mode",
+      "id" : "run-in-server-mode",
       "additionalIds" : [ ],
-      "title" : "Presentation Mode",
+      "title" : "Run In Server Mode",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "code" : "Znai",
+          "text" : "Run Znai in server mode in the directory with the config file:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "command" : "znai --serve --port=<port>",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
+      } ]
+    }, {
+      "id" : "upload-documentation",
+      "additionalIds" : [ ],
+      "title" : "Upload Documentation",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Set ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "ZNAI_SERVER_URL",
           "type" : "InlinedCode"
         }, {
-          "text" : " can turn any page into a presentation. Simply click ",
-          "type" : "SimpleText"
-        }, {
-          "id" : "maximize",
-          "type" : "Icon"
-        }, {
-          "text" : " to the far right of each page title.",
+          "text" : " environment variable to the full url of the server, e.g.:",
           "type" : "SimpleText"
         } ]
+      }, {
+        "command" : "export ZNAI_SERVER_URL=http://localhost:7070",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "In presentation mode, only certain documentation elements are converted to slides:",
+          "text" : "Now you can run ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "upload",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " command to build and upload a documentation:",
           "type" : "SimpleText"
         } ]
       }, {
-        "bulletMarker" : "*",
-        "tight" : true,
-        "type" : "BulletList",
-        "content" : [ {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Headings",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Bullets",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Images and graphics",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Code snippets",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Command line input",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Math",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Tables",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "If you write your documentation with a presentation in mind it should improve the flow of your documentation.",
-          "type" : "SimpleText"
-        } ]
+        "command" : "znai --deploy=/path/where/docresources/generate --doc-id=my-doc-id --upload",
+        "paramsToHighlight" : [ ],
+        "type" : "CliCommand"
       } ]
     } ],
     "lastModifiedTime" : 1736626383699,
     "tocItem" : {
-      "chapterTitle" : "Flow",
-      "pageTitle" : "Presentation",
+      "chapterTitle" : "Hub",
+      "pageTitle" : "Setup",
       "pageMeta" : { },
-      "dirName" : "flow",
-      "fileName" : "presentation",
+      "dirName" : "hub",
+      "fileName" : "setup",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Equal Flow",
-        "id" : "equal-flow",
-        "customAnchorId" : "equal-flow"
+        "title" : "Config File",
+        "id" : "config-file",
+        "customAnchorId" : "config-file"
       }, {
-        "title" : "Presentation Mode",
-        "id" : "presentation-mode",
-        "customAnchorId" : "presentation-mode"
+        "title" : "Run In Server Mode",
+        "id" : "run-in-server-mode",
+        "customAnchorId" : "run-in-server-mode"
+      }, {
+        "title" : "Upload Documentation",
+        "id" : "upload-documentation",
+        "customAnchorId" : "upload-documentation"
       } ]
     }
   }
