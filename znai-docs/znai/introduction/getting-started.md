@@ -105,5 +105,5 @@ Here is an example of znai publishing its documentation to github pages
 Znai has enterprise mode that lets you run Documentation hub inside your organization.
 It is completely free and open sourced.
 
-Please create a GitHub issue if you want to try it out. I don't document it yet as I only have a couple of scenarios 
+Please create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you want to try it out. I don't document it yet as I only have a couple of scenarios 
 I tried it on, and I need more input.
