@@ -51,19 +51,11 @@
                         <delete dir="${project.build.outputDirectory}/static" />
 
                         <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
-                            <fileset file="build/static/js/runt*.js" />
-                        </concat>
-
-                        <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
-                            <fileset file="build/static/js/2*.js" />
-                        </concat>
-
-                        <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
-                            <fileset file="build/static/js/main*.js" />
+                            <fileset file="dist/assets/index*.js" />
                         </concat>
 
                         <concat destfile="${project.build.outputDirectory}/static/main.css" append="true">
-                            <fileset file="build/static/css/*.css" />
+                            <fileset file="dist/assets/index*.css" />
                         </concat>
 
                         <copy verbose="true" todir="${project.build.outputDirectory}/static/css/fonts">

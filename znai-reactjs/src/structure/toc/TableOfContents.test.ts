@@ -15,56 +15,66 @@
  * limitations under the License.
  */
 
-import { isTocItemIndex, tableOfContents } from './TableOfContents'
+import { isTocItemIndex, tableOfContents } from "./TableOfContents";
 
-describe('Table of Contents', () => {
+describe("Table of Contents", () => {
   beforeEach(() => {
-    tableOfContents.toc =
-      [
-        {
-          "sectionTitle": "",
-          "dirName": "",
-          "items": [{
-            "sectionTitle": "",
-            "pageTitle": "Index",
-            "pageMeta": {},
-            "fileName": "index",
-            "dirName": "",
-          }]
-        },
-        {
-          "sectionTitle": "REST",
-          "dirName": "REST",
-          "items": [{
-            "sectionTitle": "REST",
-            "pageTitle": "Getting Started",
-            "pageMeta": {},
-            "fileName": "getting-started",
-            "dirName": "REST",
-          }, {
-            "sectionTitle": "REST",
-            "pageTitle": "CRUD",
-            "pageMeta": {},
-            "fileName": "CRUD",
-            "dirName": "REST"
-          }]
-        },
-      ]
-  })
+    tableOfContents.toc = [
+      {
+        chapterTitle: "",
+        dirName: "",
+        items: [
+          {
+            chapterTitle: "",
+            pageTitle: "Index",
+            pageMeta: {},
+            fileName: "index",
+            dirName: "",
+          },
+        ],
+      },
+      {
+        chapterTitle: "REST",
+        dirName: "REST",
+        items: [
+          {
+            chapterTitle: "REST",
+            pageTitle: "Getting Started",
+            pageMeta: {},
+            fileName: "getting-started",
+            dirName: "REST",
+          },
+          {
+            chapterTitle: "REST",
+            pageTitle: "CRUD",
+            pageMeta: {},
+            fileName: "CRUD",
+            dirName: "REST",
+          },
+        ],
+      },
+    ];
+  });
 
-  it('should detect if page is index', () => {
-    expect(isTocItemIndex({dirName: '', fileName: 'index'})).toBeTruthy()
-    expect(isTocItemIndex({dirName: '', fileName: ''})).toBeFalsy()
-    expect(isTocItemIndex({dirName: 'abc', fileName: 'index'})).toBeFalsy()
-  })
+  it("should detect if page is index", () => {
+    expect(isTocItemIndex({ dirName: "", fileName: "index" })).toBeTruthy();
+    expect(isTocItemIndex({ dirName: "", fileName: "" })).toBeFalsy();
+    expect(isTocItemIndex({ dirName: "abc", fileName: "index" })).toBeFalsy();
+  });
 
-  it('should find next toc item', () => {
-    expect(tableOfContents.nextTocItem({dirName: 'REST', fileName: 'getting-started'})!.pageTitle).toEqual('CRUD')
-    expect(tableOfContents.nextTocItem({dirName: 'REST', fileName: 'CRUD'})).toEqual(null)
-  })
+  it("should find next toc item", () => {
+    expect(tableOfContents.nextTocItem({ dirName: "REST", fileName: "getting-started" })!.pageTitle).toEqual("CRUD");
+    expect(tableOfContents.nextTocItem({ dirName: "REST", fileName: "CRUD" })).toEqual(null);
+  });
 
-  it('should find prev toc item', () => {
-    expect(tableOfContents.prevTocItem({dirName: 'REST', fileName: 'CRUD'})!.pageTitle).toEqual('Getting Started')
-    expect(tableOfContents.prevTocItem({dirName: 'REST', fileName: 'getting-started'})).toEqual({"dirName": "", "fileName": "index", "pageMeta": {}, "pageTitle": "Index", "sectionTitle": ""})
-  })
-})
+  it("should find prev toc item", () => {
+    expect(tableOfContents.prevTocItem({ dirName: "REST", fileName: "CRUD" })!.pageTitle).toEqual("Getting Started");
+    expect(tableOfContents.prevTocItem({ dirName: "REST", fileName: "getting-started" })).toEqual({
+      dirName: "",
+      fileName: "index",
+      pageMeta: {},
+      pageTitle: "Index",
+      chapterTitle: "",
+    });
+  });
+});

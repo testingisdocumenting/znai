@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,22 +18,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-require('normalize.css/normalize.css')
-require('./App.css')
-require('./layout/DocumentationLayout.css')
-require('./doc-elements/search/Search.css')
+import 'normalize.css/normalize.css'
+import './App.css'
+import './layout/DocumentationLayout.css'
+import './doc-elements/search/Search.css'
 
-const {Documentation} = require('./doc-elements/Documentation')
-const {DocumentationPreparationScreen} = require('./screens/documentation-preparation/DocumentationPreparationScreen')
-const {NotAuthorizedScreen} = require('./screens/not-authorized/NotAuthorizedScreen')
-const {Landing} = require('./screens/landing/Landing')
-const {themeRegistry} = require('./theme/ThemeRegistry')
-const {documentationNavigation} = require('./structure/DocumentationNavigation')
-const {documentationTracking} = require('./doc-elements/tracking/DocumentationTracking')
-const {pageTypesRegistry} = require('./doc-elements/page/PageTypesRegistry')
-const {mergeDocMeta} = require('./structure/docMeta')
+import {Documentation} from "./doc-elements/Documentation";
 
-const lunr = require('lunr')
+import {DocumentationPreparationScreen} from './screens/documentation-preparation/DocumentationPreparationScreen'
+import {NotAuthorizedScreen} from './screens/not-authorized/NotAuthorizedScreen'
+import {Landing} from './screens/landing/Landing'
+import {themeRegistry} from './theme/ThemeRegistry'
+import {documentationNavigation} from './structure/DocumentationNavigation'
+import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
+import {pageTypesRegistry} from './doc-elements/page/PageTypesRegistry'
+import {mergeDocMeta} from './structure/docMeta'
+
+import lunr from 'lunr'
 
 window.React = React
 window.ReactDOM = ReactDOM

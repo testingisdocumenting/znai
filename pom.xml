@@ -513,7 +513,7 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <nodeVersion>v12.16.3</nodeVersion>
+                        <nodeVersion>v18.6.0</nodeVersion>
                         <installDirectory>.mvn</installDirectory>
                         <workingDirectory>src</workingDirectory>
                     </configuration>

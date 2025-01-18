@@ -15,40 +15,41 @@
  * limitations under the License.
  */
 
-import {getDocMeta, mergeDocMeta, setDocMeta} from './docMeta'
+import { getDocMeta, mergeDocMeta, setDocMeta } from "./docMeta";
 
-describe('test methods in docMeta', () => {
-  it('get docMeta after setting one', () => {
+describe("test methods in docMeta", () => {
+  it("get docMeta after setting one", () => {
     const docMeta = {
       id: "preview",
       title: "Your Product",
       type: "Guide",
-      previewEnabled: true
-    }
+      previewEnabled: true,
+    };
 
     const expected = {
       id: "preview",
       title: "Your Product",
       type: "Guide",
-      previewEnabled: true
-    }
-    setDocMeta(docMeta)
-    expect(getDocMeta()).toEqual(expected)
-  })
+      previewEnabled: true,
+    };
+    setDocMeta(docMeta);
+    expect(getDocMeta()).toEqual(expected);
+  });
 
-  it('add twice and check merged docMeta', () => {
+  it("add twice and check merged docMeta", () => {
     const supportMeta = {
-      link: "https://example.com"
-    }
+      link: "https://example.com",
+      title: "Your Product",
+    };
     const docMeta = {
       id: "preview",
       title: "Your Product",
       type: "Guide",
-      previewEnabled: true
-    }
+      previewEnabled: true,
+    };
 
-    mergeDocMeta({supportMeta: supportMeta})
-    mergeDocMeta(docMeta)
+    mergeDocMeta({ supportMeta: supportMeta });
+    mergeDocMeta(docMeta);
 
     const expected = {
       id: "preview",
@@ -56,25 +57,27 @@ describe('test methods in docMeta', () => {
       type: "Guide",
       previewEnabled: true,
       supportMeta: {
-        link: "https://example.com"
-      }
-    }
+        link: "https://example.com",
+        title: "Your Product",
+      },
+    };
 
-    expect(getDocMeta()).toEqual(expected)
-  })
+    expect(getDocMeta()).toEqual(expected);
+  });
 
-  it('set and add docMeta and check merged docMeta', () => {
+  it("set and add docMeta and check merged docMeta", () => {
     const supportMeta = {
-      link: "https://example.com"
-    }
+      link: "https://example.com",
+      title: "Your Product",
+    };
     const docMeta = {
       id: "preview",
       title: "Your Product",
       type: "Guide",
-      previewEnabled: true
-    }
-    setDocMeta(docMeta)
-    mergeDocMeta({supportMeta: supportMeta})
+      previewEnabled: true,
+    };
+    setDocMeta(docMeta);
+    mergeDocMeta({ supportMeta: supportMeta });
 
     const expected = {
       id: "preview",
@@ -82,33 +85,35 @@ describe('test methods in docMeta', () => {
       type: "Guide",
       previewEnabled: true,
       supportMeta: {
-        link: "https://example.com"
-      }
-    }
+        link: "https://example.com",
+        title: "Your Product",
+      },
+    };
 
-    expect(getDocMeta()).toEqual(expected)
-  })
+    expect(getDocMeta()).toEqual(expected);
+  });
 
-  it('add and set docMeta and check docMeta', () => {
+  it("add and set docMeta and check docMeta", () => {
     const supportMeta = {
-      link: "https://example.com"
-    }
+      link: "https://example.com",
+      title: "Your Product",
+    };
     const docMeta = {
       id: "preview",
       title: "Your Product",
       type: "Guide",
-      previewEnabled: true
-    }
-    mergeDocMeta({supportMeta: supportMeta})
-    setDocMeta(docMeta)
+      previewEnabled: true,
+    };
+    mergeDocMeta({ supportMeta: supportMeta });
+    setDocMeta(docMeta);
 
     const expected = {
       id: "preview",
       title: "Your Product",
       type: "Guide",
-      previewEnabled: true
-    }
+      previewEnabled: true,
+    };
 
-    expect(getDocMeta()).toEqual(expected)
-  })
-})
+    expect(getDocMeta()).toEqual(expected);
+  });
+});
