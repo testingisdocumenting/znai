@@ -87,6 +87,10 @@ configuration
     top-header
 deployment
     additional-files
+hub
+    introduction
+    setup
+    build-artifacts-watch
 example-references
     domain
     api
