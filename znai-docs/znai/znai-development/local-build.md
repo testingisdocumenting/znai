@@ -12,10 +12,10 @@ Easy way to maintain Java specific dependencies below is by using [SDKMAN](https
 
 ## Java And Maven 
 
-You need Java 8 and Maven to build Znai.
+You need Java 17 and Maven to build Znai.
 
 ```cli 
-sdk install java 8.0.342-amzn 
+sdk install java 17.0.13-amzn 
 sdk install maven
 ```
 
@@ -28,6 +28,20 @@ Use [brew](https://brew.sh) to install [GraphViz](http://www.graphviz.org/)
 ```cli
 brew install graphviz
 ```
+
+## Firefox
+
+Some automated tests in znai are using [WebTau](https://testingisdocumenting.org/webtau/getting-started/what-is-this),
+which in turn use Selenium WebDriver and firefox.
+
+A firefox executable has to be on the system path.
+
+Use [brew](https://brew.sh) to install [Firefox](https://www.mozilla.org/en-US/firefox/).
+
+```cli
+brew install firefox
+```
+
 
 # Build
 
