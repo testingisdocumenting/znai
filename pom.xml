@@ -131,7 +131,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>17</maven.compiler.release>
         <groovy.version>3.0.15</groovy.version>
         <vertx.io.version>3.9.4</vertx.io.version>
         <commonmark.version>0.23.0</commonmark.version>
@@ -157,6 +156,7 @@
         <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
         <httpcore.version>4.4.13</httpcore.version>
         <httpclient.version>4.5.13</httpclient.version>
+        <frontend-maven-plugin.installDirectory>.mvn</frontend-maven-plugin.installDirectory>
     </properties>
 
     <dependencyManagement>
@@ -433,8 +433,9 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version>
+                    <version>3.13.0</version>
                     <configuration>
+                        <release>17</release>
                         <source>17</source>
                         <target>17</target>
                     </configuration>
