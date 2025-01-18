@@ -17,7 +17,7 @@
 
 import * as React from "react";
 
-import * as ClipboardJS from "clipboard";
+import ClipboardJS from "clipboard";
 
 import { extractTextFromTokens } from "./codeUtils";
 

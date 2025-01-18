@@ -18,7 +18,7 @@
 import React, {Component} from 'react'
 
 import {extractTextFromTokens, splitTokensIntoLines} from './codeUtils'
-import LineOfTokens from './LineOfTokens.js'
+import LineOfTokens from './LineOfTokens'
 import {convertToList} from '../propsUtils'
 import {isAllAtOnce} from '../meta/meta';
 import {mergeWithGlobalDocReferences} from '../references/globalDocReferences'

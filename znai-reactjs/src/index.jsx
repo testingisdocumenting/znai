@@ -34,18 +34,18 @@ const {mergeDocMeta} = require('./structure/docMeta')
 
 const lunr = require('lunr')
 
-global.React = React
-global.ReactDOM = ReactDOM
-global.Documentation = Documentation
-global.DocumentationPreparationScreen = DocumentationPreparationScreen
-global.NotAuthorizedScreen = NotAuthorizedScreen
-global.Landing = Landing
-global.themeRegistry = themeRegistry
-global.pageTypesRegistry = pageTypesRegistry
-global.documentationNavigation = documentationNavigation
-global.documentationTracking = documentationTracking
-global.lunr = lunr
-global.mergeDocMeta = mergeDocMeta
+window.React = React
+window.ReactDOM = ReactDOM
+window.Documentation = Documentation
+window.DocumentationPreparationScreen = DocumentationPreparationScreen
+window.NotAuthorizedScreen = NotAuthorizedScreen
+window.Landing = Landing
+window.themeRegistry = themeRegistry
+window.pageTypesRegistry = pageTypesRegistry
+window.documentationNavigation = documentationNavigation
+window.documentationTracking = documentationTracking
+window.lunr = lunr
+window.mergeDocMeta = mergeDocMeta
 
 if (process.env.NODE_ENV !== "production") {
     const App = require('./App').App
