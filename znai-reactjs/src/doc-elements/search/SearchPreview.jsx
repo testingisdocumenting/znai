@@ -16,7 +16,7 @@
  */
 
 import React, {Component} from 'react'
-const Mark = require('mark.js/dist/mark.js')
+import Mark from 'mark.js/dist/mark.js'
 
 class SearchPreview extends Component {
     componentDidMount() {

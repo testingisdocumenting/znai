@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +20,7 @@ const path = require('path');
 module.exports = {
     entry: './src/main/javascript/main.js',
     target: 'node',
+    mode: 'production',
     output: {
         filename: 'typeScriptParserBundle.js',
         path: path.resolve(__dirname, 'target/classes')

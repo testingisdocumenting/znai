@@ -19,28 +19,28 @@ import React from "react";
 import PresentationRegistry from "./PresentationRegistry";
 import {presentationSectionHandler} from "../default-elements/Section";
 
+const elementsLibrary = {
+    'Dummy': () => <div/>,
+    'DummyTriple': () => <div/>
+}
+
+const presentationElementHandlers = {
+    'Dummy': {
+        component: () => <div/>,
+        numberOfSlides: () => 1
+    },
+    'DummyTriple': {
+        component: () => <div/>,
+        numberOfSlides: () => 3
+    },
+    'NonSlide': {
+        component: () => <div/>,
+        numberOfSlides: () => 0
+    },
+    'Section': presentationSectionHandler
+}
+
 describe('PresentationRegistry', () => {
-    const elementsLibrary = {
-        'Dummy': () => <div/>,
-        'DummyTriple': () => <div/>
-    }
-
-    const presentationElementHandlers = {
-        'Dummy': {
-            component: () => <div/>,
-            numberOfSlides: () => 1
-        },
-        'DummyTriple': {
-            component: () => <div/>,
-            numberOfSlides: () => 3
-        },
-        'NonSlide': {
-            component: () => <div/>,
-            numberOfSlides: () => 0
-        },
-        'Section': presentationSectionHandler
-    }
-
     describe('slide idx by title', () => {
         it('should find a slide idx by page section id', () => {
             const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, [
