@@ -10,7 +10,7 @@
     "diff": "^4.0.2",
     "echarts": "^5.3.2",
     "feather-icons": "^4.28.0",
-    "katex": "0.15.3",
+    "katex": "0.16.21",
     "lunr": "2.3.9",
     "mark.js": "github:julmot/mark.js",
     "mermaid": "^8.9.2",
