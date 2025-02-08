@@ -515,7 +515,7 @@
                     </executions>
                     <configuration>
                         <nodeVersion>v18.6.0</nodeVersion>
-                        <installDirectory>.mvn</installDirectory>
+                        <installDirectory>${frontend-maven-plugin.installDirectory}</installDirectory>
                         <workingDirectory>src</workingDirectory>
                     </configuration>
                 </plugin>
