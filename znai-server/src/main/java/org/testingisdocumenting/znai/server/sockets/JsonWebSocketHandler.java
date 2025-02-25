@@ -21,7 +21,6 @@ import io.vertx.core.Vertx;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.utils.JsonUtils;
-import io.vertx.core.Handler;
 import io.vertx.core.http.ServerWebSocket;
 
 import java.util.ArrayList;
@@ -95,25 +94,20 @@ public abstract class JsonWebSocketHandler implements WebSocketHandler {
             return;
         }
 
-        String text = JsonUtils.serialize(payload);
-        ConsoleOutputs.out(name + " sending: ", BLUE, text);
+        Object typeVal = payload.get("type");
+        String type = typeVal != null ? typeVal.toString() : "";
+        String payloadAsText = JsonUtils.serialize(payload);
+        ConsoleOutputs.out(name + " sending: ", BLUE, type);
 
         sockets.stream()
                 .filter(s -> s.connectedUrl.contains(subUrlToContain))
-                .forEach(s -> s.socket.writeFinalTextFrame(text));
+                .forEach(s -> s.socket.writeFinalTextFrame(payloadAsText));
     }
 
     private void renderNumberOfSockets() {
         ConsoleOutputs.out("there are " + sockets.size() + " opened sockets for " + name);
     }
 
-    private static class SocketWithUrl {
-        private final ServerWebSocket socket;
-        private final String connectedUrl;
-
-        public SocketWithUrl(ServerWebSocket socket, String connectedUrl) {
-            this.socket = socket;
-            this.connectedUrl = connectedUrl;
-        }
+    private record SocketWithUrl(ServerWebSocket socket, String connectedUrl) {
     }
 }
