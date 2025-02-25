@@ -321,6 +321,7 @@ class MyClass {
             expect(trimComment("//  comment")).toEqual("comment")
             expect(trimComment("#comment")).toEqual("comment")
             expect(trimComment("#  comment")).toEqual("comment")
+            expect(trimComment("(* comment *)")).toEqual("comment")
         })
 
         it('collapses multi line comment and attaches it to the next code line', () => {

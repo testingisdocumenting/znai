@@ -141,19 +141,25 @@ export function isCommentToken(token) {
 
 export function trimComment(comment) {
     const trimmed = comment.trim()
-    return trimmed.substr(commentWidth(trimmed)).trim()
+    const widths = commentWidth(trimmed)
+    const start = widths[0]
+    const end = trimmed.length - widths[1]
+    return trimmed.substring(start, end).trim()
 }
 
 function commentWidth(comment) {
     if (comment.startsWith('//')) {
-        return 2;
+        return [2, 0]
+    }
+    if (comment.startsWith('(*')) {
+        return [2, 2];
     }
 
     if (comment.startsWith('#')) {
-        return 1;
+        return [1, 0];
     }
 
-    return 0;
+    return [0, 0];
 }
 
 export function containsInlinedComment(tokens) {
