@@ -50,10 +50,13 @@ window.lunr = lunr
 window.mergeDocMeta = mergeDocMeta
 
 if (process.env.NODE_ENV !== "production") {
-    const App = require('./App').App
-
-    ReactDOM.render(
-        <App />,
-        document.getElementById('root')
-    )
+    import('./App').then((module) => {
+        const App = module.App;
+        ReactDOM.render(
+          <App />,
+          document.getElementById('root')
+        )
+    }).catch((error) => {
+        console.error('Error loading the module:', error);
+    });
 }
