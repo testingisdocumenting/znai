@@ -89,6 +89,7 @@ import { OpenApiMethodAndUrl } from "./open-api/OpenApiMethodAndUrl";
 import { Card } from "./card/Card";
 import { FootnoteReference } from "./footnote/FootnoteReference";
 import { EmbeddedHtml } from "./html/EmbeddedHtml";
+import { Asciinema } from "./asciinema/Asciinema";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -241,6 +242,7 @@ library.DocumentationLayout = DocumentationLayout
 library.Footer = Footer
 
 library.Redirect = Redirect
+library.Asciinema = Asciinema
 
 /**
  * to make a DocElement aligned with a page content it needs to have a content-block assigned.

@@ -26,3 +26,4 @@ org.testingisdocumenting.znai.extensions.xml.XmlIncludePlugin
 org.testingisdocumenting.znai.extensions.templates.TemplateIncludePlugin
 org.testingisdocumenting.znai.extensions.cli.CliCommandIncludePlugin
 org.testingisdocumenting.znai.extensions.cli.CliOutputIncludePlugin
+org.testingisdocumenting.znai.extensions.asciinema.AsciinemaIncludePlugin
