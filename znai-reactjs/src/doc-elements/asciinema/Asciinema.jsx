@@ -14,16 +14,27 @@
  * limitations under the License.
  */
 
-import React, { useEffect } from "react";
-import * as AsciinemaPlayer from "asciinema-player";
+import React, { useEffect, useRef } from "react";
+import * as AsciinemaPlayer from 'asciinema-player';
 import "asciinema-player/dist/bundle/asciinema-player.css";
+import "./Asciinema.css"
 
-export function Asciinema({}) {
-  const ref = React.useRef(null);
+export function Asciinema({src}) {
+  const containerRef = useRef(null);
+  const playerRef = useRef(null);
+
   useEffect(() => {
-    console.log("create player");
-    AsciinemaPlayer.create("demo.cast", ref.current, {});
+    if (containerRef.current) {
+      playerRef.current = AsciinemaPlayer.create(src, containerRef.current, {preload: true, fit: false});
+    }
+
+    return () => {
+      if (playerRef.current && playerRef.current.destroy) {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
+    };
   }, []);
 
-  return <div ref={ref} />;
+  return <div className="content-block znai-asciinema" ref={containerRef} />;
 }

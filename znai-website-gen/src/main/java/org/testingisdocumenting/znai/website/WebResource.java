@@ -25,35 +25,55 @@ public class WebResource {
     private final Path originPath;
     private final String path;
     private final byte[] resourceContent;
+    private final boolean isModule;
 
-    private WebResource(final Path originPath, final String path) {
+    private WebResource(final Path originPath, final String path, boolean isModule) {
         this.originPath = originPath;
         this.path = path;
         this.resourceContent = null;
+        this.isModule = isModule;
     }
 
-    private WebResource(final String resourcePath) {
+    private WebResource(final Path originPath, final String path) {
+        this(originPath, path, false);
+    }
+
+    private WebResource(final String resourcePath, boolean isModule) {
         this.originPath = null;
         this.path = resourcePath;
         this.resourceContent = ResourceUtils.binaryContent(resourcePath);
+        this.isModule = isModule;
+    }
+
+    private WebResource(final String resourcePath) {
+        this(resourcePath, false);
     }
 
     private WebResource(final String path, final byte[] content) {
         this.originPath = null;
         this.path = path;
         this.resourceContent = content;
+        this.isModule = false;
     }
 
     public static WebResource withPath(final String path) {
         return new WebResource(null, path);
     }
-    
+
+    public static WebResource moduleWithPath(final String path) {
+        return new WebResource(null, path, true);
+    }
+
     public static WebResource withPath(final Path originPath, final String webPath) {
         return new WebResource(originPath, webPath);
     }
 
     public static WebResource fromResource(final String resourcePath) {
         return new WebResource(resourcePath);
+    }
+
+    public static WebResource moduleFromResource(final String resourcePath) {
+        return new WebResource(resourcePath, true);
     }
 
     public static WebResource withTextContent(final String path, final String content) {
@@ -73,7 +93,8 @@ public class WebResource {
     }
 
     public String generateJavaScriptLink(String documentationId) {
-        return "<script type=\"text/javascript\" src=\"" + pathForHtml(documentationId) + "\"></script>";
+        var type = isModule ? "module" : "text/javascript";
+        return "<script type=\"" + type + "\" src=\"" + pathForHtml(documentationId) + "\"></script>";
     }
 
     private String pathForHtml(String documentationId) {

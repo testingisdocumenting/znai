@@ -20,6 +20,6 @@ import { Asciinema } from "./Asciinema";
 
 export function asciinemaDemo(registry) {
   registry.add("primary", () => (
-      <Asciinema />
+      <Asciinema src="intro.cast" />
   ));
 }

@@ -122,7 +122,7 @@ public class WebSite implements Log {
         footerJavaScript = WebResource.withPath("footer.js");
         globalAssetsJavaScript = WebResource.withPath("assets.js");
         globalDocReferencesJavaScript = WebResource.withPath("documentation-references.js");
-        searchIndexJavaScript = WebResource.withPath(SEARCH_INDEX_FILE_NAME);
+        searchIndexJavaScript = WebResource.moduleWithPath(SEARCH_INDEX_FILE_NAME);
         auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
         markupParsingConfiguration = MarkupParsingConfigurations.byName(cfg.documentationType);
         globalSearchEntries = new GlobalSearchEntries();

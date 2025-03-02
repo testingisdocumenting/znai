@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class AsciinemaIncludePlugin implements IncludePlugin {
-    private String path;
+    private AuxiliaryFile auxiliaryFile;
 
     @Override
     public String id() {
@@ -43,14 +43,16 @@ public class AsciinemaIncludePlugin implements IncludePlugin {
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(componentsRegistry.resourceResolver().runtimeAuxiliaryFile(path));
+        return Stream.of(auxiliaryFile);
     }
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
-        path = pluginParams.getFreeParam();
+        String path = pluginParams.getFreeParam();
+        auxiliaryFile = componentsRegistry.resourceResolver().runtimeAuxiliaryFile(path);
+
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
-        props.put("src", path);
+        props.put("src", componentsRegistry.docStructure().fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
 
         return PluginResult.docElement("Asciinema", props);
     }

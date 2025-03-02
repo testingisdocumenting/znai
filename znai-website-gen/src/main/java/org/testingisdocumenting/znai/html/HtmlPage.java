@@ -100,7 +100,7 @@ public class HtmlPage {
                 "<script>" + themeCode + "</script>\n" +
                 bodySuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
                 javaScriptResources.stream().map(r -> r.generateJavaScriptLink(documentationId)).collect(joining("\n")) + "\n" +
-                "<script>\n" +
+                "<script type=\"module\">\n" +
                 javaScriptSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
                 "</script>\n" +
                 "\n</body>" +
