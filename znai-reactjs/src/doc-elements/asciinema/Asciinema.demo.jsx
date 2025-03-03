@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2025 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,12 @@
  * limitations under the License.
  */
 
-var myComponents = (function (exports,React) {
-    'use strict';
+import React from "react";
 
-    React = React && React.hasOwnProperty('default') ? React['default'] : React;
+import { Asciinema } from "./Asciinema";
 
-    function CustomComponentA(_ref) {
-        var title = _ref.title;
-
-        return React.createElement(
-            'div',
-            { className: 'custom-component-a' },
-            title
-        );
-    }
-
-    exports.CustomComponentA = CustomComponentA;
-
-    return exports;
-
-}({},window.React));
+export function asciinemaDemo(registry) {
+  registry.add("primary", () => (
+      <Asciinema src="intro.cast" />
+  ));
+}

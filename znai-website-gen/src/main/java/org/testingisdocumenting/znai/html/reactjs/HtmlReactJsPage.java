@@ -52,7 +52,7 @@ public class HtmlReactJsPage {
                 // because it is embedded into html page <script> block, browser parser get confused
                 // but if it is surrounded by this special comment, it tricks browser to be "normal" again
                 "/*<!--*/\n" +
-                "ReactDOM.render(" + createElementStatement.render() + ", " +
+                "window.ReactDOM.render(" + createElementStatement.render() + ", " +
                 "document.getElementById(\"" + REACT_BLOCK_ID + "\"));\n" +
                 "/*-->*/\n");
 

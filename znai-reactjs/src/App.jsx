@@ -103,6 +103,7 @@ import { cardsDemo } from "./doc-elements/card/CardsDemo";
 import { doxygenPresentationDemo } from "./doc-elements/doxygen/PresentationDoxygen.demo";
 import { jsonPresentationDemo } from "./doc-elements/json/PresentationJson.demo";
 import { footnoteDemo } from "./doc-elements/footnote/Footnote.demo";
+import { asciinemaDemo } from "./doc-elements/asciinema/Asciinema.demo";
 
 const docMeta = {
     id: 'preview',
@@ -178,6 +179,7 @@ registries.add('visuals')
     .registerAsGrid('Keyboard shortcuts', 0, keyboardShortcutsDemo)
     .registerAsGrid('Iframe', 0, iframeDemo)
     .registerAsGrid('Mermaid', 0, mermaidDemo)
+    .registerAsGrid('Asciinema', 0, asciinemaDemo)
 
 registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)

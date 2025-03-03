@@ -35,7 +35,7 @@ var stopWordFilter = createStopWordFilter([
     'to'
 ])
 
-znaiSearchIdx = lunr(function () {
+window.znaiSearchIdx = window.lunr(function () {
     this.pipeline.remove(lunr.stemmer)
     this.ref('id')
     this.field('section')

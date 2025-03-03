@@ -53,6 +53,7 @@ visuals
     graphviz-diagrams
     PlantUml
     iframe
+    asciinema
 layout
     tabs
     tables

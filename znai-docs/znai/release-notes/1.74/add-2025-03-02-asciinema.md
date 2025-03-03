@@ -1,0 +1,1 @@
+* Add: Initial [Asciinema](visuals/asciinema) support

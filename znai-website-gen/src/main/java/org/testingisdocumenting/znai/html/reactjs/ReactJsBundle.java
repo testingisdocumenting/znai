@@ -32,7 +32,7 @@ public class ReactJsBundle {
     private final List<WebResource> fonts;
 
     public ReactJsBundle() {
-        mainJs = WebResource.fromResource("static/main.js");
+        mainJs = WebResource.moduleFromResource("static/main.js");
         mainCss = WebResource.fromResource("static/main.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");
 
