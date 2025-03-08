@@ -84,7 +84,6 @@ public class WebSite implements Log {
 
     private final WebSiteComponentsRegistry componentsRegistry;
     private final AuxiliaryFilesRegistry auxiliaryFilesRegistry;
-    private final ReactJsBundle reactJsBundle;
     private final WebResource tocJavaScript;
     private final WebResource footerJavaScript;
     private final WebResource globalAssetsJavaScript;
@@ -117,7 +116,6 @@ public class WebSite implements Log {
         pluginParamsFactory = new PluginParamsWithDefaultsFactory();
         componentsRegistry.setPluginParamsFactory(pluginParamsFactory);
         resourceResolver = new ResourcesResolverChain();
-        reactJsBundle = siteConfig.reactJsBundle;
         tocJavaScript = WebResource.withPath("toc.js");
         footerJavaScript = WebResource.withPath("footer.js");
         globalAssetsJavaScript = WebResource.withPath("assets.js");
@@ -165,10 +163,6 @@ public class WebSite implements Log {
 
     public DocMeta getDocMeta() {
         return docMeta;
-    }
-
-    public ReactJsBundle getReactJsBundle() {
-        return reactJsBundle;
     }
 
     public Map<String, Path> getOutsideDocsRequestedResources() {
@@ -352,7 +346,7 @@ public class WebSite implements Log {
     }
 
     private void reset() {
-        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, reactJsBundle);
+        pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, ReactJsBundle.INSTANCE);
         markupParser = markupParsingConfiguration.createMarkupParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
         pagePropsByTocItem = new LinkedHashMap<>();
@@ -375,7 +369,7 @@ public class WebSite implements Log {
     private void deployResources() {
         reportPhase("deploying resources");
 
-        reactJsBundle.deploy(deployer);
+        ReactJsBundle.INSTANCE.deploy(deployer);
         WebSiteResourcesProviders.cssResources().forEach(deployer::deploy);
         WebSiteResourcesProviders.jsResources().forEach(deployer::deploy);
         WebSiteResourcesProviders.jsClientOnlyResources().forEach(deployer::deploy);
@@ -916,7 +910,6 @@ public class WebSite implements Log {
         private boolean isValidateExternalLinks;
         private String documentationType = MARKDOWN;
         private DocMeta docMeta = new DocMeta(Collections.emptyMap());
-        private ReactJsBundle reactJsBundle;
         private PageModifiedTimeStrategy pageModifiedTimeStrategy;
         private List<String> additionalLookupPaths;
 
@@ -937,11 +930,6 @@ public class WebSite implements Log {
 
         public Configuration withFooterPath(Path path) {
             footerPath = path.toAbsolutePath();
-            return this;
-        }
-
-        public Configuration withReactJsBundle(ReactJsBundle reactJsBundle) {
-            this.reactJsBundle = reactJsBundle;
             return this;
         }
 

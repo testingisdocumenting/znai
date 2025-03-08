@@ -30,6 +30,8 @@ import java.nio.file.*;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
 import static java.nio.file.StandardWatchEventKinds.*;
@@ -39,6 +41,7 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
     private final FileChangeHandler fileChangeHandler;
     private final WatchService watchService;
     private final Map<WatchKey, Path> pathByKey;
+    private final AtomicBoolean isTerminated = new AtomicBoolean(false);
 
     private static final Path tempDirPath = detectTempFilesDir();
 
@@ -62,6 +65,10 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
         }
     }
 
+    public void stop() {
+        isTerminated.set(true);
+    }
+
     @Override
     public void onAuxiliaryFile(AuxiliaryFile auxiliaryFile) {
         register(auxiliaryFile.getPath());
@@ -76,6 +83,9 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
         while (true) {
             try {
                 watchCycle();
+                if (isTerminated.get()) {
+                    break;
+                }
             } catch (RuntimeException e) {
                 ConsoleOutputs.err(e.getClass() + ":" + e.getMessage());
             }
@@ -83,8 +93,17 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
     }
 
     private void watchCycle() throws InterruptedException {
-        final WatchKey key = watchService.take();
+        final WatchKey key = watchService.poll(1000, TimeUnit.MILLISECONDS);
+
+        if (key == null) {
+            return;
+        }
+
         try {
+            if (isTerminated.get()) {
+                return;
+            }
+
             final Path path = pathByKey.get(key);
             if (path == null) {
                 ConsoleOutputs.err("bad watch key: ", key);

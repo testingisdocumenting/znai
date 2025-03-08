@@ -25,13 +25,14 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class ReactJsBundle {
+    public static final ReactJsBundle INSTANCE =  new ReactJsBundle();
     private final WebResource mainJs;
     private final WebResource mainCss;
     private final WebResource katexCss;
 
     private final List<WebResource> fonts;
 
-    public ReactJsBundle() {
+    private ReactJsBundle() {
         mainJs = WebResource.moduleFromResource("static/main.js");
         mainCss = WebResource.fromResource("static/main.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");

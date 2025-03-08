@@ -21,7 +21,6 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
@@ -37,19 +36,20 @@ import org.testingisdocumenting.znai.server.sockets.WebSocketHandlers;
 import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ZnaiServer {
     private final Vertx vertx;
-    private final ReactJsBundle reactJsBundle;
     private final ZnaiServerConfig serverConfig;
     private final AuthenticationHandler authenticationHandler;
     private final SslConfig sslConfig;
+    private ZnaiCommands znaiCommands;
 
-    public ZnaiServer(ReactJsBundle reactJsBundle, Path deployRoot, AuthenticationHandler authenticationHandler, SslConfig sslConfig) {
-        this.reactJsBundle = reactJsBundle;
+    public ZnaiServer(Path deployRoot, AuthenticationHandler authenticationHandler, SslConfig sslConfig) {
         this.serverConfig = new ZnaiServerConfig(deployRoot);
         this.authenticationHandler = authenticationHandler;
         this.sslConfig = sslConfig;
@@ -61,6 +61,10 @@ public class ZnaiServer {
 
         FileUtils.symlinkAwareCreateDirs(deployRoot);
         vertx = Vertx.vertx();
+    }
+
+    public void setZnaiCommands(ZnaiCommands znaiCommands) {
+        this.znaiCommands = znaiCommands;
     }
 
     public HttpServer create() {
@@ -87,6 +91,7 @@ public class ZnaiServer {
         });
 
         router.get("/static/*").handler(staticCommonResources);
+        router.get("/trigger/*").handler(this::triggerNewPreview);
 
         registerCustomHandlersAndRoutes(router);
         registerPagesHandler(router, pagesStaticHandler);
@@ -98,22 +103,12 @@ public class ZnaiServer {
         return server;
     }
 
-    private void updateServerOptiaonsWithSsl(HttpServerOptions serverOptions, SslConfig sslConfig) {
-        if (!sslConfig.isSpecified()) {
-            return;
-        }
-
-        serverOptions
-                .setSsl(true)
-                .setKeyStoreOptions(new JksOptions().setPath(sslConfig.jksPath().toString()).setPassword(sslConfig.jksPassword()));
-    }
-
     private void registerCustomHandlersAndRoutes(Router router) {
         UrlContentHandlers.urlContentHandlers()
                 .forEach(urlContentHandler ->
                         router.get(urlContentHandler.url())
                                 .handler(ctx -> ctx.response().end(
-                                        urlContentHandler.buildContent(serverConfig, ctx, reactJsBundle))));
+                                        urlContentHandler.buildContent(serverConfig, ctx, ReactJsBundle.INSTANCE))));
 
         RoutesProviders.register(vertx, serverConfig, router);
     }
@@ -167,7 +162,7 @@ public class ZnaiServer {
     }
 
     private void serverNotAuthorizedPage(RoutingContext ctx, String docId) {
-        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(reactJsBundle);
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(ReactJsBundle.INSTANCE);
         Map<String, Object> props = new LinkedHashMap<>();
 
         props.put("docId", docId);
@@ -183,8 +178,16 @@ public class ZnaiServer {
         ctx.response().end(htmlPage.render(docId));
     }
 
+    private void triggerNewPreview(RoutingContext ctx) {
+        String uri = ctx.request().uri();
+        String[] parts = uri.split("/");
+        ctx.response().end("test:" + List.of(parts));
+
+        znaiCommands.changePreviewSourceRoot(Paths.get("/usr/todochange"));
+    }
+
     private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {
-        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(reactJsBundle);
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(ReactJsBundle.INSTANCE);
         Map<String, Object> props = new LinkedHashMap<>();
 
         props.put("docId", docId);

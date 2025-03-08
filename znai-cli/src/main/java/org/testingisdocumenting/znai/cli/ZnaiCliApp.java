@@ -23,7 +23,6 @@ import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.html.HtmlPage;
-import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
 import org.testingisdocumenting.znai.server.AuthorizationHeaderBasedAuthenticationHandler;
 import org.testingisdocumenting.znai.server.HttpServerUtils;
 import org.testingisdocumenting.znai.server.SslConfig;
@@ -54,9 +53,6 @@ public class ZnaiCliApp {
     private final ZnaiCliConfig config;
     private final Path deployPath;
     private final SslConfig sslConfig;
-
-    private WebSite webSite;
-    private ReactJsBundle reactJsBundle;
 
     public ZnaiCliApp(ZnaiCliConfig cliConfig) {
         System.setProperty("java.awt.headless", "true");
@@ -93,10 +89,8 @@ public class ZnaiCliApp {
 
         announceMode(config.getModeAsString());
 
-        reactJsBundle = new ReactJsBundle();
-
         if (needsDocGeneration()) {
-            generateDocs();
+            generateDocs(config.getSourceRoot());
         }
 
         if (config.isPreviewMode()) {
@@ -112,7 +106,7 @@ public class ZnaiCliApp {
     }
 
     private boolean needsDocGeneration() {
-        if (config.isServeMode()) {
+        if (config.isServeMode() || config.isPreviewMode()) {
             return false;
         }
 
@@ -124,12 +118,12 @@ public class ZnaiCliApp {
     }
 
     private void preview() {
-        DocumentationPreview preview = new DocumentationPreview(config.getDeployRoot());
-        preview.start(webSite, config.createSslConfig(), config.getPort(), () -> reportHostPort(config.getPort(), "/preview"));
+        DocumentationPreview preview = new DocumentationPreview(config.getSourceRoot(), config.getDeployRoot());
+        preview.start(this::generateDocs, config.createSslConfig(), config.getPort(), () -> reportHostPort(config.getPort(), "/preview"));
     }
 
     private void serve() {
-        HttpServer server = new ZnaiServer(reactJsBundle, config.getDeployRoot(),
+        HttpServer server = new ZnaiServer(config.getDeployRoot(),
                 new AuthorizationHeaderBasedAuthenticationHandler(),
                 config.createSslConfig()).create();
         HttpServerUtils.listen(server, config.getPort());
@@ -170,29 +164,28 @@ public class ZnaiCliApp {
         }
     }
 
-    private void generateDocs() {
-        Path userDefinedFavicon = config.getSourceRoot().resolve("favicon.png");
+    private WebSite generateDocs(Path sourceRoot) {
+        Path userDefinedFavicon = sourceRoot.resolve("favicon.png");
         WebResource favIconResource = Files.exists(userDefinedFavicon) ?
                 WebResource.withPath(userDefinedFavicon, HtmlPage.FAVICON_PATH):
                 WebResource.fromResource(HtmlPage.FAVICON_PATH);
 
-        WebSite.Configuration webSiteCfg = WebSite.withRoot(config.getSourceRoot()).
-                withReactJsBundle(reactJsBundle).
+        WebSite.Configuration webSiteCfg = WebSite.withRoot(sourceRoot).
                 withId(getDocId()).
                 withDocumentationType(config.getMarkupType()).
-                withMetaFromJsonFile(config.getSourceRoot().resolve(DocMeta.META_FILE_NAME)).
+                withMetaFromJsonFile(sourceRoot.resolve(DocMeta.META_FILE_NAME)).
                 withFileWithLookupPaths("lookup-paths").
                 withAdditionalLookupPaths(config.getLookupPaths()).
-                withFooterPath(config.getSourceRoot().resolve("footer.md")).
-                withExtensionsDefPath(config.getSourceRoot().resolve("extensions.json")).
-                withGlobalReferencesPathNoExt(config.getSourceRoot().resolve("references")).
-                withGlobalPluginParamsPath(config.getSourceRoot().resolve(PLUGIN_PARAMS_FILE_NAME)).
+                withFooterPath(sourceRoot.resolve("footer.md")).
+                withExtensionsDefPath(sourceRoot.resolve("extensions.json")).
+                withGlobalReferencesPathNoExt(sourceRoot.resolve("references")).
+                withGlobalPluginParamsPath(sourceRoot.resolve(PLUGIN_PARAMS_FILE_NAME)).
                 withWebResources(favIconResource).
                 withPageModifiedTimeStrategy(pageModifiedTimeStrategy()).
                 withEnabledPreview(config.isPreviewMode()).
                 withValidateExternalLinks(config.isValidateExternalLinks());
 
-        this.webSite = config.isExportMode() ?
+        return config.isExportMode() ?
                 webSiteCfg.parseOnly():
                 webSiteCfg.deployTo(deployPath);
     }
