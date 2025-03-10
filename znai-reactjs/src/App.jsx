@@ -104,6 +104,7 @@ import { doxygenPresentationDemo } from "./doc-elements/doxygen/PresentationDoxy
 import { jsonPresentationDemo } from "./doc-elements/json/PresentationJson.demo";
 import { footnoteDemo } from "./doc-elements/footnote/Footnote.demo";
 import { asciinemaDemo } from "./doc-elements/asciinema/Asciinema.demo";
+import { previewConsoleOutputDemo } from "./screens/preview-change-path/PreviewConsoleOutput.demo";
 
 const docMeta = {
     id: 'preview',
@@ -223,6 +224,7 @@ registries.add('screens')
     .registerAsTabs('Landing', landingDemo)
     .registerAsTabs('Not Authorized', notAuthorizedDemo)
     .registerAsTabs('Search Popup', searchPopupDemo)
+    .registerAsTabs('Preview Console Output', previewConsoleOutputDemo)
 
 registries.add('end to end')
     .registerAsMiniApp('full documentation navigation', /\/preview/,

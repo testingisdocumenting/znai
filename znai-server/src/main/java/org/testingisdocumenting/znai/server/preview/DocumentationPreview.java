@@ -55,16 +55,30 @@ public class DocumentationPreview {
         HttpServerUtils.listen(server, port);
 
         znaiServer.setZnaiCommands(new ZnaiCommands() {
+            private Path sourceRoot;
+            private WebSocketPreviewUpdateHandler socketConsoleOutput;
+
             @Override
             public void changePreviewSourceRoot(Path sourceRoot) {
-                clearFileWatcher();
-                cleanDeployRoot();
+                this.sourceRoot = sourceRoot;
+                this.socketConsoleOutput = new WebSocketPreviewUpdateHandler(this::changePreviewSourceRoot);
+                WebSocketHandlers.add(socketConsoleOutput);
+            }
+
+            private void changePreviewSourceRoot() {
                 try {
+                    ConsoleOutputs.add(socketConsoleOutput);
+
+                    clearFileWatcher();
+                    cleanDeployRoot();
                     buildWebSiteAndFileWatcher(sourceRoot);
+                    fileWatcher.start();
                 } catch (Throwable e) {
                     ConsoleOutputs.err(e.getMessage());
+                } finally {
+                    ConsoleOutputs.remove(socketConsoleOutput);
+                    WebSocketHandlers.remove(socketConsoleOutput);
                 }
-                fileWatcher.start();
             }
         });
 

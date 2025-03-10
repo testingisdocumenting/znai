@@ -89,15 +89,17 @@ public abstract class JsonWebSocketHandler implements WebSocketHandler {
 
     public void send(String subUrlToContain, Map<String, ?> payload) {
         if (sockets.isEmpty()) {
-            ConsoleOutputs.out(BLUE, name + " connection ", FontStyle.NORMAL, "with", BLUE, " web page ", FontStyle.NORMAL, "is not established. ",
-                    BLUE, "reload or open", FontStyle.NORMAL, " the page");
+            System.out.println("#### empty");
+            // TODO how to make it not print
+//            ConsoleOutputs.out(BLUE, name + " connection ", FontStyle.NORMAL, "with", BLUE, " web page ", FontStyle.NORMAL, "is not established. ",
+//                    BLUE, "reload or open", FontStyle.NORMAL, " the page");
             return;
         }
 
         Object typeVal = payload.get("type");
         String type = typeVal != null ? typeVal.toString() : "";
         String payloadAsText = JsonUtils.serialize(payload);
-        ConsoleOutputs.out(name + " sending: ", BLUE, type);
+//        ConsoleOutputs.out(name + " sending: ", BLUE, type);
 
         sockets.stream()
                 .filter(s -> s.connectedUrl.contains(subUrlToContain))

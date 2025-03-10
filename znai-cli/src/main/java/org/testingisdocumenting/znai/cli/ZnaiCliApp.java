@@ -53,6 +53,7 @@ public class ZnaiCliApp {
     private final ZnaiCliConfig config;
     private final Path deployPath;
     private final SslConfig sslConfig;
+    private WebSite webSite;
 
     public ZnaiCliApp(ZnaiCliConfig cliConfig) {
         System.setProperty("java.awt.headless", "true");
@@ -90,7 +91,7 @@ public class ZnaiCliApp {
         announceMode(config.getModeAsString());
 
         if (needsDocGeneration()) {
-            generateDocs(config.getSourceRoot());
+            webSite = generateDocs(config.getSourceRoot());
         }
 
         if (config.isPreviewMode()) {

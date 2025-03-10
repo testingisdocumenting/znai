@@ -181,8 +181,13 @@ public class ZnaiServer {
     private void triggerNewPreview(RoutingContext ctx) {
         String uri = ctx.request().uri();
         String[] parts = uri.split("/");
-        ctx.response().end("test:" + List.of(parts));
+//        ctx.response().end("test:" + List.of(parts));
 
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(ReactJsBundle.INSTANCE);
+        HtmlPage htmlPage = htmlReactJsPage.create("Changing source root",
+                "PreviewChangeScreen", Collections.emptyMap(), () -> "", FavIcons.DEFAULT_ICON_PATH);
+
+        ctx.response().end(htmlPage.render("preview"));
         znaiCommands.changePreviewSourceRoot(Paths.get("/usr/todochange"));
     }
 
