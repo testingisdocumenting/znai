@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
+import "./PreviewChangeScreen.css";
+import { useEffect, useRef } from "react";
+
 export interface OutputPart {
-  type: "color" | "font" | "text";
+  type: "color" | "text";
   value: string;
 }
 
@@ -28,11 +31,58 @@ interface Props {
   lines: Line[];
 }
 
+interface StyledParts {
+  style: string;
+  part: string;
+}
+
+function combineStylesAndText(parts: OutputPart[]) {
+  const result: StyledParts[] = [];
+  let currentStyle = "";
+  for (const part of parts) {
+    switch (part.type) {
+      case "color":
+        currentStyle = part.value.toLowerCase();
+        break;
+      case "text":
+        result.push({ style: currentStyle, part: part.value });
+        break;
+    }
+  }
+
+  return result;
+}
+
+function LineContent({ styledParts }: { styledParts: StyledParts[] }) {
+  return (
+    <>
+      {styledParts.map(({ style, part }) => {
+        const className = "znai-preview-console-output-line-part" + (style.length > 0 ? " " + style : "");
+        return <span className={className}>{part}</span>;
+      })}
+    </>
+  );
+}
+
 function LineView({ type, parts }: Line) {
+  const lineContent = <LineContent styledParts={combineStylesAndText(parts)} />;
   switch (type) {
+    case "err":
+      return <div className="znai-preview-console-output-line err">{lineContent}</div>;
+    case "out":
+      return <div className="znai-preview-console-output-line out">{lineContent}</div>;
   }
 }
 
 export function PreviewConsoleOutput({ lines }: Props) {
-  return <div>test</div>;
+  const lastElementRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    lastElementRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, [lines]);
+  return (
+    <pre className="znai-preview-console-output">
+      {lines.map(LineView)}
+      <div ref={lastElementRef} />
+    </pre>
+  );
 }

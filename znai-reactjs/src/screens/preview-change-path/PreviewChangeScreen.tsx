@@ -15,10 +15,13 @@
  */
 
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { socketUrl } from "../../utils/socket";
+import { Line, PreviewConsoleOutput } from "./PreviewConsoleOutput";
 
 export function PreviewChangeScreen({}) {
+  const [lines, setLines] = useState([]);
+
   useEffect(() => {
     const ws = new WebSocket(socketUrl("_preview-update"));
 
@@ -31,8 +34,10 @@ export function PreviewChangeScreen({}) {
     };
 
     ws.onmessage = (message) => {
-      const data = JSON.parse(message.data);
+      const data: Line = JSON.parse(message.data);
       console.log("@@ data", data);
+      //@ts-ignore
+      setLines((prev) => [...prev, data]);
     };
 
     return () => {
@@ -40,5 +45,5 @@ export function PreviewChangeScreen({}) {
     };
   }, []);
 
-  return <div className="">todo</div>;
+  return <PreviewConsoleOutput lines={lines} />;
 }

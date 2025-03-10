@@ -24,8 +24,11 @@ import org.testingisdocumenting.znai.server.sockets.JsonWebSocketHandler;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class WebSocketPreviewUpdateHandler extends JsonWebSocketHandler implements ConsoleOutput {
+    private static final ExecutorService THREAD_POOL_EXECUTOR = Executors.newSingleThreadExecutor();
     private final Runnable onConnect;
 
     public WebSocketPreviewUpdateHandler(Runnable onConnect) {
@@ -71,7 +74,6 @@ public class WebSocketPreviewUpdateHandler extends JsonWebSocketHandler implemen
 
     @Override
     public void onConnect(String uri) {
-        System.out.println("@@ onConnect " + uri);
-        this.onConnect.run();
+        THREAD_POOL_EXECUTOR.submit(onConnect);
     }
 }

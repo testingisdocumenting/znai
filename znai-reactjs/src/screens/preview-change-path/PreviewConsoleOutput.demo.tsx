@@ -19,7 +19,23 @@ import { Registry } from "react-component-viewer";
 import { PreviewConsoleOutput, Line } from "./PreviewConsoleOutput";
 
 export function previewConsoleOutputDemo(registry: Registry) {
-  const lines: Line[] = [{ type: "out", parts: [{ type: "text", value: "hello" }] }];
+  const lines: Line[] = [
+    {
+      type: "out",
+      parts: [
+        { type: "text", value: "hello" },
+        { type: "color", value: "GREEN" },
+        { type: "text", value: " world" },
+        { type: "text", value: " another " },
+        { type: "color", value: "BLUE" },
+        { type: "text", value: "different color" },
+      ],
+    },
+    {
+      type: "err",
+      parts: [{ type: "text", value: "error processing file" }],
+    },
+  ];
   const props = { lines };
 
   registry.add("output", () => <PreviewConsoleOutput {...props} />);
