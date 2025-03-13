@@ -188,7 +188,8 @@ public class ZnaiServer {
                 "PreviewChangeScreen", Collections.emptyMap(), () -> "", FavIcons.DEFAULT_ICON_PATH);
 
         ctx.response().end(htmlPage.render("preview"));
-        znaiCommands.changePreviewSourceRoot(Paths.get("/Users/mykolagolubyev/work/testingisdocumenting/znai/znai-docs/znai"));
+//        znaiCommands.changePreviewSourceRoot(Paths.get("/Users/mykolagolubyev/work/testingisdocumenting/znai/znai-docs/znai"));
+        znaiCommands.changePreviewSourceRoot(Paths.get("/Users/mykolagolubyev/work/testingisdocumenting/znai/znai-docs/target/znai"));
     }
 
     private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {

@@ -487,13 +487,6 @@ public class WebSite implements Log {
 
     private void parseMarkupsMeta() {
         reportPhase("parsing markup files meta");
-        // TODO remove
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
         toc.getTocItems().forEach(this::parseMarkupMetaOnlyAndUpdateTocItem);
     }
 

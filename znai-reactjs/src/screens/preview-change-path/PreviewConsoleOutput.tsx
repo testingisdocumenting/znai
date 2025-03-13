@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import "./PreviewChangeScreen.css";
 import { useEffect, useRef } from "react";
+import "./PreviewChangeScreen.css";
 
 export interface OutputPart {
   type: "color" | "text";

@@ -84,6 +84,8 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
             try {
                 watchCycle();
                 if (isTerminated.get()) {
+                    // TODO use ConsoleOutputs.out (?)
+                    System.out.println("### file watcher stopped");
                     break;
                 }
             } catch (RuntimeException e) {
