@@ -183,13 +183,14 @@ public class ZnaiServer {
         String[] parts = uri.split("/");
 //        ctx.response().end("test:" + List.of(parts));
 
+        Path newPath = Paths.get("/Users/mykolagolubyev/work/testingisdocumenting/znai/znai-docs/target/znai");
         HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(ReactJsBundle.INSTANCE);
         HtmlPage htmlPage = htmlReactJsPage.create("Changing source root",
-                "PreviewChangeScreen", Collections.emptyMap(), () -> "", FavIcons.DEFAULT_ICON_PATH);
+                "PreviewChangeScreen", Collections.singletonMap("newPath", newPath.toString()), () -> "", FavIcons.DEFAULT_ICON_PATH);
 
         ctx.response().end(htmlPage.render("preview"));
 //        znaiCommands.changePreviewSourceRoot(Paths.get("/Users/mykolagolubyev/work/testingisdocumenting/znai/znai-docs/znai"));
-        znaiCommands.changePreviewSourceRoot(Paths.get("/Users/mykolagolubyev/work/testingisdocumenting/znai/znai-docs/target/znai"));
+        znaiCommands.changePreviewSourceRoot(newPath);
     }
 
     private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {

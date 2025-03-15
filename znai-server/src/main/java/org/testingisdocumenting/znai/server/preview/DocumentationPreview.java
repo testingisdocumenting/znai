@@ -26,17 +26,21 @@ import org.testingisdocumenting.znai.server.sockets.WebSocketHandlers;
 import org.testingisdocumenting.znai.website.WebSite;
 
 import java.nio.file.Path;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class DocumentationPreview {
+    private static final ExecutorService SINGLE_THREAD_POOL_EXECUTOR = Executors.newSingleThreadExecutor();
+
     private final Path sourceRoot;
     private final Path deployRoot;
 
     private WebSite webSite;
     private FileWatcher fileWatcher;
     private Function<Path, WebSite> createWebSite;
-    private PreviewWebSocketHandler previewWebSocketHandler;
+    private PreviewSendChangesWebSocketHandler previewSendChangesWebSocketHandler;
 
     public DocumentationPreview(Path sourceRoot, Path deployRoot) {
         this.sourceRoot = sourceRoot;
@@ -47,48 +51,33 @@ public class DocumentationPreview {
         this.createWebSite = createWebSite;
 
         ZnaiServer znaiServer = new ZnaiServer(deployRoot, new NoAuthenticationHandler(), sslConfig);
-        previewWebSocketHandler = new PreviewWebSocketHandler();
-        WebSocketHandlers.add(previewWebSocketHandler);
+        previewSendChangesWebSocketHandler = new PreviewSendChangesWebSocketHandler();
+        PreviewUpdatePathWebSocketHandler previewUpdatePathWebSocketHandler = new PreviewUpdatePathWebSocketHandler(this::changePreviewSourceRoot);
+
+        WebSocketHandlers.add(previewSendChangesWebSocketHandler);
+        WebSocketHandlers.add(previewUpdatePathWebSocketHandler);
+        ConsoleOutputs.add(previewUpdatePathWebSocketHandler);
         HttpServer server = znaiServer.create();
 
         reportPhase("starting server");
         HttpServerUtils.listen(server, port);
 
-        znaiServer.setZnaiCommands(new ZnaiCommands() {
-            private Path sourceRoot;
-            private WebSocketPreviewUpdateHandler previewUpdateHandler;
-
-            @Override
-            public void changePreviewSourceRoot(Path sourceRoot) {
-                this.sourceRoot = sourceRoot;
-                this.previewUpdateHandler = new WebSocketPreviewUpdateHandler(this::changePreviewSourceRoot);
-                WebSocketHandlers.add(previewUpdateHandler);
-            }
-
-            private void changePreviewSourceRoot() {
-                try {
-                    ConsoleOutputs.add(previewUpdateHandler);
-
-                    clearFileWatcher();
-                    cleanDeployRoot();
-                    buildWebSiteAndFileWatcher(sourceRoot);
-                    System.out.println("## before file watcher strat");
-
-                    new Thread(() -> fileWatcher.start()).start();
-
-                    System.out.println("## after file watcher strat");
-                } catch (Throwable e) {
-                    ConsoleOutputs.err(e.getMessage());
-                } finally {
-                    ConsoleOutputs.remove(previewUpdateHandler);
-                    WebSocketHandlers.remove(previewUpdateHandler);
-                }
-            }
-        });
-
         buildWebSiteAndFileWatcher(sourceRoot);
         onStart.run();
         fileWatcher.start();
+    }
+
+    public void changePreviewSourceRoot(Path sourceRoot) {
+        SINGLE_THREAD_POOL_EXECUTOR.submit(() -> {
+            try {
+                clearFileWatcher();
+                cleanDeployRoot();
+                buildWebSiteAndFileWatcher(sourceRoot);
+                new Thread(() -> fileWatcher.start()).start();
+            } catch (Throwable e) {
+                ConsoleOutputs.err(e.getMessage());
+            }
+        });
     }
 
     private void buildWebSiteAndFileWatcher(Path sourceRoot) {
@@ -97,7 +86,7 @@ public class DocumentationPreview {
 
         reportPhase("initializing file watcher");
         final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(
-                previewWebSocketHandler,
+                previewSendChangesWebSocketHandler,
                 webSite);
         fileWatcher = new FileWatcher(
                 webSite.getCfg(),

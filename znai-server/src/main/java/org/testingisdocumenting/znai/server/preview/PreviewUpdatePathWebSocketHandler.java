@@ -20,20 +20,24 @@ import org.testingisdocumenting.znai.console.ConsoleOutput;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.server.sockets.JsonWebSocketHandler;
+import org.testingisdocumenting.znai.utils.JsonUtils;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
-public class WebSocketPreviewUpdateHandler extends JsonWebSocketHandler implements ConsoleOutput {
-    private static final ExecutorService THREAD_POOL_EXECUTOR = Executors.newSingleThreadExecutor();
-    private final Runnable onConnect;
+public class PreviewUpdatePathWebSocketHandler extends JsonWebSocketHandler implements ConsoleOutput {
+    public PreviewUpdatePathWebSocketHandler(Consumer<Path> onPathReceived) {
+        super("preview path change", "/_preview-update", (message) -> {
+            @SuppressWarnings("unchecked")
+            Map<String, Object> deserialize = (Map<String, Object>) JsonUtils.deserialize(message);
+            Path newPath = Paths.get(deserialize.get("path").toString());
 
-    public WebSocketPreviewUpdateHandler(Runnable onConnect) {
-        super("preview path change", "/_preview-update");
-        this.onConnect = onConnect;
+            onPathReceived.accept(newPath);
+        });
     }
 
     @Override
@@ -74,6 +78,5 @@ public class WebSocketPreviewUpdateHandler extends JsonWebSocketHandler implemen
 
     @Override
     public void onConnect(String uri) {
-        THREAD_POOL_EXECUTOR.submit(onConnect);
     }
 }

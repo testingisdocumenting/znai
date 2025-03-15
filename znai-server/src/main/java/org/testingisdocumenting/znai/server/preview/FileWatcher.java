@@ -85,7 +85,7 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
                 watchCycle();
                 if (isTerminated.get()) {
                     // TODO use ConsoleOutputs.out (?)
-                    System.out.println("### file watcher stopped");
+                    System.out.println("### file watcher stopped for root:" + siteCfg.getDocRootPath());
                     break;
                 }
             } catch (RuntimeException e) {

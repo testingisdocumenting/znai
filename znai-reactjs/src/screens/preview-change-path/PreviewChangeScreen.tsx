@@ -19,7 +19,11 @@ import { useEffect, useState } from "react";
 import { socketUrl } from "../../utils/socket";
 import { Line, PreviewConsoleOutput } from "./PreviewConsoleOutput";
 
-export function PreviewChangeScreen({}) {
+interface Props {
+  newPath: string;
+}
+
+export function PreviewChangeScreen({ newPath }: Props) {
   const [lines, setLines] = useState([]);
 
   useEffect(() => {
@@ -27,6 +31,7 @@ export function PreviewChangeScreen({}) {
 
     ws.onopen = () => {
       console.log("@@ open");
+      ws.send(JSON.stringify({ hello: "2world2", path: newPath }));
     };
 
     ws.onclose = () => {
