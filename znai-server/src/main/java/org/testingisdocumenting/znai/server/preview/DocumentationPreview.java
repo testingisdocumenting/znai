@@ -41,6 +41,7 @@ public class DocumentationPreview {
     private FileWatcher fileWatcher;
     private Function<Path, WebSite> createWebSite;
     private PreviewSendChangesWebSocketHandler previewSendChangesWebSocketHandler;
+    private PreviewUpdatePathWebSocketHandler previewUpdatePathWebSocketHandler;
 
     public DocumentationPreview(Path sourceRoot, Path deployRoot) {
         this.sourceRoot = sourceRoot;
@@ -52,7 +53,7 @@ public class DocumentationPreview {
 
         ZnaiServer znaiServer = new ZnaiServer(deployRoot, new NoAuthenticationHandler(), sslConfig);
         previewSendChangesWebSocketHandler = new PreviewSendChangesWebSocketHandler();
-        PreviewUpdatePathWebSocketHandler previewUpdatePathWebSocketHandler = new PreviewUpdatePathWebSocketHandler(this::changePreviewSourceRoot);
+        previewUpdatePathWebSocketHandler = new PreviewUpdatePathWebSocketHandler(this::changePreviewSourceRoot);
 
         WebSocketHandlers.add(previewSendChangesWebSocketHandler);
         WebSocketHandlers.add(previewUpdatePathWebSocketHandler);
@@ -73,11 +74,16 @@ public class DocumentationPreview {
                 clearFileWatcher();
                 cleanDeployRoot();
                 buildWebSiteAndFileWatcher(sourceRoot);
+                sendCompletionSignal();
                 new Thread(() -> fileWatcher.start()).start();
             } catch (Throwable e) {
                 ConsoleOutputs.err(e.getMessage());
             }
         });
+    }
+
+    private void sendCompletionSignal() {
+        previewUpdatePathWebSocketHandler.sendCompletion();
     }
 
     private void buildWebSiteAndFileWatcher(Path sourceRoot) {

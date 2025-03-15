@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.server.preview;
 
 import com.sun.nio.file.SensitivityWatchEventModifier;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.AuxiliaryFileListener;
 import org.testingisdocumenting.znai.core.DocMeta;
@@ -84,8 +85,7 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
             try {
                 watchCycle();
                 if (isTerminated.get()) {
-                    // TODO use ConsoleOutputs.out (?)
-                    System.out.println("### file watcher stopped for root:" + siteCfg.getDocRootPath());
+                    ConsoleOutputs.out("previous file watcher stopped for root: ", Color.PURPLE, siteCfg.getDocRootPath());
                     break;
                 }
             } catch (RuntimeException e) {

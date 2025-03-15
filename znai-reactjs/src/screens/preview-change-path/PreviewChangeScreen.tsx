@@ -20,29 +20,31 @@ import { socketUrl } from "../../utils/socket";
 import { Line, PreviewConsoleOutput } from "./PreviewConsoleOutput";
 
 interface Props {
-  newPath: string;
+  srcRoot: string;
+  previewPageLink: string;
 }
 
-export function PreviewChangeScreen({ newPath }: Props) {
+export function PreviewChangeScreen({ srcRoot, previewPageLink }: Props) {
   const [lines, setLines] = useState([]);
 
   useEffect(() => {
     const ws = new WebSocket(socketUrl("_preview-update"));
 
     ws.onopen = () => {
-      console.log("@@ open");
-      ws.send(JSON.stringify({ hello: "2world2", path: newPath }));
+      ws.send(JSON.stringify({ srcRoot }));
     };
 
-    ws.onclose = () => {
-      console.log("@@ close");
-    };
+    ws.onclose = () => {};
 
     ws.onmessage = (message) => {
-      const data: Line = JSON.parse(message.data);
-      console.log("@@ data", data);
-      //@ts-ignore
-      setLines((prev) => [...prev, data]);
+      const data = JSON.parse(message.data);
+      if (data.type === "done") {
+        window.location.replace("/preview/" + previewPageLink);
+      } else {
+        const line: Line = JSON.parse(message.data);
+        //@ts-ignore
+        setLines((prev) => [...prev, line]);
+      }
     };
 
     return () => {

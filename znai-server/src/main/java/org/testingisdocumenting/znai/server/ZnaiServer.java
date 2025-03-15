@@ -36,10 +36,8 @@ import org.testingisdocumenting.znai.server.sockets.WebSocketHandlers;
 import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ZnaiServer {
@@ -47,7 +45,6 @@ public class ZnaiServer {
     private final ZnaiServerConfig serverConfig;
     private final AuthenticationHandler authenticationHandler;
     private final SslConfig sslConfig;
-    private ZnaiCommands znaiCommands;
 
     public ZnaiServer(Path deployRoot, AuthenticationHandler authenticationHandler, SslConfig sslConfig) {
         this.serverConfig = new ZnaiServerConfig(deployRoot);
@@ -61,10 +58,6 @@ public class ZnaiServer {
 
         FileUtils.symlinkAwareCreateDirs(deployRoot);
         vertx = Vertx.vertx();
-    }
-
-    public void setZnaiCommands(ZnaiCommands znaiCommands) {
-        this.znaiCommands = znaiCommands;
     }
 
     public HttpServer create() {
@@ -91,7 +84,7 @@ public class ZnaiServer {
         });
 
         router.get("/static/*").handler(staticCommonResources);
-        router.get("/trigger/*").handler(this::triggerNewPreview);
+        router.get("/change-preview-path").handler(this::changePreviewPath);
 
         registerCustomHandlersAndRoutes(router);
         registerPagesHandler(router, pagesStaticHandler);
@@ -178,19 +171,14 @@ public class ZnaiServer {
         ctx.response().end(htmlPage.render(docId));
     }
 
-    private void triggerNewPreview(RoutingContext ctx) {
-        String uri = ctx.request().uri();
-        String[] parts = uri.split("/");
-//        ctx.response().end("test:" + List.of(parts));
-
-        Path newPath = Paths.get("/Users/mykolagolubyev/work/testingisdocumenting/znai/znai-docs/target/znai");
+    private void changePreviewPath(RoutingContext ctx) {
+        String srcRoot = ctx.request().params().get("srcRoot");
+        String previewPageLink = ctx.request().params().get("previewPageLink");
         HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(ReactJsBundle.INSTANCE);
         HtmlPage htmlPage = htmlReactJsPage.create("Changing source root",
-                "PreviewChangeScreen", Collections.singletonMap("newPath", newPath.toString()), () -> "", FavIcons.DEFAULT_ICON_PATH);
+                "PreviewChangeScreen", Map.of("srcRoot", srcRoot, "previewPageLink", previewPageLink), () -> "", FavIcons.DEFAULT_ICON_PATH);
 
         ctx.response().end(htmlPage.render("preview"));
-//        znaiCommands.changePreviewSourceRoot(Paths.get("/Users/mykolagolubyev/work/testingisdocumenting/znai/znai-docs/znai"));
-        znaiCommands.changePreviewSourceRoot(newPath);
     }
 
     private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {

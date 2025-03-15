@@ -25,29 +25,35 @@ import org.testingisdocumenting.znai.utils.JsonUtils;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
 public class PreviewUpdatePathWebSocketHandler extends JsonWebSocketHandler implements ConsoleOutput {
+    private static final String URL = "/_preview-update";
     public PreviewUpdatePathWebSocketHandler(Consumer<Path> onPathReceived) {
-        super("preview path change", "/_preview-update", (message) -> {
+        super("preview path change", URL, (message) -> {
             @SuppressWarnings("unchecked")
             Map<String, Object> deserialize = (Map<String, Object>) JsonUtils.deserialize(message);
-            Path newPath = Paths.get(deserialize.get("path").toString());
+            Path newPath = Paths.get(deserialize.get("srcRoot").toString());
 
             onPathReceived.accept(newPath);
         });
     }
 
+    public void sendCompletion() {
+       send(URL, Collections.singletonMap("type", "done"));
+    }
+
     @Override
     public void out(Object... styleOrValues) {
-        send("", convertToJson("out", styleOrValues));
+        send(URL, convertToJson("out", styleOrValues));
     }
 
     @Override
     public void err(Object... styleOrValues) {
-        send("", convertToJson("err", styleOrValues));
+        send(URL, convertToJson("err", styleOrValues));
     }
 
     private Map<String, Object> convertToJson(String type, Object... styleOrValue) {
