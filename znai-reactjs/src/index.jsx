@@ -26,6 +26,7 @@ import './doc-elements/search/Search.css'
 import {Documentation} from "./doc-elements/Documentation";
 
 import {DocumentationPreparationScreen} from './screens/documentation-preparation/DocumentationPreparationScreen'
+import {PreviewChangeScreen} from './screens/preview-change-path/PreviewChangeScreen'
 import {NotAuthorizedScreen} from './screens/not-authorized/NotAuthorizedScreen'
 import {Landing} from './screens/landing/Landing'
 import {themeRegistry} from './theme/ThemeRegistry'
@@ -42,6 +43,7 @@ window.Documentation = Documentation
 window.DocumentationPreparationScreen = DocumentationPreparationScreen
 window.NotAuthorizedScreen = NotAuthorizedScreen
 window.Landing = Landing
+window.PreviewChangeScreen = PreviewChangeScreen
 window.themeRegistry = themeRegistry
 window.pageTypesRegistry = pageTypesRegistry
 window.documentationNavigation = documentationNavigation

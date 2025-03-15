@@ -19,27 +19,29 @@ package org.testingisdocumenting.znai.server.sockets;
 
 import io.vertx.core.Vertx;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
-import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 import io.vertx.core.http.ServerWebSocket;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static org.testingisdocumenting.znai.console.ansi.Color.BLUE;
 import static org.testingisdocumenting.znai.console.ansi.Color.RED;
 
 public abstract class JsonWebSocketHandler implements WebSocketHandler {
-    private final List<SocketWithUrl> sockets;
+    protected final List<SocketWithUrl> sockets;
     private final String name;
     private final String url;
+    private final Consumer<String> onMessageHandler;
     protected Vertx vertx;
 
-    public JsonWebSocketHandler(String name, String url) {
+    public JsonWebSocketHandler(String name, String url, Consumer<String> onMessageHandler) {
         this.sockets = new ArrayList<>();
         this.name = name;
         this.url = url;
+        this.onMessageHandler = onMessageHandler;
     }
 
     public abstract void onConnect(String uri);
@@ -77,7 +79,11 @@ public abstract class JsonWebSocketHandler implements WebSocketHandler {
 
         ws.handler(data -> {
             String dataString = data.getString(0, data.length());
-            System.out.println(dataString);
+            try {
+                onMessageHandler.accept(dataString);
+            } catch (Throwable t) {
+                ConsoleOutputs.err(t.toString());
+            }
         });
 
         ws.closeHandler((h) -> {
@@ -89,15 +95,10 @@ public abstract class JsonWebSocketHandler implements WebSocketHandler {
 
     public void send(String subUrlToContain, Map<String, ?> payload) {
         if (sockets.isEmpty()) {
-            ConsoleOutputs.out(BLUE, name + " connection ", FontStyle.NORMAL, "with", BLUE, " web page ", FontStyle.NORMAL, "is not established. ",
-                    BLUE, "reload or open", FontStyle.NORMAL, " the page");
             return;
         }
 
-        Object typeVal = payload.get("type");
-        String type = typeVal != null ? typeVal.toString() : "";
         String payloadAsText = JsonUtils.serialize(payload);
-        ConsoleOutputs.out(name + " sending: ", BLUE, type);
 
         sockets.stream()
                 .filter(s -> s.connectedUrl.contains(subUrlToContain))
@@ -108,6 +109,6 @@ public abstract class JsonWebSocketHandler implements WebSocketHandler {
         ConsoleOutputs.out("there are " + sockets.size() + " opened sockets for " + name);
     }
 
-    private record SocketWithUrl(ServerWebSocket socket, String connectedUrl) {
+    protected record SocketWithUrl(ServerWebSocket socket, String connectedUrl) {
     }
 }

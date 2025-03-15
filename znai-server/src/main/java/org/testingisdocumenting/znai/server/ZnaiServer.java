@@ -21,7 +21,6 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.core.net.JksOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.StaticHandler;
@@ -43,13 +42,11 @@ import java.util.Map;
 
 public class ZnaiServer {
     private final Vertx vertx;
-    private final ReactJsBundle reactJsBundle;
     private final ZnaiServerConfig serverConfig;
     private final AuthenticationHandler authenticationHandler;
     private final SslConfig sslConfig;
 
-    public ZnaiServer(ReactJsBundle reactJsBundle, Path deployRoot, AuthenticationHandler authenticationHandler, SslConfig sslConfig) {
-        this.reactJsBundle = reactJsBundle;
+    public ZnaiServer(Path deployRoot, AuthenticationHandler authenticationHandler, SslConfig sslConfig) {
         this.serverConfig = new ZnaiServerConfig(deployRoot);
         this.authenticationHandler = authenticationHandler;
         this.sslConfig = sslConfig;
@@ -87,6 +84,7 @@ public class ZnaiServer {
         });
 
         router.get("/static/*").handler(staticCommonResources);
+        router.get("/change-preview-path").handler(this::changePreviewPath);
 
         registerCustomHandlersAndRoutes(router);
         registerPagesHandler(router, pagesStaticHandler);
@@ -98,22 +96,12 @@ public class ZnaiServer {
         return server;
     }
 
-    private void updateServerOptiaonsWithSsl(HttpServerOptions serverOptions, SslConfig sslConfig) {
-        if (!sslConfig.isSpecified()) {
-            return;
-        }
-
-        serverOptions
-                .setSsl(true)
-                .setKeyStoreOptions(new JksOptions().setPath(sslConfig.jksPath().toString()).setPassword(sslConfig.jksPassword()));
-    }
-
     private void registerCustomHandlersAndRoutes(Router router) {
         UrlContentHandlers.urlContentHandlers()
                 .forEach(urlContentHandler ->
                         router.get(urlContentHandler.url())
                                 .handler(ctx -> ctx.response().end(
-                                        urlContentHandler.buildContent(serverConfig, ctx, reactJsBundle))));
+                                        urlContentHandler.buildContent(serverConfig, ctx, ReactJsBundle.INSTANCE))));
 
         RoutesProviders.register(vertx, serverConfig, router);
     }
@@ -167,7 +155,7 @@ public class ZnaiServer {
     }
 
     private void serverNotAuthorizedPage(RoutingContext ctx, String docId) {
-        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(reactJsBundle);
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(ReactJsBundle.INSTANCE);
         Map<String, Object> props = new LinkedHashMap<>();
 
         props.put("docId", docId);
@@ -183,8 +171,18 @@ public class ZnaiServer {
         ctx.response().end(htmlPage.render(docId));
     }
 
+    private void changePreviewPath(RoutingContext ctx) {
+        String srcRoot = ctx.request().params().get("srcRoot");
+        String previewPageLink = ctx.request().params().get("previewPageLink");
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(ReactJsBundle.INSTANCE);
+        HtmlPage htmlPage = htmlReactJsPage.create("Changing source root",
+                "PreviewChangeScreen", Map.of("srcRoot", srcRoot, "previewPageLink", previewPageLink), () -> "", FavIcons.DEFAULT_ICON_PATH);
+
+        ctx.response().end(htmlPage.render("preview"));
+    }
+
     private void serveDocumentationPreparationPage(RoutingContext ctx, String docId) {
-        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(reactJsBundle);
+        HtmlReactJsPage htmlReactJsPage = new HtmlReactJsPage(ReactJsBundle.INSTANCE);
         Map<String, Object> props = new LinkedHashMap<>();
 
         props.put("docId", docId);

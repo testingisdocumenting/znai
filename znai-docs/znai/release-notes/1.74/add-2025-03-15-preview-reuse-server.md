@@ -1,0 +1,1 @@
+* Add: preview server path to change preview server `srcRoot`: `/change-preview-path?srcRoot=<new-src-root>&previewPageLink=<link-to-page>`

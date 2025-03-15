@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 public class DocumentationPreparationWebSocketHandler extends JsonWebSocketHandler {
     public DocumentationPreparationWebSocketHandler() {
-        super("documentation update", "/_doc-update");
+        super("documentation update", "/_doc-update", (message) -> {});
     }
 
     public void sendUpdate(String docId, String message, Map<String, String> keyValues, int progressPercent) {

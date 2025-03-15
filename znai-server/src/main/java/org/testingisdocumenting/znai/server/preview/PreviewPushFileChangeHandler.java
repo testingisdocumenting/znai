@@ -37,10 +37,10 @@ import java.util.stream.Stream;
 import static org.testingisdocumenting.znai.console.ansi.Color.BLUE;
 
 public class PreviewPushFileChangeHandler implements FileChangeHandler {
-    private final PreviewWebSocketHandler previewSocket;
+    private final PreviewSendChangesWebSocketHandler previewSocket;
     private final WebSite previewWebSite;
 
-    public PreviewPushFileChangeHandler(final PreviewWebSocketHandler previewSocket,
+    public PreviewPushFileChangeHandler(final PreviewSendChangesWebSocketHandler previewSocket,
                                         final WebSite previewWebSite) {
 
         this.previewSocket = previewSocket;

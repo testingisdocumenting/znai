@@ -17,6 +17,8 @@
 
 package org.testingisdocumenting.znai.server.preview;
 
+import org.testingisdocumenting.znai.console.ConsoleOutputs;
+import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.html.DocPageReactProps;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.server.sockets.JsonWebSocketHandler;
@@ -24,19 +26,21 @@ import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.structure.Footer;
 import org.testingisdocumenting.znai.structure.TableOfContents;
 import org.testingisdocumenting.znai.structure.TocItem;
+import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
+import static org.testingisdocumenting.znai.console.ansi.Color.BLUE;
 
-public class PreviewWebSocketHandler extends JsonWebSocketHandler {
+public class PreviewSendChangesWebSocketHandler extends JsonWebSocketHandler {
     private static final String NAME = "preview";
     private static final String URL = "/preview";
 
-    PreviewWebSocketHandler() {
-        super(NAME, URL);
+    PreviewSendChangesWebSocketHandler() {
+        super(NAME, URL, (String content) -> {});
     }
 
     public void sendPage(DocPageReactProps pageProps) {
@@ -116,6 +120,16 @@ public class PreviewWebSocketHandler extends JsonWebSocketHandler {
     }
 
     private void send(Map<String, ?> payload) {
+        if (sockets.isEmpty()) {
+            ConsoleOutputs.out(BLUE, "preview send changes connection ", FontStyle.NORMAL, "with", BLUE, " web page ", FontStyle.NORMAL, "is not established. ",
+                    BLUE, "reload or open", FontStyle.NORMAL, " the page");
+            return;
+        }
+
+        Object typeVal = payload.get("type");
+        String type = typeVal != null ? typeVal.toString() : "";
+        ConsoleOutputs.out("preview sending: ", BLUE, type);
+
         send(URL, payload);
     }
 

@@ -18,10 +18,11 @@ package org.testingisdocumenting.znai.console;
 
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class ConsoleOutputs {
-    private static Set<ConsoleOutput> outputs = ServiceLoaderUtils.load(ConsoleOutput.class);
+    private static final Set<ConsoleOutput> outputs = Collections.synchronizedSet(ServiceLoaderUtils.load(ConsoleOutput.class));
 
     public static void out(Object... styleOrValues) {
         outputs.forEach(o -> o.out(styleOrValues));

@@ -18,42 +18,83 @@
 package org.testingisdocumenting.znai.server.preview;
 
 import io.vertx.core.http.HttpServer;
+import org.apache.commons.io.FileUtils;
 import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
-import org.testingisdocumenting.znai.server.HttpServerUtils;
-import org.testingisdocumenting.znai.server.NoAuthenticationHandler;
-import org.testingisdocumenting.znai.server.SslConfig;
-import org.testingisdocumenting.znai.server.ZnaiServer;
+import org.testingisdocumenting.znai.server.*;
 import org.testingisdocumenting.znai.server.sockets.WebSocketHandlers;
 import org.testingisdocumenting.znai.website.WebSite;
 
 import java.nio.file.Path;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class DocumentationPreview {
+    private static final ExecutorService SINGLE_THREAD_POOL_EXECUTOR = Executors.newSingleThreadExecutor();
+
+    private final Path sourceRoot;
     private final Path deployRoot;
 
-    public DocumentationPreview(Path deployRoot) {
+    private WebSite webSite;
+    private FileWatcher fileWatcher;
+    private Function<Path, WebSite> createWebSite;
+    private PreviewSendChangesWebSocketHandler previewSendChangesWebSocketHandler;
+    private PreviewUpdatePathWebSocketHandler previewUpdatePathWebSocketHandler;
+
+    public DocumentationPreview(Path sourceRoot, Path deployRoot) {
+        this.sourceRoot = sourceRoot;
         this.deployRoot = deployRoot;
     }
 
-    public void start(WebSite webSite, SslConfig sslConfig, int port, Runnable onStart) {
-        ZnaiServer znaiServer = new ZnaiServer(webSite.getReactJsBundle(), deployRoot, new NoAuthenticationHandler(), sslConfig);
-        PreviewWebSocketHandler previewWebSocketHandler = new PreviewWebSocketHandler();
+    public void start(Function<Path, WebSite> createWebSite, SslConfig sslConfig, int port, Runnable onStart) {
+        this.createWebSite = createWebSite;
 
-        WebSocketHandlers.add(previewWebSocketHandler);
+        ZnaiServer znaiServer = new ZnaiServer(deployRoot, new NoAuthenticationHandler(), sslConfig);
+        previewSendChangesWebSocketHandler = new PreviewSendChangesWebSocketHandler();
+        previewUpdatePathWebSocketHandler = new PreviewUpdatePathWebSocketHandler(this::changePreviewSourceRoot);
 
+        WebSocketHandlers.add(previewSendChangesWebSocketHandler);
+        WebSocketHandlers.add(previewUpdatePathWebSocketHandler);
+        ConsoleOutputs.add(previewUpdatePathWebSocketHandler);
         HttpServer server = znaiServer.create();
 
         reportPhase("starting server");
-        final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(
-                previewWebSocketHandler,
-                webSite);
-
         HttpServerUtils.listen(server, port);
 
+        buildWebSiteAndFileWatcher(sourceRoot);
+        onStart.run();
+        fileWatcher.start();
+    }
+
+    public void changePreviewSourceRoot(Path sourceRoot) {
+        SINGLE_THREAD_POOL_EXECUTOR.submit(() -> {
+            try {
+                clearFileWatcher();
+                cleanDeployRoot();
+                buildWebSiteAndFileWatcher(sourceRoot);
+                sendCompletionSignal();
+                new Thread(() -> fileWatcher.start()).start();
+            } catch (Throwable e) {
+                ConsoleOutputs.err(e.getMessage());
+            }
+        });
+    }
+
+    private void sendCompletionSignal() {
+        previewUpdatePathWebSocketHandler.sendCompletion();
+    }
+
+    private void buildWebSiteAndFileWatcher(Path sourceRoot) {
+        reportPhase("building webs site", sourceRoot);
+        webSite = createWebSite.apply(sourceRoot);
+
         reportPhase("initializing file watcher");
-        final FileWatcher fileWatcher = new FileWatcher(
+        final PreviewPushFileChangeHandler fileChangeHandler = new PreviewPushFileChangeHandler(
+                previewSendChangesWebSocketHandler,
+                webSite);
+        fileWatcher = new FileWatcher(
                 webSite.getCfg(),
                 Stream.concat(
                         webSite.getAuxiliaryFilesRegistry().getAllPaths(),
@@ -62,13 +103,28 @@ public class DocumentationPreview {
 
         webSite.getAuxiliaryFilesRegistry().registerListener(fileWatcher);
         webSite.registerTocChangeListener(fileWatcher);
+    }
 
-        onStart.run();
+    private void cleanDeployRoot() {
+        var pathToClean = deployRoot.resolve("preview");
+        reportPhase("cleaning deploy root", pathToClean);
+        FileUtils.deleteQuietly(pathToClean.toFile());
+    }
 
-        fileWatcher.start();
+    private void clearFileWatcher() {
+        reportPhase("unsubscribing from file changes");
+        webSite.unregisterTocChangeListener(fileWatcher);
+        webSite.getAuxiliaryFilesRegistry().unregisterListener(fileWatcher);
+
+        reportPhase("stopping file watcher");
+        fileWatcher.stop();
     }
 
     private void reportPhase(String phase) {
         ConsoleOutputs.out(Color.BLUE, phase);
+    }
+
+    private void reportPhase(String phase, Object param) {
+        ConsoleOutputs.out(Color.BLUE, phase, " ", Color.PURPLE, param);
     }
 }
