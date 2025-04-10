@@ -18,8 +18,7 @@ package org.testingisdocumenting.znai.extensions.asciinema;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.PluginParams;
-import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 
@@ -34,6 +33,14 @@ public class AsciinemaIncludePlugin implements IncludePlugin {
     @Override
     public String id() {
         return "asciinema";
+    }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        PluginParamsDefinition params = new PluginParamsDefinition();
+        params.add("startAt", PluginParamType.NUMBER_OR_STRING, "start the playback at a given time", "10 (seconds) or \"2:03\" (\"mm:ss\")");
+
+        return params;
     }
 
     @Override

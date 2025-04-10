@@ -19,13 +19,13 @@ import * as AsciinemaPlayer from 'asciinema-player';
 import "asciinema-player/dist/bundle/asciinema-player.css";
 import "./Asciinema.css"
 
-export function Asciinema({src}) {
+export function Asciinema({src, startAt = 0}) {
   const containerRef = useRef(null);
   const playerRef = useRef(null);
 
   useEffect(() => {
     if (containerRef.current) {
-      playerRef.current = AsciinemaPlayer.create(src, containerRef.current, {preload: true, fit: false});
+      playerRef.current = AsciinemaPlayer.create(src, containerRef.current, {preload: true, fit: false, startAt});
     }
 
     return () => {
