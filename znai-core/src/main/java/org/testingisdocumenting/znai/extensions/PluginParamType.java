@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.extensions.paramtypes.*;
 public interface PluginParamType {
     PluginParamType STRING = new PluginParamTypeString();
     PluginParamType NUMBER = new PluginParamTypeNumber();
+    PluginParamType NUMBER_OR_STRING = new PluginParamTypeNumberOrString();
     PluginParamType BOOLEAN = new PluginParamTypeBoolean();
     PluginParamType OBJECT = new PluginParamTypeObject();
     PluginParamType LIST_OR_OBJECT = new PluginParamTypeListOrObject();
