@@ -30,6 +30,13 @@ class DocUrlTest {
     }
 
     @Test
+    void "parse with extension, reference current dir with dot and anchor"() {
+        def url = new DocUrl(markupPath, "./chapter/name.md#page-section")
+        url.should == [anchorId: "page-section", dirName: "chapter", fileNameWithoutExtension: "name"]
+    }
+
+
+    @Test
     void "parse without extension, reference back and anchor"() {
         def url = new DocUrl(markupPath, "../chapter/name#page-section")
         url.should == [anchorId: "page-section", dirName: "chapter", fileNameWithoutExtension: "name"]
