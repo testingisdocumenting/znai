@@ -325,6 +325,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
             props.put("destination", docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString()));
             props.put("alt", alt);
             props.put("inlined", true);
+            props.put("fit", true);
             props.put("timestamp", componentsRegistry.timeService().fileModifiedTimeMillis(auxiliaryFile.getPath()));
 
             if (image != null) {
