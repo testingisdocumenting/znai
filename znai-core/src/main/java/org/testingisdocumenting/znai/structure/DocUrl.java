@@ -103,11 +103,11 @@ public class DocUrl {
         }
 
         if (parts.length != 2 && parts.length != 3) {
-            throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
+            throwUnexpectedPattern(url);
         }
 
-        if (parts.length == 3 && !parts[0].equals("..")) {
-            throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
+        if (parts.length == 3 && !parts[0].equals("..") && !parts[0].equals(".")) {
+            throwUnexpectedPattern(url);
         }
 
         int dirIdx = parts.length == 3 ? 1 : 0;
@@ -121,6 +121,10 @@ public class DocUrl {
         anchorId = idxOfAnchorSep == -1 ? "" : parts[nameIdx].substring(idxOfAnchorSep + 1);
 
         return true;
+    }
+
+    private void throwUnexpectedPattern(String url) {
+        throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
     }
 
     private boolean handleNoDirSpecified(Path markupPath, String part) {
