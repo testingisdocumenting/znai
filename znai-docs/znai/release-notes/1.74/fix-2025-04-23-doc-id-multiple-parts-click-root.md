@@ -1,0 +1,1 @@
+* Fix: Clicking doc title when `docId` is a multipart (e.g. `part-one/part-two`) is now properly navigates to the landing page.
