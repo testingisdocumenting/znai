@@ -39,6 +39,7 @@ public class AsciinemaIncludePlugin implements IncludePlugin {
     public PluginParamsDefinition parameters() {
         PluginParamsDefinition params = new PluginParamsDefinition();
         params.add("startAt", PluginParamType.NUMBER_OR_STRING, "start the playback at a given time", "10 (seconds) or \"2:03\" (\"mm:ss\")");
+        params.add("poster", PluginParamType.STRING, "preview frame to display", "npt:0:32 (0 minutes 32 seconds)");
 
         return params;
     }
