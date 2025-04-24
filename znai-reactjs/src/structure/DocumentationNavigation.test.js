@@ -66,6 +66,14 @@ describe("DocumentationNavigation", () => {
         expect(location.fileName).toEqual("index")
     })
 
+    it("extracts page location for root where doc id consist of two parts with extra slash at the end", () => {
+        setDocMeta({id: 'doc/id'})
+        const location = documentationNavigation.extractPageLocation("/doc/id/")
+
+        expect(location.dirName).toEqual("")
+        expect(location.fileName).toEqual("index")
+    })
+
     it("extracts page location for root where doc id is empty", () => {
         setDocMeta({id: ''})
         const location = documentationNavigation.extractPageLocation("/")

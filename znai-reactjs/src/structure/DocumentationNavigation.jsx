@@ -48,15 +48,10 @@ class DocumentationNavigation {
         if (relativePageUrl.indexOf('#') === 0) {
             return relativePageUrl
         }
-
         const relativePageUrlWithoutLeadingSlash = relativePageUrl.indexOf('/') === 0 ?
           relativePageUrl.substring(1) : relativePageUrl
 
-        const docIdIsEmpty = getDocId().length === 0
-
-        return "/" + getDocId() +
-            (docIdIsEmpty ? '' : '/') +
-            relativePageUrlWithoutLeadingSlash
+        return "/" + ([getDocId(), relativePageUrlWithoutLeadingSlash].filter(part => part.length > 0).join("/"))
     }
 
     buildUrl(id) {
@@ -110,6 +105,7 @@ class DocumentationNavigation {
     }
 
     extractPageLocation(url) {
+        url = url.endsWith("/") ? url.substring(0, url.length - 1) : url
         const hashIdx = url.indexOf("#");
         const anchorId = hashIdx >= 0 ? url.substring(hashIdx + 1) : ""
         url = hashIdx >= 0 ? url.substring(0, hashIdx) : url
