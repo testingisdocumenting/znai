@@ -29,23 +29,18 @@ class ServerSideSimplifiedRendererTest {
 
     @Test
     void "should render TOC with page sections"() {
-        ServerSideSimplifiedRenderer.renderToc(toc).should ==
+        ServerSideSimplifiedRenderer.renderToc(toc, "my/doc").should ==
                 '<section style="max-width: 640px; margin-left: auto; margin-right: auto;">\n' +
                 '<article>\n' +
-                '<a href="chapter-a/page-one/">Page One</a>\n' +
-                '<a href="chapter-a/page-one/#ps0">Page One PS0</a>\n' +
+                '<a href="/my/doc/chapter-a/page-one/">Page One</a>\n' +
                 '</article>\n' +
                 '\n' +
                 '<article>\n' +
-                '<a href="chapter-a/page-two/">Page Two</a>\n' +
-                '<a href="chapter-a/page-two/#ps1">Page Two PS1</a>\n' +
-                '<a href="chapter-a/page-two/#ps2">Page Two PS2</a>\n' +
+                '<a href="/my/doc/chapter-a/page-two/">Page Two</a>\n' +
                 '</article>\n' +
                 '\n' +
                 '<article>\n' +
-                '<a href="chapter-b/page-one/">Page One</a>\n' +
-                '<a href="chapter-b/page-one/#ps3">Page One PS3</a>\n' +
-                '<a href="chapter-b/page-one/#ps4">Page One PS4</a>\n' +
+                '<a href="/my/doc/chapter-b/page-one/">Page One</a>\n' +
                 '</article>\n' +
                 '</section>\n'
     }

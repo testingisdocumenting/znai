@@ -16,7 +16,6 @@
 
 package org.testingisdocumenting.znai.html;
 
-import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 import org.testingisdocumenting.znai.search.PageLocalSearchEntries;
 import org.testingisdocumenting.znai.search.PageSearchEntry;
 import org.testingisdocumenting.znai.structure.TableOfContents;
@@ -29,10 +28,11 @@ import java.util.stream.Collectors;
 public class ServerSideSimplifiedRenderer {
     static final String LOADING_INDICATOR = ResourceUtils.textContent("template/initial-page-loading.html");
 
-    public static String renderToc(TableOfContents toc) {
+    public static String renderToc(TableOfContents toc, String docId) {
         return section(
                 toc.getTocItems().stream()
-                        .map(ServerSideSimplifiedRenderer::renderTocLink)
+                        .filter((tocItem -> !tocItem.isIndex()))
+                        .map((tocItem) -> ServerSideSimplifiedRenderer.renderTocLink(tocItem, docId))
                         .collect(Collectors.joining("\n")));
     }
 
@@ -43,22 +43,11 @@ public class ServerSideSimplifiedRenderer {
                         .collect(Collectors.joining("\n")));
     }
 
-    private static String renderTocLink(TocItem tocItem) {
-        String rootLink = aHref(
-                tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension() + "/",
+    private static String renderTocLink(TocItem tocItem, String docId) {
+        String rootLink = aHref("/" + docId + "/" + tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension() + "/",
                 tocItem.getPageTitle());
 
-        String subLinks = tocItem.getPageSectionIdTitles().stream()
-                .map(section -> renderTocSubLink(tocItem, section))
-                .collect(Collectors.joining(""));
-
-        return article(rootLink + subLinks);
-    }
-
-    private static String renderTocSubLink(TocItem tocItem, PageSectionIdTitle pageSectionIdTitle) {
-        return aHref(
-                tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension() + "/#" + pageSectionIdTitle.getId(),
-                tocItem.getPageTitle() + " " + pageSectionIdTitle.getTitle());
+        return article(rootLink);
     }
 
     private static String renderPageEntry(PageSearchEntry entry) {

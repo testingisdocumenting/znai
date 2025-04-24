@@ -1,0 +1,1 @@
+* Add: generate TOC as simplified server side rendering for every page for crawlers.
