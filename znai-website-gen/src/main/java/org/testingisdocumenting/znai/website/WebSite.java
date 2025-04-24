@@ -708,12 +708,8 @@ public class WebSite implements Log {
     private RenderSupplier createServerSideRenderer(TocItem tocItem) {
         PageLocalSearchEntries pageSearchEntries = localSearchEntries.searchEntriesByTocItem(tocItem);
 
-        if (tocItem.isIndex()) {
-            return () -> ServerSideSimplifiedRenderer.renderPageTextContent(pageSearchEntries) +
-                    ServerSideSimplifiedRenderer.renderToc(toc);
-        }
-
-        return () -> ServerSideSimplifiedRenderer.renderPageTextContent(pageSearchEntries);
+        return () -> ServerSideSimplifiedRenderer.renderPageTextContent(pageSearchEntries) +
+                ServerSideSimplifiedRenderer.renderToc(toc, docMeta.getId());
     }
 
     private void deployAuxiliaryFiles() {
