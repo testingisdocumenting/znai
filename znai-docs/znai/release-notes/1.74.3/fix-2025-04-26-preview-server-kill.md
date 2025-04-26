@@ -1,0 +1,1 @@
+* Fix: Exit the preview server when the initial documentation build fails

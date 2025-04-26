@@ -47,6 +47,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-client</artifactId>
             <version>${project.version}</version>

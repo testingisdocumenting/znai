@@ -51,6 +51,9 @@ public class DocumentationPreview {
     public void start(Function<Path, WebSite> createWebSite, SslConfig sslConfig, int port, Runnable onStart) {
         this.createWebSite = createWebSite;
 
+        buildWebSiteAndFileWatcher(sourceRoot);
+
+        reportPhase("starting server");
         ZnaiServer znaiServer = new ZnaiServer(deployRoot, new NoAuthenticationHandler(), sslConfig);
         previewSendChangesWebSocketHandler = new PreviewSendChangesWebSocketHandler();
         previewUpdatePathWebSocketHandler = new PreviewUpdatePathWebSocketHandler(this::changePreviewSourceRoot);
@@ -58,13 +61,11 @@ public class DocumentationPreview {
         WebSocketHandlers.add(previewSendChangesWebSocketHandler);
         WebSocketHandlers.add(previewUpdatePathWebSocketHandler);
         ConsoleOutputs.add(previewUpdatePathWebSocketHandler);
+
         HttpServer server = znaiServer.create();
-
-        reportPhase("starting server");
         HttpServerUtils.listen(server, port);
-
-        buildWebSiteAndFileWatcher(sourceRoot);
         onStart.run();
+
         fileWatcher.start();
     }
 
