@@ -51,11 +51,11 @@ public class DocumentationPreview {
     public void start(Function<Path, WebSite> createWebSite, SslConfig sslConfig, int port, Runnable onStart) {
         this.createWebSite = createWebSite;
 
+        previewSendChangesWebSocketHandler = new PreviewSendChangesWebSocketHandler();
         buildWebSiteAndFileWatcher(sourceRoot);
 
         reportPhase("starting server");
         ZnaiServer znaiServer = new ZnaiServer(deployRoot, new NoAuthenticationHandler(), sslConfig);
-        previewSendChangesWebSocketHandler = new PreviewSendChangesWebSocketHandler();
         previewUpdatePathWebSocketHandler = new PreviewUpdatePathWebSocketHandler(this::changePreviewSourceRoot);
 
         WebSocketHandlers.add(previewSendChangesWebSocketHandler);
