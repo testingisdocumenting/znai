@@ -25,6 +25,7 @@ import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.preprocessor.RegexpBasedPreprocessor;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
@@ -35,6 +36,7 @@ import java.util.stream.Stream;
 
 public abstract class MarkdownBasePlugin implements Plugin {
     private static final String FIRST_AVAILABLE_PARAM_KEY = "firstAvailable";
+    private static final String PREPROCESSOR_PATH_KEY = "preprocessorPath";
     private static final String USAGE_MESSAGE = "use either <" + FIRST_AVAILABLE_PARAM_KEY + "> or free " +
             "form param to specify file to include";
     protected Path markdownPathUsed;
@@ -47,9 +49,12 @@ public abstract class MarkdownBasePlugin implements Plugin {
 
     @Override
     public PluginParamsDefinition parameters() {
-        return new PluginParamsDefinition().add(FIRST_AVAILABLE_PARAM_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
+        return new PluginParamsDefinition()
+                .add(FIRST_AVAILABLE_PARAM_KEY, PluginParamType.LIST_OR_SINGLE_STRING,
                         "path(s) of files to consider to include, first one will be included." +
                                 " Use this to provide an alternative docs for on-prem documentation")
+                .add(PREPROCESSOR_PATH_KEY, PluginParamType.STRING,
+                        "Path with CSV file to replace content based on regexp")
                 .add(ManipulatedSnippetContentProvider.paramsDefinition);
     }
 
@@ -59,18 +64,23 @@ public abstract class MarkdownBasePlugin implements Plugin {
         MarkupParser parser = componentsRegistry.defaultParser();
 
         markdownPathUsed = selectMarkdown(componentsRegistry.resourceResolver(), pluginParams);
-        String content = modifiedContent(markdownPathUsed.toString(),
-                resourcesResolver.textContent(markdownPathUsed), pluginParams);
+        String content = modifiedContent(markdownPathUsed.toString(), resourcesResolver, markdownPathUsed, pluginParams);
         parserResult = parser.parse(markupPath, content);
 
     }
 
-    private String modifiedContent(String id, String fullContent, PluginParams pluginParams) {
+    private String modifiedContent(String id, ResourcesResolver resourcesResolver, Path path, PluginParams pluginParams) {
+        String fullContent = resourcesResolver.textContent(path);
         ManipulatedSnippetContentProvider contentProvider = new ManipulatedSnippetContentProvider(id,
                 fullContent,
                 pluginParams);
 
-        return contentProvider.snippetContent();
+        String extractedContent = contentProvider.snippetContent();
+        if (pluginParams.getOpts().has(PREPROCESSOR_PATH_KEY)) {
+            return new RegexpBasedPreprocessor(resourcesResolver.textContent(pluginParams.getOpts().getString(PREPROCESSOR_PATH_KEY))).preprocess(extractedContent);
+        } else {
+            return extractedContent;
+        }
     }
 
     private Path selectMarkdown(ResourcesResolver resourcesResolver, PluginParams pluginParams) {

@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 /**
  * modifies markup content before parser and extensions take place.
- * main use-case is to strip/replace html custom blocks in existing markdowns
+ * the main use-case is to strip/replace html custom blocks in existing markdowns
  */
 public class RegexpBasedPreprocessor {
     private final List<RegexpAndReplacement> replacementList;
