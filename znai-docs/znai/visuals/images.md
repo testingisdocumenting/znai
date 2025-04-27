@@ -56,7 +56,7 @@ Use `border: true` to include a border around image.
 
 # Fit
 
-By default image occupies all available horizontal space:
+By default, images generated with `include-image` occupy all the available horizontal space:
 
 :include-image: books.jpg {title: "wide image"}
 

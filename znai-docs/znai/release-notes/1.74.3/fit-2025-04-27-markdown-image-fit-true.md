@@ -1,0 +1,1 @@
+* Fix: default markdown image applies `fit:true` by default 

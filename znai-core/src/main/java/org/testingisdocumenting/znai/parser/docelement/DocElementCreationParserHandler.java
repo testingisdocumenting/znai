@@ -341,6 +341,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
             append(DocElementType.IMAGE, "title", title,
                     "destination", destination,
                     "alt", alt,
+                    "fit", true,
                     "inlined", true);
         }
     }
