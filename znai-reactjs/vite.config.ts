@@ -6,8 +6,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: undefined, // Prevent splitting chunks
+        manualChunks: null, // Prevent splitting chunks
+        inlineDynamicImports: true,
       },
+    },
+    commonjsOptions: {
+      include: /node_modules/, // Ensure dependencies are included
     },
   },
   test: {

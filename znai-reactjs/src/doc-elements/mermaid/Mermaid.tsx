@@ -16,7 +16,10 @@
 
 import React, { useState } from "react";
 
-import mermaid from "mermaid";
+// import mermaid from "mermaid";
+
+import mermaidAPI from "mermaid/mermaidAPI";
+import flowchartParser from "mermaid/mermaidAPI
 
 import "./Mermaid.css";
 
@@ -75,9 +78,7 @@ export default function Mermaid(props: Props) {
   }, []);
 
   React.useEffect(() => {
-    mermaid.mermaidAPI.render(generateNewMermaidId(), props.mermaid, (html) => {
-      setHTML(html);
-    });
+    mermaid.render(generateNewMermaidId(), props.mermaid).then((result) => setHTML(result.svg));
   }, [props.mermaid, znaiThemeName]);
 
   const className = "znai-mermaid " + (props.wide ? "wide" : "content-block");
