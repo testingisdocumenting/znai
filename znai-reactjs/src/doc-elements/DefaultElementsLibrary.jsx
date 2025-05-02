@@ -90,6 +90,7 @@ import { Card } from "./card/Card";
 import { FootnoteReference } from "./footnote/FootnoteReference";
 import { EmbeddedHtml } from "./html/EmbeddedHtml";
 import { Asciinema } from "./asciinema/Asciinema";
+import { ReadMore } from "./read-more/ReadMore.js";
 
 const library = {}
 const presentationElementHandlers = {}
@@ -225,6 +226,7 @@ presentationElementHandlers.CliOutput = presentationCliOutput
 library.EmbeddedHtml = EmbeddedHtml
 
 library.Spoiler = Spoiler
+library.ReadMore = ReadMore
 
 library.ApiParameters = ApiParameters
 presentationElementHandlers.ApiParameters = presentationApiParameters

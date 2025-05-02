@@ -1,0 +1,1 @@
+* Add: [`readmore`](visuals/read-more) plugin 

@@ -37,7 +37,7 @@ export interface DocElementProps extends WithElementsLibrary {
 }
 
 /**
- * uses given set of components to render DocElements like links, paragraphs, code blocks, etc
+ * uses a given set of components to render DocElements like links, paragraphs, code blocks, etc
  *
  * @param content content to render
  * @param elementsLibrary library of elements to use to render
