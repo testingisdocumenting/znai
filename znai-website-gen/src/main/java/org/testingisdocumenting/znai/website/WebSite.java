@@ -650,11 +650,11 @@ public class WebSite implements Log {
         try {
             HtmlPageAndPageProps htmlAndProps = createHtmlPageAndProps(tocItem, page);
 
-            pagePropsByTocItem.put(tocItem, htmlAndProps.getProps());
-            extraJavaScriptsInFront.forEach(htmlAndProps.getHtmlPage()::addJavaScriptInFront);
-            extraJavaScriptsInBack.forEach(htmlAndProps.getHtmlPage()::addJavaScript);
+            pagePropsByTocItem.put(tocItem, htmlAndProps.props());
+            extraJavaScriptsInFront.forEach(htmlAndProps.htmlPage()::addJavaScriptInFront);
+            extraJavaScriptsInBack.forEach(htmlAndProps.htmlPage()::addJavaScript);
 
-            String html = htmlAndProps.getHtmlPage().render(docMeta.getId());
+            String html = htmlAndProps.htmlPage().render(docMeta.getId());
 
             Path pagePath = tocItem.isIndex() ? Paths.get("index.html") :
                     Paths.get(tocItem.getDirName()).resolve(tocItem.getFileNameWithoutExtension()).resolve("index.html");

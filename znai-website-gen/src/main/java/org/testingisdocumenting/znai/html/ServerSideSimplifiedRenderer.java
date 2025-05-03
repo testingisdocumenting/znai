@@ -29,7 +29,7 @@ public class ServerSideSimplifiedRenderer {
     static final String LOADING_INDICATOR = ResourceUtils.textContent("template/initial-page-loading.html");
 
     public static String renderToc(TableOfContents toc, String docId) {
-        return section(
+        return section("table-of-contents",
                 toc.getTocItems().stream()
                         .filter((tocItem -> !tocItem.isIndex()))
                         .map((tocItem) -> ServerSideSimplifiedRenderer.renderTocLink(tocItem, docId))
@@ -37,7 +37,7 @@ public class ServerSideSimplifiedRenderer {
     }
 
     public static String renderPageTextContent(PageLocalSearchEntries pageSearchEntries) {
-        return LOADING_INDICATOR + section(
+        return LOADING_INDICATOR + section("page-content",
                 pageSearchEntries.entries().stream()
                         .map(ServerSideSimplifiedRenderer::renderPageEntry)
                         .collect(Collectors.joining("\n")));
@@ -60,8 +60,8 @@ public class ServerSideSimplifiedRenderer {
         return article(optionalHeader + paragraph);
     }
 
-    private static String section(String htmlBlock) {
-        return "<section style=\"max-width: 640px; margin-left: auto; margin-right: auto;\">\n" +
+    private static String section(String id, String htmlBlock) {
+        return "<section id=\"" + id + "\" style=\"max-width: 640px; margin-left: auto; margin-right: auto;\">\n" +
                 htmlBlock +
                 "</section>\n";
     }
