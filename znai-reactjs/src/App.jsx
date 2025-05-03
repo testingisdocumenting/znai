@@ -105,6 +105,7 @@ import { jsonPresentationDemo } from "./doc-elements/json/PresentationJson.demo"
 import { footnoteDemo } from "./doc-elements/footnote/Footnote.demo";
 import { asciinemaDemo } from "./doc-elements/asciinema/Asciinema.demo";
 import { previewConsoleOutputDemo } from "./screens/preview-change-path/PreviewConsoleOutput.demo";
+import { readMoreDemo } from "./doc-elements/read-more/ReadMore.demo.js";
 
 const docMeta = {
     id: 'preview',
@@ -166,21 +167,22 @@ registries.add('python')
   .registerAsRows('member', pythonMethodDemo)
 
 registries.add('visuals')
-    .registerAsGrid('Text Badges', 0, textBadgeDemo)
-    .registerAsGrid('Spoilers', 0, spoilerDemo)
-    .registerAsGrid('Echarts', 0, echartDemo)
-    .registerAsRows('Image', imageDemo)
-    .registerAsRows('Image With List', annotatedImageWithOrderedListDemo)
-    .registerAsRows('Smart Bullets', smartBulletListsDemo)
-    .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
-    .registerAsGrid('SVG', 0, svgDemo)
-    .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
-    .registerAsRows('Cards', cardsDemo)
-    .registerAsRows('Diagram Legend', diagramLegendDemo)
-    .registerAsGrid('Keyboard shortcuts', 0, keyboardShortcutsDemo)
-    .registerAsGrid('Iframe', 0, iframeDemo)
-    .registerAsGrid('Mermaid', 0, mermaidDemo)
-    .registerAsGrid('Asciinema', 0, asciinemaDemo)
+  .registerAsGrid('Text Badges', 0, textBadgeDemo)
+  .registerAsGrid('Spoilers', 0, spoilerDemo)
+  .registerAsGrid('Read More', 0, readMoreDemo)
+  .registerAsGrid('Echarts', 0, echartDemo)
+  .registerAsRows('Image', imageDemo)
+  .registerAsRows('Image With List', annotatedImageWithOrderedListDemo)
+  .registerAsRows('Smart Bullets', smartBulletListsDemo)
+  .registerAsGrid('Embedded SVG', 0, embeddedSvgDemo)
+  .registerAsGrid('SVG', 0, svgDemo)
+  .registerAsGrid('GraphViz SVG', 0, graphVizSvgDemo)
+  .registerAsRows('Cards', cardsDemo)
+  .registerAsRows('Diagram Legend', diagramLegendDemo)
+  .registerAsGrid('Keyboard shortcuts', 0, keyboardShortcutsDemo)
+  .registerAsGrid('Iframe', 0, iframeDemo)
+  .registerAsGrid('Mermaid', 0, mermaidDemo)
+  .registerAsGrid('Asciinema', 0, asciinemaDemo)
 
 registries.add('layout')
     .registerAsTabs('Pages', pagesDemo)

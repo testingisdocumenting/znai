@@ -15,6 +15,7 @@
 #
 
 org.testingisdocumenting.znai.extensions.reveal.SpoilerFencePlugin
+org.testingisdocumenting.znai.extensions.reveal.ReadMoreFencePlugin
 org.testingisdocumenting.znai.extensions.api.ApiParametersFencePlugin
 org.testingisdocumenting.znai.extensions.attention.AttentionSignNoteFencePlugin
 org.testingisdocumenting.znai.extensions.attention.AttentionSignQuestionFencePlugin
