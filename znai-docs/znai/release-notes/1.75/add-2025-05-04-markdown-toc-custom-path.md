@@ -1,0 +1,1 @@
+* Add: TOC now supports `{path: "neste/file.md"}` to select a markdown file in a custom location to make it easier to move existing content to Znai

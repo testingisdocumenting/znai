@@ -17,8 +17,8 @@
 package org.testingisdocumenting.znai.website.markups
 
 import org.junit.Test
+import org.testingisdocumenting.znai.core.MarkupPathWithError
 import org.testingisdocumenting.znai.structure.TableOfContents
-import org.testingisdocumenting.znai.structure.TocNameAndOpts
 
 import java.nio.file.Paths
 
@@ -31,6 +31,7 @@ class MarkdownParsingConfigurationTest {
         toc.addTocItem("chapter1", "page-a")
         toc.addTocItem("chapter1", "index")
         toc.addIndex()
+        toc.resolveTocItemPathsAndReturnMissing { new MarkupPathWithError(Paths.get("/root/" + it.getFilePath()), null) }
 
         def config = new MarkdownParsingConfiguration()
 

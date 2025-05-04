@@ -25,7 +25,7 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 class TocItemTest {
     @Test
     void "should not allow special symbols in file name"() {
-        def ignore = new TocItem('dir-name', 'file-name', 'md')
+        var ignore = new TocItem('dir-name', 'file-name', 'md')
 
         shouldThrow('dir-name', 'fileName?')
         shouldThrow('dir-name?', 'fileName')
@@ -67,6 +67,25 @@ class TocItemTest {
 
         tocItem.setPageTitleIfNoTocOverridePresent("override inside markdown")
         tocItem.pageTitle.should == "my page"
+    }
+
+    static void validatePath(tocItem, path) {
+        tocItem.getFilePath().should == path
+    }
+
+    @Test
+    void "should allow to specify markup file path"() {
+        validatePath(new TocItem(new TocNameAndOpts('dir-name'),
+                new TocNameAndOpts('my-id {path: "nested-dir/file.mdx"}'), 'md'),
+        "dir-name/nested-dir/file.mdx")
+
+        validatePath(new TocItem(new TocNameAndOpts('dir-name'),
+                new TocNameAndOpts('my-id {path: "/nested-dir/file.mdx"}'), 'md'),
+                "/nested-dir/file.mdx")
+
+        validatePath(new TocItem(new TocNameAndOpts('dir-name'),
+                new TocNameAndOpts('my-id {path: "../file.mdx"}'), 'md'),
+                "dir-name/../file.mdx")
     }
 
     private static void shouldThrow(String dirName, String fileName) {
