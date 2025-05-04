@@ -1,0 +1,1 @@
+* Add: Distinct `id` for HTML content for crawlers

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,20 +17,5 @@
 
 package org.testingisdocumenting.znai.html;
 
-public class HtmlPageAndPageProps {
-    private HtmlPage htmlPage;
-    private DocPageReactProps props;
-
-    public HtmlPageAndPageProps(HtmlPage htmlPage, DocPageReactProps props) {
-        this.htmlPage = htmlPage;
-        this.props = props;
-    }
-
-    public HtmlPage getHtmlPage() {
-        return htmlPage;
-    }
-
-    public DocPageReactProps getProps() {
-        return props;
-    }
+public record HtmlPageAndPageProps(HtmlPage htmlPage, DocPageReactProps props) {
 }

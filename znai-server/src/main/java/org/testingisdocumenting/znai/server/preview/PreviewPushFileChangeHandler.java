@@ -56,7 +56,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
 
             if (!tocAddedUpdatedAndRemovedPages.addedOrUpdatedPagesProps().isEmpty()) {
                 previewSocket.sendPages(tocAddedUpdatedAndRemovedPages.addedOrUpdatedPagesProps().stream()
-                        .map(HtmlPageAndPageProps::getProps));
+                        .map(HtmlPageAndPageProps::props));
             }
 
             if (!tocAddedUpdatedAndRemovedPages.removedTocItems().isEmpty()) {
@@ -127,7 +127,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
                 return;
             }
 
-            previewSocket.sendPage(htmlPageAndPageProps.getProps());
+            previewSocket.sendPage(htmlPageAndPageProps.props());
             previewSocket.sendToc(previewWebSite.getToc());
         });
     }
@@ -144,7 +144,7 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
 
             dependentTocItems.forEach(System.out::println);
             Stream<DocPageReactProps> generatedPages = dependentTocItems.stream().
-                    map(tocItem -> previewWebSite.regenerateAndValidatePageDeployTocAndAllPages(tocItem).getProps());
+                    map(tocItem -> previewWebSite.regenerateAndValidatePageDeployTocAndAllPages(tocItem).props());
 
             previewSocket.sendPages(generatedPages);
             previewSocket.sendToc(previewWebSite.getToc());
