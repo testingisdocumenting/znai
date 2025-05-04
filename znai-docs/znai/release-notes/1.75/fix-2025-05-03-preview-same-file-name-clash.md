@@ -1,0 +1,1 @@
+* Fix: changing files with the same name in preview mode is no longer confuse files

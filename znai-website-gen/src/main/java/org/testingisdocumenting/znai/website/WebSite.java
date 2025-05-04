@@ -554,6 +554,8 @@ public class WebSite implements Log {
             updateSearchEntries(tocItem, parserResult);
         } catch(Exception e) {
             throwParsingErrorMessage(tocItem, markupPathWithError.path(), e);
+        } finally {
+            localResourceResolver.setCurrentFilePath(null);
         }
     }
 
