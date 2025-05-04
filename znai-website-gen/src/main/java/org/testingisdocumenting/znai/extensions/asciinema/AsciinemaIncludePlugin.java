@@ -40,6 +40,10 @@ public class AsciinemaIncludePlugin implements IncludePlugin {
         PluginParamsDefinition params = new PluginParamsDefinition();
         params.add("startAt", PluginParamType.NUMBER_OR_STRING, "start the playback at a given time", "10 (seconds) or \"2:03\" (\"mm:ss\")");
         params.add("poster", PluginParamType.STRING, "preview frame to display", "npt:0:32 (0 minutes 32 seconds)");
+        params.add("cols", PluginParamType.NUMBER, "number of columns", "120");
+        params.add("rows", PluginParamType.NUMBER, "number of rows", "10");
+        params.add("idleTimeLimit", PluginParamType.NUMBER, "limit terminal inactivity to a given number of seconds", "2");
+        params.add("speed", PluginParamType.NUMBER, "playback speed. value 2 means 2x faster", "2");
 
         return params;
     }

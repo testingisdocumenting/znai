@@ -16,25 +16,41 @@
 
 import React, { useEffect, useRef } from "react";
 import * as AsciinemaPlayer from 'asciinema-player';
+
 import "asciinema-player/dist/bundle/asciinema-player.css";
 import "./Asciinema.css"
 
-export function Asciinema({src, startAt = 0, poster = undefined}) {
+export function Asciinema({src, startAt = 0, poster = undefined, cols = undefined, rows = undefined,
+                           idleTimeLimit = undefined, speed = undefined}) {
   const containerRef = useRef(null);
   const playerRef = useRef(null);
 
+  function destroyPlayer() {
+    if (playerRef.current) {
+      playerRef.current.dispose();
+      playerRef.current = null;
+    }
+  }
+
+  function recreatePlayer() {
+    destroyPlayer();
+    playerRef.current = AsciinemaPlayer.create(src, containerRef.current,
+      {preload: true, fit: false, startAt, poster, cols, rows, idleTimeLimit, speed});
+  }
+
   useEffect(() => {
     if (containerRef.current) {
-      playerRef.current = AsciinemaPlayer.create(src, containerRef.current, {preload: true, fit: false, startAt, poster});
+        recreatePlayer();
     }
 
     return () => {
-      if (playerRef.current && playerRef.current.destroy) {
-        playerRef.current.destroy();
+      if (playerRef.current) {
+        playerRef.current.dispose();
         playerRef.current = null;
       }
     };
-  }, []);
+  }, [src, startAt, poster, cols, rows, idleTimeLimit, speed, containerRef]);
+
 
   return <div className="content-block znai-asciinema" ref={containerRef} />;
 }

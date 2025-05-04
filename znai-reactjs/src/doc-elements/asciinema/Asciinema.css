@@ -22,3 +22,8 @@
 .znai-asciinema .ap-wrapper {
     justify-content: start;
 }
+
+.znai-asciinema {
+    margin-top: var(--znai-snippets-space-above);
+    margin-bottom: var(--znai-snippets-space-below);
+}
