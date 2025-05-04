@@ -30,7 +30,7 @@ class ServerSideSimplifiedRendererTest {
     @Test
     void "should render TOC with page sections"() {
         ServerSideSimplifiedRenderer.renderToc(toc, "my/doc").should ==
-                '<section style="max-width: 640px; margin-left: auto; margin-right: auto;">\n' +
+                '<section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">\n' +
                 '<article>\n' +
                 '<a href="/my/doc/chapter-a/page-one/">Page One</a>\n' +
                 '</article>\n' +
@@ -54,7 +54,7 @@ class ServerSideSimplifiedRendererTest {
 
         ServerSideSimplifiedRenderer.renderPageTextContent(searchEntries).should ==
                 ServerSideSimplifiedRenderer.LOADING_INDICATOR +
-                '<section style="max-width: 640px; margin-left: auto; margin-right: auto;">\n' +
+                '<section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">\n' +
                 '<article>\n' +
                 '<header><h1>PS0</h1></header>\n' +
                 '<p>hello \' &quot; &lt;&gt; [] &amp; world</p>\n' +
