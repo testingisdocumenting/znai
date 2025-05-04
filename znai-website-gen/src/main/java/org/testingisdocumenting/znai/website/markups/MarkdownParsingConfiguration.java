@@ -28,7 +28,6 @@ import org.testingisdocumenting.znai.structure.TableOfContents;
 import org.testingisdocumenting.znai.structure.TocItem;
 import org.testingisdocumenting.znai.utils.FilePathUtils;
 
-import java.io.File;
 import java.nio.file.Path;
 
 public class MarkdownParsingConfiguration implements MarkupParsingConfiguration {
@@ -64,8 +63,7 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
             return "index.md";
         }
 
-        return tocItem.getDirName() + File.separator +
-                (tocItem.getFileNameWithoutExtension() + "." + tocItem.getFileExtension());
+        return tocItem.getFilePath();
     }
 
     @Override
@@ -75,13 +73,13 @@ public class MarkdownParsingConfiguration implements MarkupParsingConfiguration 
 
     @Override
     public TocItem tocItemByPath(ComponentsRegistry componentsRegistry, TableOfContents toc, Path path) {
-        String fileNameWithoutExtension = FilePathUtils.fileNameWithoutExtension(path);
-        TocItem tocItem = toc.findTocItem(path.toAbsolutePath().getParent().getFileName().toString(), fileNameWithoutExtension);
+        TocItem tocItem = toc.findTocItem(path);
 
         if (tocItem != null) {
             return tocItem;
         }
 
+        String fileNameWithoutExtension = FilePathUtils.fileNameWithoutExtension(path);
         if (fileNameWithoutExtension.equals("index")) {
             return toc.getIndex();
         }

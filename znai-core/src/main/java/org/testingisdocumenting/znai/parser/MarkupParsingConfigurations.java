@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +24,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MarkupParsingConfigurations {
-    private static Set<MarkupParsingConfiguration> configurations =
+    private static final Set<MarkupParsingConfiguration> configurations =
             ServiceLoaderUtils.load(MarkupParsingConfiguration.class);
 
     private MarkupParsingConfigurations() {
@@ -36,7 +37,7 @@ public class MarkupParsingConfigurations {
     public static MarkupParsingConfiguration byName(String name) {
         List<MarkupParsingConfiguration> configurations = MarkupParsingConfigurations.configurations.stream()
                 .filter(c -> name.equals(c.configurationName()))
-                .collect(Collectors.toList());
+                .toList();
 
         if (configurations.isEmpty()) {
             throw new RuntimeException("can't find markup configuration for" +

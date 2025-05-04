@@ -80,6 +80,19 @@ public class TocItem {
         return fileNameWithoutExtension;
     }
 
+    public String getFilePath() {
+        if (page.hasPath()) {
+            String path = page.getPath();
+            if (path.startsWith("/")) {
+                return path;
+            }
+
+            return getDirName() + "/" + path;
+        }
+
+        return getDirName() + "/" + getFileNameWithoutExtension() + "." + getFileExtension();
+    }
+
     public String getFileExtension() {
         return fileExtension;
     }
@@ -94,14 +107,6 @@ public class TocItem {
 
     public void setPageMeta(PageMeta pageMeta) {
         this.pageMeta = pageMeta;
-    }
-
-    public void setViewOnRelativePath(String viewOnRelativePath) {
-        this.viewOnRelativePath = viewOnRelativePath;
-    }
-
-    public String getViewOnRelativePath() {
-        return viewOnRelativePath;
     }
 
     public List<PageSectionIdTitle> getPageSectionIdTitles() {

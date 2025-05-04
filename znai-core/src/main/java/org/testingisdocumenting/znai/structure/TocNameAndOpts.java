@@ -28,10 +28,12 @@ import java.util.Map;
  */
 public class TocNameAndOpts {
     private final String TITLE_KEY = "title";
+    private final String PATH_KEY = "path";
 
     private final String givenName;
     private final Map<String, ?> opts;
     private final boolean hasTitleOverride;
+    private final boolean hasPath;
 
     private String humanReadableName;
 
@@ -42,6 +44,7 @@ public class TocNameAndOpts {
         this.givenName = hasOpenBracket ? trimmed.substring(0, openBracketIdx).trim() : trimmed;
         this.opts = hasOpenBracket ? extractOpts(trimmed, openBracketIdx) : Collections.emptyMap();
         this.hasTitleOverride = opts.containsKey(TITLE_KEY);
+        this.hasPath = opts.containsKey(PATH_KEY);
 
         this.humanReadableName = buildHumanReadableName();
     }
@@ -64,6 +67,14 @@ public class TocNameAndOpts {
 
     public boolean hasTitleOverride() {
         return hasTitleOverride;
+    }
+
+    public boolean hasPath() {
+        return hasPath;
+    }
+
+    public String getPath() {
+        return opts.get(PATH_KEY).toString();
     }
 
     private Map<String, ?> extractOpts(String trimmed, int openBracketIdx) {
