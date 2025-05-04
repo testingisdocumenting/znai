@@ -17,12 +17,12 @@
 
 package org.testingisdocumenting.znai.website
 
+import org.testingisdocumenting.znai.core.MarkupPathWithError
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle
 import org.testingisdocumenting.znai.core.DocMeta
 import org.testingisdocumenting.znai.structure.AnchorIds
 import org.testingisdocumenting.znai.structure.DocUrl
 import org.testingisdocumenting.znai.structure.TableOfContents
-import org.testingisdocumenting.znai.structure.TocNameAndOpts
 import org.testingisdocumenting.znai.website.markups.MarkdownParsingConfiguration
 import org.junit.Before
 import org.junit.BeforeClass
@@ -52,6 +52,7 @@ class WebSiteDocStructureTest {
         toc.addTocItem("chapter", "pageTwo")
         toc.addIndex()
         toc.findTocItem("chapter", "pageTwo").pageSectionIdTitles = [new PageSectionIdTitle ("Test Section", [:])]
+        toc.resolveTocItemPathsAndReturnMissing { new MarkupPathWithError(Paths.get("/home/user/docs/" + it.getFilePath()), null) }
     }
 
     @Before
