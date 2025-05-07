@@ -92,7 +92,7 @@
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 73&lt; version> &lt; plugin></text>
+      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 75&lt; version> &lt; plugin></text>
     </text>
   </entry>
   <entry>
@@ -108,7 +108,7 @@
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 73&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
+      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 75&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
     </text>
   </entry>
   <entry>
@@ -116,7 +116,7 @@
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 73&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
+      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 75&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
     </text>
   </entry>
   <entry>
@@ -156,7 +156,7 @@
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling top header deployment additional files hub introduction setup build artifacts watch example references domain api znai development local build release notes 2024 2023 2022 2021 introduction rationale rationale md</text>
+      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge read more spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe asciinema layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling top header deployment additional files hub introduction setup build artifacts watch example references domain api znai development local build release notes 2024 2023 2022 2021 introduction rationale rationale md</text>
     </text>
   </entry>
   <entry>
@@ -1500,7 +1500,7 @@
     <fullTitle>Znai: Images, Fit [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>By default image occupies all available horizontal space Use parameter to fit an image to the text column width Note You can click on the scaled down images to display it full screen fit include image books jpg fit true</text>
+      <text>By default images generated with occupy all the available horizontal space Use parameter to fit an image to the text column width Note You can click on the scaled down images to display it full screen include image fit include image books jpg fit true</text>
     </text>
   </entry>
   <entry>
@@ -1856,6 +1856,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/read-more#collapsible-content</url>
+    <fullTitle>Znai: Read More, Collapsible Content [Visuals]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>To collapse content use fence plugin Information you don t want users to see right away goes here Can use all the markdown inside item A item B let list 1 2 3 let value 0 Note Four backticks were used instead of the usual three This is done so one fence block can include another block code snippet without confusion It can be any number of backticks greater than three readmore ````readmore title Title of the Hidden Details Information you don t want users to see right away goes here Can use all the markdown inside 1 item A 2 item B ``` let list 1 2 3 let value 0 ``` ````</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/spoilers#hidden-content</url>
     <fullTitle>Znai: Spoilers, Hidden Content [Visuals]</fullTitle>
     <text>
@@ -2133,6 +2141,14 @@
     <text>
       <score>STANDARD</score>
       <text>Use to change aspect ratio of the embedded content aspectRatio include iframe https www youtube com embed tgbNymZ7vqY aspectRatio 4 3</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/asciinema#asciinema-player</url>
+    <fullTitle>Znai: Asciinema, Asciinema Player [Visuals]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>To embedd Acsiinema Player use include asciinema asciinema intro cast startAt 0 5 poster npt 0 5</text>
     </text>
   </entry>
   <entry>
@@ -3124,7 +3140,7 @@
     <fullTitle>Znai: Local Build, Build Tools Setup [Znai Development]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>SDK Man Easy way to maintain Java specific dependencies below is by using SDKMAN Java And Maven You need Java 8 and Maven to build Znai Graphviz Diagram features depend on its presence of dot when build generates documentation for Znai Use brew to install GraphViz sdk install java 8 0 342 amzn sdk install maven brew install graphviz</text>
+      <text>SDK Man Easy way to maintain Java specific dependencies below is by using SDKMAN Java And Maven You need Java 17 and Maven to build Znai Graphviz Diagram features depend on its presence of dot when build generates documentation for Znai Use brew to install GraphViz Firefox Some automated tests in znai are using WebTau which in turn use Selenium WebDriver and firefox A firefox executable has to be on the system path Use brew to install Firefox sdk install java 17 0 13 amzn sdk install maven brew install graphviz brew install firefox</text>
     </text>
   </entry>
   <entry>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Support</title>
+<title>Znai: Asciinema</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,8 +85,8 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Linking To Support Site</h1></header>
-<p>To provide a support link to your users add link and title to the file Take a look at the example at the top of this page meta json</p>
+<header><h1>Asciinema Player</h1></header>
+<p>To embedd Acsiinema Player use include asciinema asciinema intro cast startAt 0 5 poster npt 0 5</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -478,61 +478,52 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "linking-to-support-site",
+      "id" : "asciinema-player",
       "additionalIds" : [ ],
-      "title" : "Linking To Support Site",
+      "title" : "Asciinema Player",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To provide a support link to your users add link and title to the ",
+          "text" : "To embedd ",
           "type" : "SimpleText"
         }, {
-          "code" : "meta.json",
-          "type" : "InlinedCode"
+          "url" : "https://docs.asciinema.org/manual/player/quick-start/",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Acsiinema Player",
+            "type" : "SimpleText"
+          } ]
         }, {
-          "text" : " file.",
+          "text" : " use:",
           "type" : "SimpleText"
         } ]
       }, {
-        "data" : {
-          "title" : "Znai",
-          "type" : "User Guide",
-          "category" : "Documentation",
-          "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
-          "viewOn" : {
-            "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-            "title" : "View Markdown"
-          },
-          "support" : {
-            "link" : "https://github.com/testingisdocumenting/znai/discussions",
-            "title" : "GitHub"
-          }
-        },
-        "highlightValues" : [ "root.support.link" ],
-        "highlightKeys" : [ ],
-        "type" : "Json"
+        "lang" : "markdown",
+        "snippet" : ":include-asciinema: asciinema/intro.cast {startAt: \"0:5\", poster:\"npt:0:5\"}",
+        "lineNumber" : "",
+        "type" : "Snippet"
       }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Take a look at the example at the top of this page.",
-          "type" : "SimpleText"
-        } ]
+        "startAt" : "0:5",
+        "poster" : "npt:0:5",
+        "src" : "/znai/visuals/asciinema/intro.cast",
+        "type" : "Asciinema"
       } ]
     } ],
-    "lastModifiedTime" : 1746580475612,
+    "lastModifiedTime" : 1746580475634,
     "tocItem" : {
-      "chapterTitle" : "Flow",
-      "pageTitle" : "Support",
+      "chapterTitle" : "Visuals",
+      "pageTitle" : "Asciinema",
       "pageMeta" : { },
-      "dirName" : "flow",
-      "fileName" : "support",
+      "dirName" : "visuals",
+      "fileName" : "asciinema",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Linking To Support Site",
-        "id" : "linking-to-support-site",
-        "customAnchorId" : "linking-to-support-site"
+        "title" : "Asciinema Player",
+        "id" : "asciinema-player",
+        "customAnchorId" : "asciinema-player"
       } ]
     }
   }

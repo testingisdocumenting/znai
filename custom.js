@@ -33,4 +33,4 @@ var myComponents = (function (exports,React) {
 
     return exports;
 
-}({},React));
+}({},window.React));

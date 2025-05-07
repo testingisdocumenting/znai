@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Support</title>
+<title>Znai: Read More</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,8 +85,8 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Linking To Support Site</h1></header>
-<p>To provide a support link to your users add link and title to the file Take a look at the example at the top of this page meta json</p>
+<header><h1>Collapsible Content</h1></header>
+<p>To collapse content use fence plugin Information you don t want users to see right away goes here Can use all the markdown inside item A item B let list 1 2 3 let value 0 Note Four backticks were used instead of the usual three This is done so one fence block can include another block code snippet without confusion It can be any number of backticks greater than three readmore ````readmore title Title of the Hidden Details Information you don t want users to see right away goes here Can use all the markdown inside 1 item A 2 item B ``` let list 1 2 3 let value 0 ``` ````</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -478,61 +478,96 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "linking-to-support-site",
+      "id" : "collapsible-content",
       "additionalIds" : [ ],
-      "title" : "Linking To Support Site",
+      "title" : "Collapsible Content",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "To provide a support link to your users add link and title to the ",
+          "text" : "To collapse content use ",
           "type" : "SimpleText"
         }, {
-          "code" : "meta.json",
+          "code" : "readmore",
           "type" : "InlinedCode"
         }, {
-          "text" : " file.",
+          "text" : " fence plugin",
           "type" : "SimpleText"
         } ]
       }, {
-        "data" : {
-          "title" : "Znai",
-          "type" : "User Guide",
-          "category" : "Documentation",
-          "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
-          "viewOn" : {
-            "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-            "title" : "View Markdown"
-          },
-          "support" : {
-            "link" : "https://github.com/testingisdocumenting/znai/discussions",
-            "title" : "GitHub"
-          }
-        },
-        "highlightValues" : [ "root.support.link" ],
-        "highlightKeys" : [ ],
-        "type" : "Json"
+        "lang" : "",
+        "snippet" : "````readmore {title: \"Title of the Hidden Details\"}\nInformation you don't want users to see right away goes here.\nCan use all the markdown inside\n1. item A\n2. item B\n    \n```\nlet list = [1, 2, 3]\nlet value = 0\n```\n````",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "title" : "Title of the Hidden Details",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Information you don't want users to see right away goes here.",
+            "type" : "SimpleText"
+          }, {
+            "type" : "SoftLineBreak"
+          }, {
+            "text" : "Can use all the markdown inside",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "delimiter" : ".",
+          "startNumber" : 1,
+          "type" : "OrderedList",
+          "content" : [ {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item A",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "type" : "ListItem",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "item B",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        }, {
+          "lang" : "",
+          "snippet" : "let list = [1, 2, 3]\nlet value = 0",
+          "lineNumber" : "",
+          "type" : "Snippet"
+        } ],
+        "type" : "ReadMore"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Take a look at the example at the top of this page.",
+          "text" : "Note: Four backticks were used instead of the usual three. This is done so one fence block can include",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "another block (code snippet) without confusion. It can be any number of backticks greater than three.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1746580475612,
+    "lastModifiedTime" : 1746580475646,
     "tocItem" : {
-      "chapterTitle" : "Flow",
-      "pageTitle" : "Support",
+      "chapterTitle" : "Visuals",
+      "pageTitle" : "Read More",
       "pageMeta" : { },
-      "dirName" : "flow",
-      "fileName" : "support",
+      "dirName" : "visuals",
+      "fileName" : "read-more",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Linking To Support Site",
-        "id" : "linking-to-support-site",
-        "customAnchorId" : "linking-to-support-site"
+        "title" : "Collapsible Content",
+        "id" : "collapsible-content",
+        "customAnchorId" : "collapsible-content"
       } ]
     }
   }

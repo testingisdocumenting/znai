@@ -1391,6 +1391,19 @@ toc = [ {
     } ]
   }, {
     "chapterTitle" : "Visuals",
+    "pageTitle" : "Read More",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "read-more",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Collapsible Content",
+      "id" : "collapsible-content",
+      "customAnchorId" : "collapsible-content"
+    } ]
+  }, {
+    "chapterTitle" : "Visuals",
     "pageTitle" : "Spoilers",
     "pageMeta" : { },
     "dirName" : "visuals",
@@ -1591,6 +1604,19 @@ toc = [ {
       "title" : "Aspect Ratio",
       "id" : "aspect-ratio",
       "customAnchorId" : "aspect-ratio"
+    } ]
+  }, {
+    "chapterTitle" : "Visuals",
+    "pageTitle" : "Asciinema",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "asciinema",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Asciinema Player",
+      "id" : "asciinema-player",
+      "customAnchorId" : "asciinema-player"
     } ]
   } ]
 }, {
