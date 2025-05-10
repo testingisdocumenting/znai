@@ -66,6 +66,14 @@ class UrlUtilsTest {
     }
 
     @Test
+    void "extract anchor"() {
+        UrlUtils.extractAnchor("no-anchor").should == ""
+        UrlUtils.extractAnchor("my-relative#hello").should == "hello"
+        UrlUtils.extractAnchor("multiple#anchor-one#anchor-one").should == "anchor-one"
+        UrlUtils.extractAnchor("my-relative/#hello").should == "hello"
+    }
+
+    @Test
     void "attach index html"() {
         UrlUtils.attachIndexHtmlIfEndsWithSlash("my-dir/").should == "my-dir/index.html"
         UrlUtils.attachIndexHtmlIfEndsWithSlash("my-dir/other").should == "my-dir/other"

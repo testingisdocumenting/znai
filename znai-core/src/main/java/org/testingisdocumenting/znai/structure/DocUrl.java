@@ -25,17 +25,19 @@ public class DocUrl {
     private static final String LINK_TO_SECTION_INSTRUCTION = """
             To refer to a section of a document page use either
               dir-name/file-name-without-extension#page-section-id or
-              ../dir-name/file-name.md#page-section-id or
-              ./file-name-within-chapter.md#page-section-id
               (#page-section-id is optional)
             dir-name is not an arbitrary directory name or structure, but the TOC directory associated with a chapter
             Use #page-section-id to refer to the current page section.
             Use /#section-id to refer the root page of a documentation.
+            
+            Alternatively you can use a relative path to another markdown file.
+            Path can be relative to the root of the documentation or to the current file.
             """;
 
     private String dirName = "";
     private String fileNameWithoutExtension = "";
     private String anchorId = "";
+    private String tocItemFilePath = "";
 
     private String url;
 
@@ -61,6 +63,7 @@ public class DocUrl {
         this.url = url;
 
         boolean handled = handleExternal() ||
+                handleBasedOnFilePath(url) ||
                 handleIndex() ||
                 handleAnchorOnly() ||
                 handleLocal(markupPath);
@@ -72,6 +75,19 @@ public class DocUrl {
 
     private boolean handleExternal() {
         return isExternalUrl = UrlUtils.isExternal(url);
+    }
+
+    private boolean handleBasedOnFilePath(String url) {
+        String withoutAnchor = UrlUtils.removeAnchor(url);
+        String extension = FilePathUtils.fileExtension(withoutAnchor);
+
+        if (extension.startsWith("md")) {
+            tocItemFilePath = withoutAnchor;
+            anchorId = UrlUtils.extractAnchor(url);
+            return true;
+        }
+
+        return false;
     }
 
     private boolean handleIndex() {
@@ -155,6 +171,20 @@ public class DocUrl {
 
     public boolean isAnchorOnly() {
         return isAnchorOnly;
+    }
+
+    public boolean isFilePathBased() {
+        return !tocItemFilePath.isEmpty();
+    }
+
+    public String getTocItemFilePath() {
+        return tocItemFilePath;
+    }
+
+    public void setResolvedToDirNameAndFileName(String dirName, String fileNameWithoutExtension) {
+        this.tocItemFilePath = "";
+        this.dirName = dirName;
+        this.fileNameWithoutExtension = fileNameWithoutExtension;
     }
 
     public String getDirName() {

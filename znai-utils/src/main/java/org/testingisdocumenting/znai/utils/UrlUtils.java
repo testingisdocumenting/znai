@@ -58,6 +58,15 @@ public class UrlUtils {
         return url.substring(0, idx);
     }
 
+    public static String extractAnchor(String url) {
+        var idx = url.lastIndexOf('#');
+        if (idx == -1) {
+            return "";
+        }
+
+        return url.substring(idx + 1);
+    }
+
     public static String attachIndexHtmlIfEndsWithSlash(String url) {
         if (!url.endsWith("/")) {
             return url;

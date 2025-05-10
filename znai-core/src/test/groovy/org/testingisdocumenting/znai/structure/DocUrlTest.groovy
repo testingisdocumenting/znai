@@ -26,15 +26,20 @@ class DocUrlTest {
     @Test
     void "parse with extension, reference back and anchor"() {
         def url = new DocUrl(markupPath, "../chapter/name.md#page-section")
-        url.should == [anchorId: "page-section", dirName: "chapter", fileNameWithoutExtension: "name"]
+        url.should == [anchorId: "page-section", tocItemFilePath: "../chapter/name.md", dirName: "", fileNameWithoutExtension: ""]
     }
 
     @Test
     void "parse with extension, reference current dir with dot and anchor"() {
         def url = new DocUrl(markupPath, "./chapter/name.md#page-section")
-        url.should == [anchorId: "page-section", dirName: "chapter", fileNameWithoutExtension: "name"]
+        url.should == [anchorId: "page-section", tocItemFilePath: "./chapter/name.md", dirName: "", fileNameWithoutExtension: ""]
     }
 
+    @Test
+    void "parse with mdx extension"() {
+        def url = new DocUrl(markupPath, "./chapter/name.mdx#page-section")
+        url.should == [anchorId: "page-section", tocItemFilePath: "./chapter/name.mdx", dirName: "", fileNameWithoutExtension: ""]
+    }
 
     @Test
     void "parse without extension, reference back and anchor"() {
@@ -48,9 +53,9 @@ class DocUrlTest {
         url.should == [anchorId: "page-section", dirName: "dir-name", fileNameWithoutExtension: "name"]
 
         url = new DocUrl(markupPath, "name.md#page-section")
-        url.should == [anchorId: "page-section", dirName: "dir-name", fileNameWithoutExtension: "name"]
+        url.should == [anchorId: "page-section", tocItemFilePath: "name.md", dirName: "", fileNameWithoutExtension: ""]
 
         url = new DocUrl(markupPath, "name.md")
-        url.should == [fileNameWithoutExtension: "name", dirName: "dir-name"]
+        url.should == [tocItemFilePath: "name.md", fileNameWithoutExtension: "", dirName: ""]
     }
 }

@@ -33,4 +33,10 @@ class FilePathUtilsTest {
     void "should replace extension"() {
         assert FilePathUtils.replaceExtension("/path/to/file-name.md", "json") == "/path/to/file-name.json"
     }
+
+    @Test
+    void "should extract extension"() {
+        assert FilePathUtils.fileExtension("/path/to/file-name.md") == "md"
+        assert FilePathUtils.fileExtension("/path/to/file-name") == ""
+    }
 }

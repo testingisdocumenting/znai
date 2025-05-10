@@ -39,10 +39,7 @@ import org.testingisdocumenting.znai.parser.commonmark.HeadingTextAndProps;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
-import org.testingisdocumenting.znai.structure.AnchorIds;
-import org.testingisdocumenting.znai.structure.DocStructure;
-import org.testingisdocumenting.znai.structure.DocUrl;
-import org.testingisdocumenting.znai.structure.TocItem;
+import org.testingisdocumenting.znai.structure.*;
 import org.testingisdocumenting.znai.utils.StringUtils;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
@@ -337,7 +334,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
             auxiliaryFiles.add(auxiliaryFile);
         } else {
-            docStructure.validateUrl(path, "![]() image", new DocUrl(path, destination));
+            docStructure.validateUrl(path, "![]() image",
+                    new DocUrl(path, destination));
             append(DocElementType.IMAGE, "title", title,
                     "destination", destination,
                     "alt", alt,
@@ -545,6 +543,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     private boolean isLocalFile(DocUrl docUrl, String url) {
         if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("mailto:")) {
+            return false;
+        }
+
+        if (docUrl.isFilePathBased()) {
             return false;
         }
 

@@ -26,20 +26,20 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.time.TimeService;
 
 /**
- * simple components registry to avoid introduction of DI frameworks.
+ * simple components registry to avoid a dependency on DI frameworks.
  * One place where we don't control dependencies passing is {@link IncludePlugin}
  *
  * @see IncludePlugin
  */
 public interface ComponentsRegistry {
     /**
-     * documentation wide default parser, can be markdown or any other parser that is used to build a documentation.
+     * documentation wide default parser: can be markdown or any other parser that is used to build documentation.
      * @return instance of a default parser
      */
     MarkupParser defaultParser();
 
     /**
-     * markdown specific parser
+     * markdown-specific parser
      * @return Markdown parser
      */
     MarkdownParser markdownParser();

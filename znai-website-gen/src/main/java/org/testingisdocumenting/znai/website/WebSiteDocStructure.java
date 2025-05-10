@@ -110,6 +110,11 @@ class WebSiteDocStructure implements DocStructure {
             return docUrl.getUrl();
         }
 
+        if (docUrl.isFilePathBased()) {
+            TocItem tocItem = findTocItemByDocUrlTocItemPath(docUrl);
+            docUrl.setResolvedToDirNameAndFileName(tocItem.getDirName(), tocItem.getFileNameWithoutExtension());
+        }
+
         return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
     }
 
@@ -245,14 +250,25 @@ class WebSiteDocStructure implements DocStructure {
         }
     }
 
+    private TocItem findTocItemByDocUrlTocItemPath(DocUrl docUrl) {
+        Path tocItemPath = componentsRegistry.resourceResolver().fullPath(docUrl.getTocItemFilePath()).toAbsolutePath().normalize();
+        return parsingConfiguration.tocItemByPath(componentsRegistry, toc, tocItemPath);
+    }
+
     private TocItem findTocItemByLink(LinkToValidate link) {
         if (link.docUrl.isIndexUrl()) {
             return toc.getIndex();
         }
 
-        return link.docUrl.isAnchorOnly() ?
-                parsingConfiguration.tocItemByPath(componentsRegistry, toc, link.path):
-                toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileNameWithoutExtension());
+        if (link.docUrl.isAnchorOnly()) {
+            return parsingConfiguration.tocItemByPath(componentsRegistry, toc, link.path);
+        }
+
+        if (link.docUrl.isFilePathBased()) {
+            return findTocItemByDocUrlTocItemPath(link.docUrl);
+        }
+
+        return toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileNameWithoutExtension());
     }
 
     private String createInvalidLinkMessage(LinkToValidate link) {

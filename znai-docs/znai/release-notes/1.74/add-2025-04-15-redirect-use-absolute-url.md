@@ -1,1 +1,1 @@
-* Add: `:include-redirect:` converts passed `url` to full absolute URL to better support `docId` with `/` 
+* Add: `include-redirect` plugin converts passed `url` to full absolute URL to better support `docId` with `/` 
