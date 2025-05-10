@@ -17,12 +17,9 @@
 
 package org.testingisdocumenting.znai.parser
 
-import org.junit.BeforeClass
-import org.testingisdocumenting.znai.core.MarkupPathWithError
 import org.testingisdocumenting.znai.extensions.PropsUtils
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
-import org.testingisdocumenting.znai.structure.TableOfContents
 
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -37,13 +34,6 @@ class MarkdownParserTest {
 
     private List<Map> content
     private MarkupParserResult parseResult
-
-    @BeforeClass
-    static void setup() {
-        def resourceResolver = new TestResourceResolver(Paths.get("/doc/root"))
-        resourceResolver.setPathToResolvePrefix("")
-        componentsRegistry.resourceResolver = resourceResolver
-    }
 
     @Test
     void "link"() {
