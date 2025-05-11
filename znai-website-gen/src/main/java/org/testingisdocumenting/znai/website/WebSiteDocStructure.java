@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.website;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.core.DocMeta;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.*;
 import org.testingisdocumenting.znai.parser.MarkupParsingConfiguration;
 
@@ -112,10 +113,14 @@ class WebSiteDocStructure implements DocStructure {
 
         if (docUrl.isFilePathBased()) {
             TocItem tocItem = findTocItemByDocUrlTocItemPath(docUrl);
-            docUrl.setResolvedToDirNameAndFileName(tocItem.getDirName(), tocItem.getFileNameWithoutExtension());
+            if (tocItem == null) {
+                return docUrl.getTocItemFilePath();
+            } else {
+                return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
+            }
         }
 
-        return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
+        return createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash();
     }
 
     @Override
@@ -251,8 +256,13 @@ class WebSiteDocStructure implements DocStructure {
     }
 
     private TocItem findTocItemByDocUrlTocItemPath(DocUrl docUrl) {
-        Path tocItemPath = componentsRegistry.resourceResolver().fullPath(docUrl.getTocItemFilePath()).toAbsolutePath().normalize();
-        return parsingConfiguration.tocItemByPath(componentsRegistry, toc, tocItemPath);
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
+        if (resourcesResolver.canResolve(docUrl.getTocItemFilePath())) {
+            Path tocItemPath = resourcesResolver.fullPath(docUrl.getTocItemFilePath()).toAbsolutePath().normalize();
+            return parsingConfiguration.tocItemByPath(componentsRegistry, toc, tocItemPath);
+        } else {
+            return null;
+        }
     }
 
     private TocItem findTocItemByLink(LinkToValidate link) {
@@ -278,12 +288,16 @@ class WebSiteDocStructure implements DocStructure {
             return "can't find the anchor " + link.docUrl.getAnchorIdWithHash() + checkFileMessage;
         }
 
-        String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileNameWithoutExtension() + link.docUrl.getAnchorIdWithHash();
-        return "can't find a page associated with: " + url + checkFileMessage;
+        String url =
+                link.docUrl.isFilePathBased() ?
+                        link.docUrl.getTocItemFilePath() :
+                        link.docUrl.getDirName() + "/" + link.docUrl.getFileNameWithoutExtension() + link.docUrl.getAnchorIdWithHash();
+
+        return "can't find a TOC registered page associated with: " + url + checkFileMessage;
     }
 
     private String checkFileMessage(LinkToValidate link) {
-        return "\ncheck file: " + link.path + (
+        return "\nreferenced in file: " + link.path + (
                 link.additionalClue.isEmpty() ? "" : ", " + link.additionalClue);
     }
 
