@@ -114,8 +114,8 @@ class WebSiteDocStructureTest {
 
         code {
             docStructure.validateCollectedLinks()
-        } should throwException("can't find a page associated with: /#index-wrong-id\n" +
-                "check file: /home/user/docs/chapter/pageOne.md, section title: referring title\n")
+        } should throwException("can't find a TOC registered page associated with: /#index-wrong-id\n" +
+                "referenced in file: /home/user/docs/chapter/pageOne.md, section title: referring title\n")
     }
 
     @Test
@@ -125,8 +125,8 @@ class WebSiteDocStructureTest {
 
         code {
             docStructure.validateCollectedLinks()
-        } should throwException("can't find a page associated with: chapter/unknown-page\n" +
-                "check file: /home/user/docs/chapter/pageOne.md, section title: section title\n")
+        } should throwException("can't find a TOC registered page associated with: chapter/unknown-page\n" +
+                "referenced in file: /home/user/docs/chapter/pageOne.md, section title: section title\n")
     }
 
     @Test
@@ -137,10 +137,10 @@ class WebSiteDocStructureTest {
 
         code {
             docStructure.validateCollectedLinks()
-        } should throwException('can\'t find a page associated with: chapter/pageOne#wrongRefId\n' +
-                'check file: /home/user/docs/chapter/pageOne.md, section title: section title\n' +
+        } should throwException('can\'t find a TOC registered page associated with: chapter/pageOne#wrongRefId\n' +
+                'referenced in file: /home/user/docs/chapter/pageOne.md, section title: section title\n' +
                 '\n' +
                 'can\'t find the anchor #anotherWrongRefId\n' +
-                'check file: /home/user/docs/chapter/pageOne.md, section title: section title\n')
+                'referenced in file: /home/user/docs/chapter/pageOne.md, section title: section title\n')
     }
 }

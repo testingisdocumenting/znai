@@ -120,7 +120,7 @@ class WebSiteDocStructure implements DocStructure {
             }
         }
 
-        return createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash();
+        return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
     }
 
     @Override
