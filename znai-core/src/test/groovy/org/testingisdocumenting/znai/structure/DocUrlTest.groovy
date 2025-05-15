@@ -18,44 +18,28 @@ package org.testingisdocumenting.znai.structure
 
 import org.junit.Test
 
-import java.nio.file.Paths
-
 class DocUrlTest {
-    def markupPath = Paths.get("dir-name/file-name.md")
-
     @Test
     void "parse with extension, reference back and anchor"() {
-        def url = new DocUrl(markupPath, "../chapter/name.md#page-section")
+        def url = new DocUrl("../chapter/name.md#page-section")
         url.should == [anchorId: "page-section", tocItemFilePath: "../chapter/name.md", dirName: "", fileNameWithoutExtension: ""]
     }
 
     @Test
     void "parse with extension, reference current dir with dot and anchor"() {
-        def url = new DocUrl(markupPath, "./chapter/name.md#page-section")
+        def url = new DocUrl("./chapter/name.md#page-section")
         url.should == [anchorId: "page-section", tocItemFilePath: "./chapter/name.md", dirName: "", fileNameWithoutExtension: ""]
     }
 
     @Test
     void "parse with mdx extension"() {
-        def url = new DocUrl(markupPath, "./chapter/name.mdx#page-section")
+        def url = new DocUrl("./chapter/name.mdx#page-section")
         url.should == [anchorId: "page-section", tocItemFilePath: "./chapter/name.mdx", dirName: "", fileNameWithoutExtension: ""]
     }
 
     @Test
     void "parse without extension, reference back and anchor"() {
-        def url = new DocUrl(markupPath, "../chapter/name#page-section")
+        def url = new DocUrl("../chapter/name#page-section")
         url.should == [anchorId: "page-section", dirName: "chapter", fileNameWithoutExtension: "name"]
-    }
-
-    @Test
-    void "parse with current dir"() {
-        def url = new DocUrl(markupPath, "./name#page-section")
-        url.should == [anchorId: "page-section", dirName: "dir-name", fileNameWithoutExtension: "name"]
-
-        url = new DocUrl(markupPath, "name.md#page-section")
-        url.should == [anchorId: "page-section", tocItemFilePath: "name.md", dirName: "", fileNameWithoutExtension: ""]
-
-        url = new DocUrl(markupPath, "name.md")
-        url.should == [tocItemFilePath: "name.md", fileNameWithoutExtension: "", dirName: ""]
     }
 }
