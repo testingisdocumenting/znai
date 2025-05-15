@@ -29,7 +29,6 @@ import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
-import java.nio.file.Path;
 import java.util.Map;
 
 public class NoOpParserHandler implements ParserHandler {
@@ -138,7 +137,7 @@ public class NoOpParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onLinkStart(Path markupPath, String url) {
+    public void onLinkStart(String url) {
     }
 
     @Override

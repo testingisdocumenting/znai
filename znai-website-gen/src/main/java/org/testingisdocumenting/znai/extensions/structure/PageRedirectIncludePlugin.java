@@ -40,7 +40,7 @@ public class PageRedirectIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         String url = pluginParams.getFreeParam();
-        componentsRegistry.docStructure().validateUrl(markupPath, "<redirect>", new DocUrl(markupPath, url));
+        componentsRegistry.docStructure().validateUrl(markupPath, "<redirect>", new DocUrl(url));
 
         return PluginResult.docElement("Redirect", Collections.singletonMap("url", url));
     }

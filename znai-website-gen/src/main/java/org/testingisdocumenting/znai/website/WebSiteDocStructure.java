@@ -116,6 +116,7 @@ class WebSiteDocStructure implements DocStructure {
             if (tocItem == null) {
                 return docUrl.getTocItemFilePath();
             } else {
+                docUrl.setResolvedToDirNameAndFileName(tocItem.getDirName(), tocItem.getFileNameWithoutExtension());
                 return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
             }
         }
@@ -212,7 +213,7 @@ class WebSiteDocStructure implements DocStructure {
         TocItem tocItem = findTocItemByLink(link);
 
         if (tocItem == null) {
-            return Optional.of(createInvalidLinkMessage(link));
+            return Optional.of(createInvalidLinkMessageTocNotFound(link));
         }
 
         if (anchorId.isEmpty()) {
@@ -227,7 +228,7 @@ class WebSiteDocStructure implements DocStructure {
             return Optional.empty();
         }
 
-        return Optional.of(createInvalidLinkMessage(link));
+        return Optional.of(createInvalidAnchorMessage(tocItem, link));
     }
 
     private Optional<String> validateExternalLink(LinkToValidate linkToValidate) {
@@ -281,19 +282,19 @@ class WebSiteDocStructure implements DocStructure {
         return toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileNameWithoutExtension());
     }
 
-    private String createInvalidLinkMessage(LinkToValidate link) {
+    private String createInvalidLinkMessageTocNotFound(LinkToValidate link) {
         String checkFileMessage = checkFileMessage(link);
 
         if (link.docUrl.isAnchorOnly()) {
             return "can't find the anchor " + link.docUrl.getAnchorIdWithHash() + checkFileMessage;
         }
 
-        String url =
-                link.docUrl.isFilePathBased() ?
-                        link.docUrl.getTocItemFilePath() :
-                        link.docUrl.getDirName() + "/" + link.docUrl.getFileNameWithoutExtension() + link.docUrl.getAnchorIdWithHash();
+        return "can't find a TOC registered page associated with: " + link.url() + checkFileMessage;
+    }
 
-        return "can't find a TOC registered page associated with: " + url + checkFileMessage;
+    private String createInvalidAnchorMessage(TocItem foundTocItem, LinkToValidate link) {
+        String checkFileMessage = checkFileMessage(link);
+        return "can't find an anchor " + link.docUrl().getAnchorIdWithHash() + " in: " + foundTocItem.getFilePath() + checkFileMessage;
     }
 
     private String checkFileMessage(LinkToValidate link) {
@@ -334,5 +335,11 @@ class WebSiteDocStructure implements DocStructure {
         return docUrl.isIndexUrl() ? "" : docUrl.getDirName() + "/" + docUrl.getFileNameWithoutExtension();
     }
 
-    private record LinkToValidate(Path path, String additionalClue, DocUrl docUrl) { }
+    private record LinkToValidate(Path path, String additionalClue, DocUrl docUrl) {
+        public String url() {
+            return docUrl.isFilePathBased() ?
+                    docUrl.getTocItemFilePath() :
+                    docUrl.getDirName() + "/" + docUrl.getFileNameWithoutExtension() + docUrl.getAnchorIdWithHash();
+        }
+    }
 }

@@ -19,8 +19,6 @@ package org.testingisdocumenting.znai.structure;
 import org.testingisdocumenting.znai.utils.FilePathUtils;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
-import java.nio.file.Path;
-
 public class DocUrl {
     private static final String LINK_TO_SECTION_INSTRUCTION = """
             To refer to a section of a document page use either
@@ -59,14 +57,14 @@ public class DocUrl {
         this.anchorId = anchorId;
     }
 
-    public DocUrl(Path markupPath, String url) {
+    public DocUrl(String url) {
         this.url = url;
 
         boolean handled = handleExternal() ||
                 handleBasedOnFilePath(url) ||
                 handleIndex() ||
                 handleAnchorOnly() ||
-                handleLocal(markupPath);
+                handleLocal();
 
         if (!handled) {
             throw new IllegalStateException("couldn't parse url: " + url);
@@ -112,24 +110,20 @@ public class DocUrl {
         return isAnchorOnly;
     }
 
-    private boolean handleLocal(Path markupPath) {
+    private boolean handleLocal() {
         String[] parts = url.split("/");
-        if (parts.length == 1) {
-            return handleNoDirSpecified(markupPath, parts[0]);
-        }
-
         if (parts.length != 2 && parts.length != 3) {
-            throwUnexpectedPattern(url);
+            throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
         }
 
-        if (parts.length == 3 && !parts[0].equals("..") && !parts[0].equals(".")) {
-            throwUnexpectedPattern(url);
+        if (parts.length == 3 && !parts[0].equals("..")) {
+            throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
         }
 
         int dirIdx = parts.length == 3 ? 1 : 0;
         int nameIdx = parts.length == 3 ? 2 : 1;
 
-        dirName = replaceDirNameIfRequired(markupPath, parts[dirIdx]);
+        dirName = parts[dirIdx];
 
         int idxOfAnchorSep = parts[nameIdx].indexOf('#');
 
@@ -137,28 +131,6 @@ public class DocUrl {
         anchorId = idxOfAnchorSep == -1 ? "" : parts[nameIdx].substring(idxOfAnchorSep + 1);
 
         return true;
-    }
-
-    private void throwUnexpectedPattern(String url) {
-        throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
-    }
-
-    private boolean handleNoDirSpecified(Path markupPath, String part) {
-        int idxOfAnchorSep = part.indexOf('#');
-        dirName = replaceDirNameIfRequired(markupPath, "");
-        fileNameWithoutExtension = FilePathUtils.fileNameWithoutExtension(idxOfAnchorSep == -1 ? part : part.substring(0, idxOfAnchorSep));
-        anchorId = idxOfAnchorSep == -1 ? "" : part.substring(idxOfAnchorSep + 1);
-
-        return true;
-    }
-
-    private static String replaceDirNameIfRequired(Path markupPath, String currentDirName) {
-        if (currentDirName.equals(".") || currentDirName.isEmpty()) {
-            Path parentPath = markupPath.getParent();
-            return parentPath != null ? parentPath.getFileName().toString() : "";
-        } else {
-            return currentDirName;
-        }
     }
 
     public boolean isIndexUrl() {

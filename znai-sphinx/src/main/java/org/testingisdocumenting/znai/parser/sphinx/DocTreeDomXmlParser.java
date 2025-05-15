@@ -140,7 +140,7 @@ class DocTreeDomXmlParser {
     }
 
     private boolean parseReference(Node node) {
-        parserHandler.onLinkStart(filePath, XmlUtils.getAttributeText(node, "refuri"));
+        parserHandler.onLinkStart(XmlUtils.getAttributeText(node, "refuri"));
         parseChildren(node);
         parserHandler.onLinkEnd();
 

@@ -291,8 +291,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onLinkStart(Path markupPath, String url) {
-        DocUrl docUrl = new DocUrl(markupPath, url);
+    public void onLinkStart(String url) {
+        DocUrl docUrl = new DocUrl(url);
 
         boolean isFile = isLocalFile(docUrl, url);
         String convertedUrl = isFile ?
@@ -335,7 +335,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
             auxiliaryFiles.add(auxiliaryFile);
         } else {
             docStructure.validateUrl(path, "![]() image",
-                    new DocUrl(path, destination));
+                    new DocUrl(destination));
             append(DocElementType.IMAGE, "title", title,
                     "destination", destination,
                     "alt", alt,
@@ -418,7 +418,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onGlobalAnchorRefStart(String id) {
         String anchorUrl = componentsRegistry.docStructure().globalAnchorUrl(path, id);
-        onLinkStart(path, anchorUrl);
+        onLinkStart(anchorUrl);
     }
 
     @Override
@@ -598,7 +598,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
             @Override
             public void visit(Link link) {
-                parserHandler.onLinkStart(path, link.getDestination());
+                parserHandler.onLinkStart(link.getDestination());
                 visitChildren(link);
                 parserHandler.onLinkEnd();
             }
