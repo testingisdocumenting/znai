@@ -40,6 +40,8 @@ class TestComponentsRegistry implements ComponentsRegistry {
     private MarkupParser markdownParser = new TestMarkdownParser(this)
     private MarkupParser defaultParser = new TestMarkupParser()
 
+    private TestResourceResolver resourceResolver = new TestResourceResolver(Paths.get(""))
+
     private GlobalAssetsRegistry assetsRegistry = new GlobalAssetsRegistry()
     private TimeService timeService = new FakeTimeService()
 
@@ -75,7 +77,11 @@ class TestComponentsRegistry implements ComponentsRegistry {
 
     @Override
     ResourcesResolver resourceResolver() {
-        return new TestResourceResolver(Paths.get(""))
+        return resourceResolver
+    }
+
+    void setResourceResolver(TestResourceResolver resourceResolver) {
+        this.resourceResolver = resourceResolver
     }
 
     @Override

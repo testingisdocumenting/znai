@@ -66,7 +66,7 @@ public class GlobalDocReferences {
         DocStructure docStructure = componentsRegistry.docStructure();
 
         docReferences.pageUrlsStream().forEach(pageUrl ->
-                docStructure.validateUrl(globalReferencesPathNoExt, "", new DocUrl(globalReferencesPathNoExt, pageUrl)));
+                docStructure.validateUrl(globalReferencesPathNoExt, "", new DocUrl(pageUrl)));
     }
 
     public Path getGlobalReferencesPathNoExt() {

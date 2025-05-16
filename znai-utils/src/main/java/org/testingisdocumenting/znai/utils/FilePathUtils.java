@@ -36,4 +36,8 @@ public class FilePathUtils {
     public static String replaceExtension(String path, String newExt) {
         return FilenameUtils.removeExtension(path) + "." + newExt;
     }
+
+    public static String fileExtension(String path) {
+        return FilenameUtils.getExtension(path);
+    }
 }

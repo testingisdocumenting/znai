@@ -66,20 +66,20 @@ class WebSiteDocStructureTest {
         def indexPath = Paths.get('/home/user/docs/index.md')
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
 
-        docStructure.createUrl(path, new DocUrl(markupPath, "http://abc")).should == "http://abc"
-        docStructure.createUrl(path, new DocUrl(markupPath, "https://abc")).should == "https://abc"
-        docStructure.createUrl(path, new DocUrl(markupPath, "mailto:/link")).should == "mailto:/link"
-        docStructure.createUrl(path, new DocUrl(markupPath, "file:/link")).should == "file:/link"
-        docStructure.createUrl(path, new DocUrl(markupPath, "/")).should == "/product"
-        docStructure.createUrl(path, new DocUrl(markupPath, "#anchor")).should == "/product/chapter/pageOne#anchor"
-        docStructure.createUrl(path, new DocUrl(markupPath, "/#anchor")).should == "/product#anchor"
-        docStructure.createUrl(path, new DocUrl(markupPath, "test/page")).should == "/product/test/page"
-        docStructure.createUrl(path, new DocUrl(markupPath, "mailto/page")).should == "/product/mailto/page"
-        docStructure.createUrl(path, new DocUrl(markupPath, "test/page#anchor")).should == "/product/test/page#anchor"
-        docStructure.createUrl(path, new DocUrl(markupPath, "file-system/page")).should == "/product/file-system/page"
-        docStructure.createUrl(indexPath, new DocUrl(markupPath, "#ref")).should == "/product#ref"
-        docStructure.createUrl(indexPath, new DocUrl(markupPath, "file-system/page")).should == "/product/file-system/page"
-        docStructure.createUrl(wrongPath, new DocUrl(markupPath, "file-system/page")).should == "/product/file-system/page"
+        docStructure.createUrl(path, new DocUrl("http://abc")).should == "http://abc"
+        docStructure.createUrl(path, new DocUrl("https://abc")).should == "https://abc"
+        docStructure.createUrl(path, new DocUrl("mailto:/link")).should == "mailto:/link"
+        docStructure.createUrl(path, new DocUrl("file:/link")).should == "file:/link"
+        docStructure.createUrl(path, new DocUrl("/")).should == "/product"
+        docStructure.createUrl(path, new DocUrl("#anchor")).should == "/product/chapter/pageOne#anchor"
+        docStructure.createUrl(path, new DocUrl("/#anchor")).should == "/product#anchor"
+        docStructure.createUrl(path, new DocUrl("test/page")).should == "/product/test/page"
+        docStructure.createUrl(path, new DocUrl("mailto/page")).should == "/product/mailto/page"
+        docStructure.createUrl(path, new DocUrl("test/page#anchor")).should == "/product/test/page#anchor"
+        docStructure.createUrl(path, new DocUrl("file-system/page")).should == "/product/file-system/page"
+        docStructure.createUrl(indexPath, new DocUrl("#ref")).should == "/product#ref"
+        docStructure.createUrl(indexPath, new DocUrl("file-system/page")).should == "/product/file-system/page"
+        docStructure.createUrl(wrongPath, new DocUrl("file-system/page")).should == "/product/file-system/page"
     }
 
     @Test
@@ -89,10 +89,10 @@ class WebSiteDocStructureTest {
         docStructure.registerGlobalAnchor(pageOnePath, 'functionRefId')
         docStructure.registerLocalAnchors(pageOnePath, new AnchorIds('localId', []))
         docStructure.registerLocalAnchors(pageTwoPath, new AnchorIds('test-section', []))
-        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl(markupPath, 'chapter/pageOne#functionRefId'))
-        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl(markupPath, 'chapter/pageOne#localId'))
-        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl(markupPath, 'chapter/pageTwo#test-section'))
-        docStructure.validateUrl(pageTwoPath, 'section title', new DocUrl(markupPath, '#test-section'))
+        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageOne#functionRefId'))
+        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageOne#localId'))
+        docStructure.validateUrl(pageOnePath, 'section title', new DocUrl('chapter/pageTwo#test-section'))
+        docStructure.validateUrl(pageTwoPath, 'section title', new DocUrl('#test-section'))
         docStructure.validateCollectedLinks()
     }
 
@@ -101,7 +101,7 @@ class WebSiteDocStructureTest {
         def indexPath = Paths.get('/home/user/docs/index.md')
         def referringPagePath = Paths.get('/home/user/docs/chapter/pageOne.md')
         docStructure.registerLocalAnchors(indexPath, new AnchorIds('index-id', []))
-        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl(markupPath, '/#index-id'))
+        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl('/#index-id'))
         docStructure.validateCollectedLinks()
     }
 
@@ -110,37 +110,37 @@ class WebSiteDocStructureTest {
         def indexPath = Paths.get('/home/user/docs/index.md')
         def referringPagePath = Paths.get('/home/user/docs/chapter/pageOne.md')
         docStructure.registerLocalAnchors(indexPath, new AnchorIds('index-id', []))
-        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl(markupPath, '/#index-wrong-id'))
+        docStructure.validateUrl(referringPagePath, 'section title: referring title', new DocUrl('/#index-wrong-id'))
 
         code {
             docStructure.validateCollectedLinks()
-        } should throwException("can't find a page associated with: /#index-wrong-id\n" +
-                "check file: /home/user/docs/chapter/pageOne.md, section title: referring title\n")
+        } should throwException("can't find an anchor #index-wrong-id in: /index\n" +
+                "referenced in file: /home/user/docs/chapter/pageOne.md, section title: referring title\n")
     }
 
     @Test
     void "should reject link that has no associated toc item"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title: section title', new DocUrl(markupPath, 'chapter/unknown-page'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/unknown-page'))
 
         code {
             docStructure.validateCollectedLinks()
-        } should throwException("can't find a page associated with: chapter/unknown-page\n" +
-                "check file: /home/user/docs/chapter/pageOne.md, section title: section title\n")
+        } should throwException("can't find a TOC registered page associated with: chapter/unknown-page\n" +
+                "referenced in file: /home/user/docs/chapter/pageOne.md, section title: section title\n")
     }
 
     @Test
     void "should reject link that has no associated anchor"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
-        docStructure.validateUrl(path, 'section title: section title', new DocUrl(markupPath, 'chapter/pageOne#wrongRefId'))
-        docStructure.validateUrl(path, 'section title: section title', new DocUrl(markupPath, '#anotherWrongRefId'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('chapter/pageTwo#wrongRefId'))
+        docStructure.validateUrl(path, 'section title: section title', new DocUrl('#anotherWrongRefId'))
 
         code {
             docStructure.validateCollectedLinks()
-        } should throwException('can\'t find a page associated with: chapter/pageOne#wrongRefId\n' +
-                'check file: /home/user/docs/chapter/pageOne.md, section title: section title\n' +
+        } should throwException('can\'t find an anchor #wrongRefId in: chapter/pageTwo.md\n' +
+                'referenced in file: /home/user/docs/chapter/pageOne.md, section title: section title\n' +
                 '\n' +
-                'can\'t find the anchor #anotherWrongRefId\n' +
-                'check file: /home/user/docs/chapter/pageOne.md, section title: section title\n')
+                'can\'t find an anchor #anotherWrongRefId in: chapter/pageOne.md\n' +
+                'referenced in file: /home/user/docs/chapter/pageOne.md, section title: section title\n')
     }
 }

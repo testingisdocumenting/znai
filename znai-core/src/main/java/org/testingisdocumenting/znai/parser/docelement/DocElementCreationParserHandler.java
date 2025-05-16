@@ -39,10 +39,7 @@ import org.testingisdocumenting.znai.parser.commonmark.HeadingTextAndProps;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
-import org.testingisdocumenting.znai.structure.AnchorIds;
-import org.testingisdocumenting.znai.structure.DocStructure;
-import org.testingisdocumenting.znai.structure.DocUrl;
-import org.testingisdocumenting.znai.structure.TocItem;
+import org.testingisdocumenting.znai.structure.*;
 import org.testingisdocumenting.znai.utils.StringUtils;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
@@ -294,8 +291,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onLinkStart(Path markupPath, String url) {
-        DocUrl docUrl = new DocUrl(markupPath, url);
+    public void onLinkStart(String url) {
+        DocUrl docUrl = new DocUrl(url);
 
         boolean isFile = isLocalFile(docUrl, url);
         String convertedUrl = isFile ?
@@ -337,7 +334,8 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
             auxiliaryFiles.add(auxiliaryFile);
         } else {
-            docStructure.validateUrl(path, "![]() image", new DocUrl(path, destination));
+            docStructure.validateUrl(path, "![]() image",
+                    new DocUrl(destination));
             append(DocElementType.IMAGE, "title", title,
                     "destination", destination,
                     "alt", alt,
@@ -420,7 +418,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onGlobalAnchorRefStart(String id) {
         String anchorUrl = componentsRegistry.docStructure().globalAnchorUrl(path, id);
-        onLinkStart(path, anchorUrl);
+        onLinkStart(anchorUrl);
     }
 
     @Override
@@ -548,6 +546,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
             return false;
         }
 
+        if (docUrl.isFilePathBased()) {
+            return false;
+        }
+
         TocItem tocItem = componentsRegistry.docStructure().tableOfContents().findTocItem(docUrl.getDirName(), docUrl.getFileNameWithoutExtension());
         if (tocItem != null) {
             return false;
@@ -596,7 +598,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
             @Override
             public void visit(Link link) {
-                parserHandler.onLinkStart(path, link.getDestination());
+                parserHandler.onLinkStart(link.getDestination());
                 visitChildren(link);
                 parserHandler.onLinkEnd();
             }

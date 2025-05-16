@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.website;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.core.DocMeta;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.*;
 import org.testingisdocumenting.znai.parser.MarkupParsingConfiguration;
 
@@ -108,6 +109,16 @@ class WebSiteDocStructure implements DocStructure {
     public String createUrl(Path path, DocUrl docUrl) {
         if (docUrl.isExternalUrl()) {
             return docUrl.getUrl();
+        }
+
+        if (docUrl.isFilePathBased()) {
+            TocItem tocItem = findTocItemByDocUrlTocItemPath(docUrl);
+            if (tocItem == null) {
+                return docUrl.getTocItemFilePath();
+            } else {
+                docUrl.setResolvedToDirNameAndFileName(tocItem.getDirName(), tocItem.getFileNameWithoutExtension());
+                return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
+            }
         }
 
         return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
@@ -202,7 +213,7 @@ class WebSiteDocStructure implements DocStructure {
         TocItem tocItem = findTocItemByLink(link);
 
         if (tocItem == null) {
-            return Optional.of(createInvalidLinkMessage(link));
+            return Optional.of(createInvalidLinkMessageTocNotFound(link));
         }
 
         if (anchorId.isEmpty()) {
@@ -217,7 +228,7 @@ class WebSiteDocStructure implements DocStructure {
             return Optional.empty();
         }
 
-        return Optional.of(createInvalidLinkMessage(link));
+        return Optional.of(createInvalidAnchorMessage(tocItem, link));
     }
 
     private Optional<String> validateExternalLink(LinkToValidate linkToValidate) {
@@ -245,29 +256,49 @@ class WebSiteDocStructure implements DocStructure {
         }
     }
 
+    private TocItem findTocItemByDocUrlTocItemPath(DocUrl docUrl) {
+        ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
+        if (resourcesResolver.canResolve(docUrl.getTocItemFilePath())) {
+            Path tocItemPath = resourcesResolver.fullPath(docUrl.getTocItemFilePath()).toAbsolutePath().normalize();
+            return parsingConfiguration.tocItemByPath(componentsRegistry, toc, tocItemPath);
+        } else {
+            return null;
+        }
+    }
+
     private TocItem findTocItemByLink(LinkToValidate link) {
         if (link.docUrl.isIndexUrl()) {
             return toc.getIndex();
         }
 
-        return link.docUrl.isAnchorOnly() ?
-                parsingConfiguration.tocItemByPath(componentsRegistry, toc, link.path):
-                toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileNameWithoutExtension());
+        if (link.docUrl.isAnchorOnly()) {
+            return parsingConfiguration.tocItemByPath(componentsRegistry, toc, link.path);
+        }
+
+        if (link.docUrl.isFilePathBased()) {
+            return findTocItemByDocUrlTocItemPath(link.docUrl);
+        }
+
+        return toc.findTocItem(link.docUrl.getDirName(), link.docUrl.getFileNameWithoutExtension());
     }
 
-    private String createInvalidLinkMessage(LinkToValidate link) {
+    private String createInvalidLinkMessageTocNotFound(LinkToValidate link) {
         String checkFileMessage = checkFileMessage(link);
 
         if (link.docUrl.isAnchorOnly()) {
             return "can't find the anchor " + link.docUrl.getAnchorIdWithHash() + checkFileMessage;
         }
 
-        String url = link.docUrl.getDirName() + "/" + link.docUrl.getFileNameWithoutExtension() + link.docUrl.getAnchorIdWithHash();
-        return "can't find a page associated with: " + url + checkFileMessage;
+        return "can't find a TOC registered page associated with: " + link.url() + checkFileMessage;
+    }
+
+    private String createInvalidAnchorMessage(TocItem foundTocItem, LinkToValidate link) {
+        String checkFileMessage = checkFileMessage(link);
+        return "can't find an anchor " + link.docUrl().getAnchorIdWithHash() + " in: " + foundTocItem.getFilePath() + checkFileMessage;
     }
 
     private String checkFileMessage(LinkToValidate link) {
-        return "\ncheck file: " + link.path + (
+        return "\nreferenced in file: " + link.path + (
                 link.additionalClue.isEmpty() ? "" : ", " + link.additionalClue);
     }
 
@@ -304,5 +335,11 @@ class WebSiteDocStructure implements DocStructure {
         return docUrl.isIndexUrl() ? "" : docUrl.getDirName() + "/" + docUrl.getFileNameWithoutExtension();
     }
 
-    private record LinkToValidate(Path path, String additionalClue, DocUrl docUrl) { }
+    private record LinkToValidate(Path path, String additionalClue, DocUrl docUrl) {
+        public String url() {
+            return docUrl.isFilePathBased() ?
+                    docUrl.getTocItemFilePath() :
+                    docUrl.getDirName() + "/" + docUrl.getFileNameWithoutExtension() + docUrl.getAnchorIdWithHash();
+        }
+    }
 }

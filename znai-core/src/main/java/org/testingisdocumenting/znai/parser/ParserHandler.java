@@ -29,7 +29,6 @@ import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
-import java.nio.file.Path;
 import java.util.Map;
 
 /**
@@ -72,7 +71,7 @@ public interface ParserHandler {
     void onBlockQuoteEnd();
     void onSimpleText(String value);
     void onInlinedCode(String inlinedCode, DocReferences docReferences);
-    void onLinkStart(Path markupPath, String url);
+    void onLinkStart(String url);
     void onLinkEnd();
     void onImage(String title, String destination, String alt);
     void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet);

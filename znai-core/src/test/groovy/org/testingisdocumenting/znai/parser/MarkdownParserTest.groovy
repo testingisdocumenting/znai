@@ -81,7 +81,9 @@ class MarkdownParserTest {
     @Test
     void "link to an existing within documentation location"() {
         componentsRegistry.docStructure().addValidLink("valid-dir-name/page-name")
+        componentsRegistry.docStructure().addValidLink("../valid-dir-name/page-name.md")
         componentsRegistry.docStructure().addValidLink("valid-dir-name/page-name#page-section")
+        componentsRegistry.docStructure().addValidLink("../valid-dir-name/page-name.md#page-section")
 
         parse("[label](valid-dir-name/page-name)")
         content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name', isFile: false,
@@ -89,7 +91,7 @@ class MarkdownParserTest {
                                                          content:[[text: 'label' , type: 'SimpleText']]]]]]
 
         parse("[label](../valid-dir-name/page-name.md)")
-        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name', isFile: false,
+        content.should == [[type: 'Paragraph', content:[[url: 'resolved-url-for:../valid-dir-name/page-name.md', isFile: false,
                                                          type: 'Link',
                                                          content:[[text: 'label' , type: 'SimpleText']]]]]]
 
@@ -98,17 +100,18 @@ class MarkdownParserTest {
                                                          isFile: false, type: 'Link',
                                                          content:[[text: 'label' , type: 'SimpleText']]]]]]
 
-        parse("[label](../valid-dir-name/page-name#page-section)")
-        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-name#page-section',
+        parse("[label](../valid-dir-name/page-name.md#page-section)")
+        content.should == [[type: 'Paragraph', content:[[url: 'resolved-url-for:../valid-dir-name/page-name.md#page-section',
                                                          isFile: false, type: 'Link',
                                                          content:[[text: 'label' , type: 'SimpleText']]]]]]
     }
 
     @Test
     void "link to a markdown file within a current directory"() {
-        componentsRegistry.docStructure().addValidLink("valid-dir-name/page-three")
-        parse("[page 3](page-three.md)", Paths.get("valid-dir-name/page-two.md"))
-        content.should == [[type: 'Paragraph', content:[[url: '/test-doc/valid-dir-name/page-three', isFile: false,
+        componentsRegistry.docStructure().addValidLink("page-three.md")
+
+        parse("[page 3](page-three.md)", Paths.get("page-two/page-two.md"))
+        content.should == [[type: 'Paragraph', content:[[url: 'resolved-url-for:page-three.md', isFile: false,
                                                          type: 'Link',
                                                          content:[[text: 'page 3' , type: 'SimpleText']]]]]]
     }

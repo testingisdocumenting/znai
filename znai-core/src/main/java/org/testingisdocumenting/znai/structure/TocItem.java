@@ -90,7 +90,8 @@ public class TocItem {
             return getDirName() + "/" + path;
         }
 
-        return getDirName() + "/" + getFileNameWithoutExtension() + "." + getFileExtension();
+        return getDirName() + "/" + getFileNameWithoutExtension() +
+                (getFileExtension().isEmpty() ? "" : "." + getFileExtension());
     }
 
     public String getFileExtension() {

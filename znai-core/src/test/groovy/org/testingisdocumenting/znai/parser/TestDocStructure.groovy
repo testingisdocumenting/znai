@@ -41,7 +41,12 @@ class TestDocStructure implements DocStructure {
         }
 
         def urlBase = "${docUrl.dirName}/${docUrl.fileNameWithoutExtension}"
-        def url = urlBase + (docUrl.anchorId.isEmpty() ? "" : "#${docUrl.anchorId}")
+        def url = ""
+        if (docUrl.isFilePathBased()) {
+            url = docUrl.tocItemFilePath
+        } else {
+            url = urlBase + (docUrl.anchorId.isEmpty() ? "" : "#${docUrl.anchorId}")
+        }
 
         if (! validLinks.contains(url.toString())) {
             throw new IllegalArgumentException("no valid link found in ${path.fileName}, ${additionalClue}: " + url)
@@ -52,6 +57,10 @@ class TestDocStructure implements DocStructure {
     String createUrl(Path path, DocUrl docUrl) {
         if (docUrl.isExternalUrl()) {
             return docUrl.url
+        }
+
+        if (docUrl.isFilePathBased()) {
+            return "resolved-url-for:${docUrl.tocItemFilePath}${docUrl.getAnchorIdWithHash()}"
         }
 
         def base = "${docUrl.dirName}/${docUrl.fileNameWithoutExtension}"
