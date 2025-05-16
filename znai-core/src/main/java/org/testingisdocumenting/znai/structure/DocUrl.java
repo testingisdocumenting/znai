@@ -62,6 +62,7 @@ public class DocUrl {
 
         boolean handled = handleExternal() ||
                 handleBasedOnFilePath(url) ||
+                handleLocalFile(url) ||
                 handleIndex() ||
                 handleAnchorOnly() ||
                 handleLocal();
@@ -73,6 +74,10 @@ public class DocUrl {
 
     private boolean handleExternal() {
         return isExternalUrl = UrlUtils.isExternal(url);
+    }
+
+    private boolean handleLocalFile(String url) {
+        return !FilePathUtils.fileExtension(url).isEmpty();
     }
 
     private boolean handleBasedOnFilePath(String url) {
