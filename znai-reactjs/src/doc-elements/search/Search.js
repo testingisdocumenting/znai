@@ -30,35 +30,7 @@ class Search {
     }
 
     search(term) {
-        const lunr = window.lunr
-        const highestBoost = 2
-        const highBoost = 1.5
-        const defaultBoost = 0.5
-        const lowestBoost = 0.05
-        const matches = this.searchIdx.query(q => {
-            term.split(lunr.tokenizer.separator).forEach(function (term) {
-                if (term.length <= 2) {
-                    return
-                }
-
-                q.term(term, { fields: [ 'pageTitle' ], boost: highestBoost })
-                q.term(term, { fields: [ 'pageSection' ], boost: highestBoost })
-                q.term(term, { fields: [ 'textStandard' ], boost: defaultBoost })
-                q.term(term, { fields: [ 'textHigh' ], boost: highBoost })
-
-                // add wildcard search for long enough queries that don't have * in them
-                if (term.length >= 3 && term.indexOf('*') === -1) {
-                    q.term(term, { fields: ['pageTitle'], boost: highestBoost, wildcard: lunr.Query.wildcard.TRAILING })
-                    q.term(term, { fields: ['pageSection'], boost: highestBoost, wildcard: lunr.Query.wildcard.TRAILING })
-                    q.term(term, { fields: ['textStandard'], boost: lowestBoost, wildcard: lunr.Query.wildcard.TRAILING })
-                    q.term(term, { fields: ['textHigh'], boost: highBoost, wildcard: lunr.Query.wildcard.TRAILING })
-                }
-            })
-        })
-
-        console.log("term", term, "matches", matches)
-
-        return new QueryResult(matches)
+        return lunrQuery(window.lunr, this.searchIdx, term)
     }
 
     findSearchEntryById(id) {
@@ -94,6 +66,35 @@ class Search {
 
         return matching[0]
     }
+}
+
+export function lunrQuery(lunr, searchIdx, term) {
+    const highestBoost = 20.0
+    const highBoost = 5
+    const defaultBoost = 1
+    const lowestBoost = 1
+    const matches = searchIdx.query(q => {
+        term.split(lunr.tokenizer.separator).forEach(function (term) {
+            if (term.length <= 2) {
+                return
+            }
+
+            q.term(term, { fields: [ 'pageTitle' ], boost: highestBoost })
+            q.term(term, { fields: [ 'pageSection' ], boost: highestBoost })
+            q.term(term, { fields: [ 'textStandard' ]})
+            // q.term(term, { fields: [ 'textHigh' ], boost: highBoost })
+
+            // add wildcard search for long enough queries that don't have * in them
+            // if (term.length >= 3 && term.indexOf('*') === -1) {
+            //     q.term(term, { fields: ['pageTitle'], boost: highestBoost, wildcard: lunr.Query.wildcard.TRAILING })
+            //     q.term(term, { fields: ['pageSection'], boost: highestBoost, wildcard: lunr.Query.wildcard.TRAILING })
+            //     q.term(term, { fields: ['textStandard'], boost: lowestBoost, wildcard: lunr.Query.wildcard.TRAILING })
+            //     // q.term(term, { fields: ['textHigh'], boost: highBoost, wildcard: lunr.Query.wildcard.TRAILING })
+            // }
+        })
+    })
+
+    return new QueryResult(matches)
 }
 
 function mapById(searchData) {
