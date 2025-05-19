@@ -35,7 +35,7 @@ import {documentationTracking} from './doc-elements/tracking/DocumentationTracki
 import {pageTypesRegistry} from './doc-elements/page/PageTypesRegistry'
 import {mergeDocMeta} from './structure/docMeta'
 
-import lunr from 'lunr'
+import { createLocalSearchIndex, populateLocalSearchIndexWithData } from "./doc-elements/search/flexSearch.js";
 
 window.React = React
 window.ReactDOM = ReactDOM
@@ -48,8 +48,9 @@ window.themeRegistry = themeRegistry
 window.pageTypesRegistry = pageTypesRegistry
 window.documentationNavigation = documentationNavigation
 window.documentationTracking = documentationTracking
-window.lunr = lunr
 window.mergeDocMeta = mergeDocMeta
+window.createLocalSearchIndex = createLocalSearchIndex
+window.populateLocalSearchIndexWithData = populateLocalSearchIndexWithData
 
 if (process.env.NODE_ENV !== "production") {
     import('./App').then((module) => {

@@ -173,7 +173,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     private String replaceCommonSeparatorsWithSpace(String text) {
-        return text.replaceAll("[.,();:\\-+=\\\\/\"'!?\\[\\]{}]", " ");
+        return text.replaceAll("[.,();:\\-+=\\\\/\"'!?\\[\\]{}~]", " ");
     }
 
     private SearchText createSearchText(SearchScore score, List<String> parts) {

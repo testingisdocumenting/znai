@@ -39,24 +39,25 @@ class SearchPreview extends Component {
 
     highlight() {
         const {snippets} = this.props
-        console.log("highlight snippets", snippets)
 
         const mark = new Mark(this.dom)
-        mark.mark(snippets, {
-            acrossElements: false,
-            separateWordSearch: true,
-            caseSensitive: false,
-            ignoreJoiners: false,
-            diacritics: false,
-            ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", "\"", "'"],
-            accuracy: "partially",
-            done: () => {
-                const marked = document.querySelector(".znai-search-result-preview mark");
-                if (marked) {
-                    marked.scrollIntoView();
-                }
-            }
-        })
+        mark.unmark({done: () => {
+                mark.mark(snippets, {
+                    acrossElements: false,
+                    separateWordSearch: true,
+                    caseSensitive: false,
+                    ignoreJoiners: false,
+                    diacritics: false,
+                    ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", "\"", "'", "~"],
+                    accuracy: "partially",
+                    done: () => {
+                        const marked = document.querySelector(".znai-search-result-preview mark");
+                        if (marked) {
+                            marked.scrollIntoView();
+                        }
+                    }
+                })
+            }})
     }
 }
 

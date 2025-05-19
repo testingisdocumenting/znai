@@ -1,0 +1,1 @@
+* Add: Migrate from [lunrjs](https://github.com/olivernn/lunr.js) to [flexsearchjs](https://github.com/nextapps-de/flexsearch) for local search
