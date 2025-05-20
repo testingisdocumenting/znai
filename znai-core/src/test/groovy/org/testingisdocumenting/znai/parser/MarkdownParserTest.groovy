@@ -349,6 +349,12 @@ world""")
     }
 
     @Test
+    void "tribble dash as em dash"() {
+        parse("hello --- world")
+        content.should == [[type: 'Paragraph', content:[[text: 'hello — world', type: 'SimpleText']]]]
+    }
+
+    @Test
     void "include plugin error should provide context of the plugin"() {
         code {
             parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2', throw: 'message to throw'}")
