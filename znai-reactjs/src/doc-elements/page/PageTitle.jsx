@@ -20,12 +20,14 @@ import React from 'react'
 import { Support } from "./Support"
 import { Icon } from '../icons/Icon'
 
+import { isPresentationButtonVisible } from "../../structure/docMeta.js";
+
 import "./PageTitle.css"
 
 const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta}) => {
     const displayTitle = !!tocItem.pageTitle
     const title = displayTitle ? [<span key="title" className="page-title">{tocItem.pageTitle}</span>,
-        onPresentationOpen ?
+      (onPresentationOpen && isPresentationButtonVisible()) ?
             <Icon key="presentation-mode"
                   id="maximize"
                   className="presentation-button"
