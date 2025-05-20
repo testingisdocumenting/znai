@@ -18,3 +18,7 @@
     display: flex;
     justify-content: center;
 }
+
+.znai-mermaid svg text.messageText {
+    stroke: none !important;
+}

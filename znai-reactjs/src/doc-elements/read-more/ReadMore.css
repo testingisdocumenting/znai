@@ -22,7 +22,8 @@
 }
 
 .znai-read-more-content {
-    padding-left: 4px;
+    padding-left: 26px;
+    padding-top: 8px;
 }
 
 .znai-read-more-title-block {
@@ -38,6 +39,5 @@
 
 .znai-read-more-title {
     margin-left: 8px;
-    font-weight: 500;
+    font-weight: 700;
 }
-
