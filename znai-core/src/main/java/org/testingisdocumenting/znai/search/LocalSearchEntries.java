@@ -49,6 +49,6 @@ public class LocalSearchEntries {
 
     public String buildIndexScript() {
         return "window.znaiSearchData = " + JsonUtils.serialize(toListOfLists()) + "\n" +
-                ResourceUtils.textContent("lunrjs/indexCreation.js");
+                ResourceUtils.textContent("flexsearchjs/indexCreation.js");
     }
 }

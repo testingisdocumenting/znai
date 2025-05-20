@@ -16,6 +16,7 @@
  */
 
 import QueryResult from './QueryResult'
+import { searchWithHighlight, truncateQueryByMinLength } from "./flexSearch.js";
 
 class Search {
     constructor(allPages) {
@@ -30,34 +31,7 @@ class Search {
     }
 
     search(term) {
-        const lunr = window.lunr
-        const highestBoost = 2
-        const highBoost = 1.5
-        const defaultBoost = 0.5
-        const lowestBoost = 0.05
-        const matches = this.searchIdx.query(q => {
-            term.split(lunr.tokenizer.separator).forEach(function (term) {
-                if (term.length <= 2) {
-                    return
-                }
-
-                q.term(term, { fields: [ 'pageTitle' ], boost: highestBoost })
-                q.term(term, { fields: [ 'pageSection' ], boost: highestBoost })
-                q.term(term, { fields: [ 'textStandard' ], boost: defaultBoost })
-                q.term(term, { fields: [ 'textHigh' ], boost: highBoost })
-
-                // add wildcard search for long enough queries that don't have * in them
-                if (term.length >= 3 && term.indexOf('*') === -1) {
-                    q.term(term, { fields: ['pageTitle'], boost: highestBoost, wildcard: lunr.Query.wildcard.TRAILING })
-                    q.term(term, { fields: ['pageSection'], boost: highestBoost, wildcard: lunr.Query.wildcard.TRAILING })
-                    q.term(term, { fields: ['textStandard'], boost: lowestBoost, wildcard: lunr.Query.wildcard.TRAILING })
-                    q.term(term, { fields: ['textHigh'], boost: highBoost, wildcard: lunr.Query.wildcard.TRAILING })
-                }
-            })
-        })
-
-        console.log("term", term, "matches", matches)
-
+        const matches = searchWithHighlight(this.searchIdx, truncateQueryByMinLength(term, 3))
         return new QueryResult(matches)
     }
 
@@ -67,7 +41,7 @@ class Search {
 
     previewDetails(id, queryResult) {
         const section = this._findSectionById(id)
-        const snippets = queryResult.getSnippetsToHighlight(id, this.findSearchEntryById(id))
+        const snippets = queryResult.getSnippetsToHighlight(id)
 
         return {section, snippets}
     }
@@ -88,7 +62,7 @@ class Search {
             sections.forEach((s) => matching.push(s))
         })
 
-        if (! matching) {
+        if (!matching) {
             console.error("expected section associated with", indexId)
         }
 

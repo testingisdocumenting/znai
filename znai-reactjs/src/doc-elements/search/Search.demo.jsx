@@ -19,6 +19,8 @@ import {getSearchPromise} from "./searchPromise"
 import SearchPopup from "./SearchPopup"
 import {elementsLibrary} from '../DefaultElementsLibrary'
 
+import { setDocMeta } from "../../structure/docMeta.js";
+
 import './testData'
 
 const buttonStyle = {
@@ -30,6 +32,15 @@ const buttonStyle = {
 
 class SearchDemo extends React.Component {
     state = {isOpen: true}
+
+    componentDidMount() {
+        setDocMeta({
+            id: "preview",
+            title: "Your Product",
+            type: "Guide",
+            previewEnabled: true,
+        });
+    }
 
     render() {
         const { isOpen } = this.state
