@@ -85,8 +85,12 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<p>extends markdown with plugins system to supercharge visuals and maintainability Three categories of plugins are available for usage and creation Include Plugins Inlined Code Fenced Block Znai</p>
+</article>
+
+<article>
 <header><h1>Include Plugins</h1></header>
-<p>extends markdown with plugins system to supercharge visuals and maintainability Three categories of plugins are available for usage and creation Include Plugins Inlined Code Fenced Block To use include plugin write following on a new line Znai include &lt;pluginId&gt; text param key1 value1 key2 value2 include json example json title JSON example highlightValue root person id collapsedPaths root details include java java HelloWorld java entry sampleMethod bodyOnly true commentsType inline validate process p2 important comment notifyAll p1 very important return bestSample</p>
+<p>To use include plugin write following on a new line include &lt;pluginId&gt; text param key1 value1 key2 value2 include json example json title JSON example highlightValue root person id collapsedPaths root details include java java HelloWorld java entry sampleMethod bodyOnly true commentsType inline validate process p2 important comment notifyAll p1 very important return bestSample</p>
 </article>
 
 <article>
@@ -441,6 +445,10 @@
 </article>
 
 <article>
+<a href="/znai/release-notes/2025/">2024 Releases</a>
+</article>
+
+<article>
 <a href="/znai/release-notes/2024/">2024 Releases</a>
 </article>
 
@@ -470,6 +478,7 @@ document.getElementById('znai').innerHTML = '';
 /*<!--*/
 window.ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
+    "hidePresentationTrigger" : false,
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
       "title" : "View Markdown"
@@ -696,7 +705,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Tabs"
       } ]
     } ],
-    "lastModifiedTime" : 1746580475615,
+    "lastModifiedTime" : 1747705624250,
     "tocItem" : {
       "chapterTitle" : "Plugins",
       "pageTitle" : "Plugin Types",

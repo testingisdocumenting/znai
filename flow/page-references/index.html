@@ -91,7 +91,7 @@
 
 <article>
 <header><h1>Links</h1></header>
-<p>To create an link use To refer page within your documentation use Note you can get by hovering over a section title and pressing link icon Your browser URL display the updated link Links to Subsection Linking to subsections is the same as linking to a top level section Here is an example Use Subsection Shortcut if a subsection is within the same page Index Page Clicking this index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel To refer back to the top level page use external Link Title http external reference internal internal link dir name file name md#optional page section id internal link file name md#optional page section id internal link dir name file name#optional page section id page section id Here is an example flow page references md#links links to subsection Here is an example flow page references#links links to subsection Subsection Shortcut #links index index page index page #link to subsection</p>
+<p>To create an link use To refer page within your documentation use Note you can get by hovering over a section title and pressing link icon Your browser URL display the updated link Links to Subsection Linking to subsections is the same as linking to a top level section Here is an example Use Subsection Shortcut if a subsection is within the same page Index Page Clicking this index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel To refer back to the top level page use external Link Title http external reference internal internal link dir name file name md#optional page section id internal link file name md#optional page section id internal link dir name file name#optional page section id page section id Here is an example flow page references#links links to subsection Subsection Shortcut #links index index page index page #link to subsection</p>
 </article>
 
 <article>
@@ -451,6 +451,10 @@
 </article>
 
 <article>
+<a href="/znai/release-notes/2025/">2024 Releases</a>
+</article>
+
+<article>
 <a href="/znai/release-notes/2024/">2024 Releases</a>
 </article>
 
@@ -480,6 +484,7 @@ document.getElementById('znai').innerHTML = '';
 /*<!--*/
 window.ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
+    "hidePresentationTrigger" : false,
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
       "title" : "View Markdown"
@@ -608,7 +613,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "markdown",
-        "snippet" : "[Here is an example](../flow/page-references.md#links-links-to-subsection)\n[Here is an example](flow/page-references#links-links-to-subsection)",
+        "snippet" : "[Here is an example](flow/page-references#links-links-to-subsection)",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
@@ -776,7 +781,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1746580475612,
+    "lastModifiedTime" : 1747705624248,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Page References",

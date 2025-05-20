@@ -85,8 +85,12 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<p>Add next to file to change look and feel of the resulting documentation website style css toc</p>
+</article>
+
+<article>
 <header><h1>CSS Variables</h1></header>
-<p>Add next to file to change look and feel of the resulting documentation website There are dozens of css variables you can target directly first before considering more cascading options with class names Use your browser inspector tool to see which ones are used For example to change font sizes use Note consider only targeting variables and classes that starts with prefix Those are considered to be public API style css toc root znai regular text size 16px znai smaller text size 14px znai code text size 13px znai code font family Menlo Monaco Consolas Courier New monospace znai</p>
+<p>There are dozens of css variables you can target directly first before considering more cascading options with class names Use your browser inspector tool to see which ones are used For example to change font sizes use Note consider only targeting variables and classes that starts with prefix Those are considered to be public API root znai regular text size 16px znai smaller text size 14px znai code text size 13px znai code font family Menlo Monaco Consolas Courier New monospace znai</p>
 </article>
 
 <article>
@@ -436,6 +440,10 @@
 </article>
 
 <article>
+<a href="/znai/release-notes/2025/">2024 Releases</a>
+</article>
+
+<article>
 <a href="/znai/release-notes/2024/">2024 Releases</a>
 </article>
 
@@ -465,6 +473,7 @@ document.getElementById('znai').innerHTML = '';
 /*<!--*/
 window.ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
+    "hidePresentationTrigger" : false,
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
       "title" : "View Markdown"
@@ -562,7 +571,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1746580475609,
+    "lastModifiedTime" : 1747705624245,
     "tocItem" : {
       "chapterTitle" : "Configuration",
       "pageTitle" : "Styling",

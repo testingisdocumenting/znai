@@ -92,7 +92,7 @@
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 75&lt; version> &lt; plugin></text>
+      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 76&lt; version> &lt; plugin></text>
     </text>
   </entry>
   <entry>
@@ -108,7 +108,7 @@
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 75&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
+      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 76&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
     </text>
   </entry>
   <entry>
@@ -116,7 +116,7 @@
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 75&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
+      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 76&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
     </text>
   </entry>
   <entry>
@@ -156,7 +156,7 @@
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge read more spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe asciinema layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling top header deployment additional files hub introduction setup build artifacts watch example references domain api znai development local build release notes 2024 2023 2022 2021 introduction rationale rationale md</text>
+      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge read more spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe asciinema layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling top header deployment additional files hub introduction setup build artifacts watch example references domain api znai development local build release notes 2025 2024 2023 2022 2021 introduction rationale rationale md</text>
     </text>
   </entry>
   <entry>
@@ -180,7 +180,7 @@
     <fullTitle>Znai: Structure, Meta [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Each documentation must have the file in its root This file contains documentation display name type and optional information meta json JSON View On title Znai type User Guide category Documentation description Build functional maintainable beautiful User Guides with markdown and Znai plugins Instant pages navigation Local search Multiple integrations to work with Python Java C OpenAPI etc Transform getting started sections into slideshow for your workshops Manage multiple documentations with self deployed znai hub viewOn link https github com testingisdocumenting znai blob master znai docs znai title View Markdown support link https github com testingisdocumenting znai discussions title GitHub</text>
+      <text>Each documentation must have the file in its root This file contains documentation display name type and optional information meta json JSON View On title Znai type User Guide category Documentation description Build functional maintainable beautiful User Guides with markdown and Znai plugins Instant pages navigation Local search Multiple integrations to work with Python Java C OpenAPI etc Transform getting started sections into slideshow for your workshops Manage multiple documentations with self deployed znai hub hidePresentationTrigger false viewOn link https github com testingisdocumenting znai blob master znai docs znai title View Markdown support link https github com testingisdocumenting znai discussions title GitHub</text>
     </text>
   </entry>
   <entry>
@@ -236,7 +236,7 @@
     <fullTitle>Znai: Page References, Links [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To create an link use To refer page within your documentation use Note you can get by hovering over a section title and pressing link icon Your browser URL display the updated link Links to Subsection Linking to subsections is the same as linking to a top level section Here is an example Use Subsection Shortcut if a subsection is within the same page Index Page Clicking this index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel To refer back to the top level page use external Link Title http external reference internal internal link dir name file name md#optional page section id internal link file name md#optional page section id internal link dir name file name#optional page section id page section id Here is an example flow page references md#links links to subsection Here is an example flow page references#links links to subsection Subsection Shortcut #links index index page index page #link to subsection</text>
+      <text>To create an link use To refer page within your documentation use Note you can get by hovering over a section title and pressing link icon Your browser URL display the updated link Links to Subsection Linking to subsections is the same as linking to a top level section Here is an example Use Subsection Shortcut if a subsection is within the same page Index Page Clicking this index page link will have the same effect as clicking the documentation title at the top of the Navigation Panel To refer back to the top level page use external Link Title http external reference internal internal link dir name file name md#optional page section id internal link file name md#optional page section id internal link dir name file name#optional page section id page section id Here is an example flow page references#links links to subsection Subsection Shortcut #links index index page index page #link to subsection</text>
     </text>
   </entry>
   <entry>
@@ -264,11 +264,19 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/flow/page-toc</url>
+    <fullTitle>Znai: Page Toc,  [Flow]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use to include page top level sections as links include page toc include page toc</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/flow/page-toc#section-one</url>
     <fullTitle>Znai: Page Toc, Section One [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to include page top level sections as links some text include page toc include page toc</text>
+      <text>some text</text>
     </text>
   </entry>
   <entry>
@@ -480,8 +488,8 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/snippets/external-code-snippets#long-section-name-long-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-name</url>
-    <fullTitle>Znai: External Code Snippets, Long Section Name Long Section NameLong Section NameLong Section NameLong Section NameLong Section NameLong Section NameLong Section Name [Snippets]</fullTitle>
+    <url>/znai/snippets/external-code-snippets#embedding-content</url>
+    <fullTitle>Znai: External Code Snippets, Embedding Content [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>To reduce documentation maintenance burden avoid copy and paste of code snippets Embed content by referencing existing files using the plugin instead This syntax will appear throughout the documentation and represents a family of custom Markdown extensions The file will be looked up using following rules directory with a markup file root directory of a documentation all lookup paths listed in a file include file include file file name js include class JsClass constructor usefulAction export default JsClass lookup paths</text>
@@ -1056,11 +1064,35 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/open-API#auto-section</url>
+    <fullTitle>Znai: Open API, Auto Section [Snippets]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use the property to automatically generate a page section with a title taken from an operation summary Note The section below is automatically generated by autoSection include open api petstore openapi3 json operationId addPet autoSection true include open api</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/open-API#add-a-new-pet-to-the-store</url>
     <fullTitle>Znai: Open API, Add a new pet to the store [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use the property to automatically generate a page section with a title taken from an operation summary Note The section below is automatically generated by Request Responses 200 405 autoSection include open api petstore openapi3 json operationId addPet autoSection true include open api</text>
+      <text>Request Responses 200 405</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/open-API#tags</url>
+    <fullTitle>Znai: Open API, Tags [Snippets]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Specify to automatically generate multiple entries from a service definition file Note The sections below are automatically generated by tags include open api open api uber yaml tags Estimates autoSection true include open api</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/open-API#price-estimates</url>
+    <fullTitle>Znai: Open API, Price Estimates [Snippets]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Responses 200 default</text>
     </text>
   </entry>
   <entry>
@@ -1068,7 +1100,7 @@
     <fullTitle>Znai: Open API, Time Estimates [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Specify to automatically generate multiple entries from a service definition file Note The sections below are automatically generated by Responses 200 default Responses 200 default tags include open api open api uber yaml tags Estimates autoSection true include open api</text>
+      <text>Responses 200 default</text>
     </text>
   </entry>
   <entry>
@@ -1216,11 +1248,19 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/jupyter-notebook#seamless-markdown-integration</url>
+    <fullTitle>Znai: Jupyter Notebook, Seamless Markdown Integration [Snippets]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Markdown from your notebook will be seamlessly integrated into your current page First level will become part of Table Of Contents and part of a search unit Note below text is auto generated including the Panda section # headers include jupyter notebook with markdown story ipynb</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/jupyter-notebook#pandas</url>
     <fullTitle>Znai: Jupyter Notebook, Pandas [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Markdown from your notebook will be seamlessly integrated into your current page First level will become part of Table Of Contents and part of a search unit Note below text is auto generated including the Panda section Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet # headers include jupyter notebook with markdown story ipynb display</text>
+      <text>Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet display</text>
     </text>
   </entry>
   <entry>
@@ -2072,8 +2112,8 @@
     </text>
   </entry>
   <entry>
-    <url>/znai/visuals/PlantUml#in-place</url>
-    <fullTitle>Znai: PlantUml, In Place [Visuals]</fullTitle>
+    <url>/znai/visuals/PlantUml</url>
+    <fullTitle>Znai: PlantUml,  [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>PlantUml is a text based way of drawing many kinds of diagrams</text>
@@ -2504,11 +2544,19 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/layout/jupyter-notebook-two-sides#story-first</url>
+    <fullTitle>Znai: Jupyter Notebook Two Sides, Story First [Layout]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use if you use a notebook with Markdown cells to tell a story In this mode code will be moved to the right side and a reader can focus on the story itself storyFirst include jupyter notebook ipynb storyFirst true</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/layout/jupyter-notebook-two-sides#pandas</url>
     <fullTitle>Znai: Jupyter Notebook Two Sides, Pandas [Layout]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use if you use a notebook with Markdown cells to tell a story In this mode code will be moved to the right side and a reader can focus on the story itself Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet storyFirst include jupyter notebook ipynb storyFirst true display</text>
+      <text>Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet display</text>
     </text>
   </entry>
   <entry>
@@ -2592,11 +2640,35 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/python/auto-reference#class-definition</url>
+    <fullTitle>Znai: Auto Reference, Class Definition [Python]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>To define a class use include plugin Note Once you define class method arguments and parameter descriptions with the same type will automatically link to the place of definition python class include python class fin money Money Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead def __init__ self amount int currency str generic constructor that accepts a currency Parameters amount amount of money currency currency to associate with the created Money self _amount amount self _currency currency @property def amount self > int amount in provided currency return self _amount @amount setter def amount self amount int self amount amount @property def currency self > str money currency return self _currency @classmethod def dollars cls amount int > Money creates money instance with `USD` as the currency Parameters amount dollar amount Returns new money instance with `USD` as currency return cls amount USD def add self another Money add money from another money instance Parameters another money to add self amount another amount Money</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/python/auto-reference#finmoneymoney</url>
     <fullTitle>Znai: Auto Reference, fin.money.Money [Python]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To define a class use include plugin Note Once you define class method arguments and parameter descriptions with the same type will automatically link to the place of definition Properties Members Details dollars __init__ add python class include python class fin money Money Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead def __init__ self amount int currency str generic constructor that accepts a currency Parameters amount amount of money currency currency to associate with the created Money self _amount amount self _currency currency @property def amount self > int amount in provided currency return self _amount @amount setter def amount self amount int self amount amount @property def currency self > str money currency return self _currency @classmethod def dollars cls amount int > Money creates money instance with `USD` as the currency Parameters amount dollar amount Returns new money instance with `USD` as currency return cls amount USD def add self another Money add money from another money instance Parameters another money to add self amount another amount Money Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str readonly money currency Money dollars Money __init__ Money add Money dollars creates money instance with `USD` as the currency returns fin money Money new money instance with as currency USD amount int dollar amount Money __init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money add add money from another money instance another fin money Money money to add</text>
+      <text>Properties Members Details dollars __init__ add Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str readonly money currency Money dollars Money __init__ Money add Money dollars creates money instance with `USD` as the currency returns fin money Money new money instance with as currency USD amount int dollar amount Money __init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money add add money from another money instance another fin money Money money to add</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/python/auto-reference#inheritance</url>
+    <fullTitle>Znai: Auto Reference, Inheritance [Python]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Example of inheritance Note Base classes that are defined somewhere in the documentation will turn into links from fin money import Money class Person Person the root of all def __init__ self name self _name name self _desire @property def name self > str Person name you d better use it when talking to them return self _name @property def desire self > str Person desire can change over time return self _desire @desire setter def desire self new_desire str self _desire new_desire def talk self person talks print f self name talks class Worker Person Works and improves the world def __init__ self name str salary Money Person __init__ self name self _salary salary def work self work to the best ability pass @property def salary self > Money Annual non yet taxed salary return self _salary from department import Worker as Wo from fin money import Money class WorkerCTO Wo CTO worker with all the qualities and attributes required for a successful business def __init__ self name str salary Money goal str Create a new instance of CTO with provided name salary and the goal Parameters name CTO name salary CTO salary goal top priority goal to achieve Wo __init__ self name name salary salary self _goal goal def work_hard self level int work as hard as possible to observe Parameters level effort level from 0 to 100 pass @property def goal self > str CTO s top priority goal to achieve return self _goal @goal setter def goal self new_goal str self _goal new_goal include python class executive_department WorkerCTO include python class department Worker</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/python/auto-reference#executive_departmentworkercto</url>
+    <fullTitle>Znai: Auto Reference, executive_department.WorkerCTO [Python]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Base classes Properties WorkerCTO Members Worker Members Person Members WorkerCTO Details __init__ work_hard CTO worker with all the qualities and attributes required for a successful business Worker Person goal str CTO s top priority goal to achieve salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them WorkerCTO __init__ WorkerCTO work_hard Worker work Person talk WorkerCTO __init__ Create a new instance of CTO with provided name salary and the goal name str CTO name salary fin money Money CTO salary goal str top priority goal to achieve WorkerCTO work_hard work as hard as possible to observe level int effort level from 0 to 100</text>
     </text>
   </entry>
   <entry>
@@ -2604,7 +2676,7 @@
     <fullTitle>Znai: Auto Reference, department.Worker [Python]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Example of inheritance Note Base classes that are defined somewhere in the documentation will turn into links Base classes Properties WorkerCTO Members Worker Members Person Members WorkerCTO Details __init__ work_hard Base classes Properties Worker Members Person Members Worker Details __init__ work from fin money import Money class Person Person the root of all def __init__ self name self _name name self _desire @property def name self > str Person name you d better use it when talking to them return self _name @property def desire self > str Person desire can change over time return self _desire @desire setter def desire self new_desire str self _desire new_desire def talk self person talks print f self name talks class Worker Person Works and improves the world def __init__ self name str salary Money Person __init__ self name self _salary salary def work self work to the best ability pass @property def salary self > Money Annual non yet taxed salary return self _salary from department import Worker as Wo from fin money import Money class WorkerCTO Wo CTO worker with all the qualities and attributes required for a successful business def __init__ self name str salary Money goal str Create a new instance of CTO with provided name salary and the goal Parameters name CTO name salary CTO salary goal top priority goal to achieve Wo __init__ self name name salary salary self _goal goal def work_hard self level int work as hard as possible to observe Parameters level effort level from 0 to 100 pass @property def goal self > str CTO s top priority goal to achieve return self _goal @goal setter def goal self new_goal str self _goal new_goal include python class executive_department WorkerCTO include python class department Worker CTO worker with all the qualities and attributes required for a successful business Worker Person goal str CTO s top priority goal to achieve salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them WorkerCTO __init__ WorkerCTO work_hard Worker work Person talk WorkerCTO __init__ Create a new instance of CTO with provided name salary and the goal name str CTO name salary fin money Money CTO salary goal str top priority goal to achieve WorkerCTO work_hard work as hard as possible to observe level int effort level from 0 to 100 Works and improves the world Person salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them Worker __init__ Worker work Person talk Worker __init__ Worker work work to the best ability</text>
+      <text>Base classes Properties Worker Members Person Members Worker Details __init__ work Works and improves the world Person salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them Worker __init__ Worker work Person talk Worker __init__ Worker work work to the best ability</text>
     </text>
   </entry>
   <entry>
@@ -2720,11 +2792,27 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/CPP/auto-reference#compound</url>
+    <fullTitle>Znai: Auto Reference, Compound [CPP]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use to render a definition of a class struct include doxygen compound include doxygen compound utils second AnotherClass</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/CPP/auto-reference#utilssecondanotherclass</url>
     <fullTitle>Znai: Auto Reference, utils::second::AnotherClass [CPP]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to render a definition of a class struct Public Functions Static Public Functions Public Attributes Static Public Attributes Protected Functions Definitions sing bark smile number_of_sounds counter help include doxygen compound include doxygen compound utils second AnotherClass Domain specific context setting Describes business setting and requirements sing out loud tone int tone at which to sing volume int volume at which to sing bark out loud myClass const MyClass &amp; to test reference tone int tone at which to sing volume int volume at which to sing global smile volume int smile volume current number of sounds made ask for help out loud example tone int tone at which to sing volume int volume at which to sing utils second AnotherClass</text>
+      <text>Public Functions Static Public Functions Public Attributes Static Public Attributes Protected Functions Definitions sing bark smile number_of_sounds counter help Domain specific context setting Describes business setting and requirements sing out loud tone int tone at which to sing volume int volume at which to sing bark out loud myClass const MyClass &amp; to test reference tone int tone at which to sing volume int volume at which to sing global smile volume int smile volume current number of sounds made ask for help out loud example tone int tone at which to sing volume int volume at which to sing utils second AnotherClass</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/CPP/auto-reference#cross-reference</url>
+    <fullTitle>Znai: Auto Reference, Cross-Reference [CPP]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Znai uses doxygen cross reference to link definitions together Class above references in its parameters After you include definition of that class reference above becomes a link MyClass MyClass include doxygen compound utils second MyClass</text>
     </text>
   </entry>
   <entry>
@@ -2732,7 +2820,7 @@
     <fullTitle>Znai: Auto Reference, utils::second::MyClass [CPP]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai uses doxygen cross reference to link definitions together Class above references in its parameters After you include definition of that class reference above becomes a link Public Functions Definitions bark MyClass MyClass include doxygen compound utils second MyClass Domain specific context setting Describes business setting and requirements Do not reveal your password Use alternatives option one option two more context bark utils second MyClass</text>
+      <text>Public Functions Definitions bark Domain specific context setting Describes business setting and requirements Do not reveal your password Use alternatives option one option two more context bark utils second MyClass</text>
     </text>
   </entry>
   <entry>
@@ -2952,11 +3040,19 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/plugins/plugin-types</url>
+    <fullTitle>Znai: Plugin Types,  [Plugins]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>extends markdown with plugins system to supercharge visuals and maintainability Three categories of plugins are available for usage and creation Include Plugins Inlined Code Fenced Block Znai</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/plugins/plugin-types#include-plugins</url>
     <fullTitle>Znai: Plugin Types, Include Plugins [Plugins]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>extends markdown with plugins system to supercharge visuals and maintainability Three categories of plugins are available for usage and creation Include Plugins Inlined Code Fenced Block To use include plugin write following on a new line Znai include &lt;pluginId> text param key1 value1 key2 value2 include json example json title JSON example highlightValue root person id collapsedPaths root details include java java HelloWorld java entry sampleMethod bodyOnly true commentsType inline validate process p2 important comment notifyAll p1 very important return bestSample</text>
+      <text>To use include plugin write following on a new line include &lt;pluginId> text param key1 value1 key2 value2 include json example json title JSON example highlightValue root person id collapsedPaths root details include java java HelloWorld java entry sampleMethod bodyOnly true commentsType inline validate process p2 important comment notifyAll p1 very important return bestSample</text>
     </text>
   </entry>
   <entry>
@@ -3008,11 +3104,19 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/configuration/styling</url>
+    <fullTitle>Znai: Styling,  [Configuration]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Add next to file to change look and feel of the resulting documentation website style css toc</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/configuration/styling#css-variables</url>
     <fullTitle>Znai: Styling, CSS Variables [Configuration]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Add next to file to change look and feel of the resulting documentation website There are dozens of css variables you can target directly first before considering more cascading options with class names Use your browser inspector tool to see which ones are used For example to change font sizes use Note consider only targeting variables and classes that starts with prefix Those are considered to be public API style css toc root znai regular text size 16px znai smaller text size 14px znai code text size 13px znai code font family Menlo Monaco Consolas Courier New monospace znai</text>
+      <text>There are dozens of css variables you can target directly first before considering more cascading options with class names Use your browser inspector tool to see which ones are used For example to change font sizes use Note consider only targeting variables and classes that starts with prefix Those are considered to be public API root znai regular text size 16px znai smaller text size 14px znai code text size 13px znai code font family Menlo Monaco Consolas Courier New monospace znai</text>
     </text>
   </entry>
   <entry>
@@ -3080,11 +3184,19 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/example-references/domain</url>
+    <fullTitle>Znai: Domain,  [Example References]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>This page is a dummy page to demo code reference capabilities from Java Enums and parameter types</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/example-references/domain#trader</url>
     <fullTitle>Znai: Domain, Trader [Example References]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>This page is a dummy page to demo code reference capabilities from Java Enums and parameter types Trader reference placeholder</text>
+      <text>Trader reference placeholder</text>
     </text>
   </entry>
   <entry>
@@ -3096,11 +3208,19 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/example-references/api</url>
+    <fullTitle>Znai: Api,  [Example References]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>This page is a dummy page to demo code reference capabilities</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/example-references/api#flight-api</url>
     <fullTitle>Znai: Api, Flight API [Example References]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>This page is a dummy page to demo code reference capabilities Flight API summary placeholder</text>
+      <text>Flight API summary placeholder</text>
     </text>
   </entry>
   <entry>
@@ -3157,6 +3277,30 @@
     <text>
       <score>STANDARD</score>
       <text>cd znai dist target unzip dist znai zip export PATH $ pwd dist $PATH znai version</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2025#176</url>
+    <fullTitle>Znai: 2024 Releases, 1.76 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Fix Local Search correctly previews content from an implicit section Add Mermaid css for message text remove bold font Add Read more content extra spacing and bolder title Add Migrate from lunrjs to flexsearchjs for local search Add new option to to hide presentation trigger icons hidePresentationTrigger meta json Add Convert into em dash Add Referencing another markdown via link is no longer restricted by a single level Add A better error message when referencing a non existing anchor</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2025#175</url>
+    <fullTitle>Znai: 2024 Releases, 1.75 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Fix changing files with the same name in preview mode is no longer confuse files Fix default markdown image applies by default fit true Fix Remove slf4j logger warning Fix Exit the preview server when the initial documentation build fails Add TOC now supports to select a markdown file in a custom location to make it easier to move existing content to Znai path neste file md Add Aciinema new parameters Add Aciinema reacts to parameter changes during preview mode Add Aciinema bottom top margins to match code snippets cols rows idleTimeLimit speed Add Distinct for HTML content for crawlers id Add plugin readmore Add now supports to change the content based on regexp from CSV file include markdown preprocessorPath</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2025#174</url>
+    <fullTitle>Znai: 2024 Releases, 1.74 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Fix Clicking doc title when is a multipart e g is now properly navigates to the landing page docId part one part two Add generate TOC as simplified server side rendering for every page for crawlers Add default markdown image applies by default fit true Add Support for markdown urls dir file name md Add plugin converts passed to full absolute URL to better support with include redirect url docId Add preview server path to change preview server srcRoot change preview path srcRoot &lt;new src root>&amp;previewPageLink &lt;link to page> Add Initial Asciinema support Add Preview server prints less details of what is being sent to the browser Add OCaml Code Comments support</text>
     </text>
   </entry>
   <entry>

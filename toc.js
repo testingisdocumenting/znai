@@ -421,10 +421,6 @@ toc = [ {
       "id" : "embedding-content",
       "customAnchorId" : "embedding-content"
     }, {
-      "title" : "Long Section Name Long Section NameLong Section NameLong Section NameLong Section NameLong Section NameLong Section NameLong Section Name",
-      "id" : "long-section-name-long-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-name",
-      "customAnchorId" : "long-section-name-long-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-namelong-section-name"
-    }, {
       "title" : "Syntax highlighting",
       "id" : "syntax-highlighting",
       "customAnchorId" : "syntax-highlighting"
@@ -2484,6 +2480,29 @@ toc = [ {
   "chapterTitle" : "Release Notes",
   "dirName" : "release-notes",
   "items" : [ {
+    "chapterTitle" : "Release Notes",
+    "pageTitle" : "2024 Releases",
+    "pageMeta" : {
+      "title" : [ "2024 Releases" ]
+    },
+    "dirName" : "release-notes",
+    "fileName" : "2025",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "1.76",
+      "id" : "176",
+      "customAnchorId" : "176"
+    }, {
+      "title" : "1.75",
+      "id" : "175",
+      "customAnchorId" : "175"
+    }, {
+      "title" : "1.74",
+      "id" : "174",
+      "customAnchorId" : "174"
+    } ]
+  }, {
     "chapterTitle" : "Release Notes",
     "pageTitle" : "2024 Releases",
     "pageMeta" : {

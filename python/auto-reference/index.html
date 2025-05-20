@@ -90,13 +90,28 @@
 </article>
 
 <article>
+<header><h1>Class Definition</h1></header>
+<p>To define a class use include plugin Note Once you define class method arguments and parameter descriptions with the same type will automatically link to the place of definition python class include python class fin money Money Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead def __init__ self amount int currency str generic constructor that accepts a currency Parameters amount amount of money currency currency to associate with the created Money self _amount amount self _currency currency @property def amount self &gt; int amount in provided currency return self _amount @amount setter def amount self amount int self amount amount @property def currency self &gt; str money currency return self _currency @classmethod def dollars cls amount int &gt; Money creates money instance with `USD` as the currency Parameters amount dollar amount Returns new money instance with `USD` as currency return cls amount USD def add self another Money add money from another money instance Parameters another money to add self amount another amount Money</p>
+</article>
+
+<article>
 <header><h1>fin.money.Money</h1></header>
-<p>To define a class use include plugin Note Once you define class method arguments and parameter descriptions with the same type will automatically link to the place of definition Properties Members Details dollars __init__ add python class include python class fin money Money Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead def __init__ self amount int currency str generic constructor that accepts a currency Parameters amount amount of money currency currency to associate with the created Money self _amount amount self _currency currency @property def amount self &gt; int amount in provided currency return self _amount @amount setter def amount self amount int self amount amount @property def currency self &gt; str money currency return self _currency @classmethod def dollars cls amount int &gt; Money creates money instance with `USD` as the currency Parameters amount dollar amount Returns new money instance with `USD` as currency return cls amount USD def add self another Money add money from another money instance Parameters another money to add self amount another amount Money Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str readonly money currency Money dollars Money __init__ Money add Money dollars creates money instance with `USD` as the currency returns fin money Money new money instance with as currency USD amount int dollar amount Money __init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money add add money from another money instance another fin money Money money to add</p>
+<p>Properties Members Details dollars __init__ add Money representation Encapsulates money type combining amount and currency Deals with precision errors Warning avoid using `int` in place of money and use this type instead amount int amount in provided currency currency str readonly money currency Money dollars Money __init__ Money add Money dollars creates money instance with `USD` as the currency returns fin money Money new money instance with as currency USD amount int dollar amount Money __init__ generic constructor that accepts a currency amount int amount of money currency str currency to associate with the created Money Money add add money from another money instance another fin money Money money to add</p>
+</article>
+
+<article>
+<header><h1>Inheritance</h1></header>
+<p>Example of inheritance Note Base classes that are defined somewhere in the documentation will turn into links from fin money import Money class Person Person the root of all def __init__ self name self _name name self _desire @property def name self &gt; str Person name you d better use it when talking to them return self _name @property def desire self &gt; str Person desire can change over time return self _desire @desire setter def desire self new_desire str self _desire new_desire def talk self person talks print f self name talks class Worker Person Works and improves the world def __init__ self name str salary Money Person __init__ self name self _salary salary def work self work to the best ability pass @property def salary self &gt; Money Annual non yet taxed salary return self _salary from department import Worker as Wo from fin money import Money class WorkerCTO Wo CTO worker with all the qualities and attributes required for a successful business def __init__ self name str salary Money goal str Create a new instance of CTO with provided name salary and the goal Parameters name CTO name salary CTO salary goal top priority goal to achieve Wo __init__ self name name salary salary self _goal goal def work_hard self level int work as hard as possible to observe Parameters level effort level from 0 to 100 pass @property def goal self &gt; str CTO s top priority goal to achieve return self _goal @goal setter def goal self new_goal str self _goal new_goal include python class executive_department WorkerCTO include python class department Worker</p>
+</article>
+
+<article>
+<header><h1>executive_department.WorkerCTO</h1></header>
+<p>Base classes Properties WorkerCTO Members Worker Members Person Members WorkerCTO Details __init__ work_hard CTO worker with all the qualities and attributes required for a successful business Worker Person goal str CTO s top priority goal to achieve salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them WorkerCTO __init__ WorkerCTO work_hard Worker work Person talk WorkerCTO __init__ Create a new instance of CTO with provided name salary and the goal name str CTO name salary fin money Money CTO salary goal str top priority goal to achieve WorkerCTO work_hard work as hard as possible to observe level int effort level from 0 to 100</p>
 </article>
 
 <article>
 <header><h1>department.Worker</h1></header>
-<p>Example of inheritance Note Base classes that are defined somewhere in the documentation will turn into links Base classes Properties WorkerCTO Members Worker Members Person Members WorkerCTO Details __init__ work_hard Base classes Properties Worker Members Person Members Worker Details __init__ work from fin money import Money class Person Person the root of all def __init__ self name self _name name self _desire @property def name self &gt; str Person name you d better use it when talking to them return self _name @property def desire self &gt; str Person desire can change over time return self _desire @desire setter def desire self new_desire str self _desire new_desire def talk self person talks print f self name talks class Worker Person Works and improves the world def __init__ self name str salary Money Person __init__ self name self _salary salary def work self work to the best ability pass @property def salary self &gt; Money Annual non yet taxed salary return self _salary from department import Worker as Wo from fin money import Money class WorkerCTO Wo CTO worker with all the qualities and attributes required for a successful business def __init__ self name str salary Money goal str Create a new instance of CTO with provided name salary and the goal Parameters name CTO name salary CTO salary goal top priority goal to achieve Wo __init__ self name name salary salary self _goal goal def work_hard self level int work as hard as possible to observe Parameters level effort level from 0 to 100 pass @property def goal self &gt; str CTO s top priority goal to achieve return self _goal @goal setter def goal self new_goal str self _goal new_goal include python class executive_department WorkerCTO include python class department Worker CTO worker with all the qualities and attributes required for a successful business Worker Person goal str CTO s top priority goal to achieve salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them WorkerCTO __init__ WorkerCTO work_hard Worker work Person talk WorkerCTO __init__ Create a new instance of CTO with provided name salary and the goal name str CTO name salary fin money Money CTO salary goal str top priority goal to achieve WorkerCTO work_hard work as hard as possible to observe level int effort level from 0 to 100 Works and improves the world Person salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them Worker __init__ Worker work Person talk Worker __init__ Worker work work to the best ability</p>
+<p>Base classes Properties Worker Members Person Members Worker Details __init__ work Works and improves the world Person salary fin money Money readonly Annual non yet taxed salary desire str Person desire can change over time name str readonly Person name you d better use it when talking to them Worker __init__ Worker work Person talk Worker __init__ Worker work work to the best ability</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -441,6 +456,10 @@
 </article>
 
 <article>
+<a href="/znai/release-notes/2025/">2024 Releases</a>
+</article>
+
+<article>
 <a href="/znai/release-notes/2024/">2024 Releases</a>
 </article>
 
@@ -470,6 +489,7 @@ document.getElementById('znai').innerHTML = '';
 /*<!--*/
 window.ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
+    "hidePresentationTrigger" : false,
     "viewOn" : {
       "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
       "title" : "View Markdown"
@@ -1727,7 +1747,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1746580475615,
+    "lastModifiedTime" : 1747705624250,
     "tocItem" : {
       "chapterTitle" : "Python",
       "pageTitle" : "Auto Reference",

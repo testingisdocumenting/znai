@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Smart Bullet Points</title>
+<title>Znai: 2024 Releases</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,33 +85,18 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Types</h1></header>
-<p>Bullet points are an essential tool in the presentation of information Frequent use of bullet points however may make documentation and presentation boring You can change the way bullet points are rendered by using the plugin meta include meta bulletListType BulletsListType * Testing * Design * Code Review * Documentation</p>
+<header><h1>1.76</h1></header>
+<p>Fix Local Search correctly previews content from an implicit section Add Mermaid css for message text remove bold font Add Read more content extra spacing and bolder title Add Migrate from lunrjs to flexsearchjs for local search Add new option to to hide presentation trigger icons hidePresentationTrigger meta json Add Convert into em dash Add Referencing another markdown via link is no longer restricted by a single level Add A better error message when referencing a non existing anchor</p>
 </article>
 
 <article>
-<header><h1>Left Right Timeline</h1></header>
-<p>Use to outline your flow This also splits related things by moving odd points to the left and even to the right Testing Design Code Review Documentation LeftRightTimeLine include meta bulletListType LeftRightTimeLine * Testing * Design * Code Review * Documentation</p>
+<header><h1>1.75</h1></header>
+<p>Fix changing files with the same name in preview mode is no longer confuse files Fix default markdown image applies by default fit true Fix Remove slf4j logger warning Fix Exit the preview server when the initial documentation build fails Add TOC now supports to select a markdown file in a custom location to make it easier to move existing content to Znai path neste file md Add Aciinema new parameters Add Aciinema reacts to parameter changes during preview mode Add Aciinema bottom top margins to match code snippets cols rows idleTimeLimit speed Add Distinct for HTML content for crawlers id Add plugin readmore Add now supports to change the content based on regexp from CSV file include markdown preprocessorPath</p>
 </article>
 
 <article>
-<header><h1>Venn</h1></header>
-<p>Use to display overlapping relationships Velocity Volume Variety Venn</p>
-</article>
-
-<article>
-<header><h1>Steps</h1></header>
-<p>Use to outline a procedure Install IDEA Learn Java Learn Machine Learning Use to use distinct colors for each step Install IDEA Learn Java Learn Machine Learning Use to align steps to the left Install IDEA Learn Java Learn Machine Learning Steps differentColors true include meta bulletListType Steps differentColors true align left include meta bulletListType Steps differentColors true align left</p>
-</article>
-
-<article>
-<header><h1>Presentation Only</h1></header>
-<p>If you want to change bullets type only for presentation use include meta presentationBulletListType BulletsListType</p>
-</article>
-
-<article>
-<header><h1>Horizontal Stripes</h1></header>
-<p>The following bullet points will be rendered as horizontal striped but only in presentation mode Lessons Learned Future Plans Backup Strategy include meta presentationBulletListType HorizontalStripes</p>
+<header><h1>1.74</h1></header>
+<p>Fix Clicking doc title when is a multipart e g is now properly navigates to the landing page docId part one part two Add generate TOC as simplified server side rendering for every page for crawlers Add default markdown image applies by default fit true Add Support for markdown urls dir file name md Add plugin converts passed to full absolute URL to better support with include redirect url docId Add preview server path to change preview server srcRoot change preview path srcRoot &lt;new src root&gt;&amp;previewPageLink &lt;link to page&gt; Add Initial Asciinema support Add Preview server prints less details of what is being sent to the browser Add OCaml Code Comments support</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -508,69 +493,24 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "types",
+      "id" : "176",
       "additionalIds" : [ ],
-      "title" : "Types",
+      "title" : "1.76",
       "type" : "Section",
       "content" : [ {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "Bullet points are an essential tool in the presentation of information.",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Frequent use of bullet points however may make documentation and presentation boring.",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Local Search correctly previews content from an implicit section",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "You can change the way bullet points are rendered by using the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "meta",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " plugin.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-meta: {bulletListType: \"BulletsListType\"}\n\n* Testing\n* Design\n* Code Review\n* Documentation",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      } ]
-    }, {
-      "id" : "left-right-timeline",
-      "additionalIds" : [ ],
-      "title" : "Left Right Timeline",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "LeftRightTimeLine",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to outline your flow. This also splits related things by moving odd points to the left and even",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "to the right.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-meta: {bulletListType: \"LeftRightTimeLine\"}\n\n* Testing\n* Design\n* Code Review\n* Documentation",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "bulletListType" : "LeftRightTimeLine",
-        "type" : "Meta"
       }, {
         "bulletMarker" : "*",
         "tight" : true,
@@ -580,7 +520,18 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Testing",
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/mermaid-diagrams",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Mermaid",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " css for message text - remove bold font",
               "type" : "SimpleText"
             } ]
           } ]
@@ -589,50 +540,22 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Design",
+              "text" : "Add: ",
               "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Code Review",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Documentation",
+            }, {
+              "url" : "/znai/visuals/read-more",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Read more",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " content extra spacing and bolder title",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
-      } ]
-    }, {
-      "id" : "venn",
-      "additionalIds" : [ ],
-      "title" : "Venn",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "Venn",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to display overlapping relationships.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "bulletListType" : "Venn",
-        "type" : "Meta"
       }, {
         "bulletMarker" : "*",
         "tight" : true,
@@ -642,50 +565,33 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Velocity",
+              "text" : "Add: Migrate from ",
               "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Volume",
+            }, {
+              "url" : "https://github.com/olivernn/lunr.js",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "lunrjs",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " to ",
               "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Variety",
+            }, {
+              "url" : "https://github.com/nextapps-de/flexsearch",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "flexsearchjs",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " for local search",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
-      } ]
-    }, {
-      "id" : "steps",
-      "additionalIds" : [ ],
-      "title" : "Steps",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "Steps",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to outline a procedure.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "bulletListType" : "Steps",
-        "type" : "Meta"
       }, {
         "bulletMarker" : "*",
         "tight" : true,
@@ -695,50 +601,23 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Install IDEA",
+              "text" : "Add: new option ",
               "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Learn Java",
+            }, {
+              "code" : "hidePresentationTrigger",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to ",
               "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Learn Machine Learning",
+            }, {
+              "code" : "meta.json",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to hide presentation trigger icons.",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "differentColors: true",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to use distinct colors for each step",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-meta: {bulletListType: \"Steps\", differentColors: true}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "bulletListType" : "Steps",
-        "differentColors" : true,
-        "type" : "Meta"
       }, {
         "bulletMarker" : "*",
         "tight" : true,
@@ -748,51 +627,17 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Install IDEA",
+              "text" : "Add: Convert ",
               "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Learn Java",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Learn Machine Learning",
+            }, {
+              "code" : "---",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " into em-dash.",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "align: \"left\"",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to align steps to the left",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-meta: {bulletListType: \"Steps\", differentColors: true, align: \"left\"}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "bulletListType" : "Steps",
-        "differentColors" : true,
-        "align" : "left",
-        "type" : "Meta"
       }, {
         "bulletMarker" : "*",
         "tight" : true,
@@ -802,7 +647,13 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Install IDEA",
+              "text" : "Add: Referencing another markdown via link is no longer restricted by a single ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "..",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " level",
               "type" : "SimpleText"
             } ]
           } ]
@@ -811,57 +662,31 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Learn Java",
-              "type" : "SimpleText"
-            } ]
-          } ]
-        }, {
-          "type" : "ListItem",
-          "content" : [ {
-            "type" : "Paragraph",
-            "content" : [ {
-              "text" : "Learn Machine Learning",
+              "text" : "Add: A better error message when referencing a non-existing anchor",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
       } ]
     }, {
-      "id" : "presentation-only",
+      "id" : "175",
       "additionalIds" : [ ],
-      "title" : "Presentation Only",
+      "title" : "1.75",
       "type" : "Section",
       "content" : [ {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "If you want to change bullets type only for presentation use:",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: changing files with the same name in preview mode is no longer confuse files",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-meta: {presentationBulletListType: \"BulletsListType\"}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      } ]
-    }, {
-      "id" : "horizontal-stripes",
-      "additionalIds" : [ ],
-      "title" : "Horizontal Stripes",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "The following bullet points will be rendered as horizontal striped, but only in presentation mode.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-meta: {presentationBulletListType: \"HorizontalStripes\"}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "presentationBulletListType" : "HorizontalStripes",
-        "type" : "Meta"
       }, {
         "bulletMarker" : "*",
         "tight" : true,
@@ -871,7 +696,127 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Lessons Learned",
+              "text" : "Fix: default markdown image applies ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "fit:true",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " by default",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Remove slf4j logger warning",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Exit the preview server when the initial documentation build fails",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: TOC now supports ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "{path: \"neste/file.md\"}",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to select a markdown file in a custom location to make it easier to move existing content to Znai",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/asciinema",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Aciinema",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " new parameters: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "cols",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "rows",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "idleTimeLimit",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "speed",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/asciinema",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Aciinema",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " reacts to parameter changes during preview mode",
               "type" : "SimpleText"
             } ]
           } ]
@@ -880,55 +825,329 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Future Plans",
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/asciinema",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Aciinema",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " bottom/top margins to match code snippets",
               "type" : "SimpleText"
             } ]
           } ]
-        }, {
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
           "type" : "ListItem",
           "content" : [ {
             "type" : "Paragraph",
             "content" : [ {
-              "text" : "Backup Strategy",
+              "text" : "Add: Distinct ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "id",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for HTML content for crawlers",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/read-more",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "code" : "readmore",
+                "type" : "InlinedCode"
+              } ]
+            }, {
+              "text" : " plugin",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "include-markdown",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " now supports ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "preprocessorPath",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to change the content based on regexp from CSV file",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "174",
+      "additionalIds" : [ ],
+      "title" : "1.74",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Clicking doc title when ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "docId",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " is a multipart (e.g. ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "part-one/part-two",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ") is now properly navigates to the landing page.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: generate TOC as simplified server side rendering for every page for crawlers.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: default markdown image applies ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "fit:true",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " by default",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Support ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "./dir/file-name.md",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for markdown urls",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "include-redirect",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " plugin converts passed ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "url",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to full absolute URL to better support ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "docId",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " with ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "/",
+              "type" : "InlinedCode"
+            }, {
+              "text" : "",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: preview server path to change preview server ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "srcRoot",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ": ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "/change-preview-path?srcRoot=<new-src-root>&previewPageLink=<link-to-page>",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Initial ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/asciinema",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Asciinema",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Preview server prints less details of what is being sent to the browser",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: OCaml ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/code-comments",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Code Comments",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " support",
               "type" : "SimpleText"
             } ]
           } ]
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1747705624279,
+    "lastModifiedTime" : 1747705624262,
     "tocItem" : {
-      "chapterTitle" : "Visuals",
-      "pageTitle" : "Smart Bullet Points",
-      "pageMeta" : { },
-      "dirName" : "visuals",
-      "fileName" : "smart-bullet-points",
+      "chapterTitle" : "Release Notes",
+      "pageTitle" : "2024 Releases",
+      "pageMeta" : {
+        "title" : [ "2024 Releases" ]
+      },
+      "dirName" : "release-notes",
+      "fileName" : "2025",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Types",
-        "id" : "types",
-        "customAnchorId" : "types"
+        "title" : "1.76",
+        "id" : "176",
+        "customAnchorId" : "176"
       }, {
-        "title" : "Left Right Timeline",
-        "id" : "left-right-timeline",
-        "customAnchorId" : "left-right-timeline"
+        "title" : "1.75",
+        "id" : "175",
+        "customAnchorId" : "175"
       }, {
-        "title" : "Venn",
-        "id" : "venn",
-        "customAnchorId" : "venn"
-      }, {
-        "title" : "Steps",
-        "id" : "steps",
-        "customAnchorId" : "steps"
-      }, {
-        "title" : "Presentation Only",
-        "id" : "presentation-only",
-        "customAnchorId" : "presentation-only"
-      }, {
-        "title" : "Horizontal Stripes",
-        "id" : "horizontal-stripes",
-        "customAnchorId" : "horizontal-stripes"
+        "title" : "1.74",
+        "id" : "174",
+        "customAnchorId" : "174"
       } ]
     }
   }
