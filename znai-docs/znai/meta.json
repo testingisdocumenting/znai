@@ -3,6 +3,7 @@
   "type": "User Guide",
   "category": "Documentation",
   "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+  "hidePresentationTrigger": false,
   "viewOn": {
     "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
     "title": "View Markdown"

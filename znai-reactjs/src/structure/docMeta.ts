@@ -23,6 +23,7 @@ export interface DocMeta {
   type: string;
   previewEnabled: boolean;
   useTopHeader?: boolean;
+  hidePresentationTrigger?: boolean;
   support?: DocMetaSupport;
   supportMeta?: SupportMeta;
 }
@@ -62,6 +63,10 @@ function getDocId() {
   return docMeta.id || "";
 }
 
+function isPresentationButtonVisible() {
+  return !docMeta.hidePresentationTrigger;
+}
+
 let supportLinkPromise: Promise<SupportMeta> | undefined = undefined;
 
 const defaultSupportTitle = "Support";
@@ -93,4 +98,12 @@ function getSupportLinkAndTitlePromise(): Promise<SupportMeta> {
   return supportLinkPromise!;
 }
 
-export { setDocMeta, mergeDocMeta, getDocMeta, isPreviewEnabled, getDocId, getSupportLinkAndTitlePromise };
+export {
+  setDocMeta,
+  mergeDocMeta,
+  getDocMeta,
+  isPreviewEnabled,
+  getDocId,
+  getSupportLinkAndTitlePromise,
+  isPresentationButtonVisible,
+};
