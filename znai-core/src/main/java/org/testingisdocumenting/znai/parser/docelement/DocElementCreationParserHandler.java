@@ -276,6 +276,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
     @Override
     public void onSimpleText(String value) {
+        value = value.replace("---", "—");
         append(DocElementType.SIMPLE_TEXT, "text", value);
     }
 
