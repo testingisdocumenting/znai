@@ -1,0 +1,1 @@
+* Fix: Local Search correctly previews content from an implicit section

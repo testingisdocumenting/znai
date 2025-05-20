@@ -56,6 +56,17 @@ class SearchCrawlerParserHandlerTest {
     }
 
     @Test
+    void "should have independent entry for the first no title section"() {
+        parserHandler.onSimpleText("hello")
+        parserHandler.onSnippet(PluginParams.EMPTY, "", "", "source code")
+        parserHandler.onSectionStart("section one", HeadingProps.EMPTY, null)
+        parserHandler.onSectionEnd()
+        parserHandler.getSearchEntries().size().should == 1
+        def searchEntry = parserHandler.getSearchEntries().get(0)
+        searchEntry.should == [pageSectionId: '', searchTextList: [[text: "hello", score: SearchScore.STANDARD], [text: "source code", score: SearchScore.HIGH]]]
+    }
+
+    @Test
     void "should use custom anchor ids from sections"() {
         parserHandler.onSectionStart("section one", HeadingProps.customAnchorId("my-anchor"), null)
         parserHandler.onSimpleText("hello")

@@ -53,6 +53,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onSectionStart(String title, HeadingProps headingProps, Heading heading) {
+        flush(); // in case there was a text accumulated in a no name section
         pageSectionIdTitle = new PageSectionIdTitle(title, headingProps.props());
     }
 
