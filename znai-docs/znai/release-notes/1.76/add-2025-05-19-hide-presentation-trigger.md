@@ -1,0 +1,1 @@
+* Add: new option `hidePresentationTrigger` to `meta.json` to hide presentation trigger icons.

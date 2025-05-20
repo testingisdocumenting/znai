@@ -26,6 +26,8 @@ import { DocElementContent, ElementsLibraryMap } from "./DocElement";
 import { HeadingContent } from "./HeadingContent";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 
+import { isPresentationButtonVisible } from "../../structure/docMeta";
+
 import "./SectionTitle.css";
 import "./HeadingStyles.css";
 
@@ -49,7 +51,9 @@ export function SectionTitle({ id, title, headingContent, badge, style }: Props)
         <a href={"#" + id}>
           <Icon id="link" />
         </a>
-        <Icon id="maximize" className="znai-section-title-presentation" onClick={openPresentation} />
+        {isPresentationButtonVisible() && (
+          <Icon id="maximize" className="znai-section-title-presentation" onClick={openPresentation} />
+        )}
       </div>
     </h1>
   ) : (
