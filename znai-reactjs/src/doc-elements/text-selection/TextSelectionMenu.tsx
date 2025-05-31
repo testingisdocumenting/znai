@@ -14,21 +14,39 @@
  * limitations under the License.
  */
 
-import React, { ReactNode, useRef } from "react";
-import "./SelectionMenuTracker.css";
+import React, { ReactNode, useEffect, useRef } from "react";
+import "./TextSelectionMenu.css";
 
-export function SelectionMenuTracker({ children }: { children: ReactNode }) {
+export function TextSelectionMenu({ children }: { children: ReactNode }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.addEventListener("selectionchange", detectSelectionReset);
+    return () => document.removeEventListener("selectionchange", detectSelectionReset);
+  }, []);
+
   return (
     <>
       <div onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
         {children}
       </div>
-      <dialog ref={dialogRef} popover="auto" className="znai-selection-menu">
-        <div>test</div>
+      <dialog ref={dialogRef} popover="auto" className="znai-text-selection-menu">
+        <div className="znai-text-selection-menu-item" onClick={clickMenu} onMouseDown={preventDefault}>
+          Ask in Slack
+        </div>
       </dialog>
     </>
   );
+
+  function preventDefault(e: React.MouseEvent<HTMLDivElement>) {
+    console.log("preventDefault");
+    e.preventDefault();
+  }
+
+  function clickMenu() {
+    console.log("clickMenu");
+  }
 
   function onMouseDown(e: React.MouseEvent<HTMLDivElement>) {
     console.log("onMouseDown", e);
@@ -39,17 +57,20 @@ export function SelectionMenuTracker({ children }: { children: ReactNode }) {
       return;
     }
 
+    console.log("showMenu", left, top);
+
     const dialog = dialogRef.current;
     dialog.style.left = `${left}px`;
     dialog.style.top = `${top}px`;
     dialog.showPopover();
   }
 
-  function onMouseUp(e: React.MouseEvent<HTMLDivElement>) {
-    function hidePopover() {
-      dialogRef.current?.close();
-    }
+  function hidePopover() {
+    console.log("hidePopover");
+    dialogRef.current?.hidePopover();
+  }
 
+  function onMouseUp(e: React.MouseEvent<HTMLDivElement>) {
     console.log("onMouseUp", e);
 
     const selection = getSelection();
@@ -66,6 +87,16 @@ export function SelectionMenuTracker({ children }: { children: ReactNode }) {
     console.log("coords", coordinates);
     if (coordinates) {
       showMenu(coordinates.left, coordinates.top);
+    }
+  }
+
+  function detectSelectionReset() {
+    console.log("detectSelectionReset");
+    const selection = getSelection();
+    if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
+      console.log("no selection");
+      hidePopover();
+      return;
     }
   }
 }

@@ -14,7 +14,18 @@
  * limitations under the License.
  */
 
-.znai-selection-menu {
+.znai-text-selection-menu {
     position: fixed;
     margin: 0;
+    padding: 0;
+}
+
+.znai-text-selection-menu-item {
+    cursor: pointer;
+    padding: 2px 16px;
+}
+
+.znai-text-selection-menu-item:hover {
+    color: var(--znai-text-selection-menu-text-color);
+    background-color: var(--znai-text-selection-menu-background-color);
 }

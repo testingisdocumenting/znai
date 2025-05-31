@@ -53,7 +53,7 @@ import {mainPanelClassName} from '../layout/classNames';
 import {ZoomOverlay} from './zoom/ZoomOverlay';
 import { TooltipRenderer } from "../components/Tooltip";
 
-import { SelectionMenuTracker } from "./text-selection/SelectionMenuTracker.js";
+import { TextSelectionMenu } from "./text-selection/TextSelectionMenu.tsx";
 
 import './search/Search.css'
 
@@ -116,7 +116,6 @@ export class Documentation extends Component {
         this.onPageGenError = this.onPageGenError.bind(this)
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
-        this.mouseUpHandler = this.mouseUpHandler.bind(this)
         this.mouseClickHandler = this.mouseClickHandler.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
@@ -165,15 +164,15 @@ export class Documentation extends Component {
                                                           onSearchSelection={this.onSearchSelection}
                                                           onClose={this.onSearchClose}/> : null
 
-        const renderedPage = <SelectionMenuTracker><elementsLibrary.Page {...page}
-                                                                         docMeta={docMeta}
-                                                                         onPresentationOpen={this.onPresentationOpen}
-                                                                         prevPageTocItem={this.prevPageTocItem}
-                                                                         nextPageTocItem={this.nextPageTocItem}
-                                                                         onNextPage={this.onNextPage}
-                                                                         onPrevPage={this.onPrevPage}
-                                                                         previewEnabled={docMeta.previewEnabled}
-                                                                         elementsLibrary={elementsLibrary}/></SelectionMenuTracker>
+        const renderedPage = <TextSelectionMenu><elementsLibrary.Page {...page}
+                                                                      docMeta={docMeta}
+                                                                      onPresentationOpen={this.onPresentationOpen}
+                                                                      prevPageTocItem={this.prevPageTocItem}
+                                                                      nextPageTocItem={this.nextPageTocItem}
+                                                                      onNextPage={this.onNextPage}
+                                                                      onPrevPage={this.onPrevPage}
+                                                                      previewEnabled={docMeta.previewEnabled}
+                                                                      elementsLibrary={elementsLibrary}/></TextSelectionMenu>
 
         const NextPrevNavigation = pageTypesRegistry.nextPrevNavigationComponent(page.tocItem)
         const renderedNextPrevNavigation = <NextPrevNavigation currentTocItem={page.tocItem}
