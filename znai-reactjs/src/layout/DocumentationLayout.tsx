@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import TocPanel from "./TocPanel";
 import { PageGenError } from "../doc-elements/page-gen-error/PageGenError";
@@ -32,6 +32,7 @@ import { mainPanelClassName } from "./classNames";
 import { TopHeader } from "./TopHeader";
 import "./DocumentationLayout.css";
 import "./mobile/MobileLayoutOverrides.css";
+import { TextSelectionMenu } from "../doc-elements/text-selection/TextSelectionMenu";
 
 interface Props {
   zoomOverlay: React.ReactNode;
@@ -81,6 +82,7 @@ export function DocumentationLayout({
   scrollToPageSection,
 }: Props) {
   const [isMobileTocVisible, setMobileTocVisible] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
   const pageGenErrorPanel = pageGenError ? <PageGenError error={pageGenError} /> : null;
@@ -91,7 +93,8 @@ export function DocumentationLayout({
 
   function renderPageContent() {
     return (
-      <div className={panelFullClassName}>
+      <div ref={panelRef} className={panelFullClassName}>
+        {panelRef.current && <TextSelectionMenu contentNode={panelRef.current} />}
         {renderedPage}
 
         <div className="page-bottom">
