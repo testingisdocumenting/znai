@@ -14,29 +14,30 @@
  * limitations under the License.
  */
 
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./TextSelectionMenu.css";
 
-export function TextSelectionMenu({ children }: { children: ReactNode }) {
+export function TextSelectionMenu({ contentNode }: { contentNode: HTMLDivElement }) {
+  const anchorRef = useRef<Node | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.addEventListener("selectionchange", detectSelectionReset);
-    return () => document.removeEventListener("selectionchange", detectSelectionReset);
+    document.addEventListener("mouseup", onMouseUp);
+    contentNode.addEventListener("scroll", updatePopoverCoords);
+    return () => {
+      document.removeEventListener("selectionchange", detectSelectionReset);
+      document.removeEventListener("mouseup", onMouseUp);
+      contentNode.removeEventListener("scroll", updatePopoverCoords);
+    };
   }, []);
 
   return (
-    <>
-      <div onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
-        {children}
+    <dialog ref={dialogRef} popover="auto" className="znai-text-selection-menu">
+      <div className="znai-text-selection-menu-item" onClick={clickMenu} onMouseDown={preventDefault}>
+        Ask in Slack
       </div>
-      <dialog ref={dialogRef} popover="auto" className="znai-text-selection-menu">
-        <div className="znai-text-selection-menu-item" onClick={clickMenu} onMouseDown={preventDefault}>
-          Ask in Slack
-        </div>
-      </dialog>
-    </>
+    </dialog>
   );
 
   function preventDefault(e: React.MouseEvent<HTMLDivElement>) {
@@ -46,10 +47,6 @@ export function TextSelectionMenu({ children }: { children: ReactNode }) {
 
   function clickMenu() {
     console.log("clickMenu");
-  }
-
-  function onMouseDown(e: React.MouseEvent<HTMLDivElement>) {
-    console.log("onMouseDown", e);
   }
 
   function showMenu(left: number, top: number) {
@@ -65,13 +62,31 @@ export function TextSelectionMenu({ children }: { children: ReactNode }) {
     dialog.showPopover();
   }
 
+  function updatePopoverCoords() {
+    if (!anchorRef.current || !dialogRef.current) {
+      return;
+    }
+
+    console.log("updatePopoverCoords");
+    const coordinates = elementCoordinates(contentNode, anchorRef.current);
+    if (coordinates) {
+      console.log("new coords", coordinates);
+      const dialog = dialogRef.current;
+      dialog.style.left = `${coordinates.left}px`;
+      dialog.style.top = `${coordinates.top}px`;
+    }
+  }
+
   function hidePopover() {
     console.log("hidePopover");
     dialogRef.current?.hidePopover();
   }
 
-  function onMouseUp(e: React.MouseEvent<HTMLDivElement>) {
+  function onMouseUp(e: MouseEvent) {
     console.log("onMouseUp", e);
+
+    console.log("wrapper", contentNode);
+    console.log("offset", contentNode.scrollTop);
 
     const selection = getSelection();
     if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
@@ -83,7 +98,9 @@ export function TextSelectionMenu({ children }: { children: ReactNode }) {
     const range = selection.getRangeAt(0);
     console.log("selection", range);
 
-    const coordinates = elementCoordinates(range.startContainer);
+    anchorRef.current = range.startContainer as HTMLElement;
+
+    const coordinates = elementCoordinates(contentNode, range.startContainer);
     console.log("coords", coordinates);
     if (coordinates) {
       showMenu(coordinates.left, coordinates.top);
@@ -101,7 +118,7 @@ export function TextSelectionMenu({ children }: { children: ReactNode }) {
   }
 }
 
-function elementCoordinates(startNode: Node) {
+function elementCoordinates(contentNode: HTMLDivElement, startNode: Node) {
   function findContentBlockNode(n: Node) {
     let it: Node | null = n;
     let result: HTMLElement | null = null;
@@ -115,6 +132,7 @@ function elementCoordinates(startNode: Node) {
     return result;
   }
 
+  // TODO pre cache anchor and search once especially on scroll event
   function coords(htmlElement?: HTMLElement) {
     if (!htmlElement) {
       return { top: 0, left: 0 };
@@ -131,8 +149,10 @@ function elementCoordinates(startNode: Node) {
       return clientRect.left + clientRect.width;
     }
 
+    console.log("contentNode.scrollTop", contentNode.scrollTop);
+
     return {
-      top: htmlElement.getBoundingClientRect().top,
+      top: htmlElement.getBoundingClientRect().top /*+ contentNode.scrollTop*/,
       left: left(),
     };
   }

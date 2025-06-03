@@ -53,8 +53,6 @@ import {mainPanelClassName} from '../layout/classNames';
 import {ZoomOverlay} from './zoom/ZoomOverlay';
 import { TooltipRenderer } from "../components/Tooltip";
 
-import { TextSelectionMenu } from "./text-selection/TextSelectionMenu.tsx";
-
 import './search/Search.css'
 
 export class Documentation extends Component {
@@ -164,15 +162,15 @@ export class Documentation extends Component {
                                                           onSearchSelection={this.onSearchSelection}
                                                           onClose={this.onSearchClose}/> : null
 
-        const renderedPage = <TextSelectionMenu><elementsLibrary.Page {...page}
-                                                                      docMeta={docMeta}
-                                                                      onPresentationOpen={this.onPresentationOpen}
-                                                                      prevPageTocItem={this.prevPageTocItem}
-                                                                      nextPageTocItem={this.nextPageTocItem}
-                                                                      onNextPage={this.onNextPage}
-                                                                      onPrevPage={this.onPrevPage}
-                                                                      previewEnabled={docMeta.previewEnabled}
-                                                                      elementsLibrary={elementsLibrary}/></TextSelectionMenu>
+        const renderedPage = <elementsLibrary.Page {...page}
+                                                   docMeta={docMeta}
+                                                   onPresentationOpen={this.onPresentationOpen}
+                                                   prevPageTocItem={this.prevPageTocItem}
+                                                   nextPageTocItem={this.nextPageTocItem}
+                                                   onNextPage={this.onNextPage}
+                                                   onPrevPage={this.onPrevPage}
+                                                   previewEnabled={docMeta.previewEnabled}
+                                                   elementsLibrary={elementsLibrary}/>
 
         const NextPrevNavigation = pageTypesRegistry.nextPrevNavigationComponent(page.tocItem)
         const renderedNextPrevNavigation = <NextPrevNavigation currentTocItem={page.tocItem}
