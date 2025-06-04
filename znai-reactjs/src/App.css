@@ -194,9 +194,6 @@
     --znai-attention-recommendation-color: var(--znai-attention-question-color);
     --znai-attention-recommendation-background-color: var(--znai-attention-question-background-color);
 
-    --znai-text-selection-menu-background-color: var(--znai-brand-primary-color);
-    --znai-text-selection-menu-text-color: #fff;
-
     --znai-text-badge-background-color: #06437c;
     --znai-text-badge-text-color: #eee;
 

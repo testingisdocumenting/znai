@@ -17,31 +17,27 @@
 import React, { useEffect, useRef } from "react";
 import "./TextSelectionMenu.css";
 
-export function TextSelectionMenu({ contentNode }: { contentNode: HTMLDivElement }) {
-  const anchorRef = useRef<Node | null>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
+export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.addEventListener("selectionchange", detectSelectionReset);
     document.addEventListener("mouseup", onMouseUp);
-    contentNode.addEventListener("scroll", updatePopoverCoords);
     return () => {
       document.removeEventListener("selectionchange", detectSelectionReset);
       document.removeEventListener("mouseup", onMouseUp);
-      contentNode.removeEventListener("scroll", updatePopoverCoords);
     };
   }, []);
 
   return (
-    <dialog ref={dialogRef} popover="auto" className="znai-text-selection-menu">
+    <div ref={menuRef} className="znai-text-selection-menu">
       <div className="znai-text-selection-menu-item" onClick={clickMenu} onMouseDown={preventDefault}>
         Ask in Slack
       </div>
-    </dialog>
+    </div>
   );
 
   function preventDefault(e: React.MouseEvent<HTMLDivElement>) {
-    console.log("preventDefault");
     e.preventDefault();
   }
 
@@ -49,44 +45,29 @@ export function TextSelectionMenu({ contentNode }: { contentNode: HTMLDivElement
     console.log("clickMenu");
   }
 
-  function showMenu(left: number, top: number) {
-    if (!dialogRef.current) {
+  function showMenu(top: number, left: number) {
+    if (!menuRef.current) {
       return;
     }
 
-    console.log("showMenu", left, top);
-
-    const dialog = dialogRef.current;
-    dialog.style.left = `${left}px`;
-    dialog.style.top = `${top}px`;
-    dialog.showPopover();
-  }
-
-  function updatePopoverCoords() {
-    if (!anchorRef.current || !dialogRef.current) {
-      return;
-    }
-
-    console.log("updatePopoverCoords");
-    const coordinates = elementCoordinates(contentNode, anchorRef.current);
-    if (coordinates) {
-      console.log("new coords", coordinates);
-      const dialog = dialogRef.current;
-      dialog.style.left = `${coordinates.left}px`;
-      dialog.style.top = `${coordinates.top}px`;
-    }
+    const menu = menuRef.current;
+    menu.style.top = `${top}px`;
+    menu.style.left = `${left}px`;
+    menuRef.current.style.display = "block";
   }
 
   function hidePopover() {
     console.log("hidePopover");
-    dialogRef.current?.hidePopover();
+    if (menuRef.current) {
+      menuRef.current.style.display = "none";
+    }
   }
 
   function onMouseUp(e: MouseEvent) {
     console.log("onMouseUp", e);
 
-    console.log("wrapper", contentNode);
-    console.log("offset", contentNode.scrollTop);
+    console.log("wrapper", containerNode);
+    console.log("offset", containerNode.scrollTop);
 
     const selection = getSelection();
     if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
@@ -96,15 +77,17 @@ export function TextSelectionMenu({ contentNode }: { contentNode: HTMLDivElement
     }
 
     const range = selection.getRangeAt(0);
-    console.log("selection", range);
 
-    anchorRef.current = range.startContainer as HTMLElement;
-
-    const coordinates = elementCoordinates(contentNode, range.startContainer);
-    console.log("coords", coordinates);
-    if (coordinates) {
-      showMenu(coordinates.left, coordinates.top);
+    const selectionRect = range.getBoundingClientRect();
+    if (!containerNode.contains(range.startContainer)) {
+      return;
     }
+
+    const containerRect = containerNode.getBoundingClientRect();
+
+    const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 48;
+    const left = selectionRect.left - containerRect.left;
+    showMenu(top, left);
   }
 
   function detectSelectionReset() {
@@ -115,51 +98,5 @@ export function TextSelectionMenu({ contentNode }: { contentNode: HTMLDivElement
       hidePopover();
       return;
     }
-  }
-}
-
-function elementCoordinates(contentNode: HTMLDivElement, startNode: Node) {
-  function findContentBlockNode(n: Node) {
-    let it: Node | null = n;
-    let result: HTMLElement | null = null;
-    while (it !== null) {
-      if (it instanceof HTMLElement && it.classList.contains("content-block")) {
-        result = it;
-      }
-      it = it.parentNode;
-    }
-
-    return result;
-  }
-
-  // TODO pre cache anchor and search once especially on scroll event
-  function coords(htmlElement?: HTMLElement) {
-    if (!htmlElement) {
-      return { top: 0, left: 0 };
-    }
-
-    const contentBlockNode = findContentBlockNode(htmlElement);
-    function left() {
-      if (!contentBlockNode) {
-        return 0;
-      }
-
-      const clientRect = contentBlockNode.getBoundingClientRect();
-      console.log("clientRect", clientRect);
-      return clientRect.left + clientRect.width;
-    }
-
-    console.log("contentNode.scrollTop", contentNode.scrollTop);
-
-    return {
-      top: htmlElement.getBoundingClientRect().top /*+ contentNode.scrollTop*/,
-      left: left(),
-    };
-  }
-
-  if (startNode.nodeType === Node.TEXT_NODE) {
-    return coords(startNode.parentElement as HTMLElement);
-  } else if (startNode.nodeType === Node.ELEMENT_NODE) {
-    return coords(startNode as HTMLElement);
   }
 }

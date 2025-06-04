@@ -94,7 +94,7 @@ export function DocumentationLayout({
   function renderPageContent() {
     return (
       <div ref={panelRef} className={panelFullClassName}>
-        {panelRef.current && <TextSelectionMenu contentNode={panelRef.current} />}
+        {panelRef.current && <TextSelectionMenu containerNode={panelRef.current} />}
         {renderedPage}
 
         <div className="page-bottom">

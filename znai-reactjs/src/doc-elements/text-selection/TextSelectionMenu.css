@@ -15,17 +15,20 @@
  */
 
 .znai-text-selection-menu {
-    position: fixed;
-    margin: 0;
-    padding: 0;
+    position: absolute;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.15), 0 8px 6px 2px rgb(0 0 0 / 0.15);
+    background-color: #fff;
+    z-index: 10;
 }
 
 .znai-text-selection-menu-item {
     cursor: pointer;
-    padding: 2px 16px;
+    padding: 2px 24px;
 }
 
 .znai-text-selection-menu-item:hover {
-    color: var(--znai-text-selection-menu-text-color);
-    background-color: var(--znai-text-selection-menu-background-color);
+    color: #fff;
+    background-color: var(--znai-color-blue);
 }
