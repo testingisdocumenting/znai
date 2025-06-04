@@ -19,8 +19,15 @@
     border-radius: 3px;
     border: 1px solid #ccc;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.15), 0 8px 6px 2px rgb(0 0 0 / 0.15);
-    background-color: #fff;
+    background-color: var(--znai-background-color);
+    color: var(--znai-regular-text-color);
+    font-size: var(--znai-smaller-text-size);
     z-index: 10;
+}
+
+.theme-znai-dark .znai-text-selection-menu {
+    border-color: #888;
+    box-shadow: 0 1px 3px 0 rgb(180 180 180 / 0.15), 0 0 4px 4px rgb(80 80 80 / 0.4);
 }
 
 .znai-text-selection-menu-item {

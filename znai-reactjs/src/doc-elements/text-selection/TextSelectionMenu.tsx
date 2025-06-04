@@ -57,21 +57,14 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   }
 
   function hidePopover() {
-    console.log("hidePopover");
     if (menuRef.current) {
       menuRef.current.style.display = "none";
     }
   }
 
   function onMouseUp(e: MouseEvent) {
-    console.log("onMouseUp", e);
-
-    console.log("wrapper", containerNode);
-    console.log("offset", containerNode.scrollTop);
-
     const selection = getSelection();
     if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
-      console.log("no selection");
       hidePopover();
       return;
     }
@@ -86,15 +79,14 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     const containerRect = containerNode.getBoundingClientRect();
 
     const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 48;
-    const left = selectionRect.left - containerRect.left;
+    const selectionCenter = selectionRect.left + selectionRect.width / 2.0 - 72;
+    const left = selectionCenter - containerRect.left;
     showMenu(top, left);
   }
 
   function detectSelectionReset() {
-    console.log("detectSelectionReset");
     const selection = getSelection();
     if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
-      console.log("no selection");
       hidePopover();
       return;
     }
