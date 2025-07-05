@@ -1,0 +1,1 @@
+* Add: [Footnote](flow/footnotes) uses given label instead of auto incrementing index if the label is numeric
