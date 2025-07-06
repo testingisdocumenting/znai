@@ -32,7 +32,7 @@ class TestMarkupParser implements MarkupParser {
 
         def searchEntry = new PageSearchEntry(new PageSectionIdTitle('dummy page section title', [:]), [SearchScore.STANDARD.text(markup)])
 
-        return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta())
+        return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta(), markup)
     }
 
     @Override

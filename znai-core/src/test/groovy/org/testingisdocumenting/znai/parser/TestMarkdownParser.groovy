@@ -38,7 +38,7 @@ class TestMarkdownParser extends MarkdownParser {
 
         def searchEntry = new PageSearchEntry(new PageSectionIdTitle('dummy page section title', [:]), [SearchScore.STANDARD.text(markdown)])
 
-        return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta())
+        return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta(), markdown)
     }
 
     @Override

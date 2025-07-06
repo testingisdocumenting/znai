@@ -36,6 +36,7 @@ import org.testingisdocumenting.znai.parser.ParserHandlersList;
 import org.testingisdocumenting.znai.search.SearchCrawlerParserHandler;
 import org.testingisdocumenting.znai.structure.PageMeta;
 import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
+import org.testingisdocumenting.znai.markdown.MarkdownGeneratorParserHandler;
 import org.commonmark.ext.front.matter.YamlFrontMatterExtension;
 import org.commonmark.ext.front.matter.YamlFrontMatterVisitor;
 import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension;
@@ -60,8 +61,9 @@ public class MarkdownParser implements MarkupParser {
         SearchCrawlerParserHandler searchCrawler = new SearchCrawlerParserHandler();
         DocElementCreationParserHandler elementCreationHandler =
                 new DocElementCreationParserHandler(componentsRegistry, path);
+        MarkdownGeneratorParserHandler markdownGenerator = new MarkdownGeneratorParserHandler(0);
 
-        ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler);
+        ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler, markdownGenerator);
 
         Node node = fullParser.parse(markdown);
         MarkdownVisitor visitor = parsePartial(node, path, parserHandler);
@@ -80,7 +82,8 @@ public class MarkdownParser implements MarkupParser {
                 elementCreationHandler.getGlobalAnchorIds(),
                 searchCrawler.getSearchEntries(),
                 elementCreationHandler.getAuxiliaryFiles(),
-                parsePageMeta(node));
+                parsePageMeta(node),
+                markdownGenerator.getMarkdown());
     }
 
     @Override

@@ -63,4 +63,23 @@ public class JsonIncludePlugin extends JsonBasePlugin implements IncludePlugin {
 
         return commonProcess(componentsRegistry, markupPath, pluginParams, json);
     }
+
+    @Override
+    public String markdownRepresentation(PluginParams params) {
+        if (resourcesResolver == null) {
+            return "";
+        }
+        
+        String json = resourcesResolver.textContent(fileName);
+        
+        StringBuilder markdown = new StringBuilder();
+        markdown.append("```json\n");
+        markdown.append(json);
+        if (!json.endsWith("\n")) {
+            markdown.append("\n");
+        }
+        markdown.append("```");
+        
+        return markdown.toString();
+    }
 }

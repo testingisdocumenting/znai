@@ -31,7 +31,8 @@ public record MarkupParserResult(DocElement docElement,
                                  List<String> globalAnchorIds,
                                  List<PageSearchEntry> searchEntries,
                                  List<AuxiliaryFile> auxiliaryFiles,
-                                 PageMeta pageMeta) {
+                                 PageMeta pageMeta,
+                                 String markdown) {
     /**
      * Top level page element. use get content to get access to the children
      *

@@ -97,6 +97,26 @@ public class FileIncludePlugin implements IncludePlugin {
         return SearchScore.HIGH.text(contentProvider.snippetContent());
     }
 
+    @Override
+    public String markdownRepresentation(PluginParams params) {
+        if (contentProvider == null) {
+            return "";
+        }
+        
+        String providedLang = params.getOpts().getString("lang");
+        String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;
+        
+        StringBuilder markdown = new StringBuilder();
+        markdown.append("```").append(langToUse).append("\n");
+        markdown.append(contentProvider.snippetContent());
+        if (!contentProvider.snippetContent().endsWith("\n")) {
+            markdown.append("\n");
+        }
+        markdown.append("```");
+        
+        return markdown.toString();
+    }
+
     private static String langFromFileName(String fileName) {
         return extFromFileName(fileName);
     }
