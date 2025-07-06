@@ -37,17 +37,17 @@ import java.util.Map;
 
 public class MarkdownGeneratorParserHandler implements ParserHandler {
     private final StringBuilder markdownBuilder;
+    
     private final List<String> currentParagraph;
-    private int baseHeadingLevel;
+    
+    private final int baseHeadingLevel;
     private boolean inList;
-    private boolean inCodeBlock;
 
     public MarkdownGeneratorParserHandler(int baseHeadingLevel) {
         this.markdownBuilder = new StringBuilder();
         this.currentParagraph = new ArrayList<>();
         this.baseHeadingLevel = baseHeadingLevel;
         this.inList = false;
-        this.inCodeBlock = false;
     }
 
     public String getMarkdown() {
