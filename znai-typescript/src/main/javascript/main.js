@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-const readline = require('readline');
-const { extractDefinitions } = require('./definitionsExtractor');
+import readline from 'readline';
+import { extractDefinitions } from './definitionsExtractor.js';
 
 const rl = readline.createInterface({
     input: process.stdin,
