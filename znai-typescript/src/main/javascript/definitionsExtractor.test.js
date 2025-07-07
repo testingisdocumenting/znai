@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const {extractDefinitions} = require('./definitionsExtractor');
+import {extractDefinitions} from './definitionsExtractor.js';
 
 describe('definitionsExtractor', () => {
     it('parses js docs', () => {

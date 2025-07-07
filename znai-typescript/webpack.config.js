@@ -15,9 +15,12 @@
  * limitations under the License.
  */
 
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default {
     entry: './src/main/javascript/main.js',
     target: 'node',
     mode: 'production',
