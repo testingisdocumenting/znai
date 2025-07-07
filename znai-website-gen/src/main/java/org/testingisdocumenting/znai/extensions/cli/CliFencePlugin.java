@@ -71,4 +71,15 @@ public class CliFencePlugin implements FencePlugin {
     public SearchText textForSearch() {
         return SearchScore.HIGH.text(String.join(" ", commands));
     }
+
+    @Override
+    public String markdownRepresentation(PluginParams params) {
+        if (commands == null || commands.isEmpty()) {
+            return "";
+        }
+
+        return "```cli\n" +
+                String.join("\n", commands) +
+                "\n```";
+    }
 }
