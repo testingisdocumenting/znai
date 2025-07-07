@@ -65,7 +65,7 @@ public class JsonIncludePlugin extends JsonBasePlugin implements IncludePlugin {
     }
 
     @Override
-    public String markdownRepresentation(PluginParams params) {
+    public String markdownRepresentation() {
         if (resourcesResolver == null) {
             return "";
         }

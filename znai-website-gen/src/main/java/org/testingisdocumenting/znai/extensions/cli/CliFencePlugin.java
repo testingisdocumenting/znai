@@ -73,7 +73,7 @@ public class CliFencePlugin implements FencePlugin {
     }
 
     @Override
-    public String markdownRepresentation(PluginParams params) {
+    public String markdownRepresentation() {
         if (commands == null || commands.isEmpty()) {
             return "";
         }

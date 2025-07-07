@@ -295,19 +295,19 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
 
     @Override
     public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
-        String markdownRepresentation = includePlugin.markdownRepresentation(PluginParams.EMPTY);
+        String markdownRepresentation = includePlugin.markdownRepresentation();
         markdown.append(markdownRepresentation).append("\n\n");
     }
 
     @Override
     public void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult) {
-        String markdownRepresentation = fencePlugin.markdownRepresentation(PluginParams.EMPTY);
+        String markdownRepresentation = fencePlugin.markdownRepresentation();
         markdown.append(markdownRepresentation).append("\n\n");
     }
 
     @Override
     public void onInlinedCodePlugin(InlinedCodePlugin inlinedCodePlugin, PluginResult pluginResult) {
-        String markdownRepresentation = inlinedCodePlugin.markdownRepresentation(PluginParams.EMPTY);
+        String markdownRepresentation = inlinedCodePlugin.markdownRepresentation();
         markdown.append(markdownRepresentation);
     }
 }

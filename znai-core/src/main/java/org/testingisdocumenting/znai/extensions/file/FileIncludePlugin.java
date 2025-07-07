@@ -38,6 +38,7 @@ public class FileIncludePlugin implements IncludePlugin {
     private PluginFeatureList features;
 
     private ManipulatedSnippetContentProvider contentProvider;
+    private String lang;
 
     @Override
     public PluginParamsDefinition parameters() {
@@ -75,7 +76,7 @@ public class FileIncludePlugin implements IncludePlugin {
         features = new PluginFeatureList();
         features.add(SnippetsCommon.createCommonFeatures(componentsRegistry, markupPath, pluginParams, contentProvider).asList());
 
-        String lang = getLang(pluginParams);
+        this.lang = getLang(pluginParams);
         Map<String, Object> props = CodeSnippetsProps.create(lang, contentProvider.snippetContent());
         props.putAll(pluginParams.getOpts().toMap());
 
@@ -96,12 +97,11 @@ public class FileIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public String markdownRepresentation(PluginParams pluginParams) {
+    public String markdownRepresentation() {
         if (contentProvider == null) {
             return "";
         }
         
-        String lang = getLang(pluginParams);
         StringBuilder markdown = new StringBuilder();
         markdown.append("```").append(lang).append("\n");
         markdown.append(contentProvider.snippetContent());

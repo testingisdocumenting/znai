@@ -28,6 +28,8 @@ import org.testingisdocumenting.znai.parser.docelement.DocElement
 import java.nio.file.Path
 
 class DummyIncludePlugin implements IncludePlugin {
+    PluginParams pluginParams
+
     @Override
     String id() {
         return "dummy"
@@ -52,6 +54,7 @@ class DummyIncludePlugin implements IncludePlugin {
                          ParserHandler parserHandler,
                          Path markupPath,
                          PluginParams pluginParams) {
+        this.pluginParams = pluginParams;
         def throwMessage = pluginParams.getOpts().get("throw", "")
         if (throwMessage) {
             callThatThrows(throwMessage)
@@ -65,7 +68,7 @@ class DummyIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    String markdownRepresentation(PluginParams pluginParams) {
+    String markdownRepresentation() {
         return "**Dummy plugin content**: " + pluginParams.getFreeParam()
     }
 

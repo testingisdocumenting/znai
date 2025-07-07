@@ -48,7 +48,7 @@ public interface Plugin {
         return null;
     }
 
-    default String markdownRepresentation(PluginParams params) {
+    default String markdownRepresentation() {
         return "";
     }
 
