@@ -571,36 +571,69 @@ $$
     void "footnotes"() {
         parse("""
 Main text [^my-footnote] and another [^secret]
+numeric one [^5] what do we do with this one
+and what do we do with this [^8]
 
 [^my-footnote]: additional text footnote
     more text here
     ```
     code block
     ```
-    
+
 [^secret]: no secret here
-    
+
+[^5]: footnote num5
+[^8]: footnote num8
+
 after footnote
 """)
 
         def content = PropsUtils.exerciseSuppliers(content)
-        content.should == [
-                [ "type": "Paragraph",
-                  "content": [
-                          ["text": "Main text ", "type": "SimpleText"],
-                          ["label": "1", "content": [ [ "type": "Paragraph", "content": [
-                                  ["text": "additional text footnote", "type": "SimpleText"],
-                                  ["type": "SoftLineBreak"],
-                                  ["text": "more text here", "type": "SimpleText"] ] ],
-                                                      [ "lang": "", "snippet":"code block", "lineNumber": "", "type": "Snippet" ] ],
-                           "type": "FootnoteReference" ],
-                          ["text": " and another ", "type": "SimpleText"],
-                          [ "label": "2", "content": [["type": "Paragraph", "content": [["text": "no secret here", "type": "SimpleText"]]]],
+        content.should ==   [[
+                    "type": "Paragraph",
+                    "content": [
+                        ["text": "Main text ", "type": "SimpleText"],
+                        [
+                            "label": "1",
+                            "content": [
+                                [
+                                    "type": "Paragraph",
+                                    "content": [
+                                        ["text": "additional text footnote", "type": "SimpleText"],
+                                        ["type": "SoftLineBreak"],
+                                        ["text": "more text here", "type": "SimpleText"]
+                                ]
+                                ],
+                                ["lang": "", "snippet": "code block", "lineNumber": "", "type": "Snippet"]
+                        ],
                             "type": "FootnoteReference"
-                          ]
-                  ]
-                ],
-                ["type": "Paragraph", "content": [["text": "after footnote", "type": "SimpleText"]]]
+                        ],
+                        ["text": " and another ", "type": "SimpleText"],
+                        [
+                            "label": "2",
+                            "content": [["type": "Paragraph", "content": [["text": "no secret here", "type": "SimpleText"]]]],
+                            "type": "FootnoteReference"
+                        ],
+                        ["type": "SoftLineBreak"],
+                        ["text": "numeric one ", "type": "SimpleText"],
+                        [
+                            "label": "5",
+                            "content": [["type": "Paragraph", "content": [["text": "footnote num5", "type": "SimpleText"]]]],
+                            "type": "FootnoteReference"
+                        ],
+                        ["text": " what do we do with this one", "type": "SimpleText"],
+                        ["type": "SoftLineBreak"],
+                        ["text": "and what do we do with this ", "type": "SimpleText"],
+                        [
+                            "label": "8",
+                            "content": [["type": "Paragraph", "content": [["text": "footnote num8", "type": "SimpleText"]]]],
+                            "type": "FootnoteReference"
+                        ]
+                ]],
+                [
+                    "type": "Paragraph",
+                    "content": [["text": "after footnote", "type": "SimpleText"]],
+                ]
         ]
     }
 

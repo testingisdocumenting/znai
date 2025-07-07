@@ -17,4 +17,11 @@
 package org.testingisdocumenting.znai.extensions.footnote;
 
 public record FootnoteId(String id) {
+    public int asNumber() {
+        return Integer.parseInt(id);
+    }
+    
+    public boolean isNumber() {
+        return id != null && id.matches("\\d+");
+    }
 }
