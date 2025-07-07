@@ -70,6 +70,7 @@ public class WebSite implements Log {
     private final Configuration cfg;
 
     private Map<TocItem, Page> pageByTocItem;
+    private Map<TocItem, MarkupParserResult> parserResultByTocItem;
     private final GlobalSearchEntries globalSearchEntries;
     private final LocalSearchEntries localSearchEntries;
 
@@ -200,6 +201,7 @@ public class WebSite implements Log {
         reportPhase("deploying documentation");
         generatePages();
         generateSearchIndex();
+        generateLlmContent();
         deployToc();
         deployFooter();
         deployMeta();
@@ -349,6 +351,7 @@ public class WebSite implements Log {
         pageToHtmlPageConverter = new PageToHtmlPageConverter(docMeta, ReactJsBundle.INSTANCE);
         markupParser = markupParsingConfiguration.createMarkupParser(componentsRegistry);
         pageByTocItem = new LinkedHashMap<>();
+        parserResultByTocItem = new LinkedHashMap<>();
         pagePropsByTocItem = new LinkedHashMap<>();
         extraJavaScriptsInFront = new ArrayList<>(registeredExtraJavaScripts);
         extraJavaScriptsInFront.add(globalAssetsJavaScript);
@@ -547,6 +550,7 @@ public class WebSite implements Log {
             Instant lastModifiedTime = pageModifiedTimeStrategy.lastModifiedTime(tocItem, markupPathWithError.path());
             Page page = new Page(parserResult.docElement(), lastModifiedTime, parserResult.pageMeta());
             pageByTocItem.put(tocItem, page);
+            parserResultByTocItem.put(tocItem, parserResult);
 
             updateTocItemWithPageMeta(tocItem, page.getPageMeta());
             tocItem.setPageSectionIdTitles(page.getPageSectionIdTitles());
@@ -638,6 +642,27 @@ public class WebSite implements Log {
 
         String xmlExternalIndex = globalSearchEntries.toXml();
         deployer.deploy("search-entries.xml", xmlExternalIndex);
+    }
+
+    private void generateLlmContent() {
+        reportPhase("generating LLM content file");
+
+        StringBuilder llmContent = new StringBuilder();
+        
+        forEachPage((tocItem, page) -> {
+            if (page == null) {
+                return;
+            }
+            
+            MarkupParserResult parserResult = parserResultByTocItem.get(tocItem);
+            if (parserResult != null && parserResult.markdown() != null) {
+                llmContent.append("# ").append(tocItem.getPageTitle()).append("\n\n");
+                llmContent.append(parserResult.markdown());
+                llmContent.append("\n\n");
+            }
+        });
+        
+        deployer.deploy("llm.txt", llmContent.toString());
     }
 
     private void buildJsonOfAllPages() {
