@@ -645,7 +645,7 @@ public class WebSite implements Log {
     }
 
     private void generateLlmContent() {
-        reportPhase("generating LLM content file");
+        reportPhase("generating LLM context file");
 
         StringBuilder llmContent = new StringBuilder();
         llmContent.append("\"").append(docMeta.getTitle()).append("\" full guide:\n\n");

@@ -75,10 +75,8 @@ public class FileIncludePlugin implements IncludePlugin {
         features = new PluginFeatureList();
         features.add(SnippetsCommon.createCommonFeatures(componentsRegistry, markupPath, pluginParams, contentProvider).asList());
 
-        String providedLang = getLang(pluginParams);
-        String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;
-
-        Map<String, Object> props = CodeSnippetsProps.create(langToUse, contentProvider.snippetContent());
+        String lang = getLang(pluginParams);
+        Map<String, Object> props = CodeSnippetsProps.create(lang, contentProvider.snippetContent());
         props.putAll(pluginParams.getOpts().toMap());
 
         features.updateProps(props);
@@ -103,11 +101,9 @@ public class FileIncludePlugin implements IncludePlugin {
             return "";
         }
         
-        String providedLang = getLang(pluginParams);
-        String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;
-        
+        String lang = getLang(pluginParams);
         StringBuilder markdown = new StringBuilder();
-        markdown.append("```").append(langToUse).append("\n");
+        markdown.append("```").append(lang).append("\n");
         markdown.append(contentProvider.snippetContent());
         if (!contentProvider.snippetContent().endsWith("\n")) {
             markdown.append("\n");
@@ -117,8 +113,9 @@ public class FileIncludePlugin implements IncludePlugin {
         return markdown.toString();
     }
 
-    private static String getLang(PluginParams pluginParams) {
-        return pluginParams.getOpts().getString("lang");
+    private String getLang(PluginParams pluginParams) {
+        var providedLang = pluginParams.getOpts().getString("lang");
+        return (providedLang == null) ? langFromFileName(fileName) : providedLang;
     }
 
     private static String langFromFileName(String fileName) {
