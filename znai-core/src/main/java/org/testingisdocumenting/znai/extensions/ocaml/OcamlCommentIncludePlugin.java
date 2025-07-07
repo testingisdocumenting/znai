@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.extensions.file;
+package org.testingisdocumenting.znai.extensions.ocaml;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
@@ -62,74 +62,23 @@ public class OcamlCommentIncludePlugin implements IncludePlugin {
 
     private String extractComments(String text, PluginParamsOpts opts) {
         String commentLine = opts.getRequiredString("commentLine");
-        return extractCommentBlock(text, commentLine);
+        OcamlCommentExtractor extractor = new OcamlCommentExtractor(text);
+        String rawComment = extractor.extractCommentBlock(commentLine);
+        return cleanCommentBlock(rawComment);
     }
 
-    private String extractCommentBlock(String text, String commentLine) {
-        String[] lines = text.split("\n");
+    private String cleanCommentBlock(String rawComment) {
+        String[] lines = rawComment.split("\n");
+        StringBuilder result = new StringBuilder();
         
-        int startIndex = -1;
-        for (int i = 0; i < lines.length; i++) {
-            if (lines[i].trim().equals(commentLine.trim())) {
-                startIndex = i;
-                break;
-            }
-        }
-        
-        if (startIndex == -1) {
-            throw new RuntimeException("Comment line not found: " + commentLine);
-        }
-
-        int commentStart = findCommentStart(lines, startIndex);
-        int commentEnd = findCommentEnd(lines, commentStart);
-        
-        if (commentStart == -1 || commentEnd == -1) {
-            throw new RuntimeException("Could not find comment block boundaries for line: " + commentLine);
-        }
-
-        StringBuilder commentContent = new StringBuilder();
-        for (int i = commentStart; i <= commentEnd; i++) {
-            String line = lines[i];
-            String cleanedLine = cleanCommentLine(line);
-            if (!cleanedLine.isEmpty()) {
-                commentContent.append(cleanedLine).append("\n");
+        for (String line : lines) {
+            String cleaned = cleanCommentLine(line);
+            if (!cleaned.isEmpty()) {
+                result.append(cleaned).append("\n");
             }
         }
         
-        return commentContent.toString().trim();
-    }
-
-    private int findCommentStart(String[] lines, int startIndex) {
-        for (int i = startIndex; i >= 0; i--) {
-            String line = lines[i].trim();
-            if (line.startsWith("(*")) {
-                return i;
-            }
-            if (!line.isEmpty() && !isCommentLine(line)) {
-                break;
-            }
-        }
-        return -1;
-    }
-
-    private int findCommentEnd(String[] lines, int startIndex) {
-        for (int i = startIndex; i < lines.length; i++) {
-            String line = lines[i].trim();
-            if (line.endsWith("*)")) {
-                return i;
-            }
-            if (!line.isEmpty() && !isCommentLine(line)) {
-                break;
-            }
-        }
-        return -1;
-    }
-
-    private boolean isCommentLine(String line) {
-        String trimmed = line.trim();
-        return trimmed.startsWith("(*") || trimmed.startsWith("*") || trimmed.endsWith("*)") ||
-               (!trimmed.isEmpty() && !trimmed.startsWith("(*") && !trimmed.endsWith("*)") &&
-                trimmed.chars().allMatch(c -> Character.isWhitespace(c) || c == '*'));
+        return result.toString().trim();
     }
 
     private String cleanCommentLine(String line) {

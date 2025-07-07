@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.extensions.file
+package org.testingisdocumenting.znai.extensions.ocaml
 
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.junit.Test
@@ -24,22 +24,35 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class OcamlCommentIncludePluginTest {
     @Test
-    void "should extract multi-line comment block"() {
-        def result = process("test-ocaml.ml", "{commentLine: '@param a the first integer'}")
-        println result
+    void "should extract comment for add function"() {
+        def result = process("test-ocaml.ml", "{commentLine: 'let add'}")
         
+        result.should == "This is a simple OCaml function"
     }
 
     @Test
-    void "should extract single line comment"() {
-        def result = process("test-ocaml.ml", "{commentLine: 'Single line comment'}")
+    void "should extract multi-line comment for multiply function"() {
+        def result = process("test-ocaml.ml", "{commentLine: 'let multiply'}")
+        
+        result.should == "This is a more complex function\n" +
+                "that demonstrates multiple parameter handling\n" +
+                "and return value documentation\n" +
+                "\n" +
+                "@param a the first integer\n" +
+                "@param b the second integer\n" +
+                "@return the sum of a and b"
+    }
+
+    @Test
+    void "should extract single line comment for subtract function"() {
+        def result = process("test-ocaml.ml", "{commentLine: 'let subtract'}")
         
         result.should == "Single line comment"
     }
 
     @Test
-    void "should extract complex multi-line comment block"() {
-        def result = process("test-ocaml.ml", "{commentLine: 'This function calculates the factorial of a number'}")
+    void "should extract complex multi-line comment for factorial function"() {
+        def result = process("test-ocaml.ml", "{commentLine: 'let rec factorial'}")
         
         result.should == "Multi-line comment block\n" +
                 "with detailed documentation\n" +
@@ -55,8 +68,8 @@ class OcamlCommentIncludePluginTest {
     @Test
     void "should throw exception when comment line not found"() {
         code {
-            process("test-ocaml.ml", "{commentLine: 'non-existent comment'}")
-        } should throwException("Comment line not found: non-existent comment")
+            process("test-ocaml.ml", "{commentLine: 'non-existent-function'}")
+        } should throwException("can't find text: non-existent-function")
     }
 
     private static def process(fileName, params) {
