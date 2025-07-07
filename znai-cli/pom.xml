@@ -26,6 +26,7 @@
     </parent>
 
     <artifactId>znai-cli</artifactId>
+    <name>Znai CLI</name>
 
     <dependencies>
         <dependency>

@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-maven-plugin-test</artifactId>
+    <name>Znai Maven Plugin Test</name>
 
     <build>
         <plugins>

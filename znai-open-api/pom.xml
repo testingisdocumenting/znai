@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-open-api</artifactId>
+    <name>Znai Open API</name>
 
     <dependencies>
         <dependency>

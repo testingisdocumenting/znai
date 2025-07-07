@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-diagrams</artifactId>
+    <name>Znai Diagrams</name>
 
     <dependencies>
         <dependency>

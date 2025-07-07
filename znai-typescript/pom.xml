@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-typescript</artifactId>
+    <name>Znai TypeScript</name>
 
     <dependencies>
         <dependency>

@@ -25,4 +25,5 @@
     </parent>
 
     <artifactId>znai-utils-for-testing</artifactId>
+    <name>Znai Utils for Testing</name>
 </project>

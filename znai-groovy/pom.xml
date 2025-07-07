@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-groovy</artifactId>
+    <name>Znai Groovy</name>
 
     <dependencies>
         <dependency>

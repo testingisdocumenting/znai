@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-ddjt-docs</artifactId>
+    <name>Znai DDJT Docs</name>
 
     <dependencies>
         <dependency>

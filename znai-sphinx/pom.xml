@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-sphinx</artifactId>
+    <name>Znai Sphinx</name>
 
     <dependencies>
         <dependency>

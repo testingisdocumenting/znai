@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-maven-plugin</artifactId>
+    <name>Znai Maven Plugin</name>
 
     <packaging>maven-plugin</packaging>
 

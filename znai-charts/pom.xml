@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-charts</artifactId>
+    <name>Znai Charts</name>
     <description>Bars, Pies, Lines charts</description>
 
     <dependencies>

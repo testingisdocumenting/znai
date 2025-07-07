@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-utils</artifactId>
+    <name>Znai Utils</name>
 
     <dependencies>
         <dependency>

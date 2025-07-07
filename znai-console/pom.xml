@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-console</artifactId>
+    <name>Znai Console</name>
 
     <dependencies>
         <dependency>

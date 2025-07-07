@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-core</artifactId>
+    <name>Znai Core</name>
 
     <properties>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>

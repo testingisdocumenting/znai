@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-generators</artifactId>
+    <name>Znai Generators</name>
 
     <dependencies>
         <dependency>

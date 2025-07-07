@@ -26,6 +26,7 @@
     </parent>
 
     <artifactId>znai-docs</artifactId>
+    <name>Znai Docs</name>
 
     <profiles>
         <profile>

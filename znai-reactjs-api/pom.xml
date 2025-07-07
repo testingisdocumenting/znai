@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-reactjs-default-components</artifactId>
+    <name>Znai ReactJS API</name>
 
     <description>this a placeholder for moving React default components and props</description>
 </project>

@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-tests</artifactId>
+    <name>Znai Tests</name>
 
     <dependencies>
         <!-- to force running of the tests before documentation -->

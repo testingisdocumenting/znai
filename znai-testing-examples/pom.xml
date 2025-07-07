@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-testing-examples</artifactId>
+    <name>Znai Testing Examples</name>
 
     <dependencies>
         <dependency>

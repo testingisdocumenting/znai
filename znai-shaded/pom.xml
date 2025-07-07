@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-shaded</artifactId>
+    <name>Znai Shaded</name>
 
     <dependencies>
         <dependency>

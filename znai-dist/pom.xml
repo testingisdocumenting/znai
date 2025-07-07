@@ -26,6 +26,7 @@
     </parent>
 
     <artifactId>znai-dist</artifactId>
+    <name>Znai Distribution</name>
     <packaging>pom</packaging>
 
     <dependencies>

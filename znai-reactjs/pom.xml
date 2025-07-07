@@ -26,6 +26,7 @@
     </parent>
 
     <artifactId>znai-reactjs</artifactId>
+    <name>Znai ReactJS</name>
 
     <build>
         <plugins>

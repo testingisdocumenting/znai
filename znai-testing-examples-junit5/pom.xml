@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-testing-examples-junit5</artifactId>
+    <name>Znai Testing Examples JUnit5</name>
 
     <properties>
         <junit5.version>5.7.2</junit5.version>

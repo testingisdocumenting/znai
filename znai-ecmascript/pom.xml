@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-ecmascript</artifactId>
+    <name>Znai ECMAScript</name>
 
     <dependencies>
         <dependency>

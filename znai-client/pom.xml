@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-client</artifactId>
+    <name>Znai Client</name>
 
     <dependencies>
         <dependency>

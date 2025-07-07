@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-java</artifactId>
+    <name>Znai Java</name>
 
     <dependencies>
         <dependency>

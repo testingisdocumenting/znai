@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-cpp</artifactId>
+    <name>Znai C++</name>
 
     <dependencies>
         <dependency>

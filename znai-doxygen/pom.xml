@@ -25,6 +25,7 @@
     </parent>
 
     <artifactId>znai-doxygen</artifactId>
+    <name>Znai Doxygen</name>
     <version>1.78-SNAPSHOT</version>
 
     <dependencies>
