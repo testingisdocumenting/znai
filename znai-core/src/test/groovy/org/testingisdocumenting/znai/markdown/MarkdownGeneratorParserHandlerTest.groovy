@@ -16,6 +16,8 @@
 
 package org.testingisdocumenting.znai.markdown
 
+import org.testingisdocumenting.znai.extensions.include.DummyIncludePlugin
+import org.testingisdocumenting.znai.extensions.PluginResult
 import org.testingisdocumenting.znai.parser.MarkupParser
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
@@ -69,7 +71,7 @@ class MarkdownGeneratorParserHandlerTest {
     @Test
     void "should generate block quotes"() {
         def result = process("> Quote")
-        result.should == "> Quote\n\n\n"
+        result.should == "> Quote\n\n"
     }
 
     @Test
@@ -109,6 +111,20 @@ class MarkdownGeneratorParserHandlerTest {
     void "should handle empty input"() {
         def result = process("")
         result.should == ""
+    }
+
+    @Test
+    void "should use plugin markdownRepresentation method for include plugins"() {
+        def handler = new MarkdownGeneratorParserHandler(0)
+        def plugin = new DummyIncludePlugin()
+        
+        plugin.process(TEST_COMPONENTS_REGISTRY, handler, Paths.get("test.md"),
+                      TEST_COMPONENTS_REGISTRY.pluginParamsFactory().create("dummy", "test-param", [:]))
+        
+        handler.onIncludePlugin(plugin, PluginResult.empty())
+        
+        def result = handler.getMarkdown()
+        result.should == "**Dummy plugin content**: test-param\n\n"
     }
 
     private static String process(String markdown, int baseHeadingLevel = 0) {

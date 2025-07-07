@@ -50,11 +50,15 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     }
 
     public String getMarkdown() {
-        return markdown.toString();
+        return markdown.toString().replaceAll("\n\n\n", "\n\n");
     }
 
     @Override
     public void onSectionStart(String title, HeadingProps headingProps, Heading heading) {
+        if (heading == null) {
+            return;
+        }
+
         int level = Math.max(1, heading.getLevel() + baseHeadingLevel);
         markdown.append("#".repeat(level)).append(" ").append(title).append("\n\n");
     }

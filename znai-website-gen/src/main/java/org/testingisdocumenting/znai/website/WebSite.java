@@ -648,6 +648,7 @@ public class WebSite implements Log {
         reportPhase("generating LLM content file");
 
         StringBuilder llmContent = new StringBuilder();
+        llmContent.append("\"").append(docMeta.getTitle()).append("\" full guide:\n\n");
         
         forEachPage((tocItem, page) -> {
             if (page == null) {
@@ -656,7 +657,7 @@ public class WebSite implements Log {
             
             MarkupParserResult parserResult = parserResultByTocItem.get(tocItem);
             if (parserResult != null && parserResult.markdown() != null) {
-                llmContent.append("# ").append(tocItem.getPageTitle()).append("\n\n");
+                llmContent.append("# ").append(tocItem.getChapterTitle()).append(" -> ").append(tocItem.getPageTitle()).append("\n\n");
                 llmContent.append(parserResult.markdown());
                 llmContent.append("\n\n");
             }

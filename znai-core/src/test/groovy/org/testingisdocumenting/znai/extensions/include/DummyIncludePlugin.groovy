@@ -64,6 +64,11 @@ class DummyIncludePlugin implements IncludePlugin {
         return PluginResult.docElements([dummy].stream())
     }
 
+    @Override
+    String markdownRepresentation(PluginParams pluginParams) {
+        return "**Dummy plugin content**: " + pluginParams.getFreeParam()
+    }
+
     private static void callThatThrows(String message) {
         throw new RuntimeException(message)
     }
