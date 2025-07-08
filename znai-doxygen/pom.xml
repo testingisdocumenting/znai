@@ -21,12 +21,12 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.78-SNAPSHOT</version>
+        <version>1.77.1</version>
     </parent>
 
     <artifactId>znai-doxygen</artifactId>
     <name>Znai Doxygen</name>
-    <version>1.78-SNAPSHOT</version>
+    <version>1.77.1</version>
 
     <dependencies>
         <dependency>
