@@ -27,6 +27,25 @@ class OcamlCommentExtractor {
         return removeCommentPrefixAndSuffix(extractBlock(startBlockIdx, endBlockIdx));
     }
 
+    /**
+     * Converts an OCaml comment block to a list of DocElements.
+     * Handles OCaml-specific doc syntax like `[code]` and `{[ multi-line code ]}`.
+     *
+     * @param componentsRegistry registry containing the markdown parser
+     * @param filePath path to the OCaml file (for parser context)
+     * @param textToMatch text to find within a comment block
+     * @return list of DocElements representing the parsed comment
+     */
+    List<DocElement> extractCommentBlockAsDocElements(ComponentsRegistry componentsRegistry, Path filePath, String textToMatch) {
+        String commentText = extractCommentBlock(textToMatch);
+        String processedText = processOcamlDocSyntax(commentText);
+
+        MarkupParser parser = componentsRegistry.defaultParser();
+        MarkupParserResult parserResult = parser.parse(filePath, processedText);
+
+        return parserResult.docElement().getContent();
+    }
+
     private String removeCommentPrefixAndSuffix(String commentBlock) {
         String trimmed = commentBlock.trim();
         
@@ -81,29 +100,10 @@ class OcamlCommentExtractor {
         throw new IllegalArgumentException("can't find text: " + textToMatch + contentPartForException());
     }
 
-    String contentPartForException() {
+    private String contentPartForException() {
         return ", content:\n" + content;
     }
 
-    /**
-     * Converts an OCaml comment block to a list of DocElements.
-     * Handles OCaml-specific doc syntax like `[code]` and `{[ multi-line code ]}`.
-     * 
-     * @param componentsRegistry registry containing the markdown parser
-     * @param filePath path to the OCaml file (for parser context)
-     * @param textToMatch text to find within a comment block
-     * @return list of DocElements representing the parsed comment
-     */
-    List<DocElement> extractCommentBlockAsDocElements(ComponentsRegistry componentsRegistry, Path filePath, String textToMatch) {
-        String commentText = extractCommentBlock(textToMatch);
-        String processedText = processOcamlDocSyntax(commentText);
-        
-        MarkupParser parser = componentsRegistry.defaultParser();
-        MarkupParserResult parserResult = parser.parse(filePath, processedText);
-        
-        return parserResult.docElement().getContent();
-    }
-    
     /**
      * Processes OCaml-specific documentation syntax and converts it to markdown.
      * Converts:
@@ -113,7 +113,14 @@ class OcamlCommentExtractor {
     String processOcamlDocSyntax(String text) {
         Pattern multiLineCodePattern = Pattern.compile("\\{\\[([^}]*?)]}", Pattern.DOTALL);
         String afterMultiLine = RegexpUtils.replaceAll(text, multiLineCodePattern, 
-            matcher -> "\n```\n" + matcher.group(1).trim() + "\n```");
+            matcher -> {
+                String codeContent = matcher.group(1);
+                // Remove leading and trailing newlines but preserve internal spacing
+                codeContent = codeContent.replaceAll("^\\s*\\n", "").replaceAll("\\n\\s*$", "");
+                // Normalize indentation by removing common leading whitespace
+                codeContent = normalizeIndentation(codeContent);
+                return "\n```\n" + codeContent + "\n```";
+            });
 
         // Then handle inline code: [code]
         // But avoid processing content inside code blocks (between ``` markers)
@@ -144,5 +151,42 @@ class OcamlCommentExtractor {
         }
 
         return finalResult.toString();
+    }
+
+    private String normalizeIndentation(String text) {
+        String[] lines = text.split("\n");
+        if (lines.length == 0) return text;
+        
+        // Find minimum indentation (ignoring empty lines)
+        int minIndent = Integer.MAX_VALUE;
+        for (String line : lines) {
+            if (!line.trim().isEmpty()) {
+                int indent = 0;
+                while (indent < line.length() && line.charAt(indent) == ' ') {
+                    indent++;
+                }
+                minIndent = Math.min(minIndent, indent);
+            }
+        }
+        
+        if (minIndent == Integer.MAX_VALUE || minIndent == 0) {
+            return text;
+        }
+        
+        // Remove common indentation
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i];
+            if (line.trim().isEmpty()) {
+                result.append(line);
+            } else {
+                result.append(line.substring(Math.min(minIndent, line.length())));
+            }
+            if (i < lines.length - 1) {
+                result.append("\n");
+            }
+        }
+        
+        return result.toString();
     }
 }

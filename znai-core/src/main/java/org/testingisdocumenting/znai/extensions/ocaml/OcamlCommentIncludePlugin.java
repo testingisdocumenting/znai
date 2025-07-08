@@ -18,17 +18,18 @@ package org.testingisdocumenting.znai.extensions.ocaml;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.PluginParams;
-import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
-import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.parser.docelement.DocElement;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class OcamlCommentIncludePlugin implements IncludePlugin {
+    protected static final String COMMENT_LINE_KEY = "commentLine";
     private Path ocamlPath;
 
     @Override
@@ -42,6 +43,14 @@ public class OcamlCommentIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        PluginParamsDefinition params = new PluginParamsDefinition();
+        params.add(COMMENT_LINE_KEY, PluginParamType.STRING, "text within a comment to match and identify the ocaml comment block", "\"to use this function\"");
+
+        return params;
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry,
                                 ParserHandler parserHandler,
                                 Path markupPath,
@@ -49,57 +58,14 @@ public class OcamlCommentIncludePlugin implements IncludePlugin {
         String fileName = pluginParams.getFreeParam();
         ocamlPath = componentsRegistry.resourceResolver().fullPath(fileName);
         String text = componentsRegistry.resourceResolver().textContent(fileName);
+        String commentLine = pluginParams.getOpts().getRequiredString(COMMENT_LINE_KEY);
 
-        String comments = extractComments(text, pluginParams.getOpts());
-        MarkupParserResult parserResult = componentsRegistry.defaultParser().parse(ocamlPath, comments);
-        return PluginResult.docElements(parserResult.docElement().getContent().stream());
+        List<DocElement> docElements = new OcamlCommentExtractor(text).extractCommentBlockAsDocElements(componentsRegistry, markupPath, commentLine);
+        return PluginResult.docElements(docElements.stream());
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(ocamlPath));
-    }
-
-    private String extractComments(String text, PluginParamsOpts opts) {
-        String commentLine = opts.getRequiredString("commentLine");
-        OcamlCommentExtractor extractor = new OcamlCommentExtractor(text);
-        String rawComment = extractor.extractCommentBlock(commentLine);
-        return cleanCommentBlock(rawComment);
-    }
-
-    private String cleanCommentBlock(String rawComment) {
-        String[] lines = rawComment.split("\n");
-        StringBuilder result = new StringBuilder();
-        
-        for (String line : lines) {
-            String cleaned = cleanCommentLine(line);
-            if (!cleaned.isEmpty()) {
-                result.append(cleaned).append("\n");
-            }
-        }
-        
-        return result.toString().trim();
-    }
-
-    private String cleanCommentLine(String line) {
-        String trimmed = line.trim();
-        
-        if (trimmed.startsWith("(*") && trimmed.endsWith("*)")) {
-            return trimmed.substring(2, trimmed.length() - 2).trim();
-        }
-        
-        if (trimmed.startsWith("(*")) {
-            return trimmed.substring(2).trim();
-        }
-        
-        if (trimmed.endsWith("*)")) {
-            return trimmed.substring(0, trimmed.length() - 2).trim();
-        }
-        
-        if (trimmed.startsWith("*")) {
-            return trimmed.substring(1).trim();
-        }
-        
-        return trimmed;
     }
 }

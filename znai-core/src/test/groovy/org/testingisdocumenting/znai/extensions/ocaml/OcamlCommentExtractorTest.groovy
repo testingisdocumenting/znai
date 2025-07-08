@@ -116,7 +116,7 @@ let y = 10
 
 ```
 let x = 1
-  let y = 2
+let y = 2
 ```"""
         
         extractor.processOcamlDocSyntax(input).should == expected
