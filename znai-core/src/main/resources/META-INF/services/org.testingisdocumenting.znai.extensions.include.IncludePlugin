@@ -21,3 +21,4 @@ org.testingisdocumenting.znai.extensions.meta.MetaIncludePlugin
 org.testingisdocumenting.znai.extensions.api.ApiParametersIncludePlugin
 org.testingisdocumenting.znai.extensions.toc.PageTocIncludePlugin
 org.testingisdocumenting.znai.extensions.json.JsonIncludePlugin
+org.testingisdocumenting.znai.extensions.ocaml.OcamlCommentIncludePlugin
