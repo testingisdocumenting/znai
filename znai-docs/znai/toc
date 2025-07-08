@@ -9,6 +9,7 @@ flow
     page-toc
     lookup-paths
     search
+    llm
     footer
     support
     footnotes

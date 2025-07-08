@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-const ts = require('typescript');
-const fs = require('fs');
+import ts from 'typescript';
+import fs from 'fs';
 
-module.exports.extractDefinitions = extractDefinitions;
+export { extractDefinitions };
 
 function extractDefinitions(filePath) {
     const compilerOptions = { module: ts.ModuleKind.None };

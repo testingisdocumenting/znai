@@ -21,8 +21,9 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.77-SNAPSHOT</version>
+        <version>1.78-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-utils-for-testing</artifactId>
+    <name>Znai Utils for Testing</name>
 </project>

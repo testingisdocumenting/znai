@@ -21,10 +21,11 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.77-SNAPSHOT</version>
+        <version>1.78-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-ddjt-docs</artifactId>
+    <name>Znai DDJT Docs</name>
 
     <dependencies>
         <dependency>

@@ -2,6 +2,7 @@
   "name": "typescript-parser",
   "version": "0.1.0",
   "description": "Parsing typescript and generating ast",
+  "type": "module",
   "private": true,
   "files": [
     "build/lib"

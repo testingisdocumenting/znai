@@ -38,6 +38,7 @@ public class FileIncludePlugin implements IncludePlugin {
     private PluginFeatureList features;
 
     private ManipulatedSnippetContentProvider contentProvider;
+    private String lang;
 
     @Override
     public PluginParamsDefinition parameters() {
@@ -75,10 +76,8 @@ public class FileIncludePlugin implements IncludePlugin {
         features = new PluginFeatureList();
         features.add(SnippetsCommon.createCommonFeatures(componentsRegistry, markupPath, pluginParams, contentProvider).asList());
 
-        String providedLang = pluginParams.getOpts().getString("lang");
-        String langToUse = (providedLang == null) ? langFromFileName(fileName) : providedLang;
-
-        Map<String, Object> props = CodeSnippetsProps.create(langToUse, contentProvider.snippetContent());
+        this.lang = getLang(pluginParams);
+        Map<String, Object> props = CodeSnippetsProps.create(lang, contentProvider.snippetContent());
         props.putAll(pluginParams.getOpts().toMap());
 
         features.updateProps(props);
@@ -95,6 +94,28 @@ public class FileIncludePlugin implements IncludePlugin {
     @Override
     public SearchText textForSearch() {
         return SearchScore.HIGH.text(contentProvider.snippetContent());
+    }
+
+    @Override
+    public String markdownRepresentation() {
+        if (contentProvider == null) {
+            return "";
+        }
+        
+        StringBuilder markdown = new StringBuilder();
+        markdown.append("```").append(lang).append("\n");
+        markdown.append(contentProvider.snippetContent());
+        if (!contentProvider.snippetContent().endsWith("\n")) {
+            markdown.append("\n");
+        }
+        markdown.append("```");
+        
+        return markdown.toString();
+    }
+
+    private String getLang(PluginParams pluginParams) {
+        var providedLang = pluginParams.getOpts().getString("lang");
+        return (providedLang == null) ? langFromFileName(fileName) : providedLang;
     }
 
     private static String langFromFileName(String fileName) {

@@ -48,7 +48,8 @@ public class SphinxDocTreeParser implements MarkupParser {
                 Collections.emptyList(),
                 searchCrawler.getSearchEntries(),
                 elementCreationHandler.getAuxiliaryFiles(),
-                new PageMeta());
+                new PageMeta(),
+                docXml);
     }
 
     @Override

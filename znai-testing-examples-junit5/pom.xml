@@ -21,10 +21,11 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.77-SNAPSHOT</version>
+        <version>1.78-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-testing-examples-junit5</artifactId>
+    <name>Znai Testing Examples JUnit5</name>
 
     <properties>
         <junit5.version>5.7.2</junit5.version>
