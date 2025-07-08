@@ -17,8 +17,13 @@
 package org.testingisdocumenting.znai.extensions.ocaml
 
 import org.junit.Test
+import org.testingisdocumenting.znai.parser.TestComponentsRegistry
+
+import java.nio.file.Paths
 
 class OcamlCommentExtractorTest {
+
+
     @Test
     void "extract single line comment block"() {
         def content = """
@@ -87,5 +92,96 @@ let y = 10
 """
         def extractor = new OcamlCommentExtractor(content)
         extractor.extractCommentBlock("let x")
+    }
+
+    @Test
+    void "convert OCaml inline code syntax to markdown"() {
+        def extractor = new OcamlCommentExtractor("")
+        
+        extractor.processOcamlDocSyntax("Use [List.map] to transform").should == "Use `List.map` to transform"
+        extractor.processOcamlDocSyntax("Check [fold_left] and [fold_right]").should == "Check `fold_left` and `fold_right`"
+    }
+
+    @Test
+    void "convert OCaml multi-line code blocks to markdown"() {
+        def extractor = new OcamlCommentExtractor("")
+        
+        def input = """Example:
+{[
+  let x = 1
+  let y = 2
+]}"""
+        
+        def expected = """Example:
+
+```
+let x = 1
+  let y = 2
+```
+"""
+        
+        extractor.processOcamlDocSyntax(input).should == expected
+    }
+
+    @Test
+    void "handle multiple code blocks"() {
+        def extractor = new OcamlCommentExtractor("")
+        
+        def input = """First: {[let x = 1]}
+Second: {[let y = 2]}"""
+        
+        def expected = """First: 
+```
+let x = 1
+```
+
+Second: 
+```
+let y = 2
+```
+"""
+        
+        extractor.processOcamlDocSyntax(input).should == expected
+    }
+
+    @Test
+    void "handle mixed OCaml and markdown syntax"() {
+        def extractor = new OcamlCommentExtractor("")
+        
+        def input = """## Header
+
+Use [fold_left] like this:
+{[
+  List.fold_left (+) 0 [1; 2; 3]
+]}
+
+after"""
+        
+        def expected = """## Header
+
+Use `fold_left` like this:
+
+```
+List.fold_left (+) 0 [1; 2; 3]
+```
+
+after"""
+        
+        extractor.processOcamlDocSyntax(input).should == expected
+    }
+
+    @Test
+    void "convert full comment block to doc elements"() {
+        def content = """
+(** Use [List.map] to transform elements *)
+let transform lst = List.map (fun x -> x + 1) lst
+"""
+        def extractor = new OcamlCommentExtractor(content)
+        def elements = extractor.extractCommentBlockAsDocElements(TestComponentsRegistry.TEST_COMPONENTS_REGISTRY,
+                Paths.get("test.ml"), "transform")
+        
+        elements.size().should == 1
+        elements[0].toMap().type.should == 'TestMarkup'
+        elements[0].toMap().markup.should == 'Use `List.map` to transform elements'
     }
 }
