@@ -117,8 +117,7 @@ let y = 10
 ```
 let x = 1
   let y = 2
-```
-"""
+```"""
         
         extractor.processOcamlDocSyntax(input).should == expected
     }
@@ -134,12 +133,10 @@ Second: {[let y = 2]}"""
 ```
 let x = 1
 ```
-
 Second: 
 ```
 let y = 2
-```
-"""
+```"""
         
         extractor.processOcamlDocSyntax(input).should == expected
     }

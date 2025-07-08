@@ -117,7 +117,7 @@ class OcamlCommentExtractor {
 
         // Then handle inline code: [code]
         // But avoid processing content inside code blocks (between ``` markers)
-        String[] parts = afterMultiLine.split("```");
+        String[] parts = afterMultiLine.split("```", -1);
         StringBuilder finalResult = new StringBuilder();
         
         Pattern inlineCodePattern = Pattern.compile("\\[([^]]+?)]");
