@@ -22,8 +22,6 @@ import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import java.nio.file.Paths
 
 class OcamlCommentExtractorTest {
-
-
     @Test
     void "extract single line comment block"() {
         def content = """
@@ -175,10 +173,10 @@ let transform lst = List.map (fun x -> x + 1) lst
 """
         def extractor = new OcamlCommentExtractor(content)
         def elements = extractor.extractCommentBlockAsDocElements(TestComponentsRegistry.TEST_COMPONENTS_REGISTRY,
-                Paths.get("test.ml"), "transform")
+                Paths.get("test.ml"), "transform").contentToListOfMaps()
         
         elements.size().should == 1
-        elements[0].toMap().type.should == 'TestMarkup'
-        elements[0].toMap().markup.should == 'Use `List.map` to transform elements'
+        elements[0].type.should == 'TestMarkup'
+        elements[0].markup.should == 'Use `List.map` to transform elements'
     }
 }

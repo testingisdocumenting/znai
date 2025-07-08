@@ -3,11 +3,10 @@ package org.testingisdocumenting.znai.extensions.ocaml;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
-import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.utils.RegexpUtils;
+import org.testingisdocumenting.znai.utils.StringUtils;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.regex.Pattern;
 
 class OcamlCommentExtractor {
@@ -36,14 +35,12 @@ class OcamlCommentExtractor {
      * @param textToMatch text to find within a comment block
      * @return list of DocElements representing the parsed comment
      */
-    List<DocElement> extractCommentBlockAsDocElements(ComponentsRegistry componentsRegistry, Path filePath, String textToMatch) {
+    MarkupParserResult extractCommentBlockAsDocElements(ComponentsRegistry componentsRegistry, Path filePath, String textToMatch) {
         String commentText = extractCommentBlock(textToMatch);
         String processedText = processOcamlDocSyntax(commentText);
 
         MarkupParser parser = componentsRegistry.defaultParser();
-        MarkupParserResult parserResult = parser.parse(filePath, processedText);
-
-        return parserResult.docElement().getContent();
+        return parser.parse(filePath, processedText);
     }
 
     private String removeCommentPrefixAndSuffix(String commentBlock) {
@@ -117,8 +114,7 @@ class OcamlCommentExtractor {
                 String codeContent = matcher.group(1);
                 // Remove leading and trailing newlines but preserve internal spacing
                 codeContent = codeContent.replaceAll("^\\s*\\n", "").replaceAll("\\n\\s*$", "");
-                // Normalize indentation by removing common leading whitespace
-                codeContent = normalizeIndentation(codeContent);
+                codeContent = StringUtils.stripIndentation(codeContent);
                 return "\n```\n" + codeContent + "\n```";
             });
 
@@ -151,42 +147,5 @@ class OcamlCommentExtractor {
         }
 
         return finalResult.toString();
-    }
-
-    private String normalizeIndentation(String text) {
-        String[] lines = text.split("\n");
-        if (lines.length == 0) return text;
-        
-        // Find minimum indentation (ignoring empty lines)
-        int minIndent = Integer.MAX_VALUE;
-        for (String line : lines) {
-            if (!line.trim().isEmpty()) {
-                int indent = 0;
-                while (indent < line.length() && line.charAt(indent) == ' ') {
-                    indent++;
-                }
-                minIndent = Math.min(minIndent, indent);
-            }
-        }
-        
-        if (minIndent == Integer.MAX_VALUE || minIndent == 0) {
-            return text;
-        }
-        
-        // Remove common indentation
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < lines.length; i++) {
-            String line = lines[i];
-            if (line.trim().isEmpty()) {
-                result.append(line);
-            } else {
-                result.append(line.substring(Math.min(minIndent, line.length())));
-            }
-            if (i < lines.length - 1) {
-                result.append("\n");
-            }
-        }
-        
-        return result.toString();
     }
 }

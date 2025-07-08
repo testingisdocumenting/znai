@@ -22,15 +22,16 @@ import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
-import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class OcamlCommentIncludePlugin implements IncludePlugin {
     protected static final String COMMENT_LINE_KEY = "commentLine";
     private Path ocamlPath;
+    private MarkupParserResult parserResult;
 
     @Override
     public String id() {
@@ -60,8 +61,13 @@ public class OcamlCommentIncludePlugin implements IncludePlugin {
         String text = componentsRegistry.resourceResolver().textContent(fileName);
         String commentLine = pluginParams.getOpts().getRequiredString(COMMENT_LINE_KEY);
 
-        List<DocElement> docElements = new OcamlCommentExtractor(text).extractCommentBlockAsDocElements(componentsRegistry, markupPath, commentLine);
-        return PluginResult.docElements(docElements.stream());
+        parserResult = new OcamlCommentExtractor(text).extractCommentBlockAsDocElements(componentsRegistry, markupPath, commentLine);
+        return PluginResult.docElements(parserResult.docElement().getContent().stream());
+    }
+
+    @Override
+    public SearchText textForSearch() {
+        return SearchScore.STANDARD.text(parserResult.getAllText());
     }
 
     @Override
