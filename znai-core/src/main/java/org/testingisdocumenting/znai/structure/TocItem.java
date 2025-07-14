@@ -81,16 +81,18 @@ public class TocItem {
     }
 
     public String getFilePath() {
+        String dirPrefix =  getDirName().isEmpty() ? "" : getDirName() + "/";
+
         if (page.hasPath()) {
             String path = page.getPath();
             if (path.startsWith("/")) {
                 return path;
             }
 
-            return getDirName() + "/" + path;
+            return dirPrefix +  path;
         }
 
-        return getDirName() + "/" + getFileNameWithoutExtension() +
+        return dirPrefix + getFileNameWithoutExtension() +
                 (getFileExtension().isEmpty() ? "" : "." + getFileExtension());
     }
 

@@ -1,0 +1,1 @@
+* Add: Initial support for [pages defined outside of chapters](flow/structure#pages-without-chapters)
