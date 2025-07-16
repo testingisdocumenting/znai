@@ -36,6 +36,17 @@ Take a look at the left side bar and compare it with the file content.
 The top entry, `introduction`, corresponds to the directory of the same name. 
 The nested entry, `rationale`, corresponds to the file `rationale.md`.
 
+# Pages Without Chapters
+
+You can define TOC without having chapters. Specify file names with extension without adding any indentation:
+```
+page-one.md
+page-two.md
+optional-chapter
+   page-three.md
+   page-four.md
+```
+
 # Sub Headings
 
 Only a first level heading is treated as a first class citizen:

@@ -15,59 +15,53 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import { Icon } from '../../icons/Icon'
+import { Icon } from "../../icons/Icon";
 
-import { isTocItemIndex } from "../../../structure/toc/TableOfContents"
+import "./PageDefaultNextPrevNavigation.css";
 
-import './PageDefaultNextPrevNavigation.css'
-
-function PageDefaultNextPrevNavigation({
-                                           currentTocItem,
-                                           prevPageTocItem,
-                                           nextPageTocItem,
-                                           onNextPage,
-                                           onPrevPage
-                                       }) {
-    return (
-        <div className="page-default-next-prev-navigation">
-            <DefaultPrevPageButton currentTocItem={currentTocItem}
-                                   prevTocItem={prevPageTocItem}
-                                   onClick={onPrevPage}/>
-            <DefaultNextPageButton currentTocItem={currentTocItem}
-                                   nextTocItem={nextPageTocItem}
-                                   onClick={onNextPage}/>
-        </div>
-    )
+function PageDefaultNextPrevNavigation({ currentTocItem, prevPageTocItem, nextPageTocItem, onNextPage, onPrevPage }) {
+  return (
+    <div className="page-default-next-prev-navigation">
+      <DefaultPrevPageButton currentTocItem={currentTocItem} prevTocItem={prevPageTocItem} onClick={onPrevPage} />
+      <DefaultNextPageButton currentTocItem={currentTocItem} nextTocItem={nextPageTocItem} onClick={onNextPage} />
+    </div>
+  );
 }
 
-function DefaultPrevPageButton({currentTocItem, prevTocItem, onClick}) {
-    return prevTocItem ? (
-        <div className="default-next-prev-navigation-button" onClick={onClick}>
-            <Icon id="chevron-left"/>
-            <div className="next-prev-page-title prev">{fullTitle(currentTocItem, prevTocItem)}</div>
-        </div>) : <div/>
+function DefaultPrevPageButton({ currentTocItem, prevTocItem, onClick }) {
+  return prevTocItem ? (
+    <div className="default-next-prev-navigation-button" onClick={onClick}>
+      <Icon id="chevron-left" />
+      <div className="next-prev-page-title prev">{fullTitle(currentTocItem, prevTocItem)}</div>
+    </div>
+  ) : (
+    <div />
+  );
 }
 
-function DefaultNextPageButton({currentTocItem, nextTocItem, onClick}) {
-    return nextTocItem ? (
-        <div className="default-next-prev-navigation-button" onClick={onClick}>
-            <div className="next-prev-page-title next">{fullTitle(currentTocItem, nextTocItem)}</div>
-            <Icon id="chevron-right"/>
-        </div>) : <div/>
+function DefaultNextPageButton({ currentTocItem, nextTocItem, onClick }) {
+  return nextTocItem ? (
+    <div className="default-next-prev-navigation-button" onClick={onClick}>
+      <div className="next-prev-page-title next">{fullTitle(currentTocItem, nextTocItem)}</div>
+      <Icon id="chevron-right" />
+    </div>
+  ) : (
+    <div />
+  );
 }
 
 function fullTitle(current, nextOrPrev) {
-    if (isTocItemIndex(nextOrPrev)) {
-        return nextOrPrev.pageTitle
-    }
+  if (nextOrPrev.dirName === "") {
+    return nextOrPrev.pageTitle;
+  }
 
-    if (current.dirName === nextOrPrev.dirName) {
-        return nextOrPrev.pageTitle
-    }
+  if (current.dirName === nextOrPrev.dirName) {
+    return nextOrPrev.pageTitle;
+  }
 
-    return `${nextOrPrev.chapterTitle}: ${nextOrPrev.pageTitle}`
+  return `${nextOrPrev.chapterTitle}: ${nextOrPrev.pageTitle}`;
 }
 
-export {PageDefaultNextPrevNavigation, DefaultPrevPageButton, DefaultNextPageButton}
+export { PageDefaultNextPrevNavigation, DefaultPrevPageButton, DefaultNextPageButton };

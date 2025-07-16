@@ -14,113 +14,117 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import TocPanel from './TocPanel'
-import {testLongToc} from "../structure/toc/toc.test.data";
+import React from "react";
+import TocPanel from "./TocPanel";
+import { testLongToc } from "../structure/toc/toc.test.data";
 
 const docMeta = {
-    "title": "Znai",
-    "type": "User Guide",
-    "viewOn": {
-        "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-cli/documentation",
-        "title": "View On GitHub"
-    }
-}
+  title: "Znai",
+  type: "User Guide",
+  viewOn: {
+    link: "https://github.com/testingisdocumenting/znai/blob/master/znai-cli/documentation",
+    title: "View On GitHub",
+  },
+};
 
 export function tocPanelDemo(registry) {
-    const selectedTocItem = {dirName: 'snippets', fileName: 'json'}
+  const selectedTocItem = { dirName: "snippets", fileName: "json" };
 
-    registry
-        .add('long', () => <TocPanel docMeta={docMeta}
-                                     toc={testLongToc()}
-                                     selectedItem={selectedTocItem}/>, '')
-        .add('short', () => <TocPanel docMeta={docMeta}
-                                      toc={shortToc()}
-                                      selectedItem={selectedTocItem}/>, '')
+  registry
+    .add("long", () => <TocPanel docMeta={docMeta} toc={testLongToc()} selectedItem={selectedTocItem} />, "")
+    .add("short", () => <TocPanel docMeta={docMeta} toc={shortToc()} selectedItem={selectedTocItem} />, "");
 }
 
 function shortToc() {
-    return [
+  return [
+    {
+      sectionTitle: "",
+      dirName: "",
+      items: [
         {
-            "sectionTitle": "",
-            "dirName": "",
-            "items": [
-                {
-                    "sectionTitle": "",
-                    "pageTitle": "Index",
-                    "pageMeta": {},
-                    "fileName": "index",
-                    "dirName": "",
-                    "pageSectionIdTitles": []
-                }
-            ]
+          sectionTitle: "",
+          pageTitle: "Index",
+          pageMeta: {},
+          fileName: "index",
+          dirName: "",
+          pageSectionIdTitles: [],
         },
         {
-            "sectionTitle": "Introduction",
-            "dirName": "introduction",
-            "items": [
-                {
-                    "sectionTitle": "Introduction",
-                    "pageTitle": "Rationale",
-                    "pageMeta": {},
-                    "fileName": "rationale",
-                    "dirName": "introduction",
-                },
-                {
-                    "sectionTitle": "Introduction",
-                    "pageTitle": "Example",
-                    "pageMeta": {},
-                    "fileName": "example",
-                    "dirName": "introduction",
-                },
-                {
-                    "sectionTitle": "Introduction",
-                    "pageTitle": "Getting Started",
-                    "pageMeta": {},
-                    "fileName": "getting-started",
-                    "dirName": "introduction",
-                }
-            ]
+          sectionTitle: "",
+          pageTitle: "My Intro",
+          pageMeta: {},
+          fileName: "my-intro",
+          dirName: "",
+          pageSectionIdTitles: [],
+        },
+      ],
+    },
+    {
+      sectionTitle: "Introduction",
+      dirName: "introduction",
+      items: [
+        {
+          sectionTitle: "Introduction",
+          pageTitle: "Rationale",
+          pageMeta: {},
+          fileName: "rationale",
+          dirName: "introduction",
         },
         {
-            "sectionTitle": "Synergy With Testing",
-            "dirName": "synergy-with-testing",
-            "items": [
-                {
-                    "sectionTitle": "Synergy With Testing",
-                    "pageTitle": "Java",
-                    "pageMeta": {},
-                    "fileName": "java",
-                    "dirName": "synergy-with-testing",
-                },
-                {
-                    "sectionTitle": "Synergy With Testing",
-                    "pageTitle": "REST",
-                    "pageMeta": {},
-                    "fileName": "REST",
-                    "dirName": "synergy-with-testing",
-                },
-                {
-                    "sectionTitle": "Synergy With Testing",
-                    "pageTitle": "Web UI",
-                    "pageMeta": {},
-                    "fileName": "web-UI",
-                    "dirName": "synergy-with-testing",
-                }
-            ]
+          sectionTitle: "Introduction",
+          pageTitle: "Example",
+          pageMeta: {},
+          fileName: "example",
+          dirName: "introduction",
         },
         {
-            "sectionTitle": "Configuration",
-            "dirName": "configuration",
-            "items": [
-                {
-                    "sectionTitle": "Configuration",
-                    "pageTitle": "Basic",
-                    "pageMeta": {},
-                    "fileName": "basic",
-                    "dirName": "configuration",
-                }
-            ]
-        }
-    ]
+          sectionTitle: "Introduction",
+          pageTitle: "Getting Started",
+          pageMeta: {},
+          fileName: "getting-started",
+          dirName: "introduction",
+        },
+      ],
+    },
+    {
+      sectionTitle: "Synergy With Testing",
+      dirName: "synergy-with-testing",
+      items: [
+        {
+          sectionTitle: "Synergy With Testing",
+          pageTitle: "Java",
+          pageMeta: {},
+          fileName: "java",
+          dirName: "synergy-with-testing",
+        },
+        {
+          sectionTitle: "Synergy With Testing",
+          pageTitle: "REST",
+          pageMeta: {},
+          fileName: "REST",
+          dirName: "synergy-with-testing",
+        },
+        {
+          sectionTitle: "Synergy With Testing",
+          pageTitle: "Web UI",
+          pageMeta: {},
+          fileName: "web-UI",
+          dirName: "synergy-with-testing",
+        },
+      ],
+    },
+    {
+      sectionTitle: "Configuration",
+      dirName: "configuration",
+      items: [
+        {
+          sectionTitle: "Configuration",
+          pageTitle: "Basic",
+          pageMeta: {},
+          fileName: "basic",
+          dirName: "configuration",
+        },
+      ],
+    },
+  ];
 }

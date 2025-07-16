@@ -17,6 +17,8 @@
 
 package org.testingisdocumenting.znai.structure;
 
+import org.testingisdocumenting.znai.utils.FilePathUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,14 +60,19 @@ public class PlainTextTocGenerator implements TocGenerator {
             } else if (line.startsWith(" ")) {
                 handleSyntaxError();
             } else {
-                handleChapterEntry(trimmedLine);
+                // Check if line has extension (indicates standalone page)
+                if (hasFileExtension(trimmedLine)) {
+                    handleStandalonePageEntry(trimmedLine);
+                } else {
+                    handleChapterEntry(trimmedLine);
+                }
             }
         }
 
         private void handleSyntaxError() {
             throw new IllegalArgumentException(
                     "toc line should either start with " + INDENTATION.length() + " spaces to denote " +
-                            "page file name, or start without spaces to denote chapter dir name");
+                            "page file name, or start without spaces to denote chapter dir name or standalone page (with file extension)");
         }
 
         private void handleChapterEntry(final String trimmedLine) {
@@ -79,6 +86,17 @@ public class PlainTextTocGenerator implements TocGenerator {
             } else {
                 toc.addTocItem(currentChapter, new TocNameAndOpts(line));
             }
+        }
+
+        private boolean hasFileExtension(String line) {
+            TocNameAndOpts nameAndOpts = new TocNameAndOpts(line);
+            String name = nameAndOpts.getGivenName();
+            return !FilePathUtils.fileExtension(name).isEmpty();
+        }
+
+        private void handleStandalonePageEntry(final String line) {
+            // Create TocItem with empty chapter for standalone pages
+            toc.addTocItem(new TocNameAndOpts(""), new TocNameAndOpts(line));
         }
     }
 }

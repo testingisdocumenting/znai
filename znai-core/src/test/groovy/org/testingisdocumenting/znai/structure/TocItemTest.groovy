@@ -88,6 +88,15 @@ class TocItemTest {
                 "dir-name/../file.mdx")
     }
 
+    @Test
+    void "should identify standalone pages correctly"() {
+        def standalonePage = new TocItem('', 'overview.md', 'md')
+        standalonePage.isIndex().should == false
+
+        def chapterPage = new TocItem('chapter1', 'page.md', 'md') 
+        chapterPage.isIndex().should == false
+    }
+
     private static void shouldThrow(String dirName, String fileName) {
         code {
             new TocItem(dirName, fileName, 'md')

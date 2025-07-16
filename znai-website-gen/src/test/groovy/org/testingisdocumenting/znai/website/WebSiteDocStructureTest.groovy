@@ -114,7 +114,7 @@ class WebSiteDocStructureTest {
 
         code {
             docStructure.validateCollectedLinks()
-        } should throwException("can't find an anchor #index-wrong-id in: /index\n" +
+        } should throwException("can't find an anchor #index-wrong-id in: index\n" +
                 "referenced in file: /home/user/docs/chapter/pageOne.md, section title: referring title\n")
     }
 

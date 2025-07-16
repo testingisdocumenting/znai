@@ -15,86 +15,102 @@
  * limitations under the License.
  */
 
-import {documentationNavigation} from './DocumentationNavigation'
-import {setDocMeta} from './docMeta';
+import { documentationNavigation } from "./DocumentationNavigation";
+import { setDocMeta } from "./docMeta";
 
 describe("DocumentationNavigation", () => {
-    it("extracts page location from url", () => {
-        const location = documentationNavigation.extractPageLocation("/something/section-name/page-title#page-section")
+  it("extracts page location from url", () => {
+    const location = documentationNavigation.extractPageLocation("/something/section-name/page-title#page-section");
 
-        expect(location.dirName).toEqual("section-name")
-        expect(location.fileName).toEqual("page-title")
-        expect(location.anchorId).toEqual("page-section")
-    })
+    expect(location.dirName).toEqual("section-name");
+    expect(location.fileName).toEqual("page-title");
+    expect(location.anchorId).toEqual("page-section");
+  });
 
-    it("extracts page location from url when doc-id is empty", () => {
-        const location = documentationNavigation.extractPageLocation("/section-name/page-title#page-section")
+  it("extracts page location from url when doc-id is empty", () => {
+    const location = documentationNavigation.extractPageLocation("/section-name/page-title#page-section");
 
-        expect(location.dirName).toEqual("section-name")
-        expect(location.fileName).toEqual("page-title")
-        expect(location.anchorId).toEqual("page-section")
-    })
+    expect(location.dirName).toEqual("section-name");
+    expect(location.fileName).toEqual("page-title");
+    expect(location.anchorId).toEqual("page-section");
+  });
 
-    it("extracts page location from url without hash", () => {
-        const location = documentationNavigation.extractPageLocation("/something/section-name/page-title")
+  it("extracts page location from url without hash", () => {
+    const location = documentationNavigation.extractPageLocation("/something/section-name/page-title");
 
-        expect(location.dirName).toEqual("section-name")
-        expect(location.fileName).toEqual("page-title")
-        expect(location.anchorId).toEqual("")
-    })
+    expect(location.dirName).toEqual("section-name");
+    expect(location.fileName).toEqual("page-title");
+    expect(location.anchorId).toEqual("");
+  });
 
-    it("extracts page location from url where doc id consist of two parts", () => {
-        const location = documentationNavigation.extractPageLocation("/doc/id/section-name/page-title#page-section")
+  it("extracts page location for a page without chapter", () => {
+    setDocMeta({ id: "my-doc" });
+    const location = documentationNavigation.extractPageLocation("/my-doc/page-title");
 
-        expect(location.dirName).toEqual("section-name")
-        expect(location.fileName).toEqual("page-title")
-        expect(location.anchorId).toEqual("page-section")
-    })
+    expect(location.dirName).toEqual("");
+    expect(location.fileName).toEqual("page-title");
+  });
 
-    it("extracts page location from url where doc id consist of two parts without hash", () => {
-        const location = documentationNavigation.extractPageLocation("/doc/id/section-name/page-title")
+  it("extracts page location for a page without chapter when doc id consist of two parts", () => {
+    setDocMeta({ id: "doc/id" });
+    const location = documentationNavigation.extractPageLocation("/doc/id/page-title");
 
-        expect(location.dirName).toEqual("section-name")
-        expect(location.fileName).toEqual("page-title")
-    })
+    expect(location.dirName).toEqual("");
+    expect(location.fileName).toEqual("page-title");
+  });
 
-    it("extracts page location for root where doc id consist of two parts", () => {
-        setDocMeta({id: 'doc/id'})
-        const location = documentationNavigation.extractPageLocation("/doc/id")
+  it("extracts page location from url where doc id consist of two parts", () => {
+    const location = documentationNavigation.extractPageLocation("/doc/id/section-name/page-title#page-section");
 
-        expect(location.dirName).toEqual("")
-        expect(location.fileName).toEqual("index")
-    })
+    expect(location.dirName).toEqual("section-name");
+    expect(location.fileName).toEqual("page-title");
+    expect(location.anchorId).toEqual("page-section");
+  });
 
-    it("extracts page location for root where doc id consist of two parts with extra slash at the end", () => {
-        setDocMeta({id: 'doc/id'})
-        const location = documentationNavigation.extractPageLocation("/doc/id/")
+  it("extracts page location from url where doc id consist of two parts without hash", () => {
+    const location = documentationNavigation.extractPageLocation("/doc/id/section-name/page-title");
 
-        expect(location.dirName).toEqual("")
-        expect(location.fileName).toEqual("index")
-    })
+    expect(location.dirName).toEqual("section-name");
+    expect(location.fileName).toEqual("page-title");
+  });
 
-    it("extracts page location for root where doc id is empty", () => {
-        setDocMeta({id: ''})
-        const location = documentationNavigation.extractPageLocation("/")
+  it("extracts page location for root where doc id consist of two parts", () => {
+    setDocMeta({ id: "doc/id" });
+    const location = documentationNavigation.extractPageLocation("/doc/id");
 
-        expect(location.dirName).toEqual("")
-        expect(location.fileName).toEqual("index")
-    })
+    expect(location.dirName).toEqual("");
+    expect(location.fileName).toEqual("index");
+  });
 
-    it("builds full doc url given a relative url", () => {
-        setDocMeta({id: 'my-doc'})
+  it("extracts page location for root where doc id consist of two parts with extra slash at the end", () => {
+    setDocMeta({ id: "doc/id" });
+    const location = documentationNavigation.extractPageLocation("/doc/id/");
 
-        expect(documentationNavigation.fullPageUrl('#anchor')).toEqual('#anchor')
-        expect(documentationNavigation.fullPageUrl('/chapter/page')).toEqual('/my-doc/chapter/page')
-        expect(documentationNavigation.fullPageUrl('chapter/page')).toEqual('/my-doc/chapter/page')
-    })
+    expect(location.dirName).toEqual("");
+    expect(location.fileName).toEqual("index");
+  });
 
-    it("builds full doc url given a relative url when doc id is empty", () => {
-        setDocMeta({id: ''})
+  it("extracts page location for root where doc id is empty", () => {
+    setDocMeta({ id: "" });
+    const location = documentationNavigation.extractPageLocation("/");
 
-        expect(documentationNavigation.fullPageUrl('#anchor')).toEqual('#anchor')
-        expect(documentationNavigation.fullPageUrl('/chapter/page')).toEqual('/chapter/page')
-        expect(documentationNavigation.fullPageUrl('chapter/page')).toEqual('/chapter/page')
-    })
-})
+    expect(location.dirName).toEqual("");
+    expect(location.fileName).toEqual("index");
+  });
+
+  it("builds full doc url given a relative url", () => {
+    setDocMeta({ id: "my-doc" });
+
+    expect(documentationNavigation.fullPageUrl("#anchor")).toEqual("#anchor");
+    expect(documentationNavigation.fullPageUrl("/chapter/page")).toEqual("/my-doc/chapter/page");
+    expect(documentationNavigation.fullPageUrl("chapter/page")).toEqual("/my-doc/chapter/page");
+  });
+
+  it("builds full doc url given a relative url when doc id is empty", () => {
+    setDocMeta({ id: "" });
+
+    expect(documentationNavigation.fullPageUrl("#anchor")).toEqual("#anchor");
+    expect(documentationNavigation.fullPageUrl("/chapter/page")).toEqual("/chapter/page");
+    expect(documentationNavigation.fullPageUrl("chapter/page")).toEqual("/chapter/page");
+  });
+});

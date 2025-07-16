@@ -33,6 +33,13 @@ scenario("validate doxygen page") {
     docContent.paragraphs.get("list three").waitTo visible
 }
 
+scenario("validate page outside of chapter") {
+    standardView.tocItems.get("Outside Chapter File").click()
+    docContent.title.waitTo visible
+    docContent.title.should == "Outside Chapter File"
+    docContent.paragraphs.get("Files don't have to belong to chapters if you have simple docs").waitTo visible
+}
+
 scenario("validate uploads files") {
     def baseUrl = "http://localhost:$port/preview"
 
