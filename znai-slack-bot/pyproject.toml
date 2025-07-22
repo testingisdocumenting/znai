@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "znai-slack-bot"
+version = "1.0.0"
+description = "Slack bot for Znai documentation questions"
+requires-python = ">=3.9"
+dependencies = [
+    "flask==3.0.0",
+    "flask-cors==4.0.0",
+    "slack-sdk==3.26.1"
+]
+
+[project.scripts]
+znai-slack-bot = "slack_bot:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
