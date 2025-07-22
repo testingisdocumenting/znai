@@ -35,4 +35,16 @@ class PageLocalSearchEntriesTest {
                 ["dir-name@@file-name@@section-one", "Dir Name", "File Name", "section one", "hello world", "snippet-one"],
                 ["dir-name@@file-name@@section-two", "Dir Name", "File Name", "section two", "how is the weather", ""]]
     }
+
+    @Test
+    void "should handle empty chapter"() {
+        def searchEntries = new PageLocalSearchEntries(
+                new TocItem("", "overview.md", "md"),  // Standalone page
+                [
+                        new PageSearchEntry(new PageSectionIdTitle("overview", [:]), [SearchScore.STANDARD.text("project overview")]),
+                ])
+
+        searchEntries.toListOfLists().should == [
+                ["@@overview@@overview", "", "Overview", "overview", "project overview", ""]]
+    }
 }
