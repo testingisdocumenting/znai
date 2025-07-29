@@ -15,6 +15,7 @@
  */
 
 import React, { useEffect, useRef } from "react";
+import { toPng } from "html-to-image";
 import "./TextSelectionMenu.css";
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
@@ -41,8 +42,97 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     e.preventDefault();
   }
 
-  function clickMenu() {
-    console.log("clickMenu");
+  async function clickMenu() {
+    const selection = getSelection();
+    if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+      return;
+    }
+
+    try {
+      const selectedText = selection.toString();
+      const range = selection.getRangeAt(0);
+
+      // Get context before and after the selection for unique text fragment
+      const textContent = range.commonAncestorContainer.textContent || "";
+      const fullText = textContent;
+      const selectedStart = textContent.indexOf(selectedText);
+      
+      // Get prefix and suffix for context
+      const prefixStart = Math.max(0, selectedStart - 20);
+      const prefixText = textContent.substring(prefixStart, selectedStart).trim();
+      const suffixEnd = Math.min(textContent.length, selectedStart + selectedText.length + 20);
+      const suffixText = textContent.substring(selectedStart + selectedText.length, suffixEnd).trim();
+
+      const contextElement = getContextElement(range);
+
+      const imageDataUrl = await toPng(contextElement, {
+        backgroundColor: "white",
+        quality: 0.8,
+        pixelRatio: 1,
+      });
+
+      // Debug: Log the image data URL
+      console.log("Generated image data URL:", imageDataUrl);
+      console.log("Context element:", contextElement);
+      console.log("Context element dimensions:", {
+        width: contextElement.offsetWidth,
+        height: contextElement.offsetHeight,
+        className: contextElement.className,
+      });
+
+      // Debug: Create a link to view the image
+      const debugLink = document.createElement("a");
+      debugLink.href = imageDataUrl;
+      debugLink.download = "debug-screenshot.png";
+      debugLink.textContent = "View generated image";
+      console.log("Click to view image:", debugLink);
+
+      // Debug: Open image in new tab
+      const debugWindow = window.open("", "_blank");
+      if (debugWindow) {
+        debugWindow.document.write(`<img src="${imageDataUrl}" style="max-width: 100%;" />`);
+        debugWindow.document.title = "Context Screenshot Debug";
+      }
+
+      const imageBlob = await (await fetch(imageDataUrl)).blob();
+      console.log("Image blob size:", imageBlob.size, "bytes");
+
+      const formData = new FormData();
+      formData.append("selectedText", selectedText);
+      
+      // Create text fragment with prefix and suffix for uniqueness
+      let textFragment = "";
+      if (prefixText && suffixText) {
+        textFragment = `${encodeURIComponent(prefixText)}-,${encodeURIComponent(selectedText)},-${encodeURIComponent(suffixText)}`;
+      } else if (prefixText) {
+        textFragment = `${encodeURIComponent(prefixText)}-,${encodeURIComponent(selectedText)}`;
+      } else if (suffixText) {
+        textFragment = `${encodeURIComponent(selectedText)},-${encodeURIComponent(suffixText)}`;
+      } else {
+        textFragment = encodeURIComponent(selectedText);
+      }
+      
+      formData.append("pageUrl", `${window.location.href}#:~:text=${textFragment}`);
+      formData.append("username", "web-user");
+
+      // Try to send with image first
+      formData.append("image", imageBlob, "context-screenshot.png");
+
+      let response = await fetch("http://localhost:5111/ask-in-slack-with-image", {
+        method: "POST",
+        body: formData,
+      });
+
+      hidePopover();
+
+      if (response.ok) {
+        console.log("Successfully sent to Slack");
+      } else {
+        console.error("Failed to send to Slack:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error sending to Slack:", error);
+    }
   }
 
   function showMenu(top: number, left: number) {
@@ -90,5 +180,26 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       hidePopover();
       return;
     }
+  }
+
+  function getContextElement(range: Range): HTMLElement {
+    let element = range.commonAncestorContainer;
+
+    if (element.nodeType === Node.TEXT_NODE) {
+      element = element.parentNode!;
+    }
+
+    let contextElement = element as HTMLElement;
+    while (contextElement && !contextElement.classList.contains("znai-documentation-page")) {
+      if (
+        contextElement.tagName === "SECTION" ||
+        (contextElement.tagName === "DIV" && contextElement.className.includes("content"))
+      ) {
+        break;
+      }
+      contextElement = contextElement.parentElement!;
+    }
+
+    return contextElement || containerNode;
   }
 }
