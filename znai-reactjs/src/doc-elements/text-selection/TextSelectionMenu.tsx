@@ -18,6 +18,24 @@ import React, { useEffect, useRef } from "react";
 import { generateFragment } from "text-fragments-polyfill/dist/fragment-generation-utils.js";
 import "./TextSelectionMenu.css";
 
+function encodeTextFragment(text: string): string {
+  return text.replace(/\n/g, "%0A").replace(/ /g, "%20").replace(/-/g, "%2D").replace(/,/g, "%2C");
+}
+
+function encodeTextFragmentPart(
+  prefix: string | undefined,
+  start: string,
+  end: string | undefined,
+  suffix: string | undefined
+): string {
+  const prefixPart = prefix ? `${encodeTextFragment(prefix)}-,` : "";
+  const suffixPart = suffix ? `,-${encodeTextFragment(suffix)}` : "";
+  const startPart = encodeTextFragment(start);
+  const endPart = end ? `,${encodeTextFragment(end)}` : "";
+
+  return `${prefixPart}${startPart}${endPart}${suffixPart}`;
+}
+
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -52,38 +70,44 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     try {
       const selectedText = selection.toString();
       const range = selection.getRangeAt(0);
-      
+
       let pageUrl = `${window.location.origin}${window.location.pathname}${window.location.search}`;
       let result;
 
       // Try to generate fragment with the original selection
       try {
+        console.log("selection", selection);
         result = generateFragment(selection);
       } catch (error) {
         console.error("Fragment generation error:", error);
       }
 
-      // Build URL based on result
+      console.log("result", result);
+
       if (result && result.status === 0 && result.fragment) {
         const fragment = result.fragment;
-        const prefix = fragment.prefix ? `${encodeURIComponent(fragment.prefix)}-,` : '';
-        const suffix = fragment.suffix ? `,-${encodeURIComponent(fragment.suffix)}` : '';
-        const start = encodeURIComponent(fragment.textStart);
-        const end = fragment.textEnd ? `,${encodeURIComponent(fragment.textEnd)}` : '';
-        pageUrl += `#:~:text=${prefix}${start}${end}${suffix}`;
+        console.log("fragment", fragment);
+        const fragmentPart = encodeTextFragmentPart(
+          fragment.prefix,
+          fragment.textStart,
+          fragment.textEnd,
+          fragment.suffix
+        );
+        pageUrl += `#:~:text=${fragmentPart}`;
       } else {
+        console.log("fallback");
         // For partial word selections or when fragment generation fails,
         // expand to word boundaries and use that
         const expandedRange = range.cloneRange();
         expandWordSelection(expandedRange);
         const expandedText = expandedRange.toString();
-        
+
         // If we expanded the selection, use the expanded text
         if (expandedText !== selectedText && expandedText.length > 0) {
-          pageUrl += `#:~:text=${encodeURIComponent(expandedText)}`;
+          pageUrl += `#:~:text=${encodeTextFragment(expandedText)}`;
         } else {
           // Use the original selected text
-          pageUrl += `#:~:text=${encodeURIComponent(selectedText)}`;
+          pageUrl += `#:~:text=${encodeTextFragment(selectedText)}`;
         }
       }
 
@@ -97,6 +121,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
         body: formData,
       });
 
+      console.log("page url", pageUrl);
       hidePopover();
 
       if (response.ok) {
@@ -112,22 +137,22 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   function expandWordSelection(range: Range) {
     const startContainer = range.startContainer;
     const endContainer = range.endContainer;
-    
+
     if (startContainer.nodeType === Node.TEXT_NODE) {
       const textContent = startContainer.textContent || "";
       let startOffset = range.startOffset;
-      
+
       // Expand backwards to word boundary
       while (startOffset > 0 && /\w/.test(textContent[startOffset - 1])) {
         startOffset--;
       }
       range.setStart(startContainer, startOffset);
     }
-    
+
     if (endContainer.nodeType === Node.TEXT_NODE) {
       const textContent = endContainer.textContent || "";
       let endOffset = range.endOffset;
-      
+
       // Expand forwards to word boundary
       while (endOffset < textContent.length && /\w/.test(textContent[endOffset])) {
         endOffset++;
@@ -153,7 +178,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     }
   }
 
-  function onMouseUp(e: MouseEvent) {
+  function onMouseUp() {
     const selection = getSelection();
     if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
       hidePopover();
