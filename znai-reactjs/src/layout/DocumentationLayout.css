@@ -52,6 +52,10 @@
     -webkit-overflow-scrolling: touch;
 }
 
+.znai-main-panel:focus {
+    outline: none;
+}
+
 ::-webkit-scrollbar {
     width: var(--znai-scrollbar-width);
     height: var(--znai-scrollbar-height);
