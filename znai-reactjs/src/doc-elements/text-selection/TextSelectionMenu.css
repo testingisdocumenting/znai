@@ -36,6 +36,6 @@
 }
 
 .znai-text-selection-menu-item:hover {
-    color: #fff;
-    background-color: var(--znai-color-blue);
+    color: var(--znai-text-selection-menu-text-color);
+    background-color: var(--znai-text-selection-menu-background-color);
 }

@@ -76,7 +76,6 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
       // Try to generate fragment with the original selection
       try {
-        console.log("selection", selection);
         result = generateFragment(selection);
       } catch (error) {
         console.error("Fragment generation error:", error);
