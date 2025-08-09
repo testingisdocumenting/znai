@@ -1,0 +1,30 @@
+.highlight {
+    background-color: #ffeb3b;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.highlight.clicked {
+    background-color: #ff9800;
+}
+
+.highlight-start {
+    border-radius: 4px 0 0 4px;
+    padding-left: 2px;
+}
+
+.highlight-end {
+    border-radius: 0 4px 4px 0;
+    padding-right: 2px;
+}
+
+.highlight-middle {
+    border-radius: 0;
+}
+
+.highlight-single {
+    border-radius: 4px;
+    padding: 0 2px;
+}
+

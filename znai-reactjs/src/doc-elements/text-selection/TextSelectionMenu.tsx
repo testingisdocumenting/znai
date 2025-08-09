@@ -16,7 +16,10 @@
 
 import React, { useEffect, useRef } from "react";
 import { generateFragment } from "text-fragments-polyfill/dist/fragment-generation-utils.js";
+import { buildHighlightAnchor, buildMatchPrefixAndSuffix } from "./textSelection";
 import "./TextSelectionMenu.css";
+import { TextHighlighter } from "./textHighlihter";
+import highlight from "../images/shapes/Highlight";
 
 function encodeTextFragment(text: string): string {
   return text.replace(/\n/g, "%0A").replace(/ /g, "%20").replace(/-/g, "%2D").replace(/,/g, "%2C");
@@ -97,37 +100,41 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
         console.log("fallback");
         // For partial word selections or when fragment generation fails,
         // expand to word boundaries and use that
-        const expandedRange = range.cloneRange();
-        expandWordSelection(expandedRange);
-        const expandedText = expandedRange.toString();
+        // const expandedRange = range.cloneRange();
+        expandWordSelection(range);
+        const expandedText = range.toString();
 
-        // If we expanded the selection, use the expanded text
-        if (expandedText !== selectedText && expandedText.length > 0) {
-          pageUrl += `#:~:text=${encodeTextFragment(expandedText)}`;
-        } else {
-          // Use the original selected text
-          pageUrl += `#:~:text=${encodeTextFragment(selectedText)}`;
-        }
+        const allText = containerNode.innerText;
+        const highlight = buildMatchPrefixAndSuffix(allText, selectedText);
+        console.log("highlight", highlight);
+
+        pageUrl += buildHighlightAnchor(selectedText, highlight);
+        const highlighter = new TextHighlighter(containerNode);
+        highlighter.highlight(selectedText, highlight.prefix, highlight.suffix);
+        window.highligther = highlighter;
       }
 
-      const formData = new FormData();
-      formData.append("selectedText", selectedText);
-      formData.append("pageUrl", pageUrl);
-      formData.append("username", "web-user");
-
-      let response = await fetch("http://localhost:5111/ask-in-slack", {
-        method: "POST",
-        body: formData,
-      });
-
-      console.log("page url", pageUrl);
+      // console.log(pageUrl);
+      // window.open(pageUrl, "_blank");
       hidePopover();
 
-      if (response.ok) {
-        console.log("Successfully sent to Slack");
-      } else {
-        console.error("Failed to send to Slack:", response.statusText);
-      }
+      // const formData = new FormData();
+      // formData.append("selectedText", selectedText);
+      // formData.append("pageUrl", pageUrl);
+      // formData.append("username", "web-user");
+      //
+      // let response = await fetch("http://localhost:5111/ask-in-slack", {
+      //   method: "POST",
+      //   body: formData,
+      // });
+      //
+      // console.log("page url", pageUrl);
+      //
+      // if (response.ok) {
+      //   console.log("Successfully sent to Slack");
+      // } else {
+      //   console.error("Failed to send to Slack:", response.statusText);
+      // }
     } catch (error) {
       console.error("Error sending to Slack:", error);
     }

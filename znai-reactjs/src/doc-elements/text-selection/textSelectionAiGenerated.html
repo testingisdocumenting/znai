@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Highlighter Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .demo-container {
+            border: 2px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            background: #f9f9f9;
+        }
+
+        .highlight {
+            background-color: #ffeb3b;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        /* Remove individual hover since we handle it with JavaScript */
+
+        .highlight.clicked {
+            background-color: #ff9800;
+        }
+
+        /* Style for continuous highlight appearance */
+        .highlight-start {
+            border-radius: 4px 0 0 4px;
+            padding-left: 2px;
+        }
+
+        .highlight-end {
+            border-radius: 0 4px 4px 0;
+            padding-right: 2px;
+        }
+
+        .highlight-middle {
+            border-radius: 0;
+        }
+
+        .highlight-single {
+            border-radius: 4px;
+            padding: 0 2px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #e8e8e8;
+            border-radius: 5px;
+        }
+
+        .control-group {
+            margin-bottom: 10px;
+        }
+
+        .control-group label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background: #1976D2;
+        }
+
+        button.example-btn {
+            background: #4CAF50;
+            font-size: 12px;
+            padding: 5px 10px;
+        }
+
+        button.example-btn:hover {
+            background: #45a049;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            display: block;
+            line-height: 1.5;
+        }
+
+        .nested-example {
+            margin: 10px 0;
+        }
+
+        .info {
+            background: #e3f2fd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .duplicate-text {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<h1>Text Highlighter with Prefix/Suffix Context</h1>
+
+<div class="controls">
+    <div class="control-group">
+        <label>Search Text:</label>
+        <input type="text" id="searchText" placeholder="Enter text to highlight" value="multiple">
+        <span style="font-size: 12px; color: #666; margin-left: 10px;">Use \n for newlines</span>
+    </div>
+    <div class="control-group">
+        <label>Prefix:</label>
+        <input type="text" id="prefixText" placeholder="Text before (optional)" value="">
+        <button class="example-btn" onclick="setExample1()">Example 1</button>
+        <button class="example-btn" onclick="setExample3()">Code Example</button>
+        <button class="example-btn" onclick="setExample5()">Multi-line</button>
+    </div>
+    <div class="control-group">
+        <label>Suffix:</label>
+        <input type="text" id="suffixText" placeholder="Text after (optional)" value="">
+        <button class="example-btn" onclick="setExample2()">Example 2</button>
+        <button class="example-btn" onclick="setExample4()">HTML Example</button>
+        <button class="example-btn" onclick="setExample6()">Line Break</button>
+    </div>
+    <div style="margin-top: 15px;">
+        <button onclick="highlightText()">Highlight</button>
+        <button onclick="clearHighlights()">Clear Highlights</button>
+    </div>
+</div>
+
+<div class="info" id="clickInfo">Click on any highlighted text to see the onClick handler in action!</div>
+
+<div class="demo-container" id="content">
+    <h2>Sample Content with Multiple Occurrences</h2>
+    <p>This is a <strong>paragraph</strong> with <em>various</em> inline elements. The text <span style="color: blue;">spans</span> across multiple <code>DOM nodes</code> and elements.</p>
+
+    <div class="nested-example">
+        <div>This content is <span>nested deeply</span> and the highlighter <span>can handle text that <strong>spans across multiple</strong> levels</span> of nesting.</div>
+    </div>
+
+    <p>Here's another paragraph with the word <span class="duplicate-text">multiple</span> appearing several times. We can use prefix/suffix to target specific occurrences of <span class="duplicate-text">multiple</span> words.</p>
+
+    <h3>Code Examples</h3>
+    <p>The highlighter also works with inline code like <code>const multiple = items.filter()</code> and can highlight text within code blocks:</p>
+
+    <pre><code>// JavaScript example with multiple occurrences
+function processMultipleItems(items) {
+    // Handle multiple selections
+    const multiple = items.filter(item => item.selected);
+
+    // Process multiple times if needed
+    for (let i = 0; i < multiple.length; i++) {
+        console.log(`Processing item ${i} of multiple items`);
+    }
+
+    return multiple;
+}</code></pre>
+
+    <p>Here's another code snippet showing HTML with <code>multiple</code> attributes:</p>
+
+    <pre><code>&lt;select multiple class="form-control"&gt;
+    &lt;option&gt;Option 1&lt;/option&gt;
+    &lt;option&gt;Option 2&lt;/option&gt;
+    &lt;option&gt;Multiple selections allowed&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+    <p>Example of multi-line highlighting in code:</p>
+
+    <pre><code>// Multi-line example
+const config = {
+    multiple: true,
+    items: [
+        'first item',
+        'second item'
+    ]
+};
+
+// Later in the code
+if (config.multiple) {
+    processMultipleItems(config.items);
+}</code></pre>
+
+    <p>Debug area - click to see the actual text content:</p>
+    <button onclick="debugTextContent()">Show Text Content</button>
+    <pre id="debugOutput" style="background: #f0f0f0; padding: 10px; display: none;"></pre>
+
+    <ul>
+        <li>List items can also <span>contain text that spans</span> across multiple nodes</li>
+        <li>The highlighter works with <code>multiple HTML structures</code></li>
+        <li>You can disambiguate between multiple instances of the same text</li>
+        <li>Even in mixed content with <code>multiple</code> code snippets</li>
+    </ul>
+
+    <p>The word <span class="duplicate-text">multiple</span> appears many times in this demo. Use prefix and suffix to highlight only specific instances!</p>
+</div>
+
+<script>
+    // Global error handler to catch any uncaught errors
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+        console.error('Global error caught:', {
+            message: msg,
+            source: url,
+            lineno: lineNo,
+            colno: columnNo,
+            error: error
+        });
+        return true; // Prevent default error handling
+    };
+
+    class TextHighlighter {
+        constructor(container) {
+            this.container = container;
+            this.highlights = [];
+        }
+
+        // Find all text nodes in the container
+        getTextNodes(node) {
+            const textNodes = [];
+            const walker = document.createTreeWalker(
+                node,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: (node) => {
+                        // Include ALL text nodes, even whitespace-only ones
+                        // This is important for matching across newlines
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                }
+            );
+
+            let textNode;
+            while (textNode = walker.nextNode()) {
+                textNodes.push(textNode);
+            }
+            return textNodes;
+        }
+
+        // Find matches with optional prefix/suffix context
+        findMatches(searchText, prefix = '', suffix = '') {
+            const textNodes = this.getTextNodes(this.container);
+            const matches = [];
+
+            // Build a map of text positions
+            let currentPos = 0;
+            const nodeMap = textNodes.map(node => {
+                const start = currentPos;
+                const end = currentPos + node.nodeValue.length;
+                currentPos = end;
+                return { node, start, end, text: node.nodeValue };
+            });
+
+            // Get the full text
+            const fullText = nodeMap.map(item => item.text).join('');
+
+            // Helper function to escape regex special chars but preserve \n and \s
+            const escapeRegex = (str) => {
+                try {
+                    // Replace literal \n with newline and \s with whitespace pattern
+                    let result = str.replace(/\\n/g, '\n');
+                    result = result.replace(/\\s/g, '\\s');
+
+                    // Escape special regex characters
+                    result = result.replace(/[.*+?^${}()|[\]\\]/g, (match, offset) => {
+                        // Check if it's a backslash followed by 's'
+                        if (match === '\\' && offset + 1 < result.length && result[offset + 1] === 's') {
+                            return match;
+                        }
+                        return '\\' + match;
+                    });
+
+                    return result;
+                } catch (e) {
+                    console.error('Error in escapeRegex:', e);
+                    return str;
+                }
+            };
+
+            // Build the search pattern with optional prefix/suffix
+            let pattern = '';
+            try {
+                if (prefix) {
+                    pattern += '(' + escapeRegex(prefix) + ')\\s*';
+                }
+                pattern += '(' + escapeRegex(searchText) + ')';
+                if (suffix) {
+                    pattern += '\\s*(' + escapeRegex(suffix) + ')';
+                }
+
+                // Use 's' flag to make . match newlines
+                const regex = new RegExp(pattern, 'gis');
+                let match;
+
+                while ((match = regex.exec(fullText)) !== null) {
+                    // Determine which group contains the actual search text
+                    let searchGroupIndex = prefix ? 2 : 1;
+                    let matchStart = match.index;
+                    let matchEnd = matchStart + match[0].length;
+
+                    // If we have prefix/suffix, we only want to highlight the actual search text
+                    if (prefix || suffix) {
+                        let groupStart = 0;
+                        for (let i = 1; i < searchGroupIndex; i++) {
+                            groupStart += match[i] ? match[i].length : 0;
+                        }
+                        matchStart = match.index + groupStart;
+                        matchEnd = matchStart + match[searchGroupIndex].length;
+
+                        // Account for any spaces between prefix and search text
+                        const beforeSearchText = fullText.substring(match.index, matchStart);
+                        const spaceMatch = beforeSearchText.match(/\s*$/);
+                        if (spaceMatch) {
+                            matchStart = match.index + beforeSearchText.length - spaceMatch[0].length + spaceMatch[0].length;
+                        }
+                    }
+
+                    // Find which nodes this match spans
+                    const affectedNodes = [];
+
+                    nodeMap.forEach((nodeInfo, index) => {
+                        if (nodeInfo.end > matchStart && nodeInfo.start < matchEnd) {
+                            const nodeStart = Math.max(0, matchStart - nodeInfo.start);
+                            const nodeEnd = Math.min(nodeInfo.text.length, matchEnd - nodeInfo.start);
+
+                            affectedNodes.push({
+                                node: nodeInfo.node,
+                                start: nodeStart,
+                                end: nodeEnd,
+                                text: nodeInfo.text.substring(nodeStart, nodeEnd)
+                            });
+                        }
+                    });
+
+                    if (affectedNodes.length > 0) {
+                        matches.push({
+                            nodes: affectedNodes,
+                            fullMatch: match[0],
+                            searchMatch: match[searchGroupIndex]
+                        });
+                    }
+                }
+            } catch (e) {
+                console.error('Error in regex matching:', e);
+                console.error('Pattern:', pattern);
+            }
+
+            return matches;
+        }
+
+        // Highlight the matched text
+        highlight(searchText, prefix = '', suffix = '', onClick) {
+            this.clearHighlights();
+
+            if (!searchText) return 0;
+
+            const matches = this.findMatches(searchText, prefix, suffix);
+
+            matches.forEach((match, matchIndex) => {
+                const highlightGroup = [];
+
+                // Create handlers for the entire group
+                const handleMouseEnter = () => {
+                    highlightGroup.forEach(span => {
+                        span.style.backgroundColor = '#fdd835';
+                    });
+                };
+
+                const handleMouseLeave = () => {
+                    highlightGroup.forEach(span => {
+                        span.style.backgroundColor = '';
+                    });
+                };
+
+                const handleClick = (e) => {
+                    e.stopPropagation();
+
+                    // Add clicked class to all spans in the group
+                    highlightGroup.forEach(span => {
+                        span.classList.add('clicked');
+                        setTimeout(() => {
+                            span.classList.remove('clicked');
+                        }, 500);
+                    });
+
+                    if (onClick) {
+                        onClick(e, {
+                            matchIndex,
+                            text: searchText,
+                            prefix,
+                            suffix,
+                            element: e.target,
+                            highlights: highlightGroup,
+                            fullMatch: match.fullMatch,
+                            searchMatch: match.searchMatch
+                        });
+                    }
+                };
+
+                match.nodes.forEach((nodeInfo, nodeIndex) => {
+                    const { node, start, end } = nodeInfo;
+                    const parent = node.parentNode;
+
+                    // Skip if the node has already been processed or removed from DOM
+                    if (!parent) {
+                        console.warn('Skipping node - no parent found');
+                        return;
+                    }
+
+                    // Split the text node if necessary
+                    const beforeText = node.nodeValue.substring(0, start);
+                    const highlightText = node.nodeValue.substring(start, end);
+                    const afterText = node.nodeValue.substring(end);
+
+                    const highlightSpan = document.createElement('span');
+                    highlightSpan.className = 'highlight';
+                    highlightSpan.textContent = highlightText;
+                    highlightSpan.dataset.matchIndex = matchIndex;
+                    highlightSpan.dataset.nodeIndex = nodeIndex;
+
+                    // Add position-specific classes for visual continuity
+                    if (match.nodes.length === 1) {
+                        highlightSpan.classList.add('highlight-single');
+                    } else if (nodeIndex === 0) {
+                        highlightSpan.classList.add('highlight-start');
+                    } else if (nodeIndex === match.nodes.length - 1) {
+                        highlightSpan.classList.add('highlight-end');
+                    } else {
+                        highlightSpan.classList.add('highlight-middle');
+                    }
+
+                    // Replace the text node with the new structure
+                    const fragment = document.createDocumentFragment();
+
+                    if (beforeText) {
+                        fragment.appendChild(document.createTextNode(beforeText));
+                    }
+                    fragment.appendChild(highlightSpan);
+                    if (afterText) {
+                        fragment.appendChild(document.createTextNode(afterText));
+                    }
+
+                    try {
+                        parent.replaceChild(fragment, node);
+                        highlightGroup.push(highlightSpan);
+                    } catch (e) {
+                        console.error('Error replacing node:', e);
+                    }
+                });
+
+                // Add event listeners to all spans in the group
+                highlightGroup.forEach(span => {
+                    span.addEventListener('mouseenter', handleMouseEnter);
+                    span.addEventListener('mouseleave', handleMouseLeave);
+                    span.addEventListener('click', handleClick);
+                });
+
+                this.highlights.push(highlightGroup);
+            });
+
+            return this.highlights.length;
+        }
+
+        // Clear all highlights
+        clearHighlights() {
+            this.highlights.forEach(highlightGroup => {
+                highlightGroup.forEach(span => {
+                    const parent = span.parentNode;
+                    if (!parent) {
+                        console.warn('Highlight span has no parent, skipping');
+                        return;
+                    }
+
+                    const text = span.textContent;
+                    const textNode = document.createTextNode(text);
+
+                    try {
+                        parent.replaceChild(textNode, span);
+                    } catch (e) {
+                        console.error('Error clearing highlight:', e);
+                    }
+                });
+            });
+
+            // Normalize to merge adjacent text nodes
+            try {
+                this.container.normalize();
+            } catch (e) {
+                console.error('Error normalizing container:', e);
+            }
+
+            this.highlights = [];
+        }
+    }
+
+    // Initialize the highlighter
+    const contentContainer = document.getElementById('content');
+    const highlighter = new TextHighlighter(contentContainer);
+
+    // Highlight function
+    function highlightText() {
+        const searchText = document.getElementById('searchText').value;
+        const prefixText = document.getElementById('prefixText').value;
+        const suffixText = document.getElementById('suffixText').value;
+
+        // Debug: Show what we're actually searching for
+        console.log('Searching for:', {
+            searchText: searchText,
+            prefix: prefixText,
+            suffix: suffixText,
+            processedSearch: searchText.replace(/\\n/g, '\n')
+        });
+
+        const count = highlighter.highlight(searchText, prefixText, suffixText, (event, info) => {
+            // Custom onClick handler
+            console.log('Clicked highlight:', info);
+
+            // Visual feedback
+            event.target.classList.add('clicked');
+            setTimeout(() => {
+                event.target.classList.remove('clicked');
+            }, 500);
+
+            // Update info display
+            let message = `Clicked: "${info.searchMatch}" (Match #${info.matchIndex + 1})`;
+            if (info.prefix || info.suffix) {
+                message += ` with context: "${info.fullMatch}"`;
+            }
+            document.getElementById('clickInfo').textContent = message;
+        });
+
+        if (count === 0 && searchText) {
+            let message = 'No matches found!';
+            if (prefixText || suffixText) {
+                message += ' Try adjusting the prefix/suffix context.';
+            }
+            document.getElementById('clickInfo').textContent = message;
+        } else if (count > 0) {
+            let message = `Found ${count} match${count > 1 ? 'es' : ''}`;
+            if (prefixText || suffixText) {
+                message += ' with the specified context';
+            }
+            message += '. Click on any highlighted text!';
+            document.getElementById('clickInfo').textContent = message;
+        }
+    }
+
+    // Clear highlights function
+    function clearHighlights() {
+        highlighter.clearHighlights();
+        document.getElementById('clickInfo').textContent =
+            'Click on any highlighted text to see the onClick handler in action!';
+    }
+
+    // Example setters
+    function setExample1() {
+        document.getElementById('searchText').value = 'multiple';
+        document.getElementById('prefixText').value = 'across';
+        document.getElementById('suffixText').value = 'levels';
+        highlightText();
+    }
+
+    function setExample2() {
+        document.getElementById('searchText').value = 'multiple';
+        document.getElementById('prefixText').value = 'between';
+        document.getElementById('suffixText').value = 'instances';
+        highlightText();
+    }
+
+    function setExample3() {
+        document.getElementById('searchText').value = 'multiple';
+        document.getElementById('prefixText').value = 'const';
+        document.getElementById('suffixText').value = '= items';
+        highlightText();
+    }
+
+    function setExample4() {
+        document.getElementById('searchText').value = 'multiple';
+        document.getElementById('prefixText').value = '<select';
+        document.getElementById('suffixText').value = 'class=';
+        highlightText();
+    }
+
+    function setExample5() {
+        // Example with newline - highlights across multiple lines
+        document.getElementById('searchText').value = 'multiple: true,\\n    items:';
+        document.getElementById('prefixText').value = '';
+        document.getElementById('suffixText').value = '';
+        highlightText();
+    }
+
+    // Debug function to show actual text content
+    function debugTextContent() {
+        const codeBlocks = document.querySelectorAll('pre code');
+        const debugOutput = document.getElementById('debugOutput');
+        debugOutput.style.display = 'block';
+
+        let output = '';
+        codeBlocks.forEach((block, index) => {
+            const text = block.textContent;
+            // Show the text with visible newlines and spaces
+            const visualText = text
+                .replace(/\n/g, '\\n\n')
+                .replace(/ /g, '·')
+                .replace(/\t/g, '→');
+            output += `Code Block ${index + 1}:\n${visualText}\n\n`;
+
+            // Also show the character codes around the bracket
+            const bracketIndex = text.indexOf(']');
+            if (bracketIndex !== -1) {
+                const start = Math.max(0, bracketIndex - 5);
+                const end = Math.min(text.length, bracketIndex + 10);
+                const segment = text.substring(start, end);
+                const codes = [];
+                for (let i = 0; i < segment.length; i++) {
+                    codes.push(`'${segment[i]}' (${segment.charCodeAt(i)})`);
+                }
+                output += `Characters around ']':\n${codes.join(', ')}\n\n`;
+            }
+        });
+
+        debugOutput.textContent = output;
+    }
+
+    function setExample6() {
+        try {
+            // Let's find what's actually after the bracket
+            const codeBlocks = document.querySelectorAll('pre code');
+            let actualPattern = '';
+
+            codeBlocks.forEach(block => {
+                const text = block.textContent;
+                const match = text.match(/'second item'([^}]*)\}/);
+                if (match) {
+                    actualPattern = match[1] + '}';
+                    console.log('Found pattern after "second item":', JSON.stringify(actualPattern));
+                }
+            });
+
+            // Use the actual pattern found or a default
+            if (actualPattern) {
+                document.getElementById('searchText').value = actualPattern.replace(/\n/g, '\\n');
+            } else {
+                // Default pattern if not found
+                document.getElementById('searchText').value = '\\n    ]\\n};';
+            }
+            document.getElementById('prefixText').value = "'second item'";
+            document.getElementById('suffixText').value = '';
+            highlightText();
+        } catch (e) {
+            console.error('Error in setExample6:', e);
+            // Fallback to a simple pattern
+            document.getElementById('searchText').value = ']\\n};';
+            document.getElementById('prefixText').value = "item'";
+            document.getElementById('suffixText').value = '';
+            highlightText();
+        }
+    }
+
+    // Highlight on Enter key - wrap in try-catch
+    try {
+        ['searchText', 'prefixText', 'suffixText'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        highlightText();
+                    }
+                });
+            }
+        });
+    } catch (e) {
+        console.error('Error setting up event listeners:', e);
+    }
+
+    // Initial highlight - wrap in try-catch
+    try {
+        highlightText();
+    } catch (e) {
+        console.error('Error during initial highlight:', e);
+    }
+</script>
+</body>
+</html>
