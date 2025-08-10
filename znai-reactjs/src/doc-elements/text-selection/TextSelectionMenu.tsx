@@ -77,8 +77,11 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
       const result = findPrefixSuffixAndMatch(containerNode);
       console.log("result", result);
+
       const highlighter = new TextHighlighter(containerNode);
       highlighter.highlight(result.text, result.prefix, result.suffix);
+
+      selection.removeAllRanges();
 
       hidePopover();
 
