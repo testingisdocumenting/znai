@@ -75,42 +75,11 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       const selectedText = selection.toString();
       const range = selection.getRangeAt(0);
 
-      let pageUrl = `${window.location.origin}${window.location.pathname}${window.location.search}`;
-      let result;
-
-      // Try to generate fragment with the original selection
-      try {
-        result = generateFragment(selection);
-      } catch (error) {
-        console.error("Fragment generation error:", error);
-      }
-
+      const result = findPrefixSuffixAndMatch(containerNode);
       console.log("result", result);
+      const highlighter = new TextHighlighter(containerNode);
+      highlighter.highlight(result.text, result.prefix, result.suffix);
 
-      if (result && result.status === 0 && result.fragment) {
-        const fragment = result.fragment;
-        console.log("fragment", fragment);
-        const fragmentPart = encodeTextFragmentPart(
-          fragment.prefix,
-          fragment.textStart,
-          fragment.textEnd,
-          fragment.suffix
-        );
-        pageUrl += `#:~:text=${fragmentPart}`;
-      } else {
-        console.log("fallback");
-        // For partial word selections or when fragment generation fails,
-        // expand to word boundaries and use that
-        // const expandedRange = range.cloneRange();
-
-        const result = findPrefixSuffixAndMatch(containerNode);
-        console.log("result", result);
-        const highlighter = new TextHighlighter(containerNode);
-        highlighter.highlight(selectedText, result.prefix, result.suffix);
-      }
-
-      // console.log(pageUrl);
-      // window.open(pageUrl, "_blank");
       hidePopover();
 
       // const formData = new FormData();
@@ -132,33 +101,6 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       // }
     } catch (error) {
       console.error("Error sending to Slack:", error);
-    }
-  }
-
-  function expandWordSelection(range: Range) {
-    const startContainer = range.startContainer;
-    const endContainer = range.endContainer;
-
-    if (startContainer.nodeType === Node.TEXT_NODE) {
-      const textContent = startContainer.textContent || "";
-      let startOffset = range.startOffset;
-
-      // Expand backwards to word boundary
-      while (startOffset > 0 && /\w/.test(textContent[startOffset - 1])) {
-        startOffset--;
-      }
-      range.setStart(startContainer, startOffset);
-    }
-
-    if (endContainer.nodeType === Node.TEXT_NODE) {
-      const textContent = endContainer.textContent || "";
-      let endOffset = range.endOffset;
-
-      // Expand forwards to word boundary
-      while (endOffset < textContent.length && /\w/.test(textContent[endOffset])) {
-        endOffset++;
-      }
-      range.setEnd(endContainer, endOffset);
     }
   }
 
