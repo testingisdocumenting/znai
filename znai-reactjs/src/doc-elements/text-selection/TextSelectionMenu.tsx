@@ -20,6 +20,7 @@ import { buildHighlightAnchor, buildMatchPrefixAndSuffix } from "./textSelection
 import "./TextSelectionMenu.css";
 import { TextHighlighter } from "./textHighlihter";
 import highlight from "../images/shapes/Highlight";
+import { findPrefixSuffixAndMatch } from "./textSelectionBuilder";
 
 function encodeTextFragment(text: string): string {
   return text.replace(/\n/g, "%0A").replace(/ /g, "%20").replace(/-/g, "%2D").replace(/,/g, "%2C");
@@ -101,17 +102,11 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
         // For partial word selections or when fragment generation fails,
         // expand to word boundaries and use that
         // const expandedRange = range.cloneRange();
-        expandWordSelection(range);
-        const expandedText = range.toString();
 
-        const allText = containerNode.innerText;
-        const highlight = buildMatchPrefixAndSuffix(allText, selectedText);
-        console.log("highlight", highlight);
-
-        pageUrl += buildHighlightAnchor(selectedText, highlight);
+        const result = findPrefixSuffixAndMatch(containerNode);
+        console.log("result", result);
         const highlighter = new TextHighlighter(containerNode);
-        highlighter.highlight(selectedText, highlight.prefix, highlight.suffix);
-        window.highligther = highlighter;
+        highlighter.highlight(selectedText, result.prefix, result.suffix);
       }
 
       // console.log(pageUrl);
