@@ -114,61 +114,53 @@ function expandRange(range, charsToMove, navigator, isBackward) {
  * @param {HTMLElement} container - The container element to search within
  * @returns {Object|null} Object with text, prefix, and suffix properties, or null if error
  */
+/**
+ * Builds full text exactly like TextHighlighter does.
+ * @param {HTMLElement} container - The container element
+ * @returns {string} The full text as seen by TextHighlighter
+ */
+function buildFullTextLikeHighlighter(container) {
+  const textNodes = [];
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+
+  let textNode;
+  while ((textNode = walker.nextNode())) {
+    textNodes.push(textNode);
+  }
+
+  return textNodes.map((node) => node.nodeValue).join("");
+}
+
 export function findPrefixSuffixAndMatch(container) {
   const selection = window.getSelection();
-  const selectedText = selection.toString().trim();
+  const originalSelectedText = selection.toString();
 
-  if (!selectedText) {
+  if (!originalSelectedText || !originalSelectedText.trim()) {
     return null;
   }
 
-  const range = selection.getRangeAt(0);
-  const navigator = new TextNodeNavigator(container);
+  const selectedText = originalSelectedText.trim();
+  
+  // Use the SAME text building logic as TextHighlighter
+  const fullText = buildFullTextLikeHighlighter(container);
 
-  // Get a large context around the selection to identify it uniquely
-  const largeContext = getExpandedContext(
-    range,
-    MAX_CONTEXT_EXPANSION,
-    MAX_CONTEXT_EXPANSION,
-    navigator
-  );
+  const selectionIndex = fullText.indexOf(selectedText);
 
-  const selectionStartInContext = largeContext.indexOf(selectedText);
-
-  if (selectionStartInContext === -1) {
-    // Try with normalized whitespace in case of formatting differences
-    const normalizedContext = largeContext.replace(/\s+/g, ' ').trim();
-    const normalizedSelection = selectedText.replace(/\s+/g, ' ').trim();
-    const normalizedIndex = normalizedContext.indexOf(normalizedSelection);
-    
-    if (normalizedIndex === -1) {
-      console.warn('textSelectionBuilder: Could not find selected text in expanded context', {
-        selectedText: selectedText.substring(0, 50) + '...',
-        contextLength: largeContext.length,
-        contextPreview: largeContext.substring(0, 100) + '...'
-      });
-      return null;
-    }
-    
-    // If normalized version found, use the original context with best effort
-    const actualPrefix = largeContext.substring(0, Math.min(largeContext.length, normalizedIndex));
-    const actualSuffix = largeContext.substring(Math.min(largeContext.length, normalizedIndex + selectedText.length));
-    
-    return {
-      text: selectedText,
-      prefix: actualPrefix.slice(-MIN_CONTEXT_LENGTH) || actualPrefix,
-      suffix: actualSuffix.slice(0, MIN_CONTEXT_LENGTH) || actualSuffix,
-    };
+  if (selectionIndex === -1) {
+    console.warn('textSelectionBuilder: Could not find selected text in highlighter full text', {
+      selectedLength: selectedText.length,
+      fullTextLength: fullText.length,
+      preview: selectedText.substring(0, 50) + '...',
+      fullTextPreview: fullText.substring(0, 100) + '...'
+    });
+    return null;
   }
 
-  // Extract the actual prefix and suffix from the large context
-  const actualPrefix = largeContext.substring(0, selectionStartInContext);
-  const actualSuffix = largeContext.substring(selectionStartInContext + selectedText.length);
+  // Extract prefix and suffix from the same full text that highlighter uses
+  const actualPrefix = fullText.substring(Math.max(0, selectionIndex - MAX_CONTEXT_EXPANSION), selectionIndex);
+  const actualSuffix = fullText.substring(selectionIndex + selectedText.length, selectionIndex + selectedText.length + MAX_CONTEXT_EXPANSION);
 
-  // Get the full text to test uniqueness
-  const fullText = container.innerText;
-
-  // Check if the selected text is unique
+  // Check if the text is unique in the highlighter's full text
   const isUniqueText = countOccurrences(fullText, selectedText) === 1;
 
   if (isUniqueText) {

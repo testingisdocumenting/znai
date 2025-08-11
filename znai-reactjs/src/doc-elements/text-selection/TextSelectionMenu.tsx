@@ -71,40 +71,33 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       return;
     }
 
-    try {
-      const selectedText = selection.toString();
-      const range = selection.getRangeAt(0);
+    const result = findPrefixSuffixAndMatch(containerNode);
+    console.log("result", result);
 
-      const result = findPrefixSuffixAndMatch(containerNode);
-      console.log("result", result);
+    const highlighter = new TextHighlighter(containerNode);
+    highlighter.highlight(result.text, result.prefix, result.suffix);
 
-      const highlighter = new TextHighlighter(containerNode);
-      highlighter.highlight(result.text, result.prefix, result.suffix);
+    selection.removeAllRanges();
 
-      selection.removeAllRanges();
+    hidePopover();
 
-      hidePopover();
-
-      // const formData = new FormData();
-      // formData.append("selectedText", selectedText);
-      // formData.append("pageUrl", pageUrl);
-      // formData.append("username", "web-user");
-      //
-      // let response = await fetch("http://localhost:5111/ask-in-slack", {
-      //   method: "POST",
-      //   body: formData,
-      // });
-      //
-      // console.log("page url", pageUrl);
-      //
-      // if (response.ok) {
-      //   console.log("Successfully sent to Slack");
-      // } else {
-      //   console.error("Failed to send to Slack:", response.statusText);
-      // }
-    } catch (error) {
-      console.error("Error sending to Slack:", error);
-    }
+    // const formData = new FormData();
+    // formData.append("selectedText", selectedText);
+    // formData.append("pageUrl", pageUrl);
+    // formData.append("username", "web-user");
+    //
+    // let response = await fetch("http://localhost:5111/ask-in-slack", {
+    //   method: "POST",
+    //   body: formData,
+    // });
+    //
+    // console.log("page url", pageUrl);
+    //
+    // if (response.ok) {
+    //   console.log("Successfully sent to Slack");
+    // } else {
+    //   console.error("Failed to send to Slack:", response.statusText);
+    // }
   }
 
   function showMenu(top: number, left: number) {
