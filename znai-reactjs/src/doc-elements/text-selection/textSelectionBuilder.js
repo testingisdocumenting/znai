@@ -37,88 +37,11 @@ class TextNodeNavigator {
 }
 
 /**
- * Expands a text range by a specified number of characters in both directions.
- * @param {Range} range - The range to expand
- * @param {number} charsBefore - Number of characters to expand backward
- * @param {number} charsAfter - Number of characters to expand forward
- * @param {TextNodeNavigator} navigator - Text node navigator instance
- * @returns {string} The text content of the expanded range
- */
-function getExpandedContext(range, charsBefore, charsAfter, navigator) {
-  const expandedRange = range.cloneRange();
-
-  // Expand backwards
-  expandRange(expandedRange, charsBefore, navigator, true);
-
-  // Expand forwards
-  expandRange(expandedRange, charsAfter, navigator, false);
-
-  return expandedRange.toString();
-}
-
-/**
- * Expands a range in a specific direction.
- * @param {Range} range - The range to expand
- * @param {number} charsToMove - Number of characters to expand
- * @param {TextNodeNavigator} navigator - Text node navigator instance
- * @param {boolean} isBackward - True to expand backward, false for forward
- */
-function expandRange(range, charsToMove, navigator, isBackward) {
-  try {
-    let moved = 0;
-    let currentContainer = isBackward ? range.startContainer : range.endContainer;
-    let currentOffset = isBackward ? range.startOffset : range.endOffset;
-
-    while (moved < charsToMove) {
-      if (currentContainer.nodeType !== Node.TEXT_NODE) {
-        break;
-      }
-
-      const availableChars = isBackward ? currentOffset : currentContainer.textContent.length - currentOffset;
-
-      const toMove = Math.min(charsToMove - moved, availableChars);
-
-      if (isBackward) {
-        range.setStart(currentContainer, currentOffset - toMove);
-      } else {
-        range.setEnd(currentContainer, currentOffset + toMove);
-      }
-
-      moved += toMove;
-
-      if (moved >= charsToMove) {
-        break;
-      }
-
-      // Move to adjacent text node
-      const adjacentNode = isBackward
-        ? navigator.getPreviousTextNode(currentContainer)
-        : navigator.getNextTextNode(currentContainer);
-
-      if (!adjacentNode) {
-        break;
-      }
-
-      currentContainer = adjacentNode;
-      currentOffset = isBackward ? adjacentNode.textContent.length : 0;
-    }
-  } catch (e) {
-    // Silently handle range expansion errors
-  }
-}
-
-/**
- * Finds minimal unique prefix and suffix for the selected text within the container.
- * @param {HTMLElement} container - The container element to search within
- * @returns {Object|null} Object with text, prefix, and suffix properties, or null if error
- */
-/**
  * Builds full text exactly like TextHighlighter does.
  * @param {HTMLElement} container - The container element
  * @returns {string} The full text as seen by TextHighlighter
  */
-// TODO try a regular innerText
-function buildFullTextLikeHighlighter(container) {
+function buildFullTextUsingTreeWalker(container) {
   const textNodes = [];
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
 
@@ -179,18 +102,14 @@ export function findPrefixSuffixAndMatch(container) {
   }
 
   const range = selection.getRangeAt(0);
-
-  // DON'T use selection.toString() - build text using TreeWalker method like TextHighlighter
   const selectedText = extractTextFromRangeUsingTreeWalker(range, container).trim();
 
   if (!selectedText) {
     return null;
   }
 
-  // Use the SAME text building logic as TextHighlighter
-  const fullText = buildFullTextLikeHighlighter(container);
+  const fullText = buildFullTextUsingTreeWalker(container);
 
-  // Since both are built with TreeWalker, they should match exactly
   const selectionIndex = fullText.indexOf(selectedText);
 
   if (selectionIndex === -1) {
@@ -316,14 +235,9 @@ function findMinimalUniqueContext(fullText, selectedText, actualPrefix, actualSu
       const pattern = testPrefix + selectedText + testSuffix;
 
       if (isUniqueOccurrence(fullText, pattern)) {
-        let finalPrefix = testPrefix;
-
-        // Try to clean up to word boundary if possible
-        finalPrefix = cleanToWordBoundary(finalPrefix, selectedText, testSuffix, fullText);
-
         return {
           text: selectedText,
-          prefix: finalPrefix,
+          prefix: testPrefix,
           suffix: testSuffix,
         };
       }
@@ -331,36 +245,4 @@ function findMinimalUniqueContext(fullText, selectedText, actualPrefix, actualSu
   }
 
   return null;
-}
-
-/**
- * Attempts to clean the prefix to a word boundary while maintaining uniqueness.
- * @param {string} prefix - The prefix to clean
- * @param {string} selectedText - The selected text
- * @param {string} suffix - The suffix
- * @param {string} fullText - The full text to verify uniqueness
- * @returns {string} The cleaned prefix or original if cleaning breaks uniqueness
- */
-function cleanToWordBoundary(prefix, selectedText, suffix, fullText) {
-  if (prefix.length <= MIN_CONTEXT_LENGTH + 5) {
-    return prefix;
-  }
-
-  const lastSpace = prefix.lastIndexOf(" ");
-  if (lastSpace <= MIN_CONTEXT_LENGTH) {
-    return prefix;
-  }
-
-  const cleanPrefix = prefix.substring(lastSpace + 1);
-  if (cleanPrefix.length < MIN_CONTEXT_LENGTH) {
-    return prefix;
-  }
-
-  // Verify the cleaned prefix still results in unique pattern
-  const cleanPattern = cleanPrefix + selectedText + suffix;
-  if (isUniqueOccurrence(fullText, cleanPattern)) {
-    return cleanPrefix;
-  }
-
-  return prefix;
 }

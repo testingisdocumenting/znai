@@ -34,7 +34,7 @@ describe("textSelectionBuilder", () => {
     const dom = new JSDOM(
       `
       <!DOCTYPE html>
-      <html>
+      <html lang="en">
         <body>
           ${htmlContent}
         </body>
@@ -74,7 +74,6 @@ describe("textSelectionBuilder", () => {
   }
 
   describe("findPrefixSuffixAndMatch", () => {
-
     it("should find minimal unique prefix and suffix for selected text", () => {
       const { container } = setupDOM(`
         <div id="test-container">
@@ -538,7 +537,7 @@ describe("textSelectionBuilder", () => {
       // Select from paragraph text across to code snippet
       const firstP = container.querySelector("p");
       const codeSpan = container.querySelector(".token.function");
-      
+
       // Select from "some text" in paragraph to "example" in code
       selectText(firstP.firstChild, 25, codeSpan.firstChild, 7);
 
@@ -573,7 +572,7 @@ describe("textSelectionBuilder", () => {
       // Select across deeply nested structure - this might cause context expansion issues
       const startP = container.querySelector("p");
       const endP = container.querySelectorAll("p")[1];
-      
+
       // Select from start paragraph through complex nested code to end paragraph
       selectText(startP.firstChild, 6, endP.firstChild, 3);
 
@@ -602,7 +601,7 @@ describe("textSelectionBuilder", () => {
       // Select from the period at end of paragraph to start of code block
       const paragraph = container.querySelector("p");
       const codeBlock = container.querySelector("code");
-      
+
       // Select from "." to "function"
       selectText(paragraph.firstChild, paragraph.firstChild.textContent.length - 1, codeBlock.firstChild, 8);
 
@@ -630,17 +629,17 @@ describe("textSelectionBuilder", () => {
       // Select from just before period to just after newline - this might include only whitespace/formatting
       const paragraph = container.querySelector("p");
       const codeBlock = container.querySelector("code");
-      
+
       // Try to select the transition area that might be problematic
       selectText(paragraph.firstChild, paragraph.firstChild.textContent.length - 2, codeBlock.firstChild, 4);
 
       const result = findPrefixSuffixAndMatch(container);
-      
+
       const selection = global.window.getSelection();
       const selectedText = selection.toString();
 
       // Should handle this case gracefully - either return valid result or null for empty selection
-      if (selectedText.trim() === '') {
+      if (selectedText.trim() === "") {
         expect(result).toBeNull();
       } else {
         expect(result).not.toBeNull();
@@ -668,17 +667,17 @@ describe("textSelectionBuilder", () => {
       // Simulate the exact problematic scenario: end of sentence to code
       const paragraph = container.querySelector("p");
       const tokenSpan = container.querySelector(".token.keyword");
-      
+
       // Select from sentence ending to start of code token
       selectText(paragraph.firstChild, paragraph.firstChild.textContent.length - 1, tokenSpan.firstChild, 8);
 
       const result = findPrefixSuffixAndMatch(container);
-      
+
       const selection = global.window.getSelection();
       const selectedText = selection.toString();
 
       // This is the case that should be fixed - should not return null
-      if (selectedText.trim() === '') {
+      if (selectedText.trim() === "") {
         expect(result).toBeNull();
       } else {
         expect(result).not.toBeNull();
@@ -705,18 +704,18 @@ describe("textSelectionBuilder", () => {
       // Select just lines within the code block (not spanning from paragraph)
       const codeBlock = container.querySelector("code");
       const codeText = codeBlock.firstChild;
-      
+
       // Select "const result = processData();" line from the code
       const startIndex = codeText.textContent.indexOf("const result");
       const endIndex = codeText.textContent.indexOf(";", startIndex) + 1;
-      
+
       selectText(codeText, startIndex, codeText, endIndex);
 
       const result = findPrefixSuffixAndMatch(container);
-      
+
       const selection = global.window.getSelection();
       const selectedText = selection.toString();
-      
+
       expect(selectedText).toBe("const result = processData();");
       expect(result).not.toBeNull();
       if (result) {
@@ -745,15 +744,15 @@ function calculateTotal(items) {
       // Select a line within the code, which should expand context but might hit the paragraph boundary
       const codeBlock = container.querySelector("code");
       const codeText = codeBlock.firstChild;
-      
-      // Select the "let total = 0;" line 
+
+      // Select the "let total = 0;" line
       const startIndex = codeText.textContent.indexOf("let total");
       const endIndex = codeText.textContent.indexOf(";", startIndex) + 1;
-      
+
       selectText(codeText, startIndex, codeText, endIndex);
 
       const result = findPrefixSuffixAndMatch(container);
-      
+
       const selection = global.window.getSelection();
       const selectedText = selection.toString();
 
@@ -798,17 +797,17 @@ function calculateTotal(items) {
         textNodes.push(textNode);
       }
       const highlighterFullText = textNodes.map((node) => node.nodeValue).join("");
-      
+
       // We already imported findPrefixSuffixAndMatch at the top of the file
-      
+
       // Select something within the code
-      const constructorSpan = container.querySelector('.token.function');
+      const constructorSpan = container.querySelector(".token.function");
       selectText(constructorSpan.firstChild, 0, constructorSpan.firstChild, 11); // "constructor"
-      
+
       const result = findPrefixSuffixAndMatch(container);
       const selection = global.window.getSelection();
       const selectedText = selection.toString();
-      
+
       expect(result).not.toBeNull();
       if (result) {
         // Verify the pattern can be found in highlighter's text
@@ -867,17 +866,17 @@ function calculateTotal(items) {
       `);
 
       // Try to select a line within the complex znai structure
-      const constructorSpan = container.querySelector('.token.function');
-      const nextLine = constructorSpan.closest('.znai-code-line').nextElementSibling.querySelector('.token.function');
-      
+      const constructorSpan = container.querySelector(".token.function");
+      const nextLine = constructorSpan.closest(".znai-code-line").nextElementSibling.querySelector(".token.function");
+
       // Select from "constructor" to "usefulAction"
       selectText(constructorSpan.firstChild, 0, nextLine.firstChild, 12);
 
       const result = findPrefixSuffixAndMatch(container);
-      
+
       const selection = global.window.getSelection();
       const selectedText = selection.toString();
-      
+
       // This should work with complex znai DOM structure
       expect(result).not.toBeNull();
       if (result) {
@@ -913,29 +912,29 @@ function calculateTotal(items) {
       `);
 
       // Select from end of paragraph text to beginning of code
-      const paragraphSpan = container.querySelector('.znai-simple-text:last-child');
-      const codeKeyword = container.querySelector('.token.keyword');
-      
+      const paragraphSpan = container.querySelector(".znai-simple-text:last-child");
+      const codeKeyword = container.querySelector(".token.keyword");
+
       // Select from "documentation." in paragraph to "class" in code
       const paragraphText = paragraphSpan.firstChild;
       const codeText = codeKeyword.firstChild;
-      
-      const startIndex = paragraphText.textContent.indexOf('documentation');
-      
+
+      const startIndex = paragraphText.textContent.indexOf("documentation");
+
       selectText(paragraphText, startIndex, codeText, 5); // "documentation." to "class"
 
       const result = findPrefixSuffixAndMatch(container);
-      
+
       const selection = global.window.getSelection();
       const selectedText = selection.toString();
-      
+
       // Should not return null for cross-element selections
       expect(result).not.toBeNull();
       if (result) {
         expect(result.text).toBeTruthy();
         expect(result.prefix).toBeTruthy();
         expect(result.suffix).toBeTruthy();
-        
+
         // Verify the result can be found by TextHighlighter
         const highlighterFullText = buildFullTextLikeHighlighter(container);
         const pattern = result.prefix + result.text + result.suffix;
@@ -952,14 +951,14 @@ function calculateTotal(items) {
       `);
 
       // Simulate browser adding newline where TreeWalker doesn't
-      const paragraph = container.querySelector('p').firstChild;
-      const code = container.querySelector('code').firstChild;
-      
+      const paragraph = container.querySelector("p").firstChild;
+      const code = container.querySelector("code").firstChild;
+
       // Select from "plugin instead." to ":include-file:"
-      selectText(paragraph, paragraph.textContent.indexOf('plugin'), code, 14);
+      selectText(paragraph, paragraph.textContent.indexOf("plugin"), code, 14);
 
       const result = findPrefixSuffixAndMatch(container);
-      
+
       // This should work by handling the newline that selection.toString() adds
       expect(result).not.toBeNull();
       if (result) {
@@ -982,13 +981,13 @@ function calculateTotal(items) {
       `);
 
       // Select text spanning from paragraph to code - this should remove block newlines
-      const paragraph = container.querySelector('p').firstChild;
-      const code = container.querySelector('code').firstChild;
-      
+      const paragraph = container.querySelector("p").firstChild;
+      const code = container.querySelector("code").firstChild;
+
       selectText(paragraph, 5, code, 8); // "ending here...function"
-      
+
       let result = findPrefixSuffixAndMatch(container);
-      
+
       expect(result).not.toBeNull();
       if (result) {
         // Should work by removing the paragraph→code newline
@@ -996,17 +995,17 @@ function calculateTotal(items) {
       }
 
       // Now test selection within code block - should preserve newlines
-      const codeStart = code.textContent.indexOf('function');
-      const returnLine = code.textContent.indexOf('return');
-      
+      const codeStart = code.textContent.indexOf("function");
+      const returnLine = code.textContent.indexOf("return");
+
       selectText(code, codeStart, code, returnLine + 6); // "function test() {\n  return"
-      
+
       result = findPrefixSuffixAndMatch(container);
-      
+
       expect(result).not.toBeNull();
       if (result) {
         // Should preserve the actual newline in code
-        expect(result.text.includes('\n')).toBe(true);
+        expect(result.text.includes("\n")).toBe(true);
       }
     });
 
@@ -1022,27 +1021,27 @@ function calculateTotal(items) {
       `);
 
       // Select from middle of first paragraph, through code, to middle of last paragraph
-      const firstP = container.querySelector('p').firstChild;
-      const code = container.querySelector('code').firstChild;
-      const lastP = container.querySelectorAll('p')[1].firstChild;
-      
+      const firstP = container.querySelector("p").firstChild;
+      const code = container.querySelector("code").firstChild;
+      const lastP = container.querySelectorAll("p")[1].firstChild;
+
       // Select "paragraph text." + code + "End of"
       selectText(firstP, 9, lastP, 6);
 
       const result = findPrefixSuffixAndMatch(container);
-      
+
       const selection = global.window.getSelection();
       const selectedText = selection.toString();
-      
+
       // Should work even with mixed content (paragraph + code + paragraph)
       expect(result).not.toBeNull();
       if (result) {
         expect(result.text).toBeTruthy();
         expect(result.prefix).toBeTruthy();
         expect(result.suffix).toBeTruthy();
-        
+
         // Should preserve code structure since selection contains preformatted content
-        expect(result.text.includes('function')).toBe(true);
+        expect(result.text.includes("function")).toBe(true);
       }
     });
 
@@ -1063,18 +1062,18 @@ function calculateTotal(items) {
       // Create a selection that might cause range expansion to fail
       const paragraph = container.querySelector("p");
       const codeSpan = container.querySelector(".token.function");
-      
+
       try {
         // This might create a problematic range that's hard to expand context for
         selectText(paragraph.firstChild, paragraph.firstChild.textContent.length - 1, codeSpan.firstChild, 3);
 
         const result = findPrefixSuffixAndMatch(container);
-        
+
         const selection = global.window.getSelection();
         const selectedText = selection.toString();
 
         // Should handle even problematic ranges
-        if (selectedText.trim() === '') {
+        if (selectedText.trim() === "") {
           expect(result).toBeNull();
         } else {
           // With improved fallback logic, should not return null
