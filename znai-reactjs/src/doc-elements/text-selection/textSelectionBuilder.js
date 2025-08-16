@@ -74,9 +74,7 @@ function expandRange(range, charsToMove, navigator, isBackward) {
         break;
       }
 
-      const availableChars = isBackward
-        ? currentOffset
-        : currentContainer.textContent.length - currentOffset;
+      const availableChars = isBackward ? currentOffset : currentContainer.textContent.length - currentOffset;
 
       const toMove = Math.min(charsToMove - moved, availableChars);
 
@@ -119,6 +117,7 @@ function expandRange(range, charsToMove, navigator, isBackward) {
  * @param {HTMLElement} container - The container element
  * @returns {string} The full text as seen by TextHighlighter
  */
+// TODO try a regular innerText
 function buildFullTextLikeHighlighter(container) {
   const textNodes = [];
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
@@ -148,8 +147,8 @@ function extractTextFromRangeUsingTreeWalker(range, container) {
   }
 
   // Find which text nodes are affected by the range
-  let result = '';
-  
+  let result = "";
+
   for (const node of textNodes) {
     if (range.intersectsNode && range.intersectsNode(node)) {
       // This text node intersects with our range
@@ -187,7 +186,7 @@ export function findPrefixSuffixAndMatch(container) {
   if (!selectedText) {
     return null;
   }
-  
+
   // Use the SAME text building logic as TextHighlighter
   const fullText = buildFullTextLikeHighlighter(container);
 
@@ -196,51 +195,60 @@ export function findPrefixSuffixAndMatch(container) {
 
   if (selectionIndex === -1) {
     // Enhanced debugging for the real browser issue
-    console.group('textSelectionBuilder: DEBUG INFO FOR NULL RESULT');
-    console.warn('Could not find selected text in TreeWalker full text');
-    console.log('Selected text length:', selectedText.length);
-    console.log('Selected text preview:', JSON.stringify(selectedText.substring(0, 100)));
-    console.log('Selected text char codes:', Array.from(selectedText.substring(0, 20)).map(c => `${c}(${c.charCodeAt(0)})`));
-    
-    console.log('TreeWalker full text length:', fullText.length);
-    console.log('TreeWalker full text preview:', JSON.stringify(fullText.substring(0, 200)));
-    console.log('TreeWalker char codes:', Array.from(fullText.substring(0, 20)).map(c => `${c}(${c.charCodeAt(0)})`));
-    
+    console.group("textSelectionBuilder: DEBUG INFO FOR NULL RESULT");
+    console.warn("Could not find selected text in TreeWalker full text");
+    console.log("Selected text length:", selectedText.length);
+    console.log("Selected text preview:", JSON.stringify(selectedText.substring(0, 100)));
+    console.log(
+      "Selected text char codes:",
+      Array.from(selectedText.substring(0, 20)).map((c) => `${c}(${c.charCodeAt(0)})`)
+    );
+
+    console.log("TreeWalker full text length:", fullText.length);
+    console.log("TreeWalker full text preview:", JSON.stringify(fullText.substring(0, 200)));
+    console.log(
+      "TreeWalker char codes:",
+      Array.from(fullText.substring(0, 20)).map((c) => `${c}(${c.charCodeAt(0)})`)
+    );
+
     // Check if we can find the selected text with different approaches
-    const normalizedSelection = selectedText.replace(/\s+/g, ' ');
-    const normalizedFullText = fullText.replace(/\s+/g, ' ');
+    const normalizedSelection = selectedText.replace(/\s+/g, " ");
+    const normalizedFullText = fullText.replace(/\s+/g, " ");
     const normalizedFound = normalizedFullText.indexOf(normalizedSelection);
-    console.log('Found with normalized whitespace:', normalizedFound !== -1, 'at index:', normalizedFound);
-    
+    console.log("Found with normalized whitespace:", normalizedFound !== -1, "at index:", normalizedFound);
+
     // Check if we can find the first few words
-    const firstWords = selectedText.split(/\s+/).slice(0, 3).join(' ');
-    const lastWords = selectedText.split(/\s+/).slice(-3).join(' ');
-    console.log('First words found:', fullText.indexOf(firstWords) !== -1, 'text:', JSON.stringify(firstWords));
-    console.log('Last words found:', fullText.indexOf(lastWords) !== -1, 'text:', JSON.stringify(lastWords));
-    
+    const firstWords = selectedText.split(/\s+/).slice(0, 3).join(" ");
+    const lastWords = selectedText.split(/\s+/).slice(-3).join(" ");
+    console.log("First words found:", fullText.indexOf(firstWords) !== -1, "text:", JSON.stringify(firstWords));
+    console.log("Last words found:", fullText.indexOf(lastWords) !== -1, "text:", JSON.stringify(lastWords));
+
     // Show selection range info
     const range = selection.getRangeAt(0);
-    console.log('Selection range info:');
-    console.log('  startContainer:', range.startContainer.nodeName, range.startContainer.nodeType);
-    console.log('  endContainer:', range.endContainer.nodeName, range.endContainer.nodeType);
-    console.log('  startOffset:', range.startOffset);
-    console.log('  endOffset:', range.endOffset);
-    console.log('  commonAncestor:', range.commonAncestorContainer.nodeName);
-    
+    console.log("Selection range info:");
+    console.log("  startContainer:", range.startContainer.nodeName, range.startContainer.nodeType);
+    console.log("  endContainer:", range.endContainer.nodeName, range.endContainer.nodeType);
+    console.log("  startOffset:", range.startOffset);
+    console.log("  endOffset:", range.endOffset);
+    console.log("  commonAncestor:", range.commonAncestorContainer.nodeName);
+
     // Show what browser selection.toString() vs what TreeWalker sees
-    console.log('Browser selection.toString():', JSON.stringify(selection.toString()));
-    console.log('TreeWalker would see as text:', JSON.stringify(fullText.substring(0, 200)));
-    
+    console.log("Browser selection.toString():", JSON.stringify(selection.toString()));
+    console.log("TreeWalker would see as text:", JSON.stringify(fullText.substring(0, 200)));
+
     console.groupEnd();
     return null;
   }
 
   // Extract prefix and suffix from the same full text that highlighter uses
   const actualPrefix = fullText.substring(Math.max(0, selectionIndex - MAX_CONTEXT_EXPANSION), selectionIndex);
-  const actualSuffix = fullText.substring(selectionIndex + selectedText.length, selectionIndex + selectedText.length + MAX_CONTEXT_EXPANSION);
+  const actualSuffix = fullText.substring(
+    selectionIndex + selectedText.length,
+    selectionIndex + selectedText.length + MAX_CONTEXT_EXPANSION
+  );
 
   // Check if the text is unique in the highlighter's full text
-  const isUniqueText = countOccurrences(fullText, selectedText) === 1;
+  const isUniqueText = isUniqueOccurrence(fullText, selectedText);
 
   if (isUniqueText) {
     return {
@@ -251,12 +259,7 @@ export function findPrefixSuffixAndMatch(container) {
   }
 
   // Find minimal prefix/suffix combination that makes the selection unique
-  const result = findMinimalUniqueContext(
-    fullText,
-    selectedText,
-    actualPrefix,
-    actualSuffix
-  );
+  const result = findMinimalUniqueContext(fullText, selectedText, actualPrefix, actualSuffix);
 
   if (result) {
     return result;
@@ -270,20 +273,21 @@ export function findPrefixSuffixAndMatch(container) {
   };
 }
 
-/**
- * Counts occurrences of a substring in a string.
- * @param {string} text - The text to search in
- * @param {string} substring - The substring to count
- * @returns {number} Number of occurrences
- */
-function countOccurrences(text, substring) {
+function isUniqueOccurrence(text, substring) {
   let count = 0;
-  let idx = text.indexOf(substring);
-  while (idx !== -1) {
+  let idx = 0;
+
+  for (;;) {
+    idx = text.indexOf(substring, idx);
+    if (idx === -1) {
+      break;
+    }
+
+    idx = idx + substring.length;
     count++;
-    idx = text.indexOf(substring, idx + 1);
   }
-  return count;
+
+  return count === 1;
 }
 
 /**
@@ -311,16 +315,11 @@ function findMinimalUniqueContext(fullText, selectedText, actualPrefix, actualSu
       const testSuffix = actualSuffix.slice(0, suffixLen);
       const pattern = testPrefix + selectedText + testSuffix;
 
-      if (countOccurrences(fullText, pattern) === 1) {
+      if (isUniqueOccurrence(fullText, pattern)) {
         let finalPrefix = testPrefix;
 
         // Try to clean up to word boundary if possible
-        finalPrefix = cleanToWordBoundary(
-          finalPrefix,
-          selectedText,
-          testSuffix,
-          fullText
-        );
+        finalPrefix = cleanToWordBoundary(finalPrefix, selectedText, testSuffix, fullText);
 
         return {
           text: selectedText,
@@ -359,7 +358,7 @@ function cleanToWordBoundary(prefix, selectedText, suffix, fullText) {
 
   // Verify the cleaned prefix still results in unique pattern
   const cleanPattern = cleanPrefix + selectedText + suffix;
-  if (countOccurrences(fullText, cleanPattern) === 1) {
+  if (isUniqueOccurrence(fullText, cleanPattern)) {
     return cleanPrefix;
   }
 

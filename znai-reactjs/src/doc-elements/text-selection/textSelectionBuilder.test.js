@@ -18,6 +18,17 @@ import { describe, it, expect } from "vitest";
 import { JSDOM } from "jsdom";
 import { findPrefixSuffixAndMatch } from "./textSelectionBuilder.js";
 
+// Helper function to match TextHighlighter's text building
+function buildFullTextLikeHighlighter(container) {
+  const textNodes = [];
+  const walker = container.ownerDocument.createTreeWalker(container, global.NodeFilter.SHOW_TEXT, null, false);
+  let textNode;
+  while ((textNode = walker.nextNode())) {
+    textNodes.push(textNode);
+  }
+  return textNodes.map((node) => node.nodeValue).join("");
+}
+
 describe("textSelectionBuilder", () => {
   function setupDOM(htmlContent) {
     const dom = new JSDOM(
@@ -873,6 +884,165 @@ function calculateTotal(items) {
         expect(result.text).toBeTruthy();
         expect(result.prefix).toBeTruthy();
         expect(result.suffix).toBeTruthy();
+      }
+    });
+
+    it("should handle cross-element selection from paragraph to code snippet", () => {
+      const { container } = setupDOM(`
+        <div id="test-container">
+          <div class="paragraph content-block">
+            <span class="znai-simple-text">This </span>
+            <code class="znai-inlined-code">include-</code>
+            <span class="znai-simple-text"> syntax will appear throughout the documentation.</span>
+          </div>
+          <div class="snippet">
+            <pre>
+              <span class="znai-code-line">
+                <span class="token keyword">class</span> <span class="token class-name">JsClass</span> <span class="token punctuation">{</span>
+                <span>
+</span>
+              </span>
+              <span class="znai-code-line">
+                    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span>
+</span>
+              </span>
+            </pre>
+          </div>
+        </div>
+      `);
+
+      // Select from end of paragraph text to beginning of code
+      const paragraphSpan = container.querySelector('.znai-simple-text:last-child');
+      const codeKeyword = container.querySelector('.token.keyword');
+      
+      // Select from "documentation." in paragraph to "class" in code
+      const paragraphText = paragraphSpan.firstChild;
+      const codeText = codeKeyword.firstChild;
+      
+      const startIndex = paragraphText.textContent.indexOf('documentation');
+      
+      selectText(paragraphText, startIndex, codeText, 5); // "documentation." to "class"
+
+      const result = findPrefixSuffixAndMatch(container);
+      
+      const selection = global.window.getSelection();
+      const selectedText = selection.toString();
+      
+      // Should not return null for cross-element selections
+      expect(result).not.toBeNull();
+      if (result) {
+        expect(result.text).toBeTruthy();
+        expect(result.prefix).toBeTruthy();
+        expect(result.suffix).toBeTruthy();
+        
+        // Verify the result can be found by TextHighlighter
+        const highlighterFullText = buildFullTextLikeHighlighter(container);
+        const pattern = result.prefix + result.text + result.suffix;
+        expect(highlighterFullText.indexOf(pattern) !== -1).toBe(true);
+      }
+    });
+
+    it("should handle selection with newlines that don't exist in TreeWalker text", () => {
+      const { container } = setupDOM(`
+        <div id="test-container">
+          <p>Text ending with plugin instead.</p>
+          <code>:include-file: file-name.js</code>
+        </div>
+      `);
+
+      // Simulate browser adding newline where TreeWalker doesn't
+      const paragraph = container.querySelector('p').firstChild;
+      const code = container.querySelector('code').firstChild;
+      
+      // Select from "plugin instead." to ":include-file:"
+      selectText(paragraph, paragraph.textContent.indexOf('plugin'), code, 14);
+
+      const result = findPrefixSuffixAndMatch(container);
+      
+      // This should work by handling the newline that selection.toString() adds
+      expect(result).not.toBeNull();
+      if (result) {
+        expect(result.text).toBeTruthy();
+        // In JSDOM, the newline is preserved, but in real browsers it would be removed
+        // The important thing is that the function finds the text either way
+        expect(result.prefix).toBeTruthy();
+        expect(result.suffix).toBeTruthy();
+      }
+    });
+
+    it("should preserve newlines in preformatted code but remove block-element newlines", () => {
+      const { container } = setupDOM(`
+        <div id="test-container">
+          <p>Text ending here</p>
+          <pre><code>function test() {
+  return "value";
+}</code></pre>
+        </div>
+      `);
+
+      // Select text spanning from paragraph to code - this should remove block newlines
+      const paragraph = container.querySelector('p').firstChild;
+      const code = container.querySelector('code').firstChild;
+      
+      selectText(paragraph, 5, code, 8); // "ending here...function"
+      
+      let result = findPrefixSuffixAndMatch(container);
+      
+      expect(result).not.toBeNull();
+      if (result) {
+        // Should work by removing the paragraph→code newline
+        expect(result.text).toBeTruthy();
+      }
+
+      // Now test selection within code block - should preserve newlines
+      const codeStart = code.textContent.indexOf('function');
+      const returnLine = code.textContent.indexOf('return');
+      
+      selectText(code, codeStart, code, returnLine + 6); // "function test() {\n  return"
+      
+      result = findPrefixSuffixAndMatch(container);
+      
+      expect(result).not.toBeNull();
+      if (result) {
+        // Should preserve the actual newline in code
+        expect(result.text.includes('\n')).toBe(true);
+      }
+    });
+
+    it("should handle selection spanning paragraph → code → paragraph", () => {
+      const { container } = setupDOM(`
+        <div id="test-container">
+          <p>Start of paragraph text.</p>
+          <pre><code>function example() {
+  return "code";
+}</code></pre>
+          <p>End of paragraph text.</p>
+        </div>
+      `);
+
+      // Select from middle of first paragraph, through code, to middle of last paragraph
+      const firstP = container.querySelector('p').firstChild;
+      const code = container.querySelector('code').firstChild;
+      const lastP = container.querySelectorAll('p')[1].firstChild;
+      
+      // Select "paragraph text." + code + "End of"
+      selectText(firstP, 9, lastP, 6);
+
+      const result = findPrefixSuffixAndMatch(container);
+      
+      const selection = global.window.getSelection();
+      const selectedText = selection.toString();
+      
+      // Should work even with mixed content (paragraph + code + paragraph)
+      expect(result).not.toBeNull();
+      if (result) {
+        expect(result.text).toBeTruthy();
+        expect(result.prefix).toBeTruthy();
+        expect(result.suffix).toBeTruthy();
+        
+        // Should preserve code structure since selection contains preformatted content
+        expect(result.text.includes('function')).toBe(true);
       }
     });
 
