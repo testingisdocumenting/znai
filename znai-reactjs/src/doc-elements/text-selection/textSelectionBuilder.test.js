@@ -46,19 +46,12 @@ describe("textSelectionBuilder", () => {
     const document = dom.window.document;
     const window = dom.window;
 
-    // Set up only the globals that textSelectionBuilder actually uses
     global.window = window;
     global.document = document;
     global.Node = window.Node;
     global.NodeFilter = window.NodeFilter;
 
-    // Get the container and add innerText polyfill automatically
-    const container = document.getElementById("test-container");
-    Object.defineProperty(container, "innerText", {
-      get() {
-        return this.textContent;
-      },
-    });
+    const container = document.body;
 
     return { document, window, container };
   }
@@ -107,28 +100,27 @@ describe("textSelectionBuilder", () => {
       expect(secondIndex).toBe(-1); // Should be unique
     });
 
-    it("should handle unique text with minimal context", () => {
+    it("should handle unique text with minimal context when multiple entries are present", () => {
       const { container } = setupDOM(`
-        <div id="test-container">
+        <div>
           <p>This is a sample text with multiple words.</p>
           <p>This text contains repeated phrases.</p>
-          <p>The sample text is useful for testing.</p>
+          <p id="content">The sample text is useful for testing.</p>
         </div>
       `);
 
-      const firstP = container.querySelector("p");
-      const textNode = firstP.firstChild;
+      const lastP = document.getElementById("content");
+      const textNode = lastP.firstChild;
 
-      // Select "multiple" which is unique
-      selectText(textNode, 27, textNode, 35);
+      selectText(textNode, 4, textNode, 10);
+      console.log(">>>", global.window.getSelection().toString());
 
       const result = findPrefixSuffixAndMatch(container);
 
       expect(result).toBeDefined();
-      expect(result.text).toBe("multiple");
-      // For unique text, should still provide at least 10 chars of context
-      expect(result.prefix).toBe("text with ");
-      expect(result.suffix).toBe(" words.\n  ");
+      expect(result.text).toBe("sample");
+      expect(result.prefix).toBe("The ");
+      expect(result.suffix).toBe(" text is useful");
     });
 
     it("should handle selection across multiple nodes", () => {
