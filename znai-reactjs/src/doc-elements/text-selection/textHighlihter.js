@@ -37,7 +37,7 @@ export class TextHighlighter {
 
     const fullText = nodeMap.map((item) => item.text).join("");
 
-    // Build pattern
+    // Build a pattern
     let pattern = "";
     if (prefix) {
       pattern += "(" + this.escapeRegex(prefix) + ")\\s*";

@@ -15,11 +15,8 @@
  */
 
 import React, { useEffect, useRef } from "react";
-import { generateFragment } from "text-fragments-polyfill/dist/fragment-generation-utils.js";
-import { buildHighlightAnchor, buildMatchPrefixAndSuffix } from "./textSelection";
 import "./TextSelectionMenu.css";
 import { TextHighlighter } from "./textHighlihter";
-import highlight from "../images/shapes/Highlight";
 import { findPrefixSuffixAndMatch } from "./textSelectionBuilder";
 
 function encodeTextFragment(text: string): string {
@@ -75,7 +72,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     console.log("result", result);
 
     const highlighter = new TextHighlighter(containerNode);
-    highlighter.highlight(result.text, result.prefix, result.suffix);
+    highlighter.highlight(result.selection, result.prefix, result.suffix);
 
     selection.removeAllRanges();
 
