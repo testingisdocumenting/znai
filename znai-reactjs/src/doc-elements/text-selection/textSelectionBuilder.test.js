@@ -112,42 +112,40 @@ describe("textSelectionBuilder", () => {
 
     it("should handle selection at the beginning of container", () => {
       const { container } = setupDOM(`
-        <div>
-          <p>This is a sample text with multiple words.</p>
+        <div id="boundary"><p>This is a sample text with multiple words.</p>
           <p>This text contains repeated phrases.</p>
-          <p>The sample text is useful for testing.</p>
-        </div>
+          <p>The sample text is useful for testing.</p></div>
       `);
 
+      const boundaryContainer = document.getElementById("boundary");
       const firstP = container.querySelector("p");
       const textNode = firstP.firstChild;
 
       selectText(textNode, 0, textNode, 7);
 
-      const result = findPrefixSuffixAndMatch(container);
+      const result = findPrefixSuffixAndMatch(boundaryContainer);
 
       expect(result.selection).toBe("This is");
-      // TODO handle boundaries of the container properly
-      expect(result.prefix).toBe("          ");
+      expect(result.prefix).toBe("");
       expect(result.suffix).toBe(" a sample ");
     });
 
     it("should handle selection at the end of container", () => {
       const { container } = setupDOM(`
-        <div>
+        <div id="boundary">
           <p>This is a sample text with multiple words.</p>
           <p>This text contains repeated phrases.</p>
-          <p>The sample text is useful for testing.</p>
-        </div>
+          <p>The sample text is useful for testing.</p></div>
       `);
 
+      const boundaryContainer = document.getElementById("boundary");
       const lastP = container.querySelectorAll("p")[2];
       const textNode = lastP.firstChild;
       const text = textNode.textContent;
 
       selectText(textNode, text.length - 8, textNode, text.length);
 
-      const result = findPrefixSuffixAndMatch(container);
+      const result = findPrefixSuffixAndMatch(boundaryContainer);
 
       expect(result.selection).toBe("testing.");
       expect(result.prefix).toBe("seful for ");

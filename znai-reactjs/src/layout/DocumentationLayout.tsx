@@ -82,7 +82,7 @@ export function DocumentationLayout({
   scrollToPageSection,
 }: Props) {
   const [isMobileTocVisible, setMobileTocVisible] = useState(false);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
   const pageGenErrorPanel = pageGenError ? <PageGenError error={pageGenError} /> : null;
@@ -93,9 +93,11 @@ export function DocumentationLayout({
 
   function renderPageContent() {
     return (
-      <div ref={panelRef} className={panelFullClassName}>
-        {panelRef.current && <TextSelectionMenu containerNode={panelRef.current} />}
-        {renderedPage}
+      <div ref={contentRef} className={panelFullClassName}>
+        {contentRef.current && <TextSelectionMenu containerNode={contentRef.current} />}
+        <div ref={contentRef} style={{ display: "contents" }}>
+          {renderedPage}
+        </div>
 
         <div className="page-bottom">
           {renderedNextPrevNavigation}

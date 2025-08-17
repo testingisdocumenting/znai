@@ -32,7 +32,7 @@ export function findPrefixSuffixAndMatch(container) {
 
   const fullText = buildFullTextUsingTreeWalker(container);
 
-  const expandSelection = createSelectionExpander();
+  const expandSelection = createSelectionExpander(container);
   for (let i = 0; i < 10; i++) {
     result = expandSelection();
     const maybeUniqueText = result.prefix + result.selection + result.suffix;

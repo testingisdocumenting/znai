@@ -24,8 +24,9 @@ export function getSelectionText(range) {
 }
 
 class TextExpander {
-  constructor(node, offset, forward) {
-    this.walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  constructor(node, offset, forward, containerElement) {
+    this.container = containerElement;
+    this.walker = document.createTreeWalker(this.container, NodeFilter.SHOW_TEXT);
     this.walker.currentNode = node;
     this.currentNode = node;
     this.currentOffset = offset;
@@ -34,20 +35,34 @@ class TextExpander {
     this.exhausted = false;
 
     // If we're at a node boundary, move to the next node immediately
-    if (forward && offset === node.nodeValue.length) {
-      if (this.walker.nextNode()) {
-        this.currentNode = this.walker.currentNode;
-        this.currentOffset = 0;
-      } else {
-        this.exhausted = true;
-      }
+    if (forward && node.nodeValue && offset === node.nodeValue.length) {
+      this.moveToNextNode();
     } else if (!forward && offset === 0) {
-      if (this.walker.previousNode()) {
-        this.currentNode = this.walker.currentNode;
-        this.currentOffset = this.currentNode.nodeValue.length;
-      } else {
-        this.exhausted = true;
-      }
+      this.moveToPreviousNode();
+    }
+  }
+
+  moveToNextNode() {
+    this.walker.currentNode = this.currentNode;
+    if (this.walker.nextNode()) {
+      this.currentNode = this.walker.currentNode;
+      this.currentOffset = 0;
+      return true;
+    } else {
+      this.exhausted = true;
+      return false;
+    }
+  }
+
+  moveToPreviousNode() {
+    this.walker.currentNode = this.currentNode;
+    if (this.walker.previousNode()) {
+      this.currentNode = this.walker.currentNode;
+      this.currentOffset = this.currentNode.nodeValue.length;
+      return true;
+    } else {
+      this.exhausted = true;
+      return false;
     }
   }
 
@@ -63,16 +78,12 @@ class TextExpander {
 
       if (available === 0) {
         // We're at node boundary, move to next node
-        this.walker.currentNode = this.currentNode;
-        const moved = this.forward ? this.walker.nextNode() : this.walker.previousNode();
+        const moved = this.forward ? this.moveToNextNode() : this.moveToPreviousNode();
 
-        if (moved) {
-          this.currentNode = this.walker.currentNode;
-          this.currentOffset = this.forward ? 0 : this.currentNode.nodeValue.length;
-          continue;
-        } else {
-          this.exhausted = true;
+        if (!moved) {
           break;
+        } else {
+          continue;
         }
       }
 
@@ -109,7 +120,7 @@ class TextExpander {
   }
 }
 
-export function createSelectionExpander() {
+export function createSelectionExpander(container) {
   const selection = window.getSelection();
   if (!selection.rangeCount) {
     return function () {
@@ -124,8 +135,8 @@ export function createSelectionExpander() {
   const range = selection.getRangeAt(0);
 
   const selectionText = getSelectionText(range);
-  const prefixExpander = new TextExpander(range.startContainer, range.startOffset, false);
-  const suffixExpander = new TextExpander(range.endContainer, range.endOffset, true);
+  const prefixExpander = new TextExpander(range.startContainer, range.startOffset, false, container);
+  const suffixExpander = new TextExpander(range.endContainer, range.endOffset, true, container);
 
   return function () {
     prefixExpander.expand(10);
