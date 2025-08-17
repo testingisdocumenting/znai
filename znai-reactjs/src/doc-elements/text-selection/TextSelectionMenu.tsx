@@ -15,27 +15,10 @@
  */
 
 import React, { useEffect, useRef } from "react";
-import "./TextSelectionMenu.css";
 import { TextHighlighter } from "./textHighlihter";
 import { findPrefixSuffixAndMatch } from "./textSelectionBuilder";
 
-function encodeTextFragment(text: string): string {
-  return text.replace(/\n/g, "%0A").replace(/ /g, "%20").replace(/-/g, "%2D").replace(/,/g, "%2C");
-}
-
-function encodeTextFragmentPart(
-  prefix: string | undefined,
-  start: string,
-  end: string | undefined,
-  suffix: string | undefined
-): string {
-  const prefixPart = prefix ? `${encodeTextFragment(prefix)}-,` : "";
-  const suffixPart = suffix ? `,-${encodeTextFragment(suffix)}` : "";
-  const startPart = encodeTextFragment(start);
-  const endPart = end ? `,${encodeTextFragment(end)}` : "";
-
-  return `${prefixPart}${startPart}${endPart}${suffixPart}`;
-}
+import "./TextSelectionMenu.css";
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
   const menuRef = useRef<HTMLDivElement>(null);

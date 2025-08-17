@@ -146,17 +146,17 @@ export class TextHighlighter {
         const afterText = nodeInfo.node.nodeValue.substring(nodeInfo.end);
 
         const highlightSpan = document.createElement("span");
-        highlightSpan.className = "highlight";
+        highlightSpan.className = "znai-highlight";
         highlightSpan.textContent = highlightText;
 
         if (match.nodes.length === 1) {
-          highlightSpan.classList.add("highlight-single");
+          highlightSpan.classList.add("single");
         } else if (nodeIndex === 0) {
-          highlightSpan.classList.add("highlight-start");
+          highlightSpan.classList.add("start");
         } else if (nodeIndex === match.nodes.length - 1) {
-          highlightSpan.classList.add("highlight-end");
+          highlightSpan.classList.add("end");
         } else {
-          highlightSpan.classList.add("highlight-middle");
+          highlightSpan.classList.add("middle");
         }
 
         const fragment = document.createDocumentFragment();
