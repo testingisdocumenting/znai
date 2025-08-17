@@ -5,6 +5,10 @@
     transition: background-color 0.2s;
 }
 
+.znai-highlight-hover {
+    background-color: #efdd47;
+}
+
 .znai-highlight.clicked {
     background-color: #ff9800;
 }

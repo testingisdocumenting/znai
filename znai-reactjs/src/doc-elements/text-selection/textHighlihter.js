@@ -17,11 +17,10 @@ export class TextHighlighter {
     return textNodes;
   }
 
-  findMatches(searchText, prefix, suffix) {
-    if (!searchText) return [];
-
-    prefix = prefix || "";
-    suffix = suffix || "";
+  findMatches(selection, prefix, suffix) {
+    if (!selection) {
+      return [];
+    }
 
     const textNodes = this.getTextNodes(this.container);
     const matches = [];
@@ -36,66 +35,34 @@ export class TextHighlighter {
     });
 
     const fullText = nodeMap.map((item) => item.text).join("");
+    const textToFind = prefix + selection + suffix;
 
-    // Build a pattern
-    let pattern = "";
-    if (prefix) {
-      pattern += "(" + this.escapeRegex(prefix) + ")\\s*";
-    }
-    pattern += "(" + this.escapeRegex(searchText) + ")";
-    if (suffix) {
-      pattern += "\\s*(" + this.escapeRegex(suffix) + ")";
-    }
+    const matchIdx = fullText.indexOf(textToFind);
 
-    try {
-      const regex = new RegExp(pattern, "is"); // Only need first match since it should be unique
-      const match = regex.exec(fullText);
+    if (matchIdx !== -1) {
+      let matchStart = matchIdx + prefix.length;
+      const matchEnd = matchStart + selection.length;
 
-      if (match) {
-        let searchGroupIndex = prefix ? 2 : 1;
-        let matchStart = match.index;
-
-        if (prefix || suffix) {
-          let groupStart = 0;
-          for (let i = 1; i < searchGroupIndex; i++) {
-            groupStart += match[i] ? match[i].length : 0;
-          }
-          matchStart = match.index + groupStart;
-        }
-
-        const matchEnd = matchStart + match[searchGroupIndex].length;
-
-        const affectedNodes = [];
-        nodeMap.forEach((nodeInfo) => {
-          if (nodeInfo.end > matchStart && nodeInfo.start < matchEnd) {
-            affectedNodes.push({
-              node: nodeInfo.node,
-              start: Math.max(0, matchStart - nodeInfo.start),
-              end: Math.min(nodeInfo.text.length, matchEnd - nodeInfo.start),
-              text: nodeInfo.text,
-            });
-          }
-        });
-
-        if (affectedNodes.length > 0) {
-          matches.push({
-            nodes: affectedNodes,
-            fullMatch: match[0],
-            searchMatch: match[searchGroupIndex],
+      const affectedNodes = [];
+      nodeMap.forEach((nodeInfo) => {
+        if (nodeInfo.end > matchStart && nodeInfo.start < matchEnd) {
+          affectedNodes.push({
+            node: nodeInfo.node,
+            start: Math.max(0, matchStart - nodeInfo.start),
+            end: Math.min(nodeInfo.text.length, matchEnd - nodeInfo.start),
+            text: nodeInfo.text,
           });
         }
+      });
+
+      if (affectedNodes.length > 0) {
+        matches.push({
+          nodes: affectedNodes,
+        });
       }
-    } catch (e) {
-      console.error("Regex error:", e);
     }
 
     return matches;
-  }
-
-  escapeRegex(str) {
-    str = str.replace(/\\n/g, "\n");
-    str = str.replace(/\\s/g, "\\s");
-    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 
   highlight(searchText, prefix, suffix, onClick) {
@@ -108,32 +75,21 @@ export class TextHighlighter {
 
       const handleMouseEnter = () => {
         highlightGroup.forEach((span) => {
-          span.style.backgroundColor = "#fdd835";
+          span.classList.add("znai-highlight-hover");
         });
       };
 
       const handleMouseLeave = () => {
         highlightGroup.forEach((span) => {
-          span.style.backgroundColor = "";
+          span.classList.remove("znai-highlight-hover");
         });
       };
 
       const handleClick = (e) => {
         e.stopPropagation();
-        highlightGroup.forEach((span) => {
-          span.classList.add("clicked");
-          setTimeout(() => span.classList.remove("clicked"), 500);
-        });
 
         if (onClick) {
-          onClick(e, {
-            matchIndex,
-            text: searchText,
-            prefix,
-            suffix,
-            fullMatch: match.fullMatch,
-            searchMatch: match.searchMatch,
-          });
+          onClick();
         }
       };
 

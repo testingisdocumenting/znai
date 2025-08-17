@@ -74,7 +74,7 @@ class TextExpander {
 
     while (remaining > 0 && this.currentNode) {
       const nodeText = this.currentNode.nodeValue;
-      const available = this.forward ? nodeText.length - this.currentOffset : this.currentOffset;
+      const available = this.forward ? (nodeText ? nodeText.length - this.currentOffset : 0) : this.currentOffset;
 
       if (available === 0) {
         // We're at node boundary, move to next node

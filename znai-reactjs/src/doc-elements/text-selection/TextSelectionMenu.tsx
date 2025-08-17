@@ -19,6 +19,7 @@ import { TextHighlighter } from "./textHighlihter";
 import { findPrefixSuffixAndMatch } from "./textSelectionBuilder";
 
 import "./TextSelectionMenu.css";
+import { buildHighlightUrl } from "./highlightUrl";
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -58,6 +59,9 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     highlighter.highlight(result.selection, result.prefix, result.suffix);
 
     selection.removeAllRanges();
+
+    const url = buildHighlightUrl(location.toString(), result);
+    console.log("url", url);
 
     hidePopover();
 

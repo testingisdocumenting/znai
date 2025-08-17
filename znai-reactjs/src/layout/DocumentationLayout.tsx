@@ -30,9 +30,11 @@ import { TocMobilePanel } from "./mobile/TocMobilePanel";
 import { mainPanelClassName } from "./classNames";
 
 import { TopHeader } from "./TopHeader";
+import { TextSelectionMenu } from "../doc-elements/text-selection/TextSelectionMenu";
+
 import "./DocumentationLayout.css";
 import "./mobile/MobileLayoutOverrides.css";
-import { TextSelectionMenu } from "../doc-elements/text-selection/TextSelectionMenu";
+import { HighlightUrlText } from "../doc-elements/text-selection/HighlightUrlText";
 
 interface Props {
   zoomOverlay: React.ReactNode;
@@ -95,6 +97,7 @@ export function DocumentationLayout({
     return (
       <div ref={contentRef} className={panelFullClassName}>
         {contentRef.current && <TextSelectionMenu containerNode={contentRef.current} />}
+        <HighlightUrlText />
         <div ref={contentRef} style={{ display: "contents" }}>
           {renderedPage}
         </div>
