@@ -35,7 +35,6 @@ export function findPrefixSuffixAndMatch(container) {
   const expandSelection = createSelectionExpander();
   for (let i = 0; i < 10; i++) {
     result = expandSelection();
-    console.log("result", result);
     const maybeUniqueText = result.prefix + result.selection + result.suffix;
 
     if (isUniqueOccurrence(fullText, maybeUniqueText)) {
@@ -47,6 +46,10 @@ export function findPrefixSuffixAndMatch(container) {
 }
 
 function isUniqueOccurrence(text, substring) {
+  if (substring.length === 0) {
+    return false;
+  }
+
   let count = 0;
   let idx = 0;
 

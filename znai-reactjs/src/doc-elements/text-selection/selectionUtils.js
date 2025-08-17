@@ -32,10 +32,27 @@ class TextExpander {
     this.forward = forward;
     this.accumulated = "";
     this.exhausted = false;
+
+    // If we're at a node boundary, move to the next node immediately
+    if (forward && offset === node.nodeValue.length) {
+      if (this.walker.nextNode()) {
+        this.currentNode = this.walker.currentNode;
+        this.currentOffset = 0;
+      } else {
+        this.exhausted = true;
+      }
+    } else if (!forward && offset === 0) {
+      if (this.walker.previousNode()) {
+        this.currentNode = this.walker.currentNode;
+        this.currentOffset = this.currentNode.nodeValue.length;
+      } else {
+        this.exhausted = true;
+      }
+    }
   }
 
   expand(chars = 10) {
-    if (this.exhausted) return "";
+    if (this.exhausted || !this.currentNode) return "";
 
     let text = "";
     let remaining = chars;
@@ -44,40 +61,41 @@ class TextExpander {
       const nodeText = this.currentNode.nodeValue;
       const available = this.forward ? nodeText.length - this.currentOffset : this.currentOffset;
 
-      if (available > 0) {
-        const availableText = this.forward
-          ? nodeText.substring(this.currentOffset)
-          : nodeText.substring(0, this.currentOffset);
+      if (available === 0) {
+        // We're at node boundary, move to next node
+        this.walker.currentNode = this.currentNode;
+        const moved = this.forward ? this.walker.nextNode() : this.walker.previousNode();
 
-        if (availableText.length <= remaining) {
-          // Take all available
-          text += this.forward ? availableText : availableText + text;
-          remaining -= availableText.length;
-
-          // Move to next node
-          this.walker.currentNode = this.currentNode;
-          const moved = this.forward ? this.walker.nextNode() : this.walker.previousNode();
-
-          if (moved) {
-            this.currentNode = this.walker.currentNode;
-            this.currentOffset = this.forward ? 0 : this.currentNode.nodeValue.length;
-          } else {
-            this.currentNode = null;
-            this.exhausted = true;
-          }
+        if (moved) {
+          this.currentNode = this.walker.currentNode;
+          this.currentOffset = this.forward ? 0 : this.currentNode.nodeValue.length;
+          continue;
         } else {
-          // Take partial
-          const chunk = this.forward
-            ? availableText.substring(0, remaining)
-            : availableText.substring(availableText.length - remaining);
-
-          text = this.forward ? text + chunk : chunk + text;
-          this.currentOffset += this.forward ? remaining : -remaining;
-          remaining = 0;
+          this.exhausted = true;
+          break;
         }
+      }
+
+      const availableText = this.forward
+        ? nodeText.substring(this.currentOffset)
+        : nodeText.substring(0, this.currentOffset);
+
+      if (availableText.length <= remaining) {
+        // Take all available
+        text = this.forward ? text + availableText : availableText + text;
+        remaining -= availableText.length;
+
+        // Update offset to indicate we've consumed this node
+        this.currentOffset = this.forward ? nodeText.length : 0;
       } else {
-        // Current node has no more text, shouldn't happen
-        break;
+        // Take partial
+        const chunk = this.forward
+          ? availableText.substring(0, remaining)
+          : availableText.substring(availableText.length - remaining);
+
+        text = this.forward ? text + chunk : chunk + text;
+        this.currentOffset += this.forward ? remaining : -remaining;
+        remaining = 0;
       }
     }
 
@@ -92,7 +110,6 @@ class TextExpander {
 }
 
 export function createSelectionExpander() {
-  // TODO error selection handler
   const selection = window.getSelection();
   if (!selection.rangeCount) {
     return function () {
