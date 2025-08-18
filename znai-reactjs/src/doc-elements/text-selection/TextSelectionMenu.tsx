@@ -18,8 +18,11 @@ import React, { useEffect, useRef } from "react";
 import { TextHighlighter } from "./textHighlihter";
 import { findPrefixSuffixAndMatch } from "./textSelectionBuilder";
 
-import "./TextSelectionMenu.css";
 import { buildHighlightUrl } from "./highlightUrl";
+
+import { getDocMeta } from "../../structure/docMeta";
+
+import "./TextSelectionMenu.css";
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -53,41 +56,49 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     }
 
     const result = findPrefixSuffixAndMatch(containerNode);
-    console.log("result", result);
-
     const highlighter = new TextHighlighter(containerNode);
     highlighter.highlight(result.selection, result.prefix, result.suffix);
 
     selection.removeAllRanges();
 
-    const url = buildHighlightUrl(location.toString(), result);
-    console.log("url", url);
+    const pageUrl = buildHighlightUrl(location.toString(), result);
 
     hidePopover();
 
-    // const formData = new FormData();
-    // formData.append("selectedText", selectedText);
-    // formData.append("pageUrl", pageUrl);
-    // formData.append("username", "web-user");
-    //
-    // let response = await fetch("http://localhost:5111/ask-in-slack", {
-    //   method: "POST",
-    //   body: formData,
-    // });
-    //
-    // console.log("page url", pageUrl);
-    //
-    // if (response.ok) {
-    //   console.log("Successfully sent to Slack");
-    // } else {
-    //   console.error("Failed to send to Slack:", response.statusText);
-    // }
+    const body = {
+      selectedText: result.selection,
+      pageUrl: pageUrl,
+      username: "web-user",
+      slackChannel: getDocMeta().slackChannel,
+    };
+
+    let response = await fetch("http://localhost:5111/ask-in-slack", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    // TODO notification of sent or failed
+
+    if (response.ok) {
+      console.log("Successfully sent to Slack");
+    } else {
+      console.error("Failed to send to Slack:", response.statusText);
+    }
   }
 
   function showMenu(top: number, left: number) {
     if (!menuRef.current) {
       return;
     }
+
+    if (!getDocMeta().sendToSlackUrl || !getDocMeta().slackChannel) {
+      return;
+    }
+
+    getDocMeta();
 
     const menu = menuRef.current;
     menu.style.top = `${top}px`;

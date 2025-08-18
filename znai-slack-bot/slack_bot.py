@@ -9,13 +9,11 @@ app = Flask(__name__)
 CORS(app)
 
 slack_token = os.environ.get("SLACK_BOT_TOKEN")
-slack_channel = os.environ.get("SLACK_CHANNEL", "C096MM39HC2")
 
 print("=== Slack Bot Configuration ===")
 print(f"SLACK_BOT_TOKEN present: {slack_token is not None}")
 print(f"SLACK_BOT_TOKEN length: {len(slack_token) if slack_token else 0}")
 print(f"SLACK_BOT_TOKEN prefix: {slack_token[:10] if slack_token else 'None'}...")
-print(f"Slack channel: {slack_channel}")
 
 if not slack_token:
     print("WARNING: SLACK_BOT_TOKEN environment variable is not set!")
@@ -31,19 +29,27 @@ def ask_in_slack():
             print("ERROR: No Slack token configured")
             return jsonify({"error": "Slack bot token not configured"}), 500
             
-        print(f"Form data keys: {list(request.form.keys())}")
-        print(f"Files: {list(request.files.keys())}")
+        # Get JSON data from request
+        data = request.get_json()
+
+        if not data:
+            return jsonify({"error": "No JSON data provided"}), 400
         
-        selected_text = request.form.get('selectedText')
-        page_url = request.form.get('pageUrl')
-        username = request.form.get('username', 'web-user')
+        selected_text = data.get('selectedText')
+        page_url = data.get('pageUrl')
+        username = data.get('username')
+        slack_channel = data.get('slackChannel')
 
         print(f"Selected text: {selected_text[:100] if selected_text else None}...")
         print(f"Page URL: {page_url}")
         print(f"Username: {username}")
+        print(f"Slack channel: {slack_channel}")
 
         if not selected_text:
             return jsonify({"error": "Missing required field: selectedText"}), 400
+        
+        if not slack_channel:
+            return jsonify({"error": "Missing required field: slackChannel"}), 400
         
         slack_message = format_slack_message(username, selected_text, page_url)
         print(f"Slack message blocks: {json.dumps(slack_message, indent=2)}")

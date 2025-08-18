@@ -22,6 +22,8 @@ export interface DocMeta {
   title: string;
   type: string;
   previewEnabled: boolean;
+  slackChannel?: string;
+  sendToSlackUrl?: string;
   useTopHeader?: boolean;
   hidePresentationTrigger?: boolean;
   support?: DocMetaSupport;
