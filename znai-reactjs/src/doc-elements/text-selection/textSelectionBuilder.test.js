@@ -15,57 +15,10 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { JSDOM } from "jsdom";
 import { findPrefixSuffixAndMatch } from "./textSelectionBuilder.js";
-
-// Helper function to match TextHighlighter's text building
-function buildFullTextLikeHighlighter(container) {
-  const textNodes = [];
-  const walker = container.ownerDocument.createTreeWalker(container, global.NodeFilter.SHOW_TEXT, null, false);
-  let textNode;
-  while ((textNode = walker.nextNode())) {
-    textNodes.push(textNode);
-  }
-  return textNodes.map((node) => node.nodeValue).join("");
-}
+import { selectText, setupDOM } from "./selectionTestUtils.js";
 
 describe("textSelectionBuilder", () => {
-  function setupDOM(htmlContent) {
-    const dom = new JSDOM(
-      `
-      <!DOCTYPE html>
-      <html lang="en">
-        <body>
-          ${htmlContent}
-        </body>
-      </html>
-    `,
-      { pretendToBeVisual: true }
-    );
-
-    const document = dom.window.document;
-    const window = dom.window;
-
-    global.window = window;
-    global.document = document;
-    global.Node = window.Node;
-    global.NodeFilter = window.NodeFilter;
-
-    const container = document.body;
-
-    return { document, window, container };
-  }
-
-  function selectText(startNode, startOffset, endNode, endOffset) {
-    const range = global.document.createRange();
-    range.setStart(startNode, startOffset);
-    range.setEnd(endNode, endOffset);
-
-    const selection = global.window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }
-
   describe("findPrefixSuffixAndMatch", () => {
     it("should handle unique text with minimal context when multiple entries are present", () => {
       const { container } = setupDOM(`
