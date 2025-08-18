@@ -134,26 +134,5 @@ export default JsClass`;
       expect(result).toBe("");
     });
 
-    it("should handle code block without znai-code-line spans", () => {
-      const { container } = setupDOM(`
-        <pre>function test() {
-  return true;
-}</pre>
-      `);
-
-      const pre = container.querySelector('pre');
-      const textNode = pre.firstChild;
-      
-      // Select "test()"
-      selectText(textNode, 9, textNode, 15);
-
-      const result = buildContext(container);
-
-      const expectedOutput = `function **test()** { <----
-  return true;
-}`;
-
-      expect(result).toBe(expectedOutput);
-    });
   });
 });

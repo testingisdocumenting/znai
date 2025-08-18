@@ -6,35 +6,26 @@ export function buildContext(_container: HTMLElement): string {
 
   const range = selection.getRangeAt(0);
   
-  // Find the code block containing the selection
   const codeBlock = findCodeBlock(range);
   if (!codeBlock) {
     return "";
   }
 
-  // Extract lines and determine which are selected
   const lineElements = codeBlock.querySelectorAll('.znai-code-line');
-  
-  if (lineElements.length === 0) {
-    // Handle code blocks without line spans
-    return handleCodeBlockWithoutLines(codeBlock, range);
-  }
 
-  // Handle code blocks with line spans
   const lines: string[] = [];
-  const selectedLines = new Set<number>();
+  const selectedLineIndices = new Set<number>();
   
   lineElements.forEach((lineElement, index) => {
-    const lineText = lineElement.textContent || '';
+    const lineText = lineElement.textContent ?? '';
     lines.push(lineText);
     
-    // Check if this line intersects with the selection
     if (isLineIntersectingSelection(lineElement as HTMLElement, range)) {
-      selectedLines.add(index);
+      selectedLineIndices.add(index);
     }
   });
 
-  return buildOutput(lines, selectedLines, range, lineElements);
+  return buildMarkdownOutput(lines, selectedLineIndices, range, lineElements);
 }
 
 function findCodeBlock(range: Range): HTMLElement | null {
@@ -56,44 +47,34 @@ function findCodeBlock(range: Range): HTMLElement | null {
 }
 
 function isLineIntersectingSelection(lineElement: HTMLElement, range: Range): boolean {
-  // Check if any part of the selection intersects with this line
   const lineRange = document.createRange();
   lineRange.selectNodeContents(lineElement);
   
   try {
-    // Check if ranges intersect
-    const selectionStart = range.compareBoundaryPoints(Range.START_TO_END, lineRange);
-    const selectionEnd = range.compareBoundaryPoints(Range.END_TO_START, lineRange);
+    const selectionStartComparison = range.compareBoundaryPoints(Range.START_TO_END, lineRange);
+    const selectionEndComparison = range.compareBoundaryPoints(Range.END_TO_START, lineRange);
     
-    // Ranges intersect if selection doesn't end before line starts
-    // and doesn't start after line ends
-    return selectionStart >= 0 && selectionEnd <= 0;
-  } catch {
+    return selectionStartComparison >= 0 && selectionEndComparison <= 0;
+  } catch (error) {
+    console.warn('Failed to compare ranges for line intersection:', error);
     return false;
   }
 }
 
-function buildOutput(
+function buildMarkdownOutput(
   lines: string[], 
-  selectedLines: Set<number>,
+  selectedLineIndices: Set<number>,
   range: Range,
   lineElements: NodeListOf<Element>
 ): string {
   const result: string[] = [];
   
   lines.forEach((line, index) => {
-    if (selectedLines.has(index)) {
+    if (selectedLineIndices.has(index)) {
       const lineElement = lineElements[index] as HTMLElement;
       const selectedText = getSelectionInLine(lineElement, range);
       
-      let highlightedLine;
-      if (selectedText && selectedText.trim() && line.includes(selectedText.trim())) {
-        const trimmedSelection = selectedText.trim();
-        highlightedLine = line.replace(trimmedSelection, `**${trimmedSelection}**`);
-      } else {
-        highlightedLine = `**${line}**`;
-      }
-      
+      const highlightedLine = createHighlightedLine(line, selectedText);
       result.push(highlightedLine + ' <----');
     } else {
       result.push(line);
@@ -103,53 +84,45 @@ function buildOutput(
   return result.join('\n');
 }
 
+function createHighlightedLine(line: string, selectedText: string): string {
+  const trimmedSelection = selectedText.trim();
+  
+  if (trimmedSelection && line.includes(trimmedSelection)) {
+    const escapedSelection = trimmedSelection.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return line.replace(new RegExp(escapedSelection, 'g'), `**${trimmedSelection}**`);
+  }
+  
+  return `**${line}**`;
+}
+
 function getSelectionInLine(lineElement: HTMLElement, range: Range): string {
   try {
-    // Create intersection of line and selection
     const lineRange = document.createRange();
     lineRange.selectNodeContents(lineElement);
     
     const intersectionRange = document.createRange();
     
-    // Find intersection start
-    if (lineElement.contains(range.startContainer)) {
-      intersectionRange.setStart(range.startContainer, range.startOffset);
-    } else {
-      intersectionRange.setStart(lineRange.startContainer, lineRange.startOffset);
-    }
+    const startContainer = lineElement.contains(range.startContainer) 
+      ? range.startContainer 
+      : lineRange.startContainer;
+    const startOffset = lineElement.contains(range.startContainer) 
+      ? range.startOffset 
+      : lineRange.startOffset;
     
-    // Find intersection end
-    if (lineElement.contains(range.endContainer)) {
-      intersectionRange.setEnd(range.endContainer, range.endOffset);
-    } else {
-      intersectionRange.setEnd(lineRange.endContainer, lineRange.endOffset);
-    }
+    const endContainer = lineElement.contains(range.endContainer) 
+      ? range.endContainer 
+      : lineRange.endContainer;
+    const endOffset = lineElement.contains(range.endContainer) 
+      ? range.endOffset 
+      : lineRange.endOffset;
+    
+    intersectionRange.setStart(startContainer, startOffset);
+    intersectionRange.setEnd(endContainer, endOffset);
     
     return intersectionRange.toString();
-  } catch {
+  } catch (error) {
+    console.warn('Failed to get selection in line:', error);
     return '';
   }
 }
 
-function handleCodeBlockWithoutLines(codeBlock: HTMLElement, range: Range): string {
-  const text = codeBlock.textContent || '';
-  const lines = text.split('\n').filter(line => line.trim() || text.endsWith('\n'));
-  
-  // For simplicity, mark first line as selected
-  const result: string[] = [];
-  lines.forEach((line, index) => {
-    if (index === 0) {
-      const selectedText = range.toString();
-      if (selectedText && line.includes(selectedText)) {
-        const highlightedLine = line.replace(selectedText, `**${selectedText}**`);
-        result.push(highlightedLine + ' <----');
-      } else {
-        result.push(`**${line}** <----`);
-      }
-    } else {
-      result.push(line);
-    }
-  });
-  
-  return result.join('\n');
-}
