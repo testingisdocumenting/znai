@@ -19,9 +19,8 @@ import { buildContext } from "./markdownContextBuilder.js";
 import { selectText, setupDOM } from "./selectionTestUtils.js";
 
 describe("markdownContextBuilder", () => {
-  describe("buildContext", () => {
-    it("should extract code block and highlight selected lines across two lines", () => {
-      const { container } = setupDOM(`
+  describe("buildContext - code snippets", () => {
+    const { container } = setupDOM(`
         <div class="snippet">
           <pre>
             <span class="znai-code-line"><span class="token keyword">class</span> <span class="token class-name">JsClass</span> <span class="token punctuation">{</span></span>
@@ -35,22 +34,35 @@ describe("markdownContextBuilder", () => {
         </div>
       `);
 
-      const lines = container.querySelectorAll('.znai-code-line');
+    it("should extract code block and highlight selected single word", () => {
+      const className = container.querySelectorAll(".class-name")[0];
+
+      selectText(className.firstChild, 0, className.firstChild, 5);
+
+      const result = buildContext();
+
+      const expectedOutput = `class **JsCla**ss { <----
+    constructor() {
+        usefulAction()
+    }
+}
+
+export default JsClass`;
+
+      expect(result).toBe(expectedOutput);
+    });
+
+    it("should extract code block and highlight selected lines across two lines", () => {
+      const lines = container.querySelectorAll(".znai-code-line");
       const constructorLine = lines[1]; // constructor line
       const usefulActionLine = lines[2]; // usefulAction line
-      
-      // Select from "constructor" to end of "usefulAction()"
-      const constructorText = constructorLine.querySelector('.token.function');
-      const usefulActionCloseParen = usefulActionLine.lastElementChild;
-      
-      selectText(
-        constructorText.firstChild, 
-        0, // start of "constructor"
-        usefulActionCloseParen.firstChild,
-        1  // after ")"
-      );
 
-      const result = buildContext(container);
+      const constructorText = constructorLine.querySelector(".token.function");
+      const usefulActionCloseParen = usefulActionLine.lastElementChild;
+
+      selectText(constructorText.firstChild, 0, usefulActionCloseParen.firstChild, 1);
+
+      const result = buildContext();
 
       const expectedOutput = `class JsClass {
     **constructor() {** <----
@@ -62,6 +74,16 @@ export default JsClass`;
 
       expect(result).toBe(expectedOutput);
     });
+    /*
+    <div class="snippet"><pre><span class="znai-code-line"><span class="token macro"><span class="token directive-hash">#</span><span class="token directive">include</span> <span class="token string">&lt;iostream&gt;</span></span><span>
+</span></span><span class="znai-code-line"><span>
+</span></span><span class="znai-code-line"><span class="token keyword">using</span> <span class="token keyword"><span class="znai-highlight single">namespace</span></span> std<span class="token punctuation">;</span><span>
+</span></span><span class="znai-code-line"><span>
+</span></span><span class="znai-code-line"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span>
+</span></span><span class="znai-code-line">    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"hello"</span><span class="token punctuation">;</span><span>
+</span></span><span class="znai-code-line"><span class="token punctuation">}</span><span>
+</span></span></pre></div>
+     */
 
     it("should handle selection within a single line", () => {
       const { container } = setupDOM(`
@@ -74,14 +96,14 @@ export default JsClass`;
         </div>
       `);
 
-      const lines = container.querySelectorAll('.znai-code-line');
+      const lines = container.querySelectorAll(".znai-code-line");
       const firstLine = lines[0];
-      const functionName = firstLine.querySelector('.token.function-name');
-      
+      const functionName = firstLine.querySelector(".token.function-name");
+
       // Select just "calculateSum"
       selectText(functionName.firstChild, 0, functionName.firstChild, 12);
 
-      const result = buildContext(container);
+      const result = buildContext();
 
       const expectedOutput = `function **calculateSum**(a, b) { <----
     return a + b;
@@ -90,7 +112,7 @@ export default JsClass`;
       expect(result).toBe(expectedOutput);
     });
 
-    it("should return empty string when selection is outside code block", () => {
+    it("should handle text selection outside code block as paragraph", () => {
       const { container } = setupDOM(`
         <div>
           <p>Some text before code</p>
@@ -103,15 +125,15 @@ export default JsClass`;
         </div>
       `);
 
-      const paragraph = container.querySelector('p');
+      const paragraph = container.querySelector("p");
       selectText(paragraph.firstChild, 0, paragraph.firstChild, 4);
 
-      const result = buildContext(container);
+      const result = buildContext();
 
-      expect(result).toBe("");
+      expect(result).toBe("**Some** text before code \n                          const x = 5;\n          ...");
     });
 
-    it("should return empty string when selection crosses code block boundary", () => {
+    it("should handle selection crossing code block boundary as paragraph", () => {
       const { container } = setupDOM(`
         <div>
           <p>Text before</p>
@@ -123,16 +145,118 @@ export default JsClass`;
         </div>
       `);
 
-      const paragraph = container.querySelector('p');
-      const codeLine = container.querySelector('.znai-code-line');
-      
+      const paragraph = container.querySelector("p");
+      const codeLine = container.querySelector(".znai-code-line");
+
       // Selection from paragraph to code line (crosses boundary)
       selectText(paragraph.firstChild, 0, codeLine.firstChild, 5);
 
-      const result = buildContext(container);
+      const result = buildContext();
+
+      expect(result).toBe(
+        "**Text** **before** \n                          **const** x = 5;\n          ...\n\n**Text** **before** \n                          **const** x = 5;"
+      );
+    });
+  });
+
+  describe("buildContext - paragraphs", () => {
+    it("should highlight selected text within a single paragraph", () => {
+      const { container } = setupDOM(`
+        <div>
+          <p>This is a test paragraph with some important text that should be highlighted.</p>
+        </div>
+      `);
+
+      const paragraph = container.querySelector("p");
+      const textNode = paragraph.firstChild;
+
+      // Select "important text" - counting characters: "This is a test paragraph with some " = 35 chars
+      selectText(textNode, 35, textNode, 49);
+
+      const result = buildContext();
+
+      expect(result).toBe("This is a test paragraph with some **important text** that should be highlighted.");
+    });
+
+    it("should add context before and after small paragraph", () => {
+      const { container } = setupDOM(`
+        <div>
+          <p>Before text that provides context.</p>
+          <p>Short selected.</p>
+          <p>After text that provides more context.</p>
+        </div>
+      `);
+
+      const paragraph = container.querySelectorAll("p")[1]; // middle paragraph
+      const textNode = paragraph.firstChild;
+
+      // Select "selected"
+      selectText(textNode, 6, textNode, 14);
+
+      const result = buildContext();
+
+      expect(result).toBe(
+        "Before text that provides context. Short **selected**. After text that provides more context."
+      );
+    });
+
+    it("should handle selection across multiple paragraphs", () => {
+      const { container } = setupDOM(`
+        <div>
+          <p>First paragraph with some text.</p>
+          <p>Second paragraph with more text.</p>
+        </div>
+      `);
+
+      const firstP = container.querySelectorAll("p")[0];
+      const secondP = container.querySelectorAll("p")[1];
+
+      // Select from "some text" in first to "more text" in second
+      selectText(firstP.firstChild, 20, secondP.firstChild, 25);
+
+      const result = buildContext();
+
+      expect(result).toBe(
+        "First **paragraph** **with** **some** text. **Second** **paragraph** **with** more text.\n\nFirst **paragraph** **with** **some** text. **Second** **paragraph** **with** more text."
+      );
+    });
+
+    it("should return empty string for non-text selections in paragraphs", () => {
+      const { container } = setupDOM(`
+        <div>
+          <p>Some paragraph text.</p>
+        </div>
+      `);
+
+      const paragraph = container.querySelector("p");
+      // Select empty range
+      selectText(paragraph.firstChild, 5, paragraph.firstChild, 5);
+
+      const result = buildContext();
 
       expect(result).toBe("");
     });
 
+    it("should truncate long context text with ellipsis", () => {
+      const { container } = setupDOM(`
+        <div>
+          <p>This is a very long paragraph that provides context before the target paragraph and should be truncated when it exceeds the fifty character limit.</p>
+          <p>Target.</p>
+          <p>This is another very long paragraph that provides context after the target paragraph and should also be truncated when it exceeds the limit.</p>
+        </div>
+      `);
+
+      const paragraph = container.querySelectorAll("p")[1]; // middle paragraph
+      const textNode = paragraph.firstChild;
+
+      // Select "Target"
+      selectText(textNode, 0, textNode, 6);
+
+      const result = buildContext();
+
+      expect(result).toBe(
+        "...uncated when it exceeds the fifty character limit. **Target**. This is another very long paragraph that provides ..."
+      );
+    });
   });
 });

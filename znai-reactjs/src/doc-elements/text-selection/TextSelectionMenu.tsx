@@ -23,6 +23,7 @@ import { buildHighlightUrl } from "./highlightUrl";
 import { getDocMeta } from "../../structure/docMeta";
 
 import "./TextSelectionMenu.css";
+import { buildContext } from "./markdownContextBuilder";
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -54,6 +55,11 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
       return;
     }
+
+    const markdownContext = buildContext();
+    console.log("-------------");
+    console.log(markdownContext);
+    console.log("-------------");
 
     const result = findPrefixSuffixAndMatch(containerNode);
     const highlighter = new TextHighlighter(containerNode);
