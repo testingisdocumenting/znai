@@ -121,11 +121,23 @@ function findContainingParagraph(node: Node): HTMLElement | null {
 
 function buildParagraphOutput(paragraphs: HTMLElement[], selectedText: string): string {
   const result: string[] = [];
+  const selection = window.getSelection();
+  const range = selection ? selection.getRangeAt(0) : null;
 
   paragraphs.forEach((paragraph) => {
     const paragraphText = paragraph.textContent ?? "";
     const context = addContextAroundParagraph(paragraph, paragraphText);
-    const highlightedText = highlightSelectedTextInParagraph(context, selectedText);
+    
+    // Calculate the position of the selection within the paragraph
+    let selectionPosition = -1;
+    if (range && paragraph.contains(range.startContainer)) {
+      const tempRange = document.createRange();
+      tempRange.selectNodeContents(paragraph);
+      tempRange.setEnd(range.startContainer, range.startOffset);
+      selectionPosition = tempRange.toString().length;
+    }
+    
+    const highlightedText = highlightSelectedTextInParagraph(context, selectedText, selectionPosition);
     result.push(highlightedText);
   });
 
@@ -177,7 +189,7 @@ function addContextAroundParagraph(paragraph: HTMLElement, paragraphText: string
   return (contextBefore + (contextBefore ? " " : "") + paragraphText + (contextAfter ? " " : "") + contextAfter).trim();
 }
 
-function highlightSelectedTextInParagraph(text: string, selectedText: string): string {
+function highlightSelectedTextInParagraph(text: string, selectedText: string, selectionPosition: number = -1): string {
   const trimmedSelection = selectedText.trim();
 
   if (!trimmedSelection) {
@@ -186,22 +198,22 @@ function highlightSelectedTextInParagraph(text: string, selectedText: string): s
 
   // Try exact match first
   if (text.includes(trimmedSelection)) {
+    if (selectionPosition >= 0) {
+      // Find the actual position of the trimmed selection in the text
+      const actualPosition = text.indexOf(trimmedSelection, Math.max(0, selectionPosition - 10)); // Allow some flexibility
+      if (actualPosition >= 0) {
+        const before = text.substring(0, actualPosition);
+        const after = text.substring(actualPosition + trimmedSelection.length);
+        return before + `**${trimmedSelection}**` + after;
+      }
+    }
+    
+    // Fallback to first occurrence
     const escapedSelection = trimmedSelection.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return text.replace(new RegExp(escapedSelection, "g"), `**${trimmedSelection}**`);
+    return text.replace(new RegExp(escapedSelection), `**${trimmedSelection}**`);
   }
 
-  // If exact match fails, try to find words from the selection
-  const words = trimmedSelection.split(/\s+/).filter((word) => word.length > 0);
-  let result = text;
-
-  words.forEach((word) => {
-    if (result.includes(word)) {
-      const escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      result = result.replace(new RegExp(`\\b${escapedWord}\\b`, "g"), `**${word}**`);
-    }
-  });
-
-  return result;
+  return text;
 }
 
 function findCodeBlock(range: Range): HTMLElement | null {
@@ -249,8 +261,9 @@ function buildCodeSnippetMarkdownOutput(
     if (selectedLineIndices.has(index)) {
       const lineElement = lineElements[index] as HTMLElement;
       const selectedText = getSelectionInLine(lineElement, range);
+      const selectionPosition = getSelectionPositionInLine(lineElement, range);
 
-      const highlightedLine = createHighlightedLine(line, selectedText);
+      const highlightedLine = createHighlightedLine(line, selectedText, selectionPosition);
       result.push(highlightedLine.trimEnd() + " <----");
     } else {
       result.push(line.trimEnd());
@@ -261,15 +274,54 @@ function buildCodeSnippetMarkdownOutput(
   // return "```\n" + result.join("\n") + "```";
 }
 
-function createHighlightedLine(line: string, selectedText: string): string {
+function createHighlightedLine(line: string, selectedText: string, selectionPosition: number = -1): string {
   const trimmedSelection = selectedText.trim();
 
   if (trimmedSelection && line.includes(trimmedSelection)) {
+    // If we have a specific position, highlight at that position
+    if (selectionPosition >= 0) {
+      // Find the actual position of the trimmed selection in the line
+      const actualPosition = line.indexOf(trimmedSelection, selectionPosition);
+      if (actualPosition >= 0) {
+        const before = line.substring(0, actualPosition);
+        const after = line.substring(actualPosition + trimmedSelection.length);
+        return before + `**${trimmedSelection}**` + after;
+      }
+    }
+    
+    // Fallback to first occurrence
     const escapedSelection = trimmedSelection.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return line.replace(new RegExp(escapedSelection, "g"), `**${trimmedSelection}**`);
+    return line.replace(new RegExp(escapedSelection), `**${trimmedSelection}**`);
   }
 
   return `**${line}**`;
+}
+
+function getSelectionPositionInLine(lineElement: HTMLElement, range: Range): number {
+  try {
+    const lineText = lineElement.textContent || "";
+    const selectedText = getSelectionInLine(lineElement, range).trim();
+    
+    if (!selectedText) {
+      return -1;
+    }
+
+    // Create a range from the start of the line to the start of the selection
+    const tempRange = document.createRange();
+    tempRange.selectNodeContents(lineElement);
+    
+    if (lineElement.contains(range.startContainer)) {
+      tempRange.setEnd(range.startContainer, range.startOffset);
+      const textBeforeSelection = tempRange.toString();
+      return textBeforeSelection.length;
+    }
+    
+    // If selection starts outside this line, it starts at the beginning
+    return 0;
+  } catch (error) {
+    console.warn("Failed to get selection position in line:", error);
+    return -1;
+  }
 }
 
 function getSelectionInLine(lineElement: HTMLElement, range: Range): string {
