@@ -34,7 +34,71 @@ describe("markdownContextBuilder", () => {
         </div>
       `);
 
+    it("should highlight only selected text, not all occurrences", () => {
+      const { container } = setupDOM(`
+        <div class="snippet">
+          <pre>
+            <span class="znai-code-line"><span class="token keyword">function</span> <span class="token function-name">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+            <span class="znai-code-line">    <span class="token keyword">this</span>.<span class="token function">constructor</span> = <span class="token function">constructor</span>;</span>
+            <span class="znai-code-line"><span class="token punctuation">}</span></span>
+          </pre>
+        </div>
+      `);
+
+      const lines = container.querySelectorAll(".znai-code-line");
+      const firstLine = lines[0];
+      const functionName = firstLine.querySelector(".token.function-name");
+
+      // Select just the first "constructor" word
+      selectText(functionName.firstChild, 0, functionName.firstChild, 11);
+
+      const result = buildContext();
+
+      const expectedOutput = `function **constructor**() { <----
+    this.constructor = constructor;
+}`;
+
+      expect(result).toBe(expectedOutput);
+    });
+
+    it("should highlight the specific selected occurrence, not the first one", () => {
+      const { container } = setupDOM(`
+        <div class="snippet">
+          <pre>
+            <span class="znai-code-line"><span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// new syntax for constructor</span></span>
+          </pre>
+        </div>
+      `);
+
+      const lines = container.querySelectorAll(".znai-code-line");
+      const firstLine = lines[0];
+      const comment = firstLine.querySelector(".token.comment");
+
+      // Select the word "constructor" in the comment
+      selectText(comment.firstChild, 18, comment.firstChild, 29);
+
+      const result = buildContext();
+
+      const expectedOutput = `constructor() { // new syntax for **constructor** <----`;
+
+      expect(result).toBe(expectedOutput);
+    });
+
     it("should extract code block and highlight selected single word", () => {
+      const { container } = setupDOM(`
+        <div class="snippet">
+          <pre>
+            <span class="znai-code-line"><span class="token keyword">class</span> <span class="token class-name">JsClass</span> <span class="token punctuation">{</span></span>
+            <span class="znai-code-line">    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+            <span class="znai-code-line">        <span class="token function">usefulAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+            <span class="znai-code-line">    <span class="token punctuation">}</span></span>
+            <span class="znai-code-line"><span class="token punctuation">}</span></span>
+            <span class="znai-code-line"></span>
+            <span class="znai-code-line"><span class="token keyword">export</span> <span class="token keyword">default</span> JsClass</span>
+          </pre>
+        </div>
+      `);
+
       const className = container.querySelectorAll(".class-name")[0];
 
       selectText(className.firstChild, 0, className.firstChild, 5);
@@ -53,6 +117,20 @@ export default JsClass`;
     });
 
     it("should extract code block and highlight selected lines across two lines", () => {
+      const { container } = setupDOM(`
+        <div class="snippet">
+          <pre>
+            <span class="znai-code-line"><span class="token keyword">class</span> <span class="token class-name">JsClass</span> <span class="token punctuation">{</span></span>
+            <span class="znai-code-line">    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+            <span class="znai-code-line">        <span class="token function">usefulAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+            <span class="znai-code-line">    <span class="token punctuation">}</span></span>
+            <span class="znai-code-line"><span class="token punctuation">}</span></span>
+            <span class="znai-code-line"></span>
+            <span class="znai-code-line"><span class="token keyword">export</span> <span class="token keyword">default</span> JsClass</span>
+          </pre>
+        </div>
+      `);
+
       const lines = container.querySelectorAll(".znai-code-line");
       const constructorLine = lines[1]; // constructor line
       const usefulActionLine = lines[2]; // usefulAction line
@@ -74,16 +152,6 @@ export default JsClass`;
 
       expect(result).toBe(expectedOutput);
     });
-    /*
-    <div class="snippet"><pre><span class="znai-code-line"><span class="token macro"><span class="token directive-hash">#</span><span class="token directive">include</span> <span class="token string">&lt;iostream&gt;</span></span><span>
-</span></span><span class="znai-code-line"><span>
-</span></span><span class="znai-code-line"><span class="token keyword">using</span> <span class="token keyword"><span class="znai-highlight single">namespace</span></span> std<span class="token punctuation">;</span><span>
-</span></span><span class="znai-code-line"><span>
-</span></span><span class="znai-code-line"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span>
-</span></span><span class="znai-code-line">    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"hello"</span><span class="token punctuation">;</span><span>
-</span></span><span class="znai-code-line"><span class="token punctuation">}</span><span>
-</span></span></pre></div>
-     */
 
     it("should handle selection within a single line", () => {
       const { container } = setupDOM(`
@@ -154,12 +222,48 @@ export default JsClass`;
       const result = buildContext();
 
       expect(result).toBe(
-        "**Text** **before** \n                          **const** x = 5;\n          ...\n\n**Text** **before** \n                          **const** x = 5;"
+        "Text before \n                          const x = 5;\n          ...\n\nText before \n                          const x = 5;"
       );
     });
   });
 
   describe("buildContext - paragraphs", () => {
+    it("should highlight only selected text occurrence in paragraph", () => {
+      const { container } = setupDOM(`
+        <div>
+          <p>The test function should test the test case properly.</p>
+        </div>
+      `);
+
+      const paragraph = container.querySelector("p");
+      const textNode = paragraph.firstChild;
+
+      // Select the first "test" word only
+      selectText(textNode, 4, textNode, 8);
+
+      const result = buildContext();
+
+      expect(result).toBe("The **test** function should test the test case properly.");
+    });
+
+    it("should highlight second occurrence when selected in paragraph", () => {
+      const { container } = setupDOM(`
+        <div>
+          <p>The test function should test the test case properly.</p>
+        </div>
+      `);
+
+      const paragraph = container.querySelector("p");
+      const textNode = paragraph.firstChild;
+
+      // Select the second "test" word (at position 25)
+      selectText(textNode, 25, textNode, 29);
+
+      const result = buildContext();
+
+      expect(result).toBe("The test function should **test** the test case properly.");
+    });
+
     it("should highlight selected text within a single paragraph", () => {
       const { container } = setupDOM(`
         <div>
@@ -217,7 +321,7 @@ export default JsClass`;
       const result = buildContext();
 
       expect(result).toBe(
-        "First **paragraph** **with** **some** text. **Second** **paragraph** **with** more text.\n\nFirst **paragraph** **with** **some** text. **Second** **paragraph** **with** more text."
+        "First paragraph with some text. Second paragraph with more text.\n\nFirst paragraph with some text. Second paragraph with more text."
       );
     });
 

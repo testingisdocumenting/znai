@@ -299,25 +299,18 @@ function createHighlightedLine(line: string, selectedText: string, selectionPosi
 
 function getSelectionPositionInLine(lineElement: HTMLElement, range: Range): number {
   try {
-    const lineText = lineElement.textContent || "";
-    const selectedText = getSelectionInLine(lineElement, range).trim();
-    
-    if (!selectedText) {
-      return -1;
+    if (!lineElement.contains(range.startContainer)) {
+      // If selection starts outside this line, it starts at the beginning
+      return 0;
     }
 
     // Create a range from the start of the line to the start of the selection
-    const tempRange = document.createRange();
-    tempRange.selectNodeContents(lineElement);
+    const beforeRange = document.createRange();
+    beforeRange.selectNodeContents(lineElement);
+    beforeRange.setEnd(range.startContainer, range.startOffset);
     
-    if (lineElement.contains(range.startContainer)) {
-      tempRange.setEnd(range.startContainer, range.startOffset);
-      const textBeforeSelection = tempRange.toString();
-      return textBeforeSelection.length;
-    }
-    
-    // If selection starts outside this line, it starts at the beginning
-    return 0;
+    // The length of text before selection is the position
+    return beforeRange.toString().length;
   } catch (error) {
     console.warn("Failed to get selection position in line:", error);
     return -1;
