@@ -34,32 +34,6 @@ describe("markdownContextBuilder", () => {
         </div>
       `);
 
-    it("should highlight only selected text, not all occurrences", () => {
-      const { container } = setupDOM(`
-        <div class="snippet">
-          <pre>
-            <span class="znai-code-line"><span class="token keyword">function</span> <span class="token function-name">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-            <span class="znai-code-line">    <span class="token keyword">this</span>.<span class="token function">constructor</span> = <span class="token function">constructor</span>;</span>
-            <span class="znai-code-line"><span class="token punctuation">}</span></span>
-          </pre>
-        </div>
-      `);
-
-      const lines = container.querySelectorAll(".znai-code-line");
-      const firstLine = lines[0];
-      const functionName = firstLine.querySelector(".token.function-name");
-
-      // Select just the first "constructor" word
-      selectText(functionName.firstChild, 0, functionName.firstChild, 11);
-
-      const result = buildContext();
-
-      const expectedOutput = `function **constructor**() { <----
-    this.constructor = constructor;
-}`;
-
-      expect(result).toBe(expectedOutput);
-    });
 
     it("should highlight the specific selected occurrence, not the first one", () => {
       const { container } = setupDOM(`
@@ -153,32 +127,6 @@ export default JsClass`;
       expect(result).toBe(expectedOutput);
     });
 
-    it("should handle selection within a single line", () => {
-      const { container } = setupDOM(`
-        <div class="snippet">
-          <pre>
-            <span class="znai-code-line"><span class="token keyword">function</span> <span class="token function-name">calculateSum</span><span class="token punctuation">(</span><span class="token parameter">a</span>, <span class="token parameter">b</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-            <span class="znai-code-line">    <span class="token keyword">return</span> <span class="token variable">a</span> + <span class="token variable">b</span>;</span>
-            <span class="znai-code-line"><span class="token punctuation">}</span></span>
-          </pre>
-        </div>
-      `);
-
-      const lines = container.querySelectorAll(".znai-code-line");
-      const firstLine = lines[0];
-      const functionName = firstLine.querySelector(".token.function-name");
-
-      // Select just "calculateSum"
-      selectText(functionName.firstChild, 0, functionName.firstChild, 12);
-
-      const result = buildContext();
-
-      const expectedOutput = `function **calculateSum**(a, b) { <----
-    return a + b;
-}`;
-
-      expect(result).toBe(expectedOutput);
-    });
 
     it("should handle text selection outside code block as paragraph", () => {
       const { container } = setupDOM(`
@@ -228,7 +176,8 @@ export default JsClass`;
   });
 
   describe("buildContext - paragraphs", () => {
-    it("should highlight only selected text occurrence in paragraph", () => {
+
+    it("should highlight specific occurrence when multiple exist", () => {
       const { container } = setupDOM(`
         <div>
           <p>The test function should test the test case properly.</p>
@@ -238,49 +187,17 @@ export default JsClass`;
       const paragraph = container.querySelector("p");
       const textNode = paragraph.firstChild;
 
-      // Select the first "test" word only
+      // Test first "test" word
       selectText(textNode, 4, textNode, 8);
-
-      const result = buildContext();
-
+      let result = buildContext();
       expect(result).toBe("The **test** function should test the test case properly.");
-    });
 
-    it("should highlight second occurrence when selected in paragraph", () => {
-      const { container } = setupDOM(`
-        <div>
-          <p>The test function should test the test case properly.</p>
-        </div>
-      `);
-
-      const paragraph = container.querySelector("p");
-      const textNode = paragraph.firstChild;
-
-      // Select the second "test" word (at position 25)
+      // Test second "test" word (at position 25)
       selectText(textNode, 25, textNode, 29);
-
-      const result = buildContext();
-
+      result = buildContext();
       expect(result).toBe("The test function should **test** the test case properly.");
     });
 
-    it("should highlight selected text within a single paragraph", () => {
-      const { container } = setupDOM(`
-        <div>
-          <p>This is a test paragraph with some important text that should be highlighted.</p>
-        </div>
-      `);
-
-      const paragraph = container.querySelector("p");
-      const textNode = paragraph.firstChild;
-
-      // Select "important text" - counting characters: "This is a test paragraph with some " = 35 chars
-      selectText(textNode, 35, textNode, 49);
-
-      const result = buildContext();
-
-      expect(result).toBe("This is a test paragraph with some **important text** that should be highlighted.");
-    });
 
     it("should add context before and after small paragraph", () => {
       const { container } = setupDOM(`

@@ -24,21 +24,13 @@ export function buildContext(): string {
 
   const codeBlock = findCodeBlock(range);
   if (codeBlock) {
-    return buildCodeSnippetContext();
+    return buildCodeSnippetContext(range, codeBlock);
   }
 
-  return buildParagraphContext();
+  return buildParagraphContext(range);
 }
 
-function buildCodeSnippetContext(): string {
-  const selection = window.getSelection();
-  if (!selection || !selection.rangeCount || selection.isCollapsed) {
-    return "";
-  }
-
-  const range = selection.getRangeAt(0);
-
-  const codeBlock = findCodeBlock(range);
+function buildCodeSnippetContext(range: Range, codeBlock: HTMLElement): string {
   if (!codeBlock) {
     return "";
   }
@@ -60,13 +52,7 @@ function buildCodeSnippetContext(): string {
   return buildCodeSnippetMarkdownOutput(lines, selectedLineIndices, range, lineElements);
 }
 
-function buildParagraphContext(): string {
-  const selection = window.getSelection();
-  if (!selection || !selection.rangeCount || selection.isCollapsed) {
-    return "";
-  }
-
-  const range = selection.getRangeAt(0);
+function buildParagraphContext(range: Range): string {
   const selectedText = range.toString();
 
   if (!selectedText.trim()) {
@@ -122,21 +108,24 @@ function findContainingParagraph(node: Node): HTMLElement | null {
 function buildParagraphOutput(paragraphs: HTMLElement[], selectedText: string): string {
   const result: string[] = [];
   const selection = window.getSelection();
-  const range = selection ? selection.getRangeAt(0) : null;
+  if (!selection) {
+    return "";
+  }
+  const range = selection.getRangeAt(0);
 
   paragraphs.forEach((paragraph) => {
     const paragraphText = paragraph.textContent ?? "";
     const context = addContextAroundParagraph(paragraph, paragraphText);
-    
+
     // Calculate the position of the selection within the paragraph
     let selectionPosition = -1;
-    if (range && paragraph.contains(range.startContainer)) {
+    if (paragraph.contains(range.startContainer)) {
       const tempRange = document.createRange();
       tempRange.selectNodeContents(paragraph);
       tempRange.setEnd(range.startContainer, range.startOffset);
       selectionPosition = tempRange.toString().length;
     }
-    
+
     const highlightedText = highlightSelectedTextInParagraph(context, selectedText, selectionPosition);
     result.push(highlightedText);
   });
@@ -190,30 +179,7 @@ function addContextAroundParagraph(paragraph: HTMLElement, paragraphText: string
 }
 
 function highlightSelectedTextInParagraph(text: string, selectedText: string, selectionPosition: number = -1): string {
-  const trimmedSelection = selectedText.trim();
-
-  if (!trimmedSelection) {
-    return text;
-  }
-
-  // Try exact match first
-  if (text.includes(trimmedSelection)) {
-    if (selectionPosition >= 0) {
-      // Find the actual position of the trimmed selection in the text
-      const actualPosition = text.indexOf(trimmedSelection, Math.max(0, selectionPosition - 10)); // Allow some flexibility
-      if (actualPosition >= 0) {
-        const before = text.substring(0, actualPosition);
-        const after = text.substring(actualPosition + trimmedSelection.length);
-        return before + `**${trimmedSelection}**` + after;
-      }
-    }
-    
-    // Fallback to first occurrence
-    const escapedSelection = trimmedSelection.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return text.replace(new RegExp(escapedSelection), `**${trimmedSelection}**`);
-  }
-
-  return text;
+  return highlightText(text, selectedText, selectionPosition, false);
 }
 
 function findCodeBlock(range: Range): HTMLElement | null {
@@ -275,26 +241,43 @@ function buildCodeSnippetMarkdownOutput(
 }
 
 function createHighlightedLine(line: string, selectedText: string, selectionPosition: number = -1): string {
+  return highlightText(line, selectedText, selectionPosition, true);
+}
+
+function highlightText(
+  text: string,
+  selectedText: string,
+  selectionPosition: number = -1,
+  isCodeLine: boolean = false
+): string {
   const trimmedSelection = selectedText.trim();
 
-  if (trimmedSelection && line.includes(trimmedSelection)) {
-    // If we have a specific position, highlight at that position
+  if (!trimmedSelection) {
+    return isCodeLine ? `**${text}**` : text;
+  }
+
+  if (text.includes(trimmedSelection)) {
     if (selectionPosition >= 0) {
-      // Find the actual position of the trimmed selection in the line
-      const actualPosition = line.indexOf(trimmedSelection, selectionPosition);
+      // Find the actual position of the trimmed selection in the text
+      const searchStart = isCodeLine ? selectionPosition : Math.max(0, selectionPosition - 10);
+      const actualPosition = text.indexOf(trimmedSelection, searchStart);
       if (actualPosition >= 0) {
-        const before = line.substring(0, actualPosition);
-        const after = line.substring(actualPosition + trimmedSelection.length);
+        const before = text.substring(0, actualPosition);
+        const after = text.substring(actualPosition + trimmedSelection.length);
         return before + `**${trimmedSelection}**` + after;
       }
     }
-    
+
     // Fallback to first occurrence
-    const escapedSelection = trimmedSelection.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return line.replace(new RegExp(escapedSelection), `**${trimmedSelection}**`);
+    const escapedSelection = escapeRegex(trimmedSelection);
+    return text.replace(new RegExp(escapedSelection), `**${trimmedSelection}**`);
   }
 
-  return `**${line}**`;
+  return isCodeLine ? `**${text}**` : text;
+}
+
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function getSelectionPositionInLine(lineElement: HTMLElement, range: Range): number {
@@ -308,7 +291,7 @@ function getSelectionPositionInLine(lineElement: HTMLElement, range: Range): num
     const beforeRange = document.createRange();
     beforeRange.selectNodeContents(lineElement);
     beforeRange.setEnd(range.startContainer, range.startOffset);
-    
+
     // The length of text before selection is the position
     return beforeRange.toString().length;
   } catch (error) {
