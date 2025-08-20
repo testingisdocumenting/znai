@@ -34,7 +34,6 @@ describe("markdownContextBuilder", () => {
         </div>
       `);
 
-
     it("should highlight the specific selected occurrence, not the first one", () => {
       const { container } = setupDOM(`
         <div class="snippet">
@@ -53,7 +52,9 @@ describe("markdownContextBuilder", () => {
 
       const result = buildContext();
 
-      const expectedOutput = `constructor() { // new syntax for **constructor** <----`;
+      const expectedOutput = `\`\`\`
+constructor() { // new syntax for **constructor** <----
+\`\`\``;
 
       expect(result).toBe(expectedOutput);
     });
@@ -79,13 +80,15 @@ describe("markdownContextBuilder", () => {
 
       const result = buildContext();
 
-      const expectedOutput = `class **JsCla**ss { <----
+      const expectedOutput = `\`\`\`
+class **JsCla**ss { <----
     constructor() {
         usefulAction()
     }
 }
 
-export default JsClass`;
+export default JsClass
+\`\`\``;
 
       expect(result).toBe(expectedOutput);
     });
@@ -116,17 +119,18 @@ export default JsClass`;
 
       const result = buildContext();
 
-      const expectedOutput = `class JsClass {
+      const expectedOutput = `\`\`\`
+class JsClass {
     **constructor() {** <----
         **usefulAction()** <----
     }
 }
 
-export default JsClass`;
+export default JsClass
+\`\`\``;
 
       expect(result).toBe(expectedOutput);
     });
-
 
     it("should handle text selection outside code block as paragraph", () => {
       const { container } = setupDOM(`
@@ -146,7 +150,7 @@ export default JsClass`;
 
       const result = buildContext();
 
-      expect(result).toBe("**Some** text before code \n                          const x = 5;\n          ...");
+      expect(result).toBe("> **Some** text before code \n>                           const x = 5;\n>           ...");
     });
 
     it("should handle selection crossing code block boundary as paragraph", () => {
@@ -170,13 +174,12 @@ export default JsClass`;
       const result = buildContext();
 
       expect(result).toBe(
-        "Text before \n                          const x = 5;\n          ...\n\nText before \n                          const x = 5;"
+        "> Text before \n>                           const x = 5;\n>           ...\n\n> Text before \n>                           const x = 5;"
       );
     });
   });
 
   describe("buildContext - paragraphs", () => {
-
     it("should highlight specific occurrence when multiple exist", () => {
       const { container } = setupDOM(`
         <div>
@@ -190,14 +193,13 @@ export default JsClass`;
       // Test first "test" word
       selectText(textNode, 4, textNode, 8);
       let result = buildContext();
-      expect(result).toBe("The **test** function should test the test case properly.");
+      expect(result).toBe("> The **test** function should test the test case properly.");
 
       // Test second "test" word (at position 25)
       selectText(textNode, 25, textNode, 29);
       result = buildContext();
-      expect(result).toBe("The test function should **test** the test case properly.");
+      expect(result).toBe("> The test function should **test** the test case properly.");
     });
-
 
     it("should add context before and after small paragraph", () => {
       const { container } = setupDOM(`
@@ -217,7 +219,7 @@ export default JsClass`;
       const result = buildContext();
 
       expect(result).toBe(
-        "Before text that provides context. Short **selected**. After text that provides more context."
+        "> Before text that provides context. Short **selected**. After text that provides more context."
       );
     });
 
@@ -238,7 +240,7 @@ export default JsClass`;
       const result = buildContext();
 
       expect(result).toBe(
-        "First paragraph with some text. Second paragraph with more text.\n\nFirst paragraph with some text. Second paragraph with more text."
+        "> First paragraph with some text. Second paragraph with more text.\n\n> First paragraph with some text. Second paragraph with more text."
       );
     });
 
@@ -276,7 +278,7 @@ export default JsClass`;
       const result = buildContext();
 
       expect(result).toBe(
-        "...uncated when it exceeds the fifty character limit. **Target**. This is another very long paragraph that provides ..."
+        "> ...uncated when it exceeds the fifty character limit. **Target**. This is another very long paragraph that provides ..."
       );
     });
   });

@@ -130,7 +130,7 @@ function buildParagraphOutput(paragraphs: HTMLElement[], selectedText: string): 
     result.push(highlightedText);
   });
 
-  return result.join("\n\n");
+  return result.map(line => "> " + line.replace(/\n/g, "\n> ")).join("\n\n");
 }
 
 function addContextAroundParagraph(paragraph: HTMLElement, paragraphText: string): string {
@@ -236,8 +236,7 @@ function buildCodeSnippetMarkdownOutput(
     }
   });
 
-  return result.join("\n");
-  // return "```\n" + result.join("\n") + "```";
+  return "```\n" + result.join("\n") + "\n```";
 }
 
 function createHighlightedLine(line: string, selectedText: string, selectionPosition: number = -1): string {
