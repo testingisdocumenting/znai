@@ -15,7 +15,6 @@
  */
 
 import React, { useEffect, useRef, useState } from "react";
-import { TextHighlighter } from "./textHighlihter";
 import { findPrefixSuffixAndMatch } from "./textSelectionBuilder";
 
 import { buildHighlightUrl } from "./highlightUrl";
@@ -33,7 +32,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   const [expanded, setExpanded] = useState(false);
   const [currentContext, setCurrentContext] = useState("");
   const [hasText, setHasText] = useState(false);
-  const [notification, setNotification] = useState<{type: "success" | "error", message: string} | null>(null);
+  const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   useEffect(() => {
     document.addEventListener("selectionchange", detectSelectionReset);
@@ -50,53 +49,43 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   return (
     <>
       {notification && (
-        <Notification
-          type={notification.type}
-          message={notification.message}
-          onClose={() => setNotification(null)}
-        />
+        <Notification type={notification.type} message={notification.message} onClose={() => setNotification(null)} />
       )}
       <div
         ref={menuRef}
         className={`znai-text-selection-menu ${expanded ? "expanded" : ""}`}
         onClick={(e) => e.stopPropagation()}
       >
-      <div
-        className={`znai-text-selection-menu-item ${expanded ? "fading-out" : ""}`}
-        onClick={!expanded ? handleAskInSlack : undefined}
-        onMouseDown={preventDefault}
-      >
-        Ask in Slack
-      </div>
-      
-      <div className={`znai-text-selection-panel-content ${expanded ? "fading-in" : ""}`} ref={sendToSlackPanelRef}>
-        <div className="znai-text-selection-panel-preview">
-          <div className="znai-text-selection-panel-preview-title">Context:</div>
-          <pre className="znai-text-selection-panel-preview-content">{currentContext}</pre>
+        <div
+          className={`znai-text-selection-menu-item ${expanded ? "fading-out" : ""}`}
+          onClick={!expanded ? handleAskInSlack : undefined}
+          onMouseDown={preventDefault}
+        >
+          Ask in Slack
         </div>
-        <div className="znai-text-selection-panel-input">
-          <textarea
-            ref={inputRef}
-            placeholder="Enter your question..."
-            className="znai-text-selection-question-input"
-            rows={3}
-            onClick={(e) => e.stopPropagation()}
-            onFocus={(e) => e.stopPropagation()}
-            onKeyDown={handleTextareaKeyDown}
-            onChange={handleTextChange}
-          />
-        </div>
-        <div className="znai-text-selection-panel-footer">
-          <button 
-            onClick={handleSend} 
-            className="znai-text-selection-send-button"
-            disabled={!hasText}
-          >
-            Send to {getDocMeta().slackChannel || "Slack"}
-          </button>
+
+        <div className={`znai-text-selection-panel-content ${expanded ? "fading-in" : ""}`} ref={sendToSlackPanelRef}>
+          <div className="znai-text-selection-panel-preview">
+            <div className="znai-text-selection-panel-preview-title">Context:</div>
+            <pre className="znai-text-selection-panel-preview-content">{currentContext}</pre>
+          </div>
+          <div className="znai-text-selection-panel-input">
+            <textarea
+              ref={inputRef}
+              placeholder="Enter your question..."
+              className="znai-text-selection-question-input"
+              rows={3}
+              onKeyDown={handleTextareaKeyDown}
+              onChange={handleTextChange}
+            />
+          </div>
+          <div className="znai-text-selection-panel-footer">
+            <button onClick={handleSend} className="znai-text-selection-send-button" disabled={!hasText}>
+              Send to {getDocMeta().slackChannel || "Slack"}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 
@@ -124,25 +113,17 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   }
 
   function handleAskInSlack() {
-    console.log("handleAskInSlack called");
     const context = buildContext();
     setCurrentContext(context);
     setExpanded(true);
-    console.log("Set expanded to true");
-
-    const result = findPrefixSuffixAndMatch(containerNode);
-    const highlighter = new TextHighlighter(containerNode);
-    highlighter.highlight(result.selection, result.prefix, result.suffix);
-
-    // Focus input after animation
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 300);
+    inputRef.current?.focus();
   }
 
   async function handleSend() {
     const question = inputRef.current?.value?.trim();
-    if (!question) return;
+    if (!question) {
+      return;
+    }
 
     const result = findPrefixSuffixAndMatch(containerNode);
     const pageUrl = buildHighlightUrl(location.toString(), result);
@@ -157,6 +138,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     };
 
     try {
+      console.log(JSON.stringify(body));
       let response = await fetch("http://localhost:5111/ask-in-slack", {
         method: "POST",
         headers: {
@@ -166,15 +148,12 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       });
 
       if (response.ok) {
-        console.log("Successfully sent to Slack");
         setNotification({ type: "success", message: "Successfully sent to Slack!" });
         hidePopover();
       } else {
-        console.error("Failed to send to Slack:", response.statusText);
         setNotification({ type: "error", message: `Failed to send to Slack: ${response.statusText}` });
       }
     } catch (error) {
-      console.error("Network error:", error);
       setNotification({ type: "error", message: "Network error: Unable to connect to server" });
     }
   }
@@ -185,10 +164,8 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     }
 
     const docMeta = getDocMeta();
-    console.log("DocMeta for Slack:", { sendToSlackUrl: docMeta.sendToSlackUrl, slackChannel: docMeta.slackChannel });
 
     if (!docMeta.sendToSlackUrl || !docMeta.slackChannel) {
-      console.log("Slack not configured, menu will not show");
       return;
     }
 
@@ -199,7 +176,6 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   }
 
   function hidePopover() {
-    console.log("hidePopover called, expanded:", expanded);
     if (menuRef.current) {
       menuRef.current.style.display = "none";
     }
@@ -242,7 +218,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
   function detectSelectionReset() {
     if (expanded) {
-      return; // Don't hide when panel is expanded
+      return;
     }
 
     const selection = getSelection();

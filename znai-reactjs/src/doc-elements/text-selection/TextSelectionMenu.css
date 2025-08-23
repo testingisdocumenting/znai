@@ -31,8 +31,8 @@
 }
 
 .theme-znai-dark .znai-text-selection-menu {
-    border-color: #888;
-    box-shadow: 0 1px 3px 0 rgb(180 180 180 / 0.15), 0 0 4px 4px rgb(80 80 80 / 0.4);
+    border-color: #555;
+    box-shadow: 0 2px 8px 0 rgb(0 0 0 / 0.4), 0 4px 12px 2px rgb(0 0 0 / 0.3);
 }
 
 
