@@ -39,25 +39,28 @@ def ask_in_slack():
         page_url = data.get('pageUrl')
         username = data.get('username')
         slack_channel = data.get('slackChannel')
+        question = data.get('question')
+        context = data.get('context')
 
         print(f"Selected text: {selected_text[:100] if selected_text else None}...")
         print(f"Page URL: {page_url}")
         print(f"Username: {username}")
         print(f"Slack channel: {slack_channel}")
+        print(f"Question: {question[:100] if question else None}...")
+        print(f"Context: {context[:100] if context else None}...")
 
-        if not selected_text:
-            return jsonify({"error": "Missing required field: selectedText"}), 400
+        if not question:
+            return jsonify({"error": "Missing required field: question"}), 400
         
         if not slack_channel:
             return jsonify({"error": "Missing required field: slackChannel"}), 400
         
-        slack_message = format_slack_message(username, selected_text, page_url)
+        slack_message = format_slack_message(username, question, context, page_url)
         print(f"Slack message blocks: {json.dumps(slack_message, indent=2)}")
         
         result = slack_client.chat_postMessage(
             channel=slack_channel,
-            blocks=slack_message,
-            text=f"Question from {username} about: {selected_text[:50]}..."
+            text=slack_message
         )
         
         print(f"Message posted successfully: {result['ts']}")
@@ -73,35 +76,15 @@ def ask_in_slack():
         return jsonify({"error": str(e)}), 500
 
 
-def format_slack_message(username, selected_text, page_url=None):
-    blocks = [{
-        "type": "section",
-        "text": {
-            "type": "mrkdwn",
-            "text": f"*{username}* selected text and asked for help:"
-        }
-    }, {"type": "divider"}]
-
-    escaped_text = selected_text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-    blocks.append({
-        "type": "section",
-        "text": {
-            "type": "mrkdwn",
-            "text": f"*Selected text:*\n```{escaped_text}```"
-        }
-    })
+def format_slack_message(username, question, context, page_url):
+    # Build message text with "asked" as the link
+    message_parts = [f"User *{username}* <{page_url}|asked>: {question}"]
     
-    if page_url:
-        blocks.append({"type": "divider"})
-        blocks.append({
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": f"📄 <{page_url}|View documentation page>"
-            }
-        })
+    if context:
+        message_parts.append(context)
     
-    return blocks
+    # Return as single text message without sections for full width
+    return "\n\n".join(message_parts)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5111, debug=True)

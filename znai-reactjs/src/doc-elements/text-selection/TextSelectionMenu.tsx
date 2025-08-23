@@ -29,8 +29,10 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   const menuRef = useRef<HTMLDivElement>(null);
   const sendToSlackPanelRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const [expanded, setExpanded] = useState(false);
-  const [currentContext, setCurrentContext] = useState("");
+  const [panelData, setPanelData] = useState<{
+    context: string;
+    prefixSuffixMatch: ReturnType<typeof findPrefixSuffixAndMatch>;
+  } | null>(null);
   const [hasText, setHasText] = useState(false);
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
@@ -44,7 +46,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       document.removeEventListener("mouseup", onMouseUp);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [expanded]);
+  }, [panelData]);
 
   return (
     <>
@@ -53,21 +55,21 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       )}
       <div
         ref={menuRef}
-        className={`znai-text-selection-menu ${expanded ? "expanded" : ""}`}
+        className={`znai-text-selection-menu ${panelData ? "expanded" : ""}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          className={`znai-text-selection-menu-item ${expanded ? "fading-out" : ""}`}
-          onClick={!expanded ? handleAskInSlack : undefined}
+          className={`znai-text-selection-menu-item ${panelData ? "fading-out" : ""}`}
+          onClick={!panelData ? handleAskInSlack : undefined}
           onMouseDown={preventDefault}
         >
           Ask in Slack
         </div>
 
-        <div className={`znai-text-selection-panel-content ${expanded ? "fading-in" : ""}`} ref={sendToSlackPanelRef}>
+        <div className={`znai-text-selection-panel-content ${panelData ? "fading-in" : ""}`} ref={sendToSlackPanelRef}>
           <div className="znai-text-selection-panel-preview">
             <div className="znai-text-selection-panel-preview-title">Context:</div>
-            <pre className="znai-text-selection-panel-preview-content">{currentContext}</pre>
+            <pre className="znai-text-selection-panel-preview-content">{panelData?.context || ""}</pre>
           </div>
           <div className="znai-text-selection-panel-input">
             <textarea
@@ -114,8 +116,8 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
   function handleAskInSlack() {
     const context = buildContext();
-    setCurrentContext(context);
-    setExpanded(true);
+    const prefixSuffixMatch = findPrefixSuffixAndMatch(containerNode);
+    setPanelData({ context, prefixSuffixMatch });
     inputRef.current?.focus();
   }
 
@@ -125,16 +127,15 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       return;
     }
 
-    const result = findPrefixSuffixAndMatch(containerNode);
-    const pageUrl = buildHighlightUrl(location.toString(), result);
+    const pageUrl = buildHighlightUrl(location.toString(), panelData!.prefixSuffixMatch);
 
     const body = {
-      selectedText: result.selection,
+      selectedText: panelData!.prefixSuffixMatch.selection,
       pageUrl: pageUrl,
       username: "web-user",
       slackChannel: getDocMeta().slackChannel,
       question: question,
-      context: currentContext,
+      context: panelData!.context,
     };
 
     try {
@@ -179,16 +180,15 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     if (menuRef.current) {
       menuRef.current.style.display = "none";
     }
-    setExpanded(false);
+    setPanelData(null);
     if (inputRef.current) {
       inputRef.current.value = "";
     }
     setHasText(false);
-    setCurrentContext("");
   }
 
   function onMouseUp(event: MouseEvent) {
-    if (expanded) {
+    if (panelData) {
       if (sendToSlackPanelRef.current && event.target && !sendToSlackPanelRef.current.contains(event.target as Node)) {
         hidePopover();
       }
@@ -217,7 +217,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   }
 
   function detectSelectionReset() {
-    if (expanded) {
+    if (panelData) {
       return;
     }
 
