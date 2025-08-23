@@ -28,9 +28,10 @@ import "./TextSelectionMenu.css";
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
   const menuRef = useRef<HTMLDivElement>(null);
   const sendToSlackPanelRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const [expanded, setExpanded] = useState(false);
-  const [question, setQuestion] = useState("");
   const [currentContext, setCurrentContext] = useState("");
+  const [hasText, setHasText] = useState(false);
 
   useEffect(() => {
     document.addEventListener("selectionchange", detectSelectionReset);
@@ -62,16 +63,23 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
           <pre className="znai-text-selection-panel-preview-content">{currentContext}</pre>
         </div>
         <div className="znai-text-selection-panel-input">
-          <input
-            type="text"
+          <textarea
+            ref={inputRef}
             placeholder="Enter your question..."
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
             className="znai-text-selection-question-input"
+            rows={3}
             onClick={(e) => e.stopPropagation()}
             onFocus={(e) => e.stopPropagation()}
+            onKeyDown={handleKeyDown}
+            onChange={handleTextChange}
           />
-          <button onClick={handleSend} className="znai-text-selection-send-button">
+        </div>
+        <div className="znai-text-selection-panel-footer">
+          <button 
+            onClick={handleSend} 
+            className="znai-text-selection-send-button"
+            disabled={!hasText}
+          >
             Send to {getDocMeta().slackChannel || "Slack"}
           </button>
         </div>
@@ -81,6 +89,19 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
   function preventDefault(e: React.MouseEvent<HTMLDivElement>) {
     e.preventDefault();
+  }
+
+  function handleTextChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setHasText(e.target.value.trim().length > 0);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (hasText) {
+        void handleSend();
+      }
+    }
   }
 
   function handleAskInSlack() {
@@ -93,9 +114,17 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     const result = findPrefixSuffixAndMatch(containerNode);
     const highlighter = new TextHighlighter(containerNode);
     highlighter.highlight(result.selection, result.prefix, result.suffix);
+
+    // Focus input after animation
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 300);
   }
 
   async function handleSend() {
+    const question = inputRef.current?.value?.trim();
+    if (!question) return;
+
     const result = findPrefixSuffixAndMatch(containerNode);
     const pageUrl = buildHighlightUrl(location.toString(), result);
 
@@ -149,7 +178,10 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       menuRef.current.style.display = "none";
     }
     setExpanded(false);
-    setQuestion("");
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+    setHasText(false);
     setCurrentContext("");
   }
 
