@@ -48,37 +48,34 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       className={`znai-text-selection-menu ${expanded ? "expanded" : ""}`}
       onClick={(e) => e.stopPropagation()}
     >
-      {!expanded ? (
-        <div
-          key="menu"
-          className="znai-text-selection-menu-item"
-          onClick={handleAskInSlack}
-          onMouseDown={preventDefault}
-        >
-          Ask in Slack
+      <div
+        className={`znai-text-selection-menu-item ${expanded ? "fading-out" : ""}`}
+        onClick={!expanded ? handleAskInSlack : undefined}
+        onMouseDown={preventDefault}
+      >
+        Ask in Slack
+      </div>
+      
+      <div className={`znai-text-selection-panel-content ${expanded ? "fading-in" : ""}`} ref={sendToSlackPanelRef}>
+        <div className="znai-text-selection-panel-preview">
+          <div className="znai-text-selection-panel-preview-title">Context:</div>
+          <pre className="znai-text-selection-panel-preview-content">{currentContext}</pre>
         </div>
-      ) : (
-        <div key="menu" className="znai-text-selection-panel-content" ref={sendToSlackPanelRef}>
-          <div className="znai-text-selection-panel-preview">
-            <div className="znai-text-selection-panel-preview-title">Context:</div>
-            <pre className="znai-text-selection-panel-preview-content">{currentContext}</pre>
-          </div>
-          <div className="znai-text-selection-panel-input">
-            <input
-              type="text"
-              placeholder="Enter your question..."
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              className="znai-text-selection-question-input"
-              onClick={(e) => e.stopPropagation()}
-              onFocus={(e) => e.stopPropagation()}
-            />
-            <button onClick={handleSend} className="znai-text-selection-send-button">
-              Send to {getDocMeta().slackChannel || "Slack"}
-            </button>
-          </div>
+        <div className="znai-text-selection-panel-input">
+          <input
+            type="text"
+            placeholder="Enter your question..."
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            className="znai-text-selection-question-input"
+            onClick={(e) => e.stopPropagation()}
+            onFocus={(e) => e.stopPropagation()}
+          />
+          <button onClick={handleSend} className="znai-text-selection-send-button">
+            Send to {getDocMeta().slackChannel || "Slack"}
+          </button>
         </div>
-      )}
+      </div>
     </div>
   );
 
@@ -179,7 +176,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
     const containerRect = containerNode.getBoundingClientRect();
 
-    const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 48;
+    const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 30;
     const selectionCenter = selectionRect.left + selectionRect.width / 2.0 - 72;
     const left = selectionCenter - containerRect.left;
     showMenu(top, left);

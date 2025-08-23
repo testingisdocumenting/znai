@@ -16,6 +16,8 @@
 
 .znai-text-selection-menu {
     position: absolute;
+    width: 144px;
+    height: 24px;
     border-radius: 3px;
     border: 1px solid #ccc;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.15), 0 8px 6px 2px rgb(0 0 0 / 0.15);
@@ -23,6 +25,9 @@
     color: var(--znai-regular-text-color);
     font-size: var(--znai-smaller-text-size);
     z-index: 10;
+    transition: all 500ms ease-in-out;
+    transform-origin: top center;
+    overflow: hidden;
 }
 
 .theme-znai-dark .znai-text-selection-menu {
@@ -31,21 +36,28 @@
 }
 
 
-/* Smooth transformation animation */
-.znai-text-selection-menu {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-}
-
 .znai-text-selection-menu.expanded {
-    width: 400px;
-    min-height: 200px;
+    width: 500px;
+    height: 280px;
 }
 
 .znai-text-selection-menu-item {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    padding: 2px 24px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 8px 16px;
+    white-space: nowrap;
+    transition: opacity 300ms;
+    line-height: 1.2;
+    box-sizing: border-box;
+}
+
+.znai-text-selection-menu-item.fading-out {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .znai-text-selection-menu-item:hover {
@@ -54,10 +66,20 @@
 }
 
 .znai-text-selection-panel-content {
+    position: absolute;
+    inset: 0;
     padding: 12px;
+    transition: opacity 500ms;
+    transition-delay: 200ms;
     opacity: 0;
-    animation: fadeIn 0.3s ease-out 0.1s forwards;
+    pointer-events: none;
 }
+
+.znai-text-selection-panel-content.fading-in {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 
 .znai-text-selection-panel-preview {
     border: 1px solid #ddd;
@@ -150,25 +172,3 @@
     box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes expandPanel {
-    from {
-        transform: scale(0.8);
-        opacity: 0.8;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
