@@ -78,7 +78,7 @@ def ask_in_slack():
 
 def format_slack_message(username, question, context, page_url):
     # Build message text with "asked" as the link
-    message_parts = [f"User *{username}* <{page_url}|asked>: {question}"]
+    message_parts = [f"@{username} <{page_url}|asked>: {question}"]
     
     if context:
         message_parts.append(context)

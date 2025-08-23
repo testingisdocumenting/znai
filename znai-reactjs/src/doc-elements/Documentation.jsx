@@ -275,7 +275,8 @@ export class Documentation extends Component {
 
     keyDownHandler(e) {
         const {isSearchActive, mode} = this.state
-        if (e.code === "Slash" && !isSearchActive && mode === DocumentationModes.DEFAULT) {
+        const isFromInputElement = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA'
+        if (e.code === "Slash" && !isSearchActive && mode === DocumentationModes.DEFAULT && !isFromInputElement) {
             e.preventDefault()
             this.setState({isSearchActive: true})
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && e.altKey) {
