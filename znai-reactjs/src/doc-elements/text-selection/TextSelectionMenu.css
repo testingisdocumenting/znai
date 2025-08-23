@@ -163,13 +163,13 @@
 }
 
 .znai-text-selection-send-button:disabled {
-    background-color: #ccc;
-    color: #888;
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
 .znai-text-selection-send-button:disabled:hover {
-    background-color: #ccc;
+    background-color: #0066cc;
+    opacity: 0.5;
 }
 
 /* Dark theme styles */

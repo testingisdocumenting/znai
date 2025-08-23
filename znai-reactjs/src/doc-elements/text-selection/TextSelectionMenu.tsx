@@ -23,6 +23,7 @@ import { buildHighlightUrl } from "./highlightUrl";
 import { getDocMeta } from "../../structure/docMeta";
 
 import { buildContext } from "./markdownContextBuilder";
+import { Notification } from "../../components/Notification";
 import "./TextSelectionMenu.css";
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
@@ -32,23 +33,34 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   const [expanded, setExpanded] = useState(false);
   const [currentContext, setCurrentContext] = useState("");
   const [hasText, setHasText] = useState(false);
+  const [notification, setNotification] = useState<{type: "success" | "error", message: string} | null>(null);
 
   useEffect(() => {
     document.addEventListener("selectionchange", detectSelectionReset);
     document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.removeEventListener("selectionchange", detectSelectionReset);
       document.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [expanded]);
 
   return (
-    <div
-      ref={menuRef}
-      className={`znai-text-selection-menu ${expanded ? "expanded" : ""}`}
-      onClick={(e) => e.stopPropagation()}
-    >
+    <>
+      {notification && (
+        <Notification
+          type={notification.type}
+          message={notification.message}
+          onClose={() => setNotification(null)}
+        />
+      )}
+      <div
+        ref={menuRef}
+        className={`znai-text-selection-menu ${expanded ? "expanded" : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
       <div
         className={`znai-text-selection-menu-item ${expanded ? "fading-out" : ""}`}
         onClick={!expanded ? handleAskInSlack : undefined}
@@ -70,7 +82,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
             rows={3}
             onClick={(e) => e.stopPropagation()}
             onFocus={(e) => e.stopPropagation()}
-            onKeyDown={handleKeyDown}
+            onKeyDown={handleTextareaKeyDown}
             onChange={handleTextChange}
           />
         </div>
@@ -85,6 +97,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
         </div>
       </div>
     </div>
+    </>
   );
 
   function preventDefault(e: React.MouseEvent<HTMLDivElement>) {
@@ -95,12 +108,18 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     setHasText(e.target.value.trim().length > 0);
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+  function handleTextareaKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if (hasText) {
         void handleSend();
       }
+    }
+  }
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === "Escape") {
+      hidePopover();
     }
   }
 
@@ -137,19 +156,26 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       context: currentContext,
     };
 
-    let response = await fetch("http://localhost:5111/ask-in-slack", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+    try {
+      let response = await fetch("http://localhost:5111/ask-in-slack", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
 
-    if (response.ok) {
-      console.log("Successfully sent to Slack");
-      hidePopover();
-    } else {
-      console.error("Failed to send to Slack:", response.statusText);
+      if (response.ok) {
+        console.log("Successfully sent to Slack");
+        setNotification({ type: "success", message: "Successfully sent to Slack!" });
+        hidePopover();
+      } else {
+        console.error("Failed to send to Slack:", response.statusText);
+        setNotification({ type: "error", message: `Failed to send to Slack: ${response.statusText}` });
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      setNotification({ type: "error", message: "Network error: Unable to connect to server" });
     }
   }
 
