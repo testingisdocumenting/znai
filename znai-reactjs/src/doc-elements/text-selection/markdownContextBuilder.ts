@@ -59,35 +59,15 @@ function buildParagraphContext(range: Range): string {
     return "";
   }
 
-  const paragraphs = collectSelectedParagraphs(range);
-  if (paragraphs.length === 0) {
+  // Find the paragraph containing the start of the selection
+  const paragraph = findContainingParagraph(range.startContainer);
+  if (!paragraph) {
     return "";
   }
 
-  return buildParagraphOutput(paragraphs, selectedText);
+  return buildParagraphOutput(paragraph, selectedText, range);
 }
 
-function collectSelectedParagraphs(range: Range): HTMLElement[] {
-  const paragraphs: HTMLElement[] = [];
-
-  // Find all elements that contain part of the selection
-  let startContainer = range.startContainer;
-  let endContainer = range.endContainer;
-
-  // Find paragraph elements containing start and end
-  const startParagraph = findContainingParagraph(startContainer);
-  const endParagraph = findContainingParagraph(endContainer);
-
-  if (startParagraph) {
-    paragraphs.push(startParagraph);
-  }
-
-  if (endParagraph && endParagraph !== startParagraph) {
-    paragraphs.push(endParagraph);
-  }
-
-  return paragraphs;
-}
 
 function findContainingParagraph(node: Node): HTMLElement | null {
   let element: Node | null = node;
@@ -105,78 +85,23 @@ function findContainingParagraph(node: Node): HTMLElement | null {
   return null;
 }
 
-function buildParagraphOutput(paragraphs: HTMLElement[], selectedText: string): string {
-  const result: string[] = [];
-  const selection = window.getSelection();
-  if (!selection) {
-    return "";
+function buildParagraphOutput(paragraph: HTMLElement, selectedText: string, range: Range): string {
+  const paragraphText = paragraph.textContent ?? "";
+
+  // Calculate the position of the selection within the paragraph
+  let selectionPosition = -1;
+  if (paragraph.contains(range.startContainer)) {
+    const tempRange = document.createRange();
+    tempRange.selectNodeContents(paragraph);
+    tempRange.setEnd(range.startContainer, range.startOffset);
+    selectionPosition = tempRange.toString().length;
   }
-  const range = selection.getRangeAt(0);
 
-  paragraphs.forEach((paragraph) => {
-    const paragraphText = paragraph.textContent ?? "";
-    const context = addContextAroundParagraph(paragraph, paragraphText);
-
-    // Calculate the position of the selection within the paragraph
-    let selectionPosition = -1;
-    if (paragraph.contains(range.startContainer)) {
-      const tempRange = document.createRange();
-      tempRange.selectNodeContents(paragraph);
-      tempRange.setEnd(range.startContainer, range.startOffset);
-      selectionPosition = tempRange.toString().length;
-    }
-
-    const highlightedText = highlightSelectedTextInParagraph(context, selectedText, selectionPosition);
-    result.push(highlightedText);
-  });
-
-  return result.map(line => "> " + line.replace(/\n/g, "\n> ")).join("\n\n");
+  const highlightedText = highlightSelectedTextInParagraph(paragraphText, selectedText, selectionPosition);
+  // Handle multi-line content with proper markdown quoting
+  return "> " + highlightedText.replace(/\n/g, "\n> ");
 }
 
-function addContextAroundParagraph(paragraph: HTMLElement, paragraphText: string): string {
-  const CONTEXT_LENGTH = 50;
-
-  if (paragraphText.length >= CONTEXT_LENGTH * 2) {
-    return paragraphText;
-  }
-
-  let contextBefore = "";
-  let contextAfter = "";
-
-  // Get text before
-  let prevElement = paragraph.previousElementSibling;
-  while (prevElement && contextBefore.length < CONTEXT_LENGTH) {
-    const prevText = prevElement.textContent ?? "";
-    const neededLength = CONTEXT_LENGTH - contextBefore.length;
-
-    if (prevText.length <= neededLength) {
-      contextBefore = prevText + (contextBefore ? " " : "") + contextBefore;
-    } else {
-      contextBefore = "..." + prevText.slice(-neededLength) + (contextBefore ? " " : "") + contextBefore;
-      break;
-    }
-
-    prevElement = prevElement.previousElementSibling;
-  }
-
-  // Get text after
-  let nextElement = paragraph.nextElementSibling;
-  while (nextElement && contextAfter.length < CONTEXT_LENGTH) {
-    const nextText = nextElement.textContent ?? "";
-    const neededLength = CONTEXT_LENGTH - contextAfter.length;
-
-    if (nextText.length <= neededLength) {
-      contextAfter = contextAfter + (contextAfter ? " " : "") + nextText;
-    } else {
-      contextAfter = contextAfter + (contextAfter ? " " : "") + nextText.slice(0, neededLength) + "...";
-      break;
-    }
-
-    nextElement = nextElement.nextElementSibling;
-  }
-
-  return (contextBefore + (contextBefore ? " " : "") + paragraphText + (contextAfter ? " " : "") + contextAfter).trim();
-}
 
 function highlightSelectedTextInParagraph(text: string, selectedText: string, selectionPosition: number = -1): string {
   return highlightText(text, selectedText, selectionPosition, false);

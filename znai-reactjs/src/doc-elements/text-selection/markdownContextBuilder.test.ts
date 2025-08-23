@@ -150,7 +150,7 @@ export default JsClass
 
       const result = buildContext();
 
-      expect(result).toBe("> **Some** text before code \n>                           const x = 5;\n>           ...");
+      expect(result).toBe("> **Some** text before code");
     });
 
     it("should handle selection crossing code block boundary as paragraph", () => {
@@ -173,13 +173,16 @@ export default JsClass
 
       const result = buildContext();
 
+      // Should only return the first paragraph since that's where selection starts
+      // Code block content should not be included in context
       expect(result).toBe(
-        "> Text before \n>                           const x = 5;\n>           ...\n\n> Text before \n>                           const x = 5;"
+        "> Text before"
       );
     });
   });
 
   describe("buildContext - paragraphs", () => {
+
     it("should highlight specific occurrence when multiple exist", () => {
       const { container } = setupDOM(`
         <div>
@@ -201,7 +204,7 @@ export default JsClass
       expect(result).toBe("> The test function should **test** the test case properly.");
     });
 
-    it("should add context before and after small paragraph", () => {
+    it("should handle selection in a short paragraph", () => {
       const { container } = setupDOM(`
         <div>
           <p>Before text that provides context.</p>
@@ -218,8 +221,9 @@ export default JsClass
 
       const result = buildContext();
 
+      // Should only return the paragraph with selection, no context from siblings
       expect(result).toBe(
-        "> Before text that provides context. Short **selected**. After text that provides more context."
+        "> Short **selected**."
       );
     });
 
@@ -239,8 +243,9 @@ export default JsClass
 
       const result = buildContext();
 
+      // Should only return the first paragraph where selection starts
       expect(result).toBe(
-        "> First paragraph with some text. Second paragraph with more text.\n\n> First paragraph with some text. Second paragraph with more text."
+        "> First paragraph with some text."
       );
     });
 
@@ -260,26 +265,5 @@ export default JsClass
       expect(result).toBe("");
     });
 
-    it("should truncate long context text with ellipsis", () => {
-      const { container } = setupDOM(`
-        <div>
-          <p>This is a very long paragraph that provides context before the target paragraph and should be truncated when it exceeds the fifty character limit.</p>
-          <p>Target.</p>
-          <p>This is another very long paragraph that provides context after the target paragraph and should also be truncated when it exceeds the limit.</p>
-        </div>
-      `);
-
-      const paragraph = container.querySelectorAll("p")[1]; // middle paragraph
-      const textNode = paragraph.firstChild;
-
-      // Select "Target"
-      selectText(textNode, 0, textNode, 6);
-
-      const result = buildContext();
-
-      expect(result).toBe(
-        "> ...uncated when it exceeds the fifty character limit. **Target**. This is another very long paragraph that provides ..."
-      );
-    });
   });
 });
