@@ -17,10 +17,10 @@
 .znai-text-selection-menu {
     position: absolute;
     border-radius: 6px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 8px rgb(0 0 0 / 0.1), 0 12px 24px rgb(0 0 0 / 0.15);
-    background: linear-gradient(to bottom, #ffffff, #e8ecf0);
-    backdrop-filter: blur(12px);
+    background: linear-gradient(to bottom, #ffffff, #f8fafc);
+    backdrop-filter: blur(10px);
     color: var(--znai-regular-text-color);
     font-size: var(--znai-smaller-text-size);
     z-index: 10;
@@ -31,12 +31,11 @@
 .theme-znai-dark .znai-text-selection-menu {
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 2px 12px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.4);
-    background-color: #1e1e1e;
-    background-image: linear-gradient(to bottom, rgba(40, 40, 40, 0.95), rgba(30, 30, 30, 0.98));
+    background: linear-gradient(to bottom, #2a3236, #272f33);
 }
 
 .theme-znai-dark .znai-text-selection-menu-item:hover {
-    background-color: rgba(74, 158, 255, 0.12);
+    background: linear-gradient(to bottom, rgba(74, 158, 255, 0.08), rgba(74, 158, 255, 0.15));
     color: #4a9eff;
 }
 
@@ -66,7 +65,7 @@
 }
 
 .znai-text-selection-menu-item:hover {
-    background-color: rgba(0, 102, 204, 0.08);
+    background: linear-gradient(to bottom, rgba(0, 102, 204, 0.05), rgba(0, 102, 204, 0.1));
     color: #0066cc;
     transition: all 0.15s ease;
 }
