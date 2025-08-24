@@ -14,25 +14,52 @@
  * limitations under the License.
  */
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { TextHighlighter } from "./textHighlihter";
 import { mainPanelClassName } from "../../layout/classNames";
 import { extractHighlightParams } from "./highlightUrl";
+import "./HighlightUrlText.css";
 
-export function HighlightUrlText() {
+export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElement }) {
+  const bubbleRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const params = extractHighlightParams();
+
     if (params) {
       const container = document.querySelector(mainPanelClassName) || document.body;
       const highlighter = new TextHighlighter(container);
-      highlighter.highlight(params.selection, params.prefix, params.suffix);
-
-      const firstHighlight = document.querySelector(".znai-highlight");
-      if (firstHighlight) {
-        firstHighlight.scrollIntoView({ behavior: "smooth", block: "center" });
+      const highlights = highlighter.highlight(params.selection, params.prefix, params.suffix);
+      const firstHighlightedElement = highlights[0];
+      if (!firstHighlightedElement) {
+        return;
       }
+
+      if (params.question && bubbleRef.current) {
+        const containerRect = containerNode.getBoundingClientRect();
+
+        const range = document.createRange();
+        range.setStart(firstHighlightedElement, 0);
+        range.setEnd(highlights[highlights.length - 1], highlights[highlights.length - 1].childNodes.length);
+        const selectionRect = range.getBoundingClientRect();
+
+        const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 30;
+        const selectionCenter = selectionRect.left + selectionRect.width / 2.0 - 72;
+        const left = selectionCenter - containerRect.left;
+
+        const bubble = bubbleRef.current;
+        bubble.style.top = `${top}px`;
+        bubble.style.left = `${left}px`;
+        bubbleRef.current.style.display = "block";
+        bubbleRef.current.innerText = params.question;
+      }
+
+      setTimeout(() => {
+        if (firstHighlightedElement) {
+          firstHighlightedElement.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 100);
     }
   }, []);
 
-  return null;
+  return <div ref={bubbleRef} className="znai-highlight-question-bubble" />;
 }

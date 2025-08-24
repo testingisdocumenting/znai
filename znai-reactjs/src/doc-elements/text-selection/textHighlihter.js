@@ -149,7 +149,7 @@ export class TextHighlighter {
       this.highlights.push(highlightGroup);
     });
 
-    return this.highlights.length;
+    return this.highlights.flat();
   }
 
   clearHighlights() {

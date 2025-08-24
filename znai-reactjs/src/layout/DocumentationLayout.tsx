@@ -97,7 +97,7 @@ export function DocumentationLayout({
     return (
       <div ref={contentRef} className={panelFullClassName}>
         {contentRef.current && <TextSelectionMenu containerNode={contentRef.current} />}
-        <HighlightUrlText />
+        {contentRef.current && <HighlightUrlText containerNode={contentRef.current} />}
         <div ref={contentRef} style={{ display: "contents" }}>
           {renderedPage}
         </div>

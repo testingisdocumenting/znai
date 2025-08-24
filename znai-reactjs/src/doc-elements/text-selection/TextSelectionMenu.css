@@ -28,6 +28,7 @@
     transition: all 500ms ease-in-out;
     transform-origin: top center;
     overflow: hidden;
+    display: none;
 }
 
 .theme-znai-dark .znai-text-selection-menu {
@@ -90,15 +91,6 @@
     max-height: 120px;
     overflow-y: auto;
     margin-bottom: 12px;
-}
-
-.znai-text-selection-panel-preview-title {
-    padding: 6px 8px;
-    font-weight: 600;
-    font-size: 12px;
-    color: var(--znai-secondary-text-color, #666);
-    border-bottom: 1px solid #eee;
-    background-color: var(--znai-background-color);
 }
 
 .znai-text-selection-panel-preview-content {

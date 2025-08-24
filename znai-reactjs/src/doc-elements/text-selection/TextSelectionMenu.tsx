@@ -68,7 +68,6 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
         <div className={`znai-text-selection-panel-content ${panelData ? "fading-in" : ""}`} ref={sendToSlackPanelRef}>
           <div className="znai-text-selection-panel-preview">
-            <div className="znai-text-selection-panel-preview-title">Context:</div>
             <pre className="znai-text-selection-panel-preview-content">{panelData?.context || ""}</pre>
           </div>
           <div className="znai-text-selection-panel-input">
@@ -127,7 +126,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       return;
     }
 
-    const pageUrl = buildHighlightUrl(location.toString(), panelData!.prefixSuffixMatch);
+    const pageUrl = buildHighlightUrl(location.toString(), panelData!.prefixSuffixMatch, question);
 
     const body = {
       selectedText: panelData!.prefixSuffixMatch.selection,
