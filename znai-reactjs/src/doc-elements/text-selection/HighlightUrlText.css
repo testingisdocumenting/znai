@@ -1,5 +1,29 @@
 .znai-highlight-question-bubble {
     display: none;
     position: absolute;
-    border: 1px solid #0066cc;
+    background: #0891b2;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    max-width: 280px;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.25), 
+                0 4px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.znai-highlight-question-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #0891b2;
 }
