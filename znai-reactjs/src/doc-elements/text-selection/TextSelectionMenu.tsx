@@ -27,9 +27,11 @@ import "./TextSelectionMenu.css";
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
   const menuRef = useRef<HTMLDivElement>(null);
-  const sendToSlackPanelRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const expandedPanelRef = useRef<HTMLDivElement>(null);
+  const slackQuestionInputRef = useRef<HTMLTextAreaElement>(null);
+  const linkCommentInputRef = useRef<HTMLTextAreaElement>(null);
   const [panelData, setPanelData] = useState<{
+    type: "slack" | "linkgen";
     context: string;
     prefixSuffixMatch: ReturnType<typeof findPrefixSuffixAndMatch>;
   } | null>(null);
@@ -48,47 +50,106 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     };
   }, [panelData]);
 
-  return (
-    <>
-      {notification && (
-        <Notification type={notification.type} message={notification.message} onClose={() => setNotification(null)} />
-      )}
-      <div
-        ref={menuRef}
-        className={`znai-text-selection-menu ${panelData ? "expanded" : ""}`}
-        onClick={(e) => e.stopPropagation()}
-      >
+  function menuItems() {
+    if (panelData) {
+      return null;
+    }
+
+    return (
+      <div className="znai-text-selection-menu-item-list">
         <div
-          className={`znai-text-selection-menu-item ${panelData ? "fading-out" : ""}`}
+          className="znai-text-selection-menu-item"
+          onClick={!panelData ? handleGenerateLink : undefined}
+          onMouseDown={preventDefault}
+        >
+          Generate Link
+        </div>
+        <div
+          className="znai-text-selection-menu-item"
           onClick={!panelData ? handleAskInSlack : undefined}
           onMouseDown={preventDefault}
         >
           Ask in Slack
         </div>
+      </div>
+    );
+  }
 
-        <div className={`znai-text-selection-panel-content ${panelData ? "fading-in" : ""}`} ref={sendToSlackPanelRef}>
-          <div className="znai-text-selection-panel-preview">
-            <pre className="znai-text-selection-panel-preview-content">{panelData?.context || ""}</pre>
-          </div>
-          <div className="znai-text-selection-panel-input">
-            <textarea
-              ref={inputRef}
-              placeholder="Enter your question..."
-              className="znai-text-selection-question-input"
-              rows={3}
-              onKeyDown={handleTextareaKeyDown}
-              onChange={handleTextChange}
-            />
-          </div>
-          <div className="znai-text-selection-panel-footer">
-            <button onClick={sendToSlack} className="znai-text-selection-send-button" disabled={!hasText}>
-              Send to {getDocMeta().slackChannel || "Slack"}
-            </button>
-          </div>
-        </div>
+  function expandedPanel() {
+    if (!panelData) {
+      return null;
+    }
+
+    if (panelData.type === "linkgen") {
+      return renderGenLinkExpanded();
+    }
+
+    if (panelData.type === "slack") {
+      return renderAskInSlackExpanded();
+    }
+  }
+
+  const menuClassName = "znai-text-selection-menu" + (panelData ? " expanded " + panelData.type : "");
+  return (
+    <>
+      {notification && (
+        <Notification type={notification.type} message={notification.message} onClose={() => setNotification(null)} />
+      )}
+      <div ref={menuRef} className={menuClassName} onClick={(e) => e.stopPropagation()}>
+        {menuItems()}
+        {expandedPanel()}
       </div>
     </>
   );
+
+  function renderGenLinkExpanded() {
+    return (
+      <div className={`znai-text-selection-panel-content ${panelData ? "fading-in" : ""}`} ref={expandedPanelRef}>
+        <div className="znai-text-selection-panel-input">
+          <textarea
+            ref={linkCommentInputRef}
+            autoFocus={true}
+            placeholder="Selected text annotation"
+            className="znai-text-selection-question-input"
+            rows={3}
+            onKeyDown={handleTextareaKeyDown}
+            onChange={handleTextChange}
+          />
+        </div>
+        <div className="znai-text-selection-panel-footer">
+          <button onClick={generateLink} className="znai-text-selection-send-button" disabled={!hasText}>
+            Generate Link
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  function renderAskInSlackExpanded() {
+    return (
+      <div className={`znai-text-selection-panel-content ${panelData ? "fading-in" : ""}`} ref={expandedPanelRef}>
+        <div className="znai-text-selection-panel-preview">
+          <pre className="znai-text-selection-panel-preview-content">{panelData?.context || ""}</pre>
+        </div>
+        <div className="znai-text-selection-panel-input">
+          <textarea
+            autoFocus={true}
+            ref={slackQuestionInputRef}
+            placeholder="Enter your question..."
+            className="znai-text-selection-question-input"
+            rows={3}
+            onKeyDown={handleTextareaKeyDown}
+            onChange={handleTextChange}
+          />
+        </div>
+        <div className="znai-text-selection-panel-footer">
+          <button onClick={sendToSlack} className="znai-text-selection-send-button" disabled={!hasText}>
+            Send to {getDocMeta().slackChannel || "Slack"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   function preventDefault(e: React.MouseEvent<HTMLDivElement>) {
     e.preventDefault();
@@ -113,15 +174,21 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     }
   }
 
+  function handleGenerateLink() {
+    const prefixSuffixMatch = findPrefixSuffixAndMatch(containerNode);
+    setPanelData({ type: "linkgen", context: "", prefixSuffixMatch });
+  }
+
   function handleAskInSlack() {
     const context = buildContext();
     const prefixSuffixMatch = findPrefixSuffixAndMatch(containerNode);
-    setPanelData({ context, prefixSuffixMatch });
-    inputRef.current?.focus();
+    setPanelData({ type: "slack", context, prefixSuffixMatch });
   }
 
+  function generateLink() {}
+
   async function sendToSlack() {
-    const question = inputRef.current?.value?.trim();
+    const question = slackQuestionInputRef.current?.value?.trim();
     if (!question) {
       return;
     }
@@ -165,6 +232,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
     const docMeta = getDocMeta();
 
+    // TODO change condition per menu item
     if (!docMeta.sendToSlackUrl || !docMeta.slackChannel) {
       return;
     }
@@ -177,18 +245,20 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
   function hidePopover() {
     if (menuRef.current) {
-      menuRef.current.style.display = "none";
+      menuRef.current.style.display = "bloc";
+      // TODO reverts
+      // menuRef.current.style.display = "none";
     }
     setPanelData(null);
-    if (inputRef.current) {
-      inputRef.current.value = "";
+    if (slackQuestionInputRef.current) {
+      slackQuestionInputRef.current.value = "";
     }
     setHasText(false);
   }
 
   function onMouseUp(event: MouseEvent) {
     if (panelData) {
-      if (sendToSlackPanelRef.current && event.target && !sendToSlackPanelRef.current.contains(event.target as Node)) {
+      if (expandedPanelRef.current && event.target && !expandedPanelRef.current.contains(event.target as Node)) {
         hidePopover();
       }
       return;

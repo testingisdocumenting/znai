@@ -16,9 +16,7 @@
 
 .znai-text-selection-menu {
     position: absolute;
-    width: 144px;
-    height: 24px;
-    border-radius: 3px;
+    border-radius: 4px;
     border: 1px solid #ccc;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.15), 0 8px 6px 2px rgb(0 0 0 / 0.15);
     background-color: var(--znai-background-color);
@@ -28,7 +26,8 @@
     transition: all 500ms ease-in-out;
     transform-origin: top center;
     overflow: hidden;
-    display: none;
+    /*revert*/
+    display: block;
 }
 
 .theme-znai-dark .znai-text-selection-menu {
@@ -36,29 +35,28 @@
     box-shadow: 0 2px 8px 0 rgb(0 0 0 / 0.4), 0 4px 12px 2px rgb(0 0 0 / 0.3);
 }
 
-
-.znai-text-selection-menu.expanded {
+.znai-text-selection-menu.slack.expanded {
     width: 500px;
-    height: 280px;
+    height: 240px;
+}
+
+.znai-text-selection-menu.linkgen.expanded {
+    width: 500px;
+    height: 180px;
+}
+
+.znai-text-selection-menu-item-list {
+    display: flex;
 }
 
 .znai-text-selection-menu-item {
-    position: absolute;
-    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    padding: 8px 16px;
+    padding: 4px 8px;
     white-space: nowrap;
-    transition: opacity 300ms;
-    line-height: 1.2;
     box-sizing: border-box;
-}
-
-.znai-text-selection-menu-item.fading-out {
-    opacity: 0;
-    pointer-events: none;
 }
 
 .znai-text-selection-menu-item:hover {
@@ -72,15 +70,6 @@
     padding: 12px;
     display: flex;
     flex-direction: column;
-    transition: opacity 500ms;
-    transition-delay: 200ms;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.znai-text-selection-panel-content.fading-in {
-    opacity: 1;
-    pointer-events: auto;
 }
 
 .znai-text-selection-panel-preview {
