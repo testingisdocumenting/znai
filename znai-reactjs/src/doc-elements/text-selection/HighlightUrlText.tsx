@@ -42,15 +42,20 @@ export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElem
         range.setEnd(highlights[highlights.length - 1], highlights[highlights.length - 1].childNodes.length);
         const selectionRect = range.getBoundingClientRect();
 
-        const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 60;
-        const selectionCenter = selectionRect.left + selectionRect.width / 2.0 - 72;
-        const left = selectionCenter - containerRect.left;
-
         const bubble = bubbleRef.current;
+        bubble.innerText = params.question;
+        bubble.style.display = "block";
+        
+        // Measure bubble dimensions after setting content
+        const bubbleRect = bubble.getBoundingClientRect();
+        const bubbleWidth = bubbleRect.width;
+        
+        const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 60;
+        const selectionCenter = selectionRect.left + selectionRect.width / 2.0;
+        const left = selectionCenter - bubbleWidth / 2.0 - containerRect.left;
+
         bubble.style.top = `${top}px`;
         bubble.style.left = `${left}px`;
-        bubbleRef.current.style.display = "block";
-        bubbleRef.current.innerText = params.question;
       }
 
       setTimeout(() => {
