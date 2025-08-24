@@ -81,7 +81,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
             />
           </div>
           <div className="znai-text-selection-panel-footer">
-            <button onClick={handleSend} className="znai-text-selection-send-button" disabled={!hasText}>
+            <button onClick={sendToSlack} className="znai-text-selection-send-button" disabled={!hasText}>
               Send to {getDocMeta().slackChannel || "Slack"}
             </button>
           </div>
@@ -102,7 +102,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if (hasText) {
-        void handleSend();
+        void sendToSlack();
       }
     }
   }
@@ -120,7 +120,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     inputRef.current?.focus();
   }
 
-  async function handleSend() {
+  async function sendToSlack() {
     const question = inputRef.current?.value?.trim();
     if (!question) {
       return;

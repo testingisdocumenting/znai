@@ -83,11 +83,10 @@
     pointer-events: auto;
 }
 
-
 .znai-text-selection-panel-preview {
     border: 1px solid #ddd;
     border-radius: 4px;
-    background-color: var(--znai-code-background-color, #f8f8f8);
+    background-color: var(--znai-snippets-background-color);
     max-height: 120px;
     overflow-y: auto;
     margin-bottom: 12px;
@@ -164,15 +163,8 @@
     opacity: 0.5;
 }
 
-/* Dark theme styles */
 .theme-znai-dark .znai-text-selection-panel-preview {
     border-color: #555;
-    background-color: var(--znai-code-background-color, #2d2d2d);
-}
-
-.theme-znai-dark .znai-text-selection-panel-preview-title {
-    border-bottom-color: #444;
-    color: var(--znai-secondary-text-color, #aaa);
 }
 
 .theme-znai-dark .znai-text-selection-panel-question-input {
