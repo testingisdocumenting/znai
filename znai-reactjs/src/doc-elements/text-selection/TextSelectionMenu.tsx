@@ -64,7 +64,12 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
     const renderedMenuItems = menuItems.map((item) => {
       return (
-        <div className="znai-text-selection-menu-item" onClick={item.action} onMouseDown={preventDefault}>
+        <div
+          key={item.label}
+          className="znai-text-selection-menu-item"
+          onClick={item.action}
+          onMouseDown={preventDefault}
+        >
           {item.label}
         </div>
       );
@@ -107,7 +112,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
           <textarea
             ref={linkCommentInputRef}
             autoFocus={true}
-            placeholder="Selected text annotation"
+            placeholder="Selected text optional annotation"
             className="znai-text-selection-question-input"
             rows={3}
             onKeyDown={handleGenerateLinkCommentKeyDown}
@@ -284,7 +289,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
     const containerRect = containerNode.getBoundingClientRect();
 
-    const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 30;
+    const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 40;
     const selectionCenter = selectionRect.left + selectionRect.width / 2.0 - 72;
     const left = selectionCenter - containerRect.left;
     showMenu(top, left);
