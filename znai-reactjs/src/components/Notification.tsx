@@ -31,7 +31,7 @@ export function Notification({ type, message, onClose }: NotificationProps) {
       const timer = setTimeout(() => {
         setVisible(false);
         setTimeout(onClose, 300); // Wait for fade out animation
-      }, 3000);
+      }, 2000);
 
       return () => clearTimeout(timer);
     }
@@ -43,14 +43,10 @@ export function Notification({ type, message, onClose }: NotificationProps) {
   };
 
   return (
-    <div className={`znai-notification znai-notification-${type} ${visible ? 'visible' : 'fade-out'}`}>
+    <div className={`znai-notification znai-notification-${type} ${visible ? "visible" : "fade-out"}`}>
       <div className="znai-notification-content">
         <span className="znai-notification-message">{message}</span>
-        <button 
-          className="znai-notification-close"
-          onClick={handleClose}
-          aria-label="Close notification"
-        >
+        <button className="znai-notification-close" onClick={handleClose} aria-label="Close notification">
           ✕
         </button>
       </div>

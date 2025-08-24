@@ -26,8 +26,7 @@
     transition: all 500ms ease-in-out;
     transform-origin: top center;
     overflow: hidden;
-    /*revert*/
-    display: block;
+    display: none;
 }
 
 .theme-znai-dark .znai-text-selection-menu {

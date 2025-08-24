@@ -55,24 +55,22 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       return null;
     }
 
-    return (
-      <div className="znai-text-selection-menu-item-list">
-        <div
-          className="znai-text-selection-menu-item"
-          onClick={!panelData ? handleGenerateLink : undefined}
-          onMouseDown={preventDefault}
-        >
-          Generate Link
+    const menuItems = [{ label: "Generate Link", action: handleGenerateLink }];
+    const docMeta = getDocMeta();
+
+    if (docMeta.sendToSlackUrl && docMeta.slackChannel) {
+      menuItems.push({ label: "Ask In Slack", action: handleAskInSlack });
+    }
+
+    const renderedMenuItems = menuItems.map((item) => {
+      return (
+        <div className="znai-text-selection-menu-item" onClick={item.action} onMouseDown={preventDefault}>
+          {item.label}
         </div>
-        <div
-          className="znai-text-selection-menu-item"
-          onClick={!panelData ? handleAskInSlack : undefined}
-          onMouseDown={preventDefault}
-        >
-          Ask in Slack
-        </div>
-      </div>
-    );
+      );
+    });
+
+    return <div className="znai-text-selection-menu-item-list">{renderedMenuItems}</div>;
   }
 
   function expandedPanel() {
@@ -112,12 +110,12 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
             placeholder="Selected text annotation"
             className="znai-text-selection-question-input"
             rows={3}
-            onKeyDown={handleTextareaKeyDown}
+            onKeyDown={handleGenerateLinkCommentKeyDown}
             onChange={handleTextChange}
           />
         </div>
         <div className="znai-text-selection-panel-footer">
-          <button onClick={generateLink} className="znai-text-selection-send-button" disabled={!hasText}>
+          <button onClick={generateLink} className="znai-text-selection-send-button">
             Generate Link
           </button>
         </div>
@@ -138,7 +136,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
             placeholder="Enter your question..."
             className="znai-text-selection-question-input"
             rows={3}
-            onKeyDown={handleTextareaKeyDown}
+            onKeyDown={handleSlackQuestionKeyDown}
             onChange={handleTextChange}
           />
         </div>
@@ -159,12 +157,19 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     setHasText(e.target.value.trim().length > 0);
   }
 
-  function handleTextareaKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+  function handleSlackQuestionKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if (hasText) {
         void sendToSlack();
       }
+    }
+  }
+
+  function handleGenerateLinkCommentKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      void generateLink();
     }
   }
 
@@ -185,7 +190,17 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     setPanelData({ type: "slack", context, prefixSuffixMatch });
   }
 
-  function generateLink() {}
+  async function generateLink() {
+    const comment = linkCommentInputRef.current?.value?.trim();
+    const pageUrl = buildHighlightUrl(location.toString(), panelData!.prefixSuffixMatch, comment);
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+      setNotification({ type: "success", message: "Link is generated and copied to clipboard" });
+      hidePopover();
+    } catch (err) {
+      setNotification({ type: "error", message: `Failed to generate link: ${err}` });
+    }
+  }
 
   async function sendToSlack() {
     const question = slackQuestionInputRef.current?.value?.trim();
@@ -205,7 +220,6 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     };
 
     try {
-      console.log(JSON.stringify(body));
       let response = await fetch("http://localhost:5111/ask-in-slack", {
         method: "POST",
         headers: {
@@ -230,13 +244,6 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       return;
     }
 
-    const docMeta = getDocMeta();
-
-    // TODO change condition per menu item
-    if (!docMeta.sendToSlackUrl || !docMeta.slackChannel) {
-      return;
-    }
-
     const menu = menuRef.current;
     menu.style.top = `${top}px`;
     menu.style.left = `${left}px`;
@@ -245,9 +252,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
   function hidePopover() {
     if (menuRef.current) {
-      menuRef.current.style.display = "bloc";
-      // TODO reverts
-      // menuRef.current.style.display = "none";
+      menuRef.current.style.display = "none";
     }
     setPanelData(null);
     if (slackQuestionInputRef.current) {
