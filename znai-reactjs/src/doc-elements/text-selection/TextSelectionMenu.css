@@ -23,10 +23,8 @@
     color: var(--znai-regular-text-color);
     font-size: var(--znai-smaller-text-size);
     z-index: 10;
-    transition: all 500ms ease-in-out;
-    transform-origin: top center;
     overflow: hidden;
-    display: none;
+    visibility: hidden;
 }
 
 .theme-znai-dark .znai-text-selection-menu {

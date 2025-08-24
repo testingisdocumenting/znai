@@ -252,12 +252,12 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     const menu = menuRef.current;
     menu.style.top = `${top}px`;
     menu.style.left = `${left}px`;
-    menuRef.current.style.display = "block";
+    menu.style.visibility = "visible";
   }
 
   function hidePopover() {
     if (menuRef.current) {
-      menuRef.current.style.display = "none";
+      menuRef.current.style.visibility = "hidden";
     }
     setPanelData(null);
     if (slackQuestionInputRef.current) {
@@ -289,8 +289,10 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
     const containerRect = containerNode.getBoundingClientRect();
 
+    const menuWidth = menuRef.current ? menuRef.current.getBoundingClientRect().width : 0;
+
     const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 40;
-    const selectionCenter = selectionRect.left + selectionRect.width / 2.0 - 72;
+    const selectionCenter = selectionRect.left + selectionRect.width / 2.0 - menuWidth / 2.0;
     const left = selectionCenter - containerRect.left;
     showMenu(top, left);
   }
