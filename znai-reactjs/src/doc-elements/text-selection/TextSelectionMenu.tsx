@@ -230,6 +230,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(body),
       });
 
