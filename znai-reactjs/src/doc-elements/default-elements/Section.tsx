@@ -19,13 +19,14 @@ import React from "react";
 
 import { PresentationHeading } from "./PresentationHeading";
 
-import { ElementsLibraryMap } from "./DocElement";
+import { ElementsLibraryMap, DocElementContent } from "./DocElement";
 import "./Section.css";
 
 interface Props {
   id: string;
   title: string;
   elementsLibrary: ElementsLibraryMap;
+  content?: DocElementContent;
 }
 
 function Section({ id, title, ...props }: Props) {
