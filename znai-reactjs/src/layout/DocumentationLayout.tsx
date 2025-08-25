@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useState } from "react";
 
 import TocPanel from "./TocPanel";
 import { PageGenError } from "../doc-elements/page-gen-error/PageGenError";
@@ -30,8 +30,11 @@ import { TocMobilePanel } from "./mobile/TocMobilePanel";
 import { mainPanelClassName } from "./classNames";
 
 import { TopHeader } from "./TopHeader";
+import { TextSelectionMenu } from "../doc-elements/text-selection/TextSelectionMenu";
+
 import "./DocumentationLayout.css";
 import "./mobile/MobileLayoutOverrides.css";
+import { HighlightUrlText } from "../doc-elements/text-selection/HighlightUrlText";
 
 interface Props {
   zoomOverlay: React.ReactNode;
@@ -81,25 +84,23 @@ export function DocumentationLayout({
   scrollToPageSection,
 }: Props) {
   const [isMobileTocVisible, setMobileTocVisible] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  const pageContentRef = useRef<HTMLDivElement>(null);
 
   const pageGenErrorPanel = pageGenError ? <PageGenError error={pageGenError} /> : null;
 
   const panelFullClassName = mainPanelClassName + (isMobile ? " mobile" : "");
 
-  useEffect(() => {
-    if (pageContentRef.current) {
-      pageContentRef.current.focus();
-    }
-  }, [selectedTocItem]);
-
   return isMobile ? renderMobile() : renderDesktop();
 
   function renderPageContent() {
     return (
-      <div ref={pageContentRef} className={panelFullClassName} tabIndex={1}>
-        {renderedPage}
+      <div ref={contentRef} className={panelFullClassName}>
+        {contentRef.current && <TextSelectionMenu containerNode={contentRef.current} />}
+        {contentRef.current && <HighlightUrlText containerNode={contentRef.current} />}
+        <div ref={contentRef} style={{ display: "contents" }}>
+          {renderedPage}
+        </div>
 
         <div className="page-bottom">
           {renderedNextPrevNavigation}

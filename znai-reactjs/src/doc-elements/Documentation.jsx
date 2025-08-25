@@ -24,7 +24,6 @@ import SearchPopup from './search/SearchPopup'
 import {getSearchPromise} from './search/searchPromise'
 import {documentationNavigation} from '../structure/DocumentationNavigation'
 import {documentationTracking} from './tracking/DocumentationTracking'
-import {textSelection} from './selected-text-extensions/TextSelection'
 import {tableOfContents} from '../structure/toc/TableOfContents'
 import {getAllPagesPromise} from './allPages'
 
@@ -115,11 +114,9 @@ export class Documentation extends Component {
         this.onPageGenError = this.onPageGenError.bind(this)
         this.updateCurrentPageSection = this.updateCurrentPageSection.bind(this)
         this.keyDownHandler = this.keyDownHandler.bind(this)
-        this.mouseUpHandler = this.mouseUpHandler.bind(this)
         this.mouseClickHandler = this.mouseClickHandler.bind(this)
 
         documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this))
-        textSelection.addListener(this.onTextSelection.bind(this))
     }
 
     get theme() {
@@ -224,7 +221,6 @@ export class Documentation extends Component {
                                          onTocItemPageSectionClick={this.onTocItemPageSectionClick}
                                          onNextPage={this.onNextPage}
                                          onPrevPage={this.onPrevPage}
-                                         textSelection={textSelection}
                                          scrollToTop={this.scrollTop}
                                          scrollToPageSection={this.scrollToPageSection}
                                          pageGenError={pageGenError}/>
@@ -265,8 +261,6 @@ export class Documentation extends Component {
         this.onPageLoad()
 
         document.addEventListener('keydown', this.keyDownHandler)
-        document.addEventListener('mouseup', this.mouseUpHandler)
-        document.addEventListener('click', this.mouseClickHandler)
 
         presentationModeListeners.addListener(this)
     }
@@ -275,15 +269,14 @@ export class Documentation extends Component {
         this.disableScrollListener()
 
         document.removeEventListener('keydown', this.keyDownHandler)
-        document.removeEventListener('mouseup', this.mouseUpHandler)
-        document.removeEventListener('click', this.mouseClickHandler)
 
         presentationModeListeners.removeListener(this)
     }
 
     keyDownHandler(e) {
         const {isSearchActive, mode} = this.state
-        if (e.code === "Slash" && !isSearchActive && mode === DocumentationModes.DEFAULT) {
+        const isFromInputElement = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA'
+        if (e.code === "Slash" && !isSearchActive && mode === DocumentationModes.DEFAULT && !isFromInputElement) {
             e.preventDefault()
             this.setState({isSearchActive: true})
         } else if (mode === DocumentationModes.DEFAULT && e.code === 'KeyP' && e.altKey) {
@@ -298,32 +291,6 @@ export class Documentation extends Component {
             this.onNextPage()
         } else if (e.code === "Escape") {
             this.onPresentationClose()
-        }
-    }
-
-    mouseUpHandler() {
-        const {isSearchActive, mode} = this.state
-        if (mode !== DocumentationModes.DEFAULT || isSearchActive) {
-            return
-        }
-
-        const selection = window.getSelection()
-        if (!selection.rangeCount) {
-            return
-        }
-
-        const rangeAt = selection.getRangeAt(0)
-        const text = selection.toString()
-
-        if (!text || selection.isCollapsed) {
-            textSelection.clear()
-        } else {
-            const {page} = this.state
-
-            const tocItem = page.tocItem
-            const startNode = selection.isCollapsed ? null : rangeAt.startContainer.parentNode
-
-            textSelection.endSelection({tocItem, startNode, text})
         }
     }
 
@@ -361,7 +328,7 @@ export class Documentation extends Component {
         if (isMobile) {
             window.removeEventListener("scroll", this.updateCurrentPageSection)
         } else {
-            this.mainPanelDom.addEventListener("scroll", this.updateCurrentPageSection)
+            this.mainPanelDom.removeEventListener("scroll", this.updateCurrentPageSection)
         }
     }
 
@@ -635,9 +602,6 @@ export class Documentation extends Component {
     updatePageAndDetectChangePosition(funcToUpdatePage) {
         enableDiffTrackingForOneDomChangeTransaction()
         return funcToUpdatePage()
-    }
-
-    onTextSelection(selectedText) {
     }
 
     onUrlChange(url, urlHistoryState) {

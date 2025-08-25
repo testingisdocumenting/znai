@@ -112,7 +112,8 @@ const docMeta = {
   type: "User Guide",
   title: "Znai",
   previewEnabled: true,
-  hipchatRoom: "Test Room",
+  slackChannel: "help-domain-name",
+  sendToSlackUrl: "http://localhost:5111/ask-in-slack",
   viewOn: {
     link: "https://github.com/testingisdocumenting/znai/znai-cli/documentation",
     title: "View On GitHub",

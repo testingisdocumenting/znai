@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +15,22 @@
  * limitations under the License.
  */
 
-class SelectedTextExtensions {
-    constructor() {
-        this._extensions = []
-    }
+import React from "react";
 
-    register({name, action}) {
-        this._extensions.push({name: name, action: action})
-    }
+import "./PresentationHeading.css";
 
-    hasExtensions() {
-        return this._extensions.length > 0
-    }
-
-    extensions() {
-        return this._extensions
-    }
+interface Props {
+  level: number;
+  title: string;
+  className?: string;
 }
 
-const selectedTextExtensions = new SelectedTextExtensions()
+export function PresentationHeading({ level, title, className }: Props) {
+  const Element = `h${level}` as keyof JSX.IntrinsicElements;
 
-export {selectedTextExtensions}
+  return (
+    <div className="presentation-heading-wrapper">
+      <Element className={className}>{title}</Element>
+    </div>
+  );
+}

@@ -6,101 +6,85 @@ from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True, origins="*")
 
 slack_token = os.environ.get("SLACK_BOT_TOKEN")
-slack_channel = "#help-domain-name"
+
+print("=== Slack Bot Configuration ===")
+print(f"SLACK_BOT_TOKEN present: {slack_token is not None}")
+print(f"SLACK_BOT_TOKEN length: {len(slack_token) if slack_token else 0}")
+print(f"SLACK_BOT_TOKEN prefix: {slack_token[:10] if slack_token else 'None'}...")
+
+if not slack_token:
+    print("WARNING: SLACK_BOT_TOKEN environment variable is not set!")
+
 slack_client = WebClient(token=slack_token)
 
 @app.route('/ask-in-slack', methods=['POST'])
 def ask_in_slack():
     try:
-        data = request.json
+        print("=== ask-in-slack request received ===")
         
+        if not slack_token:
+            print("ERROR: No Slack token configured")
+            return jsonify({"error": "Slack bot token not configured"}), 500
+            
+        # Get JSON data from request
+        data = request.get_json()
+
         if not data:
-            return jsonify({"error": "No data provided"}), 400
+            return jsonify({"error": "No JSON data provided"}), 400
         
+        selected_text = data.get('selectedText')
+        page_url = data.get('pageUrl')
         username = data.get('username')
-        message = data.get('message')
-        link = data.get('link')
+        slack_channel = data.get('slackChannel')
+        question = data.get('question')
+        context = data.get('context')
+
+        print(f"Selected text: {selected_text[:100] if selected_text else None}...")
+        print(f"Page URL: {page_url}")
+        print(f"Username: {username}")
+        print(f"Slack channel: {slack_channel}")
+        print(f"Question: {question[:100] if question else None}...")
+        print(f"Context: {context[:100] if context else None}...")
+
+        if not question:
+            return jsonify({"error": "Missing required field: question"}), 400
         
-        if not username or not message:
-            return jsonify({"error": "Missing required fields: username and message"}), 400
+        if not slack_channel:
+            return jsonify({"error": "Missing required field: slackChannel"}), 400
         
-        slack_message = format_slack_message(username, message, link)
+        slack_message = format_slack_message(username, question, context, page_url)
+        print(f"Slack message blocks: {json.dumps(slack_message, indent=2)}")
         
         result = slack_client.chat_postMessage(
             channel=slack_channel,
-            blocks=slack_message,
-            text=f"Question from {username}"
+            text=slack_message
         )
         
+        print(f"Message posted successfully: {result['ts']}")
         return jsonify({"success": True, "ts": result['ts']}), 200
         
     except SlackApiError as e:
+        print(f"SlackApiError in main handler: {e.response}")
         return jsonify({"error": f"Slack API error: {e.response['error']}"}), 500
     except Exception as e:
+        print(f"Unexpected error in main handler: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
-def format_slack_message(username, message, link=None):
-    blocks = [{
-        "type": "section",
-        "text": {
-            "type": "mrkdwn",
-            "text": f"<@{username}> asked a question:"
-        }
-    }, {"type": "divider"}]
 
-    parts = parse_message_with_code(message)
+def format_slack_message(username, question, context, page_url):
+    # Build message text with "asked" as the link
+    message_parts = [f"@{username} <{page_url}|asked>: {question}"]
     
-    for part in parts:
-        if part['type'] == 'text':
-            blocks.append({
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": part['content']
-                }
-            })
-        elif part['type'] == 'code':
-            blocks.append({
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": f"```{part.get('language', '')}\n{part['content']}\n```"
-                }
-            })
+    if context:
+        message_parts.append(context)
     
-    if link:
-        blocks.append({"type": "divider"})
-        blocks.append({
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": f"<{link}|View more details>"
-            }
-        })
-    
-    return blocks
-
-def parse_message_with_code(message):
-    parts = []
-    
-    if isinstance(message, str):
-        parts.append({"type": "text", "content": message})
-    elif isinstance(message, list):
-        for item in message:
-            if isinstance(item, dict):
-                parts.append(item)
-            else:
-                parts.append({"type": "text", "content": str(item)})
-    elif isinstance(message, dict):
-        if 'type' in message and 'content' in message:
-            parts.append(message)
-        else:
-            parts.append({"type": "text", "content": json.dumps(message)})
-    
-    return parts
+    # Return as single text message without sections for full width
+    return "\n\n".join(message_parts)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5111, debug=True)

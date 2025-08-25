@@ -21,7 +21,8 @@ import {elementsLibrary} from '../DefaultElementsLibrary'
 
 import { setDocMeta } from "../../structure/docMeta.js";
 
-import './testData'
+// TODO fix search demo
+// import './testData'
 
 const buttonStyle = {
     border: "1px solid",

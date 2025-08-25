@@ -1,0 +1,174 @@
+/*
+ * Copyright 2025 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.znai-text-selection-menu {
+    position: absolute;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1), 0 12px 24px rgb(0 0 0 / 0.15);
+    background: linear-gradient(to bottom, #ffffff, #f8fafc);
+    backdrop-filter: blur(10px);
+    color: var(--znai-regular-text-color);
+    font-size: var(--znai-smaller-text-size);
+    z-index: 10;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.theme-znai-dark .znai-text-selection-menu {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 12px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.4);
+    background: linear-gradient(to bottom, #2a3236, #272f33);
+}
+
+.theme-znai-dark .znai-text-selection-menu-item:hover {
+    background: linear-gradient(to bottom, rgba(74, 158, 255, 0.08), rgba(74, 158, 255, 0.15));
+    color: #4a9eff;
+}
+
+.znai-text-selection-menu.slack.expanded {
+    width: 500px;
+    height: 240px;
+}
+
+.znai-text-selection-menu.linkgen.expanded {
+    width: 500px;
+    height: 180px;
+}
+
+.znai-text-selection-menu-item-list {
+    display: flex;
+}
+
+.znai-text-selection-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 6px 10px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: all 0.15s ease;
+}
+
+.znai-text-selection-menu-item:hover {
+    background: linear-gradient(to bottom, rgba(0, 102, 204, 0.05), rgba(0, 102, 204, 0.1));
+    color: #0066cc;
+    transition: all 0.15s ease;
+}
+
+.znai-text-selection-panel-content {
+    position: absolute;
+    inset: 0;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.znai-text-selection-panel-preview {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: var(--znai-snippets-background-color);
+    max-height: 120px;
+    overflow-y: auto;
+    margin-bottom: 12px;
+}
+
+.znai-text-selection-panel-preview-content {
+    padding: 8px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--znai-regular-text-color);
+    background: transparent;
+}
+
+.znai-text-selection-panel-input {
+    margin-bottom: 12px;
+}
+
+.znai-text-selection-panel-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+.znai-text-selection-question-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: var(--znai-background-color);
+    color: var(--znai-regular-text-color);
+    outline: none;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+.znai-text-selection-question-input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+.znai-text-selection-send-button {
+    padding: 8px 16px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    align-self: flex-end;
+}
+
+.znai-text-selection-send-button:hover {
+    background-color: #0052a3;
+}
+
+.znai-text-selection-send-button:active {
+    background-color: #003d7a;
+}
+
+.znai-text-selection-send-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.znai-text-selection-send-button:disabled:hover {
+    background-color: #0066cc;
+    opacity: 0.5;
+}
+
+.theme-znai-dark .znai-text-selection-panel-preview {
+    border-color: #555;
+}
+
+.theme-znai-dark .znai-text-selection-panel-question-input {
+    border-color: #555;
+    background-color: var(--znai-background-color, #1a1a1a);
+}
+
+.theme-znai-dark .znai-text-selection-panel-question-input:focus {
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
+}
+
