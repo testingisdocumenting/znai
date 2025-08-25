@@ -225,7 +225,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     };
 
     try {
-      let response = await fetch("http://localhost:5111/ask-in-slack", {
+      const response = await fetch(getDocMeta().sendToSlackUrl!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
