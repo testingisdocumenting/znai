@@ -68,7 +68,6 @@ function buildParagraphContext(range: Range): string {
   return buildParagraphOutput(paragraph, selectedText, range);
 }
 
-
 function findContainingParagraph(node: Node): HTMLElement | null {
   let element: Node | null = node;
 
@@ -101,7 +100,6 @@ function buildParagraphOutput(paragraph: HTMLElement, selectedText: string, rang
   // Handle multi-line content with proper markdown quoting
   return "> " + highlightedText.replace(/\n/g, "\n> ");
 }
-
 
 function highlightSelectedTextInParagraph(text: string, selectedText: string, selectionPosition: number = -1): string {
   return highlightText(text, selectedText, selectionPosition, false);
@@ -147,8 +145,26 @@ function buildCodeSnippetMarkdownOutput(
   lineElements: NodeListOf<Element>
 ): string {
   const result: string[] = [];
+  const maxContextLines = 5;
 
-  lines.forEach((line, index) => {
+  const selectedIndices = Array.from(selectedLineIndices).sort((a, b) => a - b);
+  if (selectedIndices.length === 0) {
+    return "```\n```";
+  }
+
+  const firstSelectedIndex = selectedIndices[0];
+  const lastSelectedIndex = selectedIndices[selectedIndices.length - 1];
+
+  const startIndex = Math.max(0, firstSelectedIndex - maxContextLines);
+  const endIndex = Math.min(lines.length - 1, lastSelectedIndex + maxContextLines);
+
+  if (startIndex > 0) {
+    result.push("...");
+  }
+
+  // Process lines within the range
+  for (let index = startIndex; index <= endIndex; index++) {
+    const line = lines[index];
     if (selectedLineIndices.has(index)) {
       const lineElement = lineElements[index] as HTMLElement;
       const selectedText = getSelectionInLine(lineElement, range);
@@ -159,7 +175,11 @@ function buildCodeSnippetMarkdownOutput(
     } else {
       result.push(line.trimEnd());
     }
-  });
+  }
+
+  if (endIndex < lines.length - 1) {
+    result.push("...");
+  }
 
   return "```\n" + result.join("\n") + "\n```";
 }

@@ -20,20 +20,6 @@ import { selectText, setupDOM } from "./selectionTestUtils.js";
 
 describe("markdownContextBuilder", () => {
   describe("buildContext - code snippets", () => {
-    const { container } = setupDOM(`
-        <div class="snippet">
-          <pre>
-            <span class="znai-code-line"><span class="token keyword">class</span> <span class="token class-name">JsClass</span> <span class="token punctuation">{</span></span>
-            <span class="znai-code-line">    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-            <span class="znai-code-line">        <span class="token function">usefulAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span>
-            <span class="znai-code-line">    <span class="token punctuation">}</span></span>
-            <span class="znai-code-line"><span class="token punctuation">}</span></span>
-            <span class="znai-code-line"></span>
-            <span class="znai-code-line"><span class="token keyword">export</span> <span class="token keyword">default</span> JsClass</span>
-          </pre>
-        </div>
-      `);
-
     it("should highlight the specific selected occurrence, not the first one", () => {
       const { container } = setupDOM(`
         <div class="snippet">
@@ -87,7 +73,7 @@ class **JsCla**ss { <----
     }
 }
 
-export default JsClass
+...
 \`\`\``;
 
       expect(result).toBe(expectedOutput);
@@ -175,14 +161,163 @@ export default JsClass
 
       // Should only return the first paragraph since that's where selection starts
       // Code block content should not be included in context
-      expect(result).toBe(
-        "> Text before"
-      );
+      expect(result).toBe("> Text before");
+    });
+
+    it("should limit context to 5 lines before and after selection in long code snippets", () => {
+      const { container } = setupDOM(`
+        <div class="snippet">
+          <pre>
+            <span class="znai-code-line">// Line 1</span>
+            <span class="znai-code-line">// Line 2</span>
+            <span class="znai-code-line">// Line 3</span>
+            <span class="znai-code-line">// Line 4</span>
+            <span class="znai-code-line">// Line 5</span>
+            <span class="znai-code-line">// Line 6</span>
+            <span class="znai-code-line">// Line 7</span>
+            <span class="znai-code-line">// Line 8</span>
+            <span class="znai-code-line">// Line 9</span>
+            <span class="znai-code-line">// Line 10 - selected</span>
+            <span class="znai-code-line">// Line 11</span>
+            <span class="znai-code-line">// Line 12</span>
+            <span class="znai-code-line">// Line 13</span>
+            <span class="znai-code-line">// Line 14</span>
+            <span class="znai-code-line">// Line 15</span>
+            <span class="znai-code-line">// Line 16</span>
+            <span class="znai-code-line">// Line 17</span>
+            <span class="znai-code-line">// Line 18</span>
+            <span class="znai-code-line">// Line 19</span>
+            <span class="znai-code-line">// Line 20</span>
+          </pre>
+        </div>
+      `);
+
+      const lines = container.querySelectorAll(".znai-code-line");
+      const line10 = lines[9]; // Line 10 (index 9)
+
+      selectText(line10.firstChild, 13, line10.firstChild, 21);
+
+      const result = buildContext();
+
+      const expectedOutput = `\`\`\`
+...
+// Line 5
+// Line 6
+// Line 7
+// Line 8
+// Line 9
+// Line 10 - **selected** <----
+// Line 11
+// Line 12
+// Line 13
+// Line 14
+// Line 15
+...
+\`\`\``;
+
+      expect(result).toBe(expectedOutput);
+    });
+
+    it("should show ellipsis only at the end when selection is near the beginning", () => {
+      const { container } = setupDOM(`
+        <div class="snippet">
+          <pre>
+            <span class="znai-code-line">// Line 1</span>
+            <span class="znai-code-line">// Line 2 - selected</span>
+            <span class="znai-code-line">// Line 3</span>
+            <span class="znai-code-line">// Line 4</span>
+            <span class="znai-code-line">// Line 5</span>
+            <span class="znai-code-line">// Line 6</span>
+            <span class="znai-code-line">// Line 7</span>
+            <span class="znai-code-line">// Line 8</span>
+            <span class="znai-code-line">// Line 9</span>
+            <span class="znai-code-line">// Line 10</span>
+            <span class="znai-code-line">// Line 11</span>
+            <span class="znai-code-line">// Line 12</span>
+          </pre>
+        </div>
+      `);
+
+      const lines = container.querySelectorAll(".znai-code-line");
+      const line2 = lines[1];
+
+      selectText(line2.firstChild, 12, line2.firstChild, 20);
+
+      const result = buildContext();
+
+      const expectedOutput = `\`\`\`
+// Line 1
+// Line 2 - **selected** <----
+// Line 3
+// Line 4
+// Line 5
+// Line 6
+// Line 7
+...
+\`\`\``;
+
+      expect(result).toBe(expectedOutput);
+    });
+
+    it("should handle multiple selected lines with context limitation", () => {
+      const { container } = setupDOM(`
+        <div class="snippet">
+          <pre>
+            <span class="znai-code-line">// Line 1</span>
+            <span class="znai-code-line">// Line 2</span>
+            <span class="znai-code-line">// Line 3</span>
+            <span class="znai-code-line">// Line 4</span>
+            <span class="znai-code-line">// Line 5</span>
+            <span class="znai-code-line">// Line 6</span>
+            <span class="znai-code-line">// Line 7</span>
+            <span class="znai-code-line">// Line 8</span>
+            <span class="znai-code-line">// Line 9</span>
+            <span class="znai-code-line">// Line 10 - start</span>
+            <span class="znai-code-line">// Line 11 - middle</span>
+            <span class="znai-code-line">// Line 12 - end</span>
+            <span class="znai-code-line">// Line 13</span>
+            <span class="znai-code-line">// Line 14</span>
+            <span class="znai-code-line">// Line 15</span>
+            <span class="znai-code-line">// Line 16</span>
+            <span class="znai-code-line">// Line 17</span>
+            <span class="znai-code-line">// Line 18</span>
+            <span class="znai-code-line">// Line 19</span>
+            <span class="znai-code-line">// Line 20</span>
+          </pre>
+        </div>
+      `);
+
+      const lines = container.querySelectorAll(".znai-code-line");
+      const line10 = lines[9]; // Line 10 (index 9)
+      const line12 = lines[11]; // Line 12 (index 11)
+
+      selectText(line10.firstChild, 13, line12.firstChild, 16);
+
+      const result = buildContext();
+
+      const expectedOutput = `\`\`\`
+...
+// Line 5
+// Line 6
+// Line 7
+// Line 8
+// Line 9
+// Line 10 - **start** <----
+**// Line 11 - middle** <----
+**// Line 12 - end** <----
+// Line 13
+// Line 14
+// Line 15
+// Line 16
+// Line 17
+...
+\`\`\``;
+
+      expect(result).toBe(expectedOutput);
     });
   });
 
   describe("buildContext - paragraphs", () => {
-
     it("should highlight specific occurrence when multiple exist", () => {
       const { container } = setupDOM(`
         <div>
@@ -222,9 +357,7 @@ export default JsClass
       const result = buildContext();
 
       // Should only return the paragraph with selection, no context from siblings
-      expect(result).toBe(
-        "> Short **selected**."
-      );
+      expect(result).toBe("> Short **selected**.");
     });
 
     it("should handle selection across multiple paragraphs", () => {
@@ -244,9 +377,7 @@ export default JsClass
       const result = buildContext();
 
       // Should only return the first paragraph where selection starts
-      expect(result).toBe(
-        "> First paragraph with some text."
-      );
+      expect(result).toBe("> First paragraph with some text.");
     });
 
     it("should return empty string for non-text selections in paragraphs", () => {
@@ -264,6 +395,5 @@ export default JsClass
 
       expect(result).toBe("");
     });
-
   });
 });

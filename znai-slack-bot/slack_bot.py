@@ -6,7 +6,7 @@ from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True, origins="*")
 
 slack_token = os.environ.get("SLACK_BOT_TOKEN")
 
