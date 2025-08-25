@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +26,6 @@ import static org.testingisdocumenting.znai.jupyter.JupyterCell.MARKDOWN_TYPE;
 import static java.util.stream.Collectors.toList;
 
 public class JupyterParserVer4 implements JupyterParser {
-
     public JupyterParserVer4() {
     }
 
@@ -43,14 +43,12 @@ public class JupyterParserVer4 implements JupyterParser {
 
         String type = cellContent.get("cell_type").toString();
 
-        switch (type) {
-            case CODE_TYPE:
-                return parseCodeCell(cellContent);
-            case MARKDOWN_TYPE:
-                return parseMarkdownCell(cellContent);
-        }
+        return switch (type) {
+            case CODE_TYPE -> parseCodeCell(cellContent);
+            case MARKDOWN_TYPE -> parseMarkdownCell(cellContent);
+            default -> new JupyterCell("unknown", "", Collections.emptyList());
+        };
 
-        return new JupyterCell("unknown", "", Collections.emptyList());
     }
 
     private JupyterCell parseMarkdownCell(Map<String, ?> cellContent) {
@@ -70,12 +68,10 @@ public class JupyterParserVer4 implements JupyterParser {
     @SuppressWarnings("unchecked")
     private JupyterOutput parseOutput(Map<String, ?> outputContent) {
         String type = outputContent.get("output_type").toString();
-        switch (type) {
-            case "stream":
-                return new JupyterOutput(JupyterOutput.TEXT_FORMAT, joinLines(outputContent.get("text")));
-            default:
-                return parseOutputData((Map<String, ?>) outputContent.get("data"));
+        if (type.equals("stream")) {
+            return new JupyterOutput(JupyterOutput.TEXT_FORMAT, joinLines(outputContent.get("text")));
         }
+        return parseOutputData((Map<String, ?>) outputContent.get("data"));
     }
 
     private JupyterOutput parseOutputData(Map<String, ?> data) {

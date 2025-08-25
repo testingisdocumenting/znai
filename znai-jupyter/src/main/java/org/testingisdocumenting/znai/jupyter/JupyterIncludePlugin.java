@@ -20,9 +20,8 @@ package org.testingisdocumenting.znai.jupyter;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
-import org.testingisdocumenting.znai.extensions.PluginParams;
-import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
@@ -35,6 +34,8 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class JupyterIncludePlugin implements IncludePlugin {
+    private static final String STORY_FIRST_KEY = "storyFirst";
+    private static final String INCLUDE_SECTION_KEY = "includeSection";
     private MarkdownParser markdownParser;
     private Path path;
     private String lang;
@@ -52,11 +53,20 @@ public class JupyterIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        PluginParamsDefinition params = new PluginParamsDefinition();
+        params.add(STORY_FIRST_KEY, PluginParamType.BOOLEAN, "put output cells first, before input", "true");
+        params.add(INCLUDE_SECTION_KEY, PluginParamType.BOOLEAN, "only include specified section by title", "Example of Data setup");
+
+        return params;
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         markdownParser = componentsRegistry.markdownParser();
         markdownParserHandler = parserHandler;
 
-        isStoryFirst = pluginParams.getOpts().get("storyFirst", false);
+        isStoryFirst = pluginParams.getOpts().get(STORY_FIRST_KEY, false);
 
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         path = resourcesResolver.fullPath(pluginParams.getFreeParam());
@@ -154,12 +164,10 @@ public class JupyterIncludePlugin implements IncludePlugin {
     }
 
     private Map<String, Object> convertInputData(JupyterCell cell) {
-        switch (cell.getType()) {
-            case JupyterCell.CODE_TYPE:
-                return CodeSnippetsProps.create(lang, cell.getInput());
-            default:
-                return Collections.singletonMap(JupyterOutput.TEXT_FORMAT, cell.getInput());
+        if (cell.getType().equals(JupyterCell.CODE_TYPE)) {
+            return CodeSnippetsProps.create(lang, cell.getInput());
         }
+        return Collections.singletonMap(JupyterOutput.TEXT_FORMAT, cell.getInput());
     }
 
     private Map<String, Object> convertOutputData(JupyterOutput output) {

@@ -1,5 +1,7 @@
 # Code and Output
 
+:include-jupyter: jupyter/polars-try.json
+
 Use `include-jupyter` to include [Jupyter](https://jupyter.org/) notebook inside your documentation. 
 
     :include-jupyter: jupyter/simple-notebook.ipynb
