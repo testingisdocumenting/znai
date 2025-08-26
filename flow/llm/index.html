@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Landing</title>
+<title>Znai: Llm</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,13 +85,8 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Optional Index Landing Page</h1></header>
-<p>Optional file in the root is your landing page Consider putting logos and high level information about your product there Note Landing page is not part of your Table Of Contents and is not present on navigation panel Don t put essential information there as users may not get back there often index md</p>
-</article>
-
-<article>
-<header><h1>Auto Redirect</h1></header>
-<p>Use plugin to automatically redirect from index page to any other page in your docs Use it if you don t know what to put on Landing Page or find yourself repeating the content in your next introduction page If is not present users will be redirected to the first page in your Table Of Contents include redirect include redirect chapter page index md</p>
+<header><h1>Context For LLMs</h1></header>
+<p>Note Initial experimental support Znai generates a single markdown file called to be used by LLMs It is deployed at the root of the documentation and can be used in multiple scenarios The primary use case is to provide guide context to systems like Claude Code llm txt</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -496,77 +491,36 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "optional-index-landing-page",
+      "id" : "context-for-llms",
       "additionalIds" : [ ],
-      "title" : "Optional Index Landing Page",
+      "title" : "Context For LLMs",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Optional ",
+          "text" : "Note: Initial experimental support",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Znai generates a single markdown file called ",
           "type" : "SimpleText"
         }, {
-          "code" : "index.md",
+          "code" : "llm.txt",
           "type" : "InlinedCode"
         }, {
-          "text" : " file in the root is your landing page. Consider putting logos and high level information about",
+          "text" : " to be used by LLMs.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "your product there.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential information",
+          "text" : "It is deployed at the root of the documentation and can be used in multiple scenarios.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "there as users may not get back there often.",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "id" : "auto-redirect",
-      "additionalIds" : [ ],
-      "title" : "Auto Redirect",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "include-redirect",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " plugin to automatically redirect from index page to any other page in your docs.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "markdown",
-        "snippet" : ":include-redirect: chapter/page",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "If ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "index.md",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " is not present, users will be redirected to the first page in your Table Of Contents.",
+          "text" : "The primary use case is to provide guide context to systems like Claude Code.",
           "type" : "SimpleText"
         } ]
       } ]
@@ -574,20 +528,16 @@ window.ReactDOM.render(React.createElement(Documentation, {
     "lastModifiedTime" : 1756175551668,
     "tocItem" : {
       "chapterTitle" : "Flow",
-      "pageTitle" : "Landing",
+      "pageTitle" : "Llm",
       "pageMeta" : { },
       "dirName" : "flow",
-      "fileName" : "landing",
+      "fileName" : "llm",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Optional Index Landing Page",
-        "id" : "optional-index-landing-page",
-        "customAnchorId" : "optional-index-landing-page"
-      }, {
-        "title" : "Auto Redirect",
-        "id" : "auto-redirect",
-        "customAnchorId" : "auto-redirect"
+        "title" : "Context For LLMs",
+        "id" : "context-for-llms",
+        "customAnchorId" : "context-for-llms"
       } ]
     }
   }

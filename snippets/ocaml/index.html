@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Landing</title>
+<title>Znai: OCaml</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,13 +85,8 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Optional Index Landing Page</h1></header>
-<p>Optional file in the root is your landing page Consider putting logos and high level information about your product there Note Landing page is not part of your Table Of Contents and is not present on navigation panel Don t put essential information there as users may not get back there often index md</p>
-</article>
-
-<article>
-<header><h1>Auto Redirect</h1></header>
-<p>Use plugin to automatically redirect from index page to any other page in your docs Use it if you don t know what to put on Landing Page or find yourself repeating the content in your next introduction page If is not present users will be redirected to the first page in your Table Of Contents include redirect include redirect chapter page index md</p>
+<header><h1>Extract Comment Text</h1></header>
+<p>Given text file When you use the following plugin it will extract the comment and embed it as if it was typed Domain knowledge of the most important thing in the library High level description that contains information and some examples like More text User module My_module sig end ** Domain knowledge of the most important thing in the library High level description that contains User information and some examples like module My_module sig end More text * type t val act_on_domain t &gt; unit Deferred t include ocaml comment ocaml domain mli commentLine description that contains</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -496,98 +491,79 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "optional-index-landing-page",
+      "id" : "extract-comment-text",
       "additionalIds" : [ ],
-      "title" : "Optional Index Landing Page",
+      "title" : "Extract Comment Text",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Optional ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "index.md",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " file in the root is your landing page. Consider putting logos and high level information about",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "your product there.",
+          "text" : "Given text file:",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "mli",
+        "snippet" : "(**\nDomain knowledge of the most important thing in the library.\nHigh level description that contains [User] information and some examples like\n{[\n  module My_module : sig\n    ...\n  end\n]}\nMore text.\n*)\ntype t\n\nval act_on_domain : t -> unit Deferred.t",
+        "autoTitle" : true,
+        "title" : "ocaml/domain.mli",
+        "anchorId" : "extract-comment-text-ocaml-domainmli",
+        "type" : "Snippet"
+      }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential information",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "there as users may not get back there often.",
-          "type" : "SimpleText"
-        } ]
-      } ]
-    }, {
-      "id" : "auto-redirect",
-      "additionalIds" : [ ],
-      "title" : "Auto Redirect",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "include-redirect",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " plugin to automatically redirect from index page to any other page in your docs.",
+          "text" : "When you use the following plugin, it will extract the comment and embed it as if it was typed.",
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "markdown",
-        "snippet" : ":include-redirect: chapter/page",
+        "lang" : "",
+        "snippet" : ":include-ocaml-comment: ocaml/domain.mli {commentLine: \"description that contains\"}",
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.",
+          "text" : "Domain knowledge of the most important thing in the library.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "High level description that contains ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "User",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " information and some examples like",
           "type" : "SimpleText"
         } ]
       }, {
+        "lang" : "",
+        "snippet" : "module My_module : sig\n  ...\nend",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "If ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "index.md",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " is not present, users will be redirected to the first page in your Table Of Contents.",
+          "text" : "More text.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1756175551668,
+    "lastModifiedTime" : 1756175551685,
     "tocItem" : {
-      "chapterTitle" : "Flow",
-      "pageTitle" : "Landing",
-      "pageMeta" : { },
-      "dirName" : "flow",
-      "fileName" : "landing",
+      "chapterTitle" : "Snippets",
+      "pageTitle" : "OCaml",
+      "pageMeta" : {
+        "title" : [ "OCaml" ]
+      },
+      "dirName" : "snippets",
+      "fileName" : "ocaml",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Optional Index Landing Page",
-        "id" : "optional-index-landing-page",
-        "customAnchorId" : "optional-index-landing-page"
-      }, {
-        "title" : "Auto Redirect",
-        "id" : "auto-redirect",
-        "customAnchorId" : "auto-redirect"
+        "title" : "Extract Comment Text",
+        "id" : "extract-comment-text",
+        "customAnchorId" : "extract-comment-text"
       } ]
     }
   }

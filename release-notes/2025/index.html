@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: 2024 Releases</title>
+<title>Znai: 2025</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,6 +85,16 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.78</h1></header>
+<p>Add Jupyter includeSection Add Initial menu for selected text Generate link with comment and send to slack Add Focus the main page content on load navigation and search Add Initial support for pages defined outside of chapters</p>
+</article>
+
+<article>
+<header><h1>1.77</h1></header>
+<p>Add Extract Ocaml comments as documentation text Add Initial LLM context support Add Footnote uses given label instead of auto incrementing index if the label is numeric</p>
+</article>
+
+<article>
 <header><h1>1.76</h1></header>
 <p>Fix Local Search correctly previews content from an implicit section Add Mermaid css for message text remove bold font Add Read more content extra spacing and bolder title Add Migrate from lunrjs to flexsearchjs for local search Add new option to to hide presentation trigger icons hidePresentationTrigger meta json Add Convert into em dash Add Referencing another markdown via link is no longer restricted by a single level Add A better error message when referencing a non existing anchor</p>
 </article>
@@ -134,6 +144,10 @@
 
 <article>
 <a href="/znai/flow/search/">Search</a>
+</article>
+
+<article>
+<a href="/znai/flow/llm/">Llm</a>
 </article>
 
 <article>
@@ -198,6 +212,10 @@
 
 <article>
 <a href="/znai/snippets/xml/">Xml</a>
+</article>
+
+<article>
+<a href="/znai/snippets/ocaml/">OCaml</a>
 </article>
 
 <article>
@@ -441,23 +459,23 @@
 </article>
 
 <article>
-<a href="/znai/release-notes/2025/">2024 Releases</a>
+<a href="/znai/release-notes/2025/">2025</a>
 </article>
 
 <article>
-<a href="/znai/release-notes/2024/">2024 Releases</a>
+<a href="/znai/release-notes/2024/">2024</a>
 </article>
 
 <article>
-<a href="/znai/release-notes/2023/">2023 Releases</a>
+<a href="/znai/release-notes/2023/">2023</a>
 </article>
 
 <article>
-<a href="/znai/release-notes/2022/">2022 Releases</a>
+<a href="/znai/release-notes/2022/">2022</a>
 </article>
 
 <article>
-<a href="/znai/release-notes/2021/">2021 Releases</a>
+<a href="/znai/release-notes/2021/">2021</a>
 </article>
 </section>
 </div>
@@ -493,6 +511,171 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "178",
+      "additionalIds" : [ ],
+      "title" : "1.78",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/jupyter-notebook",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Jupyter",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "includeSection",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Initial menu for selected text. Generate link with comment and send to slack.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Focus the main page content on-load, navigation, and search",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Initial support for ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/structure#pages-without-chapters",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "pages defined outside of chapters",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "177",
+      "additionalIds" : [ ],
+      "title" : "1.77",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Extract ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/ocaml",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Ocaml comments",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " as documentation text",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Initial ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/llm",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "LLM",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " context support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/footnotes",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Footnote",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " uses given label instead of auto incrementing index if the label is numeric",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "176",
       "additionalIds" : [ ],
       "title" : "1.76",
@@ -1125,18 +1308,24 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1747705624262,
+    "lastModifiedTime" : 1756175551682,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
-      "pageTitle" : "2024 Releases",
-      "pageMeta" : {
-        "title" : [ "2024 Releases" ]
-      },
+      "pageTitle" : "2025",
+      "pageMeta" : { },
       "dirName" : "release-notes",
       "fileName" : "2025",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.78",
+        "id" : "178",
+        "customAnchorId" : "178"
+      }, {
+        "title" : "1.77",
+        "id" : "177",
+        "customAnchorId" : "177"
+      }, {
         "title" : "1.76",
         "id" : "176",
         "customAnchorId" : "176"

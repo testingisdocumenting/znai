@@ -92,7 +92,7 @@
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 76&lt; version> &lt; plugin></text>
+      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 78&lt; version> &lt; plugin></text>
     </text>
   </entry>
   <entry>
@@ -108,7 +108,7 @@
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 76&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
+      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 78&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
     </text>
   </entry>
   <entry>
@@ -116,7 +116,7 @@
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 76&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
+      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 78&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
     </text>
   </entry>
   <entry>
@@ -156,7 +156,15 @@
     <fullTitle>Znai: Structure, Table of Contents [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge read more spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe asciinema layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling top header deployment additional files hub introduction setup build artifacts watch example references domain api znai development local build release notes 2025 2024 2023 2022 2021 introduction rationale rationale md</text>
+      <text>Each documentation must have file in its root This file contains chapters and pages This is a file for this documentation Take a look at the left side bar and compare it with the file content The top entry corresponds to the directory of the same name The nested entry corresponds to the file toc toc introduction what is this getting started flow structure landing names page references page toc lookup paths search llm footer support footnotes presentation testing is documenting shortcuts snippets code snippets external code snippets snippets manipulation snippets highlighting code comments inlined code snippets api parameters code references json xml ocaml open API CLI math jupyter notebook cpp python java groovy markdown visuals attention signs images image annotations cards charts mermaid diagrams SVG icons headings text badge read more spoilers keyboard shortcuts smart bullet points flow diagrams graphviz diagrams PlantUml iframe asciinema layout tabs tables columns templates two sides pages two sides tabs jupyter notebook two sides python content extraction description extraction auto reference CPP doxygen setup description extraction auto reference java content extraction description extraction auto reference synergy with testing web UI REST API business logic plugins plugin types default parameters development configuration basic styling top header deployment additional files hub introduction setup build artifacts watch example references domain api znai development local build release notes 2025 2024 2023 2022 2021 introduction rationale rationale md</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/structure#pages-without-chapters</url>
+    <fullTitle>Znai: Structure, Pages Without Chapters [Flow]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>You can define TOC without having chapters Specify file names with extension without adding any indentation page one md page two md optional chapter page three md page four md</text>
     </text>
   </entry>
   <entry>
@@ -341,6 +349,14 @@
     <text>
       <score>STANDARD</score>
       <text>Besides local search capabilities provides a search entry file for your documentation This file can be crawled to expose your documentation to external search engines Your search entry file can be located at the following endpoint For example the search entry for the documentation on Github is located at https testingisdocumenting org znai search entries xml Znai XML &lt;base url> &lt;doc id> search entries xml Znai</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/llm#context-for-llms</url>
+    <fullTitle>Znai: Llm, Context For LLMs [Flow]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Note Initial experimental support Znai generates a single markdown file called to be used by LLMs It is deployed at the root of the documentation and can be used in multiple scenarios The primary use case is to provide guide context to systems like Claude Code llm txt</text>
     </text>
   </entry>
   <entry>
@@ -1048,6 +1064,14 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/snippets/ocaml#extract-comment-text</url>
+    <fullTitle>Znai: OCaml, Extract Comment Text [Snippets]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Given text file When you use the following plugin it will extract the comment and embed it as if it was typed Domain knowledge of the most important thing in the library High level description that contains information and some examples like More text User module My_module sig end ** Domain knowledge of the most important thing in the library High level description that contains User information and some examples like module My_module sig end More text * type t val act_on_domain t > unit Deferred t include ocaml comment ocaml domain mli commentLine description that contains</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/snippets/open-API#operation-by-method-and-path</url>
     <fullTitle>Znai: Open API, Operation By Method And Path [Snippets]</fullTitle>
     <text>
@@ -1261,6 +1285,14 @@
     <text>
       <score>STANDARD</score>
       <text>Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet display</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/snippets/jupyter-notebook#include-only-specified-sections</url>
+    <fullTitle>Znai: Jupyter Notebook, Include Only Specified Sections [Snippets]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use to select which sections of the notebook to include includeSection include jupyter notebook ipynb includeSection Section One Section Three excludeSectionTitle true</text>
     </text>
   </entry>
   <entry>
@@ -3280,8 +3312,24 @@
     </text>
   </entry>
   <entry>
+    <url>/znai/release-notes/2025#178</url>
+    <fullTitle>Znai: 2025, 1.78 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Add Jupyter includeSection Add Initial menu for selected text Generate link with comment and send to slack Add Focus the main page content on load navigation and search Add Initial support for pages defined outside of chapters</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2025#177</url>
+    <fullTitle>Znai: 2025, 1.77 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Add Extract Ocaml comments as documentation text Add Initial LLM context support Add Footnote uses given label instead of auto incrementing index if the label is numeric</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/release-notes/2025#176</url>
-    <fullTitle>Znai: 2024 Releases, 1.76 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2025, 1.76 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Local Search correctly previews content from an implicit section Add Mermaid css for message text remove bold font Add Read more content extra spacing and bolder title Add Migrate from lunrjs to flexsearchjs for local search Add new option to to hide presentation trigger icons hidePresentationTrigger meta json Add Convert into em dash Add Referencing another markdown via link is no longer restricted by a single level Add A better error message when referencing a non existing anchor</text>
@@ -3289,7 +3337,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2025#175</url>
-    <fullTitle>Znai: 2024 Releases, 1.75 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2025, 1.75 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix changing files with the same name in preview mode is no longer confuse files Fix default markdown image applies by default fit true Fix Remove slf4j logger warning Fix Exit the preview server when the initial documentation build fails Add TOC now supports to select a markdown file in a custom location to make it easier to move existing content to Znai path neste file md Add Aciinema new parameters Add Aciinema reacts to parameter changes during preview mode Add Aciinema bottom top margins to match code snippets cols rows idleTimeLimit speed Add Distinct for HTML content for crawlers id Add plugin readmore Add now supports to change the content based on regexp from CSV file include markdown preprocessorPath</text>
@@ -3297,7 +3345,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2025#174</url>
-    <fullTitle>Znai: 2024 Releases, 1.74 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2025, 1.74 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Clicking doc title when is a multipart e g is now properly navigates to the landing page docId part one part two Add generate TOC as simplified server side rendering for every page for crawlers Add default markdown image applies by default fit true Add Support for markdown urls dir file name md Add plugin converts passed to full absolute URL to better support with include redirect url docId Add preview server path to change preview server srcRoot change preview path srcRoot &lt;new src root>&amp;previewPageLink &lt;link to page> Add Initial Asciinema support Add Preview server prints less details of what is being sent to the browser Add OCaml Code Comments support</text>
@@ -3305,7 +3353,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2024#173</url>
-    <fullTitle>Znai: 2024 Releases, 1.73 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2024, 1.73 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Remove more non printable characters when creating global search index to avoid crash Fix html comment block when used before first no longer creates extra spacing Fix Correctly highlight page sections with custom anchor id as you scroll through a page Fix Search result section with custom anchor id no longer crash the page Add Footnote update styles Add Footnote references uses normalized labels like instead of a user specified custom ids 1 2 3 Add explicit new line support in replacement preprocessor csv Add Page sections allow bold and italic Add Better error message when unsupported styling is used in page sections Add Better handling of longer page sections Add Inlined code font size match when used inside page sections Add Graphviz expose hex colors for override via css variables Add Footnote preview uses fixed width to match content width Add Top Header displays current chapter page section</text>
@@ -3313,7 +3361,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2024#172</url>
-    <fullTitle>Znai: 2024 Releases, 1.72 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2024, 1.72 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Add Code Snippets automatically strip extra indentation Add Experimental top header Add Headings support for links inside Add Graphviz better black color support in subgraph Add Graphviz option align Add Support for HTML block Add Initial Footnotes support Add Latex Math block shortcut support $$ Add Latex Math inline shortcut support $ Add Custom Anchor Id Add iframe to add scrollbars that match in style the main document maxHeight Add Search hotkey indicator</text>
@@ -3321,7 +3369,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2024#171</url>
-    <fullTitle>Znai: 2024 Releases, 1.71 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2024, 1.71 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Doc How to style Add support for additional hidden anchor ids when referencing Other Pages to be backward compatible with existing markdowns Add Search Result Preview code snippets have higher weight Add Search Result Preview wildcard and stronger boost to page titles Add Improve Search Result Preview highlighting Add Default Tab Add Adjust inlined Latex horizontal spacing Add Search better recognizes dot separated code snippet entries</text>
@@ -3329,7 +3377,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2024#170</url>
-    <fullTitle>Znai: 2024 Releases, 1.70 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2024, 1.70 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Doxygen now handles empty in method parameters declname Fix link correctly adds to the index page viewOn md Add Use to find files from upload txt lookup paths</text>
@@ -3337,7 +3385,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2024#169</url>
-    <fullTitle>Znai: 2024 Releases, 1.69 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2024, 1.69 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Presentation mode viewport explicit width to force full screen Fix auto title now correctly ignores specified extension Fix Page title overrides automatically removes quotes around Fix normalize file watching path during preview mode to correctly detect documentation page change when file path contains extra in it Fix documentation root index md file is detected again instead of automatic redirection Add Initial support for in headers For now it displays it as a regular text inlined code</text>
@@ -3345,7 +3393,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2024#168</url>
-    <fullTitle>Znai: 2024 Releases, 1.68 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2024, 1.68 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Json presentation mode correctly highlights value nodes Add Page title overrides via file toc Add Presentation mode handling for API Parameters members Add Support explicit file name extension in file toc Add Empty support to deploy documentation to a site root doc id Add Presentation mode handling for Doxygen members Add Display Doxygen @note Add Display Doxygen decltype Add Display Doxygen noexcept Add validate non empty startLine and endLine Add Keep Last First Line for multi start end lines Add multiple lines to Highlight Region With Scope start</text>
@@ -3353,7 +3401,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2024#167</url>
-    <fullTitle>Znai: 2024 Releases, 1.67 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2024, 1.67 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix auto generated anchor from title can now be referenced from other pages Add and to enable SSL during preview that you run inside orgs that prefer to host SSL content pem cert path pem key path Add and to enable SSL during preview that you run inside orgs that prefer to host SSL content jks path jks password Add Shorten Tabs dividers when content inside is not wide Add automatic preview navigation to the most recent change ignores previous user clicked anchors Add Tabs remove vertical margin when the only content inside is a code snippet or api parameters Rename to noGapBorder noGapSeparator</text>
@@ -3361,7 +3409,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2023#166</url>
-    <fullTitle>Znai: 2023 Releases, 1.66 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2023, 1.66 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Properly render leading spaces when using include cli output Fix Text right after Include Plugin is no longer ignored Add noGapSeparator to add a separator between code snippets with noGap Add Charts columns parameter Add IFrame auto reload on html content change during preview Add IFrame title parameter Add IFrame content now participates in presentation mode Add IFrame content no gap on mobile</text>
@@ -3369,7 +3417,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2023#165</url>
-    <fullTitle>Znai: 2023 Releases, 1.65 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2023, 1.65 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Restore search focus when iframe is present in search preview Add Plant UML use license as dependency BSD Add Surrounded By Multi chars Scope text manipulation Add Surrounded By Scope text manipulation Add Properties override for iframe content based on active dark light mode selection Add Automatically add index html if iframe src points to documentation content and ends with</text>
@@ -3377,7 +3425,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2023#164</url>
-    <fullTitle>Znai: 2023 Releases, 1.64 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2023, 1.64 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Deploy images that are used in Footer Fix Links from page are no longer always pointing to index page itself index Fix During preview mode subsections anchor ids are no longer increasing the counter when editing the same file Fix bullet list presentation mode is now properly hiding unrevealed boxes Grid Fix snippets constant color for dark and light theme Doc Testing Is Documenting intro page rework Doc Move snippets highlighting into its own page Add iframe fit parameter to auto adjust height of the iframe Add regexp based preprocessor to modify markdown files before parsing to work with existing custom markdowns Add Preview and real time updates for TOC items that are outside main documentation directory Add OCaml syntax highlight Add Clarify Surrounded By message when second marker is absent Add upload txt Add tweak yellow terminal output color for light theme Add code snippets highlighting regions scope Add code snippets highlighting regions Add Improve highlighting of adjacent lines in code snippets Add Support for limited relative links with explicit file extension Add surroundedByKeep boolean option Add Anchor support for embedded code blocks Add JSON callouts from file Add JSON callouts Add Java 17 is a minimum java version required to run Add JSON rename to and to to match and pair paths highlightValue pathsFile highlightValueFile highlightKey highlightKeyFile Add JSON highlight keys Add plugin parameter names deprecation rename mechanism</text>
@@ -3385,7 +3433,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2023#163</url>
-    <fullTitle>Znai: 2023 Releases, 1.63 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2023, 1.63 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Images null pointer when using with SVGs Fix Table column parameters name conflict Fix JSON regression with displaying values null Fix stop badge image annotation from pulsing when mouse moved out Fix remove extra gap from last code snippet inside API parameters Add Plugins parameters validation error message now prints in the context of plugin name and passed params Fix code reference now turns into links parts of code that is not fully recognized by highlighter Add surroundedBy validates that content is not empty after extraction Add Open API summary field validation when using autoSection true Add CLI Output Highlight now matches sub lines ignoring colors ANSI sequence Add JSON Enclose In Object Add JSON format for Code References Add better alignment of multiple CLI Commands in a row and when surrounded by text Add console output and code snippets trim empty lines from start end when no extraction specific params is set Add and to include exclude lines using contains include exclude Add and as separate options to snippets manipulation excludeStart excludeEnd Add identifier support for multiple validation paths Example of using default parameters to simplify flow Add noGap option for images tables snippets and API parameters is only required for the first entry second can omit it If it does third entry will have a gap again above This helps with groups of snippets tables etc Add Wide Mode for CLI Output</text>
@@ -3393,7 +3441,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#162</url>
-    <fullTitle>Znai: 2022 Releases, 1.62 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.62 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Flow Diagrams multi line support when color or shape is set Add handle property title in Open API Doc add clarification to dummy code reference page for java and generic Add Plugin Page Local Defaults Add Plugin Global Defaults Add JavaDoc markdown support Add CLI Output anchor support Add CLI Output plugin formal parameters validation Add Report misprinted inlined code plugin Add Inlined Markdown plugin Add Table and Card integration Add Table wide mode centered title Add JSON anchor id support Add enum type formal parameters for plugins</text>
@@ -3401,7 +3449,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#1612</url>
-    <fullTitle>Znai: 2022 Releases, 1.61.2 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.61.2 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Card recognizes additional images inside to include into dist</text>
@@ -3409,7 +3457,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#1611</url>
-    <fullTitle>Znai: 2022 Releases, 1.61.1 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.61.1 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Null Pointer in some cases of URL resolve Fix Display stacktrace within plugin to identify problems easier Add Report Image Annotations that are outside of image boundaries</text>
@@ -3417,7 +3465,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#161</url>
-    <fullTitle>Znai: 2022 Releases, 1.61 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.61 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix page title override for index page Fix Java Anchor linking from pages incorrect validation Fix local ref in index page link doesn t add to url on ref click index Doc Table Multiline Content Add Table Regexp Filter Remove Table gap in wide mode</text>
@@ -3425,7 +3473,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#160</url>
-    <fullTitle>Znai: 2022 Releases, 1.60 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.60 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Fit Image in mobile view Doc Local Build instructions Add Three columns Layout**** Add Cards Add Auto anchor id from title for Tables Add Auto anchor id from title for Snippets Add Auto anchor id from title for Images Add Table No Gap Add Table Collapse Add highlight by text highlights all matches Add API Parameters No Gap Remove Image padding in mobile view Add Image Collapse Add Image No Gap Add Mobile and Desktop only Images Add Python content Anchor Add Java content Anchor Rename property is now noGap compact Add Table formal parameters support Add Table Anchor Add Image Anchor Add External Snippet Anchor Add Attention Sign Fence Block</text>
@@ -3433,7 +3481,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#1591</url>
-    <fullTitle>Znai: 2022 Releases, 1.59.1 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.59.1 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix include java body only takes first method when overloads are present but no types are specified Fix next prev page chapter name is properly rendered was undefined Fix Tabs don t confuse Fence block of API Parameters with tab name Fix remove possible duplication of API Parameters when param names match Add tooltip to TOC items to display full title in case of overflow Add syntax highlight for code snippets SQL GraphQL Cypher Add Tip and Recommendation attention signs PlantUml version bump to 1 2022 6</text>
@@ -3441,7 +3489,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#159</url>
-    <fullTitle>Znai: 2022 Releases, 1.59 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.59 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Centered Image with horizontal scrollbar doesn t cut parts of image anymore Fix Image Zoom now has vertical scroll for tall images Add Time Series option to Charts Add Open API 3 support Add compact option to Code Snippets Add collapsible option to Code Snippets API Parameters expand nested by default when single root parameter Add collapsible option to API Parameters Add title support for Standard Markdown Image Add code snippets color to be distinct from the regular text class Add Chapter Title Override via file toc</text>
@@ -3449,7 +3497,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#158</url>
-    <fullTitle>Znai: 2022 Releases, 1.58 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.58 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix Maven Plugin race condition between shutdown hook and apache FileUtils class unload Fix CPP Auto Ref method link color Fix highlight python code snippet decorator Fix Python multi line token color during snippet render Fix python multiline string parsing to properly highlight lines Fix JSON rendering order Fix search popup on iPad now fits a browser window Fix Enable Image click to zoom on scaled down images Fix Column rendering when content starts with a link Fix Empty Column rendering crash Fix Image bottom border rendering Fix Image explicit now respects Annotations Placement scale Fix iPad layout adjustments to battle 100vh rendering feature Doc how to include json that is not valid Doc Improved Examples on Synergy With Testing Doc Move CPP to its own chapter Doc Move Python to its own chapter Doc Move Java to its own chapter Doc fix example of classpath lookup Rework Templates example Doc Table with Icons example Doc Document Image Pixel Ratio Doc Update Columns examples and text refactoring Doc Rework What Is This with more examples and reorganized order Doc JSON WebTau example Add Auto Annotation Color for JSON annotations Add include markdowns parameter sort Image Annotation From CSV File Add caching to Python Parsing Add Rectangles And Arrows image annotations Add Rectangles And Arrows Tooltips Parse Python Returns PyDoc section Render Python Properties as API Parameters Reflect Heading Style in Table Of Contents menu panel Add include python class package ClassName to display and define a class Add include python method package method_name to display a function signature documentation and parameters Tweak color of code snippets of lang markdown Removed for handling cross references in favor of lazy url evaluation at page generation time global references js Add Python Doc params Type Hint support Mermaid Diagrams Wide Mode Mermaid Diagrams External File Add Graphviz fenced block support Add collapse button for Snippet Read More Mermaid Diagrams dark mode and auto them switch Image Annotation Coordinates during preview mode Change Image Annotations style to be single color and use tooltip arrow Add automatic Image Annotations badges textual description tooltips via ordered list Add tooltip for Code Comments Bullet Points Tweak Image Zoom style in dark and light themes Add API Parameters Wide Mode Tweak API Parameters Title style Add API Parameters plugin parameters definition New Image Title look and feel Add Support Title Add JSON Collapsed Paths validation Add formal plugin parameters to Image Plugin Add Image Badge Annotation auto color detection Add JSON fence plugin Add JSON parameters formalization Add JSON Auto Title feature Add Java Plugins parameters definition Add initial plugin parameters formalization Enforce parameters validation for File Plugin Add JSON Code References support More prominent colors for highlight of JSON value Better error message in case of wrong CLI argument name znai Add param to CLI version znai</text>
@@ -3457,7 +3505,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#157</url>
-    <fullTitle>Znai: 2022 Releases, 1.57 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.57 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix selected TOC item padding Fix Table text selection during preview is not auto deselected Fix read more option change during preview now properly updates the snippet Fix Latex more complex math render by adding missing fonts Fix remove extra top margin in case of code snippet in between code snippets in two columns mode Fix markdown snippets render extra new line at the end Fix search preview popup has fixed height now to avoid size jump Use standard args parsing for CLI Lookup Paths Add Doxygen From Zip support Add Charts Presentation support for breakpoint support that creates a slide for every textual value Add Charts Presentation breakpoint validation all Add Bar Chart presentation mode breakpoints support Add Zip and Jar lookup path support to access content from within archives Add Pie Chart presentation mode breakpoints support Better validation of API Parameters input JSON Add automatic hard wrap and noWrap option to API Parameters to handle long parameter names without spaces Add Smart Bullets Points Steps align option Add Charts Wide Mode Add Charts Inlined Data Add External Images support and image URL validation Add presentation support for Line Chart breakpoints Remove generic plugin that uses Victory Chart for rendering include chart Add chart legend Add dark theme support for Charts Migrate Pie Chart to ECharts Migrate Line Chart to ECharts Add stack mode to Bar Chart Bar Chart horizontal mode with height setting Add multiple values per tick support to Bar Chart Wrap code option for Fence Block and External Code Landing hub opens documentation in the same window and not a new tab Add surrounded by null as separator value No extra separator for java and groovy entries separator</text>
@@ -3465,7 +3513,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2022#156</url>
-    <fullTitle>Znai: 2022 Releases, 1.56 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2022, 1.56 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Fix search result preview highlight across styles Fix highlight code lines when multiline comment is present e g * * Fix using chars in Search doesn t lead to crash anymore Fix search popup window height is consistent size when jumping between results Added include partial markdown Added multiple entries separator for Java and Groovy Added multiple bodies only using for Groovy entry Added multiple bodies only using for Java entry index md is now optional Add validate external links flag validate external links Add image fence plugin with badge annotations Handle loop reference in Open API Generate plugin params usage statistics file Generate plugins usage statistics file</text>
@@ -3473,7 +3521,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#155</url>
-    <fullTitle>Znai: 2021 Releases, 1.55 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.55 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Doc moved Snippets Manipulation to its own page Doc rewrite of What Is This starting page Extra spacing between section title and its badge Color tweaks for code snippet bullet points and text badge for light and dark theme Normalize doxygen member selection by args Add Replace snippet manipulation Add Surrounded By Multiple blocks support Add CLI fence plugin Tweaked text selection color for dark theme Fix CLI ANSI output background colors Fix snippets highlight regression Fix win cmd script to include passed params</text>
@@ -3481,7 +3529,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#154</url>
-    <fullTitle>Znai: 2021 Releases, 1.54 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.54 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Doc more examples Add Doxygen ignore template parameter Add Doxygen member select by args Add doxygen all overloads at once Add doxygen compound to include class description and methods attributes Add inner classes reference to java doc parsing Add API heading style Add doxygen member signature Add doxygen docs params to embed as API parameters Add doxygen docs to embed comments text Add heading text badge Add text badge Add commentsType remove to remove comments from a code snippet Add command to upload any html zip to znai hub uploadzip Add graphviz include plugin Plugin parameters parsing error provides more details about plugin id and provided parameters Add and plugin failure context id params include fence inline code Add Tabs presence validation Enhance python variable extraction to include all assignments not just global variables Fix Enterprise nix based authz last user group is now taken into account Fix icon alignment regression in Attention Paragraphs</text>
@@ -3489,7 +3537,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#153</url>
-    <fullTitle>Znai: 2021 Releases, 1.53 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.53 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Add support for parameter names with dashes to python doc params Fix Image Annotations placement when is present fit true Fix python variable extraction crashing in certain cases by adding more checks Fix Parsing of Python data classes that include default field values</text>
@@ -3497,7 +3545,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#152</url>
-    <fullTitle>Znai: 2021 Releases, 1.52 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.52 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Add enterprise server log rotation Force max width for type and name for API Parameters Reduce title height Exclude Parameters section type during python doc parsing Handle optional type during python doc params parsing Added Scala syntax highlight Added Table row highlight by index Handle dash for python doc params parsing Add Page Table Of Contents Add Table wide mode Add Table column min width Add Table percentage width Add Windows znai cmd script Add support for variables to include python and revamped the entire doc section Fix Table title rendering when scroll is present</text>
@@ -3505,7 +3553,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#151</url>
-    <fullTitle>Znai: 2021 Releases, 1.51 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.51 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Doc brew install instruction Added initial pythod doc params support Python parsing is more robust and partially work with older versions of python Explicit use of to use matching image annotations file annotate true Fix handle dashes in flow diagram node ids</text>
@@ -3513,7 +3561,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#150</url>
-    <fullTitle>Znai: 2021 Releases, 1.50 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.50 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Doc clarify Getting Started documentation section Image badge annotation becomes transparent on hover Add include python to include function s content Rename > for plugin paramsToHighlight highlight include cli command Rename > for plugin scaleRatio scale include image Add click to zoom image that was fit true Preview footer change detection Add to include file like plugins documentaiton surroundedB Add inlined code snippet with automatic identifier validation by looking into a provided file documentaiton Validate JSON path for highlighting Validate XML path for highlighting Validate that snippets include exclude matches lines Prints port info when port is taken during preview More permissive json parsing Added include python doc to extract python docs as markdown text and add it to a page Enterprise file monitor validates monitor path Fix extra margin in Columns Layout when code snippets in both columns goes after a code snippet Fix auto jump to a changed page and highlight the right place It was jumping to the right place but was highlighting date time as the first change for pages that were last modified not in the same day Fix does not override plugin specific meta anymore include meta Fix restore scroll position on back button Fix XML alignment and remove extra empty line</text>
@@ -3521,7 +3569,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#149</url>
-    <fullTitle>Znai: 2021 Releases, 1.49 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.49 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>No notes</text>
@@ -3529,7 +3577,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#148</url>
-    <fullTitle>Znai: 2021 Releases, 1.48 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.48 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>No notes</text>
@@ -3537,7 +3585,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#147</url>
-    <fullTitle>Znai: 2021 Releases, 1.47 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.47 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>No notes</text>
@@ -3545,7 +3593,7 @@
   </entry>
   <entry>
     <url>/znai/release-notes/2021#146</url>
-    <fullTitle>Znai: 2021 Releases, 1.46 [Release Notes]</fullTitle>
+    <fullTitle>Znai: 2021, 1.46 [Release Notes]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>No notes</text>
