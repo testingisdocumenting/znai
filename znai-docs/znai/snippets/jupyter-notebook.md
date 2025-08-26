@@ -20,15 +20,10 @@ become part of Table Of Contents and part of a search unit.
 
 Note: below text is auto generated, including the **Panda** section 
 :include-jupyter: src/test/resources/notebook-with-markdown-story.ipynb
-     
-# Two Sides
-
-You will learn about the [Two Sides Layout](layout/two-sides-pages) in the Layout section. 
-If you are are curious now for examples, jump to [Jupyter Two Sides example](layout/jupyter-notebook-two-sides)
 
 # Include Only Specified Sections
 
-Use `includeSection` to select which sections of the notebook to include. 
+Use `includeSection` to select which sections of the notebook to include.
 
 ```
 :include-jupyter: notebook.ipynb {
@@ -36,3 +31,8 @@ Use `includeSection` to select which sections of the notebook to include.
     excludeSectionTitle: true
 }
 ```
+
+# Two Sides
+
+You will learn about the [Two Sides Layout](layout/two-sides-pages) in the Layout section. 
+If you are are curious now for examples, jump to [Jupyter Two Sides example](layout/jupyter-notebook-two-sides)
