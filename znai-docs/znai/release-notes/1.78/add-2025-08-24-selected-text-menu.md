@@ -1,0 +1,1 @@
+* Add: Initial menu for selected text. Generate link with comment and send to slack.
