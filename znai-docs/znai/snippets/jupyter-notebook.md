@@ -1,7 +1,5 @@
 # Code and Output
 
-:include-jupyter: jupyter/polars-try.json
-
 Use `include-jupyter` to include [Jupyter](https://jupyter.org/) notebook inside your documentation. 
 
     :include-jupyter: jupyter/simple-notebook.ipynb
@@ -27,3 +25,14 @@ Note: below text is auto generated, including the **Panda** section
 
 You will learn about the [Two Sides Layout](layout/two-sides-pages) in the Layout section. 
 If you are are curious now for examples, jump to [Jupyter Two Sides example](layout/jupyter-notebook-two-sides)
+
+# Include Only Specified Sections
+
+Use `includeSection` to select which sections of the notebook to include. 
+
+```
+:include-jupyter: notebook.ipynb {
+    includeSection: ["Section One"; "Section Three"], 
+    excludeSectionTitle: true
+}
+```

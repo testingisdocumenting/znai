@@ -107,4 +107,70 @@ class JupyterCellFilterTest {
         result[0].input.should == "# Section"
         result[1].input.should == null
     }
+    
+    @Test
+    void "should exclude section title when flag is set"() {
+        def cells = [
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Section One\nSome content after header", []),
+            new JupyterCell(JupyterCell.CODE_TYPE, "code1()", []),
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Section Two", [])
+        ]
+        
+        def result = JupyterCellFilter.fromSection(cells, "Section One", true)
+        
+        result.size().should == 2
+        result[0].type.should == JupyterCell.MARKDOWN_TYPE
+        result[0].input.should == "Some content after header"
+        result[1].input.should == "code1()"
+    }
+    
+    @Test
+    void "should skip cell entirely if it only contains header when excludeSectionTitle is true"() {
+        def cells = [
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Section One", []),
+            new JupyterCell(JupyterCell.CODE_TYPE, "code1()", []),
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "Some text", []),
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Section Two", [])
+        ]
+        
+        def result = JupyterCellFilter.fromSection(cells, "Section One", true)
+        
+        result.size().should == 2
+        result[0].type.should == JupyterCell.CODE_TYPE
+        result[0].input.should == "code1()"
+        result[1].input.should == "Some text"
+    }
+    
+    @Test
+    void "should handle multiline content after header when excludeSectionTitle is true"() {
+        def cells = [
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "## Section Title\nLine 1\n\nLine 2\nLine 3", []),
+            new JupyterCell(JupyterCell.CODE_TYPE, "code()", []),
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Next", [])
+        ]
+        
+        def result = JupyterCellFilter.fromSection(cells, "Section Title", true)
+        
+        result.size().should == 2
+        result[0].type.should == JupyterCell.MARKDOWN_TYPE
+        result[0].input.should == "Line 1\n\nLine 2\nLine 3"
+        result[1].input.should == "code()"
+    }
+    
+    @Test
+    void "should preserve original cells when excludeSectionTitle is false"() {
+        def cells = [
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Section\nContent", []),
+            new JupyterCell(JupyterCell.CODE_TYPE, "code()", [])
+        ]
+        
+        def resultWithFlag = JupyterCellFilter.fromSection(cells, "Section", false)
+        def resultWithoutFlag = JupyterCellFilter.fromSection(cells, "Section")
+        
+        resultWithFlag.size().should == 2
+        resultWithFlag[0].input.should == "# Section\nContent"
+        
+        resultWithoutFlag.size().should == 2  
+        resultWithoutFlag[0].input.should == "# Section\nContent"
+    }
 }
