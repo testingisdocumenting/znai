@@ -20,7 +20,18 @@ become part of Table Of Contents and part of a search unit.
 
 Note: below text is auto generated, including the **Panda** section 
 :include-jupyter: src/test/resources/notebook-with-markdown-story.ipynb
-     
+
+# Include Only Specified Sections
+
+Use `includeSection` to select which sections of the notebook to include.
+
+```
+:include-jupyter: notebook.ipynb {
+    includeSection: ["Section One"; "Section Three"], 
+    excludeSectionTitle: true
+}
+```
+
 # Two Sides
 
 You will learn about the [Two Sides Layout](layout/two-sides-pages) in the Layout section. 

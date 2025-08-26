@@ -20,21 +20,21 @@ package org.testingisdocumenting.znai.jupyter;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
-import org.testingisdocumenting.znai.extensions.PluginParams;
-import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class JupyterIncludePlugin implements IncludePlugin {
+    private static final String STORY_FIRST_KEY = "storyFirst";
+    private static final String INCLUDE_SECTION_KEY = "includeSection";
+    private static final String EXCLUDE_SECTION_TITLE_KEY = "excludeSectionTitle";
     private MarkdownParser markdownParser;
     private Path path;
     private String lang;
@@ -52,11 +52,23 @@ public class JupyterIncludePlugin implements IncludePlugin {
     }
 
     @Override
+    public PluginParamsDefinition parameters() {
+        PluginParamsDefinition params = new PluginParamsDefinition();
+        params.add(STORY_FIRST_KEY, PluginParamType.BOOLEAN, "put output cells first, before input", "true");
+        params.add(INCLUDE_SECTION_KEY, PluginParamType.LIST_OR_SINGLE_STRING, "only include specified section by title", "Example of Data setup");
+        params.add(EXCLUDE_SECTION_TITLE_KEY, PluginParamType.BOOLEAN, "when include section key is used, excludes the matched title", "true");
+
+        return params;
+    }
+
+    @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         markdownParser = componentsRegistry.markdownParser();
         markdownParserHandler = parserHandler;
 
-        isStoryFirst = pluginParams.getOpts().get("storyFirst", false);
+        isStoryFirst = pluginParams.getOpts().get(STORY_FIRST_KEY, false);
+        List<String> includeSection = pluginParams.getOpts().getList(INCLUDE_SECTION_KEY);
+        Boolean excludeSectionTitle = pluginParams.getOpts().get(EXCLUDE_SECTION_TITLE_KEY, false);
 
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         path = resourcesResolver.fullPath(pluginParams.getFreeParam());
@@ -65,13 +77,31 @@ public class JupyterIncludePlugin implements IncludePlugin {
                 .parse(JsonUtils.deserializeAsMap(resourcesResolver.textContent(path)));
         lang = notebook.getLang();
 
-        notebook.getCells().forEach(this::processCell);
+        List<JupyterCell> cells =
+                !includeSection.isEmpty() ?
+                        collectCells(notebook.getCells(), includeSection, excludeSectionTitle) :
+                        notebook.getCells();
+
+        cells.forEach(this::processCell);
         return PluginResult.docElements(Stream.empty());
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(path));
+    }
+
+    private List<JupyterCell> collectCells(List<JupyterCell> cells, List<String> includeSections, Boolean excludeSectionTitle) {
+        List<JupyterCell> result = new ArrayList<>();
+        for (String includeSection : includeSections) {
+            List<JupyterCell> filtered = JupyterCellFilter.fromSection(cells, includeSection, excludeSectionTitle);
+            if (filtered.isEmpty()) {
+                throw new RuntimeException("No cells found for include section: \"" + includeSection + "\"");
+            }
+            result.addAll(filtered);
+        }
+
+        return result;
     }
 
     private void processCell(JupyterCell cell) {
@@ -154,12 +184,10 @@ public class JupyterIncludePlugin implements IncludePlugin {
     }
 
     private Map<String, Object> convertInputData(JupyterCell cell) {
-        switch (cell.getType()) {
-            case JupyterCell.CODE_TYPE:
-                return CodeSnippetsProps.create(lang, cell.getInput());
-            default:
-                return Collections.singletonMap(JupyterOutput.TEXT_FORMAT, cell.getInput());
+        if (cell.getType().equals(JupyterCell.CODE_TYPE)) {
+            return CodeSnippetsProps.create(lang, cell.getInput());
         }
+        return Collections.singletonMap(JupyterOutput.TEXT_FORMAT, cell.getInput());
     }
 
     private Map<String, Object> convertOutputData(JupyterOutput output) {
