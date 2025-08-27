@@ -197,7 +197,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
   async function generateLink() {
     const comment = linkCommentInputRef.current?.value?.trim();
-    const pageUrl = buildHighlightUrl(location.toString(), panelData!.prefixSuffixMatch, comment);
+    const pageUrl = buildHighlightUrl(panelData!.prefixSuffixMatch, comment);
     try {
       await navigator.clipboard.writeText(pageUrl);
       setNotification({ type: "success", message: "Link is generated and copied to clipboard" });
@@ -213,7 +213,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       return;
     }
 
-    const pageUrl = buildHighlightUrl(location.toString(), panelData!.prefixSuffixMatch, question);
+    const pageUrl = buildHighlightUrl(panelData!.prefixSuffixMatch, question);
 
     const body = {
       selectedText: panelData!.prefixSuffixMatch.selection,

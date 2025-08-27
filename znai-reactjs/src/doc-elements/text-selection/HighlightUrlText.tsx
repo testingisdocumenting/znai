@@ -18,16 +18,18 @@ import { useEffect, useRef } from "react";
 import { TextHighlighter } from "./textHighlihter";
 import { mainPanelClassName } from "../../layout/classNames";
 import { extractHighlightParams } from "./highlightUrl";
+import { documentationNavigation } from "../../structure/DocumentationNavigation";
 import "./HighlightUrlText.css";
 
 export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElement }) {
   const bubbleRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const params = extractHighlightParams();
+    let highlighter: TextHighlighter | null = null;
 
     if (params) {
       const container = document.querySelector(mainPanelClassName) || document.body;
-      const highlighter = new TextHighlighter(container);
+      highlighter = new TextHighlighter(container);
       const highlights = highlighter.highlight(params.selection, params.prefix, params.suffix);
       const firstHighlightedElement = highlights[0];
       if (!firstHighlightedElement) {
@@ -42,14 +44,16 @@ export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElem
         range.setEnd(highlights[highlights.length - 1], highlights[highlights.length - 1].childNodes.length);
         const selectionRect = range.getBoundingClientRect();
 
+        const bubbleText = params.question.endsWith("/")
+          ? params.question.substring(0, params.question.length - 1)
+          : params.question;
         const bubble = bubbleRef.current;
-        bubble.innerText = params.question;
+        bubble.innerText = bubbleText;
         bubble.style.display = "block";
-        
-        // Measure bubble dimensions after setting content
+
         const bubbleRect = bubble.getBoundingClientRect();
         const bubbleWidth = bubbleRect.width;
-        
+
         const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 60;
         const selectionCenter = selectionRect.left + selectionRect.width / 2.0;
         const left = selectionCenter - bubbleWidth / 2.0 - containerRect.left;
@@ -64,6 +68,20 @@ export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElem
         }
       }, 100);
     }
+
+    const urlChangeListener = () => {
+      if (bubbleRef.current) {
+        bubbleRef.current.style.display = "none";
+      }
+      if (highlighter) {
+        highlighter.clearHighlights();
+      }
+    };
+
+    documentationNavigation.addUrlChangeListener(urlChangeListener);
+    return () => {
+      documentationNavigation.removeUrlChangeListener(urlChangeListener);
+    };
   }, []);
 
   return <div ref={bubbleRef} className="znai-highlight-question-bubble" />;
