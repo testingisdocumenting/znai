@@ -227,9 +227,6 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     try {
       const response = await fetch(getDocMeta().sendToSlackUrl!, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         credentials: "include",
         body: JSON.stringify(body),
       });
