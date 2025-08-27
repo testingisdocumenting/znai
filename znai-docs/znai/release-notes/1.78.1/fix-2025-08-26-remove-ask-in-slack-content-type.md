@@ -1,0 +1,1 @@
+* Fix: Remove ask-in-slack `content-type` from `POST` request to simplify CORS

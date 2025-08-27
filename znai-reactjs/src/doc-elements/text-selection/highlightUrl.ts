@@ -45,13 +45,19 @@ export function extractHighlightParams(): HighlightParams | null {
   return null;
 }
 
-export function buildHighlightUrl(baseUrl: string, params: HighlightParams, question?: string): string {
-  const url = new URL(baseUrl);
+export function buildHighlightUrl(params: HighlightParams, question?: string): string {
+  let builtUrl = location.origin + location.pathname;
+  if (!builtUrl.endsWith("/")) {
+    builtUrl += "/";
+  }
+
+  const url = new URL(builtUrl);
   url.searchParams.set(HIGHLIGHT_PREFIX_PARAM, encodeURIComponent(params.prefix));
   url.searchParams.set(HIGHLIGHT_SELECTION_PARAM, encodeURIComponent(params.selection));
   url.searchParams.set(HIGHLIGHT_SUFFIX_PARAM, encodeURIComponent(params.suffix));
   if (question) {
     url.searchParams.set(HIGHLIGHT_QUESTION_PARAM, encodeURIComponent(question));
   }
+
   return url.toString();
 }
