@@ -51,7 +51,8 @@ public class JupyterCellFilter {
     }
 
     private static String firstLineTrimmed(String input) {
-        return input.trim().contains("\n") ? input.substring(0, input.indexOf("\n")) : input;
+        input = input.trim();
+        return input.contains("\n") ? input.substring(0, input.indexOf("\n")) : input;
     }
 
     private static String stripFirstSectionHeader(String content) {
