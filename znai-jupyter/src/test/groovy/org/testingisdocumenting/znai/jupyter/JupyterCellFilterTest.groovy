@@ -73,23 +73,23 @@ class JupyterCellFilterTest {
         def cells = [
             new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Top Level", []),
             new JupyterCell(JupyterCell.CODE_TYPE, "code1()", []),
-            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "## Second Level Section", []),
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "## Second Level Section\nsome text goes here", []),
             new JupyterCell(JupyterCell.CODE_TYPE, "code2()", []),
-            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "### Third Level", []),
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "### Third Level\nmore text goes here", []),
             new JupyterCell(JupyterCell.CODE_TYPE, "code3()", []),
-            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "#### Fourth Level Section", []),
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "#### Fourth Level Section\nmore text", []),
             new JupyterCell(JupyterCell.CODE_TYPE, "code4()", []),
-            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Another Top", [])
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "#### Another Top", [])
         ]
         
         def result2 = JupyterCellFilter.fromSection(cells, "Second Level Section")
         result2.size().should == 2
-        result2[0].input.should == "## Second Level Section"
+        result2[0].input.should == "## Second Level Section\nsome text goes here"
         result2[1].input.should == "code2()"
         
         def result4 = JupyterCellFilter.fromSection(cells, "Fourth Level Section")
         result4.size().should == 2
-        result4[0].input.should == "#### Fourth Level Section"
+        result4[0].input.should == "#### Fourth Level Section\nmore text"
         result4[1].input.should == "code4()"
     }
     
@@ -113,7 +113,7 @@ class JupyterCellFilterTest {
         def cells = [
             new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Section One\nSome content after header", []),
             new JupyterCell(JupyterCell.CODE_TYPE, "code1()", []),
-            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Section Two", [])
+            new JupyterCell(JupyterCell.MARKDOWN_TYPE, "# Section Two\nWith other content", [])
         ]
         
         def result = JupyterCellFilter.fromSection(cells, "Section One", true)

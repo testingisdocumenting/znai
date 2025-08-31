@@ -18,9 +18,7 @@ public class JupyterCellFilter {
             JupyterCell cell = cells.get(i);
             if (cell.getType().equals(JupyterCell.MARKDOWN_TYPE) && 
                 cell.getInput() != null) {
-                String input = cell.getInput().trim();
-                String firstLine = input.contains("\n") ? input.substring(0, input.indexOf("\n")) : input;
-                if (firstLine.matches("^#+\\s+" + java.util.regex.Pattern.quote(sectionName))) {
+                if (firstLineTrimmed(cell.getInput()).matches("^#+\\s+" + java.util.regex.Pattern.quote(sectionName))) {
                     startIdx = i;
                     break;
                 }
@@ -34,10 +32,11 @@ public class JupyterCellFilter {
         for (int i = startIdx + 1; i < cells.size(); i++) {
             JupyterCell cell = cells.get(i);
             if (cell.getType().equals(JupyterCell.MARKDOWN_TYPE) && 
-                cell.getInput() != null && 
-                cell.getInput().trim().matches("^#+ .*")) {
-                endIdx = i;
-                break;
+                cell.getInput() != null) {
+                if (firstLineTrimmed(cell.getInput()).matches("^#+ .*")) {
+                    endIdx = i;
+                    break;
+                }
             }
         }
         
@@ -49,6 +48,11 @@ public class JupyterCellFilter {
         return excludeSectionTitle ?
                 excludeSectionHeader(sectionCells):
                 sectionCells;
+    }
+
+    private static String firstLineTrimmed(String input) {
+        input = input.trim();
+        return input.contains("\n") ? input.substring(0, input.indexOf("\n")) : input;
     }
 
     private static String stripFirstSectionHeader(String content) {
