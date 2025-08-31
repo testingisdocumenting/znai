@@ -1,0 +1,1 @@
+* Fix: [Jupyter](snippets/jupyter-notebook) `includeSection` to handle section delimiter that has other text below it
