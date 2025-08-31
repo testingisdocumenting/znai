@@ -147,8 +147,9 @@ public class TableOfContents {
 
     public Set<String> getAllDirNames() {
         return tocItems.stream()
-                .filter(tocItem -> !tocItem.isIndex())
-                .map(TocItem::getDirName).collect(toSet());
+                .map(TocItem::getDirName)
+                .filter(dirName -> !dirName.isEmpty())
+                .collect(toSet());
     }
 
     public Collection<Path> getResolvedPaths() {
