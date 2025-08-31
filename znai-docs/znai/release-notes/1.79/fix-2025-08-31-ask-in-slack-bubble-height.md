@@ -1,0 +1,1 @@
+* Fix: Adjust position for ask in slack bubble with multiline text

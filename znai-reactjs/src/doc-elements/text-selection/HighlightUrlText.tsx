@@ -23,6 +23,20 @@ import "./HighlightUrlText.css";
 
 export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElement }) {
   const bubbleRef = useRef<HTMLDivElement>(null);
+
+  function toggleBubble() {
+    if (!bubbleRef.current) {
+      return;
+    }
+
+    const bubble = bubbleRef.current as HTMLDivElement;
+    if (bubble.style.display === "block") {
+      bubble.style.display = "none";
+    } else {
+      bubble.style.display = "block";
+    }
+  }
+
   useEffect(() => {
     const params = extractHighlightParams();
     let highlighter: TextHighlighter | null = null;
@@ -30,7 +44,7 @@ export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElem
     if (params) {
       const container = document.querySelector(mainPanelClassName) || document.body;
       highlighter = new TextHighlighter(container);
-      const highlights = highlighter.highlight(params.selection, params.prefix, params.suffix);
+      const highlights = highlighter.highlight(params.selection, params.prefix, params.suffix, toggleBubble);
       const firstHighlightedElement = highlights[0];
       if (!firstHighlightedElement) {
         return;
@@ -52,11 +66,9 @@ export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElem
         bubble.style.display = "block";
 
         const bubbleRect = bubble.getBoundingClientRect();
-        const bubbleWidth = bubbleRect.width;
-
-        const top = selectionRect.top - containerRect.top + containerNode.scrollTop - 60;
+        const top = selectionRect.top - containerRect.top + containerNode.scrollTop - bubbleRect.height - 10;
         const selectionCenter = selectionRect.left + selectionRect.width / 2.0;
-        const left = selectionCenter - bubbleWidth / 2.0 - containerRect.left;
+        const left = selectionCenter - bubbleRect.width / 2.0 - containerRect.left;
 
         bubble.style.top = `${top}px`;
         bubble.style.left = `${left}px`;
