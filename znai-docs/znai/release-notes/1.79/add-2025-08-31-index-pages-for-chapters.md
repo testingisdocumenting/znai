@@ -1,0 +1,1 @@
+* Add: Generate index.html files for chapters to automatically redirect to the first page

@@ -38,6 +38,7 @@ import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 import org.testingisdocumenting.znai.parser.MarkupParsingConfiguration;
 import org.testingisdocumenting.znai.parser.MarkupParsingConfigurations;
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 import org.testingisdocumenting.znai.website.modifiedtime.FileBasedPageModifiedTime;
 import org.testingisdocumenting.znai.website.modifiedtime.PageModifiedTimeStrategy;
 
@@ -200,6 +201,7 @@ public class WebSite implements Log {
     public void deploy() {
         reportPhase("deploying documentation");
         generatePages();
+        generateChapterIndexRedirectPages();
         generateSearchIndex();
         generateLlmContent();
         deployToc();
@@ -632,6 +634,22 @@ public class WebSite implements Log {
         reportPhase("generating the rest of HTML pages");
         forEachPage(this::generatePage);
         buildJsonOfAllPages();
+    }
+
+    private void generateChapterIndexRedirectPages() {
+        reportPhase("generating chapter index redirect pages");
+
+        Set<String> dirNames = toc.getAllDirNames();
+        dirNames.forEach(dirName -> {
+            toc.firstPageInChapter(dirName).ifPresent((tocItem) -> {
+                String redirectUrl = docStructure.fullUrl(
+                        tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension());
+                String redirectPage = ResourceUtils.textContent("template/redirect.html")
+                        .replace("${newUrl}", redirectUrl);
+
+                deployer.deploy(dirName + "/index.html", redirectPage);
+            });
+        });
     }
 
     private void generateSearchIndex() {

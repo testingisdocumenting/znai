@@ -80,6 +80,12 @@ public class TableOfContents {
                 .orElse(null);
     }
 
+    public Optional<TocItem> firstPageInChapter(String dirName) {
+        return tocItems.stream()
+                .filter(tocItem -> tocItem.getDirName().equals(dirName))
+                .findFirst();
+    }
+
     public void removeTocItem(String dirName, String fileNameWithoutExtension) {
         tocItems.removeIf(item -> item.match(dirName, fileNameWithoutExtension));
     }
@@ -137,6 +143,12 @@ public class TableOfContents {
 
     public List<TocItem> getTocItems() {
         return Collections.unmodifiableList(tocItems);
+    }
+
+    public Set<String> getAllDirNames() {
+        return tocItems.stream()
+                .filter(tocItem -> !tocItem.isIndex())
+                .map(TocItem::getDirName).collect(toSet());
     }
 
     public Collection<Path> getResolvedPaths() {
