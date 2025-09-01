@@ -1,9 +1,7 @@
 import os
 import json
 import csv
-import threading
-import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from slack_sdk import WebClient
