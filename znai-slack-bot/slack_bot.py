@@ -39,7 +39,6 @@ def ask_in_slack():
             print("ERROR: No Slack token configured")
             return jsonify({"error": "Slack bot token not configured"}), 500
             
-        # Get JSON data from request
         data = request.get_json()
 
         if not data:
@@ -176,32 +175,5 @@ def format_slack_message(username, question, context, page_url):
     
     return "\n\n".join(message_parts)
 
-def periodic_completion_check():
-    while True:
-        try:
-            questions = load_questions_from_csv()
-            cutoff_time = datetime.now() - timedelta(hours=24)
-            
-            for question in questions:
-                if question['completed']:
-                    continue
-                    
-                question_time = datetime.fromisoformat(question['timestamp'].replace('Z', '+00:00').replace('+00:00', ''))
-                if question_time < cutoff_time:
-                    continue
-                
-                is_completed = check_slack_message_completion(question['channel'], question['message_ts'])
-                if is_completed:
-                    update_question_completion_status(question['message_ts'], True)
-                    print(f"Marked question {question['message_ts']} as completed")
-
-            time.sleep(60)
-
-        except Exception as e:
-            print(f"Error in periodic completion check: {e}")
-
 if __name__ == '__main__':
-    completion_thread = threading.Thread(target=periodic_completion_check, daemon=True)
-    completion_thread.start()
-    
     app.run(host='0.0.0.0', port=5111, debug=True)
