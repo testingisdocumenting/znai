@@ -41,7 +41,6 @@ export class TextHighlighter {
     const textNodes = this.getTextNodes(this.container);
     const matches = [];
 
-    // Build node map
     let currentPos = 0;
     const nodeMap = textNodes.map((node) => {
       const start = currentPos;
@@ -132,9 +131,13 @@ export class TextHighlighter {
         }
 
         const fragment = document.createDocumentFragment();
-        if (beforeText) fragment.appendChild(document.createTextNode(beforeText));
+        if (beforeText) {
+          fragment.appendChild(document.createTextNode(beforeText));
+        }
         fragment.appendChild(highlightSpan);
-        if (afterText) fragment.appendChild(document.createTextNode(afterText));
+        if (afterText) {
+          fragment.appendChild(document.createTextNode(afterText));
+        }
 
         parent.replaceChild(fragment, nodeInfo.node);
         highlightGroup.push(highlightSpan);

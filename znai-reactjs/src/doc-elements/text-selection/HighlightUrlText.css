@@ -3,12 +3,11 @@
     position: absolute;
     background: #1e40af;
     color: white;
-    padding: 12px 18px;
+    padding: 8px 16px;
     border-radius: 8px;
     font-size: 14px;
-    font-weight: 500;
     line-height: 1.4;
-    max-width: 280px;
+    max-width: 380px;
     box-shadow: 0 12px 28px rgba(30, 64, 175, 0.25), 
                 0 6px 12px rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(10px);
