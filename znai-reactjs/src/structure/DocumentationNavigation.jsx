@@ -16,7 +16,7 @@
  */
 
 import * as Promise from "promise";
-import { getDocId } from "./docMeta";
+import { getDocId, getDocMeta } from "./docMeta";
 import { isTocItemIndex } from "./toc/TableOfContents";
 import { mainPanelClassName } from "../layout/classNames";
 
@@ -128,6 +128,11 @@ class DocumentationNavigation {
   }
 }
 
+function currentPageId() {
+  const pageLocation = documentationNavigation.currentPageLocation();
+  return [getDocMeta().id, pageLocation.dirName, pageLocation.fileName].filter((part) => !!part).join("/");
+}
+
 const documentationNavigation = new DocumentationNavigation();
 
-export { documentationNavigation };
+export { documentationNavigation, currentPageId };

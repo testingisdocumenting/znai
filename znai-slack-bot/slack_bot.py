@@ -26,7 +26,7 @@ if not slack_token:
 slack_client = WebClient(token=slack_token)
 
 CSV_FILE = "active_questions.csv"
-CSV_HEADERS = ["timestamp", "page_url", "context", "selected_text", "selected_prefix", "selected_suffix", "question", "slack_link", "username", "channel", "message_ts", "completed"]
+CSV_HEADERS = ["timestamp", "page_id", "page_url", "context", "selected_text", "selected_prefix", "selected_suffix", "question", "slack_link", "username", "channel", "message_ts", "completed"]
 
 @app.route('/ask-in-slack', methods=['POST'])
 def ask_in_slack():
@@ -45,6 +45,7 @@ def ask_in_slack():
         selected_text = data.get('selectedText')
         selected_prefix = data.get('selectedPrefix', '')
         selected_suffix = data.get('selectedSuffix', '')
+        page_id = data.get('pageId')
         page_url = data.get('pageUrl')
         username = data.get('username')
         slack_channel = data.get('slackChannel')
@@ -52,6 +53,7 @@ def ask_in_slack():
         context = data.get('context')
 
         print(f"Selected text: {selected_text[:100] if selected_text else None}...")
+        print(f"Page ID: {page_id}")
         print(f"Page URL: {page_url}")
         print(f"Username: {username}")
         print(f"Slack channel: {slack_channel}")
@@ -77,6 +79,7 @@ def ask_in_slack():
         
         persist_questions_to_csv([{
             'timestamp': datetime.now().isoformat(),
+            'page_id': page_id,
             'page_url': page_url,
             'context': context or '',
             'selected_text': selected_text or '',

@@ -23,6 +23,7 @@ import { getDocMeta } from "../../structure/docMeta";
 
 import { buildContext } from "./markdownContextBuilder";
 import { Notification } from "../../components/Notification";
+import { currentPageId, documentationNavigation } from "../../structure/DocumentationNavigation";
 import "./TextSelectionMenu.css";
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
@@ -214,12 +215,12 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     }
 
     const pageUrl = buildHighlightUrl({ ...panelData!.prefixSuffixMatch, question });
-
     const body = {
       selectedText: panelData!.prefixSuffixMatch.selection,
       selectedPrefix: panelData!.prefixSuffixMatch.prefix,
       selectedSuffix: panelData!.prefixSuffixMatch.suffix,
       pageUrl: pageUrl,
+      pageId: currentPageId(),
       username: "web-user",
       slackChannel: getDocMeta().slackChannel,
       question: question,
@@ -227,9 +228,16 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     };
 
     try {
+      const headers = getDocMeta().sendToSlackIncludeContentType
+        ? {
+            "Content-Type": "application/json",
+          }
+        : undefined;
+
       const response = await fetch(getDocMeta().sendToSlackUrl!, {
         method: "POST",
         credentials: "include",
+        headers,
         body: JSON.stringify(body),
       });
 
