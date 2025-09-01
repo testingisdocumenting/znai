@@ -1,12 +1,12 @@
 .znai-highlight {
     background-color: #ffeb3b;
     color: black;
-    cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .znai-highlight-hover {
     background-color: #efdd47;
+    cursor: pointer;
 }
 
 .znai-highlight.clicked {
