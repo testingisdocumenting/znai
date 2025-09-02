@@ -46,6 +46,7 @@ interface Props {
   renderedFooter: React.ReactNode;
   docMeta: DocMeta;
   toc: TocItem[];
+  tocItem: TocItem;
   selectedTocItem?: TocItem;
 
   onHeaderClick(): void;
@@ -69,6 +70,7 @@ interface Props {
 export function DocumentationLayout({
   zoomOverlay,
   searchPopup,
+  tocItem,
   renderedPage,
   renderedNextPrevNavigation,
   renderedFooter,
@@ -100,7 +102,7 @@ export function DocumentationLayout({
       <div ref={contentRef} className={panelFullClassName}>
         {contentRef.current && <TextSelectionMenu containerNode={contentRef.current} />}
         {contentRef.current && <HighlightUrlText containerNode={contentRef.current} />}
-        {contentRef.current && <SlackActiveQuestions containerNode={contentRef.current} />}
+        {contentRef.current && <SlackActiveQuestions containerNode={contentRef.current} tocItem={tocItem} />}
         <div ref={contentRef} style={{ display: "contents" }}>
           {renderedPage}
         </div>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { currentPageId } from "../../structure/DocumentationNavigation";
+import { currentPageId, pageIdFromTocItem } from "../../structure/DocumentationNavigation";
 import { getDocMeta } from "../../structure/docMeta";
 import { Notification } from "../../components/Notification";
 import { HighlightedText } from "./HighlightedText";
+import { TocItem } from "../../structure/TocItem";
 
 interface Question {
   selectedText: string;
@@ -11,13 +12,15 @@ interface Question {
   question: string;
 }
 
-export function SlackActiveQuestions({ containerNode }: { containerNode: HTMLDivElement }) {
+export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode: HTMLDivElement; tocItem: TocItem }) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
+  const pageId = pageIdFromTocItem(tocItem);
+
   useEffect(() => {
     void fetchActiveQuestions();
-  }, []);
+  }, [pageId]);
 
   async function fetchActiveQuestions() {
     try {

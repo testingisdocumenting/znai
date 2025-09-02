@@ -43,6 +43,7 @@ export function documentationLayoutDemo(registry: Registry) {
           renderedFooter={dummy}
           docMeta={docMeta}
           toc={testLongToc()}
+          tocItem={{ dirName: "dir", fileName: "file" }}
           selectedTocItem={undefined}
           onHeaderClick={noOp}
           onSearchClick={noOp}
