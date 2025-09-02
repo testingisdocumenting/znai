@@ -161,7 +161,12 @@ def check_slack_message_completion(channel, message_ts):
 @app.route('/active-questions', methods=['GET'])
 def get_active_questions():
     try:
+        page_id = request.args.get('pageId')
         questions = load_questions_from_csv()
+        
+        if page_id:
+            questions = [q for q in questions if q.get('page_id') == page_id]
+        
         return jsonify({"questions": questions}), 200
         
     except Exception as e:

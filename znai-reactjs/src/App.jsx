@@ -114,6 +114,7 @@ const docMeta = {
   previewEnabled: true,
   slackChannel: "help-domain-name",
   sendToSlackUrl: "http://localhost:5111/ask-in-slack",
+  slackActiveQuestionsUrl: "http://localhost:5111/active-questions",
   sendToSlackIncludeContentType: true,
   viewOn: {
     link: "https://github.com/testingisdocumenting/znai/znai-cli/documentation",

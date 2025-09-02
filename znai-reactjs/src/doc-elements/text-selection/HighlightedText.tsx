@@ -29,40 +29,8 @@ export function HighlightedText({
 
     const bubble = bubbleRef.current as HTMLDivElement;
 
-    function showBubbleIfHasQuestion() {
-      if (!question) {
-        return;
-      }
-      bubble.style.display = "block";
-    }
-
-    function hideBubble() {
-      bubble.style.display = "none";
-    }
-
-    function toggleBubble() {
-      const bubble = bubbleRef.current as HTMLDivElement;
-      if (bubble.style.display === "block") {
-        hideBubble();
-      } else {
-        showBubbleIfHasQuestion();
-      }
-    }
-
-    const highlighter = new TextHighlighter(containerNode);
-    const highlights = highlighter.highlight(textSelection, prefix, suffix, question ? toggleBubble : null);
-    const firstHighlightedElement = highlights[0];
-    if (!firstHighlightedElement) {
-      return;
-    }
-
-    if (question && bubbleRef.current) {
+    function updateBubblePosition() {
       const containerRect = containerNode.getBoundingClientRect();
-
-      if (displayBubbleAndScrollIntoView) {
-        showBubbleIfHasQuestion();
-      }
-
       const range = document.createRange();
       range.setStart(firstHighlightedElement, 0);
       range.setEnd(highlights[highlights.length - 1], highlights[highlights.length - 1].childNodes.length);
@@ -77,6 +45,38 @@ export function HighlightedText({
 
       bubble.style.top = `${top}px`;
       bubble.style.left = `${left}px`;
+    }
+
+    function showBubbleAndCalcPositionIfHasQuestion() {
+      if (!question) {
+        return;
+      }
+      bubble.style.display = "block";
+      updateBubblePosition();
+    }
+
+    function hideBubble() {
+      bubble.style.display = "none";
+    }
+
+    function toggleBubble() {
+      const bubble = bubbleRef.current as HTMLDivElement;
+      if (bubble.style.display === "block") {
+        hideBubble();
+      } else {
+        showBubbleAndCalcPositionIfHasQuestion();
+      }
+    }
+
+    const highlighter = new TextHighlighter(containerNode);
+    const highlights = highlighter.highlight(textSelection, prefix, suffix, question ? toggleBubble : null);
+    const firstHighlightedElement = highlights[0];
+    if (!firstHighlightedElement) {
+      return;
+    }
+
+    if (question && bubbleRef.current && displayBubbleAndScrollIntoView) {
+      showBubbleAndCalcPositionIfHasQuestion();
     }
 
     if (displayBubbleAndScrollIntoView) {

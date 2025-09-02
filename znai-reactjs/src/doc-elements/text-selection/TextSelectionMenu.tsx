@@ -23,7 +23,7 @@ import { getDocMeta } from "../../structure/docMeta";
 
 import { buildContext } from "./markdownContextBuilder";
 import { Notification } from "../../components/Notification";
-import { currentPageId, documentationNavigation } from "../../structure/DocumentationNavigation";
+import { currentPageId } from "../../structure/DocumentationNavigation";
 import "./TextSelectionMenu.css";
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
