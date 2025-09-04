@@ -5,11 +5,16 @@ import { Notification } from "../../components/Notification";
 import { HighlightedText } from "./HighlightedText";
 import { TocItem } from "../../structure/TocItem";
 
+import "./SlackActiveQuestions.css";
+import { ResolveQuestionButton } from "./ResolveQuestionButton";
+
 interface Question {
   selectedText: string;
   prefix: string;
   suffix: string;
   question: string;
+  slackLink?: string;
+  slackMessageTs?: string;
 }
 
 export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode: HTMLDivElement; tocItem: TocItem }) {
@@ -39,11 +44,13 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
 
       if (response.ok) {
         const data = await response.json();
-        const questions = data.questions.map((item: any) => ({
-          selectedText: item.selected_text,
-          prefix: item.selected_prefix,
-          suffix: item.selected_suffix,
+        const questions = data.map((item: any) => ({
+          selectedText: item.selectedText,
+          prefix: item.selectedPrefix,
+          suffix: item.selectedSuffix,
           question: item.question,
+          slackLink: item.slackLink,
+          slackMessageTs: item.slackMessageTs,
         }));
         setQuestions(questions);
       } else {
@@ -55,17 +62,28 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
     }
   }
 
-  const renderedQuestions = questions.map((question, idx) => (
-    <HighlightedText
-      key={idx}
-      containerNode={containerNode}
-      textSelection={question.selectedText}
-      prefix={question.prefix}
-      suffix={question.suffix}
-      question={question.question}
-      displayBubbleAndScrollIntoView={false}
-    />
-  ));
+  const renderedQuestions = questions.map((question, idx) => {
+    const additionalView = (
+      <div className="znai-highlight-bubble-resolve-and-link">
+        <ResolveQuestionButton onClick={() => console.log("resolve")} />
+        <a className="znai-highlight-bubble-link" href={question.slackLink} target="_blank" rel="noopener noreferrer">
+          slack thread
+        </a>
+      </div>
+    );
+    return (
+      <HighlightedText
+        key={idx}
+        containerNode={containerNode}
+        textSelection={question.selectedText}
+        prefix={question.prefix}
+        suffix={question.suffix}
+        question={question.question}
+        additionalView={additionalView}
+        displayBubbleAndScrollIntoView={false}
+      />
+    );
+  });
 
   return (
     <>

@@ -1,7 +1,6 @@
 import os
 import json
 import csv
-from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from slack_sdk import WebClient
@@ -26,7 +25,7 @@ if not slack_token:
 slack_client = WebClient(token=slack_token)
 
 CSV_FILE = "active_questions.csv"
-CSV_HEADERS = ["timestamp", "page_id", "page_url", "context", "selected_text", "selected_prefix", "selected_suffix", "question", "slack_link", "username", "channel", "message_ts", "completed"]
+CSV_HEADERS = ["timestamp", "pageId", "pageUrl", "context", "selectedText", "selectedPrefix", "selectedSuffix", "question", "slackLink", "username", "channel", "slackMessageTs", "completed"]
 
 @app.route('/ask-in-slack', methods=['POST'])
 def ask_in_slack():
@@ -78,19 +77,16 @@ def ask_in_slack():
         slack_link = f"https://slack.com/archives/{slack_channel}/p{message_ts.replace('.', '')}"
         
         persist_questions_to_csv([{
-            'timestamp': datetime.now().isoformat(),
-            'page_id': page_id,
-            'page_url': page_url,
+            'pageId': page_id,
             'context': context or '',
-            'selected_text': selected_text or '',
-            'selected_prefix': selected_prefix,
-            'selected_suffix': selected_suffix,
+            'selectedText': selected_text or '',
+            'selectedPrefix': selected_prefix,
+            'selectedSuffix': selected_suffix,
             'question': question,
-            'slack_link': slack_link,
-            'username': username or 'anonymous',
+            'slackLink': slack_link,
             'channel': slack_channel,
-            'message_ts': message_ts,
-            'completed': False
+            'slackMessageTs': message_ts,
+            'completed': False,
         }])
         
         print(f"Message posted successfully: {message_ts}")
@@ -106,13 +102,13 @@ def ask_in_slack():
         return jsonify({"error": str(e)}), 500
 
 
-def persist_questions_to_csv(questions):
+def persist_questions_to_csv(questions, mode='a'):
     file_exists = os.path.exists(CSV_FILE)
     
-    with open(CSV_FILE, 'a', newline='', encoding='utf-8') as csvfile:
+    with open(CSV_FILE, mode, newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=CSV_HEADERS)
         
-        if not file_exists:
+        if mode == 'w' or (mode == 'a' and not file_exists):
             writer.writeheader()
 
         for question in questions:
@@ -133,12 +129,18 @@ def load_questions_from_csv():
 
 def update_question_completion_status(message_ts, completed):
     questions = load_questions_from_csv()
+    updated = False
     
     for question in questions:
         if question['message_ts'] == message_ts:
             question['completed'] = completed
-
-    persist_questions_to_csv(questions)
+            updated = True
+            break
+    
+    if updated:
+        persist_questions_to_csv(questions, mode='w')
+    
+    return updated
 
 def check_slack_message_completion(channel, message_ts):
     try:
@@ -164,13 +166,32 @@ def get_active_questions():
         page_id = request.args.get('pageId')
         questions = load_questions_from_csv()
         
-        if page_id:
-            questions = [q for q in questions if q.get('page_id') == page_id]
+        questions = [q for q in questions if q.get('pageId') == page_id]
         
-        return jsonify({"questions": questions}), 200
+        return jsonify(questions), 200
         
     except Exception as e:
         print(f"Error getting active questions: {type(e).__name__}: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/resolve-slack-question/<ts>', methods=['POST'])
+def resolve_slack_question(ts):
+    try:
+        print(f"=== resolve-slack-question request received for ts: {ts} ===")
+        
+        updated = update_question_completion_status(ts, True)
+        
+        if updated:
+            print(f"Successfully marked question with ts {ts} as completed")
+            return jsonify({"success": True, "message": f"Question {ts} marked as completed"}), 200
+        else:
+            print(f"Question with ts {ts} not found")
+            return jsonify({"error": f"Question with ts {ts} not found"}), 404
+            
+    except Exception as e:
+        print(f"Error resolving question: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
 def format_slack_message(username, question, context, page_url):

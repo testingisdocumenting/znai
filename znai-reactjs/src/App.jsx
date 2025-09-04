@@ -116,6 +116,7 @@ const docMeta = {
   sendToSlackUrl: "http://localhost:5111/ask-in-slack",
   slackActiveQuestionsUrl: "http://localhost:5111/active-questions",
   sendToSlackIncludeContentType: true,
+  resolveSlackQuestionUrl: "http://localhost:5111/resolve-slack-question",
   viewOn: {
     link: "https://github.com/testingisdocumenting/znai/znai-cli/documentation",
     title: "View On GitHub",

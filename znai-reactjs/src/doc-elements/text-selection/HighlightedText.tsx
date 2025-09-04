@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { TextHighlighter } from "./textHighlighter";
 
 import "./HighlightedText.css";
@@ -10,6 +10,7 @@ interface Props {
   suffix: string;
   question: string;
   displayBubbleAndScrollIntoView: boolean;
+  additionalView: React.ReactNode;
 }
 
 export function HighlightedText({
@@ -19,8 +20,11 @@ export function HighlightedText({
   suffix,
   question,
   displayBubbleAndScrollIntoView,
+  additionalView,
 }: Props) {
   const bubbleRef = useRef<HTMLDivElement>(null);
+
+  const bubbleText = question.endsWith("/") ? question.substring(0, question.length - 1) : question;
 
   useEffect(() => {
     if (!bubbleRef.current) {
@@ -35,8 +39,6 @@ export function HighlightedText({
       range.setStart(firstHighlightedElement, 0);
       range.setEnd(highlights[highlights.length - 1], highlights[highlights.length - 1].childNodes.length);
       const selectionRect = range.getBoundingClientRect();
-
-      bubble.innerText = question.endsWith("/") ? question.substring(0, question.length - 1) : question;
 
       const bubbleRect = bubble.getBoundingClientRect();
       const top = selectionRect.top - containerRect.top + containerNode.scrollTop - bubbleRect.height - 10;
@@ -91,5 +93,10 @@ export function HighlightedText({
     };
   }, []);
 
-  return <div ref={bubbleRef} className="znai-highlight-question-bubble" />;
+  return (
+    <div ref={bubbleRef} className="znai-highlight-question-bubble">
+      {bubbleText}
+      {additionalView}
+    </div>
+  );
 }

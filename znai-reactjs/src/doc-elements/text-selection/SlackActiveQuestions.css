@@ -1,0 +1,27 @@
+.znai-highlight-bubble-resolve-and-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.znai-highlight-bubble-link {
+    display: block;
+    text-align: right;
+    color: #93bbf9;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.znai-highlight-bubble-link:hover {
+    color: #b8d4ff;
+    text-decoration: none;
+}
+
+.theme-znai-dark .znai-highlight-bubble-link {
+    color: #a5d8ff;
+}
+
+.theme-znai-dark .znai-highlight-bubble-link:hover {
+    color: #d0ebff;
+}
