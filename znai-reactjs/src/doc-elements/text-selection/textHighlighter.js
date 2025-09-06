@@ -116,6 +116,12 @@ export class TextHighlighter {
         }
       };
 
+      const handleDoubleClick = (e) => {
+        if (onClick) {
+          e.stopPropagation();
+        }
+      };
+
       match.nodes.forEach((nodeInfo, nodeIndex) => {
         const parent = nodeInfo.node.parentNode;
         if (!parent) return;
@@ -155,6 +161,7 @@ export class TextHighlighter {
         span.addEventListener("mouseenter", handleMouseEnter);
         span.addEventListener("mouseleave", handleMouseLeave);
         span.addEventListener("click", handleClick);
+        span.addEventListener("dblclick", handleDoubleClick);
       });
 
       this.highlights.push(highlightGroup);
