@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { TextHighlighter } from "./textHighlighter";
 
+import { addTextMenuListener, removeTextMenuListener, TextMenuListener } from "./TextSelectionMenu";
 import "./HighlightedText.css";
 
 interface Props {
@@ -34,6 +35,13 @@ export function HighlightedText({
     }
 
     const bubble = bubbleRef.current as HTMLDivElement;
+
+    const textMenuListener: TextMenuListener = {
+      onHide() {},
+      onShow() {
+        hideBubble();
+      },
+    };
 
     function updateBubblePosition() {
       const containerRect = containerNode.getBoundingClientRect();
@@ -94,9 +102,12 @@ export function HighlightedText({
       }, 100);
     }
 
+    addTextMenuListener(textMenuListener);
+
     return () => {
       highlighter.clearHighlights();
       hideBubble();
+      removeTextMenuListener(textMenuListener);
     };
   }, []);
 

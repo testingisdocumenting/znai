@@ -26,6 +26,21 @@ import { Notification } from "../../components/Notification";
 import { currentPageId } from "../../structure/DocumentationNavigation";
 import "./TextSelectionMenu.css";
 
+export interface TextMenuListener {
+  onShow(): void;
+  onHide(): void;
+}
+
+const textMenuListeners: TextMenuListener[] = [];
+
+export function addTextMenuListener(listener: TextMenuListener) {
+  textMenuListeners.push(listener);
+}
+
+export function removeTextMenuListener(listener: TextMenuListener) {
+  textMenuListeners.splice(textMenuListeners.indexOf(listener), 1);
+}
+
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
   const menuRef = useRef<HTMLDivElement>(null);
   const expandedPanelRef = useRef<HTMLDivElement>(null);
@@ -181,7 +196,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key === "Escape") {
-      hidePopover();
+      hideMenu();
     }
   }
 
@@ -202,7 +217,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     try {
       await navigator.clipboard.writeText(pageUrl);
       setNotification({ type: "success", message: "Link is generated and copied to clipboard" });
-      hidePopover();
+      hideMenu();
     } catch (err) {
       setNotification({ type: "error", message: `Failed to generate link: ${err}` });
     }
@@ -240,7 +255,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
       if (response.ok) {
         setNotification({ type: "success", message: "Successfully sent to Slack!" });
-        hidePopover();
+        hideMenu();
       } else {
         setNotification({ type: "error", message: `Failed to send to Slack: ${response.statusText}` });
       }
@@ -258,9 +273,11 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     menu.style.top = `${top}px`;
     menu.style.left = `${left}px`;
     menu.style.visibility = "visible";
+
+    textMenuListeners.forEach((listener) => listener.onShow());
   }
 
-  function hidePopover() {
+  function hideMenu() {
     if (menuRef.current) {
       menuRef.current.style.visibility = "hidden";
     }
@@ -269,19 +286,21 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       slackQuestionInputRef.current.value = "";
     }
     setHasText(false);
+
+    textMenuListeners.forEach((listener) => listener.onHide());
   }
 
   function onMouseUp(event: MouseEvent) {
     if (panelData) {
       if (expandedPanelRef.current && event.target && !expandedPanelRef.current.contains(event.target as Node)) {
-        hidePopover();
+        hideMenu();
       }
       return;
     }
 
     const selection = getSelection();
     if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
-      hidePopover();
+      hideMenu();
       return;
     }
 
@@ -309,7 +328,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
     const selection = getSelection();
     if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
-      hidePopover();
+      hideMenu();
       return;
     }
   }
