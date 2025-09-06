@@ -65,9 +65,11 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
   const renderedQuestions = questions.map((question, idx) => {
     const additionalView = (
       <div className="znai-highlight-bubble-resolve-and-link">
-        <ResolveQuestionButton onClick={() => console.log("resolve")} />
+        <div className="znai-highlight-bubble-resolve-wrapper">
+          <ResolveQuestionButton onClick={() => console.log("resolve")} />
+        </div>
         <a className="znai-highlight-bubble-link" href={question.slackLink} target="_blank" rel="noopener noreferrer">
-          slack thread
+          open thread
         </a>
       </div>
     );

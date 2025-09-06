@@ -3,7 +3,6 @@
     position: absolute;
     background: #1e40af;
     color: white;
-    padding: 8px 16px;
     border-radius: 8px;
     font-size: 14px;
     line-height: 1.4;
@@ -12,6 +11,10 @@
                 0 6px 12px rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(10px);
     z-index: 20;
+}
+
+.znai-highlight-question-bubble-text {
+    padding: 8px 16px;
 }
 
 .znai-highlight-question-bubble::after {

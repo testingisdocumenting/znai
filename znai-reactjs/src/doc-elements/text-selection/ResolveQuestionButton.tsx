@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './ResolveQuestionButton.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./ResolveQuestionButton.css";
 
 interface Props {
   onClick(): void;
@@ -35,11 +35,8 @@ export function ResolveQuestionButton({ onClick }: Props) {
   };
 
   return (
-    <button 
-      className={`resolve-question-button ${isConfirming ? 'confirming' : ''}`}
-      onClick={handleClick}
-    >
-      {isConfirming ? 'Confirm' : 'Resolve'}
+    <button className={`resolve-question-button ${isConfirming ? "confirming" : ""}`} onClick={handleClick}>
+      {isConfirming ? "confirm" : "resolve"}
     </button>
   );
 }

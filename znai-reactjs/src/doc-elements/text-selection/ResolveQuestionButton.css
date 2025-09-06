@@ -22,17 +22,17 @@
 }
 
 .theme-znai-dark .resolve-question-button {
-  color: #7a9bd6;
+  color: #b8cef0;
 }
 
 .theme-znai-dark .resolve-question-button:hover {
-  color: #95b0e0;
+  color: #d0dff5;
 }
 
 .theme-znai-dark .resolve-question-button.confirming {
-  color: #d4a85c;
+  color: #f0c674;
 }
 
 .theme-znai-dark .resolve-question-button.confirming:hover {
-  color: #e0b870;
+  color: #f5d48a;
 }

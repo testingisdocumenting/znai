@@ -26,6 +26,8 @@ export function HighlightedText({
 
   const bubbleText = question.endsWith("/") ? question.substring(0, question.length - 1) : question;
 
+  // TODO re-calculate bubble position on window size change
+
   useEffect(() => {
     if (!bubbleRef.current) {
       return;
@@ -95,7 +97,7 @@ export function HighlightedText({
 
   return (
     <div ref={bubbleRef} className="znai-highlight-question-bubble">
-      {bubbleText}
+      <div className="znai-highlight-question-bubble-text">{bubbleText}</div>
       {additionalView}
     </div>
   );
