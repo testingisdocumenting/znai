@@ -122,8 +122,8 @@ def load_questions_from_csv():
     with open(CSV_FILE, 'r', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            row['completed'] = row['completed'].lower() == 'true' if row['completed'] else False
-            questions.append(row)
+            if not row['completed'].lower() == 'true':
+                questions.append(row)
     
     return questions
 
@@ -132,7 +132,7 @@ def update_question_completion_status(message_ts, completed):
     updated = False
     
     for question in questions:
-        if question['message_ts'] == message_ts:
+        if question['slackMessageTs'] == message_ts:
             question['completed'] = completed
             updated = True
             break

@@ -5,16 +5,16 @@ import { Notification } from "../../components/Notification";
 import { HighlightedText } from "./HighlightedText";
 import { TocItem } from "../../structure/TocItem";
 
-import "./SlackActiveQuestions.css";
 import { ResolveQuestionButton } from "./ResolveQuestionButton";
+import "./SlackActiveQuestions.css";
 
 interface Question {
   selectedText: string;
   prefix: string;
   suffix: string;
   question: string;
-  slackLink?: string;
-  slackMessageTs?: string;
+  slackLink: string;
+  slackMessageTs: string;
 }
 
 export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode: HTMLDivElement; tocItem: TocItem }) {
@@ -62,12 +62,40 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
     }
   }
 
-  const renderedQuestions = questions.map((question, idx) => {
+  async function resolveQuestionPost(question: Question) {
+    try {
+      const response = await fetch(getDocMeta().resolveSlackQuestionUrl! + "/" + question.slackMessageTs, {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        setNotification({ type: "success", message: "Resolved slack question" });
+        setQuestions(questions.filter((q) => question.slackMessageTs !== q.slackMessageTs));
+      } else {
+        setNotification({ type: "error", message: `Failed to resolve question: ${response.statusText}` });
+      }
+    } catch (error) {
+      setNotification({ type: "error", message: "Network error: Unable to connect to server" });
+    }
+  }
+
+  const renderedQuestions = questions.map((question) => {
+    function maybeResolveButton() {
+      if (!getDocMeta().resolveSlackQuestionUrl) {
+        return null;
+      }
+
+      return (
+        <div className="znai-highlight-bubble-resolve-wrapper">
+          <ResolveQuestionButton onClick={() => resolveQuestionPost(question)} />
+        </div>
+      );
+    }
+
     const additionalView = (
       <div className="znai-highlight-bubble-resolve-and-link">
-        <div className="znai-highlight-bubble-resolve-wrapper">
-          <ResolveQuestionButton onClick={() => console.log("resolve")} />
-        </div>
+        {maybeResolveButton()}
         <a className="znai-highlight-bubble-link" href={question.slackLink} target="_blank" rel="noopener noreferrer">
           open thread
         </a>
@@ -75,7 +103,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
     );
     return (
       <HighlightedText
-        key={idx}
+        key={question.slackMessageTs}
         containerNode={containerNode}
         textSelection={question.selectedText}
         prefix={question.prefix}
