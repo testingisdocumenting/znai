@@ -1,6 +1,7 @@
 import os
 import json
 import csv
+import uuid
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from slack_sdk import WebClient
@@ -25,7 +26,7 @@ if not slack_token:
 slack_client = WebClient(token=slack_token)
 
 CSV_FILE = "active_questions.csv"
-CSV_HEADERS = ["timestamp", "pageId", "pageUrl", "context", "selectedText", "selectedPrefix", "selectedSuffix", "question", "slackLink", "username", "channel", "slackMessageTs", "completed"]
+CSV_HEADERS = ["id", "timestamp", "pageId", "pageUrl", "context", "selectedText", "selectedPrefix", "selectedSuffix", "question", "slackLink", "username", "channel", "slackMessageTs", "resolved"]
 
 @app.route('/ask-in-slack', methods=['POST'])
 def ask_in_slack():
@@ -40,12 +41,14 @@ def ask_in_slack():
 
         if not data:
             return jsonify({"error": "No JSON data provided"}), 400
-        
+
+
+        question_id = str(uuid.uuid4())
+        page_id = data.get('pageId')
+        page_url = f"http://localhost:5173/preview/{page_id}?questionId={question_id}"
         selected_text = data.get('selectedText')
         selected_prefix = data.get('selectedPrefix', '')
         selected_suffix = data.get('selectedSuffix', '')
-        page_id = data.get('pageId')
-        page_url = data.get('pageUrl')
         username = data.get('username')
         slack_channel = data.get('slackChannel')
         question = data.get('question')
@@ -77,6 +80,7 @@ def ask_in_slack():
         slack_link = f"https://slack.com/archives/{slack_channel}/p{message_ts.replace('.', '')}"
         
         persist_questions_to_csv([{
+            'id': question_id,
             'pageId': page_id,
             'context': context or '',
             'selectedText': selected_text or '',
@@ -86,7 +90,7 @@ def ask_in_slack():
             'slackLink': slack_link,
             'channel': slack_channel,
             'slackMessageTs': message_ts,
-            'completed': False,
+            'resolved': False,
         }])
         
         print(f"Message posted successfully: {message_ts}")
@@ -122,18 +126,18 @@ def load_questions_from_csv():
     with open(CSV_FILE, 'r', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            if not row['completed'].lower() == 'true':
-                questions.append(row)
-    
+            row['resolved'] =  row['resolved'].lower() == 'true'
+            questions.append(row)
+
     return questions
 
-def update_question_completion_status(message_ts, completed):
+def update_question_completion_status(message_ts, resolved):
     questions = load_questions_from_csv()
     updated = False
     
     for question in questions:
         if question['slackMessageTs'] == message_ts:
-            question['completed'] = completed
+            question['resolved'] = resolved
             updated = True
             break
     
@@ -152,7 +156,7 @@ def check_slack_message_completion(channel, message_ts):
         if 'message' in result and 'reactions' in result['message']:
             reactions = result['message']['reactions']
             for reaction in reactions:
-                if reaction['name'] in ['white_check_mark', 'heavy_check_mark', 'completed', 'done']:
+                if reaction['name'] in ['white_check_mark', 'heavy_check_mark', 'resolved', 'done']:
                     return True
         
         return False
@@ -164,9 +168,9 @@ def check_slack_message_completion(channel, message_ts):
 def get_active_questions():
     try:
         page_id = request.args.get('pageId')
+        question_id = request.args.get('questionId')
         questions = load_questions_from_csv()
-        
-        questions = [q for q in questions if q.get('pageId') == page_id]
+        questions = [q for q in questions if q.get('pageId') == page_id and (q.get('resolved') == False or q.get('id') == question_id)]
         
         return jsonify(questions), 200
         
@@ -182,8 +186,8 @@ def resolve_slack_question(ts):
         updated = update_question_completion_status(ts, True)
         
         if updated:
-            print(f"Successfully marked question with ts {ts} as completed")
-            return jsonify({"success": True, "message": f"Question {ts} marked as completed"}), 200
+            print(f"Successfully marked question with ts {ts} as resolved")
+            return jsonify({"success": True, "message": f"Question {ts} marked as resolved"}), 200
         else:
             print(f"Question with ts {ts} not found")
             return jsonify({"error": f"Question with ts {ts} not found"}), 404

@@ -9,17 +9,22 @@ import { ResolveQuestionButton } from "./ResolveQuestionButton";
 import "./SlackActiveQuestions.css";
 
 interface Question {
+  id: string;
   selectedText: string;
   selectedPrefix: string;
   selectedSuffix: string;
   question: string;
   slackLink: string;
   slackMessageTs: string;
+  resolved: boolean;
 }
 
 export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode: HTMLDivElement; tocItem: TocItem }) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  const params = new URLSearchParams(window.location.search);
+  const questionId = params.get("questionId") || "";
 
   const pageId = pageIdFromTocItem(tocItem);
 
@@ -35,7 +40,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
         return;
       }
 
-      const url = `${baseUrl}?pageId=${encodeURIComponent(pageId)}`;
+      const url = `${baseUrl}?pageId=${encodeURIComponent(pageId)}&questionId=${questionId}`;
 
       const response = await fetch(url, {
         method: "GET",
@@ -51,6 +56,8 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
           question: item.question,
           slackLink: item.slackLink,
           slackMessageTs: item.slackMessageTs,
+          id: item.id,
+          resolved: item.resolved,
         }));
         setQuestions(questions);
       } else {
@@ -86,7 +93,9 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
         return null;
       }
 
-      return (
+      return question.resolved ? (
+        <div className="znai-highlight-bubble-resolve-wrapper">resolved</div>
+      ) : (
         <div className="znai-highlight-bubble-resolve-wrapper">
           <ResolveQuestionButton onClick={() => resolveQuestionPost(question)} />
         </div>
@@ -101,6 +110,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
         </a>
       </div>
     );
+
     return (
       <HighlightedText
         key={question.slackMessageTs}
@@ -110,7 +120,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
         selectedSuffix={question.selectedSuffix}
         question={question.question}
         additionalView={additionalView}
-        displayBubbleAndScrollIntoView={false}
+        displayBubbleAndScrollIntoView={!!questionId && question.id === questionId}
       />
     );
   });

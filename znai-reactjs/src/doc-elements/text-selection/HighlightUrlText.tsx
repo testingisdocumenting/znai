@@ -23,11 +23,12 @@ export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElem
   return params ? (
     <HighlightedText
       containerNode={containerNode}
-      textSelection={params.selection}
-      prefix={params.prefix}
-      suffix={params.suffix}
+      selectedText={params.selection}
+      selectedPrefix={params.prefix}
+      selectedSuffix={params.suffix}
       question={params.question}
       displayBubbleAndScrollIntoView={true}
+      additionalView={null}
     />
   ) : null;
 }

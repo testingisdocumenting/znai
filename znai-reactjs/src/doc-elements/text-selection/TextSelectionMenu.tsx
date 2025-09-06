@@ -214,14 +214,11 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       return;
     }
 
-    const pageUrl = buildHighlightUrl({ ...panelData!.prefixSuffixMatch, question });
     const body = {
       selectedText: panelData!.prefixSuffixMatch.selection,
       selectedPrefix: panelData!.prefixSuffixMatch.prefix,
       selectedSuffix: panelData!.prefixSuffixMatch.suffix,
-      pageUrl: pageUrl,
       pageId: currentPageId(),
-      username: "web-user",
       slackChannel: getDocMeta().slackChannel,
       question: question,
       context: panelData!.context,
