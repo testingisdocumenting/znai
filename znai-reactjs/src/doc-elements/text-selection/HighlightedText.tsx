@@ -5,9 +5,9 @@ import "./HighlightedText.css";
 
 interface Props {
   containerNode: HTMLDivElement;
-  textSelection: string;
-  prefix: string;
-  suffix: string;
+  selectedText: string;
+  selectedPrefix: string;
+  selectedSuffix: string;
   question: string;
   displayBubbleAndScrollIntoView: boolean;
   additionalView: React.ReactNode;
@@ -15,9 +15,9 @@ interface Props {
 
 export function HighlightedText({
   containerNode,
-  textSelection,
-  prefix,
-  suffix,
+  selectedText,
+  selectedPrefix,
+  selectedSuffix,
   question,
   displayBubbleAndScrollIntoView,
   additionalView,
@@ -73,7 +73,12 @@ export function HighlightedText({
     }
 
     const highlighter = new TextHighlighter(containerNode);
-    const highlights = highlighter.highlight(textSelection, prefix, suffix, question ? toggleBubble : null);
+    const highlights = highlighter.highlight(
+      selectedText,
+      selectedPrefix,
+      selectedSuffix,
+      question ? toggleBubble : null
+    );
     const firstHighlightedElement = highlights[0];
     if (!firstHighlightedElement) {
       return;

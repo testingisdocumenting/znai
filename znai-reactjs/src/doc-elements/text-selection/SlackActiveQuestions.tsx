@@ -10,8 +10,8 @@ import "./SlackActiveQuestions.css";
 
 interface Question {
   selectedText: string;
-  prefix: string;
-  suffix: string;
+  selectedPrefix: string;
+  selectedSuffix: string;
   question: string;
   slackLink: string;
   slackMessageTs: string;
@@ -46,8 +46,8 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
         const data = await response.json();
         const questions = data.map((item: any) => ({
           selectedText: item.selectedText,
-          prefix: item.selectedPrefix,
-          suffix: item.selectedSuffix,
+          selectedPrefix: item.selectedPrefix,
+          selectedSuffix: item.selectedSuffix,
           question: item.question,
           slackLink: item.slackLink,
           slackMessageTs: item.slackMessageTs,
@@ -105,9 +105,9 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
       <HighlightedText
         key={question.slackMessageTs}
         containerNode={containerNode}
-        textSelection={question.selectedText}
-        prefix={question.prefix}
-        suffix={question.suffix}
+        selectedText={question.selectedText}
+        selectedPrefix={question.selectedPrefix}
+        selectedSuffix={question.selectedSuffix}
         question={question.question}
         additionalView={additionalView}
         displayBubbleAndScrollIntoView={false}
