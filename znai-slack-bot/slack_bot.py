@@ -45,7 +45,8 @@ def ask_in_slack():
 
         question_id = str(uuid.uuid4())
         page_id = data.get('pageId')
-        page_url = f"http://localhost:5173/preview/{page_id}?questionId={question_id}"
+        page_origin = data.get('pageOrigin')
+        page_url = f"{page_origin}/{page_id}/?questionId={question_id}"
         selected_text = data.get('selectedText')
         selected_prefix = data.get('selectedPrefix', '')
         selected_suffix = data.get('selectedSuffix', '')

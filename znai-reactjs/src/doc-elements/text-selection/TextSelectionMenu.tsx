@@ -239,6 +239,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       selectedPrefix: panelData!.prefixSuffixMatch.prefix,
       selectedSuffix: panelData!.prefixSuffixMatch.suffix,
       pageId: currentPageId(),
+      pageOrigin: document.location.origin,
       slackChannel: getDocMeta().slackChannel,
       question: question,
       context: panelData!.context,
