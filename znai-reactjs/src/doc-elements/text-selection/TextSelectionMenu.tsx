@@ -23,7 +23,23 @@ import { getDocMeta } from "../../structure/docMeta";
 
 import { buildContext } from "./markdownContextBuilder";
 import { Notification } from "../../components/Notification";
+import { currentPageId } from "../../structure/DocumentationNavigation";
 import "./TextSelectionMenu.css";
+
+export interface TextMenuListener {
+  onShow(): void;
+  onHide(): void;
+}
+
+const textMenuListeners: TextMenuListener[] = [];
+
+export function addTextMenuListener(listener: TextMenuListener) {
+  textMenuListeners.push(listener);
+}
+
+export function removeTextMenuListener(listener: TextMenuListener) {
+  textMenuListeners.splice(textMenuListeners.indexOf(listener), 1);
+}
 
 export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -180,13 +196,14 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key === "Escape") {
-      hidePopover();
+      hideMenu();
     }
   }
 
   function handleGenerateLink() {
+    const context = buildContext();
     const prefixSuffixMatch = findPrefixSuffixAndMatch(containerNode);
-    setPanelData({ type: "linkgen", context: "", prefixSuffixMatch });
+    setPanelData({ type: "linkgen", context, prefixSuffixMatch });
   }
 
   function handleAskInSlack() {
@@ -196,12 +213,16 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   }
 
   async function generateLink() {
-    const comment = linkCommentInputRef.current?.value?.trim();
-    const pageUrl = buildHighlightUrl(panelData!.prefixSuffixMatch, comment);
+    const comment = linkCommentInputRef.current?.value?.trim() || "";
+    const pageUrl = buildHighlightUrl({
+      ...panelData!.prefixSuffixMatch,
+      question: comment,
+      context: panelData?.context || "",
+    });
     try {
       await navigator.clipboard.writeText(pageUrl);
       setNotification({ type: "success", message: "Link is generated and copied to clipboard" });
-      hidePopover();
+      hideMenu();
     } catch (err) {
       setNotification({ type: "error", message: `Failed to generate link: ${err}` });
     }
@@ -213,27 +234,33 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       return;
     }
 
-    const pageUrl = buildHighlightUrl(panelData!.prefixSuffixMatch, question);
-
     const body = {
       selectedText: panelData!.prefixSuffixMatch.selection,
-      pageUrl: pageUrl,
-      username: "web-user",
+      selectedPrefix: panelData!.prefixSuffixMatch.prefix,
+      selectedSuffix: panelData!.prefixSuffixMatch.suffix,
+      pageId: currentPageId(),
       slackChannel: getDocMeta().slackChannel,
       question: question,
       context: panelData!.context,
     };
 
     try {
+      const headers = getDocMeta().sendToSlackIncludeContentType
+        ? {
+            "Content-Type": "application/json",
+          }
+        : undefined;
+
       const response = await fetch(getDocMeta().sendToSlackUrl!, {
         method: "POST",
         credentials: "include",
+        headers,
         body: JSON.stringify(body),
       });
 
       if (response.ok) {
         setNotification({ type: "success", message: "Successfully sent to Slack!" });
-        hidePopover();
+        hideMenu();
       } else {
         setNotification({ type: "error", message: `Failed to send to Slack: ${response.statusText}` });
       }
@@ -251,9 +278,11 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     menu.style.top = `${top}px`;
     menu.style.left = `${left}px`;
     menu.style.visibility = "visible";
+
+    textMenuListeners.forEach((listener) => listener.onShow());
   }
 
-  function hidePopover() {
+  function hideMenu() {
     if (menuRef.current) {
       menuRef.current.style.visibility = "hidden";
     }
@@ -262,19 +291,21 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       slackQuestionInputRef.current.value = "";
     }
     setHasText(false);
+
+    textMenuListeners.forEach((listener) => listener.onHide());
   }
 
   function onMouseUp(event: MouseEvent) {
     if (panelData) {
       if (expandedPanelRef.current && event.target && !expandedPanelRef.current.contains(event.target as Node)) {
-        hidePopover();
+        hideMenu();
       }
       return;
     }
 
     const selection = getSelection();
     if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
-      hidePopover();
+      hideMenu();
       return;
     }
 
@@ -302,7 +333,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
     const selection = getSelection();
     if (selection === null || selection.rangeCount === 0 || selection.isCollapsed) {
-      hidePopover();
+      hideMenu();
       return;
     }
   }

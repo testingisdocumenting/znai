@@ -1,0 +1,38 @@
+.resolve-question-button {
+  background: none;
+  border: none;
+  color: #a8b9e3;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  transition: color 0.2s ease;
+}
+
+.resolve-question-button:hover {
+  color: #c5d3ed;
+}
+
+.resolve-question-button.confirming {
+  color: #e6c074;
+  font-weight: 500;
+}
+
+.resolve-question-button.confirming:hover {
+  color: #f0d08a;
+}
+
+.theme-znai-dark .resolve-question-button {
+  color: #b8cef0;
+}
+
+.theme-znai-dark .resolve-question-button:hover {
+  color: #d0dff5;
+}
+
+.theme-znai-dark .resolve-question-button.confirming {
+  color: #f0c674;
+}
+
+.theme-znai-dark .resolve-question-button.confirming:hover {
+  color: #f5d48a;
+}

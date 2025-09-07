@@ -23,7 +23,7 @@
     backdrop-filter: blur(10px);
     color: var(--znai-regular-text-color);
     font-size: var(--znai-smaller-text-size);
-    z-index: 10;
+    z-index: 100;
     overflow: hidden;
     visibility: hidden;
 }

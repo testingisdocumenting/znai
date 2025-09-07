@@ -15,78 +15,76 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import { Support } from "./Support"
-import { Icon } from '../icons/Icon'
+import { Support } from "./Support";
+import { Icon } from "../icons/Icon";
 
 import { isPresentationButtonVisible } from "../../structure/docMeta.js";
 
-import "./PageTitle.css"
+import { pageTitleBlockClassName } from "../../layout/classNamesAndIds";
+import "./PageTitle.css";
 
-const PageTitle = ({tocItem, onPresentationOpen, lastModifiedTime, docMeta}) => {
-    const displayTitle = !!tocItem.pageTitle
-    const title = displayTitle ? [<span key="title" className="page-title">{tocItem.pageTitle}</span>,
-      (onPresentationOpen && isPresentationButtonVisible()) ?
-            <Icon key="presentation-mode"
-                  id="maximize"
-                  className="presentation-button"
-                  onClick={onPresentationOpen}/> : null] : []
+const PageTitle = ({ tocItem, onPresentationOpen, lastModifiedTime, docMeta }) => {
+  const displayTitle = !!tocItem.pageTitle;
+  const title = displayTitle
+    ? [
+        <span key="title" className="page-title">
+          {tocItem.pageTitle}
+        </span>,
+        onPresentationOpen && isPresentationButtonVisible() ? (
+          <Icon key="presentation-mode" id="maximize" className="presentation-button" onClick={onPresentationOpen} />
+        ) : null,
+      ]
+    : [];
 
-    return (
-        <React.Fragment>
-            <div className="page-title-block">
-                {title}
-            </div>
-            <div className="page-meta-block">
-                <ModifiedTime lastModifiedTime={lastModifiedTime}/>
-                <ViewOn docMeta={docMeta} tocItem={tocItem}/>
-                <Support/>
-            </div>
-        </React.Fragment>
-    )
+  return (
+    <React.Fragment>
+      <div className={pageTitleBlockClassName}>{title}</div>
+      <div className="page-meta-block">
+        <ModifiedTime lastModifiedTime={lastModifiedTime} />
+        <ViewOn docMeta={docMeta} tocItem={tocItem} />
+        <Support />
+      </div>
+    </React.Fragment>
+  );
+};
+
+function ModifiedTime({ lastModifiedTime }) {
+  if (!lastModifiedTime) {
+    return null;
+  }
+
+  const modifiedTimeAsStr = new Date(lastModifiedTime).toDateString();
+  return <div className="znai-page-last-update-time">{modifiedTimeAsStr}</div>;
 }
 
-function ModifiedTime({lastModifiedTime}) {
-    if (!lastModifiedTime) {
-        return null
-    }
+function ViewOn({ docMeta, tocItem }) {
+  const viewOn = docMeta.viewOn;
+  if (!viewOn || !viewOn.link || !viewOn.title) {
+    return null;
+  }
 
-    const modifiedTimeAsStr = new Date(lastModifiedTime).toDateString()
-    return (
-        <div className="znai-page-last-update-time">
-            {modifiedTimeAsStr}
-        </div>
-    )
-}
-
-function ViewOn({docMeta, tocItem}) {
-    const viewOn = docMeta.viewOn
-    if (!viewOn || !viewOn.link || !viewOn.title) {
-        return null
-    }
-
-    return (
-        <div className="page-view-on">
-            <a href={buildViewOnLink(tocItem, viewOn.link)}
-               target="_blank" rel="noopener">
-                {viewOn.title}
-            </a>
-        </div>
-    )
+  return (
+    <div className="page-view-on">
+      <a href={buildViewOnLink(tocItem, viewOn.link)} target="_blank" rel="noopener">
+        {viewOn.title}
+      </a>
+    </div>
+  );
 }
 
 function buildViewOnLink(tocItem, link) {
   if (tocItem.viewOnRelativePath) {
-    return `${link}/${tocItem.viewOnRelativePath}`
+    return `${link}/${tocItem.viewOnRelativePath}`;
   }
 
-  const fileName = (tocItem.fileExtension === "" && tocItem.fileName === "index") ? "index.md" :
-    `${tocItem.fileName}.${tocItem.fileExtension}`
+  const fileName =
+    tocItem.fileExtension === "" && tocItem.fileName === "index"
+      ? "index.md"
+      : `${tocItem.fileName}.${tocItem.fileExtension}`;
 
-  return tocItem.dirName ?
-    `${link}/${tocItem.dirName}/${fileName}`:
-    `${link}/${fileName}`
+  return tocItem.dirName ? `${link}/${tocItem.dirName}/${fileName}` : `${link}/${fileName}`;
 }
 
-export default PageTitle
+export default PageTitle;

@@ -89,12 +89,20 @@ export class TextHighlighter {
       const highlightGroup = [];
 
       const handleMouseEnter = () => {
+        if (!onClick) {
+          return;
+        }
+
         highlightGroup.forEach((span) => {
           span.classList.add("znai-highlight-hover");
         });
       };
 
       const handleMouseLeave = () => {
+        if (!onClick) {
+          return;
+        }
+
         highlightGroup.forEach((span) => {
           span.classList.remove("znai-highlight-hover");
         });
@@ -105,6 +113,12 @@ export class TextHighlighter {
 
         if (onClick) {
           onClick();
+        }
+      };
+
+      const handleDoubleClick = (e) => {
+        if (onClick) {
+          e.stopPropagation();
         }
       };
 
@@ -147,6 +161,7 @@ export class TextHighlighter {
         span.addEventListener("mouseenter", handleMouseEnter);
         span.addEventListener("mouseleave", handleMouseLeave);
         span.addEventListener("click", handleClick);
+        span.addEventListener("dblclick", handleDoubleClick);
       });
 
       this.highlights.push(highlightGroup);

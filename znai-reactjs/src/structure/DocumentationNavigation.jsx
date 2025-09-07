@@ -18,7 +18,7 @@
 import * as Promise from "promise";
 import { getDocId } from "./docMeta";
 import { isTocItemIndex } from "./toc/TableOfContents";
-import { mainPanelClassName } from "../layout/classNames";
+import { mainPanelClassName } from "../layout/classNamesAndIds.js";
 
 const index = { dirName: "", fileName: "index" };
 
@@ -128,6 +128,19 @@ class DocumentationNavigation {
   }
 }
 
+function joinPageIdParts(docId, dirName, fileName) {
+  return [docId, dirName, fileName].filter((part) => !!part).join("/");
+}
+
+function currentPageId() {
+  const pageLocation = documentationNavigation.currentPageLocation();
+  return joinPageIdParts(getDocId(), pageLocation.dirName, pageLocation.fileName);
+}
+
+function pageIdFromTocItem(tocItem) {
+  return joinPageIdParts(getDocId(), tocItem.dirName, tocItem.fileName);
+}
+
 const documentationNavigation = new DocumentationNavigation();
 
-export { documentationNavigation };
+export { documentationNavigation, currentPageId, pageIdFromTocItem };
