@@ -1033,11 +1033,27 @@ public class WebSite implements Log {
         public Configuration withMetaFromJsonFile(Path path) {
             String json = fileTextContent(path);
             docMeta = new DocMeta(json);
+            attachSlackMetaFromEnvVars(docMeta);
 
             withTitle(docMeta.getTitle());
             withType(docMeta.getType());
 
             return this;
+        }
+
+        private void attachSlackMetaFromEnvVars(DocMeta docMeta) {
+            addMetaFromEnvVar(docMeta, "sendToSlackUrl", "ZNAI_SEND_TO_SLACK_URL");
+            addMetaFromEnvVar(docMeta, "slackChannel", "ZNAI_SLACK_CHANNEL");
+            addMetaFromEnvVar(docMeta, "slackActiveQuestionsUrl", "ZNAI_SLACK_ACTIVE_QUESTIONS_URL");
+            addMetaFromEnvVar(docMeta, "resolveSlackQuestionUrl", "ZNAI_RESOLVE_SLACK_QUESTION_URL");
+            addMetaFromEnvVar(docMeta, "sendToSlackIncludeContentType", "ZNAI_SEND_TO_SLACK_INCLUDE_CONTENT_TYPE");
+        }
+
+        private void addMetaFromEnvVar(DocMeta docMeta, String key, String envVarName) {
+            String envValue = System.getenv(envVarName);
+            if (envValue != null) {
+                docMeta.addMetaIfNotPresent(key, envValue);
+            }
         }
 
         public Configuration withEnabledPreview(boolean isPreviewEnabled) {

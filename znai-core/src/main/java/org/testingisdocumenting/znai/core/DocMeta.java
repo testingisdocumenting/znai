@@ -38,13 +38,14 @@ public class DocMeta {
     private final boolean displayOnLanding;
 
     private boolean previewEnabled;
-    private final Map<String, ?> docMetaMap;
+    private final Map<String, Object> docMetaMap;
 
+    @SuppressWarnings("unchecked")
     public DocMeta(String metaJson) {
-        this(JsonUtils.deserializeAsMap(metaJson));
+        this((Map<String, Object>) JsonUtils.deserializeAsMap(metaJson));
     }
 
-    public DocMeta(Map<String, ?> docMetaMap) {
+    public DocMeta(Map<String, Object> docMetaMap) {
         this.id = stringValue(docMetaMap, "id", "");
         this.type = stringValue(docMetaMap, "type", "no-type");
         this.title = stringValue(docMetaMap, "title", "no-title");
@@ -53,14 +54,14 @@ public class DocMeta {
         this.description = stringValue(docMetaMap, "description", "no description");
         this.allowedUsers = stringList(docMetaMap, "allowedUsers");
         this.allowedGroups = stringList(docMetaMap, "allowedGroups");
-        attachSlackMetaFromEnvVars(docMetaMap);
 
         this.docMetaMap = docMetaMap;
     }
 
-    private void attachSlackMetaFromEnvVars(Map<String, ?> docMetaMap) {
-        addMetaFromEnvVar(docMetaMap, "sendToSlackUrl", "ZNAI_SEND_TO_SLACK_URL");
-        addMetaFromEnvVar(docMetaMap, "sendToSlackUrl", "ZNAI_SEND_TO_SLACK_URL");
+    public void addMetaIfNotPresent(String key, Object value) {
+        if (!docMetaMap.containsKey(key)) {
+            docMetaMap.put(key, value);
+        }
     }
 
     public DocMeta cloneWithNewJson(String docMetaJson) {

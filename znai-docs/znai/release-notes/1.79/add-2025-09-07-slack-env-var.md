@@ -1,0 +1,1 @@
+* Add: Slack setup via env variable
