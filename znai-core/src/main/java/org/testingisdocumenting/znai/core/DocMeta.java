@@ -53,8 +53,14 @@ public class DocMeta {
         this.description = stringValue(docMetaMap, "description", "no description");
         this.allowedUsers = stringList(docMetaMap, "allowedUsers");
         this.allowedGroups = stringList(docMetaMap, "allowedGroups");
+        attachSlackMetaFromEnvVars(docMetaMap);
 
         this.docMetaMap = docMetaMap;
+    }
+
+    private void attachSlackMetaFromEnvVars(Map<String, ?> docMetaMap) {
+        addMetaFromEnvVar(docMetaMap, "sendToSlackUrl", "ZNAI_SEND_TO_SLACK_URL");
+        addMetaFromEnvVar(docMetaMap, "sendToSlackUrl", "ZNAI_SEND_TO_SLACK_URL");
     }
 
     public DocMeta cloneWithNewJson(String docMetaJson) {
