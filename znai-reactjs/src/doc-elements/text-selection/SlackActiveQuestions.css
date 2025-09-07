@@ -1,0 +1,59 @@
+.znai-highlight-bubble-resolve-and-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    position: relative;
+}
+
+.znai-highlight-bubble-resolve-and-link::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.2) 80%, transparent);
+}
+
+.znai-highlight-bubble-resolve-wrapper {
+    padding-right: 16px;
+    margin-right: 16px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.znai-highlight-bubble-link {
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #93bbf9;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.znai-highlight-bubble-link:hover {
+    color: #b8d4ff;
+    text-decoration: none;
+}
+
+.theme-znai-dark .znai-highlight-bubble-link {
+    color: #a5d8ff;
+}
+
+.theme-znai-dark .znai-highlight-bubble-link:hover {
+    color: #d0ebff;
+}
+
+.theme-znai-dark .znai-highlight-bubble-resolve-and-link {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-znai-dark .znai-highlight-bubble-resolve-and-link::before {
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 80%, transparent);
+}
+
+.theme-znai-dark .znai-highlight-bubble-resolve-wrapper {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}

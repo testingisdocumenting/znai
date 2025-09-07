@@ -14,87 +14,22 @@
  * limitations under the License.
  */
 
-import { useEffect, useRef } from "react";
-import { TextHighlighter } from "./textHighlihter";
-import { mainPanelClassName } from "../../layout/classNames";
 import { extractHighlightParams } from "./highlightUrl";
-import { documentationNavigation } from "../../structure/DocumentationNavigation";
-import "./HighlightUrlText.css";
+import { HighlightedText } from "./HighlightedText";
 
 export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElement }) {
-  const bubbleRef = useRef<HTMLDivElement>(null);
+  const params = extractHighlightParams();
 
-  function toggleBubble() {
-    if (!bubbleRef.current) {
-      return;
-    }
-
-    const bubble = bubbleRef.current as HTMLDivElement;
-    if (bubble.style.display === "block") {
-      bubble.style.display = "none";
-    } else {
-      bubble.style.display = "block";
-    }
-  }
-
-  useEffect(() => {
-    const params = extractHighlightParams();
-    let highlighter: TextHighlighter | null = null;
-
-    if (params) {
-      const container = document.querySelector(mainPanelClassName) || document.body;
-      highlighter = new TextHighlighter(container);
-      const highlights = highlighter.highlight(params.selection, params.prefix, params.suffix, toggleBubble);
-      const firstHighlightedElement = highlights[0];
-      if (!firstHighlightedElement) {
-        return;
-      }
-
-      if (params.question && bubbleRef.current) {
-        const containerRect = containerNode.getBoundingClientRect();
-
-        const range = document.createRange();
-        range.setStart(firstHighlightedElement, 0);
-        range.setEnd(highlights[highlights.length - 1], highlights[highlights.length - 1].childNodes.length);
-        const selectionRect = range.getBoundingClientRect();
-
-        const bubbleText = params.question.endsWith("/")
-          ? params.question.substring(0, params.question.length - 1)
-          : params.question;
-        const bubble = bubbleRef.current;
-        bubble.innerText = bubbleText;
-        bubble.style.display = "block";
-
-        const bubbleRect = bubble.getBoundingClientRect();
-        const top = selectionRect.top - containerRect.top + containerNode.scrollTop - bubbleRect.height - 10;
-        const selectionCenter = selectionRect.left + selectionRect.width / 2.0;
-        const left = selectionCenter - bubbleRect.width / 2.0 - containerRect.left;
-
-        bubble.style.top = `${top}px`;
-        bubble.style.left = `${left}px`;
-      }
-
-      setTimeout(() => {
-        if (firstHighlightedElement) {
-          firstHighlightedElement.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      }, 100);
-    }
-
-    const urlChangeListener = () => {
-      if (bubbleRef.current) {
-        bubbleRef.current.style.display = "none";
-      }
-      if (highlighter) {
-        highlighter.clearHighlights();
-      }
-    };
-
-    documentationNavigation.addUrlChangeListener(urlChangeListener);
-    return () => {
-      documentationNavigation.removeUrlChangeListener(urlChangeListener);
-    };
-  }, []);
-
-  return <div ref={bubbleRef} className="znai-highlight-question-bubble" />;
+  return params ? (
+    <HighlightedText
+      containerNode={containerNode}
+      selectedText={params.selection}
+      selectedPrefix={params.prefix}
+      selectedSuffix={params.suffix}
+      question={params.question}
+      context={params.context}
+      displayBubbleAndScrollIntoView={true}
+      additionalView={null}
+    />
+  ) : null;
 }

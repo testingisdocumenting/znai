@@ -18,12 +18,14 @@ const HIGHLIGHT_PREFIX_PARAM = "highlightPrefix";
 const HIGHLIGHT_SELECTION_PARAM = "highlightSelection";
 const HIGHLIGHT_SUFFIX_PARAM = "highlightSuffix";
 const HIGHLIGHT_QUESTION_PARAM = "highlightQuestion";
+const HIGHLIGHT_CONTEXT_PARAM = "highlightContext";
 
 export interface HighlightParams {
   prefix: string;
   selection: string;
   suffix: string;
-  question?: string;
+  question: string;
+  context: string;
 }
 
 export function extractHighlightParams(): HighlightParams | null {
@@ -32,20 +34,22 @@ export function extractHighlightParams(): HighlightParams | null {
   const selection = params.get(HIGHLIGHT_SELECTION_PARAM);
   const suffix = params.get(HIGHLIGHT_SUFFIX_PARAM);
   const question = params.get(HIGHLIGHT_QUESTION_PARAM);
+  const context = params.get(HIGHLIGHT_CONTEXT_PARAM);
 
   if (prefix !== null && selection && suffix !== null) {
     return {
       prefix: decodeURIComponent(prefix),
       selection: decodeURIComponent(selection),
       suffix: decodeURIComponent(suffix),
-      question: question ? decodeURIComponent(question) : undefined,
+      question: question ? decodeURIComponent(question) : "",
+      context: context ? decodeURIComponent(context) : "",
     };
   }
 
   return null;
 }
 
-export function buildHighlightUrl(params: HighlightParams, question?: string): string {
+export function buildHighlightUrl(params: HighlightParams): string {
   let builtUrl = location.origin + location.pathname;
   if (!builtUrl.endsWith("/")) {
     builtUrl += "/";
@@ -55,8 +59,11 @@ export function buildHighlightUrl(params: HighlightParams, question?: string): s
   url.searchParams.set(HIGHLIGHT_PREFIX_PARAM, encodeURIComponent(params.prefix));
   url.searchParams.set(HIGHLIGHT_SELECTION_PARAM, encodeURIComponent(params.selection));
   url.searchParams.set(HIGHLIGHT_SUFFIX_PARAM, encodeURIComponent(params.suffix));
-  if (question) {
-    url.searchParams.set(HIGHLIGHT_QUESTION_PARAM, encodeURIComponent(question));
+  if (params.question) {
+    url.searchParams.set(HIGHLIGHT_QUESTION_PARAM, encodeURIComponent(params.question));
+  }
+  if (params.context) {
+    url.searchParams.set(HIGHLIGHT_CONTEXT_PARAM, encodeURIComponent(params.context));
   }
 
   return url.toString();
