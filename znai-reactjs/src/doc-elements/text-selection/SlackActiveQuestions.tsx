@@ -14,6 +14,7 @@ interface Question {
   selectedPrefix: string;
   selectedSuffix: string;
   question: string;
+  context: string;
   slackLink: string;
   slackMessageTs: string;
   resolved: boolean;
@@ -54,6 +55,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
           selectedPrefix: item.selectedPrefix,
           selectedSuffix: item.selectedSuffix,
           question: item.question,
+          context: item.context,
           slackLink: item.slackLink,
           slackMessageTs: item.slackMessageTs,
           id: item.id,
@@ -119,6 +121,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
         selectedPrefix={question.selectedPrefix}
         selectedSuffix={question.selectedSuffix}
         question={question.question}
+        context={question.context}
         additionalView={additionalView}
         displayBubbleAndScrollIntoView={!!questionId && question.id === questionId}
       />

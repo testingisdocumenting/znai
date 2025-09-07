@@ -18,12 +18,14 @@ const HIGHLIGHT_PREFIX_PARAM = "highlightPrefix";
 const HIGHLIGHT_SELECTION_PARAM = "highlightSelection";
 const HIGHLIGHT_SUFFIX_PARAM = "highlightSuffix";
 const HIGHLIGHT_QUESTION_PARAM = "highlightQuestion";
+const HIGHLIGHT_CONTEXT_PARAM = "highlightContext";
 
 export interface HighlightParams {
   prefix: string;
   selection: string;
   suffix: string;
   question: string;
+  context: string;
 }
 
 export function extractHighlightParams(): HighlightParams | null {
@@ -32,6 +34,7 @@ export function extractHighlightParams(): HighlightParams | null {
   const selection = params.get(HIGHLIGHT_SELECTION_PARAM);
   const suffix = params.get(HIGHLIGHT_SUFFIX_PARAM);
   const question = params.get(HIGHLIGHT_QUESTION_PARAM);
+  const context = params.get(HIGHLIGHT_CONTEXT_PARAM);
 
   if (prefix !== null && selection && suffix !== null) {
     return {
@@ -39,6 +42,7 @@ export function extractHighlightParams(): HighlightParams | null {
       selection: decodeURIComponent(selection),
       suffix: decodeURIComponent(suffix),
       question: question ? decodeURIComponent(question) : "",
+      context: context ? decodeURIComponent(context) : "",
     };
   }
 
@@ -57,6 +61,9 @@ export function buildHighlightUrl(params: HighlightParams): string {
   url.searchParams.set(HIGHLIGHT_SUFFIX_PARAM, encodeURIComponent(params.suffix));
   if (params.question) {
     url.searchParams.set(HIGHLIGHT_QUESTION_PARAM, encodeURIComponent(params.question));
+  }
+  if (params.context) {
+    url.searchParams.set(HIGHLIGHT_CONTEXT_PARAM, encodeURIComponent(params.context));
   }
 
   return url.toString();

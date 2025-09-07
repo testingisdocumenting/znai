@@ -27,6 +27,7 @@ export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElem
       selectedPrefix={params.prefix}
       selectedSuffix={params.suffix}
       question={params.question}
+      context={params.context}
       displayBubbleAndScrollIntoView={true}
       additionalView={null}
     />

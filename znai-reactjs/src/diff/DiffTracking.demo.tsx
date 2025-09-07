@@ -24,7 +24,7 @@ import {
   enableDiffTracking,
   enableDiffTrackingForOneDomChangeTransaction,
 } from "./DiffTracking";
-import { mainPanelClassName } from "../layout/classNames";
+import { mainPanelClassName } from "../layout/classNamesAndIds";
 
 const [getTextValue, setTextValue] = simulateState("hello");
 const [getSvgTextValue, setSvgTextValue] = simulateState("svg hello");
@@ -37,22 +37,14 @@ const [getScrollCaseBeforeItems, setScrollCaseBeforeItems] = simulateState([
   "line4",
   "line5",
 ]);
-const [getScrollCaseAfterItems, setScrollCaseAfterItems] = simulateState([
-  "line1",
-  "line2",
-  "line3",
-  "line4",
-  "line5",
-]);
+const [getScrollCaseAfterItems, setScrollCaseAfterItems] = simulateState(["line1", "line2", "line3", "line4", "line5"]);
 
 export function diffTrackingDemo(registry: Registry) {
   registry.add("tracking control", () => (
     <div>
       <button onClick={enableDiffTracking}>enable</button>
       <button onClick={disableDiffTracking}>disable</button>
-      <button onClick={enableDiffTrackingForOneDomChangeTransaction}>
-        enable for one change transaction
-      </button>
+      <button onClick={enableDiffTrackingForOneDomChangeTransaction}>enable for one change transaction</button>
     </div>
   ));
 
@@ -95,10 +87,7 @@ export function diffTrackingDemo(registry: Registry) {
 
   registry.add("with scroll", () => (
     <DiffTracking>
-      <div
-        className={mainPanelClassName}
-        style={{ maxHeight: 100, overflow: "auto" }}
-      >
+      <div className={mainPanelClassName} style={{ maxHeight: 100, overflow: "auto" }}>
         <div className="page-content">
           {getScrollCaseBeforeItems().map((item, idx) => (
             <div key={idx} className="znai-simple-text">
@@ -143,16 +132,10 @@ function addAfterItem() {
 
 function addScrollCaseBeforeItem() {
   itemIdx++;
-  setScrollCaseBeforeItems([
-    ...getScrollCaseBeforeItems(),
-    "another item " + itemIdx,
-  ]);
+  setScrollCaseBeforeItems([...getScrollCaseBeforeItems(), "another item " + itemIdx]);
 }
 
 function addScrollCaseAfterItem() {
   itemIdx++;
-  setScrollCaseAfterItems([
-    ...getScrollCaseAfterItems(),
-    "another item " + itemIdx,
-  ]);
+  setScrollCaseAfterItems([...getScrollCaseAfterItems(), "another item " + itemIdx]);
 }

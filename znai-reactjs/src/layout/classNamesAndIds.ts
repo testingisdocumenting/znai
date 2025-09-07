@@ -15,3 +15,5 @@
  */
 
 export const mainPanelClassName = "znai-main-panel";
+export const pageTitleBlockClassName = "page-title-block";
+export const afterTitleId = "znai-after-title";

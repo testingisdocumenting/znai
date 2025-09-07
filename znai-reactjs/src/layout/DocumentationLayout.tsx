@@ -27,7 +27,7 @@ import { TocMobileHeader } from "./mobile/TocMobileHeader";
 
 import { TocMobilePanel } from "./mobile/TocMobilePanel";
 
-import { mainPanelClassName } from "./classNames";
+import { mainPanelClassName } from "./classNamesAndIds";
 
 import { TopHeader } from "./TopHeader";
 import { TextSelectionMenu } from "../doc-elements/text-selection/TextSelectionMenu";

@@ -19,7 +19,7 @@ import * as React from "react";
 import { HtmlNodeDiff } from "./HtmlNodeDiff";
 
 import "./DiffTracking.css";
-import { mainPanelClassName } from "../layout/classNames";
+import { mainPanelClassName } from "../layout/classNamesAndIds";
 
 let enabled = false;
 let autoDisable = false;
@@ -62,11 +62,7 @@ export class DiffTracking extends React.Component<Props, {}> {
     };
   }
 
-  componentDidUpdate(
-    prevProps: Props,
-    prevState: {},
-    snapshot: { beforeNode: HTMLElement }
-  ) {
+  componentDidUpdate(prevProps: Props, prevState: {}, snapshot: { beforeNode: HTMLElement }) {
     if (!snapshot) {
       return;
     }

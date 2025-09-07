@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,21 +15,22 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
+import { afterTitleId } from "../../../layout/classNamesAndIds";
 
 const DefaultPageContent = (props) => {
-    const {elementsLibrary, content} = props
-    const {PageTitle} = elementsLibrary
+  const { elementsLibrary, content } = props;
+  const { PageTitle } = elementsLibrary;
 
-    return (
-        <React.Fragment>
-            <div className="content-block">
-                <PageTitle {...props}/>
-            </div>
-            <props.elementsLibrary.DocElement elementsLibrary={elementsLibrary}
-                                              content={content}/>
-        </React.Fragment>
-    )
-}
+  return (
+    <React.Fragment>
+      <div className="content-block">
+        <PageTitle {...props} />
+      </div>
+      <props.elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={content} />
+      <div id={afterTitleId}></div>
+    </React.Fragment>
+  );
+};
 
-export default DefaultPageContent
+export default DefaultPageContent;

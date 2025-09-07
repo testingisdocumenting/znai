@@ -201,8 +201,9 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   }
 
   function handleGenerateLink() {
+    const context = buildContext();
     const prefixSuffixMatch = findPrefixSuffixAndMatch(containerNode);
-    setPanelData({ type: "linkgen", context: "", prefixSuffixMatch });
+    setPanelData({ type: "linkgen", context, prefixSuffixMatch });
   }
 
   function handleAskInSlack() {
@@ -213,7 +214,11 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
 
   async function generateLink() {
     const comment = linkCommentInputRef.current?.value?.trim() || "";
-    const pageUrl = buildHighlightUrl({ ...panelData!.prefixSuffixMatch, question: comment });
+    const pageUrl = buildHighlightUrl({
+      ...panelData!.prefixSuffixMatch,
+      question: comment,
+      context: panelData?.context || "",
+    });
     try {
       await navigator.clipboard.writeText(pageUrl);
       setNotification({ type: "success", message: "Link is generated and copied to clipboard" });
