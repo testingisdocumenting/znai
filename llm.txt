@@ -5771,6 +5771,9 @@ Use [brew]() to install [Firefox]().
 
 # Release Notes -> 2025
 
+## 1.78.1
+
+
 ## 1.78
 
 
