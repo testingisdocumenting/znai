@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,17 +20,49 @@
     margin-bottom: var(--znai-snippets-space-below);
 }
 
-.jupyter-html thead tr,
 .jupyter-html table {
+    margin: 0;
+    border-collapse: collapse;
+    background-color: var(--znai-table-body-background-color);
+    border: 1px solid var(--znai-table-border-color);
+}
+
+.jupyter-html thead tr {
     border: none;
 }
 
-.jupyter-html td,
-.jupyter-html th {
-    padding: 6px
+.jupyter-html thead {
+    background-color: var(--znai-table-header-background-color);
 }
 
-.jupyter-html table td,
-.jupyter-html table th {
-    border: 1px solid var(--znai-snippets-outer-border-color);
+.jupyter-html th {
+    background: var(--znai-table-header-background-color);
+    padding: 12px 16px;
+    font-weight: 600;
+    text-align: left;
+    color: var(--znai-table-title-color);
+    font-size: var(--znai-smaller-text-size);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--znai-table-border-color);
+    border-right: 1px solid var(--znai-table-border-color);
+}
+
+.jupyter-html th:last-child {
+    border-right: none;
+}
+
+.jupyter-html td {
+    padding: 12px 16px;
+    color: var(--znai-regular-text-color);
+    font-size: var(--znai-regular-text-size);
+    border-bottom: 1px solid var(--znai-table-border-color);
+    border-right: 1px solid var(--znai-table-border-color);
+}
+
+.jupyter-html td:last-child {
+    border-right: none;
+}
+
+.jupyter-html tbody tr:last-child td {
+    border-bottom: none;
 }

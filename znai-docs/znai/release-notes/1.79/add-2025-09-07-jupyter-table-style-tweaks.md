@@ -1,0 +1,1 @@
+* Add: Jupyter notebook table output style tweaks
