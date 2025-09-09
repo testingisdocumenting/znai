@@ -22,11 +22,11 @@ import { createPortal } from "react-dom";
 
 import { afterTitleId } from "../../layout/classNamesAndIds";
 
-import "./HighlightedText.css";
 import { removeTrailingSlashFromQueryParam } from "./queryParamUtils";
+import "./HighlightedText.css";
 
 export interface HighlightedTextListener {
-  onHighlight(firstElement: HTMLElement): void;
+  onUserDrivenTextHighlight(firstElement: HTMLElement): void;
 }
 
 const highlightedTextListeners: HighlightedTextListener[] = [];
@@ -174,7 +174,7 @@ export function HighlightedText({
       }
 
       scrollToBubbleIfRequired(firstHighlightedElement);
-      highlightedTextListeners.forEach((listener) => listener.onHighlight(firstHighlightedElement));
+      highlightedTextListeners.forEach((listener) => listener.onUserDrivenTextHighlight(firstHighlightedElement));
     }
 
     addTextMenuListener(textMenuListener);

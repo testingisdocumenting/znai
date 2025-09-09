@@ -25,6 +25,10 @@ import { mergeWithGlobalDocReferences } from "../references/globalDocReferences"
 
 import { repeatChar } from "../../utils/strings";
 
+import { addHighlightedTextListener, removeHighlightedTextListener } from "../text-selection/HighlightedText.js";
+
+import { reapplyTextHighlights } from "../text-selection/AllTextHighlights.js";
+
 import "./tokens.css";
 import "./SimpleCodeSnippet.css";
 
@@ -35,6 +39,7 @@ class SimpleCodeSnippet extends Component {
     this.processProps(props);
     this.state = {
       clickedReadMore: false,
+      hasHighlightedText: false,
     };
   }
 
@@ -50,17 +55,41 @@ class SimpleCodeSnippet extends Component {
     this.highlight = convertToList(highlight);
   }
 
+  componentDidMount() {
+    addHighlightedTextListener(this);
+  }
+
+  componentWillUnmount() {
+    removeHighlightedTextListener(this);
+  }
+
+  // highlight via slack questions or url link
+  onUserDrivenTextHighlight = (firstHighlightElement) => {
+    if (this.hiddenLinesContainerRef.current) {
+      console.log("-----------------");
+      console.log(this.hiddenLinesContainerRef.current);
+      const hasHighlight = this.hiddenLinesContainerRef.current.contains(firstHighlightElement);
+      if (hasHighlight) {
+        this.setState({ hasHighlightedText: true });
+      }
+    }
+  };
+
   render() {
+    this.hiddenLinesContainerRef = React.createRef();
     const { clickedReadMore } = this.state;
     const { wrap, isPresentation, slideIdx, references } = this.props;
 
     // slideIdx === 0 means no highlights, 1 - first highlight, etc
     const highlightIsVisible = !isPresentation || slideIdx > 0;
 
+    const linesOfTokens = this.linesOfTokens;
     const visibleLines =
       this.limitLines(this.props) && !clickedReadMore && !isPresentation
-        ? this.linesOfTokens.slice(0, this.readMoreVisibleLines(this.props))
-        : this.linesOfTokens;
+        ? linesOfTokens.slice(0, this.readMoreVisibleLines(this.props))
+        : linesOfTokens;
+
+    const hiddenLinesForHighlight = linesOfTokens.slice(visibleLines.length, linesOfTokens.length);
 
     const linesToRender = this.processLinesToRender(visibleLines);
 
@@ -81,6 +110,25 @@ class SimpleCodeSnippet extends Component {
             isPresentation={isPresentation}
           />
         ))}
+
+        <div ref={this.hiddenLinesContainerRef}>
+          {hiddenLinesForHighlight.map((tokens, lineIdx) => {
+            lineIdx = lineIdx + linesOfTokens.length;
+            return (
+              <LineOfTokens
+                key={lineIdx}
+                tokens={tokens}
+                references={mergedReferences}
+                wrap={wrap}
+                isPrevHighlighted={isHighlightedByIdx[lineIdx - 1]}
+                isHighlighted={isHighlightedByIdx[lineIdx]}
+                isNextHighlighted={isHighlightedByIdx[lineIdx + 1]}
+                isPresentation={isPresentation}
+                isHidden={true}
+              />
+            );
+          })}
+        </div>
         <React.Fragment>{this.renderReadMore()}</React.Fragment>
       </pre>
     );
@@ -94,7 +142,13 @@ class SimpleCodeSnippet extends Component {
       return null;
     }
 
-    const label = clickedReadMore ? "...collapse" : "read more...";
+    const label = clickedReadMore ? (
+      "...collapse"
+    ) : this.state.hasHighlightedText ? (
+      <span className="znai-highlight single">read more...</span>
+    ) : (
+      "read more..."
+    );
 
     return (
       <div className="code-snippet-read-more" onClick={this.toggleReadMoreClick}>
@@ -123,7 +177,12 @@ class SimpleCodeSnippet extends Component {
   }
 
   toggleReadMoreClick = () => {
-    this.setState((prev) => ({ clickedReadMore: !prev.clickedReadMore }));
+    this.setState(
+      (prev) => ({ clickedReadMore: !prev.clickedReadMore }),
+      () => {
+        reapplyTextHighlights();
+      }
+    );
   };
 
   limitLines(props) {

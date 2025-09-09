@@ -20,6 +20,10 @@
     white-space: pre;
 }
 
+.znai-code-line.hidden {
+    display: none;
+}
+
 .znai-code-line.highlight {
     background: var(--znai-snippets-line-highlighted-background-color);
     margin-left: -16px;

@@ -39,8 +39,11 @@ import {
 } from "../demo-utils/contentGenerators";
 
 import "./tokens.css";
+import { documentationNavigation } from "../../structure/DocumentationNavigation.jsx";
+import { AllTextHighlights } from "../text-selection/AllTextHighlights.js";
 
 const [getReadMore, setReadMore] = simulateState(true);
+const [isHighlightedTextPresent, setIsHighlightedTextPresent] = simulateState(true);
 
 export function snippetsDemo(registry) {
   registry
@@ -113,10 +116,13 @@ export function snippetsDemo(registry) {
     ))
     .add("read more", () => <Snippet lang="csv" snippet={longCode()} readMore={true} readMoreVisibleLines={4} />)
     .add("read more switch", () => (
-      <div>
+      <div id="read-more-switch">
         <button onClick={() => setReadMore(!getReadMore())}>toggle read more</button>
-        <button onClick={() => {}}>simulate highlight</button>
+        <button onClick={() => setIsHighlightedTextPresent(true)}>simulate highlight</button>
         <Snippet lang="csv" snippet={longCode()} readMore={getReadMore()} readMoreVisibleLines={4} />)
+        {isHighlightedTextPresent() && (
+          <AllTextHighlights containerNode={document.body} tocItem={documentationNavigation.currentPageLocation()} />
+        )}
       </div>
     ))
     .add("tabs with wide", () => (
