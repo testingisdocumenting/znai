@@ -25,6 +25,20 @@ import { afterTitleId } from "../../layout/classNamesAndIds";
 import "./HighlightedText.css";
 import { removeTrailingSlashFromQueryParam } from "./queryParamUtils";
 
+export interface HighlightedTextListener {
+  onHighlight(firstElement: HTMLElement): void;
+}
+
+const highlightedTextListeners: HighlightedTextListener[] = [];
+
+export function addHighlightedTextListener(listener: HighlightedTextListener) {
+  highlightedTextListeners.push(listener);
+}
+
+export function removeHighlightedTextListener(listener: HighlightedTextListener) {
+  highlightedTextListeners.splice(highlightedTextListeners.indexOf(listener), 1);
+}
+
 interface Props {
   containerNode: HTMLDivElement;
   selectedText: string;
@@ -154,14 +168,13 @@ export function HighlightedText({
       } else {
         console.warn("can't find element with id: " + afterTitleId);
       }
-    }
-
-    if (firstHighlightedElement) {
+    } else {
       if (question && bubbleRef.current && displayBubbleAndScrollIntoView) {
         showBubbleAndCalcPositionIfHasQuestion(firstHighlightedElement, highlights[highlights.length - 1]);
       }
 
       scrollToBubbleIfRequired(firstHighlightedElement);
+      highlightedTextListeners.forEach((listener) => listener.onHighlight(firstHighlightedElement));
     }
 
     addTextMenuListener(textMenuListener);

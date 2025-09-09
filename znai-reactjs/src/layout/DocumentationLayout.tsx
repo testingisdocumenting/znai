@@ -32,9 +32,7 @@ import { mainPanelClassName } from "./classNamesAndIds";
 import { TopHeader } from "./TopHeader";
 import { TextSelectionMenu } from "../doc-elements/text-selection/TextSelectionMenu";
 
-import { HighlightUrlText } from "../doc-elements/text-selection/HighlightUrlText";
-import { SlackActiveQuestions } from "../doc-elements/text-selection/SlackActiveQuestions";
-
+import { AllTextHighlights } from "../doc-elements/text-selection/AllTextHighlights";
 import "./DocumentationLayout.css";
 import "./mobile/MobileLayoutOverrides.css";
 
@@ -101,8 +99,7 @@ export function DocumentationLayout({
     return (
       <div ref={contentRef} className={panelFullClassName}>
         {contentRef.current && <TextSelectionMenu containerNode={contentRef.current} />}
-        {contentRef.current && <HighlightUrlText containerNode={contentRef.current} />}
-        {contentRef.current && <SlackActiveQuestions containerNode={contentRef.current} tocItem={tocItem} />}
+        {contentRef.current && <AllTextHighlights containerNode={contentRef.current} tocItem={tocItem} />}
         <div ref={contentRef} style={{ display: "contents" }}>
           {renderedPage}
         </div>
