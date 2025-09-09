@@ -14,37 +14,10 @@
  * limitations under the License.
  */
 
-.znai-highlight {
-    background-color: #ffeb3b;
-    color: black;
-    transition: background-color 0.2s;
-}
+export function removeTrailingSlashFromQueryParam(value: string | undefined) {
+  if (!value) {
+    return value;
+  }
 
-.znai-highlight-hover {
-    background-color: #efdd47;
-    cursor: pointer;
+  return value.endsWith("/") ? value.substring(0, value.length - 1) : value;
 }
-
-.znai-highlight.clicked {
-    background-color: #ff9800;
-}
-
-.znai-highlight.start {
-    border-radius: 4px 0 0 4px;
-    padding-left: 2px;
-}
-
-.znai-highlight.end {
-    border-radius: 0 4px 4px 0;
-    padding-right: 2px;
-}
-
-.znai-highlight.middle {
-    border-radius: 0;
-}
-
-.znai-highlight.single {
-    border-radius: 4px;
-    padding: 0 2px;
-}
-

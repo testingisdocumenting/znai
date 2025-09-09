@@ -1,1 +1,1 @@
-* Add: Jupyter notebook table output style tweaks
+* Fix: Slack link - remove trailing slash from `questionId` to fix auto scroll to the question
