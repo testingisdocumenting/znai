@@ -65,9 +65,15 @@ class SimpleCodeSnippet extends Component {
 
   // highlight via slack questions or url link
   onUserDrivenTextHighlight = (firstHighlightElement) => {
+    if (!this.props.readMore) {
+      return;
+    }
+
     if (this.hiddenLinesContainerRef.current) {
       const hasHighlight = this.hiddenLinesContainerRef.current.contains(firstHighlightElement);
       if (hasHighlight) {
+        this.hiddenLinesContainerRef.current.appendChild(firstHighlightElement);
+        firstHighlightElement.style.visibility = "hidden";
         this.setState({ hasHighlightedText: true });
       }
     }

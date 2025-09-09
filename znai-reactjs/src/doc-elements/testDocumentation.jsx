@@ -126,6 +126,14 @@ export const testDocumentation = {
             ],
           },
           {
+            lang: "java",
+            snippet:
+              'public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n        this.workingDir = workingDir;\n        this.fileNameByDirName = new LinkedHashMap<>();\n    }\n\n    public void create() {\n        createPages();\n        createToc();\n        createMeta();\n        createIndex();\n        createLookupPaths();\n    }\n\n    private void createLookupPaths() {\n        createFileFromResource("lookup-paths");\n    }\n\n    private void createMeta() {\n        createFileFromResource("meta.json");\n    }\n}',
+            readMore: true,
+            readMoreVisibleLines: 3,
+            type: "Snippet",
+          },
+          {
             bulletMarker: "*",
             tight: true,
             type: "BulletList",
