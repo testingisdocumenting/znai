@@ -21,9 +21,7 @@ export function setupDOM(htmlContent) {
     `
       <!DOCTYPE html>
       <html lang="en">
-        <body>
-          ${htmlContent}
-        </body>
+        <body>${htmlContent}</body>
       </html>
     `,
     { pretendToBeVisual: true }

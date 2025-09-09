@@ -22,6 +22,10 @@ export function buildContext(): string {
 
   const range = selection.getRangeAt(0);
 
+  if (isSvgContainer(range)) {
+    return "```\n[svg image]\n" + "selected text: " + selection.toString().trim() + "\n```";
+  }
+
   const codeBlock = findCodeBlock(range);
   if (codeBlock) {
     return buildCodeSnippetContext(range, codeBlock);
@@ -59,7 +63,6 @@ function buildParagraphContext(range: Range): string {
     return "";
   }
 
-  // Find the paragraph containing the start of the selection
   const paragraph = findContainingParagraph(range.startContainer);
   if (!paragraph) {
     return "";
@@ -87,7 +90,6 @@ function findContainingParagraph(node: Node): HTMLElement | null {
 function buildParagraphOutput(paragraph: HTMLElement, selectedText: string, range: Range): string {
   const paragraphText = paragraph.textContent ?? "";
 
-  // Calculate the position of the selection within the paragraph
   let selectionPosition = -1;
   if (paragraph.contains(range.startContainer)) {
     const tempRange = document.createRange();
@@ -97,7 +99,6 @@ function buildParagraphOutput(paragraph: HTMLElement, selectedText: string, rang
   }
 
   const highlightedText = highlightSelectedTextInParagraph(paragraphText, selectedText, selectionPosition);
-  // Handle multi-line content with proper markdown quoting
   return "> " + highlightedText.replace(/\n/g, "\n> ");
 }
 
@@ -105,12 +106,24 @@ function highlightSelectedTextInParagraph(text: string, selectedText: string, se
   return highlightText(text, selectedText, selectionPosition, false);
 }
 
+function isSvgContainer(range: Range): boolean {
+  let element: Node | null = range.commonAncestorContainer;
+
+  while (element) {
+    if (element.nodeName.toLowerCase() === "svg") {
+      return true;
+    }
+
+    element = element?.parentNode;
+  }
+
+  return false;
+}
+
 function findCodeBlock(range: Range): HTMLElement | null {
   let element: Node | null = range.commonAncestorContainer;
 
-  // Walk up the DOM tree to find a code block
   while (element) {
-    // Check if it's an element node (nodeType 1)
     if (element.nodeType === 1) {
       const htmlElement = element as HTMLElement;
       if (htmlElement.tagName === "PRE" || htmlElement.classList.contains("snippet")) {
