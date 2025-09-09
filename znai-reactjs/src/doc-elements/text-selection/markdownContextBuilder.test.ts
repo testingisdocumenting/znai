@@ -396,4 +396,20 @@ export default JsClass
       expect(result).toBe("");
     });
   });
+
+  describe("buildContext - svg", () => {
+    it("should return svg context", () => {
+      const { container } = setupDOM(`<svg>
+<text>This is a sample text with multiple words.</text>
+<text>This text contains repeated phrases.</text>
+<text>The sample text is useful for testing.</text></svg>`);
+
+      const text = container.querySelector("text");
+      selectText(text.firstChild, 0, text.firstChild, 5);
+
+      const result = buildContext();
+
+      expect(result).toBe("```\n[svg image]\nselected text: This\n```");
+    });
+  });
 });

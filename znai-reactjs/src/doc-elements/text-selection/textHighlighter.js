@@ -28,7 +28,8 @@ export class TextHighlighter {
 
     let textNode;
     while ((textNode = walker.nextNode())) {
-      const isSvg = textNode.parentNode.localName === "text";
+      const localName = textNode.parentNode.localName;
+      const isSvg = localName === "text" || localName === "tspan";
       textNodes.push({ node: textNode, isSvg });
     }
     return textNodes;

@@ -1,0 +1,1 @@
+* Add: SVG support for Slack/Generate Link 

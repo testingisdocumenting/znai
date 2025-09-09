@@ -66,6 +66,12 @@ export const testDocumentation = {
             ],
           },
           {
+            wide: true,
+            mermaid:
+              "sequenceDiagram\n    par Alice to Bob\n        Alice->>Bob: Go help John\n    and Alice to John\n        Alice->>John: I want this done today\n        par John to Charlie\n            John->>Charlie: Can we do this today?\n        and John to Diana\n            John->>Diana: Can you help us today?\n    and Alice to Carl\n        Alice->>Carl: I also want this done today\n    end\nend\n",
+            type: "Mermaid",
+          },
+          {
             diagram: {
               isInvertedTextColorByStyleId: {},
               svg:

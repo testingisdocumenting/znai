@@ -21,8 +21,8 @@
 }
 
 .znai-highlight-svg {
-    fill: black;
-    stroke: #ffeb3b;
+    fill: black !important;
+    stroke: #ffeb3b !important;
     stroke-width: 8;
     stroke-linejoin: round;
     stroke-linecap: round;
