@@ -1,0 +1,1 @@
+* Fix: Ask in Slack now generates a correct link for initial index page
