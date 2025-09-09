@@ -134,7 +134,9 @@ function joinPageIdParts(docId, dirName, fileName) {
 
 function currentPageId() {
   const pageLocation = documentationNavigation.currentPageLocation();
-  return joinPageIdParts(getDocId(), pageLocation.dirName, pageLocation.fileName);
+  return isTocItemIndex(pageLocation)
+    ? getDocId()
+    : joinPageIdParts(getDocId(), pageLocation.dirName, pageLocation.fileName);
 }
 
 function pageIdFromTocItem(tocItem) {
