@@ -43,7 +43,6 @@ import { documentationNavigation } from "../../structure/DocumentationNavigation
 import { AllTextHighlights } from "../text-selection/AllTextHighlights.js";
 
 const [getReadMore, setReadMore] = simulateState(true);
-const [isHighlightedTextPresent, setIsHighlightedTextPresent] = simulateState(true);
 
 export function snippetsDemo(registry) {
   registry
@@ -118,11 +117,32 @@ export function snippetsDemo(registry) {
     .add("read more switch", () => (
       <div id="read-more-switch">
         <button onClick={() => setReadMore(!getReadMore())}>toggle read more</button>
-        <button onClick={() => setIsHighlightedTextPresent(true)}>simulate highlight</button>
+        <button
+          onClick={() => {
+            const url = new URL(window.location.href);
+            url.searchParams.set("highlightSelection", "line of text number 4");
+            url.searchParams.set("highlightPrefix", "");
+            url.searchParams.set("highlightSuffix", "");
+            history.pushState(null, "", url.toString());
+            location.reload();
+          }}
+        >
+          simulate highlight outside
+        </button>
+        <button
+          onClick={() => {
+            const url = new URL(window.location.href);
+            url.searchParams.set("highlightSelection", "line of text number 6");
+            url.searchParams.set("highlightPrefix", "");
+            url.searchParams.set("highlightSuffix", "");
+            history.pushState(null, "", url.toString());
+            location.reload();
+          }}
+        >
+          simulate highlight inside
+        </button>
         <Snippet lang="csv" snippet={longCode()} readMore={getReadMore()} readMoreVisibleLines={4} />)
-        {isHighlightedTextPresent() && (
-          <AllTextHighlights containerNode={document.body} tocItem={documentationNavigation.currentPageLocation()} />
-        )}
+        <AllTextHighlights containerNode={document.body} tocItem={documentationNavigation.currentPageLocation()} />
       </div>
     ))
     .add("tabs with wide", () => (

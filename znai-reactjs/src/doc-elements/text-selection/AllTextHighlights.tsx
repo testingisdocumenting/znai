@@ -41,7 +41,6 @@ export function AllTextHighlights({ containerNode, tocItem }: { containerNode: H
 
   useEffect(() => {
     function forceReapply() {
-      console.log("@@ force");
       setKeyToForceReHighlight((prev) => prev + 1);
     }
 
