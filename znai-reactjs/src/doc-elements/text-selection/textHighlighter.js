@@ -28,7 +28,8 @@ export class TextHighlighter {
 
     let textNode;
     while ((textNode = walker.nextNode())) {
-      textNodes.push(textNode);
+      const isSvg = textNode.parentNode.localName === "text";
+      textNodes.push({ node: textNode, isSvg });
     }
     return textNodes;
   }
@@ -43,10 +44,11 @@ export class TextHighlighter {
 
     let currentPos = 0;
     const nodeMap = textNodes.map((node) => {
+      const nodeValue = node.node.nodeValue;
       const start = currentPos;
-      const end = currentPos + node.nodeValue.length;
+      const end = currentPos + nodeValue.length;
       currentPos = end;
-      return { node, start, end, text: node.nodeValue };
+      return { node: node.node, isSvg: node.isSvg, start, end, text: nodeValue };
     });
 
     const fullText = nodeMap.map((item) => item.text).join("");
@@ -63,6 +65,7 @@ export class TextHighlighter {
         if (nodeInfo.end > matchStart && nodeInfo.start < matchEnd) {
           affectedNodes.push({
             node: nodeInfo.node,
+            isSvg: nodeInfo.isSvg,
             start: Math.max(0, matchStart - nodeInfo.start),
             end: Math.min(nodeInfo.text.length, matchEnd - nodeInfo.start),
             text: nodeInfo.text,
@@ -85,7 +88,7 @@ export class TextHighlighter {
 
     const matches = this.findMatches(searchText, prefix, suffix);
 
-    matches.forEach((match, matchIndex) => {
+    matches.forEach((match) => {
       const highlightGroup = [];
 
       const handleMouseEnter = () => {
@@ -124,24 +127,31 @@ export class TextHighlighter {
 
       match.nodes.forEach((nodeInfo, nodeIndex) => {
         const parent = nodeInfo.node.parentNode;
-        if (!parent) return;
+        if (!parent) {
+          return;
+        }
 
         const beforeText = nodeInfo.node.nodeValue.substring(0, nodeInfo.start);
         const highlightText = nodeInfo.node.nodeValue.substring(nodeInfo.start, nodeInfo.end);
         const afterText = nodeInfo.node.nodeValue.substring(nodeInfo.end);
 
-        const highlightSpan = document.createElement("span");
-        highlightSpan.className = "znai-highlight";
+        const highlightSpan = nodeInfo.isSvg
+          ? document.createElementNS("http://www.w3.org/2000/svg", "tspan")
+          : document.createElement("span");
+
+        highlightSpan.setAttribute("class", nodeInfo.isSvg ? "znai-highlight-svg" : "znai-highlight");
         highlightSpan.textContent = highlightText;
 
-        if (match.nodes.length === 1) {
-          highlightSpan.classList.add("single");
-        } else if (nodeIndex === 0) {
-          highlightSpan.classList.add("start");
-        } else if (nodeIndex === match.nodes.length - 1) {
-          highlightSpan.classList.add("end");
-        } else {
-          highlightSpan.classList.add("middle");
+        if (!nodeInfo.isSvg) {
+          if (match.nodes.length === 1) {
+            highlightSpan.classList.add("single");
+          } else if (nodeIndex === 0) {
+            highlightSpan.classList.add("start");
+          } else if (nodeIndex === match.nodes.length - 1) {
+            highlightSpan.classList.add("end");
+          } else {
+            highlightSpan.classList.add("middle");
+          }
         }
 
         const fragment = document.createDocumentFragment();

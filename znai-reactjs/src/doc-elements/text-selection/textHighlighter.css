@@ -20,6 +20,15 @@
     transition: background-color 0.2s;
 }
 
+.znai-highlight-svg {
+    fill: black;
+    stroke: #ffeb3b;
+    stroke-width: 8;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    paint-order: stroke fill;
+}
+
 .znai-highlight-hover {
     background-color: #efdd47;
     cursor: pointer;

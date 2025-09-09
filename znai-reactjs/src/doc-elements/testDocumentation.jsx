@@ -15,696 +15,969 @@
  */
 
 export const testDocumentation = {
-    "docMeta": {
-        "viewOn": {
-            "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-            "title": "View On GitHub"
-        },
-        "support": {
-            "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
-            "title": "Questions/Suggestions"
-        },
-        "useTopHeader": true,
-        "description": "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
-        "id": "preview",
-        "title": "Znai",
-        "type": "User Guide",
-        "category": "Documentation",
-        "previewEnabled": true
+  docMeta: {
+    viewOn: {
+      link: "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      title: "View On GitHub",
     },
-    "page": {
-        "type": "Page",
-        "content": [{
-            "title": "Embedding Content",
-            "id": "embedding-content",
-            "type": "Section",
-            "content": [{
-                "type": "Paragraph",
-                "content": [{
-                    "text": "To reduce documentation maintenance burden avoid copy and paste of code snippets.",
-                    "type": "SimpleText"
-                }, {
-                    "type": "SoftLineBreak"
-                }, {
-                    "text": "Embed content by referencing existing files using the ",
-                    "type": "SimpleText"
-                }, {
-                    "code": ":include-file:",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " plugin instead.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: file-name.js\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "This ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "include-",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " syntax will appear throughout the documentation and represents a family of custom Markdown extensions.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "javascript",
-                "snippet": "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "The file will be looked up using following rules:",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "bulletMarker": "*",
-                "tight": true,
-                "type": "BulletList",
-                "content": [{
-                    "type": "ListItem",
-                    "content": [{
-                        "type": "Paragraph",
-                        "content": [{
-                            "text": "directory with a markup file",
-                            "type": "SimpleText"
-                        }]
-                    }]
-                }, {
-                    "type": "ListItem",
-                    "content": [{
-                        "type": "Paragraph",
-                        "content": [{
-                            "text": "root directory of a documentation",
-                            "type": "SimpleText"
-                        }]
-                    }]
-                }, {
-                    "type": "ListItem",
-                    "content": [{
-                        "type": "Paragraph",
-                        "content": [{
-                            "text": "all lookup paths listed in a ",
-                            "type": "SimpleText"
-                        }, {
-                            "code": "lookup-paths",
-                            "type": "InlinedCode"
-                        }, {
-                            "text": " file",
-                            "type": "SimpleText"
-                        }]
-                    }]
-                }]
-            }]
-        }, {
-            "title": "Syntax highlighting",
-            "id": "syntax-highlighting",
-            "type": "Section",
-            "content": [{
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Syntax highlighting is automatically selected based file extension.",
-                    "type": "SimpleText"
-                }, {
-                    "type": "SoftLineBreak"
-                }, {
-                    "text": "E.g. extensions ",
-                    "type": "SimpleText"
-                }, {
-                    "code": ".c",
-                    "type": "InlinedCode"
-                }, {
-                    "text": ", ",
-                    "type": "SimpleText"
-                }, {
-                    "code": ".h",
-                    "type": "InlinedCode"
-                }, {
-                    "text": ", ",
-                    "type": "SimpleText"
-                }, {
-                    "code": ".cpp",
-                    "type": "InlinedCode"
-                }, {
-                    "text": ", ",
-                    "type": "SimpleText"
-                }, {
-                    "code": ".hpp",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " are treated as C++.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: simple.c\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "c",
-                "snippet": "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Use ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "lang",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " to force a different syntax highlighting",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: simple.c {lang: \"java\"}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "java",
-                "snippet": "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << \"hello\";\n}",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Note: File extensions and ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "lang",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " are case-insensitive.",
-                    "type": "SimpleText"
-                }]
-            }]
-        }, {
-            "title": "Title",
-            "id": "title",
-            "type": "Section",
-            "content": [{
-                "lang": "",
-                "snippet": ":include-file: file-name.js {title: \"ES6 class\"} \n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Use the ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "title",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " property to specify a title.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "javascript",
-                "snippet": "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-                "title": "ES6 class",
-                "type": "Snippet"
-            }]
-        }, {
-            "title": "Wide Code",
-            "id": "wide-code",
-            "type": "Section",
-            "content": [{
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Use the ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "wide",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " option to stretch wide code to occupy as much horizontal screen real estate as possible.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: WideCode.java {wide: true}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "java",
-                "snippet": "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
-                "wide": true,
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Without the ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "wide",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " option code will be aligned with the rest of the text and users can use scrollbars.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "java",
-                "snippet": "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Note: Good placement of a ",
-                    "type": "SimpleText"
-                }, {
-                    "type": "Emphasis",
-                    "content": [{
-                        "text": "Wide Code",
-                        "type": "SimpleText"
-                    }]
-                }, {
-                    "text": " element is at the end of a page or a section to show the full version of a code sample.",
-                    "type": "SimpleText"
-                }]
-            }]
-        }, {
-            "title": "Read More",
-            "id": "read-more",
-            "type": "Section",
-            "content": [{
-                "type": "Paragraph",
-                "content": [{
-                    "text": "If you have a file with large code snippet and you want to initially display only a small fraction use ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "readMore",
-                    "type": "InlinedCode"
-                }, {
-                    "text": "",
-                    "type": "SimpleText"
-                }, {
-                    "type": "SoftLineBreak"
-                }, {
-                    "text": "option with an ",
-                    "type": "SimpleText"
-                }, {
-                    "type": "StrongEmphasis",
-                    "content": [{
-                        "text": "optional",
-                        "type": "SimpleText"
-                    }]
-                }, {
-                    "text": " ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "readMoreVisibleLines",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " option to specify a number of initial lines displayed (default is 8).",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "java",
-                "snippet": "public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n        this.workingDir = workingDir;\n        this.fileNameByDirName = new LinkedHashMap<>();\n    }\n\n    public void create() {\n        createPages();\n        createToc();\n        createMeta();\n        createIndex();\n        createLookupPaths();\n    }\n\n    private void createLookupPaths() {\n        createFileFromResource(\"lookup-paths\");\n    }\n\n    private void createMeta() {\n        createFileFromResource(\"meta.json\");\n    }\n}",
-                "readMore": true,
-                "readMoreVisibleLines": 3,
-                "type": "Snippet"
-            }]
-        }, {
-            "title": "Highlights",
-            "id": "highlights",
-            "type": "Section",
-            "content": [{
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Use the ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "highlight",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " option to bring readers attention to the important lines.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: file-name.js {highlight: \"export\"}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "javascript",
-                "snippet": "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-                "highlight": [6],
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "It is recommended to pass a substring, but you can pass a line idx (starts from 0).",
-                    "type": "SimpleText"
-                }, {
-                    "type": "SoftLineBreak"
-                }, {
-                    "text": "Additionally you can combine two approaches and pass a list of things to highlight.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: file-name.js {highlight: [\"export\", 1]}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "javascript",
-                "snippet": "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-                "highlight": [6, 1],
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Note: Order of lines to highlight is reflected during presentation mode",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Use the ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "highlightPath",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " option to highlight lines specified in a separate file.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: file-name.js {highlightPath: \"lines-to-highlight.txt\"}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "javascript",
-                "snippet": "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-                "highlightPath": "lines-to-highlight.txt",
-                "highlight": [0, 2],
-                "type": "Snippet"
-            }, {
-                "lang": "txt",
-                "snippet": "class\nusefulAction",
-                "title": "lines-to-highlight.txt",
-                "type": "Snippet"
-            }]
-        }, {
-            "title": "Limit",
-            "id": "limit",
-            "type": "Section",
-            "content": [{
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Use ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "startLine",
-                    "type": "InlinedCode"
-                }, {
-                    "text": ", ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "endLine",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " to limit the included content.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "py",
-                "snippet": "import market\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example: cancel trade\n    market.cancel_trade('id')\n    # example-end\n\nif __name__  == \"__main__\":\n    main()",
-                "title": "file with examples",
-                "type": "Snippet"
-            }, {
-                "lang": "",
-                "snippet": ":include-file: python-examples.py {startLine: \"example: book trade\", endLine: \"example-end\"}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "py",
-                "snippet": "# example: book trade\nid = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n# example-end",
-                "title": "extracted example",
-                "startLine": "example: book trade",
-                "endLine": "example-end",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Note: Lines match doesn't have to be exact, ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "contains",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " is used.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "By default ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "startLine",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " and ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "endLine",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " are included in the rendered result. Use ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "excludeStartEnd: true",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " to remove markers.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: python-examples.py { \n    startLine: \"example: book trade\",\n    endLine: \"example-end\",\n    excludeStartEnd: true }\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "py",
-                "snippet": "id = market.book_trade('symbol', market.CURRENT_PRICE, 100)",
-                "title": "extracted example",
-                "startLine": "example: book trade",
-                "endLine": "example-end",
-                "excludeStartEnd": true,
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Use ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "includeRegexp",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " to include only lines matching regexp(s).",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: python-examples.py {includeRegexp: \"import\"}\n:include-file: python-examples.py {includeRegexp: [\"import\"]}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "py",
-                "snippet": "import market",
-                "includeRegexp": ["import"],
-                "title": "include by regexp",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Use ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "excludeRegexp",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " to exclude lines matching regexp(s).",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: python-examples.py {excludeRegexp: \"# example\"}\n:include-file: python-examples.py {excludeRegexp: [\"# example\"]}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "lang": "py",
-                "snippet": "import market\n\ndef main():\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n\n    market.cancel_trade('id')\n\nif __name__  == \"__main__\":\n    main()",
-                "excludeRegexp": ["# example"],
-                "title": "exclude by regexp",
-                "type": "Snippet"
-            }]
-        }, {
-            "title": "Callout Comments",
-            "id": "callout-comments",
-            "type": "Section",
-            "content": [{
-                "type": "Paragraph",
-                "content": [{
-                    "text": "If you already have comments inside your code it would be non effecient to repeat them inside documentation.",
-                    "type": "SimpleText"
-                }, {
-                    "type": "SoftLineBreak"
-                }, {
-                    "text": "Instead comments can be automatically extracted and presented as part of the text",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Given file with inlined comments",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "javascript",
-                "snippet": "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "By specifying ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "commentsType",
-                    "type": "InlinedCode"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: file-name-with-comments.js {commentsType: \"inline\"}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "It will be rendered as",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "javascript",
-                "snippet": "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
-                "commentsType": "inline",
-                "type": "Snippet"
-            }]
-        }, {
-            "title": "Spoilers",
-            "id": "spoilers",
-            "type": "Section",
-            "content": [{
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Set the ",
-                    "type": "SimpleText"
-                }, {
-                    "code": "spoiler",
-                    "type": "InlinedCode"
-                }, {
-                    "text": " property to initially hide explanations. It may be useful when teaching.",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "",
-                "snippet": ":include-file: file-name-with-comments.js {commentsType: \"inline\", spoiler: true}\n",
-                "lineNumber": "",
-                "type": "Snippet"
-            }, {
-                "type": "Paragraph",
-                "content": [{
-                    "text": "Click on the spoiler to reveal the explanations:",
-                    "type": "SimpleText"
-                }]
-            }, {
-                "lang": "javascript",
-                "snippet": "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
-                "commentsType": "inline",
-                "spoiler": true,
-                "type": "Snippet"
-            }]
-        }],
-        "lastModifiedTime": 1592959343904,
-        "tocItem": {
-            "sectionTitle": "Snippets",
-            "pageTitle": "External Code Snippets",
-            "pageMeta": {},
-            "dirName": "snippets",
-            "fileName": "external-code-snippets",
-            "viewOnRelativePath": null,
-            "pageSectionIdTitles": [{
-                "title": "Embedding Content",
-                "id": "embedding-content"
-            }, {
-                "title": "Syntax highlighting",
-                "id": "syntax-highlighting"
-            }, {
-                "title": "Title",
-                "id": "title"
-            }, {
-                "title": "Wide Code",
-                "id": "wide-code"
-            }, {
-                "title": "Read More",
-                "id": "read-more"
-            }, {
-                "title": "Highlights",
-                "id": "highlights"
-            }, {
-                "title": "Limit",
-                "id": "limit"
-            }, {
-                "title": "Callout Comments",
-                "id": "callout-comments"
-            }, {
-                "title": "Spoilers",
-                "id": "spoilers"
-            }]
-        }
+    support: {
+      link: "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      title: "Questions/Suggestions",
     },
-    "footer": {
-        "type": "Footer",
-        "content": [{
-            "type": "Paragraph",
-            "content": [{
-                "text": "If you have documentation suggestions, features or bugs to report, please create ",
-                "type": "SimpleText"
-            }, {
-                "url": "https://github.com/testingisdocumenting/znai/issues",
-                "isFile": false,
-                "type": "Link",
-                "content": [{
-                    "text": "GitHub Issue",
-                    "type": "SimpleText"
-                }]
-            }]
-        }, {
-            "type": "Paragraph",
-            "content": [{
-                "text": "Contributions are welcome",
-                "type": "SimpleText"
-            }]
-        }]
-    }
+    useTopHeader: true,
+    description:
+      "Transforms Markdown files into rich, well-structured documentation served in a modern web front-end. Znai provides many custom add-ons that supercharge basic generated docs with advanced layout features, dynamic references to code and test artifacts, and many visual and functional enhancements.",
+    id: "preview",
+    title: "Znai",
+    type: "User Guide",
+    category: "Documentation",
+    previewEnabled: true,
+  },
+  page: {
+    type: "Page",
+    content: [
+      {
+        title: "Embedding Content",
+        id: "embedding-content",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "To reduce documentation maintenance burden avoid copy and paste of code snippets.",
+                type: "SimpleText",
+              },
+              {
+                type: "SoftLineBreak",
+              },
+              {
+                text: "Embed content by referencing existing files using the ",
+                type: "SimpleText",
+              },
+              {
+                code: ":include-file:",
+                type: "InlinedCode",
+              },
+              {
+                text: " plugin instead.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            diagram: {
+              isInvertedTextColorByStyleId: {},
+              svg:
+                '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"\n "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">\n<!-- Generated by graphviz version 13.0.1 (20250615.1724)\n -->\n<!-- Title: Generated Pages: 1 -->\n<svg width="526pt" height="280pt"\n viewBox="0.00 0.00 526.00 280.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 276.2)">\n<title>Generated</title>\n<polygon fill="none" stroke="none" points="-4,4 -4,-276.2 522.05,-276.2 522.05,4 -4,4"/>\n<!-- author -->\n<g id="node1" class="node">\n<title>author</title>\n<polygon fill="none" stroke="black" points="219.38,-231.65 219.38,-271.7 278.93,-271.7 278.93,-231.65 219.38,-231.65"/>\n<text xml:space="preserve" text-anchor="middle" x="249.15" y="-247.8" font-family="Helvetica,sans-Serif" font-size="10.00">Project</text>\n</g>\n<!-- src -->\n<g id="node2" class="node">\n<title>src</title>\n<polygon fill="none" stroke="black" points="140.15,-154.6 140.15,-194.65 194.15,-194.65 194.15,-154.6 140.15,-154.6"/>\n<text xml:space="preserve" text-anchor="middle" x="166.68" y="-170.75" font-family="Helvetica,sans-Serif" font-size="10.00">Code</text>\n</g>\n<!-- author&#45;&gt;src -->\n<g id="edge1" class="edge">\n<title>author&#45;&gt;src</title>\n<path fill="none" stroke="black" d="M228.03,-231.35C218.54,-222.66 207.18,-212.26 196.85,-202.81"/>\n<polygon fill="black" stroke="black" points="199.34,-200.34 189.6,-196.17 194.61,-205.5 199.34,-200.34"/>\n</g>\n<!-- markdown -->\n<g id="node3" class="node">\n<title>markdown</title>\n<polygon fill="none" stroke="black" points="212.25,-154.6 212.25,-194.65 286.05,-194.65 286.05,-154.6 212.25,-154.6"/>\n<text xml:space="preserve" text-anchor="middle" x="249.15" y="-170.75" font-family="Helvetica,sans-Serif" font-size="10.00">Markdown</text>\n</g>\n<!-- author&#45;&gt;markdown -->\n<g id="edge2" class="edge">\n<title>author&#45;&gt;markdown</title>\n<path fill="none" stroke="black" d="M249.15,-231.35C249.15,-223.79 249.15,-214.93 249.15,-206.53"/>\n<polygon fill="black" stroke="black" points="252.65,-206.66 249.15,-196.66 245.65,-206.66 252.65,-206.66"/>\n</g>\n<!-- test -->\n<g id="node4" class="node">\n<title>test</title>\n<polygon fill="none" stroke="black" points="310.15,-154.6 310.15,-194.65 364.15,-194.65 364.15,-154.6 310.15,-154.6"/>\n<text xml:space="preserve" text-anchor="middle" x="336.92" y="-170.75" font-family="Helvetica,sans-Serif" font-size="10.00">Test</text>\n</g>\n<!-- author&#45;&gt;test -->\n<g id="edge3" class="edge">\n<title>author&#45;&gt;test</title>\n<path fill="none" stroke="black" d="M271.81,-231.35C282.1,-222.57 294.44,-212.05 305.61,-202.52"/>\n<polygon fill="black" stroke="black" points="307.77,-205.28 313.11,-196.13 303.23,-199.96 307.77,-205.28"/>\n</g>\n<!-- javadoc -->\n<g id="node5" class="node">\n<title>javadoc</title>\n<polygon fill="none" stroke="black" points="0,-77.55 0,-117.6 126.3,-117.6 126.3,-77.55 0,-77.55"/>\n<text xml:space="preserve" text-anchor="middle" x="63.15" y="-93.7" font-family="Helvetica,sans-Serif" font-size="10.00">JavaDoc/Doxygen/etc</text>\n</g>\n<!-- src&#45;&gt;javadoc -->\n<g id="edge4" class="edge">\n<title>src&#45;&gt;javadoc</title>\n<path fill="none" stroke="black" d="M140.1,-154.1C127.58,-145.07 112.53,-134.21 99.08,-124.5"/>\n<polygon fill="black" stroke="black" points="101.45,-121.9 91.3,-118.89 97.36,-127.58 101.45,-121.9"/>\n</g>\n<!-- examples -->\n<g id="node6" class="node">\n<title>examples</title>\n<polygon fill="none" stroke="black" points="144,-77.55 144,-117.6 216.3,-117.6 216.3,-77.55 144,-77.55"/>\n<text xml:space="preserve" text-anchor="middle" x="180.15" y="-93.7" font-family="Helvetica,sans-Serif" font-size="10.00">Examples</text>\n</g>\n<!-- src&#45;&gt;examples -->\n<g id="edge5" class="edge">\n<title>src&#45;&gt;examples</title>\n<path fill="none" stroke="black" d="M170.5,-154.3C171.82,-146.65 173.38,-137.68 174.85,-129.2"/>\n<polygon fill="black" stroke="black" points="178.25,-130.04 176.51,-119.59 171.35,-128.84 178.25,-130.04"/>\n</g>\n<!-- userguide -->\n<g id="node9" class="node">\n<title>userguide</title>\n<polygon fill="none" stroke="black" points="205,-0.5 205,-40.55 283.3,-40.55 283.3,-0.5 205,-0.5"/>\n<text xml:space="preserve" text-anchor="middle" x="244.15" y="-16.65" font-family="Helvetica,sans-Serif" font-size="10.00">User Guide</text>\n</g>\n<!-- markdown&#45;&gt;userguide -->\n<g id="edge8" class="edge">\n<title>markdown&#45;&gt;userguide</title>\n<path fill="none" stroke="black" d="M248.52,-154.36C247.67,-128.53 246.15,-82.4 245.15,-51.88"/>\n<polygon fill="black" stroke="black" points="248.65,-52.02 244.83,-42.14 241.66,-52.25 248.65,-52.02"/>\n</g>\n<!-- screenshots -->\n<g id="node7" class="node">\n<title>screenshots</title>\n<polygon fill="none" stroke="black" points="271.75,-77.55 271.75,-117.6 402.55,-117.6 402.55,-77.55 271.75,-77.55"/>\n<text xml:space="preserve" text-anchor="middle" x="337.15" y="-93.7" font-family="Helvetica,sans-Serif" font-size="10.00">Annotated Screenshots</text>\n</g>\n<!-- test&#45;&gt;screenshots -->\n<g id="edge6" class="edge">\n<title>test&#45;&gt;screenshots</title>\n<path fill="none" stroke="black" d="M337.15,-154.3C337.15,-146.74 337.15,-137.88 337.15,-129.48"/>\n<polygon fill="black" stroke="black" points="340.65,-129.61 337.15,-119.61 333.65,-129.61 340.65,-129.61"/>\n</g>\n<!-- apiresponse -->\n<g id="node8" class="node">\n<title>apiresponse</title>\n<polygon fill="none" stroke="black" points="420.25,-77.55 420.25,-117.6 518.05,-117.6 518.05,-77.55 420.25,-77.55"/>\n<text xml:space="preserve" text-anchor="middle" x="469.15" y="-93.7" font-family="Helvetica,sans-Serif" font-size="10.00">API Responses</text>\n</g>\n<!-- test&#45;&gt;apiresponse -->\n<g id="edge7" class="edge">\n<title>test&#45;&gt;apiresponse</title>\n<path fill="none" stroke="black" d="M364.5,-158.07C382.07,-148.08 405.29,-134.89 425.39,-123.46"/>\n<polygon fill="black" stroke="black" points="426.98,-126.57 433.95,-118.59 423.53,-120.49 426.98,-126.57"/>\n</g>\n<!-- javadoc&#45;&gt;userguide -->\n<g id="edge9" class="edge">\n<title>javadoc&#45;&gt;userguide</title>\n<path fill="none" stroke="black" d="M110.23,-77.05C136.01,-66.36 167.95,-53.12 194.16,-42.25"/>\n<polygon fill="black" stroke="black" points="195.35,-45.55 203.25,-38.48 192.67,-39.08 195.35,-45.55"/>\n</g>\n<!-- examples&#45;&gt;userguide -->\n<g id="edge10" class="edge">\n<title>examples&#45;&gt;userguide</title>\n<path fill="none" stroke="black" d="M196.63,-77.25C203.82,-68.82 212.38,-58.78 220.24,-49.56"/>\n<polygon fill="black" stroke="black" points="222.69,-52.08 226.52,-42.2 217.37,-47.54 222.69,-52.08"/>\n</g>\n<!-- screenshots&#45;&gt;userguide -->\n<g id="edge12" class="edge">\n<title>screenshots&#45;&gt;userguide</title>\n<path fill="none" stroke="black" d="M313.2,-77.25C302.22,-68.39 289.03,-57.74 277.13,-48.14"/>\n<polygon fill="black" stroke="black" points="279.5,-45.55 269.52,-42 275.1,-51 279.5,-45.55"/>\n</g>\n<!-- apiresponse&#45;&gt;userguide -->\n<g id="edge11" class="edge">\n<title>apiresponse&#45;&gt;userguide</title>\n<path fill="none" stroke="black" d="M419.79,-79.95C416.87,-78.96 413.97,-77.99 411.15,-77.05 371.97,-63.94 327.59,-49.19 294.43,-38.19"/>\n<polygon fill="black" stroke="black" points="295.67,-34.91 285.08,-35.09 293.47,-41.56 295.67,-34.91"/>\n</g>\n</g>\n</svg>\n',
+              stylesByNodeId: {
+                src: ["b"],
+                test: ["c"],
+              },
+              id: "dag1",
+            },
+            idsToHighlight: ["userguide"],
+            wide: false,
+            urls: {},
+            type: "GraphVizDiagram",
+          },
+          {
+            lang: "",
+            snippet: ":include-file: file-name.js\n",
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "This ",
+                type: "SimpleText",
+              },
+              {
+                code: "include-",
+                type: "InlinedCode",
+              },
+              {
+                text:
+                  " syntax will appear throughout the documentation and represents a family of custom Markdown extensions.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "javascript",
+            snippet: "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "The file will be looked up using following rules:",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            bulletMarker: "*",
+            tight: true,
+            type: "BulletList",
+            content: [
+              {
+                type: "ListItem",
+                content: [
+                  {
+                    type: "Paragraph",
+                    content: [
+                      {
+                        text: "directory with a markup file",
+                        type: "SimpleText",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "ListItem",
+                content: [
+                  {
+                    type: "Paragraph",
+                    content: [
+                      {
+                        text: "root directory of a documentation",
+                        type: "SimpleText",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "ListItem",
+                content: [
+                  {
+                    type: "Paragraph",
+                    content: [
+                      {
+                        text: "all lookup paths listed in a ",
+                        type: "SimpleText",
+                      },
+                      {
+                        code: "lookup-paths",
+                        type: "InlinedCode",
+                      },
+                      {
+                        text: " file",
+                        type: "SimpleText",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Syntax highlighting",
+        id: "syntax-highlighting",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Syntax highlighting is automatically selected based file extension.",
+                type: "SimpleText",
+              },
+              {
+                type: "SoftLineBreak",
+              },
+              {
+                text: "E.g. extensions ",
+                type: "SimpleText",
+              },
+              {
+                code: ".c",
+                type: "InlinedCode",
+              },
+              {
+                text: ", ",
+                type: "SimpleText",
+              },
+              {
+                code: ".h",
+                type: "InlinedCode",
+              },
+              {
+                text: ", ",
+                type: "SimpleText",
+              },
+              {
+                code: ".cpp",
+                type: "InlinedCode",
+              },
+              {
+                text: ", ",
+                type: "SimpleText",
+              },
+              {
+                code: ".hpp",
+                type: "InlinedCode",
+              },
+              {
+                text: " are treated as C++.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet: ":include-file: simple.c\n",
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "c",
+            snippet: '#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << "hello";\n}',
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Use ",
+                type: "SimpleText",
+              },
+              {
+                code: "lang",
+                type: "InlinedCode",
+              },
+              {
+                text: " to force a different syntax highlighting",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet: ':include-file: simple.c {lang: "java"}\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "java",
+            snippet: '#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cout << "hello";\n}',
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Note: File extensions and ",
+                type: "SimpleText",
+              },
+              {
+                code: "lang",
+                type: "InlinedCode",
+              },
+              {
+                text: " are case-insensitive.",
+                type: "SimpleText",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Title",
+        id: "title",
+        type: "Section",
+        content: [
+          {
+            lang: "",
+            snippet: ':include-file: file-name.js {title: "ES6 class"} \n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Use the ",
+                type: "SimpleText",
+              },
+              {
+                code: "title",
+                type: "InlinedCode",
+              },
+              {
+                text: " property to specify a title.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "javascript",
+            snippet: "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+            title: "ES6 class",
+            type: "Snippet",
+          },
+        ],
+      },
+      {
+        title: "Wide Code",
+        id: "wide-code",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Use the ",
+                type: "SimpleText",
+              },
+              {
+                code: "wide",
+                type: "InlinedCode",
+              },
+              {
+                text: " option to stretch wide code to occupy as much horizontal screen real estate as possible.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet: ":include-file: WideCode.java {wide: true}\n",
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "java",
+            snippet:
+              "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
+            wide: true,
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Without the ",
+                type: "SimpleText",
+              },
+              {
+                code: "wide",
+                type: "InlinedCode",
+              },
+              {
+                text: " option code will be aligned with the rest of the text and users can use scrollbars.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "java",
+            snippet:
+              "class InternationalPriceService implements PriceService {\n    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {\n        ...\n    }\n}",
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Note: Good placement of a ",
+                type: "SimpleText",
+              },
+              {
+                type: "Emphasis",
+                content: [
+                  {
+                    text: "Wide Code",
+                    type: "SimpleText",
+                  },
+                ],
+              },
+              {
+                text: " element is at the end of a page or a section to show the full version of a code sample.",
+                type: "SimpleText",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Read More",
+        id: "read-more",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text:
+                  "If you have a file with large code snippet and you want to initially display only a small fraction use ",
+                type: "SimpleText",
+              },
+              {
+                code: "readMore",
+                type: "InlinedCode",
+              },
+              {
+                text: "",
+                type: "SimpleText",
+              },
+              {
+                type: "SoftLineBreak",
+              },
+              {
+                text: "option with an ",
+                type: "SimpleText",
+              },
+              {
+                type: "StrongEmphasis",
+                content: [
+                  {
+                    text: "optional",
+                    type: "SimpleText",
+                  },
+                ],
+              },
+              {
+                text: " ",
+                type: "SimpleText",
+              },
+              {
+                code: "readMoreVisibleLines",
+                type: "InlinedCode",
+              },
+              {
+                text: " option to specify a number of initial lines displayed (default is 8).",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet: ":include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3}\n",
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "java",
+            snippet:
+              'public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n        this.workingDir = workingDir;\n        this.fileNameByDirName = new LinkedHashMap<>();\n    }\n\n    public void create() {\n        createPages();\n        createToc();\n        createMeta();\n        createIndex();\n        createLookupPaths();\n    }\n\n    private void createLookupPaths() {\n        createFileFromResource("lookup-paths");\n    }\n\n    private void createMeta() {\n        createFileFromResource("meta.json");\n    }\n}',
+            readMore: true,
+            readMoreVisibleLines: 3,
+            type: "Snippet",
+          },
+        ],
+      },
+      {
+        title: "Highlights",
+        id: "highlights",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Use the ",
+                type: "SimpleText",
+              },
+              {
+                code: "highlight",
+                type: "InlinedCode",
+              },
+              {
+                text: " option to bring readers attention to the important lines.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet: ':include-file: file-name.js {highlight: "export"}\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "javascript",
+            snippet: "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+            highlight: [6],
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "It is recommended to pass a substring, but you can pass a line idx (starts from 0).",
+                type: "SimpleText",
+              },
+              {
+                type: "SoftLineBreak",
+              },
+              {
+                text: "Additionally you can combine two approaches and pass a list of things to highlight.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet: ':include-file: file-name.js {highlight: ["export", 1]}\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "javascript",
+            snippet: "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+            highlight: [6, 1],
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Note: Order of lines to highlight is reflected during presentation mode",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Use the ",
+                type: "SimpleText",
+              },
+              {
+                code: "highlightPath",
+                type: "InlinedCode",
+              },
+              {
+                text: " option to highlight lines specified in a separate file.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet: ':include-file: file-name.js {highlightPath: "lines-to-highlight.txt"}\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "javascript",
+            snippet: "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
+            highlightPath: "lines-to-highlight.txt",
+            highlight: [0, 2],
+            type: "Snippet",
+          },
+          {
+            lang: "txt",
+            snippet: "class\nusefulAction",
+            title: "lines-to-highlight.txt",
+            type: "Snippet",
+          },
+        ],
+      },
+      {
+        title: "Limit",
+        id: "limit",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Use ",
+                type: "SimpleText",
+              },
+              {
+                code: "startLine",
+                type: "InlinedCode",
+              },
+              {
+                text: ", ",
+                type: "SimpleText",
+              },
+              {
+                code: "endLine",
+                type: "InlinedCode",
+              },
+              {
+                text: " to limit the included content.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text:
+                  "If you have a file with embedded examples, you can use limit function to extract small samples by using marker lines.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "py",
+            snippet:
+              "import market\n\ndef main():\n    # example: book trade\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n    # example-end\n\n    # example: cancel trade\n    market.cancel_trade('id')\n    # example-end\n\nif __name__  == \"__main__\":\n    main()",
+            title: "file with examples",
+            type: "Snippet",
+          },
+          {
+            lang: "",
+            snippet: ':include-file: python-examples.py {startLine: "example: book trade", endLine: "example-end"}\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "py",
+            snippet:
+              "# example: book trade\nid = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n# example-end",
+            title: "extracted example",
+            startLine: "example: book trade",
+            endLine: "example-end",
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Note: Lines match doesn't have to be exact, ",
+                type: "SimpleText",
+              },
+              {
+                code: "contains",
+                type: "InlinedCode",
+              },
+              {
+                text: " is used.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "By default ",
+                type: "SimpleText",
+              },
+              {
+                code: "startLine",
+                type: "InlinedCode",
+              },
+              {
+                text: " and ",
+                type: "SimpleText",
+              },
+              {
+                code: "endLine",
+                type: "InlinedCode",
+              },
+              {
+                text: " are included in the rendered result. Use ",
+                type: "SimpleText",
+              },
+              {
+                code: "excludeStartEnd: true",
+                type: "InlinedCode",
+              },
+              {
+                text: " to remove markers.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet:
+              ':include-file: python-examples.py { \n    startLine: "example: book trade",\n    endLine: "example-end",\n    excludeStartEnd: true }\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "py",
+            snippet: "id = market.book_trade('symbol', market.CURRENT_PRICE, 100)",
+            title: "extracted example",
+            startLine: "example: book trade",
+            endLine: "example-end",
+            excludeStartEnd: true,
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Use ",
+                type: "SimpleText",
+              },
+              {
+                code: "includeRegexp",
+                type: "InlinedCode",
+              },
+              {
+                text: " to include only lines matching regexp(s).",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet:
+              ':include-file: python-examples.py {includeRegexp: "import"}\n:include-file: python-examples.py {includeRegexp: ["import"]}\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "py",
+            snippet: "import market",
+            includeRegexp: ["import"],
+            title: "include by regexp",
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Use ",
+                type: "SimpleText",
+              },
+              {
+                code: "excludeRegexp",
+                type: "InlinedCode",
+              },
+              {
+                text: " to exclude lines matching regexp(s).",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet:
+              ':include-file: python-examples.py {excludeRegexp: "# example"}\n:include-file: python-examples.py {excludeRegexp: ["# example"]}\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            lang: "py",
+            snippet:
+              "import market\n\ndef main():\n    id = market.book_trade('symbol', market.CURRENT_PRICE, 100)\n\n    market.cancel_trade('id')\n\nif __name__  == \"__main__\":\n    main()",
+            excludeRegexp: ["# example"],
+            title: "exclude by regexp",
+            type: "Snippet",
+          },
+        ],
+      },
+      {
+        title: "Callout Comments",
+        id: "callout-comments",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text:
+                  "If you already have comments inside your code it would be non effecient to repeat them inside documentation.",
+                type: "SimpleText",
+              },
+              {
+                type: "SoftLineBreak",
+              },
+              {
+                text: "Instead comments can be automatically extracted and presented as part of the text",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Given file with inlined comments",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "javascript",
+            snippet:
+              "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "By specifying ",
+                type: "SimpleText",
+              },
+              {
+                code: "commentsType",
+                type: "InlinedCode",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet: ':include-file: file-name-with-comments.js {commentsType: "inline"}\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "It will be rendered as",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "javascript",
+            snippet:
+              "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
+            commentsType: "inline",
+            type: "Snippet",
+          },
+        ],
+      },
+      {
+        title: "Spoilers",
+        id: "spoilers",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Set the ",
+                type: "SimpleText",
+              },
+              {
+                code: "spoiler",
+                type: "InlinedCode",
+              },
+              {
+                text: " property to initially hide explanations. It may be useful when teaching.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "",
+            snippet: ':include-file: file-name-with-comments.js {commentsType: "inline", spoiler: true}\n',
+            lineNumber: "",
+            type: "Snippet",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Click on the spoiler to reveal the explanations:",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            lang: "javascript",
+            snippet:
+              "class JsClass {\n    constructor() { // new syntax for constructor\n    }\n}\n\nexport default JsClass // new syntax for ES6 modules",
+            commentsType: "inline",
+            spoiler: true,
+            type: "Snippet",
+          },
+        ],
+      },
+    ],
+    lastModifiedTime: 1592959343904,
+    tocItem: {
+      sectionTitle: "Snippets",
+      pageTitle: "External Code Snippets",
+      pageMeta: {},
+      dirName: "snippets",
+      fileName: "external-code-snippets",
+      viewOnRelativePath: null,
+      pageSectionIdTitles: [
+        {
+          title: "Embedding Content",
+          id: "embedding-content",
+        },
+        {
+          title: "Syntax highlighting",
+          id: "syntax-highlighting",
+        },
+        {
+          title: "Title",
+          id: "title",
+        },
+        {
+          title: "Wide Code",
+          id: "wide-code",
+        },
+        {
+          title: "Read More",
+          id: "read-more",
+        },
+        {
+          title: "Highlights",
+          id: "highlights",
+        },
+        {
+          title: "Limit",
+          id: "limit",
+        },
+        {
+          title: "Callout Comments",
+          id: "callout-comments",
+        },
+        {
+          title: "Spoilers",
+          id: "spoilers",
+        },
+      ],
+    },
+  },
+  footer: {
+    type: "Footer",
+    content: [
+      {
+        type: "Paragraph",
+        content: [
+          {
+            text: "If you have documentation suggestions, features or bugs to report, please create ",
+            type: "SimpleText",
+          },
+          {
+            url: "https://github.com/testingisdocumenting/znai/issues",
+            isFile: false,
+            type: "Link",
+            content: [
+              {
+                text: "GitHub Issue",
+                type: "SimpleText",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: "Paragraph",
+        content: [
+          {
+            text: "Contributions are welcome",
+            type: "SimpleText",
+          },
+        ],
+      },
+    ],
+  },
 };
