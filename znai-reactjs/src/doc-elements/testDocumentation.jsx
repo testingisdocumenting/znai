@@ -112,6 +112,69 @@ export const testDocumentation = {
             ],
           },
           {
+            title: "Title of the Hidden Details",
+            content: [
+              {
+                type: "Paragraph",
+                content: [
+                  {
+                    text: "Information you don't want users to see right away goes here.",
+                    type: "SimpleText",
+                  },
+                  {
+                    type: "SoftLineBreak",
+                  },
+                  {
+                    text: "Can use all the markdown inside",
+                    type: "SimpleText",
+                  },
+                ],
+              },
+              {
+                delimiter: ".",
+                startNumber: 1,
+                type: "OrderedList",
+                content: [
+                  {
+                    type: "ListItem",
+                    content: [
+                      {
+                        type: "Paragraph",
+                        content: [
+                          {
+                            text: "item A",
+                            type: "SimpleText",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    type: "ListItem",
+                    content: [
+                      {
+                        type: "Paragraph",
+                        content: [
+                          {
+                            text: "item B",
+                            type: "SimpleText",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                lang: "",
+                snippet: "let list = [1, 2, 3]\nlet value = 0",
+                lineNumber: "",
+                type: "Snippet",
+              },
+            ],
+            type: "ReadMore",
+          },
+          {
             lang: "javascript",
             snippet: "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
             type: "Snippet",

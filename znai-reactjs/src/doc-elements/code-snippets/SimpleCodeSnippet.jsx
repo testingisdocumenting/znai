@@ -75,8 +75,6 @@ class SimpleCodeSnippet extends Component {
       // to the right place
       const hasHighlight = this.hiddenLinesContainerRef.current.contains(firstHighlightElement);
       if (hasHighlight) {
-        this.hiddenLinesContainerRef.current.appendChild(firstHighlightElement);
-        firstHighlightElement.style.visibility = "hidden";
         this.firstHighlightElement = firstHighlightElement;
         this.setState({ hasHighlightedText: true });
       }
@@ -152,10 +150,8 @@ class SimpleCodeSnippet extends Component {
 
     const label = clickedReadMore ? (
       "...collapse"
-    ) : this.state.hasHighlightedText ? (
-      <span className="znai-highlight single">read more...</span>
     ) : (
-      "read more..."
+      <span className={this.state.hasHighlightedText ? "znai-highlight single" : ""}>read more...</span>
     );
 
     return (
@@ -189,10 +185,8 @@ class SimpleCodeSnippet extends Component {
       (prev) => ({ clickedReadMore: !prev.clickedReadMore }),
       () => {
         if (this.hiddenLinesContainerRef.current && this.firstHighlightElement) {
-          this.hiddenLinesContainerRef.current.removeChild(this.firstHighlightElement);
           this.firstHighlightElement = null;
         }
-
         reapplyTextHighlights();
       }
     );

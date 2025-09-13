@@ -41,6 +41,7 @@ import {
 import "./tokens.css";
 import { documentationNavigation } from "../../structure/DocumentationNavigation.jsx";
 import { AllTextHighlights } from "../text-selection/AllTextHighlights.js";
+import { ButtonToForceTextHighlight } from "../demo-utils/ButtonToForceTextHighlight.js";
 
 const [getReadMore, setReadMore] = simulateState(true);
 
@@ -129,18 +130,7 @@ export function snippetsDemo(registry) {
         >
           simulate highlight outside
         </button>
-        <button
-          onClick={() => {
-            const url = new URL(window.location.href);
-            url.searchParams.set("highlightSelection", "line of text number 6");
-            url.searchParams.set("highlightPrefix", "");
-            url.searchParams.set("highlightSuffix", "");
-            history.pushState(null, "", url.toString());
-            location.reload();
-          }}
-        >
-          simulate highlight inside
-        </button>
+        <ButtonToForceTextHighlight textToHighlight={"line of text number 20"} />
         <Snippet lang="csv" snippet={longCode()} readMore={getReadMore()} readMoreVisibleLines={4} />)
         <AllTextHighlights containerNode={document.body} tocItem={documentationNavigation.currentPageLocation()} />
       </div>

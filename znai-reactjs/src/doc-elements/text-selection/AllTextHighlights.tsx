@@ -35,7 +35,7 @@ export function removeReapplyTextHighlightsListener(listener: ReapplyTextHighlig
   listeners.splice(listeners.indexOf(listener), 1);
 }
 
-export function AllTextHighlights({ containerNode, tocItem }: { containerNode: HTMLDivElement; tocItem: TocItem }) {
+export function AllTextHighlights({ containerNode, tocItem }: { containerNode: HTMLElement; tocItem: TocItem }) {
   const [keyToForceReHighlight, setKeyToForceReHighlight] = useState(0);
   // TODO move load questions from slack here
 

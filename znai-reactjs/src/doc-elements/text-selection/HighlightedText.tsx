@@ -40,7 +40,7 @@ export function removeHighlightedTextListener(listener: HighlightedTextListener)
 }
 
 interface Props {
-  containerNode: HTMLDivElement;
+  containerNode: HTMLElement;
   selectedText: string;
   selectedPrefix: string;
   selectedSuffix: string;
