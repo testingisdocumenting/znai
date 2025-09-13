@@ -23,34 +23,53 @@ import CodeToken from "./CodeToken";
 
 import "./LineOfTokens.css";
 
-const LineOfTokens = ({tokens, references, isHighlighted, isPrevHighlighted, isNextHighlighted, isPresentation, wrap, endOfLineRender}) => {
-    const className = "znai-code-line"
-      + (isHighlighted ? " highlight" : "")
-      + (isHighlighted && !isPrevHighlighted ? " no-highlight-top-neighbour" : "")
-      + (isHighlighted && !isNextHighlighted ? " no-highlight-bottom-neighbour" : "")
-      + (wrap ? " wrap": "")
+const LineOfTokens = ({
+  tokens,
+  references,
+  isHighlighted,
+  isPrevHighlighted,
+  isNextHighlighted,
+  isPresentation,
+  wrap,
+  endOfLineRender,
+  isHidden,
+}) => {
+  const className =
+    "znai-code-line" +
+    (isHighlighted ? " highlight" : "") +
+    (isHighlighted && !isPrevHighlighted ? " no-highlight-top-neighbour" : "") +
+    (isHighlighted && !isNextHighlighted ? " no-highlight-bottom-neighbour" : "") +
+    (wrap ? " wrap" : "") +
+    (isHidden ? " hidden" : "");
 
-    const trimmedOnRight = lineWithTokensTrimmedOnRight(tokens)
-    const enhancedTokens = enhanceTokens(trimmedOnRight)
+  const trimmedOnRight = lineWithTokensTrimmedOnRight(tokens);
+  const enhancedTokens = enhanceTokens(trimmedOnRight);
 
-    return (
-        <span className={className}>
-            {enhancedTokens.map((t, idx) => <CodeToken key={idx} token={t} isPresentation={isPresentation}/>)}
-            {endOfLineRender && endOfLineRender()}
-            <span>{"\n"}</span>
-        </span>
-    )
+  return (
+    <span className={className}>
+      {enhancedTokens.map((t, idx) => (
+        <CodeToken key={idx} token={t} isPresentation={isPresentation} />
+      ))}
+      {endOfLineRender && endOfLineRender()}
+      <span>{"\n"}</span>
+    </span>
+  );
 
-    function enhanceTokens(tokens) {
-        if (!references) {
-            return tokens
-        }
-
-        return enhanceMatchedTokensWithMeta(tokens, Object.keys(references), () => 'link', (referenceText) => {
-            const reference = references[referenceText]
-            return reference.pageUrl
-        })
+  function enhanceTokens(tokens) {
+    if (!references) {
+      return tokens;
     }
-}
 
-export default LineOfTokens
+    return enhanceMatchedTokensWithMeta(
+      tokens,
+      Object.keys(references),
+      () => "link",
+      (referenceText) => {
+        const reference = references[referenceText];
+        return reference.pageUrl;
+      }
+    );
+  }
+};
+
+export default LineOfTokens;
