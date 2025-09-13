@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
-import { addHighlightedTextListener, removeHighlightedTextListener } from "../text-selection/HighlightedText";
-import { reapplyTextHighlights } from "../text-selection/AllTextHighlights";
 
-import { moveAndHideHtmlElementForAutoScroll } from "../text-selection/componentsHighlightUtils";
+import { useHighlightOfHiddenElement } from "../text-selection/componentsHighlightUtils";
 import "./ReadMore.css";
 
 interface Props {
@@ -33,44 +31,8 @@ interface Props {
 export function ReadMore({ title, content, elementsLibrary }: Props) {
   const [expanded, setExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const restoreFirstHighlightElementFunRef = useRef<(() => void) | null>(null);
-  const onlyOnce = useRef<boolean>(false);
-  const [hasHiddenHighlightedElement, setHasHiddenHighlightedElement] = useState(false);
-  const hiddenContentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const listener = {
-      onUserDrivenTextHighlight: (firstHighlightElement: HTMLElement) => {
-        console.log("onUserDrivenTextHighlight", firstHighlightElement);
-        if (
-          containerRef.current &&
-          hiddenContentRef.current &&
-          hiddenContentRef.current.contains(firstHighlightElement) &&
-          !onlyOnce.current
-        ) {
-          console.log("inside >");
-          restoreFirstHighlightElementFunRef.current = moveAndHideHtmlElementForAutoScroll(
-            firstHighlightElement,
-            containerRef.current
-          );
-          setHasHiddenHighlightedElement(true);
-          onlyOnce.current = true;
-        }
-      },
-    };
-    addHighlightedTextListener(listener);
-    return () => {
-      removeHighlightedTextListener(listener);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (restoreFirstHighlightElementFunRef.current && onlyOnce.current) {
-      restoreFirstHighlightElementFunRef.current();
-      restoreFirstHighlightElementFunRef.current = null;
-    }
-    reapplyTextHighlights();
-  }, [expanded]);
+  const hiddenContainerRef = useRef<HTMLDivElement>(null);
+  const hasHiddenHighlightedElement = useHighlightOfHiddenElement(containerRef, hiddenContainerRef, expanded);
 
   const expandedClassName = expanded ? "expanded" : "collapsed";
   const topClassName = "znai-read-more content-block " + expandedClassName;
@@ -88,7 +50,7 @@ export function ReadMore({ title, content, elementsLibrary }: Props) {
   return (
     <div className={topClassName} ref={containerRef}>
       {summary}
-      <div className="znai-read-more-content content-block" style={style} ref={hiddenContentRef}>
+      <div className="znai-read-more-content content-block" style={style} ref={hiddenContainerRef}>
         <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} />
       </div>
     </div>

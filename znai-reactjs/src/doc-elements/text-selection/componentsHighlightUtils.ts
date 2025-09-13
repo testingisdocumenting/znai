@@ -2,31 +2,6 @@ import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { addHighlightedTextListener, removeHighlightedTextListener } from "./HighlightedText";
 import { reapplyTextHighlights } from "./AllTextHighlights";
 
-export function moveAndHideHtmlElementForAutoScroll(element: HTMLElement, newParent: HTMLElement) {
-  const originalParent = element.parentNode;
-  const originalNextSibling = element.nextSibling;
-  const originalDisplay = element.style.display;
-  const originalHeight = element.style.height;
-  const originalOverflow = element.style.overflow;
-
-  newParent.appendChild(element);
-  element.style.display = "block";
-  element.style.height = "0";
-  element.style.overflow = "hidden";
-
-  return function restore() {
-    element.style.display = originalDisplay;
-    element.style.height = originalHeight;
-    element.style.overflow = originalOverflow;
-
-    if (originalNextSibling) {
-      originalParent!.insertBefore(element, originalNextSibling);
-    } else {
-      originalParent!.appendChild(element);
-    }
-  };
-}
-
 /*
 
 Use can highlight text inside hidden by default blocks of text.
@@ -82,14 +57,41 @@ export function useHighlightOfHiddenElement(
     };
   }, []);
 
-  // this most likely won't work with Tabs
+  // this may not work with Tabs
   useEffect(() => {
     if (restoreFirstHighlightElementFunRef.current && onlyOnce.current) {
       restoreFirstHighlightElementFunRef.current();
       restoreFirstHighlightElementFunRef.current = null;
     }
+    // TODO only reapply for the specific highlight(s) that are affected maybe somehow(?)
+    // or make sure that the scroll to the selected question is triggered everytime someone toggles read more
     reapplyTextHighlights();
   }, [contentVisibilityTrigger]);
 
   return hasHiddenHighlightedElement;
+}
+
+export function moveAndHideHtmlElementForAutoScroll(element: HTMLElement, newParent: HTMLElement) {
+  const originalParent = element.parentNode;
+  const originalNextSibling = element.nextSibling;
+  const originalDisplay = element.style.display;
+  const originalHeight = element.style.height;
+  const originalOverflow = element.style.overflow;
+
+  newParent.appendChild(element);
+  element.style.display = "block";
+  element.style.height = "0";
+  element.style.overflow = "hidden";
+
+  return function restore() {
+    element.style.display = originalDisplay;
+    element.style.height = originalHeight;
+    element.style.overflow = originalOverflow;
+
+    if (originalNextSibling) {
+      originalParent!.insertBefore(element, originalNextSibling);
+    } else {
+      originalParent!.appendChild(element);
+    }
+  };
 }
