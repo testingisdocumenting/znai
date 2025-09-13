@@ -37,7 +37,7 @@ interface Question {
   resolved: boolean;
 }
 
-export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode: HTMLDivElement; tocItem: TocItem }) {
+export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode: HTMLElement; tocItem: TocItem }) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
 

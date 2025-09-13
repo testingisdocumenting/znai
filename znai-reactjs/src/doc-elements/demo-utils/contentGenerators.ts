@@ -30,6 +30,22 @@ export function contentParagraph(isRightSide: boolean) {
   };
 }
 
+export function anotherContentParagraph(isRightSide: boolean) {
+  return {
+    type: "Paragraph",
+    content: [
+      {
+        text:
+          "This is the first line of test text that demonstrates how content flows in a paragraph format. The second line continues the sample content while maintaining readability and proper spacing throughout. Finally, the third line completes this example paragraph with additional placeholder text for testing purposes.",
+        type: "SimpleText",
+      },
+    ],
+    meta: {
+      rightSide: isRightSide,
+    },
+  };
+}
+
 export function contentSingleLink(text: string) {
   return {
     type: "Paragraph",

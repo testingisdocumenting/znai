@@ -17,14 +17,17 @@
 import { Registry } from "react-component-viewer";
 import * as React from "react";
 import { elementsLibrary } from "../DefaultElementsLibrary";
-import { contentParagraph } from "../demo-utils/contentGenerators";
+import { anotherContentParagraph, contentParagraph } from "../demo-utils/contentGenerators";
 import { ReadMore } from "./ReadMore";
+import { AllTextHighlights } from "../text-selection/AllTextHighlights";
+import { documentationNavigation } from "../../structure/DocumentationNavigation";
+import { ButtonToForceTextHighlight } from "../demo-utils/ButtonToForceTextHighlight";
 
 export function readMoreDemo(registry: Registry) {
   registry.add("regular text", () =>
     surroundWithText(
       elementsLibrary,
-      <ReadMore title="Press to reveal" content={[contentParagraph(false)]} elementsLibrary={elementsLibrary} />
+      <ReadMore title="Press to reveal" content={[anotherContentParagraph(false)]} elementsLibrary={elementsLibrary} />
     )
   );
 }
@@ -36,6 +39,8 @@ function surroundWithText(elementsLibrary: any, rendered: any) {
       <DocElement content={[contentParagraph(false)]} elementsLibrary={elementsLibrary} />
       {rendered}
       <DocElement content={[contentParagraph(false)]} elementsLibrary={elementsLibrary} />
+      <AllTextHighlights containerNode={document.body} tocItem={documentationNavigation.currentPageLocation()} />
+      <ButtonToForceTextHighlight textToHighlight={"content flows in a paragraph format"} />
     </React.Fragment>
   );
 }

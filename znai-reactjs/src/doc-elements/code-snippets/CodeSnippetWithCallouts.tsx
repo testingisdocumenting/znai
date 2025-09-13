@@ -82,6 +82,7 @@ const CodeSnippetWithCallouts = ({
               references={mergedReferences}
               isPresentation={isPresentation}
               wrap={wrap}
+              isHidden={false}
               endOfLineRender={() => {
                 const calloutContent = callouts[lineIdx];
 

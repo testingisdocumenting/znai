@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
+
+import { useHighlightOfHiddenElement } from "../text-selection/componentsHighlightUtils";
 import "./ReadMore.css";
 
 interface Props {
@@ -28,27 +30,29 @@ interface Props {
 
 export function ReadMore({ title, content, elementsLibrary }: Props) {
   const [expanded, setExpanded] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const hiddenContainerRef = useRef<HTMLDivElement>(null);
+  const hasHiddenHighlightedElement = useHighlightOfHiddenElement(containerRef, hiddenContainerRef, expanded);
+
   const expandedClassName = expanded ? "expanded" : "collapsed";
   const topClassName = "znai-read-more content-block " + expandedClassName;
-  const summaryClassName = "znai-read-more-title-block content-block " + expandedClassName;
+  const summaryClassName =
+    "znai-read-more-title-block content-block " +
+    expandedClassName +
+    (hasHiddenHighlightedElement && !expanded ? " " + "znai-highlight single" : "");
   const summary = (
     <div className={summaryClassName} onClick={() => setExpanded((prev) => !prev)}>
       <Icon id="chevron-right" className="znai-read-more-icon" />
       <span className="znai-read-more-title">{title}</span>
     </div>
   );
+  const style = expanded ? { display: "block" } : { display: "none" };
   return (
-    <div className={topClassName}>
-      {expanded ? (
-        <>
-          {summary}
-          <div className="znai-read-more-content content-block">
-            <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} />
-          </div>
-        </>
-      ) : (
-        summary
-      )}
+    <div className={topClassName} ref={containerRef}>
+      {summary}
+      <div className="znai-read-more-content content-block" style={style} ref={hiddenContainerRef}>
+        <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} />
+      </div>
     </div>
   );
 }

@@ -17,7 +17,7 @@
 import { extractHighlightParams } from "./highlightUrl";
 import { HighlightedText } from "./HighlightedText";
 
-export function HighlightUrlText({ containerNode }: { containerNode: HTMLDivElement }) {
+export function HighlightUrlText({ containerNode }: { containerNode: HTMLElement }) {
   const params = extractHighlightParams();
 
   return params ? (

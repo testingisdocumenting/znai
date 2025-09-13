@@ -22,11 +22,25 @@ import { createPortal } from "react-dom";
 
 import { afterTitleId } from "../../layout/classNamesAndIds";
 
-import "./HighlightedText.css";
 import { removeTrailingSlashFromQueryParam } from "./queryParamUtils";
+import "./HighlightedText.css";
+
+export interface HighlightedTextListener {
+  onUserDrivenTextHighlight(firstElement: HTMLElement): void;
+}
+
+const highlightedTextListeners: HighlightedTextListener[] = [];
+
+export function addHighlightedTextListener(listener: HighlightedTextListener) {
+  highlightedTextListeners.push(listener);
+}
+
+export function removeHighlightedTextListener(listener: HighlightedTextListener) {
+  highlightedTextListeners.splice(highlightedTextListeners.indexOf(listener), 1);
+}
 
 interface Props {
-  containerNode: HTMLDivElement;
+  containerNode: HTMLElement;
   selectedText: string;
   selectedPrefix: string;
   selectedSuffix: string;
@@ -154,14 +168,13 @@ export function HighlightedText({
       } else {
         console.warn("can't find element with id: " + afterTitleId);
       }
-    }
-
-    if (firstHighlightedElement) {
+    } else {
       if (question && bubbleRef.current && displayBubbleAndScrollIntoView) {
         showBubbleAndCalcPositionIfHasQuestion(firstHighlightedElement, highlights[highlights.length - 1]);
       }
 
       scrollToBubbleIfRequired(firstHighlightedElement);
+      highlightedTextListeners.forEach((listener) => listener.onUserDrivenTextHighlight(firstHighlightedElement));
     }
 
     addTextMenuListener(textMenuListener);

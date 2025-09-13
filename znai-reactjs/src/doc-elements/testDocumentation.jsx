@@ -112,6 +112,69 @@ export const testDocumentation = {
             ],
           },
           {
+            title: "Title of the Hidden Details",
+            content: [
+              {
+                type: "Paragraph",
+                content: [
+                  {
+                    text: "Information you don't want users to see right away goes here.",
+                    type: "SimpleText",
+                  },
+                  {
+                    type: "SoftLineBreak",
+                  },
+                  {
+                    text: "Can use all the markdown inside",
+                    type: "SimpleText",
+                  },
+                ],
+              },
+              {
+                delimiter: ".",
+                startNumber: 1,
+                type: "OrderedList",
+                content: [
+                  {
+                    type: "ListItem",
+                    content: [
+                      {
+                        type: "Paragraph",
+                        content: [
+                          {
+                            text: "item A",
+                            type: "SimpleText",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    type: "ListItem",
+                    content: [
+                      {
+                        type: "Paragraph",
+                        content: [
+                          {
+                            text: "item B",
+                            type: "SimpleText",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                lang: "",
+                snippet: "let list = [1, 2, 3]\nlet value = 0",
+                lineNumber: "",
+                type: "Snippet",
+              },
+            ],
+            type: "ReadMore",
+          },
+          {
             lang: "javascript",
             snippet: "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
             type: "Snippet",
@@ -124,6 +187,14 @@ export const testDocumentation = {
                 type: "SimpleText",
               },
             ],
+          },
+          {
+            lang: "java",
+            snippet:
+              'public class DocScaffolding {\n    private final Path workingDir;\n    private Map<String, List<String>> fileNameByDirName;\n\n    public DocScaffolding(Path workingDir) {\n        this.workingDir = workingDir;\n        this.fileNameByDirName = new LinkedHashMap<>();\n    }\n\n    public void create() {\n        createPages();\n        createToc();\n        createMeta();\n        createIndex();\n        createLookupPaths();\n    }\n\n    private void createLookupPaths() {\n        createFileFromResource("lookup-paths");\n    }\n\n    private void createMeta() {\n        createFileFromResource("meta.json");\n    }\n}',
+            readMore: true,
+            readMoreVisibleLines: 3,
+            type: "Snippet",
           },
           {
             bulletMarker: "*",
