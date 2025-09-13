@@ -29,6 +29,8 @@ import { addHighlightedTextListener, removeHighlightedTextListener } from "../te
 
 import { reapplyTextHighlights } from "../text-selection/AllTextHighlights.js";
 
+import { moveAndHideHtmlElementForAutoScroll } from "../text-selection/componentsHighlightUtils.js";
+
 import "./tokens.css";
 import "./SimpleCodeSnippet.css";
 
@@ -76,6 +78,10 @@ class SimpleCodeSnippet extends Component {
       const hasHighlight = this.hiddenLinesContainerRef.current.contains(firstHighlightElement);
       if (hasHighlight) {
         this.firstHighlightElement = firstHighlightElement;
+        this.restoreHighlightElement = moveAndHideHtmlElementForAutoScroll(
+          firstHighlightElement,
+          this.hiddenLinesContainerRef.current
+        );
         this.setState({ hasHighlightedText: true });
       }
     }
@@ -184,8 +190,9 @@ class SimpleCodeSnippet extends Component {
     this.setState(
       (prev) => ({ clickedReadMore: !prev.clickedReadMore }),
       () => {
-        if (this.hiddenLinesContainerRef.current && this.firstHighlightElement) {
+        if (this.hiddenLinesContainerRef.current && this.firstHighlightElement && this.restoreHighlightElement) {
           this.firstHighlightElement = null;
+          this.restoreHighlightElement();
         }
         reapplyTextHighlights();
       }
