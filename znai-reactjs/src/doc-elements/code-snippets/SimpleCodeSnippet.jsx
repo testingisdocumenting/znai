@@ -70,10 +70,14 @@ class SimpleCodeSnippet extends Component {
     }
 
     if (this.hiddenLinesContainerRef.current) {
+      // if highlight is inside hidden portion
+      // we attach and hide the first highlighted element so the overall highlight engine can scroll
+      // to the right place
       const hasHighlight = this.hiddenLinesContainerRef.current.contains(firstHighlightElement);
       if (hasHighlight) {
         this.hiddenLinesContainerRef.current.appendChild(firstHighlightElement);
         firstHighlightElement.style.visibility = "hidden";
+        this.firstHighlightElement = firstHighlightElement;
         this.setState({ hasHighlightedText: true });
       }
     }
@@ -184,6 +188,11 @@ class SimpleCodeSnippet extends Component {
     this.setState(
       (prev) => ({ clickedReadMore: !prev.clickedReadMore }),
       () => {
+        if (this.hiddenLinesContainerRef.current && this.firstHighlightElement) {
+          this.hiddenLinesContainerRef.current.removeChild(this.firstHighlightElement);
+          this.firstHighlightElement = null;
+        }
+
         reapplyTextHighlights();
       }
     );
