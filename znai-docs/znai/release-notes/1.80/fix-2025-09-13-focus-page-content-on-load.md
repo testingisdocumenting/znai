@@ -1,0 +1,1 @@
+* Fix: Focus page content on page open or search open regression

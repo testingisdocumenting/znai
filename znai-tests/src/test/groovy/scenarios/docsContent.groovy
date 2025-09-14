@@ -59,6 +59,12 @@ scenario('table of contents navigation') {
     browser.title.should == "Your Product: Page Three"
 }
 
+scenario('main content should have focus on page load and after navigation') {
+    browser.open(scaffoldServerUrl.get() + '/my-product/chapter-one/getting-started')
+    browser.sendKeys(browser.keys.pageDown)
+    standardView.mainPanelScrollTop.shouldBe > 100
+}
+
 scenario('navigating back and forth should preserve scroll position') {
     standardView.gettingStartedTocItem.click()
     standardView.metaSection.waitTo visible
