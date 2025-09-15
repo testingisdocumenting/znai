@@ -63,7 +63,7 @@ scenario('main content should have focus on page load and after navigation') {
     browser.open(scaffoldServerUrl.get() + '/my-product/chapter-one/getting-started')
     standardView.pageTitle.waitTo == "Getting Started"
     browser.sendKeys(browser.keys.pageDown)
-    standardView.mainPanelScrollTop.shouldBe > 100
+    standardView.mainPanelScrollTop.waitToBe > 100
 }
 
 scenario('navigating back and forth should preserve scroll position') {
