@@ -15,8 +15,8 @@
  */
 
 .znai-highlight {
-    background-color: #ffeb3b;
-    color: black;
+    background-color: #ffeb3b !important;
+    color: black !important;
     transition: background-color 0.2s;
 }
 
