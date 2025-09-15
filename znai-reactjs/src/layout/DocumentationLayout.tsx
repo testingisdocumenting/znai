@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import TocPanel from "./TocPanel";
 import { PageGenError } from "../doc-elements/page-gen-error/PageGenError";
@@ -92,6 +92,12 @@ export function DocumentationLayout({
   const pageGenErrorPanel = pageGenError ? <PageGenError error={pageGenError} /> : null;
 
   const panelFullClassName = mainPanelClassName + (isMobile ? " mobile" : "");
+
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.focus();
+    }
+  }, [selectedTocItem]);
 
   return isMobile ? renderMobile() : renderDesktop();
 

@@ -136,7 +136,7 @@
         <commonmark.version>0.23.0</commonmark.version>
         <antlr.version>4.5</antlr.version>
         <jackson.version>2.19.1</jackson.version>
-        <webtau.version>2.2</webtau.version>
+        <webtau.version>2.4</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
         <ant.version>1.10.11</ant.version>
         <ant-compress.version>1.5</ant-compress.version>
