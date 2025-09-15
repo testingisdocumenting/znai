@@ -17,16 +17,13 @@
 
 .znai-spoiler {
     display: grid;
+    background-color: var(--znai-spoiler-background-color);
 
     border: solid 1px var(--znai-spoiler-border-color);
     cursor: pointer;
     user-select: none;
 
     margin-bottom: 16px;
-}
-
-.znai-spoiler {
-    background-color: var(--znai-spoiler-background-color);
 }
 
 .znai-spoiler-content {
