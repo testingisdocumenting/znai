@@ -26,7 +26,7 @@ import { removeTrailingSlashFromQueryParam } from "./queryParamUtils";
 import "./HighlightedText.css";
 
 export interface HighlightedTextListener {
-  onUserDrivenTextHighlight(firstElement: HTMLElement): void;
+  onUserDrivenTextHighlight(firstElement: HTMLElement, hideBubble: () => void): void;
 }
 
 const highlightedTextListeners: HighlightedTextListener[] = [];
@@ -174,7 +174,9 @@ export function HighlightedText({
       }
 
       scrollToBubbleIfRequired(firstHighlightedElement);
-      highlightedTextListeners.forEach((listener) => listener.onUserDrivenTextHighlight(firstHighlightedElement));
+      highlightedTextListeners.forEach((listener) =>
+        listener.onUserDrivenTextHighlight(firstHighlightedElement, hideBubble)
+      );
     }
 
     addTextMenuListener(textMenuListener);

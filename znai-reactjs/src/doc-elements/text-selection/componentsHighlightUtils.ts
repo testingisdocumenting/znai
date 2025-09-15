@@ -35,7 +35,7 @@ export function useHighlightOfHiddenElement(
 
   useEffect(() => {
     const listener = {
-      onUserDrivenTextHighlight: (firstHighlightElement: HTMLElement) => {
+      onUserDrivenTextHighlight: (firstHighlightElement: HTMLElement, hideBubble: () => void) => {
         if (
           containerRef.current &&
           hiddenContainerRef.current &&
@@ -46,6 +46,7 @@ export function useHighlightOfHiddenElement(
             firstHighlightElement,
             containerRef.current
           );
+          hideBubble();
           setHasHiddenHighlightedElement(true);
           onlyOnce.current = true;
         }

@@ -41,7 +41,6 @@ export function Spoiler({ title, content, elementsLibrary }: SpoilerProps) {
   if (active) {
     // TODO function to augment class name with highlight?
     const titleClassName = "znai-spoiler-title" + (hasHiddenHighlightedElement ? " znai-highlight single" : "");
-    console.log("hasHiddenHighlightedElement", hasHiddenHighlightedElement);
     return (
       <div className="znai-spoiler content-block" onClick={reveal} ref={containerRef}>
         <div className={titleClassName}>{title}</div>
