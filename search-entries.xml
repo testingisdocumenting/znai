@@ -92,7 +92,7 @@
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 79&lt; version> &lt; plugin></text>
+      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 80&lt; version> &lt; plugin></text>
     </text>
   </entry>
   <entry>
@@ -108,7 +108,7 @@
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 79&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
+      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 80&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
     </text>
   </entry>
   <entry>
@@ -116,7 +116,7 @@
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 79&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
+      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 80&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
     </text>
   </entry>
   <entry>
@@ -3309,6 +3309,22 @@
     <text>
       <score>STANDARD</score>
       <text>cd znai dist target unzip dist znai zip export PATH $ pwd dist $PATH znai version</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2025#180</url>
+    <fullTitle>Znai: 2025, 1.80 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Fix Focus page content on page open or search open regression Fix Jupyter to handle section delimiter that has other text below it includeSection Fix Ask in Slack now generates a correct link for initial index page Add highlight Slack questions inside spoiler block Add SVG support for Slack Generate Link Add Initial attempt to highlight Slack questions inside code snippets read more part Add Initial attempt to highlight Slack questions inside read more blocks</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2025#179</url>
+    <fullTitle>Znai: 2025, 1.79 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Fix Jupyter to handle section delimiter that has other text below it includeSection Fix Adjust position for ask in slack bubble with multiline text Add Slack persisted questions Add Slack detached questions Add Slack setup via env variable Fix Slack link remove trailing slash from to fix auto scroll to the question questionId Add Generate index html files for chapters to automatically redirect to the first page Add Hide show ask in slack bubble when clicking</text>
     </text>
   </entry>
   <entry>

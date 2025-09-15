@@ -2524,6 +2524,14 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.80",
+      "id" : "180",
+      "customAnchorId" : "180"
+    }, {
+      "title" : "1.79",
+      "id" : "179",
+      "customAnchorId" : "179"
+    }, {
       "title" : "1.78.1",
       "id" : "1781",
       "customAnchorId" : "1781"
