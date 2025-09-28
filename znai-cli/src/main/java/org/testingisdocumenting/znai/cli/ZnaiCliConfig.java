@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.parser.MarkupTypes;
 import org.apache.commons.cli.*;
+import org.apache.commons.cli.help.HelpFormatter;
 import org.testingisdocumenting.znai.server.SslConfig;
 import org.testingisdocumenting.znai.version.ZnaiVersion;
 
@@ -457,7 +458,7 @@ public class ZnaiCliConfig {
                 .desc("additional lookup paths separated by colon(:)")
                 .longOpt(LOOKUP_PATHS_KEY)
                 .hasArgs()
-                .build();
+                .get();
         options.addOption(lookupPaths);
 
         CliCommandHandlers.forEach(h -> options.addOption(null, h.commandName(), false, h.description()));
@@ -526,7 +527,7 @@ public class ZnaiCliConfig {
     }
 
     private void printHelp(String command, Options options) {
-        HelpFormatter helpFormatter = new HelpFormatter();
+        HelpFormatter helpFormatter = HelpFormatter.builder().get();
         printVersion();
 
         if (!isLegacyMode) {
@@ -541,13 +542,21 @@ public class ZnaiCliConfig {
 
             if (command != null) {
                 ConsoleOutputs.out(Color.CYAN, "Options for 'znai " + command + "':");
-                helpFormatter.printHelp("znai " + command + " [options]", options);
+                try {
+                    helpFormatter.printHelp("znai " + command + " [options]", "", options, "", true);
+                } catch (java.io.IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
                 ConsoleOutputs.out(Color.CYAN, "\nFor command-specific options, use:");
                 ConsoleOutputs.out("  znai [command] --help\n");
             }
         } else {
-            helpFormatter.printHelp("znai", options);
+            try {
+                helpFormatter.printHelp("znai", "", options, "", true);
+            } catch (java.io.IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
