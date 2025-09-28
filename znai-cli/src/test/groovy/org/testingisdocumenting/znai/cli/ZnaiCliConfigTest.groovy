@@ -20,11 +20,28 @@ import org.junit.Test
 
 class ZnaiCliConfigTest {
     @Test
-    void "mode as string"() {
+    void "legacy mode as string"() {
         mode('--deploy=location').should == 'build'
         mode('--doc-id=my-doc').should == 'build'
         mode('--preview').should == 'preview'
         mode('--export=my-dir').should == 'export'
+    }
+
+    @Test
+    void "new command mode as string"() {
+        mode('build', '--deploy=location').should == 'build'
+        mode('build', '--doc-id=my-doc').should == 'build'
+        mode('preview').should == 'preview'
+        mode('preview', '--port=4000').should == 'preview'
+        mode('export', 'my-dir').should == 'export'
+        mode('new').should == 'scaffold new'
+        mode('serve').should == 'serve'
+    }
+
+    @Test
+    void "defaults to build when no command specified"() {
+        mode('--source=docs').should == 'build'
+        mode('some-path').should == 'build'
     }
 
     private static String mode(String... args) {
