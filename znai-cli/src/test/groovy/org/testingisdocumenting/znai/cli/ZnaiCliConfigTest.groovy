@@ -17,9 +17,24 @@
 package org.testingisdocumenting.znai.cli
 
 import org.apache.commons.cli.Options
+import org.junit.BeforeClass
 import org.junit.Test
+import org.testingisdocumenting.znai.console.ConsoleOutputs
+import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput
 
 class ZnaiCliConfigTest {
+    static AnsiConsoleOutput consoleOutput = new AnsiConsoleOutput()
+
+    @BeforeClass
+    static void init() {
+        ConsoleOutputs.add(consoleOutput)
+    }
+
+    @BeforeClass
+    static void tearDown() {
+        ConsoleOutputs.remove(consoleOutput)
+    }
+
     @Test
     void "legacy mode as string"() {
         mode('--deploy=location').should == 'build'
