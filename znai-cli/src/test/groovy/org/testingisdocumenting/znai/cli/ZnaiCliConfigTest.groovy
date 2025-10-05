@@ -63,7 +63,7 @@ class ZnaiCliConfigTest {
     @Test
     void "preview command includes server and SSL options"() {
         def config = createConfig('preview', '--source=test')
-        def options = config.createOptionsForCommand('preview')
+        def options = config.createOptionsForCommand(ZnaiCliConfig.Command.PREVIEW)
 
         // Server options should be available for preview
         options.hasOption('host').should == true
@@ -87,15 +87,17 @@ class ZnaiCliConfigTest {
     @Test
     void "build command includes doc-id but not server options"() {
         def config = createConfig('build', '--source=test')
-        def options = createOptionsForCommand(config, 'build')
+        def options = createOptionsForCommand(config, ZnaiCliConfig.Command.BUILD)
 
         // Build-specific options should be available
         options.hasOption('doc-id').should == true
 
-        // Server options should NOT be available for build
+        // Deploy option should be available for build
+        options.hasOption('deploy').should == true
+
+        // Server options should NOT be available for build (except deploy)
         options.hasOption('host').should == false
         options.hasOption('port').should == false
-        options.hasOption('deploy').should == false
 
         // SSL options should NOT be available for build
         options.hasOption('jks-path').should == false
@@ -109,7 +111,7 @@ class ZnaiCliConfigTest {
     @Test
     void "export command includes export option but not server options"() {
         def config = createConfig('export', '--source=test')
-        def options = createOptionsForCommand(config, 'export')
+        def options = createOptionsForCommand(config, ZnaiCliConfig.Command.EXPORT)
 
         // Export-specific options should be available
         options.hasOption('export').should == true
@@ -130,7 +132,7 @@ class ZnaiCliConfigTest {
     @Test
     void "new command shows only common options"() {
         def config = createConfig('new', '--source=test')
-        def options = createOptionsForCommand(config, 'new')
+        def options = createOptionsForCommand(config, ZnaiCliConfig.Command.NEW)
 
         // Command-specific options should NOT be available
         options.hasOption('host').should == false
@@ -156,7 +158,7 @@ class ZnaiCliConfigTest {
         return createConfig(args).modeAsString
     }
 
-    private static Options createOptionsForCommand(ZnaiCliConfig config, String command) {
+    private static Options createOptionsForCommand(ZnaiCliConfig config, ZnaiCliConfig.Command command) {
         return config.createOptionsForCommand(command)
     }
 }

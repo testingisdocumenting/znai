@@ -36,38 +36,178 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Set;
+import java.util.EnumSet;
+import java.util.Map;
+import java.util.EnumMap;
 
 public class ZnaiCliConfig {
-    private static final String PREVIEW_KEY = "preview";
-    private static final String SERVE_KEY = "serve";
-    private static final String GENERATE_KEY = "new";
-    private static final String EXPORT_KEY = "export";
-    private static final String DEPLOY_KEY = "deploy";
-    private static final String MODIFIED_TIME_KEY = "modified-time";
-    private static final String DOC_ID_KEY = "doc-id";
-    private static final String SOURCE_KEY = "source";
-    private static final String MARKUP_TYPE_KEY = "markup-type";
-    private static final String HOST_KEY = "host";
-    private static final String PORT_KEY = "port";
-    private static final String ACTOR_KEY = "actor";
-    private static final String LOOKUP_PATHS_KEY = "lookup-paths";
-    private static final String VALIDATE_EXTERNAL_LINKS_KEY = "validate-external-links";
-    private static final String SSL_JKS_PATH_KEY = "jks-path";
-    private static final String SSL_JSK_PASSWORD_KEY = "jks-password";
-    private static final String SSL_PEM_CERT_PATH_KEY = "pem-cert-path";
-    private static final String SSL_PEM_KEY_PATH_KEY = "pem-key-path";
+    public enum Command {
+        PREVIEW("preview", "Preview mode with hot reload"),
+        SERVE("serve", "Serve static documentation"),
+        NEW("new", "Create new documentation with minimal necessary files"),
+        EXPORT("export", "Export documentation source including required artifacts"),
+        BUILD("build", "Build documentation (default)");
 
-    private static final String HELP_KEY = "help";
-    private static final String VERSION_KEY = "version";
+        private final String name;
+        private final String description;
 
-    private static final String PREVIEW_COMMAND = "preview";
-    private static final String SERVE_COMMAND = "serve";
-    private static final String NEW_COMMAND = "new";
-    private static final String EXPORT_COMMAND = "export";
-    private static final String BUILD_COMMAND = "build";
+        Command(String name, String description) {
+            this.name = name;
+            this.description = description;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public static Command fromName(String name) {
+            for (Command cmd : values()) {
+                if (cmd.name.equals(name)) {
+                    return cmd;
+                }
+            }
+            return null;
+        }
+    }
+
+    public enum OptionKey {
+        // Common options
+        HELP("help", "print help", false, false),
+        VERSION("version", "print version", false, false),
+        SOURCE("source", "documentation source dir", true, false),
+        MARKUP_TYPE("markup-type", "markup type", true, false),
+        VALIDATE_EXTERNAL_LINKS("validate-external-links", "validate external links", false, false),
+        ACTOR("actor", "actor name", true, false),
+        MODIFIED_TIME("modified-time", "strategy of modified time for each page: constant or file last update time: constant, file (default)", true, false),
+        LOOKUP_PATHS("lookup-paths", "additional lookup paths separated by colon(:)", true, true),
+
+        // Server-related options
+        HOST("host", "server host", true, false),
+        PORT("port", "server port", true, false),
+        DEPLOY("deploy", "documentation deploy root dir", true, false),
+        SSL_JKS_PATH("jks-path", "path to JKS cert. when specified SSL will be enabled for preview server", true, false),
+        SSL_JKS_PASSWORD("jks-password", "JSK cert password", true, false),
+        SSL_PEM_CERT_PATH("pem-cert-path", "path to PEM cert. when specified SSL will be enabled for preview server", true, false),
+        SSL_PEM_KEY_PATH("pem-key-path", "path to key pem file. when specified SSL will be enabled for preview server", true, false),
+
+        // Build-specific options
+        DOC_ID("doc-id", "documentation id", true, false),
+
+        // Export-specific options
+        EXPORT("export", "export destination directory", true, false),
+
+        // Legacy options (deprecated)
+        PREVIEW_LEGACY("preview", "[DEPRECATED] preview mode (use 'znai preview' instead)", false, false),
+        SERVE_LEGACY("serve", "[DEPRECATED] server mode (use 'znai serve' instead)", false, false),
+        NEW_LEGACY("new", "[DEPRECATED] create new documentation (use 'znai new' instead)", false, false);
+
+        private final String key;
+        private final String description;
+        private final boolean hasArg;
+        private final boolean hasMultipleArgs;
+
+        OptionKey(String key, String description, boolean hasArg, boolean hasMultipleArgs) {
+            this.key = key;
+            this.description = description;
+            this.hasArg = hasArg;
+            this.hasMultipleArgs = hasMultipleArgs;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public boolean hasArg() {
+            return hasArg;
+        }
+
+        public boolean hasMultipleArgs() {
+            return hasMultipleArgs;
+        }
+    }
+
+    private static final Map<Command, Set<OptionKey>> COMMAND_OPTIONS = new EnumMap<>(Command.class);
+
+    static {
+        // Common options for all commands
+        Set<OptionKey> commonOptions = EnumSet.of(
+            OptionKey.HELP,
+            OptionKey.VERSION,
+            OptionKey.SOURCE,
+            OptionKey.MARKUP_TYPE,
+            OptionKey.VALIDATE_EXTERNAL_LINKS,
+            OptionKey.ACTOR,
+            OptionKey.MODIFIED_TIME,
+            OptionKey.LOOKUP_PATHS
+        );
+
+        // Preview command options
+        Set<OptionKey> previewOptions = EnumSet.copyOf(commonOptions);
+        previewOptions.addAll(EnumSet.of(
+            OptionKey.HOST,
+            OptionKey.PORT,
+            OptionKey.DEPLOY,
+            OptionKey.SSL_JKS_PATH,
+            OptionKey.SSL_JKS_PASSWORD,
+            OptionKey.SSL_PEM_CERT_PATH,
+            OptionKey.SSL_PEM_KEY_PATH
+        ));
+        COMMAND_OPTIONS.put(Command.PREVIEW, previewOptions);
+
+        // Serve command options (same as preview)
+        COMMAND_OPTIONS.put(Command.SERVE, previewOptions);
+
+        // Build command options
+        Set<OptionKey> buildOptions = EnumSet.copyOf(commonOptions);
+        buildOptions.add(OptionKey.DOC_ID);
+        buildOptions.add(OptionKey.DEPLOY);
+        COMMAND_OPTIONS.put(Command.BUILD, buildOptions);
+
+        // Export command options
+        Set<OptionKey> exportOptions = EnumSet.copyOf(commonOptions);
+        exportOptions.add(OptionKey.EXPORT);
+        COMMAND_OPTIONS.put(Command.EXPORT, exportOptions);
+
+        // New command options (just common options)
+        COMMAND_OPTIONS.put(Command.NEW, commonOptions);
+    }
 
     private static final int DEFAULT_PORT = 3333;
     private final Consumer<Integer> exit;
+
+    private static Option createOptionFromKey(OptionKey key) {
+        if (key.hasMultipleArgs()) {
+            return Option.builder()
+                    .desc(key.getDescription())
+                    .longOpt(key.getKey())
+                    .hasArgs()
+                    .get();
+        } else if (key.hasArg()) {
+            return Option.builder()
+                    .desc(key.getDescription())
+                    .longOpt(key.getKey())
+                    .hasArg()
+                    .get();
+        } else {
+            return Option.builder()
+                    .desc(key.getDescription())
+                    .longOpt(key.getKey())
+                    .get();
+        }
+    }
+
+    private static Set<OptionKey> getOptionsForCommand(Command command) {
+        return COMMAND_OPTIONS.getOrDefault(command, EnumSet.noneOf(OptionKey.class));
+    }
 
     public enum Mode {
         BUILD("build"),
@@ -115,7 +255,7 @@ public class ZnaiCliConfig {
 
     private ModifiedTimeStrategy modifiedTimeStrategy;
     private boolean isLegacyMode = false;
-    private String commandName = null;
+    private Command command = null;
 
     public ZnaiCliConfig(Consumer<Integer> exit, String... args) {
         this.exit = exit;
@@ -123,7 +263,7 @@ public class ZnaiCliConfig {
     }
 
     public String getModeAsString() {
-        return mode.getLabel();
+        return mode != null ? mode.getLabel() : "unknown";
     }
 
     public CliCommandHandler getSpecifiedCustomCommand() {
@@ -248,56 +388,60 @@ public class ZnaiCliConfig {
     private void parseArgs(String[] args) {
         CommandParseResult parseResult = detectCommandMode(args);
         isLegacyMode = parseResult.isLegacy;
-        commandName = parseResult.command;
+        command = parseResult.command;
         String[] effectiveArgs = parseResult.remainingArgs;
 
-        Options options = isLegacyMode ? createLegacyOptions() : createOptionsForCommand(commandName);
+        Options options = isLegacyMode ? createLegacyOptions() : createOptionsForCommand(command);
         CommandLine commandLine = createCommandLine(effectiveArgs, options);
 
-        if (commandLine.hasOption(HELP_KEY) || (args.length < 1 && !isLegacyMode)) {
-            printHelp(commandName, options);
+        if (commandLine == null) {
+            return; // Exit already called in createCommandLine
+        }
+
+        if (commandLine.hasOption(OptionKey.HELP.getKey()) || (args.length < 1 && !isLegacyMode)) {
+            printHelp(command, options);
             exit.accept(1);
         }
 
-        if (commandLine.hasOption(VERSION_KEY)) {
+        if (commandLine.hasOption(OptionKey.VERSION.getKey())) {
             printVersion();
             exit.accept(1);
         }
 
-        if (isLegacyMode && (commandLine.hasOption(PREVIEW_KEY) || commandLine.hasOption(SERVE_KEY) ||
-                commandLine.hasOption(GENERATE_KEY) || commandLine.hasOption(EXPORT_KEY))) {
+        if (isLegacyMode && (commandLine.hasOption(OptionKey.PREVIEW_LEGACY.getKey()) || commandLine.hasOption(OptionKey.SERVE_LEGACY.getKey()) ||
+                commandLine.hasOption(OptionKey.NEW_LEGACY.getKey()) || commandLine.hasOption(OptionKey.EXPORT.getKey()))) {
             showDeprecationWarning(commandLine);
         }
 
-        port = commandLine.hasOption(PORT_KEY) ? Integer.parseInt(commandLine.getOptionValue(PORT_KEY)) : DEFAULT_PORT;
+        port = commandLine.hasOption(OptionKey.PORT.getKey()) ? Integer.parseInt(commandLine.getOptionValue(OptionKey.PORT.getKey())) : DEFAULT_PORT;
         mode = determineMode(commandLine);
         specifiedCustomCommands = CliCommandHandlers.registeredCommandNames()
                 .filter(commandLine::hasOption)
                 .collect(Collectors.toList());
 
-        docId = commandLine.hasOption(DOC_ID_KEY) ? commandLine.getOptionValue(DOC_ID_KEY) : "no-id-specified";
-        host = commandLine.hasOption(HOST_KEY) ? commandLine.getOptionValue(HOST_KEY) : "localhost";
+        docId = commandLine.hasOption(OptionKey.DOC_ID.getKey()) ? commandLine.getOptionValue(OptionKey.DOC_ID.getKey()) : "no-id-specified";
+        host = commandLine.hasOption(OptionKey.HOST.getKey()) ? commandLine.getOptionValue(OptionKey.HOST.getKey()) : "localhost";
 
-        markupType = commandLine.hasOption(MARKUP_TYPE_KEY) ? commandLine.getOptionValue(MARKUP_TYPE_KEY) : MarkupTypes.MARKDOWN;
+        markupType = commandLine.hasOption(OptionKey.MARKUP_TYPE.getKey()) ? commandLine.getOptionValue(OptionKey.MARKUP_TYPE.getKey()) : MarkupTypes.MARKDOWN;
 
-        isValidateExternalLinks = commandLine.hasOption(VALIDATE_EXTERNAL_LINKS_KEY);
+        isValidateExternalLinks = commandLine.hasOption(OptionKey.VALIDATE_EXTERNAL_LINKS.getKey());
 
-        jksPath = commandLine.getOptionValue(SSL_JKS_PATH_KEY);
-        jksPassword = commandLine.getOptionValue(SSL_JSK_PASSWORD_KEY);
-        pemCertPath = commandLine.getOptionValue(SSL_PEM_CERT_PATH_KEY);
-        pemKeyPath = commandLine.getOptionValue(SSL_PEM_KEY_PATH_KEY);
+        jksPath = commandLine.getOptionValue(OptionKey.SSL_JKS_PATH.getKey());
+        jksPassword = commandLine.getOptionValue(OptionKey.SSL_JKS_PASSWORD.getKey());
+        pemCertPath = commandLine.getOptionValue(OptionKey.SSL_PEM_CERT_PATH.getKey());
+        pemKeyPath = commandLine.getOptionValue(OptionKey.SSL_PEM_KEY_PATH.getKey());
 
-        isSourceRootSet = commandLine.hasOption(SOURCE_KEY);
-        sourceRoot = Paths.get(isSourceRootSet ? commandLine.getOptionValue(SOURCE_KEY) : "")
+        isSourceRootSet = commandLine.hasOption(OptionKey.SOURCE.getKey());
+        sourceRoot = Paths.get(isSourceRootSet ? commandLine.getOptionValue(OptionKey.SOURCE.getKey()) : "")
                 .toAbsolutePath();
 
-        deployRoot = (commandLine.hasOption(DEPLOY_KEY) ? Paths.get(commandLine.getOptionValue(DEPLOY_KEY)) :
+        deployRoot = (commandLine.hasOption(OptionKey.DEPLOY.getKey()) ? Paths.get(commandLine.getOptionValue(OptionKey.DEPLOY.getKey())) :
                 DeployTempDir.prepare(getModeAsString(), port)).toAbsolutePath();
 
         Path defaultRoot = Paths.get("");
         if (mode == Mode.EXPORT) {
-            if (commandLine.hasOption(EXPORT_KEY)) {
-                exportRoot = Paths.get(commandLine.getOptionValue(EXPORT_KEY));
+            if (commandLine.hasOption(OptionKey.EXPORT.getKey())) {
+                exportRoot = Paths.get(commandLine.getOptionValue(OptionKey.EXPORT.getKey()));
             } else {
                 // For command mode, use the first remaining arg as export directory
                 String[] remainingArgs = commandLine.getArgs();
@@ -308,15 +452,15 @@ public class ZnaiCliConfig {
                 }
             }
         } else {
-            exportRoot = commandLine.hasOption(EXPORT_KEY) ?
-                    Paths.get(commandLine.getOptionValue(EXPORT_KEY)):
+            exportRoot = commandLine.hasOption(OptionKey.EXPORT.getKey()) ?
+                    Paths.get(commandLine.getOptionValue(OptionKey.EXPORT.getKey())):
                     defaultRoot;
         }
 
-        actor = commandLine.hasOption(ACTOR_KEY) ? commandLine.getOptionValue(ACTOR_KEY) : "";
+        actor = commandLine.hasOption(OptionKey.ACTOR.getKey()) ? commandLine.getOptionValue(OptionKey.ACTOR.getKey()) : "";
 
-        lookupPaths = commandLine.hasOption(LOOKUP_PATHS_KEY) ?
-                Arrays.asList(commandLine.getOptionValues(LOOKUP_PATHS_KEY)):
+        lookupPaths = commandLine.hasOption(OptionKey.LOOKUP_PATHS.getKey()) ?
+                Arrays.asList(commandLine.getOptionValues(OptionKey.LOOKUP_PATHS.getKey())):
                 Collections.emptyList();
 
         modifiedTimeStrategy = determineModifiedTimeStrategy(commandLine);
@@ -330,34 +474,29 @@ public class ZnaiCliConfig {
     }
 
     private Mode determineMode(CommandLine commandLine) {
-        if (!isLegacyMode && commandName != null) {
-            switch (commandName) {
-                case PREVIEW_COMMAND:
-                    return Mode.PREVIEW;
-                case SERVE_COMMAND:
-                    return Mode.SERVE;
-                case NEW_COMMAND:
-                    return Mode.SCAFFOLD;
-                case EXPORT_COMMAND:
-                    return Mode.EXPORT;
-                case BUILD_COMMAND:
-                    return Mode.BUILD;
-            }
+        if (!isLegacyMode && command != null) {
+            return switch (command) {
+                case PREVIEW -> Mode.PREVIEW;
+                case SERVE -> Mode.SERVE;
+                case NEW -> Mode.SCAFFOLD;
+                case EXPORT -> Mode.EXPORT;
+                case BUILD -> Mode.BUILD;
+            };
         }
 
-        if (commandLine.hasOption(PREVIEW_KEY)) {
+        if (commandLine.hasOption(OptionKey.PREVIEW_LEGACY.getKey())) {
             return Mode.PREVIEW;
         }
 
-        if (commandLine.hasOption(SERVE_KEY)) {
+        if (commandLine.hasOption(OptionKey.SERVE_LEGACY.getKey())) {
             return Mode.SERVE;
         }
 
-        if (commandLine.hasOption(GENERATE_KEY)) {
+        if (commandLine.hasOption(OptionKey.NEW_LEGACY.getKey())) {
             return Mode.SCAFFOLD;
         }
 
-        if (commandLine.hasOption(EXPORT_KEY)) {
+        if (commandLine.hasOption(OptionKey.EXPORT.getKey())) {
             return Mode.EXPORT;
         }
 
@@ -369,21 +508,22 @@ public class ZnaiCliConfig {
     }
 
     private ModifiedTimeStrategy determineModifiedTimeStrategy(CommandLine commandLine) {
-        if (!commandLine.hasOption(MODIFIED_TIME_KEY)) {
+        if (!commandLine.hasOption(OptionKey.MODIFIED_TIME.getKey())) {
             return ModifiedTimeStrategy.NA;
         }
 
-        String modifiedTime = commandLine.getOptionValue(MODIFIED_TIME_KEY);
+        String modifiedTime = commandLine.getOptionValue(OptionKey.MODIFIED_TIME.getKey());
         return switch (modifiedTime) {
             case "constant" -> ModifiedTimeStrategy.CONSTANT;
             case "file" -> ModifiedTimeStrategy.FILE;
             default ->
-                    throw new IllegalArgumentException("unsupported " + MODIFIED_TIME_KEY + " value: " + modifiedTime);
+                    throw new IllegalArgumentException("unsupported " + OptionKey.MODIFIED_TIME.getKey() + " value: " + modifiedTime);
         };
     }
 
     private void validateMode(CommandLine commandLine) {
-        long activeModesCount = Stream.of(PREVIEW_KEY, SERVE_KEY, GENERATE_KEY, EXPORT_KEY)
+        long activeModesCount = Stream.of(OptionKey.PREVIEW_LEGACY.getKey(), OptionKey.SERVE_LEGACY.getKey(),
+                OptionKey.NEW_LEGACY.getKey(), OptionKey.EXPORT.getKey())
                 .filter(commandLine::hasOption)
                 .count() + specifiedCustomCommands.size();
 
@@ -414,77 +554,47 @@ public class ZnaiCliConfig {
     }
 
     private Options createLegacyOptions() {
-        Options options = createCommonOptions();
-
-        options.addOption(null, PREVIEW_KEY, false, "[DEPRECATED] preview mode (use 'znai preview' instead)");
-        options.addOption(null, SERVE_KEY, false, "[DEPRECATED] server mode (use 'znai serve' instead)");
-        options.addOption(null, EXPORT_KEY, true, "[DEPRECATED] export documentation (use 'znai export' instead)");
-        options.addOption(null, GENERATE_KEY, false, "[DEPRECATED] create new documentation (use 'znai new' instead)");
-
-        return options;
-    }
-
-    protected Options createOptionsForCommand(String command) {
-        Options options = createCommonOptions();
-
-        if (PREVIEW_COMMAND.equals(command) || SERVE_COMMAND.equals(command)) {
-            options.addOption(null, HOST_KEY, true, "server host");
-            options.addOption(null, PORT_KEY, true, "server port");
-            options.addOption(null, DEPLOY_KEY, true, "documentation deploy root dir");
-            options.addOption(null, SSL_JKS_PATH_KEY, true,
-                    "path to JKS cert. when specified SSL will be enabled for preview server");
-            options.addOption(null, SSL_JSK_PASSWORD_KEY, true,
-                    "JSK cert password");
-            options.addOption(null, SSL_PEM_CERT_PATH_KEY, true,
-                    "path to PEM cert. when specified SSL will be enabled for preview server");
-            options.addOption(null, SSL_PEM_KEY_PATH_KEY, true,
-                    "path to key pem file. when specified SSL will be enabled for preview server");
-        }
-
-        if (BUILD_COMMAND.equals(command)) {
-            options.addOption(null, DOC_ID_KEY, true, "documentation id");
-        }
-
-        if (EXPORT_COMMAND.equals(command)) {
-            options.addOption(null, EXPORT_KEY, true, "export destination directory");
-        }
-
-        return options;
-    }
-
-    private Options createCommonOptions() {
         Options options = new Options();
-        options.addOption(null, HELP_KEY, false, "print help");
-        options.addOption(null, VERSION_KEY, false, "print version");
-        options.addOption(null, MARKUP_TYPE_KEY, true, "markup type");
-        options.addOption(null, VALIDATE_EXTERNAL_LINKS_KEY, false, "validate external links");
-        options.addOption(null, SOURCE_KEY, true, "documentation source dir");
-        options.addOption(null, ACTOR_KEY, true, "actor name");
-        options.addOption(null, MODIFIED_TIME_KEY, true,
-                "strategy of modified time for each page: constant or file last update time: constant, file (default)");
 
-        Option lookupPaths = Option.builder()
-                .desc("additional lookup paths separated by colon(:)")
-                .longOpt(LOOKUP_PATHS_KEY)
-                .hasArgs()
-                .get();
-        options.addOption(lookupPaths);
+        // Add all legacy options
+        for (OptionKey key : OptionKey.values()) {
+            options.addOption(createOptionFromKey(key));
+        }
 
+        // Add custom command options
         CliCommandHandlers.forEach(h -> options.addOption(null, h.commandName(), false, h.description()));
 
         return options;
     }
+
+    protected Options createOptionsForCommand(Command command) {
+        Options options = new Options();
+
+        if (command != null) {
+            Set<OptionKey> commandOptions = getOptionsForCommand(command);
+            for (OptionKey key : commandOptions) {
+                options.addOption(createOptionFromKey(key));
+            }
+        }
+
+        // Add custom command options
+        CliCommandHandlers.forEach(h -> options.addOption(null, h.commandName(), false, h.description()));
+
+        return options;
+    }
+
+
 
     private void print(String name, Object value) {
         ConsoleOutputs.out(Color.BLUE, name, ": ", Color.YELLOW, value);
     }
 
     private static class CommandParseResult {
-        String command;
+        Command command;
         String[] remainingArgs;
         boolean isLegacy;
 
-        CommandParseResult(String command, String[] remainingArgs, boolean isLegacy) {
+        CommandParseResult(Command command, String[] remainingArgs, boolean isLegacy) {
             this.command = command;
             this.remainingArgs = remainingArgs;
             this.isLegacy = isLegacy;
@@ -502,40 +612,39 @@ public class ZnaiCliConfig {
             return new CommandParseResult(null, args, true);
         }
 
-        if (PREVIEW_COMMAND.equals(firstArg) || SERVE_COMMAND.equals(firstArg) ||
-            NEW_COMMAND.equals(firstArg) || EXPORT_COMMAND.equals(firstArg) ||
-            BUILD_COMMAND.equals(firstArg)) {
+        Command cmd = Command.fromName(firstArg);
+        if (cmd != null) {
             String[] remainingArgs = new String[args.length - 1];
             System.arraycopy(args, 1, remainingArgs, 0, args.length - 1);
-            return new CommandParseResult(firstArg, remainingArgs, false);
+            return new CommandParseResult(cmd, remainingArgs, false);
         }
 
         if (CliCommandHandlers.registeredCommandNames().anyMatch(firstArg::equals)) {
             String[] remainingArgs = new String[args.length - 1];
             System.arraycopy(args, 1, remainingArgs, 0, args.length - 1);
-            return new CommandParseResult(firstArg, remainingArgs, false);
+            return new CommandParseResult(null, remainingArgs, false);
         }
 
-        return new CommandParseResult(BUILD_COMMAND, args, false);
+        return new CommandParseResult(Command.BUILD, args, false);
     }
 
     private void showDeprecationWarning(CommandLine commandLine) {
         ConsoleOutputs.out(Color.YELLOW, "\nWarning: Using deprecated command-line format.");
 
-        if (commandLine.hasOption(PREVIEW_KEY)) {
+        if (commandLine.hasOption(OptionKey.PREVIEW_LEGACY.getKey())) {
             ConsoleOutputs.out(Color.YELLOW, "Please use 'znai preview' instead of 'znai --preview'");
-        } else if (commandLine.hasOption(SERVE_KEY)) {
+        } else if (commandLine.hasOption(OptionKey.SERVE_LEGACY.getKey())) {
             ConsoleOutputs.out(Color.YELLOW, "Please use 'znai serve' instead of 'znai --serve'");
-        } else if (commandLine.hasOption(GENERATE_KEY)) {
+        } else if (commandLine.hasOption(OptionKey.NEW_LEGACY.getKey())) {
             ConsoleOutputs.out(Color.YELLOW, "Please use 'znai new' instead of 'znai --new'");
-        } else if (commandLine.hasOption(EXPORT_KEY)) {
+        } else if (commandLine.hasOption(OptionKey.EXPORT.getKey())) {
             ConsoleOutputs.out(Color.YELLOW, "Please use 'znai export' instead of 'znai --export'");
         }
 
         ConsoleOutputs.out(Color.YELLOW, "The old format will be removed in a future version.\n");
     }
 
-    private void printHelp(String command, Options options) {
+    private void printHelp(Command command, Options options) {
         HelpFormatter helpFormatter = HelpFormatter.builder().get();
         printVersion();
 
@@ -543,16 +652,15 @@ public class ZnaiCliConfig {
             ConsoleOutputs.out(Color.CYAN, "\nUsage:");
             ConsoleOutputs.out("  znai [command] [options]\n");
             ConsoleOutputs.out(Color.CYAN, "Commands:");
-            ConsoleOutputs.out("  preview   ", Color.WHITE, "Preview mode with hot reload");
-            ConsoleOutputs.out("  serve     ", Color.WHITE, "Serve static documentation");
-            ConsoleOutputs.out("  new       ", Color.WHITE, "Create new documentation with minimal necessary files");
-            ConsoleOutputs.out("  export    ", Color.WHITE, "Export documentation source including required artifacts");
-            ConsoleOutputs.out("  build     ", Color.WHITE, "Build documentation (default)\n");
+            for (Command cmd : Command.values()) {
+                ConsoleOutputs.out(String.format("  %-10s", cmd.getName()), Color.WHITE, cmd.getDescription());
+            }
+            ConsoleOutputs.out();
 
             if (command != null) {
-                ConsoleOutputs.out(Color.CYAN, "Options for 'znai " + command + "':");
+                ConsoleOutputs.out(Color.CYAN, "Options for 'znai " + command.getName() + "':");
                 try {
-                    helpFormatter.printHelp("znai " + command + " [options]", "", options, "", true);
+                    helpFormatter.printHelp("znai " + command.getName() + " [options]", "", options, "", true);
                 } catch (java.io.IOException e) {
                     throw new RuntimeException(e);
                 }
