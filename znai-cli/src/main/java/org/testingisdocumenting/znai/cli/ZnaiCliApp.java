@@ -69,7 +69,7 @@ public class ZnaiCliApp {
 
     public static void main(String[] args) {
         ConsoleOutputs.add(new AnsiConsoleOutput());
-        start(new ZnaiCliConfig(args));
+        start(new ZnaiCliConfig((exitCode) -> System.exit(exitCode), args));
     }
 
     private String getDocId() {

@@ -33,6 +33,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,6 +67,7 @@ public class ZnaiCliConfig {
     private static final String BUILD_COMMAND = "build";
 
     private static final int DEFAULT_PORT = 3333;
+    private final Consumer<Integer> exit;
 
     public enum Mode {
         BUILD("build"),
@@ -115,7 +117,8 @@ public class ZnaiCliConfig {
     private boolean isLegacyMode = false;
     private String commandName = null;
 
-    public ZnaiCliConfig(String... args) {
+    public ZnaiCliConfig(Consumer<Integer> exit, String... args) {
+        this.exit = exit;
         parseArgs(args);
     }
 
@@ -253,12 +256,12 @@ public class ZnaiCliConfig {
 
         if (commandLine.hasOption(HELP_KEY) || (args.length < 1 && !isLegacyMode)) {
             printHelp(commandName, options);
-            System.exit(1);
+            exit.accept(1);
         }
 
         if (commandLine.hasOption(VERSION_KEY)) {
             printVersion();
-            System.exit(1);
+            exit.accept(1);
         }
 
         if (isLegacyMode && (commandLine.hasOption(PREVIEW_KEY) || commandLine.hasOption(SERVE_KEY) ||
@@ -291,7 +294,7 @@ public class ZnaiCliConfig {
         deployRoot = (commandLine.hasOption(DEPLOY_KEY) ? Paths.get(commandLine.getOptionValue(DEPLOY_KEY)) :
                 DeployTempDir.prepare(getModeAsString(), port)).toAbsolutePath();
 
-        // For export mode, handle directory parameter
+        Path defaultRoot = Paths.get("");
         if (mode == Mode.EXPORT) {
             if (commandLine.hasOption(EXPORT_KEY)) {
                 exportRoot = Paths.get(commandLine.getOptionValue(EXPORT_KEY));
@@ -301,13 +304,13 @@ public class ZnaiCliConfig {
                 if (remainingArgs.length > 0) {
                     exportRoot = Paths.get(remainingArgs[0]);
                 } else {
-                    exportRoot = Paths.get("");
+                    exportRoot = defaultRoot;
                 }
             }
         } else {
             exportRoot = commandLine.hasOption(EXPORT_KEY) ?
                     Paths.get(commandLine.getOptionValue(EXPORT_KEY)):
-                    Paths.get("");
+                    defaultRoot;
         }
 
         actor = commandLine.hasOption(ACTOR_KEY) ? commandLine.getOptionValue(ACTOR_KEY) : "";
@@ -396,7 +399,7 @@ public class ZnaiCliConfig {
         } catch (ParseException e) {
             ConsoleOutputs.out(Color.RED, e.getMessage());
             ConsoleOutputs.out(Color.BLUE, "use --help to list all available parameters");
-            System.exit(2);
+            exit.accept(2);
 
             return null;
         }
@@ -421,8 +424,26 @@ public class ZnaiCliConfig {
         return options;
     }
 
-    private Options createOptionsForCommand(String command) {
+    protected Options createOptionsForCommand(String command) {
         Options options = createCommonOptions();
+
+        if (PREVIEW_COMMAND.equals(command) || SERVE_COMMAND.equals(command)) {
+            options.addOption(null, HOST_KEY, true, "server host");
+            options.addOption(null, PORT_KEY, true, "server port");
+            options.addOption(null, DEPLOY_KEY, true, "documentation deploy root dir");
+            options.addOption(null, SSL_JKS_PATH_KEY, true,
+                    "path to JKS cert. when specified SSL will be enabled for preview server");
+            options.addOption(null, SSL_JSK_PASSWORD_KEY, true,
+                    "JSK cert password");
+            options.addOption(null, SSL_PEM_CERT_PATH_KEY, true,
+                    "path to PEM cert. when specified SSL will be enabled for preview server");
+            options.addOption(null, SSL_PEM_KEY_PATH_KEY, true,
+                    "path to key pem file. when specified SSL will be enabled for preview server");
+        }
+
+        if (BUILD_COMMAND.equals(command)) {
+            options.addOption(null, DOC_ID_KEY, true, "documentation id");
+        }
 
         if (EXPORT_COMMAND.equals(command)) {
             options.addOption(null, EXPORT_KEY, true, "export destination directory");
@@ -435,24 +456,12 @@ public class ZnaiCliConfig {
         Options options = new Options();
         options.addOption(null, HELP_KEY, false, "print help");
         options.addOption(null, VERSION_KEY, false, "print version");
-        options.addOption(null, PORT_KEY, true, "server port");
-        options.addOption(null, HOST_KEY, true, "server host");
         options.addOption(null, MARKUP_TYPE_KEY, true, "markup type");
         options.addOption(null, VALIDATE_EXTERNAL_LINKS_KEY, false, "validate external links");
         options.addOption(null, SOURCE_KEY, true, "documentation source dir");
-        options.addOption(null, DOC_ID_KEY, true, "documentation id");
-        options.addOption(null, DEPLOY_KEY, true, "documentation deploy root dir");
         options.addOption(null, ACTOR_KEY, true, "actor name");
         options.addOption(null, MODIFIED_TIME_KEY, true,
                 "strategy of modified time for each page: constant or file last update time: constant, file (default)");
-        options.addOption(null, SSL_JKS_PATH_KEY, true,
-                "path to JKS cert. when specified SSL will be enabled for preview server");
-        options.addOption(null, SSL_JSK_PASSWORD_KEY, true,
-                "JSK cert password");
-        options.addOption(null, SSL_PEM_CERT_PATH_KEY, true,
-                "path to PEM cert. when specified SSL will be enabled for preview server");
-        options.addOption(null, SSL_PEM_KEY_PATH_KEY, true,
-                "path to key pem file. when specified SSL will be enabled for preview server");
 
         Option lookupPaths = Option.builder()
                 .desc("additional lookup paths separated by colon(:)")
