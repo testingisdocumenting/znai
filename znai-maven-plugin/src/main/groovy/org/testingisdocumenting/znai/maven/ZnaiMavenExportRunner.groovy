@@ -30,14 +30,9 @@ class ZnaiMavenExportRunner extends AbstractMojo {
     @Parameter(defaultValue = '${project.build.directory}/znai-export')
     private String exportRoot
 
-    @Parameter(defaultValue = "3333")
-    private Integer port
-
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
-        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), [
-                export: exportRoot,
-                port  : port.toString(),
+        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), ["export", exportRoot], [
                 source: sourceRoot,
         ])
     }
