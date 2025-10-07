@@ -43,9 +43,9 @@ import java.util.EnumMap;
 
 public class ZnaiCliConfig {
     public enum Command {
-        PREVIEW("preview", "Preview mode with hot reload"),
+        PREVIEW("preview", "Preview mode"),
         SERVE("serve", "Serve static documentation"),
-        NEW("new", "Create new documentation with minimal necessary files"),
+        NEW("new", "Create new documentation with sample content and basic setup"),
         EXPORT("export", "Export documentation source including required artifacts"),
         BUILD("build", "Build documentation (default)");
 
@@ -76,17 +76,16 @@ public class ZnaiCliConfig {
     }
 
     public enum OptionKey {
-        // Common options
         HELP("help", "print help", false, false),
         VERSION("version", "print version", false, false),
         SOURCE("source", "documentation source dir", true, false),
+        OUTPUT("output", "destination for produced artifacts", true, false),
         MARKUP_TYPE("markup-type", "markup type", true, false),
         VALIDATE_EXTERNAL_LINKS("validate-external-links", "validate external links", false, false),
         ACTOR("actor", "actor name", true, false),
         MODIFIED_TIME("modified-time", "strategy of modified time for each page: constant or file last update time: constant, file (default)", true, false),
         LOOKUP_PATHS("lookup-paths", "additional lookup paths separated by colon(:)", true, true),
 
-        // Server-related options
         HOST("host", "server host", true, false),
         PORT("port", "server port", true, false),
         DEPLOY("deploy", "documentation deploy root dir", true, false),
@@ -95,13 +94,10 @@ public class ZnaiCliConfig {
         SSL_PEM_CERT_PATH("pem-cert-path", "path to PEM cert. when specified SSL will be enabled for preview server", true, false),
         SSL_PEM_KEY_PATH("pem-key-path", "path to key pem file. when specified SSL will be enabled for preview server", true, false),
 
-        // Build-specific options
         DOC_ID("doc-id", "documentation id", true, false),
 
-        // Export-specific options
         EXPORT("export", "export destination directory", true, false),
 
-        // Legacy options (deprecated)
         PREVIEW_LEGACY("preview", "[DEPRECATED] preview mode (use 'znai preview' instead)", false, false),
         SERVE_LEGACY("serve", "[DEPRECATED] server mode (use 'znai serve' instead)", false, false),
         NEW_LEGACY("new", "[DEPRECATED] create new documentation (use 'znai new' instead)", false, false);
@@ -138,7 +134,6 @@ public class ZnaiCliConfig {
     private static final Map<Command, Set<OptionKey>> COMMAND_OPTIONS = new EnumMap<>(Command.class);
 
     static {
-        // Common options for all commands
         Set<OptionKey> commonOptions = EnumSet.of(
             OptionKey.HELP,
             OptionKey.VERSION,
@@ -150,7 +145,6 @@ public class ZnaiCliConfig {
             OptionKey.LOOKUP_PATHS
         );
 
-        // Preview command options
         Set<OptionKey> previewOptions = EnumSet.copyOf(commonOptions);
         previewOptions.addAll(EnumSet.of(
             OptionKey.HOST,
@@ -162,22 +156,17 @@ public class ZnaiCliConfig {
             OptionKey.SSL_PEM_KEY_PATH
         ));
         COMMAND_OPTIONS.put(Command.PREVIEW, previewOptions);
-
-        // Serve command options (same as preview)
         COMMAND_OPTIONS.put(Command.SERVE, previewOptions);
 
-        // Build command options
         Set<OptionKey> buildOptions = EnumSet.copyOf(commonOptions);
         buildOptions.add(OptionKey.DOC_ID);
         buildOptions.add(OptionKey.DEPLOY);
         COMMAND_OPTIONS.put(Command.BUILD, buildOptions);
 
-        // Export command options
         Set<OptionKey> exportOptions = EnumSet.copyOf(commonOptions);
         exportOptions.add(OptionKey.EXPORT);
         COMMAND_OPTIONS.put(Command.EXPORT, exportOptions);
 
-        // New command options (just common options)
         COMMAND_OPTIONS.put(Command.NEW, commonOptions);
     }
 
@@ -394,11 +383,7 @@ public class ZnaiCliConfig {
         Options options = isLegacyMode ? createLegacyOptions() : createOptionsForCommand(command);
         CommandLine commandLine = createCommandLine(effectiveArgs, options);
 
-        if (commandLine == null) {
-            return; // Exit already called in createCommandLine
-        }
-
-        if (commandLine.hasOption(OptionKey.HELP.getKey()) || (args.length < 1 && !isLegacyMode)) {
+        if (commandLine.hasOption(OptionKey.HELP.getKey()) || (args.length < 1)) {
             printHelp(command, options);
             exit.accept(1);
         }
@@ -556,12 +541,10 @@ public class ZnaiCliConfig {
     private Options createLegacyOptions() {
         Options options = new Options();
 
-        // Add all legacy options
         for (OptionKey key : OptionKey.values()) {
             options.addOption(createOptionFromKey(key));
         }
 
-        // Add custom command options
         CliCommandHandlers.forEach(h -> options.addOption(null, h.commandName(), false, h.description()));
 
         return options;
@@ -577,9 +560,7 @@ public class ZnaiCliConfig {
             }
         }
 
-        // Add custom command options
         CliCommandHandlers.forEach(h -> options.addOption(null, h.commandName(), false, h.description()));
-
         return options;
     }
 
@@ -603,11 +584,10 @@ public class ZnaiCliConfig {
 
     private CommandParseResult detectCommandMode(String[] args) {
         if (args.length == 0) {
-            return new CommandParseResult(null, args, true);
+            return new CommandParseResult(null, args, false);
         }
 
         String firstArg = args[0];
-
         if (firstArg.startsWith("--") || firstArg.startsWith("-")) {
             return new CommandParseResult(null, args, true);
         }
@@ -629,7 +609,7 @@ public class ZnaiCliConfig {
     }
 
     private void showDeprecationWarning(CommandLine commandLine) {
-        ConsoleOutputs.out(Color.YELLOW, "\nWarning: Using deprecated command-line format.");
+        ConsoleOutputs.out(Color.YELLOW, "Warning: Using deprecated command-line format.");
 
         if (commandLine.hasOption(OptionKey.PREVIEW_LEGACY.getKey())) {
             ConsoleOutputs.out(Color.YELLOW, "Please use 'znai preview' instead of 'znai --preview'");
@@ -641,11 +621,11 @@ public class ZnaiCliConfig {
             ConsoleOutputs.out(Color.YELLOW, "Please use 'znai export' instead of 'znai --export'");
         }
 
-        ConsoleOutputs.out(Color.YELLOW, "The old format will be removed in a future version.\n");
+        ConsoleOutputs.out(Color.YELLOW, "The old format will be removed in future versions");
     }
 
     private void printHelp(Command command, Options options) {
-        HelpFormatter helpFormatter = HelpFormatter.builder().get();
+        HelpFormatter helpFormatter = HelpFormatter.builder().setShowSince(false).get();
         printVersion();
 
         if (!isLegacyMode) {

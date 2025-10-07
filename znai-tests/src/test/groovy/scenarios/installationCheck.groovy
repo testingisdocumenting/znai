@@ -24,8 +24,8 @@ def scaffoldedDocRoot = cache.value("scaffoldedNewDocs")
 
 scenario('shows help') {
     znai.run() {
-        output.should contain('--new')
-        output.should contain('create new documentation with minimal')
+        output.should contain('new')
+        output.should contain('Create new documentation with sample content and basic setup')
 
         exitCode.should == 1
     }

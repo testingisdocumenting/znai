@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +22,9 @@ import org.junit.BeforeClass
 import org.junit.Test
 import org.testingisdocumenting.znai.console.ConsoleOutputs
 import org.testingisdocumenting.znai.console.ansi.AnsiConsoleOutput
+
+import static org.testingisdocumenting.znai.cli.ZnaiCliConfig.Command
+import static org.testingisdocumenting.znai.cli.ZnaiCliConfig.OptionKey
 
 class ZnaiCliConfigTest {
     static AnsiConsoleOutput consoleOutput = new AnsiConsoleOutput()
@@ -46,12 +50,12 @@ class ZnaiCliConfigTest {
     @Test
     void "new command mode as string"() {
         mode('build', '--deploy=location').should == 'build'
-//        mode('build', '--doc-id=my-doc').should == 'build'
-//        mode('preview').should == 'preview'
-//        mode('preview', '--port=4000').should == 'preview'
-//        mode('export', 'my-dir').should == 'export'
-//        mode('new').should == 'scaffold new'
-//        mode('serve').should == 'serve'
+        mode('build', '--doc-id=my-doc').should == 'build'
+        mode('preview').should == 'preview'
+        mode('preview', '--port=4000').should == 'preview'
+        mode('export', 'my-dir').should == 'export'
+        mode('new').should == 'scaffold new'
+        mode('serve').should == 'serve'
     }
 
     @Test
@@ -62,91 +66,76 @@ class ZnaiCliConfigTest {
 
     @Test
     void "preview command includes server and SSL options"() {
-        def config = createConfig('preview', '--source=test')
-        def options = config.createOptionsForCommand(ZnaiCliConfig.Command.PREVIEW)
+        def options = createOptionsForCommand(Command.PREVIEW, '--source=test')
 
-        // Server options should be available for preview
-        options.hasOption('host').should == true
-        options.hasOption('port').should == true
-        options.hasOption('deploy').should == true
-
-        // SSL options should be available for preview
-        options.hasOption('jks-path').should == true
-        options.hasOption('jks-password').should == true
-        options.hasOption('pem-cert-path').should == true
-        options.hasOption('pem-key-path').should == true
-
-        // Build-specific options should NOT be available
-        options.hasOption('doc-id').should == false
-
-        // Common options should be available
-        options.hasOption('source').should == true
-        options.hasOption('markup-type').should == true
+        assertOnlyTheseOptions(options,
+            OptionKey.HOST,
+            OptionKey.PORT,
+            OptionKey.DEPLOY,
+            OptionKey.SSL_JKS_PATH,
+            OptionKey.SSL_JKS_PASSWORD,
+            OptionKey.SSL_PEM_CERT_PATH,
+            OptionKey.SSL_PEM_KEY_PATH,
+            OptionKey.SOURCE,
+            OptionKey.MARKUP_TYPE,
+            OptionKey.HELP,
+            OptionKey.VERSION,
+            OptionKey.VALIDATE_EXTERNAL_LINKS,
+            OptionKey.ACTOR,
+            OptionKey.MODIFIED_TIME,
+            OptionKey.LOOKUP_PATHS
+        )
     }
 
     @Test
     void "build command includes doc-id but not server options"() {
-        def config = createConfig('build', '--source=test')
-        def options = createOptionsForCommand(config, ZnaiCliConfig.Command.BUILD)
+        def options = createOptionsForCommand(Command.BUILD, '--source=test')
 
-        // Build-specific options should be available
-        options.hasOption('doc-id').should == true
-
-        // Deploy option should be available for build
-        options.hasOption('deploy').should == true
-
-        // Server options should NOT be available for build (except deploy)
-        options.hasOption('host').should == false
-        options.hasOption('port').should == false
-
-        // SSL options should NOT be available for build
-        options.hasOption('jks-path').should == false
-        options.hasOption('pem-cert-path').should == false
-
-        // Common options should be available
-        options.hasOption('source').should == true
-        options.hasOption('markup-type').should == true
+        assertOnlyTheseOptions(options,
+            OptionKey.DOC_ID,
+            OptionKey.DEPLOY,
+            OptionKey.SOURCE,
+            OptionKey.MARKUP_TYPE,
+            OptionKey.HELP,
+            OptionKey.VERSION,
+            OptionKey.VALIDATE_EXTERNAL_LINKS,
+            OptionKey.ACTOR,
+            OptionKey.MODIFIED_TIME,
+            OptionKey.LOOKUP_PATHS
+        )
     }
 
     @Test
     void "export command includes export option but not server options"() {
-        def config = createConfig('export', '--source=test')
-        def options = createOptionsForCommand(config, ZnaiCliConfig.Command.EXPORT)
+        def options = createOptionsForCommand(Command.EXPORT, '--source=test')
 
-        // Export-specific options should be available
-        options.hasOption('export').should == true
-
-        // Server options should NOT be available for export
-        options.hasOption('host').should == false
-        options.hasOption('port').should == false
-        options.hasOption('jks-path').should == false
-
-        // Build-specific options should NOT be available
-        options.hasOption('doc-id').should == false
-
-        // Common options should be available
-        options.hasOption('source').should == true
-        options.hasOption('markup-type').should == true
+        assertOnlyTheseOptions(options,
+            OptionKey.EXPORT,
+            OptionKey.SOURCE,
+            OptionKey.MARKUP_TYPE,
+            OptionKey.HELP,
+            OptionKey.VERSION,
+            OptionKey.VALIDATE_EXTERNAL_LINKS,
+            OptionKey.ACTOR,
+            OptionKey.MODIFIED_TIME,
+            OptionKey.LOOKUP_PATHS
+        )
     }
 
     @Test
     void "new command shows only common options"() {
-        def config = createConfig('new', '--source=test')
-        def options = createOptionsForCommand(config, ZnaiCliConfig.Command.NEW)
+        def options = createOptionsForCommand(Command.NEW, '--source=test')
 
-        // Command-specific options should NOT be available
-        options.hasOption('host').should == false
-        options.hasOption('port').should == false
-        options.hasOption('deploy').should == false
-        options.hasOption('jks-path').should == false
-        options.hasOption('doc-id').should == false
-        options.hasOption('export').should == false
-
-        // Common options should be available
-        options.hasOption('source').should == true
-        options.hasOption('markup-type').should == true
-        options.hasOption('help').should == true
-        options.hasOption('version').should == true
+        assertOnlyTheseOptions(options,
+            OptionKey.SOURCE,
+            OptionKey.MARKUP_TYPE,
+            OptionKey.HELP,
+            OptionKey.VERSION,
+            OptionKey.VALIDATE_EXTERNAL_LINKS,
+            OptionKey.ACTOR,
+            OptionKey.MODIFIED_TIME,
+            OptionKey.LOOKUP_PATHS
+        )
     }
 
     private static createConfig(String... args) {
@@ -158,7 +147,27 @@ class ZnaiCliConfigTest {
         return createConfig(args).modeAsString
     }
 
-    private static Options createOptionsForCommand(ZnaiCliConfig config, ZnaiCliConfig.Command command) {
+    private static Options createOptionsForCommand(Command command, String... args) {
+        def commandName = command.getName()
+        def allArgs = [commandName] + args.toList()
+        def config = createConfig(allArgs as String[])
         return config.createOptionsForCommand(command)
+    }
+
+    private static void assertOnlyTheseOptions(Options options, OptionKey... expectedKeys) {
+        def allKeys = OptionKey.values()
+
+        expectedKeys.each { key ->
+            def optionName = key.getKey()
+            assert options.hasOption(optionName), "Expected option ${optionName} (${key}) to be present"
+        }
+
+        def expectedSet = expectedKeys as Set
+        allKeys.each { key ->
+            if (!expectedSet.contains(key)) {
+                def optionName = key.getKey()
+                assert !options.hasOption(optionName), "Unexpected option ${optionName} (${key}) should not be present"
+            }
+        }
     }
 }

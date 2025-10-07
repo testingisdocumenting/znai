@@ -40,7 +40,7 @@ class ZnaiMavenBuildRunner extends AbstractMojo {
 
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
-        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), [
+        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), ["build"], [
                 'doc-id': docId,
                 source  : sourceRoot,
                 deploy  : deployRoot,

@@ -21,7 +21,7 @@ import org.junit.Test
 class ZnaiMavenRunnerTest {
     @Test
     void "should handle params with no values"() {
-        def args = ZnaiMavenRunner.constructArgs([
+        def args = ZnaiMavenRunner.constructArgs([], [
                 noValue: null,
                 foo: 'bar',
         ])
