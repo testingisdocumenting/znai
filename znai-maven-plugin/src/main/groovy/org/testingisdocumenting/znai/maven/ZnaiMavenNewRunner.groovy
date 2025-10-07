@@ -29,8 +29,6 @@ class ZnaiMavenNewRunner extends AbstractMojo {
 
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
-        def args = [new: null, source: sourceRoot]
-
-        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), args)
+        ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), ["new"], [source: sourceRoot])
     }
 }

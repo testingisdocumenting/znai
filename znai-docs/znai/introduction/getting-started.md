@@ -28,7 +28,7 @@ Note: consider adding a separate module for documentation in the multi module ma
 To create a minimum set of files for your documentation execute 
 
 ```tabs
-CLI: :include-cli-command: znai --new
+CLI: :include-cli-command: znai new
 Maven: :include-cli-command: mvn znai:new
 ```
 
@@ -53,7 +53,7 @@ to navigates to the right page and highlights the changes.
 To start preview mode, navigate to the documentation directory (`znai` if you used scaffold) and run
 
 ```tabs
-CLI: :include-cli-command: znai --preview [--port port-number]
+CLI: :include-cli-command: znai preview [--port port-number]
 Maven: 
 
 :include-cli-command: mvn znai:preview

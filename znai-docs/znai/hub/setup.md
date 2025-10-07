@@ -11,7 +11,7 @@ Create the enterprise config file and set the path where Znai will store uploade
 
 Run Znai in server mode in the directory with the config file:
 ```cli
-znai --serve --port=<port>
+znai serve --port=<port>
 ```
 
 # Upload Documentation

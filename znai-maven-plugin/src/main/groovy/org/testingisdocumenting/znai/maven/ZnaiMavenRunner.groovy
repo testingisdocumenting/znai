@@ -21,13 +21,15 @@ import org.testingisdocumenting.znai.console.ConsoleOutputs
 import org.testingisdocumenting.znai.cli.ZnaiCliApp
 import org.testingisdocumenting.znai.cli.ZnaiCliConfig
 
+import java.util.stream.Stream
+
 class ZnaiMavenRunner {
-    static void run(ConsoleOutput consoleOutput, Map<String, String> argsMap) {
+    static void run(ConsoleOutput consoleOutput, List<String> freeFormArgs, Map<String, String> argsMap) {
         ConsoleOutputs.add(consoleOutput)
 
         try {
-            String[] args = constructArgs(argsMap)
-            def config = new ZnaiCliConfig(args)
+            String[] args = constructArgs(freeFormArgs, argsMap)
+            def config = new ZnaiCliConfig(System::exit, args)
 
             ZnaiCliApp.start(config)
         } finally {
@@ -35,10 +37,11 @@ class ZnaiMavenRunner {
         }
     }
 
-    static String[] constructArgs(Map<String, String> args) {
-        return args.entrySet().stream()
-        .map { entry -> argToString(entry) }
-        .toArray { size -> new String[size] }
+    static String[] constructArgs(List<String> freeFormArgs, Map<String, String> args) {
+        return Stream.concat(freeFormArgs.stream(),
+                args.entrySet().stream()
+                        .map { entry -> argToString(entry) })
+                .toArray { size -> new String[size] }
     }
 
     private static String argToString(Map.Entry<String, String> entry) {
