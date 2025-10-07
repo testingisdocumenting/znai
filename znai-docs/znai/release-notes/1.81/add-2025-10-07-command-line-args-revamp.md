@@ -1,0 +1,1 @@
+* Add: Deprecate `znai --new`, `znai --preview`, `znai --serve` in favor of `znai new`, `znai preview`, `znai serve`
