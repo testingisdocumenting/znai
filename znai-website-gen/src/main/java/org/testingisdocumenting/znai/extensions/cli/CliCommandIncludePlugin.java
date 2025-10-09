@@ -29,6 +29,7 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -70,8 +71,8 @@ public class CliCommandIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.HIGH.text(command);
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.HIGH.text(command));
     }
 
     private String extractCommand(PluginParams pluginParams) {

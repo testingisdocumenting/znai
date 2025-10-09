@@ -28,6 +28,7 @@ import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
@@ -286,5 +287,11 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
             this.collapsed = collapsed;
             this.example = example;
         }
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

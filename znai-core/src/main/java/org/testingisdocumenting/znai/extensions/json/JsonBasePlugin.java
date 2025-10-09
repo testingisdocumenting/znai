@@ -31,6 +31,7 @@ import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.parser.table.CsvTableParser;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
@@ -283,5 +284,11 @@ public abstract class JsonBasePlugin implements Plugin {
 
     private static Set<String> buildPaths(Object json) {
         return new JsonPaths(json).getPaths();
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement
+        return List.of();
     }
 }

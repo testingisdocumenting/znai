@@ -119,8 +119,8 @@ public class TabsFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(String.join(" ", texts));
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(String.join(" ", texts)));
     }
 
     private record ParsedTab(String name, MarkupParserResult parserResult) {

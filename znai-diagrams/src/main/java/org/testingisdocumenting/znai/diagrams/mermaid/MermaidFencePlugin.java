@@ -17,7 +17,6 @@
 package org.testingisdocumenting.znai.diagrams.mermaid;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
@@ -27,6 +26,7 @@ import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MermaidFencePlugin implements FencePlugin {
@@ -57,7 +57,7 @@ public class MermaidFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(this.content);
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(this.content));
     }
 }

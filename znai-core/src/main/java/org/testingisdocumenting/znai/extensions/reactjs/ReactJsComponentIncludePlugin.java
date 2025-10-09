@@ -21,9 +21,11 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public class ReactJsComponentIncludePlugin implements IncludePlugin {
     @Override
@@ -64,5 +66,11 @@ public class ReactJsComponentIncludePlugin implements IncludePlugin {
             this.namespace = namespace;
             this.name = name;
         }
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

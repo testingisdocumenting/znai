@@ -26,6 +26,7 @@ import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.List;
 
 public class LatexFencePlugin implements FencePlugin {
     public static final String ID = "latex";
@@ -49,7 +50,7 @@ public class LatexFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(this.content);
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(this.content));
     }
 }

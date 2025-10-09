@@ -24,9 +24,11 @@ import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MarkdownAndResultFencePlugin implements FencePlugin {
@@ -53,5 +55,11 @@ public class MarkdownAndResultFencePlugin implements FencePlugin {
         props.put("result", parserResult.contentToListOfMaps());
 
         return PluginResult.docElement("MarkdownAndResult", props);
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

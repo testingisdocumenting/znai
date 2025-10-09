@@ -20,11 +20,15 @@ package org.testingisdocumenting.znai.jupyter;
 import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.*;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
@@ -40,6 +44,7 @@ public class JupyterIncludePlugin implements IncludePlugin {
     private String lang;
     private boolean isStoryFirst;
     private ParserHandler markdownParserHandler;
+    private List<JupyterCell> cells;
 
     @Override
     public String id() {
@@ -77,10 +82,9 @@ public class JupyterIncludePlugin implements IncludePlugin {
                 .parse(JsonUtils.deserializeAsMap(resourcesResolver.textContent(path)));
         lang = notebook.getLang();
 
-        List<JupyterCell> cells =
-                !includeSection.isEmpty() ?
-                        collectCells(notebook.getCells(), includeSection, excludeSectionTitle) :
-                        notebook.getCells();
+        cells = !includeSection.isEmpty() ?
+                collectCells(notebook.getCells(), includeSection, excludeSectionTitle) :
+                notebook.getCells();
 
         cells.forEach(this::processCell);
         return PluginResult.docElements(Stream.empty());
@@ -103,6 +107,12 @@ public class JupyterIncludePlugin implements IncludePlugin {
 
         return result;
     }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        return List.of();
+    }
+
 
     private void processCell(JupyterCell cell) {
         processMarkdownCell(cell);

@@ -25,6 +25,7 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public class KeyboardShortcutInlinedCodePlugin implements InlinedCodePlugin {
     private String shortcut;
@@ -46,8 +47,8 @@ public class KeyboardShortcutInlinedCodePlugin implements InlinedCodePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(shortcut);
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(shortcut));
     }
 
 }

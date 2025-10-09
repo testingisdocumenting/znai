@@ -30,6 +30,7 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -81,10 +82,10 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
+    public List<SearchText> textForSearch() {
         ApiParameters apiParameters = membersList.first().getDescription().getFull().getApiParameters();
         if (apiParameters != null) {
-            return SearchScore.HIGH.text(apiParameters.combinedTextForSearch());
+            return List.of(SearchScore.HIGH.text(apiParameters.combinedTextForSearch()));
         }
 
         return null;

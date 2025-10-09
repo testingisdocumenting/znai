@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class TrackingIncludePlugin implements IncludePlugin {
@@ -45,7 +46,7 @@ public class TrackingIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
+    public List<SearchText> textForSearch() {
         return delegate.textForSearch();
     }
 

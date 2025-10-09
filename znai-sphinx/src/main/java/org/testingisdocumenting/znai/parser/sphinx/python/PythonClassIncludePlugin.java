@@ -21,8 +21,10 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public class PythonClassIncludePlugin implements IncludePlugin {
     @Override
@@ -41,5 +43,11 @@ public class PythonClassIncludePlugin implements IncludePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams) {
         return PluginResult.docElement("LangClass", pluginParams.getOpts().toMap());
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

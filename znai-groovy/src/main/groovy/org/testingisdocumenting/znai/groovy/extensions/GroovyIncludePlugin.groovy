@@ -23,11 +23,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry
 import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.PluginResult
 import org.testingisdocumenting.znai.extensions.features.PluginFeatureList
-import org.testingisdocumenting.znai.extensions.file.CodeReferencesFeature
-import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider
-import org.testingisdocumenting.znai.extensions.file.SnippetAutoTitleFeature
-import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature
-import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature
+import org.testingisdocumenting.znai.extensions.file.*
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin
 import org.testingisdocumenting.znai.groovy.parser.GroovyCode
 import org.testingisdocumenting.znai.parser.ParserHandler
@@ -95,8 +91,8 @@ class GroovyIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    SearchText textForSearch() {
-        return SearchScore.STANDARD.text(contentProvider.snippetContent())
+    List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(contentProvider.snippetContent()))
     }
 
     @Override

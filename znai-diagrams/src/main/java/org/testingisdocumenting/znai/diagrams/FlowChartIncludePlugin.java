@@ -16,26 +16,30 @@
 
 package org.testingisdocumenting.znai.diagrams;
 
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.diagrams.graphviz.Graphviz;
 import org.testingisdocumenting.znai.diagrams.graphviz.GraphvizDiagram;
+import org.testingisdocumenting.znai.diagrams.graphviz.GraphvizEngine;
 import org.testingisdocumenting.znai.diagrams.graphviz.gen.DiagramNode;
 import org.testingisdocumenting.znai.diagrams.graphviz.gen.GraphvizFromJsonGen;
 import org.testingisdocumenting.znai.diagrams.graphviz.gen.GraphvizGenConfig;
 import org.testingisdocumenting.znai.diagrams.graphviz.gen.GraphvizGenResult;
-import org.testingisdocumenting.znai.core.AuxiliaryFile;
-import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
 import org.testingisdocumenting.znai.utils.JsonUtils;
-import org.testingisdocumenting.znai.diagrams.graphviz.GraphvizEngine;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -135,5 +139,11 @@ public class FlowChartIncludePlugin implements IncludePlugin {
         return Stream.concat(
                 Stream.of(AuxiliaryFile.builtTime(filePath)),
                 nodeLibPath.stream().map(AuxiliaryFile::builtTime));
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

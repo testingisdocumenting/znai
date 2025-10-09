@@ -27,6 +27,7 @@ import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -93,8 +94,8 @@ public class CardFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(contentParseResult.getAllText());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(contentParseResult.getAllText()));
     }
 
     private AuxiliaryFile createAuxiliaryFileIfRequired(String imageSrc) {

@@ -28,6 +28,7 @@ import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -67,7 +68,7 @@ public class MermaidIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(this.content);
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(this.content));
     }
 }

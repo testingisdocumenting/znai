@@ -23,10 +23,12 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -71,5 +73,11 @@ public class IframeIncludePlugin implements IncludePlugin {
 
     private String generatePreviewMarker() {
         return UUID.randomUUID().toString();
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

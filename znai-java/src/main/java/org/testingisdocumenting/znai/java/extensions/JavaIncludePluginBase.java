@@ -90,8 +90,8 @@ abstract public class JavaIncludePluginBase implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.HIGH.text(javaIncludeResult.text());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.HIGH.text(javaIncludeResult.text()));
     }
 
     protected JavaDocElementsMapsAndSearchText javaDocTextToDocElements(String html, CodeReferencesFeature codeReferencesFeature) {

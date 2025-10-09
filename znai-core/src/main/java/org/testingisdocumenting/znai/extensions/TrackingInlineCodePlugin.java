@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class TrackingInlineCodePlugin implements InlinedCodePlugin {
@@ -49,7 +50,7 @@ public class TrackingInlineCodePlugin implements InlinedCodePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
+    public List<SearchText> textForSearch() {
         return delegate.textForSearch();
     }
 

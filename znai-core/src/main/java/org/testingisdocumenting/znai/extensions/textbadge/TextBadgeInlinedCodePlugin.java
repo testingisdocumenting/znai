@@ -20,9 +20,11 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.List;
 
 public class TextBadgeInlinedCodePlugin implements InlinedCodePlugin {
     @Override
@@ -38,5 +40,11 @@ public class TextBadgeInlinedCodePlugin implements InlinedCodePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
         return PluginResult.docElement("TextBadge", Collections.singletonMap("text", pluginParams.getFreeParam()));
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

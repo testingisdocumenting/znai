@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.extensions.PluginParams
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition
 import org.testingisdocumenting.znai.extensions.PluginResult
 import org.testingisdocumenting.znai.parser.docelement.DocElement
+import org.testingisdocumenting.znai.search.SearchText
 
 import java.nio.file.Path
 
@@ -61,5 +62,10 @@ class DummyFencePlugin implements FencePlugin {
         pluginParams.opts.assignToDocElement(dummy)
 
         return PluginResult.docElements([dummy].stream())
+    }
+
+    @Override
+    List<SearchText> textForSearch() {
+        return []
     }
 }

@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.extensions.PluginParamsDefinition
 import org.testingisdocumenting.znai.extensions.PluginResult
 import org.testingisdocumenting.znai.parser.ParserHandler
 import org.testingisdocumenting.znai.parser.docelement.DocElement
+import org.testingisdocumenting.znai.search.SearchText
 
 import java.nio.file.Path
 
@@ -70,6 +71,11 @@ class DummyIncludePlugin implements IncludePlugin {
     @Override
     String markdownRepresentation() {
         return "**Dummy plugin content**: " + pluginParams.getFreeParam()
+    }
+
+    @Override
+    List<SearchText> textForSearch() {
+        return []
     }
 
     private static void callThatThrows(String message) {

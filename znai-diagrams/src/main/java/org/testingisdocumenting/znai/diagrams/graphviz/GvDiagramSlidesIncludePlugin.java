@@ -16,17 +16,18 @@
 
 package org.testingisdocumenting.znai.diagrams.graphviz;
 
+import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.diagrams.DiagramsGlobalAssetsRegistration;
 import org.testingisdocumenting.znai.diagrams.slides.DiagramSlides;
 import org.testingisdocumenting.znai.diagrams.slides.MarkupDiagramSlides;
-import org.testingisdocumenting.znai.core.AuxiliaryFile;
-import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.NameUtils;
 
 import java.nio.file.Path;
@@ -89,5 +90,11 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
         return Stream.concat(auxiliaryFiles.stream(), Stream.of(
                 AuxiliaryFile.builtTime(diagramPath),
                 AuxiliaryFile.builtTime(slidesPath)));
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

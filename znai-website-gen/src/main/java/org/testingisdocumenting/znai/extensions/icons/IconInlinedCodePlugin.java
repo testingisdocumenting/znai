@@ -21,9 +21,11 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class IconInlinedCodePlugin implements InlinedCodePlugin {
@@ -42,5 +44,11 @@ public class IconInlinedCodePlugin implements InlinedCodePlugin {
         Map<String, Object> props = new HashMap<>(pluginParams.getOpts().toMap());
         props.put("id", pluginParams.getFreeParam());
         return PluginResult.docElement("Icon", props);
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

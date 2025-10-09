@@ -109,7 +109,7 @@ public abstract class MarkdownBasePlugin implements Plugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(parserResult.getAllText());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(parserResult.getAllText()));
     }
 }

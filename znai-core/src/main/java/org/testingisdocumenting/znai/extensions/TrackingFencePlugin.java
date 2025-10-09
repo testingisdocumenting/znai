@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class TrackingFencePlugin implements FencePlugin {
@@ -65,7 +66,7 @@ public class TrackingFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
+    public List<SearchText> textForSearch() {
         return delegate.textForSearch();
     }
 

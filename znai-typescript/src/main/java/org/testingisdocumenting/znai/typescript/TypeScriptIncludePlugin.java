@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -123,5 +124,11 @@ public class TypeScriptIncludePlugin implements IncludePlugin {
     public static void main(String[] args) {
         List<Map<String, ?>> parsedFile = ParserSingleton.INSTANCE.parsedFile(Paths.get("/Users/mykolagolubyev/work/TestingIsDocumenting/znai-typescript/src/main/javascript/test-data/Sample.ts"));
         System.out.println(parsedFile);
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

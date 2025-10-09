@@ -26,8 +26,10 @@ import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 
 public class DoxygenMemberIncludePlugin implements IncludePlugin {
@@ -130,5 +132,11 @@ public class DoxygenMemberIncludePlugin implements IncludePlugin {
         }
 
         parserHandler.onCustomNode("DoxygenMember", member.toMap());
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

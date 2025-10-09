@@ -29,6 +29,7 @@ import org.testingisdocumenting.znai.text.TextContentExtractor;
 
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class FileInlinedCodePlugin implements InlinedCodePlugin {
@@ -64,7 +65,7 @@ public class FileInlinedCodePlugin implements InlinedCodePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(text);
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(text));
     }
 }

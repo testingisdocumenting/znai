@@ -27,6 +27,7 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public class TableFencePlugin implements FencePlugin {
     private TableDocElementFromParams docElementFromParams;
@@ -65,7 +66,7 @@ public class TableFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(docElementFromParams.getModifiedTable().allText());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(docElementFromParams.getModifiedTable().allText()));
     }
 }

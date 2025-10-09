@@ -27,6 +27,7 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.FilePathUtils;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
@@ -187,5 +188,11 @@ public class ImageIncludePlugin extends ImagePluginBase implements IncludePlugin
         }
 
         throw new RuntimeException("can't find any of the files: " + jsonAnnotationsPath + "; " + csvAnnotationsPath);
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
     }
 }

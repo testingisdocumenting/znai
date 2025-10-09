@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
@@ -72,4 +73,9 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
         return Stream.empty();
     }
 
+    @Override
+    public List<SearchText> textForSearch() {
+        // TODO implement textForSearch
+        return List.of();
+    }
 }

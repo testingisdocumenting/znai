@@ -18,7 +18,6 @@ package org.testingisdocumenting.znai.extensions.templates;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsOpts;
 import org.testingisdocumenting.znai.extensions.PluginResult;
@@ -26,6 +25,7 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.template.TextTemplate;
@@ -34,6 +34,7 @@ import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -90,7 +91,7 @@ public class TemplateIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(parserResult.getAllText());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(parserResult.getAllText()));
     }
 }

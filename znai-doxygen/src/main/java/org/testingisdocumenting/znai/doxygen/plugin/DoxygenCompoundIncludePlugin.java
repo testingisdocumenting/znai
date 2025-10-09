@@ -90,8 +90,8 @@ public class DoxygenCompoundIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.HIGH.text(compound.getName());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.HIGH.text(compound.getName()));
     }
 
     @Override

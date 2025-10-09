@@ -101,7 +101,7 @@ public class IdentifierInlinedCodePlugin implements InlinedCodePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(identifier);
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(identifier));
     }
 }
