@@ -36,7 +36,7 @@ class ColumnsFencePluginTest {
                 """left:text on the left
 right:text on the right""")
 
-        plugin.textForSearch().text.should == 'text on the left text on the right'
+        plugin.textForSearch().text.should == ['text on the left text on the right']
     }
 
     @Test
