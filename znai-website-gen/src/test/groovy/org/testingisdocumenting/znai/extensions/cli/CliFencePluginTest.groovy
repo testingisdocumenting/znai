@@ -32,7 +32,7 @@ class CliFencePluginTest {
         def pluginParams = pluginParamsFactory.create("cli", "", [highlight: "prob"])
         def result = processAndGetFencePluginAndParserHandler(pluginParams,  " my-script prob twice\n ")
 
-        result.fencePlugin.textForSearch().text.should == "my-script prob twice"
+        result.fencePlugin.textForSearch().text.should == ["my-script prob twice"]
         result.parserHandler.docElement.contentToListOfMaps().should == [
                 [command: "my-script prob twice", paramsToHighlight: ["prob"], type: "CliCommand"]]
     }
@@ -44,7 +44,7 @@ class CliFencePluginTest {
                 " my-script1 prob twice\n " +
                 " my-script2 three\n ")
 
-        result.fencePlugin.textForSearch().text.should == "my-script1 prob twice my-script2 three"
+        result.fencePlugin.textForSearch().text.should == ["my-script1 prob twice my-script2 three"]
         result.parserHandler.docElement.contentToListOfMaps().should == [
                 [command: "my-script1 prob twice", paramsToHighlight: ["prob"], type: "CliCommand"],
                 [command: "my-script2 three", paramsToHighlight: ["prob"], type: "CliCommand"]
