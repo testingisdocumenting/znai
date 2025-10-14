@@ -64,7 +64,7 @@ class TabsFencePluginTest {
         FencePlugin plugin = processAndGetPluginWithResult("java:test java markup\n" +
                 "groovy:test groovy markup").plugin
 
-        plugin.textForSearch().text.should == 'java test java markup groovy test groovy markup'
+        plugin.textForSearch().text.should == ['java test java markup groovy test groovy markup']
     }
 
     @Test
