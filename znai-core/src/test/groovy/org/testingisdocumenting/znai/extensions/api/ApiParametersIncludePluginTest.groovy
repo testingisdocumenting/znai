@@ -65,7 +65,7 @@ class ApiParametersIncludePluginTest {
         def plugin = PluginsTestUtils.processAndGetIncludePluginAndParserHandler(
                 ":include-api-parameters: api-params-simple.json").includePlugin
 
-         plugin.textForSearch().text.should == 'firstName String first name'
+        plugin.textForSearch().text.should == ['firstName String first name']
     }
     @Test
     void "should register local anchors"() {
