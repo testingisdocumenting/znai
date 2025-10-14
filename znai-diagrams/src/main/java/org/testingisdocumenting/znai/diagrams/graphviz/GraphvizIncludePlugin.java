@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
@@ -32,6 +33,7 @@ import java.util.stream.Stream;
 
 public class GraphvizIncludePlugin implements IncludePlugin {
     private Path diagramPath;
+    private String diagramContent;
 
     @Override
     public String id() {
@@ -54,9 +56,10 @@ public class GraphvizIncludePlugin implements IncludePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams) {
         diagramPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
+        diagramContent = componentsRegistry.resourceResolver().textContent(diagramPath);
 
         return GraphvizPlugin.pluginResult(componentsRegistry.globalAssetsRegistry(), pluginParams,
-                componentsRegistry.resourceResolver().textContent(diagramPath));
+                diagramContent);
     }
 
     @Override
@@ -66,7 +69,6 @@ public class GraphvizIncludePlugin implements IncludePlugin {
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        return diagramContent != null ? List.of(SearchScore.STANDARD.text(diagramContent)) : List.of();
     }
 }

@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
 import org.testingisdocumenting.znai.extensions.paramtypes.PluginParamTypeEnum;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
@@ -55,6 +56,7 @@ abstract class ImagePluginBase implements Plugin {
     protected boolean isExternal;
 
     protected Double pixelRatioFromOpts;
+    private PluginParamsOpts opts;
 
     @Override
     public PluginParamsDefinition parameters() {
@@ -104,7 +106,7 @@ abstract class ImagePluginBase implements Plugin {
     protected abstract Stream<AuxiliaryFile> additionalAuxiliaryFiles();
 
     protected PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        PluginParamsOpts opts = pluginParams.getOpts();
+        opts = pluginParams.getOpts();
         pixelRatioFromOpts = opts.has(PIXEL_RATIO_KEY) ?
                 opts.getNumber(PIXEL_RATIO_KEY).doubleValue():
                 null;
@@ -166,7 +168,17 @@ abstract class ImagePluginBase implements Plugin {
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        if (opts == null) {
+            return List.of();
+        }
+
+        String title = null;
+        if (opts.has(TITLE_KEY)) {
+            title = opts.getString(TITLE_KEY);
+        } else if (opts.has(CAPTION_KEY)) {
+            title = opts.getString(CAPTION_KEY);
+        }
+
+        return title != null ? List.of(SearchScore.STANDARD.text(title)) : List.of();
     }
 }

@@ -20,12 +20,15 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.List;
 
 public abstract class ChartFenceBasePlugin implements FencePlugin {
+    private String csvContent;
+
     abstract protected String type();
 
     @Override
@@ -33,12 +36,12 @@ public abstract class ChartFenceBasePlugin implements FencePlugin {
                                 Path markupPath,
                                 PluginParams pluginParams,
                                 String csvContent) {
+        this.csvContent = csvContent;
         return ChartPluginResult.create(pluginParams, type(), csvContent);
     }
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        return csvContent != null ? List.of(SearchScore.STANDARD.text(csvContent)) : List.of();
     }
 }

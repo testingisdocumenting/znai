@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
@@ -32,6 +33,7 @@ import java.util.stream.Stream;
 
 public class PlantUmlIncludePlugin implements IncludePlugin {
     private Path fullPath;
+    private String plantUmlSource;
 
     @Override
     public String id() {
@@ -51,8 +53,9 @@ public class PlantUmlIncludePlugin implements IncludePlugin {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
 
         fullPath = resourcesResolver.fullPath(pluginParams.getFreeParam());
+        plantUmlSource = resourcesResolver.textContent(fullPath);
         return PluginResult.docElement("Svg", Collections.singletonMap("svg",
-                PlantUml.generateSvg(resourcesResolver.textContent(fullPath))));
+                PlantUml.generateSvg(plantUmlSource)));
     }
 
     @Override
@@ -62,7 +65,6 @@ public class PlantUmlIncludePlugin implements IncludePlugin {
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        return plantUmlSource != null ? List.of(SearchScore.STANDARD.text(plantUmlSource)) : List.of();
     }
 }

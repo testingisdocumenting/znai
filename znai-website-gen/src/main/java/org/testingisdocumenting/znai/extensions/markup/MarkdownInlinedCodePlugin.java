@@ -22,10 +22,8 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
-import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.List;
 
 public class MarkdownInlinedCodePlugin extends MarkdownBasePlugin implements InlinedCodePlugin {
     @Override
@@ -48,11 +46,5 @@ public class MarkdownInlinedCodePlugin extends MarkdownBasePlugin implements Inl
         }
 
         return PluginResult.docElements(page.getContent().stream());
-    }
-
-    @Override
-    public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
     }
 }

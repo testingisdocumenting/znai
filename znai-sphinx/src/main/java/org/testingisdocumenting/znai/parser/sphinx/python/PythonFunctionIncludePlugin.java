@@ -21,12 +21,16 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 public class PythonFunctionIncludePlugin implements IncludePlugin {
+    private Map<String, Object> opts;
+
     @Override
     public String id() {
         return "python-function";
@@ -42,12 +46,27 @@ public class PythonFunctionIncludePlugin implements IncludePlugin {
                                 ParserHandler parserHandler,
                                 Path markupPath,
                                 PluginParams pluginParams) {
-        return PluginResult.docElement("LangFunction", pluginParams.getOpts().toMap());
+        opts = pluginParams.getOpts().toMap();
+        return PluginResult.docElement("LangFunction", opts);
     }
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        if (opts == null) {
+            return List.of();
+        }
+
+        StringBuilder searchText = new StringBuilder();
+        if (opts.containsKey("name")) {
+            searchText.append(opts.get("name")).append(" ");
+        }
+
+        if (opts.containsKey("description")) {
+            searchText.append(opts.get("description")).append(" ");
+        }
+
+        return !searchText.isEmpty() ?
+                List.of(SearchScore.HIGH.text(searchText.toString().trim())) :
+                List.of();
     }
 }

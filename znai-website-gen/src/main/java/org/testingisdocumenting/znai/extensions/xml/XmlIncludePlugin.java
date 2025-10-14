@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.validation.EntryPresenceValidation;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
@@ -34,6 +35,7 @@ import java.util.stream.Stream;
 
 public class XmlIncludePlugin implements IncludePlugin {
     private String fileName;
+    private Map<String, ?> xmlAsJson;
 
     @Override
     public String id() {
@@ -52,7 +54,7 @@ public class XmlIncludePlugin implements IncludePlugin {
 
         Map<String, Object> props = pluginParams.getOpts().toMap();
 
-        Map<String, ?> xmlAsJson = XmlToMapRepresentationConverter.convert(xml);
+        xmlAsJson = XmlToMapRepresentationConverter.convert(xml);
         List<String> paths = pluginParams.getOpts().getList("paths");
         validatePaths(xmlAsJson, paths);
 
@@ -78,7 +80,36 @@ public class XmlIncludePlugin implements IncludePlugin {
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        if (xmlAsJson == null) {
+            return List.of();
+        }
+        return List.of(SearchScore.STANDARD.text(extractTextFromXmlMap(xmlAsJson)));
+    }
+
+    private String extractTextFromXmlMap(Map<String, ?> map) {
+        StringBuilder result = new StringBuilder();
+        extractTextRecursively(map, result);
+        return result.toString().trim();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void extractTextRecursively(Object obj, StringBuilder result) {
+        if (obj == null) {
+            return;
+        }
+
+        if (obj instanceof Map) {
+            Map<String, ?> map = (Map<String, ?>) obj;
+            for (Map.Entry<String, ?> entry : map.entrySet()) {
+                result.append(entry.getKey()).append(" ");
+                extractTextRecursively(entry.getValue(), result);
+            }
+        } else if (obj instanceof List<?> list) {
+            for (Object item : list) {
+                extractTextRecursively(item, result);
+            }
+        } else {
+            result.append(obj).append(" ");
+        }
     }
 }

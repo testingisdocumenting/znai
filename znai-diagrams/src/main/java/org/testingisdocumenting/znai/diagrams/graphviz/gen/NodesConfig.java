@@ -49,12 +49,12 @@ class NodesConfig {
     }
 
     public Number getWidth(DiagramNode node) {
-        Number nodeWidth = node.getWidth();
+        Number nodeWidth = node.width();
         return nodeWidth != null ? nodeWidth : getWidth();
     }
 
     public Number getHeight(DiagramNode node) {
-        Number nodeHeight = node.getHeight();
+        Number nodeHeight = node.height();
         return nodeHeight != null ? nodeHeight : getHeight();
     }
 }

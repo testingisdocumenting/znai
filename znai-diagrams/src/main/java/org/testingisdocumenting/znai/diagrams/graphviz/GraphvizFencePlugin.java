@@ -21,12 +21,15 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.List;
 
 public class GraphvizFencePlugin implements FencePlugin {
+    private String diagramContent;
+
     @Override
     public String id() {
         return "graphviz";
@@ -44,12 +47,12 @@ public class GraphvizFencePlugin implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
+        diagramContent = content;
         return GraphvizPlugin.pluginResult(componentsRegistry.globalAssetsRegistry(), pluginParams, content);
     }
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        return diagramContent != null ? List.of(SearchScore.STANDARD.text(diagramContent)) : List.of();
     }
 }

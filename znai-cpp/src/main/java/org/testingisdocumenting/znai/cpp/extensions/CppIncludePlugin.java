@@ -31,6 +31,7 @@ import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
@@ -42,6 +43,7 @@ import java.util.stream.Stream;
 public class CppIncludePlugin implements IncludePlugin {
     private MarkupParser markupParser;
     private Path cppPath;
+    private String snippet;
 
     @Override
     public String id() {
@@ -67,7 +69,7 @@ public class CppIncludePlugin implements IncludePlugin {
 
         String text = componentsRegistry.resourceResolver().textContent(fileName);
 
-        String snippet = extractSnippet(text, opts);
+        snippet = extractSnippet(text, opts);
 
         List<CodePart> codeParts = commentsType.equals("inline") ?
                 CppSourceCode.splitOnComments(snippet):
@@ -89,8 +91,7 @@ public class CppIncludePlugin implements IncludePlugin {
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        return snippet != null ? List.of(SearchScore.STANDARD.text(snippet)) : List.of();
     }
 
     private Stream<DocElement> parseComments(String data) {

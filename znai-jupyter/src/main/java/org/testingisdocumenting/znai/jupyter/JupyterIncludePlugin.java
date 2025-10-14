@@ -44,7 +44,6 @@ public class JupyterIncludePlugin implements IncludePlugin {
     private String lang;
     private boolean isStoryFirst;
     private ParserHandler markdownParserHandler;
-    private List<JupyterCell> cells;
 
     @Override
     public String id() {
@@ -82,7 +81,7 @@ public class JupyterIncludePlugin implements IncludePlugin {
                 .parse(JsonUtils.deserializeAsMap(resourcesResolver.textContent(path)));
         lang = notebook.getLang();
 
-        cells = !includeSection.isEmpty() ?
+        List<JupyterCell> cells = !includeSection.isEmpty() ?
                 collectCells(notebook.getCells(), includeSection, excludeSectionTitle) :
                 notebook.getCells();
 
@@ -112,7 +111,6 @@ public class JupyterIncludePlugin implements IncludePlugin {
     public List<SearchText> textForSearch() {
         return List.of();
     }
-
 
     private void processCell(JupyterCell cell) {
         processMarkdownCell(cell);
@@ -201,6 +199,6 @@ public class JupyterIncludePlugin implements IncludePlugin {
     }
 
     private Map<String, Object> convertOutputData(JupyterOutput output) {
-        return Collections.singletonMap(output.getFormat(), output.getContent());
+        return Collections.singletonMap(output.format(), output.content());
     }
 }

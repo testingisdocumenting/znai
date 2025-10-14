@@ -48,7 +48,6 @@ public class IconInlinedCodePlugin implements InlinedCodePlugin {
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
         return List.of();
     }
 }

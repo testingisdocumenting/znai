@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.structure.DocStructure;
 
@@ -36,6 +37,7 @@ import java.util.stream.Stream;
 
 public class SvgIncludePlugin implements IncludePlugin {
     private AuxiliaryFile svgAuxiliaryFile;
+    private String svgContent;
 
     @Override
     public String id() {
@@ -57,6 +59,7 @@ public class SvgIncludePlugin implements IncludePlugin {
 
         String svgSrc = pluginParams.getFreeParam();
         svgAuxiliaryFile = resourcesResolver.runtimeAuxiliaryFile(svgSrc);
+        svgContent = resourcesResolver.textContent(svgSrc);
 
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("svgSrc", docStructure.fullUrl(svgAuxiliaryFile.getDeployRelativePath().toString()) +
@@ -82,7 +85,15 @@ public class SvgIncludePlugin implements IncludePlugin {
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        if (svgContent == null) {
+            return List.of();
+        }
+        return List.of(SearchScore.STANDARD.text(extractTextFromSvg(svgContent)));
+    }
+
+    private String extractTextFromSvg(String svg) {
+        return svg.replaceAll("<[^>]+>", " ")
+                .replaceAll("\\s+", " ")
+                .trim();
     }
 }

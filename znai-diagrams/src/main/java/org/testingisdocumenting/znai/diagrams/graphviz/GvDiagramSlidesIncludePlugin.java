@@ -40,6 +40,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
     private List<AuxiliaryFile> auxiliaryFiles;
     private Path diagramPath;
     private Path slidesPath;
+    private DiagramSlides diagramSlides;
 
     @Override
     public String id() {
@@ -71,7 +72,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
         String slidesContent = resourcesResolver.textContent(slidesPath);
 
         MarkupDiagramSlides markupSlides = new MarkupDiagramSlides(parser);
-        DiagramSlides diagramSlides = markupSlides.create(markupPath, slidesContent);
+        diagramSlides = markupSlides.create(markupPath, slidesContent);
 
         auxiliaryFiles = markupSlides.getAuxiliaryFiles();
 
@@ -94,7 +95,7 @@ public class GvDiagramSlidesIncludePlugin implements IncludePlugin {
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
+        // TODO implement search entries
         return List.of();
     }
 }

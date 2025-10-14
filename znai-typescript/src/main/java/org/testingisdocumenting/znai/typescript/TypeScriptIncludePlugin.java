@@ -128,7 +128,6 @@ public class TypeScriptIncludePlugin implements IncludePlugin {
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
         return List.of();
     }
 }

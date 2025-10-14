@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,25 +17,10 @@
 
 package org.testingisdocumenting.znai.jupyter;
 
-public class JupyterOutput {
+public record JupyterOutput(String format, String content) {
     public static final String HTML_FORMAT = "html";
     public static final String SVG_FORMAT = "svg";
     public static final String IMG_FORMAT = "img";
     public static final String TEXT_FORMAT = "text";
 
-    private final String format;
-    private final String content;
-
-    public JupyterOutput(String format, String content) {
-        this.format = format;
-        this.content = content;
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public String getContent() {
-        return content;
-    }
 }

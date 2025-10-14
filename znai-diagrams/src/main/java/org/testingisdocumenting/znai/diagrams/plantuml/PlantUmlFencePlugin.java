@@ -20,6 +20,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
@@ -27,6 +28,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class PlantUmlFencePlugin implements FencePlugin {
+    private String plantUmlSource;
+
     @Override
     public String id() {
         return "plantuml";
@@ -39,12 +42,12 @@ public class PlantUmlFencePlugin implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
+        plantUmlSource = content;
         return PluginResult.docElement("Svg", Collections.singletonMap("svg", PlantUml.generateSvg(content)));
     }
 
     @Override
     public List<SearchText> textForSearch() {
-        // TODO implement textForSearch
-        return List.of();
+        return plantUmlSource != null ? List.of(SearchScore.STANDARD.text(plantUmlSource)) : List.of();
     }
 }
