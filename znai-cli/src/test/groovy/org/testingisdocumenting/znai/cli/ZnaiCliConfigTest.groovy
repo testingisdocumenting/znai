@@ -65,76 +65,89 @@ class ZnaiCliConfigTest {
     }
 
     @Test
-    void "preview command includes server and SSL options"() {
+    void "preview command options"() {
         def options = createOptionsForCommand(Command.PREVIEW, '--source=test')
 
         assertOnlyTheseOptions(options,
-            OptionKey.HOST,
-            OptionKey.PORT,
-            OptionKey.DEPLOY,
-            OptionKey.SSL_JKS_PATH,
-            OptionKey.SSL_JKS_PASSWORD,
-            OptionKey.SSL_PEM_CERT_PATH,
-            OptionKey.SSL_PEM_KEY_PATH,
-            OptionKey.SOURCE,
-            OptionKey.MARKUP_TYPE,
-            OptionKey.HELP,
-            OptionKey.VERSION,
-            OptionKey.VALIDATE_EXTERNAL_LINKS,
-            OptionKey.ACTOR,
-            OptionKey.MODIFIED_TIME,
-            OptionKey.LOOKUP_PATHS
+                OptionKey.HOST,
+                OptionKey.PORT,
+                OptionKey.DEPLOY,
+                OptionKey.SSL_JKS_PATH,
+                OptionKey.SSL_JKS_PASSWORD,
+                OptionKey.SSL_PEM_CERT_PATH,
+                OptionKey.SSL_PEM_KEY_PATH,
+                OptionKey.SOURCE,
+                OptionKey.MARKUP_TYPE,
+                OptionKey.HELP,
+                OptionKey.VERSION,
+                OptionKey.VALIDATE_EXTERNAL_LINKS,
+                OptionKey.ACTOR,
+                OptionKey.MODIFIED_TIME,
+                OptionKey.LOOKUP_PATHS
         )
     }
 
     @Test
-    void "build command includes doc-id but not server options"() {
+    void "build command options"() {
         def options = createOptionsForCommand(Command.BUILD, '--source=test')
 
         assertOnlyTheseOptions(options,
-            OptionKey.DOC_ID,
-            OptionKey.DEPLOY,
-            OptionKey.SOURCE,
-            OptionKey.MARKUP_TYPE,
-            OptionKey.HELP,
-            OptionKey.VERSION,
-            OptionKey.VALIDATE_EXTERNAL_LINKS,
-            OptionKey.ACTOR,
-            OptionKey.MODIFIED_TIME,
-            OptionKey.LOOKUP_PATHS
+                OptionKey.DOC_ID,
+                OptionKey.DEPLOY,
+                OptionKey.SOURCE,
+                OptionKey.MARKUP_TYPE,
+                OptionKey.HELP,
+                OptionKey.VERSION,
+                OptionKey.VALIDATE_EXTERNAL_LINKS,
+                OptionKey.ACTOR,
+                OptionKey.MODIFIED_TIME,
+                OptionKey.LOOKUP_PATHS,
+                OptionKey.SSL_JKS_PATH,
+                OptionKey.SSL_JKS_PASSWORD,
+                OptionKey.SSL_PEM_CERT_PATH,
+                OptionKey.SSL_PEM_KEY_PATH,
         )
     }
 
     @Test
-    void "export command includes export option but not server options"() {
+    void "export command options"() {
         def options = createOptionsForCommand(Command.EXPORT, '--source=test')
 
         assertOnlyTheseOptions(options,
-            OptionKey.EXPORT,
-            OptionKey.SOURCE,
-            OptionKey.MARKUP_TYPE,
-            OptionKey.HELP,
-            OptionKey.VERSION,
-            OptionKey.VALIDATE_EXTERNAL_LINKS,
-            OptionKey.ACTOR,
-            OptionKey.MODIFIED_TIME,
-            OptionKey.LOOKUP_PATHS
+                OptionKey.EXPORT,
+                OptionKey.SOURCE,
+                OptionKey.MARKUP_TYPE,
+                OptionKey.HELP,
+                OptionKey.VERSION,
+                OptionKey.VALIDATE_EXTERNAL_LINKS,
+                OptionKey.ACTOR,
+                OptionKey.MODIFIED_TIME,
+                OptionKey.LOOKUP_PATHS,
+                OptionKey.SSL_JKS_PATH,
+                OptionKey.SSL_JKS_PASSWORD,
+                OptionKey.SSL_PEM_CERT_PATH,
+                OptionKey.SSL_PEM_KEY_PATH,
         )
     }
 
     @Test
-    void "new command shows only common options"() {
+    void "new command options"() {
         def options = createOptionsForCommand(Command.NEW, '--source=test')
 
         assertOnlyTheseOptions(options,
-            OptionKey.SOURCE,
-            OptionKey.MARKUP_TYPE,
-            OptionKey.HELP,
-            OptionKey.VERSION,
-            OptionKey.VALIDATE_EXTERNAL_LINKS,
-            OptionKey.ACTOR,
-            OptionKey.MODIFIED_TIME,
-            OptionKey.LOOKUP_PATHS
+                OptionKey.SOURCE,
+                OptionKey.MARKUP_TYPE,
+                OptionKey.HELP,
+                OptionKey.VERSION,
+                OptionKey.VALIDATE_EXTERNAL_LINKS,
+                OptionKey.ACTOR,
+                OptionKey.MODIFIED_TIME,
+                OptionKey.LOOKUP_PATHS,
+                OptionKey.SSL_JKS_PATH,
+                OptionKey.SSL_JKS_PASSWORD,
+                OptionKey.SSL_PEM_CERT_PATH,
+                OptionKey.SSL_PEM_KEY_PATH,
+
         )
     }
 
