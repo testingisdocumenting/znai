@@ -106,6 +106,7 @@ import { footnoteDemo } from "./doc-elements/footnote/Footnote.demo";
 import { asciinemaDemo } from "./doc-elements/asciinema/Asciinema.demo";
 import { previewConsoleOutputDemo } from "./screens/preview-change-path/PreviewConsoleOutput.demo";
 import { readMoreDemo } from "./doc-elements/read-more/ReadMore.demo.js";
+import { snippetsResultOutputDemo } from "./doc-elements/code-snippets/SnippetResultOutput.demo.jsx";
 
 const docMeta = {
   id: "preview",
@@ -146,6 +147,7 @@ registries
   .add("snippets")
   .registerAsRows("containers title", containerTitleDemo)
   .registerAsGrid("Code Snippet", 0, snippetsDemo)
+  .registerAsGrid("Code Snippet Result Output", 0, snippetsResultOutputDemo)
   .registerAsGrid("Code Snippet With Bullets", 0, snippetsWithInlineCommentsDemo)
   .registerAsGrid("Code Snippet Removed Comments", 0, codeSnippetWithRemovedCommentsDemo)
   .registerAsGrid("Code Snippet Syntax Highlight ", 0, syntaxHighlightSnippetDemo)

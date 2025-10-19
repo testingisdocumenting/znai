@@ -30,175 +30,171 @@ import { ContainerTitle } from "../container/ContainerTitle";
 import "./SnippetContainer.css";
 
 class SnippetContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            displayCopied: false,
-            collapsed: this.props.collapsed
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayCopied: false,
+      collapsed: this.props.collapsed
+    };
+  }
+
+  render() {
+    const { wide, isPresentation } = this.props;
+    const renderWide = wide && !isPresentation;
+
+    return renderWide ? this.renderWideMode() : this.renderNormalMode();
+  }
+
+  renderNormalMode() {
+    const { title, className, resultOutput, noGap, noGapBorder, next, prev } = this.props;
+
+    const fullClassName =
+      "snippet-container content-block" + (resultOutput ? " result-output" : "") + (className ? " " + className : "");
+
+    return (
+      <Container className={fullClassName} next={next} prev={prev} noGap={noGap} noGapBorder={noGapBorder}>
+        {this.renderTitle(title)}
+        {this.renderSnippet()}
+      </Container>
+    );
+  }
+
+  renderWideMode() {
+    const { title, className } = this.props;
+
+    const wideModePadding = <div className="padding" />;
+
+    const fullClassName =
+      "snippet-container wide-screen" + (title ? " with-title" : "") + (className ? " " + className : "");
+
+    return (
+      <div className={fullClassName}>
+        {wideModePadding}
+        {title && <div className="title-layer">{this.renderTitle(title)}</div>}
+
+        {wideModePadding}
+
+        {this.renderSnippet()}
+      </div>
+    );
+  }
+
+  renderTitle(title) {
+    if (!title) {
+      return null;
+    }
+
+    const anchorId = this.props.anchorId;
+
+    const { collapsed } = this.state;
+
+    return (
+      <ContainerTitle
+        title={title}
+        anchorId={anchorId}
+        collapsed={collapsed}
+        additionalTitleClassNames="znai-snippet-container-title"
+        onCollapseToggle={this.collapseToggle}
+      />
+    );
+  }
+
+  collapseToggle = () => {
+    this.setState((prev) => ({ collapsed: !prev.collapsed }));
+  };
+
+  renderSnippet() {
+    return (
+      <div className={this.snippetClassName}>
+        <SnippetOptionallyScrollablePart {...this.props} />
+        {this.renderCopyToClipboard()}
+      </div>
+    );
+  }
+
+  renderCopyToClipboard() {
+    const { isPresentation } = this.props;
+    const { displayCopied } = this.state;
+
+    if (isPresentation) {
+      return null;
+    }
+
+    const className = "snippet-copy-to-clipboard " + (displayCopied ? "copied" : "copy");
+
+    return (
+      <div className={className} ref={this.saveCopyToClipboardNode}>
+        <Icon id="copy" />
+      </div>
+    );
+  }
+
+  get snippetClassName() {
+    const { title } = this.props;
+    const { collapsed } = this.state;
+    return "snippet" + (title ? " with-title" : "") + (collapsed ? " collapsed" : "");
+  }
+
+  saveCopyToClipboardNode = (node) => {
+    this.copyToClipboardNode = node;
+  };
+
+  componentDidMount() {
+    this.setupClipboard();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.collapsed !== this.props.collapsed) {
+      this.setState({ collapsed: this.props.collapsed });
+    }
+  }
+
+  componentWillUnmount() {
+    this.clearTimer();
+    this.destroyClipboard();
+  }
+
+  setupClipboard() {
+    if (!this.copyToClipboardNode) {
+      return;
+    }
+
+    this.clipboard = new ClipboardJS(this.copyToClipboardNode, {
+      text: () => {
+        const { linesOfCode, tokensForClipboardProvider } = this.props;
+        this.setState({ displayCopied: true });
+        this.startRemoveFeedbackTimer();
+
+        return extractTextFromTokens(tokensToUse());
+
+        function tokensToUse() {
+          if (tokensForClipboardProvider) {
+            return tokensForClipboardProvider();
+          }
+
+          return linesOfCode.reduce((acc, curr) => acc.concat(curr).concat("\n"), []);
         }
+      },
+    });
+  }
+
+  destroyClipboard() {
+    if (this.clipboard) {
+      this.clipboard.destroy();
     }
+  }
 
-    render() {
-        const {wide, isPresentation} = this.props
-        const renderWide = wide && !isPresentation
+  startRemoveFeedbackTimer() {
+    this.removeFeedbackTimer = setTimeout(() => {
+      this.setState({ displayCopied: false });
+    }, 200);
+  }
 
-        return renderWide ?
-            this.renderWideMode() : this.renderNormalMode()
+  clearTimer() {
+    if (this.removeFeedbackTimer) {
+      clearTimeout(this.removeFeedbackTimer);
     }
-
-    renderNormalMode() {
-        const {title, className, noGap, noGapBorder, next, prev} = this.props
-
-        const fullClassName = "snippet-container content-block"
-          + (className ? " " + className : "")
-
-        return (
-            <Container className={fullClassName} next={next} prev={prev} noGap={noGap} noGapBorder={noGapBorder}>
-                {this.renderTitle(title)}
-                {this.renderSnippet()}
-            </Container>
-        )
-    }
-
-    renderWideMode() {
-        const {title, className} = this.props
-
-        const wideModePadding = <div className="padding"/>
-
-        const fullClassName = "snippet-container wide-screen" +
-            (title ? " with-title" : "") +
-            (className ? " " + className : "")
-
-        return (
-            <div className={fullClassName}>
-                {wideModePadding}
-                {title && <div className="title-layer">
-                    {this.renderTitle(title)}
-                </div>}
-
-                {wideModePadding}
-
-                {this.renderSnippet()}
-            </div>
-        )
-    }
-
-    renderTitle(title) {
-        if (!title) {
-            return null;
-        }
-
-        const anchorId = this.props.anchorId
-
-        const { collapsed } = this.state;
-
-        return (
-          <ContainerTitle title={title}
-                          anchorId={anchorId}
-                          collapsed={collapsed}
-                          additionalTitleClassNames="znai-snippet-container-title"
-                          onCollapseToggle={this.collapseToggle}/>
-        )
-    }
-
-     collapseToggle = () => {
-        this.setState(prev => ({collapsed: !prev.collapsed}))
-    }
-
-    renderSnippet() {
-        return (
-            <div className={this.snippetClassName}>
-                <SnippetOptionallyScrollablePart{...this.props}/>
-                {this.renderCopyToClipboard()}
-            </div>
-        );
-    }
-
-    renderCopyToClipboard() {
-        const {isPresentation} = this.props
-        const {displayCopied} = this.state
-
-        if (isPresentation) {
-            return null
-        }
-
-        const className = 'snippet-copy-to-clipboard ' + (displayCopied ? 'copied': 'copy')
-
-        return (
-            <div className={className} ref={this.saveCopyToClipboardNode}>
-                <Icon id="copy"/>
-            </div>
-        )
-    }
-
-    get snippetClassName() {
-        const {title} = this.props
-        const {collapsed} = this.state
-        return "snippet"
-          + (title ? " with-title" : "")
-          + (collapsed ? " collapsed" : "")
-    }
-
-    saveCopyToClipboardNode = (node) => {
-        this.copyToClipboardNode = node
-    }
-
-    componentDidMount() {
-        this.setupClipboard()
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.collapsed !== this.props.collapsed) {
-            this.setState({ collapsed: this.props.collapsed })
-        }
-    }
-
-    componentWillUnmount() {
-        this.clearTimer()
-        this.destroyClipboard()
-    }
-
-    setupClipboard() {
-        if (! this.copyToClipboardNode) {
-            return
-        }
-
-        this.clipboard = new ClipboardJS(this.copyToClipboardNode, {
-            text: () => {
-                const {linesOfCode, tokensForClipboardProvider} = this.props
-                this.setState({displayCopied: true})
-                this.startRemoveFeedbackTimer()
-
-                return extractTextFromTokens(tokensToUse())
-
-                function tokensToUse() {
-                    if (tokensForClipboardProvider) {
-                        return tokensForClipboardProvider()
-                    }
-
-                    return linesOfCode.reduce((acc, curr) => acc.concat(curr).concat("\n"), [])
-                }
-            }
-        })
-    }
-
-    destroyClipboard() {
-        if (this.clipboard) {
-            this.clipboard.destroy()
-        }
-    }
-
-    startRemoveFeedbackTimer() {
-        this.removeFeedbackTimer = setTimeout(() => {
-            this.setState({displayCopied: false})
-        }, 200)
-    }
-
-    clearTimer() {
-        if (this.removeFeedbackTimer) {
-            clearTimeout(this.removeFeedbackTimer)
-        }
-    }
+  }
 }
 
-export default SnippetContainer
+export default SnippetContainer;

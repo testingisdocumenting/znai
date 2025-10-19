@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +15,19 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import './JupyterCodeCell.css'
+import "./JupyterCodeCell.css";
 
-const JupyterCodeCell = ({snippet, lang, elementsLibrary}) => {
-    return (
-        <div className="jupyter-cell jupyter-code">
-            <elementsLibrary.Snippet snippet={snippet} lang={lang}/>
-        </div>
-    )
-}
+const JupyterCodeCell = ({ snippet, lang, elementsLibrary, ...props }) => {
+  return (
+    <elementsLibrary.Snippet
+      snippet={snippet}
+      lang={lang}
+      className="znai-jupyter-cell znai-jupyter-cell-code-snippet"
+      {...props}
+    />
+  );
+};
 
-export default JupyterCodeCell
+export default JupyterCodeCell;
