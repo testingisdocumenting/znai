@@ -98,9 +98,9 @@ public class ZnaiCliConfig {
 
         EXPORT("export", "export destination directory", true, false),
 
-        PREVIEW_LEGACY("preview", "[DEPRECATED] preview mode (use 'znai preview' instead)", false, false),
-        SERVE_LEGACY("serve", "[DEPRECATED] server mode (use 'znai serve' instead)", false, false),
-        NEW_LEGACY("new", "[DEPRECATED] create new documentation (use 'znai new' instead)", false, false);
+        PREVIEW_LEGACY("preview", "[DEPRECATED] preview mode (use '" + ZnaiTitleWithMaybeOverride.title + " preview' instead)", false, false),
+        SERVE_LEGACY("serve", "[DEPRECATED] server mode (use '" + ZnaiTitleWithMaybeOverride.title + " serve' instead)", false, false),
+        NEW_LEGACY("new", "[DEPRECATED] create new documentation (use '" + ZnaiTitleWithMaybeOverride.title + " new' instead)", false, false);
 
         private final String key;
         private final String description;
@@ -454,7 +454,7 @@ public class ZnaiCliConfig {
     }
 
     private void printVersion() {
-        ConsoleOutputs.out(Color.YELLOW, "znai version: ", Color.CYAN, ZnaiVersion.getVersion(),
+        ConsoleOutputs.out(Color.YELLOW, "version: ", Color.CYAN, ZnaiVersion.getVersion(),
                 Color.GREEN, " (", ZnaiVersion.getTimeStamp(), ")");
     }
 
@@ -612,13 +612,13 @@ public class ZnaiCliConfig {
         ConsoleOutputs.out(Color.YELLOW, "Warning: Using deprecated command-line format.");
 
         if (commandLine.hasOption(OptionKey.PREVIEW_LEGACY.getKey())) {
-            ConsoleOutputs.out(Color.YELLOW, "Please use 'znai preview' instead of 'znai --preview'");
+            ConsoleOutputs.out(Color.YELLOW, "Please use 'preview' instead of '--preview'");
         } else if (commandLine.hasOption(OptionKey.SERVE_LEGACY.getKey())) {
-            ConsoleOutputs.out(Color.YELLOW, "Please use 'znai serve' instead of 'znai --serve'");
+            ConsoleOutputs.out(Color.YELLOW, "Please use 'serve' instead of '--serve'");
         } else if (commandLine.hasOption(OptionKey.NEW_LEGACY.getKey())) {
-            ConsoleOutputs.out(Color.YELLOW, "Please use 'znai new' instead of 'znai --new'");
+            ConsoleOutputs.out(Color.YELLOW, "Please use 'new' instead of '--new'");
         } else if (commandLine.hasOption(OptionKey.EXPORT.getKey())) {
-            ConsoleOutputs.out(Color.YELLOW, "Please use 'znai export' instead of 'znai --export'");
+            ConsoleOutputs.out(Color.YELLOW, "Please use 'export' instead of '--export'");
         }
 
         ConsoleOutputs.out(Color.YELLOW, "The old format will be removed in future versions");
@@ -630,7 +630,7 @@ public class ZnaiCliConfig {
 
         if (!isLegacyMode) {
             ConsoleOutputs.out(Color.CYAN, "\nUsage:");
-            ConsoleOutputs.out("  znai [command] [options]\n");
+            ConsoleOutputs.out("  " + ZnaiTitleWithMaybeOverride.title +" [command] [options]\n");
             ConsoleOutputs.out(Color.CYAN, "Commands:");
             for (Command cmd : Command.values()) {
                 ConsoleOutputs.out(String.format("  %-10s", cmd.getName()), Color.WHITE, cmd.getDescription());
@@ -646,7 +646,7 @@ public class ZnaiCliConfig {
                 }
             } else {
                 ConsoleOutputs.out(Color.CYAN, "\nFor command-specific options, use:");
-                ConsoleOutputs.out("  znai [command] --help\n");
+                ConsoleOutputs.out("  " + ZnaiTitleWithMaybeOverride.title + " [command] --help\n");
             }
         } else {
             try {
