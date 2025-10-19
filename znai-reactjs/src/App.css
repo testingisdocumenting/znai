@@ -156,6 +156,7 @@
     --znai-landing-input-placeholder-color: #bbb;
 
     --znai-snippets-background-color: #f8fafc;
+    --znai-snippets-result-output-background-color: #f3f3f3; /* e.g., for combining example and output with noGap */
     --znai-snippets-outer-border-color: #ddd;
     --znai-snippets-inner-border-color: #f3f3f3;
 

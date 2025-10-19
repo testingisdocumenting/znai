@@ -15,194 +15,197 @@
  * limitations under the License.
  */
 
-import * as React from "react"
+import * as React from "react";
 
 import {
-    collapseCommentsAboveToMakeCommentOnTheCodeLine,
-    isCommentToken, removeCommentsFromEachLine,
-    splitTokensIntoLines, trimComment
+  collapseCommentsAboveToMakeCommentOnTheCodeLine,
+  isCommentToken,
+  removeCommentsFromEachLine,
+  splitTokensIntoLines,
+  trimComment,
 } from "./codeUtils";
-import {isAllAtOnce} from '../meta/meta'
-import {convertToList} from '../propsUtils';
+import { isAllAtOnce } from "../meta/meta";
+import { convertToList } from "../propsUtils";
 
-import SnippetContainer from './SnippetContainer'
-import CodeSnippetWithCallouts from './CodeSnippetWithCallouts'
-import SimpleCodeSnippet from './SimpleCodeSnippet'
+import SnippetContainer from "./SnippetContainer";
+import CodeSnippetWithCallouts from "./CodeSnippetWithCallouts";
+import SimpleCodeSnippet from "./SimpleCodeSnippet";
 
-import {parseCode} from './codeParser'
-import {countNumberOfLines} from "../../utils/strings";
+import { parseCode } from "./codeParser";
+import { countNumberOfLines } from "../../utils/strings";
 
-import { SnippetBulletExplanations } from './explanations/SnippetBulletExplanations';
+import { SnippetBulletExplanations } from "./explanations/SnippetBulletExplanations";
 
-import './Snippet.css'
+import "./Snippet.css";
 
-const defaultNumberOfVisibleLines = 25
+const defaultNumberOfVisibleLines = 25;
 
-const BULLETS_COMMENT_TYPE = 'inline'
-const REMOVE_COMMENT_TYPE = 'remove'
+const BULLETS_COMMENT_TYPE = "inline";
+const REMOVE_COMMENT_TYPE = "remove";
 
 const Snippet = (props) => {
-    const tokensToUse = parseCodeWithCompatibility({lang: props.lang, snippet: props.snippet, tokens: props.tokens})
+  const tokensToUse = parseCodeWithCompatibility({ lang: props.lang, snippet: props.snippet, tokens: props.tokens });
 
-    const renderBulletComments = props.commentsType === BULLETS_COMMENT_TYPE || (props.callouts && Object.keys(props.callouts).length > 0);
+  const renderBulletComments =
+    props.commentsType === BULLETS_COMMENT_TYPE || (props.callouts && Object.keys(props.callouts).length > 0);
 
-    const snippetComponent = renderBulletComments ?
-        CodeSnippetWithCallouts :
-        SimpleCodeSnippet
+  const snippetComponent = renderBulletComments ? CodeSnippetWithCallouts : SimpleCodeSnippet;
 
-    const lines = splitTokensIntoLines(tokensToUse);
+  const lines = splitTokensIntoLines(tokensToUse);
 
-    const modifiedLines = mergeOrRemoveComments()
-    const comments = renderBulletComments ? buildCalloutsFromComments(modifiedLines) : {};
-    const mergedCallouts = {...comments, ...props.callouts}
+  const modifiedLines = mergeOrRemoveComments();
+  const comments = renderBulletComments ? buildCalloutsFromComments(modifiedLines) : {};
+  const mergedCallouts = { ...comments, ...props.callouts };
 
-    return (
-        <>
-            <SnippetContainer {...props}
-                              tokens={tokensToUse}
-                              linesOfCode={modifiedLines}
-                              scrollToLineIdx={scrollToLineIdx(props)}
-                              callouts={mergedCallouts}
-                              snippetComponent={snippetComponent}/>
-            <Explanations callouts={mergedCallouts} {...props}/>
-        </>
-    )
+  return (
+    <>
+      <SnippetContainer
+        {...props}
+        tokens={tokensToUse}
+        linesOfCode={modifiedLines}
+        scrollToLineIdx={scrollToLineIdx(props)}
+        callouts={mergedCallouts}
+        snippetComponent={snippetComponent}
+      />
+      <Explanations callouts={mergedCallouts} {...props} />
+    </>
+  );
 
-    function mergeOrRemoveComments() {
-        if (renderBulletComments) {
-            return collapseCommentsAboveToMakeCommentOnTheCodeLine(lines)
-        }
-
-        if (props.commentsType === REMOVE_COMMENT_TYPE) {
-            return removeCommentsFromEachLine(lines)
-        }
-
-        return lines
+  function mergeOrRemoveComments() {
+    if (renderBulletComments) {
+      return collapseCommentsAboveToMakeCommentOnTheCodeLine(lines);
     }
-}
+
+    if (props.commentsType === REMOVE_COMMENT_TYPE) {
+      return removeCommentsFromEachLine(lines);
+    }
+
+    return lines;
+  }
+};
 
 Snippet.defaultProps = {
-    numberOfVisibleLines: defaultNumberOfVisibleLines
+  numberOfVisibleLines: defaultNumberOfVisibleLines,
+};
+
+function Explanations({ spoiler, isPresentation, callouts = {}, elementsLibrary }) {
+  if (isPresentation || Object.keys(callouts).length === 0) {
+    return null;
+  }
+
+  return <SnippetBulletExplanations spoiler={spoiler} callouts={callouts} elementsLibrary={elementsLibrary} />;
 }
 
-function Explanations({spoiler, isPresentation, callouts = {}, elementsLibrary}) {
-    if (isPresentation || Object.keys(callouts).length === 0) {
-        return null
-    }
+function scrollToLineIdx({ isPresentation, slideIdx, numberOfVisibleLines }) {
+  if (!isPresentation || !numberOfVisibleLines) {
+    return undefined;
+  }
 
-    return <SnippetBulletExplanations spoiler={spoiler}
-                                      callouts={callouts}
-                                      elementsLibrary={elementsLibrary}/>
-}
-
-
-function scrollToLineIdx({isPresentation, slideIdx, numberOfVisibleLines}) {
-    if (!isPresentation || !numberOfVisibleLines) {
-        return undefined
-    }
-
-    return numberOfVisibleLines * slideIdx
+  return numberOfVisibleLines * slideIdx;
 }
 
 const presentationSnippetHandler = {
-    component: Snippet,
-    numberOfSlides: ({
-                         meta,
-                         commentsType,
-                         lang,
-                         snippet,
-                         tokens,
-                         highlight,
-                         revealLineStop,
-                         numberOfVisibleLines = defaultNumberOfVisibleLines
-                     }) => {
-        const tokensToUse = parseCodeWithCompatibility({lang, snippet, tokens})
-        const highlightAsList = convertToList(highlight)
+  component: Snippet,
+  numberOfSlides: ({
+    meta,
+    commentsType,
+    lang,
+    snippet,
+    tokens,
+    highlight,
+    revealLineStop,
+    numberOfVisibleLines = defaultNumberOfVisibleLines,
+  }) => {
+    const tokensToUse = parseCodeWithCompatibility({ lang, snippet, tokens });
+    const highlightAsList = convertToList(highlight);
 
-        if (commentsType === BULLETS_COMMENT_TYPE) {
-            return inlinedCommentsNumberOfSlides({meta, tokens: tokensToUse})
-        }
-
-        const numberOfStopLines = (revealLineStop || []).length
-        const numberOfScrolls = countNumberOfScrolls()
-
-        const hasFirstNoActionSlide = highlightAsList.length > 0 || numberOfStopLines > 0 ||
-            (highlightAsList.length === 0 && numberOfStopLines === 0 && numberOfScrolls === 0)
-
-        return (hasFirstNoActionSlide ? 1 : 0) +
-            highlightNumberOfSlides({meta, highlightAsList}) +
-            numberOfStopLines +
-            numberOfScrolls
-
-        function countNumberOfScrolls() {
-            const numberOfLines = countNumberOfLines(snippet)
-
-            if (numberOfLines <= numberOfVisibleLines) {
-                return 0
-            }
-
-            return Math.ceil(numberOfLines / numberOfVisibleLines)
-        }
-    },
-    slideInfoProvider: ({meta, commentsType, lang, snippet, tokens, slideIdx}) => {
-        const tokensToUse = parseCodeWithCompatibility({lang, snippet, tokens})
-
-        if (isAllAtOnce(meta)) {
-            return {}
-        }
-
-        if (commentsType !== BULLETS_COMMENT_TYPE) {
-            return {}
-        }
-
-        const comments = tokensToUse.filter(t => isCommentToken(t))
-
-        return {
-            slideVisibleNote: !comments.length ? null :
-                slideIdx === 0 ? "" : comments[slideIdx - 1].content
-        }
+    if (commentsType === BULLETS_COMMENT_TYPE) {
+      return inlinedCommentsNumberOfSlides({ meta, tokens: tokensToUse });
     }
-}
+
+    const numberOfStopLines = (revealLineStop || []).length;
+    const numberOfScrolls = countNumberOfScrolls();
+
+    const hasFirstNoActionSlide =
+      highlightAsList.length > 0 ||
+      numberOfStopLines > 0 ||
+      (highlightAsList.length === 0 && numberOfStopLines === 0 && numberOfScrolls === 0);
+
+    return (
+      (hasFirstNoActionSlide ? 1 : 0) +
+      highlightNumberOfSlides({ meta, highlightAsList }) +
+      numberOfStopLines +
+      numberOfScrolls
+    );
+
+    function countNumberOfScrolls() {
+      const numberOfLines = countNumberOfLines(snippet);
+
+      if (numberOfLines <= numberOfVisibleLines) {
+        return 0;
+      }
+
+      return Math.ceil(numberOfLines / numberOfVisibleLines);
+    }
+  },
+  slideInfoProvider: ({ meta, commentsType, lang, snippet, tokens, slideIdx }) => {
+    const tokensToUse = parseCodeWithCompatibility({ lang, snippet, tokens });
+
+    if (isAllAtOnce(meta)) {
+      return {};
+    }
+
+    if (commentsType !== BULLETS_COMMENT_TYPE) {
+      return {};
+    }
+
+    const comments = tokensToUse.filter((t) => isCommentToken(t));
+
+    return {
+      slideVisibleNote: !comments.length ? null : slideIdx === 0 ? "" : comments[slideIdx - 1].content,
+    };
+  },
+};
 
 // TODO for backward compatibility with already built and deployed docs
 // remove once TSI rebuilds all the docs
-function parseCodeWithCompatibility({lang, tokens, snippet}) {
-    if (tokens) {
-        return tokens
-    }
+function parseCodeWithCompatibility({ lang, tokens, snippet }) {
+  if (tokens) {
+    return tokens;
+  }
 
-    return parseCode(lang, snippet)
+  return parseCode(lang, snippet);
 }
 
-function inlinedCommentsNumberOfSlides({meta, tokens}) {
-    const comments = tokens.filter(t => isCommentToken(t))
+function inlinedCommentsNumberOfSlides({ meta, tokens }) {
+  const comments = tokens.filter((t) => isCommentToken(t));
 
-    if (isAllAtOnce(meta) && comments.length > 0) {
-        return 2 // two slides: 1st - no highlights; 2nd - all highlighted at once
-    }
+  if (isAllAtOnce(meta) && comments.length > 0) {
+    return 2; // two slides: 1st - no highlights; 2nd - all highlighted at once
+  }
 
-    return comments.length + 1
+  return comments.length + 1;
 }
 
-function highlightNumberOfSlides({meta, highlightAsList}) {
-    if (isAllAtOnce(meta) && highlightAsList.length > 0) {
-        return 1
-    }
+function highlightNumberOfSlides({ meta, highlightAsList }) {
+  if (isAllAtOnce(meta) && highlightAsList.length > 0) {
+    return 1;
+  }
 
-    return highlightAsList.length
+  return highlightAsList.length;
 }
 
 function buildCalloutsFromComments(lines) {
-    const result = {}
-    lines.forEach((line, lineIdx) => {
-        line.forEach(token => {
-            if (isCommentToken(token)) {
-                result[lineIdx] = [{type: "SimpleText", text: trimComment(token.content)}]
-            }
-        })
-    })
+  const result = {};
+  lines.forEach((line, lineIdx) => {
+    line.forEach((token) => {
+      if (isCommentToken(token)) {
+        result[lineIdx] = [{ type: "SimpleText", text: trimComment(token.content) }];
+      }
+    });
+  });
 
-    return result
+  return result;
 }
 
-export {Snippet, presentationSnippetHandler}
+export { Snippet, presentationSnippetHandler };
