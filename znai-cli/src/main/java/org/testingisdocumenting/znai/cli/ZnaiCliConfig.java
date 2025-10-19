@@ -135,25 +135,25 @@ public class ZnaiCliConfig {
 
     static {
         Set<OptionKey> commonOptions = EnumSet.of(
-            OptionKey.HELP,
-            OptionKey.VERSION,
-            OptionKey.SOURCE,
-            OptionKey.MARKUP_TYPE,
-            OptionKey.VALIDATE_EXTERNAL_LINKS,
-            OptionKey.ACTOR,
-            OptionKey.MODIFIED_TIME,
-            OptionKey.LOOKUP_PATHS
+                OptionKey.HELP,
+                OptionKey.VERSION,
+                OptionKey.SOURCE,
+                OptionKey.MARKUP_TYPE,
+                OptionKey.VALIDATE_EXTERNAL_LINKS,
+                OptionKey.ACTOR,
+                OptionKey.MODIFIED_TIME,
+                OptionKey.LOOKUP_PATHS,
+                OptionKey.SSL_JKS_PATH,
+                OptionKey.SSL_JKS_PASSWORD,
+                OptionKey.SSL_PEM_CERT_PATH,
+                OptionKey.SSL_PEM_KEY_PATH
         );
 
         Set<OptionKey> previewOptions = EnumSet.copyOf(commonOptions);
         previewOptions.addAll(EnumSet.of(
-            OptionKey.HOST,
-            OptionKey.PORT,
-            OptionKey.DEPLOY,
-            OptionKey.SSL_JKS_PATH,
-            OptionKey.SSL_JKS_PASSWORD,
-            OptionKey.SSL_PEM_CERT_PATH,
-            OptionKey.SSL_PEM_KEY_PATH
+                OptionKey.HOST,
+                OptionKey.PORT,
+                OptionKey.DEPLOY
         ));
         COMMAND_OPTIONS.put(Command.PREVIEW, previewOptions);
         COMMAND_OPTIONS.put(Command.SERVE, previewOptions);
