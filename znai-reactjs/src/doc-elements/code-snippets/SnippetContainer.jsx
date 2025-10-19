@@ -34,7 +34,7 @@ class SnippetContainer extends React.Component {
     super(props);
     this.state = {
       displayCopied: false,
-      collapsed: this.props.collapsed
+      collapsed: this.props.collapsed,
     };
   }
 

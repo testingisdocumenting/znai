@@ -22,7 +22,7 @@ import {
   isCommentToken,
   removeCommentsFromEachLine,
   splitTokensIntoLines,
-  trimComment
+  trimComment,
 } from "./codeUtils";
 import { isAllAtOnce } from "../meta/meta";
 import { convertToList } from "../propsUtils";
@@ -85,7 +85,7 @@ const Snippet = (props) => {
 };
 
 Snippet.defaultProps = {
-  numberOfVisibleLines: defaultNumberOfVisibleLines
+  numberOfVisibleLines: defaultNumberOfVisibleLines,
 };
 
 function Explanations({ spoiler, isPresentation, callouts = {}, elementsLibrary }) {
@@ -107,15 +107,15 @@ function scrollToLineIdx({ isPresentation, slideIdx, numberOfVisibleLines }) {
 const presentationSnippetHandler = {
   component: Snippet,
   numberOfSlides: ({
-                     meta,
-                     commentsType,
-                     lang,
-                     snippet,
-                     tokens,
-                     highlight,
-                     revealLineStop,
-                     numberOfVisibleLines = defaultNumberOfVisibleLines
-                   }) => {
+    meta,
+    commentsType,
+    lang,
+    snippet,
+    tokens,
+    highlight,
+    revealLineStop,
+    numberOfVisibleLines = defaultNumberOfVisibleLines,
+  }) => {
     const tokensToUse = parseCodeWithCompatibility({ lang, snippet, tokens });
     const highlightAsList = convertToList(highlight);
 
@@ -162,7 +162,7 @@ const presentationSnippetHandler = {
     const comments = tokensToUse.filter((t) => isCommentToken(t));
 
     return {
-      slideVisibleNote: !comments.length ? null : slideIdx === 0 ? "" : comments[slideIdx - 1].content
+      slideVisibleNote: !comments.length ? null : slideIdx === 0 ? "" : comments[slideIdx - 1].content,
     };
   },
 };
