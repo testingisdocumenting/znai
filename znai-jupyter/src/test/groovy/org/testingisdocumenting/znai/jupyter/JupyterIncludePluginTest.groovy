@@ -24,13 +24,13 @@ class JupyterIncludePluginTest {
     @Test
     void "should split each cell and create separate doc elements for each input and output"() {
         def elements = process("jupyter-notebook.ipynb")
-        elements.should == [[type: 'JupyterCell', cellType: 'code', snippet: 'from pandas import read_csv\nfrom IPython.display import display', lang: 'python'],
+        elements.should == [[type: 'Snippet', snippet: 'from pandas import read_csv\nfrom IPython.display import display', lang: 'python', className: "znai-jupyter-cell", lineNumber: ""],
                             [type: 'JupyterCell', cellType: 'empty-output', meta: [rightSide: true]],
-                            [type: 'JupyterCell', cellType: 'code', snippet: "tran = read_csv('transport.csv')\nprint(tran)", lang: 'python'],
-                            [type: 'JupyterCell', cellType: 'output', text: '   a   b   c\n' +
+                            [type: 'Snippet',  snippet: "tran = read_csv('transport.csv')\nprint(tran)", lang: 'python', className: "znai-jupyter-cell", lineNumber: "", noGap: true, noGapBorder: true],
+                            [type: 'Snippet', snippet: '   a   b   c\n' +
                                     '0  1   2   3\n' +
-                                    '1  4   5   6\n', meta: [rightSide: true]],
-                            [type: 'JupyterCell', cellType: 'code', snippet: 'display(tran)', lang: 'python'],
+                                    '1  4   5   6', meta: [rightSide: true], className: "znai-jupyter-cell", lineNumber: "", lang: "csv", resultOutput: true],
+                            [type: 'Snippet', snippet: 'display(tran)', lang: 'python', noGap: true, className: "znai-jupyter-cell", lineNumber: ""],
                             [type: 'JupyterCell', cellType: 'output', meta: [rightSide: true], html:'<table border="1" class="dataframe">\n' +
                                     '  <thead>\n' +
                                     '  </thead>\n' +
@@ -54,19 +54,19 @@ class JupyterIncludePluginTest {
                              'JupyterCell'  | 'empty-output' | true
 
                              'JupyterCell'  | 'empty-output' | true
-                             'JupyterCell'  | 'code'         | true
+                             'Snippet'      | ''             | true
+
+                             'TestMarkdown' | ''             | false
+                             'JupyterCell'  | 'empty-output' | true
+
+                             'Snippet'      | ''             | false
+                             'Snippet'      | ''             | true
 
                              'TestMarkdown' | ''             | false
                              'JupyterCell'  | 'empty-output' | true
 
                              'JupyterCell'  | 'output'       | false
-                             'JupyterCell'  | 'code'         | true
-
-                             'TestMarkdown' | ''             | false
-                             'JupyterCell'  | 'empty-output' | true
-
-                             'JupyterCell'  | 'output'       | false
-                             'JupyterCell'  | 'code'         | true  }
+                             'Snippet'      | ''             | true  }
 
     }
 

@@ -43,4 +43,8 @@ public class JupyterCell {
     public List<JupyterOutput> getOutputs() {
         return outputs;
     }
+
+    public boolean hasTextOutput() {
+        return outputs.stream().anyMatch((output) -> output.format().equals(JupyterOutput.TEXT_FORMAT));
+    }
 }

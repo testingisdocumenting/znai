@@ -76,5 +76,18 @@ export function jupyterDemo(registry) {
   registry
     .add("code cell", () => <JupyterCell elementsLibrary={elementsLibrary} {...simpleNotebook.cells[0]} />)
     .add("output text cell", () => <JupyterCell elementsLibrary={elementsLibrary} {...simpleNotebook.cells[1]} />)
-    .add("output htlml cell", () => <JupyterCell elementsLibrary={elementsLibrary} {...simpleNotebook.cells[2]} />);
+    .add("output html cells", () => {
+      const content = [
+        {
+          type: "JupyterCell",
+          noGap: true,
+          ...simpleNotebook.cells[0],
+        },
+        {
+          type: "JupyterCell",
+          ...simpleNotebook.cells[2],
+        },
+      ];
+      return <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={content} />;
+    });
 }

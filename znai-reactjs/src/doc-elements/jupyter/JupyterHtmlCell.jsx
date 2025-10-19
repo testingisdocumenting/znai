@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +15,17 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import './JupyterHtmlCell.css'
+import { Container } from "../container/Container.js";
+import "./JupyterHtmlCell.css";
 
-const JupyterHtmlCell = ({html, elementsLibrary}) => {
-    return (
-        <div className="jupyter-cell jupyter-html content-block">
-            <div dangerouslySetInnerHTML={{__html: html}}/>
-        </div>
-    )
-}
+const JupyterHtmlCell = ({ html, elementsLibrary, ...props }) => {
+  return (
+    <Container className="znai-jupyter-cell jupyter-html content-block" {...props}>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </Container>
+  );
+};
 
-export default JupyterHtmlCell
+export default JupyterHtmlCell;
