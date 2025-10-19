@@ -30,6 +30,7 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -111,7 +112,7 @@ abstract public class PythonIncludePluginBase implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.HIGH.text(pythonResult.text());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.HIGH.text(pythonResult.text()));
     }
 }

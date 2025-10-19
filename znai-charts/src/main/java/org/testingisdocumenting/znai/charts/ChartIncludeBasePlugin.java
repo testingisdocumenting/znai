@@ -24,8 +24,11 @@ import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 abstract public class ChartIncludeBasePlugin implements IncludePlugin {
@@ -39,6 +42,7 @@ abstract public class ChartIncludeBasePlugin implements IncludePlugin {
     protected static String COLUMNS = "columns";
 
     private Path fullPath;
+    private String csvContent;
 
     abstract protected String type();
 
@@ -58,7 +62,7 @@ abstract public class ChartIncludeBasePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         fullPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
-        String csvContent = componentsRegistry.resourceResolver().textContent(fullPath);
+        csvContent = componentsRegistry.resourceResolver().textContent(fullPath);
 
         return ChartPluginResult.create(pluginParams, type(), csvContent);
     }
@@ -66,5 +70,10 @@ abstract public class ChartIncludeBasePlugin implements IncludePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(fullPath));
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        return csvContent != null ? List.of(SearchScore.STANDARD.text(csvContent)) : List.of();
     }
 }

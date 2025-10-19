@@ -21,12 +21,16 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public class LatexInlinedCodePlugin implements InlinedCodePlugin {
     public static final String ID = "latex";
     public static final String SRC_KEY = "src";
+    private String latex;
 
     @Override
     public String id() {
@@ -40,7 +44,12 @@ public class LatexInlinedCodePlugin implements InlinedCodePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        String latex = pluginParams.getOpts().getRequiredString(SRC_KEY);
+        latex = pluginParams.getOpts().getRequiredString(SRC_KEY);
         return PluginResult.docElement(new DocElement("InlinedLatex", "latex", latex));
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        return latex != null ? List.of(SearchScore.STANDARD.text(latex)) : List.of();
     }
 }

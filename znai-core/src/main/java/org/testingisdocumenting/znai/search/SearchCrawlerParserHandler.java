@@ -105,12 +105,12 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
-        processPluginSearchText(includePlugin.textForSearch());
+        processPluginSearchTexts(includePlugin.textForSearch());
     }
 
     @Override
     public void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult) {
-        processPluginSearchText(fencePlugin.textForSearch());
+        processPluginSearchTexts(fencePlugin.textForSearch());
     }
 
     @Override
@@ -142,14 +142,18 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
         flushTextParts();
     }
 
-    private void processPluginSearchText(SearchText searchText) {
-        if (searchText == null) {
+    private void processPluginSearchTexts(List<SearchText> searchTexts) {
+        if (searchTexts == null || searchTexts.isEmpty()) {
             return;
         }
 
-        switch (searchText.getScore()) {
-            case HIGH -> addHighWithSpaceSeparator(searchText.getText());
-            case STANDARD -> addStandardWithSpaceSeparator(searchText.getText());
+        for (SearchText searchText : searchTexts) {
+            if (searchText != null) {
+                switch (searchText.getScore()) {
+                    case HIGH -> addHighWithSpaceSeparator(searchText.getText());
+                    case STANDARD -> addStandardWithSpaceSeparator(searchText.getText());
+                }
+            }
         }
     }
 

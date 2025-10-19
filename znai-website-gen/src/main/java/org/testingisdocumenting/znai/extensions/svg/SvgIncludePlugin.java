@@ -18,22 +18,26 @@ package org.testingisdocumenting.znai.extensions.svg;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.structure.DocStructure;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
 public class SvgIncludePlugin implements IncludePlugin {
     private AuxiliaryFile svgAuxiliaryFile;
+    private String svgContent;
 
     @Override
     public String id() {
@@ -55,6 +59,7 @@ public class SvgIncludePlugin implements IncludePlugin {
 
         String svgSrc = pluginParams.getFreeParam();
         svgAuxiliaryFile = resourcesResolver.runtimeAuxiliaryFile(svgSrc);
+        svgContent = resourcesResolver.textContent(svgSrc);
 
         Map<String, Object> props = new LinkedHashMap<>();
         props.put("svgSrc", docStructure.fullUrl(svgAuxiliaryFile.getDeployRelativePath().toString()) +
@@ -76,5 +81,19 @@ public class SvgIncludePlugin implements IncludePlugin {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        if (svgContent == null) {
+            return List.of();
+        }
+        return List.of(SearchScore.STANDARD.text(extractTextFromSvg(svgContent)));
+    }
+
+    private String extractTextFromSvg(String svg) {
+        return svg.replaceAll("<[^>]+>", " ")
+                .replaceAll("\\s+", " ")
+                .trim();
     }
 }

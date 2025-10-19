@@ -1,0 +1,1 @@
+* Add: Search text for various plugins like `TextBadge` and `Latex`

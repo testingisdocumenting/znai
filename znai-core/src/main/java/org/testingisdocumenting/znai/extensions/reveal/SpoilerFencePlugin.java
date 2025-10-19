@@ -28,6 +28,7 @@ import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class SpoilerFencePlugin implements FencePlugin {
@@ -60,7 +61,7 @@ public class SpoilerFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(parserResult.getAllText());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(parserResult.getAllText()));
     }
 }

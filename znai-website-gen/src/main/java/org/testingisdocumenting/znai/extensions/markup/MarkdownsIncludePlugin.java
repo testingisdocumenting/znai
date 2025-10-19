@@ -113,11 +113,11 @@ public class MarkdownsIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
+    public List<SearchText> textForSearch() {
         String textFromMarkupResults = parserResults.stream()
                 .map(MarkupParserResult::getAllText)
                 .collect(joining(" "));
 
-        return SearchScore.STANDARD.text(textFromMarkupResults);
+        return List.of(SearchScore.STANDARD.text(textFromMarkupResults));
     }
 }

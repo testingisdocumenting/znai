@@ -71,5 +71,4 @@ public class ImageFencePlugin extends ImagePluginBase implements FencePlugin {
     protected Stream<AuxiliaryFile> additionalAuxiliaryFiles() {
         return Stream.empty();
     }
-
 }

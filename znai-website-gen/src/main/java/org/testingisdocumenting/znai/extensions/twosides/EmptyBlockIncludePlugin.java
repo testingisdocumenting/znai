@@ -21,8 +21,10 @@ import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public class EmptyBlockIncludePlugin implements IncludePlugin {
     @Override
@@ -38,5 +40,10 @@ public class EmptyBlockIncludePlugin implements IncludePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         return PluginResult.docElement("EmptyBlock", pluginParams.getOpts().toMap());
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        return List.of();
     }
 }

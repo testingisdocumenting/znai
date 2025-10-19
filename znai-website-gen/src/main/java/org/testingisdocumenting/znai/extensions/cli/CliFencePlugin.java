@@ -68,8 +68,8 @@ public class CliFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.HIGH.text(String.join(" ", commands));
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.HIGH.text(String.join(" ", commands)));
     }
 
     @Override

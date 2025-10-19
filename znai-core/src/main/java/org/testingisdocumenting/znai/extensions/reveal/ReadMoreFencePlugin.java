@@ -18,7 +18,10 @@ package org.testingisdocumenting.znai.extensions.reveal;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.*;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
+import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
@@ -27,6 +30,7 @@ import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class ReadMoreFencePlugin implements FencePlugin {
@@ -67,7 +71,7 @@ public class ReadMoreFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(parserResult.getAllText());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(parserResult.getAllText()));
     }
 }

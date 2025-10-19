@@ -160,7 +160,7 @@ public class GraphvizFromJsonGen {
     }
 
     private String generateNode(DiagramNode node) {
-        return StringUtils.wrapInDoubleQuotes(node.getId()) + " [label=\"" + generateNodeLabel(node) + "\"" +
+        return StringUtils.wrapInDoubleQuotes(node.id()) + " [label=\"" + generateNodeLabel(node) + "\"" +
                 generateSizeAttributesIfRequired(node) + "];";
     }
 
@@ -183,19 +183,19 @@ public class GraphvizFromJsonGen {
 
     private String generateNodeLabel(DiagramNode node) {
         List<String> metaParts = new ArrayList<>();
-        if (node.getHighlight()) {
+        if (node.highlight()) {
             metaParts.add("h");
-        } else if (!node.getColorGroup().isEmpty()) {
-            metaParts.add(node.getColorGroup());
+        } else if (!node.colorGroup().isEmpty()) {
+            metaParts.add(node.colorGroup());
         }
 
-        if (!node.getShape().isEmpty()) {
-            metaParts.add(node.getShape());
+        if (!node.shape().isEmpty()) {
+            metaParts.add(node.shape());
         }
 
         String labelSuffix = metaParts.isEmpty() ? "" : "[" + String.join(" ", metaParts) + "]";
 
-        return preProcessLabel(node.getLabel()) + labelSuffix;
+        return preProcessLabel(node.label()) + labelSuffix;
     }
 
     private String generateEdges(List<DiagramEdge> edges) {

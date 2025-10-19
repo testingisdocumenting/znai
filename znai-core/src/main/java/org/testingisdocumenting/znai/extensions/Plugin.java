@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 public interface Plugin {
@@ -44,9 +45,7 @@ public interface Plugin {
         return Stream.empty();
     }
 
-    default SearchText textForSearch() {
-        return null;
-    }
+    List<SearchText> textForSearch();
 
     default String markdownRepresentation() {
         return "";

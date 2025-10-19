@@ -24,7 +24,10 @@ import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinitionCommon;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.features.PluginFeatureList;
-import org.testingisdocumenting.znai.extensions.file.*;
+import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider;
+import org.testingisdocumenting.znai.extensions.file.SnippetHighlightFeature;
+import org.testingisdocumenting.znai.extensions.file.SnippetRevealLineStopFeature;
+import org.testingisdocumenting.znai.extensions.file.SnippetsCommon;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
@@ -97,7 +100,7 @@ public class CliOutputIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(contentProvider.snippetContent());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(contentProvider.snippetContent()));
     }
 }

@@ -61,7 +61,7 @@ class ApiParametersFencePluginTest {
                 pluginParamsFactory.create("api-parameters", "", [:]),
                 "firstName, String, first name").fencePlugin
 
-        plugin.textForSearch().text.should == "firstName String first name"
+        plugin.textForSearch().text.should == ["firstName String first name"]
     }
 
     @Test

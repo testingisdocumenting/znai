@@ -18,19 +18,20 @@ package org.testingisdocumenting.znai.extensions.templates;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.extensions.ColonDelimitedKeyValues;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.template.TextTemplate;
 
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class TemplateFencePlugin implements FencePlugin {
@@ -71,7 +72,7 @@ public class TemplateFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(parserResult.getAllText());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(parserResult.getAllText()));
     }
 }

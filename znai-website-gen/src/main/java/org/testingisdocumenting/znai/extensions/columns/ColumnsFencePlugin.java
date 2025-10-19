@@ -97,10 +97,10 @@ public class ColumnsFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
+    public List<SearchText> textForSearch() {
         String textFromAllColumns = columnsParserResult.stream().map(MarkupParserResult::getAllText)
                 .collect(joining(" "));
 
-        return SearchScore.STANDARD.text(textFromAllColumns);
+        return List.of(SearchScore.STANDARD.text(textFromAllColumns));
     }
 }

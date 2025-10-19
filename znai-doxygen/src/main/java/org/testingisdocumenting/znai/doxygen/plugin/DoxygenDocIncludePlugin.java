@@ -29,6 +29,7 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class DoxygenDocIncludePlugin implements IncludePlugin {
@@ -76,10 +77,10 @@ public class DoxygenDocIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return membersList.isEmpty() ?
+    public List<SearchText> textForSearch() {
+        return List.of(membersList.isEmpty() ?
                 SearchScore.HIGH.text(compound.getDescription().textForSearch()):
-                SearchScore.HIGH.text(membersList.first().getDescription().textForSearch());
+                SearchScore.HIGH.text(membersList.first().getDescription().textForSearch()));
     }
 
     @Override

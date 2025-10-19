@@ -27,6 +27,7 @@ import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DiagramLegendIncludePlugin implements IncludePlugin {
@@ -58,8 +59,8 @@ public class DiagramLegendIncludePlugin implements IncludePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(String.join(" ", legend.values()));
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(String.join(" ", legend.values())));
     }
 
     private Map<String, String> extractLegend(PluginParamsOpts opts) {

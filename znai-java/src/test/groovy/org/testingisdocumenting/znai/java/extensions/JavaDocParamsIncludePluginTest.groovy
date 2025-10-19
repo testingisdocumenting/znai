@@ -26,13 +26,13 @@ class JavaDocParamsIncludePluginTest {
     @Test
     void "text for search with no return"() {
         def plugin = processAndGetIncludePlugin('{entry: "sampleMethod(String)"}')
-        plugin.textForSearch().text.should == 'test String test param <code>package.Param</code>'
+        plugin.textForSearch().text.should == ['test String test param <code>package.Param</code>']
     }
 
     @Test
     void "text for search with return"() {
         def plugin = processAndGetIncludePlugin('{entry: "sampleMethod(String, List)"}')
-        plugin.textForSearch().text.should == 'test String test param name List name of the param return List<String> list of samples'
+        plugin.textForSearch().text.should == ['test String test param name List name of the param return List<String> list of samples']
     }
 
     @Test

@@ -26,6 +26,8 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -36,6 +38,7 @@ public class CppCommentsIncludePlugin implements IncludePlugin {
     private static final String ZNAI_PREFIX = "@znai";
 
     private Path cppPath;
+    private MarkupParserResult parserResult;
 
     @Override
     public String id() {
@@ -57,13 +60,20 @@ public class CppCommentsIncludePlugin implements IncludePlugin {
         String text = componentsRegistry.resourceResolver().textContent(fileName);
 
         String comments = extractComments(text, pluginParams.getOpts());
-        MarkupParserResult parserResult = componentsRegistry.defaultParser().parse(cppPath, comments);
+        parserResult = componentsRegistry.defaultParser().parse(cppPath, comments);
         return PluginResult.docElements(parserResult.docElement().getContent().stream());
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(cppPath));
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        return parserResult != null ?
+                List.of(SearchScore.STANDARD.text(parserResult.getAllText())) :
+                List.of();
     }
 
     private String extractComments(String text, PluginParamsOpts opts) {

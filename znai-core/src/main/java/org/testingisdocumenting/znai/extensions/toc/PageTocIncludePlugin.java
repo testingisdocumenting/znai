@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 import org.testingisdocumenting.znai.parser.ParserHandler;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.structure.TableOfContents;
 import org.testingisdocumenting.znai.structure.TocItem;
 
@@ -63,5 +64,10 @@ public class PageTocIncludePlugin implements IncludePlugin {
         return tocItem.getPageSectionIdTitles().stream()
                 .map(PageSectionIdTitle::toMap)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        return List.of();
     }
 }

@@ -26,6 +26,7 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public class ApiParametersFencePlugin implements FencePlugin {
     private ApiParameters apiParameters;
@@ -55,7 +56,7 @@ public class ApiParametersFencePlugin implements FencePlugin {
     }
 
     @Override
-    public SearchText textForSearch() {
-        return SearchScore.STANDARD.text(apiParameters.combinedTextForSearch());
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(apiParameters.combinedTextForSearch()));
     }
 }

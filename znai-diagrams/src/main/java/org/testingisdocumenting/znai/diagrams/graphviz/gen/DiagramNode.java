@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintaiers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,62 +17,10 @@
 
 package org.testingisdocumenting.znai.diagrams.graphviz.gen;
 
-public class DiagramNode {
-    private final String id;
-    private final String label;
-    private final String url;
-    private final String colorGroup;
-    private final String shape;
-    private final Boolean highlight;
-
-    private final Number width;
-    private final Number height;
-
-    public DiagramNode(String id, String label, String url, String colorGroup, String shape, Boolean highlight,
-                       Number width, Number height) {
-        this.id = id;
-        this.label = label;
-        this.url = url;
-        this.colorGroup = colorGroup;
-        this.shape = shape;
-        this.highlight = highlight;
-        this.width = width;
-        this.height = height;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public Boolean getHighlight() {
-        return highlight;
-    }
-
-    public String getColorGroup() {
-        return colorGroup;
-    }
-
-    public String getShape() {
-        return shape;
-    }
+public record DiagramNode(String id, String label, String url, String colorGroup, String shape, Boolean highlight,
+                          Number width, Number height) {
 
     public Boolean hasUrl() {
         return !url.isEmpty();
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public Number getWidth() {
-        return width;
-    }
-
-    public Number getHeight() {
-        return height;
     }
 }

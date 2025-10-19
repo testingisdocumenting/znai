@@ -22,13 +22,18 @@ import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.file.AnchorFeature;
 import org.testingisdocumenting.znai.extensions.paramtypes.PluginParamTypeEnum;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.structure.DocUrl;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 abstract class ImagePluginBase implements Plugin {
@@ -51,6 +56,7 @@ abstract class ImagePluginBase implements Plugin {
     protected boolean isExternal;
 
     protected Double pixelRatioFromOpts;
+    private PluginParamsOpts opts;
 
     @Override
     public PluginParamsDefinition parameters() {
@@ -100,7 +106,7 @@ abstract class ImagePluginBase implements Plugin {
     protected abstract Stream<AuxiliaryFile> additionalAuxiliaryFiles();
 
     protected PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams) {
-        PluginParamsOpts opts = pluginParams.getOpts();
+        opts = pluginParams.getOpts();
         pixelRatioFromOpts = opts.has(PIXEL_RATIO_KEY) ?
                 opts.getNumber(PIXEL_RATIO_KEY).doubleValue():
                 null;
@@ -158,5 +164,21 @@ abstract class ImagePluginBase implements Plugin {
         } else if (opts.has(CAPTION_KEY)) {
             props.put(TITLE_KEY, opts.get(CAPTION_KEY));
         }
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        if (opts == null) {
+            return List.of();
+        }
+
+        String title = null;
+        if (opts.has(TITLE_KEY)) {
+            title = opts.getString(TITLE_KEY);
+        } else if (opts.has(CAPTION_KEY)) {
+            title = opts.getString(CAPTION_KEY);
+        }
+
+        return title != null ? List.of(SearchScore.STANDARD.text(title)) : List.of();
     }
 }

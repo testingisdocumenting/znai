@@ -24,12 +24,17 @@ import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.docelement.DocElementType;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MarkdownAndResultFencePlugin implements FencePlugin {
+    private MarkupParserResult parserResult;
+
     @Override
     public String id() {
         return "markdown-and-result";
@@ -43,7 +48,7 @@ public class MarkdownAndResultFencePlugin implements FencePlugin {
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         MarkupParser parser = componentsRegistry.defaultParser();
-        MarkupParserResult parserResult = parser.parse(markupPath, content);
+        parserResult = parser.parse(markupPath, content);
 
         Map<String, Object> markdown = CodeSnippetsProps.create("markdown", content);
         markdown.put("type", DocElementType.SNIPPET);
@@ -53,5 +58,10 @@ public class MarkdownAndResultFencePlugin implements FencePlugin {
         props.put("result", parserResult.contentToListOfMaps());
 
         return PluginResult.docElement("MarkdownAndResult", props);
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        return List.of(SearchScore.STANDARD.text(parserResult.getAllText()));
     }
 }

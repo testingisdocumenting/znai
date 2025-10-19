@@ -28,6 +28,8 @@ import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
+import org.testingisdocumenting.znai.search.SearchScore;
+import org.testingisdocumenting.znai.search.SearchText;
 import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
@@ -51,6 +53,7 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
     private OpenApi3Spec spec;
     private MarkdownParser markdownParser;
     private OpenApiMarkdownParser openApiMarkdownParser;
+    private List<OpenApi3Operation> processedOperations;
 
     @Override
     public String id() {
@@ -84,10 +87,10 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
 
         spec = OpenApi3Spec.parse(specContent);
 
-        List<OpenApi3Operation> operations = findOperations(pluginParams);
-        validateOperations(operations);
+        processedOperations = findOperations(pluginParams);
+        validateOperations(processedOperations);
 
-        operations.forEach(operation -> renderOperation(operation, pluginParams));
+        processedOperations.forEach(operation -> renderOperation(operation, pluginParams));
 
         return PluginResult.docElements(Stream.empty());
     }
@@ -286,5 +289,32 @@ public class OpenApi3IncludePlugin implements IncludePlugin {
             this.collapsed = collapsed;
             this.example = example;
         }
+    }
+
+    @Override
+    public List<SearchText> textForSearch() {
+        if (processedOperations == null || processedOperations.isEmpty()) {
+            return List.of();
+        }
+
+        StringBuilder searchText = new StringBuilder();
+        processedOperations.forEach(operation -> {
+            searchText.append(operation.getMethod()).append(" ");
+            searchText.append(operation.getPath()).append(" ");
+
+            if (operation.getSummary() != null && !operation.getSummary().isEmpty()) {
+                searchText.append(operation.getSummary()).append(" ");
+            }
+
+            if (operation.getDescription() != null && !operation.getDescription().isEmpty()) {
+                searchText.append(operation.getDescription()).append(" ");
+            }
+
+            operation.getParameters().forEach(param -> searchText.append(param.getName()).append(" "));
+        });
+
+        return !searchText.isEmpty() ?
+                List.of(SearchScore.HIGH.text(searchText.toString().trim())) :
+                List.of();
     }
 }
