@@ -17,13 +17,9 @@
 
 package org.testingisdocumenting.znai.jupyter;
 
-import org.testingisdocumenting.znai.codesnippets.CodeSnippetsProps;
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
-import org.testingisdocumenting.znai.extensions.PluginParamType;
-import org.testingisdocumenting.znai.extensions.PluginParams;
-import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
-import org.testingisdocumenting.znai.extensions.PluginResult;
+import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
@@ -41,9 +37,9 @@ public class JupyterIncludePlugin implements IncludePlugin {
     private static final String EXCLUDE_SECTION_TITLE_KEY = "excludeSectionTitle";
     private MarkdownParser markdownParser;
     private Path path;
-    private String lang;
     private boolean isStoryFirst;
     private ParserHandler markdownParserHandler;
+    private PluginParamsFactory pluginParamsFactory;
 
     @Override
     public String id() {
@@ -69,6 +65,7 @@ public class JupyterIncludePlugin implements IncludePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
         markdownParser = componentsRegistry.markdownParser();
         markdownParserHandler = parserHandler;
+        pluginParamsFactory = componentsRegistry.pluginParamsFactory();
 
         isStoryFirst = pluginParams.getOpts().get(STORY_FIRST_KEY, false);
         List<String> includeSection = pluginParams.getOpts().getList(INCLUDE_SECTION_KEY);
@@ -79,7 +76,6 @@ public class JupyterIncludePlugin implements IncludePlugin {
 
         JupyterNotebook notebook = new JupyterParserVer4()
                 .parse(JsonUtils.deserializeAsMap(resourcesResolver.textContent(path)));
-        lang = notebook.getLang();
 
         List<JupyterCell> cells = !includeSection.isEmpty() ?
                 collectCells(notebook.getCells(), includeSection, excludeSectionTitle) :
@@ -109,6 +105,7 @@ public class JupyterIncludePlugin implements IncludePlugin {
 
     @Override
     public List<SearchText> textForSearch() {
+        // TODO extract output from html output cells as those are not being processed by markdown processor
         return List.of();
     }
 
@@ -137,15 +134,17 @@ public class JupyterIncludePlugin implements IncludePlugin {
             return;
         }
 
-        Map<String, Object> props = new LinkedHashMap<>();
-        props.put("cellType", cell.getType());
-        props.putAll(convertInputData(cell));
-
-        if (isStoryFirst) {
-            props.putAll(createMetaRight());
+        Map<String, Object> props = isStoryFirst ? createRightSideProp() : new HashMap<>();
+        addJupyterCellClassName(props);
+        if (!cell.getOutputs().isEmpty()) {
+            props.put("noGap", true);
+            if (cell.hasTextOutput()) {
+                props.put("noGapBorder", true);
+            }
         }
 
-        addCell(props);
+        markdownParserHandler.onSnippet(pluginParamsFactory.create("snippet", "", props),
+                "python", "", cell.getInput());
     }
 
     private void processOutputFromCell(JupyterCell cell) {
@@ -157,15 +156,25 @@ public class JupyterIncludePlugin implements IncludePlugin {
     }
 
     private void processCellOutput(JupyterOutput output) {
-        Map<String, Object> props = new LinkedHashMap<>();
-        props.put("cellType", "output");
-        props.putAll(convertOutputData(output));
+        if (output.format().equals(JupyterOutput.TEXT_FORMAT)) {
+            Map<String, Object> props = !isStoryFirst ? createRightSideProp() : new HashMap<>();
+            props.put("resultOutput", true);
+            addJupyterCellClassName(props);
 
-        if (!isStoryFirst) {
-            props.putAll(createMetaRight());
+            markdownParserHandler.
+                    onSnippet(pluginParamsFactory.create("snippet", "", props),
+                            "csv", "", output.content());
+        } else {
+            Map<String, Object> props = new LinkedHashMap<>();
+            props.put("cellType", "output");
+            props.putAll(convertOutputData(output));
+
+            if (!isStoryFirst) {
+                props.putAll(createMetaRight());
+            }
+
+            addCell(props);
         }
-
-        addCell(props);
     }
 
     private void processEmptyOutput() {
@@ -184,21 +193,22 @@ public class JupyterIncludePlugin implements IncludePlugin {
         return cell.getType().equals(JupyterCell.MARKDOWN_TYPE);
     }
 
-    private Map<String, ?> createMetaRight() {
-        Map<String, Object> meta = new LinkedHashMap<>();
-        meta.put("rightSide", true);
-
+    private Map<String, Object> createMetaRight() {
+        Map<String, Object> meta = createRightSideProp();
         return Collections.singletonMap("meta", meta);
     }
 
-    private Map<String, Object> convertInputData(JupyterCell cell) {
-        if (cell.getType().equals(JupyterCell.CODE_TYPE)) {
-            return CodeSnippetsProps.create(lang, cell.getInput());
-        }
-        return Collections.singletonMap(JupyterOutput.TEXT_FORMAT, cell.getInput());
+    private static Map<String, Object> createRightSideProp() {
+        Map<String, Object> meta = new LinkedHashMap<>();
+        meta.put("rightSide", true);
+        return meta;
     }
 
     private Map<String, Object> convertOutputData(JupyterOutput output) {
         return Collections.singletonMap(output.format(), output.content());
+    }
+
+    private void addJupyterCellClassName(Map<String, Object> props) {
+        props.put("className", "znai-jupyter-cell");
     }
 }

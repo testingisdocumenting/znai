@@ -30,6 +30,7 @@ scenario("open browser with docs") {
 }
 
 scenario("switch to presentation mode and validate title") {
+    standardView.presentationButton.waitToBe visible
     standardView.presentationButton.click()
     presentationContent.title.waitTo == "What Is This"
 }

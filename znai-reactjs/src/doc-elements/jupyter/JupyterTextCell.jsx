@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +15,14 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-const JupyterTextCell = ({text, elementsLibrary}) => {
-    return (
-        <div className="jupyter-cell jupyter-text content-block">
-            <elementsLibrary.Snippet snippet={text} lang="csv"/>
-        </div>
-    )
-}
+const JupyterTextCell = ({ text, elementsLibrary }) => {
+  return (
+    <div className="jupyter-cell jupyter-text content-block">
+      <elementsLibrary.Snippet snippet={text} lang="csv" />
+    </div>
+  );
+};
 
-export default JupyterTextCell
+export default JupyterTextCell;
