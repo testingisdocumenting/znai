@@ -1,0 +1,1 @@
+* Fix: `/search-entries.xml` correctly constructs `title` field when text is outside a top level header
