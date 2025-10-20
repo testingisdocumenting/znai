@@ -40,6 +40,11 @@ scenario("validate page outside of chapter") {
     docContent.paragraphs.get("Files don't have to belong to chapters if you have simple docs").waitTo visible
 }
 
+scenario("check redirect page") {
+    previewServer.openPreviewWithUrl(port, "chapter-three/page-one")
+    docContent.title.waitToBe == "Links"
+}
+
 scenario("validate uploads files") {
     def baseUrl = "http://localhost:$port/preview"
 

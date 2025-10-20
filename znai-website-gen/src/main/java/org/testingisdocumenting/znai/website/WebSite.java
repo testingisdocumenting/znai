@@ -202,6 +202,7 @@ public class WebSite implements Log {
         reportPhase("deploying documentation");
         generatePages();
         generateChapterIndexRedirectPages();
+        generatePageRedirects();
         generateSearchIndex();
         generateLlmContent();
         deployToc();
@@ -609,8 +610,15 @@ public class WebSite implements Log {
                     docMeta.getType() : pageSearchEntry.getPageSectionTitle());
         }
 
-        return docMeta.getTitle() + ": " + tocItem.getPageTitle() + ", " + pageSearchEntry.getPageSectionTitle() +
+        String pageSectionPart = pageSearchEntry.getPageSectionTitle().isEmpty() ?
+                "" :
+                ", " +  pageSearchEntry.getPageSectionTitle();
+
+        String chapterPart = tocItem.getChapterTitle().isEmpty() ?
+                "" :
                 " [" + tocItem.getChapterTitle() + "]";
+
+        return docMeta.getTitle() + ": " + tocItem.getPageTitle() + pageSectionPart + chapterPart;
     }
 
     // each markup file may refer other files like code snippets or diagrams
@@ -650,6 +658,16 @@ public class WebSite implements Log {
                 deployer.deploy(dirName + "/index.html", redirectPage);
             });
         });
+    }
+
+    private void generatePageRedirects() {
+        PageRedirects pageRedirects = new PageRedirects(docStructure, deployer, cfg.redirectsPaths);
+        if (!pageRedirects.isPresent()) {
+            return;
+        }
+
+        reportPhase("generating page redirects");
+        pageRedirects.deployRedirectPages();
     }
 
     private void generateSearchIndex() {
@@ -940,6 +958,7 @@ public class WebSite implements Log {
         private Path docRootPath;
         private Path footerPath;
         private Path extensionsDefPath;
+        private Path redirectsPaths;
         private Path globalReferencesPathNoExt;
         private Path pluginParamsPath;
         private final List<WebResource> webResources;
@@ -977,6 +996,11 @@ public class WebSite implements Log {
 
         public Configuration withExtensionsDefPath(Path path) {
             extensionsDefPath = path.toAbsolutePath();
+            return this;
+        }
+
+        public Configuration withRedirectsPath(Path path) {
+            redirectsPaths = path.toAbsolutePath();
             return this;
         }
 

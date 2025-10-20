@@ -22,4 +22,8 @@ class PreviewServer {
     void openPreview(port) {
         browser.open("http://localhost:${port}/preview")
     }
+
+    void openPreviewWithUrl(port, url) {
+        browser.open("http://localhost:${port}/preview/${url}")
+    }
 }
