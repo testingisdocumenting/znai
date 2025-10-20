@@ -200,15 +200,41 @@ public class ZnaiCliApp {
         };
     }
 
+    private boolean maybeCreateNewFromTemplate(DocScaffolding scaffolding) {
+        String templatePathEnv = System.getenv("ZNAI_NEW_TEMPLATE_PATH");
+        if (templatePathEnv == null) {
+            return false;
+        }
+
+        if (templatePathEnv.trim().isEmpty()) {
+            ConsoleOutputs.out(Color.RED, "template path value is empty");
+            return false;
+        }
+
+        Path templatePath = Paths.get(templatePathEnv);
+        if (Files.exists(templatePath) && Files.isDirectory(templatePath)) {
+            ConsoleOutputs.out(Color.BLUE, "scaffolding from template: ", Color.PURPLE, templatePath);
+            scaffolding.createFromFileSystem(templatePath);
+            return true;
+        } else {
+            ConsoleOutputs.err(Color.RED, "template path does not exist or is not a directory: ",
+                    Color.PURPLE, templatePath);
+            ConsoleOutputs.out(Color.YELLOW, "falling back to default scaffold");
+            return false;
+        }
+    }
+
     private void createNew() {
         Path pathToScaffold = (config.isSourceRootSet() ?
                 config.getSourceRoot() :
                 Paths.get("guide")).toAbsolutePath();
 
         ConsoleOutputs.out(Color.BLUE, "scaffolding new documentation: ", Color.PURPLE, pathToScaffold);
-
         DocScaffolding scaffolding = new DocScaffolding(pathToScaffold);
-        scaffolding.create();
+
+        if (!maybeCreateNewFromTemplate(scaffolding)) {
+            scaffolding.create();
+        }
     }
 
     private void announceMode(String name) {

@@ -21,12 +21,15 @@ import org.testingisdocumenting.znai.core.DocMeta;
 import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.ResourceUtils;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DocScaffolding {
     private final Path workingDir;
@@ -45,6 +48,28 @@ public class DocScaffolding {
         createPluginParams();
         createIndex();
         createLookupPaths();
+    }
+
+    public void createFromFileSystem(Path templatePath) {
+        if (!Files.exists(templatePath)) {
+            throw new RuntimeException("template path does not exist: " + templatePath);
+        }
+
+        if (!Files.isDirectory(templatePath)) {
+            throw new RuntimeException("template path is not a directory: " + templatePath);
+        }
+
+        try (Stream<Path> discoveredFiles = Files.walk(templatePath)) {
+            discoveredFiles
+                    .filter(Files::isRegularFile)
+                    .forEach(f -> {
+                        Path relativePath = templatePath.relativize(f);
+                        Path targetPath = workingDir.resolve(relativePath);
+                        FileUtils.copyFile(f, targetPath);
+                    });
+        } catch (IOException e) {
+            throw new RuntimeException("failed to copy files from template: " + templatePath, e);
+        }
     }
 
     private void createLookupPaths() {
