@@ -33,9 +33,9 @@ scenario('shows help') {
 
 scenario('scaffolds new documentation') {
     def scaffoldDir = fs.tempDir('znai-scaffold')
-    znai.run('--new', cli.workingDir(scaffoldDir))
+    znai.run('new', cli.workingDir(scaffoldDir))
 
-    def docRoot = scaffoldDir.resolve('znai')
+    def docRoot = scaffoldDir.resolve('guide')
     fs.textContent(docRoot.resolve('toc')).should contain('chapter-one\n' +
             '    getting-started')
 
@@ -45,7 +45,7 @@ scenario('scaffolds new documentation') {
 scenario('preview znai docs') {
     String docsRoot = scaffoldedDocRoot.get()
 
-    def znaiPreview = znai.runInBackground("--preview", cli.workingDir(docsRoot))
+    def znaiPreview = znai.runInBackground("preview", cli.workingDir(docsRoot))
     znaiPreview.output.waitTo contain(":3333")
 
     browser.open("http://localhost:3333/preview")

@@ -28,7 +28,7 @@ class ScaffoldUtils {
 
         def znaiDeployRoot = tempPath.resolve('deploy-root')
         CliCommands.znai.run("--doc-id my-product --deploy $znaiDeployRoot",
-                cli.workingDir(tempPath.resolve('znai')))
+                cli.workingDir(tempPath.resolve('guide')))
 
         return server.serve(serverId, znaiDeployRoot)
     }

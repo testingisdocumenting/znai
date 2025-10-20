@@ -1,0 +1,1 @@
+* Add: `page-redirects.csv` support to help with page renames
