@@ -20,6 +20,10 @@
     background: var(--znai-snippets-background-color);
 }
 
+.snippet-container.result-output {
+    background: var(--znai-snippets-result-output-background-color);
+}
+
 .snippet-container.no-margin-bottom {
     margin-bottom: 0;
 }
