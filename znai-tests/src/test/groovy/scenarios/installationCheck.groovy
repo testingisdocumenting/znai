@@ -33,9 +33,9 @@ scenario('shows help') {
 
 scenario('scaffolds new documentation') {
     def scaffoldDir = fs.tempDir('znai-scaffold')
-    znai.run('--new', cli.workingDir(scaffoldDir))
+    znai.run('new', cli.workingDir(scaffoldDir))
 
-    def docRoot = scaffoldDir.resolve('znai')
+    def docRoot = scaffoldDir.resolve('guide')
     fs.textContent(docRoot.resolve('toc')).should contain('chapter-one\n' +
             '    getting-started')
 
