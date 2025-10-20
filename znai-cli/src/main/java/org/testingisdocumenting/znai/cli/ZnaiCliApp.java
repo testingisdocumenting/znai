@@ -203,7 +203,7 @@ public class ZnaiCliApp {
     private void createNew() {
         Path pathToScaffold = (config.isSourceRootSet() ?
                 config.getSourceRoot() :
-                Paths.get("znai")).toAbsolutePath();
+                Paths.get("guide")).toAbsolutePath();
 
         ConsoleOutputs.out(Color.BLUE, "scaffolding new documentation: ", Color.PURPLE, pathToScaffold);
 
@@ -212,7 +212,7 @@ public class ZnaiCliApp {
     }
 
     private void announceMode(String name) {
-        ConsoleOutputs.out(Color.BLUE, "znai ", Color.YELLOW, name + " mode");
+        ConsoleOutputs.out(Color.BLUE, ZnaiTitleWithMaybeOverride.title, " ", Color.YELLOW, name + " mode");
     }
 
     private void reportHostPort(int port, String relativeUrl) {

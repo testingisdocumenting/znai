@@ -27,13 +27,13 @@ def scaffoldedPathCache = cache.value('scaffolded-docs-for-preview')
 
 scenario('scaffold docs and run preview') {
     def tempPath = fs.tempDir('znai-scaffold-for-preview')
-    CliCommands.znai.run('--new', cli.workingDir(tempPath))
+    CliCommands.znai.run('new', cli.workingDir(tempPath))
 
-    def docsPath = tempPath.resolve("znai")
+    def docsPath = tempPath.resolve("guide")
     scaffoldedPathCache.set(docsPath.toString())
 
     def port = 3457
-    def preview = CliCommands.znai.runInBackground("--preview --port=${port}", cli.workingDir(docsPath))
+    def preview = CliCommands.znai.runInBackground("preview --port=${port}", cli.workingDir(docsPath))
 
     preview.output.waitTo(contain("server started"), 30_000)
 

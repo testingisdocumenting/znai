@@ -1,0 +1,1 @@
+* Add: `ZNAI_APP_TITLE` to override cli output with custom tool title
