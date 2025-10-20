@@ -45,7 +45,7 @@ scenario('scaffolds new documentation') {
 scenario('preview znai docs') {
     String docsRoot = scaffoldedDocRoot.get()
 
-    def znaiPreview = znai.runInBackground("--preview", cli.workingDir(docsRoot))
+    def znaiPreview = znai.runInBackground("preview", cli.workingDir(docsRoot))
     znaiPreview.output.waitTo contain(":3333")
 
     browser.open("http://localhost:3333/preview")
