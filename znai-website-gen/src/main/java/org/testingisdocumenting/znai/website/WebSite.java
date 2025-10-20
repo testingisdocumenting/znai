@@ -610,8 +610,15 @@ public class WebSite implements Log {
                     docMeta.getType() : pageSearchEntry.getPageSectionTitle());
         }
 
-        return docMeta.getTitle() + ": " + tocItem.getPageTitle() + ", " + pageSearchEntry.getPageSectionTitle() +
+        String pageSectionPart = pageSearchEntry.getPageSectionTitle().isEmpty() ?
+                "" :
+                ", " +  pageSearchEntry.getPageSectionTitle();
+
+        String chapterPart = tocItem.getChapterTitle().isEmpty() ?
+                "" :
                 " [" + tocItem.getChapterTitle() + "]";
+
+        return docMeta.getTitle() + ": " + tocItem.getPageTitle() + pageSectionPart + chapterPart;
     }
 
     // each markup file may refer other files like code snippets or diagrams
