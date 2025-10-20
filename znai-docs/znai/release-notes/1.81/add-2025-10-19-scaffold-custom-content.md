@@ -1,0 +1,1 @@
+* Add: `znai new` custom content scaffold 
