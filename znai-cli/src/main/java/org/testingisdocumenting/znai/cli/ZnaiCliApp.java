@@ -171,6 +171,7 @@ public class ZnaiCliApp {
                 WebResource.withPath(userDefinedFavicon, HtmlPage.FAVICON_PATH):
                 WebResource.fromResource(HtmlPage.FAVICON_PATH);
 
+        String llmUrlPrefix = System.getenv("ZNAI_LLM_URL_PREFIX");
         WebSite.Configuration webSiteCfg = WebSite.withRoot(sourceRoot).
                 withId(getDocId()).
                 withDocumentationType(config.getMarkupType()).
@@ -185,7 +186,8 @@ public class ZnaiCliApp {
                 withWebResources(favIconResource).
                 withPageModifiedTimeStrategy(pageModifiedTimeStrategy()).
                 withEnabledPreview(config.isPreviewMode()).
-                withValidateExternalLinks(config.isValidateExternalLinks());
+                withValidateExternalLinks(config.isValidateExternalLinks()).
+                withLlmUrlPrefix(llmUrlPrefix == null ? "" : llmUrlPrefix);
 
         return config.isExportMode() ?
                 webSiteCfg.parseOnly():

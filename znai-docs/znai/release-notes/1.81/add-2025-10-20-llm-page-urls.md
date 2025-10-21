@@ -1,0 +1,1 @@
+* Add: `llm.txt` now contains urls to the pages. Set custom prefix using `ZNAI_LLM_URL_PREFIX` env var
