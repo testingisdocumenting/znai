@@ -21,12 +21,12 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.81-SNAPSHOT</version>
+        <version>1.81</version>
     </parent>
 
     <artifactId>znai-python</artifactId>
     <name>Znai Python</name>
-    <version>1.81-SNAPSHOT</version>
+    <version>1.81</version>
 
     <dependencies>
         <dependency>
