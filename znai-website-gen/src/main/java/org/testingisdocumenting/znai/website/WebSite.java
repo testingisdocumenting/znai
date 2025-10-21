@@ -101,6 +101,8 @@ public class WebSite implements Log {
 
     private final PageModifiedTimeStrategy pageModifiedTimeStrategy;
 
+    private final String llmUrlPrefix;
+
     private RegexpBasedPreprocessor regexpBasedPreprocessor;
 
     private WebSite(Configuration siteConfig) {
@@ -109,6 +111,7 @@ public class WebSite implements Log {
         docMeta = siteConfig.docMeta;
         pageModifiedTimeStrategy = siteConfig.pageModifiedTimeStrategy != null ?
                 siteConfig.pageModifiedTimeStrategy : new FileBasedPageModifiedTime();
+        llmUrlPrefix = siteConfig.llmUrlPrefix;
 
         tocChangeListeners = new HashSet<>();
 
@@ -683,23 +686,15 @@ public class WebSite implements Log {
     private void generateLlmContent() {
         reportPhase("generating LLM context file");
 
-        StringBuilder llmContent = new StringBuilder();
-        llmContent.append("\"").append(docMeta.getTitle()).append("\" full guide:\n\n");
-        
-        forEachPage((tocItem, page) -> {
-            if (page == null) {
-                return;
-            }
-            
-            MarkupParserResult parserResult = parserResultByTocItem.get(tocItem);
-            if (parserResult != null && parserResult.markdown() != null) {
-                llmContent.append("# ").append(tocItem.getChapterTitle()).append(" -> ").append(tocItem.getPageTitle()).append("\n\n");
-                llmContent.append(parserResult.markdown());
-                llmContent.append("\n\n");
-            }
-        });
-        
-        deployer.deploy("llm.txt", llmContent.toString());
+        LlmContentGenerator generator = new LlmContentGenerator(
+                docMeta,
+                llmUrlPrefix,
+                pageByTocItem,
+                parserResultByTocItem
+        );
+
+        String llmContent = generator.generateContent();
+        deployer.deploy("llm.txt", llmContent);
     }
 
     private void buildJsonOfAllPages() {
@@ -973,6 +968,7 @@ public class WebSite implements Log {
         private DocMeta docMeta = new DocMeta(Collections.emptyMap());
         private PageModifiedTimeStrategy pageModifiedTimeStrategy;
         private List<String> additionalLookupPaths;
+        private String llmUrlPrefix;
 
         private Configuration() {
             webResources = new ArrayList<>();
@@ -1051,6 +1047,11 @@ public class WebSite implements Log {
 
         public Configuration withAdditionalLookupPaths(List<String> additionalLookupPaths) {
             this.additionalLookupPaths = additionalLookupPaths;
+            return this;
+        }
+
+        public Configuration withLlmUrlPrefix(String llmUrlPrefix) {
+            this.llmUrlPrefix = llmUrlPrefix;
             return this;
         }
 
