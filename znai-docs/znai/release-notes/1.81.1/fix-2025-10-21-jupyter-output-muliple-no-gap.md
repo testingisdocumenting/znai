@@ -1,0 +1,1 @@
+* Fix: Jupyter output multiple cell outputs use `noGap: true`

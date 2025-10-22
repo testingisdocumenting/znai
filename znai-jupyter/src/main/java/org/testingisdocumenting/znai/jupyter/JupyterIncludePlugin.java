@@ -151,13 +151,18 @@ public class JupyterIncludePlugin implements IncludePlugin {
         if (cell.getOutputs().isEmpty()) {
             processEmptyOutput();
         } else {
-            cell.getOutputs().forEach(this::processCellOutput);
+            int idx = 0;
+            for (JupyterOutput output : cell.getOutputs()) {
+                processCellOutput(output, idx == cell.getOutputs().size() - 1);
+                idx++;
+            }
         }
     }
 
-    private void processCellOutput(JupyterOutput output) {
+    private void processCellOutput(JupyterOutput output, boolean isLast) {
         if (output.format().equals(JupyterOutput.TEXT_FORMAT)) {
             Map<String, Object> props = !isStoryFirst ? createRightSideProp() : new HashMap<>();
+            props.put("noGap", !isLast);
             props.put("resultOutput", true);
             addJupyterCellClassName(props);
 
