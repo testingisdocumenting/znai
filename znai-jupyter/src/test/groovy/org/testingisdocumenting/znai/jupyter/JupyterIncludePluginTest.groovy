@@ -29,7 +29,7 @@ class JupyterIncludePluginTest {
                             [type: 'Snippet',  snippet: "tran = read_csv('transport.csv')\nprint(tran)", lang: 'python', className: "znai-jupyter-cell", lineNumber: "", noGap: true, noGapBorder: true],
                             [type: 'Snippet', snippet: '   a   b   c\n' +
                                     '0  1   2   3\n' +
-                                    '1  4   5   6', meta: [rightSide: true], className: "znai-jupyter-cell", lineNumber: "", lang: "csv", resultOutput: true],
+                                    '1  4   5   6', meta: [rightSide: true], className: "znai-jupyter-cell", lineNumber: "", lang: "csv", resultOutput: true, noGap: false],
                             [type: 'Snippet', snippet: 'display(tran)', lang: 'python', noGap: true, className: "znai-jupyter-cell", lineNumber: ""],
                             [type: 'JupyterCell', cellType: 'output', meta: [rightSide: true], html:'<table border="1" class="dataframe">\n' +
                                     '  <thead>\n' +
