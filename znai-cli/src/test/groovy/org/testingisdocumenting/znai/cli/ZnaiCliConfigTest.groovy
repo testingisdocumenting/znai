@@ -72,10 +72,6 @@ class ZnaiCliConfigTest {
                 OptionKey.HOST,
                 OptionKey.PORT,
                 OptionKey.DEPLOY,
-                OptionKey.SSL_JKS_PATH,
-                OptionKey.SSL_JKS_PASSWORD,
-                OptionKey.SSL_PEM_CERT_PATH,
-                OptionKey.SSL_PEM_KEY_PATH,
                 OptionKey.SOURCE,
                 OptionKey.MARKUP_TYPE,
                 OptionKey.HELP,
@@ -101,11 +97,7 @@ class ZnaiCliConfigTest {
                 OptionKey.VALIDATE_EXTERNAL_LINKS,
                 OptionKey.ACTOR,
                 OptionKey.MODIFIED_TIME,
-                OptionKey.LOOKUP_PATHS,
-                OptionKey.SSL_JKS_PATH,
-                OptionKey.SSL_JKS_PASSWORD,
-                OptionKey.SSL_PEM_CERT_PATH,
-                OptionKey.SSL_PEM_KEY_PATH,
+                OptionKey.LOOKUP_PATHS
         )
     }
 
@@ -122,11 +114,7 @@ class ZnaiCliConfigTest {
                 OptionKey.VALIDATE_EXTERNAL_LINKS,
                 OptionKey.ACTOR,
                 OptionKey.MODIFIED_TIME,
-                OptionKey.LOOKUP_PATHS,
-                OptionKey.SSL_JKS_PATH,
-                OptionKey.SSL_JKS_PASSWORD,
-                OptionKey.SSL_PEM_CERT_PATH,
-                OptionKey.SSL_PEM_KEY_PATH,
+                OptionKey.LOOKUP_PATHS
         )
     }
 
@@ -143,11 +131,6 @@ class ZnaiCliConfigTest {
                 OptionKey.ACTOR,
                 OptionKey.MODIFIED_TIME,
                 OptionKey.LOOKUP_PATHS,
-                OptionKey.SSL_JKS_PATH,
-                OptionKey.SSL_JKS_PASSWORD,
-                OptionKey.SSL_PEM_CERT_PATH,
-                OptionKey.SSL_PEM_KEY_PATH,
-
         )
     }
 

@@ -1,0 +1,1 @@
+* Add: Move ssl related configs from command parameters to environment variables: `ZNAI_SSL_JKS_PATH`, `ZNAI_SSL_JKS_PASSWORD`, `ZNAI_SSL_PEM_CERT_PATH`, `ZNAI_SSL_PEM_KEY_PATH`

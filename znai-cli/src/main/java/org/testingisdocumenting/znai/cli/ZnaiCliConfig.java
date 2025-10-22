@@ -89,10 +89,6 @@ public class ZnaiCliConfig {
         HOST("host", "server host", true, false),
         PORT("port", "server port", true, false),
         DEPLOY("deploy", "documentation deploy root dir", true, false),
-        SSL_JKS_PATH("jks-path", "path to JKS cert. when specified SSL will be enabled for preview server", true, false),
-        SSL_JKS_PASSWORD("jks-password", "JSK cert password", true, false),
-        SSL_PEM_CERT_PATH("pem-cert-path", "path to PEM cert. when specified SSL will be enabled for preview server", true, false),
-        SSL_PEM_KEY_PATH("pem-key-path", "path to key pem file. when specified SSL will be enabled for preview server", true, false),
 
         DOC_ID("doc-id", "documentation id", true, false),
 
@@ -142,11 +138,7 @@ public class ZnaiCliConfig {
                 OptionKey.VALIDATE_EXTERNAL_LINKS,
                 OptionKey.ACTOR,
                 OptionKey.MODIFIED_TIME,
-                OptionKey.LOOKUP_PATHS,
-                OptionKey.SSL_JKS_PATH,
-                OptionKey.SSL_JKS_PASSWORD,
-                OptionKey.SSL_PEM_CERT_PATH,
-                OptionKey.SSL_PEM_KEY_PATH
+                OptionKey.LOOKUP_PATHS
         );
 
         Set<OptionKey> previewOptions = EnumSet.copyOf(commonOptions);
@@ -237,10 +229,6 @@ public class ZnaiCliConfig {
     private List<String> lookupPaths;
 
     private boolean isValidateExternalLinks;
-    private String jksPath;
-    private String jksPassword;
-    private String pemCertPath;
-    private String pemKeyPath;
 
     private ModifiedTimeStrategy modifiedTimeStrategy;
     private boolean isLegacyMode = false;
@@ -312,6 +300,10 @@ public class ZnaiCliConfig {
     }
 
     public SslConfig createSslConfig() {
+        var jksPath = System.getenv("ZNAI_SSL_JKS_PATH");
+        var jksPassword = System.getenv("ZNAI_SSL_JKS_PASSWORD");
+        var pemCertPath = System.getenv("ZNAI_SSL_PEM_CERT_PATH");
+        var pemKeyPath = System.getenv("ZNAI_SSL_PEM_KEY_PATH");
         return new SslConfig(jksPath, jksPassword, pemCertPath, pemKeyPath);
     }
 
@@ -410,11 +402,6 @@ public class ZnaiCliConfig {
         markupType = commandLine.hasOption(OptionKey.MARKUP_TYPE.getKey()) ? commandLine.getOptionValue(OptionKey.MARKUP_TYPE.getKey()) : MarkupTypes.MARKDOWN;
 
         isValidateExternalLinks = commandLine.hasOption(OptionKey.VALIDATE_EXTERNAL_LINKS.getKey());
-
-        jksPath = commandLine.getOptionValue(OptionKey.SSL_JKS_PATH.getKey());
-        jksPassword = commandLine.getOptionValue(OptionKey.SSL_JKS_PASSWORD.getKey());
-        pemCertPath = commandLine.getOptionValue(OptionKey.SSL_PEM_CERT_PATH.getKey());
-        pemKeyPath = commandLine.getOptionValue(OptionKey.SSL_PEM_KEY_PATH.getKey());
 
         isSourceRootSet = commandLine.hasOption(OptionKey.SOURCE.getKey());
         sourceRoot = Paths.get(isSourceRootSet ? commandLine.getOptionValue(OptionKey.SOURCE.getKey()) : "")
