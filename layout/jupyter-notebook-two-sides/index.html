@@ -86,7 +86,7 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Code First</h1></header>
-<p>The include jupyter extension automatically assigns to output cells If page is set to you will get automatic split between code and output Note Content below is included using meta rightSide true type two sides include jupyter</p>
+<p>The include jupyter extension automatically assigns to output cells If page is set to you will get automatic split between code and output Note Content below is included using meta rightSide true type two sides include jupyter from pandas import read_csv from IPython display import display tran read_csv transport csv print tran a b c 0 1 2 3 1 4 5 6 display tran</p>
 </article>
 
 <article>
@@ -96,7 +96,7 @@
 
 <article>
 <header><h1>Pandas</h1></header>
-<p>Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet display</p>
+<p>Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet display from pandas import read_csv from IPython display import display a b c 0 1 2 3 1 4 5 6 tran read_csv transport csv print tran display tran</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -552,10 +552,11 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "type" : "InlinedCode"
         } ]
       }, {
-        "cellType" : "code",
         "lang" : "python",
         "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
-        "type" : "JupyterCell"
+        "lineNumber" : "",
+        "className" : "znai-jupyter-cell",
+        "type" : "Snippet"
       }, {
         "cellType" : "empty-output",
         "meta" : {
@@ -563,22 +564,31 @@ window.ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "JupyterCell"
       }, {
-        "cellType" : "code",
         "lang" : "python",
         "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
-        "type" : "JupyterCell"
+        "lineNumber" : "",
+        "noGap" : true,
+        "noGapBorder" : true,
+        "className" : "znai-jupyter-cell",
+        "type" : "Snippet"
       }, {
-        "cellType" : "output",
-        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
+        "lang" : "csv",
+        "snippet" : "   a   b   c\n0  1   2   3\n1  4   5   6",
+        "lineNumber" : "",
+        "noGap" : false,
+        "resultOutput" : true,
+        "className" : "znai-jupyter-cell",
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell"
+        "type" : "Snippet"
       }, {
-        "cellType" : "code",
         "lang" : "python",
         "snippet" : "display(tran)",
-        "type" : "JupyterCell"
+        "lineNumber" : "",
+        "noGap" : true,
+        "className" : "znai-jupyter-cell",
+        "type" : "Snippet"
       }, {
         "cellType" : "output",
         "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
@@ -642,13 +652,14 @@ window.ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "JupyterCell"
       }, {
-        "cellType" : "code",
         "lang" : "python",
         "snippet" : "from pandas import read_csv\nfrom IPython.display import display",
+        "lineNumber" : "",
+        "className" : "znai-jupyter-cell",
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -662,17 +673,24 @@ window.ReactDOM.render(React.createElement(Documentation, {
         },
         "type" : "JupyterCell"
       }, {
-        "cellType" : "output",
-        "text" : "   a   b   c\n0  1   2   3\n1  4   5   6\n",
-        "type" : "JupyterCell"
+        "lang" : "csv",
+        "snippet" : "   a   b   c\n0  1   2   3\n1  4   5   6",
+        "lineNumber" : "",
+        "noGap" : false,
+        "className" : "znai-jupyter-cell",
+        "resultOutput" : true,
+        "type" : "Snippet"
       }, {
-        "cellType" : "code",
         "lang" : "python",
         "snippet" : "tran = read_csv('transport.csv')\nprint(tran)",
+        "lineNumber" : "",
+        "className" : "znai-jupyter-cell",
+        "noGap" : true,
+        "noGapBorder" : true,
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell"
+        "type" : "Snippet"
       }, {
         "type" : "Paragraph",
         "content" : [ {
@@ -690,16 +708,18 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "html" : "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>a</th>\n      <th>b</th>\n      <th>c</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>1</td>\n      <td>2</td>\n      <td>3</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>4</td>\n      <td>5</td>\n      <td>6</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
         "type" : "JupyterCell"
       }, {
-        "cellType" : "code",
         "lang" : "python",
         "snippet" : "display(tran)",
+        "lineNumber" : "",
+        "className" : "znai-jupyter-cell",
+        "noGap" : true,
         "meta" : {
           "rightSide" : true
         },
-        "type" : "JupyterCell"
+        "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1757972106537,
+    "lastModifiedTime" : 1761697810418,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Jupyter Notebook Two Sides",

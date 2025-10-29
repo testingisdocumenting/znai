@@ -85,6 +85,16 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.81.1</h1></header>
+<p>Fix Jupyter output multiple cell outputs use noGap true Add Move ssl related configs from command parameters to environment variables ZNAI_SSL_JKS_PATH ZNAI_SSL_JKS_PASSWORD ZNAI_SSL_PEM_CERT_PATH ZNAI_SSL_PEM_KEY_PATH</p>
+</article>
+
+<article>
+<header><h1>1.81</h1></header>
+<p>Fix correctly constructs field when text is outside a top level header search entries xml title Add now contains urls to the pages Set custom prefix using env var llm txt ZNAI_LLM_URL_PREFIX Add custom content scaffold znai new Add support to help with page renames page redirects csv Add Jupyter notebooks improved search and llm txt support Add Jupyter notebooks improved std output and tables cell rendering Add to override cli output with custom tool title ZNAI_APP_TITLE Add Search text for various plugins like and TextBadge Latex Add Deprecate in favor of znai new znai preview znai serve znai new znai preview znai serve</p>
+</article>
+
+<article>
 <header><h1>1.80</h1></header>
 <p>Fix Focus page content on page open or search open regression Fix Jupyter to handle section delimiter that has other text below it includeSection Fix Ask in Slack now generates a correct link for initial index page Add highlight Slack questions inside spoiler block Add SVG support for Slack Generate Link Add Initial attempt to highlight Slack questions inside code snippets read more part Add Initial attempt to highlight Slack questions inside read more blocks</p>
 </article>
@@ -526,6 +536,275 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "1811",
+      "additionalIds" : [ ],
+      "title" : "1.81.1",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Jupyter output multiple cell outputs use ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "noGap: true",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Move ssl related configs from command parameters to environment variables: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "ZNAI_SSL_JKS_PATH",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "ZNAI_SSL_JKS_PASSWORD",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "ZNAI_SSL_PEM_CERT_PATH",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "ZNAI_SSL_PEM_KEY_PATH",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "id" : "181",
+      "additionalIds" : [ ],
+      "title" : "1.81",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "/search-entries.xml",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " correctly constructs ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "title",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " field when text is outside a top level header",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "llm.txt",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " now contains urls to the pages. Set custom prefix using ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "ZNAI_LLM_URL_PREFIX",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " env var",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "znai new",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " custom content scaffold",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "page-redirects.csv",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " support to help with page renames",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Jupyter notebooks improved search and llm.txt support",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Jupyter notebooks improved std output and tables cell rendering",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "ZNAI_APP_TITLE",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to override cli output with custom tool title",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Search text for various plugins like ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "TextBadge",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "Latex",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Deprecate ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "znai --new",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "znai --preview",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "znai --serve",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " in favor of ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "znai new",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "znai preview",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "znai serve",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "180",
       "additionalIds" : [ ],
       "title" : "1.80",
@@ -1635,7 +1914,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1757972106551,
+    "lastModifiedTime" : 1761697810431,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2025",
@@ -1645,6 +1924,14 @@ window.ReactDOM.render(React.createElement(Documentation, {
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.81.1",
+        "id" : "1811",
+        "customAnchorId" : "1811"
+      }, {
+        "title" : "1.81",
+        "id" : "181",
+        "customAnchorId" : "181"
+      }, {
         "title" : "1.80",
         "id" : "180",
         "customAnchorId" : "180"

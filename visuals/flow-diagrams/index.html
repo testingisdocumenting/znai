@@ -86,37 +86,37 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Nodes and Edges</h1></header>
-<p>Specify a file to define a flow chart At the minimum must be provided JSON nodes id n1 label input one id n2 label input two id n3 label processor id n4 label output one id n5 label output two id n6 label output three edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6 edges include flow chart simple dag json</p>
+<p>n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three Specify a file to define a flow chart At the minimum must be provided JSON nodes id n1 label input one id n2 label input two id n3 label processor id n4 label output one id n5 label output two id n6 label output three edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6 edges include flow chart simple dag json</p>
 </article>
 
 <article>
 <header><h1>Multiline Labels</h1></header>
-<p>Use to split your label into multiple lines n nodes id n1 label input none id n2 label output ntwo edges n1 n2</p>
+<p>Use to split your label into multiple lines n1 input one n2 output two n nodes id n1 label input none id n2 label output ntwo edges n1 n2</p>
 </article>
 
 <article>
 <header><h1>Nodes Size</h1></header>
-<p>Add section to specify a common size for all the nodes Note Size unit is not based on pixels It is sized in inches assuming correct DPI It is the size units used by Graphviz Use and property on a node itself to control individual nodes size config width height</p>
+<p>Add section to specify a common size for all the nodes n1 one n2 two n3 three Note Size unit is not based on pixels It is sized in inches assuming correct DPI It is the size units used by Graphviz Use and property on a node itself to control individual nodes size n1 one n2 two n3 three config width height</p>
 </article>
 
 <article>
 <header><h1>Highlight</h1></header>
-<p>Use to highlight a node Or use property of a include plugin Note To highlight more than one element use nodes id n1 label label 1 id n2 label label 2 highlight true id n3 label label 3 edges n1 n2 n2 n3 n1 n3 highlight highlight flow chart include flow chart simple dag json highlight n3 highlight n3 n4</p>
+<p>Use to highlight a node n1 label 1 n2 label 2 n3 label 3 Or use property of a include plugin n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three Note To highlight more than one element use nodes id n1 label label 1 id n2 label label 2 highlight true id n3 label label 3 edges n1 n2 n2 n3 n1 n3 highlight highlight flow chart include flow chart simple dag json highlight n3 highlight n3 n4</p>
 </article>
 
 <article>
 <header><h1>Color Groups</h1></header>
-<p>Use to assign a color group to a node There are four color groups out of the box default colorGroup a b c d nodes id n1 label input one id n2 label input two id n3 label processor colorGroup b id n4 label output one colorGroup c id n5 label output two colorGroup c id n6 label output three colorGroup d edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6</p>
+<p>Use to assign a color group to a node There are four color groups out of the box default n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three colorGroup a b c d nodes id n1 label input one id n2 label input two id n3 label processor colorGroup b id n4 label output one colorGroup c id n5 label output two colorGroup c id n6 label output three colorGroup d edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6</p>
 </article>
 
 <article>
 <header><h1>Shapes</h1></header>
-<p>Use to assign one of the predefined shapes shape nodes id researcher label researcher shape actor id db label two shape database id another db label three input shape database bottom label id processor label processor colorGroup b id outcome colorGroup c shape world id config label config file colorGroup b shape document edges researcher processor researcher config db processor another db processor config outcome processor outcome</p>
+<p>Use to assign one of the predefined shapes researcher researcher processor processor config config file db two another db three input outcome shape nodes id researcher label researcher shape actor id db label two shape database id another db label three input shape database bottom label id processor label processor colorGroup b id outcome colorGroup c shape world id config label config file colorGroup b shape document edges researcher processor researcher config db processor another db processor config outcome processor outcome</p>
 </article>
 
 <article>
 <header><h1>Legend</h1></header>
-<p>Use to add a legend to your diagram Optionally add to insert a message that the nodes are clickable in case you use urls inputs optimization process outcome unknown include diagram legend clickableNodes true include diagram legend a inputs b optimization process c outcome d unknown clickableNodes true include flow chart flow diagrams simple dag colors json</p>
+<p>Use to add a legend to your diagram Optionally add to insert a message that the nodes are clickable in case you use urls inputs optimization process outcome unknown n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three include diagram legend clickableNodes true include diagram legend a inputs b optimization process c outcome d unknown clickableNodes true include flow chart flow diagrams simple dag colors json</p>
 </article>
 
 <article>
@@ -126,22 +126,22 @@
 
 <article>
 <header><h1>Vertical Layout</h1></header>
-<p>To switch layout from horizontal to vertical use vertical true</p>
+<p>To switch layout from horizontal to vertical use n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three vertical true</p>
 </article>
 
 <article>
 <header><h1>Layout Types</h1></header>
-<p>Use to specify a different underlying layout engine Only default and is supported at the moment Neato layout guide from Graphviz layout dot neato include flow chart simple dag json layout neato</p>
+<p>Use to specify a different underlying layout engine Only default and is supported at the moment n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three Neato layout guide from Graphviz layout dot neato include flow chart simple dag json layout neato</p>
 </article>
 
 <article>
 <header><h1>Links</h1></header>
-<p>To attach links to nodes use property Combine links and highlights to create a sub navigation for your product url nodes id n1 label No Link id n2 label Link To Java url java content extraction id n3 label Link to External url http commonmark org edges n1 n2 n3 n2</p>
+<p>To attach links to nodes use property n1 No Link n2 Link To Java n3 Link to External Combine links and highlights to create a sub navigation for your product url nodes id n1 label No Link id n2 label Link To Java url java content extraction id n3 label Link to External url http commonmark org edges n1 n2 n3 n2</p>
 </article>
 
 <article>
 <header><h1>Reusable Nodes</h1></header>
-<p>Move node definitions to a one or more separate files if you use them across multiple diagrams edges a1 a2 b1 b2 b1 a2 id a1 label Label A 1 id a2 label Label A 2 id a3 label Label A 3 id b1 label Label B 1 id b2 label Label B 2 id b3 label Label B 3 include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json nodes set b json</p>
+<p>Move node definitions to a one or more separate files if you use them across multiple diagrams a1 Label A 1 a2 Label A 2 a1 Label A 1 a2 Label A 2 b1 Label B 1 b2 Label B 2 edges a1 a2 b1 b2 b1 a2 id a1 label Label A 1 id a2 label Label A 2 id a3 label Label A 3 id b1 label Label B 1 id b2 label Label B 2 id b3 label Label B 3 include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json nodes set b json</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -1222,7 +1222,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "GraphVizDiagram"
       } ]
     } ],
-    "lastModifiedTime" : 1757972106564,
+    "lastModifiedTime" : 1761697810444,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Flow Diagrams",

@@ -4,7 +4,7 @@
     <fullTitle>Znai: What Is This, Beautiful and Maintainable User Guide [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>combines human written text with artifacts such as etc to create up to date maintainable beautiful User Guides and Tutorials Znai code graphs REST API Java Docs Doxygen # Beautiful and Maintainable User Guide `Znai` combines human written text with artifacts such as `code` `graphs` `REST API` `Java Docs` `Doxygen` etc to create up to date maintainable beautiful **User Guides** and **Tutorials** include flow chart artifacts flow json vertical true highlight userguide</text>
+      <text>combines human written text with artifacts such as etc to create up to date maintainable beautiful User Guides and Tutorials author Project src Code markdown Markdown test Test javadoc JavaDoc Doxygen etc examples Examples screenshots Annotated Screenshots apiresponse API Responses userguide User Guide Znai code graphs REST API Java Docs Doxygen # Beautiful and Maintainable User Guide `Znai` combines human written text with artifacts such as `code` `graphs` `REST API` `Java Docs` `Doxygen` etc to create up to date maintainable beautiful **User Guides** and **Tutorials** include flow chart artifacts flow json vertical true highlight userguide</text>
     </text>
   </entry>
   <entry>
@@ -92,7 +92,7 @@
     <fullTitle>Znai: Getting Started, Maven Plugin [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 80&lt; version> &lt; plugin></text>
+      <text>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 81 1&lt; version> &lt; plugin></text>
     </text>
   </entry>
   <entry>
@@ -108,7 +108,7 @@
     <fullTitle>Znai: Getting Started, Preview Mode [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 80&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
+      <text>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 81 1&lt; version> &lt;configuration> &lt;port>3334&lt; port> &lt; optional override of default value 3333 > &lt; configuration> &lt; plugin> Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</text>
     </text>
   </entry>
   <entry>
@@ -116,7 +116,7 @@
     <fullTitle>Znai: Getting Started, Static Site Generation [Introduction]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 80&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
+      <text>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin> &lt;groupId>org testingisdocumenting znai&lt; groupId> &lt;artifactId>znai maven plugin&lt; artifactId> &lt;version>1 81 1&lt; version> &lt;configuration> &lt;docId>project name&lt; docId> &lt;deployRoot> path to static content&lt; deployRoot> &lt; default is $ project build directory > &lt; configuration> &lt; plugin> documentation id znai documentation id</text>
     </text>
   </entry>
   <entry>
@@ -273,7 +273,7 @@
   </entry>
   <entry>
     <url>/znai/flow/page-toc</url>
-    <fullTitle>Znai: Page Toc,  [Flow]</fullTitle>
+    <fullTitle>Znai: Page Toc [Flow]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Use to include page top level sections as links include page toc include page toc</text>
@@ -1044,7 +1044,7 @@
     <fullTitle>Znai: Xml, Highlight Parts [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use the plugin to bring attention to a certain place in a file Comma separated paths specified inside will be highlighted Note Children index in starts with 0 and is associated with a tag include xml XML paths include xml menu html paths ul @class ul li 1 @class ul li 2 paths include xml simple xml paths root a 1 root b 0 root c 0</text>
+      <text>Use the plugin to bring attention to a certain place in a file Comma separated paths specified inside will be highlighted tagName ul attributes name class value menu children tagName li attributes name class value menu item children tagName text Menu 1 tagName li attributes name class value menu item children tagName text Menu 2 tagName li attributes name class value menu item children tagName text Menu 3 Note Children index in starts with 0 and is associated with a tag tagName root attributes children tagName a attributes children tagName text text 1 tagName a attributes children tagName text text 2 tagName b attributes children tagName text text 3 tagName c attributes children tagName text text 4 tagName c attributes children tagName text text 5 include xml XML paths include xml menu html paths ul @class ul li 1 @class ul li 2 paths include xml simple xml paths root a 1 root b 0 root c 0</text>
     </text>
   </entry>
   <entry>
@@ -1060,7 +1060,7 @@
     <fullTitle>Znai: Xml, Title [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use the property to specify a title title include xml menu html title Menu snippet</text>
+      <text>Use the property to specify a title tagName ul attributes name class value menu children tagName li attributes name class value menu item children tagName text Menu 1 tagName li attributes name class value menu item children tagName text Menu 2 tagName li attributes name class value menu item children tagName text Menu 3 title include xml menu html title Menu snippet</text>
     </text>
   </entry>
   <entry>
@@ -1076,7 +1076,7 @@
     <fullTitle>Znai: Open API, Operation By Method And Path [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>If you have a file with an Open API definition a k a a Swagger file you can render it by a given and or by Both and formats are supported Let s consider Uber s API definition as an example Responses 200 default Note descriptions are treated as Markdown using the CommonMark specification method path operationId yaml json include open api open api uber json method get path estimates time</text>
+      <text>If you have a file with an Open API definition a k a a Swagger file you can render it by a given and or by Both and formats are supported Let s consider Uber s API definition as an example Responses 200 default Note descriptions are treated as Markdown using the CommonMark specification method path operationId yaml json include open api open api uber json method get path estimates time get estimates time Time Estimates The Time Estimates endpoint returns ETAs for all products offered at a given location with the responses expressed as integers in seconds We recommend that this endpoint be called every minute to provide the most accurate up to date ETAs start_latitude start_longitude customer_uuid product_id</text>
     </text>
   </entry>
   <entry>
@@ -1084,7 +1084,7 @@
     <fullTitle>Znai: Open API, Operation By ID [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Let s take a pet store example Use to include operation definition by ID Request Responses 200 400 404 405 operationId include open api petstore openapi3 json operationId updatePet</text>
+      <text>Let s take a pet store example Use to include operation definition by ID Request Responses 200 400 404 405 operationId include open api petstore openapi3 json operationId updatePet put pet Update an existing pet Update an existing pet by Id</text>
     </text>
   </entry>
   <entry>
@@ -1100,7 +1100,7 @@
     <fullTitle>Znai: Open API, Add a new pet to the store [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Request Responses 200 405</text>
+      <text>Request Responses 200 405 post pet Add a new pet to the store Add a new pet to the store</text>
     </text>
   </entry>
   <entry>
@@ -1124,7 +1124,7 @@
     <fullTitle>Znai: Open API, Time Estimates [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Responses 200 default</text>
+      <text>Responses 200 default get estimates price Price Estimates The Price Estimates endpoint returns an estimated price range for each product offered at a given location The price estimate is provided as a formatted string with the full price range and the localized currency symbol &lt;br>&lt;br>The response also includes low and high estimates and the ISO 4217 http en wikipedia org wiki ISO_4217 currency code for situations requiring currency conversion When surge is active for a particular product its surge_multiplier will be greater than 1 but the price estimate already factors in this multiplier start_latitude start_longitude end_latitude end_longitude get estimates time Time Estimates The Time Estimates endpoint returns ETAs for all products offered at a given location with the responses expressed as integers in seconds We recommend that this endpoint be called every minute to provide the most accurate up to date ETAs start_latitude start_longitude customer_uuid product_id</text>
     </text>
   </entry>
   <entry>
@@ -1268,7 +1268,7 @@
     <fullTitle>Znai: Jupyter Notebook, Code and Output [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to include Jupyter notebook inside your documentation Note Remember that you can define lookup paths for files like notebooks inside lookup paths file so you don t have to copy and paste notebooks to your documentation directory include jupyter include jupyter jupyter simple notebook ipynb</text>
+      <text>Use to include Jupyter notebook inside your documentation Note Remember that you can define lookup paths for files like notebooks inside lookup paths file so you don t have to copy and paste notebooks to your documentation directory include jupyter include jupyter jupyter simple notebook ipynb from pandas import read_csv from IPython display import display tran read_csv transport csv print tran a b c 0 1 2 3 1 4 5 6 display tran</text>
     </text>
   </entry>
   <entry>
@@ -1284,7 +1284,7 @@
     <fullTitle>Znai: Jupyter Notebook, Pandas [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet display</text>
+      <text>Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet display from pandas import read_csv from IPython display import display tran read_csv transport csv print tran a b c 0 1 2 3 1 4 5 6 display tran</text>
     </text>
   </entry>
   <entry>
@@ -1316,7 +1316,7 @@
     <fullTitle>Znai: Cpp, Auto Reference [Snippets]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai provides plugins to automatically create reference documentation for methods and classes Head over to CPP Auto Reference to learn more include doxygen member multi_println prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * template&lt;typename T1 typename T2> void multi_println const T1&amp; v1 const T2&amp; v2 std cout &lt;&lt; v1 &lt;&lt; &lt;&lt; v2 &lt;&lt; n</text>
+      <text>Znai provides plugins to automatically create reference documentation for methods and classes Head over to CPP Auto Reference to learn more include doxygen member multi_println prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print prints a value and a new line ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * template&lt;typename T1 typename T2> void multi_println const T1&amp; v1 const T2&amp; v2 std cout &lt;&lt; v1 &lt;&lt; &lt;&lt; v2 &lt;&lt; n</text>
     </text>
   </entry>
   <entry>
@@ -1548,7 +1548,7 @@
     <fullTitle>Znai: Images, Title [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to add a title to an image title include image castle jpg title beautiful castle</text>
+      <text>Use to add a title to an image beautiful castle title include image castle jpg title beautiful castle</text>
     </text>
   </entry>
   <entry>
@@ -1556,7 +1556,7 @@
     <fullTitle>Znai: Images, Anchor [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>When you specify a title hover mouse over it to see a clickable anchor Use to override auto generated identifier anchorId include image castle jpg title beautiful castle anchorId castle image</text>
+      <text>When you specify a title hover mouse over it to see a clickable anchor Use to override auto generated identifier beautiful castle anchorId include image castle jpg title beautiful castle anchorId castle image</text>
     </text>
   </entry>
   <entry>
@@ -1572,7 +1572,7 @@
     <fullTitle>Znai: Images, Fit [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>By default images generated with occupy all the available horizontal space Use parameter to fit an image to the text column width Note You can click on the scaled down images to display it full screen include image fit include image books jpg fit true</text>
+      <text>By default images generated with occupy all the available horizontal space wide image Use parameter to fit an image to the text column width Note You can click on the scaled down images to display it full screen auto scaled down image include image fit include image books jpg fit true</text>
     </text>
   </entry>
   <entry>
@@ -1596,7 +1596,7 @@
     <fullTitle>Znai: Images, Collapse [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to make image collapsible Note option is required collapsed true|false title include image books jpg fit true title books anchorId my books collapsed true</text>
+      <text>Use to make image collapsible Note option is required books collapsed true|false title include image books jpg fit true title books anchorId my books collapsed true</text>
     </text>
   </entry>
   <entry>
@@ -1604,7 +1604,7 @@
     <fullTitle>Znai: Images, No Gap [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to remove top bottom margins when there are multiple images in a row noGap true include image books jpg fit true title books collapsed true noGap true include image castle jpg fit true title castle collapsed false</text>
+      <text>Use to remove top bottom margins when there are multiple images in a row books castle noGap true include image books jpg fit true title books collapsed true noGap true include image castle jpg fit true title castle collapsed false</text>
     </text>
   </entry>
   <entry>
@@ -1620,7 +1620,7 @@
     <fullTitle>Znai: Images, Mobile And Desktop Only [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to only render an image in mobile screen size Use to only render an image in desktop screen size mobileOnly desktopOnly include image small book png title only visible in mobile screen size mobileOnly true include image books jpg title only visible in desktop screen size desktopOnly true fit true</text>
+      <text>Use to only render an image in mobile screen size Use to only render an image in desktop screen size only visible in mobile screen size only visible in desktop screen size mobileOnly desktopOnly include image small book png title only visible in mobile screen size mobileOnly true include image books jpg title only visible in desktop screen size desktopOnly true fit true</text>
     </text>
   </entry>
   <entry>
@@ -1684,7 +1684,7 @@
     <fullTitle>Znai: Image Annotations, Integration With Testing [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use UI testing frameworks to automatically generate annotations file and capture screenshot For example WebTau automatically generates an annotations file in addition to capturing a screenshot Type question you want to be answered anonymously Scan through results and pick the most relevant one Note WebTau captures additional data such as package webtauexamples import static org testingisdocumenting webtau WebTauGroovyDsl * def homeSearchInput $ input id* search def resultSearchInput $ #search_form_input def result $ article data testid result scenario capture screenshot browser open https duckduckgo com homeSearchInput waitToBe visible homeSearchInput setValue testing is documenting homeSearchInput sendKeys browser keys enter result waitTo visible browser doc withAnnotations resultSearchInput result capture duckduckgo search include image doc artifacts duckduckgo search png annotate true pixelRatio</text>
+      <text>Use UI testing frameworks to automatically generate annotations file and capture screenshot For example WebTau automatically generates an annotations file in addition to capturing a screenshot Type question you want to be answered anonymously Scan through results and pick the most relevant one Note WebTau captures additional data such as package webtauexamples import static org testingisdocumenting webtau WebTauGroovyDsl * def homeSearchInput $ input class* searchbox_input input class* search input def resultSearchInput $ #search_form_input def result $ article data testid result scenario capture screenshot browser open https duckduckgo com homeSearchInput waitToBe visible homeSearchInput setValue testing is documenting homeSearchInput sendKeys browser keys enter result waitTo visible browser doc withAnnotations resultSearchInput result capture duckduckgo search include image doc artifacts duckduckgo search png annotate true pixelRatio</text>
     </text>
   </entry>
   <entry>
@@ -1732,7 +1732,7 @@
     <fullTitle>Znai: Charts, Pie [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build a pie chart use include piechart charts genres csv genre preference RPG 75 Action 50 RTS 40 FPS 50</text>
+      <text>To build a pie chart use genre preference RPG 75 Action 50 RTS 40 FPS 50 include piechart charts genres csv genre preference RPG 75 Action 50 RTS 40 FPS 50</text>
     </text>
   </entry>
   <entry>
@@ -1740,7 +1740,7 @@
     <fullTitle>Znai: Charts, Bar [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build a bar chart use Add more columns to CSV data to use multiple bars per X axis tick Use to render multiple bars stacked Use and parameter to change render direction include barchart charts genres csv genre preference RPG 75 Action 50 RTS 40 FPS 50 include barchart charts game activities csv game walking fighting reading Oblivion 100 100 20 Elden Ring 110 110 5 Persona 5 20 30 50 Divinity 30 30 10 stack true include barchart charts game activities csv stack true horizontal true height include barchart charts game activities csv stack true horizontal true height 250</text>
+      <text>To build a bar chart use genre preference RPG 75 Action 50 RTS 40 FPS 50 Add more columns to CSV data to use multiple bars per X axis tick game walking fighting reading Oblivion 100 100 20 Elden Ring 110 110 5 Persona 5 20 30 50 Divinity 30 30 10 Use to render multiple bars stacked game walking fighting reading Oblivion 100 100 20 Elden Ring 110 110 5 Persona 5 20 30 50 Divinity 30 30 10 Use and parameter to change render direction game walking fighting reading Oblivion 100 100 20 Elden Ring 110 110 5 Persona 5 20 30 50 Divinity 30 30 10 include barchart charts genres csv genre preference RPG 75 Action 50 RTS 40 FPS 50 include barchart charts game activities csv game walking fighting reading Oblivion 100 100 20 Elden Ring 110 110 5 Persona 5 20 30 50 Divinity 30 30 10 stack true include barchart charts game activities csv stack true horizontal true height include barchart charts game activities csv stack true horizontal true height 250</text>
     </text>
   </entry>
   <entry>
@@ -1748,7 +1748,7 @@
     <fullTitle>Znai: Charts, Line [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build a line chart use Use multiple CSV columns to add more lines Use numbers in first column to have a regular X Y plots include linechart charts genres csv genre preference RPG 75 Action 50 RTS 40 FPS 50 include linechart charts daily genres csv day RPG RTS FPS Monday 100 10 0 Tuesday 50 50 20 Wednesday 10 30 50 Thursday 5 5 100 Friday 0 100 10 include linechart charts competitors csv x company one company two 10 100 150 15 5 110 145 30 120 130 40 110 145 50 115 100</text>
+      <text>To build a line chart use genre preference RPG 75 Action 50 RTS 40 FPS 50 Use multiple CSV columns to add more lines day RPG RTS FPS Monday 100 10 0 Tuesday 50 50 20 Wednesday 10 30 50 Thursday 5 5 100 Friday 0 100 10 Use numbers in first column to have a regular X Y plots x company one company two 10 100 150 15 5 110 145 30 120 130 40 110 145 50 115 100 include linechart charts genres csv genre preference RPG 75 Action 50 RTS 40 FPS 50 include linechart charts daily genres csv day RPG RTS FPS Monday 100 10 0 Tuesday 50 50 20 Wednesday 10 30 50 Thursday 5 5 100 Friday 0 100 10 include linechart charts competitors csv x company one company two 10 100 150 15 5 110 145 30 120 130 40 110 145 50 115 100</text>
     </text>
   </entry>
   <entry>
@@ -1764,7 +1764,7 @@
     <fullTitle>Znai: Charts, Legend [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to add legend to a chart legend true include linechart charts daily genres csv legend true</text>
+      <text>Use to add legend to a chart day RPG RTS FPS Monday 100 10 0 Tuesday 50 50 20 Wednesday 10 30 50 Thursday 5 5 100 Friday 0 100 10 legend true include linechart charts daily genres csv legend true</text>
     </text>
   </entry>
   <entry>
@@ -1772,7 +1772,7 @@
     <fullTitle>Znai: Charts, Wide Mode [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to use available horizontal space Use in combination with height to fit larger charts wide true include linechart charts daily genres csv wide true include linechart charts daily genres csv wide true height 800</text>
+      <text>Use to use available horizontal space day RPG RTS FPS Monday 100 10 0 Tuesday 50 50 20 Wednesday 10 30 50 Thursday 5 5 100 Friday 0 100 10 Use in combination with height to fit larger charts day RPG RTS FPS Monday 100 10 0 Tuesday 50 50 20 Wednesday 10 30 50 Thursday 5 5 100 Friday 0 100 10 wide true include linechart charts daily genres csv wide true include linechart charts daily genres csv wide true height 800</text>
     </text>
   </entry>
   <entry>
@@ -1780,7 +1780,7 @@
     <fullTitle>Znai: Charts, Inlined Data [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use fence block plugin to inline chart data into markdown ```piechart genre preference RPG 75 Action 50 RTS 40 FPS 50 ``` ```linechart legend true day RPG RTS FPS Monday 100 10 0 Tuesday 50 50 20 Wednesday 10 30 50 Thursday 5 5 100 Friday 0 100 10 ``` ```barchart genre preference RPG 75 Action 50 RTS 40 FPS 50 ```</text>
+      <text>Use fence block plugin to inline chart data into markdown genre preference RPG 75 Action 50 RTS 40 FPS 50 day RPG RTS FPS Monday 100 10 0 Tuesday 50 50 20 Wednesday 10 30 50 Thursday 5 5 100 Friday 0 100 10 genre preference RPG 75 Action 50 RTS 40 FPS 50 ```piechart genre preference RPG 75 Action 50 RTS 40 FPS 50 ``` ```linechart legend true day RPG RTS FPS Monday 100 10 0 Tuesday 50 50 20 Wednesday 10 30 50 Thursday 5 5 100 Friday 0 100 10 ``` ```barchart genre preference RPG 75 Action 50 RTS 40 FPS 50 ```</text>
     </text>
   </entry>
   <entry>
@@ -1788,7 +1788,7 @@
     <fullTitle>Znai: Charts, Filtering columns [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>You can filter for specific columns from a CSV input by using the parameter columns ```barchart columns genre rating genre preference rating RPG 75 8 Action 50 9 RTS 40 1 FPS 50 1 ```</text>
+      <text>You can filter for specific columns from a CSV input by using the parameter genre preference rating RPG 75 8 Action 50 9 RTS 40 1 FPS 50 1 columns ```barchart columns genre rating genre preference rating RPG 75 8 Action 50 9 RTS 40 1 FPS 50 1 ```</text>
     </text>
   </entry>
   <entry>
@@ -1796,7 +1796,7 @@
     <fullTitle>Znai: Charts, Presentation [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Charts automatically participate in slides Each chart becomes an individual slide Use to add extra slides transitions To try it press on icon next to the Presentation header Use as breakpoint value to create a slide for each textual entry breakpoint include linechart charts competitors csv legend true breakpoint 17 42 include piechart charts genres csv breakpoint Action all include barchart charts genres csv legend true breakpoint all</text>
+      <text>Charts automatically participate in slides Each chart becomes an individual slide Use to add extra slides transitions x company one company two 10 100 150 15 5 110 145 30 120 130 40 110 145 50 115 100 To try it press on icon next to the Presentation header genre preference RPG 75 Action 50 RTS 40 FPS 50 Use as breakpoint value to create a slide for each textual entry genre preference RPG 75 Action 50 RTS 40 FPS 50 breakpoint include linechart charts competitors csv legend true breakpoint 17 42 include piechart charts genres csv breakpoint Action all include barchart charts genres csv legend true breakpoint all</text>
     </text>
   </entry>
   <entry>
@@ -1836,7 +1836,7 @@
     <fullTitle>Znai: SVG, Retina Displays [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To have crisp documentation images on high DPI displays use images SVG include svg with groups svg</text>
+      <text>To have crisp documentation images on high DPI displays use images st0 fill #5CB8CD st1 fill #FB8A52 st2 fill #152D39 st3 fill #E8E8E8 SVG include svg with groups svg</text>
     </text>
   </entry>
   <entry>
@@ -1844,7 +1844,7 @@
     <fullTitle>Znai: SVG, Ids To Reveal [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>If you have that you want to display while hiding everything else pass the IDs to the property In presentation mode groups will be displayed one at a time in the order specified To force all specified parts to appear at once add this before either in the same section or at the start of a document This SVG image is taken and modified from https www shareicon net pyramid piramid draw stock 877888 groups idsToReveal include svg with groups svg idsToReveal partA partB include meta allAtOnce true &lt; xml version 1 0 > &lt;svg version 1 1 viewBox 0 0 512 512 width 256 height 256 xml space preserve xmlns http www w3 org 2000 svg xmlns xlink http www w3 org 1999 xlink > &lt;style type text css > st0 fill #5CB8CD st1 fill #FB8A52 st2 fill #152D39 st3 fill #E8E8E8 &lt; style> &lt;g id partA > &lt;path class st2 d M109 4 397 7c 0 8 3 8 0 4 7 9 1 4 11 8l127 9 279 4c2 3 5 1 6 4 8 5 11 10 1V6 c 4 6 1 6 8 6 4 9 11 10 1L52 1 423 6c 1 9 4 1 2 2 8 3 1 3 12 2L109 4 397 7z > &lt;path class st2 d M160 4 325 4c 43 8 0 79 4 35 6 79 4 79 4s35 6 79 4 79 4 79 4s79 4 35 6 79 4 79 4 S204 2 325 4 160 4 325 4z > &lt;circle class st3 cx 160 4 cy 246 r 68 1 > &lt;path class st2 d M168 2 253 3h 11 3l 2 7 7 8H150l10 9 30 1h3 5l10 6 30 1h 4 2L168 2 253 3z M158 249 9h9l 4 4 12 9h 0 1 L158 249 9z > &lt; g> &lt;g id partC > &lt;path class st1 d M394 8 409 5c 3 2 1 6 8 3 4 10 9 3 4H128 1c 4 7 0 8 9 1 6 12 1 4 3l 58 3 37 9 c3 2 2 5 7 2 4 11 8 4h373 1c4 0 7 6 1 2 10 5 3 2L394 8 409 5z > &lt;path class st1 d M262 4 506c 43 8 0 79 4 35 6 79 4 79 4s35 6 79 4 79 4 79 4s79 4 35 6 79 4 79 4 S306 1 506 262 4 506z > &lt;circle class st3 cx 262 4 cy 426 6 id XMLID_7_ r 68 1 > &lt;path class st1 d M274 8 432 6l0 0 1c0 1 3 1 1 5 7 3 3 7 8c 2 3 2 1 5 2 3 2 8 9 3 2c 3 8 0 6 8 1 3 9 2 4 c 2 4 2 7 3 6 6 1 3 6 10 2v 5 9c0 4 1 1 2 7 5 3 6 10 2c2 4 2 7 5 4 4 9 2 4c3 8 0 6 8 1 9 3c2 2 2 3 3 4 7 3 2 8l0 0 1h 4 3 c0 2 3 0 7 4 2 2 1 5 5c 1 4 1 4 3 3 2 5 8 2c 2 5 0 4 5 1 6 3c 1 5 2 2 2 4 5 2 2 7 5v6c0 3 0 7 5 6 2 2 7 6c1 5 2 3 5 3 6 3 c2 5 0 4 4 0 7 5 8 2c1 4 1 3 2 1 3 2 2 1 5 6H274 8z > &lt; g> &lt;g id partB > &lt;path class st0 d M262 4 96 5c4 6 1 6 8 6 4 9 11 10 1l127 9 279 4c2 4 4 2 2 9 1 1 13 2l58 5 38 1 c1 4 4 3 1 2 9 1 0 9 13 6L273 4 16 1c 2 3 5 1 6 4 8 5 11 10 1V96 5z > &lt;path class st0 d M364 3 325 4c 43 8 0 79 4 35 6 79 4 79 4s35 6 79 4 79 4 79 4s79 4 35 6 79 4 79 4 S408 1 325 4 364 3 325 4z > &lt;circle class st3 cx 364 3 cy 246 id XMLID_9_ r 68 1 > &lt;path class st0 d M352 7 263 2v 34 4h11 2c3 6 0 6 4 0 8 8 4 2 3c2 1 6 3 3 9 3 7c0 1 5 0 5 2 8 1 4 4c 0 9 1 2 2 1 2 1 3 6 2 7 c2 3 0 3 4 1 3 5 3 2 9c1 3 1 6 2 3 6 2 5 8c0 3 1 1 5 6 3 1 7 2c 2 1 7 4 8 2 5 8 3 2 5H352 7z M357 3 243 4h7 5 c1 7 0 3 1 0 5 4 2 1 4c1 1 1 1 6 2 3 1 6 4c0 1 9 0 6 3 2 1 8 4 2c 1 2 0 9 2 9 1 4 5 1 1 4h 6 6V243 4z M357 3 247 1v12 5h9 c2 1 0 3 8 0 5 4 9 1 6c1 2 1 1 8 2 5 1 8 4 5c0 1 9 0 6 3 4 1 8 4 6c 1 2 1 2 2 8 1 8 4 8 1 9h 0 3H357 3z > &lt; g> &lt; svg></text>
+      <text>If you have that you want to display while hiding everything else pass the IDs to the property st0 fill #5CB8CD st1 fill #FB8A52 st2 fill #152D39 st3 fill #E8E8E8 In presentation mode groups will be displayed one at a time in the order specified To force all specified parts to appear at once add this before either in the same section or at the start of a document This SVG image is taken and modified from https www shareicon net pyramid piramid draw stock 877888 groups idsToReveal include svg with groups svg idsToReveal partA partB include meta allAtOnce true &lt; xml version 1 0 > &lt;svg version 1 1 viewBox 0 0 512 512 width 256 height 256 xml space preserve xmlns http www w3 org 2000 svg xmlns xlink http www w3 org 1999 xlink > &lt;style type text css > st0 fill #5CB8CD st1 fill #FB8A52 st2 fill #152D39 st3 fill #E8E8E8 &lt; style> &lt;g id partA > &lt;path class st2 d M109 4 397 7c 0 8 3 8 0 4 7 9 1 4 11 8l127 9 279 4c2 3 5 1 6 4 8 5 11 10 1V6 c 4 6 1 6 8 6 4 9 11 10 1L52 1 423 6c 1 9 4 1 2 2 8 3 1 3 12 2L109 4 397 7z > &lt;path class st2 d M160 4 325 4c 43 8 0 79 4 35 6 79 4 79 4s35 6 79 4 79 4 79 4s79 4 35 6 79 4 79 4 S204 2 325 4 160 4 325 4z > &lt;circle class st3 cx 160 4 cy 246 r 68 1 > &lt;path class st2 d M168 2 253 3h 11 3l 2 7 7 8H150l10 9 30 1h3 5l10 6 30 1h 4 2L168 2 253 3z M158 249 9h9l 4 4 12 9h 0 1 L158 249 9z > &lt; g> &lt;g id partC > &lt;path class st1 d M394 8 409 5c 3 2 1 6 8 3 4 10 9 3 4H128 1c 4 7 0 8 9 1 6 12 1 4 3l 58 3 37 9 c3 2 2 5 7 2 4 11 8 4h373 1c4 0 7 6 1 2 10 5 3 2L394 8 409 5z > &lt;path class st1 d M262 4 506c 43 8 0 79 4 35 6 79 4 79 4s35 6 79 4 79 4 79 4s79 4 35 6 79 4 79 4 S306 1 506 262 4 506z > &lt;circle class st3 cx 262 4 cy 426 6 id XMLID_7_ r 68 1 > &lt;path class st1 d M274 8 432 6l0 0 1c0 1 3 1 1 5 7 3 3 7 8c 2 3 2 1 5 2 3 2 8 9 3 2c 3 8 0 6 8 1 3 9 2 4 c 2 4 2 7 3 6 6 1 3 6 10 2v 5 9c0 4 1 1 2 7 5 3 6 10 2c2 4 2 7 5 4 4 9 2 4c3 8 0 6 8 1 9 3c2 2 2 3 3 4 7 3 2 8l0 0 1h 4 3 c0 2 3 0 7 4 2 2 1 5 5c 1 4 1 4 3 3 2 5 8 2c 2 5 0 4 5 1 6 3c 1 5 2 2 2 4 5 2 2 7 5v6c0 3 0 7 5 6 2 2 7 6c1 5 2 3 5 3 6 3 c2 5 0 4 4 0 7 5 8 2c1 4 1 3 2 1 3 2 2 1 5 6H274 8z > &lt; g> &lt;g id partB > &lt;path class st0 d M262 4 96 5c4 6 1 6 8 6 4 9 11 10 1l127 9 279 4c2 4 4 2 2 9 1 1 13 2l58 5 38 1 c1 4 4 3 1 2 9 1 0 9 13 6L273 4 16 1c 2 3 5 1 6 4 8 5 11 10 1V96 5z > &lt;path class st0 d M364 3 325 4c 43 8 0 79 4 35 6 79 4 79 4s35 6 79 4 79 4 79 4s79 4 35 6 79 4 79 4 S408 1 325 4 364 3 325 4z > &lt;circle class st3 cx 364 3 cy 246 id XMLID_9_ r 68 1 > &lt;path class st0 d M352 7 263 2v 34 4h11 2c3 6 0 6 4 0 8 8 4 2 3c2 1 6 3 3 9 3 7c0 1 5 0 5 2 8 1 4 4c 0 9 1 2 2 1 2 1 3 6 2 7 c2 3 0 3 4 1 3 5 3 2 9c1 3 1 6 2 3 6 2 5 8c0 3 1 1 5 6 3 1 7 2c 2 1 7 4 8 2 5 8 3 2 5H352 7z M357 3 243 4h7 5 c1 7 0 3 1 0 5 4 2 1 4c1 1 1 1 6 2 3 1 6 4c0 1 9 0 6 3 2 1 8 4 2c 1 2 0 9 2 9 1 4 5 1 1 4h 6 6V243 4z M357 3 247 1v12 5h9 c2 1 0 3 8 0 5 4 9 1 6c1 2 1 1 8 2 5 1 8 4 5c0 1 9 0 6 3 4 1 8 4 6c 1 2 1 2 2 8 1 8 4 8 1 9h 0 3H357 3z > &lt; g> &lt; svg></text>
     </text>
   </entry>
   <entry>
@@ -1852,7 +1852,7 @@
     <fullTitle>Znai: SVG, Actual Size [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>SVGs may have additional white space around the content and have width and height property specified inside Use if you want to use the actual content only and effectively crop the white space and will be overridden with the cropped size Without there would be a gap created by hiding other parts actualSize true width height include svg with groups svg idsToReveal partC actualSize true actualSize</text>
+      <text>SVGs may have additional white space around the content and have width and height property specified inside Use if you want to use the actual content only and effectively crop the white space and will be overridden with the cropped size st0 fill #5CB8CD st1 fill #FB8A52 st2 fill #152D39 st3 fill #E8E8E8 Without there would be a gap created by hiding other parts actualSize true width height include svg with groups svg idsToReveal partC actualSize true actualSize</text>
     </text>
   </entry>
   <entry>
@@ -1860,7 +1860,7 @@
     <fullTitle>Znai: SVG, Scale [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to change the size of the SVG provided scale scaleFactor include svg with groups svg idsToReveal partC actualSize true scale 0 2</text>
+      <text>Use to change the size of the SVG provided st0 fill #5CB8CD st1 fill #FB8A52 st2 fill #152D39 st3 fill #E8E8E8 scale scaleFactor include svg with groups svg idsToReveal partC actualSize true scale 0 2</text>
     </text>
   </entry>
   <entry>
@@ -2020,7 +2020,7 @@
     <fullTitle>Znai: Flow Diagrams, Nodes and Edges [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Specify a file to define a flow chart At the minimum must be provided JSON nodes id n1 label input one id n2 label input two id n3 label processor id n4 label output one id n5 label output two id n6 label output three edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6 edges include flow chart simple dag json</text>
+      <text>n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three Specify a file to define a flow chart At the minimum must be provided JSON nodes id n1 label input one id n2 label input two id n3 label processor id n4 label output one id n5 label output two id n6 label output three edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6 edges include flow chart simple dag json</text>
     </text>
   </entry>
   <entry>
@@ -2028,7 +2028,7 @@
     <fullTitle>Znai: Flow Diagrams, Multiline Labels [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to split your label into multiple lines n nodes id n1 label input none id n2 label output ntwo edges n1 n2</text>
+      <text>Use to split your label into multiple lines n1 input one n2 output two n nodes id n1 label input none id n2 label output ntwo edges n1 n2</text>
     </text>
   </entry>
   <entry>
@@ -2036,7 +2036,7 @@
     <fullTitle>Znai: Flow Diagrams, Nodes Size [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Add section to specify a common size for all the nodes Note Size unit is not based on pixels It is sized in inches assuming correct DPI It is the size units used by Graphviz Use and property on a node itself to control individual nodes size config width height</text>
+      <text>Add section to specify a common size for all the nodes n1 one n2 two n3 three Note Size unit is not based on pixels It is sized in inches assuming correct DPI It is the size units used by Graphviz Use and property on a node itself to control individual nodes size n1 one n2 two n3 three config width height</text>
     </text>
   </entry>
   <entry>
@@ -2044,7 +2044,7 @@
     <fullTitle>Znai: Flow Diagrams, Highlight [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to highlight a node Or use property of a include plugin Note To highlight more than one element use nodes id n1 label label 1 id n2 label label 2 highlight true id n3 label label 3 edges n1 n2 n2 n3 n1 n3 highlight highlight flow chart include flow chart simple dag json highlight n3 highlight n3 n4</text>
+      <text>Use to highlight a node n1 label 1 n2 label 2 n3 label 3 Or use property of a include plugin n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three Note To highlight more than one element use nodes id n1 label label 1 id n2 label label 2 highlight true id n3 label label 3 edges n1 n2 n2 n3 n1 n3 highlight highlight flow chart include flow chart simple dag json highlight n3 highlight n3 n4</text>
     </text>
   </entry>
   <entry>
@@ -2052,7 +2052,7 @@
     <fullTitle>Znai: Flow Diagrams, Color Groups [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to assign a color group to a node There are four color groups out of the box default colorGroup a b c d nodes id n1 label input one id n2 label input two id n3 label processor colorGroup b id n4 label output one colorGroup c id n5 label output two colorGroup c id n6 label output three colorGroup d edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6</text>
+      <text>Use to assign a color group to a node There are four color groups out of the box default n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three colorGroup a b c d nodes id n1 label input one id n2 label input two id n3 label processor colorGroup b id n4 label output one colorGroup c id n5 label output two colorGroup c id n6 label output three colorGroup d edges n1 n3 n2 n3 n3 n4 n3 n5 n3 n6</text>
     </text>
   </entry>
   <entry>
@@ -2060,7 +2060,7 @@
     <fullTitle>Znai: Flow Diagrams, Shapes [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to assign one of the predefined shapes shape nodes id researcher label researcher shape actor id db label two shape database id another db label three input shape database bottom label id processor label processor colorGroup b id outcome colorGroup c shape world id config label config file colorGroup b shape document edges researcher processor researcher config db processor another db processor config outcome processor outcome</text>
+      <text>Use to assign one of the predefined shapes researcher researcher processor processor config config file db two another db three input outcome shape nodes id researcher label researcher shape actor id db label two shape database id another db label three input shape database bottom label id processor label processor colorGroup b id outcome colorGroup c shape world id config label config file colorGroup b shape document edges researcher processor researcher config db processor another db processor config outcome processor outcome</text>
     </text>
   </entry>
   <entry>
@@ -2068,7 +2068,7 @@
     <fullTitle>Znai: Flow Diagrams, Legend [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to add a legend to your diagram Optionally add to insert a message that the nodes are clickable in case you use urls inputs optimization process outcome unknown include diagram legend clickableNodes true include diagram legend a inputs b optimization process c outcome d unknown clickableNodes true include flow chart flow diagrams simple dag colors json</text>
+      <text>Use to add a legend to your diagram Optionally add to insert a message that the nodes are clickable in case you use urls inputs optimization process outcome unknown n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three include diagram legend clickableNodes true include diagram legend a inputs b optimization process c outcome d unknown clickableNodes true include flow chart flow diagrams simple dag colors json</text>
     </text>
   </entry>
   <entry>
@@ -2084,7 +2084,7 @@
     <fullTitle>Znai: Flow Diagrams, Vertical Layout [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To switch layout from horizontal to vertical use vertical true</text>
+      <text>To switch layout from horizontal to vertical use n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three vertical true</text>
     </text>
   </entry>
   <entry>
@@ -2092,7 +2092,7 @@
     <fullTitle>Znai: Flow Diagrams, Layout Types [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to specify a different underlying layout engine Only default and is supported at the moment Neato layout guide from Graphviz layout dot neato include flow chart simple dag json layout neato</text>
+      <text>Use to specify a different underlying layout engine Only default and is supported at the moment n1 input one n3 processor n2 input two n4 output one n5 output two n6 output three Neato layout guide from Graphviz layout dot neato include flow chart simple dag json layout neato</text>
     </text>
   </entry>
   <entry>
@@ -2100,7 +2100,7 @@
     <fullTitle>Znai: Flow Diagrams, Links [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To attach links to nodes use property Combine links and highlights to create a sub navigation for your product url nodes id n1 label No Link id n2 label Link To Java url java content extraction id n3 label Link to External url http commonmark org edges n1 n2 n3 n2</text>
+      <text>To attach links to nodes use property n1 No Link n2 Link To Java n3 Link to External Combine links and highlights to create a sub navigation for your product url nodes id n1 label No Link id n2 label Link To Java url java content extraction id n3 label Link to External url http commonmark org edges n1 n2 n3 n2</text>
     </text>
   </entry>
   <entry>
@@ -2108,7 +2108,7 @@
     <fullTitle>Znai: Flow Diagrams, Reusable Nodes [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Move node definitions to a one or more separate files if you use them across multiple diagrams edges a1 a2 b1 b2 b1 a2 id a1 label Label A 1 id a2 label Label A 2 id a3 label Label A 3 id b1 label Label B 1 id b2 label Label B 2 id b3 label Label B 3 include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json nodes set b json</text>
+      <text>Move node definitions to a one or more separate files if you use them across multiple diagrams a1 Label A 1 a2 Label A 2 a1 Label A 1 a2 Label A 2 b1 Label B 1 b2 Label B 2 edges a1 a2 b1 b2 b1 a2 id a1 label Label A 1 id a2 label Label A 2 id a3 label Label A 3 id b1 label Label B 1 id b2 label Label B 2 id b3 label Label B 3 include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json include flow chart flow diagrams graph using lib json nodeLibPath nodes set a json nodes set b json</text>
     </text>
   </entry>
   <entry>
@@ -2116,7 +2116,7 @@
     <fullTitle>Znai: Graphviz Diagrams, Fenced Block [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Surround Graphviz expression with fenced block to render diagrams graphviz ```graphviz digraph a > b b > c d > b b > e ```</text>
+      <text>Surround Graphviz expression with fenced block to render diagrams digraph a > b b > c d > b b > e graphviz ```graphviz digraph a > b b > c d > b b > e ```</text>
     </text>
   </entry>
   <entry>
@@ -2124,7 +2124,7 @@
     <fullTitle>Znai: Graphviz Diagrams, Alignment [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use parameter to change diagram alignment align ```graphviz align center digraph a > b</text>
+      <text>Use parameter to change diagram alignment digraph a > b b > c d > b b > e align ```graphviz align center digraph a > b</text>
     </text>
   </entry>
   <entry>
@@ -2132,7 +2132,7 @@
     <fullTitle>Znai: Graphviz Diagrams, External File [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use include plugin to render a diagram from a file include graphviz graphviz dot align center digraph a > b b > c d > b b > e</text>
+      <text>Use include plugin to render a diagram from a file digraph a > b b > c d > b b > e include graphviz graphviz dot align center digraph a > b b > c d > b b > e</text>
     </text>
   </entry>
   <entry>
@@ -2145,10 +2145,18 @@
   </entry>
   <entry>
     <url>/znai/visuals/PlantUml</url>
-    <fullTitle>Znai: PlantUml,  [Visuals]</fullTitle>
+    <fullTitle>Znai: PlantUml [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>PlantUml is a text based way of drawing many kinds of diagrams</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/PlantUml#in-place</url>
+    <fullTitle>Znai: PlantUml, In Place [Visuals]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>@startuml Alice > Bob Authentication Request Bob > Alice Authentication Response Alice > Bob Another authentication Request Alice &lt; Bob another authentication Response @enduml</text>
     </text>
   </entry>
   <entry>
@@ -2156,7 +2164,7 @@
     <fullTitle>Znai: PlantUml, External File [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>If your diagram is stored in a separate file use include plantuml demo plantuml @startuml package Some Group HTTP First Component Another Component node Other Groups FTP Second Component First Component > FTP cloud Example 1 database MySql folder This is my folder Folder 3 frame Foo Frame 4 Another Component > Example 1 Example 1 > Folder 3 Folder 3 > Frame 4 @enduml include plantuml &lt;path></text>
+      <text>If your diagram is stored in a separate file use include plantuml demo plantuml @startuml package Some Group HTTP First Component Another Component node Other Groups FTP Second Component First Component > FTP cloud Example 1 database MySql folder This is my folder Folder 3 frame Foo Frame 4 Another Component > Example 1 Example 1 > Folder 3 Folder 3 > Frame 4 @enduml @startuml package Some Group HTTP First Component Another Component node Other Groups FTP Second Component First Component > FTP cloud Example 1 database MySql folder This is my folder Folder 3 frame Foo Frame 4 Another Component > Example 1 Example 1 > Folder 3 Folder 3 > Frame 4 @enduml include plantuml &lt;path></text>
     </text>
   </entry>
   <entry>
@@ -2164,7 +2172,7 @@
     <fullTitle>Znai: PlantUml, Gantt Example [Visuals]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>@startgantt Task1 lasts 4 days then Task1 1 lasts 4 days Task1 2 starts at Task1 s end and lasts 7 days Task2 lasts 5 days then Task2 1 lasts 4 days MaxTaskEnd happens at Task1 1 s end MaxTaskEnd happens at Task1 2 s end MaxTaskEnd happens at Task2 1 s end @endgantt</text>
+      <text>@startgantt Task1 lasts 4 days then Task1 1 lasts 4 days Task1 2 starts at Task1 s end and lasts 7 days Task2 lasts 5 days then Task2 1 lasts 4 days MaxTaskEnd happens at Task1 1 s end MaxTaskEnd happens at Task1 2 s end MaxTaskEnd happens at Task2 1 s end @endgantt @startgantt Task1 lasts 4 days then Task1 1 lasts 4 days Task1 2 starts at Task1 s end and lasts 7 days Task2 lasts 5 days then Task2 1 lasts 4 days MaxTaskEnd happens at Task1 1 s end MaxTaskEnd happens at Task1 2 s end MaxTaskEnd happens at Task2 1 s end @endgantt</text>
     </text>
   </entry>
   <entry>
@@ -2236,7 +2244,7 @@
     <fullTitle>Znai: Tabs, Definition [Layout]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To define multiple tabs we use fenced code block This will generate a multi tab widget with plugin content for each tab JavaScript class JsClass constructor usefulAction export default JsClass Java class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar Cpp Selecting a tab will switch all the tabs on every page ```tabs JavaScript include file snippets file name js Java include file snippets WideCode java Cpp include cpp snippets simple cpp entry main bodyOnly true ``` include</text>
+      <text>To define multiple tabs we use fenced code block This will generate a multi tab widget with plugin content for each tab JavaScript class JsClass constructor usefulAction export default JsClass Java class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar Cpp int test 2 comment with **important** information int b 3 int d 3 * * multi line comment * of multi *lines* text * int e 5 Selecting a tab will switch all the tabs on every page ```tabs JavaScript include file snippets file name js Java include file snippets WideCode java Cpp include cpp snippets simple cpp entry main bodyOnly true ``` include</text>
     </text>
   </entry>
   <entry>
@@ -2524,7 +2532,7 @@
     <fullTitle>Znai: Two Sides Pages, Open API Example [Layout]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Responses 200 default</text>
+      <text>Responses 200 default get estimates time Time Estimates The Time Estimates endpoint returns ETAs for all products offered at a given location with the responses expressed as integers in seconds We recommend that this endpoint be called every minute to provide the most accurate up to date ETAs start_latitude start_longitude customer_uuid product_id</text>
     </text>
   </entry>
   <entry>
@@ -2556,7 +2564,7 @@
     <fullTitle>Znai: Two Sides Tabs, Definition [Layout]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>To define multiple tabs we use fenced code block This will generate a multi tab widget with an include plugin content per tab Note Selecting a tab will switch all the tabs on every page JavaScript class JsClass constructor usefulAction export default JsClass Java class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar Cpp ```tabs JavaScript include file snippets file name js Java include file snippets WideCode java Cpp include cpp snippets simple cpp entry main bodyOnly true ```</text>
+      <text>To define multiple tabs we use fenced code block This will generate a multi tab widget with an include plugin content per tab Note Selecting a tab will switch all the tabs on every page JavaScript class JsClass constructor usefulAction export default JsClass Java class InternationalPriceService implements PriceService private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory final ExchangeCalendarLongerThanLife calendar Cpp int test 2 comment with **important** information int b 3 int d 3 * * multi line comment * of multi *lines* text * int e 5 ```tabs JavaScript include file snippets file name js Java include file snippets WideCode java Cpp include cpp snippets simple cpp entry main bodyOnly true ```</text>
     </text>
   </entry>
   <entry>
@@ -2572,7 +2580,7 @@
     <fullTitle>Znai: Jupyter Notebook Two Sides, Code First [Layout]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>The include jupyter extension automatically assigns to output cells If page is set to you will get automatic split between code and output Note Content below is included using meta rightSide true type two sides include jupyter</text>
+      <text>The include jupyter extension automatically assigns to output cells If page is set to you will get automatic split between code and output Note Content below is included using meta rightSide true type two sides include jupyter from pandas import read_csv from IPython display import display tran read_csv transport csv print tran a b c 0 1 2 3 1 4 5 6 display tran</text>
     </text>
   </entry>
   <entry>
@@ -2588,7 +2596,7 @@
     <fullTitle>Znai: Jupyter Notebook Two Sides, Pandas [Layout]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet display</text>
+      <text>Displaying values using panda Values can be displayed using standard console output Or using library to render a html snippet display from pandas import read_csv from IPython display import display a b c 0 1 2 3 1 4 5 6 tran read_csv transport csv print tran display tran</text>
     </text>
   </entry>
   <entry>
@@ -2780,7 +2788,7 @@
     <fullTitle>Znai: Description Extraction, Ignore Template Parameters [CPP]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use as part of template parameter name to remove it from signature doc_ignore ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @param v3 value to print * @param v4 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * @tparam T3 type of the value three to print * @tparam T4 type of the value four to print * template&lt;typename T1 typename T2 typename T3 typename T4 typename T5_doc_ignore> void long_template_func const T1&amp; v1 const T2&amp; v2 const T3&amp; v3 const T4&amp; v4 include doxygen member long_template_func signatureOnly true</text>
+      <text>Use as part of template parameter name to remove it from signature doc_ignore ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @param v3 value to print * @param v4 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * @tparam T3 type of the value three to print * @tparam T4 type of the value four to print * template&lt;typename T1 typename T2 typename T3 typename T4 typename T5_doc_ignore> void long_template_func const T1&amp; v1 const T2&amp; v2 const T3&amp; v3 const T4&amp; v4 include doxygen member long_template_func signatureOnly true prints a value and a new line</text>
     </text>
   </entry>
   <entry>
@@ -2796,7 +2804,7 @@
     <fullTitle>Znai: Auto Reference, Member Signature, Comment And Parameters [CPP]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to render member signature its description and parameters list include doxygen member namespace utils namespace nested ** * top **level** comment *of* important * * list one * * list two * * list three * * 1 number one * 2 number two * * @param first_param description of first *param* * 1 item a * 2 item b * @param second_param description of second param * void my_func int first_param bool second_param ** * specific description for single param version * @param first_param description of first *param* * 1 item a * 2 item b * void my_func int first_param void free_func include doxygen member utils nested my_func top level comment of important list one list two list three number one number two first_param int description of first param item a item b second_param bool description of second param include doxygen member multi_println ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * template&lt;typename T1 typename T2> void multi_println const T1&amp; v1 const T2&amp; v2 std cout &lt;&lt; v1 &lt;&lt; &lt;&lt; v2 &lt;&lt; n prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print</text>
+      <text>Use to render member signature its description and parameters list include doxygen member namespace utils namespace nested ** * top **level** comment *of* important * * list one * * list two * * list three * * 1 number one * 2 number two * * @param first_param description of first *param* * 1 item a * 2 item b * @param second_param description of second param * void my_func int first_param bool second_param ** * specific description for single param version * @param first_param description of first *param* * 1 item a * 2 item b * void my_func int first_param void free_func include doxygen member utils nested my_func top level comment of important list one list two list three number one number two first_param int description of first param item a item b second_param bool description of second param top level comment of important list one list two list three number one number two include doxygen member multi_println ** * prints a value and a new line * @param v1 value to print * @param v2 value to print * @tparam T1 type of the value one to print * @tparam T2 type of the value two to print * template&lt;typename T1 typename T2> void multi_println const T1&amp; v1 const T2&amp; v2 std cout &lt;&lt; v1 &lt;&lt; &lt;&lt; v2 &lt;&lt; n prints a value and a new line v1 const T1 &amp; value to print v2 const T2 &amp; value to print v1 const T1 &amp; value to print v2 const T2 &amp; value to print prints a value and a new line</text>
     </text>
   </entry>
   <entry>
@@ -2804,7 +2812,7 @@
     <fullTitle>Znai: Auto Reference, Member Signature Only [CPP]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use parameter to render only member signature signatureOnly true namespace utils namespace second ** * **Domain** specific context setting Describes business setting and requirements * * @note Do not reveal your password * Use alternatives * 1 option one * 2 option two * * more context * class MyClass public bark void bark ** * **Domain** specific context setting Describes business setting and requirements * class ThirdClass public bark void bark include doxygen member utils second ThirdClass bark signatureOnly true</text>
+      <text>Use parameter to render only member signature signatureOnly true namespace utils namespace second ** * **Domain** specific context setting Describes business setting and requirements * * @note Do not reveal your password * Use alternatives * 1 option one * 2 option two * * more context * class MyClass public bark void bark ** * **Domain** specific context setting Describes business setting and requirements * class ThirdClass public bark void bark include doxygen member utils second ThirdClass bark signatureOnly true bark</text>
     </text>
   </entry>
   <entry>
@@ -2820,7 +2828,7 @@
     <fullTitle>Znai: Auto Reference, Specific Member By Args [CPP]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use to select a specific overload by providing parameters string Note Args are coma and spaces sensitive Znai will print available args variants in case of mismatch for you to copy and paste args include doxygen member utils nested their_func args long bool Description of what and why for their_func param1 long description of param1 param3 bool description of param3</text>
+      <text>Use to select a specific overload by providing parameters string Note Args are coma and spaces sensitive Znai will print available args variants in case of mismatch for you to copy and paste args include doxygen member utils nested their_func args long bool Description of what and why for their_func param1 long description of param1 param3 bool description of param3 Description of what and why for their_func</text>
     </text>
   </entry>
   <entry>
@@ -2836,7 +2844,7 @@
     <fullTitle>Znai: Auto Reference, utils::second::AnotherClass [CPP]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Public Functions Static Public Functions Public Attributes Static Public Attributes Protected Functions Definitions sing bark smile number_of_sounds counter help Domain specific context setting Describes business setting and requirements sing out loud tone int tone at which to sing volume int volume at which to sing bark out loud myClass const MyClass &amp; to test reference tone int tone at which to sing volume int volume at which to sing global smile volume int smile volume current number of sounds made ask for help out loud example tone int tone at which to sing volume int volume at which to sing utils second AnotherClass</text>
+      <text>Public Functions Static Public Functions Public Attributes Static Public Attributes Protected Functions Definitions sing bark smile number_of_sounds counter help Domain specific context setting Describes business setting and requirements sing out loud tone int tone at which to sing volume int volume at which to sing sing out loud bark out loud myClass const MyClass &amp; to test reference tone int tone at which to sing volume int volume at which to sing bark out loud global smile volume int smile volume global smile current number of sounds made current number of sounds made ask for help out loud example tone int tone at which to sing volume int volume at which to sing ask for help out loud example utils second AnotherClass</text>
     </text>
   </entry>
   <entry>
@@ -2852,7 +2860,7 @@
     <fullTitle>Znai: Auto Reference, utils::second::MyClass [CPP]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Public Functions Definitions bark Domain specific context setting Describes business setting and requirements Do not reveal your password Use alternatives option one option two more context bark utils second MyClass</text>
+      <text>Public Functions Definitions bark Domain specific context setting Describes business setting and requirements Do not reveal your password Use alternatives option one option two more context bark bark utils second MyClass</text>
     </text>
   </entry>
   <entry>
@@ -2972,7 +2980,7 @@
     <fullTitle>Znai: Description Extraction, Handling Links [Java]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Links defined with are automatically converted to Inlined Code and become To turn into a link you need to use Code References Use the value to associate with the documentation link Alternatively you can define Global References to turn into a link @link MyClass MyClass MyClass referencesPath @link CustomDomain CustomDomain example references domain Trader example references domain#trader Transaction example references domain#transaction BUY example references domain#transaction buy SELL example references domain#transaction sell MyClass</text>
+      <text>Links defined with are automatically converted to Inlined Code and become To turn into a link you need to use Code References Use the value to associate with the documentation link Top level conceptual description of a problem To avoid copy &amp; paste of the content consider to re use information CustomDomain Alternatively you can define Global References to turn into a link @link MyClass MyClass MyClass referencesPath @link CustomDomain CustomDomain example references domain Trader example references domain#trader Transaction example references domain#transaction BUY example references domain#transaction buy SELL example references domain#transaction sell MyClass</text>
     </text>
   </entry>
   <entry>
@@ -3028,7 +3036,7 @@
     <fullTitle>Znai: Web UI, Screenshots And Annotations [Synergy With Testing]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>In Image Annotations you can specify annotations in an external file Using a testing framework one can generate coordinates during a UI test based on elements placement Here is an example of using WebTau testing framework to capture a screenshot and annotations Type question you want to be answered anonymously Scan through results and pick the most relevant one package webtauexamples import static org testingisdocumenting webtau WebTauGroovyDsl * def homeSearchInput $ input id* search def resultSearchInput $ #search_form_input def result $ article data testid result scenario capture screenshot browser open https duckduckgo com homeSearchInput waitToBe visible homeSearchInput setValue testing is documenting homeSearchInput sendKeys browser keys enter result waitTo visible browser doc withAnnotations resultSearchInput result capture duckduckgo search 1 Type question you want to be answered anonymously 2 Scan through results and pick the most relevant one include image doc artifacts duckduckgo search png annotate true</text>
+      <text>In Image Annotations you can specify annotations in an external file Using a testing framework one can generate coordinates during a UI test based on elements placement Here is an example of using WebTau testing framework to capture a screenshot and annotations Type question you want to be answered anonymously Scan through results and pick the most relevant one package webtauexamples import static org testingisdocumenting webtau WebTauGroovyDsl * def homeSearchInput $ input class* searchbox_input input class* search input def resultSearchInput $ #search_form_input def result $ article data testid result scenario capture screenshot browser open https duckduckgo com homeSearchInput waitToBe visible homeSearchInput setValue testing is documenting homeSearchInput sendKeys browser keys enter result waitTo visible browser doc withAnnotations resultSearchInput result capture duckduckgo search 1 Type question you want to be answered anonymously 2 Scan through results and pick the most relevant one include image doc artifacts duckduckgo search png annotate true</text>
     </text>
   </entry>
   <entry>
@@ -3052,7 +3060,7 @@
     <fullTitle>Znai: REST API, Documentation Pipeline [Synergy With Testing]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Documentation pipeline can look like # Create Employee include open api openapi api spec json operationId createEmployee ```columns left include json doc artifacts employee post request json title request payload right include json doc artifacts employee post response json title response payload highlightValueFile doc artifacts employee post paths json ```</text>
+      <text>Documentation pipeline can look like build Build deploy Deploy testrun Test Run documentation Documentation Build # Create Employee include open api openapi api spec json operationId createEmployee ```columns left include json doc artifacts employee post request json title request payload right include json doc artifacts employee post response json title response payload highlightValueFile doc artifacts employee post paths json ```</text>
     </text>
   </entry>
   <entry>
@@ -3060,7 +3068,7 @@
     <fullTitle>Znai: REST API, Create Employee [Synergy With Testing]</fullTitle>
     <text>
       <score>STANDARD</score>
-      <text>Request Responses 200 201</text>
+      <text>Request Responses 200 201 post employee Create new employee Create a new employee by sending details and get back the id of a newly created employee</text>
     </text>
   </entry>
   <entry>
@@ -3073,7 +3081,7 @@
   </entry>
   <entry>
     <url>/znai/plugins/plugin-types</url>
-    <fullTitle>Znai: Plugin Types,  [Plugins]</fullTitle>
+    <fullTitle>Znai: Plugin Types [Plugins]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>extends markdown with plugins system to supercharge visuals and maintainability Three categories of plugins are available for usage and creation Include Plugins Inlined Code Fenced Block Znai</text>
@@ -3137,7 +3145,7 @@
   </entry>
   <entry>
     <url>/znai/configuration/styling</url>
-    <fullTitle>Znai: Styling,  [Configuration]</fullTitle>
+    <fullTitle>Znai: Styling [Configuration]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Add next to file to change look and feel of the resulting documentation website style css toc</text>
@@ -3161,7 +3169,7 @@
   </entry>
   <entry>
     <url>/znai/configuration/top-header</url>
-    <fullTitle>Znai: Top Header,  [Configuration]</fullTitle>
+    <fullTitle>Znai: Top Header [Configuration]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>To enable Top Header navigation bar add to useTopHeader meta json useTopHeader true</text>
@@ -3169,7 +3177,7 @@
   </entry>
   <entry>
     <url>/znai/deployment/additional-files</url>
-    <fullTitle>Znai: Additional Files,  [Deployment]</fullTitle>
+    <fullTitle>Znai: Additional Files [Deployment]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Znai automatically copies files like images to deploy location when you use them Create next to file and list all the additional files directories you want to be copied to the deployment location upload txt toc my extra files fileone xml my extra dir</text>
@@ -3177,7 +3185,7 @@
   </entry>
   <entry>
     <url>/znai/hub/introduction</url>
-    <fullTitle>Znai: Introduction,  [Hub]</fullTitle>
+    <fullTitle>Znai: Introduction [Hub]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>Znai has a server mode that can act as a Hub for your company documentations In addition to serving static content Hub provides Landing page with all the documentations separated by sections On demand upload via CLI Automatic build artifacts watching to grab the latest docs</text>
@@ -3217,7 +3225,7 @@
   </entry>
   <entry>
     <url>/znai/example-references/domain</url>
-    <fullTitle>Znai: Domain,  [Example References]</fullTitle>
+    <fullTitle>Znai: Domain [Example References]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>This page is a dummy page to demo code reference capabilities from Java Enums and parameter types</text>
@@ -3241,7 +3249,7 @@
   </entry>
   <entry>
     <url>/znai/example-references/api</url>
-    <fullTitle>Znai: Api,  [Example References]</fullTitle>
+    <fullTitle>Znai: Api [Example References]</fullTitle>
     <text>
       <score>STANDARD</score>
       <text>This page is a dummy page to demo code reference capabilities</text>
@@ -3309,6 +3317,22 @@
     <text>
       <score>STANDARD</score>
       <text>cd znai dist target unzip dist znai zip export PATH $ pwd dist $PATH znai version</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2025#1811</url>
+    <fullTitle>Znai: 2025, 1.81.1 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Fix Jupyter output multiple cell outputs use noGap true Add Move ssl related configs from command parameters to environment variables ZNAI_SSL_JKS_PATH ZNAI_SSL_JKS_PASSWORD ZNAI_SSL_PEM_CERT_PATH ZNAI_SSL_PEM_KEY_PATH</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2025#181</url>
+    <fullTitle>Znai: 2025, 1.81 [Release Notes]</fullTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Fix correctly constructs field when text is outside a top level header search entries xml title Add now contains urls to the pages Set custom prefix using env var llm txt ZNAI_LLM_URL_PREFIX Add custom content scaffold znai new Add support to help with page renames page redirects csv Add Jupyter notebooks improved search and llm txt support Add Jupyter notebooks improved std output and tables cell rendering Add to override cli output with custom tool title ZNAI_APP_TITLE Add Search text for various plugins like and TextBadge Latex Add Deprecate in favor of znai new znai preview znai serve znai new znai preview znai serve</text>
     </text>
   </entry>
   <entry>

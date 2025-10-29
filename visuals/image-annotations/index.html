@@ -121,7 +121,7 @@
 
 <article>
 <header><h1>Integration With Testing</h1></header>
-<p>Use UI testing frameworks to automatically generate annotations file and capture screenshot For example WebTau automatically generates an annotations file in addition to capturing a screenshot Type question you want to be answered anonymously Scan through results and pick the most relevant one Note WebTau captures additional data such as package webtauexamples import static org testingisdocumenting webtau WebTauGroovyDsl * def homeSearchInput $ input id* search def resultSearchInput $ #search_form_input def result $ article data testid result scenario capture screenshot browser open https duckduckgo com homeSearchInput waitToBe visible homeSearchInput setValue testing is documenting homeSearchInput sendKeys browser keys enter result waitTo visible browser doc withAnnotations resultSearchInput result capture duckduckgo search include image doc artifacts duckduckgo search png annotate true pixelRatio</p>
+<p>Use UI testing frameworks to automatically generate annotations file and capture screenshot For example WebTau automatically generates an annotations file in addition to capturing a screenshot Type question you want to be answered anonymously Scan through results and pick the most relevant one Note WebTau captures additional data such as package webtauexamples import static org testingisdocumenting webtau WebTauGroovyDsl * def homeSearchInput $ input class* searchbox_input input class* search input def resultSearchInput $ #search_form_input def result $ article data testid result scenario capture screenshot browser open https duckduckgo com homeSearchInput waitToBe visible homeSearchInput setValue testing is documenting homeSearchInput sendKeys browser keys enter result waitTo visible browser doc withAnnotations resultSearchInput result capture duckduckgo search include image doc artifacts duckduckgo search png annotate true pixelRatio</p>
 </article>
 
 <article>
@@ -555,7 +555,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scale" : 0.5,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1757972106576,
+        "timestamp" : 1761697810456,
         "shapes" : [ {
           "invertedColors" : true,
           "x" : 840.0,
@@ -659,7 +659,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
       }, {
         "scale" : 0.5,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1757972106576,
+        "timestamp" : 1761697810456,
         "shapes" : [ {
           "invertedColors" : true,
           "x" : 840.0,
@@ -702,7 +702,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1757972106576,
+        "timestamp" : 1761697810456,
         "shapes" : [ {
           "invertedColors" : true,
           "x" : 420.0,
@@ -762,7 +762,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
       }, {
         "pixelRatio" : 2,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1757972106576,
+        "timestamp" : 1761697810456,
         "shapes" : [ {
           "endY" : 430.0,
           "endX" : 420.0,
@@ -829,7 +829,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "annotationsPath" : "testingisdocumenting.json",
         "pixelRatio" : 2,
         "imageSrc" : "/znai/visuals/testingisdocumenting.png",
-        "timestamp" : 1757972106576,
+        "timestamp" : 1761697810456,
         "shapes" : [ {
           "type" : "rect",
           "beginX" : 60.0,
@@ -991,7 +991,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "groovy",
-        "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[id*=\"search\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\")\n    homeSearchInput.sendKeys(browser.keys.enter)\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
+        "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[class*=\"searchbox_input\"], input[class*=\"search-input\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\")\n    homeSearchInput.sendKeys(browser.keys.enter)\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
         "autoTitle" : true,
         "title" : "webtauexamples/imageCapture.groovy",
         "anchorId" : "integration-with-testing-webtauexamples-imagecapturegroovy",
@@ -1027,7 +1027,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
       }, {
         "annotate" : true,
         "imageSrc" : "/znai/doc-artifacts/duckduckgo-search.png",
-        "timestamp" : 1757972283900,
+        "timestamp" : 1761697980899,
         "shapes" : [ {
           "type" : "badge",
           "text" : "1",
@@ -1103,7 +1103,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1757972106567,
+    "lastModifiedTime" : 1761697810447,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Image Annotations",

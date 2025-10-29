@@ -86,12 +86,12 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Operation By Method And Path</h1></header>
-<p>If you have a file with an Open API definition a k a a Swagger file you can render it by a given and or by Both and formats are supported Let s consider Uber s API definition as an example Responses 200 default Note descriptions are treated as Markdown using the CommonMark specification method path operationId yaml json include open api open api uber json method get path estimates time</p>
+<p>If you have a file with an Open API definition a k a a Swagger file you can render it by a given and or by Both and formats are supported Let s consider Uber s API definition as an example Responses 200 default Note descriptions are treated as Markdown using the CommonMark specification method path operationId yaml json include open api open api uber json method get path estimates time get estimates time Time Estimates The Time Estimates endpoint returns ETAs for all products offered at a given location with the responses expressed as integers in seconds We recommend that this endpoint be called every minute to provide the most accurate up to date ETAs start_latitude start_longitude customer_uuid product_id</p>
 </article>
 
 <article>
 <header><h1>Operation By ID</h1></header>
-<p>Let s take a pet store example Use to include operation definition by ID Request Responses 200 400 404 405 operationId include open api petstore openapi3 json operationId updatePet</p>
+<p>Let s take a pet store example Use to include operation definition by ID Request Responses 200 400 404 405 operationId include open api petstore openapi3 json operationId updatePet put pet Update an existing pet Update an existing pet by Id</p>
 </article>
 
 <article>
@@ -101,7 +101,7 @@
 
 <article>
 <header><h1>Add a new pet to the store</h1></header>
-<p>Request Responses 200 405</p>
+<p>Request Responses 200 405 post pet Add a new pet to the store Add a new pet to the store</p>
 </article>
 
 <article>
@@ -116,7 +116,7 @@
 
 <article>
 <header><h1>Time Estimates</h1></header>
-<p>Responses 200 default</p>
+<p>Responses 200 default get estimates price Price Estimates The Price Estimates endpoint returns an estimated price range for each product offered at a given location The price estimate is provided as a formatted string with the full price range and the localized currency symbol &lt;br&gt;&lt;br&gt;The response also includes low and high estimates and the ISO 4217 http en wikipedia org wiki ISO_4217 currency code for situations requiring currency conversion When surge is active for a particular product its surge_multiplier will be greater than 1 but the price estimate already factors in this multiplier start_latitude start_longitude end_latitude end_longitude get estimates time Time Estimates The Time Estimates endpoint returns ETAs for all products offered at a given location with the responses expressed as integers in seconds We recommend that this endpoint be called every minute to provide the most accurate up to date ETAs start_latitude start_longitude customer_uuid product_id</p>
 </article>
 
 <article>
@@ -4027,7 +4027,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1757972106553,
+    "lastModifiedTime" : 1761697810434,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Open API",

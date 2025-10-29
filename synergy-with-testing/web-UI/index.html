@@ -86,7 +86,7 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Screenshots And Annotations</h1></header>
-<p>In Image Annotations you can specify annotations in an external file Using a testing framework one can generate coordinates during a UI test based on elements placement Here is an example of using WebTau testing framework to capture a screenshot and annotations Type question you want to be answered anonymously Scan through results and pick the most relevant one package webtauexamples import static org testingisdocumenting webtau WebTauGroovyDsl * def homeSearchInput $ input id* search def resultSearchInput $ #search_form_input def result $ article data testid result scenario capture screenshot browser open https duckduckgo com homeSearchInput waitToBe visible homeSearchInput setValue testing is documenting homeSearchInput sendKeys browser keys enter result waitTo visible browser doc withAnnotations resultSearchInput result capture duckduckgo search 1 Type question you want to be answered anonymously 2 Scan through results and pick the most relevant one include image doc artifacts duckduckgo search png annotate true</p>
+<p>In Image Annotations you can specify annotations in an external file Using a testing framework one can generate coordinates during a UI test based on elements placement Here is an example of using WebTau testing framework to capture a screenshot and annotations Type question you want to be answered anonymously Scan through results and pick the most relevant one package webtauexamples import static org testingisdocumenting webtau WebTauGroovyDsl * def homeSearchInput $ input class* searchbox_input input class* search input def resultSearchInput $ #search_form_input def result $ article data testid result scenario capture screenshot browser open https duckduckgo com homeSearchInput waitToBe visible homeSearchInput setValue testing is documenting homeSearchInput sendKeys browser keys enter result waitTo visible browser doc withAnnotations resultSearchInput result capture duckduckgo search 1 Type question you want to be answered anonymously 2 Scan through results and pick the most relevant one include image doc artifacts duckduckgo search png annotate true</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -536,7 +536,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "lang" : "groovy",
-        "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[id*=\"search\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\")\n    homeSearchInput.sendKeys(browser.keys.enter)\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
+        "snippet" : "package webtauexamples\n\nimport static org.testingisdocumenting.webtau.WebTauGroovyDsl.*\n\ndef homeSearchInput = $('input[class*=\"searchbox_input\"], input[class*=\"search-input\"]')\ndef resultSearchInput = $(\"#search_form_input\")\ndef result = $('article[data-testid=\"result\"]')\n\nscenario(\"capture screenshot\") {\n    browser.open(\"https://duckduckgo.com/\")\n\n    homeSearchInput.waitToBe visible\n    homeSearchInput.setValue(\"testing is documenting\")\n    homeSearchInput.sendKeys(browser.keys.enter)\n\n    result.waitTo visible\n\n    browser.doc.withAnnotations(resultSearchInput, result)\n            .capture(\"duckduckgo-search\")\n}",
         "autoTitle" : true,
         "title" : "webtauexamples/imageCapture.groovy",
         "anchorId" : "screenshots-and-annotations-webtauexamples-imagecapturegroovy",
@@ -574,7 +574,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
       }, {
         "annotate" : true,
         "imageSrc" : "/znai/doc-artifacts/duckduckgo-search.png",
-        "timestamp" : 1757972283900,
+        "timestamp" : 1761697980899,
         "shapes" : [ {
           "type" : "badge",
           "text" : "1",
@@ -618,7 +618,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Json"
       } ]
     } ],
-    "lastModifiedTime" : 1757972106555,
+    "lastModifiedTime" : 1761697810435,
     "tocItem" : {
       "chapterTitle" : "Synergy With Testing",
       "pageTitle" : "Web UI",

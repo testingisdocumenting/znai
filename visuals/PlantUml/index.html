@@ -89,13 +89,18 @@
 </article>
 
 <article>
+<header><h1>In Place</h1></header>
+<p>@startuml Alice &gt; Bob Authentication Request Bob &gt; Alice Authentication Response Alice &gt; Bob Another authentication Request Alice &lt; Bob another authentication Response @enduml</p>
+</article>
+
+<article>
 <header><h1>External File</h1></header>
-<p>If your diagram is stored in a separate file use include plantuml demo plantuml @startuml package Some Group HTTP First Component Another Component node Other Groups FTP Second Component First Component &gt; FTP cloud Example 1 database MySql folder This is my folder Folder 3 frame Foo Frame 4 Another Component &gt; Example 1 Example 1 &gt; Folder 3 Folder 3 &gt; Frame 4 @enduml include plantuml &lt;path&gt;</p>
+<p>If your diagram is stored in a separate file use include plantuml demo plantuml @startuml package Some Group HTTP First Component Another Component node Other Groups FTP Second Component First Component &gt; FTP cloud Example 1 database MySql folder This is my folder Folder 3 frame Foo Frame 4 Another Component &gt; Example 1 Example 1 &gt; Folder 3 Folder 3 &gt; Frame 4 @enduml @startuml package Some Group HTTP First Component Another Component node Other Groups FTP Second Component First Component &gt; FTP cloud Example 1 database MySql folder This is my folder Folder 3 frame Foo Frame 4 Another Component &gt; Example 1 Example 1 &gt; Folder 3 Folder 3 &gt; Frame 4 @enduml include plantuml &lt;path&gt;</p>
 </article>
 
 <article>
 <header><h1>Gantt Example</h1></header>
-<p>@startgantt Task1 lasts 4 days then Task1 1 lasts 4 days Task1 2 starts at Task1 s end and lasts 7 days Task2 lasts 5 days then Task2 1 lasts 4 days MaxTaskEnd happens at Task1 1 s end MaxTaskEnd happens at Task1 2 s end MaxTaskEnd happens at Task2 1 s end @endgantt</p>
+<p>@startgantt Task1 lasts 4 days then Task1 1 lasts 4 days Task1 2 starts at Task1 s end and lasts 7 days Task2 lasts 5 days then Task2 1 lasts 4 days MaxTaskEnd happens at Task1 1 s end MaxTaskEnd happens at Task1 2 s end MaxTaskEnd happens at Task2 1 s end @endgantt @startgantt Task1 lasts 4 days then Task1 1 lasts 4 days Task1 2 starts at Task1 s end and lasts 7 days Task2 lasts 5 days then Task2 1 lasts 4 days MaxTaskEnd happens at Task1 1 s end MaxTaskEnd happens at Task1 2 s end MaxTaskEnd happens at Task2 1 s end @endgantt</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -585,7 +590,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Svg"
       } ]
     } ],
-    "lastModifiedTime" : 1757972106555,
+    "lastModifiedTime" : 1761697810435,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "PlantUml",

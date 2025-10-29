@@ -1,6 +1,7 @@
 "Znai" full guide:
 
-# Introduction -> What Is This
+# Introduction :: What Is This
+answer-link: znai/introduction/what-is-this
 
 ## Beautiful and Maintainable User Guide
 
@@ -105,7 +106,8 @@ Znai comes with
 
 
 
-# Introduction -> Getting Started
+# Introduction :: Getting Started
+answer-link: znai/introduction/getting-started
 
 ## Markdown
 
@@ -187,7 +189,8 @@ Please create a [GitHub Issue]() if you want to try it out. I don't document it 
 
 
 
-# Flow -> Structure
+# Flow :: Structure
+answer-link: znai/flow/structure
 
 ## Building Blocks
 
@@ -282,7 +285,8 @@ Each documentation must have the `meta.json` file in its root. This `JSON` file 
 
 
 
-# Flow -> Landing
+# Flow :: Landing
+answer-link: znai/flow/landing
 
 ## Optional Index Landing Page
 
@@ -304,7 +308,8 @@ If `index.md` is not present, users will be redirected to the first page in your
 
 
 
-# Flow -> Page Titles
+# Flow :: Page Titles
+answer-link: znai/flow/names
 
 ## Automatic Names
 
@@ -349,7 +354,8 @@ chapter-one {title: "Chapter ONE explicit"}
 
 
 
-# Flow -> Page References
+# Flow :: Page References
+answer-link: znai/flow/page-references
 
 ## Follow the Order
 
@@ -430,7 +436,8 @@ Pass `--validate-external-links` to enable external links validation.
 
 
 
-# Flow -> Page Toc
+# Flow :: Page Toc
+answer-link: znai/flow/page-toc
 
 Use `include-page-toc` to include page top level sections as links
 
@@ -449,7 +456,8 @@ some other text
 
 
 
-# Flow -> Lookup Paths
+# Flow :: Lookup Paths
+answer-link: znai/flow/lookup-paths
 
 ## Files Reference Lookup
 
@@ -518,7 +526,8 @@ Znai is written using Java and can access resources from the classpath. Using cl
 
 
 
-# Flow -> Search
+# Flow :: Search
+answer-link: znai/flow/search
 
 ## Local
 
@@ -545,7 +554,8 @@ Avoid: using generic names in your page titles and page section titles. You shou
 
 
 
-# Flow -> Llm
+# Flow :: Llm
+answer-link: znai/flow/llm
 
 ## Context For LLMs
 
@@ -555,7 +565,8 @@ Znai generates a single markdown file called `llm.txt` to be used by LLMs. It is
 
 
 
-# Flow -> Footer
+# Flow :: Footer
+answer-link: znai/flow/footer
 
 ## Definition
 
@@ -565,7 +576,8 @@ Content in `footer.md` will be displayed at the bottom of each page.
 
 
 
-# Flow -> Support
+# Flow :: Support
+answer-link: znai/flow/support
 
 ## Linking To Support Site
 
@@ -576,7 +588,8 @@ Take a look at the example at the top of this page.
 
 
 
-# Flow -> Footnotes
+# Flow :: Footnotes
+answer-link: znai/flow/footnotes
 
 ## Definition
 
@@ -600,7 +613,8 @@ Hover mouse over a footnote reference see its content in a tooltip.
 
 
 
-# Flow -> Presentation
+# Flow :: Presentation
+answer-link: znai/flow/presentation
 
 ## Equal Flow
 
@@ -627,7 +641,8 @@ If you write your documentation with a presentation in mind it should improve th
 
 
 
-# Flow -> Testing Is Documenting
+# Flow :: Testing Is Documenting
+answer-link: znai/flow/testing-is-documenting
 
 ## Auto Maintainable Content
 
@@ -662,14 +677,16 @@ In [Synergy With Testing]() chapter you will see examples of UI, REST API and Bu
 
 
 
-# Flow -> Shortcuts
+# Flow :: Shortcuts
+answer-link: znai/flow/shortcuts
 
 ## Keyboard shortcuts
 
 
 
 
-# Snippets -> Code Snippets
+# Snippets :: Code Snippets
+answer-link: znai/snippets/code-snippets
 
 ## Simple Snippet
 
@@ -895,7 +912,8 @@ public class DocScaffolding {
 
 
 
-# Snippets -> External Code Snippets
+# Snippets :: External Code Snippets
+answer-link: znai/snippets/external-code-snippets
 
 ## Embedding Content
 
@@ -1035,7 +1053,8 @@ Read page on [Snippets Manipulation]() to learn more about extracting/modifying 
 
 
 
-# Snippets -> Snippets Manipulation
+# Snippets :: Snippets Manipulation
+answer-link: znai/snippets/snippets-manipulation
 
 ## Surrounded By
 
@@ -1221,7 +1240,8 @@ Use  to exclude lines matching regexp(s).
 
 
 
-# Snippets -> Snippets Highlighting
+# Snippets :: Snippets Highlighting
+answer-link: znai/snippets/snippets-highlighting
 
 ## Line By Text
 
@@ -1296,7 +1316,8 @@ Use list to specify multiple regions to highlight:
 
 
 
-# Snippets -> Code Comments
+# Snippets :: Code Comments
+answer-link: znai/snippets/code-comments
 
 ## Callout Comments
 
@@ -1337,7 +1358,8 @@ Use `commentsType: "remove"` to hide all the comments from a code snippet Given 
 
 
 
-# Snippets -> Inlined Code Snippets
+# Snippets :: Inlined Code Snippets
+answer-link: znai/snippets/inlined-code-snippets
 
 ## Backtick
 
@@ -1372,7 +1394,8 @@ my text `:identifier: my_func`
 
 
 
-# Snippets -> API Parameters
+# Snippets :: API Parameters
+answer-link: znai/snippets/api-parameters
 
 ## Inlined CSV
 
@@ -1551,7 +1574,8 @@ line with *markdown* support and few moe lines"
 
 
 
-# Snippets -> Code References
+# Snippets :: Code References
+answer-link: znai/snippets/code-references
 
 ## Local References
 
@@ -1586,7 +1610,8 @@ Add references to `references.csv` or `references.json` if you want all your cod
 
 
 
-# Snippets -> Json
+# Snippets :: Json
+answer-link: znai/snippets/json
 
 ## Auto Formatting
 
@@ -1802,7 +1827,8 @@ All the features above require fully formed JSON. If you need only syntax highli
 
 
 
-# Snippets -> Xml
+# Snippets :: Xml
+answer-link: znai/snippets/xml
 
 ## Highlight Parts
 
@@ -1844,7 +1870,8 @@ Use the `title` property to specify a title.
 
 
 
-# Snippets -> OCaml
+# Snippets :: OCaml
+answer-link: znai/snippets/ocaml
 
 ## Extract Comment Text
 
@@ -1860,7 +1887,8 @@ When you use the following plugin, it will extract the comment and embed it as i
 
 
 
-# Snippets -> Open API
+# Snippets :: Open API
+answer-link: znai/snippets/open-API
 
 ## Operation By Method And Path
 
@@ -1952,7 +1980,8 @@ Znai supports [Two Sides]() Layout mode that is perfect to supplement API docume
 
 
 
-# Snippets -> CLI
+# Snippets :: CLI
+answer-link: znai/snippets/CLI
 
 ## Parameters Highlight
 
@@ -2127,7 +2156,8 @@ Passed  will highlight each line as a separate slide.
 
 
 
-# Snippets -> Math
+# Snippets :: Math
+answer-link: znai/snippets/math
 
 ## LaTeX Block
 
@@ -2197,7 +2227,8 @@ Rendering is done by using awesome [KaTeX]() library.
 
 
 
-# Snippets -> Jupyter Notebook
+# Snippets :: Jupyter Notebook
+answer-link: znai/snippets/jupyter-notebook
 
 ## Code and Output
 
@@ -2205,6 +2236,26 @@ Use `include-jupyter` to include [Jupyter]() notebook inside your documentation.
 
 ```
 :include-jupyter: jupyter/simple-notebook.ipynb
+```
+
+```python
+from pandas import read_csv
+from IPython.display import display
+```
+
+```python
+tran = read_csv('transport.csv')
+print(tran)
+```
+
+```csv
+   a   b   c
+0  1   2   3
+1  4   5   6
+```
+
+```python
+display(tran)
 ```
 
 
@@ -2225,9 +2276,29 @@ Note: below text is auto generated, including the **Panda** section
 
 Displaying values using panda `display`
 
+```python
+from pandas import read_csv
+from IPython.display import display
+```
+
 Values can be displayed using standard console output
 
+```python
+tran = read_csv('transport.csv')
+print(tran)
+```
+
+```csv
+   a   b   c
+0  1   2   3
+1  4   5   6
+```
+
 Or using library to render a html snippet
+
+```python
+display(tran)
+```
 
 
 ## Include Only Specified Sections
@@ -2247,7 +2318,8 @@ You will learn about the [Two Sides Layout]() in the Layout section. If you are 
 
 
 
-# Snippets -> Cpp
+# Snippets :: Cpp
+answer-link: znai/snippets/cpp
 
 ## Description Extraction
 
@@ -2278,7 +2350,8 @@ Head over to [CPP Auto Reference]() to learn more
 
 
 
-# Snippets -> Python
+# Snippets :: Python
+answer-link: znai/snippets/python
 
 ## Content Extraction
 
@@ -2318,7 +2391,8 @@ Head over to [Python Auto Reference]() to learn more
 
 
 
-# Snippets -> Java
+# Snippets :: Java
+answer-link: znai/snippets/java
 
 ## Content Extraction
 
@@ -2358,7 +2432,8 @@ Create a [GitHub Issue]() or [Discussion]() to help prioritize
 
 
 
-# Snippets -> Groovy
+# Snippets :: Groovy
+answer-link: znai/snippets/groovy
 
 ## Method Body
 
@@ -2436,7 +2511,8 @@ Use `bodyOnly` to only display only the body of your class.
 
 
 
-# Snippets -> Markdown
+# Snippets :: Markdown
+answer-link: znai/snippets/markdown
 
 ## Single Markdown File
 
@@ -2519,7 +2595,8 @@ Note: `include-markdowns` renders files of the specified directory based on the 
 
 
 
-# Visuals -> Attention Signs
+# Visuals :: Attention Signs
+answer-link: znai/visuals/attention-signs
 
 ## Speed Bump
 
@@ -2649,7 +2726,8 @@ attention-<type>
 
 
 
-# Visuals -> Images
+# Visuals :: Images
+answer-link: znai/visuals/images
 
 ## Standard Markdown
 
@@ -2807,7 +2885,8 @@ Use `mobileOnly` to only render an image in mobile screen size. Use `desktopOnly
 
 
 
-# Visuals -> Image Annotations
+# Visuals :: Image Annotations
+answer-link: znai/visuals/image-annotations
 
 ## Badges
 
@@ -2934,7 +3013,8 @@ Annotated images automatically participate in presentation mode. Annotations wil
 
 
 
-# Visuals -> Cards
+# Visuals :: Cards
+answer-link: znai/visuals/cards
 
 ## Image And Title
 
@@ -3021,7 +3101,8 @@ Markdown content goes here
 
 
 
-# Visuals -> Charts
+# Visuals :: Charts
+answer-link: znai/visuals/charts
 
 ## Pie
 
@@ -3215,7 +3296,8 @@ Use `all` as breakpoint value to create a slide for each textual entry
 
 
 
-# Visuals -> Mermaid Diagrams
+# Visuals :: Mermaid Diagrams
+answer-link: znai/visuals/mermaid-diagrams
 
 ## Fenced Block
 
@@ -3280,7 +3362,8 @@ or
 
 
 
-# Visuals -> SVG
+# Visuals :: SVG
+answer-link: znai/visuals/SVG
 
 ## Retina Displays
 
@@ -3333,7 +3416,8 @@ Use `scale: scaleFactor` to change the size of the SVG provided
 
 
 
-# Visuals -> Icons
+# Visuals :: Icons
+answer-link: znai/visuals/icons
 
 ## Feather Icons
 
@@ -3399,7 +3483,8 @@ Znai provides a shortcut to use icons inside [Tables]().
 
 
 
-# Visuals -> Headings
+# Visuals :: Headings
+answer-link: znai/visuals/headings
 
 ## Heading Types
 
@@ -3430,7 +3515,8 @@ Use it to hand-craft reference documentation
 
 
 
-# Visuals -> Text Badge
+# Visuals :: Text Badge
+answer-link: znai/visuals/text-badge
 
 ## Part Of Text
 
@@ -3450,7 +3536,8 @@ To add a badge to a header use
 
 
 
-# Visuals -> Read More
+# Visuals :: Read More
+answer-link: znai/visuals/read-more
 
 ## Collapsible Content
 
@@ -3475,7 +3562,8 @@ Note: Four backticks were used instead of the usual three. This is done so one f
 
 
 
-# Visuals -> Spoilers
+# Visuals :: Spoilers
+answer-link: znai/visuals/spoilers
 
 ## Hidden Content
 
@@ -3511,7 +3599,8 @@ Use the `title` parameter to set a custom title for your spoiler.
 
 
 
-# Visuals -> Keyboard Shortcuts
+# Visuals :: Keyboard Shortcuts
+answer-link: znai/visuals/keyboard-shortcuts
 
 ## Inlined Keyboard Shorcuts
 
@@ -3534,7 +3623,8 @@ To provide multiple keys, simply separate them with a space.
 
 
 
-# Visuals -> Smart Bullet Points
+# Visuals :: Smart Bullet Points
+answer-link: znai/visuals/smart-bullet-points
 
 ## Types
 
@@ -3633,7 +3723,8 @@ The following bullet points will be rendered as horizontal striped, but only in 
 
 
 
-# Visuals -> Flow Diagrams
+# Visuals :: Flow Diagrams
+answer-link: znai/visuals/flow-diagrams
 
 ## Nodes and Edges
 
@@ -3759,7 +3850,8 @@ Move node definitions to a one or more separate files if you use them across mul
 
 
 
-# Visuals -> Graphviz Diagrams
+# Visuals :: Graphviz Diagrams
+answer-link: znai/visuals/graphviz-diagrams
 
 ## Fenced Block
 
@@ -3807,7 +3899,8 @@ To override use `-Ddot.bin` Java system property to specify an alternative locat
 
 
 
-# Visuals -> PlantUml
+# Visuals :: PlantUml
+answer-link: znai/visuals/PlantUml
 
 [PlantUml]() is a text-based way of drawing many kinds of diagrams.
 
@@ -3829,7 +3922,8 @@ If your diagram is stored in a separate file, use
 
 
 
-# Visuals -> Iframe
+# Visuals :: Iframe
+answer-link: znai/visuals/iframe
 
 ## Embedding Supporting Content
 
@@ -3901,7 +3995,8 @@ Use `aspectRatio` to change aspect ratio of the embedded content
 
 
 
-# Visuals -> Asciinema
+# Visuals :: Asciinema
+answer-link: znai/visuals/asciinema
 
 ## Asciinema Player
 
@@ -3914,7 +4009,8 @@ To embedd [Acsiinema Player]() use:
 
 
 
-# Layout -> Tabs
+# Layout :: Tabs
+answer-link: znai/layout/tabs
 
 ## Primary Use Case
 
@@ -4043,7 +4139,8 @@ $ whoamis
 
 
 
-# Layout -> Tables
+# Layout :: Tables
+answer-link: znai/layout/tables
 
 ## CSV
 
@@ -4282,7 +4379,8 @@ You can use Markdown table syntax within your table file.
 
 
 
-# Layout -> Columns
+# Layout :: Columns
+answer-link: znai/layout/columns
 
 ## Information Layout
 
@@ -4399,7 +4497,8 @@ In Presentation Mode each column content will appear on slide transition
 
 
 
-# Layout -> Templates
+# Layout :: Templates
+answer-link: znai/layout/templates
 
 ## Re-usable patterns
 
@@ -4451,7 +4550,8 @@ Let's move a block we plan to repeat into a separate file and replace hardcoding
 
 
 
-# Layout -> Two Sides Pages
+# Layout :: Two Sides Pages
+answer-link: znai/layout/two-sides-pages
 
 ## Setup
 
@@ -4513,7 +4613,8 @@ Table and code snippets above are aligned by using an empty block on the right s
 
 
 
-# Layout -> Two Sides Tabs
+# Layout :: Two Sides Tabs
+answer-link: znai/layout/two-sides-tabs
 
 ## Unified Tabs
 
@@ -4573,13 +4674,34 @@ $ whoamis
 
 
 
-# Layout -> Jupyter Notebook Two Sides
+# Layout :: Jupyter Notebook Two Sides
+answer-link: znai/layout/jupyter-notebook-two-sides
 
 ## Code First
 
 [The include-jupyter extension]() automatically assigns `{meta: {rightSide: true}}` to output cells. If page `type` is set to `two-sides` you will get automatic split between code and output.
 
 Note: Content below is included using `include-jupyter`
+
+```python
+from pandas import read_csv
+from IPython.display import display
+```
+
+```python
+tran = read_csv('transport.csv')
+print(tran)
+```
+
+```csv
+   a   b   c
+0  1   2   3
+1  4   5   6
+```
+
+```python
+display(tran)
+```
 
 
 ## Story First
@@ -4594,14 +4716,35 @@ Use `storyFirst` if you use a notebook with Markdown cells to tell a story. In t
 
 Displaying values using panda `display`
 
+```python
+from pandas import read_csv
+from IPython.display import display
+```
+
 Values can be displayed using standard console output
+
+```csv
+   a   b   c
+0  1   2   3
+1  4   5   6
+```
+
+```python
+tran = read_csv('transport.csv')
+print(tran)
+```
 
 Or using library to render a html snippet
 
+```python
+display(tran)
+```
 
 
 
-# Python -> Content Extraction
+
+# Python :: Content Extraction
+answer-link: znai/python/content-extraction
 
 ## Content
 
@@ -4699,7 +4842,8 @@ To show the contents of a class without the class declaration or doc string:
 
 
 
-# Python -> Description Extraction
+# Python :: Description Extraction
+answer-link: znai/python/description-extraction
 
 ## Doc String
 
@@ -4747,7 +4891,8 @@ If you define [Type Hints](), you can omit types from PyDoc text and Znai will t
 
 
 
-# Python -> Auto Reference
+# Python :: Auto Reference
+answer-link: znai/python/auto-reference
 
 ## Method/Function Definition
 
@@ -4830,7 +4975,8 @@ Note: Base classes that are defined somewhere in the documentation will turn int
 
 
 
-# CPP -> Doxygen Setup
+# CPP :: Doxygen Setup
+answer-link: znai/CPP/doxygen-setup
 
 ## Doxygen
 
@@ -4851,7 +4997,8 @@ Note: To read doxygen XMLs from zip, add path to the zip to [lookup-paths]()
 
 
 
-# CPP -> Description Extraction
+# CPP :: Description Extraction
+answer-link: znai/CPP/description-extraction
 
 ## Members Comment Text
 
@@ -4939,7 +5086,8 @@ Return description is part of parameters list
 
 
 
-# CPP -> Auto Reference
+# CPP :: Auto Reference
+answer-link: znai/CPP/auto-reference
 
 ## Member Signature, Comment And Parameters
 
@@ -5071,7 +5219,8 @@ Znai uses doxygen cross-reference to link definitions together. Class above refe
 
 
 
-# Java -> Content Extraction
+# Java :: Content Extraction
+answer-link: znai/java/content-extraction
 
 ## Method Body
 
@@ -5223,7 +5372,8 @@ Pass `entrySeparator: "<separator>"` to have a provided line in between entries 
 
 
 
-# Java -> Description Extraction
+# Java :: Description Extraction
+answer-link: znai/java/description-extraction
 
 ## Class Level
 
@@ -5364,7 +5514,8 @@ Pass `markdown: true` parameter to the plugins to treat JavaDoc content as markd
 
 
 
-# Java -> Auto Reference
+# Java :: Auto Reference
+answer-link: znai/java/auto-reference
 
 ## Coming Soon
 
@@ -5374,7 +5525,8 @@ Create a [GitHub Issue]() or [Discussion]() to help prioritize
 
 
 
-# Synergy With Testing -> Web UI
+# Synergy With Testing :: Web UI
+answer-link: znai/synergy-with-testing/web-UI
 
 ## Screenshots And Annotations
 
@@ -5397,7 +5549,8 @@ Using a testing framework one can generate coordinates during a UI test based on
 
 
 
-# Synergy With Testing -> REST API
+# Synergy With Testing :: REST API
+answer-link: znai/synergy-with-testing/REST-API
 
 ## Request and Response Capture
 
@@ -5448,7 +5601,8 @@ right:
 
 
 
-# Synergy With Testing -> Business Logic
+# Synergy With Testing :: Business Logic
+answer-link: znai/synergy-with-testing/business-logic
 
 ## Capture Input Example
 
@@ -5468,7 +5622,8 @@ Your test data and user-facing documentation is now linked.
 
 
 
-# Plugins -> Plugin Types
+# Plugins :: Plugin Types
+answer-link: znai/plugins/plugin-types
 
 `Znai` extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation:
 
@@ -5540,7 +5695,8 @@ Python:
 
 
 
-# Plugins -> Default Parameters
+# Plugins :: Default Parameters
+answer-link: znai/plugins/default-parameters
 
 ## Global Defaults
 
@@ -5573,7 +5729,8 @@ Once we have a block like this, every [include-image]() plugin on this page will
 
 
 
-# Plugins -> Development
+# Plugins :: Development
+answer-link: znai/plugins/development
 
 ## PlaceHolder
 
@@ -5581,7 +5738,8 @@ Please create [GitHub Issue]() if you are interested in plugins creation documen
 
 
 
-# Configuration -> Basic
+# Configuration :: Basic
+answer-link: znai/configuration/basic
 
 ## Favicon
 
@@ -5589,7 +5747,8 @@ Put a `favicon.png` file inside the root of your docs (next to your `toc` file)
 
 
 
-# Configuration -> Styling
+# Configuration :: Styling
+answer-link: znai/configuration/styling
 
 Add `style.css` next to `toc` file to change look and feel of the resulting documentation website.
 
@@ -5622,7 +5781,8 @@ Example above targets both light and dark theme. If you want to target dark them
 
 
 
-# Configuration -> Top Header
+# Configuration :: Top Header
+answer-link: znai/configuration/top-header
 
 To enable Top Header navigation bar, add `useTopHeader` to `meta.json`:
 
@@ -5632,7 +5792,8 @@ To enable Top Header navigation bar, add `useTopHeader` to `meta.json`:
 
 
 
-# Deployment -> Additional Files
+# Deployment :: Additional Files
+answer-link: znai/deployment/additional-files
 
 Znai automatically copies files like images to deploy location when you use them.
 
@@ -5645,7 +5806,8 @@ my-extra-dir
 
 
 
-# Hub -> Introduction
+# Hub :: Introduction
+answer-link: znai/hub/introduction
 
 Znai has a server mode that can act as a Hub for your company documentations. In addition to serving static content, Hub provides:
 
@@ -5655,7 +5817,8 @@ Znai has a server mode that can act as a Hub for your company documentations. In
 
 
 
-# Hub -> Setup
+# Hub :: Setup
+answer-link: znai/hub/setup
 
 ## Config File
 
@@ -5677,7 +5840,8 @@ Now you can run `upload` command to build and upload a documentation:
 
 
 
-# Hub -> Build Artifacts Watch
+# Hub :: Build Artifacts Watch
+answer-link: znai/hub/build-artifacts-watch
 
 ## Todo
 
@@ -5685,7 +5849,8 @@ Please create [GitHub Issue]() if you are interested in automatically watching a
 
 
 
-# Example References -> Domain
+# Example References :: Domain
+answer-link: znai/example-references/domain
 
 This page is a dummy page to demo code reference capabilities from [Java Enums]() and [parameter types]()
 
@@ -5707,7 +5872,8 @@ Transaction sell placeholder
 
 
 
-# Example References -> Api
+# Example References :: Api
+answer-link: znai/example-references/api
 
 This page is a dummy page to demo [code reference]() capabilities
 
@@ -5729,7 +5895,8 @@ stub for useful action description
 
 
 
-# Znai Development -> Local Build
+# Znai Development :: Local Build
+answer-link: znai/znai-development/local-build
 
 ## Clone Project
 
@@ -5769,7 +5936,14 @@ Use [brew]() to install [Firefox]().
 
 
 
-# Release Notes -> 2025
+# Release Notes :: 2025
+answer-link: znai/release-notes/2025
+
+## 1.81.1
+
+
+## 1.81
+
 
 ## 1.80
 
@@ -5797,7 +5971,8 @@ Use [brew]() to install [Firefox]().
 
 
 
-# Release Notes -> 2024
+# Release Notes :: 2024
+answer-link: znai/release-notes/2024
 
 ## 1.73
 
@@ -5822,7 +5997,8 @@ Use [brew]() to install [Firefox]().
 
 
 
-# Release Notes -> 2023
+# Release Notes :: 2023
+answer-link: znai/release-notes/2023
 
 ## 1.66
 
@@ -5838,7 +6014,8 @@ Use [brew]() to install [Firefox]().
 
 
 
-# Release Notes -> 2022
+# Release Notes :: 2022
+answer-link: znai/release-notes/2022
 
 ## 1.62
 
@@ -5872,7 +6049,8 @@ Use [brew]() to install [Firefox]().
 
 
 
-# Release Notes -> 2021
+# Release Notes :: 2021
+answer-link: znai/release-notes/2021
 
 ## 1.55
 
