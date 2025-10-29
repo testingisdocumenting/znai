@@ -27,6 +27,7 @@ import org.testingisdocumenting.znai.preprocessor.RegexpBasedPreprocessor;
 import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
+import org.testingisdocumenting.znai.markdown.PageMarkdownSection;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
@@ -587,35 +588,36 @@ public class WebSite implements Log {
     }
 
     private void updateSearchEntries(TocItem tocItem, MarkupParserResult parserResult) {
-        List<GlobalSearchEntry> siteSearchEntries = parserResult.searchEntries().stream()
-                .map(pageSearchEntry ->
+        List<GlobalSearchEntry> siteSearchEntries = parserResult.markdown().sections().stream()
+                .filter(section -> !(section.title().isEmpty() && section.markdown().trim().isEmpty()))
+                .map(section ->
                         new GlobalSearchEntry(
-                                searchEntryUrl(tocItem, pageSearchEntry),
-                                searchEntryTitle(tocItem, pageSearchEntry),
-                                pageSearchEntry.extractText()))
+                                searchEntryUrl(tocItem, section),
+                                searchEntryTitle(tocItem, section),
+                                section.markdown()))
                 .collect(toList());
 
         globalSearchEntries.addAll(siteSearchEntries);
         localSearchEntries.add(new PageLocalSearchEntries(tocItem, parserResult.searchEntries()));
     }
 
-    private String searchEntryUrl(TocItem tocItem, PageSearchEntry pageSearchEntry) {
+    private String searchEntryUrl(TocItem tocItem, PageMarkdownSection section) {
         DocUrl docUrl = tocItem.isIndex() ?
                 DocUrl.indexUrl():
-                new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), pageSearchEntry.getPageSectionId());
+                new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), section.id());
 
         return docStructure.createUrl(null, docUrl);
     }
 
-    private String searchEntryTitle(TocItem tocItem, PageSearchEntry pageSearchEntry) {
+    private String searchEntryTitle(TocItem tocItem, PageMarkdownSection section) {
         if (tocItem.isIndex()) {
-            return docMeta.getTitle() + " " + (pageSearchEntry.getPageSectionTitle().isEmpty() ?
-                    docMeta.getType() : pageSearchEntry.getPageSectionTitle());
+            return docMeta.getTitle() + " " + (section.title().isEmpty() ?
+                    docMeta.getType() : section.title());
         }
 
-        String pageSectionPart = pageSearchEntry.getPageSectionTitle().isEmpty() ?
+        String pageSectionPart = section.title().isEmpty() ?
                 "" :
-                ", " +  pageSearchEntry.getPageSectionTitle();
+                ", " + section.title();
 
         String chapterPart = tocItem.getChapterTitle().isEmpty() ?
                 "" :

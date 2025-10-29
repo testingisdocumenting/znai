@@ -26,11 +26,13 @@ import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
+import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,17 +42,32 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
         DEFAULT
     }
 
-    private final StringBuilder markdown;
+    private final List<PageMarkdownSection> sections;
     private final int baseHeadingLevel;
     private State state = State.DEFAULT;
 
+    private String currentSectionId;
+    private String currentSectionTitle;
+    private StringBuilder currentMarkdown;
+
     public MarkdownGeneratorParserHandler(int baseHeadingLevel) {
-        this.markdown = new StringBuilder();
+        this.sections = new ArrayList<>();
         this.baseHeadingLevel = baseHeadingLevel;
+
+        this.currentSectionId = "";
+        this.currentSectionTitle = "";
+        this.currentMarkdown = new StringBuilder();
     }
 
-    public String getMarkdown() {
-        return markdown.toString().replaceAll("\n\n\n", "\n\n");
+    public PageMarkdown getMarkdown() {
+        return new PageMarkdown(List.copyOf(sections));
+    }
+
+    private void finalizeCurrentSection() {
+        if (!currentMarkdown.isEmpty()) {
+            String markdown = currentMarkdown.toString().replaceAll("\n\n\n", "\n\n");
+            sections.add(new PageMarkdownSection(currentSectionId, currentSectionTitle, markdown));
+        }
     }
 
     @Override
@@ -59,19 +76,22 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
             return;
         }
 
-        int level = Math.max(1, heading.getLevel() + baseHeadingLevel);
-        markdown.append("#".repeat(level)).append(" ").append(title).append("\n\n");
+        finalizeCurrentSection();
+
+        currentSectionId = new PageSectionIdTitle(title, headingProps.props()).getId();
+        currentSectionTitle = title;
+        currentMarkdown = new StringBuilder();
     }
 
     @Override
     public void onSubHeading(int level, String title, HeadingProps headingProps, Heading heading) {
         int adjustedLevel = Math.max(1, level + baseHeadingLevel);
-        markdown.append("#".repeat(adjustedLevel)).append(" ").append(title).append("\n\n");
+        currentMarkdown.append("#".repeat(adjustedLevel)).append(" ").append(title).append("\n\n");
     }
 
     @Override
     public void onSimpleText(String value) {
-        markdown.append(value);
+        currentMarkdown.append(value);
     }
 
     @Override
@@ -81,49 +101,49 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     @Override
     public void onParagraphEnd() {
         switch (state) {
-            case INSIDE_LIST -> markdown.append("\n");
-            case DEFAULT -> markdown.append("\n\n");
+            case INSIDE_LIST -> currentMarkdown.append("\n");
+            case DEFAULT -> currentMarkdown.append("\n\n");
         }
     }
 
     @Override
     public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
-        markdown.append("`").append(inlinedCode).append("`");
+        currentMarkdown.append("`").append(inlinedCode).append("`");
     }
 
     @Override
     public void onEmphasisStart() {
-        markdown.append("*");
+        currentMarkdown.append("*");
     }
 
     @Override
     public void onEmphasisEnd() {
-        markdown.append("*");
+        currentMarkdown.append("*");
     }
 
     @Override
     public void onStrongEmphasisStart() {
-        markdown.append("**");
+        currentMarkdown.append("**");
     }
 
     @Override
     public void onStrongEmphasisEnd() {
-        markdown.append("**");
+        currentMarkdown.append("**");
     }
 
     @Override
     public void onStrikeThroughStart() {
-        markdown.append("~~");
+        currentMarkdown.append("~~");
     }
 
     @Override
     public void onStrikeThroughEnd() {
-        markdown.append("~~");
+        currentMarkdown.append("~~");
     }
 
     @Override
     public void onListItemStart() {
-        markdown.append("- ");
+        currentMarkdown.append("- ");
     }
 
     @Override
@@ -138,7 +158,7 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     @Override
     public void onBulletListEnd() {
         state = State.DEFAULT;
-        markdown.append("\n");
+        currentMarkdown.append("\n");
     }
 
     @Override
@@ -149,36 +169,36 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     @Override
     public void onOrderedListEnd() {
         state = State.DEFAULT;
-        markdown.append("\n");
+        currentMarkdown.append("\n");
     }
 
     @Override
     public void onBlockQuoteStart() {
-        markdown.append("> ");
+        currentMarkdown.append("> ");
     }
 
     @Override
     public void onBlockQuoteEnd() {
-        markdown.append("\n");
+        currentMarkdown.append("\n");
     }
 
     @Override
     public void onImage(String title, String destination, String alt) {
-        markdown.append("![").append(alt != null ? alt : "").append("](").append(destination);
+        currentMarkdown.append("![").append(alt != null ? alt : "").append("](").append(destination);
         if (title != null && !title.trim().isEmpty()) {
-            markdown.append(" \"").append(title).append("\"");
+            currentMarkdown.append(" \"").append(title).append("\"");
         }
-        markdown.append(")\n\n");
+        currentMarkdown.append(")\n\n");
     }
 
     @Override
     public void onSnippet(PluginParams pluginParams, String lang, String lineNumber, String snippet) {
-        markdown.append("```").append(lang != null ? lang : "").append("\n");
-        markdown.append(snippet);
+        currentMarkdown.append("```").append(lang != null ? lang : "").append("\n");
+        currentMarkdown.append(snippet);
         if (!snippet.endsWith("\n")) {
-            markdown.append("\n");
+            currentMarkdown.append("\n");
         }
-        markdown.append("```\n\n");
+        currentMarkdown.append("```\n\n");
     }
 
     @Override
@@ -190,60 +210,57 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
             return;
         }
 
-        // Header row
-        markdown.append("| ").append(String.join(" | ", columnTitles)).append(" |\n");
-        
-        // Separator row
-        markdown.append("|").append(" --- |".repeat(columnTitles.size())).append("\n");
-        
-        // Data rows
+        currentMarkdown.append("| ").append(String.join(" | ", columnTitles)).append(" |\n");
+        currentMarkdown.append("|").append(" --- |".repeat(columnTitles.size())).append("\n");
+
         for (List<Object> row : data) {
-            markdown.append("| ");
+            currentMarkdown.append("| ");
             for (int i = 0; i < columnTitles.size(); i++) {
                 String cell = i < row.size() && row.get(i) != null ? row.get(i).toString() : "";
-                markdown.append(cell.replace("|", "\\|"));
+                currentMarkdown.append(cell.replace("|", "\\|"));
                 if (i < columnTitles.size() - 1) {
-                    markdown.append(" | ");
+                    currentMarkdown.append(" | ");
                 }
             }
-            markdown.append(" |\n");
+            currentMarkdown.append(" |\n");
         }
-        markdown.append("\n\n");
+        currentMarkdown.append("\n\n");
     }
 
     @Override
     public void onFootnoteDefinition(ParsedFootnote footnote) {
-        markdown.append("[^").append(footnote.id().id()).append("]: ").append(footnote.allText()).append("\n\n");
+        currentMarkdown.append("[^").append(footnote.id().id()).append("]: ").append(footnote.allText()).append("\n\n");
     }
 
     @Override
     public void onSoftLineBreak() {
-        markdown.append(" ");
+        currentMarkdown.append(" ");
     }
 
     @Override
     public void onHardLineBreak() {
-        markdown.append("  \n");
+        currentMarkdown.append("  \n");
     }
 
     @Override
     public void onThematicBreak() {
-        markdown.append("---\n\n");
+        currentMarkdown.append("---\n\n");
     }
 
     @Override
     public void onHtml(String html, boolean isInlined) {
         String plainText = Jsoup.parse(html).text();
         if (!plainText.isEmpty()) {
-            markdown.append(plainText);
+            currentMarkdown.append(plainText);
             if (!isInlined) {
-                markdown.append("\n\n");
+                currentMarkdown.append("\n\n");
             }
         }
     }
 
     @Override
     public void onParsingEnd() {
+        finalizeCurrentSection();
     }
 
     @Override
@@ -252,17 +269,17 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
 
     @Override
     public void onLinkStart(String url) {
-        markdown.append("[");
+        currentMarkdown.append("[");
     }
 
     @Override
     public void onLinkEnd() {
-        markdown.append("]()");
+        currentMarkdown.append("]()");
     }
 
     @Override
     public void onFootnoteReference(FootnoteId footnoteId) {
-        markdown.append("[^").append(footnoteId.id()).append("]");
+        currentMarkdown.append("[^").append(footnoteId.id()).append("]");
     }
 
     @Override
@@ -296,18 +313,18 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     @Override
     public void onIncludePlugin(IncludePlugin includePlugin, PluginResult pluginResult) {
         String markdownRepresentation = includePlugin.markdownRepresentation();
-        markdown.append(markdownRepresentation).append("\n\n");
+        currentMarkdown.append(markdownRepresentation).append("\n\n");
     }
 
     @Override
     public void onFencePlugin(FencePlugin fencePlugin, PluginResult pluginResult) {
         String markdownRepresentation = fencePlugin.markdownRepresentation();
-        markdown.append(markdownRepresentation).append("\n\n");
+        currentMarkdown.append(markdownRepresentation).append("\n\n");
     }
 
     @Override
     public void onInlinedCodePlugin(InlinedCodePlugin inlinedCodePlugin, PluginResult pluginResult) {
         String markdownRepresentation = inlinedCodePlugin.markdownRepresentation();
-        markdown.append(markdownRepresentation);
+        currentMarkdown.append(markdownRepresentation);
     }
 }
