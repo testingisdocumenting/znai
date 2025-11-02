@@ -18,6 +18,7 @@
 package org.testingisdocumenting.znai.parser;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
+import org.testingisdocumenting.znai.markdown.PageMarkdown;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.search.PageSearchEntry;
 import org.testingisdocumenting.znai.structure.PageMeta;
@@ -32,7 +33,7 @@ public record MarkupParserResult(DocElement docElement,
                                  List<PageSearchEntry> searchEntries,
                                  List<AuxiliaryFile> auxiliaryFiles,
                                  PageMeta pageMeta,
-                                 String markdown) {
+                                 PageMarkdown markdown) {
     /**
      * Top level page element. use get content to get access to the children
      *

@@ -55,11 +55,29 @@ public class LlmContentGenerator {
                 return;
             }
 
-            String pageUrl = buildPageUrl(tocItem);
-            llmContent.append("# ").append(tocItem.getChapterTitle()).append(" :: ").append(tocItem.getPageTitle()).append("\n");
-            llmContent.append("answer-link: ").append(pageUrl).append("\n\n");
-            llmContent.append(parserResult.markdown());
-            llmContent.append("\n\n");
+            String basePageUrl = buildPageUrl(tocItem);
+
+            parserResult.markdown().sections().forEach(section -> {
+                if (section.title().isEmpty() && section.markdown().trim().isEmpty()) {
+                    return;
+                }
+
+                llmContent.append("# ").append(tocItem.getChapterTitle()).append(" :: ").append(tocItem.getPageTitle());
+
+                if (!section.title().isEmpty()) {
+                    llmContent.append(" :: ").append(section.title());
+                }
+                llmContent.append("\n");
+
+                String sectionUrl = section.title().isEmpty()
+                    ? basePageUrl
+                    : basePageUrl + "#" + section.id();
+                llmContent.append("answer-link: ").append(sectionUrl).append("\n\n");
+
+                String sectionMarkdown = section.markdown().stripTrailing();
+                llmContent.append(sectionMarkdown);
+                llmContent.append("\n\n");
+            });
         });
 
         return llmContent.toString();

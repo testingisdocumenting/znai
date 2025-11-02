@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.file.ManipulatedSnippetContentProvider;
+import org.testingisdocumenting.znai.markdown.PageMarkdownSection;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.preprocessor.RegexpBasedPreprocessor;
@@ -32,6 +33,7 @@ import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class MarkdownBasePlugin implements Plugin {
@@ -111,5 +113,16 @@ public abstract class MarkdownBasePlugin implements Plugin {
     @Override
     public List<SearchText> textForSearch() {
         return List.of(SearchScore.STANDARD.text(parserResult.getAllText()));
+    }
+
+    @Override
+    public String markdownRepresentation() {
+        if (parserResult == null || parserResult.markdown() == null) {
+            return "";
+        }
+
+        return parserResult.markdown().sections().stream()
+                .map(PageMarkdownSection::markdown)
+                .collect(Collectors.joining("\n\n"));
     }
 }

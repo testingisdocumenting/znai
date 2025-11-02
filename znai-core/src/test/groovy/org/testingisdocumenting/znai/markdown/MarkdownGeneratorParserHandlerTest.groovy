@@ -23,7 +23,9 @@ import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
 import java.nio.file.Paths
+import java.util.stream.Collectors
 
+import static org.testingisdocumenting.webtau.Matchers.contain
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class MarkdownGeneratorParserHandlerTest {
@@ -31,72 +33,59 @@ class MarkdownGeneratorParserHandlerTest {
 
     @Test
     void "should generate markdown for basic text"() {
-        def result = process("Hello world")
+        def result = pageMarkdownAsText("Hello world")
         result.should == "Hello world\n\n"
     }
 
     @Test
     void "should generate markdown with text formatting"() {
-        def result = process("This is **bold** and *italic* and ~~strikethrough~~")
+        def result = pageMarkdownAsText("This is **bold** and *italic* and ~~strikethrough~~")
         result.should == "This is **bold** and *italic* and ~~strikethrough~~\n\n"
     }
 
     @Test
-    void "should generate headers with base level adjustment"() {
-        def result = process("# Header")
-        result.should == "# Header\n\n"
-
-        result = process("# Header", 2)
-        result.should == "### Header\n\n"
-    }
-
-    @Test
     void "should generate inline code"() {
-        def result = process("Code: `hello()`")
+        def result = pageMarkdownAsText("Code: `hello()`")
         result.should == "Code: `hello()`\n\n"
     }
 
     @Test
     void "should generate code blocks"() {
-        def result = process("```java\nSystem.out.println();\n```")
+        def result = pageMarkdownAsText("```java\nSystem.out.println();\n```")
         result.should == "```java\nSystem.out.println();\n```\n\n"
     }
 
     @Test
     void "should generate lists"() {
-        def result = process("- Item one\n- Item two")
+        def result = pageMarkdownAsText("- Item one\n- Item two")
         result.should == "- Item one\n- Item two\n\n"
     }
 
     @Test
     void "should generate block quotes"() {
-        def result = process("> Quote")
+        def result = pageMarkdownAsText("> Quote")
         result.should == "> Quote\n\n"
     }
 
     @Test
     void "should generate thematic breaks"() {
-        def result = process("Text\n\n---\n\nMore text")
+        def result = pageMarkdownAsText("Text\n\n---\n\nMore text")
         result.should == "Text\n\n---\n\nMore text\n\n"
     }
 
     @Test
     void "should handle multi-paragraph content"() {
-        def result = process("First paragraph\n\nSecond paragraph")
+        def result = pageMarkdownAsText("First paragraph\n\nSecond paragraph")
         result.should == "First paragraph\n\nSecond paragraph\n\n"
     }
 
     @Test
-    void "should handle complex document with proper header level shifting"() {
-        def result = process("# Main Title\n\nContent here\n\n## Subtitle\n\nMore content with **bold**", 1)
-        result.should == "## Main Title\n\nContent here\n\n### Subtitle\n\nMore content with **bold**\n\n"
-    }
-
-    @Test
     void "should preserve markdown formatting in complex content"() {
-        def result = process("# Documentation\n\nThis has **bold**, *italic*, and `code`.\n\n```python\nprint('hello')\n```\n\n- List item\n- Another item")
-        result.should == "# Documentation\n" +
-                "\n" +
+        def result = pageMarkdown("# Documentation\n\nThis has **bold**, *italic*, and `code`.\n\n```python\nprint('hello')\n```\n\n- List item\n- Another item")
+
+        result.sections().size().should == 1
+        result.sections().get(0).title().should == "Documentation"
+        result.sections().get(0).markdown().should ==
                 "This has **bold**, *italic*, and `code`.\n" +
                 "\n" +
                 "```python\n" +
@@ -109,27 +98,114 @@ class MarkdownGeneratorParserHandlerTest {
 
     @Test
     void "should handle empty input"() {
-        def result = process("")
+        def result = pageMarkdownAsText("")
         result.should == ""
     }
 
     @Test
     void "should use plugin markdownRepresentation method for include plugins"() {
-        def handler = new MarkdownGeneratorParserHandler(0)
+        def handler = new MarkdownGeneratorParserHandler()
         def plugin = new DummyIncludePlugin()
-        
+
         plugin.process(TEST_COMPONENTS_REGISTRY, handler, Paths.get("test.md"),
                       TEST_COMPONENTS_REGISTRY.pluginParamsFactory().create("dummy", "test-param", [:]))
-        
+
         handler.onIncludePlugin(plugin, PluginResult.empty())
-        
-        def result = handler.getMarkdown()
+        handler.onParsingEnd()
+
+        def result = joinSections(handler.getMarkdown())
         result.should == "**Dummy plugin content**: test-param\n\n"
     }
 
-    private static String process(String markdown, int baseHeadingLevel = 0) {
-        def handler = new MarkdownGeneratorParserHandler(baseHeadingLevel)
+    @Test
+    void "should separate content into sections by first-level headers"() {
+        def markdown = """# Section One
+
+Content in section one
+
+## Subsection
+
+More content
+
+# Section Two
+
+Content in section two"""
+
+        def pageMarkdown =pageMarkdown(markdown)
+
+        pageMarkdown.sections().size().should == 2
+
+        def section1 = pageMarkdown.sections()[0]
+        section1.title().should == "Section One"
+        section1.id().should == "section-one"
+
+        def section2 = pageMarkdown.sections()[1]
+        section2.title().should == "Section Two"
+        section2.id().should == "section-two"
+    }
+
+    @Test
+    void "should capture content before first header in section with empty title"() {
+        def markdown = """Content before any header
+
+More content
+
+# First Header
+
+Content after header"""
+
+        def pageMarkdown = pageMarkdown(markdown)
+
+        pageMarkdown.sections().size().should == 2
+
+        def section1 = pageMarkdown.sections()[0]
+        section1.title().should == ""
+        section1.id().should == ""
+        section1.markdown().trim().should == "Content before any header\n\nMore content"
+    }
+
+    @Test
+    void "should include markdown representation from include plugin in section"() {
+        def markdown = """# Global
+
+Content before include
+
+:include-dummy: included-content
+"""
+
+        def pageMarkdown = pageMarkdown(markdown)
+
+        pageMarkdown.sections().size().should == 1
+
+        def section1 = pageMarkdown.sections()[0]
+        section1.title().should == "Global"
+        section1.id().should == "global"
+
+        def sectionMd = section1.markdown()
+
+        sectionMd.should contain("Content before include")
+        sectionMd.should contain("**Dummy plugin content**: included-content")
+    }
+
+    private static String pageMarkdownAsText(String markdown) {
+        return joinSections(pageMarkdown(markdown))
+    }
+
+    private static PageMarkdown pageMarkdown(String markdown) {
+        def handler = new MarkdownGeneratorParserHandler()
         parser.parse(Paths.get("test.md"), handler, markdown)
+        handler.onParsingEnd()
+
         return handler.getMarkdown()
+    }
+
+    private static String joinSections(PageMarkdown pageMarkdown) {
+        if (pageMarkdown.sections().isEmpty()) {
+            return ""
+        }
+
+        return pageMarkdown.sections().stream()
+                .map(section -> section.markdown())
+                .collect(Collectors.joining())
     }
 }

@@ -61,7 +61,7 @@ public class MarkdownParser implements MarkupParser {
         SearchCrawlerParserHandler searchCrawler = new SearchCrawlerParserHandler();
         DocElementCreationParserHandler elementCreationHandler =
                 new DocElementCreationParserHandler(componentsRegistry, path);
-        MarkdownGeneratorParserHandler markdownGenerator = new MarkdownGeneratorParserHandler(1);
+        MarkdownGeneratorParserHandler markdownGenerator = new MarkdownGeneratorParserHandler();
 
         ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler, markdownGenerator);
 
