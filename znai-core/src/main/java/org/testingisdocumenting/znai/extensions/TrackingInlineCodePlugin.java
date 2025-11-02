@@ -69,4 +69,9 @@ public class TrackingInlineCodePlugin implements InlinedCodePlugin {
         paramsTracker.trackParams(pluginParams);
         return delegate.process(componentsRegistry, markupPath, pluginParams);
     }
+
+    @Override
+    public String markdownRepresentation() {
+        return delegate.markdownRepresentation();
+    }
 }

@@ -43,16 +43,14 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     }
 
     private final List<PageMarkdownSection> sections;
-    private final int baseHeadingLevel;
     private State state = State.DEFAULT;
 
     private String currentSectionId;
     private String currentSectionTitle;
     private StringBuilder currentMarkdown;
 
-    public MarkdownGeneratorParserHandler(int baseHeadingLevel) {
+    public MarkdownGeneratorParserHandler() {
         this.sections = new ArrayList<>();
-        this.baseHeadingLevel = baseHeadingLevel;
 
         this.currentSectionId = "";
         this.currentSectionTitle = "";
@@ -85,8 +83,7 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
 
     @Override
     public void onSubHeading(int level, String title, HeadingProps headingProps, Heading heading) {
-        int adjustedLevel = Math.max(1, level + baseHeadingLevel);
-        currentMarkdown.append("#".repeat(adjustedLevel)).append(" ").append(title).append("\n\n");
+        currentMarkdown.append("#".repeat(level)).append(" ").append(title).append("\n\n");
     }
 
     @Override

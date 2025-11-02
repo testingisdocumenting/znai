@@ -70,4 +70,9 @@ public class TrackingIncludePlugin implements IncludePlugin {
     public PluginParamsDefinition parameters() {
         return delegate.parameters();
     }
+
+    @Override
+    public String markdownRepresentation() {
+        return delegate.markdownRepresentation();
+    }
 }

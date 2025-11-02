@@ -74,7 +74,8 @@ public class LlmContentGenerator {
                     : basePageUrl + "#" + section.id();
                 llmContent.append("answer-link: ").append(sectionUrl).append("\n\n");
 
-                llmContent.append(section.markdown());
+                String sectionMarkdown = section.markdown().stripTrailing();
+                llmContent.append(sectionMarkdown);
                 llmContent.append("\n\n");
             });
         });

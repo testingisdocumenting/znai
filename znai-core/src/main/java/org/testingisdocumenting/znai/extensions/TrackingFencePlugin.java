@@ -74,4 +74,9 @@ public class TrackingFencePlugin implements FencePlugin {
     public PluginParamsDefinition parameters() {
         return delegate.parameters();
     }
+
+    @Override
+    public String markdownRepresentation() {
+        return delegate.markdownRepresentation();
+    }
 }
