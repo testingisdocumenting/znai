@@ -1,0 +1,1 @@
+* Add: `search-entries.xml` now contains page section text as markdown representation 

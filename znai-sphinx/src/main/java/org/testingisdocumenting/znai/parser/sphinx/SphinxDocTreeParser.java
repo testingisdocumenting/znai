@@ -17,6 +17,8 @@
 package org.testingisdocumenting.znai.parser.sphinx;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.markdown.PageMarkdown;
+import org.testingisdocumenting.znai.markdown.PageMarkdownSection;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandlersList;
@@ -44,12 +46,15 @@ public class SphinxDocTreeParser implements MarkupParser {
         DocTreeDomXmlParser xmlParser = new DocTreeDomXmlParser(componentsRegistry, path, parserHandler);
         xmlParser.parse(docXml);
 
+        PageMarkdownSection section = new PageMarkdownSection("", "", docXml);
+        PageMarkdown pageMarkdown = new PageMarkdown(Collections.singletonList(section));
+
         return new MarkupParserResult(elementCreationHandler.getDocElement(),
                 Collections.emptyList(),
                 searchCrawler.getSearchEntries(),
                 elementCreationHandler.getAuxiliaryFiles(),
                 new PageMeta(),
-                docXml);
+                pageMarkdown);
     }
 
     @Override

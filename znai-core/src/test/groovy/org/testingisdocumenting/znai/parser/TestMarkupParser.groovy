@@ -16,6 +16,8 @@
 
 package org.testingisdocumenting.znai.parser
 
+import org.testingisdocumenting.znai.markdown.PageMarkdown
+import org.testingisdocumenting.znai.markdown.PageMarkdownSection
 import org.testingisdocumenting.znai.parser.docelement.DocElement
 import org.testingisdocumenting.znai.search.PageSearchEntry
 import org.testingisdocumenting.znai.search.SearchScore
@@ -32,7 +34,8 @@ class TestMarkupParser implements MarkupParser {
 
         def searchEntry = new PageSearchEntry(new PageSectionIdTitle('dummy page section title', [:]), [SearchScore.STANDARD.text(markup)])
 
-        return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta(), markup)
+        def pageMarkdownSection = new PageMarkdownSection("test-id", "test-title", markup)
+        return new MarkupParserResult(page, [], [searchEntry], [], new PageMeta(), new PageMarkdown([pageMarkdownSection]))
     }
 
     @Override
