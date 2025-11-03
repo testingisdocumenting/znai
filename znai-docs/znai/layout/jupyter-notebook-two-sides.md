@@ -9,7 +9,7 @@ If page `type` is set to `two-sides` you will get automatic split between code a
 
 Note: Content below is included using `include-jupyter`
 
-:include-jupyter: snippets/jupyter/simple-notebook.ipynb
+:include-jupyter: snippets/jupyter/notebook.ipynb
 
 # Story First
 
@@ -18,4 +18,4 @@ side and a reader can focus on the story itself.
 
     :include-jupyter: notebook.ipynb {storyFirst: true}
 
-:include-jupyter: src/test/resources/notebook-with-markdown-story.ipynb {storyFirst: true}
+:include-jupyter: ../snippets/jupyter/notebook.ipynb {storyFirst: true}

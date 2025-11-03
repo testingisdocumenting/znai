@@ -1,36 +1,46 @@
-# Code and Output
+# Include Notebook Section
 
-Use `include-jupyter` to include [Jupyter](https://jupyter.org/) notebook inside your documentation. 
+Use `include-jupyter` to include a jupyter notebook or one of its parts.
+Here is an example of a notebook:
 
-    :include-jupyter: jupyter/simple-notebook.ipynb
-    
-:include-jupyter: jupyter/simple-notebook.ipynb
+:include-image: jupyter/notebook.png {fit: true, border: true}
+
+To include one of its sections use,
+
+```
+:include-jupyter: jupyter/notebook.ipynb {
+    includeSection: ["Loading Data From CSV"]
+}
+```
+
+Markdown cells will be seamlessly integrated with the current page. 
+Top level headers become this page top level header.
+
+Note: without `includeSection`, the entire notebook content will be added.
+
+:include-jupyter: jupyter/notebook.ipynb {
+    includeSection: ["Loading Data From CSV"]
+}
 
 Note: Remember that you can define lookup paths for files like notebooks inside [lookup-paths](flow/lookup-paths) file, so you don't have
 to copy and paste notebooks to your documentation directory.
 
-# Seamless Markdown Integration
+# Exclude Section Title
 
-Markdown from your notebook will be seamlessly integrated into your current page. First level `# headers` will
-become part of Table Of Contents and part of a search unit. 
-
-:include-image: jupyter/notebook.png {fit: true}
-
-    :include-jupyter: notebook-with-markdown-story.ipynb
-
-Note: below text is auto generated, including the **Panda** section 
-:include-jupyter: src/test/resources/notebook-with-markdown-story.ipynb
-
-# Include Only Specified Sections
-
-Use `includeSection` to select which sections of the notebook to include.
+Use `excludeSectionTitle` to exclude section title. It can be useful when you 
+want to use section titles as example separators to be included into your guides.
 
 ```
-:include-jupyter: notebook.ipynb {
-    includeSection: ["Section One"; "Section Three"], 
+:include-jupyter: jupyter/notebook.ipynb {
+    includeSection: ["Average Prcing By Genre"],
     excludeSectionTitle: true
 }
 ```
+
+:include-jupyter: jupyter/notebook.ipynb {
+    includeSection: ["Average Pricing By Genre"],
+    excludeSectionTitle: true
+}
 
 # Two Sides
 
