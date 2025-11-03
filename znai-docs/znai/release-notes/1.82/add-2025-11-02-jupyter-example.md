@@ -1,0 +1,1 @@
+* Add: Jupyter dataframes align cells right
