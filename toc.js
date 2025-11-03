@@ -943,21 +943,17 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
-      "title" : "Code and Output",
-      "id" : "code-and-output",
-      "customAnchorId" : "code-and-output"
+      "title" : "Include Notebook Section",
+      "id" : "include-notebook-section",
+      "customAnchorId" : "include-notebook-section"
     }, {
-      "title" : "Seamless Markdown Integration",
-      "id" : "seamless-markdown-integration",
-      "customAnchorId" : "seamless-markdown-integration"
+      "title" : "Loading Data From CSV",
+      "id" : "loading-data-from-csv",
+      "customAnchorId" : "loading-data-from-csv"
     }, {
-      "title" : "Pandas",
-      "id" : "pandas",
-      "customAnchorId" : "pandas"
-    }, {
-      "title" : "Include Only Specified Sections",
-      "id" : "include-only-specified-sections",
-      "customAnchorId" : "include-only-specified-sections"
+      "title" : "Exclude Section Title",
+      "id" : "exclude-section-title",
+      "customAnchorId" : "exclude-section-title"
     }, {
       "title" : "Two Sides",
       "id" : "two-sides",
@@ -1899,13 +1895,25 @@ toc = [ {
       "id" : "code-first",
       "customAnchorId" : "code-first"
     }, {
+      "title" : "Loading Data From CSV",
+      "id" : "loading-data-from-csv",
+      "customAnchorId" : "loading-data-from-csv"
+    }, {
+      "title" : "Average Pricing By Genre",
+      "id" : "average-pricing-by-genre",
+      "customAnchorId" : "average-pricing-by-genre"
+    }, {
       "title" : "Story First",
       "id" : "story-first",
       "customAnchorId" : "story-first"
     }, {
-      "title" : "Pandas",
-      "id" : "pandas",
-      "customAnchorId" : "pandas"
+      "title" : "Loading Data From CSV",
+      "id" : "loading-data-from-csv-3",
+      "customAnchorId" : "loading-data-from-csv-3"
+    }, {
+      "title" : "Average Pricing By Genre",
+      "id" : "average-pricing-by-genre-3",
+      "customAnchorId" : "average-pricing-by-genre-3"
     } ]
   } ]
 }, {
@@ -2524,6 +2532,10 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.82",
+      "id" : "182",
+      "customAnchorId" : "182"
+    }, {
       "title" : "1.81.1",
       "id" : "1811",
       "customAnchorId" : "1811"
