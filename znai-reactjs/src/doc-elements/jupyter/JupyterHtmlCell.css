@@ -66,3 +66,7 @@
 .jupyter-html tbody tr:last-child td {
     border-bottom: none;
 }
+
+.jupyter-html .dataframe tbody td {
+    text-align: right;
+}
