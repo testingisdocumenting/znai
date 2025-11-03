@@ -1,0 +1,1 @@
+* Add: Dismissable slack offline indicator instead of an error banner on every page.

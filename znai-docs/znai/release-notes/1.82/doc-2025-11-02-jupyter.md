@@ -1,0 +1,1 @@
+* Doc: Jupyter improved example for docs

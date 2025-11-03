@@ -22,8 +22,9 @@ import { HighlightedText } from "./HighlightedText";
 import { TocItem } from "../../structure/TocItem";
 
 import { ResolveQuestionButton } from "./ResolveQuestionButton";
-import "./SlackActiveQuestions.css";
 import { removeTrailingSlashFromQueryParam } from "./queryParamUtils";
+
+import "./SlackActiveQuestions.css";
 
 interface Question {
   id: string;
@@ -37,9 +38,34 @@ interface Question {
   resolved: boolean;
 }
 
+let slackConnectionDismissed = false;
+
+function SlackConnectionIndicator({ onDismiss }: { onDismiss: () => void }) {
+  const handleDismiss = () => {
+    slackConnectionDismissed = true;
+    onDismiss();
+  };
+
+  return (
+    <div className="znai-slack-connection-indicator">
+      <div className="znai-slack-connection-content">
+        <span className="znai-slack-connection-message">Slack conversations are offline</span>
+        <button
+          className="znai-slack-connection-close"
+          onClick={handleDismiss}
+          aria-label="Dismiss Slack connection indicator"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode: HTMLElement; tocItem: TocItem }) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [showConnectionIndicator, setShowConnectionIndicator] = useState(false);
 
   const params = new URLSearchParams(window.location.search);
   const questionId = params.get("questionId") || "";
@@ -80,11 +106,18 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
         }));
         setQuestions(questions);
       } else {
-        setNotification({ type: "error", message: `Failed to fetch slack questions: ${response.statusText}` });
+        handleFetchError(`Failed to fetch slack questions: ${response.status} ${response.statusText}`);
         setQuestions([]);
       }
     } catch (err) {
-      setNotification({ type: "error", message: `Failed to fetch slack questions: ${err}` });
+      handleFetchError(`Failed to fetch slack questions: ${err}`);
+    }
+  }
+
+  function handleFetchError(errorMessage: string) {
+    console.error(errorMessage);
+    if (!slackConnectionDismissed) {
+      setShowConnectionIndicator(true);
     }
   }
 
@@ -150,6 +183,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
   return (
     <>
       {renderedQuestions}
+      {showConnectionIndicator && <SlackConnectionIndicator onDismiss={() => setShowConnectionIndicator(false)} />}
       {notification && (
         <Notification type={notification.type} message={notification.message} onClose={() => setNotification(null)} />
       )}

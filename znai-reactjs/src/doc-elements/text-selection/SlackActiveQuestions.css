@@ -73,3 +73,31 @@
 .theme-znai-dark .znai-highlight-bubble-resolve-wrapper {
     border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.znai-slack-connection-indicator {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 10000;
+}
+
+.znai-slack-connection-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 152, 0, 0.15);
+    border: 1px solid rgba(255, 152, 0, 0.4);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+.znai-slack-connection-close {
+    background: none;
+    border: none;
+    color: rgba(255, 152, 0, 0.8);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0;
+    margin-left: 4px;
+}
