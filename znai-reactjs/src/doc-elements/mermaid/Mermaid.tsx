@@ -75,9 +75,21 @@ export default function Mermaid(props: Props) {
   }, []);
 
   React.useEffect(() => {
-    mermaid.mermaidAPI.render(generateNewMermaidId(), props.mermaid, (html) => {
-      setHTML(html);
+    const id = generateNewMermaidId();
+    mermaid.mermaidAPI.initialize({
+      startOnLoad: false,
+      // @ts-ignore
+      theme: mermaidThemeName(),
     });
+
+    mermaid.render(id, props.mermaid)
+        .then(({ svg }) => {
+          // For Mermaid 11+, the render method returns an object with the SVG
+          setHTML(svg);
+        })
+        .catch((error) => {
+          console.error('Error rendering mermaid diagram:', error);
+        });
   }, [props.mermaid, znaiThemeName]);
 
   const className = "znai-mermaid " + (props.wide ? "wide" : "content-block");
