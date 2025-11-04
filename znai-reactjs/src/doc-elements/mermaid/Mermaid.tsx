@@ -47,7 +47,7 @@ function initMermaidIfRequired() {
   }
 
   function initializeMermaid() {
-    mermaid.mermaidAPI.initialize({
+    mermaid.initialize({
       startOnLoad: false,
       // @ts-ignore
       theme: mermaidThemeName(),
@@ -76,7 +76,7 @@ export default function Mermaid(props: Props) {
 
   React.useEffect(() => {
     const id = generateNewMermaidId();
-    mermaid.mermaidAPI.initialize({
+    mermaid.initialize({
       startOnLoad: false,
       // @ts-ignore
       theme: mermaidThemeName(),
