@@ -15,13 +15,13 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import SvgCustomShape from './SvgCustomShape'
 import { buildUniqueId, removeRadiusPropsNoCopy, removeCustomPropsNoCopy } from "./gvUtils";
 
 import LinkWrap from './LinkWrap'
 
-class GvPolygon extends Component {
+class GvPolygon extends React.Component {
     render() {
         const {url} = this.props
         const renderNode = this.renderNode()

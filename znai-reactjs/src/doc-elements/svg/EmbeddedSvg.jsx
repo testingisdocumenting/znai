@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import {svgAttributesToProps} from './svgUtils'
 
 import {isAllAtOnce} from '../meta/meta'
 
 import './EmbeddedSvg.css'
 
-class EmbeddedSvg extends Component {
+class EmbeddedSvg extends React.Component {
     render() {
         const {svg} = this.props
 

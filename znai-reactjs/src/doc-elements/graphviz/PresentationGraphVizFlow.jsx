@@ -20,7 +20,7 @@ import GraphVizSvg from './GraphVizSvg'
 
 import {expandId} from './gvUtils'
 
-class PresentationGraphVizFlow extends Component {
+class PresentationGraphVizFlow extends React.Component {
     render() {
         const {diagram, colors} = this.props
 

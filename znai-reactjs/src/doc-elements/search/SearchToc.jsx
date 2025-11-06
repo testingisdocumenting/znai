@@ -1,41 +1,24 @@
-/*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-import React, {Component} from 'react'
+/** @jsx React.createElement */
+import React from 'react'
 import SearchTocItem from './SearchTocItem'
 
-export default class SearchToc extends Component {
-    render() {
-        const {ids, selectedIdx, onSelect, onJump, search} = this.props
-
-        return (
-            <div className="znai-search-toc-items">
-                {ids.map((id, idx) => {
-                    const searchEntry = search.findSearchEntryById(id)
-                    return (
-                        <SearchTocItem key={id}
-                                       idx={idx}
-                                       pageTitle={searchEntry.pageTitle}
-                                       pageSection={searchEntry.pageSection}
-                                       isSelected={idx === selectedIdx}
-                                       onSelect={onSelect}
-                                       onJump={onJump}/>
-                    )
-                })}
-            </div>
-        )
-    }
+const SearchToc = ({ids, search, onClick}) => {
+    return (
+        <div className="znai-search-toc">
+            {ids.map((id, idx) => {
+                const searchEntry = search.findSearchEntryById(id)
+                return (
+                    <SearchTocItem 
+                        key={id}
+                        idx={idx}
+                        pageTitle={searchEntry.pageTitle}
+                        section={searchEntry.section}
+                        onSearch={onClick}
+                    />
+                )
+            })}
+        </div>
+    )
 }
+
+export default SearchToc

@@ -56,7 +56,7 @@ const testData = {
     "urls": {"n1": "http://google.com", "n3": "/preview/local"}
 }
 
-class DiagramSlidesDemo extends Component {
+class DiagramSlidesDemo extends React.Component {
     render() {
         return <div>
             <GraphVizSvg {...testData}/></div>

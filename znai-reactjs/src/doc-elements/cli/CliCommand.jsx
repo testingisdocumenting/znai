@@ -21,7 +21,7 @@ import CliCommandToken from "./CliCommandToken"
 import {splitParts} from "../../utils/strings"
 import "./CliCommand.css"
 
-class CliCommand extends Component {
+class CliCommand extends React.Component {
     constructor(props) {
         super(props)
 

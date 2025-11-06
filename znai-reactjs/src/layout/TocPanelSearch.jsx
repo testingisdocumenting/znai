@@ -15,13 +15,13 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import { Icon } from '../doc-elements/icons/Icon'
 
 import './TocPanelSearch.css'
 
-class TocPanelSearch extends Component {
+class TocPanelSearch extends React.Component {
     render() {
         return (
           <div className="znai-toc-panel-search" onClick={this.props.onClick}>

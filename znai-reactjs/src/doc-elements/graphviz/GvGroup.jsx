@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import {removeCustomProps} from './gvUtils'
 
-class GvGroup extends Component {
+class GvGroup extends React.Component {
     render() {
         const cleanedUpProps = removeCustomProps(this.props)
 

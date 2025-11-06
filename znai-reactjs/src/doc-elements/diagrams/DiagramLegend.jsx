@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import './DiagramLegend.css'
 
-class DiagramLegend extends Component {
+class DiagramLegend extends React.Component {
     render() {
         const {clickableNodes} = this.props
 

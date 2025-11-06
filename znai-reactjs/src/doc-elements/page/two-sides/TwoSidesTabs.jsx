@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import {tabsRegistration} from '../../tabs/TabsRegistration'
 
-class TwoSidesTabs extends Component {
+class TwoSidesTabs extends React.Component {
     constructor(props) {
         super(props)
 

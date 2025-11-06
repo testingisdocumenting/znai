@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import {socketUrl} from '../../utils/socket'
 import { Icon } from '../icons/Icon'
 
@@ -73,7 +73,7 @@ class Server {
     }
 }
 
-class Preview extends Component {
+class Preview extends React.Component {
     constructor(props) {
         super(props)
         this.state = {active: false}
