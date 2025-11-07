@@ -34,7 +34,7 @@ import { moveAndHideHtmlElementForAutoScroll } from "../text-selection/component
 import "./tokens.css";
 import "./SimpleCodeSnippet.css";
 
-class SimpleCodeSnippet extends Component {
+class SimpleCodeSnippet extends React.Component {
   constructor(props) {
     super(props);
 

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import {isAllAtOnce} from '../meta/meta'
 import {EmbeddedSvg} from './EmbeddedSvg'
 
 import './Svg.css'
 
-class Svg extends Component {
+class Svg extends React.Component {
     constructor(props) {
         super(props)
         this.state = {loadedSvg: null}

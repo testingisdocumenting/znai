@@ -21,7 +21,7 @@ import GraphVizFlowAllInfoAtOnce from './GraphVizFlowAllInfoAtOnce'
 
 import './GraphvVizFlow.css'
 
-class GraphVizFlow extends Component {
+class GraphVizFlow extends React.Component {
     constructor(props) {
         super(props)
         this.state = {fullScreen: false}

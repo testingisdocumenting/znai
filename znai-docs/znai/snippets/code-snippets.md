@@ -17,9 +17,9 @@ Note: this method doesn't highlight code.
 You can also specify a language to enable syntax highlighting for your snippet. 
 
     ```javascript
-    import React, {Component} from 'react'
+    import React from 'react'
 
-    class MyComponent extends Component {
+    class MyComponent extends React.Component {
         render() {
             /// ...
         }
@@ -27,9 +27,9 @@ You can also specify a language to enable syntax highlighting for your snippet.
     ```
 
 ```javascript
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
     render() {
         /// ...
     }
@@ -61,9 +61,9 @@ Use the `title` property to specify a title.
     ```
 
 ```javascript {title: "ReactJS Component"}
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
     render() {
         /// ...
     }
@@ -82,9 +82,9 @@ Use `anchorId` to override auto generated identifier.
 ```
 `````
 ```javascript {title: "ReactJS Component", anchorId: "my-special-code"}
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
   render() {
     /// ...
   }

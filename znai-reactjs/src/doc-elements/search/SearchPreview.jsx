@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import Mark from 'mark.js/dist/mark.js'
 
-class SearchPreview extends Component {
+class SearchPreview extends React.Component {
     componentDidMount() {
         this.highlight()
     }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import './ShapeInfo.css'
 
 const LabeledField = ({name, value, onChange}) => {
@@ -32,7 +32,7 @@ const LabeledField = ({name, value, onChange}) => {
     </div>)
 }
 
-class ShapeInfo extends Component {
+class ShapeInfo extends React.Component {
     render() {
         const {shape, isSelected, onSelect, onChange} = this.props
         const className = "shape-info" + (isSelected ? " selected" : "")

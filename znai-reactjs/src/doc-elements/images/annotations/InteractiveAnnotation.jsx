@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import Knob from './Knob'
 
-const interactiveAnnotation = (shapeHandler, handlers) => class InteractiveAnnotation extends Component {
+const interactiveAnnotation = (shapeHandler, handlers) => class InteractiveAnnotation extends React.Component {
     constructor(props) {
         super(props)
 

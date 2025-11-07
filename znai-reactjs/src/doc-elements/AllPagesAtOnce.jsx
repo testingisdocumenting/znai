@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import {getAllPagesPromise} from './allPages'
 import {elementsLibrary} from './DefaultElementsLibrary'
 
 import './AllPagesAtOnce.css'
 
-class AllPagesAtOnce extends Component {
+class AllPagesAtOnce extends React.Component {
     constructor(props) {
         super(props)
 

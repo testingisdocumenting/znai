@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import SearchBox from './SearchBox'
 import SearchToc from './SearchToc'
 import SearchPreview from './SearchPreview'
 import Search from './Search'
 
-class SearchPopup extends Component {
+class SearchPopup extends React.Component {
     constructor(props) {
         super(props)
 

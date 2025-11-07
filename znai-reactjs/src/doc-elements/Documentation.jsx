@@ -55,7 +55,7 @@ import { TooltipRenderer } from "../components/Tooltip";
 
 import "./search/Search.css";
 
-export class Documentation extends Component {
+export class Documentation extends React.Component {
   constructor(props) {
     super(props);
 

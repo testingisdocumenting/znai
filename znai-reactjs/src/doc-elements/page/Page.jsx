@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import {pageTypesRegistry} from './PageTypesRegistry'
 import {PresentationHeading} from '../default-elements/PresentationHeading'
 import {areTocItemEquals} from '../../structure/TocItem'
 
-class Page extends Component {
+class Page extends React.Component {
     render() {
         const {tocItem} = this.props
 

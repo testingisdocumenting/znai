@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import {extractTextLines, extractTextLinesEmphasisOrFull} from '../bulletUtils'
 import {splitTextIntoLinesUsingThreshold} from '../../../utils/strings'
@@ -42,7 +42,7 @@ const halfFontHeight = fontHeight / 2.0
 const distanceBetweenSteps = 2
 const stepAllocatedWidth = (stepWidth + distanceBetweenSteps)
 
-class Step extends Component {
+class Step extends React.Component {
     render() {
         const {idx, color} = this.props
 
