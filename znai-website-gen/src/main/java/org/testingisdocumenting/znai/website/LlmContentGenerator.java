@@ -62,11 +62,11 @@ public class LlmContentGenerator {
                     return;
                 }
 
-                llmContent.append("# ").append(tocItem.getChapterTitle()).append(" :: ").append(tocItem.getPageTitle());
+                var headerParts = Stream.of(tocItem.isIndex() ? "Index": "", tocItem.getChapterTitle(), tocItem.getPageTitle(), section.title())
+                        .filter(s -> !s.isEmpty())
+                        .collect(Collectors.joining(" :: "));
 
-                if (!section.title().isEmpty()) {
-                    llmContent.append(" :: ").append(section.title());
-                }
+                llmContent.append("# ").append(headerParts);
                 llmContent.append("\n");
 
                 String sectionUrl = section.title().isEmpty()

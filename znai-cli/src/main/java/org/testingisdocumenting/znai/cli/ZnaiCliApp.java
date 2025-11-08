@@ -92,6 +92,7 @@ public class ZnaiCliApp {
 
         if (needsDocGeneration()) {
             webSite = generateDocs(config.getSourceRoot());
+            exportLlmTxtIfNeeded();
         }
 
         if (config.isPreviewMode()) {
@@ -148,6 +149,21 @@ public class ZnaiCliApp {
         ProgressReporter.reportPhase("patching lookup-paths");
         Path lookupPath = config.getExportRoot().resolve("lookup-paths");
         FileUtils.writeTextContent(lookupPath, artifactsDirName);
+    }
+
+    private void exportLlmTxtIfNeeded() {
+        Path llmTxtOutputPath = config.getLlmTxtOutputPath();
+        if (llmTxtOutputPath == null) {
+            return;
+        }
+
+        Path fullOutputPath = llmTxtOutputPath.isAbsolute() ?
+                llmTxtOutputPath :
+                config.getSourceRoot().resolve(llmTxtOutputPath);
+
+        ProgressReporter.reportPhase("exporting llm.txt");
+        Path llmTxtSource = deployPath.resolve("llm.txt");
+        copyFile(llmTxtSource, fullOutputPath);
     }
 
     private static void copyFile(Path source, Path target) {
