@@ -699,7 +699,7 @@ public class WebSite implements Log {
         deployer.deploy("llm.txt", llmContent);
     }
 
-    private void buildJsonOfAllPages() {
+    public void buildJsonOfAllPages() {
         List<Map<String, ?>> listOfMaps = this.pagePropsByTocItem
                 .values().stream().map(DocPageReactProps::toMap).collect(toList());
         String json = JsonUtils.serialize(listOfMaps);
