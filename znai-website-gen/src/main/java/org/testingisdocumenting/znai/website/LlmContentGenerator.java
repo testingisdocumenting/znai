@@ -43,6 +43,7 @@ public class LlmContentGenerator {
 
     public String generateContent() {
         StringBuilder llmContent = new StringBuilder();
+        llmContent.append("[//]: # (this is an auto generated file)\n");
         llmContent.append("\"").append(docMeta.getTitle()).append("\" full guide:\n\n");
 
         pageByTocItem.forEach((tocItem, page) -> {

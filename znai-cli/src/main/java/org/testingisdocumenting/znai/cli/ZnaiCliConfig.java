@@ -349,24 +349,19 @@ public class ZnaiCliConfig {
     public void print() {
         printVersion();
 
-        if (!isScaffoldMode() && !isServeMode()) {
-            print("source root", sourceRoot);
-        }
-
         if (isPreviewMode() || isServeMode()) {
+            print("source root", sourceRoot);
             print("deploy root", deployRoot);
             print("       host", host);
             print("       port", port);
-        }
-
-        if (isGenerateOnlyMode()) {
+        } else if (isGenerateOnlyMode()) {
+            print("        source root", sourceRoot);
             print("             doc id", docId);
             if (getLlmTxtOutputPath() != null) {
                 print("llm txt output path", llmTxtOutputPath);
             }
-        }
-
-        if (isExportMode()) {
+        } else if (isExportMode()) {
+            print("source root", sourceRoot);
             print("export root", exportRoot);
         }
     }

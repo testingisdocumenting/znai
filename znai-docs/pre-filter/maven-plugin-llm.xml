@@ -1,0 +1,8 @@
+<plugin>
+    <groupId>org.testingisdocumenting.znai</groupId>
+    <artifactId>znai-maven-plugin</artifactId>
+    <version>${project.version}</version>
+    <configuration>
+        <llmTxtOutputPath>\${project.basedir}/full-guide.md</llmTxtOutputPath>
+    </configuration>
+</plugin>
