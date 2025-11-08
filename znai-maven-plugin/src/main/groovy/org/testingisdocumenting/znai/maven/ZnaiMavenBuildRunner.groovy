@@ -38,12 +38,18 @@ class ZnaiMavenBuildRunner extends AbstractMojo {
     @Parameter(defaultValue = '${project.build.directory}')
     private String deployRoot
 
+    @Parameter
+    private String llmTxtOutputPath
+
     @Override
     void execute() throws MojoExecutionException, MojoFailureException {
+        def extraArgs = llmTxtOutputPath ?
+                ['llm-txt-output-path': llmTxtOutputPath] : [:]
         ZnaiMavenRunner.run(new MavenPluginConsoleOuput(getLog()), ["build"], [
                 'doc-id': docId,
                 source  : sourceRoot,
                 deploy  : deployRoot,
+                *: extraArgs
         ])
     }
 }

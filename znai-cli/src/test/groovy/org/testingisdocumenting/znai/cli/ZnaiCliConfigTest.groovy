@@ -97,7 +97,8 @@ class ZnaiCliConfigTest {
                 OptionKey.VALIDATE_EXTERNAL_LINKS,
                 OptionKey.ACTOR,
                 OptionKey.MODIFIED_TIME,
-                OptionKey.LOOKUP_PATHS
+                OptionKey.LOOKUP_PATHS,
+                OptionKey.LLM_TXT_OUTPUT_PATH
         )
     }
 
