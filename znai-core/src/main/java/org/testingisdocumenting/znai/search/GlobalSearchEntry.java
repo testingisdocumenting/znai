@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +17,10 @@
 
 package org.testingisdocumenting.znai.search;
 
+import org.testingisdocumenting.znai.core.DocMeta;
+import org.testingisdocumenting.znai.markdown.PageMarkdownSection;
+import org.testingisdocumenting.znai.structure.TocItem;
+
 import java.util.Objects;
 
 /**
@@ -24,15 +29,37 @@ import java.util.Objects;
 public class GlobalSearchEntry {
     private String url;
     private String fullTitle;
+    private String pageTitle;
+    private String chapterTitle;
+    private String pageSectionTitle;
     private SearchText text;
 
     public GlobalSearchEntry() {
     }
 
-    public GlobalSearchEntry(String url, String fullTitle, String text) {
+    public GlobalSearchEntry(DocMeta docMeta, TocItem tocItem, PageMarkdownSection section, String url) {
         this.url = url;
-        this.fullTitle = fullTitle;
-        this.text = SearchScore.STANDARD.text(text);
+        this.fullTitle = buildFullTitle(tocItem, section, docMeta);
+        this.pageTitle = tocItem.getPageTitle();
+        this.chapterTitle = tocItem.getChapterTitle();
+        this.pageSectionTitle = section.title();
+        this.text = SearchScore.STANDARD.text(section.markdown());
+    }
+
+    private String buildFullTitle(TocItem tocItem, PageMarkdownSection section, DocMeta docMeta) {
+        if (tocItem.isIndex()) {
+            return docMeta.getTitle() + (section.title().isEmpty() ? "" : ": " + section.title());
+        }
+
+        String pageSectionPart = section.title().isEmpty() ?
+                "" :
+                ", " + section.title();
+
+        String chapterPart = tocItem.getChapterTitle().isEmpty() ?
+                "" :
+                " [" + tocItem.getChapterTitle() + "]";
+
+        return docMeta.getTitle() + ": " + tocItem.getPageTitle() + pageSectionPart + chapterPart;
     }
 
     public String getUrl() {
@@ -49,6 +76,30 @@ public class GlobalSearchEntry {
 
     public void setFullTitle(String fullTitle) {
         this.fullTitle = fullTitle;
+    }
+
+    public String getPageTitle() {
+        return pageTitle;
+    }
+
+    public void setPageTitle(String pageTitle) {
+        this.pageTitle = pageTitle;
+    }
+
+    public String getChapterTitle() {
+        return chapterTitle;
+    }
+
+    public void setChapterTitle(String chapterTitle) {
+        this.chapterTitle = chapterTitle;
+    }
+
+    public String getPageSectionTitle() {
+        return pageSectionTitle;
+    }
+
+    public void setPageSectionTitle(String pageSectionTitle) {
+        this.pageSectionTitle = pageSectionTitle;
     }
 
     public SearchText getText() {
@@ -71,11 +122,14 @@ public class GlobalSearchEntry {
 
         GlobalSearchEntry that = (GlobalSearchEntry) o;
         return Objects.equals(url, that.url) &&
-                Objects.equals(fullTitle, that.fullTitle);
+                Objects.equals(fullTitle, that.fullTitle) &&
+                Objects.equals(pageTitle, that.pageTitle) &&
+                Objects.equals(chapterTitle, that.chapterTitle) &&
+                Objects.equals(pageSectionTitle, that.pageSectionTitle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, fullTitle);
+        return Objects.hash(url, fullTitle, pageTitle, chapterTitle, pageSectionTitle);
     }
 }

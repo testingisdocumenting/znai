@@ -1,0 +1,1 @@
+* Add: `search-entries.xml` add extra fields 
