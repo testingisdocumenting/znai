@@ -590,11 +590,11 @@ public class WebSite implements Log {
     private void updateSearchEntries(TocItem tocItem, MarkupParserResult parserResult) {
         List<GlobalSearchEntry> siteSearchEntries = parserResult.markdown().sections().stream()
                 .filter(section -> !(section.title().isEmpty() && section.markdown().trim().isEmpty()))
-                .map(section ->
-                        new GlobalSearchEntry(
-                                searchEntryUrl(tocItem, section),
-                                searchEntryTitle(tocItem, section),
-                                section.markdown()))
+                .map(section -> new GlobalSearchEntry(
+                        docMeta,
+                        tocItem,
+                        section,
+                        searchEntryUrl(tocItem, section)))
                 .collect(toList());
 
         globalSearchEntries.addAll(siteSearchEntries);
@@ -607,23 +607,6 @@ public class WebSite implements Log {
                 new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), section.id());
 
         return docStructure.createUrl(null, docUrl);
-    }
-
-    private String searchEntryTitle(TocItem tocItem, PageMarkdownSection section) {
-        if (tocItem.isIndex()) {
-            return docMeta.getTitle() + " " + (section.title().isEmpty() ?
-                    docMeta.getType() : section.title());
-        }
-
-        String pageSectionPart = section.title().isEmpty() ?
-                "" :
-                ", " + section.title();
-
-        String chapterPart = tocItem.getChapterTitle().isEmpty() ?
-                "" :
-                " [" + tocItem.getChapterTitle() + "]";
-
-        return docMeta.getTitle() + ": " + tocItem.getPageTitle() + pageSectionPart + chapterPart;
     }
 
     // each markup file may refer other files like code snippets or diagrams
