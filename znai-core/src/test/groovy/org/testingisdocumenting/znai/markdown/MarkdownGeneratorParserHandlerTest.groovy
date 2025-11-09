@@ -56,6 +56,12 @@ class MarkdownGeneratorParserHandlerTest {
     }
 
     @Test
+    void "should generate links"() {
+        def result = pageMarkdownAsText("[*hello* world](https://example.com)")
+        result.should == "[*hello* world](https://example.com)\n\n"
+    }
+
+    @Test
     void "should generate lists"() {
         def result = pageMarkdownAsText("- Item one\n- Item two")
         result.should == "- Item one\n- Item two\n\n"
