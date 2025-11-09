@@ -49,6 +49,8 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     private String currentSectionTitle;
     private StringBuilder currentMarkdown;
 
+    private String linkUrl;
+
     public MarkdownGeneratorParserHandler() {
         this.sections = new ArrayList<>();
 
@@ -267,11 +269,17 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     @Override
     public void onLinkStart(String url) {
         currentMarkdown.append("[");
+        linkUrl = url;
     }
 
     @Override
     public void onLinkEnd() {
-        currentMarkdown.append("]()");
+        currentMarkdown.append("](");
+        if (linkUrl != null) {
+            currentMarkdown.append(linkUrl);
+            linkUrl = null;
+        }
+        currentMarkdown.append(")");
     }
 
     @Override
