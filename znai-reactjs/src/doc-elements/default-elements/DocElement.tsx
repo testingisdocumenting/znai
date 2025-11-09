@@ -34,6 +34,8 @@ export interface DocElementProps extends WithElementsLibrary {
   content?: DocElementContent;
   next?: DocElementPayload;
   prev?: DocElementPayload;
+  // when doc element is part of the search result (during search preview or after search result is selected)
+  isPartOfSearchResult?: boolean;
 }
 
 /**
