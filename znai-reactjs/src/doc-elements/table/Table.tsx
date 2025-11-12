@@ -17,7 +17,7 @@
 
 import React, { CSSProperties } from "react";
 
-import { DocElementProps } from "../default-elements/DocElement";
+import { DocElementPayload } from "../default-elements/DocElement";
 import { calcTableWidth } from "./tableSize";
 
 import { cssVarPixelValue } from "../../utils/cssVars";
@@ -41,7 +41,7 @@ interface Table {
   data: any[][];
 }
 
-interface Props extends DocElementProps, ContainerTitleCommonProps, ContainerCommonProps {
+interface Props extends DocElementPayload, ContainerTitleCommonProps, ContainerCommonProps {
   table: Table;
   highlightRowIndexes: number[];
 }

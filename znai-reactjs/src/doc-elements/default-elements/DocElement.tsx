@@ -20,31 +20,23 @@ import * as React from "react";
 export type ElementsLibraryMap = { [key: string]: any };
 export type DocElementContent = DocElementPayload[];
 
-export interface DocElementPayload {
+export interface DocElementPayload extends WithElementsLibrary {
   type: any;
+  isPartOfSearch?: boolean; // when element is rendered in search preview or after section is selected as search result
   noGap?: boolean;
   content?: DocElementContent;
+  next?: DocElementPayload;
+  prev?: DocElementPayload;
 }
 
 export interface WithElementsLibrary {
   elementsLibrary: ElementsLibraryMap;
 }
 
-export interface DocElementProps extends WithElementsLibrary {
-  content?: DocElementContent;
-  next?: DocElementPayload;
-  prev?: DocElementPayload;
-  // when doc element is part of the search result (during search preview or after search result is selected)
-  isPartOfSearchResult?: boolean;
-}
-
 /**
  * uses a given set of components to render DocElements like links, paragraphs, code blocks, etc
- *
- * @param content content to render
- * @param elementsLibrary library of elements to use to render
  */
-export function DocElement({ content, elementsLibrary }: DocElementProps) {
+export function DocElement({ content, elementsLibrary, isPartOfSearch }: DocElementPayload) {
   if (!content) {
     return null;
   }
@@ -55,7 +47,7 @@ export function DocElement({ content, elementsLibrary }: DocElementProps) {
   while (contentProvider.peekCurrent()) {
     const found = findRenderComponent(elementsLibrary, contentProvider);
     const ElementToUse = found.component;
-    const propsToUse = found.propsToUse;
+    const propsToUse = { isPartOfSearch, ...found.propsToUse };
 
     if (!ElementToUse) {
       console.warn("can't find component to display: " + JSON.stringify(contentProvider.peekCurrent()));

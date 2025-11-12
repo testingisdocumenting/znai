@@ -18,11 +18,11 @@
 import React from "react";
 import { isLocalUrl } from "../../structure/links";
 import { LinkWrapper } from "./LinkWrapper";
-import { DocElementProps } from "./DocElement";
+import { DocElementPayload } from "./DocElement";
 
 import "./Link.css";
 
-interface Props extends DocElementProps {
+interface Props extends DocElementPayload {
   url: string;
   isFile?: boolean;
 }

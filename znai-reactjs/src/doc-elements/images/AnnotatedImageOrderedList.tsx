@@ -16,10 +16,10 @@
 
 import React from "react";
 
-import { DocElementContent, DocElementProps, ElementsLibraryMap } from "../default-elements/DocElement";
+import { DocElementContent, DocElementPayload, ElementsLibraryMap } from "../default-elements/DocElement";
 import "./AnnotatedImageOrderedList.css";
 
-interface Props extends DocElementProps {
+interface Props extends DocElementPayload {
   isInvertedColors: boolean[];
   onHover(itemIdx: number): void;
 }

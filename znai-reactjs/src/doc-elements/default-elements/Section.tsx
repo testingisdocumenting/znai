@@ -19,19 +19,19 @@ import React from "react";
 
 import { PresentationHeading } from "./PresentationHeading";
 
-import { ElementsLibraryMap, DocElementContent } from "./DocElement";
+import { DocElementPayload } from "./DocElement";
 import "./Section.css";
 
-interface Props {
+interface Props extends DocElementPayload {
   id: string;
   title: string;
-  elementsLibrary: ElementsLibraryMap;
-  content?: DocElementContent;
+  highlight?: boolean;
 }
 
-function Section({ id, title, ...props }: Props) {
+function Section({ id, title, highlight, ...props }: Props) {
+  const className = "section" + (highlight ? " highlight" : "");
   return (
-    <div className="section" key={title}>
+    <div className={className} key={title}>
       <props.elementsLibrary.SectionTitle
         level={1}
         id={id}

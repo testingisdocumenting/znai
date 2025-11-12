@@ -15,50 +15,52 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
-import Mark from 'mark.js/dist/mark.js'
+import React, { Component } from "react";
+import Mark from "mark.js/dist/mark.js";
 
 class SearchPreview extends Component {
-    componentDidMount() {
-        this.highlight()
-    }
+  componentDidMount() {
+    this.highlight();
+  }
 
-    componentDidUpdate(_prevProp, _prevState) {
-        this.highlight()
-    }
+  componentDidUpdate(_prevProp, _prevState) {
+    this.highlight();
+  }
 
-    render() {
-        const {section, elementsLibrary} = this.props
-        const key = section.id + "#" + section.title
-        return (
-            <div key={key} className="znai-search-result-preview" ref={(dom) => this.dom = dom}>
-                <elementsLibrary.DocElement {...this.props} content={section.content}/>
-            </div>
-        )
-    }
+  render() {
+    const { section, elementsLibrary } = this.props;
+    const key = section.id + "#" + section.title;
+    return (
+      <div key={key} className="znai-search-result-preview" ref={(dom) => (this.dom = dom)}>
+        <elementsLibrary.DocElement {...this.props} content={section.content} isPartOfSearch={true} />
+      </div>
+    );
+  }
 
-    highlight() {
-        const {snippets} = this.props
+  highlight() {
+    const { snippets } = this.props;
 
-        const mark = new Mark(this.dom)
-        mark.unmark({done: () => {
-                mark.mark(snippets, {
-                    acrossElements: false,
-                    separateWordSearch: true,
-                    caseSensitive: false,
-                    ignoreJoiners: false,
-                    diacritics: false,
-                    ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", "\"", "'", "~"],
-                    accuracy: "partially",
-                    done: () => {
-                        const marked = document.querySelector(".znai-search-result-preview mark");
-                        if (marked) {
-                            marked.scrollIntoView();
-                        }
-                    }
-                })
-            }})
-    }
+    const mark = new Mark(this.dom);
+    mark.unmark({
+      done: () => {
+        mark.mark(snippets, {
+          acrossElements: false,
+          separateWordSearch: true,
+          caseSensitive: false,
+          ignoreJoiners: false,
+          diacritics: false,
+          ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", '"', "'", "~"],
+          accuracy: "partially",
+          done: () => {
+            const marked = document.querySelector(".znai-search-result-preview mark");
+            if (marked) {
+              marked.scrollIntoView();
+            }
+          },
+        });
+      },
+    });
+  }
 }
 
-export default SearchPreview
+export default SearchPreview;
