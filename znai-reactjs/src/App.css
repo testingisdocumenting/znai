@@ -60,6 +60,8 @@
 
     --znai-expand-collaps-color: var(--znai-brand-primary-color);
 
+    --znai-section-highlight-background-color: rgba(255, 193, 7, 0.2);
+
     --znai-link-color: var(--znai-brand-primary-color);
     --znai-link-decoration: underline;
 

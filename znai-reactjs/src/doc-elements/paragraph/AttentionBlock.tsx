@@ -16,12 +16,12 @@
 
 import React from "react";
 
-import { DocElementContent, WithElementsLibrary } from "../default-elements/DocElement";
+import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
 
 import "./AttentionBlock.css";
 
-interface Props extends WithElementsLibrary {
+interface Props extends DocElementProps {
   attentionType: string;
   label?: string;
   iconTooltip?: string;

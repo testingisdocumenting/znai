@@ -17,3 +17,22 @@
 .section {
     font-size: var(--znai-regular-text-size);
 }
+
+.section.highlight {
+    animation: highlight-pulse 0.8s ease-out;
+}
+
+@keyframes highlight-pulse {
+    0% {
+        background-color: transparent;
+        transform: scale(1);
+    }
+    30% {
+        background-color: var(--znai-section-highlight-background-color);
+        transform: scale(1.005);
+    }
+    100% {
+        background-color: transparent;
+        transform: scale(1);
+    }
+}

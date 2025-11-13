@@ -15,68 +15,72 @@
  * limitations under the License.
  */
 
-import QueryResult from './QueryResult'
+import QueryResult from "./QueryResult";
 import { searchWithHighlight, truncateQueryByMinLength } from "./flexSearch.js";
 
 class Search {
-    constructor(allPages) {
-        this.allPages = allPages
-        this.searchIdx = window.znaiSearchIdx
-        this.searchDataById = mapById(window.znaiSearchData)
+  constructor(allPages) {
+    this.allPages = allPages;
+    this.searchIdx = window.znaiSearchIdx;
+    this.searchDataById = mapById(window.znaiSearchData);
+  }
+
+  static convertIndexIdToSectionCoords(indexId) {
+    const [dirName, fileName, pageSectionId] = indexId.split("@@");
+    return { dirName, fileName, pageSectionId };
+  }
+
+  search(term) {
+    const matches = searchWithHighlight(this.searchIdx, truncateQueryByMinLength(term, 3));
+    return new QueryResult(matches);
+  }
+
+  findSearchEntryById(id) {
+    return this.searchDataById[id];
+  }
+
+  previewDetails(id, queryResult) {
+    const section = this._findSectionById(id);
+    const snippets = queryResult.getSnippetsToHighlight(id);
+
+    return { section, snippets };
+  }
+
+  _findSectionById(indexId) {
+    const sectionCoords = Search.convertIndexIdToSectionCoords(indexId);
+
+    const matching = [];
+
+    this.allPages.pages.forEach((p) => {
+      const tocItem = p.tocItem;
+
+      const sections = p.content.filter((de) => {
+        return (
+          tocItem.dirName === sectionCoords.dirName &&
+          tocItem.fileName === sectionCoords.fileName &&
+          de.type === "Section" &&
+          (!sectionCoords.pageSectionId || de.id === sectionCoords.pageSectionId)
+        );
+      });
+
+      sections.forEach((s) => matching.push(s));
+    });
+
+    if (!matching) {
+      console.error("expected section associated with", indexId);
     }
 
-    static convertIndexIdToSectionCoords(indexId) {
-        const [dirName, fileName, pageSectionId] = indexId.split('@@')
-        return {dirName, fileName, pageSectionId}
-    }
-
-    search(term) {
-        const matches = searchWithHighlight(this.searchIdx, truncateQueryByMinLength(term, 3))
-        return new QueryResult(matches)
-    }
-
-    findSearchEntryById(id) {
-        return this.searchDataById[id]
-    }
-
-    previewDetails(id, queryResult) {
-        const section = this._findSectionById(id)
-        const snippets = queryResult.getSnippetsToHighlight(id)
-
-        return {section, snippets}
-    }
-
-    _findSectionById(indexId) {
-        const sectionCoords = Search.convertIndexIdToSectionCoords(indexId)
-
-        const matching = []
-
-        this.allPages.pages.forEach((p) => {
-            const tocItem = p.tocItem
-
-            const sections = p.content.filter((de) => {
-                return tocItem.dirName === sectionCoords.dirName &&
-                    tocItem.fileName === sectionCoords.fileName &&
-                    de.type === 'Section' && (!sectionCoords.pageSectionId || de.id === sectionCoords.pageSectionId)})
-
-            sections.forEach((s) => matching.push(s))
-        })
-
-        if (!matching) {
-            console.error("expected section associated with", indexId)
-        }
-
-        return matching[0]
-    }
+    return matching[0];
+  }
 }
 
 function mapById(searchData) {
-    const result = {}
-    searchData.forEach(([id, section, pageTitle, pageSection, textStandard, textHigh]) => {
-        result[id] = {section, pageTitle, pageSection, textStandard, textHigh}
-    })
+  const result = {};
+  searchData.forEach(([id, section, pageTitle, pageSection, textStandard, textHigh]) => {
+    result[id] = { section, pageTitle, pageSection, textStandard, textHigh };
+  });
 
-    return result
+  return result;
 }
 
-export default Search
+export default Search;

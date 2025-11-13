@@ -107,6 +107,7 @@ import { asciinemaDemo } from "./doc-elements/asciinema/Asciinema.demo";
 import { previewConsoleOutputDemo } from "./screens/preview-change-path/PreviewConsoleOutput.demo";
 import { readMoreDemo } from "./doc-elements/read-more/ReadMore.demo.js";
 import { snippetsResultOutputDemo } from "./doc-elements/code-snippets/SnippetResultOutput.demo.jsx";
+import { createLocalSearchIndex } from "./doc-elements/search/flexSearch.ts";
 
 const docMeta = {
   id: "preview",
@@ -238,6 +239,8 @@ registries
   .registerAsTabs("Search Popup", searchPopupDemo)
   .registerAsTabs("Preview Console Output", previewConsoleOutputDemo);
 
+window.znaiSearchIdx = createLocalSearchIndex();
+populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);
 registries
   .add("end to end")
   .registerAsMiniApp("full documentation navigation", /\/preview/, { root: "/preview" }, () => (

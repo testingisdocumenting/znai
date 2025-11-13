@@ -20,29 +20,28 @@ import * as React from "react";
 export type ElementsLibraryMap = { [key: string]: any };
 export type DocElementContent = DocElementPayload[];
 
-export interface DocElementPayload {
-  type: any;
+interface CommonProps {
+  isPartOfSearch?: boolean; // when element is rendered in search preview or after section is selected as search result
   noGap?: boolean;
-  content?: DocElementContent;
-}
-
-export interface WithElementsLibrary {
-  elementsLibrary: ElementsLibraryMap;
-}
-
-export interface DocElementProps extends WithElementsLibrary {
   content?: DocElementContent;
   next?: DocElementPayload;
   prev?: DocElementPayload;
 }
 
+export interface DocElementPayload extends CommonProps {
+  type: any;
+}
+
+export interface DocElementProps extends CommonProps, WithElementsLibrary {}
+
+export interface WithElementsLibrary {
+  elementsLibrary: ElementsLibraryMap;
+}
+
 /**
  * uses a given set of components to render DocElements like links, paragraphs, code blocks, etc
- *
- * @param content content to render
- * @param elementsLibrary library of elements to use to render
  */
-export function DocElement({ content, elementsLibrary }: DocElementProps) {
+export function DocElement({ content, elementsLibrary, isPartOfSearch }: DocElementProps) {
   if (!content) {
     return null;
   }
@@ -53,7 +52,7 @@ export function DocElement({ content, elementsLibrary }: DocElementProps) {
   while (contentProvider.peekCurrent()) {
     const found = findRenderComponent(elementsLibrary, contentProvider);
     const ElementToUse = found.component;
-    const propsToUse = found.propsToUse;
+    const propsToUse = { isPartOfSearch, ...found.propsToUse };
 
     if (!ElementToUse) {
       console.warn("can't find component to display: " + JSON.stringify(contentProvider.peekCurrent()));

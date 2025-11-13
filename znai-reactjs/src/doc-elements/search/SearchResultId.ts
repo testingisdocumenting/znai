@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+ * Copyright 2025 znai maintainers
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import * as React from 'react';
-
-import { getDocId } from './docMeta';
-import { documentationNavigation } from './DocumentationNavigation';
-
-function isLocalUrl(url: string) {
-    if (!window.document) {
-        return false;
-    }
-
-    return url.startsWith('/' + getDocId());
+export interface SearchResultId {
+  dirName: string;
+  fileName: string;
+  pageSectionId: string;
 }
-
-function onLocalUrlClick(e: React.MouseEvent<HTMLAnchorElement>, url: string) {
-    e.preventDefault();
-    documentationNavigation.navigateToUrl(url);
-}
-
-export { isLocalUrl, onLocalUrlClick };

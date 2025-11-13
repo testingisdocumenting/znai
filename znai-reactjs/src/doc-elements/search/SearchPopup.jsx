@@ -15,150 +15,155 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
-import SearchBox from './SearchBox'
-import SearchToc from './SearchToc'
-import SearchPreview from './SearchPreview'
-import Search from './Search'
+import SearchBox from "./SearchBox";
+import SearchToc from "./SearchToc";
+import SearchPreview from "./SearchPreview";
+import Search from "./Search";
 
 class SearchPopup extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.state = { selectedIdx: 0, search: null, query: '' }
-        this.onQueryChange = this.onQueryChange.bind(this)
-        this.keyDownHandler = this.keyDownHandler.bind(this)
+    this.state = { selectedIdx: 0, search: null, query: "" };
+    this.onQueryChange = this.onQueryChange.bind(this);
+    this.keyDownHandler = this.keyDownHandler.bind(this);
+  }
+
+  queryResultIds() {
+    const queryResult = this.state.queryResult;
+    return queryResult ? queryResult.getIds() : [];
+  }
+
+  startResolvingSearch() {
+    // search is a promise because it requires json data for index and all pages
+    //
+    this.props.searchPromise.then(
+      (search) => {
+        this.setState({ search });
+      },
+      (error) => {
+        console.error("can't resolve search: " + error);
+      }
+    );
+  }
+
+  render() {
+    const { onClose, tocCollapsed } = this.props;
+    const { search } = this.state;
+
+    const ids = this.queryResultIds();
+
+    this.ids = ids;
+
+    const hasResult = ids.length > 0;
+    const selectedIdx = this.state.selectedIdx;
+    const firstId = hasResult ? ids[selectedIdx] : null;
+    const previewDetails = hasResult ? search.previewDetails(firstId, this.state.queryResult) : null;
+
+    const className = "znai-search-popup" + (tocCollapsed ? "" : " visible-toc") + (hasResult ? " with-results" : "");
+    const searchBox = search ? <SearchBox onChange={this.onQueryChange} /> : null;
+
+    return (
+      <div className={className}>
+        <div className="znai-search-overlay" onClick={onClose} />
+
+        <div className="znai-search-popup-panel">
+          {searchBox}
+          {previewDetails ? this.renderPreview(ids, selectedIdx, previewDetails) : null}
+        </div>
+      </div>
+    );
+  }
+
+  renderPreview(ids, selectedIdx, previewDetails) {
+    const { elementsLibrary } = this.props;
+    const { search } = this.state;
+
+    return (
+      <div className="znai-toc-and-preview">
+        <div className="znai-search-toc-panel">
+          <SearchToc
+            ids={ids}
+            selectedIdx={selectedIdx}
+            search={search}
+            onSelect={this.changeSelectedIdx}
+            onJump={this.jumpToIdx}
+          />
+        </div>
+        <div className="znai-search-preview-panel">
+          <SearchPreview key={selectedIdx} elementsLibrary={elementsLibrary} {...previewDetails} />
+        </div>
+      </div>
+    );
+  }
+
+  onQueryChange(query) {
+    const queryResult = this.state.search.search(query);
+    const selectedIdx = 0;
+    this.setState({ query, queryResult, selectedIdx });
+  }
+
+  componentDidMount() {
+    this.startResolvingSearch();
+    document.addEventListener("keydown", this.keyDownHandler);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyDownHandler);
+  }
+
+  changeSelectedIdx = (idx) => {
+    this.setState({ selectedIdx: idx });
+  };
+
+  jumpToIdx = (idx) => {
+    const ids = this.queryResultIds();
+    const tocToNavigate = Search.convertIndexIdToSectionCoords(ids[idx]);
+    const { query, queryResult } = this.state;
+
+    this.props.onSearchSelection(query, tocToNavigate, queryResult.getSnippetsToHighlight(ids[idx]));
+  };
+
+  keyDownHandler(e) {
+    const ids = this.queryResultIds();
+    let selectedIdx = this.state.selectedIdx;
+
+    if (e.key === "Escape") {
+      if (this.props.onClose) {
+        this.props.onClose();
+      }
     }
 
-    queryResultIds() {
-        const queryResult = this.state.queryResult
-        return queryResult ? queryResult.getIds() : []
+    if (e.key === "Enter" && ids.length > 0) {
+      this.jumpToIdx(selectedIdx);
     }
 
-    startResolvingSearch() {
-        // search is a promise because it requires json data for index and all pages
-        //
-        this.props.searchPromise.then((search) => {
-            this.setState({search})
-        }, (error) => {
-            console.error("can't resolve search: " + error)
-        })
+    if (e.key !== "ArrowUp" && e.key !== "ArrowDown") {
+      return;
     }
 
-    render() {
-        const {onClose, tocCollapsed} = this.props
-        const {search} = this.state
+    e.preventDefault();
 
-        const ids = this.queryResultIds()
-
-        this.ids = ids
-
-        const hasResult = ids.length > 0
-        const selectedIdx = this.state.selectedIdx
-        const firstId = hasResult ? ids[selectedIdx] : null
-        const previewDetails = hasResult ? search.previewDetails(firstId, this.state.queryResult) : null
-
-        const className = "znai-search-popup" + (tocCollapsed ? "" : " visible-toc") + (hasResult ? " with-results" : "")
-        const searchBox = search ? <SearchBox onChange={this.onQueryChange} /> : null
-
-        return (
-            <div className={className}>
-                <div className="znai-search-overlay" onClick={onClose} />
-
-                <div className="znai-search-popup-panel">
-                    {searchBox}
-                    {previewDetails ? this.renderPreview(ids, selectedIdx, previewDetails) : null}
-                </div>
-            </div>
-        );
+    if (e.key === "ArrowUp") {
+      selectedIdx -= 1;
     }
 
-    renderPreview(ids, selectedIdx, previewDetails) {
-        const {elementsLibrary} = this.props
-        const {search} = this.state
-
-        return (
-            <div className="znai-toc-and-preview">
-                <div className="znai-search-toc-panel">
-                    <SearchToc ids={ids}
-                               selectedIdx={selectedIdx}
-                               search={search}
-                               onSelect={this.changeSelectedIdx}
-                               onJump={this.jumpToIdx}/>
-                </div>
-                <div className="znai-search-preview-panel">
-                    <SearchPreview key={selectedIdx} elementsLibrary={elementsLibrary} {...previewDetails}/>
-                </div>
-            </div>
-        )
+    if (e.key === "ArrowDown") {
+      selectedIdx += 1;
     }
 
-    onQueryChange(query) {
-        const queryResult = this.state.search.search(query)
-        const selectedIdx = 0
-        this.setState({query, queryResult, selectedIdx})
+    if (selectedIdx < 0) {
+      selectedIdx = 0;
     }
 
-    componentDidMount() {
-        this.startResolvingSearch()
-        document.addEventListener('keydown', this.keyDownHandler)
+    if (selectedIdx >= ids.length) {
+      selectedIdx = this.ids.length - 1;
     }
 
-    componentWillUnmount() {
-        document.removeEventListener('keydown', this.keyDownHandler)
-    }
-
-    changeSelectedIdx = (idx) => {
-        this.setState({selectedIdx: idx})
-    }
-
-    jumpToIdx = (idx) => {
-        const ids = this.queryResultIds()
-        const tocToNavigate = Search.convertIndexIdToSectionCoords(ids[idx])
-        const {query} = this.state
-
-        this.props.onSearchSelection(query, tocToNavigate)
-    }
-
-    keyDownHandler(e) {
-        const ids = this.queryResultIds()
-        let selectedIdx = this.state.selectedIdx
-
-        if (e.key === 'Escape') {
-            if (this.props.onClose) {
-                this.props.onClose()
-            }
-        }
-
-        if (e.key === 'Enter' && ids.length > 0) {
-            this.jumpToIdx(selectedIdx)
-        }
-
-        if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') {
-            return
-        }
-
-        e.preventDefault()
-
-        if (e.key === 'ArrowUp') {
-            selectedIdx -= 1
-        }
-
-        if (e.key === 'ArrowDown') {
-            selectedIdx += 1
-        }
-
-        if (selectedIdx < 0) {
-            selectedIdx = 0
-        }
-
-        if (selectedIdx >= ids.length) {
-            selectedIdx = this.ids.length - 1
-        }
-
-        this.setState({selectedIdx})
-    }
+    this.setState({ selectedIdx });
+  }
 }
 
-export default SearchPopup
+export default SearchPopup;
