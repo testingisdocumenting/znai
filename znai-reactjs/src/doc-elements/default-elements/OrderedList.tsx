@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { DocElementPayload } from "./DocElement";
+import { DocElementProps } from "./DocElement";
 import React from "react";
 
-interface Props extends DocElementPayload {
+interface Props extends DocElementProps {
   className?: string;
   startNumber: number;
 }

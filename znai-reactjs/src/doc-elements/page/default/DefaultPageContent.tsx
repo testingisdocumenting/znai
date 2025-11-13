@@ -15,23 +15,35 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { afterTitleId } from "../../../layout/classNamesAndIds";
-import { DocElementPayload } from "../../default-elements/DocElement";
+import { DocElementProps } from "../../default-elements/DocElement";
 import { SearchResultId } from "../../search/SearchResultId";
 import { TocItem } from "../../../structure/TocItem";
+import { highlightSearchResultAndMaybeScroll } from "../../search/searchResultHighlighter";
 
-interface Props extends DocElementPayload {
+interface Props extends DocElementProps {
   tocItem: TocItem;
-  searchResultId: SearchResultId;
+  searchResult: { id: SearchResultId; snippetsToHighlight: string[] };
+  contentRootDom: HTMLElement;
 }
 
 export function DefaultPageContent(props: Props) {
-  const { elementsLibrary, content, searchResultId, tocItem } = props;
+  const { elementsLibrary, content, searchResult, tocItem, contentRootDom } = props;
   const { PageTitle } = elementsLibrary;
+
+  const searchResultId = searchResult?.id;
+  const searchSnippetsToHighlight = searchResult?.snippetsToHighlight;
 
   const isSearchResultOnThisPage =
     searchResultId && searchResultId.dirName === tocItem.dirName && searchResultId.fileName === tocItem.fileName;
+
+  useEffect(() => {
+    if (searchSnippetsToHighlight && isSearchResultOnThisPage && contentRootDom) {
+      highlightSearchResultAndMaybeScroll(contentRootDom, searchSnippetsToHighlight, false);
+    }
+  }, []);
+
   const renderedSections = content!.map((section) => {
     // @ts-ignore
     const id = section.id;
@@ -42,17 +54,18 @@ export function DefaultPageContent(props: Props) {
         {...section}
         elementsLibrary={elementsLibrary}
         isPartOfSearch={isPartOfSearch}
+        highlight={isPartOfSearch}
       />
     );
   });
 
   return (
-    <React.Fragment>
+    <>
       <div className="content-block">
         <PageTitle {...props} />
       </div>
       {renderedSections}
       <div id={afterTitleId}></div>
-    </React.Fragment>
+    </>
   );
 }

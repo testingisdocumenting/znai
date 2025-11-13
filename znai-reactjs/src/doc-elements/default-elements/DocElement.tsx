@@ -20,14 +20,19 @@ import * as React from "react";
 export type ElementsLibraryMap = { [key: string]: any };
 export type DocElementContent = DocElementPayload[];
 
-export interface DocElementPayload extends WithElementsLibrary {
-  type: any;
+interface CommonProps {
   isPartOfSearch?: boolean; // when element is rendered in search preview or after section is selected as search result
   noGap?: boolean;
   content?: DocElementContent;
   next?: DocElementPayload;
   prev?: DocElementPayload;
 }
+
+export interface DocElementPayload extends CommonProps {
+  type: any;
+}
+
+export interface DocElementProps extends CommonProps, WithElementsLibrary {}
 
 export interface WithElementsLibrary {
   elementsLibrary: ElementsLibraryMap;
@@ -36,7 +41,7 @@ export interface WithElementsLibrary {
 /**
  * uses a given set of components to render DocElements like links, paragraphs, code blocks, etc
  */
-export function DocElement({ content, elementsLibrary, isPartOfSearch }: DocElementPayload) {
+export function DocElement({ content, elementsLibrary, isPartOfSearch }: DocElementProps) {
   if (!content) {
     return null;
   }

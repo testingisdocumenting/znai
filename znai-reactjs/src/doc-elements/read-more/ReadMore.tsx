@@ -16,18 +16,18 @@
 
 import React, { useRef, useState } from "react";
 
-import { DocElementPayload } from "../default-elements/DocElement";
+import { DocElementProps } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
 
 import { useHighlightOfHiddenElement } from "../text-selection/componentsHighlightUtils";
 import "./ReadMore.css";
 
-interface Props extends DocElementPayload {
+interface Props extends DocElementProps {
   title: string;
 }
 
 export function ReadMore({ title, content, isPartOfSearch, elementsLibrary }: Props) {
-  const [expanded, setExpanded] = useState(isPartOfSearch);
+  const [expanded, setExpanded] = useState(() => isPartOfSearch);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
   const hasHiddenHighlightedElement = useHighlightOfHiddenElement(containerRef, hiddenContainerRef, expanded);

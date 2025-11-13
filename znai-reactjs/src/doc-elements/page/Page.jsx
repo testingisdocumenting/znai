@@ -21,7 +21,14 @@ import { pageTypesRegistry } from "./PageTypesRegistry";
 import { PresentationHeading } from "../default-elements/PresentationHeading";
 import { areTocItemEquals } from "../../structure/TocItem";
 
+import "./Page.css";
+
 class Page extends Component {
+  constructor(props) {
+    super(props);
+    this.contentRootDomRef = React.createRef();
+  }
+
   render() {
     const { tocItem } = this.props;
 
@@ -30,8 +37,8 @@ class Page extends Component {
 
     return (
       <React.Fragment>
-        <div className="page-content">
-          <PageContent key={tocItem.pageTitle} {...this.props} />
+        <div className="page-content" ref={this.contentRootDomRef}>
+          <PageContent key={tocItem.pageTitle} {...this.props} contentRootDom={this.contentRootDomRef.current} />
         </div>
         <PageBottomPadding />
       </React.Fragment>

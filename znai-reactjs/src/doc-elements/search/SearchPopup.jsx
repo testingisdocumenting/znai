@@ -121,9 +121,9 @@ class SearchPopup extends Component {
   jumpToIdx = (idx) => {
     const ids = this.queryResultIds();
     const tocToNavigate = Search.convertIndexIdToSectionCoords(ids[idx]);
-    const { query } = this.state;
+    const { query, queryResult } = this.state;
 
-    this.props.onSearchSelection(query, tocToNavigate);
+    this.props.onSearchSelection(query, tocToNavigate, queryResult.getSnippetsToHighlight(ids[idx]));
   };
 
   keyDownHandler(e) {

@@ -16,7 +16,7 @@
  */
 
 import React, { Component } from "react";
-import Mark from "mark.js/dist/mark.js";
+import { highlightSearchResultAndMaybeScroll } from "./searchResultHighlighter.ts";
 
 class SearchPreview extends Component {
   componentDidMount() {
@@ -39,27 +39,7 @@ class SearchPreview extends Component {
 
   highlight() {
     const { snippets } = this.props;
-
-    const mark = new Mark(this.dom);
-    mark.unmark({
-      done: () => {
-        mark.mark(snippets, {
-          acrossElements: false,
-          separateWordSearch: true,
-          caseSensitive: false,
-          ignoreJoiners: false,
-          diacritics: false,
-          ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", '"', "'", "~"],
-          accuracy: "partially",
-          done: () => {
-            const marked = document.querySelector(".znai-search-result-preview mark");
-            if (marked) {
-              marked.scrollIntoView();
-            }
-          },
-        });
-      },
-    });
+    highlightSearchResultAndMaybeScroll(this.dom, snippets);
   }
 }
 

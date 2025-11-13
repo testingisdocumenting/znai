@@ -17,7 +17,7 @@
 
 import React from "react";
 
-import { DocElementContent, DocElementPayload } from "../default-elements/DocElement";
+import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
 import { ApiLinkedText } from "./ApiLinkedText";
 import { ApiParameter } from "./ApiParameter";
 
@@ -36,7 +36,7 @@ export interface ApiParameterProps {
   children?: ApiParameterProps[];
 }
 
-interface Props extends DocElementPayload, ContainerCommonProps, ContainerTitleCommonProps {
+interface Props extends DocElementProps, ContainerCommonProps, ContainerTitleCommonProps {
   parameters: ApiParameterProps[];
   example?: string;
   nestedLevel?: number;

@@ -21,7 +21,7 @@ import { paragraphStartsWith, removeSuffixFromParagraph } from "./paragraphUtils
 
 import { elementMetaValue } from "../meta/meta";
 
-import { DocElementContent, DocElementPayload } from "../default-elements/DocElement";
+import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
 import { AttentionBlock } from "./AttentionBlock";
 
 import "./Paragraph.css";
@@ -48,7 +48,7 @@ const allSuffixes = [
   tipSuffix,
 ];
 
-const DefaultParagraph = (props: DocElementPayload) => {
+const DefaultParagraph = (props: DocElementProps) => {
   return (
     <div className="paragraph content-block">
       <props.elementsLibrary.DocElement {...props} />
@@ -56,7 +56,7 @@ const DefaultParagraph = (props: DocElementPayload) => {
   );
 };
 
-interface WithAttentionProps extends DocElementPayload {
+interface WithAttentionProps extends DocElementProps {
   attentionType: string;
   suffix: string;
   icon: string;
@@ -78,35 +78,35 @@ const ParagraphWithAttention = ({ attentionType, suffix, icon, ...props }: WithA
   );
 };
 
-const NoteParagraph = (props: DocElementPayload) => (
+const NoteParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="note" suffix={noteSuffix} icon="info" {...props} />
 );
-const WarningParagraph = (props: DocElementPayload) => (
+const WarningParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="warning" suffix={warningSuffix} icon="alert-triangle" {...props} />
 );
-const QuestionParagraph = (props: DocElementPayload) => (
+const QuestionParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="question" suffix={questionSuffix} icon="help-circle" {...props} />
 );
-const ExerciseParagraph = (props: DocElementPayload) => (
+const ExerciseParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="question" suffix={exerciseSuffix} icon="help-circle" {...props} />
 );
-const AvoidParagraph = (props: DocElementPayload) => (
+const AvoidParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="avoid" suffix={avoidSuffix} icon="x-octagon" {...props} />
 );
-const DontParagraph = (props: DocElementPayload) => (
+const DontParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="avoid" suffix={dontSuffix} icon="x-octagon" {...props} />
 );
-const DoNotParagraph = (props: DocElementPayload) => (
+const DoNotParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="avoid" suffix={doNotSuffix} icon="x-octagon" {...props} />
 );
-const RecommendationParagraph = (props: DocElementPayload) => (
+const RecommendationParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="recommendation" suffix={recommendationSuffix} icon="check-circle" {...props} />
 );
-const TipParagraph = (props: DocElementPayload) => (
+const TipParagraph = (props: DocElementProps) => (
   <ParagraphWithAttention attentionType="recommendation" suffix={tipSuffix} icon="check-circle" {...props} />
 );
 
-const Paragraph = (props: DocElementPayload) => {
+const Paragraph = (props: DocElementProps) => {
   if (paragraphStartsWith(props.content, noteSuffix)) {
     return <NoteParagraph {...props} />;
   }
@@ -146,7 +146,7 @@ const Paragraph = (props: DocElementPayload) => {
   return <DefaultParagraph {...props} />;
 };
 
-const PresentationParagraph = (props: DocElementPayload) => {
+const PresentationParagraph = (props: DocElementProps) => {
   const className = "znai-presentation-paragraph-wrapper" + buildAdditionalClassName();
 
   return (

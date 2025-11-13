@@ -19,10 +19,10 @@ import React from "react";
 
 import { PresentationHeading } from "./PresentationHeading";
 
-import { DocElementPayload } from "./DocElement";
+import { DocElementProps } from "./DocElement";
 import "./Section.css";
 
-interface Props extends DocElementPayload {
+interface Props extends DocElementProps {
   id: string;
   title: string;
   highlight?: boolean;
