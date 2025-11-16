@@ -115,6 +115,8 @@ export class Documentation extends Component {
     this.keyDownHandler = this.keyDownHandler.bind(this);
     this.mouseClickHandler = this.mouseClickHandler.bind(this);
 
+    this.searchResult = null;
+
     documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this));
   }
 
@@ -134,6 +136,15 @@ export class Documentation extends Component {
         return this.renderPrintMode();
       default:
         return <div>No handler for documentation mode: {mode}</div>;
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const isTocItemChanged = !areTocItemEquals(this.state.page.tocItem, prevState.page.tocItem);
+
+    // reset searchResultId but only when navigating to a different page
+    if (this.searchResult && isTocItemChanged && !areTocItemEquals(this.state.page.tocItem, this.searchResult.id)) {
+      this.searchResult = null;
     }
   }
 
@@ -168,6 +179,7 @@ export class Documentation extends Component {
     const renderedPage = (
       <elementsLibrary.Page
         {...page}
+        searchResult={this.searchResult}
         docMeta={docMeta}
         onPresentationOpen={this.onPresentationOpen}
         prevPageTocItem={this.prevPageTocItem}
@@ -511,8 +523,9 @@ export class Documentation extends Component {
     this.setState({ forceSelectedTocItem });
   }
 
-  onSearchSelection(query, id) {
+  onSearchSelection(query, id, snippetsToHighlight) {
     this.onSearchClose();
+    this.searchResult = { id, snippetsToHighlight };
     documentationTracking.onSearchResultSelect(query, id);
     documentationNavigation.navigateToPage(id);
   }
