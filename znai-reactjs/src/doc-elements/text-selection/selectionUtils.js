@@ -15,92 +15,8 @@
  */
 
 /**
- * Finds the first or last text node within a given node.
- */
-function findTextNode(node, findLast = false) {
-  if (node.nodeType === Node.TEXT_NODE) {
-    return node;
-  }
-
-  const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
-
-  if (findLast) {
-    let lastTextNode = null;
-    while (walker.nextNode()) {
-      lastTextNode = walker.currentNode;
-    }
-    return lastTextNode;
-  }
-
-  return walker.nextNode();
-}
-
-/**
- * Finds a text node before the given node by searching siblings and ancestors.
- */
-function findPrecedingTextNode(node) {
-  // Search previous siblings
-  let sibling = node.previousSibling;
-  while (sibling) {
-    const textNode = findTextNode(sibling, true);
-    if (textNode) {
-      return textNode;
-    }
-    sibling = sibling.previousSibling;
-  }
-
-  // Search parent's previous siblings
-  if (node.parentNode) {
-    let parentSibling = node.parentNode.previousSibling;
-    while (parentSibling) {
-      const textNode = findTextNode(parentSibling, true);
-      if (textNode) {
-        return textNode;
-      }
-      parentSibling = parentSibling.previousSibling;
-    }
-  }
-
-  // Last resort: search all preceding nodes in ancestor
-  let ancestor = node.parentNode;
-  while (ancestor) {
-    const walker = document.createTreeWalker(
-      ancestor,
-      NodeFilter.SHOW_TEXT,
-      {
-        acceptNode: (textNode) => {
-          const position = node.compareDocumentPosition(textNode);
-          return position & Node.DOCUMENT_POSITION_PRECEDING
-            ? NodeFilter.FILTER_ACCEPT
-            : NodeFilter.FILTER_SKIP;
-        },
-      }
-    );
-
-    let lastTextNode = null;
-    while (walker.nextNode()) {
-      lastTextNode = walker.currentNode;
-    }
-
-    if (lastTextNode) {
-      return lastTextNode;
-    }
-
-    ancestor = ancestor.parentNode;
-  }
-
-  return null;
-}
-
-/**
- * Normalizes a range boundary point to always be a text node.
- * When triple-clicking, browsers often create ranges with element nodes as containers.
- * This function converts such boundaries to text node boundaries.
- *
- * @param {Node} node - The container node (text or element)
- * @param {number} offset - The offset within the container
- * @param {boolean} isEnd - Whether this is an end boundary (affects navigation for element nodes)
- * @returns {{node: Node, offset: number}|null} Normalized boundary with text node, or null if no text node found
+ * Normalizes element node boundaries to text nodes.
+ * Handles cases like triple-click selections where browsers use element nodes as boundaries.
  */
 function normalizeRangeBoundary(node, offset, isEnd = false) {
   // Already a text node - return as-is
@@ -108,44 +24,106 @@ function normalizeRangeBoundary(node, offset, isEnd = false) {
     return { node, offset };
   }
 
-  // Not an element node - can't normalize
+  // Only handle element nodes
   if (node.nodeType !== Node.ELEMENT_NODE) {
     return null;
   }
 
-  // Special case: end boundary at offset 0 means selection ends before this element
-  if (isEnd && offset === 0) {
-    const textNode = findPrecedingTextNode(node);
-    return textNode ? { node: textNode, offset: textNode.nodeValue.length } : null;
-  }
-
-  // Boundary at element's edge (start at 0, end at childNodes.length)
-  if (offset === 0 || offset === node.childNodes.length) {
-    const findLast = isEnd && offset === node.childNodes.length;
-    const textNode = findTextNode(node, findLast);
-    if (!textNode) {
-      return null;
+  try {
+    // Strategy 1: Check if the child at offset is a text node
+    const childAtOffset = node.childNodes[offset];
+    if (childAtOffset?.nodeType === Node.TEXT_NODE) {
+      return { node: childAtOffset, offset: 0 };
     }
-    return { node: textNode, offset: findLast ? textNode.nodeValue.length : 0 };
-  }
 
-  // Boundary points to a specific child
-  const targetChild = isEnd ? node.childNodes[offset - 1] : node.childNodes[offset];
-  if (!targetChild) {
+    // Strategy 2: Check the previous child (for end boundaries or when offset > 0)
+    if (offset > 0) {
+      const prevChild = node.childNodes[offset - 1];
+      if (prevChild?.nodeType === Node.TEXT_NODE) {
+        return { node: prevChild, offset: prevChild.nodeValue.length };
+      }
+
+      // If previous child is an element, find text node within it
+      if (prevChild?.nodeType === Node.ELEMENT_NODE) {
+        const textNode = findTextNodeInElement(prevChild, isEnd);
+        if (textNode) return textNode;
+      }
+    }
+
+    // Strategy 3: Special case for end boundary at offset 0
+    // This happens when selection ends right before an element starts
+    if (isEnd && offset === 0) {
+      return findPrecedingTextNode(node);
+    }
+
+    // Strategy 4: If child at offset is an element, find text node within it
+    if (childAtOffset?.nodeType === Node.ELEMENT_NODE) {
+      const textNode = findTextNodeInElement(childAtOffset, isEnd);
+      if (textNode) return textNode;
+    }
+
+    // Strategy 5: Fallback - search within the element itself
+    return findTextNodeInElement(node, isEnd);
+
+  } catch (e) {
     return null;
   }
+}
 
-  // Child is a text node - use it directly
-  if (targetChild.nodeType === Node.TEXT_NODE) {
-    return { node: targetChild, offset: isEnd ? targetChild.nodeValue.length : 0 };
+/**
+ * Finds a text node within an element, either first or last depending on position.
+ */
+function findTextNodeInElement(element, preferLast = false) {
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+
+  if (preferLast) {
+    let last = null;
+    while (walker.nextNode()) {
+      last = walker.currentNode;
+    }
+    return last ? { node: last, offset: last.nodeValue.length } : null;
   }
 
-  // Child is an element - find text node within it
-  const textNode = findTextNode(targetChild, isEnd);
-  if (!textNode) {
-    return null;
+  const first = walker.nextNode();
+  return first ? { node: first, offset: 0 } : null;
+}
+
+/**
+ * Finds the text node that precedes a given element in document order.
+ * Used for end boundaries that point to the start of an element.
+ */
+function findPrecedingTextNode(element) {
+  // Check previous sibling and its descendants
+  let sibling = element.previousSibling;
+  while (sibling) {
+    if (sibling.nodeType === Node.TEXT_NODE && sibling.nodeValue.length > 0) {
+      return { node: sibling, offset: sibling.nodeValue.length };
+    }
+    if (sibling.nodeType === Node.ELEMENT_NODE) {
+      const textNode = findTextNodeInElement(sibling, true);
+      if (textNode) return textNode;
+    }
+    sibling = sibling.previousSibling;
   }
-  return { node: textNode, offset: isEnd ? textNode.nodeValue.length : 0 };
+
+  // Check parent's previous siblings and ancestors
+  let parent = element.parentNode;
+  while (parent && parent.nodeType === Node.ELEMENT_NODE) {
+    let parentSibling = parent.previousSibling;
+    while (parentSibling) {
+      if (parentSibling.nodeType === Node.TEXT_NODE && parentSibling.nodeValue.length > 0) {
+        return { node: parentSibling, offset: parentSibling.nodeValue.length };
+      }
+      if (parentSibling.nodeType === Node.ELEMENT_NODE) {
+        const textNode = findTextNodeInElement(parentSibling, true);
+        if (textNode) return textNode;
+      }
+      parentSibling = parentSibling.previousSibling;
+    }
+    parent = parent.parentNode;
+  }
+
+  return null;
 }
 
 export function getSelectionText(range) {
