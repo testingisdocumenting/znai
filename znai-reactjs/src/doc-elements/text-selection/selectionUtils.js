@@ -15,6 +15,84 @@
  */
 
 /**
+ * Finds the first or last text node within a given node.
+ */
+function findTextNode(node, findLast = false) {
+  if (node.nodeType === Node.TEXT_NODE) {
+    return node;
+  }
+
+  const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+
+  if (findLast) {
+    let lastTextNode = null;
+    while (walker.nextNode()) {
+      lastTextNode = walker.currentNode;
+    }
+    return lastTextNode;
+  }
+
+  return walker.nextNode();
+}
+
+/**
+ * Finds a text node before the given node by searching siblings and ancestors.
+ */
+function findPrecedingTextNode(node) {
+  // Search previous siblings
+  let sibling = node.previousSibling;
+  while (sibling) {
+    const textNode = findTextNode(sibling, true);
+    if (textNode) {
+      return textNode;
+    }
+    sibling = sibling.previousSibling;
+  }
+
+  // Search parent's previous siblings
+  if (node.parentNode) {
+    let parentSibling = node.parentNode.previousSibling;
+    while (parentSibling) {
+      const textNode = findTextNode(parentSibling, true);
+      if (textNode) {
+        return textNode;
+      }
+      parentSibling = parentSibling.previousSibling;
+    }
+  }
+
+  // Last resort: search all preceding nodes in ancestor
+  let ancestor = node.parentNode;
+  while (ancestor) {
+    const walker = document.createTreeWalker(
+      ancestor,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: (textNode) => {
+          const position = node.compareDocumentPosition(textNode);
+          return position & Node.DOCUMENT_POSITION_PRECEDING
+            ? NodeFilter.FILTER_ACCEPT
+            : NodeFilter.FILTER_SKIP;
+        },
+      }
+    );
+
+    let lastTextNode = null;
+    while (walker.nextNode()) {
+      lastTextNode = walker.currentNode;
+    }
+
+    if (lastTextNode) {
+      return lastTextNode;
+    }
+
+    ancestor = ancestor.parentNode;
+  }
+
+  return null;
+}
+
+/**
  * Normalizes a range boundary point to always be a text node.
  * When triple-clicking, browsers often create ranges with element nodes as containers.
  * This function converts such boundaries to text node boundaries.
@@ -25,107 +103,49 @@
  * @returns {{node: Node, offset: number}|null} Normalized boundary with text node, or null if no text node found
  */
 function normalizeRangeBoundary(node, offset, isEnd = false) {
-  // If already a text node, return as-is
+  // Already a text node - return as-is
   if (node.nodeType === Node.TEXT_NODE) {
-    console.debug("normalizeRangeBoundary: already text node", { isEnd });
     return { node, offset };
   }
 
-  // Element node - the offset refers to child node index
-  if (node.nodeType === Node.ELEMENT_NODE) {
-    console.debug("normalizeRangeBoundary: element node", {
-      nodeName: node.nodeName,
-      offset,
-      isEnd,
-      childNodesLength: node.childNodes.length,
-    });
-
-    // For start boundary at offset 0, get first text node in the element
-    if (offset === 0 && !isEnd) {
-      const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
-      const firstTextNode = walker.nextNode();
-      console.debug("normalizeRangeBoundary: start at 0", { found: !!firstTextNode });
-      if (!firstTextNode) {
-        return null;
-      }
-      return { node: firstTextNode, offset: 0 };
-    }
-
-    // For end boundary at childNodes.length, get last text node in the element
-    if (isEnd && offset === node.childNodes.length) {
-      const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
-      let lastTextNode = null;
-      while (walker.nextNode()) {
-        lastTextNode = walker.currentNode;
-      }
-      console.debug("normalizeRangeBoundary: end at childNodes.length", { found: !!lastTextNode });
-      if (!lastTextNode) {
-        return null;
-      }
-      return { node: lastTextNode, offset: lastTextNode.nodeValue.length };
-    }
-
-    // For other offsets, the offset refers to a position among direct children
-    // offset N means: for start, before child N; for end, after child N-1
-    let targetChild;
-    if (isEnd) {
-      // For end boundary, we want the last text node before this offset
-      // offset N means after child N-1
-      targetChild = node.childNodes[offset - 1];
-    } else {
-      // For start boundary, we want the first text node at/after this offset
-      // offset N means before child N
-      targetChild = node.childNodes[offset];
-    }
-
-    console.debug("normalizeRangeBoundary: other offset", {
-      targetChild: targetChild?.nodeName,
-      targetChildType: targetChild?.nodeType,
-    });
-
-    if (!targetChild) {
-      console.debug("normalizeRangeBoundary: no target child found");
-      return null;
-    }
-
-    // If the target child is already a text node, use it directly
-    if (targetChild.nodeType === Node.TEXT_NODE) {
-      console.debug("normalizeRangeBoundary: target child is text node");
-      if (isEnd) {
-        return { node: targetChild, offset: targetChild.nodeValue.length };
-      } else {
-        return { node: targetChild, offset: 0 };
-      }
-    }
-
-    // Otherwise, find the appropriate text node within this child element
-    const walker = document.createTreeWalker(targetChild, NodeFilter.SHOW_TEXT);
-
-    if (isEnd) {
-      // Get last text node in this child
-      let lastTextNode = null;
-      while (walker.nextNode()) {
-        lastTextNode = walker.currentNode;
-      }
-      console.debug("normalizeRangeBoundary: found last text in child", { found: !!lastTextNode });
-      if (!lastTextNode) {
-        return null;
-      }
-      return { node: lastTextNode, offset: lastTextNode.nodeValue.length };
-    } else {
-      // Get first text node in this child
-      const firstTextNode = walker.nextNode();
-      console.debug("normalizeRangeBoundary: found first text in child", { found: !!firstTextNode });
-      if (!firstTextNode) {
-        return null;
-      }
-      return { node: firstTextNode, offset: 0 };
-    }
+  // Not an element node - can't normalize
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    return null;
   }
 
-  // For other node types, return null (can't normalize)
-  console.debug("normalizeRangeBoundary: unknown node type", { nodeType: node.nodeType });
-  return null;
+  // Special case: end boundary at offset 0 means selection ends before this element
+  if (isEnd && offset === 0) {
+    const textNode = findPrecedingTextNode(node);
+    return textNode ? { node: textNode, offset: textNode.nodeValue.length } : null;
+  }
+
+  // Boundary at element's edge (start at 0, end at childNodes.length)
+  if (offset === 0 || offset === node.childNodes.length) {
+    const findLast = isEnd && offset === node.childNodes.length;
+    const textNode = findTextNode(node, findLast);
+    if (!textNode) {
+      return null;
+    }
+    return { node: textNode, offset: findLast ? textNode.nodeValue.length : 0 };
+  }
+
+  // Boundary points to a specific child
+  const targetChild = isEnd ? node.childNodes[offset - 1] : node.childNodes[offset];
+  if (!targetChild) {
+    return null;
+  }
+
+  // Child is a text node - use it directly
+  if (targetChild.nodeType === Node.TEXT_NODE) {
+    return { node: targetChild, offset: isEnd ? targetChild.nodeValue.length : 0 };
+  }
+
+  // Child is an element - find text node within it
+  const textNode = findTextNode(targetChild, isEnd);
+  if (!textNode) {
+    return null;
+  }
+  return { node: textNode, offset: isEnd ? textNode.nodeValue.length : 0 };
 }
 
 export function getSelectionText(range) {
@@ -278,24 +298,14 @@ export function createSelectionExpander(container) {
 
   // Fallback: if normalization fails but the original boundaries are text nodes, use them directly
   if (!start && range.startContainer.nodeType === Node.TEXT_NODE) {
-    console.warn("Normalization failed but startContainer is text node, using original");
     start = { node: range.startContainer, offset: range.startOffset };
   }
   if (!end && range.endContainer.nodeType === Node.TEXT_NODE) {
-    console.warn("Normalization failed but endContainer is text node, using original");
     end = { node: range.endContainer, offset: range.endOffset };
   }
 
   // If we still can't get valid boundaries, return empty result
   if (!start || !end) {
-    console.warn("Failed to normalize range boundaries", {
-      startContainer: range.startContainer,
-      startOffset: range.startOffset,
-      endContainer: range.endContainer,
-      endOffset: range.endOffset,
-      startNormalized: start,
-      endNormalized: end,
-    });
     return function () {
       return {
         prefix: "",
