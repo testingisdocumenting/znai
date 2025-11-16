@@ -128,5 +128,117 @@ describe("textSelectionBuilder", () => {
       expect(result.prefix).toBe("          ");
       expect(result.suffix).toBe(", b) {\n   ");
     });
+
+    it("should handle triple-click selection with element node boundaries", () => {
+      const { container } = setupDOM(`
+        <div>
+          <p>First paragraph with some text.</p>
+          <p id="target">Second paragraph to triple click.</p>
+          <p>Third paragraph with more text.</p>
+        </div>
+      `);
+
+      const targetP = document.getElementById("target");
+
+      // Triple-click typically selects with element node as container
+      // startContainer = <p> element, startOffset = 0 (before first child)
+      // endContainer = <p> element, endOffset = childNodes.length (after last child)
+      selectText(targetP, 0, targetP, targetP.childNodes.length);
+
+      const result = findPrefixSuffixAndMatch(container);
+
+      expect(result.selection).toBe("Second paragraph to triple click.");
+      expect(result.prefix.length).toBeGreaterThan(0);
+      expect(result.suffix.length).toBeGreaterThan(0);
+    });
+
+    it("should handle triple-click with parent container selecting single child", () => {
+      const { container } = setupDOM(`
+        <div id="parent">
+          <ul>
+            <li>First bullet point item.</li>
+            <li id="target-li">Second bullet point item.</li>
+            <li>Third bullet point item.</li>
+          </ul>
+          <p>Following paragraph that should not be included.</p>
+        </div>
+      `);
+
+      const parent = document.getElementById("parent");
+      const ul = parent.querySelector("ul");
+      const targetLi = document.getElementById("target-li");
+
+      // Find the actual child index of the target <li> in the <ul>
+      // (accounting for whitespace text nodes between elements)
+      const childIndex = Array.from(ul.childNodes).indexOf(targetLi);
+
+      // Triple-click on second <li> might create selection with <ul> as container
+      // startContainer = <ul>, startOffset = childIndex (before target child)
+      // endContainer = <ul>, endOffset = childIndex + 1 (after target child)
+      selectText(ul, childIndex, ul, childIndex + 1);
+
+      const result = findPrefixSuffixAndMatch(container);
+
+      expect(result.selection).toBe("Second bullet point item.");
+      // Should NOT include "Following paragraph"
+      expect(result.selection).not.toContain("Following paragraph");
+    });
+
+    it("should handle triple-click on the last bullet point", () => {
+      const { container } = setupDOM(`
+        <div id="parent">
+          <ul>
+            <li>First bullet point item.</li>
+            <li>Second bullet point item.</li>
+            <li id="last-li">Third bullet point item.</li>
+          </ul>
+        </div>
+      `);
+
+      const parent = document.getElementById("parent");
+      const ul = parent.querySelector("ul");
+      const lastLi = document.getElementById("last-li");
+
+      // Find the actual child index of the last <li> in the <ul>
+      const childIndex = Array.from(ul.childNodes).indexOf(lastLi);
+
+      // Triple-click on last <li> creates selection with <ul> as container
+      selectText(ul, childIndex, ul, childIndex + 1);
+
+      const result = findPrefixSuffixAndMatch(container);
+
+      expect(result.selection).toBe("Third bullet point item.");
+      expect(result.prefix.length).toBeGreaterThan(0);
+      // Suffix may include trailing whitespace, which is fine
+    });
+
+    it("should handle triple-click where end boundary is outside the list", () => {
+      const { container } = setupDOM(`
+        <div id="parent">
+          <ul id="list">
+            <li>First bullet point item.</li>
+            <li>Second bullet point item.</li>
+            <li id="last-li">Third bullet point item.</li>
+          </ul>
+        </div>
+      `);
+
+      const parent = document.getElementById("parent");
+      const ul = document.getElementById("list");
+      const lastLi = document.getElementById("last-li");
+
+      // Some browsers might create selection where:
+      // startContainer = <li>, startOffset = 0
+      // endContainer = parent div, endOffset = 2 (after <ul>)
+      const ulChildIndex = Array.from(parent.childNodes).indexOf(ul);
+
+      selectText(lastLi, 0, parent, ulChildIndex + 1);
+
+      const result = findPrefixSuffixAndMatch(container);
+
+      // Selection may include trailing whitespace from the DOM
+      expect(result.selection.trim()).toBe("Third bullet point item.");
+      expect(result.prefix.length).toBeGreaterThan(0);
+    });
   });
 });
