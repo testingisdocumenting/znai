@@ -17,6 +17,8 @@
 package scenarios
 
 import docgen.ScaffoldUtils
+import org.openqa.selenium.WebElement
+import org.openqa.selenium.interactions.Actions
 import org.testingisdocumenting.webtau.WebTauGroovyDsl
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
@@ -37,28 +39,14 @@ scenario('triple-click bullet point and generate link') {
     standardView.gettingStartedTocItem.click()
     standardView.pageTitle.waitTo == "Getting Started"
 
-    def bulletElement = $("ul li").get(2)
+    def bulletElement = $("ul li").get(3)
     bulletElement.waitTo visible
 
+    Actions actions = new Actions(browser.driver);
+
     // TODO expose triple click and selenium actions via webtau
-    def originalText = browser.driver.executeScript("""
-        var elements = document.querySelectorAll('ul li');
-        var element = elements[2];
-        var range = document.createRange();
-        range.selectNodeContents(element);
-        var selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-
-        var mouseUpEvent = new MouseEvent('mouseup', {
-            view: window,
-            bubbles: true,
-            cancelable: true
-        });
-        element.dispatchEvent(mouseUpEvent);
-
-        return selection.toString();
-    """)
+    def webElement = bulletElement.findElement()
+    actions.click(webElement).click(webElement).click(webElement).perform()
 
     def menu = $(".znai-text-selection-menu")
     menu.waitTo visible
@@ -86,6 +74,7 @@ scenario('triple-click bullet point and generate link') {
     """)
 
     browser.reopen(highlightUrl)
+
     def highlightedElement = $(".znai-highlight")
-    highlightedElement.waitTo contain(originalText)
+    highlightedElement.waitTo contain("Page Sections")
 }
