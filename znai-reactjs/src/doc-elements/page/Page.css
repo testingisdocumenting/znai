@@ -1,0 +1,4 @@
+.page-content mark {
+    background-color: var(--znai-search-preview-result-highlight-background-color);
+    color: var(--znai-search-preview-result-highlight-color);
+}

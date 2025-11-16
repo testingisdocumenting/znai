@@ -113,7 +113,6 @@
         <module>znai-open-api</module>
         <module>znai-typescript</module>
         <module>znai-jupyter</module>
-        <module>znai-reactjs-api</module>
         <module>znai-reactjs</module>
         <module>znai-server</module>
         <module>znai-client</module>

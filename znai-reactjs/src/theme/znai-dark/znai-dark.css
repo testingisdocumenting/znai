@@ -36,6 +36,8 @@
 
     --znai-link-decoration: none;
 
+    --znai-section-highlight-background-color: rgba(255, 193, 7, 0.15);
+
     --znai-heading-api-color: #9cbbfb;
     --znai-heading-api-background-color: #09090c;
 
