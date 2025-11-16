@@ -17,11 +17,20 @@
 /**
  * Normalizes element node boundaries to text nodes.
  *
- * When a browser provides an element node as a range boundary with offset N,
- * it represents a position between the element's children (between child N-1 and N).
+ * Triple-click selections often use element nodes as boundaries (e.g., <p> at offset 0).
+ * We need text nodes with character offsets to extract text accurately.
  *
- * For start boundaries: Find the first text node at or after this position
- * For end boundaries: Find the last text node before this position
+ * Element offset N means "between child N-1 and child N":
+ *   <p> offset=0 → before first child
+ *   <p> offset=1 → after first child
+ *
+ * Examples:
+ *   Triple-click <p>: (<p>, 0) to (<p>, 1) → normalize to text node boundaries
+ *   Triple-click <li>: (<ul>, 1) to (<ul>, 2) → normalize to second <li>'s text nodes
+ *
+ * Strategy:
+ *   Start boundaries: search forward from offset for first text node
+ *   End boundaries: search backward from offset for last text node
  */
 function normalizeRangeBoundary(node, offset, isEnd = false) {
   // Already a text node - return as-is
