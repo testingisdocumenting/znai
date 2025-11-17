@@ -219,6 +219,16 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       question: comment,
       context: panelData?.context || "",
     });
+
+    // Check if clipboard API is available
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      setNotification({
+        type: "error",
+        message: "Clipboard API not available. Link: " + pageUrl,
+      });
+      return;
+    }
+
     try {
       await navigator.clipboard.writeText(pageUrl);
       setNotification({ type: "success", message: "Link is generated and copied to clipboard" });

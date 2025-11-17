@@ -14,23 +14,185 @@
  * limitations under the License.
  */
 
+/**
+ * Normalizes element node boundaries to text nodes.
+ *
+ * Triple-click selections often use element nodes as boundaries (e.g., <p> at offset 0).
+ * We need text nodes with character offsets to extract text accurately.
+ *
+ * Element offset N means "between child N-1 and child N":
+ *   <p> offset=0 → before first child
+ *   <p> offset=1 → after first child
+ *
+ * Examples:
+ *   Triple-click <p>: (<p>, 0) to (<p>, 1) → normalize to text node boundaries
+ *   Triple-click <li>: (<ul>, 1) to (<ul>, 2) → normalize to second <li>'s text nodes
+ *
+ * Strategy:
+ *   Start boundaries: search forward from offset for first text node
+ *   End boundaries: search backward from offset for last text node
+ */
+function normalizeRangeBoundary(node, offset, isEnd = false) {
+  // Already a text node - return as-is
+  if (node.nodeType === Node.TEXT_NODE) {
+    return { node, offset };
+  }
+
+  // Only handle element nodes
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    return null;
+  }
+
+  try {
+    if (isEnd) {
+      // End boundary: find the last text node before position 'offset'
+      // This means looking backward from offset
+      return findTextNodeBackward(node, offset);
+    } else {
+      // Start boundary: find the first text node at or after position 'offset'
+      // This means looking forward from offset
+      return findTextNodeForward(node, offset);
+    }
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Finds the first text node at or after the given offset position in an element.
+ * Used for start boundaries.
+ */
+function findTextNodeForward(element, offset) {
+  // First, try to find text within children starting from offset
+  for (let i = offset; i < element.childNodes.length; i++) {
+    const child = element.childNodes[i];
+
+    if (child.nodeType === Node.TEXT_NODE) {
+      return { node: child, offset: 0 };
+    }
+
+    if (child.nodeType === Node.ELEMENT_NODE) {
+      const textNode = findFirstTextNode(child);
+      if (textNode) return textNode;
+    }
+  }
+
+  // No text node found among this element's children
+  return null;
+}
+
+/**
+ * Finds the last text node before the given offset position in an element.
+ * Used for end boundaries.
+ */
+function findTextNodeBackward(element, offset) {
+  // If offset is 0, need to look before this element entirely
+  if (offset === 0) {
+    return findPrecedingTextNode(element);
+  }
+
+  // Search backward through children before offset
+  for (let i = offset - 1; i >= 0; i--) {
+    const child = element.childNodes[i];
+
+    if (child.nodeType === Node.TEXT_NODE) {
+      return { node: child, offset: child.nodeValue.length };
+    }
+
+    if (child.nodeType === Node.ELEMENT_NODE) {
+      const textNode = findLastTextNode(child);
+      if (textNode) return textNode;
+    }
+  }
+
+  // No text node found among this element's children
+  return null;
+}
+
+/**
+ * Finds the first text node within an element.
+ */
+function findFirstTextNode(element) {
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+  const first = walker.nextNode();
+  return first ? { node: first, offset: 0 } : null;
+}
+
+/**
+ * Finds the last text node within an element.
+ */
+function findLastTextNode(element) {
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+  let last = null;
+  while (walker.nextNode()) {
+    last = walker.currentNode;
+  }
+  return last ? { node: last, offset: last.nodeValue.length } : null;
+}
+
+/**
+ * Finds the text node that precedes a given element in document order.
+ * Used for end boundaries that point to the start of an element.
+ */
+function findPrecedingTextNode(element) {
+  // Check previous sibling and its descendants
+  let sibling = element.previousSibling;
+  while (sibling) {
+    if (sibling.nodeType === Node.TEXT_NODE && sibling.nodeValue.length > 0) {
+      return { node: sibling, offset: sibling.nodeValue.length };
+    }
+    if (sibling.nodeType === Node.ELEMENT_NODE) {
+      const textNode = findLastTextNode(sibling);
+      if (textNode) return textNode;
+    }
+    sibling = sibling.previousSibling;
+  }
+
+  // Check parent's previous siblings and ancestors
+  let parent = element.parentNode;
+  while (parent && parent.nodeType === Node.ELEMENT_NODE) {
+    let parentSibling = parent.previousSibling;
+    while (parentSibling) {
+      if (parentSibling.nodeType === Node.TEXT_NODE && parentSibling.nodeValue.length > 0) {
+        return { node: parentSibling, offset: parentSibling.nodeValue.length };
+      }
+      if (parentSibling.nodeType === Node.ELEMENT_NODE) {
+        const textNode = findLastTextNode(parentSibling);
+        if (textNode) return textNode;
+      }
+      parentSibling = parentSibling.previousSibling;
+    }
+    parent = parent.parentNode;
+  }
+
+  return null;
+}
+
 export function getSelectionText(range) {
+  const start = normalizeRangeBoundary(range.startContainer, range.startOffset, false);
+  const end = normalizeRangeBoundary(range.endContainer, range.endOffset, true);
+
+  // If we can't normalize the boundaries, fall back to empty string
+  if (!start || !end) {
+    return "";
+  }
+
   const walker = document.createTreeWalker(range.commonAncestorContainer, NodeFilter.SHOW_TEXT);
 
-  walker.currentNode = range.startContainer;
+  walker.currentNode = start.node;
 
   let text = "";
 
-  if (range.startContainer === range.endContainer) {
-    return range.startContainer.nodeValue.substring(range.startOffset, range.endOffset);
+  if (start.node === end.node) {
+    return start.node.nodeValue.substring(start.offset, end.offset);
   }
 
-  text += range.startContainer.nodeValue.substring(range.startOffset);
+  text += start.node.nodeValue.substring(start.offset);
 
   while (walker.nextNode()) {
     const node = walker.currentNode;
-    if (node === range.endContainer) {
-      text += node.nodeValue.substring(0, range.endOffset);
+    if (node === end.node) {
+      text += node.nodeValue.substring(0, end.offset);
       break;
     }
     text += node.nodeValue;
@@ -150,9 +312,32 @@ export function createSelectionExpander(container) {
 
   const range = selection.getRangeAt(0);
 
+  // Normalize range boundaries to handle triple-click selections with element nodes
+  let start = normalizeRangeBoundary(range.startContainer, range.startOffset, false);
+  let end = normalizeRangeBoundary(range.endContainer, range.endOffset, true);
+
+  // Fallback: if normalization fails but the original boundaries are text nodes, use them directly
+  if (!start && range.startContainer.nodeType === Node.TEXT_NODE) {
+    start = { node: range.startContainer, offset: range.startOffset };
+  }
+  if (!end && range.endContainer.nodeType === Node.TEXT_NODE) {
+    end = { node: range.endContainer, offset: range.endOffset };
+  }
+
+  // If we still can't get valid boundaries, return empty result
+  if (!start || !end) {
+    return function () {
+      return {
+        prefix: "",
+        selection: "",
+        suffix: "",
+      };
+    };
+  }
+
   const selectionText = getSelectionText(range);
-  const prefixExpander = new TextExpander(range.startContainer, range.startOffset, false, container);
-  const suffixExpander = new TextExpander(range.endContainer, range.endOffset, true, container);
+  const prefixExpander = new TextExpander(start.node, start.offset, false, container);
+  const suffixExpander = new TextExpander(end.node, end.offset, true, container);
 
   return function () {
     prefixExpander.expand(10);
