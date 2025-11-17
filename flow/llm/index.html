@@ -88,6 +88,11 @@
 <header><h1>Context For LLMs</h1></header>
 <p>Note Initial experimental support Znai generates a single markdown file called to be used by LLMs It is deployed at the root of the documentation and can be used in multiple scenarios The primary use case is to provide guide context to systems like Claude Code llm txt</p>
 </article>
+
+<article>
+<header><h1>Generate During Build To Keep In Repository</h1></header>
+<p>CLI znai build llm txt output path full guide md Maven &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 83&lt; version&gt; &lt;configuration&gt; &lt;llmTxtOutputPath&gt;$ project basedir full guide md&lt; llmTxtOutputPath&gt; &lt; configuration&gt; &lt; plugin&gt;</p>
+</article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
@@ -524,8 +529,34 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       } ]
+    }, {
+      "id" : "generate-during-build-to-keep-in-repository",
+      "additionalIds" : [ ],
+      "title" : "Generate During Build To Keep In Repository",
+      "type" : "Section",
+      "content" : [ {
+        "tabsContent" : [ {
+          "name" : "CLI",
+          "content" : [ {
+            "command" : "znai build --llm-txt-output-path full-guide.md",
+            "paramsToHighlight" : [ "llm-txt" ],
+            "type" : "CliCommand"
+          } ]
+        }, {
+          "name" : "Maven",
+          "content" : [ {
+            "lang" : "xml",
+            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.83</version>\n    <configuration>\n        <llmTxtOutputPath>${project.basedir}/full-guide.md</llmTxtOutputPath>\n    </configuration>\n</plugin>",
+            "title" : "expose llm.txt to source tree",
+            "highlight" : [ 5 ],
+            "anchorId" : "generate-during-build-to-keep-in-repository-expose-llmtxt-to-source-tree",
+            "type" : "Snippet"
+          } ]
+        } ],
+        "type" : "Tabs"
+      } ]
     } ],
-    "lastModifiedTime" : 1762137832465,
+    "lastModifiedTime" : 1763348422665,
     "tocItem" : {
       "chapterTitle" : "Flow",
       "pageTitle" : "Llm",
@@ -538,6 +569,10 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "title" : "Context For LLMs",
         "id" : "context-for-llms",
         "customAnchorId" : "context-for-llms"
+      }, {
+        "title" : "Generate During Build To Keep In Repository",
+        "id" : "generate-during-build-to-keep-in-repository",
+        "customAnchorId" : "generate-during-build-to-keep-in-repository"
       } ]
     }
   }

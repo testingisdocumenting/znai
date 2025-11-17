@@ -1,3 +1,4 @@
+[//]: # (this is an auto generated file)
 "Znai" full guide:
 
 # Introduction :: What Is This :: Beautiful and Maintainable User Guide
@@ -86,7 +87,7 @@ Generate one documentation and let your users switch Dark/Light theme at runtime
 # Introduction :: What Is This :: Two Sides Page Layout
 answer-link: znai/introduction/what-is-this#two-sides-page-layout
 
-Use [two sides]() layout option to render examples and supporting information side by side with convenient examples language switch
+Use [two sides](layout/two-sides-tabs) layout option to render examples and supporting information side by side with convenient examples language switch
 
 # Introduction :: What Is This :: Local Search
 answer-link: znai/introduction/what-is-this#local-search
@@ -125,15 +126,15 @@ Znai comes with
 # Introduction :: Getting Started :: Markdown
 answer-link: znai/introduction/getting-started#markdown
 
-The fastest way to learn Markdown is to go to [CommonMark]() website and go through a 60 second cheatsheet or 10 minute tutorial.
+The fastest way to learn Markdown is to go to [CommonMark](https://commonmark.org/help/) website and go through a 60 second cheatsheet or 10 minute tutorial.
 
 # Introduction :: Getting Started :: Running Znai
 answer-link: znai/introduction/getting-started#running-znai
 
 Znai is available as
 
-- [Command Line]()
-- [Maven Plugin]()
+- [Command Line](#command-line)
+- [Maven Plugin](#maven-plugin)
 
 Both command line and maven plugin lets you to build documentation website and also run preview server during documentation writing process.
 
@@ -142,7 +143,7 @@ answer-link: znai/introduction/getting-started#command-line
 
 ## CLI download
 
-Download and unzip [znai](). Add it to your `PATH`.
+Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.83/znai-dist-1.83-znai.zip). Add it to your `PATH`.
 
 ## Brew
 
@@ -157,7 +158,7 @@ answer-link: znai/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.82</version>
+    <version>1.83</version>
 </plugin>
 ```
 
@@ -201,9 +202,9 @@ answer-link: znai/introduction/getting-started#static-site-generation
 
 To build static documentation site you need to provide `documentation id`. Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.
 
-For example, znai original documentation is hosted on [https://testingisdocumenting.org/znai]() and documentation id is `znai`.
+For example, znai original documentation is hosted on [https://testingisdocumenting.org/znai](https://testingisdocumenting.org/znai) and documentation id is `znai`.
 
-This original page is hosted on [https://testingisdocumenting.org/znai/introduction/getting-started](). znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.
+This original page is hosted on [https://testingisdocumenting.org/znai/introduction/getting-started](https://testingisdocumenting.org/znai/introduction/getting-started). znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.
 
 To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide `documentation id` during the site generation.
 
@@ -212,7 +213,7 @@ To generate static site, use
 # Introduction :: Getting Started :: GitHub Pages
 answer-link: znai/introduction/getting-started#github-pages
 
-To deploy to [GitHub Pages]() use [GitHub Pages Action]().
+To deploy to [GitHub Pages](https://pages.github.com) use [GitHub Pages Action](https://github.com/peaceiris/actions-gh-pages).
 
 Here is an example of znai publishing its documentation to github pages
 
@@ -229,7 +230,7 @@ answer-link: znai/introduction/getting-started#on-site-central-hub-deployment
 
 Znai has enterprise mode that lets you run Documentation hub inside your organization. It is completely free and open sourced.
 
-Please create a [GitHub Issue]() if you want to try it out. I don't document it yet as I only have a couple of scenarios I tried it on, and I need more input.
+Please create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you want to try it out. I don't document it yet as I only have a couple of scenarios I tried it on, and I need more input.
 
 # Flow :: Structure :: Building Blocks
 answer-link: znai/flow/structure#building-blocks
@@ -550,13 +551,13 @@ Note: you can get `page-section-id` by hovering over a section title and pressin
 
 ## Links to Subsection
 
-Linking to subsections is the same as linking to a top level section. [Here is an  example]()
+Linking to subsections is the same as linking to a top level section. [Here is an  example](#links-links-to-subsection)
 
 ```markdown
 [Here is an example](flow/page-references#links-links-to-subsection)
 ```
 
-Use [Subsection Shortcut]() if a subsection is within the same page:
+Use [Subsection Shortcut](#links) if a subsection is within the same page:
 
 ```markdown
 [Subsection Shortcut](#links)
@@ -564,7 +565,7 @@ Use [Subsection Shortcut]() if a subsection is within the same page:
 
 ## Index Page
 
-Clicking this [index page]() link will have the same effect as clicking the documentation title at the top of the **Navigation Panel**
+Clicking this [index page](/) link will have the same effect as clicking the documentation title at the top of the **Navigation Panel**
 
 To refer back to the top-level `index` page use:
 
@@ -582,7 +583,7 @@ Linking to a local file will deploy the file along with the generated documentat
 Download [test json file](data/test.json)
 ```
 
-Download [test json file]()
+Download [test json file](data/test.json)
 
 # Flow :: Page References :: Custom Anchor Id
 answer-link: znai/flow/page-references#custom-anchor-id
@@ -748,7 +749,7 @@ answer-link: znai/flow/search#local
 
 To perform a local search of your documentation press `/` key or click the search section in the side panel on the left.
 
-In [documentation structure]() we learned that documentation consist of
+In [documentation structure](flow/structure) we learned that documentation consist of
 
 - Chapters
 - Pages
@@ -771,7 +772,7 @@ Besides local search capabilities, `Znai` provides a search entry `XML` file for
 
 Your search entry file can be located at the following endpoint: `<base-url>/<doc-id>/search-entries.xml`
 
-For example, the search entry for the `Znai` documentation on Github is located at [https://testingisdocumenting.org/znai/search-entries.xml]()
+For example, the search entry for the `Znai` documentation on Github is located at [https://testingisdocumenting.org/znai/search-entries.xml](https://testingisdocumenting.org/znai/search-entries.xml)
 
 # Flow :: Llm :: Context For LLMs
 answer-link: znai/flow/llm#context-for-llms
@@ -779,6 +780,11 @@ answer-link: znai/flow/llm#context-for-llms
 Note: Initial experimental support
 
 Znai generates a single markdown file called `llm.txt` to be used by LLMs. It is deployed at the root of the documentation and can be used in multiple scenarios. The primary use case is to provide guide context to systems like Claude Code.
+
+# Flow :: Llm :: Generate During Build To Keep In Repository
+answer-link: znai/flow/llm#generate-during-build-to-keep-in-repository
+
+
 
 # Flow :: Footer :: Definition
 answer-link: znai/flow/footer#definition
@@ -892,7 +898,7 @@ As you write your documentation you will come up with new scenarios to test. As 
 
 Znai provides a lot of utilities to include test artifacts.
 
-In [Synergy With Testing]() chapter you will see examples of UI, REST API and Business Logic.
+In [Synergy With Testing](synergy-with-testing/web-UI) chapter you will see examples of UI, REST API and Business Logic.
 
 # Flow :: Shortcuts :: Keyboard shortcuts
 answer-link: znai/flow/shortcuts#keyboard-shortcuts
@@ -965,7 +971,7 @@ The following languages/formats are supported:
 - Groovy
 - Bash
 
-`Znai` uses [prismjs]() library to provide syntax highlighting. Note that it is not being executed inside the browser, but rather applied during HTML generation.
+`Znai` uses [prismjs](http://prismjs.com) library to provide syntax highlighting. Note that it is not being executed inside the browser, but rather applied during HTML generation.
 
 # Snippets :: Code Snippets :: Title
 answer-link: znai/snippets/code-snippets#title
@@ -1138,7 +1144,7 @@ public class DocScaffolding {
     }
 ```
 
-[Learn More]() about highlighting options.
+[Learn More](snippets/snippets-highlighting) about highlighting options.
 
 # Snippets :: External Code Snippets :: Embedding Content
 answer-link: znai/snippets/external-code-snippets#embedding-content
@@ -1428,12 +1434,12 @@ end
 # Snippets :: External Code Snippets :: Highlights
 answer-link: znai/snippets/external-code-snippets#highlights
 
-[Learn More]() about highlighting snippets lines.
+[Learn More](snippets/snippets-highlighting) about highlighting snippets lines.
 
 # Snippets :: External Code Snippets :: Snippets Manipulation
 answer-link: znai/snippets/external-code-snippets#snippets-manipulation
 
-Read page on [Snippets Manipulation]() to learn more about extracting/modifying snippets before displaying them.
+Read page on [Snippets Manipulation](snippets/snippets-manipulation) to learn more about extracting/modifying snippets before displaying them.
 
 # Snippets :: Snippets Manipulation :: Surrounded By
 answer-link: znai/snippets/snippets-manipulation#surrounded-by
@@ -2099,7 +2105,7 @@ def example():
     my_func(100)
 ```
 
-Specify multiple files via [page local]() or [global]() plugin defaults to avoid repeating `validationPath` throughout the page.
+Specify multiple files via [page local](plugins/default-parameters#page-local-defaults) or [global](plugins/default-parameters#global-defaults) plugin defaults to avoid repeating `validationPath` throughout the page.
 
 ```md
 ---
@@ -2371,7 +2377,7 @@ JSON format is also supported
 # Snippets :: Code References :: Page Defaults
 answer-link: znai/snippets/code-references#page-defaults
 
-Use plugin [Page Local Defaults]() to set references file that is relevant to the page at hand.
+Use plugin [Page Local Defaults](plugins/default-parameters#page-local-defaults) to set references file that is relevant to the page at hand.
 
 # Snippets :: Code References :: Global References
 answer-link: znai/snippets/code-references#global-references
@@ -2402,7 +2408,7 @@ function flightStatus(id) {
 # Snippets :: Code References :: Inlined Code
 answer-link: znai/snippets/code-references#inlined-code
 
-[Inlined code]() is automatically converted into a link if its content matches one of the global references entries:
+[Inlined code](snippets/inlined-code-snippets) is automatically converted into a link if its content matches one of the global references entries:
 
 ```md
 Use `fapi.book` to book a flight.  
@@ -2616,7 +2622,7 @@ Use  to specify a file with paths to highlight keys.
 # Snippets :: Json :: Json Subparts
 answer-link: znai/snippets/json#json-subparts
 
-To include only a portion of your document pass [Json Path]() as  property:
+To include only a portion of your document pass [Json Path](https://github.com/json-path/JsonPath) as  property:
 
 ```
 :include-json: book-store.json {include: "$..book[0,1]"}
@@ -2958,7 +2964,7 @@ To hide sub-parts of your `JSON` use `collapsedPaths` property.
 # Snippets :: Json :: Highlights
 answer-link: znai/snippets/json#highlights
 
-To highlight a specific `JSON` value using `paths`, in (similar fashion to [regular code snippets](), you can highlight a line by text matching or by providing a line index.
+To highlight a specific `JSON` value using `paths`, in (similar fashion to [regular code snippets](snippets/snippets-highlighting), you can highlight a line by text matching or by providing a line index.
 
 ```
 :include-json: book-store.json {highlight: ["category", 2]}
@@ -3156,7 +3162,7 @@ root.store.bicycle.price, *price* changes daily
 # Snippets :: Json :: Test Results
 answer-link: znai/snippets/json#test-results
 
-Below is an example of using [WebTau]() testing framework to make an HTTP call, extract JSON response and information about asserted fields to highlight.
+Below is an example of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to make an HTTP call, extract JSON response and information about asserted fields to highlight.
 
 
 `http.doc.capture` captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json (validated paths).
@@ -3178,7 +3184,7 @@ Below is an example of using [WebTau]() testing framework to make an HTTP call, 
 # Snippets :: Json :: Incomplete JSON
 answer-link: znai/snippets/json#incomplete-json
 
-All the features above require fully formed JSON. If you need only syntax highlighting use [include-file]() plugin
+All the features above require fully formed JSON. If you need only syntax highlighting use [include-file](snippets/external-code-snippets) plugin
 
 ```
 :include-file: incomplete.json
@@ -3261,9 +3267,9 @@ When you use the following plugin, it will extract the comment and embed it as i
 # Snippets :: Open API :: Operation By Method And Path
 answer-link: znai/snippets/open-API#operation-by-method-and-path
 
-If you have a file with an [Open API]() definition (a.k.a. a Swagger file) you can render it by a given `method` and `path`, or by `operationId`. Both `yaml` and `json` formats are supported.
+If you have a file with an [Open API](https://github.com/OAI/OpenAPI-Specification/blob/master/README.md) definition (a.k.a. a Swagger file) you can render it by a given `method` and `path`, or by `operationId`. Both `yaml` and `json` formats are supported.
 
-Let's consider [Uber's API definition]() as an example:
+Let's consider [Uber's API definition](https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json) as an example:
 
 ```
 :include-open-api: open-api/uber.json {method: "get", path: "/estimates/time"}
@@ -3276,7 +3282,7 @@ Let's consider [Uber's API definition]() as an example:
 #### default
 
 
-Note: descriptions are treated as Markdown, using the [CommonMark]() specification
+Note: descriptions are treated as Markdown, using the [CommonMark](https://commonmark.org/help/) specification
 
 # Snippets :: Open API :: Operation By ID
 answer-link: znai/snippets/open-API#operation-by-id
@@ -3344,9 +3350,9 @@ Note: The sections below are automatically generated by `include-open-api`
 # Snippets :: Open API :: Two Sides Layout
 answer-link: znai/snippets/open-API#two-sides-layout
 
-Znai supports [Two Sides]() Layout mode that is perfect to supplement API documentation with examples column.
+Znai supports [Two Sides](layout/two-sides-pages) Layout mode that is perfect to supplement API documentation with examples column.
 
-[Open API example]()
+[Open API example](layout/two-sides-pages#open-api-example)
 
 # Snippets :: CLI :: Parameters Highlight
 answer-link: znai/snippets/CLI#parameters-highlight
@@ -3538,7 +3544,7 @@ Use `startLine`, `endLine` to extract specific content by using marker lines.
 ```
 
 
-More on snippets extractions: [Snippets Manipulation]().
+More on snippets extractions: [Snippets Manipulation](snippets/snippets-manipulation).
 
 # Snippets :: CLI :: Presentation Mode
 answer-link: znai/snippets/CLI#presentation-mode
@@ -3556,7 +3562,7 @@ Passed  will highlight each line as a separate slide.
 # Snippets :: Math :: LaTeX Block
 answer-link: znai/snippets/math#latex-block
 
-To render math you can use [LaTeX]() math expressions. Surround LaTeX expression with fenced block and specify `latex` as a language
+To render math you can use [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) math expressions. Surround LaTeX expression with fenced block and specify `latex` as a language
 
 ```
 ```latex
@@ -3618,9 +3624,9 @@ In presentation mode, rendered expressions will automatically scale to make use 
 # Snippets :: Math :: KaTex
 answer-link: znai/snippets/math#katex
 
-Rendering is done by using awesome [KaTeX]() library.
+Rendering is done by using awesome [KaTeX](https://github.com/Khan/KaTeX) library.
 
-[KaTeX]() fonts are copied to generated documentation resources.
+[KaTeX](https://github.com/Khan/KaTeX) fonts are copied to generated documentation resources.
 
 # Snippets :: Jupyter Notebook :: Include Notebook Section
 answer-link: znai/snippets/jupyter-notebook#include-notebook-section
@@ -3666,7 +3672,7 @@ display(games)
 ```
 
 
-Note: Remember that you can define lookup paths for files like notebooks inside [lookup-paths]() file, so you don't have to copy and paste notebooks to your documentation directory.
+Note: Remember that you can define lookup paths for files like notebooks inside [lookup-paths](flow/lookup-paths) file, so you don't have to copy and paste notebooks to your documentation directory.
 
 # Snippets :: Jupyter Notebook :: Exclude Section Title
 answer-link: znai/snippets/jupyter-notebook#exclude-section-title
@@ -3696,19 +3702,19 @@ games.groupby('genre')['price'].mean().plot(kind='bar',
 # Snippets :: Jupyter Notebook :: Two Sides
 answer-link: znai/snippets/jupyter-notebook#two-sides
 
-You will learn about the [Two Sides Layout]() in the Layout section. If you are are curious now for examples, jump to [Jupyter Two Sides example]()
+You will learn about the [Two Sides Layout](layout/two-sides-pages) in the Layout section. If you are are curious now for examples, jump to [Jupyter Two Sides example](layout/jupyter-notebook-two-sides)
 
 # Snippets :: Cpp :: Description Extraction
 answer-link: znai/snippets/cpp#description-extraction
 
-In addition to [snippets manipulation]() that is applicable to any language, Znai can extract description of methods and convert parameters into [API Parameters]()
+In addition to [snippets manipulation](snippets/snippets-manipulation) that is applicable to any language, Znai can extract description of methods and convert parameters into [API Parameters](snippets/api-parameters)
 
 ```
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
 ```
 
 
-Head over to [CPP Description Extraction]() to learn more
+Head over to [CPP Description Extraction](CPP/description-extraction) to learn more
 
 # Snippets :: Cpp :: Auto Reference
 answer-link: znai/snippets/cpp#auto-reference
@@ -3738,12 +3744,12 @@ void multi_println(const T1& v1, const T2& v2) {
 }
 ```
 
-Head over to [CPP Auto Reference]() to learn more
+Head over to [CPP Auto Reference](CPP/auto-reference) to learn more
 
 # Snippets :: Python :: Content Extraction
 answer-link: znai/snippets/python#content-extraction
 
-In addition to [snippets manipulation]() that is applicable to any language, Znai can extract content of methods.
+In addition to [snippets manipulation](snippets/snippets-manipulation) that is applicable to any language, Znai can extract content of methods.
 
 ```
 :include-python: python/example.py {entry: "Animal.says", bodyOnly: true}
@@ -3767,12 +3773,12 @@ class Animal:
         print("hello")
 ```
 
-Head over to [Python Content Extraction]() to learn more
+Head over to [Python Content Extraction](python/content-extraction) to learn more
 
 # Snippets :: Python :: Description Extraction
 answer-link: znai/snippets/python#description-extraction
 
-Znai provides plugin to extract PyDoc content. Use it to extract high level description and merge it with the rest of the documentation. Convert method parameters into [API Parameters]()
+Znai provides plugin to extract PyDoc content. Use it to extract high level description and merge it with the rest of the documentation. Convert method parameters into [API Parameters](snippets/api-parameters)
 
 ```
 :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "result and parameters"}
@@ -3805,7 +3811,7 @@ def my_func(label, price):
     return "OK"
 ```
 
-Head over to [Python Description Extraction]() to learn more
+Head over to [Python Description Extraction](python/description-extraction) to learn more
 
 # Snippets :: Python :: Auto Reference
 answer-link: znai/snippets/python#auto-reference
@@ -3838,12 +3844,12 @@ def render_money(amount: Money, message: str = "") -> str:
     return f"{message} {amount.amount} {amount.currency}"
 ```
 
-Head over to [Python Auto Reference]() to learn more
+Head over to [Python Auto Reference](python/auto-reference) to learn more
 
 # Snippets :: Java :: Content Extraction
 answer-link: znai/snippets/java#content-extraction
 
-In addition to [snippets manipulation]() that is applicable to any language, Znai can extract content of methods.
+In addition to [snippets manipulation](snippets/snippets-manipulation) that is applicable to any language, Znai can extract content of methods.
 
 ```
 :include-java: HelloWorld.java {
@@ -3854,12 +3860,12 @@ In addition to [snippets manipulation]() that is applicable to any language, Zna
 ```
 
 
-Head over to [Java Content Extraction]() to learn more
+Head over to [Java Content Extraction](java/content-extraction) to learn more
 
 # Snippets :: Java :: Description Extraction
 answer-link: znai/snippets/java#description-extraction
 
-Znai provides plugin to extract JavaDoc content. Use it to extract high level description and merge it with the rest of the documentation. Convert Enums and method parameters into [API Parameters]()
+Znai provides plugin to extract JavaDoc content. Use it to extract high level description and merge it with the rest of the documentation. Convert Enums and method parameters into [API Parameters](snippets/api-parameters)
 
 ```
 :include-java-doc-params: HelloWorld.java {
@@ -3870,14 +3876,14 @@ Znai provides plugin to extract JavaDoc content. Use it to extract high level de
 ```
 
 
-Head over to [Java Description Extraction]() to learn more
+Head over to [Java Description Extraction](java/description-extraction) to learn more
 
 # Snippets :: Java :: Auto Reference
 answer-link: znai/snippets/java#auto-reference
 
-Auto reference similar to [Python]() is planned for the future releases.
+Auto reference similar to [Python](python/content-extraction) is planned for the future releases.
 
-Create a [GitHub Issue]() or [Discussion]() to help prioritize
+Create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) or [Discussion](https://github.com/testingisdocumenting/znai/discussions) to help prioritize
 
 # Snippets :: Groovy :: Method Body
 answer-link: znai/snippets/groovy#method-body
@@ -4415,7 +4421,7 @@ Note: Color of badges change based on the background color
 # Visuals :: Image Annotations :: Manual Coordinates
 answer-link: znai/visuals/image-annotations#manual-coordinates
 
-Hover mouse over image during [Preview Mode]() to display coordinates under the cursor. Use the displayed coordinates to update the position.
+Hover mouse over image during [Preview Mode](introduction/getting-started#preview-mode) to display coordinates under the cursor. Use the displayed coordinates to update the position.
 
 # Visuals :: Image Annotations :: Badge Textual Description
 answer-link: znai/visuals/image-annotations#badge-textual-description
@@ -4534,7 +4540,7 @@ answer-link: znai/visuals/image-annotations#integration-with-testing
 
 Use UI testing frameworks to automatically generate annotations file and capture screenshot.
 
-For example [WebTau]() automatically generates an annotations file in addition to capturing a screenshot.
+For example [WebTau](https://github.com/testingisdocumenting/webtau) automatically generates an annotations file in addition to capturing a screenshot.
 
 ```groovy
 package webtauexamples
@@ -4579,14 +4585,14 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 220,
+    "y" : 230,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
 }
 ```
 
-Note: [WebTau]() captures additional data such as `pixelRatio`
+Note: [WebTau](https://github.com/testingisdocumenting/webtau) captures additional data such as `pixelRatio`
 
 # Visuals :: Image Annotations :: Presentation Mode
 answer-link: znai/visuals/image-annotations#presentation-mode
@@ -4615,7 +4621,7 @@ answer-link: znai/visuals/cards#image-height-and-background
 
 When you use icon like images, e.g. SVGs, then they will take all the horizontal available space, and it may not be ideal.
 
-Use `imageHeight` to force image height. Use `imageBackground` to specify a [background color/gradient]().
+Use `imageHeight` to force image height. Use `imageBackground` to specify a [background color/gradient](https://www.w3schools.com/css/css3_gradients.asp).
 
 ```markdown
 ```card diamond.svg {title: "My Card", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
@@ -4629,7 +4635,7 @@ Markdown content of the card goes here
 # Visuals :: Cards :: Multiple Columns
 answer-link: znai/visuals/cards#multiple-columns
 
-Use [Colums]() to arrange cards side by side
+Use [Colums](layout/columns) to arrange cards side by side
 
 
 ```markdown
@@ -4660,7 +4666,7 @@ score, Integer, another description line with *markdown* support
 ````````
 ```
 
-Note: Card plugin is designed to work with [code snippets](), [Tables]() and [API Parameters]() by reducing spacing and integrating borders
+Note: Card plugin is designed to work with [code snippets](snippets/external-code-snippets), [Tables](layout/tables) and [API Parameters](snippets/api-parameters) by reducing spacing and integrating borders
 
 # Visuals :: Cards :: Links
 answer-link: znai/visuals/cards#links
@@ -4920,12 +4926,12 @@ Use `all` as breakpoint value to create a slide for each textual entry
 # Visuals :: Charts :: ECharts
 answer-link: znai/visuals/charts#echarts
 
-`Znai` uses the beautiful and functional [EChart]() library to render charts.
+`Znai` uses the beautiful and functional [EChart](https://echarts.apache.org/) library to render charts.
 
 # Visuals :: Mermaid Diagrams :: Fenced Block
 answer-link: znai/visuals/mermaid-diagrams#fenced-block
 
-Use [Mermaid]() to create diagrams using text and code, written in a Markdown style. Surround Mermaid expressions with a fenced block and specify `mermaid` as a language
+Use [Mermaid](https://mermaid-js.github.io/mermaid/#/) to create diagrams using text and code, written in a Markdown style. Surround Mermaid expressions with a fenced block and specify `mermaid` as a language
 
 ```
 ```mermaid
@@ -4943,7 +4949,7 @@ The result will be a diagram.
 
 In presentation mode, rendered expressions will automatically scale to make use of the screen space.
 
-Note: Rendering is done by using [Mermaid]() library.
+Note: Rendering is done by using [Mermaid](https://mermaid-js.github.io/mermaid/#/) library.
 
 # Visuals :: Mermaid Diagrams :: External File
 answer-link: znai/visuals/mermaid-diagrams#external-file
@@ -5035,7 +5041,7 @@ To force all specified parts to appear at once add this before (either in the sa
 :include-meta: {allAtOnce: true}
 ```
 
-This SVG image is taken and modified from [https://www.shareicon.net/pyramid-piramid-draw-stock-877888]()
+This SVG image is taken and modified from [https://www.shareicon.net/pyramid-piramid-draw-stock-877888](https://www.shareicon.net/pyramid-piramid-draw-stock-877888)
 
 ```html
 <?xml version="1.0" ?>
@@ -5108,7 +5114,7 @@ Use `scale: scaleFactor` to change the size of the SVG provided
 # Visuals :: Icons :: Feather Icons
 answer-link: znai/visuals/icons#feather-icons
 
-Znai has integration with [Feather Icons](). Icons can be included using the *inlined code plugin*.
+Znai has integration with [Feather Icons](https://feathericons.com/). Icons can be included using the *inlined code plugin*.
 
 ```
 `:icon: cloud`
@@ -5116,7 +5122,7 @@ Znai has integration with [Feather Icons](). Icons can be included using the *in
 
 The result will appear in-lined in the current text 
 
-Head over to [https://feathericons.com/]() to find the icon id.
+Head over to [https://feathericons.com/](https://feathericons.com/) to find the icon id.
 
 # Visuals :: Icons :: Bullet Points
 answer-link: znai/visuals/icons#bullet-points
@@ -5162,7 +5168,7 @@ Note: default stroke color is a text color, which may not look good in Dark them
 # Visuals :: Icons :: Inside Tables
 answer-link: znai/visuals/icons#inside-tables
 
-Znai provides a shortcut to use icons inside [Tables]().
+Znai provides a shortcut to use icons inside [Tables](layout/tables).
 
 ```csv
 Feature Name, V1, V2
@@ -5531,7 +5537,7 @@ Add `config` section to specify a common size for all the nodes
 ```
 
 
-Note: Size unit is not based on pixels. It is sized in inches (assuming correct DPI). It is the size units used by [Graphviz]())
+Note: Size unit is not based on pixels. It is sized in inches (assuming correct DPI). It is the size units used by [Graphviz](https://graphviz.gitlab.io/))
 
 Use `width` and `height` property on a node itself to control individual nodes size:
 
@@ -5752,7 +5758,7 @@ Use `layout` to specify a different underlying layout engine. Only `dot` (defaul
 ```
 
 
-[Neato layout guide from Graphviz]()
+[Neato layout guide from Graphviz](https://www.graphviz.org/pdf/neatoguide.pdf)
 
 # Visuals :: Flow Diagrams :: Links
 answer-link: znai/visuals/flow-diagrams#links
@@ -5848,7 +5854,7 @@ Move node definitions to a one or more separate files if you use them across mul
 # Visuals :: Graphviz Diagrams :: Fenced Block
 answer-link: znai/visuals/graphviz-diagrams#fenced-block
 
-Surround [Graphviz]() expression with `graphviz` fenced block to render diagrams
+Surround [Graphviz](https://graphviz.org/) expression with `graphviz` fenced block to render diagrams
 
 ```
 ```graphviz
@@ -5895,14 +5901,14 @@ digraph {
 # Visuals :: Graphviz Diagrams :: Setup Requirements
 answer-link: znai/visuals/graphviz-diagrams#setup-requirements
 
-Znai renders [Graphviz]() diagrams at documentation build time. For it to work `dot` executable must be present in `PATH` during documentation generation process.
+Znai renders [Graphviz](https://graphviz.org/) diagrams at documentation build time. For it to work `dot` executable must be present in `PATH` during documentation generation process.
 
 To override use `-Ddot.bin` Java system property to specify an alternative location.
 
 # Visuals :: PlantUml
 answer-link: znai/visuals/PlantUml
 
-[PlantUml]() is a text-based way of drawing many kinds of diagrams.
+[PlantUml](https://plantuml.com/sequence-diagram) is a text-based way of drawing many kinds of diagrams.
 
 # Visuals :: PlantUml :: In Place
 answer-link: znai/visuals/PlantUml#in-place
@@ -6034,7 +6040,7 @@ Use `aspectRatio` to change aspect ratio of the embedded content
 # Visuals :: Asciinema :: Asciinema Player
 answer-link: znai/visuals/asciinema#asciinema-player
 
-To embedd [Acsiinema Player]() use:
+To embedd [Acsiinema Player](https://docs.asciinema.org/manual/player/quick-start/) use:
 
 ```markdown
 :include-asciinema: asciinema/intro.cast {startAt: "0:5", poster:"npt:0:5"}
@@ -6397,7 +6403,7 @@ featureB, -, +
 ```
 
 
-Note: We used [Icons]() in this example, but you can use any plugins or any text you want.
+Note: We used [Icons](visuals/icons) in this example, but you can use any plugins or any text you want.
 
 # Layout :: Tables :: Inlined
 answer-link: znai/layout/tables#inlined
@@ -6608,14 +6614,14 @@ right:
 ```
 ```
 
-Note: request and response were automatically captured using [WebTau]() testing framework.
+Note: request and response were automatically captured using [WebTau](synergy-with-testing/REST-API) testing framework.
 
 We need to document other methods as well, and as you can imagine, the repetition will take place.
 
 # Layout :: Templates :: Extract A Pattern
 answer-link: znai/layout/templates#extract-a-pattern
 
-Let's move a block we plan to repeat into a separate file and replace hardcoding of entries like **post** with placeholders. Znai uses the [FreeMarker]() template engine.
+Let's move a block we plan to repeat into a separate file and replace hardcoding of entries like **post** with placeholders. Znai uses the [FreeMarker](https://freemarker.apache.org) template engine.
 
 ```md
 :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {
@@ -6836,7 +6842,7 @@ $ whoamis
 # Layout :: Jupyter Notebook Two Sides :: Code First
 answer-link: znai/layout/jupyter-notebook-two-sides#code-first
 
-[The include-jupyter extension]() automatically assigns `{meta: {rightSide: true}}` to output cells. If page `type` is set to `two-sides` you will get automatic split between code and output.
+[The include-jupyter extension](snippets/jupyter-notebook) automatically assigns `{meta: {rightSide: true}}` to output cells. If page `type` is set to `two-sides` you will get automatic split between code and output.
 
 Note: Content below is included using `include-jupyter`
 
@@ -7063,7 +7069,7 @@ To show the contents of a class without the class declaration or doc string:
 # Python :: Description Extraction :: Doc String
 answer-link: znai/python/description-extraction#doc-string
 
-Use `include-python-doc` plugin to embed py doc string with markdown into documentation. Znai uses [Pandas style doc string]() to parse description and parameters.
+Use `include-python-doc` plugin to embed py doc string with markdown into documentation. Znai uses [Pandas style doc string](https://pandas.pydata.org/docs/development/contributing_docstring.html) to parse description and parameters.
 
 ```py
 my_var = "a variable"
@@ -7152,12 +7158,12 @@ def my_func(label, price):
 ```
 
 
-Note: read more about [API parameters]() for additional properties
+Note: read more about [API parameters](snippets/api-parameters) for additional properties
 
 # Python :: Description Extraction :: Type Hints
 answer-link: znai/python/description-extraction#type-hints
 
-If you define [Type Hints](), you can omit types from PyDoc text and Znai will take the types from the signature
+If you define [Type Hints](https://docs.python.org/3/library/typing.html), you can omit types from PyDoc text and Znai will take the types from the signature
 
 ```py
 import fin
@@ -7463,7 +7469,7 @@ Note: Base classes that are defined somewhere in the documentation will turn int
 # CPP :: Doxygen Setup :: Doxygen
 answer-link: znai/CPP/doxygen-setup#doxygen
 
-Znai parses generated [Doxygen]() XML files to extract and embed
+Znai parses generated [Doxygen](https://www.doxygen.nl/index.html) XML files to extract and embed
 
 - Comments
 - Signatures
@@ -7482,7 +7488,7 @@ Specify `index.xml` location inside `<docroot>/doxygen.json`
 }
 ```
 
-Note: To read doxygen XMLs from zip, add path to the zip to [lookup-paths]()
+Note: To read doxygen XMLs from zip, add path to the zip to [lookup-paths](flow/lookup-paths#zip-and-jar-lookup)
 
 # CPP :: Description Extraction :: Members Comment Text
 answer-link: znai/CPP/description-extraction#members-comment-text
@@ -7912,7 +7918,7 @@ If `bodyOnly` is specified, signature will be omitted.
 # Java :: Content Extraction :: Callout Comments
 answer-link: znai/java/content-extraction#callout-comments
 
-Similar to how you [specify comments type]() for a regular file, you can specify `commentsType` option for `include-java`.
+Similar to how you [specify comments type](snippets/code-comments#callout-comments) for a regular file, you can specify `commentsType` option for `include-java`.
 
 ```
 :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"}
@@ -8099,7 +8105,7 @@ Use `NestedName.entityName` to disambiguate a field or a method name
 # Java :: Description Extraction :: Handling Links
 answer-link: znai/java/description-extraction#handling-links
 
-Links defined with `{@link MyClass}` are automatically converted to [Inlined Code]() and become `MyClass`. To turn `MyClass` into a link you need to use [Code References]().
+Links defined with `{@link MyClass}` are automatically converted to [Inlined Code](snippets/inlined-code-snippets) and become `MyClass`. To turn `MyClass` into a link you need to use [Code References](snippets/code-references).
 
 Use the `referencesPath` value to associate `{@link CustomDomain}` with the documentation link:
 
@@ -8112,7 +8118,7 @@ BUY, example-references/domain#transaction-buy
 SELL, example-references/domain#transaction-sell
 ```
 
-Alternatively you can define [Global References]() to turn `MyClass` into a link.
+Alternatively you can define [Global References](snippets/code-references#global-references) to turn `MyClass` into a link.
 
 # Java :: Description Extraction :: Method Params
 answer-link: znai/java/description-extraction#method-params
@@ -8131,7 +8137,7 @@ Use the `title` parameter to specify a title.
 # Java :: Description Extraction :: Method Params With References
 answer-link: znai/java/description-extraction#method-params-with-references
 
-Use the [Code References]() file to link method parameters to reference pages.
+Use the [Code References](snippets/code-references) file to link method parameters to reference pages.
 
 To do that, define references in a CSV file, using a two column format: `type-or-variable-name, link`.
 
@@ -8205,7 +8211,7 @@ Use the `title` parameter to specify a title.
 # Java :: Description Extraction :: Enum Entries With References
 answer-link: znai/java/description-extraction#enum-entries-with-references
 
-Use a [Code References]() file to link enum entries to reference pages.
+Use a [Code References](snippets/code-references) file to link enum entries to reference pages.
 
 To do that, define references in a CSV file, using a two column format: `enum-name, link`.
 
@@ -8243,7 +8249,7 @@ enum TransactionTypes {
 
 Enums are now linked with a reference section for the documentation.
 
-Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use [Global References]().
+Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use [Global References](snippets/code-references#global-references).
 
 # Java :: Description Extraction :: Markdown
 answer-link: znai/java/description-extraction#markdown
@@ -8271,16 +8277,16 @@ class HelloWorld {
 # Java :: Auto Reference :: Coming Soon
 answer-link: znai/java/auto-reference#coming-soon
 
-Auto reference similar to [Python]() is planned for the future releases.
+Auto reference similar to [Python](python/content-extraction) is planned for the future releases.
 
-Create a [GitHub Issue]() or [Discussion]() to help prioritize
+Create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) or [Discussion](https://github.com/testingisdocumenting/znai/discussions) to help prioritize
 
 # Synergy With Testing :: Web UI :: Screenshots And Annotations
 answer-link: znai/synergy-with-testing/web-UI#screenshots-and-annotations
 
-In [Image Annotations]() you can specify annotations in an external file.
+In [Image Annotations](visuals/image-annotations) you can specify annotations in an external file.
 
-Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example of using [WebTau]() testing framework to capture a screenshot and annotations
+Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to capture a screenshot and annotations
 
 ```groovy
 package webtauexamples
@@ -8328,7 +8334,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 220,
+    "y" : 230,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -8338,14 +8344,14 @@ scenario("capture screenshot") {
 # Synergy With Testing :: REST API :: Request and Response Capture
 answer-link: znai/synergy-with-testing/REST-API#request-and-response-capture
 
-[Open API]() helps to define a formal API specification. And real examples of request/response helps to clarify.
+[Open API](snippets/open-API) helps to define a formal API specification. And real examples of request/response helps to clarify.
 
 Instead of manually copy-and-pasting the responses to your documentation, consider running tests and automatically capturing the relevant artifacts.
 
 # Synergy With Testing :: REST API :: WebTau
 answer-link: znai/synergy-with-testing/REST-API#webtau
 
-[WebTau]() (short for web test automation) is a testing API, command line tool and a framework to write unit, integration and end-to-end tests. Test across REST-API, Graph QL, Browser, Database, CLI and Business Logic with consistent set of matchers and concepts.
+[WebTau](https://testingisdocumenting.org/webtau) (short for web test automation) is a testing API, command line tool and a framework to write unit, integration and end-to-end tests. Test across REST-API, Graph QL, Browser, Database, CLI and Business Logic with consistent set of matchers and concepts.
 
 Here is an example of REST API test with test artifacts capture
 
@@ -8404,7 +8410,7 @@ answer-link: znai/synergy-with-testing/business-logic#capture-input-example
 
 Your business logic tests can greatly improve maintainability of your documentation. The example below tests what account types are allowed to perform *Trading Activities*.
 
-Test is using [WebTau]() testing framework to define and capture test data.
+Test is using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to define and capture test data.
 
 ```groovy
 package org.testingisdocumenting.testing.examples
@@ -8432,7 +8438,7 @@ class TestToDocExample {
 }
 ```
 
-As part of validation of account types, the test also captures data that was used for testing. We can refer to this data later in our documentation by using the [include-table]() plugin
+As part of validation of account types, the test also captures data that was used for testing. We can refer to this data later in our documentation by using the [include-table](layout/tables) plugin
 
 ```
 :include-table: account-rules.json
@@ -8445,9 +8451,9 @@ answer-link: znai/plugins/plugin-types
 
 `Znai` extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation:
 
-- [Include Plugins]()
-- [Inlined Code]()
-- [Fenced Block]()
+- [Include Plugins](#include-plugins)
+- [Inlined Code](#inlined-code)
+- [Fenced Block](#fenced-block)
 
 # Plugins :: Plugin Types :: Include Plugins
 answer-link: znai/plugins/plugin-types#include-plugins
@@ -8536,14 +8542,14 @@ Create `plugin-params.json` file to specify default parameters per plugin.
 }
 ```
 
-When the parameters file is present, any time you use [API Parameters]() plugin without `title`, an implicit title will be present
+When the parameters file is present, any time you use [API Parameters](snippets/api-parameters) plugin without `title`, an implicit title will be present
 
 # Plugins :: Default Parameters :: Page Local Defaults
 answer-link: znai/plugins/default-parameters#page-local-defaults
 
 Use page meta block at the start of a page to set plugin default parameters specific to the page.
 
-You may have seen meta block example to set [Page Title]():
+You may have seen meta block example to set [Page Title](flow/names):
 
 ```
 ---
@@ -8559,7 +8565,7 @@ image: {border: true}
 ---
 ```
 
-Once we have a block like this, every [include-image]() plugin on this page will have `border` set to true.
+Once we have a block like this, every [include-image](visuals/images#extension) plugin on this page will have `border` set to true.
 
 ```markdown
 :include-image: visuals/regular-image.png
@@ -8568,7 +8574,7 @@ Once we have a block like this, every [include-image]() plugin on this page will
 # Plugins :: Development :: PlaceHolder
 answer-link: znai/plugins/development#placeholder
 
-Please create [GitHub Issue]() if you are interested in plugins creation documentation.
+Please create [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you are interested in plugins creation documentation.
 
 # Configuration :: Basic :: Favicon
 answer-link: znai/configuration/basic#favicon
@@ -8671,12 +8677,12 @@ znai --deploy=/path/where/docresources/generate --doc-id=my-doc-id --upload
 # Hub :: Build Artifacts Watch :: Todo
 answer-link: znai/hub/build-artifacts-watch#todo
 
-Please create [GitHub Issue]() if you are interested in automatically watching a set of directories for built documentations to automatically upload them to Hub.
+Please create [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you are interested in automatically watching a set of directories for built documentations to automatically upload them to Hub.
 
 # Example References :: Domain
 answer-link: znai/example-references/domain
 
-This page is a dummy page to demo code reference capabilities from [Java Enums]() and [parameter types]()
+This page is a dummy page to demo code reference capabilities from [Java Enums](java/description-extraction#enum-entries-with-references) and [parameter types](java/description-extraction#method-params-with-references)
 
 # Example References :: Domain :: Trader
 answer-link: znai/example-references/domain#trader
@@ -8699,7 +8705,7 @@ Transaction sell placeholder
 # Example References :: Api
 answer-link: znai/example-references/api
 
-This page is a dummy page to demo [code reference]() capabilities
+This page is a dummy page to demo [code reference](snippets/code-references) capabilities
 
 # Example References :: Api :: Flight API
 answer-link: znai/example-references/api#flight-api
@@ -8733,7 +8739,7 @@ answer-link: znai/znai-development/local-build#build-tools-setup
 
 ## SDK Man
 
-Easy way to maintain Java specific dependencies below is by using [SDKMAN]()
+Easy way to maintain Java specific dependencies below is by using [SDKMAN](https://sdkman.io)
 
 ## Java And Maven
 
@@ -8746,9 +8752,9 @@ sdk install maven
 
 ## Graphviz
 
-Diagram features depend on its presence of [dot]() when build generates documentation for Znai.
+Diagram features depend on its presence of [dot](http://www.graphviz.org/) when build generates documentation for Znai.
 
-Use [brew]() to install [GraphViz]()
+Use [brew](https://brew.sh) to install [GraphViz](http://www.graphviz.org/)
 
 ```cli
 brew install graphviz
@@ -8756,11 +8762,11 @@ brew install graphviz
 
 ## Firefox
 
-Some automated tests in znai are using [WebTau](), which in turn use Selenium WebDriver and firefox.
+Some automated tests in znai are using [WebTau](https://testingisdocumenting.org/webtau/getting-started/what-is-this), which in turn use Selenium WebDriver and firefox.
 
 A firefox executable has to be on the system path.
 
-Use [brew]() to install [Firefox]().
+Use [brew](https://brew.sh) to install [Firefox](https://www.mozilla.org/en-US/firefox/).
 
 ```cli
 brew install firefox
@@ -8783,6 +8789,11 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2025 :: 1.83
+answer-link: znai/release-notes/2025#183
+
+
 
 # Release Notes :: 2025 :: 1.82
 answer-link: znai/release-notes/2025#182
