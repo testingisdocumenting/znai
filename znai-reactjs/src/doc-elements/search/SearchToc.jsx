@@ -1,5 +1,3 @@
-/** @jsx React.createElement */
-import React from 'react'
 import SearchTocItem from './SearchTocItem'
 
 const SearchToc = ({ids, search, onClick}) => {
