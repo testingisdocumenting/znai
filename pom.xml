@@ -21,7 +21,7 @@
 
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-parent</artifactId>
-    <version>1.83-SNAPSHOT</version>
+    <version>1.84-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Znai</name>
@@ -113,7 +113,6 @@
         <module>znai-open-api</module>
         <module>znai-typescript</module>
         <module>znai-jupyter</module>
-        <module>znai-reactjs-api</module>
         <module>znai-reactjs</module>
         <module>znai-server</module>
         <module>znai-client</module>

@@ -1,0 +1,1 @@
+* Fix: When new page is added to `toc`, deploy `all-pages.json` to have added pages loaded on page reload

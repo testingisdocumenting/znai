@@ -1,0 +1,1 @@
+* Fix: Ask In Slack and Generate Link are now working for paragraphs selected with triple click

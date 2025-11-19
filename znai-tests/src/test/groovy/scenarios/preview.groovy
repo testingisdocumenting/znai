@@ -26,10 +26,10 @@ import static pages.Pages.*
 def scaffoldedPathCache = cache.value('scaffolded-docs-for-preview')
 
 scenario('scaffold docs and run preview') {
-    def tempPath = fs.tempDir('znai-scaffold-for-preview')
-    CliCommands.znai.run('new', cli.workingDir(tempPath))
+    def scaffoldPath = fs.tempDir('znai-scaffold-for-preview')
+    CliCommands.znai.run('new', cli.workingDir(scaffoldPath))
 
-    def docsPath = tempPath.resolve("guide")
+    def docsPath = scaffoldPath.resolve("guide")
     scaffoldedPathCache.set(docsPath.toString())
 
     def port = 3457
@@ -46,6 +46,26 @@ scenario('footer should be updated on footer file change') {
     def docsPath = scaffoldedPathCache.getAsPath()
     fs.writeText(docsPath.resolve("footer.md"), "new footer")
     standardView.footer.waitTo == "new footer"
+}
+
+scenario('toc update should redeploy all pages json and new page link should be active on page reload') {
+    def docsPath = scaffoldedPathCache.getAsPath()
+    fs.createDir(docsPath.resolve("new-chapter"))
+    fs.writeText(docsPath.resolve("new-chapter/new-page.md"), "new page content")
+
+    def tocPath = docsPath.resolve("toc")
+    def tocContent = fs.textContent(tocPath).data
+    fs.writeText(tocPath, tocContent + "\nnew-chapter\n    new-page.md")
+
+    def newPageTocItem = standardView.tocItems.get("New Page")
+    newPageTocItem.waitToBe visible
+    standardView.pageTitle.should == "New Page"
+
+    standardView.pageTwoTocItem.click()
+    browser.refresh()
+
+    newPageTocItem.click()
+    standardView.pageTitle.waitTo == "New Page"
 }
 
 scenario('preview jumps to a page associated with a change') {

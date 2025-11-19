@@ -91,6 +91,7 @@ public class ZnaiCliConfig {
         DEPLOY("deploy", "documentation deploy root dir", true, false),
 
         DOC_ID("doc-id", "documentation id", true, false),
+        LLM_TXT_OUTPUT_PATH("llm-txt-output-path", "save llm.txt to specified path during build", true, false),
 
         EXPORT("export", "export destination directory", true, false),
 
@@ -153,6 +154,7 @@ public class ZnaiCliConfig {
         Set<OptionKey> buildOptions = EnumSet.copyOf(commonOptions);
         buildOptions.add(OptionKey.DOC_ID);
         buildOptions.add(OptionKey.DEPLOY);
+        buildOptions.add(OptionKey.LLM_TXT_OUTPUT_PATH);
         COMMAND_OPTIONS.put(Command.BUILD, buildOptions);
 
         Set<OptionKey> exportOptions = EnumSet.copyOf(commonOptions);
@@ -227,6 +229,7 @@ public class ZnaiCliConfig {
     private List<String> specifiedCustomCommands;
     private String actor;
     private List<String> lookupPaths;
+    private Path llmTxtOutputPath;
 
     private boolean isValidateExternalLinks;
 
@@ -335,6 +338,10 @@ public class ZnaiCliConfig {
         return modifiedTimeStrategy;
     }
 
+    public Path getLlmTxtOutputPath() {
+        return llmTxtOutputPath;
+    }
+
     public Path getDeployRoot() {
         return validateIsSet("deployRoot", deployRoot);
     }
@@ -342,21 +349,19 @@ public class ZnaiCliConfig {
     public void print() {
         printVersion();
 
-        if (!isScaffoldMode() && !isServeMode()) {
-            print("source root", sourceRoot);
-        }
-
         if (isPreviewMode() || isServeMode()) {
+            print("source root", sourceRoot);
             print("deploy root", deployRoot);
             print("       host", host);
             print("       port", port);
-        }
-
-        if (isGenerateOnlyMode()) {
-            print("     doc id", docId);
-        }
-
-        if (isExportMode()) {
+        } else if (isGenerateOnlyMode()) {
+            print("        source root", sourceRoot);
+            print("             doc id", docId);
+            if (getLlmTxtOutputPath() != null) {
+                print("llm txt output path", llmTxtOutputPath);
+            }
+        } else if (isExportMode()) {
+            print("source root", sourceRoot);
             print("export root", exportRoot);
         }
     }
@@ -434,6 +439,10 @@ public class ZnaiCliConfig {
         lookupPaths = commandLine.hasOption(OptionKey.LOOKUP_PATHS.getKey()) ?
                 Arrays.asList(commandLine.getOptionValues(OptionKey.LOOKUP_PATHS.getKey())):
                 Collections.emptyList();
+
+        llmTxtOutputPath = commandLine.hasOption(OptionKey.LLM_TXT_OUTPUT_PATH.getKey()) ?
+                Paths.get(commandLine.getOptionValue(OptionKey.LLM_TXT_OUTPUT_PATH.getKey())).toAbsolutePath() :
+                null;
 
         modifiedTimeStrategy = determineModifiedTimeStrategy(commandLine);
 
