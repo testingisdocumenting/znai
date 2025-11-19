@@ -55,6 +55,13 @@
                             <fileset file="dist/assets/index*.js" />
                         </concat>
 
+                        <copy todir="${project.build.outputDirectory}/static">
+                            <fileset dir="dist/assets">
+                                <include name="*.js"/>
+                                <exclude name="index*.js"/>
+                            </fileset>
+                        </copy>
+
                         <concat destfile="${project.build.outputDirectory}/static/main.css" append="true">
                             <fileset file="dist/assets/index*.css" />
                         </concat>
