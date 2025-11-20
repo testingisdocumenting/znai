@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import {extractIconIds, extractTextLinesEmphasisOrFull} from '../bulletUtils'
 import {isAllAtOnce} from '../../meta/meta'
@@ -37,7 +37,7 @@ const EmptyStripe = () => {
     return <div className="znai-empty-horizontal-stripe"/>
 }
 
-class HorizontalStripes extends Component {
+class HorizontalStripes extends React.Component {
     render() {
         const {elementsLibrary, meta, content, slideIdx} = this.props
         const textLines = extractTextLinesEmphasisOrFull(content)

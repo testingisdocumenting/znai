@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import GraphVizSvg from './GraphVizSvg'
 import {expandId} from './gvUtils'
 
 import './GraphvVizFlow.css'
 
-class DocumentationGraphVizFlow extends Component {
+class DocumentationGraphVizFlow extends React.Component {
     constructor(props) {
         super(props)
         this.state = {currentSectionIdx: -1}

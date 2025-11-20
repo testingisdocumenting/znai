@@ -17,6 +17,7 @@
 package org.testingisdocumenting.znai.html.reactjs;
 
 import org.testingisdocumenting.znai.html.Deployer;
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 import org.testingisdocumenting.znai.website.WebResource;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class ReactJsBundle {
     private final WebResource mainJs;
     private final WebResource mainCss;
     private final WebResource katexCss;
+    private final String otherJavaScripts;
 
     private final List<WebResource> fonts;
 
@@ -37,6 +39,8 @@ public class ReactJsBundle {
         mainCss = WebResource.fromResource("static/main.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");
 
+        otherJavaScripts = ResourceUtils.textContent("static/js-files.txt");
+
         Stream<WebResource> katexFonts = KatexFonts.LIST.stream()
                 .map(name -> WebResource.fromResource("static/css/fonts/" + name));
 
@@ -44,7 +48,7 @@ public class ReactJsBundle {
     }
 
     public Stream<WebResource> clientJavaScripts() {
-        return Stream.of(mainJs);
+        return Stream.concat(Stream.of(mainJs), otherJavaScripts.lines().map(WebResource::fromResource));
     }
 
     public Stream<WebResource> clientCssResources() {

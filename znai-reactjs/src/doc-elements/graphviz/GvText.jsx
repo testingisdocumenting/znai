@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import {removeCustomProps} from './gvUtils'
 
 import LinkWrap from './LinkWrap'
 
-class GvText extends Component {
+class GvText extends React.Component {
     render() {
         const {colors, isInversedTextColor, url} = this.props
         const cleanedUpProps = removeCustomProps(this.props)

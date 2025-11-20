@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import './Knob.css'
 
-class Knob extends Component {
+class Knob extends React.Component {
     constructor(props) {
         super(props)
 

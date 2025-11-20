@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import {extractTextLinesEmphasisOrFull} from '../bulletUtils'
 import {isAllAtOnce} from '../../meta/meta'
 
 import './Grid.css'
 
-class Grid extends Component {
+class Grid extends React.Component {
     render() {
         const {meta, content, slideIdx} = this.props
         const textLines = extractTextLinesEmphasisOrFull(content)

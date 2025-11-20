@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import React from "react";
 import { useEffect, useRef } from "react";
 import "./PreviewChangeScreen.css";
 

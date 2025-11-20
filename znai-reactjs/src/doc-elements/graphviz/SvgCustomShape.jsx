@@ -16,7 +16,7 @@
 
 import React, { Component } from 'react'
 
-class SvgCustomShape extends Component {
+class SvgCustomShape extends React.Component {
     render() {
         const {cx, cy, svg, colors, style} = this.props
         const transform = `translate(${cx} ${cy})`

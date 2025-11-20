@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import {Icon} from '../icons/Icon'
 import {SlideNotePanel} from "./SlideNotePanel"
@@ -29,7 +29,7 @@ import {PageGenError} from '../page-gen-error/PageGenError';
 
 const maxScaleRatio = 3
 
-class Presentation extends Component {
+class Presentation extends React.Component {
     constructor(props) {
         super(props)
 

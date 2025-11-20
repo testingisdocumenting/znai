@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import TwoSidesSection from './TwoSidesSection'
 import {TwoSidesLayout, TwoSidesLayoutLeftPart, TwoSidesLayoutRightPart} from './TwoSidesLayout'
 
@@ -31,7 +31,7 @@ import './TwoSidesPageContent.css'
  * @param content content that consist of list of doc elements
  * @returns two sides page content
  */
-class TwoSidesPageContent extends Component {
+class TwoSidesPageContent extends React.Component {
     render() {
         const {elementsLibrary, content, ...props} = this.props
         const {PageTitle} = elementsLibrary
