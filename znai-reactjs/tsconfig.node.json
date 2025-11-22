@@ -6,12 +6,6 @@
     "module": "ESNext",
     "types": ["node"],
     "skipLibCheck": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    // or use:
-    "baseUrl": ".",
-    "paths": {
-      "*": ["src/types/*"]
-    },
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

@@ -48,7 +48,7 @@ public class ReactJsBundle {
     }
 
     public Stream<WebResource> clientJavaScripts() {
-        return Stream.concat(Stream.of(mainJs), otherJavaScripts.lines().map(WebResource::fromResource));
+        return Stream.concat(Stream.of(mainJs), otherJavaScripts.lines().map(WebResource::moduleFromResource));
     }
 
     public Stream<WebResource> clientCssResources() {

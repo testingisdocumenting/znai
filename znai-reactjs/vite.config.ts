@@ -18,6 +18,7 @@ export default defineConfig({
     },
   },
   build: {
+    target: ['es2020', 'chrome87', 'firefox78', 'safari14'],
     rolldownOptions: {
       jsx: {
         mode: 'automatic'
