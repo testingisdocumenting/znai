@@ -57,8 +57,8 @@
     "vite": "npm:rolldown-vite@7.1.14"
   },
   "scripts": {
-    "dev": "vite --debug",
-    "build": "tsc && vite build --debug",
+    "dev": "vite",
+    "build": "tsc && vite build",
     "test": "vitest --config ./vitest.config.ts",
     "test:watch": "vitest --config ./vitest.config.ts --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
