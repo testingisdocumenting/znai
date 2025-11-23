@@ -16,7 +16,7 @@
     "flexsearch": "^0.8.167",
     "katex": "0.16.21",
     "mark.js": "github:julmot/mark.js",
-    "mermaid": "^11.12.1",
+    "mermaid": "^8.9.2",
     "normalize.css": "^8.0.1",
     "prismjs": "^1.30.0",
     "promise": "^7.1.1",
