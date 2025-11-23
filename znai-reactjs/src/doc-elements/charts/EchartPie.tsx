@@ -16,7 +16,7 @@
 
 import React from "react";
 import { EchartReactWrapper } from "./EchartReactWrapper";
-import { EchartCommonProps } from "./EchartCommon";
+import type { EchartCommonProps } from "./EchartCommon";
 import { echartCalcBreakpoint, findBreakpointDataIndexForText } from "./echartUtils";
 
 export function EchartPie(props: EchartCommonProps) {

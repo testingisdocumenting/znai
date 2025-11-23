@@ -15,7 +15,7 @@
  */
 
 import { createPresentationDemo } from "../demo-utils/PresentationDemo";
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 
 const arrayOfObjectWithinObjectData = {
   accounts: [

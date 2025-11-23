@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { SnippetDocReferences } from "./SnippetDocReferences";
+import type { SnippetDocReferences } from "./SnippetDocReferences";
 
 /**
  * global references are defined on the documentation level and is applicable to every code snippet.

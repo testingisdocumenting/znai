@@ -18,7 +18,7 @@
 import React from "react";
 
 import { AnnotatedImage } from "./AnnotatedImage";
-import { WithElementsLibrary } from "../default-elements/DocElement";
+import type { WithElementsLibrary } from "../default-elements/DocElement";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 
 interface MarkdownImageProps extends WithElementsLibrary {

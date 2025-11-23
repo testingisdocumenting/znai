@@ -17,13 +17,14 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import ApiParameters, { ApiParameterProps } from "./ApiParameters";
+import type { ApiParameterProps } from "./ApiParameters";
+import ApiParameters from "./ApiParameters";
 import { ReferenceLinkWrapper } from "../references/ReferenceLinkWrapper";
 
 import { Icon } from "../icons/Icon";
 import { ApiLinkedTextBlock } from "./ApiLinkedTextBlock";
 
-import { WithElementsLibrary } from "../default-elements/DocElement";
+import type { WithElementsLibrary } from "../default-elements/DocElement";
 
 import "./ApiParameter.css";
 

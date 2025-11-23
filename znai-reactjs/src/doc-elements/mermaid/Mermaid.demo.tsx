@@ -17,7 +17,7 @@
 import React from "react";
 
 import Mermaid from "./Mermaid";
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 
 export function mermaidDemo(registry: Registry) {
   registry.add("simple ", () => <Mermaid mermaid={"graph TD; A-->B; B-->C;"} />);

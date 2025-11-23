@@ -19,7 +19,7 @@ import React from "react";
 
 import { PresentationHeading } from "./PresentationHeading";
 
-import { DocElementProps } from "./DocElement";
+import type { DocElementProps } from "./DocElement";
 import "./Section.css";
 
 interface Props extends DocElementProps {

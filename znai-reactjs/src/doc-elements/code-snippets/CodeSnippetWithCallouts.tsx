@@ -24,8 +24,8 @@ import { isCommentToken, lineWithTokensTrimmedOnRight } from "./codeUtils";
 
 import { mergeWithGlobalDocReferences } from "../references/globalDocReferences";
 
-import { SnippetDocReferences } from "../references/SnippetDocReferences";
-import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
+import type { SnippetDocReferences } from "../references/SnippetDocReferences";
+import type { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
 
 import "./CodeSnippetWithCallouts.css";
 

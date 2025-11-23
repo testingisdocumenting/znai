@@ -3,6 +3,8 @@ import globals from 'globals';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import parser from '@typescript-eslint/parser';
 
 export default [
     // Ignore patterns
@@ -14,6 +16,7 @@ export default [
     {
         files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
         languageOptions: {
+            parser: parser,
             ecmaVersion: 2020,
             globals: {
                 ...globals.browser,
@@ -34,9 +37,17 @@ export default [
             react,
             'react-hooks': reactHooks,
             'react-refresh': reactRefresh,
+            '@typescript-eslint': typescriptEslint,
         },
         rules: {
             // ESLint recommended rules
+            '@typescript-eslint/consistent-type-imports': [
+                'error',
+                {
+                    prefer: 'type-imports',
+                    fixStyle: 'separate-type-imports',
+                },
+            ],
             ...js.configs.recommended.rules,
 
             // React rules

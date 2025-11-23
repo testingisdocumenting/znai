@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 import { Card } from "./Card";
 import {
   contentApiParameters,
@@ -27,7 +27,7 @@ import {
   contentTable,
 } from "../demo-utils/contentGenerators";
 import { elementsLibrary } from "../DefaultElementsLibrary";
-import { DocElementContent } from "../default-elements/DocElement";
+import type { DocElementContent } from "../default-elements/DocElement";
 
 export function cardsDemo(registry: Registry) {
   registry.add("large image", () => (

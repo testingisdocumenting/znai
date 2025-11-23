@@ -19,8 +19,8 @@ import * as React from "react";
 import { InlinedCode } from "./InlinedCode";
 import Link from "../default-elements/Link";
 import { elementsLibrary } from "../DefaultElementsLibrary";
-import { Registry } from "react-component-viewer";
-import { DocElementContent } from "../default-elements/DocElement";
+import type { Registry } from "react-component-viewer";
+import type { DocElementContent } from "../default-elements/DocElement";
 
 export function inlinedCodeDemo(registry: Registry) {
   registry

@@ -17,7 +17,8 @@
 
 import React from "react";
 
-import { Registry, simulateState } from "react-component-viewer";
+import type { Registry} from "react-component-viewer";
+import { simulateState } from "react-component-viewer";
 import {
   DiffTracking,
   disableDiffTracking,

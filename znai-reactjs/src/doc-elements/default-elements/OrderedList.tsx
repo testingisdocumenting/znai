@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { DocElementProps } from "./DocElement";
+import type { DocElementProps } from "./DocElement";
 import React from "react";
 
 interface Props extends DocElementProps {

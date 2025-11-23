@@ -15,7 +15,7 @@
  */
 
 import React from 'react'
-import { Registry } from 'react-component-viewer';
+import type { Registry } from 'react-component-viewer';
 import { NotAuthorizedScreen } from './NotAuthorizedScreen';
 
 export function notAuthorizedDemo(registry: Registry) {
