@@ -14,33 +14,43 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React, {Component} from 'react'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
-const SearchTocItem = ({ section, onSearch }) => {
-    const handleClick = React.useCallback(() => {
-        if (onSearch) {
-            onSearch(section)
-        }
-    }, [section, onSearch])
+export default class SearchTocItem extends Component {
+    render() {
+        const {pageTitle, pageSection, isSelected, idx, onSelect, onJump} = this.props
 
-    if (!section) {
-        return null
+        const className = "znai-search-toc-item" + (isSelected ? " selected" : "")
+
+        return (
+            <div className={className}
+                 onClick={() => onSelect(idx)}
+                 onDoubleClick={() => onJump(idx)}
+                 ref={this.saveRef}>
+                <span className="znai-search-toc-page-title">{pageTitle}</span>
+                <span className="znai-search-toc-section-title">{pageSection}</span>
+            </div>
+        )
     }
 
-    return React.createElement('div', 
-        { 
-            className: 'znai-search-toc-item',
-            onClick: handleClick 
-        },
-        React.createElement('div', 
-            { className: 'znai-search-toc-section' },
-            section.title
-        ),
-        section.pageTitle && React.createElement('div', 
-            { className: 'znai-search-toc-page-title' },
-            section.pageTitle
-        )
-    )
-}
+    saveRef = (node) => {
+        this.node = node
+    }
 
-export default SearchTocItem
+    componentDidMount() {
+        this.scrollIfRequired()
+    }
+
+    componentDidUpdate() {
+        this.scrollIfRequired()
+    }
+
+    scrollIfRequired() {
+        const {isSelected} = this.props
+
+        if (isSelected) {
+            scrollIntoView(this.node, { behavior: 'smooth', scrollMode: 'if-needed' })
+        }
+    }
+}
