@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 
-import React, { CSSProperties } from "react";
+import React, {type CSSProperties } from "react";
 
 import { useIsMobile } from "../../theme/ViewPortContext";
 
-import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
+import type {DocElementContent, ElementsLibraryMap} from "../default-elements/DocElement";
+// @ts-ignore
 import "./Columns.css";
-import { Property } from "csstype";
+import type {Property} from "csstype";
 
 interface ColumnConfig {
   border?: boolean;

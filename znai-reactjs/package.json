@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@types/node": "^22.10.7",
-    "@vitejs/plugin-react-swc": "^4.2.1",
+    "@vitejs/plugin-react": "^5.1.1",
     "ansi_up": "^6.0.6",
     "asciinema-player": "^3.9.0",
     "core-js": "^3.46.0",
@@ -55,7 +55,7 @@
     "vite": "npm:rolldown-vite@7.1.14"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --debug",
     "build": "tsc && vite build --debug",
     "test": "vitest --config ./vitest.config.ts",
     "test:watch": "vitest --config ./vitest.config.ts --watch",

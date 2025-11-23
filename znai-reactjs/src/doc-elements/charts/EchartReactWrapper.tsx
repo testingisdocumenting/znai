@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-import React, { MutableRefObject, RefObject, useEffect, useRef } from "react";
-import { EChartsType } from "echarts/types/dist/shared";
-import { configuredEcharts, EchartCommonProps } from "./EchartCommon";
+import React, {type MutableRefObject, type RefObject, useEffect, useRef } from "react";
+import type {EChartsType} from "echarts/types/dist/shared";
+import { configuredEcharts, type EchartCommonProps } from "./EchartCommon";
 
-import { PresentationProps } from "../presentation/PresentationProps";
+import type {PresentationProps} from "../presentation/PresentationProps";
 
 import { echartGridUsingMaxDataAndLegend } from "./echartUtils";
 
+// @ts-ignore
 import "./EchartReactWrapper.css";
 
 interface Props extends EchartCommonProps, PresentationProps {
@@ -37,6 +38,7 @@ const echarts = configuredEcharts();
 
 export function EchartReactWrapper(props: Props) {
   const echartDivNodeRef = useRef<HTMLDivElement>(null);
+  // @ts-ignore
   const echartRef = useRef<EChartsType>();
 
   useEffect(() => {
@@ -47,13 +49,15 @@ export function EchartReactWrapper(props: Props) {
     return () => window.znaiTheme.removeChangeHandler(onThemeChange);
 
     function onThemeChange() {
+      // @ts-ignore
       createOrInitEchart(echartDivNodeRef, echartRef, props);
     }
   }, [props]);
 
   useEffect(
     () => {
-      createOrInitEchart(echartDivNodeRef, echartRef, props);
+      // @ts-ignore
+      return createOrInitEchart(echartDivNodeRef, echartRef, props);
     },
     // @ts-ignore
     [props]
