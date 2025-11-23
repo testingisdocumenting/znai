@@ -14,5 +14,3 @@
  * limitations under the License.
  */
 
-window.znaiSearchIdx = window.createLocalSearchIndex();
-window.populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);
