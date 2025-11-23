@@ -32,7 +32,6 @@ interface MarkdownImageProps extends WithElementsLibrary {
 }
 
 const Image = ({ destination, title, inlined, fit, width = 0, height = 0, timestamp }: MarkdownImageProps) => {
-  console.log("@@ Image fit", fit);
   return (
     <AnnotatedImage
       imageSrc={destination}

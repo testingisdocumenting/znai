@@ -1,0 +1,1 @@
+* Fix: Search highlights apply highlights when user is already on the resulting page.
