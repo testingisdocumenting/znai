@@ -14,25 +14,28 @@
  * limitations under the License.
  */
 
+import React, {Component} from 'react'
 import SearchTocItem from './SearchTocItem'
 
-const SearchToc = ({ids, search, onClick}) => {
-    return (
-        <div className="znai-search-toc">
-            {ids.map((id, idx) => {
-                const searchEntry = search.findSearchEntryById(id)
-                return (
-                    <SearchTocItem 
-                        key={id}
-                        idx={idx}
-                        pageTitle={searchEntry.pageTitle}
-                        section={searchEntry.section}
-                        onSearch={onClick}
-                    />
-                )
-            })}
-        </div>
-    )
-}
+export default class SearchToc extends Component {
+    render() {
+        const {ids, selectedIdx, onSelect, onJump, search} = this.props
 
-export default SearchToc
+        return (
+            <div className="znai-search-toc-items">
+                {ids.map((id, idx) => {
+                    const searchEntry = search.findSearchEntryById(id)
+                    return (
+                        <SearchTocItem key={id}
+                                       idx={idx}
+                                       pageTitle={searchEntry.pageTitle}
+                                       pageSection={searchEntry.pageSection}
+                                       isSelected={idx === selectedIdx}
+                                       onSelect={onSelect}
+                                       onJump={onJump}/>
+                    )
+                })}
+            </div>
+        )
+    }
+}

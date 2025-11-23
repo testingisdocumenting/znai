@@ -14,38 +14,43 @@
  * limitations under the License.
  */
 
-const React = require('react');
+import React, {Component} from 'react'
 
-const SearchBox = ({ onSearch }) => {
-    const inputRef = React.useRef(null);
+class SearchBox extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {value: ""}
+    }
 
-    React.useEffect(() => {
-        if (inputRef.current) {
-            inputRef.current.focus();
+    render() {
+        return (
+            <div className="znai-search-popup-input-box">
+                <input
+                    ref={(dom) => this.dom = dom}
+                    placeholder="Type terms to search..."
+                    onKeyDown={this.onKeyDown}
+                    value={this.state.value}
+                    onChange={this.onInputChange}/>
+            </div>
+        )
+    }
+
+    componentDidMount() {
+        this.dom.focus();
+    }
+
+    // TODO debounce?
+    onInputChange = (e) => {
+        const value = e.target.value
+        this.props.onChange(value)
+        this.setState({value})
+    }
+
+    onKeyDown = (e) => {
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault()
         }
-    }, []);
+    }
+}
 
-    const handleChange = (e) => {
-        if (onSearch) {
-            onSearch(e.target.value);
-        }
-    };
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter' && onSearch) {
-            onSearch(inputRef.current?.value || '');
-        }
-    };
-
-    return React.createElement('div', 
-        { className: "znai-search-popup-input-box" },
-        React.createElement('input', {
-            ref: inputRef,
-            placeholder: "Type terms to search...",
-            onChange: handleChange,
-            onKeyPress: handleKeyPress
-        })
-    );
-};
-
-module.exports = SearchBox;
+export default SearchBox
