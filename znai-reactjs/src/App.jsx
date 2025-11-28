@@ -19,7 +19,7 @@ import "./App.css";
 import "./layout/DocumentationLayout.css";
 import "./doc-elements/search/Search.css";
 
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 
 import { ComponentViewer, DropDowns, Registries } from "react-component-viewer";
 import { tabsDemo } from "./doc-elements/tabs/Tabs.demo";
@@ -243,9 +243,17 @@ window.znaiSearchIdx = createLocalSearchIndex();
 populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);
 registries
   .add("end to end")
-  .registerAsMiniApp("full documentation navigation", /\/preview/, { root: "/preview" }, () => (
+  .registerAsMiniApp("test documentation page", /\/preview\/testpage/, { root: "/preview/testpage" }, () => (
     <Documentation {...testDocumentation} />
-  ));
+  ))
+  .registerAsMiniApp("full documentation navigation", /\/preview/, { root: "/preview" }, () => {
+    useEffect(() => {
+      const pageId = documentationNavigation.currentPageLocation();
+      documentationNavigation.navigateToPage(pageId);
+    }, []);
+
+    return <Documentation {...testDocumentation} />;
+  });
 
 const dropDowns = new DropDowns();
 dropDowns.add("Theme").addItem("Default", "Alt 1").addItem("Dark", "Alt 2").onSelect(selectTheme);

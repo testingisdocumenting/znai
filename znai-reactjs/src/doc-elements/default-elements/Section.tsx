@@ -29,9 +29,21 @@ interface Props extends DocElementProps {
 }
 
 function Section({ id, title, highlight, ...props }: Props) {
-  const className = "section" + (highlight ? " highlight" : "");
+  const [isHighlighted, setIsHighlighted] = React.useState(false);
+
+  React.useEffect(() => {
+    if (highlight) {
+      setIsHighlighted(true);
+    }
+  }, [highlight]);
+
+  const handleAnimationEnd = () => {
+    setIsHighlighted(false);
+  };
+
+  const className = "section" + (isHighlighted ? " highlight" : "");
   return (
-    <div className={className} key={title}>
+    <div className={className} onAnimationEnd={handleAnimationEnd} key={title}>
       <props.elementsLibrary.SectionTitle
         level={1}
         id={id}
