@@ -40,3 +40,8 @@ export function highlightSearchResultAndMaybeScroll(root: HTMLElement, snippets:
     },
   });
 }
+
+export function removeSearchHighlight(root: HTMLElement) {
+  const mark = new Mark(root);
+  mark.unmark({});
+}

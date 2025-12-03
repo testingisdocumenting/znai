@@ -20,16 +20,17 @@ import { afterTitleId } from "../../../layout/classNamesAndIds";
 import type { DocElementProps } from "../../default-elements/DocElement";
 import type { SearchResultId } from "../../search/SearchResultId";
 import type { TocItem } from "../../../structure/TocItem";
-import { highlightSearchResultAndMaybeScroll } from "../../search/searchResultHighlighter";
+import { highlightSearchResultAndMaybeScroll, removeSearchHighlight } from "../../search/searchResultHighlighter";
 
 interface Props extends DocElementProps {
   tocItem: TocItem;
   searchResult: { id: SearchResultId; snippetsToHighlight: string[] };
   contentRootDom: HTMLElement;
+  removeSearchResult: () => void;
 }
 
 export function DefaultPageContent(props: Props) {
-  const { elementsLibrary, content, searchResult, tocItem, contentRootDom } = props;
+  const { elementsLibrary, content, searchResult, tocItem, contentRootDom, removeSearchResult } = props;
   const { PageTitle } = elementsLibrary;
 
   const searchResultId = searchResult?.id;
@@ -42,7 +43,22 @@ export function DefaultPageContent(props: Props) {
     if (searchSnippetsToHighlight && isSearchResultOnThisPage && contentRootDom) {
       highlightSearchResultAndMaybeScroll(contentRootDom, searchSnippetsToHighlight, false);
     }
-  }, []);
+  }, [searchSnippetsToHighlight]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isSearchResultOnThisPage) {
+        removeSearchHighlight(contentRootDom);
+        removeSearchResult();
+        event.stopPropagation();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isSearchResultOnThisPage]);
 
   const renderedSections = content!.map((section) => {
     // @ts-ignore
