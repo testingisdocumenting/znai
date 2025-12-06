@@ -21,6 +21,8 @@ import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 
 import java.nio.file.Paths
 
+import static org.testingisdocumenting.webtau.Matchers.*
+
 class OcamlCommentExtractorTest {
     @Test
     void "extract single line comment block"() {
@@ -72,24 +74,43 @@ let docFunc x = x * 2
         result.should == "This is a documentation comment"
     }
 
-    @Test(expected = IllegalArgumentException)
+    @Test
     void "throw exception when text not found"() {
         def content = """
 (* Some comment *)
 let x = 5
 """
         def extractor = new OcamlCommentExtractor(content)
-        extractor.extractCommentBlock("nonexistent")
+
+        code {
+            extractor.extractCommentBlock("nonexistent")
+        }.should throwException(IllegalArgumentException, contain("can't find text: nonexistent"))
     }
 
-    @Test(expected = IllegalArgumentException)
+    @Test
     void "throw exception when no comment block found before match"() {
         def content = """
 let x = 5
 let y = 10
 """
         def extractor = new OcamlCommentExtractor(content)
-        extractor.extractCommentBlock("let x")
+
+        code {
+            extractor.extractCommentBlock("let x")
+        }.should throwException(IllegalArgumentException, contain("can't find comment block start"))
+    }
+
+    @Test
+    void "throw exception when comment block is not properly closed"() {
+        def content = """
+(* This comment is not closed
+let x = 5
+"""
+        def extractor = new OcamlCommentExtractor(content)
+
+        code {
+            extractor.extractCommentBlock("let x")
+        }.should throwException(IllegalArgumentException, contain("can't find comment block end"))
     }
 
     @Test

@@ -48,8 +48,6 @@ class OcamlCommentExtractor {
 
         // Remove opening delimiter - either (** or (*
         int startIndex = trimmed.startsWith("(**") ? 3 : 2;
-
-        // Remove closing delimiter - always *)
         String withoutDelimiters = trimmed.substring(startIndex, trimmed.length() - 2);
 
         // Check if first line has content (text on same line as opening delimiter)
