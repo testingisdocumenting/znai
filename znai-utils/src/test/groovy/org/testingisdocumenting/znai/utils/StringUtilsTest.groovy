@@ -46,6 +46,31 @@ line #_3\r""")
     }
 
     @Test
+    void "strip indentation but skip first line"() {
+        // First line has no indentation, continuation lines have 3 spaces
+        def text = "first line\n   second line\n   third line"
+        def stripped = StringUtils.stripIndentationSkipFirstLine(text)
+        // First line is trimmed, continuation lines have indentation stripped
+        stripped.should == "first line\nsecond line\nthird line"
+    }
+
+    @Test
+    void "strip indentation skip first line with single line"() {
+        def text = "  single line  "
+        def stripped = StringUtils.stripIndentationSkipFirstLine(text)
+        // Single line is just trimmed
+        stripped.should == "single line"
+    }
+
+    @Test
+    void "strip indentation skip first line with first line having leading space"() {
+        def text = " first line\n    second line\n    third line"
+        def stripped = StringUtils.stripIndentationSkipFirstLine(text)
+        // First line is trimmed, continuation lines have 4-space indentation stripped
+        stripped.should == "first line\nsecond line\nthird line"
+    }
+
+    @Test
     void "extracts inside curly braces"() {
         def code = "{\n    statement1;\n    statement2}"
         def stripped = StringUtils.extractInsideCurlyBraces(code)

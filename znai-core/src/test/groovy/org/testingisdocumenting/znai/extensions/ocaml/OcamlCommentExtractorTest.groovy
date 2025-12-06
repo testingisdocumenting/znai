@@ -36,16 +36,16 @@ let x = 5
     @Test
     void "extract multi line comment block"() {
         def content = """
-(* This is a 
+(* This is a
    multi-line
    comment *)
 let y = 10
 """
         def extractor = new OcamlCommentExtractor(content)
         def result = extractor.extractCommentBlock("let y")
-        result.should == """This is a 
-   multi-line
-   comment"""
+        result.should == """This is a
+multi-line
+comment"""
     }
 
     @Test
@@ -174,9 +174,42 @@ let transform lst = List.map (fun x -> x + 1) lst
         def extractor = new OcamlCommentExtractor(content)
         def elements = extractor.extractCommentBlockAsDocElements(TestComponentsRegistry.TEST_COMPONENTS_REGISTRY,
                 Paths.get("test.ml"), "transform").contentToListOfMaps()
-        
+
         elements.size().should == 1
         elements[0].type.should == 'TestMarkup'
         elements[0].markup.should == 'Use `List.map` to transform elements'
+    }
+
+    @Test
+    void "indented multi-line comment should not create code blocks in markdown"() {
+        def content = """
+        (* This function does something important.
+           It takes an argument and returns a result.
+           The algorithm is efficient. *)
+        let myFunc x = x + 1
+"""
+        def extractor = new OcamlCommentExtractor(content)
+        def elements = extractor.extractCommentBlockAsDocElements(TestComponentsRegistry.TEST_COMPONENTS_REGISTRY,
+                Paths.get("test.ml"), "myFunc").contentToListOfMaps()
+
+        elements.size().should == 1
+        elements[0].type.should == 'TestMarkup'
+        elements[0].markup.should == 'This function does something important.\nIt takes an argument and returns a result.\nThe algorithm is efficient.'
+    }
+
+    @Test
+    void "comment with empty first line after delimiter"() {
+        def content = """
+(*
+   This is the first line of content
+   This is the second line
+*)
+let x = 5
+"""
+        def extractor = new OcamlCommentExtractor(content)
+        def result = extractor.extractCommentBlock("let x")
+
+        result.should == """This is the first line of content
+This is the second line"""
     }
 }

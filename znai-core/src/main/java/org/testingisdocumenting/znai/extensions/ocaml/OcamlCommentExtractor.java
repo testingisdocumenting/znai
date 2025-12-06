@@ -45,14 +45,25 @@ class OcamlCommentExtractor {
 
     private String removeCommentPrefixAndSuffix(String commentBlock) {
         String trimmed = commentBlock.trim();
-        
+
         // Remove opening delimiter - either (** or (*
         int startIndex = trimmed.startsWith("(**") ? 3 : 2;
-        
+
         // Remove closing delimiter - always *)
         String withoutDelimiters = trimmed.substring(startIndex, trimmed.length() - 2);
-        
-        return withoutDelimiters.trim();
+
+        // Check if first line has content (text on same line as opening delimiter)
+        String[] lines = withoutDelimiters.split("\n", 2);
+        boolean firstLineHasContent = lines.length > 0 && !lines[0].trim().isEmpty();
+
+        if (firstLineHasContent) {
+            // First line has text right after delimiter - skip it when calculating indentation
+            // This removes both source code indentation and comment alignment indentation
+            return StringUtils.stripIndentationSkipFirstLine(withoutDelimiters);
+        } else {
+            // First line is empty - content starts on next line, use regular strip
+            return StringUtils.stripIndentation(withoutDelimiters);
+        }
     }
 
     private String extractBlock(int startBlockIdx, int endBlockIdx) {

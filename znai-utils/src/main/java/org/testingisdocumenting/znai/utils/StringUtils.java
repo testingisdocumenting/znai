@@ -49,6 +49,27 @@ public class StringUtils {
         return lines.stream().map(l -> removeIndentation(l, indentation)).collect(Collectors.joining("\n"));
     }
 
+    /**
+     * Strips common indentation from a multi-line text, but skips the first line when calculating
+     * the minimum indentation. Useful when the first line has different formatting (e.g., starts
+     * on the same line as an opening delimiter).
+     *
+     * @param text the text to process
+     * @return text with indentation stripped from all lines except the first (which is trimmed)
+     */
+    public static String stripIndentationSkipFirstLine(String text) {
+        String[] lines = text.split("\n", -1);
+        if (lines.length <= 1) {
+            return text.trim();
+        }
+
+        // Strip indentation from lines after the first
+        String restOfLines = String.join("\n", Arrays.copyOfRange(lines, 1, lines.length));
+        String strippedRest = stripIndentation(restOfLines).trim();
+
+        return lines[0].trim() + (strippedRest.isEmpty() ? "" : "\n" + strippedRest);
+    }
+
     public static String extractInsideCurlyBraces(String code) {
         int startIdx = code.indexOf('{');
         if (startIdx == -1) {
