@@ -28,19 +28,17 @@ import static java.util.stream.Collectors.toList;
 
 public class ReactJsBundle {
     public static final ReactJsBundle INSTANCE =  new ReactJsBundle();
-    private final WebResource mainJs;
     private final WebResource mainCss;
     private final WebResource katexCss;
-    private final String otherJavaScripts;
+    private final String javaScripts;
 
     private final List<WebResource> fonts;
 
     private ReactJsBundle() {
-        mainJs = WebResource.moduleFromResource("static/main.js");
         mainCss = WebResource.fromResource("static/main.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");
 
-        otherJavaScripts = ResourceUtils.textContent("static/js-files.txt");
+        javaScripts = ResourceUtils.textContent("static/js-files.txt");
 
         Stream<WebResource> katexFonts = KatexFonts.LIST.stream()
                 .map(name -> WebResource.fromResource("static/css/fonts/" + name));
@@ -49,7 +47,7 @@ public class ReactJsBundle {
     }
 
     public Stream<WebResource> clientJavaScripts() {
-        return Stream.concat(Stream.of(mainJs), otherJavaScripts.lines().map(WebResource::moduleFromResource));
+        return javaScripts.lines().map(WebResource::moduleFromResource);
     }
 
     public Stream<WebResource> clientCssResources() {

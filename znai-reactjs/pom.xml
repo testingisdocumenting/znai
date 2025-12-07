@@ -51,10 +51,6 @@
                     <target name="copy-react-bundle">
                         <delete dir="${project.build.outputDirectory}/static" />
 
-                        <echo file="${project.build.outputDirectory}/static/main.js" >
-                            // this is a dummy javascript file
-                        </echo>
-
                         <fileset dir="dist/assets" id="extra-js">
                             <include name="*.js"/>
                         </fileset>
