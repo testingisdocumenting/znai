@@ -22,7 +22,6 @@ import type {PresentationProps} from "../presentation/PresentationProps";
 
 import { echartGridUsingMaxDataAndLegend } from "./echartUtils";
 
-// @ts-ignore
 import "./EchartReactWrapper.css";
 
 interface Props extends EchartCommonProps, PresentationProps {
@@ -38,7 +37,6 @@ const echarts = configuredEcharts();
 
 export function EchartReactWrapper(props: Props) {
   const echartDivNodeRef = useRef<HTMLDivElement>(null);
-  // @ts-ignore
   const echartRef = useRef<EChartsType>();
 
   useEffect(() => {
@@ -49,14 +47,12 @@ export function EchartReactWrapper(props: Props) {
     return () => window.znaiTheme.removeChangeHandler(onThemeChange);
 
     function onThemeChange() {
-      // @ts-ignore
       createOrInitEchart(echartDivNodeRef, echartRef, props);
     }
   }, [props]);
 
   useEffect(
     () => {
-      // @ts-ignore
       return createOrInitEchart(echartDivNodeRef, echartRef, props);
     },
     // @ts-ignore
