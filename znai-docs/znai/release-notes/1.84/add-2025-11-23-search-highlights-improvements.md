@@ -1,0 +1,1 @@
+* Add: Remove search result highlights with Escape key

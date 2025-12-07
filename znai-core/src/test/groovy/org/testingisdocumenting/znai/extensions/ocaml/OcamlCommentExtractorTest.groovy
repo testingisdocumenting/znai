@@ -21,6 +21,8 @@ import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 
 import java.nio.file.Paths
 
+import static org.testingisdocumenting.webtau.Matchers.*
+
 class OcamlCommentExtractorTest {
     @Test
     void "extract single line comment block"() {
@@ -36,16 +38,16 @@ let x = 5
     @Test
     void "extract multi line comment block"() {
         def content = """
-(* This is a 
+(* This is a
    multi-line
    comment *)
 let y = 10
 """
         def extractor = new OcamlCommentExtractor(content)
         def result = extractor.extractCommentBlock("let y")
-        result.should == """This is a 
-   multi-line
-   comment"""
+        result.should == """This is a
+multi-line
+comment"""
     }
 
     @Test
@@ -72,24 +74,43 @@ let docFunc x = x * 2
         result.should == "This is a documentation comment"
     }
 
-    @Test(expected = IllegalArgumentException)
+    @Test
     void "throw exception when text not found"() {
         def content = """
 (* Some comment *)
 let x = 5
 """
         def extractor = new OcamlCommentExtractor(content)
-        extractor.extractCommentBlock("nonexistent")
+
+        code {
+            extractor.extractCommentBlock("nonexistent")
+        }.should throwException(IllegalArgumentException, contain("can't find text: nonexistent"))
     }
 
-    @Test(expected = IllegalArgumentException)
+    @Test
     void "throw exception when no comment block found before match"() {
         def content = """
 let x = 5
 let y = 10
 """
         def extractor = new OcamlCommentExtractor(content)
-        extractor.extractCommentBlock("let x")
+
+        code {
+            extractor.extractCommentBlock("let x")
+        }.should throwException(IllegalArgumentException, contain("can't find comment block start"))
+    }
+
+    @Test
+    void "throw exception when comment block is not properly closed"() {
+        def content = """
+(* This comment is not closed
+let x = 5
+"""
+        def extractor = new OcamlCommentExtractor(content)
+
+        code {
+            extractor.extractCommentBlock("let x")
+        }.should throwException(IllegalArgumentException, contain("can't find comment block end"))
     }
 
     @Test
@@ -174,9 +195,42 @@ let transform lst = List.map (fun x -> x + 1) lst
         def extractor = new OcamlCommentExtractor(content)
         def elements = extractor.extractCommentBlockAsDocElements(TestComponentsRegistry.TEST_COMPONENTS_REGISTRY,
                 Paths.get("test.ml"), "transform").contentToListOfMaps()
-        
+
         elements.size().should == 1
         elements[0].type.should == 'TestMarkup'
         elements[0].markup.should == 'Use `List.map` to transform elements'
+    }
+
+    @Test
+    void "indented multi-line comment should not create code blocks in markdown"() {
+        def content = """
+        (* This function does something important.
+           It takes an argument and returns a result.
+           The algorithm is efficient. *)
+        let myFunc x = x + 1
+"""
+        def extractor = new OcamlCommentExtractor(content)
+        def elements = extractor.extractCommentBlockAsDocElements(TestComponentsRegistry.TEST_COMPONENTS_REGISTRY,
+                Paths.get("test.ml"), "myFunc").contentToListOfMaps()
+
+        elements.size().should == 1
+        elements[0].type.should == 'TestMarkup'
+        elements[0].markup.should == 'This function does something important.\nIt takes an argument and returns a result.\nThe algorithm is efficient.'
+    }
+
+    @Test
+    void "comment with empty first line after delimiter"() {
+        def content = """
+(*
+   This is the first line of content
+   This is the second line
+*)
+let x = 5
+"""
+        def extractor = new OcamlCommentExtractor(content)
+        def result = extractor.extractCommentBlock("let x")
+
+        result.should == """This is the first line of content
+This is the second line"""
     }
 }

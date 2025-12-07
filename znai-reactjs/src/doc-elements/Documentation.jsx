@@ -77,6 +77,8 @@ export class Documentation extends React.Component {
       page: Documentation.processPage(page),
       toc: tableOfContents.toc,
 
+      searchResult: null,
+
       // previous version put footer inside props
       // we check props for backward compatibility with deployed docs
       // should be safe to remove props.footer after October 2021
@@ -115,8 +117,6 @@ export class Documentation extends React.Component {
     this.keyDownHandler = this.keyDownHandler.bind(this);
     this.mouseClickHandler = this.mouseClickHandler.bind(this);
 
-    this.searchResult = null;
-
     documentationNavigation.addUrlChangeListener(this.onUrlChange.bind(this));
   }
 
@@ -139,12 +139,20 @@ export class Documentation extends React.Component {
     }
   }
 
+  removeSearchResult = () => {
+    this.setState({ searchResult: null });
+  };
+
   componentDidUpdate(prevProps, prevState) {
     const isTocItemChanged = !areTocItemEquals(this.state.page.tocItem, prevState.page.tocItem);
 
     // reset searchResultId but only when navigating to a different page
-    if (this.searchResult && isTocItemChanged && !areTocItemEquals(this.state.page.tocItem, this.searchResult.id)) {
-      this.searchResult = null;
+    if (
+      this.state.searchResult &&
+      isTocItemChanged &&
+      !areTocItemEquals(this.state.page.tocItem, this.state.searchResult.id)
+    ) {
+      this.removeSearchResult();
     }
   }
 
@@ -159,6 +167,7 @@ export class Documentation extends React.Component {
       tocCollapsed,
       isSearchActive,
       pageGenError,
+      searchResult,
     } = this.state;
 
     const theme = this.theme;
@@ -179,7 +188,8 @@ export class Documentation extends React.Component {
     const renderedPage = (
       <elementsLibrary.Page
         {...page}
-        searchResult={this.searchResult}
+        searchResult={searchResult}
+        removeSearchResult={this.removeSearchResult}
         docMeta={docMeta}
         onPresentationOpen={this.onPresentationOpen}
         prevPageTocItem={this.prevPageTocItem}
@@ -525,7 +535,7 @@ export class Documentation extends React.Component {
 
   onSearchSelection(query, id, snippetsToHighlight) {
     this.onSearchClose();
-    this.searchResult = { id, snippetsToHighlight };
+    this.setState({ searchResult: { id, snippetsToHighlight } });
     documentationTracking.onSearchResultSelect(query, id);
     documentationNavigation.navigateToPage(id);
   }
