@@ -18,7 +18,6 @@ import React, { useState } from "react";
 
 import mermaid from "mermaid";
 
-// @ts-ignore
 import "./Mermaid.css";
 
 interface Props {
