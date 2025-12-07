@@ -84,10 +84,14 @@ export class HttpDocumentationTracking implements DocumentationTrackingListener 
         credentials: "include",
       });
 
-      if (!response.ok && this.onError) {
-        this.onError(new Error(`HTTP ${response.status}: ${response.statusText}`));
+      if (!response.ok) {
+        console.error("tracking server error when sending event", event);
+        if (this.onError) {
+          this.onError(new Error(`HTTP ${response.status}: ${response.statusText}`));
+        }
       }
     } catch (error) {
+      console.error("error sending tracking event", event, error);
       if (this.onError) {
         this.onError(error instanceof Error ? error : new Error(String(error)));
       }

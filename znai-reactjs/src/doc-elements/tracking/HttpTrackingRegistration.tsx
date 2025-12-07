@@ -42,10 +42,10 @@ export function HttpTrackingRegistration() {
     };
   }, [trackActivityUrl]);
 
-  function handleTrackingError(error: Error) {
+  function handleTrackingError(_error: Error) {
     errorNotifications.notifyError({
       id: TRACKING_ERROR_ID,
-      message: "Activity tracking is offline:" + error.message,
+      message: "Activity tracking is offline",
     });
   }
 

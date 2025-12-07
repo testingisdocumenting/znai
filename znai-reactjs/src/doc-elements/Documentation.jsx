@@ -420,7 +420,6 @@ export class Documentation extends Component {
     this.extractPageSectionNodes();
 
     const currentPageLocation = documentationNavigation.currentPageLocation();
-    documentationTracking.onPageOpen(currentPageLocation);
 
     if (urlHistoryState && urlHistoryState.scrollTop) {
       this.mainPanelDom.scrollTop = urlHistoryState.scrollTop;
@@ -444,7 +443,9 @@ export class Documentation extends Component {
 
     document.title = page.tocItem.pageTitle ? docMeta.title + ": " + page.tocItem.pageTitle : docMeta.title;
 
-    this.setState({ presentationRegistry });
+    this.setState({ presentationRegistry }, () => {
+      documentationTracking.onPageOpen(currentPageLocation);
+    });
   }
 
   onSearchClick() {
