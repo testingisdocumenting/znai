@@ -54,6 +54,8 @@ import { ZoomOverlay } from "./zoom/ZoomOverlay";
 import { TooltipRenderer } from "../components/Tooltip";
 
 import "./search/Search.css";
+import { DismissableErrorIndicators } from "../components/DismissableErrorIndicators.tsx";
+import { HttpTrackingRegistration } from "./tracking/HttpTrackingRegistration.tsx";
 
 export class Documentation extends Component {
   constructor(props) {
@@ -240,6 +242,8 @@ export class Documentation extends Component {
       <ViewPortProvider onLayoutChange={this.onLayoutChange}>
         <PreviewTrackerWrapper>
           <TooltipRenderer />
+          <DismissableErrorIndicators />
+          <HttpTrackingRegistration />
           <DocumentationLayout
             docMeta={docMeta}
             toc={toc}

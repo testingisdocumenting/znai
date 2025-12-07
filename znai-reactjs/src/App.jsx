@@ -93,6 +93,7 @@ import { echartDemo } from "./doc-elements/charts/Echart.demo";
 import { chartsPresentationDemo } from "./doc-elements/charts/EchartPresentation.demo";
 import { smartBulletListsDemo } from "./doc-elements/bullets/SmarlBulletList.demo";
 import { tooltipDemo } from "./components/Tooltip.demo";
+import { dismissableErrorIndicatorsDemo } from "./components/DismissableErrorIndicators.demo";
 import { annotatedImageWithOrderedListDemo } from "./doc-elements/images/AnnotatedImageWithOrderedList.demo";
 import { pythonMethodDemo } from "./doc-elements/python/PythonMethod.demo";
 import { openApiAndMethodAndUrlDemo } from "./doc-elements/open-api/OpenApiAndMethodAndUrl.demo";
@@ -134,7 +135,10 @@ updateGlobalDocReferences({
 
 const registries = new Registries();
 
-registries.add("components").registerAsRows("tooltip", tooltipDemo);
+registries
+  .add("components")
+  .registerAsRows("tooltip", tooltipDemo)
+  .registerAsRows("dismissable error indicators", dismissableErrorIndicatorsDemo);
 
 registries
   .add("text")

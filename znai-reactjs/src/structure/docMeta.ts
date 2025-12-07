@@ -27,6 +27,7 @@ export interface DocMeta {
   slackActiveQuestionsUrl?: string;
   sendToSlackIncludeContentType?: boolean;
   resolveSlackQuestionUrl?: string;
+  trackActivityUrl?: string;
   useTopHeader?: boolean;
   hidePresentationTrigger?: boolean;
   support?: DocMetaSupport;

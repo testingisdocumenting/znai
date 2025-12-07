@@ -1057,6 +1057,7 @@ public class WebSite implements Log {
             addMetaFromEnvVar(docMeta, "slackActiveQuestionsUrl", "ZNAI_SLACK_ACTIVE_QUESTIONS_URL");
             addMetaFromEnvVar(docMeta, "resolveSlackQuestionUrl", "ZNAI_RESOLVE_SLACK_QUESTION_URL");
             addMetaFromEnvVar(docMeta, "sendToSlackIncludeContentType", "ZNAI_SEND_TO_SLACK_INCLUDE_CONTENT_TYPE");
+            addMetaFromEnvVar(docMeta, "trackActivityUrl", "ZNAI_TRACK_ACTIVITY_URL");
         }
 
         private void addMetaFromEnvVar(DocMeta docMeta, String key, String envVarName) {
