@@ -19,7 +19,8 @@ import React, { useState, useEffect, useMemo } from "react";
 
 import CliCommandToken from "./CliCommandToken";
 import { splitParts } from "../../utils/strings";
-import { DocElementPayload } from "../default-elements/DocElement";
+import type { DocElementPayload } from "../default-elements/DocElement";
+// @ts-ignore
 import "./CliCommand.css";
 
 interface Token {
