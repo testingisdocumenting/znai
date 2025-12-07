@@ -83,7 +83,6 @@ interface ContentProvider {
 class ElementsContentProvider implements ContentProvider {
   idx: number = 0;
 
-  // @ts-ignore
   constructor(readonly content: DocElementContent) {}
 
   peekCurrent(): DocElementPayload | undefined {
