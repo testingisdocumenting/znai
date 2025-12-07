@@ -20,19 +20,5 @@ function initializeSearchIndex() {
     }
 }
 
-// Check immediately in case the data is already there
+// Call the method to initialize the search index.
 initializeSearchIndex();
-
-// Set up an observer to watch for changes to window.znaiSearchData
-const observer = new MutationObserver((mutations, obs) => {
-    if (window.znaiSearchData) {
-        initializeSearchIndex();
-        obs.disconnect(); // Stop observing once we've initialized
-    }
-});
-
-// Start observing
-observer.observe(document, {
-    childList: true,
-    subtree: true
-});
