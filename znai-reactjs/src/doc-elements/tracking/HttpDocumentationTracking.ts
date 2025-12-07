@@ -15,6 +15,7 @@
  */
 
 import { DocumentationTrackingListener } from "./DocumentationTracking";
+import { getDocMeta } from "../../structure/docMeta";
 
 export interface TrackingEvent {
   eventType: string;
@@ -75,11 +76,15 @@ export class HttpDocumentationTracking implements DocumentationTrackingListener 
     };
 
     try {
+      const headers = getDocMeta().trackActivityIncludeContentType
+        ? {
+            "Content-Type": "application/json",
+          }
+        : undefined;
+
       const response = await fetch(this.trackingUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headers,
         body: JSON.stringify(event),
         credentials: "include",
       });
