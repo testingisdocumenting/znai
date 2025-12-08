@@ -15,9 +15,10 @@
  */
 
 import { DocumentationTrackingListener } from "./DocumentationTracking";
-import { getDocMeta } from "../../structure/docMeta";
+import { getDocId, getDocMeta } from "../../structure/docMeta";
 
 export interface TrackingEvent {
+  docId: string;
   eventType: string;
   pageId: string;
   data?: unknown;
@@ -70,6 +71,7 @@ export class HttpDocumentationTracking implements DocumentationTrackingListener 
 
   private async sendEvent(eventType: string, pageId: string, data?: unknown) {
     const event: TrackingEvent = {
+      docId: getDocId(),
       eventType,
       pageId,
       data,

@@ -2,6 +2,7 @@ import os
 import json
 import csv
 import uuid
+from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from slack_sdk import WebClient
@@ -27,6 +28,9 @@ slack_client = WebClient(token=slack_token)
 
 CSV_FILE = "active_questions.csv"
 CSV_HEADERS = ["id", "timestamp", "pageId", "pageUrl", "context", "selectedText", "selectedPrefix", "selectedSuffix", "question", "slackLink", "username", "channel", "slackMessageTs", "resolved"]
+
+TRACKING_CSV_FILE = "tracking_events.csv"
+TRACKING_CSV_HEADERS = ["docId", "pageId", "timestamp", "eventType",  "data"]
 
 @app.route('/ask-in-slack', methods=['POST'])
 def ask_in_slack():
@@ -183,29 +187,79 @@ def get_active_questions():
 def resolve_slack_question(ts):
     try:
         print(f"=== resolve-slack-question request received for ts: {ts} ===")
-        
+
         updated = update_question_completion_status(ts, True)
-        
+
         if updated:
             print(f"Successfully marked question with ts {ts} as resolved")
             return jsonify({"success": True, "message": f"Question {ts} marked as resolved"}), 200
         else:
             print(f"Question with ts {ts} not found")
             return jsonify({"error": f"Question with ts {ts} not found"}), 404
-            
+
     except Exception as e:
         print(f"Error resolving question: {type(e).__name__}: {str(e)}")
         import traceback
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
+@app.route('/track-activity', methods=['POST'])
+def track_event():
+    try:
+        data = request.get_json()
+
+        if not data:
+            return jsonify({"error": "No JSON data provided"}), 400
+
+        doc_id = data.get('docId')
+        event_type = data.get('eventType')
+        page_id = data.get('pageId')
+        event_data = data.get('data', {})
+
+        if not event_type or not page_id:
+            return jsonify({"error": "Missing required fields: eventType and pageId"}), 400
+
+        timestamp = datetime.utcnow().isoformat()
+
+        persist_tracking_event({
+            'docId': doc_id,
+            'pageId': page_id,
+            'timestamp': timestamp,
+            'eventType': event_type,
+            'data': json.dumps(event_data) if event_data else ''
+        })
+
+        return jsonify({"success": True}), 200
+
+    except Exception as e:
+        print(f"Error tracking event: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+def persist_tracking_event(event):
+    file_exists = os.path.exists(TRACKING_CSV_FILE)
+
+    with open(TRACKING_CSV_FILE, 'a', newline='', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=TRACKING_CSV_HEADERS)
+
+        if not file_exists:
+            writer.writeheader()
+
+        writer.writerow(event)
+
 def format_slack_message(username, question, context, page_url):
     message_parts = [f"@{username} <{page_url}|asked>: {question}"]
-    
+
     if context:
         message_parts.append(context)
-    
+
     return "\n\n".join(message_parts)
+
+# Erase tracking CSV file on server start
+if os.path.exists(TRACKING_CSV_FILE):
+    os.remove(TRACKING_CSV_FILE)
+    print(f"Erased existing tracking file: {TRACKING_CSV_FILE}")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5111, debug=True)

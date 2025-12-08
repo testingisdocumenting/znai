@@ -45,7 +45,7 @@ export function HttpTrackingRegistration() {
   function handleTrackingError(_error: Error) {
     errorNotifications.notifyError({
       id: TRACKING_ERROR_ID,
-      message: "Activity tracking is offline",
+      message: "stats server is down",
     });
   }
 
