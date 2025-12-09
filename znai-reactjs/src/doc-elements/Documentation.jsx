@@ -54,6 +54,8 @@ import { ZoomOverlay } from "./zoom/ZoomOverlay";
 import { TooltipRenderer } from "../components/Tooltip";
 
 import "./search/Search.css";
+import { DismissableErrorIndicators } from "../components/DismissableErrorIndicators.tsx";
+import { HttpTrackingRegistration } from "./tracking/HttpTrackingRegistration.tsx";
 
 export class Documentation extends React.Component {
   constructor(props) {
@@ -240,6 +242,8 @@ export class Documentation extends React.Component {
       <ViewPortProvider onLayoutChange={this.onLayoutChange}>
         <PreviewTrackerWrapper>
           <TooltipRenderer />
+          <DismissableErrorIndicators />
+          <HttpTrackingRegistration />
           <DocumentationLayout
             docMeta={docMeta}
             toc={toc}
@@ -416,7 +420,6 @@ export class Documentation extends React.Component {
     this.extractPageSectionNodes();
 
     const currentPageLocation = documentationNavigation.currentPageLocation();
-    documentationTracking.onPageOpen(currentPageLocation);
 
     if (urlHistoryState && urlHistoryState.scrollTop) {
       this.mainPanelDom.scrollTop = urlHistoryState.scrollTop;
@@ -440,7 +443,9 @@ export class Documentation extends React.Component {
 
     document.title = page.tocItem.pageTitle ? docMeta.title + ": " + page.tocItem.pageTitle : docMeta.title;
 
-    this.setState({ presentationRegistry });
+    this.setState({ presentationRegistry }, () => {
+      documentationTracking.onPageOpen(currentPageLocation);
+    });
   }
 
   onSearchClick() {

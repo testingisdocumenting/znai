@@ -1,0 +1,1 @@
+* Add: Custom HTTP tracking endpoint via `ZNAI_TRACK_ACTIVITY_URL` environemnt variable 
