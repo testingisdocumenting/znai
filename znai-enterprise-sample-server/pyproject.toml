@@ -3,9 +3,9 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "znai-slack-bot"
+name = "znai-enterprise-sample-server"
 version = "1.0.0"
-description = "Slack bot for Znai documentation questions"
+description = "Enterprise sample server for Znai documentation questions"
 requires-python = ">=3.9"
 dependencies = [
     "flask==3.0.0",
@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [project.scripts]
-znai-slack-bot = "slack_bot:main"
+znai-enterprise-sample-server = "slack_bot:main"
 
 [tool.black]
 line-length = 88

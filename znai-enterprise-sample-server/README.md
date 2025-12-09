@@ -1,4 +1,4 @@
-# Znai Slack Bot - Local Testing Instructions
+# Znai Enterprise Sample Server - Local Testing Instructions
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@
 ### 2. Install Dependencies
 
 ```bash
-cd znai-slack-bot
+cd znai-enterprise-sample-server
 pip install -r requirements.txt
 ```
 
