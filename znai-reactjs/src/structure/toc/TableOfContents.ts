@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { TocItem } from "../TocItem";
+import type { TocItem } from "../TocItem";
 
 /**
 

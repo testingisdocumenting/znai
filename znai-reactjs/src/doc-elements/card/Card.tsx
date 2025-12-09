@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import { DocElementContent, WithElementsLibrary } from "../default-elements/DocElement";
+import type { DocElementContent, WithElementsLibrary } from "../default-elements/DocElement";
 
 import { extractLinkTextAndUrl, isContentElementSelfContainedLink } from "./cardContentAnalyzer";
 import { LinkWrapper } from "../default-elements/LinkWrapper";

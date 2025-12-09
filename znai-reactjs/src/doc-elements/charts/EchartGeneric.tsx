@@ -18,7 +18,7 @@ import React from "react";
 import { EchartBar } from "./EchartBar";
 import { EchartPie } from "./EchartPie";
 import { EchartLine } from "./EchartLine";
-import { PresentationProps } from "../presentation/PresentationProps";
+import type { PresentationProps } from "../presentation/PresentationProps";
 
 interface Props extends PresentationProps {
   chartType: string;

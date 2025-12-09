@@ -51,9 +51,24 @@
                     <target name="copy-react-bundle">
                         <delete dir="${project.build.outputDirectory}/static" />
 
-                        <concat destfile="${project.build.outputDirectory}/static/main.js" append="true">
-                            <fileset file="dist/assets/index*.js" />
-                        </concat>
+                        <fileset dir="dist/assets" id="extra-js">
+                            <include name="*.js"/>
+                        </fileset>
+
+                        <copy todir="${project.build.outputDirectory}/static">
+                            <fileset refid="extra-js"/>
+                        </copy>
+
+                        <pathconvert property="js.files.list" pathsep="${line.separator}">
+                            <fileset refid="extra-js"/>
+                            <chainedmapper>
+                                <mapper type="flatten"/>
+                                <mapper type="regexp" from="^(.*)\.js$$" to="static/\1.js"/>
+                            </chainedmapper>
+                        </pathconvert>
+
+                        <!-- Write to a file -->
+                        <echo file="${project.build.outputDirectory}/static/js-files.txt">${js.files.list}</echo>
 
                         <concat destfile="${project.build.outputDirectory}/static/main.css" append="true">
                             <fileset file="dist/assets/index*.css" />

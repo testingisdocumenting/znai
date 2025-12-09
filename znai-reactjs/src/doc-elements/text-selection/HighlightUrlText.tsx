@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import React from 'react'
+
 import { extractHighlightParams } from "./highlightUrl";
 import { HighlightedText } from "./HighlightedText";
 

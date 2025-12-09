@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import {buildUniqueId} from './gvUtils'
 
@@ -24,7 +24,7 @@ import GraphVizReactElementsBuilder from './GraphVizReactElementsBuilder'
 import './GraphVizSvg.css'
 
 
-class GraphVizSvg extends Component {
+class GraphVizSvg extends React.Component {
     render() {
         const {diagram, idsToDisplay, idsToHighlight, urls, wide, align = "left"} = this.props
 

@@ -57,7 +57,7 @@ import "./search/Search.css";
 import { DismissableErrorIndicators } from "../components/DismissableErrorIndicators.tsx";
 import { HttpTrackingRegistration } from "./tracking/HttpTrackingRegistration.tsx";
 
-export class Documentation extends Component {
+export class Documentation extends React.Component {
   constructor(props) {
     super(props);
 

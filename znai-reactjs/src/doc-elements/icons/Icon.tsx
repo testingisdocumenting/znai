@@ -16,7 +16,8 @@
  */
 
 import React from 'react'
-import feather, { FeatherAttributes } from 'feather-icons'
+import type { FeatherAttributes } from 'feather-icons';
+import feather from 'feather-icons'
 
 import './Icon.css'
 

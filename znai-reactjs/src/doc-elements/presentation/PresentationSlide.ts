@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { PresentationStickPlacement } from '../meta/meta';
+import type React from 'react';
+import type { PresentationStickPlacement } from '../meta/meta';
 
 export interface PresentationSlide {
   componentIdx: number;

@@ -1,6 +1,7 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -17,14 +18,22 @@ export default defineConfig({
     },
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: undefined, // Prevent splitting chunks
+    target: ['es2020', 'chrome87', 'firefox78', 'safari14'],
+    rolldownOptions: {
+      jsx: {
+        mode: 'automatic'
       },
-    },
-  },
-  test: {
-    globals: true,
-    environment: "jsdom",
-  },
-});
+      logLevel: 'debug',
+      output: {
+        advancedChunks: {
+          groups: [
+            {
+              name: 'mermaid',
+              test: /node_modules[\\/]mermaid/,
+              priority: 20,
+            }]
+        }
+      }
+    }
+  }
+})

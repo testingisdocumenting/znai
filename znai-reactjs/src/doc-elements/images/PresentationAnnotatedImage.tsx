@@ -17,8 +17,9 @@
 
 import React from "react";
 
-import { AnnotatedImage, AnnotatedImageProps } from "./AnnotatedImage";
-import { PresentationProps } from "../presentation/PresentationProps";
+import type { AnnotatedImageProps } from "./AnnotatedImage";
+import { AnnotatedImage } from "./AnnotatedImage";
+import type { PresentationProps } from "../presentation/PresentationProps";
 
 import "./PresentationAnnotatedImage.css";
 

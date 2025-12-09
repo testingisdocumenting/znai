@@ -16,9 +16,9 @@
 
 import React from "react";
 
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 import { PythonMethod } from "./PythonMethod";
-import { PythonArg } from "./PythonArg";
+import type { PythonArg } from "./PythonArg";
 
 const emptyDecorators: string[] = [];
 

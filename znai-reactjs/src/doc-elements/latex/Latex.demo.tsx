@@ -16,7 +16,7 @@
  */
 
 import React from "react";
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 
 import Latex from "./Latex";
 import InlinedLatex from "./InlinedLatex";

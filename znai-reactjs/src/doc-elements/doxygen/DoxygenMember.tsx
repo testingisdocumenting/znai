@@ -15,10 +15,10 @@
  */
 
 import React from "react";
-import { DoxygenParameter } from "./Doxygen";
+import type { DoxygenParameter } from "./Doxygen";
 
 import { LinkWrapper } from "../default-elements/LinkWrapper";
-import { ApiLinkedText } from "../api/ApiLinkedText";
+import type { ApiLinkedText } from "../api/ApiLinkedText";
 
 import { ApiLinkedTextBlock } from "../api/ApiLinkedTextBlock";
 

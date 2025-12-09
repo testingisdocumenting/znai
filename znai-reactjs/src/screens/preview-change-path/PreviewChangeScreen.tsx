@@ -17,7 +17,8 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { socketUrl } from "../../utils/socket";
-import { Line, PreviewConsoleOutput } from "./PreviewConsoleOutput";
+import type { Line} from "./PreviewConsoleOutput";
+import { PreviewConsoleOutput } from "./PreviewConsoleOutput";
 
 interface Props {
   srcRoot: string;

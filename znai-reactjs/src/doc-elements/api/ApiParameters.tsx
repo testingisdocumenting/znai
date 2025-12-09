@@ -17,14 +17,16 @@
 
 import React from "react";
 
-import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
-import { ApiLinkedText } from "./ApiLinkedText";
+import type { DocElementContent, DocElementProps } from "../default-elements/DocElement";
+import type { ApiLinkedText } from "./ApiLinkedText";
 import { ApiParameter } from "./ApiParameter";
 
 import { Snippet } from "../code-snippets/Snippet";
 
-import { ContainerTitle, ContainerTitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
-import { Container, ContainerCommonProps } from "../container/Container";
+import type { ContainerTitleCommonProps} from "../container/ContainerTitle";
+import { ContainerTitle, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
+import type { ContainerCommonProps } from "../container/Container";
+import { Container } from "../container/Container";
 
 import "./ApiParameters.css";
 

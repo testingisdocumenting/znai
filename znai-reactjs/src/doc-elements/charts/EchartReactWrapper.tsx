@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import React, { MutableRefObject, RefObject, useEffect, useRef } from "react";
-import { EChartsType } from "echarts/types/dist/shared";
-import { configuredEcharts, EchartCommonProps } from "./EchartCommon";
+import React, {type MutableRefObject, type RefObject, useEffect, useRef } from "react";
+import type {EChartsType} from "echarts/types/dist/shared";
+import { configuredEcharts, type EchartCommonProps } from "./EchartCommon";
 
-import { PresentationProps } from "../presentation/PresentationProps";
+import type {PresentationProps} from "../presentation/PresentationProps";
 
 import { echartGridUsingMaxDataAndLegend } from "./echartUtils";
 
@@ -53,7 +53,7 @@ export function EchartReactWrapper(props: Props) {
 
   useEffect(
     () => {
-      createOrInitEchart(echartDivNodeRef, echartRef, props);
+      return createOrInitEchart(echartDivNodeRef, echartRef, props);
     },
     // @ts-ignore
     [props]

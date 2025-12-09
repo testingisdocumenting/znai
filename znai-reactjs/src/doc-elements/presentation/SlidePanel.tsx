@@ -18,9 +18,9 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 
 import { SlidesLayout } from './SlidesLayout';
 
-import PresentationRegistry from './PresentationRegistry';
+import type PresentationRegistry from './PresentationRegistry';
 
-import { PresentationDimension } from './PresentationDimensions';
+import type { PresentationDimension } from './PresentationDimensions';
 
 import './SlidePanel.css';
 

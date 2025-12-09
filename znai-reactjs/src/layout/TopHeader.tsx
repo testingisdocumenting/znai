@@ -15,12 +15,12 @@
  */
 
 import React from "react";
-import { DocMeta } from "../structure/docMeta";
+import type { DocMeta } from "../structure/docMeta";
 import TocPanelSearch from "./TocPanelSearch";
 import { DarkLightThemeSwitcher } from "./DarkLightThemeSwitcher";
 
 import "./TopHeader.css";
-import { TocItem } from "../structure/TocItem";
+import type { TocItem } from "../structure/TocItem";
 
 interface Props {
   docMeta: DocMeta;

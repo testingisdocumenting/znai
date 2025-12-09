@@ -294,7 +294,7 @@ const documentationTracker = {
 
 documentationTracking.addListener(documentationTracker);
 
-export class App extends Component {
+export class App extends React.Component {
   render() {
     return <ComponentViewer registries={registries} dropDowns={dropDowns} />;
   }

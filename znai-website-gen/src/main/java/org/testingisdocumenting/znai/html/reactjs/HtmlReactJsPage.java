@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +22,7 @@ import org.testingisdocumenting.znai.html.RenderSupplier;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 import org.testingisdocumenting.znai.website.WebResource;
 import org.testingisdocumenting.znai.website.WebSiteResourcesProviders;
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 
 import java.util.Map;
 
@@ -52,6 +54,7 @@ public class HtmlReactJsPage {
                 // because it is embedded into html page <script> block, browser parser get confused
                 // but if it is surrounded by this special comment, it tricks browser to be "normal" again
                 "/*<!--*/\n" +
+                ResourceUtils.textContent("template/initialization.js") + "\n" +
                 "window.ReactDOM.render(" + createElementStatement.render() + ", " +
                 "document.getElementById(\"" + REACT_BLOCK_ID + "\"));\n" +
                 "/*-->*/\n");

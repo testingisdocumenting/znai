@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +17,7 @@
 
 import React, { Component } from 'react'
 
-class SvgCustomShape extends Component {
+class SvgCustomShape extends React.Component {
     render() {
         const {cx, cy, svg, colors, style} = this.props
         const transform = `translate(${cx} ${cy})`

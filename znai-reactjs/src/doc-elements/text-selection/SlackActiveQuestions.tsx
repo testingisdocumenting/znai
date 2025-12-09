@@ -19,7 +19,7 @@ import { currentPageId, pageIdFromTocItem } from "../../structure/DocumentationN
 import { getDocMeta } from "../../structure/docMeta";
 import { Notification } from "../../components/Notification";
 import { HighlightedText } from "./HighlightedText";
-import { TocItem } from "../../structure/TocItem";
+import type { TocItem } from "../../structure/TocItem";
 import { errorNotifications } from "../../components/DismissableErrorIndicators";
 
 import { ResolveQuestionButton } from "./ResolveQuestionButton";

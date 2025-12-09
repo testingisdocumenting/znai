@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2024 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +16,7 @@
  */
 
 import { createPresentationDemo } from "../demo-utils/PresentationDemo";
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 
 const arrayOfObjectWithinObjectData = {
   accounts: [

@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import { DocElementContent, ElementsLibraryMap } from "./DocElement";
+import type { DocElementContent, ElementsLibraryMap } from "./DocElement";
 
 interface Props {
   title: string;

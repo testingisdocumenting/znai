@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +18,7 @@
 package org.testingisdocumenting.znai.html.reactjs;
 
 import org.testingisdocumenting.znai.html.Deployer;
+import org.testingisdocumenting.znai.utils.ResourceUtils;
 import org.testingisdocumenting.znai.website.WebResource;
 
 import java.util.List;
@@ -26,16 +28,17 @@ import static java.util.stream.Collectors.toList;
 
 public class ReactJsBundle {
     public static final ReactJsBundle INSTANCE =  new ReactJsBundle();
-    private final WebResource mainJs;
     private final WebResource mainCss;
     private final WebResource katexCss;
+    private final String javaScripts;
 
     private final List<WebResource> fonts;
 
     private ReactJsBundle() {
-        mainJs = WebResource.moduleFromResource("static/main.js");
         mainCss = WebResource.fromResource("static/main.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");
+
+        javaScripts = ResourceUtils.textContent("static/js-files.txt");
 
         Stream<WebResource> katexFonts = KatexFonts.LIST.stream()
                 .map(name -> WebResource.fromResource("static/css/fonts/" + name));
@@ -44,7 +47,7 @@ public class ReactJsBundle {
     }
 
     public Stream<WebResource> clientJavaScripts() {
-        return Stream.of(mainJs);
+        return javaScripts.lines().map(WebResource::moduleFromResource);
     }
 
     public Stream<WebResource> clientCssResources() {

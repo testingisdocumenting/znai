@@ -16,9 +16,10 @@
 
 import React from 'react';
 
-import { Registry, simpleAction } from 'react-component-viewer';
+import type { Registry} from 'react-component-viewer';
+import { simpleAction } from 'react-component-viewer';
 import { TocMobileHeader } from './TocMobileHeader';
-import { DocMeta } from '../../structure/docMeta';
+import type { DocMeta } from '../../structure/docMeta';
 
 const headerClick = simpleAction('header clicked');
 const menuClick = simpleAction('menu clicked');

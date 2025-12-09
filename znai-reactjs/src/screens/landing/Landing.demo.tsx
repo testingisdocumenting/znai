@@ -16,8 +16,9 @@
  */
 
 import React from "react";
-import { Landing, LandingDocumentation } from "./Landing";
-import { Registry } from "react-component-viewer";
+import type { LandingDocumentation } from "./Landing";
+import { Landing } from "./Landing";
+import type { Registry } from "react-component-viewer";
 
 const documentations: LandingDocumentation[] = [
   {

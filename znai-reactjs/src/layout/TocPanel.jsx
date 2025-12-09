@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 
 import TocMenu from './TocMenu'
 import TocHeader from './TocHeader'
@@ -24,7 +24,7 @@ import {DarkLightThemeSwitcher} from './DarkLightThemeSwitcher'
 
 import './TocPanel.css'
 
-class TocPanel extends Component {
+class TocPanel extends React.Component {
     state = {
         collapsed: false,
         selected: false,

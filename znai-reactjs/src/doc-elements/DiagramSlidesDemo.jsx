@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -56,7 +57,7 @@ const testData = {
     "urls": {"n1": "http://google.com", "n3": "/preview/local"}
 }
 
-class DiagramSlidesDemo extends Component {
+class DiagramSlidesDemo extends React.Component {
     render() {
         return <div>
             <GraphVizSvg {...testData}/></div>

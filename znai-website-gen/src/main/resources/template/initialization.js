@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+function initializeSearchIndex() {
+    if (window.znaiSearchData) {
+        window.znaiSearchIdx = window.createLocalSearchIndex();
+        window.populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);
+    }
+}
 
-window.znaiSearchIdx = window.createLocalSearchIndex();
-window.populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);
+// Call the method to initialize the search index.
+initializeSearchIndex();

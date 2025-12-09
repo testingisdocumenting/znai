@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
+import type { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
 
 import "./FootnotePreview.css";
 
