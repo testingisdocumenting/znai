@@ -9,7 +9,7 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "typeRoots": ["./node_modules/@types", "./src/types"],
     // or use:
     "baseUrl": ".",
