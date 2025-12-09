@@ -18,6 +18,7 @@ import React from "react";
 
 import Mermaid from "./Mermaid";
 import type { Registry } from "react-component-viewer";
+import c4DiagramContent from './c4context.txt?raw';  // Add this import
 
 export function mermaidDemo(registry: Registry) {
   registry.add("simple ", () => <Mermaid mermaid={"graph TD; A-->B; B-->C;"} />);
@@ -41,4 +42,11 @@ export function mermaidDemo(registry: Registry) {
       }
     />
   ));
+  console.log(c4DiagramContent);
+    registry.add("c4", () => (
+        <Mermaid
+            wide={true}
+            mermaid={c4DiagramContent}
+        />
+    ));
 }
