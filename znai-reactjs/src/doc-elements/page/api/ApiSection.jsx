@@ -24,7 +24,7 @@ const ApiSection = ({elementsLibrary, id, title, isSelected, height, content}) =
 
     return (
         <React.Fragment>
-            {/*eslint-disable-next-line*/}
+            { }
             <a name={id} href={isSelected ? '' : ('#' + id)}>
                 <div className={titleClassName}>
                     <CollapseIndicator isSelected={isSelected}/>

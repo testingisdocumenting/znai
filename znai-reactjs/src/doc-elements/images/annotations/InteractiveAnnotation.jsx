@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +15,10 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import Knob from './Knob'
 
-const interactiveAnnotation = (shapeHandler, handlers) => class InteractiveAnnotation extends Component {
+const interactiveAnnotation = (shapeHandler, handlers) => class InteractiveAnnotation extends React.Component {
     constructor(props) {
         super(props)
 

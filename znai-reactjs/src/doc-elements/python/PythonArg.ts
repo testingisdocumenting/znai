@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { ApiLinkedText } from "../api/ApiLinkedText";
+import type { ApiLinkedText } from "../api/ApiLinkedText";
 
 export interface PythonArg {
   category: "REGULAR" | "POS_ONLY" | "KW_ONLY" | "ARGS" | "KWARGS";

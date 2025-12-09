@@ -55,6 +55,7 @@
                 <executions>
                     <execution>
                         <phase>test</phase>
+                        <id>webtau-test</id>
                         <goals>
                             <goal>run</goal>
                         </goals>

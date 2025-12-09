@@ -19,7 +19,7 @@ import React from "react";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { Columns } from "./Columns";
 import { ViewPortProvider } from "../../theme/ViewPortContext";
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 
 export function columnsDemo(registry: Registry) {
   registry

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { DocMeta } from '../../structure/docMeta';
+import type { DocMeta } from '../../structure/docMeta';
 import React from 'react';
 
 import { Icon } from '../../doc-elements/icons/Icon';

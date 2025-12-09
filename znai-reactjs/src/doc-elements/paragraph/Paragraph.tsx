@@ -21,7 +21,7 @@ import { paragraphStartsWith, removeSuffixFromParagraph } from "./paragraphUtils
 
 import { elementMetaValue } from "../meta/meta";
 
-import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
+import type { DocElementContent, DocElementProps } from "../default-elements/DocElement";
 import { AttentionBlock } from "./AttentionBlock";
 
 import "./Paragraph.css";

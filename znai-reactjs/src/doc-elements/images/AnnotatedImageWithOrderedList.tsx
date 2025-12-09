@@ -16,11 +16,11 @@
 
 import React, { useState } from "react";
 
-import { DocElementContent, WithElementsLibrary } from "../default-elements/DocElement";
+import type { DocElementContent, WithElementsLibrary } from "../default-elements/DocElement";
 
 import { AnnotatedImageOrderedList } from "./AnnotatedImageOrderedList";
 
-import { TooltipPlacement } from "../../components/Tooltip";
+import type { TooltipPlacement } from "../../components/Tooltip";
 
 import "./AnnotatedImageWithOrderedList.css";
 

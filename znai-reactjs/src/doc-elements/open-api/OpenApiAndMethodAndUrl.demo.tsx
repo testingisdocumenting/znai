@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 import { OpenApiMethodAndUrl } from "./OpenApiMethodAndUrl";
 
 export function openApiAndMethodAndUrlDemo(registry: Registry) {

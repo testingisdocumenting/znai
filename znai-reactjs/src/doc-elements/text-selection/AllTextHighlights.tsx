@@ -17,7 +17,7 @@
 import { HighlightUrlText } from "./HighlightUrlText";
 import { SlackActiveQuestions } from "./SlackActiveQuestions";
 import React, { useEffect, useState } from "react";
-import { TocItem } from "../../structure/TocItem";
+import type { TocItem } from "../../structure/TocItem";
 
 export function reapplyTextHighlights() {
   listeners.forEach((listener) => listener());

@@ -22,7 +22,7 @@ import { presentationModeListeners } from "../presentation/PresentationModeListe
 
 import { TextBadge } from "../badge/TextBadge";
 
-import { DocElementContent, ElementsLibraryMap } from "./DocElement";
+import type { DocElementContent, ElementsLibraryMap } from "./DocElement";
 import { HeadingContent } from "./HeadingContent";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 

@@ -18,7 +18,7 @@
 import React from "react";
 import Json from "./Json";
 import { TwoSidesLayoutRightPart } from "../page/two-sides/TwoSidesLayout";
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { TooltipRenderer } from "../../components/Tooltip";
 

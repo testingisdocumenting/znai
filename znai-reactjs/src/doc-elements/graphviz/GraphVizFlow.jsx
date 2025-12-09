@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +22,7 @@ import GraphVizFlowAllInfoAtOnce from './GraphVizFlowAllInfoAtOnce'
 
 import './GraphvVizFlow.css'
 
-class GraphVizFlow extends Component {
+class GraphVizFlow extends React.Component {
     constructor(props) {
         super(props)
         this.state = {fullScreen: false}

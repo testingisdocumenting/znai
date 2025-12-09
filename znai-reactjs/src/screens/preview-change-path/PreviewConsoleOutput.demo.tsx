@@ -15,8 +15,9 @@
  */
 
 import React from "react";
-import { Registry } from "react-component-viewer";
-import { PreviewConsoleOutput, Line } from "./PreviewConsoleOutput";
+import type { Registry } from "react-component-viewer";
+import type { Line } from "./PreviewConsoleOutput";
+import { PreviewConsoleOutput } from "./PreviewConsoleOutput";
 
 export function previewConsoleOutputDemo(registry: Registry) {
   const lines: Line[] = [

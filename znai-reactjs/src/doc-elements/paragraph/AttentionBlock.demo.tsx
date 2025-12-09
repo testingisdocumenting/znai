@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 import { AttentionBlock } from "./AttentionBlock";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 

@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import PresentationRegistry from './PresentationRegistry';
+import type PresentationRegistry from './PresentationRegistry';
 
 import { SlidePanel } from './SlidePanel';
 

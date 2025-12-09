@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import { PresentationProps } from "../presentation/PresentationProps";
+import type { PresentationProps } from "../presentation/PresentationProps";
 
 import { extractTextFromTokens } from "./codeUtils";
 import { repeatChar } from "../../utils/strings";
@@ -51,7 +51,7 @@ export class SnippetOptionallyScrollablePart extends React.Component<Props, Stat
 
     const { height } = this.state;
 
-    const linesOfCodeToRender = !!height ? linesOfCode : this.generateEmptyLongestLines();
+    const linesOfCodeToRender = height ? linesOfCode : this.generateEmptyLongestLines();
 
     return (
       <div className="znai-snippet-scrollable-part" ref={this.saveNode} style={{ height }}>

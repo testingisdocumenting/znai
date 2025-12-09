@@ -51,7 +51,7 @@ window.documentationTracking = documentationTracking
 window.mergeDocMeta = mergeDocMeta
 window.createLocalSearchIndex = createLocalSearchIndex
 window.populateLocalSearchIndexWithData = populateLocalSearchIndexWithData
-
+window.znaiSearchIdx = window.createLocalSearchIndex();
 if (process.env.NODE_ENV !== "production") {
     import('./App').then((module) => {
         const App = module.App;

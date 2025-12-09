@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +21,7 @@ import GraphVizSvg from './GraphVizSvg'
 
 import {expandId} from './gvUtils'
 
-class PresentationGraphVizFlow extends Component {
+class PresentationGraphVizFlow extends React.Component {
     render() {
         const {diagram, colors} = this.props
 

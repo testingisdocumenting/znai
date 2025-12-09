@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import { DocElementContent, DocElementProps, ElementsLibraryMap } from "../default-elements/DocElement";
+import type { DocElementContent, DocElementProps, ElementsLibraryMap } from "../default-elements/DocElement";
 import "./AnnotatedImageOrderedList.css";
 
 interface Props extends DocElementProps {

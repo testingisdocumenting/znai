@@ -20,7 +20,7 @@ import { Snippet } from "./Snippet";
 import { TwoSidesLayoutRightPart } from "../page/two-sides/TwoSidesLayout";
 import { TooltipRenderer } from "../../components/Tooltip";
 import { elementsLibrary } from "../DefaultElementsLibrary";
-import { Registry } from "react-component-viewer";
+import type { Registry } from "react-component-viewer";
 
 export function snippetsWithInlineCommentsDemo(registry: Registry) {
   registry

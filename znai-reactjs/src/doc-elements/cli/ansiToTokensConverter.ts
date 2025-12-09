@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import AnsiUp from "ansi_up";
+import { AnsiUp } from "ansi_up";
 import { TokensPrinter } from "../code-snippets/TokensPrinter";
 
 export function convertAnsiToTokenLines(lines: string[]): any[] {

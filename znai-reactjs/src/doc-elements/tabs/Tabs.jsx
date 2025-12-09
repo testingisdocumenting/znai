@@ -38,7 +38,7 @@ const TabNames = ({names, activeIdx, isWide, onClick}) => {
     )
 }
 
-class Tabs extends Component {
+class Tabs extends React.Component {
     constructor(props) {
         super(props)
 

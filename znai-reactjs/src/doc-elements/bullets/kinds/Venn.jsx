@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +15,13 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React from 'react'
 import {extractTextLines} from '../bulletUtils'
 
 import SvgWithCalculatedSize from './SvgWithCalculatedSize'
 
 const fillColors = ["#ffb800", "#4a9625", "#6ca5ff", "#964a25"]
-class Circle extends Component {
+class Circle extends React.Component {
     render() {
         const {idx, totalNumber, text, isPresentation} = this.props
 
