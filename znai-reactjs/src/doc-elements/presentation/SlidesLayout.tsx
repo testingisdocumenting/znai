@@ -16,11 +16,11 @@
 
 import React from 'react';
 
-import type PresentationRegistry from './PresentationRegistry';
+import PresentationRegistry from './PresentationRegistry';
 import { PresentationSlideContainer } from './PresentationSlideContainer';
-import type { PresentationSlide } from './PresentationSlide';
+import { PresentationSlide } from './PresentationSlide';
 
-import type { PresentationDimension, SlideAreaDimension } from './PresentationDimensions';
+import { PresentationDimension, SlideAreaDimension } from './PresentationDimensions';
 
 import './SlidesLayout.css';
 

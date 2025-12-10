@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import { DoxygenMember } from "./DoxygenMember";
 import { doxygenMethodParameters, doxygenMethodTemplateParameters } from "../demo-utils/contentGenerators";
 

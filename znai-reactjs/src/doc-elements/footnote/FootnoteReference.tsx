@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import type { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
+import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
 import { Tooltip } from "../../components/Tooltip";
 import { FootnotePreview } from "./FootnotePreview";
 

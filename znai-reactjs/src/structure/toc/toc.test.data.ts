@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { TocItem } from "../TocItem";
+import { TocItem } from "../TocItem";
 
 export function testLongToc(): TocItem[] {
   return [

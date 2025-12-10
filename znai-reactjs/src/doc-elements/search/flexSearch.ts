@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Document } from "flexsearch";
+import { Document } from "flexsearch";
 import FlexSearch from "flexsearch";
 
 export function createLocalSearchIndex() {

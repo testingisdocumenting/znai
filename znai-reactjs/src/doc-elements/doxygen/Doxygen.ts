@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { ApiLinkedText } from "../api/ApiLinkedText";
+import { ApiLinkedText } from "../api/ApiLinkedText";
 
 export interface DoxygenParameter {
   name: string;

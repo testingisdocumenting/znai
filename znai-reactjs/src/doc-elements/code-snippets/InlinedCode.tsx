@@ -18,7 +18,7 @@ import * as React from "react";
 
 import { mergeWithGlobalDocReferences } from "../references/globalDocReferences";
 import { ReferenceLinkWrapper } from "../references/ReferenceLinkWrapper";
-import type { SnippetDocReferences } from "../references/SnippetDocReferences";
+import { SnippetDocReferences } from "../references/SnippetDocReferences";
 
 import "./InlinedCode.css";
 

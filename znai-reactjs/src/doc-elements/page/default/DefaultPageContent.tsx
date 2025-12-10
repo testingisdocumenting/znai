@@ -17,9 +17,9 @@
 
 import React, { useEffect } from "react";
 import { afterTitleId } from "../../../layout/classNamesAndIds";
-import type { DocElementProps } from "../../default-elements/DocElement";
-import type { SearchResultId } from "../../search/SearchResultId";
-import type { TocItem } from "../../../structure/TocItem";
+import { DocElementProps } from "../../default-elements/DocElement";
+import { SearchResultId } from "../../search/SearchResultId";
+import { TocItem } from "../../../structure/TocItem";
 import { highlightSearchResultAndMaybeScroll, removeSearchHighlight } from "../../search/searchResultHighlighter";
 
 interface Props extends DocElementProps {

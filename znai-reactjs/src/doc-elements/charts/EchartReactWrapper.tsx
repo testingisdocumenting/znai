@@ -15,10 +15,10 @@
  */
 
 import React, {type MutableRefObject, type RefObject, useEffect, useRef } from "react";
-import type {EChartsType} from "echarts/types/dist/shared";
+import {EChartsType} from "echarts/types/dist/shared";
 import { configuredEcharts, type EchartCommonProps } from "./EchartCommon";
 
-import type {PresentationProps} from "../presentation/PresentationProps";
+import {PresentationProps} from "../presentation/PresentationProps";
 
 import { echartGridUsingMaxDataAndLegend } from "./echartUtils";
 

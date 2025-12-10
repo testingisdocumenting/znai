@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import { EchartGeneric } from "./EchartGeneric";
 
 export function echartDemo(registry: Registry) {

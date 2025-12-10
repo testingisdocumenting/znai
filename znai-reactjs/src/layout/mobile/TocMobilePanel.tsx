@@ -16,7 +16,7 @@
 
 import TocMenu from '../TocMenu';
 import React from 'react';
-import type { TocItem } from '../../structure/TocItem';
+import { TocItem } from '../../structure/TocItem';
 
 import { DarkLightThemeSwitcher } from '../DarkLightThemeSwitcher';
 
