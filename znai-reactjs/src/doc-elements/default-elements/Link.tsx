@@ -18,7 +18,7 @@
 import React from "react";
 import { isLocalUrl } from "../../structure/links";
 import { LinkWrapper } from "./LinkWrapper";
-import type { DocElementProps } from "./DocElement";
+import { DocElementProps } from "./DocElement";
 
 import "./Link.css";
 

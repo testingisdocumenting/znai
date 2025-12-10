@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { DocElementPayload } from "../default-elements/DocElement";
+import { DocElementPayload } from "../default-elements/DocElement";
 
 export function isContentElementSelfContainedLink(element: DocElementPayload) {
   return (

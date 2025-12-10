@@ -52,7 +52,7 @@ export class DiffTracking extends React.Component<Props, {}> {
     this.scrollNode = node.querySelector("." + mainPanelClassName);
   };
 
-  getSnapshotBeforeUpdate(prevProps: Props, prevState: {}) {
+  getSnapshotBeforeUpdate(_prevProps: Props, _prevState: {}) {
     if (!enabled) {
       return null;
     }
@@ -62,7 +62,7 @@ export class DiffTracking extends React.Component<Props, {}> {
     };
   }
 
-  componentDidUpdate(prevProps: Props, prevState: {}, snapshot: { beforeNode: HTMLElement }) {
+  componentDidUpdate(_prevProps: Props, _prevState: {}, snapshot: { beforeNode: HTMLElement }) {
     if (!snapshot) {
       return;
     }

@@ -18,7 +18,7 @@ import React, { useState } from "react";
 
 import { SnippetCircleBadge } from "./SnippetCircleBadge";
 
-import type { DocElementContent, ElementsLibraryMap } from "../../default-elements/DocElement";
+import { DocElementContent, ElementsLibraryMap } from "../../default-elements/DocElement";
 
 interface Props {
   callouts: Record<number, DocElementContent>;

@@ -22,7 +22,7 @@ import { PresentationHeading } from "./PresentationHeading";
 import { TextBadge } from "../badge/TextBadge";
 import { Icon } from "../icons/Icon";
 
-import type { DocElementContent, ElementsLibraryMap } from "./DocElement";
+import { DocElementContent, ElementsLibraryMap } from "./DocElement";
 import { HeadingContent } from "./HeadingContent";
 
 import "./SubHeading.css";

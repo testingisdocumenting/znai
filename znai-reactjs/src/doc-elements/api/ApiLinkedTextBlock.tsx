@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import type { ApiLinkedText } from "./ApiLinkedText";
+import { ApiLinkedText } from "./ApiLinkedText";
 
 import { LinkWrapper } from "../default-elements/LinkWrapper";
 import { isLocalUrl } from "../../structure/links";

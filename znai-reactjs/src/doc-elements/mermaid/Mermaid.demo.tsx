@@ -17,7 +17,7 @@
 import React from "react";
 
 import Mermaid from "./Mermaid";
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import c4DiagramContent from './c4context.txt?raw';  // Add this import
 
 export function mermaidDemo(registry: Registry) {

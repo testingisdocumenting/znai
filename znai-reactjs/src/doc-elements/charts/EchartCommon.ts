@@ -19,7 +19,7 @@ import { GridComponent, TooltipComponent, LegendComponent, TimelineComponent } f
 import { BarChart, LineChart, PieChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
 import { SVGRenderer } from "echarts/renderers";
-import type { PresentationProps } from "../presentation/PresentationProps";
+import { PresentationProps } from "../presentation/PresentationProps";
 
 let configured = false;
 export function configuredEcharts() {

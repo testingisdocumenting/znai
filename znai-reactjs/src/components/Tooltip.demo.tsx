@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import type { CSSProperties } from "react";
+import { CSSProperties } from "react";
 import React from "react";
 
-import type { Registry } from "react-component-viewer";
-import type { TooltipPlacement} from "./Tooltip";
+import { Registry } from "react-component-viewer";
+import { TooltipPlacement} from "./Tooltip";
 import { Tooltip, TooltipRenderer } from "./Tooltip";
 
 export function tooltipDemo(registry: Registry) {

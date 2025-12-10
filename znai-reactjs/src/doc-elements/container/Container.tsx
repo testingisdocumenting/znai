@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import type { CSSProperties } from "react";
+import { CSSProperties } from "react";
 import React from "react";
 
-import type { DocElementPayload } from "../default-elements/DocElement";
+import { DocElementPayload } from "../default-elements/DocElement";
 
 import "./Container.css";
 

@@ -16,7 +16,7 @@
 
 import React, { useLayoutEffect, useRef, useState } from 'react';
 
-import type { PresentationDimension, SlideAreaDimension } from './PresentationDimensions';
+import { PresentationDimension, SlideAreaDimension } from './PresentationDimensions';
 
 import './PresentationSlideContainer.css';
 

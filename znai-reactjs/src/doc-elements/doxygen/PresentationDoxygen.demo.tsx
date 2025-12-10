@@ -15,7 +15,7 @@
  */
 
 import { createPresentationDemo } from "../demo-utils/PresentationDemo";
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import {
   doxygenMethodParameters,
   doxygenMethodParametersLong,

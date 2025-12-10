@@ -17,7 +17,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { TextHighlighter } from "./textHighlighter";
 
-import type { TextMenuListener } from "./TextSelectionMenu";
+import { TextMenuListener } from "./TextSelectionMenu";
 import { addTextMenuListener, removeTextMenuListener } from "./TextSelectionMenu";
 import { createPortal } from "react-dom";
 

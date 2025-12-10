@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import { createPresentationDemo } from "../demo-utils/PresentationDemo";
 
 const paragraph = { type: "Paragraph", content: [{ text: "first name", type: "SimpleText" }] };

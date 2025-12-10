@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import type { Registry} from "react-component-viewer";
+import { Registry} from "react-component-viewer";
 import { simulateState } from "react-component-viewer";
 import { ContainerTitle } from "./ContainerTitle";
 

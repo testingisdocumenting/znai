@@ -17,7 +17,7 @@
 import React from "react";
 
 import { elementsLibrary } from "../DefaultElementsLibrary";
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 
 export function smartBulletListsDemo(registry: Registry) {
   registry.add("steps left", () => (

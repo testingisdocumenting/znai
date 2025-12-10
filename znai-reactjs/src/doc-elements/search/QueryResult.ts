@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import type { SearchResult } from "./flexSearch";
+import { SearchResult } from "./flexSearch";
 
 export default class QueryResult {
   private readonly queryResultsById: Record<string, SearchResult>;
