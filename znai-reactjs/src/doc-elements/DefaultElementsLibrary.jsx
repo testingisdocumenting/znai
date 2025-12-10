@@ -97,8 +97,11 @@ const presentationElementHandlers = {}
 
 library.DocElement = DocElement
 library.Emphasis = (props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
+library.Emphasis.displayName = "Emphasis"
 library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
+library.StrongEmphasis.displayName = "StrongEmphasis"
 library.StrikeThrough = (props) => (<del className="strike-through"><props.elementsLibrary.DocElement {...props}/></del>)
+library.StrikeThrough.displayName = "StrikeThrough"
 library.Link = Link
 library.Anchor = Anchor
 
@@ -117,8 +120,11 @@ presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
 library.SimpleText = SimpleText
 library.InlinedCode = InlinedCode
 library.SoftLineBreak = () => <span> </span>
+library.SoftLineBreak.displayName = "SoftLineBreak"
 library.HardLineBreak = () => <br />
+library.HardLineBreak.displayName = "HardLineBreak"
 library.ThematicBreak = () => <hr />
+library.ThematicBreak.displayName = "ThematicBreak"
 
 library.ApiLinkedTextBlock = ApiLinkedTextBlock;
 
@@ -128,6 +134,7 @@ presentationElementHandlers.Snippet = presentationSnippetHandler
 library.CustomReactJSComponent = CustomReactJSComponent
 
 library.EmptyBlock = () => (<div/>)
+library.EmptyBlock.displayName = "EmptyBlock"
 
 library.LangClass = wrappedInContentBlock(LangClass)
 library.LangFunction = wrappedInContentBlock(LangFunction)
@@ -253,7 +260,13 @@ library.Asciinema = Asciinema
  * @param Component component to wrap
  */
 function wrappedInContentBlock(Component) {
-    return (props) => <div className="content-block"><Component {...props}/></div>
+    const WrappedComponent = (props) => (
+        <div className="content-block">
+            <Component {...props}/>
+        </div>
+    );
+    WrappedComponent.displayName = `ContentBlock(${Component.displayName || Component.name || 'Component'})`;
+    return WrappedComponent;
 }
 
 themeRegistry.registerAsBase(new Theme({

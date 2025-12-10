@@ -143,11 +143,11 @@ class Presentation extends React.Component {
         document.removeEventListener("keydown", this.keyDownHandler)
     }
 
-    componentWillReceiveProps(props) {
+    componentDidUpdate(prevProps) {
         const {presentationRegistry} = this.props
-        if (this.scrollToLastWithinPage && presentationRegistry !== props.presentationRegistry) {
+        if (this.scrollToLastWithinPage && prevProps.presentationRegistry !== presentationRegistry) {
             this.scrollToLastWithinPage = false
-            this.setSlideIdx(props.presentationRegistry.numberOfSlides - 1)
+            this.setSlideIdx(presentationRegistry.numberOfSlides - 1)
         }
     }
 

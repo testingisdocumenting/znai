@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { DocumentationTracking, DocumentationTrackingListener } from "./DocumentationTracking";
+import type { DocumentationTrackingListener } from "./DocumentationTracking";
+import { DocumentationTracking } from "./DocumentationTracking";
 
 interface CallRecord {
   method: string;

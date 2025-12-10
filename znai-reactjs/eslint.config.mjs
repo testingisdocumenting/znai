@@ -9,18 +9,23 @@ import parser from '@typescript-eslint/parser';
 export default [
     // Ignore patterns
     {
-        ignores: ['dist', 'build', 'node_modules', '*.config.js'],
+        ignores: ['dist', 'build', 'node_modules', 'public/**/*.js', '*.config.js'],
     },
 
     // Base JavaScript configuration
     {
-        files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
+        files: ['**/*.{js,jsx,mjs,cjs}'],
         languageOptions: {
             parser: parser,
             ecmaVersion: 2020,
             globals: {
                 ...globals.browser,
                 ...globals.es2020,
+                populateLocalSearchIndexWithData: 'readonly',
+                documentationNavigation: 'readonly',
+                // Add other globals from znai's generated HTML
+                toc: 'readonly',
+                znaiSearchData: 'readonly'
             },
             parserOptions: {
                 ecmaVersion: 'latest',
@@ -68,6 +73,69 @@ export default [
             // Custom rules
             'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
             'no-console': ['warn', { allow: ['warn', 'error'] }],
+        },
+    },
+    // TypeScript files
+    {
+        files: ['**/*.{ts,tsx}'],
+        languageOptions: {
+            parser: parser,
+            parserOptions: {
+                ecmaVersion: 2020,
+                sourceType: 'module',
+                ecmaFeatures: {jsx: true},
+                project: './tsconfig.app.json',  // Important for type-aware rules
+            },
+            globals: {
+                ...globals.browser,
+                ...globals.es2020,
+            },
+        },
+        plugins: {
+            '@typescript-eslint': typescriptEslint,
+            react,
+            'react-hooks': reactHooks,
+            'react-refresh': reactRefresh,
+        }
+    },
+    // Special config for vitest.config.ts (and other config files)
+    {
+        files: ['vitest.config.ts', '*.config.ts'],
+        languageOptions: {
+            parser: parser,
+            parserOptions: {
+                ecmaVersion: 2020,
+                sourceType: 'module',
+                project: './tsconfig.node.json',  // Use node tsconfig
+            },
+            globals: {
+                ...globals.node,  // Node globals instead of browser
+            },
+        },
+        plugins: {
+            '@typescript-eslint': typescriptEslint,
+        },
+        rules: {
+            ...typescriptEslint.configs.recommended.rules,
+            'no-undef': 'off',
+            '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+        }
+    },
+    {
+        files: ['**/*.test.{js,jsx,ts,tsx}', '**/*.spec.{js,jsx,ts,tsx}'],
+        languageOptions: {
+            globals: {
+                ...globals.node,  // Vitest runs in Node
+                describe: 'readonly',
+                it: 'readonly',
+                test: 'readonly',
+                expect: 'readonly',
+                beforeEach: 'readonly',
+                afterEach: 'readonly',
+                beforeAll: 'readonly',
+                afterAll: 'readonly',
+                vi: 'readonly',  // Vitest's mock utility
+            },
         },
     },
 ];

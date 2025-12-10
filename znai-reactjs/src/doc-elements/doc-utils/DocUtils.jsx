@@ -38,11 +38,15 @@ function DocUtilsField({elementsLibrary, content}) {
 }
 
 function WrapperOnly(className) {
-    return ({elementsLibrary, content}) => <div className={className}>
-        <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={content}/>
-    </div>
-}
+    const WrapperComponent = ({elementsLibrary, content}) => (
+        <div className={className}>
+            <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={content}/>
+        </div>
+    );
 
+    WrapperComponent.displayName = `WrapperOnly(${className})`;
+    return WrapperComponent;
+}
 export function registerDocUtilsElements(elementsLibrary) {
     const components = {
         DocUtilsDesc,

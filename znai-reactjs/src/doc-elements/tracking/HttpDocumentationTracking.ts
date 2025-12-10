@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { DocumentationTrackingListener } from "./DocumentationTracking";
+import type { DocumentationTrackingListener } from "./DocumentationTracking";
 import { getDocId, getDocMeta } from "../../structure/docMeta";
 
 export interface TrackingEvent {
