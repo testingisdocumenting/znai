@@ -16,9 +16,9 @@
 
 import React from "react";
 
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import { DocumentationLayout } from "./DocumentationLayout";
-import type { DocMeta } from "../structure/docMeta";
+import { DocMeta } from "../structure/docMeta";
 import { testLongToc } from "../structure/toc/toc.test.data";
 import { ViewPortProvider } from "../theme/ViewPortContext";
 

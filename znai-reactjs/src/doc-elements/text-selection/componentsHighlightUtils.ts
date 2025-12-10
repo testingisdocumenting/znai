@@ -1,4 +1,4 @@
-import type { MutableRefObject} from "react";
+import { MutableRefObject} from "react";
 import { useEffect, useRef, useState } from "react";
 import { addHighlightedTextListener, removeHighlightedTextListener } from "./HighlightedText";
 import { reapplyTextHighlights } from "./AllTextHighlights";

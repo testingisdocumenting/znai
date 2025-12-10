@@ -15,17 +15,17 @@
  * limitations under the License.
  */
 
-import type { CSSProperties } from "react";
+import { CSSProperties } from "react";
 import React from "react";
 
-import type { DocElementProps } from "../default-elements/DocElement";
+import { DocElementProps } from "../default-elements/DocElement";
 import { calcTableWidth } from "./tableSize";
 
 import { cssVarPixelValue } from "../../utils/cssVars";
-import type { ContainerTitleCommonProps} from "../container/ContainerTitle";
+import { ContainerTitleCommonProps} from "../container/ContainerTitle";
 import { ContainerTitle, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
 
-import type { ContainerCommonProps } from "../container/Container";
+import { ContainerCommonProps } from "../container/Container";
 import { Container } from "../container/Container";
 
 import "./Table.css";

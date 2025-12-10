@@ -19,10 +19,10 @@ import React, {type CSSProperties } from "react";
 
 import { useIsMobile } from "../../theme/ViewPortContext";
 
-import type {DocElementContent, ElementsLibraryMap} from "../default-elements/DocElement";
+import {DocElementContent, ElementsLibraryMap} from "../default-elements/DocElement";
 // @ts-ignore
 import "./Columns.css";
-import type {Property} from "csstype";
+import {Property} from "csstype";
 
 interface ColumnConfig {
   border?: boolean;

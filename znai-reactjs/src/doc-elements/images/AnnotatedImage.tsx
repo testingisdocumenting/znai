@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import type { CSSProperties} from "react";
+import { CSSProperties} from "react";
 import React, { useState } from "react";
 
 import { imageAdditionalPreviewUrlParam } from "./imagePreviewAdditionalUrlParam";
@@ -27,15 +27,15 @@ import { zoom } from "../zoom/Zoom";
 
 import { isPreviewEnabled } from "../../structure/docMeta";
 
-import type { TooltipPlacement } from "../../components/Tooltip";
+import { TooltipPlacement } from "../../components/Tooltip";
 
-import type { WithElementsLibrary } from "../default-elements/DocElement";
+import { WithElementsLibrary } from "../default-elements/DocElement";
 
-import type { ContainerTitleCommonProps} from "../container/ContainerTitle";
+import { ContainerTitleCommonProps} from "../container/ContainerTitle";
 import { ContainerTitle, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
 
 import { useIsMobile } from "../../theme/ViewPortContext";
-import type { ContainerCommonProps } from "../container/Container";
+import { ContainerCommonProps } from "../container/Container";
 import { Container } from "../container/Container";
 
 import "./AnnotatedImage.css";

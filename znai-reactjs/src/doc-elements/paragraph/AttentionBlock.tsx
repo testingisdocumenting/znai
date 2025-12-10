@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import type { DocElementContent, DocElementProps } from "../default-elements/DocElement";
+import { DocElementContent, DocElementProps } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
 
 import "./AttentionBlock.css";

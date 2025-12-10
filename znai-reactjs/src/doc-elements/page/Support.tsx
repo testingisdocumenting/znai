@@ -16,7 +16,7 @@
  */
 
 import React, { useEffect, useState } from "react";
-import type { SupportMeta } from "../../structure/docMeta";
+import { SupportMeta } from "../../structure/docMeta";
 import { getSupportLinkAndTitlePromise } from "../../structure/docMeta";
 
 export function Support() {

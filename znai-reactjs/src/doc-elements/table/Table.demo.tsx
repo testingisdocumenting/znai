@@ -19,7 +19,7 @@ import React from "react";
 
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import Table from "./Table";
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import { contentParagraph, contentTable, contentTableTwoColumnsData } from "../demo-utils/contentGenerators";
 
 export function tableDemo(registry: Registry) {

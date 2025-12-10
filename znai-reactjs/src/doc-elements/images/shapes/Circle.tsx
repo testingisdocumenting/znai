@@ -16,7 +16,7 @@
  */
 
 import React from "react";
-import type { AnnotationStyle} from "./styleByName";
+import { AnnotationStyle} from "./styleByName";
 import { styleByName } from "./styleByName";
 
 import "./Circle.css";

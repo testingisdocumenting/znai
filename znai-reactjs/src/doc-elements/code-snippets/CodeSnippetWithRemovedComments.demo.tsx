@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import { Snippet } from "./Snippet";
 import React from "react";
 

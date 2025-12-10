@@ -16,7 +16,7 @@
 
 import React, { useRef, useState } from "react";
 
-import type { DocElementProps } from "../default-elements/DocElement";
+import { DocElementProps } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
 
 import { useHighlightOfHiddenElement } from "../text-selection/componentsHighlightUtils";

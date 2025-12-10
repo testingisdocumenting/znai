@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { EchartCommonProps } from "./EchartCommon";
+import { EchartCommonProps } from "./EchartCommon";
 
 export function isNumericChartValue(value: any) {
   return typeof value === "number";
