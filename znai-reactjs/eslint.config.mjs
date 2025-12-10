@@ -9,7 +9,7 @@ import parser from '@typescript-eslint/parser';
 export default [
     // Ignore patterns
     {
-        ignores: ['dist', 'build', 'node_modules', 'public/**/*.js', '*.config.js'],
+        ignores: ['target', 'dist', 'build', 'node_modules', 'public/**/*.js', '*.config.js'],
     },
 
     // Base JavaScript configuration
@@ -96,6 +96,17 @@ export default [
             react,
             'react-hooks': reactHooks,
             'react-refresh': reactRefresh,
+        },
+        rules: {
+        // ... your existing rules
+        '@typescript-eslint/consistent-type-imports': [
+            'error',
+            {
+                prefer: 'type-imports',
+                disallowTypeAnnotations: false,
+                fixStyle: 'separate-type-imports'
+            }
+        ]
         }
     },
     // Special config for vitest.config.ts (and other config files)
