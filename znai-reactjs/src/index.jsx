@@ -30,12 +30,12 @@ import {PreviewChangeScreen} from './screens/preview-change-path/PreviewChangeSc
 import {NotAuthorizedScreen} from './screens/not-authorized/NotAuthorizedScreen'
 import {Landing} from './screens/landing/Landing'
 import {themeRegistry} from './theme/ThemeRegistry'
-import {documentationNavigation} from './structure/DocumentationNavigation'
+import {documentationNavigation} from './structure/DocumentationNavigation.jsx'
 import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
 import {pageTypesRegistry} from './doc-elements/page/PageTypesRegistry'
 import {mergeDocMeta} from './structure/docMeta'
 
-import { createLocalSearchIndex, populateLocalSearchIndexWithData } from "./doc-elements/search/flexSearch.js";
+import { createLocalSearchIndex, populateLocalSearchIndexWithData } from "./doc-elements/search/flexSearch.ts";
 
 window.React = React
 window.ReactDOM = ReactDOM
@@ -52,7 +52,8 @@ window.mergeDocMeta = mergeDocMeta
 window.createLocalSearchIndex = createLocalSearchIndex
 window.populateLocalSearchIndexWithData = populateLocalSearchIndexWithData
 window.znaiSearchIdx = window.createLocalSearchIndex();
-if (process.env.NODE_ENV !== "production") {
+const isDevelopment = import.meta.env.DEV;
+if (isDevelopment) {
     import('./App').then((module) => {
         const App = module.App;
         ReactDOM.render(

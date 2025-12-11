@@ -46,8 +46,17 @@ class SimpleCodeSnippet extends React.Component {
   }
 
   // handles changes during preview
-  componentWillReceiveProps(nextProps) {
-    this.processProps(nextProps);
+  componentDidUpdate(prevProps) {
+    // Only process props if they actually changed
+    if (
+        prevProps.tokens !== this.props.tokens ||
+        prevProps.linesOfCode !== this.props.linesOfCode ||
+        prevProps.highlight !== this.props.highlight
+    ) {
+      this.processProps(this.props);
+      // If you need to update state based on props changes, you can do it here
+      // but be careful to avoid infinite loops
+    }
   }
 
   processProps({ tokens, linesOfCode, highlight }) {

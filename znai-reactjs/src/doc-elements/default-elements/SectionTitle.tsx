@@ -57,8 +57,6 @@ export function SectionTitle({ id, title, headingContent, badge, style }: Props)
       </div>
     </h1>
   ) : (
-    // @ts-ignore
-    // eslint-disable-next-line jsx-a11y/heading-has-content
     <h1 className="empty-section-title" id="implicit-section" />
   );
 

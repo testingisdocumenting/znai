@@ -96,7 +96,7 @@ class Annotations {
 }
 
 function handlerForShapeType(shape) {
-    if (shapesLib.hasOwnProperty(shape.type)) {
+    if (Object.hasOwn(shapesLib, shape.type)) {
         return shapesLib[shape.type]
     } else {
         console.error("can't find type for shape: " + shape.type)
@@ -115,7 +115,7 @@ function staticAnnotationForShape(shape) {
 
 function cachedAnnotationForType(cache, shape, createFunc) {
     const type = shape.type
-    if (cache.hasOwnProperty(type)) {
+    if (Object.hasOwn(cache, type)) {
         return cache[type]
     } else {
         const Annotation = createFunc(handlerForShapeType(shape))

@@ -24,16 +24,20 @@ import Presentation from '../presentation/Presentation'
 const defaultDocMeta = {id: "znai", title: "Znai", type: "User Guide"}
 
 export function createPresentationDemo(content, cfg = {docMeta: defaultDocMeta, slideIdx: 0}) {
-    return () => {
-        const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, content)
+    const PresentationDemoComponent = () => {
+        const presentationRegistry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, content);
 
         return (
             <Presentation docMeta={cfg.docMeta || defaultDocMeta}
                           presentationRegistry={presentationRegistry}
                           slideIdx={cfg.slideIdx}
                           onNextPage={noOp}
-                          onPrevPage={noOp}/>)
-    }
+                          onPrevPage={noOp}/>
+        );
+    };
+
+    PresentationDemoComponent.displayName = 'PresentationDemo';
+    return PresentationDemoComponent;
 }
 
 function noOp() {

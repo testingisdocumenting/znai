@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 
 class SvgCustomShape extends React.Component {
     render() {

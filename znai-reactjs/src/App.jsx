@@ -19,7 +19,7 @@ import "./App.css";
 import "./layout/DocumentationLayout.css";
 import "./doc-elements/search/Search.css";
 
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { ComponentViewer, DropDowns, Registries } from "react-component-viewer";
 import { tabsDemo } from "./doc-elements/tabs/Tabs.demo";

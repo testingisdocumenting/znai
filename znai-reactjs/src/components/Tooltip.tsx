@@ -169,7 +169,7 @@ export function TooltipRenderer() {
           left: (clientRect.left + clientRect.right) / 2.0,
         };
 
-      case "parent-content-block":
+      case "parent-content-block": {
         const parentContentBlock = findParentContentBlock();
         if (parentContentBlock) {
           const contentBlockRect = parentContentBlock.getBoundingClientRect();
@@ -183,6 +183,7 @@ export function TooltipRenderer() {
           console.error("can't find parent-content-block", parentContentBlock);
           return bottomLeft();
         }
+      }
     }
 
     function bottomLeft() {

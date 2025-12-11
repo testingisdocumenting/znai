@@ -176,7 +176,11 @@ export default class GraphVizReactElementsBuilder {
             case 'text': return GvText
             case 'path': return GvPath
             case 'g': return GvGroup
-            case 'title': return () => <g/>
+            case 'title': {
+                const TitleComponent = () => <g/>;
+                TitleComponent.displayName = 'GraphVizTitle';
+                return TitleComponent;
+            }
 
             default: return domNode.tagName
         }

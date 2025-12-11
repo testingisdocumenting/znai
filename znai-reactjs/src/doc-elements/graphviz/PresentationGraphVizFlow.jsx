@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 
 import GraphVizSvg from './GraphVizSvg'
 

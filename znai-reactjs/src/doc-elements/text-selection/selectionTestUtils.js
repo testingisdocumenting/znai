@@ -30,10 +30,10 @@ export function setupDOM(htmlContent) {
   const document = dom.window.document;
   const window = dom.window;
 
-  global.window = window;
-  global.document = document;
-  global.Node = window.Node;
-  global.NodeFilter = window.NodeFilter;
+  globalThis.window = window;
+  globalThis.document = document;
+  globalThis.Node = window.Node;
+  globalThis.NodeFilter = window.NodeFilter;
 
   const container = document.body;
 
@@ -41,11 +41,11 @@ export function setupDOM(htmlContent) {
 }
 
 export function selectText(startNode, startOffset, endNode, endOffset) {
-  const range = global.document.createRange();
+  const range = globalThis.document.createRange();
   range.setStart(startNode, startOffset);
   range.setEnd(endNode, endOffset);
 
-  const selection = global.window.getSelection();
+  const selection = globalThis.window.getSelection();
   selection.removeAllRanges();
   selection.addRange(range);
 }

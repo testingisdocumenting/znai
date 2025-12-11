@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, {type CSSProperties } from "react";
+import React, { CSSProperties } from "react";
 
 import { useIsMobile } from "../../theme/ViewPortContext";
 
