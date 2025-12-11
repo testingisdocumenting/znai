@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import * as React from "react";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { anotherContentParagraph, contentParagraph } from "../demo-utils/contentGenerators";

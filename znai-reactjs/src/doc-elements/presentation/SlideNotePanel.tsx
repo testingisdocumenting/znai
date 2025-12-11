@@ -16,8 +16,8 @@
 
 import React, { useLayoutEffect, useRef, useState } from 'react';
 
-import type { PresentationSlide } from './PresentationSlide';
-import type PresentationRegistry from './PresentationRegistry';
+import { PresentationSlide } from './PresentationSlide';
+import PresentationRegistry from './PresentationRegistry';
 
 import './SlideNotePanel.css';
 

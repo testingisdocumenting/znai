@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import type { PresentationProps } from "../presentation/PresentationProps";
+import { PresentationProps } from "../presentation/PresentationProps";
 
 import { extractTextFromTokens } from "./codeUtils";
 import { repeatChar } from "../../utils/strings";

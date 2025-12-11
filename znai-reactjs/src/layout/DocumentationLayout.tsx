@@ -18,8 +18,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import TocPanel from "./TocPanel";
 import { PageGenError } from "../doc-elements/page-gen-error/PageGenError";
-import type { DocMeta } from "../structure/docMeta";
-import type { TocItem } from "../structure/TocItem";
+import { DocMeta } from "../structure/docMeta";
+import { TocItem } from "../structure/TocItem";
 
 import { useIsMobile } from "../theme/ViewPortContext";
 

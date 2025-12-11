@@ -1,0 +1,1 @@
+* Add: Mermaid diagrams version 11.12

@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import { Section } from "../default-elements/Section";
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { TooltipRenderer } from "../../components/Tooltip";

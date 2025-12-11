@@ -18,7 +18,7 @@ import React from "react";
 
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { FootnoteReference } from "./FootnoteReference";
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import { TooltipRenderer } from "../../components/Tooltip";
 import { FootnotePreview } from "./FootnotePreview";
 

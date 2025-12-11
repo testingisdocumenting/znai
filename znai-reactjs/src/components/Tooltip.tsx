@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { CSSProperties} from "react";
+import { CSSProperties} from "react";
 import React, { useEffect, useRef, useState } from "react";
 
 import "./Tooltip.css";

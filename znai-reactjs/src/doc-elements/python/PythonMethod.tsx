@@ -16,11 +16,11 @@
 
 import React from "react";
 
-import type { PythonArg } from "./PythonArg";
+import { PythonArg } from "./PythonArg";
 import { ApiLinkedTextBlock } from "../api/ApiLinkedTextBlock";
 import { LinkWrapper } from "../default-elements/LinkWrapper";
 
-import type { ApiLinkedText } from "../api/ApiLinkedText";
+import { ApiLinkedText } from "../api/ApiLinkedText";
 
 import "./PythonMethod.css";
 

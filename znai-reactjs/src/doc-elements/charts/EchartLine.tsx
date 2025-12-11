@@ -16,7 +16,7 @@
 
 import React from "react";
 import { EchartReactWrapper } from "./EchartReactWrapper";
-import type { EchartCommonProps } from "./EchartCommon";
+import { EchartCommonProps } from "./EchartCommon";
 import {
   createInvisibleLineSeries,
   echartCalcBreakpoint,
