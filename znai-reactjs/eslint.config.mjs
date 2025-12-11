@@ -84,7 +84,7 @@ export default [
                 ecmaVersion: 2020,
                 sourceType: 'module',
                 ecmaFeatures: {jsx: true},
-                project: './tsconfig.app.json',  // Important for type-aware rules
+                project: './tsconfig.json',  // Important for type-aware rules
             },
             globals: {
                 ...globals.browser,
@@ -102,9 +102,8 @@ export default [
         '@typescript-eslint/consistent-type-imports': [
             'error',
             {
-                prefer: 'type-imports',
-                disallowTypeAnnotations: false,
-                fixStyle: 'separate-type-imports'
+                prefer: 'no-type-imports',
+                disallowTypeAnnotations: false
             }
         ]
         }
@@ -117,7 +116,7 @@ export default [
             parserOptions: {
                 ecmaVersion: 2020,
                 sourceType: 'module',
-                project: './tsconfig.node.json',  // Use node tsconfig
+                project: './tsconfig.json',  // Use node tsconfig
             },
             globals: {
                 ...globals.node,  // Node globals instead of browser

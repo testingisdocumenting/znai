@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import type { Registry } from "react-component-viewer";
+import { Registry } from "react-component-viewer";
 import { DismissableErrorIndicators, errorNotifications } from "./DismissableErrorIndicators";
 
 export function dismissableErrorIndicatorsDemo(registry: Registry) {
