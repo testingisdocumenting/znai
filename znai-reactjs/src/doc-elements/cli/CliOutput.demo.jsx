@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import {CliOutput} from "./cliOutputUtil.js";
+import {CliOutput} from "./CliOutput";
 
 export function cliOutputDemo(registry) {
     registry

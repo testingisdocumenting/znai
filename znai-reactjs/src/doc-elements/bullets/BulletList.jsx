@@ -22,7 +22,7 @@ import DefaultBulletList from './kinds/DefaultBulletList'
 import LeftRightTimeLine from './kinds/LeftRightTimeLine'
 import Venn from './kinds/Venn'
 import Steps from './kinds/Steps'
-import {presentationListType, presentationTypes, listType, valueByIdWithWarning} from './bulletUtils.js'
+import {presentationListType, presentationTypes, listType, valueByIdWithWarning} from './bulletListUtils.js'
 const types = {LeftRightTimeLine, Venn, Steps}
 
 const BulletList = (props) => {
