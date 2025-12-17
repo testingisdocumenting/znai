@@ -18,7 +18,7 @@
 
 import { PresentationBulletList } from "./BulletList.jsx";
 import { isAllAtOnce } from "../meta/meta.js";
-import { listType, presentationListType, presentationTypes, valueByIdWithWarning } from "./bulletListUtils.js";
+import { presentationListType, presentationTypes, valueByIdWithWarning } from "./bulletListUtils.js";
 
 const presentationNumberOfSlides = (props) => {
     const { content, meta } = props
