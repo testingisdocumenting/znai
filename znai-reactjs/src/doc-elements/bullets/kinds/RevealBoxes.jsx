@@ -16,7 +16,7 @@
 
 import React from 'react'
 
-import {extractTextLinesEmphasisOrFull} from '../bulletUtils'
+import {extractTextLinesEmphasisOrFull} from '../bulletUtils.js'
 import {isAllAtOnce} from '../../meta/meta'
 
 import './RevealBoxes.css'

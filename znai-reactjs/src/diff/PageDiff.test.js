@@ -49,6 +49,6 @@ describe('Page Diff', () => {
         right.add('node6', 'of lines')
 
         const result = Diff.diffArrays(left.list, right.list, {comparator: compareListEntry})
-        console.log(JSON.stringify(result, null, 2))
+        console.warn(JSON.stringify(result, null, 2))
     })
 })

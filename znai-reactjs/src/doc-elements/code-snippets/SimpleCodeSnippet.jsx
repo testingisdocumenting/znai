@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, { Component } from "react";
+import React from "react";
 
 import { extractTextFromTokens, splitTokensIntoLines } from "./codeUtils";
 import LineOfTokens from "./LineOfTokens";

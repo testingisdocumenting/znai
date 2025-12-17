@@ -18,7 +18,7 @@
 import React from 'react'
 import SvgWithCalculatedSize from './SvgWithCalculatedSize'
 
-import {extractTextLinesEmphasisOrFull, extractTextLines} from '../bulletUtils'
+import {extractTextLinesEmphasisOrFull, extractTextLines} from '../bulletUtils.js'
 import {isAllAtOnce} from '../../meta/meta'
 
 const stepSize = 15

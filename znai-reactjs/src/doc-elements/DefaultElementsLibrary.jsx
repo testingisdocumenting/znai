@@ -28,9 +28,11 @@ import PageTitle from './page/PageTitle'
 import {SectionTitle} from './default-elements/SectionTitle'
 import {presentationSectionHandler, Section} from './default-elements/Section'
 import {BlockQuote, presentationBlockQuoteHandler} from './quote/BlockQuote'
-import {presentationSnippetHandler, Snippet} from './code-snippets/Snippet'
+import {presentationSnippetHandler} from './code-snippets/snippetUtils.ts'
+import {Snippet} from './code-snippets/Snippet'
 import {InlinedCode} from './code-snippets/InlinedCode'
-import {BulletList, presentationBulletListHandler} from './bullets/BulletList'
+import {BulletList} from './bullets/BulletList'
+import {presentationBulletListHandler} from './bullets/bulletUtils.js'
 import CustomReactJSComponent from './custom/CustomReactJSComponent'
 import Anchor from './default-elements/Anchor'
 import Link from './default-elements/Link'
@@ -57,7 +59,8 @@ import Mermaid from './mermaid/Mermaid'
 import {EchartGeneric, presentationEchartHandler} from "./charts/EchartGeneric";
 import Image from './images/Image'
 import {CliCommand, presentationCliCommandHandler} from './cli/CliCommand'
-import {CliOutput, presentationCliOutput} from './cli/CliOutput'
+import {CliOutput} from './cli/CliOutput'
+import {presentationCliOutput} from './cli/cliOutputUtil.ts'
 import presentationAnnotatedImageHandler from './images/PresentationAnnotatedImage'
 import presentationGraphVizHandler from './graphviz/PresentationGraphVizFlow'
 import {MarkdownAndResult, presentationMarkdownAndResultHandler} from './markdown/MarkdownAndResult'
@@ -91,17 +94,15 @@ import { FootnoteReference } from "./footnote/FootnoteReference";
 import { EmbeddedHtml } from "./html/EmbeddedHtml";
 import { Asciinema } from "./asciinema/Asciinema";
 import { ReadMore } from "./read-more/ReadMore.js";
+import { withDisplayName } from "./components.ts";
 
 const library = {}
 const presentationElementHandlers = {}
 
 library.DocElement = DocElement
-library.Emphasis = (props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
-library.Emphasis.displayName = "Emphasis"
-library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
-library.StrongEmphasis.displayName = "StrongEmphasis"
-library.StrikeThrough = (props) => (<del className="strike-through"><props.elementsLibrary.DocElement {...props}/></del>)
-library.StrikeThrough.displayName = "StrikeThrough"
+library.Emphasis = withDisplayName("Emphasis")((props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>))
+library.StrongEmphasis = withDisplayName("StrongEmphasis")((props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>))
+library.StrikeThrough = withDisplayName("StrikeThrough")((props) => (<del className="strike-through"><props.elementsLibrary.DocElement {...props}/></del>))
 library.Link = Link
 library.Anchor = Anchor
 
@@ -119,12 +120,9 @@ presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
 
 library.SimpleText = SimpleText
 library.InlinedCode = InlinedCode
-library.SoftLineBreak = () => <span> </span>
-library.SoftLineBreak.displayName = "SoftLineBreak"
-library.HardLineBreak = () => <br />
-library.HardLineBreak.displayName = "HardLineBreak"
-library.ThematicBreak = () => <hr />
-library.ThematicBreak.displayName = "ThematicBreak"
+library.SoftLineBreak = withDisplayName("SoftLineBreak")(() => <span> </span>)
+library.HardLineBreak = withDisplayName("HardLineBreak")(() => <br />)
+library.ThematicBreak = withDisplayName("ThematicBreak")(() => <hr />)
 
 library.ApiLinkedTextBlock = ApiLinkedTextBlock;
 
@@ -133,8 +131,7 @@ presentationElementHandlers.Snippet = presentationSnippetHandler
 
 library.CustomReactJSComponent = CustomReactJSComponent
 
-library.EmptyBlock = () => (<div/>)
-library.EmptyBlock.displayName = "EmptyBlock"
+library.EmptyBlock = withDisplayName("EmptyBlock")(() => (<div/>))
 
 library.LangClass = wrappedInContentBlock(LangClass)
 library.LangFunction = wrappedInContentBlock(LangFunction)
@@ -260,13 +257,12 @@ library.Asciinema = Asciinema
  * @param Component component to wrap
  */
 function wrappedInContentBlock(Component) {
-    const WrappedComponent = (props) => (
+    return withDisplayName(`ContentBlock(${Component.displayName || Component.name || 'Component'})`) (
+        (props) =>
         <div className="content-block">
             <Component {...props}/>
         </div>
     );
-    WrappedComponent.displayName = `ContentBlock(${Component.displayName || Component.name || 'Component'})`;
-    return WrappedComponent;
 }
 
 themeRegistry.registerAsBase(new Theme({

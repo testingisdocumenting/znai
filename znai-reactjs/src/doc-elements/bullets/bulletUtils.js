@@ -15,6 +15,13 @@
  * limitations under the License.
  */
 
+import {PresentationBulletList, NoBullets} from "./BulletList.jsx";
+import {isAllAtOnce} from "../meta/meta.js";
+import RevealBoxes from "./kinds/RevealBoxes.jsx";
+import HorizontalStripes from "./kinds/HorizontalStripes.jsx";
+import Grid from "./kinds/Grid.jsx";
+const presentationTypes = {RevealBoxes, HorizontalStripes, Grid}
+
 export function startsWithIcon(content) {
     return content &&
             content.length && content[0].type === 'Paragraph' &&
@@ -96,3 +103,62 @@ function isEmphasis(docElement) {
 function capitalizeFirstLetter(text) {
     return text.length > 1 ? text.charAt(0).toUpperCase() + text.slice(1) : text;
 }
+
+export const presentationBulletListHandler = {component: PresentationBulletList,
+    numberOfSlides: presentationNumberOfSlides,
+    slideInfoProvider: slideInfoProvider}
+
+const presentationNumberOfSlides = (props) => {
+    const {content, meta} = props
+
+    const type = presentationListType(props)
+    return (type === null || isAllAtOnce(meta)) ? 1 : content.length
+}
+
+function valueByIdWithWarning(dict, type) {
+    if (!Object.hasOwn(dict, type)) {
+        console.warn("can't find bullets list type: " + type)
+        return NoBullets
+    }
+
+    return dict[type]
+}
+
+function presentationListType(props) {
+    return listType(props, 'bulletListType') ||
+        listType(props, 'presentationBulletListType')
+}
+
+function listType(props, key) {
+    if (! Object.hasOwn(props,'meta')) {
+        return null
+    }
+
+    const meta = props.meta
+    if (! Object.hasOwn(meta, key)) {
+        return null
+    }
+
+    if (meta[key] === "") {
+        return null
+    }
+
+    return meta[key]
+}
+
+function slideInfoProvider(props) {
+    const type = presentationListType(props)
+    if (!type) {
+        return {}
+    }
+
+    const Bullets = valueByIdWithWarning(presentationTypes, type)
+
+    return {
+        isSlideCentered: !Bullets.isPresentationFullScreen,
+        isSlidePadded: !Bullets.isPresentationFullScreen,
+        isSlideScaled: !Bullets.isPresentationFullScreen,
+    }
+}
+
+export {listType, presentationListType, presentationTypes, valueByIdWithWarning}

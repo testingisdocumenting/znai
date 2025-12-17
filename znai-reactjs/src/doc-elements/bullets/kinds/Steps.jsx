@@ -17,7 +17,7 @@
 
 import React from 'react'
 
-import {extractTextLines, extractTextLinesEmphasisOrFull} from '../bulletUtils'
+import {extractTextLines, extractTextLinesEmphasisOrFull} from '../bulletUtils.js'
 import {splitTextIntoLinesUsingThreshold} from '../../../utils/strings'
 import {isAllAtOnce} from '../../meta/meta'
 

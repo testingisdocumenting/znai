@@ -17,7 +17,7 @@
 import React from 'react'
 import GraphVizSvg from './GraphVizSvg'
 import {isAllAtOnce} from '../meta/meta'
-
+/* eslint-disable react-refresh/only-export-components */
 const PresentationGraphVizSvg = ({slideIdx, meta, idsToHighlight, ...props}) => {
     const idsToUse = (!idsToHighlight || isAllAtOnce(meta)) ?
         idsToHighlight:
@@ -26,7 +26,7 @@ const PresentationGraphVizSvg = ({slideIdx, meta, idsToHighlight, ...props}) => 
     return <GraphVizSvg idsToHighlight={idsToUse} {...props}/>
 }
 
-function numberOfSlides({data, idsToHighlight, meta}) {
+function numberOfSlides({_data, idsToHighlight, meta}) {
     return (!idsToHighlight || isAllAtOnce(meta)) ?
         1 :
         (idsToHighlight.length + 1)

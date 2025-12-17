@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import {
     collapseCommentsAboveToMakeCommentOnTheCodeLine,
@@ -293,7 +293,7 @@ class MyClass {
 `)
         const lines = splitTokensIntoLines(tokens)
 
-        console.log(lines)
+        console.warn(lines)
     })
 
     describe('inlined comments', () => {

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint-disable react-refresh/only-export-components */
 
 import React from 'react'
 import {isAllAtOnce} from '../meta/meta'
@@ -54,7 +55,7 @@ class Svg extends React.Component {
         this.loadSvg()
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps, _prevState, _snapshot) {
         if (prevProps.svgSrc !== this.props.svgSrc) {
             this.loadSvg()
         }

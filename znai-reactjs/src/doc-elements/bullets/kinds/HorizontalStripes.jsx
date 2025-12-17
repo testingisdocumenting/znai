@@ -17,7 +17,7 @@
 
 import React from 'react'
 
-import {extractIconIds, extractTextLinesEmphasisOrFull} from '../bulletUtils'
+import {extractIconIds, extractTextLinesEmphasisOrFull} from '../bulletUtils.js'
 import {isAllAtOnce} from '../../meta/meta'
 
 import {Icon} from "../../icons/Icon";

@@ -1,6 +1,5 @@
 /*
  * Copyright 2025 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {CliOutput} from "./CliOutput";
 
-import React from "react";
+import {isAllAtOnce} from '../meta/meta'
 
-import { Container } from "../container/Container.js";
-import "./JupyterHtmlCell.css";
+function highlightNumberOfSlides({meta, highlight}) {
+    highlight = highlight || []
+    if (isAllAtOnce(meta) && highlight.length > 0) {
+        return 1
+    }
 
-const JupyterHtmlCell = ({ html, _elementsLibrary, ...props }) => {
-  return (
-    <Container className="znai-jupyter-cell jupyter-html content-block" {...props}>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
-    </Container>
-  );
-};
+    return highlight.length
+}
 
-export default JupyterHtmlCell;
+
+const presentationCliOutput = {component: CliOutput,
+    numberOfSlides: (props) => {
+        return 1 + highlightNumberOfSlides(props) + (props.revealLineStop || []).length;
+    }
+}
+
+export {presentationCliOutput}

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint-disable react-refresh/only-export-components */
 
 import React from 'react'
 import Xml from './Xml'
@@ -22,4 +23,4 @@ const PresentationXml = ({xmlAsJson, paths, slideIdx, ...props}) => {
     return <Xml xmlAsJson={xmlAsJson} paths={pathsToDisplay} {...props}/>
 }
 
-export default {component: PresentationXml, numberOfSlides: ({data, paths}) => paths ? (paths.length + 1): 1}
+export default {component: PresentationXml, numberOfSlides: ({_data, paths}) => paths ? (paths.length + 1): 1}

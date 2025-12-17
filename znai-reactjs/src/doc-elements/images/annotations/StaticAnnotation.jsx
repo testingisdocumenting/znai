@@ -14,22 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+/* eslint-disable react-refresh/only-export-components */
 import React from 'react'
 import {styleByName} from '../shapes/styleByName';
+import {withDisplayName} from '../../components.ts'
 
 const staticAnnotation = (shapeHandler) => {
-    const StaticAnnotationComponent = ({shape, scale}) => {
+    return withDisplayName(`StaticAnnotation(${shapeHandler?.name || 'Unknown'}`)(
+        ({shape, scale}) => {
         if (!shapeHandler) {
             return <NotFound {...shape}/>
         }
-
         const Body = shapeHandler.body;
         return <Body key="body" {...shape} scale={scale}/>
-    };
-
-    StaticAnnotationComponent.displayName = `StaticAnnotation(${shapeHandler?.name || 'Unknown'})`;
-    return StaticAnnotationComponent;
+        });
 }
 function NotFound({x, y, width, height, color}) {
     const styleScheme = styleByName(color)

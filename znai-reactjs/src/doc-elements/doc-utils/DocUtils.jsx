@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint-disable react-refresh/only-export-components */
 
 import React from 'react'
 
+import {withDisplayName} from '../components.ts'
 import './DocUtils.css'
 
 const DocUtilsDesc = WrapperOnly('doc-utils-desc content-block')
@@ -38,14 +40,13 @@ function DocUtilsField({elementsLibrary, content}) {
 }
 
 function WrapperOnly(className) {
-    const WrapperComponent = ({elementsLibrary, content}) => (
-        <div className={className}>
-            <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={content}/>
-        </div>
-    );
-
-    WrapperComponent.displayName = `WrapperOnly(${className})`;
-    return WrapperComponent;
+    return withDisplayName(`WrapperOnly(${className})`)(
+        ({elementsLibrary, content}) => (
+            <div className={className}>
+                <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={content}/>
+            </div>
+        )
+    )
 }
 export function registerDocUtilsElements(elementsLibrary) {
     const components = {

@@ -19,7 +19,7 @@ import React from 'react'
 import {styleByName} from './styleByName';
 
 import rect from './Rect'
-
+/* eslint-disable react-refresh/only-export-components */
 const HighlightBody = ({x, y, width, height, color, scale, ...props}) => {
     const styleScheme = styleByName(color)
 

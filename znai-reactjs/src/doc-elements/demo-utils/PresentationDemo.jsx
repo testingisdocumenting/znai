@@ -20,6 +20,7 @@ import React from 'react'
 import {elementsLibrary, presentationElementHandlers} from '../DefaultElementsLibrary'
 import PresentationRegistry from '../presentation/PresentationRegistry'
 import Presentation from '../presentation/Presentation'
+import {withDisplayName} from '../components'
 
 const defaultDocMeta = {id: "znai", title: "Znai", type: "User Guide"}
 
@@ -35,9 +36,7 @@ export function createPresentationDemo(content, cfg = {docMeta: defaultDocMeta, 
                           onPrevPage={noOp}/>
         );
     };
-
-    PresentationDemoComponent.displayName = 'PresentationDemo';
-    return PresentationDemoComponent;
+    return withDisplayName('PresentationDemo')(PresentationDemoComponent);
 }
 
 function noOp() {

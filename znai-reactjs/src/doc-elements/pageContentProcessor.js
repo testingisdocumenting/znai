@@ -33,7 +33,7 @@ function mergeMetaIntoContent(pageContent, meta) {
     for (let i = 0, len = pageContent.length; i < len; i++) {
         const el = pageContent[i]
         if (el.type === 'Meta') {
-            const {type, ...meta} = el
+            const {_type, ...meta} = el
             currentMeta = {...currentMeta, ...meta}
         } else {
             result.push(mergeMetaIntoElement(el, currentMeta))

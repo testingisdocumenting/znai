@@ -71,7 +71,10 @@ export default [
             ],
 
             // Custom rules
-            'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+            'no-unused-vars': ['warn', {
+                argsIgnorePattern: '^_',
+                varsIgnorePattern: '^_'
+            }],
             'no-console': ['warn', { allow: ['warn', 'error'] }],
         },
     },
@@ -146,6 +149,13 @@ export default [
                 afterAll: 'readonly',
                 vi: 'readonly',  // Vitest's mock utility
             },
+        },
+    },
+    {
+        files: ['**/*.demo.{js,jsx,ts,tsx}', '**/*.stories.{js,jsx,ts,tsx}'],
+        rules: {
+            'react-refresh/only-export-components': 'off',
+            'react/display-name': 'off', // Often useful for demos too
         },
     },
 ];

@@ -16,7 +16,7 @@
  */
 
 import React from 'react'
-import {extractTextLines} from '../bulletUtils'
+import {extractTextLines} from '../bulletUtils.js'
 
 import SvgWithCalculatedSize from './SvgWithCalculatedSize'
 

@@ -24,7 +24,7 @@ const JsonPayload = ({data, checks}) => {
     )
 }
 
-const RestPayload = ({caption, type, data, checks}) => {
+const RestPayload = ({caption, _type, data, checks}) => {
     if (! data) {
         return null
     }

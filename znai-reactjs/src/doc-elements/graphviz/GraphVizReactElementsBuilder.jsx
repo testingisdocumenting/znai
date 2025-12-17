@@ -22,6 +22,7 @@ import GvText from "./GvText"
 import GvPath from "./GvPath"
 import GvGroup from "./GvGroup"
 import {globalAssets} from "../global-assets/GlobalAssets"
+import {withDisplayName} from "../components.ts"
 
 export default class GraphVizReactElementsBuilder {
     constructor({diagram, idsToDisplay, idsToHighlight, urls}) {
@@ -177,9 +178,7 @@ export default class GraphVizReactElementsBuilder {
             case 'path': return GvPath
             case 'g': return GvGroup
             case 'title': {
-                const TitleComponent = () => <g/>;
-                TitleComponent.displayName = 'GraphVizTitle';
-                return TitleComponent;
+                return withDisplayName('GraphVizTitle')( () => <g/>)
             }
 
             default: return domNode.tagName
