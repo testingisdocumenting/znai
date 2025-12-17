@@ -104,16 +104,17 @@ function capitalizeFirstLetter(text) {
     return text.length > 1 ? text.charAt(0).toUpperCase() + text.slice(1) : text;
 }
 
-export const presentationBulletListHandler = {component: PresentationBulletList,
-    numberOfSlides: presentationNumberOfSlides,
-    slideInfoProvider: slideInfoProvider}
-
 const presentationNumberOfSlides = (props) => {
     const {content, meta} = props
 
     const type = presentationListType(props)
     return (type === null || isAllAtOnce(meta)) ? 1 : content.length
 }
+
+export const presentationBulletListHandler = {component: PresentationBulletList,
+    numberOfSlides: presentationNumberOfSlides,
+    slideInfoProvider: slideInfoProvider}
+
 
 function valueByIdWithWarning(dict, type) {
     if (!Object.hasOwn(dict, type)) {
