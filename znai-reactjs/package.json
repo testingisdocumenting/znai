@@ -63,7 +63,7 @@
     "build": "vite build",
     "test": "vitest --config ./vitest.config.ts",
     "test:watch": "vitest --config ./vitest.config.ts --watch",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "proxy": "http://localhost:3334/",
