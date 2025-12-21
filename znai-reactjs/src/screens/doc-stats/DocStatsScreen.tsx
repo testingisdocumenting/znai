@@ -17,6 +17,7 @@
 import React, { useEffect, useState } from "react";
 import { TocItem } from "../../structure/TocItem";
 import { getDocMeta } from "../../structure/docMeta";
+import { fetchWithCredentials } from "../../utils/fetchWithCredentials";
 import { DocStatsView, PageStats, TimePeriod } from "./DocStatsView";
 
 const AVAILABLE_PERIODS: TimePeriod[] = ["week", "month", "year", "total"];
@@ -28,7 +29,7 @@ export interface DocStatsScreenProps {
 }
 
 async function fetchDocStats(url: string, signal: AbortSignal): Promise<DocStatsResponse> {
-  const response = await fetch(url, { signal });
+  const response = await fetchWithCredentials(url, { signal });
 
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));

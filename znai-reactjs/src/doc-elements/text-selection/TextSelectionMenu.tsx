@@ -20,6 +20,7 @@ import { findPrefixSuffixAndMatch } from "./textSelectionBuilder";
 import { buildHighlightUrl } from "./highlightUrl";
 
 import { getDocMeta } from "../../structure/docMeta";
+import { fetchWithCredentials } from "../../utils/fetchWithCredentials";
 
 import { buildContext } from "./markdownContextBuilder";
 import { Notification } from "../../components/Notification";
@@ -256,16 +257,8 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
     };
 
     try {
-      const headers = getDocMeta().sendToSlackIncludeContentType
-        ? {
-            "Content-Type": "application/json",
-          }
-        : undefined;
-
-      const response = await fetch(getDocMeta().sendToSlackUrl!, {
+      const response = await fetchWithCredentials(getDocMeta().sendToSlackUrl!, {
         method: "POST",
-        credentials: "include",
-        headers,
         body: JSON.stringify(body),
       });
 
