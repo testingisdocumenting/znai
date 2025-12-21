@@ -132,11 +132,16 @@ function joinPageIdParts(docId, dirName, fileName) {
   return [docId, dirName, fileName].filter((part) => !!part).join("/");
 }
 
-function currentPageId() {
+function currentPageIdWithDocId() {
   const pageLocation = documentationNavigation.currentPageLocation();
   return isTocItemIndex(pageLocation)
     ? getDocId()
     : joinPageIdParts(getDocId(), pageLocation.dirName, pageLocation.fileName);
+}
+
+function currentPageId() {
+  const pageLocation = documentationNavigation.currentPageLocation();
+  return joinPageIdParts(pageLocation.dirName, pageLocation.fileName);
 }
 
 function pageIdFromTocItem(tocItem) {
@@ -145,4 +150,4 @@ function pageIdFromTocItem(tocItem) {
 
 const documentationNavigation = new DocumentationNavigation();
 
-export { documentationNavigation, currentPageId, pageIdFromTocItem };
+export { documentationNavigation, currentPageIdWithDocId, currentPageId, pageIdFromTocItem };

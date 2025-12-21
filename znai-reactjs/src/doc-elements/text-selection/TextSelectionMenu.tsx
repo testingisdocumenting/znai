@@ -24,7 +24,7 @@ import { fetchWithCredentials } from "../../utils/fetchWithCredentials";
 
 import { buildContext } from "./markdownContextBuilder";
 import { Notification } from "../../components/Notification";
-import { currentPageId } from "../../structure/DocumentationNavigation";
+import { currentPageIdWithDocId } from "../../structure/DocumentationNavigation";
 import "./TextSelectionMenu.css";
 
 export interface TextMenuListener {
@@ -249,7 +249,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       selectedText: panelData!.prefixSuffixMatch.selection,
       selectedPrefix: panelData!.prefixSuffixMatch.prefix,
       selectedSuffix: panelData!.prefixSuffixMatch.suffix,
-      pageId: currentPageId(),
+      pageId: currentPageIdWithDocId(),
       pageOrigin: document.location.origin,
       slackChannel: getDocMeta().slackChannel,
       question: question,
