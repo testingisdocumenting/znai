@@ -14,33 +14,10 @@
  * limitations under the License.
  */
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TocItem } from "../../structure/TocItem";
 import { getDocMeta } from "../../structure/docMeta";
 import { DocStatsView, PageStats, TimePeriod } from "./DocStatsView";
-
-/*
- * REST API Schema:
- *
- * GET {docMeta.docStatsUrl}
- *
- * Response:
- * {
- *   "week": {
- *     "getting-started": { "totalViews": 85, "uniqueViews": 42 },
- *     "introduction/installation": { "totalViews": 54, "uniqueViews": 28 },
- *     ...
- *   },
- *   "month": { ... },
- *   "year": { ... },
- *   "total": { ... }
- * }
- *
- * Error Response (4xx/5xx):
- * {
- *   "error": "Error message"
- * }
- */
 
 const AVAILABLE_PERIODS: TimePeriod[] = ["week", "month", "year", "total"];
 
@@ -50,12 +27,12 @@ export interface DocStatsScreenProps {
   toc: TocItem[];
 }
 
-async function fetchDocStats(apiUrl: string): Promise<DocStatsResponse> {
-  const response = await fetch(apiUrl);
+async function fetchDocStats(url: string, signal: AbortSignal): Promise<DocStatsResponse> {
+  const response = await fetch(url, { signal });
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: "Failed to fetch stats" }));
-    throw new Error(error.error || `HTTP ${response.status}`);
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.error || `HTTP ${response.status}`);
   }
 
   return response.json();
@@ -64,57 +41,31 @@ async function fetchDocStats(apiUrl: string): Promise<DocStatsResponse> {
 export function DocStatsScreen({ toc }: DocStatsScreenProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>("total");
   const [statsByPeriod, setStatsByPeriod] = useState<DocStatsResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const docStatsUrl = getDocMeta().docStatsUrl;
     if (!docStatsUrl) {
-      setIsLoading(false);
       return;
     }
 
-    let cancelled = false;
+    const abortController = new AbortController();
 
-    async function loadStats() {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const data = await fetchDocStats(docStatsUrl!);
-
-        if (cancelled) return;
-
-        setStatsByPeriod(data);
-      } catch (err) {
-        if (cancelled) return;
-        setError(err instanceof Error ? err.message : "Failed to load stats");
-      } finally {
-        if (!cancelled) {
-          setIsLoading(false);
+    fetchDocStats(docStatsUrl, abortController.signal)
+      .then(setStatsByPeriod)
+      .catch((err) => {
+        if (!abortController.signal.aborted) {
+          setError(err instanceof Error ? err.message : "Failed to load stats");
         }
-      }
-    }
+      });
 
-    loadStats();
-
-    return () => {
-      cancelled = true;
-    };
+    return () => abortController.abort();
   }, []);
 
   if (error) {
     return (
       <div className="znai-doc-stats-error">
         <p>Failed to load analytics: {error}</p>
-      </div>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <div className="znai-doc-stats-loading">
-        <p>Loading analytics...</p>
       </div>
     );
   }
@@ -127,6 +78,7 @@ export function DocStatsScreen({ toc }: DocStatsScreenProps) {
 
   return (
     <DocStatsView
+      guideName={getDocMeta().title}
       toc={toc}
       pageStats={pageStats}
       selectedPeriod={selectedPeriod}
