@@ -29,11 +29,46 @@
   border-bottom: 1px solid var(--znai-toc-panel-border-color);
 }
 
+.znai-doc-stats-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .znai-doc-stats-title {
-  margin: 0 0 20px 0;
+  margin: 0;
   font-size: 24px;
   font-weight: 600;
   color: var(--znai-section-title-color);
+}
+
+.znai-doc-stats-period-switcher {
+  display: flex;
+  border-bottom: 1px solid var(--znai-snippets-outer-border-color);
+}
+
+.znai-doc-stats-period-button {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  font-family: var(--znai-regular-font-family);
+  font-size: var(--znai-smaller-text-size);
+  color: var(--znai-regular-text-color);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s ease;
+}
+
+.znai-doc-stats-period-button:hover {
+  color: var(--znai-brand-primary-color);
+}
+
+.znai-doc-stats-period-button.active {
+  font-weight: 600;
+  color: var(--znai-brand-primary-color);
+  border-bottom-color: var(--znai-brand-primary-color);
 }
 
 .znai-doc-stats-overall {

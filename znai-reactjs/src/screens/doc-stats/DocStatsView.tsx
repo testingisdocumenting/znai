@@ -21,6 +21,8 @@ import { isTocItemIndex } from "../../structure/toc/TableOfContents";
 
 import "./DocStatsView.css";
 
+export type TimePeriod = "week" | "month" | "year" | "total";
+
 export interface PageStats {
   totalViews: number;
   uniqueViews: number;
@@ -29,6 +31,9 @@ export interface PageStats {
 export interface DocStatsViewProps {
   toc: TocItem[];
   pageStats: Record<string, PageStats>;
+  selectedPeriod: TimePeriod;
+  availablePeriods: TimePeriod[];
+  onPeriodChange: (period: TimePeriod) => void;
 }
 
 interface PageItemProps {
@@ -36,6 +41,13 @@ interface PageItemProps {
   stats?: PageStats;
   onPageClick: (dirName: string, fileName: string) => void;
 }
+
+const TIME_PERIODS: { key: TimePeriod; label: string }[] = [
+  { key: "week", label: "Week" },
+  { key: "month", label: "Month" },
+  { key: "year", label: "Year" },
+  { key: "total", label: "Total" },
+];
 
 function buildPageId(dirName: string, fileName: string): string {
   return dirName ? `${dirName}/${fileName}` : fileName;
@@ -51,7 +63,7 @@ function formatNumber(num: number): string {
   return num.toLocaleString();
 }
 
-const PageItem: React.FC<PageItemProps> = ({ item, stats, onPageClick }) => {
+function PageItem({ item, stats, onPageClick }: PageItemProps) {
   const href = documentationNavigation.buildUrl(item);
 
   const handleClick = (e: React.MouseEvent) => {
@@ -78,7 +90,7 @@ const PageItem: React.FC<PageItemProps> = ({ item, stats, onPageClick }) => {
       )}
     </div>
   );
-};
+}
 
 interface ChapterSectionProps {
   chapter: TocItem;
@@ -86,7 +98,7 @@ interface ChapterSectionProps {
   onPageClick: (dirName: string, fileName: string) => void;
 }
 
-const ChapterSection: React.FC<ChapterSectionProps> = ({ chapter, pageStats, onPageClick }) => {
+function ChapterSection({ chapter, pageStats, onPageClick }: ChapterSectionProps) {
   const items = (chapter.items || []).filter((item) => !isTocItemIndex(item));
 
   if (items.length === 0) {
@@ -126,9 +138,37 @@ const ChapterSection: React.FC<ChapterSectionProps> = ({ chapter, pageStats, onP
       </div>
     </div>
   );
-};
+}
 
-export const DocStatsView: React.FC<DocStatsViewProps> = ({ toc, pageStats }) => {
+interface TimePeriodSwitcherProps {
+  selectedPeriod: TimePeriod;
+  availablePeriods: TimePeriod[];
+  onPeriodChange: (period: TimePeriod) => void;
+}
+
+function TimePeriodSwitcher({ selectedPeriod, availablePeriods, onPeriodChange }: TimePeriodSwitcherProps) {
+  return (
+    <div className="znai-doc-stats-period-switcher">
+      {TIME_PERIODS.filter((p) => availablePeriods.includes(p.key)).map((period) => (
+        <button
+          key={period.key}
+          className={`znai-doc-stats-period-button ${selectedPeriod === period.key ? "active" : ""}`}
+          onClick={() => onPeriodChange(period.key)}
+        >
+          {period.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export function DocStatsView({
+  toc,
+  pageStats,
+  selectedPeriod,
+  availablePeriods,
+  onPeriodChange,
+}: DocStatsViewProps) {
   const navigateToPage = (dirName: string, fileName: string) => {
     documentationNavigation.navigateToPage({ dirName, fileName });
   };
@@ -145,7 +185,16 @@ export const DocStatsView: React.FC<DocStatsViewProps> = ({ toc, pageStats }) =>
   return (
     <div className="znai-doc-stats-view">
       <div className="znai-doc-stats-header">
-        <h2 className="znai-doc-stats-title">Guide Analytics</h2>
+        <div className="znai-doc-stats-header-top">
+          <h2 className="znai-doc-stats-title">Guide Analytics</h2>
+          {availablePeriods.length > 1 && (
+            <TimePeriodSwitcher
+              selectedPeriod={selectedPeriod}
+              availablePeriods={availablePeriods}
+              onPeriodChange={onPeriodChange}
+            />
+          )}
+        </div>
         <div className="znai-doc-stats-overall">
           <div className="znai-doc-stats-overall-stat">
             <span className="znai-doc-stats-overall-value">{formatNumber(totalStats.totalViews)}</span>
@@ -173,4 +222,4 @@ export const DocStatsView: React.FC<DocStatsViewProps> = ({ toc, pageStats }) =>
       </div>
     </div>
   );
-};
+}
