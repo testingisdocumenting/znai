@@ -19,7 +19,7 @@ import { Registry, simulateState } from "react-component-viewer";
 import { DocStatsView, PageStats, TimePeriod } from "./DocStatsView";
 import { TocItem } from "../../structure/TocItem";
 
-const sampleToc: TocItem[] = [
+const demoToc: TocItem[] = [
   {
     chapterTitle: "",
     dirName: "",
@@ -35,8 +35,18 @@ const sampleToc: TocItem[] = [
     fileName: "",
     items: [
       { chapterTitle: "Introduction", pageTitle: "What Is This", dirName: "introduction", fileName: "what-is-this" },
-      { chapterTitle: "Introduction", pageTitle: "Installation Guide", dirName: "introduction", fileName: "installation" },
-      { chapterTitle: "Introduction", pageTitle: "Quick Start Tutorial", dirName: "introduction", fileName: "quick-start" },
+      {
+        chapterTitle: "Introduction",
+        pageTitle: "Installation Guide",
+        dirName: "introduction",
+        fileName: "installation",
+      },
+      {
+        chapterTitle: "Introduction",
+        pageTitle: "Quick Start Tutorial",
+        dirName: "introduction",
+        fileName: "quick-start",
+      },
     ],
   },
   {
@@ -44,8 +54,18 @@ const sampleToc: TocItem[] = [
     dirName: "core-concepts",
     fileName: "",
     items: [
-      { chapterTitle: "Core Concepts", pageTitle: "Architecture Overview", dirName: "core-concepts", fileName: "architecture" },
-      { chapterTitle: "Core Concepts", pageTitle: "Configuration", dirName: "core-concepts", fileName: "configuration" },
+      {
+        chapterTitle: "Core Concepts",
+        pageTitle: "Architecture Overview",
+        dirName: "core-concepts",
+        fileName: "architecture",
+      },
+      {
+        chapterTitle: "Core Concepts",
+        pageTitle: "Configuration",
+        dirName: "core-concepts",
+        fileName: "configuration",
+      },
       { chapterTitle: "Core Concepts", pageTitle: "Plugins System", dirName: "core-concepts", fileName: "plugins" },
       { chapterTitle: "Core Concepts", pageTitle: "Theming", dirName: "core-concepts", fileName: "theming" },
     ],
@@ -65,7 +85,12 @@ const sampleToc: TocItem[] = [
     dirName: "advanced",
     fileName: "",
     items: [
-      { chapterTitle: "Advanced Topics", pageTitle: "Performance Optimization", dirName: "advanced", fileName: "performance" },
+      {
+        chapterTitle: "Advanced Topics",
+        pageTitle: "Performance Optimization",
+        dirName: "advanced",
+        fileName: "performance",
+      },
       { chapterTitle: "Advanced Topics", pageTitle: "Custom Extensions", dirName: "advanced", fileName: "extensions" },
     ],
   },
@@ -77,15 +102,17 @@ const statsByPeriod: Record<TimePeriod, Record<string, PageStats>> = {
     "introduction/what-is-this": { totalViews: 68, uniqueViews: 35 },
     "introduction/installation": { totalViews: 54, uniqueViews: 28 },
     "introduction/quick-start": { totalViews: 47, uniqueViews: 24 },
-    "core-concepts/architecture": { totalViews: 31, uniqueViews: 18 },
-    "core-concepts/configuration": { totalViews: 24, uniqueViews: 12 },
-    "core-concepts/plugins": { totalViews: 18, uniqueViews: 9 },
-    "core-concepts/theming": { totalViews: 12, uniqueViews: 6 },
+    "core-concepts/architecture": { totalViews: 0, uniqueViews: 0 },
+    "core-concepts/configuration": { totalViews: 0, uniqueViews: 0 },
+    "core-concepts/plugins": { totalViews: 0, uniqueViews: 0 },
+    "core-concepts/theming": { totalViews: 0, uniqueViews: 0 },
     "api/rest-endpoints": { totalViews: 43, uniqueViews: 22 },
     "api/authentication": { totalViews: 36, uniqueViews: 19 },
     "api/error-handling": { totalViews: 14, uniqueViews: 7 },
     "advanced/performance": { totalViews: 11, uniqueViews: 5 },
     "advanced/extensions": { totalViews: 6, uniqueViews: 3 },
+    "legacy/old-api": { totalViews: 23, uniqueViews: 12 },
+    "removed/deprecated-feature": { totalViews: 8, uniqueViews: 4 },
   },
   month: {
     "getting-started": { totalViews: 1542, uniqueViews: 893 },
@@ -101,6 +128,8 @@ const statsByPeriod: Record<TimePeriod, Record<string, PageStats>> = {
     "api/error-handling": { totalViews: 234, uniqueViews: 145 },
     "advanced/performance": { totalViews: 189, uniqueViews: 102 },
     "advanced/extensions": { totalViews: 98, uniqueViews: 65 },
+    "legacy/old-api": { totalViews: 156, uniqueViews: 89 },
+    "removed/deprecated-feature": { totalViews: 67, uniqueViews: 34 },
   },
   year: {
     "getting-started": { totalViews: 12000, uniqueViews: 7000 },
@@ -116,6 +145,8 @@ const statsByPeriod: Record<TimePeriod, Record<string, PageStats>> = {
     "api/error-handling": { totalViews: 1750, uniqueViews: 1100 },
     "advanced/performance": { totalViews: 1400, uniqueViews: 780 },
     "advanced/extensions": { totalViews: 740, uniqueViews: 490 },
+    "legacy/old-api": { totalViews: 1230, uniqueViews: 678 },
+    "removed/deprecated-feature": { totalViews: 543, uniqueViews: 276 },
   },
   total: {
     "getting-started": { totalViews: 15420, uniqueViews: 8934 },
@@ -131,6 +162,8 @@ const statsByPeriod: Record<TimePeriod, Record<string, PageStats>> = {
     "api/error-handling": { totalViews: 2345, uniqueViews: 1456 },
     "advanced/performance": { totalViews: 1890, uniqueViews: 1023 },
     "advanced/extensions": { totalViews: 987, uniqueViews: 654 },
+    "legacy/old-api": { totalViews: 1567, uniqueViews: 834 },
+    "removed/deprecated-feature": { totalViews: 712, uniqueViews: 389 },
   },
 };
 
@@ -139,7 +172,8 @@ const [getSelectedPeriod, setSelectedPeriod] = simulateState<TimePeriod>("total"
 export function docStatsViewDemo(registry: Registry) {
   registry.add("default", () => (
     <DocStatsView
-      toc={sampleToc}
+      guideName={"My guide"}
+      toc={demoToc}
       pageStats={statsByPeriod[getSelectedPeriod()]}
       selectedPeriod={getSelectedPeriod()}
       availablePeriods={["week", "month", "year", "total"]}

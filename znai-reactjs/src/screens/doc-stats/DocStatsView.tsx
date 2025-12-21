@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { TocItem } from "../../structure/TocItem";
 import { documentationNavigation } from "../../structure/DocumentationNavigation";
 import { isTocItemIndex } from "../../structure/toc/TableOfContents";
@@ -29,6 +29,7 @@ export interface PageStats {
 }
 
 export interface DocStatsViewProps {
+  guideName: string;
   toc: TocItem[];
   pageStats: Record<string, PageStats>;
   selectedPeriod: TimePeriod;
@@ -53,6 +54,18 @@ function buildPageId(dirName: string, fileName: string): string {
   return dirName ? `${dirName}/${fileName}` : fileName;
 }
 
+function collectTocPageIds(toc: TocItem[]): Set<string> {
+  const pageIds = new Set<string>();
+  for (const chapter of toc) {
+    for (const item of chapter.items || []) {
+      if (!isTocItemIndex(item)) {
+        pageIds.add(buildPageId(item.dirName, item.fileName));
+      }
+    }
+  }
+  return pageIds;
+}
+
 function formatNumber(num: number): string {
   if (num >= 1000000) {
     return (num / 1000000).toFixed(1) + "M";
@@ -61,6 +74,52 @@ function formatNumber(num: number): string {
     return (num / 1000).toFixed(1) + "K";
   }
   return num.toLocaleString();
+}
+
+const ZERO_STATS: PageStats = { totalViews: 0, uniqueViews: 0 };
+
+function sumStats(statsArray: PageStats[]): PageStats {
+  return statsArray.reduce(
+    (acc, stats) => ({
+      totalViews: acc.totalViews + stats.totalViews,
+      uniqueViews: acc.uniqueViews + stats.uniqueViews,
+    }),
+    ZERO_STATS
+  );
+}
+
+function StatsCounters({ stats }: { stats: PageStats }) {
+  return (
+    <div className="znai-doc-stats-counters">
+      <span className="znai-doc-stats-counter znai-doc-stats-total" title="Total views">
+        <span className="znai-doc-stats-counter-value">{formatNumber(stats.totalViews)}</span>
+        <span className="znai-doc-stats-counter-label">views</span>
+      </span>
+      <span className="znai-doc-stats-counter znai-doc-stats-unique" title="Unique visitors">
+        <span className="znai-doc-stats-counter-value">{formatNumber(stats.uniqueViews)}</span>
+        <span className="znai-doc-stats-counter-label">unique</span>
+      </span>
+    </div>
+  );
+}
+
+function ChapterSummary({ stats }: { stats: PageStats }) {
+  return (
+    <div className="znai-doc-stats-chapter-summary">
+      <span className="znai-doc-stats-summary-item">{formatNumber(stats.totalViews)} views</span>
+      <span className="znai-doc-stats-summary-separator">|</span>
+      <span className="znai-doc-stats-summary-item">{formatNumber(stats.uniqueViews)} unique</span>
+    </div>
+  );
+}
+
+function OverallStatCard({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="znai-doc-stats-overall-stat">
+      <span className="znai-doc-stats-overall-value">{formatNumber(value)}</span>
+      <span className="znai-doc-stats-overall-label">{label}</span>
+    </div>
+  );
 }
 
 function PageItem({ item, stats, onPageClick }: PageItemProps) {
@@ -76,18 +135,7 @@ function PageItem({ item, stats, onPageClick }: PageItemProps) {
       <a href={href} onClick={handleClick} className="znai-doc-stats-page-link">
         {item.pageTitle}
       </a>
-      {stats && (
-        <div className="znai-doc-stats-counters">
-          <span className="znai-doc-stats-counter znai-doc-stats-total" title="Total views">
-            <span className="znai-doc-stats-counter-value">{formatNumber(stats.totalViews)}</span>
-            <span className="znai-doc-stats-counter-label">views</span>
-          </span>
-          <span className="znai-doc-stats-counter znai-doc-stats-unique" title="Unique visitors">
-            <span className="znai-doc-stats-counter-value">{formatNumber(stats.uniqueViews)}</span>
-            <span className="znai-doc-stats-counter-label">unique</span>
-          </span>
-        </div>
-      )}
+      <StatsCounters stats={stats ?? ZERO_STATS} />
     </div>
   );
 }
@@ -105,36 +153,51 @@ function ChapterSection({ chapter, pageStats, onPageClick }: ChapterSectionProps
     return null;
   }
 
-  const chapterStats = items.reduce(
-    (acc, item) => {
-      const pageId = buildPageId(item.dirName, item.fileName);
-      const stats = pageStats[pageId];
-      if (stats) {
-        acc.totalViews += stats.totalViews;
-        acc.uniqueViews += stats.uniqueViews;
-      }
-      return acc;
-    },
-    { totalViews: 0, uniqueViews: 0 }
-  );
+  const itemStats = items
+    .map((item) => pageStats[buildPageId(item.dirName, item.fileName)])
+    .filter((stats): stats is PageStats => !!stats);
+  const chapterStats = sumStats(itemStats);
 
   return (
     <div className="znai-doc-stats-chapter">
       <div className="znai-doc-stats-chapter-header">
         <span className="znai-doc-stats-chapter-title">{chapter.chapterTitle}</span>
-        {chapterStats.totalViews > 0 && (
-          <div className="znai-doc-stats-chapter-summary">
-            <span className="znai-doc-stats-summary-item">{formatNumber(chapterStats.totalViews)} views</span>
-            <span className="znai-doc-stats-summary-separator">|</span>
-            <span className="znai-doc-stats-summary-item">{formatNumber(chapterStats.uniqueViews)} unique</span>
-          </div>
-        )}
+        <ChapterSummary stats={chapterStats} />
       </div>
       <div className="znai-doc-stats-pages">
         {items.map((item) => {
           const pageId = buildPageId(item.dirName, item.fileName);
           return <PageItem key={pageId} item={item} stats={pageStats[pageId]} onPageClick={onPageClick} />;
         })}
+      </div>
+    </div>
+  );
+}
+
+interface OrphanedPagesSectionProps {
+  orphanedPages: [string, PageStats][];
+}
+
+function OrphanedPagesSection({ orphanedPages }: OrphanedPagesSectionProps) {
+  if (orphanedPages.length === 0) {
+    return null;
+  }
+
+  const sectionStats = sumStats(orphanedPages.map(([, stats]) => stats));
+
+  return (
+    <div className="znai-doc-stats-chapter znai-doc-stats-orphaned">
+      <div className="znai-doc-stats-chapter-header">
+        <span className="znai-doc-stats-chapter-title">Orphaned Pages</span>
+        <ChapterSummary stats={sectionStats} />
+      </div>
+      <div className="znai-doc-stats-pages">
+        {orphanedPages.map(([pageId, stats]) => (
+          <div key={pageId} className="znai-doc-stats-page-item">
+            <span className="znai-doc-stats-orphaned-page-id">{pageId}</span>
+            <StatsCounters stats={stats} />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -163,62 +226,56 @@ function TimePeriodSwitcher({ selectedPeriod, availablePeriods, onPeriodChange }
 }
 
 export function DocStatsView({
+  guideName,
   toc,
   pageStats,
   selectedPeriod,
   availablePeriods,
   onPeriodChange,
 }: DocStatsViewProps) {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    contentRef.current?.focus();
+  }, []);
+
   const navigateToPage = (dirName: string, fileName: string) => {
     documentationNavigation.navigateToPage({ dirName, fileName });
   };
 
-  const totalStats = Object.values(pageStats).reduce(
-    (acc, stats) => {
-      acc.totalViews += stats.totalViews;
-      acc.uniqueViews += stats.uniqueViews;
-      return acc;
-    },
-    { totalViews: 0, uniqueViews: 0 }
-  );
+  const totalStats = sumStats(Object.values(pageStats));
+
+  const tocPageIds = collectTocPageIds(toc);
+  const orphanedPages = Object.entries(pageStats).filter(([pageId]) => !tocPageIds.has(pageId));
 
   return (
     <div className="znai-doc-stats-view">
       <div className="znai-doc-stats-header">
-        <div className="znai-doc-stats-header-top">
-          <h2 className="znai-doc-stats-title">Guide Analytics</h2>
-          {availablePeriods.length > 1 && (
-            <TimePeriodSwitcher
-              selectedPeriod={selectedPeriod}
-              availablePeriods={availablePeriods}
-              onPeriodChange={onPeriodChange}
-            />
-          )}
-        </div>
-        <div className="znai-doc-stats-overall">
-          <div className="znai-doc-stats-overall-stat">
-            <span className="znai-doc-stats-overall-value">{formatNumber(totalStats.totalViews)}</span>
-            <span className="znai-doc-stats-overall-label">Total Views</span>
-          </div>
-          <div className="znai-doc-stats-overall-stat">
-            <span className="znai-doc-stats-overall-value">{formatNumber(totalStats.uniqueViews)}</span>
-            <span className="znai-doc-stats-overall-label">Unique Visitors</span>
-          </div>
-          <div className="znai-doc-stats-overall-stat">
-            <span className="znai-doc-stats-overall-value">{Object.keys(pageStats).length}</span>
-            <span className="znai-doc-stats-overall-label">Pages Tracked</span>
-          </div>
-        </div>
-      </div>
-      <div className="znai-doc-stats-chapters">
-        {toc.map((chapter, idx) => (
-          <ChapterSection
-            key={chapter.chapterTitle || idx}
-            chapter={chapter}
-            pageStats={pageStats}
-            onPageClick={navigateToPage}
+        <h1 className="znai-doc-stats-title">{guideName} analytics</h1>
+        {availablePeriods.length > 1 && (
+          <TimePeriodSwitcher
+            selectedPeriod={selectedPeriod}
+            availablePeriods={availablePeriods}
+            onPeriodChange={onPeriodChange}
           />
-        ))}
+        )}
+      </div>
+      <div className="znai-doc-stats-content" ref={contentRef} tabIndex={-1}>
+        <div className="znai-doc-stats-overall">
+          <OverallStatCard value={totalStats.totalViews} label="Total Views" />
+          <OverallStatCard value={totalStats.uniqueViews} label="Unique Visitors" />
+        </div>
+        <div className="znai-doc-stats-chapters">
+          {toc.map((chapter, idx) => (
+            <ChapterSection
+              key={chapter.chapterTitle || idx}
+              chapter={chapter}
+              pageStats={pageStats}
+              onPageClick={navigateToPage}
+            />
+          ))}
+          <OrphanedPagesSection orphanedPages={orphanedPages} />
+        </div>
       </div>
     </div>
   );
