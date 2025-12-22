@@ -21,9 +21,15 @@ import './BulletList.css'
 import DefaultBulletList from './kinds/DefaultBulletList'
 import LeftRightTimeLine from './kinds/LeftRightTimeLine'
 import Venn from './kinds/Venn'
+import RevealBoxes from './kinds/RevealBoxes'
 import Steps from './kinds/Steps'
-import {presentationListType, presentationTypes, listType, valueByIdWithWarning} from './bulletListUtils.js'
+import HorizontalStripes from './kinds/HorizontalStripes'
+import Grid from './kinds/Grid'
+
+import {isAllAtOnce} from '../meta/meta'
+
 const types = {LeftRightTimeLine, Venn, Steps}
+const presentationTypes = {...types, RevealBoxes, HorizontalStripes, Grid}
 
 const BulletList = (props) => {
     const type = listType(props, 'bulletListType')
@@ -51,6 +57,61 @@ const PresentationBulletList = (props) => {
     return <PresentationBullets isPresentation={isPresentation} {...props}/>
 }
 
+const presentationNumberOfSlides = (props) => {
+    const {content, meta} = props
 
+    const type = presentationListType(props)
+    return (type === null || isAllAtOnce(meta)) ? 1 : content.length
+}
 
-export {BulletList, NoBullets, PresentationBulletList}
+function valueByIdWithWarning(dict, type) {
+    if (! Object.hasOwn(dict, type)) {
+        console.warn("can't find bullets list type: " + type)
+        return NoBullets
+    }
+
+    return dict[type]
+}
+
+function presentationListType(props) {
+    return listType(props, 'bulletListType') ||
+        listType(props, 'presentationBulletListType')
+}
+
+function listType(props, key) {
+    if (! Object.hasOwn(props, 'meta')) {
+        return null
+    }
+
+    const meta = props.meta
+    if (! Object.hasOwn(meta, key)) {
+        return null
+    }
+
+    if (meta[key] === "") {
+        return null
+    }
+
+    return meta[key]
+}
+
+function slideInfoProvider(props) {
+    const type = presentationListType(props)
+    if (!type) {
+        return {}
+    }
+
+    const Bullets = valueByIdWithWarning(presentationTypes, type)
+
+    return {
+        isSlideCentered: !Bullets.isPresentationFullScreen,
+        isSlidePadded: !Bullets.isPresentationFullScreen,
+        isSlideScaled: !Bullets.isPresentationFullScreen,
+    }
+}
+
+const presentationBulletListHandler = {component: PresentationBulletList,
+    numberOfSlides: presentationNumberOfSlides,
+    slideInfoProvider: slideInfoProvider}
+
+export {BulletList, presentationBulletListHandler}

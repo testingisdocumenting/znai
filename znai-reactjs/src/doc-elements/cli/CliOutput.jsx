@@ -23,6 +23,8 @@ import {convertAnsiToTokenLines} from "./ansiToTokensConverter";
 
 import SimpleCodeSnippet from "../code-snippets/SimpleCodeSnippet";
 
+import {isAllAtOnce} from "../meta/meta";
+
 import './CliOutput.css';
 
 const CliOutput = ({lines, ...props}) => {
@@ -37,4 +39,20 @@ const CliOutput = ({lines, ...props}) => {
     )
 }
 
-export {CliOutput}
+const presentationCliOutput = {component: CliOutput,
+    numberOfSlides: (props) => {
+        return 1 + highlightNumberOfSlides(props) + (props.revealLineStop || []).length;
+    }
+}
+
+function highlightNumberOfSlides({meta, highlight}) {
+    highlight = highlight || []
+    if (isAllAtOnce(meta) && highlight.length > 0) {
+        return 1
+    }
+
+    return highlight.length
+}
+
+
+export {CliOutput, presentationCliOutput}

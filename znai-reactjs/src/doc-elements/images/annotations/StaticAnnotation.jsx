@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable react-refresh/only-export-components */
+
 import React from 'react'
 import {styleByName} from '../shapes/styleByName';
 import {withDisplayName} from '../../components.ts'

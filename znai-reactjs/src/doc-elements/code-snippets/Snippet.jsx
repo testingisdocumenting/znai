@@ -24,12 +24,15 @@ import {
   splitTokensIntoLines,
   trimComment,
 } from "./codeUtils";
+import { isAllAtOnce } from "../meta/meta";
+import { convertToList } from "../propsUtils";
 
 import SnippetContainer from "./SnippetContainer";
 import CodeSnippetWithCallouts from "./CodeSnippetWithCallouts";
 import SimpleCodeSnippet from "./SimpleCodeSnippet";
 
 import { parseCode } from "./codeParser";
+import { countNumberOfLines } from "../../utils/strings";
 
 import { SnippetBulletExplanations } from "./explanations/SnippetBulletExplanations";
 
@@ -101,6 +104,69 @@ function scrollToLineIdx({ isPresentation, slideIdx, numberOfVisibleLines }) {
   return numberOfVisibleLines * slideIdx;
 }
 
+const presentationSnippetHandler = {
+  component: Snippet,
+  numberOfSlides: ({
+    meta,
+    commentsType,
+    lang,
+    snippet,
+    tokens,
+    highlight,
+    revealLineStop,
+    numberOfVisibleLines = defaultNumberOfVisibleLines,
+  }) => {
+    const tokensToUse = parseCodeWithCompatibility({ lang, snippet, tokens });
+    const highlightAsList = convertToList(highlight);
+
+    if (commentsType === BULLETS_COMMENT_TYPE) {
+      return inlinedCommentsNumberOfSlides({ meta, tokens: tokensToUse });
+    }
+
+    const numberOfStopLines = (revealLineStop || []).length;
+    const numberOfScrolls = countNumberOfScrolls();
+
+    const hasFirstNoActionSlide =
+      highlightAsList.length > 0 ||
+      numberOfStopLines > 0 ||
+      (highlightAsList.length === 0 && numberOfStopLines === 0 && numberOfScrolls === 0);
+
+    return (
+      (hasFirstNoActionSlide ? 1 : 0) +
+      highlightNumberOfSlides({ meta, highlightAsList }) +
+      numberOfStopLines +
+      numberOfScrolls
+    );
+
+    function countNumberOfScrolls() {
+      const numberOfLines = countNumberOfLines(snippet);
+
+      if (numberOfLines <= numberOfVisibleLines) {
+        return 0;
+      }
+
+      return Math.ceil(numberOfLines / numberOfVisibleLines);
+    }
+  },
+  slideInfoProvider: ({ meta, commentsType, lang, snippet, tokens, slideIdx }) => {
+    const tokensToUse = parseCodeWithCompatibility({ lang, snippet, tokens });
+
+    if (isAllAtOnce(meta)) {
+      return {};
+    }
+
+    if (commentsType !== BULLETS_COMMENT_TYPE) {
+      return {};
+    }
+
+    const comments = tokensToUse.filter((t) => isCommentToken(t));
+
+    return {
+      slideVisibleNote: !comments.length ? null : slideIdx === 0 ? "" : comments[slideIdx - 1].content,
+    };
+  },
+};
+
 // TODO for backward compatibility with already built and deployed docs
 // remove once TSI rebuilds all the docs
 function parseCodeWithCompatibility({ lang, tokens, snippet }) {
@@ -109,6 +175,24 @@ function parseCodeWithCompatibility({ lang, tokens, snippet }) {
   }
 
   return parseCode(lang, snippet);
+}
+
+function inlinedCommentsNumberOfSlides({ meta, tokens }) {
+  const comments = tokens.filter((t) => isCommentToken(t));
+
+  if (isAllAtOnce(meta) && comments.length > 0) {
+    return 2; // two slides: 1st - no highlights; 2nd - all highlighted at once
+  }
+
+  return comments.length + 1;
+}
+
+function highlightNumberOfSlides({ meta, highlightAsList }) {
+  if (isAllAtOnce(meta) && highlightAsList.length > 0) {
+    return 1;
+  }
+
+  return highlightAsList.length;
 }
 
 function buildCalloutsFromComments(lines) {
@@ -124,4 +208,4 @@ function buildCalloutsFromComments(lines) {
   return result;
 }
 
-export { Snippet };
+export { Snippet, presentationSnippetHandler };

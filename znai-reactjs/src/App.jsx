@@ -264,31 +264,31 @@ dropDowns.add("Theme").addItem("Default", "Alt 1").addItem("Dark", "Alt 2").onSe
 
 const documentationTracker = {
   onPageOpen(pageId) {
-    console.warn("onPageOpen", pageId);
+    console.log("onPageOpen", pageId);
   },
   onLinkClick(currentPageId, url) {
-    console.warn("onLinkClick", currentPageId, url);
+    console.log("onLinkClick", currentPageId, url);
   },
   onNextPage(currentPageId) {
-    console.warn("onNextPage", currentPageId);
+    console.log("onNextPage", currentPageId);
   },
   onPrevPage(currentPageId) {
-    console.warn("onPrevPage", currentPageId);
+    console.log("onPrevPage", currentPageId);
   },
   onScrollToSection(currentPageId, sectionIdTitle) {
-    console.warn("onScrollToSection", currentPageId, sectionIdTitle);
+    console.log("onScrollToSection", currentPageId, sectionIdTitle);
   },
   onTocItemSelect(currentPageId, tocItem) {
-    console.warn("onTocItemSelect", currentPageId, tocItem);
+    console.log("onTocItemSelect", currentPageId, tocItem);
   },
   onSearchResultSelect(currentPageId, query, selectedPageId) {
-    console.warn("onSearchResultSelect", currentPageId, query, selectedPageId);
+    console.log("onSearchResultSelect", currentPageId, query, selectedPageId);
   },
   onInteraction(currentPageId, type, id) {
-    console.warn("onInteraction", currentPageId, type, id);
+    console.log("onInteraction", currentPageId, type, id);
   },
   onPresentationOpen(currentPageId) {
-    console.warn("onPresentationOpen", currentPageId);
+    console.log("onPresentationOpen", currentPageId);
   },
 };
 

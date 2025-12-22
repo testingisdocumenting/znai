@@ -66,7 +66,7 @@ export default [
 
             // React Refresh
             'react-refresh/only-export-components': [
-                'warn',
+                'off',
                 { allowConstantExport: true },
             ],
 
@@ -152,8 +152,9 @@ export default [
         },
     },
     {
-        files: ['**/*.demo.{js,jsx,ts,tsx}', '**/*.stories.{js,jsx,ts,tsx}'],
+        files: ['src/App.jsx', '**/*.demo.{js,jsx,ts,tsx}', '**/*.stories.{js,jsx,ts,tsx}'],
         rules: {
+            'no-console': 'off',
             'react-refresh/only-export-components': 'off',
             'react/display-name': 'off', // Often useful for demos too
         },

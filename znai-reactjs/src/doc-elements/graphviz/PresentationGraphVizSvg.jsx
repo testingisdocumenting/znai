@@ -1,5 +1,4 @@
 /*
- * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +17,7 @@
 import React from 'react'
 import GraphVizSvg from './GraphVizSvg'
 import {isAllAtOnce} from '../meta/meta'
-/* eslint-disable react-refresh/only-export-components */
+
 const PresentationGraphVizSvg = ({slideIdx, meta, idsToHighlight, ...props}) => {
     const idsToUse = (!idsToHighlight || isAllAtOnce(meta)) ?
         idsToHighlight:
