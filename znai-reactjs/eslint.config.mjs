@@ -149,7 +149,9 @@ export default [
                 afterAll: 'readonly',
                 vi: 'readonly',  // Vitest's mock utility
             },
-        },
+        }, rules: {
+            'no-console': 'off',
+        }
     },
     {
         files: ['src/App.jsx', '**/*.demo.{js,jsx,ts,tsx}', '**/*.stories.{js,jsx,ts,tsx}'],

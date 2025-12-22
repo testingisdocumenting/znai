@@ -293,7 +293,7 @@ class MyClass {
 `)
         const lines = splitTokensIntoLines(tokens)
 
-        console.warn(lines)
+        console.log(lines)
     })
 
     describe('inlined comments', () => {
