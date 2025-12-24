@@ -21,7 +21,7 @@ import {
     removeIcon,
     extractTextLinesEmphasisOnly,
     extractTextLinesEmphasisOrFull, extractIconIds
-} from './bulletUtils'
+} from './bulletUtils.js'
 
 const itemContentWithIcon = buildItemContentWithIcon()
 const lowerCasedItemContent = buildLowerCasedItemContent()

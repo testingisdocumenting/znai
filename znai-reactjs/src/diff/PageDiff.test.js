@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -49,6 +50,6 @@ describe('Page Diff', () => {
         right.add('node6', 'of lines')
 
         const result = Diff.diffArrays(left.list, right.list, {comparator: compareListEntry})
-        console.log(JSON.stringify(result, null, 2))
+        console.warn(JSON.stringify(result, null, 2))
     })
 })

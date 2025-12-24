@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import React, {type MutableRefObject, type RefObject, useEffect, useRef } from "react";
+import React, { MutableRefObject, RefObject, useEffect, useRef } from "react";
 import {EChartsType} from "echarts/types/dist/shared";
-import { configuredEcharts, type EchartCommonProps } from "./EchartCommon";
+import { configuredEcharts, EchartCommonProps } from "./EchartCommon";
 
 import {PresentationProps} from "../presentation/PresentationProps";
 

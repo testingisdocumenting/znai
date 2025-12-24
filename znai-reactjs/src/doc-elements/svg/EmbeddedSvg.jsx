@@ -56,7 +56,7 @@ class EmbeddedSvg extends React.Component {
         this.changeSizeWhenPropIsChanged()
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(_prevProps, _prevState, _snapshot) {
         this.changeSizeWhenPropIsChanged()
     }
 

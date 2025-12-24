@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,4 +23,4 @@ const PresentationXml = ({xmlAsJson, paths, slideIdx, ...props}) => {
     return <Xml xmlAsJson={xmlAsJson} paths={pathsToDisplay} {...props}/>
 }
 
-export default {component: PresentationXml, numberOfSlides: ({data, paths}) => paths ? (paths.length + 1): 1}
+export default {component: PresentationXml, numberOfSlides: ({_data, paths}) => paths ? (paths.length + 1): 1}

@@ -47,7 +47,7 @@ class GvPolygon extends React.Component {
             removeCustomPropsNoCopy(cleanedUpProps)
 
             // came from circle dot
-            if (this.props.hasOwnProperty("rx") &&
+            if (Object.hasOwn(this.props, "rx") &&
               (Math.abs(this.props.rx - this.props.ry) < 0.0001)) {
                 return <ellipse {...cleanedUpProps} {...colorsOverride}/>
             }

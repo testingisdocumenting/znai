@@ -65,7 +65,7 @@ const presentationNumberOfSlides = (props) => {
 }
 
 function valueByIdWithWarning(dict, type) {
-    if (! dict.hasOwnProperty(type)) {
+    if (! Object.hasOwn(dict, type)) {
         console.warn("can't find bullets list type: " + type)
         return NoBullets
     }
@@ -79,12 +79,12 @@ function presentationListType(props) {
 }
 
 function listType(props, key) {
-    if (! props.hasOwnProperty('meta')) {
+    if (! Object.hasOwn(props, 'meta')) {
         return null
     }
 
     const meta = props.meta
-    if (! meta.hasOwnProperty(key)) {
+    if (! Object.hasOwn(meta, key)) {
         return null
     }
 
