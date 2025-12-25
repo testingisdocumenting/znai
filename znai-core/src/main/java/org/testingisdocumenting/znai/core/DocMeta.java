@@ -26,6 +26,7 @@ import java.util.Map;
 
 public class DocMeta {
     public static final String META_FILE_NAME = "meta.json";
+    public static final String TRACK_ACTIVITY_URL_KEY = "trackActivityUrl";
 
     private String id;
 
@@ -112,6 +113,10 @@ public class DocMeta {
 
     public List<String> getAllowedGroups() {
         return allowedGroups;
+    }
+
+    public boolean hasTrackActivityUrl() {
+        return docMetaMap.containsKey(TRACK_ACTIVITY_URL_KEY);
     }
 
     public Map<String, Object> toMap() {

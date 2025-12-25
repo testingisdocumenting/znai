@@ -28,6 +28,7 @@ import {Documentation} from "./doc-elements/Documentation";
 import {DocumentationPreparationScreen} from './screens/documentation-preparation/DocumentationPreparationScreen'
 import {PreviewChangeScreen} from './screens/preview-change-path/PreviewChangeScreen'
 import {NotAuthorizedScreen} from './screens/not-authorized/NotAuthorizedScreen'
+import {DocStatsScreen} from './screens/doc-stats/DocStatsScreen'
 import {Landing} from './screens/landing/Landing'
 import {themeRegistry} from './theme/ThemeRegistry'
 import {documentationNavigation} from './structure/DocumentationNavigation'
@@ -42,6 +43,7 @@ window.ReactDOM = ReactDOM
 window.Documentation = Documentation
 window.DocumentationPreparationScreen = DocumentationPreparationScreen
 window.NotAuthorizedScreen = NotAuthorizedScreen
+window.DocStatsScreen = DocStatsScreen
 window.Landing = Landing
 window.PreviewChangeScreen = PreviewChangeScreen
 window.themeRegistry = themeRegistry

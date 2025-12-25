@@ -16,7 +16,7 @@
 
 import React, { useEffect, useState } from "react";
 import { TocItem } from "../../structure/TocItem";
-import { getDocMeta } from "../../structure/docMeta";
+import { DocMeta, getDocMeta, mergeDocMeta } from "../../structure/docMeta";
 import { fetchWithCredentials } from "../../utils/fetchWithCredentials";
 import { DocStatsView, PageStats, TimePeriod } from "./DocStatsView";
 
@@ -26,10 +26,11 @@ export type DocStatsResponse = Record<TimePeriod, Record<string, PageStats>>;
 
 export interface DocStatsScreenProps {
   toc: TocItem[];
+  docMeta: DocMeta;
 }
 
-async function fetchDocStats(url: string, signal: AbortSignal): Promise<DocStatsResponse> {
-  const response = await fetchWithCredentials(url, { signal });
+async function fetchDocStats(url: string): Promise<DocStatsResponse> {
+  const response = await fetchWithCredentials(url, {});
 
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
@@ -39,10 +40,15 @@ async function fetchDocStats(url: string, signal: AbortSignal): Promise<DocStats
   return response.json();
 }
 
-export function DocStatsScreen({ toc }: DocStatsScreenProps) {
+export function DocStatsScreen({ toc, docMeta }: DocStatsScreenProps) {
   const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>("total");
   const [statsByPeriod, setStatsByPeriod] = useState<DocStatsResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // rest of the code in this file and nested components expect global docMeta presence
+  useEffect(() => {
+    mergeDocMeta(docMeta);
+  }, [docMeta]);
 
   useEffect(() => {
     const docStatsUrl = getDocMeta().docStatsUrl;
@@ -50,17 +56,11 @@ export function DocStatsScreen({ toc }: DocStatsScreenProps) {
       return;
     }
 
-    const abortController = new AbortController();
-
-    fetchDocStats(docStatsUrl, abortController.signal)
+    fetchDocStats(docStatsUrl)
       .then(setStatsByPeriod)
       .catch((err) => {
-        if (!abortController.signal.aborted) {
-          setError(err instanceof Error ? err.message : "Failed to load stats");
-        }
+        setError(err instanceof Error ? err.message : "Failed to load stats");
       });
-
-    return () => abortController.abort();
   }, []);
 
   if (error) {
@@ -88,6 +88,3 @@ export function DocStatsScreen({ toc }: DocStatsScreenProps) {
     />
   );
 }
-
-export { DocStatsView } from "./DocStatsView";
-export type { DocStatsViewProps, PageStats, TimePeriod } from "./DocStatsView";
