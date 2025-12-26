@@ -91,14 +91,15 @@ import { FootnoteReference } from "./footnote/FootnoteReference";
 import { EmbeddedHtml } from "./html/EmbeddedHtml";
 import { Asciinema } from "./asciinema/Asciinema";
 import { ReadMore } from "./read-more/ReadMore.js";
+import { withDisplayName } from "./components.ts";
 
 const library = {}
 const presentationElementHandlers = {}
 
 library.DocElement = DocElement
-library.Emphasis = (props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
-library.StrongEmphasis = (props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>)
-library.StrikeThrough = (props) => (<del className="strike-through"><props.elementsLibrary.DocElement {...props}/></del>)
+library.Emphasis = withDisplayName("Emphasis")((props) => (<span className="emphasis"><props.elementsLibrary.DocElement {...props}/></span>))
+library.StrongEmphasis = withDisplayName("StrongEmphasis")((props) => (<span className="strong-emphasis"><props.elementsLibrary.DocElement {...props}/></span>))
+library.StrikeThrough = withDisplayName("StrikeThrough")((props) => (<del className="strike-through"><props.elementsLibrary.DocElement {...props}/></del>))
 library.Link = Link
 library.Anchor = Anchor
 
@@ -116,9 +117,9 @@ presentationElementHandlers.BlockQuote = presentationBlockQuoteHandler
 
 library.SimpleText = SimpleText
 library.InlinedCode = InlinedCode
-library.SoftLineBreak = () => <span> </span>
-library.HardLineBreak = () => <br />
-library.ThematicBreak = () => <hr />
+library.SoftLineBreak = withDisplayName("SoftLineBreak")(() => <span> </span>)
+library.HardLineBreak = withDisplayName("HardLineBreak")(() => <br />)
+library.ThematicBreak = withDisplayName("ThematicBreak")(() => <hr />)
 
 library.ApiLinkedTextBlock = ApiLinkedTextBlock;
 
@@ -127,7 +128,7 @@ presentationElementHandlers.Snippet = presentationSnippetHandler
 
 library.CustomReactJSComponent = CustomReactJSComponent
 
-library.EmptyBlock = () => (<div/>)
+library.EmptyBlock = withDisplayName("EmptyBlock")(() => (<div/>))
 
 library.LangClass = wrappedInContentBlock(LangClass)
 library.LangFunction = wrappedInContentBlock(LangFunction)
@@ -253,7 +254,12 @@ library.Asciinema = Asciinema
  * @param Component component to wrap
  */
 function wrappedInContentBlock(Component) {
-    return (props) => <div className="content-block"><Component {...props}/></div>
+    return withDisplayName(`ContentBlock(${Component.displayName || Component.name || 'Component'})`) (
+        (props) =>
+        <div className="content-block">
+            <Component {...props}/>
+        </div>
+    );
 }
 
 themeRegistry.registerAsBase(new Theme({

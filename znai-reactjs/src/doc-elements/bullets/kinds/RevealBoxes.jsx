@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +17,7 @@
 
 import React from 'react'
 
-import {extractTextLinesEmphasisOrFull} from '../bulletUtils'
+import {extractTextLinesEmphasisOrFull} from '../bulletUtils.js'
 import {isAllAtOnce} from '../../meta/meta'
 
 import './RevealBoxes.css'

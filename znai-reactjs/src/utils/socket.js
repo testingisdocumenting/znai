@@ -16,7 +16,9 @@
  */
 
 export function socketUrl(relativeUrl) {
-    if (process.env.NODE_ENV !== "production") {
+    const isDevelopment = import.meta.env.DEV
+
+    if (isDevelopment) {
         return "ws://localhost:3334/preview"
     }
 

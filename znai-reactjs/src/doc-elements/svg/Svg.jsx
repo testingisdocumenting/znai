@@ -54,7 +54,7 @@ class Svg extends React.Component {
         this.loadSvg()
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps, _prevState, _snapshot) {
         if (prevProps.svgSrc !== this.props.svgSrc) {
             this.loadSvg()
         }

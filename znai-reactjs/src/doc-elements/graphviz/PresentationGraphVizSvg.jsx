@@ -26,7 +26,7 @@ const PresentationGraphVizSvg = ({slideIdx, meta, idsToHighlight, ...props}) => 
     return <GraphVizSvg idsToHighlight={idsToUse} {...props}/>
 }
 
-function numberOfSlides({data, idsToHighlight, meta}) {
+function numberOfSlides({_data, idsToHighlight, meta}) {
     return (!idsToHighlight || isAllAtOnce(meta)) ?
         1 :
         (idsToHighlight.length + 1)

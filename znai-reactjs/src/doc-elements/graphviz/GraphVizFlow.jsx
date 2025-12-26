@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 
 import GraphVizFlowFullScreen from './GraphVizFlowFullScreen'
-import GraphVizFlowAllInfoAtOnce from './GraphVizFlowAllInfoAtOnce'
+import DocumentationGraphVizFlow from './DocumentationGraphVizFlow'
 
 import './GraphvVizFlow.css'
 

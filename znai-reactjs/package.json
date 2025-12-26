@@ -58,6 +58,7 @@
     "vite": "npm:rolldown-vite@7.1.14"
   },
   "scripts": {
+    "prebuild": "npm run lint",
     "dev": "vite",
     "build": "vite build",
     "test": "vitest --config ./vitest.config.ts",
