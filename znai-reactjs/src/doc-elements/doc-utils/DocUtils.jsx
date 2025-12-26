@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +17,7 @@
 
 import React from 'react'
 
+import {withDisplayName} from '../components.ts'
 import './DocUtils.css'
 
 const DocUtilsDesc = WrapperOnly('doc-utils-desc content-block')
@@ -38,11 +40,14 @@ function DocUtilsField({elementsLibrary, content}) {
 }
 
 function WrapperOnly(className) {
-    return ({elementsLibrary, content}) => <div className={className}>
-        <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={content}/>
-    </div>
+    return withDisplayName(`WrapperOnly(${className})`)(
+        ({elementsLibrary, content}) => (
+            <div className={className}>
+                <elementsLibrary.DocElement elementsLibrary={elementsLibrary} content={content}/>
+            </div>
+        )
+    )
 }
-
 export function registerDocUtilsElements(elementsLibrary) {
     const components = {
         DocUtilsDesc,

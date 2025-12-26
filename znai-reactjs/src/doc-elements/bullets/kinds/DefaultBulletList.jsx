@@ -16,7 +16,7 @@
  */
 
 import React from 'react'
-import {startsWithIcon} from '../bulletUtils'
+import {startsWithIcon} from '../bulletUtils.js'
 
 const DefaultBulletList = (props) => {
     const {tight, content} = props

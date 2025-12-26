@@ -17,16 +17,18 @@
 
 import React from 'react'
 import {styleByName} from '../shapes/styleByName';
+import {withDisplayName} from '../../components.ts'
 
-const staticAnnotation = (shapeHandler) => ({shape, scale}) => {
-    if (!shapeHandler) {
-        return <NotFound {...shape}/>
-    }
-
-    const Body = shapeHandler.body;
-    return <Body key="body" {...shape} scale={scale}/>
+const staticAnnotation = (shapeHandler) => {
+    return withDisplayName(`StaticAnnotation(${shapeHandler?.name || 'Unknown'}`)(
+        ({shape, scale}) => {
+        if (!shapeHandler) {
+            return <NotFound {...shape}/>
+        }
+        const Body = shapeHandler.body;
+        return <Body key="body" {...shape} scale={scale}/>
+        });
 }
-
 function NotFound({x, y, width, height, color}) {
     const styleScheme = styleByName(color)
 

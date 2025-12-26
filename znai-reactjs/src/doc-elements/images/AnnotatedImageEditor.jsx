@@ -77,7 +77,7 @@ class AnnotatedImageEditor extends React.Component {
         this.setState({selectedId: shape.id})
     }
 
-    onAnnotationChange(shape) {
+    onAnnotationChange(_shape) {
         this.forceUpdate()
     }
 

@@ -157,7 +157,7 @@ class XmlPrinter {
     }
 
     isHighlightedPath(path) {
-        return this._pathsToHighlight.hasOwnProperty(path)
+        return Object.hasOwn(this._pathsToHighlight, path)
     }
 }
 

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +25,7 @@ const JsonPayload = ({data, checks}) => {
     )
 }
 
-const RestPayload = ({caption, type, data, checks}) => {
+const RestPayload = ({caption, _type, data, checks}) => {
     if (! data) {
         return null
     }

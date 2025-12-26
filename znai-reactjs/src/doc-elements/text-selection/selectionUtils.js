@@ -53,7 +53,7 @@ function normalizeRangeBoundary(node, offset, isEnd = false) {
       // This means looking forward from offset
       return findTextNodeForward(node, offset);
     }
-  } catch (e) {
+  } catch {
     return null;
   }
 }

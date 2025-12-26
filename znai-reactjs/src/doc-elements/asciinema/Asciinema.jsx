@@ -32,13 +32,13 @@ export function Asciinema({src, startAt = 0, poster = undefined, cols = undefine
     }
   }
 
-  function recreatePlayer() {
-    destroyPlayer();
-    playerRef.current = AsciinemaPlayer.create(src, containerRef.current,
-      {preload: true, fit: false, startAt, poster, cols, rows, idleTimeLimit, speed});
-  }
-
   useEffect(() => {
+    function recreatePlayer() {
+      destroyPlayer();
+      playerRef.current = AsciinemaPlayer.create(src, containerRef.current,
+        {preload: true, fit: false, startAt, poster, cols, rows, idleTimeLimit, speed});
+    }
+
     if (containerRef.current) {
         recreatePlayer();
     }
@@ -49,8 +49,7 @@ export function Asciinema({src, startAt = 0, poster = undefined, cols = undefine
         playerRef.current = null;
       }
     };
-  }, [src, startAt, poster, cols, rows, idleTimeLimit, speed, containerRef]);
-
+  }, [src, startAt, poster, cols, rows, idleTimeLimit, speed]);
 
   return <div className="content-block znai-asciinema" ref={containerRef} />;
 }

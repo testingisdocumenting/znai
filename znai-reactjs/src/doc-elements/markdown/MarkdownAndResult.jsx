@@ -1,5 +1,4 @@
 /*
- * Copyright 2021 TWO SIGMA OPEN SOURCE, LLC
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

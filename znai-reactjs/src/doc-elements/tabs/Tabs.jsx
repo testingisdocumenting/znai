@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import React, { Component } from "react";
+import React from "react";
 
 import { tabsRegistration } from "./TabsRegistration";
 import { findParentWithScroll } from "../../utils/domNodes";
