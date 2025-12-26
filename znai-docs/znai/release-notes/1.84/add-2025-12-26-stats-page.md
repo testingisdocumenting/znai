@@ -1,0 +1,1 @@
+* Add: `/_stats` page to display tracked visitors for internally hosted documentations

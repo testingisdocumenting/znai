@@ -40,7 +40,6 @@ export interface DocStatsViewProps {
 interface PageItemProps {
   item: TocItem;
   stats?: PageStats;
-  onPageClick: (dirName: string, fileName: string) => void;
 }
 
 const TIME_PERIODS: { key: TimePeriod; label: string }[] = [
@@ -122,17 +121,12 @@ function OverallStatCard({ value, label }: { value: number; label: string }) {
   );
 }
 
-function PageItem({ item, stats, onPageClick }: PageItemProps) {
+function PageItem({ item, stats }: PageItemProps) {
   const href = documentationNavigation.buildUrl(item);
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    onPageClick(item.dirName, item.fileName);
-  };
 
   return (
     <div className="znai-doc-stats-page-item">
-      <a href={href} onClick={handleClick} className="znai-doc-stats-page-link">
+      <a href={href} className="znai-doc-stats-page-link">
         {item.pageTitle}
       </a>
       <StatsCounters stats={stats ?? ZERO_STATS} />
@@ -143,10 +137,9 @@ function PageItem({ item, stats, onPageClick }: PageItemProps) {
 interface ChapterSectionProps {
   chapter: TocItem;
   pageStats: Record<string, PageStats>;
-  onPageClick: (dirName: string, fileName: string) => void;
 }
 
-function ChapterSection({ chapter, pageStats, onPageClick }: ChapterSectionProps) {
+function ChapterSection({ chapter, pageStats }: ChapterSectionProps) {
   const items = (chapter.items || []).filter((item) => !isTocItemIndex(item));
 
   if (items.length === 0) {
@@ -167,7 +160,7 @@ function ChapterSection({ chapter, pageStats, onPageClick }: ChapterSectionProps
       <div className="znai-doc-stats-pages">
         {items.map((item) => {
           const pageId = buildPageId(item.dirName, item.fileName);
-          return <PageItem key={pageId} item={item} stats={pageStats[pageId]} onPageClick={onPageClick} />;
+          return <PageItem key={pageId} item={item} stats={pageStats[pageId]} />;
         })}
       </div>
     </div>
@@ -239,10 +232,6 @@ export function DocStatsView({
     contentRef.current?.focus();
   }, []);
 
-  const navigateToPage = (dirName: string, fileName: string) => {
-    documentationNavigation.navigateToPage({ dirName, fileName });
-  };
-
   const totalStats = sumStats(Object.values(pageStats));
 
   const tocPageIds = collectTocPageIds(toc);
@@ -267,12 +256,7 @@ export function DocStatsView({
         </div>
         <div className="znai-doc-stats-chapters">
           {toc.map((chapter, idx) => (
-            <ChapterSection
-              key={chapter.chapterTitle || idx}
-              chapter={chapter}
-              pageStats={pageStats}
-              onPageClick={navigateToPage}
-            />
+            <ChapterSection key={chapter.chapterTitle || idx} chapter={chapter} pageStats={pageStats} />
           ))}
           <OrphanedPagesSection orphanedPages={orphanedPages} />
         </div>
