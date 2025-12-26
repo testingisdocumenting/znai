@@ -43,14 +43,6 @@ public class DocUrl {
     private boolean isAnchorOnly;
     private boolean isIndexUrl;
 
-    public static DocUrl indexUrl() {
-        return new DocUrl(true);
-    }
-
-    private DocUrl(boolean isIndexUrl) {
-        this.isIndexUrl = isIndexUrl;
-    }
-
     public DocUrl(String dirName, String fileNameWithoutExtension, String anchorId) {
         this.dirName = dirName;
         this.fileNameWithoutExtension = fileNameWithoutExtension;

@@ -325,6 +325,7 @@ class WebSiteDocStructure implements DocStructure {
             if (tocItem == null) {
                 throw new RuntimeException("can't use relative url in this context, url: #" + docUrl.getAnchorId());
             }
+
             if (tocItem.isIndex()) {
                 return "";
             }
@@ -332,7 +333,12 @@ class WebSiteDocStructure implements DocStructure {
             return tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension();
         }
 
-        return docUrl.isIndexUrl() ? "" : docUrl.getDirName() + "/" + docUrl.getFileNameWithoutExtension();
+        if (docUrl.isIndexUrl()) {
+            return "";
+        }
+
+        String dirName = docUrl.getDirName();
+        return dirName.isEmpty() ? docUrl.getFileNameWithoutExtension() : dirName + "/" + docUrl.getFileNameWithoutExtension();
     }
 
     private record LinkToValidate(Path path, String additionalClue, DocUrl docUrl) {
