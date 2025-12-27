@@ -26,6 +26,7 @@ import org.testingisdocumenting.znai.extensions.Plugins;
 import org.testingisdocumenting.znai.preprocessor.RegexpBasedPreprocessor;
 import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
+import org.testingisdocumenting.znai.html.reactjs.HtmlReactJsPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
 import org.testingisdocumenting.znai.markdown.PageMarkdownSection;
 import org.testingisdocumenting.znai.parser.MarkupParser;
@@ -205,6 +206,7 @@ public class WebSite implements Log {
     public void deploy() {
         reportPhase("deploying documentation");
         generatePages();
+        generateDocStatsPage();
         generateChapterIndexRedirectPages();
         generatePageRedirects();
         generateSearchIndex();
@@ -687,6 +689,32 @@ public class WebSite implements Log {
         deployer.deploy("all-pages.json", json);
     }
 
+    private void generateDocStatsPage() {
+        if (!docMeta.hasTrackActivityUrl()) {
+            return;
+        }
+
+        reportPhase("generating doc stats page");
+
+        Map<String, Object> props = new HashMap<>();
+        props.put("docMeta", docMeta.toMap());
+        props.put("toc", toc.toListOfMaps());
+
+        HtmlReactJsPage reactJsPage = new HtmlReactJsPage(ReactJsBundle.INSTANCE);
+        HtmlPage htmlPage = reactJsPage.create(
+                docMeta.getTitle() + ": Stats",
+                "DocStatsScreen",
+                props,
+                () -> "",
+                "");
+
+        extraJavaScriptsInFront.forEach(htmlPage::addJavaScriptInFront);
+        extraJavaScriptsInBack.forEach(htmlPage::addJavaScript);
+
+        String html = htmlPage.render(docMeta.getId());
+        deployer.deploy("_stats/index.html", html);
+    }
+
     private HtmlPageAndPageProps generatePage(TocItem tocItem, Page page) {
         try {
             HtmlPageAndPageProps htmlAndProps = createHtmlPageAndProps(tocItem, page);
@@ -1053,9 +1081,9 @@ public class WebSite implements Log {
             addMetaFromEnvVar(docMeta, "slackChannel", "ZNAI_SLACK_CHANNEL");
             addMetaFromEnvVar(docMeta, "slackActiveQuestionsUrl", "ZNAI_SLACK_ACTIVE_QUESTIONS_URL");
             addMetaFromEnvVar(docMeta, "resolveSlackQuestionUrl", "ZNAI_RESOLVE_SLACK_QUESTION_URL");
-            addMetaFromEnvVar(docMeta, "sendToSlackIncludeContentType", "ZNAI_SEND_TO_SLACK_INCLUDE_CONTENT_TYPE");
-            addMetaFromEnvVar(docMeta, "trackActivityUrl", "ZNAI_TRACK_ACTIVITY_URL");
-            addMetaFromEnvVar(docMeta, "trackActivityIncludeContentType", "ZNAI_TRACK_ACTIVITY_INCLUDE_CONTENT_TYPE");
+            addMetaFromEnvVar(docMeta, DocMeta.TRACK_ACTIVITY_URL_KEY, "ZNAI_TRACK_ACTIVITY_URL");
+            addMetaFromEnvVar(docMeta, "docStatsUrl", "ZNAI_DOC_STATS_URL");
+            addMetaFromEnvVar(docMeta, "fetchIncludeContentType", "ZNAI_FETCH_INCLUDE_CONTENT_TYPE");
         }
 
         private void addMetaFromEnvVar(DocMeta docMeta, String key, String envVarName) {

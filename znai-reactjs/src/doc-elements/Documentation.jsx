@@ -22,7 +22,7 @@ import { themeRegistry } from "../theme/ThemeRegistry";
 
 import SearchPopup from "./search/SearchPopup";
 import { getSearchPromise } from "./search/searchPromise";
-import { documentationNavigation } from "../structure/DocumentationNavigation";
+import { documentationNavigation, currentPageId } from "../structure/DocumentationNavigation";
 import { documentationTracking } from "./tracking/DocumentationTracking";
 import { tableOfContents } from "../structure/toc/TableOfContents";
 import { getAllPagesPromise } from "./allPages";
@@ -444,7 +444,7 @@ export class Documentation extends React.Component {
     document.title = page.tocItem.pageTitle ? docMeta.title + ": " + page.tocItem.pageTitle : docMeta.title;
 
     this.setState({ presentationRegistry }, () => {
-      documentationTracking.onPageOpen(currentPageLocation);
+      documentationTracking.onPageOpen(currentPageId());
     });
   }
 

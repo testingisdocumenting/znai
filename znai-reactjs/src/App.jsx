@@ -106,6 +106,7 @@ import { jsonPresentationDemo } from "./doc-elements/json/PresentationJson.demo"
 import { footnoteDemo } from "./doc-elements/footnote/Footnote.demo";
 import { asciinemaDemo } from "./doc-elements/asciinema/Asciinema.demo";
 import { previewConsoleOutputDemo } from "./screens/preview-change-path/PreviewConsoleOutput.demo";
+import { docStatsViewDemo } from "./screens/doc-stats/DocStatsView.demo";
 import { readMoreDemo } from "./doc-elements/read-more/ReadMore.demo.js";
 import { snippetsResultOutputDemo } from "./doc-elements/code-snippets/SnippetResultOutput.demo.jsx";
 import { createLocalSearchIndex } from "./doc-elements/search/flexSearch.ts";
@@ -241,7 +242,8 @@ registries
   .registerAsTabs("Landing", landingDemo)
   .registerAsTabs("Not Authorized", notAuthorizedDemo)
   .registerAsTabs("Search Popup", searchPopupDemo)
-  .registerAsTabs("Preview Console Output", previewConsoleOutputDemo);
+  .registerAsTabs("Preview Console Output", previewConsoleOutputDemo)
+  .registerAsTabs("Doc Stats", docStatsViewDemo);
 
 window.znaiSearchIdx = createLocalSearchIndex();
 populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);

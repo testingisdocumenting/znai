@@ -15,12 +15,13 @@
  */
 
 import React, { useEffect, useState } from "react";
-import { currentPageId, pageIdFromTocItem } from "../../structure/DocumentationNavigation";
+import { currentPageIdWithDocId, pageIdFromTocItem } from "../../structure/DocumentationNavigation";
 import { getDocMeta } from "../../structure/docMeta";
 import { Notification } from "../../components/Notification";
 import { HighlightedText } from "./HighlightedText";
 import { TocItem } from "../../structure/TocItem";
 import { errorNotifications } from "../../components/DismissableErrorIndicators";
+import { fetchWithCredentials } from "../../utils/fetchWithCredentials";
 
 import { ResolveQuestionButton } from "./ResolveQuestionButton";
 import { removeTrailingSlashFromQueryParam } from "./queryParamUtils";
@@ -56,7 +57,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
 
   async function fetchActiveQuestions() {
     try {
-      const pageId = currentPageId();
+      const pageId = currentPageIdWithDocId();
       const baseUrl = getDocMeta().slackActiveQuestionsUrl;
       if (!baseUrl) {
         return;
@@ -64,10 +65,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
 
       const url = `${baseUrl}?pageId=${encodeURIComponent(pageId)}&questionId=${questionId}`;
 
-      const response = await fetch(url, {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetchWithCredentials(url);
 
       if (response.ok) {
         const data = await response.json();
@@ -102,10 +100,12 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
 
   async function resolveQuestionPost(question: Question) {
     try {
-      const response = await fetch(getDocMeta().resolveSlackQuestionUrl! + "/" + question.slackMessageTs, {
-        method: "POST",
-        credentials: "include",
-      });
+      const response = await fetchWithCredentials(
+        getDocMeta().resolveSlackQuestionUrl! + "/" + question.slackMessageTs,
+        {
+          method: "POST",
+        }
+      );
 
       if (response.ok) {
         setNotification({ type: "success", message: "Resolved slack question" });

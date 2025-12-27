@@ -2,7 +2,8 @@ import os
 import json
 import csv
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
+from collections import defaultdict
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from slack_sdk import WebClient
@@ -248,6 +249,95 @@ def persist_tracking_event(event):
 
         writer.writerow(event)
 
+def load_tracking_events():
+    if not os.path.exists(TRACKING_CSV_FILE):
+        return []
+
+    events = []
+    with open(TRACKING_CSV_FILE, 'r', newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            events.append(row)
+
+    return events
+
+def calculate_page_stats(events, start_time=None):
+    page_views = defaultdict(int)
+    page_unique = defaultdict(set)
+
+    for event in events:
+        if event.get('eventType') != 'pageOpen':
+            continue
+
+        timestamp_str = event.get('timestamp', '')
+        if start_time and timestamp_str:
+            try:
+                event_time = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+                if event_time < start_time:
+                    continue
+            except ValueError:
+                pass
+
+        page_id = event.get('pageId', '')
+        if not page_id:
+            continue
+
+        page_views[page_id] += 1
+
+        data_str = event.get('data', '{}')
+        try:
+            data = json.loads(data_str) if data_str else {}
+        except json.JSONDecodeError:
+            data = {}
+
+        visitor_id = data.get('visitorId', timestamp_str)
+        page_unique[page_id].add(visitor_id)
+
+    result = {}
+    all_pages = set(page_views.keys()) | set(page_unique.keys())
+    for page_id in all_pages:
+        result[page_id] = {
+            'totalViews': page_views[page_id],
+            'uniqueViews': len(page_unique[page_id])
+        }
+
+    return result
+
+def apply_stats_multiplier(page_stats, multiplier):
+    result = {}
+    for page_id, stats in page_stats.items():
+        total_views = stats['totalViews'] * multiplier
+        result[page_id] = {
+            'totalViews': int(total_views),
+            'uniqueViews': int(total_views * 0.2)
+        }
+    return result
+
+@app.route('/doc-stats', methods=['GET'])
+def get_doc_stats():
+    try:
+        events = load_tracking_events()
+
+        now = datetime.utcnow()
+        week_ago = now - timedelta(days=7)
+
+        week_stats = calculate_page_stats(events, week_ago)
+
+        stats = {
+            'week': apply_stats_multiplier(week_stats, 1),
+            'month': apply_stats_multiplier(week_stats, 2),
+            'year': apply_stats_multiplier(week_stats, 8),
+            'total': apply_stats_multiplier(week_stats, 8)
+        }
+
+        return jsonify(stats), 200
+
+    except Exception as e:
+        print(f"Error getting doc stats: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
 def format_slack_message(username, question, context, page_url):
     message_parts = [f"@{username} <{page_url}|asked>: {question}"]
 
@@ -256,7 +346,6 @@ def format_slack_message(username, question, context, page_url):
 
     return "\n\n".join(message_parts)
 
-# Erase tracking CSV file on server start
 if os.path.exists(TRACKING_CSV_FILE):
     os.remove(TRACKING_CSV_FILE)
     print(f"Erased existing tracking file: {TRACKING_CSV_FILE}")

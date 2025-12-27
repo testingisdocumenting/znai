@@ -25,10 +25,10 @@ export interface DocMeta {
   slackChannel?: string;
   sendToSlackUrl?: string;
   slackActiveQuestionsUrl?: string;
-  sendToSlackIncludeContentType?: boolean;
   resolveSlackQuestionUrl?: string;
   trackActivityUrl?: string;
-  trackActivityIncludeContentType?: boolean;
+  docStatsUrl?: string;
+  fetchIncludeContentType?: boolean;
   useTopHeader?: boolean;
   hidePresentationTrigger?: boolean;
   support?: DocMetaSupport;
