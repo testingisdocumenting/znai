@@ -39,7 +39,6 @@ class WebSiteDocStructureTest {
     static DocMeta docMeta
     static TableOfContents toc
 
-    static Path markupPath = Paths.get("dir-one/file-one.md")
     WebSiteDocStructure docStructure
 
     @BeforeClass
@@ -80,6 +79,15 @@ class WebSiteDocStructureTest {
         docStructure.createUrl(indexPath, new DocUrl("#ref")).should == "/product#ref"
         docStructure.createUrl(indexPath, new DocUrl("file-system/page")).should == "/product/file-system/page"
         docStructure.createUrl(wrongPath, new DocUrl("file-system/page")).should == "/product/file-system/page"
+    }
+
+    @Test
+    void "should create url without double slashes when dirName is empty"() {
+        def path = Paths.get('/home/user/docs/chapter/pageOne.md')
+
+        docStructure.createUrl(path, new DocUrl("", "index", "")).should == "/product/index"
+        docStructure.createUrl(path, new DocUrl("", "index", "section-one")).should == "/product/index#section-one"
+        docStructure.createUrl(path, new DocUrl("", "page-name", "anchor")).should == "/product/page-name#anchor"
     }
 
     @Test

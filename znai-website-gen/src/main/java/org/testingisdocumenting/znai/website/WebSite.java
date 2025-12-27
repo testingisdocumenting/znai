@@ -602,10 +602,7 @@ public class WebSite implements Log {
     }
 
     private String searchEntryUrl(TocItem tocItem, PageMarkdownSection section) {
-        DocUrl docUrl = tocItem.isIndex() ?
-                DocUrl.indexUrl():
-                new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), section.id());
-
+        DocUrl docUrl = new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), section.id());
         return docStructure.createUrl(null, docUrl);
     }
 
