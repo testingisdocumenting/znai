@@ -68,7 +68,7 @@
                         </pathconvert>
 
                         <!-- Write to a file -->
-                        <echo file="${project.build.outputDirectory}/static/js-files.txt">${js.files.list}</echo>
+                        <echo file="${project.build.outputDirectory}/META-INF/znai/javascript-files.txt">${js.files.list}</echo>
 
                         <concat destfile="${project.build.outputDirectory}/static/main.css" append="true">
                             <fileset file="dist/assets/index*.css" />

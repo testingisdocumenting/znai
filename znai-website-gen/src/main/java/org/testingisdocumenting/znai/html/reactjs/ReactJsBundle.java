@@ -22,6 +22,7 @@ import org.testingisdocumenting.znai.utils.ResourceUtils;
 import org.testingisdocumenting.znai.website.WebResource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -38,7 +39,7 @@ public class ReactJsBundle {
         mainCss = WebResource.fromResource("static/main.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");
 
-        javaScripts = ResourceUtils.textContent("static/js-files.txt");
+        javaScripts = ResourceUtils.textContents("META-INF/znai/javascript-files.txt").stream().collect(Collectors.joining());
 
         Stream<WebResource> katexFonts = KatexFonts.LIST.stream()
                 .map(name -> WebResource.fromResource("static/css/fonts/" + name));
