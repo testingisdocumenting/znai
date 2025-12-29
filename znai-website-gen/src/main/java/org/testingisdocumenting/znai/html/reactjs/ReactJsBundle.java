@@ -39,7 +39,7 @@ public class ReactJsBundle {
         mainCss = WebResource.fromResource("static/main.css");
         katexCss = WebResource.fromResource("static/css/katex.min.css");
 
-        javaScripts = ResourceUtils.textContents("META-INF/znai/javascript-files.txt").stream().collect(Collectors.joining());
+        javaScripts = ResourceUtils.textContents("META-INF/znai/javascript-files.txt").stream().collect(Collectors.joining("\n"));
 
         Stream<WebResource> katexFonts = KatexFonts.LIST.stream()
                 .map(name -> WebResource.fromResource("static/css/fonts/" + name));
