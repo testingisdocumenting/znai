@@ -104,7 +104,7 @@ public class HtmlPage {
                 "<body class=\"znai-theme theme-znai-dark\">\n" +
                 "<script>" + themeCode + "</script>\n" +
                 bodySuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
-                importMap.render() + "\n" +
+                importMap.render(documentationId) + "\n" +
                 javaScriptResources.stream().map(r -> r.generateJavaScriptLink(documentationId)).collect(joining("\n")) + "\n" +
                 "<script type=\"module\">\n" +
                 javaScriptSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
