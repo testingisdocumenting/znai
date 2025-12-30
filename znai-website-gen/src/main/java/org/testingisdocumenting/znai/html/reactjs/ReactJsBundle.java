@@ -29,17 +29,15 @@ import static java.util.stream.Collectors.toList;
 
 public class ReactJsBundle {
     public static final ReactJsBundle INSTANCE =  new ReactJsBundle();
-    private final WebResource mainCss;
-    private final WebResource katexCss;
     private final String javaScripts;
+    private final String pluginCss;
 
     private final List<WebResource> fonts;
 
     private ReactJsBundle() {
-        mainCss = WebResource.fromResource("static/main.css");
-        katexCss = WebResource.fromResource("static/css/katex.min.css");
 
         javaScripts = ResourceUtils.textContents("META-INF/znai/javascript-files.txt").stream().collect(Collectors.joining("\n"));
+        pluginCss = ResourceUtils.textContents("META-INF/znai/css-files.txt").stream().collect(Collectors.joining("\n"));
 
         Stream<WebResource> katexFonts = KatexFonts.LIST.stream()
                 .map(name -> WebResource.fromResource("static/css/fonts/" + name));
@@ -52,7 +50,7 @@ public class ReactJsBundle {
     }
 
     public Stream<WebResource> clientCssResources() {
-        return Stream.of(katexCss, mainCss);
+        return pluginCss.lines().map(WebResource::fromResource);
     }
 
     public void deploy(Deployer deployer) {

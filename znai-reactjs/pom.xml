@@ -89,6 +89,16 @@
                         <copy toDir="${project.build.outputDirectory}/static/css">
                             <fileset file="${project.basedir}/node_modules/katex/dist/katex.min.css" />
                         </copy>
+                        <pathconvert property="css.files.list" pathsep="${line.separator}">
+                            <fileset dir="${project.build.outputDirectory}">
+                                <include name="**/*.css"/>
+                            </fileset>
+                            <chainedmapper>
+                                <mapper type="regexp" from="^(.*)static/(.*)\.css$$" to="static/\2.css"/>
+                            </chainedmapper>
+                        </pathconvert>
+
+                        <echo file="${project.build.outputDirectory}/META-INF/znai/css-files.txt">${css.files.list}</echo>
 
                         <copy file="${project.basedir}/public/znai-theme.js" toFile="${project.build.outputDirectory}/znai-theme.js" />
                     </target>
