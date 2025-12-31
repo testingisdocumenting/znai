@@ -68,9 +68,10 @@ public class ZnaiCliApp {
     }
 
     public static void main(String[] args) {
+        ConsoleOutputs.add(new AnsiConsoleOutput());
         ZnaiCliConfig cliConfig = new ZnaiCliConfig(System::exit, args);
-        if (!cliConfig.isPrintOutsideDepsMode()) {
-            ConsoleOutputs.add(new AnsiConsoleOutput());
+        if (cliConfig.isPrintOutsideDepsMode()) {
+            ConsoleOutputs.clear();
         }
         start(cliConfig);
     }

@@ -39,4 +39,8 @@ public class ConsoleOutputs {
     public static void remove(ConsoleOutput consoleOutput) {
         outputs.remove(consoleOutput);
     }
+
+    public static void clear() {
+        outputs.clear();
+    }
 }
