@@ -143,7 +143,7 @@ answer-link: znai/introduction/getting-started#command-line
 
 ## CLI download
 
-Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.83/znai-dist-1.83-znai.zip). Add it to your `PATH`.
+Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.84/znai-dist-1.84-znai.zip). Add it to your `PATH`.
 
 ## Brew
 
@@ -158,7 +158,7 @@ answer-link: znai/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.83</version>
+    <version>1.84</version>
 </plugin>
 ```
 
@@ -937,9 +937,9 @@ You can also specify a language to enable syntax highlighting for your snippet.
 
 ```
 ```javascript
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
     render() {
         /// ...
     }
@@ -948,9 +948,9 @@ class MyComponent extends Component {
 ```
 
 ```javascript
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
     render() {
         /// ...
     }
@@ -985,9 +985,9 @@ Use the `title` property to specify a title.
 ```
 
 ```javascript
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
     render() {
         /// ...
     }
@@ -1008,9 +1008,9 @@ Use `anchorId` to override auto generated identifier.
 ```
 
 ```javascript
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
   render() {
     /// ...
   }

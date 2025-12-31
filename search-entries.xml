@@ -233,7 +233,7 @@ Both command line and maven plugin lets you to build documentation website and a
       <score>STANDARD</score>
       <text>## CLI download
 
-Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.83/znai-dist-1.83-znai.zip). Add it to your `PATH`.
+Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.84/znai-dist-1.84-znai.zip). Add it to your `PATH`.
 
 ## Brew
 
@@ -257,7 +257,7 @@ brew install testingisdocumenting/brew/znai
 &lt;plugin>
     &lt;groupId>org.testingisdocumenting.znai&lt;/groupId>
     &lt;artifactId>znai-maven-plugin&lt;/artifactId>
-    &lt;version>1.83&lt;/version>
+    &lt;version>1.84&lt;/version>
 &lt;/plugin>
 ```
 
@@ -1408,9 +1408,9 @@ Note: this method doesn't highlight code.
 
 ```
 ```javascript
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
     render() {
         /// ...
     }
@@ -1419,9 +1419,9 @@ class MyComponent extends Component {
 ```
 
 ```javascript
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
     render() {
         /// ...
     }
@@ -1464,9 +1464,9 @@ The following languages/formats are supported:
 ```
 
 ```javascript
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
     render() {
         /// ...
     }
@@ -1495,9 +1495,9 @@ Use `anchorId` to override auto generated identifier.
 ```
 
 ```javascript
-import React, {Component} from 'react'
+import React from 'react'
 
-class MyComponent extends Component {
+class MyComponent extends React.Component {
   render() {
     /// ...
   }

@@ -469,12 +469,75 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/main.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-VihCNMWn.js"></script>
+<script type="module" src="/znai/static/architecture-U656AL7Q-DjPBJmSV.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-VXUJARFQ-ChBn1xk8.js"></script>
+<script type="module" src="/znai/static/blockDiagram-VD42YOAC-Budi6d17.js"></script>
+<script type="module" src="/znai/static/c4Diagram-YG6GDRKO-Blf-Q85b.js"></script>
+<script type="module" src="/znai/static/classDiagram-2ON5EDUG-CV-r9Le6.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-WZHVMYZB-FjmVyVcW.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-CwokiWn5.js"></script>
+<script type="module" src="/znai/static/dagre-6UL2VRFP-qGDT-4E-.js"></script>
+<script type="module" src="/znai/static/diagram-PSM6KHXK-asygiqY4.js"></script>
+<script type="module" src="/znai/static/diagram-QEK2KX5R-RckI0Vxl.js"></script>
+<script type="module" src="/znai/static/diagram-S2PKOQOG-D3NvEb3Q.js"></script>
+<script type="module" src="/znai/static/erDiagram-Q2GNP2WA-Cyp4lw77.js"></script>
+<script type="module" src="/znai/static/flowDiagram-NV44I4VS-Durqfvdj.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-JELNMOA3-COOaPycs.js"></script>
+<script type="module" src="/znai/static/gitGraph-F6HP7TQM-CqS9sC5f.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-NY62KEGX-BQN4gPQ9.js"></script>
+<script type="module" src="/znai/static/index-By8_f_qN.js"></script>
+<script type="module" src="/znai/static/info-NVLQJR56-BUcKGpxN.js"></script>
+<script type="module" src="/znai/static/infoDiagram-WHAUD3N6-D7Xs3PNk.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-XKPGCS4Q-C0gcrYJQ.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3W4ZIXB7-DA5VTkMF.js"></script>
+<script type="module" src="/znai/static/katex-DDX8Hq9d.js"></script>
+<script type="module" src="/znai/static/mermaid-DyDSBgik.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-VGOIOE7T-CeGF8Nug.js"></script>
+<script type="module" src="/znai/static/packet-BFZMPI3H-BiSDgaWb.js"></script>
+<script type="module" src="/znai/static/pie-7BOR55EZ-6DVHbXh5.js"></script>
+<script type="module" src="/znai/static/pieDiagram-ADFJNKIX-D8LeIfHz.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AYHSOK5B-CT_QATm0.js"></script>
+<script type="module" src="/znai/static/radar-NHE76QYJ-DmqrXv6L.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-UZGBJVZJ-BbaHa2fs.js"></script>
+<script type="module" src="/znai/static/rolldown-runtime-BfSZLbwf.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-TZEHDZUN-D9YTmh-I.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WL72ISMW-D9tLLYI1.js"></script>
+<script type="module" src="/znai/static/stateDiagram-FKZM4ZOC-C__hSZA6.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4FDKWEC3-i8H-EINL.js"></script>
+<script type="module" src="/znai/static/timeline-definition-IT6M3QCI-xF8WKVt0.js"></script>
+<script type="module" src="/znai/static/treemap-KMMF4GRG-DIUMOj6d.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-PRI3JC2R-BDCeeoNZ.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="module" src="/znai/search-index.js"></script>
 <script type="module">
 document.getElementById('znai').innerHTML = '';
 /*<!--*/
+/*
+ * Copyright 2025 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+function initializeSearchIndex() {
+    if (window.znaiSearchData) {
+        window.znaiSearchIdx = window.createLocalSearchIndex();
+        window.populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);
+    }
+}
+
+// Call the method to initialize the search index.
+initializeSearchIndex();
+
 window.ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "hidePresentationTrigger" : false,
@@ -768,7 +831,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1763348422681,
+    "lastModifiedTime" : 1767223739158,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Cpp",

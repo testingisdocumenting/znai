@@ -479,12 +479,75 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/main.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-VihCNMWn.js"></script>
+<script type="module" src="/znai/static/architecture-U656AL7Q-DjPBJmSV.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-VXUJARFQ-ChBn1xk8.js"></script>
+<script type="module" src="/znai/static/blockDiagram-VD42YOAC-Budi6d17.js"></script>
+<script type="module" src="/znai/static/c4Diagram-YG6GDRKO-Blf-Q85b.js"></script>
+<script type="module" src="/znai/static/classDiagram-2ON5EDUG-CV-r9Le6.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-WZHVMYZB-FjmVyVcW.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-CwokiWn5.js"></script>
+<script type="module" src="/znai/static/dagre-6UL2VRFP-qGDT-4E-.js"></script>
+<script type="module" src="/znai/static/diagram-PSM6KHXK-asygiqY4.js"></script>
+<script type="module" src="/znai/static/diagram-QEK2KX5R-RckI0Vxl.js"></script>
+<script type="module" src="/znai/static/diagram-S2PKOQOG-D3NvEb3Q.js"></script>
+<script type="module" src="/znai/static/erDiagram-Q2GNP2WA-Cyp4lw77.js"></script>
+<script type="module" src="/znai/static/flowDiagram-NV44I4VS-Durqfvdj.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-JELNMOA3-COOaPycs.js"></script>
+<script type="module" src="/znai/static/gitGraph-F6HP7TQM-CqS9sC5f.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-NY62KEGX-BQN4gPQ9.js"></script>
+<script type="module" src="/znai/static/index-By8_f_qN.js"></script>
+<script type="module" src="/znai/static/info-NVLQJR56-BUcKGpxN.js"></script>
+<script type="module" src="/znai/static/infoDiagram-WHAUD3N6-D7Xs3PNk.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-XKPGCS4Q-C0gcrYJQ.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3W4ZIXB7-DA5VTkMF.js"></script>
+<script type="module" src="/znai/static/katex-DDX8Hq9d.js"></script>
+<script type="module" src="/znai/static/mermaid-DyDSBgik.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-VGOIOE7T-CeGF8Nug.js"></script>
+<script type="module" src="/znai/static/packet-BFZMPI3H-BiSDgaWb.js"></script>
+<script type="module" src="/znai/static/pie-7BOR55EZ-6DVHbXh5.js"></script>
+<script type="module" src="/znai/static/pieDiagram-ADFJNKIX-D8LeIfHz.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AYHSOK5B-CT_QATm0.js"></script>
+<script type="module" src="/znai/static/radar-NHE76QYJ-DmqrXv6L.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-UZGBJVZJ-BbaHa2fs.js"></script>
+<script type="module" src="/znai/static/rolldown-runtime-BfSZLbwf.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-TZEHDZUN-D9YTmh-I.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WL72ISMW-D9tLLYI1.js"></script>
+<script type="module" src="/znai/static/stateDiagram-FKZM4ZOC-C__hSZA6.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4FDKWEC3-i8H-EINL.js"></script>
+<script type="module" src="/znai/static/timeline-definition-IT6M3QCI-xF8WKVt0.js"></script>
+<script type="module" src="/znai/static/treemap-KMMF4GRG-DIUMOj6d.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-PRI3JC2R-BDCeeoNZ.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="module" src="/znai/search-index.js"></script>
 <script type="module">
 document.getElementById('znai').innerHTML = '';
 /*<!--*/
+/*
+ * Copyright 2025 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+function initializeSearchIndex() {
+    if (window.znaiSearchData) {
+        window.znaiSearchIdx = window.createLocalSearchIndex();
+        window.populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);
+    }
+}
+
+// Call the method to initialize the search index.
+initializeSearchIndex();
+
 window.ReactDOM.render(React.createElement(Documentation, {
   "docMeta" : {
     "hidePresentationTrigger" : false,
@@ -543,7 +606,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: %125 Pages: 1 -->\n<svg width=\"134pt\" height=\"188pt\"\n viewBox=\"0.00 0.00 134.00 188.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 184)\">\n<title>%125</title>\n<polygon fill=\"white\" stroke=\"transparent\" points=\"-4,4 -4,-184 130,-184 130,4 -4,4\"/>\n<!-- a -->\n<g id=\"node1\" class=\"node\">\n<title>a</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-162\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-158.3\" font-family=\"Times,serif\" font-size=\"14.00\">a</text>\n</g>\n<!-- b -->\n<g id=\"node2\" class=\"node\">\n<title>b</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"63\" cy=\"-90\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"63\" y=\"-86.3\" font-family=\"Times,serif\" font-size=\"14.00\">b</text>\n</g>\n<!-- a&#45;&gt;b -->\n<g id=\"edge1\" class=\"edge\">\n<title>a&#45;&gt;b</title>\n<path fill=\"none\" stroke=\"black\" d=\"M35.35,-144.76C39.71,-136.28 45.15,-125.71 50.04,-116.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"53.23,-117.64 54.7,-107.15 47.01,-114.44 53.23,-117.64\"/>\n</g>\n<!-- c -->\n<g id=\"node3\" class=\"node\">\n<title>c</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-14.3\" font-family=\"Times,serif\" font-size=\"14.00\">c</text>\n</g>\n<!-- b&#45;&gt;c -->\n<g id=\"edge2\" class=\"edge\">\n<title>b&#45;&gt;c</title>\n<path fill=\"none\" stroke=\"black\" d=\"M54.65,-72.76C50.29,-64.28 44.85,-53.71 39.96,-44.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"42.99,-42.44 35.3,-35.15 36.77,-45.64 42.99,-42.44\"/>\n</g>\n<!-- e -->\n<g id=\"node5\" class=\"node\">\n<title>e</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"99\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"99\" y=\"-14.3\" font-family=\"Times,serif\" font-size=\"14.00\">e</text>\n</g>\n<!-- b&#45;&gt;e -->\n<g id=\"edge4\" class=\"edge\">\n<title>b&#45;&gt;e</title>\n<path fill=\"none\" stroke=\"black\" d=\"M71.35,-72.76C75.71,-64.28 81.15,-53.71 86.04,-44.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"89.23,-45.64 90.7,-35.15 83.01,-42.44 89.23,-45.64\"/>\n</g>\n<!-- d -->\n<g id=\"node4\" class=\"node\">\n<title>d</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"99\" cy=\"-162\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"99\" y=\"-158.3\" font-family=\"Times,serif\" font-size=\"14.00\">d</text>\n</g>\n<!-- d&#45;&gt;b -->\n<g id=\"edge3\" class=\"edge\">\n<title>d&#45;&gt;b</title>\n<path fill=\"none\" stroke=\"black\" d=\"M90.65,-144.76C86.29,-136.28 80.85,-125.71 75.96,-116.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"78.99,-114.44 71.3,-107.15 72.77,-117.64 78.99,-114.44\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : { },
-          "id" : "gv_2d39c662_d4d0_4ff9_a73d_4505e79d63f6"
+          "id" : "gv_9c03e657_82db_4e10_989f_ecb8f464af2b"
         },
         "urls" : [ ],
         "type" : "GraphVizDiagram"
@@ -575,7 +638,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: %135 Pages: 1 -->\n<svg width=\"134pt\" height=\"188pt\"\n viewBox=\"0.00 0.00 134.00 188.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 184)\">\n<title>%135</title>\n<polygon fill=\"white\" stroke=\"transparent\" points=\"-4,4 -4,-184 130,-184 130,4 -4,4\"/>\n<!-- a -->\n<g id=\"node1\" class=\"node\">\n<title>a</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-162\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-158.3\" font-family=\"Times,serif\" font-size=\"14.00\">a</text>\n</g>\n<!-- b -->\n<g id=\"node2\" class=\"node\">\n<title>b</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"63\" cy=\"-90\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"63\" y=\"-86.3\" font-family=\"Times,serif\" font-size=\"14.00\">b</text>\n</g>\n<!-- a&#45;&gt;b -->\n<g id=\"edge1\" class=\"edge\">\n<title>a&#45;&gt;b</title>\n<path fill=\"none\" stroke=\"black\" d=\"M35.35,-144.76C39.71,-136.28 45.15,-125.71 50.04,-116.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"53.23,-117.64 54.7,-107.15 47.01,-114.44 53.23,-117.64\"/>\n</g>\n<!-- c -->\n<g id=\"node3\" class=\"node\">\n<title>c</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-14.3\" font-family=\"Times,serif\" font-size=\"14.00\">c</text>\n</g>\n<!-- b&#45;&gt;c -->\n<g id=\"edge2\" class=\"edge\">\n<title>b&#45;&gt;c</title>\n<path fill=\"none\" stroke=\"black\" d=\"M54.65,-72.76C50.29,-64.28 44.85,-53.71 39.96,-44.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"42.99,-42.44 35.3,-35.15 36.77,-45.64 42.99,-42.44\"/>\n</g>\n<!-- e -->\n<g id=\"node5\" class=\"node\">\n<title>e</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"99\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"99\" y=\"-14.3\" font-family=\"Times,serif\" font-size=\"14.00\">e</text>\n</g>\n<!-- b&#45;&gt;e -->\n<g id=\"edge4\" class=\"edge\">\n<title>b&#45;&gt;e</title>\n<path fill=\"none\" stroke=\"black\" d=\"M71.35,-72.76C75.71,-64.28 81.15,-53.71 86.04,-44.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"89.23,-45.64 90.7,-35.15 83.01,-42.44 89.23,-45.64\"/>\n</g>\n<!-- d -->\n<g id=\"node4\" class=\"node\">\n<title>d</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"99\" cy=\"-162\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"99\" y=\"-158.3\" font-family=\"Times,serif\" font-size=\"14.00\">d</text>\n</g>\n<!-- d&#45;&gt;b -->\n<g id=\"edge3\" class=\"edge\">\n<title>d&#45;&gt;b</title>\n<path fill=\"none\" stroke=\"black\" d=\"M90.65,-144.76C86.29,-136.28 80.85,-125.71 75.96,-116.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"78.99,-114.44 71.3,-107.15 72.77,-117.64 78.99,-114.44\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : { },
-          "id" : "gv_9f0a4121_6e6e_4db8_af82_a3d75524f494"
+          "id" : "gv_d0037c8b_d933_479f_adc2_dd049b2b4626"
         },
         "urls" : [ ],
         "align" : "center",
@@ -602,7 +665,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "isInvertedTextColorByStyleId" : { },
           "svg" : "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.43.0 (0)\n -->\n<!-- Title: %145 Pages: 1 -->\n<svg width=\"134pt\" height=\"188pt\"\n viewBox=\"0.00 0.00 134.00 188.00\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"page0,1_graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 184)\">\n<title>%145</title>\n<polygon fill=\"white\" stroke=\"transparent\" points=\"-4,4 -4,-184 130,-184 130,4 -4,4\"/>\n<!-- a -->\n<g id=\"node1\" class=\"node\">\n<title>a</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-162\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-158.3\" font-family=\"Times,serif\" font-size=\"14.00\">a</text>\n</g>\n<!-- b -->\n<g id=\"node2\" class=\"node\">\n<title>b</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"63\" cy=\"-90\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"63\" y=\"-86.3\" font-family=\"Times,serif\" font-size=\"14.00\">b</text>\n</g>\n<!-- a&#45;&gt;b -->\n<g id=\"edge1\" class=\"edge\">\n<title>a&#45;&gt;b</title>\n<path fill=\"none\" stroke=\"black\" d=\"M35.35,-144.76C39.71,-136.28 45.15,-125.71 50.04,-116.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"53.23,-117.64 54.7,-107.15 47.01,-114.44 53.23,-117.64\"/>\n</g>\n<!-- c -->\n<g id=\"node3\" class=\"node\">\n<title>c</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-14.3\" font-family=\"Times,serif\" font-size=\"14.00\">c</text>\n</g>\n<!-- b&#45;&gt;c -->\n<g id=\"edge2\" class=\"edge\">\n<title>b&#45;&gt;c</title>\n<path fill=\"none\" stroke=\"black\" d=\"M54.65,-72.76C50.29,-64.28 44.85,-53.71 39.96,-44.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"42.99,-42.44 35.3,-35.15 36.77,-45.64 42.99,-42.44\"/>\n</g>\n<!-- e -->\n<g id=\"node5\" class=\"node\">\n<title>e</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"99\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"99\" y=\"-14.3\" font-family=\"Times,serif\" font-size=\"14.00\">e</text>\n</g>\n<!-- b&#45;&gt;e -->\n<g id=\"edge4\" class=\"edge\">\n<title>b&#45;&gt;e</title>\n<path fill=\"none\" stroke=\"black\" d=\"M71.35,-72.76C75.71,-64.28 81.15,-53.71 86.04,-44.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"89.23,-45.64 90.7,-35.15 83.01,-42.44 89.23,-45.64\"/>\n</g>\n<!-- d -->\n<g id=\"node4\" class=\"node\">\n<title>d</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"99\" cy=\"-162\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"99\" y=\"-158.3\" font-family=\"Times,serif\" font-size=\"14.00\">d</text>\n</g>\n<!-- d&#45;&gt;b -->\n<g id=\"edge3\" class=\"edge\">\n<title>d&#45;&gt;b</title>\n<path fill=\"none\" stroke=\"black\" d=\"M90.65,-144.76C86.29,-136.28 80.85,-125.71 75.96,-116.2\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"78.99,-114.44 71.3,-107.15 72.77,-117.64 78.99,-114.44\"/>\n</g>\n</g>\n</svg>\n",
           "stylesByNodeId" : { },
-          "id" : "gv_2441b189_ef91_46c0_aa26_4ac220b08945"
+          "id" : "gv_85097fa6_12a4_4568_939a_13784a338c72"
         },
         "urls" : [ ],
         "align" : "center",
@@ -663,7 +726,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1763348422695,
+    "lastModifiedTime" : 1767223739171,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Graphviz Diagrams",
