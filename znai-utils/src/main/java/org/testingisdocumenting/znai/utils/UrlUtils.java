@@ -17,7 +17,11 @@
 
 package org.testingisdocumenting.znai.utils;
 
+import java.util.regex.Pattern;
+
 public class UrlUtils {
+    private static final Pattern EXTERNAL_URL_PATTERN = Pattern.compile("^\\S+://");
+
     public static String concat(String left, String right) {
         if (left == null) {
             throw new IllegalArgumentException("passed url on the left is NULL");
@@ -43,10 +47,7 @@ public class UrlUtils {
     }
 
     public static boolean isExternal(String url) {
-        return url.startsWith("http:") ||
-                url.startsWith("https:") ||
-                url.startsWith("file:") ||
-                url.startsWith("mailto:");
+        return EXTERNAL_URL_PATTERN.matcher(url).find();
     }
 
     public static String removeAnchor(String url) {

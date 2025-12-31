@@ -1,0 +1,1 @@
+* Add: any url that starts with `schema://` is considered to be external url
