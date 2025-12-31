@@ -1,0 +1,1 @@
+* Add: `print-outside-deps` command to print file dependencies outside of documentation dir

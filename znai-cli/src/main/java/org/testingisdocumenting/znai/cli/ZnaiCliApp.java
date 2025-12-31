@@ -68,8 +68,11 @@ public class ZnaiCliApp {
     }
 
     public static void main(String[] args) {
-        ConsoleOutputs.add(new AnsiConsoleOutput());
-        start(new ZnaiCliConfig(System::exit, args));
+        ZnaiCliConfig cliConfig = new ZnaiCliConfig(System::exit, args);
+        if (!cliConfig.isPrintOutsideDepsMode()) {
+            ConsoleOutputs.add(new AnsiConsoleOutput());
+        }
+        start(cliConfig);
     }
 
     private String getDocId() {
@@ -101,6 +104,8 @@ public class ZnaiCliApp {
             serve();
         } else if (config.isExportMode()) {
             export();
+        } else if (config.isPrintOutsideDepsMode()) {
+            printOutsideDeps();
         } else if (config.isCustomCommand()) {
             config.getSpecifiedCustomCommand().handle(
                     new CliCommandConfig(config.getDocId(), config.getSourceRoot(), config.getDeployRoot(), config.getActor()));
@@ -149,6 +154,15 @@ public class ZnaiCliApp {
         ProgressReporter.reportPhase("patching lookup-paths");
         Path lookupPath = config.getExportRoot().resolve("lookup-paths");
         FileUtils.writeTextContent(lookupPath, artifactsDirName);
+    }
+
+    public void printOutsideDeps() {
+        Path sourceRoot = config.getSourceRoot();
+
+        webSite.getOutsideDocsRequestedResources().values().stream()
+                .map(fullPath -> sourceRoot.relativize(fullPath).toString())
+                .sorted()
+                .forEach(System.out::println);
     }
 
     private void exportLlmTxtIfNeeded() {
@@ -205,7 +219,7 @@ public class ZnaiCliApp {
                 withValidateExternalLinks(config.isValidateExternalLinks()).
                 withLlmUrlPrefix(llmUrlPrefix == null ? "" : llmUrlPrefix);
 
-        return config.isExportMode() ?
+        return config.isExportMode() || config.isPrintOutsideDepsMode() ?
                 webSiteCfg.parseOnly():
                 webSiteCfg.deployTo(deployPath);
     }

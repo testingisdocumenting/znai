@@ -47,6 +47,7 @@ public class ZnaiCliConfig {
         SERVE("serve", "Serve static documentation"),
         NEW("new", "Create new documentation with sample content and basic setup"),
         EXPORT("export", "Export documentation source including required artifacts"),
+        PRINT_OUTSIDE_DEPS("print-outside-deps", "Print files outside docs root referenced by documentation"),
         BUILD("build", "Build documentation (default)");
 
         private final String name;
@@ -161,6 +162,8 @@ public class ZnaiCliConfig {
         exportOptions.add(OptionKey.EXPORT);
         COMMAND_OPTIONS.put(Command.EXPORT, exportOptions);
 
+        COMMAND_OPTIONS.put(Command.PRINT_OUTSIDE_DEPS, commonOptions);
+
         COMMAND_OPTIONS.put(Command.NEW, commonOptions);
     }
 
@@ -197,6 +200,7 @@ public class ZnaiCliConfig {
         PREVIEW("preview"),
         SERVE("serve"),
         EXPORT("export"),
+        PRINT_OUTSIDE_DEPS("print-outside-deps"),
         SCAFFOLD("scaffold new"),
         CUSTOM("custom");
 
@@ -276,6 +280,10 @@ public class ZnaiCliConfig {
 
     public boolean isExportMode() {
         return mode == Mode.EXPORT;
+    }
+
+    public boolean isPrintOutsideDepsMode() {
+        return mode == Mode.PRINT_OUTSIDE_DEPS;
     }
 
     public boolean isCustomCommand() {
@@ -461,6 +469,7 @@ public class ZnaiCliConfig {
                 case SERVE -> Mode.SERVE;
                 case NEW -> Mode.SCAFFOLD;
                 case EXPORT -> Mode.EXPORT;
+                case PRINT_OUTSIDE_DEPS -> Mode.PRINT_OUTSIDE_DEPS;
                 case BUILD -> Mode.BUILD;
             };
         }
