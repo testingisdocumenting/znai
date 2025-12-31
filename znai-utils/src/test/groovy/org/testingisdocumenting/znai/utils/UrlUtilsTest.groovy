@@ -54,7 +54,10 @@ class UrlUtilsTest {
         UrlUtils.isExternal("https://hello").should == true
         UrlUtils.isExternal("mailto://hello").should == true
         UrlUtils.isExternal("file://hello.txt").should == true
+        UrlUtils.isExternal("custom://something").should == true
+        UrlUtils.isExternal("custom:something").should == false
         UrlUtils.isExternal("httphello").should == false
+        UrlUtils.isExternal("relative/path").should == false
     }
 
     @Test
