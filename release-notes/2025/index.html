@@ -85,6 +85,11 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.84</h1></header>
+<p>Fix XML Search entries generate #anchors for index page url Fix XML Search entries remove double forward slash for pages outside of chapters Fix properly strips indentations instead of creating a code block include ocaml comment Fix Search highlights apply highlights when user is already on the resulting page Add command to print file dependencies outside of documentation dir print outside deps Add any url that starts with is considered to be external url schema Add page to display tracked visitors for internally hosted documentations _stats Add Mermaid diagrams version 11 12 Add Custom HTTP tracking endpoint via environemnt variable ZNAI_TRACK_ACTIVITY_URL Add Remove search result highlights with Escape key</p>
+</article>
+
+<article>
 <header><h1>1.83</h1></header>
 <p>Fix Ask In Slack and Generate Link are now working for paragraphs selected with triple click Fix correctly renders links llm txt Fix When new page is added to deploy to have added pages loaded on page reload toc all pages json Add Local Search now highlights the section selected and highlights the matching terms Add Local Search automatically expands sections read more Add add extra fields search entries xml Add Option to expose llm txt during build to be pushed to repo</p>
 </article>
@@ -609,6 +614,177 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "184",
+      "additionalIds" : [ ],
+      "title" : "1.84",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: XML Search entries generate #anchors for index page url",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: XML Search entries remove double forward slash for pages outside of chapters",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "include-ocaml-comment",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " properly strips indentations instead of creating a code block",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Search highlights apply highlights when user is already on the resulting page.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "print-outside-deps",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " command to print file dependencies outside of documentation dir",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: any url that starts with ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "schema://",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " is considered to be external url",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "/_stats",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " page to display tracked visitors for internally hosted documentations",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Mermaid diagrams version 11.12",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Custom HTTP tracking endpoint via ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "ZNAI_TRACK_ACTIVITY_URL",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " environemnt variable",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Remove search result highlights with Escape key",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "183",
       "additionalIds" : [ ],
       "title" : "1.83",
@@ -2204,7 +2380,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1767223739157,
+    "lastModifiedTime" : 1767237584914,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2025",
@@ -2214,6 +2390,10 @@ window.ReactDOM.render(React.createElement(Documentation, {
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.84",
+        "id" : "184",
+        "customAnchorId" : "184"
+      }, {
         "title" : "1.83",
         "id" : "183",
         "customAnchorId" : "183"

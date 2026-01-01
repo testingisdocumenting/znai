@@ -8790,6 +8790,11 @@ export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
 
+# Release Notes :: 2025 :: 1.84
+answer-link: znai/release-notes/2025#184
+
+
+
 # Release Notes :: 2025 :: 1.83
 answer-link: znai/release-notes/2025#183
 
