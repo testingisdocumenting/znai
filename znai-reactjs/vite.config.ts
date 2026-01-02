@@ -28,11 +28,20 @@ export default defineConfig({
         advancedChunks: {
           groups: [
             {
+              name: 'react-libs',
+              test: /node_modules[\\/](react|react-dom)/,
+              priority: 30,
+            },
+            {
               name: 'mermaid',
               test: /node_modules[\\/]mermaid/,
               priority: 20,
-            }]
+            }],
+        },
+        chunkFileNames (chunk) {
+          return chunk.name === 'react-libs' ? 'assets/react-libs.js' :  'assets/[name].[hash].js'
         }
+
       }
     }
   }

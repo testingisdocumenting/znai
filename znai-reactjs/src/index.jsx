@@ -38,6 +38,7 @@ import {mergeDocMeta} from './structure/docMeta'
 
 import { createLocalSearchIndex, populateLocalSearchIndexWithData } from "./doc-elements/search/flexSearch.ts";
 
+import { elementsLibrary } from './doc-elements/DefaultElementsLibrary';
 window.React = React
 window.ReactDOM = ReactDOM
 window.Documentation = Documentation
@@ -54,6 +55,23 @@ window.mergeDocMeta = mergeDocMeta
 window.createLocalSearchIndex = createLocalSearchIndex
 window.populateLocalSearchIndexWithData = populateLocalSearchIndexWithData
 window.znaiSearchIdx = window.createLocalSearchIndex();
+
+
+// Create the library object
+
+
+// Initialize the namespace if it doesn't exist
+if (typeof window !== 'undefined') {
+    window.znai = window.znai || {};
+    if (!window.znai.elementsLibrary) {
+        window.znai.elementsLibrary = { library: elementsLibrary };
+    } else {
+        // If it exists, just set the library property
+        window.znai.elementsLibrary.library = elementsLibrary;
+    }
+}
+
+
 const isDevelopment = import.meta.env.DEV;
 if (isDevelopment) {
     import('./App').then((module) => {
