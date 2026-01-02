@@ -16,7 +16,7 @@
 
 import React, { useEffect, useState } from "react";
 import { TocItem } from "../../structure/TocItem";
-import { DocMeta, getDocMeta, mergeDocMeta } from "../../structure/docMeta";
+import { DocMeta, getDocId, getDocMeta, mergeDocMeta } from "../../structure/docMeta";
 import { fetchWithCredentials } from "../../utils/fetchWithCredentials";
 import { DocStatsView, PageStats, TimePeriod } from "./DocStatsView";
 
@@ -30,7 +30,9 @@ export interface DocStatsScreenProps {
 }
 
 async function fetchDocStats(url: string): Promise<DocStatsResponse> {
-  const response = await fetchWithCredentials(url, {});
+  const fullUrl = new URL(url);
+  fullUrl.searchParams.set("docId", getDocId());
+  const response = await fetchWithCredentials(fullUrl.toString(), {});
 
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
