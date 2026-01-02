@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.84-SNAPSHOT</version>
+        <version>1.85-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-reactjs</artifactId>
@@ -52,18 +52,18 @@
                         <delete dir="${project.build.outputDirectory}/static" />
 
                         <fileset dir="dist/assets" id="extra-js">
-                            <include name="*.js"/>
+                            <include name="*.js" />
                         </fileset>
 
                         <copy todir="${project.build.outputDirectory}/static">
-                            <fileset refid="extra-js"/>
+                            <fileset refid="extra-js" />
                         </copy>
 
                         <pathconvert property="js.files.list" pathsep="${line.separator}">
-                            <fileset refid="extra-js"/>
+                            <fileset refid="extra-js" />
                             <chainedmapper>
-                                <mapper type="flatten"/>
-                                <mapper type="regexp" from="^(.*)\.js$$" to="static/\1.js"/>
+                                <mapper type="flatten" />
+                                <mapper type="regexp" from="^(.*)\.js$$" to="static/\1.js" />
                             </chainedmapper>
                         </pathconvert>
 

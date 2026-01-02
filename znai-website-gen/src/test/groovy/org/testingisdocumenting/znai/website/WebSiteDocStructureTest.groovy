@@ -67,8 +67,8 @@ class WebSiteDocStructureTest {
 
         docStructure.createUrl(path, new DocUrl("http://abc")).should == "http://abc"
         docStructure.createUrl(path, new DocUrl("https://abc")).should == "https://abc"
-        docStructure.createUrl(path, new DocUrl("mailto:/link")).should == "mailto:/link"
-        docStructure.createUrl(path, new DocUrl("file:/link")).should == "file:/link"
+        docStructure.createUrl(path, new DocUrl("mailto://link")).should == "mailto://link"
+        docStructure.createUrl(path, new DocUrl("file://link")).should == "file://link"
         docStructure.createUrl(path, new DocUrl("/")).should == "/product"
         docStructure.createUrl(path, new DocUrl("#anchor")).should == "/product/chapter/pageOne#anchor"
         docStructure.createUrl(path, new DocUrl("/#anchor")).should == "/product#anchor"
