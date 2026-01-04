@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'normalize.css/normalize.css'
@@ -36,11 +35,9 @@ import {documentationTracking} from './doc-elements/tracking/DocumentationTracki
 import {pageTypesRegistry} from './doc-elements/page/PageTypesRegistry'
 import {mergeDocMeta} from './structure/docMeta'
 
-import { createLocalSearchIndex, populateLocalSearchIndexWithData } from "./doc-elements/search/flexSearch.ts";
+import initializeGlobals from './library'
 
 import { elementsLibrary } from './doc-elements/DefaultElementsLibrary';
-window.React = React
-window.ReactDOM = ReactDOM
 window.Documentation = Documentation
 window.DocumentationPreparationScreen = DocumentationPreparationScreen
 window.NotAuthorizedScreen = NotAuthorizedScreen
@@ -52,8 +49,7 @@ window.pageTypesRegistry = pageTypesRegistry
 window.documentationNavigation = documentationNavigation
 window.documentationTracking = documentationTracking
 window.mergeDocMeta = mergeDocMeta
-window.createLocalSearchIndex = createLocalSearchIndex
-window.populateLocalSearchIndexWithData = populateLocalSearchIndexWithData
+initializeGlobals()
 window.znaiSearchIdx = window.createLocalSearchIndex();
 
 
