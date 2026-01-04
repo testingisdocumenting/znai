@@ -22,32 +22,12 @@ import './App.css'
 import './layout/DocumentationLayout.css'
 import './doc-elements/search/Search.css'
 
-import {DocumentationPreparationScreen} from './screens/documentation-preparation/DocumentationPreparationScreen'
-import {PreviewChangeScreen} from './screens/preview-change-path/PreviewChangeScreen'
-import {NotAuthorizedScreen} from './screens/not-authorized/NotAuthorizedScreen'
-import {DocStatsScreen} from './screens/doc-stats/DocStatsScreen'
-import {Landing} from './screens/landing/Landing'
-import {themeRegistry} from './theme/ThemeRegistry'
-import {documentationNavigation} from './structure/DocumentationNavigation.jsx'
-import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
-import {pageTypesRegistry} from './doc-elements/page/PageTypesRegistry'
-import {mergeDocMeta} from './structure/docMeta'
 
 import initializeGlobals from './library'
 
 import { elementsLibrary } from './doc-elements/DefaultElementsLibrary';
-window.DocumentationPreparationScreen = DocumentationPreparationScreen
-window.NotAuthorizedScreen = NotAuthorizedScreen
-window.DocStatsScreen = DocStatsScreen
-window.Landing = Landing
-window.PreviewChangeScreen = PreviewChangeScreen
-window.themeRegistry = themeRegistry
-window.pageTypesRegistry = pageTypesRegistry
-window.documentationNavigation = documentationNavigation
-window.documentationTracking = documentationTracking
-window.mergeDocMeta = mergeDocMeta
 initializeGlobals()
-window.znaiSearchIdx = window.createLocalSearchIndex();
+
 
 
 // Create the library object
