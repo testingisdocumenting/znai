@@ -22,8 +22,6 @@ import './App.css'
 import './layout/DocumentationLayout.css'
 import './doc-elements/search/Search.css'
 
-import {Documentation} from "./doc-elements/Documentation";
-
 import {DocumentationPreparationScreen} from './screens/documentation-preparation/DocumentationPreparationScreen'
 import {PreviewChangeScreen} from './screens/preview-change-path/PreviewChangeScreen'
 import {NotAuthorizedScreen} from './screens/not-authorized/NotAuthorizedScreen'
@@ -38,7 +36,6 @@ import {mergeDocMeta} from './structure/docMeta'
 import initializeGlobals from './library'
 
 import { elementsLibrary } from './doc-elements/DefaultElementsLibrary';
-window.Documentation = Documentation
 window.DocumentationPreparationScreen = DocumentationPreparationScreen
 window.NotAuthorizedScreen = NotAuthorizedScreen
 window.DocStatsScreen = DocStatsScreen

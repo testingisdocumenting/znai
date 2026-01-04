@@ -16,7 +16,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Documentation} from './doc-elements/Documentation'
 export { Documentation } from './doc-elements/Documentation'
+import './layout/DocumentationLayout.css'
 export { elementsLibrary } from './doc-elements/DefaultElementsLibrary'
 export { themeRegistry } from './theme/ThemeRegistry'
 export { documentationNavigation } from './structure/DocumentationNavigation'
@@ -28,6 +30,7 @@ function initializeGlobals() {
         window.populateLocalSearchIndexWithData = populateLocalSearchIndexWithData
         window.React = React
         window.ReactDOM = ReactDOM
+        window.Documentation = Documentation;
 
     }
 }
