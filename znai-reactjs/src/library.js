@@ -18,7 +18,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Documentation} from './doc-elements/Documentation'
 export { Documentation } from './doc-elements/Documentation'
+// Import CSS files - this is crucial for the CSS variables to be available
+import 'normalize.css/normalize.css'
+import './App.css'
 import './layout/DocumentationLayout.css'
+import './doc-elements/search/Search.css'
+
 import {DocumentationPreparationScreen} from './screens/documentation-preparation/DocumentationPreparationScreen'
 import {PreviewChangeScreen} from './screens/preview-change-path/PreviewChangeScreen'
 import {NotAuthorizedScreen} from './screens/not-authorized/NotAuthorizedScreen'
