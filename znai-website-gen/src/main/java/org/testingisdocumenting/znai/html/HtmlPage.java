@@ -49,8 +49,8 @@ public class HtmlPage {
 
     public HtmlPage(String customFavIconPath) {
         this.customFavIconPath = customFavIconPath;
-        this.importMap = new ImportMap(Map.of("react", "static/assets/react-libs.js",
-                "react-dom", "static/assets/react-libs.js", "znai-components", "static/znai-components.es.js"));
+        this.importMap = new ImportMap(Map.of("react", "static/react-bundle.es.js",
+                "react-dom", "static/react-bundle.es.js", "znai-components", "static/znai-components.es.js"));
 
         title = "";
 

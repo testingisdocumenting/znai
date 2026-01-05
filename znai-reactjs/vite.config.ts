@@ -26,32 +26,33 @@ export default defineConfig({
   build: {
     target: ['es2020', 'chrome87', 'firefox78', 'safari14'],
     lib: {
-      entry: path.resolve(__dirname, 'src/library.js'),
+      entry: {
+        'react-bundle' : path.resolve(__dirname, 'src/react-bundle.js'),
+        'znai-components' : path.resolve(__dirname, 'src/library.js'),
+      },
       name: 'ZnaiComponents',
-      fileName: (format) => `znai-components.${format}.js`,
-      formats: ['es']
+      formats: ['es'],
+      fileName: (format, entryName) => `${entryName}.${format}.js`,
     },
     rolldownOptions: {
       jsx: {
         mode: 'automatic'
       },
       logLevel: 'debug',
+      preserveEntrySignatures: 'strict',
       output: {
+        exports: 'auto',
         advancedChunks: {
           groups: [
-            {
-              name: 'react-libs',
-              test: /node_modules[\\/](react|react-dom)/,
-              priority: 30,
-            },
+
             {
               name: 'mermaid',
               test: /node_modules[\\/]mermaid/,
               priority: 20,
             }],
         },
-        chunkFileNames (chunk) {
-          return chunk.name === 'react-libs' ? 'assets/react-libs.js' :  'assets/[name].[hash].js'
+        chunkFileNames (_chunk) {
+          return  'assets/[name].[hash].js'
         }
 
       }
