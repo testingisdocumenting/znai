@@ -53,6 +53,7 @@
 
                         <fileset dir="dist" id="extra-js">
                             <include name="**/*.js" />
+                            <exclude name="toc.js" />
                         </fileset>
 
                         <copy todir="${project.build.outputDirectory}/static">
