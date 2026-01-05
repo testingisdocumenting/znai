@@ -54,6 +54,7 @@
                         <fileset dir="dist" id="extra-js">
                             <include name="**/*.js" />
                             <exclude name="toc.js" />
+                            <exclude name="znai-theme.js"/>
                         </fileset>
 
                         <copy todir="${project.build.outputDirectory}/static">
