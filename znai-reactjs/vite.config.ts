@@ -41,7 +41,7 @@ export default defineConfig({
       logLevel: 'debug',
       preserveEntrySignatures: 'strict',
       output: {
-        exports: 'auto',
+        exports: 'named',
         advancedChunks: {
           groups: [
 

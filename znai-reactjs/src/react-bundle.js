@@ -13,11 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React, {
+    useState,
+    useEffect,
+    useContext,
+    useReducer,
+    useCallback,
+    useMemo,
+    useRef,
+    useImperativeHandle,
+    useLayoutEffect,
+    useDebugValue,
+    Fragment,
+    StrictMode,
+    createElement,
+    createContext,
+    forwardRef,
+    memo,
+    lazy,
+    Suspense
+} from 'react';
 
-// Export as named exports
-export { React, ReactDOM };
+import ReactDOM from 'react-dom';
 
 // Also attach to window for global access
 if (typeof window !== 'undefined') {
@@ -25,5 +42,29 @@ if (typeof window !== 'undefined') {
     window.ReactDOM = ReactDOM;
 }
 
-// Default export
+// Export default
 export default { React, ReactDOM };
+
+// Explicitly re-export React named exports
+export {
+    React,
+    ReactDOM,
+    useState,
+    useEffect,
+    useContext,
+    useReducer,
+    useCallback,
+    useMemo,
+    useRef,
+    useImperativeHandle,
+    useLayoutEffect,
+    useDebugValue,
+    Fragment,
+    StrictMode,
+    createElement,
+    createContext,
+    forwardRef,
+    memo,
+    lazy,
+    Suspense
+};
