@@ -316,7 +316,11 @@ def apply_stats_multiplier(page_stats, multiplier):
 @app.route('/doc-stats', methods=['GET'])
 def get_doc_stats():
     try:
+        doc_id = request.args.get('docId')
         events = load_tracking_events()
+
+        if doc_id:
+            events = [e for e in events if e.get('docId') == doc_id]
 
         now = datetime.utcnow()
         week_ago = now - timedelta(days=7)
