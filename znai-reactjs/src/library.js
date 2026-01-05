@@ -23,6 +23,7 @@ import 'normalize.css/normalize.css'
 import './App.css'
 import './layout/DocumentationLayout.css'
 import './doc-elements/search/Search.css'
+import './doc-elements/page/default/PageDefaultNextPrevNavigation.css'
 
 import {DocumentationPreparationScreen} from './screens/documentation-preparation/DocumentationPreparationScreen'
 import {PreviewChangeScreen} from './screens/preview-change-path/PreviewChangeScreen'
