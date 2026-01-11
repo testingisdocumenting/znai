@@ -1,6 +1,5 @@
 /*
  * Copyright 2025 znai maintainers
- * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +14,20 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { JupyterImageWithFit } from './JupyterImageWithFit';
+import { useState, useCallback } from 'react';
 
-const JupyterImgCell = ({ img, elementsLibrary }) => {
-    const imageSrc = "data:image/png;base64," + img;
-    return <JupyterImageWithFit imageSrc={imageSrc} alt="jupyter output" elementsLibrary={elementsLibrary} />;
-};
+interface Dimensions {
+    width: number;
+    height: number;
+}
 
-export default JupyterImgCell;
+export function useImageDimensions() {
+    const [dimensions, setDimensions] = useState<Dimensions | null>(null);
+
+    const handleImageLoad = useCallback((event: React.SyntheticEvent<HTMLImageElement>) => {
+        const { naturalWidth, naturalHeight } = event.currentTarget;
+        setDimensions({ width: naturalWidth, height: naturalHeight });
+    }, []);
+
+    return { dimensions, handleImageLoad };
+}

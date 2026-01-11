@@ -1,0 +1,1 @@
+* Add: Jupyter notebook images are auto-scaled down to fit the column width  
