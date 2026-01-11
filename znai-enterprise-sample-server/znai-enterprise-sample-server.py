@@ -264,6 +264,10 @@ def load_tracking_events():
 def calculate_page_stats(events, start_time=None):
     page_views = defaultdict(int)
     page_unique = defaultdict(set)
+    chapter_views = defaultdict(int)
+    chapter_unique = defaultdict(set)
+    overall_views = 0
+    overall_unique = set()
 
     for event in events:
         if event.get('eventType') != 'pageOpen':
@@ -282,8 +286,6 @@ def calculate_page_stats(events, start_time=None):
         if not page_id:
             continue
 
-        page_views[page_id] += 1
-
         data_str = event.get('data', '{}')
         try:
             data = json.loads(data_str) if data_str else {}
@@ -291,27 +293,59 @@ def calculate_page_stats(events, start_time=None):
             data = {}
 
         visitor_id = data.get('visitorId', timestamp_str)
+
+        # Page stats
+        page_views[page_id] += 1
         page_unique[page_id].add(visitor_id)
 
-    result = {}
+        # Chapter stats (key is dirName portion of pageId)
+        chapter_key = page_id.split('/')[0] if '/' in page_id else ''
+        chapter_views[chapter_key] += 1
+        chapter_unique[chapter_key].add(visitor_id)
+
+        # Overall stats
+        overall_views += 1
+        overall_unique.add(visitor_id)
+
+    pages = {}
     all_pages = set(page_views.keys()) | set(page_unique.keys())
     for page_id in all_pages:
-        result[page_id] = {
+        pages[page_id] = {
             'totalViews': page_views[page_id],
             'uniqueViews': len(page_unique[page_id])
         }
 
-    return result
-
-def apply_stats_multiplier(page_stats, multiplier):
-    result = {}
-    for page_id, stats in page_stats.items():
-        total_views = stats['totalViews'] * multiplier
-        result[page_id] = {
-            'totalViews': int(total_views),
-            'uniqueViews': int(total_views * 0.2)
+    chapters = {}
+    all_chapters = set(chapter_views.keys()) | set(chapter_unique.keys())
+    for chapter_key in all_chapters:
+        chapters[chapter_key] = {
+            'totalViews': chapter_views[chapter_key],
+            'uniqueViews': len(chapter_unique[chapter_key])
         }
-    return result
+
+    return {
+        'overall': {'totalViews': overall_views, 'uniqueViews': len(overall_unique)},
+        'chapters': chapters,
+        'pages': pages
+    }
+
+def apply_stats_multiplier(stats, multiplier):
+    def multiply_stat(stat):
+        total_views = stat['totalViews'] * multiplier
+        total_views_int = int(total_views)
+        unique_views = int(total_views * 0.2)
+        if total_views_int > 0 and unique_views == 0:
+            unique_views = 1
+        return {
+            'totalViews': total_views_int,
+            'uniqueViews': unique_views
+        }
+
+    return {
+        'overall': multiply_stat(stats['overall']),
+        'chapters': {k: multiply_stat(v) for k, v in stats['chapters'].items()},
+        'pages': {k: multiply_stat(v) for k, v in stats['pages'].items()}
+    }
 
 @app.route('/doc-stats', methods=['GET'])
 def get_doc_stats():

@@ -22,7 +22,13 @@ import { DocStatsView, PageStats, TimePeriod } from "./DocStatsView";
 
 const AVAILABLE_PERIODS: TimePeriod[] = ["week", "month", "year", "total"];
 
-export type DocStatsResponse = Record<TimePeriod, Record<string, PageStats>>;
+export interface PeriodStats {
+  overall: PageStats;
+  chapters: Record<string, PageStats>;
+  pages: Record<string, PageStats>;
+}
+
+export type DocStatsResponse = Record<TimePeriod, PeriodStats>;
 
 export interface DocStatsScreenProps {
   toc: TocItem[];
@@ -77,13 +83,15 @@ export function DocStatsScreen({ toc, docMeta }: DocStatsScreenProps) {
     return null;
   }
 
-  const pageStats = statsByPeriod[selectedPeriod] || {};
+  const periodStats = statsByPeriod[selectedPeriod] || { overall: { totalViews: 0, uniqueViews: 0 }, chapters: {}, pages: {} };
 
   return (
     <DocStatsView
       guideName={getDocMeta().title}
       toc={toc}
-      pageStats={pageStats}
+      overallStats={periodStats.overall}
+      chapterStats={periodStats.chapters}
+      pageStats={periodStats.pages}
       selectedPeriod={selectedPeriod}
       availablePeriods={AVAILABLE_PERIODS}
       onPeriodChange={setSelectedPeriod}
