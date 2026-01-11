@@ -1,4 +1,5 @@
 /*
+ * Copyright 2025 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +15,13 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from 'react';
+import { JupyterImageWithFit } from './JupyterImageWithFit';
 
-const JupyterSvgCell = ({svg, elementsLibrary}) => {
-    return (
-        <div className="jupyter-cell jupyter-svg content-block">
-            <elementsLibrary.Svg svg={svg}/>
-        </div>
-    )
-}
+const JupyterSvgCell = ({ svg, elementsLibrary }) => {
+    const base64Svg = btoa(unescape(encodeURIComponent(svg)));
+    const imageSrc = "data:image/svg+xml;base64," + base64Svg;
+    return <JupyterImageWithFit imageSrc={imageSrc} alt="jupyter svg output" elementsLibrary={elementsLibrary} />;
+};
 
-export default JupyterSvgCell
+export default JupyterSvgCell;
