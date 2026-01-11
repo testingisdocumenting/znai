@@ -31,6 +31,8 @@ export interface PageStats {
 export interface DocStatsViewProps {
   guideName: string;
   toc: TocItem[];
+  overallStats: PageStats;
+  chapterStats: Record<string, PageStats>;
   pageStats: Record<string, PageStats>;
   selectedPeriod: TimePeriod;
   availablePeriods: TimePeriod[];
@@ -46,7 +48,7 @@ const TIME_PERIODS: { key: TimePeriod; label: string }[] = [
   { key: "week", label: "Week" },
   { key: "month", label: "Month" },
   { key: "year", label: "Year" },
-  { key: "total", label: "Total" },
+  { key: "total", label: "All Time" },
 ];
 
 function buildPageId(dirName: string, fileName: string): string {
@@ -76,16 +78,6 @@ function formatNumber(num: number): string {
 }
 
 const ZERO_STATS: PageStats = { totalViews: 0, uniqueViews: 0 };
-
-function sumStats(statsArray: PageStats[]): PageStats {
-  return statsArray.reduce(
-    (acc, stats) => ({
-      totalViews: acc.totalViews + stats.totalViews,
-      uniqueViews: acc.uniqueViews + stats.uniqueViews,
-    }),
-    ZERO_STATS
-  );
-}
 
 function StatsCounters({ stats }: { stats: PageStats }) {
   return (
@@ -136,26 +128,25 @@ function PageItem({ item, stats }: PageItemProps) {
 
 interface ChapterSectionProps {
   chapter: TocItem;
+  chapterStats: Record<string, PageStats>;
   pageStats: Record<string, PageStats>;
 }
 
-function ChapterSection({ chapter, pageStats }: ChapterSectionProps) {
+function ChapterSection({ chapter, chapterStats, pageStats }: ChapterSectionProps) {
   const items = (chapter.items || []).filter((item) => !isTocItemIndex(item));
 
   if (items.length === 0) {
     return null;
   }
 
-  const itemStats = items
-    .map((item) => pageStats[buildPageId(item.dirName, item.fileName)])
-    .filter((stats): stats is PageStats => !!stats);
-  const chapterStats = sumStats(itemStats);
+  const chapterKey = items[0]?.dirName ?? "";
+  const stats = chapterStats[chapterKey] ?? ZERO_STATS;
 
   return (
     <div className="znai-doc-stats-chapter">
       <div className="znai-doc-stats-chapter-header">
         <span className="znai-doc-stats-chapter-title">{chapter.chapterTitle}</span>
-        <ChapterSummary stats={chapterStats} />
+        <ChapterSummary stats={stats} />
       </div>
       <div className="znai-doc-stats-pages">
         {items.map((item) => {
@@ -176,13 +167,10 @@ function OrphanedPagesSection({ orphanedPages }: OrphanedPagesSectionProps) {
     return null;
   }
 
-  const sectionStats = sumStats(orphanedPages.map(([, stats]) => stats));
-
   return (
     <div className="znai-doc-stats-chapter znai-doc-stats-orphaned">
       <div className="znai-doc-stats-chapter-header">
         <span className="znai-doc-stats-chapter-title">Orphaned Pages</span>
-        <ChapterSummary stats={sectionStats} />
       </div>
       <div className="znai-doc-stats-pages">
         {orphanedPages.map(([pageId, stats]) => (
@@ -221,6 +209,8 @@ function TimePeriodSwitcher({ selectedPeriod, availablePeriods, onPeriodChange }
 export function DocStatsView({
   guideName,
   toc,
+  overallStats,
+  chapterStats,
   pageStats,
   selectedPeriod,
   availablePeriods,
@@ -231,8 +221,6 @@ export function DocStatsView({
   useEffect(() => {
     contentRef.current?.focus();
   }, []);
-
-  const totalStats = sumStats(Object.values(pageStats));
 
   const tocPageIds = collectTocPageIds(toc);
   const orphanedPages = Object.entries(pageStats).filter(([pageId]) => !tocPageIds.has(pageId));
@@ -251,12 +239,17 @@ export function DocStatsView({
       </div>
       <div className="znai-doc-stats-content" ref={contentRef} tabIndex={-1}>
         <div className="znai-doc-stats-overall">
-          <OverallStatCard value={totalStats.totalViews} label="Total Views" />
-          <OverallStatCard value={totalStats.uniqueViews} label="Unique Visitors" />
+          <OverallStatCard value={overallStats.totalViews} label="Total Page Views" />
+          <OverallStatCard value={overallStats.uniqueViews} label="Unique Visitors" />
         </div>
         <div className="znai-doc-stats-chapters">
           {toc.map((chapter, idx) => (
-            <ChapterSection key={chapter.chapterTitle || idx} chapter={chapter} pageStats={pageStats} />
+            <ChapterSection
+              key={chapter.chapterTitle || idx}
+              chapter={chapter}
+              chapterStats={chapterStats}
+              pageStats={pageStats}
+            />
           ))}
           <OrphanedPagesSection orphanedPages={orphanedPages} />
         </div>
