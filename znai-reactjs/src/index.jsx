@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'normalize.css/normalize.css'
@@ -23,37 +22,29 @@ import './App.css'
 import './layout/DocumentationLayout.css'
 import './doc-elements/search/Search.css'
 
-import {Documentation} from "./doc-elements/Documentation";
 
-import {DocumentationPreparationScreen} from './screens/documentation-preparation/DocumentationPreparationScreen'
-import {PreviewChangeScreen} from './screens/preview-change-path/PreviewChangeScreen'
-import {NotAuthorizedScreen} from './screens/not-authorized/NotAuthorizedScreen'
-import {DocStatsScreen} from './screens/doc-stats/DocStatsScreen'
-import {Landing} from './screens/landing/Landing'
-import {themeRegistry} from './theme/ThemeRegistry'
-import {documentationNavigation} from './structure/DocumentationNavigation.jsx'
-import {documentationTracking} from './doc-elements/tracking/DocumentationTracking'
-import {pageTypesRegistry} from './doc-elements/page/PageTypesRegistry'
-import {mergeDocMeta} from './structure/docMeta'
+import initializeGlobals from './library'
 
-import { createLocalSearchIndex, populateLocalSearchIndexWithData } from "./doc-elements/search/flexSearch.ts";
+import { elementsLibrary } from './doc-elements/DefaultElementsLibrary';
+initializeGlobals()
 
-window.React = React
-window.ReactDOM = ReactDOM
-window.Documentation = Documentation
-window.DocumentationPreparationScreen = DocumentationPreparationScreen
-window.NotAuthorizedScreen = NotAuthorizedScreen
-window.DocStatsScreen = DocStatsScreen
-window.Landing = Landing
-window.PreviewChangeScreen = PreviewChangeScreen
-window.themeRegistry = themeRegistry
-window.pageTypesRegistry = pageTypesRegistry
-window.documentationNavigation = documentationNavigation
-window.documentationTracking = documentationTracking
-window.mergeDocMeta = mergeDocMeta
-window.createLocalSearchIndex = createLocalSearchIndex
-window.populateLocalSearchIndexWithData = populateLocalSearchIndexWithData
-window.znaiSearchIdx = window.createLocalSearchIndex();
+
+
+// Create the library object
+
+
+// Initialize the namespace if it doesn't exist
+if (typeof window !== 'undefined') {
+    window.znai = window.znai || {};
+    if (!window.znai.elementsLibrary) {
+        window.znai.elementsLibrary = { library: elementsLibrary };
+    } else {
+        // If it exists, just set the library property
+        window.znai.elementsLibrary.library = elementsLibrary;
+    }
+}
+
+
 const isDevelopment = import.meta.env.DEV;
 if (isDevelopment) {
     import('./App').then((module) => {

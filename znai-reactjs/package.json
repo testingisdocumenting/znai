@@ -60,7 +60,9 @@
   "scripts": {
     "prebuild": "npm run lint",
     "dev": "vite",
-    "build": "vite build",
+    "build" : "npm run build:lib",
+    "build:lib": "vite build",
+    "build:dev": "vite build --mode development",
     "test": "vitest --config ./vitest.config.ts",
     "test:watch": "vitest --config ./vitest.config.ts --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
