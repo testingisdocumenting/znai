@@ -134,7 +134,8 @@
         <vertx.io.version>3.9.4</vertx.io.version>
         <commonmark.version>0.23.0</commonmark.version>
         <antlr.version>4.5</antlr.version>
-        <jackson.version>2.19.1</jackson.version>
+        <jackson.version>2.21.0</jackson.version>
+        <jackson-annotations.version>2.21</jackson-annotations.version>
         <webtau.version>2.4</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
         <ant.version>1.10.11</ant.version>
@@ -362,6 +363,12 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson-annotations.version}</version>
             </dependency>
 
             <dependency>
