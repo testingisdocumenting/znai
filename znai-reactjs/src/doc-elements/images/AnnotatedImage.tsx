@@ -136,7 +136,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const imageClassName =
     "znai-annotated-image" +
     (border ? " border" : "") +
-    (fit ? " znai-image-fit" : "") +
+    (fit && isScaledDown ? " znai-image-fit" : "") +
     (isScaledDown ? " znai-image-scaled-down" : "");
 
   return (
@@ -249,7 +249,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     }
 
     const singleColumnWidth = isMobile ? window.innerWidth : cssVarPixelValue("znai-single-column-full-width");
-    return singleColumnWidth / width;
+    return Math.min(1.0, singleColumnWidth / width);
   }
 
   function renderTitle() {
