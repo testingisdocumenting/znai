@@ -64,7 +64,8 @@
     "test": "vitest --config ./vitest.config.ts",
     "test:watch": "vitest --config ./vitest.config.ts --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "audit": "npm audit"
   },
   "proxy": "http://localhost:3334/",
   "browserslist": {

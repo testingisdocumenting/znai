@@ -2,5 +2,6 @@
   "cssResources": ["custom.css"],
   "jsResources": ["custom.js"],
   "htmlResources": ["custom.html"],
-  "htmlHeadResources": ["tracking.html"]
+  "htmlHeadResources": ["tracking.html"],
+  "additionalFilesToDeploy": ["demo_icons.json"]
 }

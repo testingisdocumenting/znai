@@ -15,6 +15,7 @@
  */
 
 import React, { useState } from "react";
+import { icons } from '@iconify-json/logos';
 
 import mermaid from "mermaid";
 
@@ -23,6 +24,7 @@ import "./Mermaid.css";
 interface Props {
   mermaid: string;
   wide?: boolean;
+  iconpacks?: Array<{ name: string; url: string }>;
 }
 
 let mermaidIdIdx = 0;
@@ -64,6 +66,14 @@ export default function Mermaid(props: Props) {
     // @ts-ignore
     window.znaiTheme.addChangeHandler(onThemeChange);
 
+    console.log("Props: ", props);
+    // Register icon packs if provided, otherwise use default logos pack
+    if (props.iconpacks && props.iconpacks.length > 0) {
+      mermaid.registerIconPacks(props.iconpacks.map(pack => ({
+        name: pack.name,
+        loader: () => fetch(pack.url).then(res => res.json())
+      })));
+    }
     initMermaidIfRequired();
 
     // @ts-ignore
