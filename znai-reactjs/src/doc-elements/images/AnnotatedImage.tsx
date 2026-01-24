@@ -15,12 +15,11 @@
  * limitations under the License.
  */
 
-import { CSSProperties} from "react";
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 
 import { imageAdditionalPreviewUrlParam } from "./imagePreviewAdditionalUrlParam";
 
-import { cssVarPixelValue } from "../../utils/cssVars";
+import { calcFitScale } from "./fitUtils";
 
 import Annotations from "./annotations/Annotations";
 import { zoom } from "../zoom/Zoom";
@@ -31,12 +30,10 @@ import { TooltipPlacement } from "../../components/Tooltip";
 
 import { WithElementsLibrary } from "../default-elements/DocElement";
 
-import { ContainerTitleCommonProps} from "../container/ContainerTitle";
-import { ContainerTitle, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
+import { ContainerTitle, ContainerTitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
 
 import { useIsMobile } from "../../theme/ViewPortContext";
-import { ContainerCommonProps } from "../container/Container";
-import { Container } from "../container/Container";
+import { Container, ContainerCommonProps } from "../container/Container";
 
 import "./AnnotatedImage.css";
 
@@ -87,7 +84,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const isMobile = useIsMobile();
   const { userDrivenCollapsed, collapseToggle } = useIsUserDrivenCollapsed(collapsed);
 
-  const scaleToUse = calcScale();
+  const scaleToUse = calcFitScale(fit, width, scale, isMobile);
 
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: -1, y: -1 });
 
@@ -241,15 +238,6 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
         }
       }
     }
-  }
-
-  function calcScale() {
-    if (!fit) {
-      return scale || 1.0;
-    }
-
-    const singleColumnWidth = isMobile ? window.innerWidth : cssVarPixelValue("znai-single-column-full-width");
-    return Math.min(1.0, singleColumnWidth / width);
   }
 
   function renderTitle() {
