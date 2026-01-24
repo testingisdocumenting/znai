@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 export function svg(width = 256, height = 256) {
-    const heightPart = height ? 'height="' + height + '"' : ''
-    const widthPart = width ? 'width="' + width + '"' : ''
+  const heightPart = height ? 'height="' + height + '"' : "";
+  const widthPart = width ? 'width="' + width + '"' : "";
 
   return (
     '<svg viewBox="0 0 512 512" ' +
