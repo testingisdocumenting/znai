@@ -68,7 +68,7 @@ export function EmbeddedSvg({
 
   useEffect(() => {
     changeSizeWhenPropIsChanged();
-  }, [actualSize, fit, scale, isMobile]);
+  }, [actualSize, fit, scale, isMobile, isPresentation]);
 
   function saveOriginalSize() {
     if (!svgRef.current) return;
@@ -81,8 +81,7 @@ export function EmbeddedSvg({
 
   function changeSizeWhenPropIsChanged() {
     if (isPresentation) {
-      restoreOriginalSize();
-      applyFitScale();
+      forceActualSizeSvg();
     } else if (actualSize) {
       forceActualSizeSvg();
     } else if (fit) {
