@@ -19,7 +19,7 @@ import React from "react";
 
 import { Svg } from "./Svg";
 import { Registry, simulateState } from "react-component-viewer";
-import { svg } from "./svg.testdata";
+import { svg, wideBoxesSvg } from "./svg.testdata";
 
 const [getActualSize, setActualSize] = simulateState(false);
 
@@ -39,9 +39,8 @@ export function embeddedSvgDemo(registry: Registry) {
         <Svg svg={svg(300, undefined)} idsToReveal={["partC"]} scale={0.5} actualSize={getActualSize()} />
       </div>
     ))
-    .add("wide svg without fit", () => <Svg svg={svg(1200, 400)} />)
-    .add("wide svg with fit", () => <Svg svg={svg(1200, 400)} fit={true} />)
-    .add("wide svg with fit and scale", () => <Svg svg={svg(1200, 400)} fit={true} scale={0.8} />);
+    .add("wide boxes without fit", () => <Svg svg={wideBoxesSvg()} />)
+    .add("wide boxes with fit", () => <Svg svg={wideBoxesSvg()} fit={true} />);
 }
 
 function toggleActualSize() {
