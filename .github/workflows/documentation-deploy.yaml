@@ -36,7 +36,7 @@ jobs:
           publish_dir: ./znai-docs/target/znai
 
       - name: close triggering issue
-        uses: actions/github-script@0.9.0
+        uses: actions/github-script@v8.0.0
         env:
           GITHUB_RUN_ID: ${{github.run_id}}
         with:
