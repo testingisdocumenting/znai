@@ -6,6 +6,6 @@ architecture-beta
     service disk2(logos:aws-s3)[Storage] in api
     service server(logos:aws-ec2)[Server] in api
 
-    db:L -- R:server
-    disk1:T -- B:server
-    disk2:T -- B:db
+    db:L <-[persist database updates]- R:server
+    disk1:T <-[save logs]- B:server
+    disk2:T <-[save database]- B:db
