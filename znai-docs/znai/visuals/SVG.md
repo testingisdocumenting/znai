@@ -43,3 +43,14 @@ Use `scale: scaleFactor` to change the size of the SVG provided
     :include-svg: with-groups.svg {idsToReveal: ["partC"], actualSize: true, scale: 0.2}
 
 :include-svg: with-groups.svg {idsToReveal: ["partC"], actualSize: true, scale: 0.2}
+
+# Fit
+
+Use `fit: true` to automatically scale down wide SVGs to fit within the available content width.
+This is useful for diagrams that are designed to be wide but need to adapt to different screen sizes.
+
+    :include-svg: wide-boxes.svg {fit: true}
+
+:include-svg: wide-boxes.svg {fit: true}
+
+Without `fit`, the SVG would overflow the content area on narrow screens.

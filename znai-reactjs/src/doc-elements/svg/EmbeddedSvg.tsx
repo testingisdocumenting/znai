@@ -80,13 +80,11 @@ export function EmbeddedSvg({
   }
 
   function changeSizeWhenPropIsChanged() {
-    if (isPresentation) {
-      forceActualSizeSvg();
-    } else if (actualSize) {
-      forceActualSizeSvg();
-    } else if (fit) {
+    if (fit || isPresentation) {
       restoreOriginalSize();
       applyFitScale();
+    } else if (actualSize) {
+      forceActualSizeSvg();
     } else {
       restoreOriginalSize();
     }
@@ -117,7 +115,7 @@ export function EmbeddedSvg({
     const svgWidth = getSvgWidth();
     if (!svgWidth || !svgRef.current) return;
 
-    const fitScale = calcFitScale(fit, svgWidth, scale, isMobile);
+    const fitScale = calcFitScale(fit || isPresentation, svgWidth, scale, isMobile);
 
     if (fitScale < 1) {
       svgRef.current.setAttribute("width", svgWidth * fitScale + "px");
