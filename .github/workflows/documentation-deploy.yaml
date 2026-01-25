@@ -10,7 +10,7 @@ jobs:
     if: startsWith(github.event.issue.title, 'deploy documentation')
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       - run: git fetch --prune --unshallow
 
       - name: Set up JDK 17

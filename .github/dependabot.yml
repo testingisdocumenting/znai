@@ -1,0 +1,47 @@
+version: 2
+updates:
+  # Enable version updates for Maven
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    groups:
+      jackson:
+        patterns:
+          - "com.fasterxml.jackson*"
+      apache-commons:
+        patterns:
+          - "commons-*"
+          - "org.apache.commons:*"
+      groovy:
+        patterns:
+          - "org.codehaus.groovy:*"
+    ignore:
+      # Don't update major versions automatically
+      - dependency-name: "org.codehaus.groovy:*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "org.slf4j:*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "io.vertx:*"
+        update-types: ["version-update:semver-major"]
+
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/znai-reactjs"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+    open-pull-requests-limit: 10
+    ignore:
+      # Don't update major versions automatically
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
