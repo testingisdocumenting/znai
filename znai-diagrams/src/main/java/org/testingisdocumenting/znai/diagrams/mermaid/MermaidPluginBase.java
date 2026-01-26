@@ -7,6 +7,7 @@ import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,9 @@ abstract class MermaidPluginBase implements Plugin {
             return;
         }
         @SuppressWarnings("unchecked") Map<String, String> iconPackMap = (Map<String, String>) iconPack;
+        if (!iconPackMap.containsKey("name")) {
+            throw new RuntimeException("iconpack name is missing");
+        }
         if (iconPackMap.containsKey("url")) {
             String url = iconPackMap.get("url");
             if (!UrlUtils.isExternal(url)) {
@@ -48,6 +52,8 @@ abstract class MermaidPluginBase implements Plugin {
                 url = docStructure.fullUrl(auxiliaryFile.getDeployRelativePath().toString());
             }
             iconPackMap.put("url", url);
+        } else {
+            throw new RuntimeException("iconpack url is missing");
         }
     }
 }

@@ -91,28 +91,16 @@ to register the `@iconify-json/logos@1` icon pack with the name `logos`.
 
 Use
 ```
-mermaid {iconpacks : [{ name : "logos", url : "../../icons.json" }]}
+mermaid {iconpacks : [{ name : "logos", url : "mermaid/demo_icons.json" }]}
 ```
 to register the `icons.json` icon pack with the name `logos`.
 
 This assumes that 
 
-- the `icons.json` file is checked in two directories below the current page.
-
-- you have to include `icons.json` in the file `extensions.json` like this
-
-```json {highlightValue: "root.additionalFilesToDeploy"}
-{
-  "cssResources": ["custom.css"],
-  "jsResources": ["custom.js"],
-  "htmlResources": ["custom.html"],
-  "htmlHeadResources": ["tracking.html"],
-  "additionalFilesToDeploy": ["icons.json"]
-}
-```
+- the `icons.json` file is in a subdirectory `mermaid` of the directory containing the current page.
 
 
-```mermaid {iconpacks : [{ name : "logos", url : "mermaid/demo_icons.json" }]}
+```mermaid {iconpacks : [{ name : "logos", boom : "mermaid/demo_icons.json" }]}
 architecture-beta
     group api(logos:aws-lambda)[API]
 
