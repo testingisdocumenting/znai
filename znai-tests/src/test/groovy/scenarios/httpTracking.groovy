@@ -71,7 +71,7 @@ scenario("validate another TOC navigation") {
     docContent.title.waitTo == "Target"
 
     def tocSelectEvents = capturedEvents.findAll { it.eventType == "tocItemSelect" }
-    tocSelectEvents.size().waitTo >= 2
+    actual(liveValue(tocSelectEvents::size)).waitToBe(greaterThanOrEqual(2))
 }
 
 scenario("validate all captured events") {
