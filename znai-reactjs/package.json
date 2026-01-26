@@ -31,6 +31,7 @@
     "@eslint/compat": "^1.4.1",
     "@eslint/js": "^9.39.1",
     "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^12.1.5",
     "@types/diff": "^5.0.0",
     "@types/feather-icons": "^4.7.0",
     "@types/jest": "^25.2.2",
