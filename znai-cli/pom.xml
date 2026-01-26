@@ -69,6 +69,14 @@
             <artifactId>webtau-core-groovy</artifactId>
             <scope>test</scope>
         </dependency>
+<!-- this dependency allows to preview znai docs -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -112,7 +112,7 @@ This assumes that
 ```
 
 
-```mermaid {iconpacks : [{ name : "logos", url : "../../demo_icons.json" }]}
+```mermaid {iconpacks : [{ name : "logos", url : "mermaid/demo_icons.json" }]}
 architecture-beta
     group api(logos:aws-lambda)[API]
 
@@ -121,7 +121,7 @@ architecture-beta
     service disk2(logos:aws-s3)[Storage] in api
     service server(logos:aws-ec2)[Server] in api
 
-    db:L -- R:server
-    disk1:T -- B:server
-    disk2:T -- B:db
+    db:L <-[hosts]- R:server
+    disk1:T <-[mounts]- B:server
+    disk2:T <-[mounts]- B:db
 ```
