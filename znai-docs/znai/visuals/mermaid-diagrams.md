@@ -100,7 +100,7 @@ This assumes that
 - the `icons.json` file is in a subdirectory `mermaid` of the directory containing the current page.
 
 
-```mermaid {iconpacks : [{ name : "logos", boom : "mermaid/demo_icons.json" }]}
+```mermaid {iconpacks : [{ name : "logos", url : "mermaid/demo_icons.json" }]}
 architecture-beta
     group api(logos:aws-lambda)[API]
 
