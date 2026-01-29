@@ -20,6 +20,7 @@ package org.testingisdocumenting.znai.search
 import org.junit.Test
 import org.testingisdocumenting.znai.core.DocMeta
 import org.testingisdocumenting.znai.markdown.PageMarkdownSection
+import org.testingisdocumenting.znai.parser.TestDocStructure
 import org.testingisdocumenting.znai.structure.TocItem
 
 class GlobalSearchEntriesTest {
@@ -36,16 +37,11 @@ class GlobalSearchEntriesTest {
         tocItem2.setChapterTitle('chapter 2')
         def section2 = new PageMarkdownSection('section2', 'section 2', 'text 2')
 
-        def tocItemIndex = TocItem.createIndex()
-        def sectionIndex = new PageMarkdownSection('', '', 'index text')
-
         def entries = new GlobalSearchEntries()
         entries.addAll([
                 new GlobalSearchEntry(docMeta, tocItem1, section1, '/doc-id/title1'),
-                new GlobalSearchEntry(docMeta, tocItem2, section2, '/doc-id/title2'),
-                new GlobalSearchEntry(docMeta, tocItemIndex, sectionIndex, '/doc-id')])
+                new GlobalSearchEntry(docMeta, tocItem2, section2, '/doc-id/title2')])
 
-        println entries.toXml()
         entries.toXml().should == '<znai>\n' +
                 '  <entry>\n' +
                 '    <url>/doc-id/title1</url>\n' +
@@ -69,18 +65,31 @@ class GlobalSearchEntriesTest {
                 '      <text>text 2</text>\n' +
                 '    </text>\n' +
                 '  </entry>\n' +
-                '  <entry>\n' +
-                '    <url>/doc-id</url>\n' +
-                '    <fullTitle>Test Doc</fullTitle>\n' +
-                '    <pageTitle></pageTitle>\n' +
-                '    <chapterTitle></chapterTitle>\n' +
-                '    <pageSectionTitle></pageSectionTitle>\n' +
-                '    <text>\n' +
-                '      <score>STANDARD</score>\n' +
-                '      <text>index text</text>\n' +
-                '    </text>\n' +
-                '  </entry>\n' +
                 '</znai>\n'
+    }
+
+    @Test
+    void "should generate index page search entry url without index in path"() {
+        def docMeta = new DocMeta([title: 'Test Doc'])
+        docMeta.setId('doc-id')
+        def docStructure = new TestDocStructure()
+
+        def builder = new GlobalSearchEntriesBuilder(docMeta, docStructure)
+
+        def tocItemIndex = TocItem.createIndex()
+        builder.addSearchEntries(tocItemIndex, [
+                new PageMarkdownSection('', '', 'index text'),
+                new PageMarkdownSection('intro', 'Introduction', 'intro text')])
+
+        def tocItem = new TocItem('chapter', 'page', 'md')
+        tocItem.setPageTitleIfNoTocOverridePresent('page')
+        tocItem.setChapterTitle('chapter')
+        builder.addSearchEntries(tocItem, [
+                new PageMarkdownSection('section', 'section', 'text')])
+
+        builder.searchEntryUrl(tocItemIndex, new PageMarkdownSection('', '', '')).should == '/test-doc/'
+        builder.searchEntryUrl(tocItemIndex, new PageMarkdownSection('intro', 'Introduction', '')).should == '/test-doc/#intro'
+        builder.searchEntryUrl(tocItem, new PageMarkdownSection('section', 'section', '')).should == '/test-doc/chapter/page#section'
     }
 
     @Test
