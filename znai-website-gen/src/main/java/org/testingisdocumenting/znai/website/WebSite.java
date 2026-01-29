@@ -28,7 +28,6 @@ import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
 import org.testingisdocumenting.znai.html.reactjs.HtmlReactJsPage;
 import org.testingisdocumenting.znai.html.reactjs.ReactJsBundle;
-import org.testingisdocumenting.znai.markdown.PageMarkdownSection;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser;
@@ -74,7 +73,7 @@ public class WebSite implements Log {
 
     private Map<TocItem, Page> pageByTocItem;
     private Map<TocItem, MarkupParserResult> parserResultByTocItem;
-    private final GlobalSearchEntries globalSearchEntries;
+    private GlobalSearchEntriesBuilder globalSearchEntriesBuilder;
     private final LocalSearchEntries localSearchEntries;
 
     private TableOfContents toc;
@@ -130,7 +129,6 @@ public class WebSite implements Log {
         searchIndexJavaScript = WebResource.moduleWithPath(SEARCH_INDEX_FILE_NAME);
         auxiliaryFilesRegistry = new AuxiliaryFilesRegistry();
         markupParsingConfiguration = MarkupParsingConfigurations.byName(cfg.documentationType);
-        globalSearchEntries = new GlobalSearchEntries();
         localSearchEntries = new LocalSearchEntries();
         auxiliaryFilesLastUpdateTime = new HashMap<>();
 
@@ -397,6 +395,7 @@ public class WebSite implements Log {
     private void createDocStructure() {
         docStructure = new WebSiteDocStructure(componentsRegistry, docMeta, toc, markupParsingConfiguration);
         componentsRegistry.setDocStructure(docStructure);
+        globalSearchEntriesBuilder = new GlobalSearchEntriesBuilder(docMeta, docStructure);
     }
 
     private void createResourceResolvers() {
@@ -590,22 +589,8 @@ public class WebSite implements Log {
     }
 
     private void updateSearchEntries(TocItem tocItem, MarkupParserResult parserResult) {
-        List<GlobalSearchEntry> siteSearchEntries = parserResult.markdown().sections().stream()
-                .filter(section -> !(section.title().isEmpty() && section.markdown().trim().isEmpty()))
-                .map(section -> new GlobalSearchEntry(
-                        docMeta,
-                        tocItem,
-                        section,
-                        searchEntryUrl(tocItem, section)))
-                .collect(toList());
-
-        globalSearchEntries.addAll(siteSearchEntries);
+        globalSearchEntriesBuilder.addSearchEntries(tocItem, parserResult.markdown().sections());
         localSearchEntries.add(new PageLocalSearchEntries(tocItem, parserResult.searchEntries()));
-    }
-
-    private String searchEntryUrl(TocItem tocItem, PageMarkdownSection section) {
-        DocUrl docUrl = new DocUrl(tocItem.getDirName(), tocItem.getFileNameWithoutExtension(), section.id());
-        return docStructure.createUrl(null, docUrl);
     }
 
     // each markup file may refer other files like code snippets or diagrams
@@ -663,7 +648,7 @@ public class WebSite implements Log {
         String jsIndexScript = localSearchEntries.buildIndexScript();
         deployer.deploy("search-index.js", jsIndexScript);
 
-        String xmlExternalIndex = globalSearchEntries.toXml();
+        String xmlExternalIndex = globalSearchEntriesBuilder.getGlobalSearchEntries().toXml();
         deployer.deploy("search-entries.xml", xmlExternalIndex);
     }
 
