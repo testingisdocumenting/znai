@@ -233,7 +233,7 @@ Both command line and maven plugin lets you to build documentation website and a
       <score>STANDARD</score>
       <text>## CLI download
 
-Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.84/znai-dist-1.84-znai.zip). Add it to your `PATH`.
+Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.85.1/znai-dist-1.85.1-znai.zip). Add it to your `PATH`.
 
 ## Brew
 
@@ -257,7 +257,7 @@ brew install testingisdocumenting/brew/znai
 &lt;plugin>
     &lt;groupId>org.testingisdocumenting.znai&lt;/groupId>
     &lt;artifactId>znai-maven-plugin&lt;/artifactId>
-    &lt;version>1.84&lt;/version>
+    &lt;version>1.85.1&lt;/version>
 &lt;/plugin>
 ```
 
@@ -535,6 +535,7 @@ example-references
 znai-development
     local-build
 release-notes
+    2026
     2025
     2024
     2023
@@ -7027,6 +7028,26 @@ Without `actualSize` there would be a gap created by hiding other parts.
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/SVG#fit</url>
+    <fullTitle>Znai: SVG, Fit [Visuals]</fullTitle>
+    <pageTitle>SVG</pageTitle>
+    <chapterTitle>Visuals</chapterTitle>
+    <pageSectionTitle>Fit</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use `fit: true` to automatically scale down wide SVGs to fit within the available content width. This is useful for diagrams that are designed to be wide but need to adapt to different screen sizes.
+
+```
+:include-svg: wide-boxes.svg {fit: true}
+```
+
+
+Without `fit`, the SVG would overflow the content area on narrow screens.
+
+</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/icons#feather-icons</url>
     <fullTitle>Znai: Icons, Feather Icons [Visuals]</fullTitle>
     <pageTitle>Icons</pageTitle>
@@ -12191,6 +12212,32 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2026#1852</url>
+    <fullTitle>Znai: 2026, 1.85.2 [Release Notes]</fullTitle>
+    <pageTitle>2026</pageTitle>
+    <chapterTitle>Release Notes</chapterTitle>
+    <pageSectionTitle>1.85.2</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2026#185</url>
+    <fullTitle>Znai: 2026, 1.85 [Release Notes]</fullTitle>
+    <pageTitle>2026</pageTitle>
+    <chapterTitle>Release Notes</chapterTitle>
+    <pageSectionTitle>1.85</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
 
 </text>
     </text>

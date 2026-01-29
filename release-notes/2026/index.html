@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Snippets Highlighting</title>
+<title>Znai: 2026</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -85,33 +85,13 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Line By Text</h1></header>
-<p>Use the option to bring readers attention to the important lines highlight include file file name js highlight export class JsClass constructor usefulAction export default JsClass</p>
+<header><h1>1.85.2</h1></header>
+<p>Fix displays index page stats instead of treating it as orphan page _stats Fix correctly render index page url search entries xml</p>
 </article>
 
 <article>
-<header><h1>Line By Index</h1></header>
-<p>It is recommended to pass a substring but you can pass a line idx starts from 0 Additionally you can combine two approaches and pass a list of things to highlight Note Order of lines to highlight is reflected during presentation mode include file file name js highlight export 1 class JsClass constructor usefulAction export default JsClass</p>
-</article>
-
-<article>
-<header><h1>Text From File</h1></header>
-<p>Use the option to highlight lines specified in a separate file highlightPath include file file name js highlightPath lines to highlight txt class JsClass constructor usefulAction export default JsClass class usefulAction</p>
-</article>
-
-<article>
-<header><h1>Region</h1></header>
-<p>Use the to highlight large portions of the code as one highlight block highlightRegion include file file name js highlightRegion start constructor end class JsClass constructor usefulAction export default JsClass</p>
-</article>
-
-<article>
-<header><h1>Region Using Scope</h1></header>
-<p>Use the to highlight region using scope like Unlike example above highlight will not stop at first closing Use multiple start lines to narrow down a specific region Znai will find a smallest text block that contains all specified lines and then highlight the most inner one highlightRegion scope include file with nested if js highlightRegion start userId scope class JsClass usefulAction if userId user a if canRead userId include file with multiple if clarify js highlightRegion start if userId canRead scope class JsClass usefulAction if userId user a if canRead userId if userId user a if canRead userId</p>
-</article>
-
-<article>
-<header><h1>Multiple Regions</h1></header>
-<p>Use list to specify multiple regions to highlight include file with multiple if js highlightRegion start canRead scope start canWrite scope class JsClass usefulAction if userId user a if canRead userId if userId user b if canWrite userId</p>
+<header><h1>1.85</h1></header>
+<p>Fix request unique aggregated views instead of incorrectly calculating them on client _stats Fix Pass missing query params from page docId _stats Add SVG option fit Add Jupyter notebook images are auto scaled down to fit the column width</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -583,271 +563,155 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "line-by-text",
+      "id" : "1852",
       "additionalIds" : [ ],
-      "title" : "Line By Text",
+      "title" : "1.85.2",
       "type" : "Section",
       "content" : [ {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "Use the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "highlight",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " option to bring readers attention to the important lines.",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "/_stats",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " displays index page stats instead of treating it as orphan page",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
       }, {
-        "lang" : "",
-        "snippet" : ":include-file: file-name.js {highlight: \"export\"}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlight" : [ 6 ],
-        "type" : "Snippet"
-      } ]
-    }, {
-      "id" : "line-by-index",
-      "additionalIds" : [ ],
-      "title" : "Line By Index",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "It is recommended to pass a substring, but you can pass a line idx (starts from 0).",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Additionally, you can combine two approaches and pass a list of things to highlight.",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-file: file-name.js {highlight: [\"export\", 1]}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlight" : [ 1, 6 ],
-        "type" : "Snippet"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Note: Order of lines to highlight is reflected during presentation mode",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "search-entries.xml",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " correctly render index page url",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
       } ]
     }, {
-      "id" : "text-from-file",
+      "id" : "185",
       "additionalIds" : [ ],
-      "title" : "Text From File",
+      "title" : "1.85",
       "type" : "Section",
       "content" : [ {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "Use the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "highlightPath",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " option to highlight lines specified in a separate file.",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "_stats/",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " request unique aggregated views instead of incorrectly calculating them on client",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
       }, {
-        "lang" : "",
-        "snippet" : ":include-file: file-name.js {highlightPath: \"lines-to-highlight.txt\"}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlightPath" : "lines-to-highlight.txt",
-        "highlight" : [ 0, 2 ],
-        "type" : "Snippet"
-      }, {
-        "lang" : "txt",
-        "snippet" : "class\nusefulAction",
-        "title" : "lines-to-highlight.txt",
-        "anchorId" : "text-from-file-lines-to-highlighttxt",
-        "type" : "Snippet"
-      } ]
-    }, {
-      "id" : "region",
-      "additionalIds" : [ ],
-      "title" : "Region",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "Use the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "highlightRegion",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to highlight large portions of the code as one highlight block:",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Pass missing ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "docId",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " query params from ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "_stats/",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " page",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
       }, {
-        "lang" : "",
-        "snippet" : ":include-file: file-name.js {highlightRegion: {start: \"constructor\", end: \"}\"}}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    constructor() {\n        usefulAction()\n    }\n}\n\nexport default JsClass",
-        "highlightRegion" : {
-          "start" : "constructor",
-          "end" : "}"
-        },
-        "highlight" : [ 1, 2, 3 ],
-        "type" : "Snippet"
-      } ]
-    }, {
-      "id" : "region-using-scope",
-      "additionalIds" : [ ],
-      "title" : "Region Using Scope",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "Use the ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "highlightRegion.scope",
-          "type" : "InlinedCode"
-        }, {
-          "text" : " to highlight region using scope like ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "{}",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ".",
-          "type" : "SimpleText"
-        }, {
-          "type" : "SoftLineBreak"
-        }, {
-          "text" : "Unlike example above, highlight will not stop at first closing ",
-          "type" : "SimpleText"
-        }, {
-          "code" : "}",
-          "type" : "InlinedCode"
-        }, {
-          "text" : ":",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: SVG ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "fit",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " option",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
       }, {
-        "lang" : "",
-        "snippet" : ":include-file: with-nested-if.js {highlightRegion: {start: \"userId ===\", scope: \"{}\"}}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    usefulAction() {\n        if (userId === \"user-a\") {\n            if (canRead(userId)) {\n                // ...\n            }\n        }\n    }\n}",
-        "highlightRegion" : {
-          "start" : "userId ===",
-          "scope" : "{}"
-        },
-        "highlight" : [ 2, 3, 4, 5, 6 ],
-        "type" : "Snippet"
-      }, {
-        "type" : "Paragraph",
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
         "content" : [ {
-          "text" : "Use multiple start lines to narrow down a specific region",
-          "type" : "SimpleText"
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Jupyter notebook images are auto-scaled down to fit the column width",
+              "type" : "SimpleText"
+            } ]
+          } ]
         } ]
-      }, {
-        "lang" : "",
-        "snippet" : ":include-file: with-multiple-if-clarify.js {highlightRegion: {\n  start: [\"if (userId ===\", \"canRead\"], scope: \"{}\"}\n}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Znai will find a smallest text block that contains all specified lines and then highlight the most inner one:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    usefulAction() {\n        if (userId === \"user-a\") {\n            // ...\n        }\n\n        if (canRead(userId)) {\n            // ...\n        }\n\n        if (userId === \"user-a\") {\n            // ...\n            if (canRead(userId)) {\n                // ...\n            }\n        }\n    }\n}",
-        "highlightRegion" : {
-          "start" : [ "if (userId ===", "canRead" ],
-          "scope" : "{}"
-        },
-        "highlight" : [ 12, 13, 14 ],
-        "type" : "Snippet"
-      } ]
-    }, {
-      "id" : "multiple-regions",
-      "additionalIds" : [ ],
-      "title" : "Multiple Regions",
-      "type" : "Section",
-      "content" : [ {
-        "type" : "Paragraph",
-        "content" : [ {
-          "text" : "Use list to specify multiple regions to highlight:",
-          "type" : "SimpleText"
-        } ]
-      }, {
-        "lang" : "markdown",
-        "snippet" : ":include-file: with-multiple-if.js {highlightRegion: [\n  {start: \"canRead\", scope: \"{}\"},\n  {start: \"canWrite\", scope: \"{}\"}]\n}",
-        "lineNumber" : "",
-        "type" : "Snippet"
-      }, {
-        "lang" : "js",
-        "snippet" : "class JsClass {\n    usefulAction() {\n        if (userId === \"user-a\") {\n            if (canRead(userId)) {\n                // ...\n            }\n        }\n        if (userId === \"user-b\") {\n            if (canWrite(userId)) {\n                // ...\n            }\n        }\n    }\n}",
-        "highlightRegion" : [ {
-          "start" : "canRead",
-          "scope" : "{}"
-        }, {
-          "start" : "canWrite",
-          "scope" : "{}"
-        } ],
-        "highlight" : [ 3, 4, 5, 8, 9, 10 ],
-        "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1769650216324,
+    "lastModifiedTime" : 1769650216320,
     "tocItem" : {
-      "chapterTitle" : "Snippets",
-      "pageTitle" : "Snippets Highlighting",
+      "chapterTitle" : "Release Notes",
+      "pageTitle" : "2026",
       "pageMeta" : { },
-      "dirName" : "snippets",
-      "fileName" : "snippets-highlighting",
+      "dirName" : "release-notes",
+      "fileName" : "2026",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Line By Text",
-        "id" : "line-by-text",
-        "customAnchorId" : "line-by-text"
+        "title" : "1.85.2",
+        "id" : "1852",
+        "customAnchorId" : "1852"
       }, {
-        "title" : "Line By Index",
-        "id" : "line-by-index",
-        "customAnchorId" : "line-by-index"
-      }, {
-        "title" : "Text From File",
-        "id" : "text-from-file",
-        "customAnchorId" : "text-from-file"
-      }, {
-        "title" : "Region",
-        "id" : "region",
-        "customAnchorId" : "region"
-      }, {
-        "title" : "Region Using Scope",
-        "id" : "region-using-scope",
-        "customAnchorId" : "region-using-scope"
-      }, {
-        "title" : "Multiple Regions",
-        "id" : "multiple-regions",
-        "customAnchorId" : "multiple-regions"
+        "title" : "1.85",
+        "id" : "185",
+        "customAnchorId" : "185"
       } ]
     }
   }

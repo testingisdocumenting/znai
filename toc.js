@@ -1360,6 +1360,10 @@ toc = [ {
       "title" : "Scale",
       "id" : "scale",
       "customAnchorId" : "scale"
+    }, {
+      "title" : "Fit",
+      "id" : "fit",
+      "customAnchorId" : "fit"
     } ]
   }, {
     "chapterTitle" : "Visuals",
@@ -2528,6 +2532,23 @@ toc = [ {
   "chapterTitle" : "Release Notes",
   "dirName" : "release-notes",
   "items" : [ {
+    "chapterTitle" : "Release Notes",
+    "pageTitle" : "2026",
+    "pageMeta" : { },
+    "dirName" : "release-notes",
+    "fileName" : "2026",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "1.85.2",
+      "id" : "1852",
+      "customAnchorId" : "1852"
+    }, {
+      "title" : "1.85",
+      "id" : "185",
+      "customAnchorId" : "185"
+    } ]
+  }, {
     "chapterTitle" : "Release Notes",
     "pageTitle" : "2025",
     "pageMeta" : { },

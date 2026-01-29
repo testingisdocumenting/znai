@@ -143,7 +143,7 @@ answer-link: znai/introduction/getting-started#command-line
 
 ## CLI download
 
-Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.84/znai-dist-1.84-znai.zip). Add it to your `PATH`.
+Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.85.1/znai-dist-1.85.1-znai.zip). Add it to your `PATH`.
 
 ## Brew
 
@@ -158,7 +158,7 @@ answer-link: znai/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.84</version>
+    <version>1.85.1</version>
 </plugin>
 ```
 
@@ -371,6 +371,7 @@ example-references
 znai-development
     local-build
 release-notes
+    2026
     2025
     2024
     2023
@@ -5111,6 +5112,18 @@ Use `scale: scaleFactor` to change the size of the SVG provided
 :include-svg: with-groups.svg {idsToReveal: ["partC"], actualSize: true, scale: 0.2}
 ```
 
+# Visuals :: SVG :: Fit
+answer-link: znai/visuals/SVG#fit
+
+Use `fit: true` to automatically scale down wide SVGs to fit within the available content width. This is useful for diagrams that are designed to be wide but need to adapt to different screen sizes.
+
+```
+:include-svg: wide-boxes.svg {fit: true}
+```
+
+
+Without `fit`, the SVG would overflow the content area on narrow screens.
+
 # Visuals :: Icons :: Feather Icons
 answer-link: znai/visuals/icons#feather-icons
 
@@ -8789,6 +8802,16 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2026 :: 1.85.2
+answer-link: znai/release-notes/2026#1852
+
+
+
+# Release Notes :: 2026 :: 1.85
+answer-link: znai/release-notes/2026#185
+
+
 
 # Release Notes :: 2025 :: 1.84
 answer-link: znai/release-notes/2025#184

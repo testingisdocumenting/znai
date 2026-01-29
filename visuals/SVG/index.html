@@ -103,6 +103,11 @@
 <header><h1>Scale</h1></header>
 <p>Use to change the size of the SVG provided st0 fill #5CB8CD st1 fill #FB8A52 st2 fill #152D39 st3 fill #E8E8E8 scale scaleFactor include svg with groups svg idsToReveal partC actualSize true scale 0 2</p>
 </article>
+
+<article>
+<header><h1>Fit</h1></header>
+<p>Use to automatically scale down wide SVGs to fit within the available content width This is useful for diagrams that are designed to be wide but need to adapt to different screen sizes Design Develop Test Release Monitor Without the SVG would overflow the content area on narrow screens fit true include svg wide boxes svg fit true fit</p>
+</article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
@@ -454,6 +459,10 @@
 </article>
 
 <article>
+<a href="/znai/release-notes/2026/">2026</a>
+</article>
+
+<article>
 <a href="/znai/release-notes/2025/">2025</a>
 </article>
 
@@ -479,7 +488,7 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-VihCNMWn.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-8Pss11n5.js"></script>
 <script type="module" src="/znai/static/architecture-U656AL7Q-DjPBJmSV.js"></script>
 <script type="module" src="/znai/static/architectureDiagram-VXUJARFQ-ChBn1xk8.js"></script>
 <script type="module" src="/znai/static/blockDiagram-VD42YOAC-Budi6d17.js"></script>
@@ -496,7 +505,7 @@
 <script type="module" src="/znai/static/ganttDiagram-JELNMOA3-COOaPycs.js"></script>
 <script type="module" src="/znai/static/gitGraph-F6HP7TQM-CqS9sC5f.js"></script>
 <script type="module" src="/znai/static/gitGraphDiagram-NY62KEGX-BQN4gPQ9.js"></script>
-<script type="module" src="/znai/static/index-By8_f_qN.js"></script>
+<script type="module" src="/znai/static/index-CvuEZtbh.js"></script>
 <script type="module" src="/znai/static/info-NVLQJR56-BUcKGpxN.js"></script>
 <script type="module" src="/znai/static/infoDiagram-WHAUD3N6-D7Xs3PNk.js"></script>
 <script type="module" src="/znai/static/journeyDiagram-XKPGCS4Q-C0gcrYJQ.js"></script>
@@ -591,7 +600,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1767237584937",
+        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1769650216346",
         "type" : "Svg"
       } ]
     }, {
@@ -623,7 +632,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1767237584937",
+        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1769650216346",
         "idsToReveal" : [ "partA", "partB" ],
         "type" : "Svg"
       }, {
@@ -704,7 +713,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1767237584937",
+        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1769650216346",
         "idsToReveal" : [ "partC" ],
         "actualSize" : true,
         "type" : "Svg"
@@ -744,14 +753,58 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "lineNumber" : "",
         "type" : "Snippet"
       }, {
-        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1767237584937",
+        "svgSrc" : "/znai/visuals/with-groups.svg?timestamp=1769650216346",
         "idsToReveal" : [ "partC" ],
         "actualSize" : true,
         "scale" : 0.2,
         "type" : "Svg"
       } ]
+    }, {
+      "id" : "fit",
+      "additionalIds" : [ ],
+      "title" : "Fit",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "fit: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to automatically scale down wide SVGs to fit within the available content width.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "This is useful for diagrams that are designed to be wide but need to adapt to different screen sizes.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : ":include-svg: wide-boxes.svg {fit: true}",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "svgSrc" : "/znai/visuals/wide-boxes.svg?timestamp=1769650216346",
+        "fit" : true,
+        "type" : "Svg"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Without ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "fit",
+          "type" : "InlinedCode"
+        }, {
+          "text" : ", the SVG would overflow the content area on narrow screens.",
+          "type" : "SimpleText"
+        } ]
+      } ]
     } ],
-    "lastModifiedTime" : 1767237584917,
+    "lastModifiedTime" : 1769650216325,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "SVG",
@@ -776,6 +829,10 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "title" : "Scale",
         "id" : "scale",
         "customAnchorId" : "scale"
+      }, {
+        "title" : "Fit",
+        "id" : "fit",
+        "customAnchorId" : "fit"
       } ]
     }
   }
