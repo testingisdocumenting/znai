@@ -143,7 +143,7 @@ answer-link: znai/introduction/getting-started#command-line
 
 ## CLI download
 
-Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.85.1/znai-dist-1.85.1-znai.zip). Add it to your `PATH`.
+Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.85.2/znai-dist-1.85.2-znai.zip). Add it to your `PATH`.
 
 ## Brew
 
@@ -158,7 +158,7 @@ answer-link: znai/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.85.1</version>
+    <version>1.85.2</version>
 </plugin>
 ```
 

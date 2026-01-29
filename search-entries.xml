@@ -233,7 +233,7 @@ Both command line and maven plugin lets you to build documentation website and a
       <score>STANDARD</score>
       <text>## CLI download
 
-Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.85.1/znai-dist-1.85.1-znai.zip). Add it to your `PATH`.
+Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.85.2/znai-dist-1.85.2-znai.zip). Add it to your `PATH`.
 
 ## Brew
 
@@ -257,7 +257,7 @@ brew install testingisdocumenting/brew/znai
 &lt;plugin>
     &lt;groupId>org.testingisdocumenting.znai&lt;/groupId>
     &lt;artifactId>znai-maven-plugin&lt;/artifactId>
-    &lt;version>1.85.1&lt;/version>
+    &lt;version>1.85.2&lt;/version>
 &lt;/plugin>
 ```
 
