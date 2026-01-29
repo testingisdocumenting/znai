@@ -1,0 +1,1 @@
+* Fix: `/_stats` displays index page stats instead of treating it as orphan page
