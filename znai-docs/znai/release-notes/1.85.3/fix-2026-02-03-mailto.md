@@ -1,0 +1,1 @@
+* Fix: `mailto:name` is correctly identified as external URL again
