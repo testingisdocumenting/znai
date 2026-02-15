@@ -23,6 +23,7 @@ import org.junit.Test
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
+
 class MermaidFencePluginTest {
     static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
     @Test
@@ -45,8 +46,7 @@ class MermaidFencePluginTest {
     A[Start] --> B[Process]
     B --> C[End]'''
 
-        def elements = process(mermaidContent, [iconpacks: [[name: "test", url: "/test-icons.json"]]]
-        )
+        def elements = process(mermaidContent, [iconpacks: [[name: "test", url: "/test-icons.json"]]])
 
         elements.should == [
                 mermaid: mermaidContent,
@@ -89,7 +89,6 @@ class MermaidFencePluginTest {
     }
 
     private static def process(String content, Map<String, ?>  params) {
-        def result = PluginsTestUtils.processFenceAndGetProps(pluginParamsFactory.create("mermaid", "", params), content)
-        return result
+        return PluginsTestUtils.processFenceAndGetProps(pluginParamsFactory.create("mermaid", "", params), content)
     }
 }

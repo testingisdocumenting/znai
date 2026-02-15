@@ -82,23 +82,44 @@ end
 
 Mermaid `architecture-beta` offers the possibility of displaying custom icons.
 
-Use
+## Registering an icon pack served by a web site
+
 ```
 mermaid {iconpacks : [{ name : "logos", url : "https://unpkg.com/@iconify-json/logos@1/icons.json" }]}
 ```
 to register the `@iconify-json/logos@1` icon pack with the name `logos`.
 
 
-Use
+## Registering an icon pack included in your znai documentation project
+
 ```
 mermaid {iconpacks : [{ name : "logos", url : "mermaid/demo_icons.json" }]}
 ```
-to register the `icons.json` icon pack with the name `logos`.
+to register the `mermaid/demo_icons.json` icon pack with the name `logos`.
 
 This assumes that 
 
 - the `icons.json` file is in a subdirectory `mermaid` of the directory containing the current page.
 
+## Worked example with AWS icons
+
+source :
+
+    ```mermaid {iconpacks : [{ name : "logos", url : "mermaid/demo_icons.json" }]}
+    architecture-beta
+        group api(logos:aws-lambda)[API]
+    
+        service db(logos:aws-aurora)[Database] in api
+        service disk1(logos:aws-glacier)[Storage] in api
+        service disk2(logos:aws-s3)[Storage] in api
+        service server(logos:aws-ec2)[Server] in api
+    
+        db:L <-[hosts]- R:server
+        disk1:T <-[mounts]- B:server
+        disk2:T <-[mounts]- B:db
+    ```
+
+rendered diagram :
 
 ```mermaid {iconpacks : [{ name : "logos", url : "mermaid/demo_icons.json" }]}
 architecture-beta
@@ -112,4 +133,19 @@ architecture-beta
     db:L <-[hosts]- R:server
     disk1:T <-[mounts]- B:server
     disk2:T <-[mounts]- B:db
+```
+
+### how to create a file with just the icons you need from an open source icon pack
+
+Assuming that you are working on a host where curl and jq are available, here is a way to do it :
+
+```shell
+curl -L -O https://unpkg.com/@iconify-json/logos@1/icons.json
+jq '{prefix, icons: {
+  "aws-aurora": .icons["aws-aurora"], 
+  "aws-ec2": .icons["aws-ec2"],
+  "aws-glacier": .icons["aws-glacier"],
+  "aws-lambda": .icons["aws-lambda"],
+  "aws-s3": .icons["aws-s3"]
+}, width, height}' icons.json > demo_icons.json
 ```
