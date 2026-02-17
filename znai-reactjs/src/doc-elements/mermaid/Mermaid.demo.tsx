@@ -19,6 +19,7 @@ import React from "react";
 import Mermaid from "./Mermaid";
 import { Registry } from "react-component-viewer";
 import c4DiagramContent from './c4context.txt?raw';  // Add this import
+import awsDiagramContent from './aws-diagram.txt?raw';
 
 export function mermaidDemo(registry: Registry) {
   registry.add("simple ", () => <Mermaid mermaid={"graph TD; A-->B; B-->C;"} />);
@@ -47,6 +48,13 @@ export function mermaidDemo(registry: Registry) {
         <Mermaid
             wide={true}
             mermaid={c4DiagramContent}
+        />
+    ));
+    registry.add("aws", () => (
+        <Mermaid
+            wide={true}
+            mermaid={awsDiagramContent}
+            iconpacks={[{ name : "logos", url : "/static/icons/demo_icons.json" }]}
         />
     ));
 }

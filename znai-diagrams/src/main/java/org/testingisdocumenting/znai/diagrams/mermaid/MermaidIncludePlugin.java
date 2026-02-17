@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class MermaidIncludePlugin implements IncludePlugin {
+public class MermaidIncludePlugin extends MermaidPluginBase implements IncludePlugin {
     private Path mermaidPath;
     private String content;
 
@@ -58,7 +58,7 @@ public class MermaidIncludePlugin implements IncludePlugin {
 
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         props.put("mermaid", content);
-
+        processIconPacks(componentsRegistry, props);
         return PluginResult.docElement("Mermaid", props);
     }
 

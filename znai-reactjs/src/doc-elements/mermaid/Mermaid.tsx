@@ -23,6 +23,7 @@ import "./Mermaid.css";
 interface Props {
   mermaid: string;
   wide?: boolean;
+  iconpacks?: Array<{ name: string; url: string }>;
 }
 
 let mermaidIdIdx = 0;
@@ -81,6 +82,13 @@ export default function Mermaid(props: Props) {
       // @ts-ignore
       theme: mermaidThemeName(),
     });
+    // Register icon packs if provided, otherwise use default logos pack
+    if (props.iconpacks && props.iconpacks.length > 0) {
+      mermaid.registerIconPacks(props.iconpacks.map(pack => ({
+        name: pack.name,
+        loader: () => fetch(pack.url).then(res => res.json())
+      })));
+    }
 
     mermaid.render(id, props.mermaid)
         .then(({ svg }) => {
@@ -90,7 +98,7 @@ export default function Mermaid(props: Props) {
         .catch((error) => {
           console.error('Error rendering mermaid diagram:', error);
         });
-  }, [props.mermaid, znaiThemeName]);
+  }, [props.mermaid, props.iconpacks, znaiThemeName]);
 
   const className = "znai-mermaid " + (props.wide ? "wide" : "content-block");
   return <div className={className} dangerouslySetInnerHTML={{ __html: html }}></div>;

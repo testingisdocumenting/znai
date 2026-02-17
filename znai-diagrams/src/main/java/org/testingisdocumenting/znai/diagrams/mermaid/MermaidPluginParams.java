@@ -21,6 +21,8 @@ import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 
 class MermaidPluginParams {
     static final PluginParamsDefinition definition = new PluginParamsDefinition()
-            .add("wide", PluginParamType.BOOLEAN, "use all the horizontal space for the diagram", "true");
-
+            .add("wide", PluginParamType.BOOLEAN, "use all the horizontal space for the diagram",
+                    "true")
+            .add("iconpacks", PluginParamType.LIST_OR_OBJECT, "icon packs to use for the diagram",
+                    "[{name : \"logos\", url : \"https://unpkg.com/@iconify-json/logos@1/icons.json\" }]");
 }
