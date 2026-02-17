@@ -132,7 +132,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <groovy.version>3.0.15</groovy.version>
         <vertx.io.version>3.9.4</vertx.io.version>
-        <commonmark.version>0.23.0</commonmark.version>
+        <commonmark.version>0.27.1</commonmark.version>
         <antlr.version>4.5</antlr.version>
         <jackson.version>2.21.0</jackson.version>
         <jackson-annotations.version>2.21</jackson-annotations.version>
