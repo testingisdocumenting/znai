@@ -132,30 +132,30 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <groovy.version>3.0.15</groovy.version>
         <vertx.io.version>3.9.4</vertx.io.version>
-        <commonmark.version>0.23.0</commonmark.version>
-        <antlr.version>4.5</antlr.version>
+        <commonmark.version>0.27.1</commonmark.version>
+        <antlr.version>4.13.2</antlr.version>
         <jackson.version>2.21.0</jackson.version>
         <jackson-annotations.version>2.21</jackson-annotations.version>
         <webtau.version>2.4</webtau.version>
         <jaxb.version>2.3.0</jaxb.version>
-        <ant.version>1.10.11</ant.version>
+        <ant.version>1.10.15</ant.version>
         <ant-compress.version>1.5</ant-compress.version>
-        <jsoup.version>1.15.3</jsoup.version>
-        <freemarker.version>2.3.30</freemarker.version>
+        <jsoup.version>1.22.1</jsoup.version>
+        <freemarker.version>2.3.34</freemarker.version>
         <commons-io.version>2.21.0</commons-io.version>
         <commons-cli.version>1.11.0</commons-cli.version>
         <commons-csv.version>1.14.1</commons-csv.version>
         <commons-compress.version>1.28.0</commons-compress.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-codec.version>1.20.0</commons-codec.version>
-        <plantuml.version>1.2023.12</plantuml.version>
+        <plantuml.version>1.2026.1</plantuml.version>
         <json-path.version>2.10.0</json-path.version>
         <slf4j.version>1.7.30</slf4j.version>
         <junit.version>4.13.1</junit.version>
-        <javaparser-core.version>3.24.8</javaparser-core.version>
+        <javaparser-core.version>3.28.0</javaparser-core.version>
         <jakarta.xml.bind-api.version>2.3.3</jakarta.xml.bind-api.version>
-        <httpcore.version>4.4.13</httpcore.version>
-        <httpclient.version>4.5.13</httpclient.version>
+        <httpcore.version>4.4.16</httpcore.version>
+        <httpclient.version>4.5.14</httpclient.version>
         <frontend-maven-plugin.installDirectory>.mvn</frontend-maven-plugin.installDirectory>
     </properties>
 
@@ -439,7 +439,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
+                    <version>3.15.0</version>
                     <configuration>
                         <release>17</release>
                         <source>17</source>
@@ -542,13 +542,13 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.5.0</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.4.0</version>
                     <configuration>
                         <escapeString>\</escapeString>
                     </configuration>
@@ -574,7 +574,7 @@
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.8.0</version>
+                <version>0.10.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <publishingServerId>central</publishingServerId>
@@ -652,7 +652,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.4.0</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -666,7 +666,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.12.0</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
