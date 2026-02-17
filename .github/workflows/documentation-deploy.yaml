@@ -25,7 +25,7 @@ jobs:
         run: mvn versions:set -DnewVersion=$(git describe --abbrev=0)
 
       - name: Build with xvfb enabled
-        uses: GabrielBB/xvfb-action@v1.0
+        uses: GabrielBB/xvfb-action@v1.7
         with:
           run: mvn -B package
 
