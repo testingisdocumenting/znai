@@ -18,6 +18,26 @@ updates:
       groovy:
         patterns:
           - "org.codehaus.groovy:*"
+      vertx:
+        patterns:
+          - "io.vertx:*"
+      slf4j-logging:
+        patterns:
+          - "org.slf4j:*"
+          - "ch.qos.logback:*"
+      testing:
+        patterns:
+          - "junit:*"
+          - "org.junit*"
+          - "org.mockito:*"
+          - "org.assertj:*"
+      # Catch-all: group all remaining minor/patch updates into one PR
+      maven-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
     ignore:
       # Don't update major versions automatically
       - dependency-name: "org.codehaus.groovy:*"
@@ -34,6 +54,14 @@ updates:
       interval: "weekly"
       day: "tuesday"
     open-pull-requests-limit: 10
+    groups:
+      # Group all minor and patch npm updates into a single PR
+      npm-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
     ignore:
       # Don't update major versions automatically
       - dependency-name: "*"
@@ -45,3 +73,8 @@ updates:
     schedule:
       interval: "weekly"
       day: "wednesday"
+    groups:
+      # Group all GitHub Actions updates into a single PR
+      actions-all:
+        patterns:
+          - "*"
