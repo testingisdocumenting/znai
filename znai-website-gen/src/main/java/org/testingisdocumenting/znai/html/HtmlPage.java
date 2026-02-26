@@ -20,7 +20,9 @@ import org.testingisdocumenting.znai.utils.ResourceUtils;
 import org.testingisdocumenting.znai.website.WebResource;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
 
@@ -32,6 +34,7 @@ public class HtmlPage {
     private String title;
 
     private final List<WebResource> cssResources;
+    private final ImportMap importMap;
     private final List<WebResource> javaScriptResources;
 
     private final List<RenderSupplier> headSuppliers;
@@ -46,6 +49,8 @@ public class HtmlPage {
 
     public HtmlPage(String customFavIconPath) {
         this.customFavIconPath = customFavIconPath;
+        this.importMap = new ImportMap(Map.of("react", "static/react-bundle.es.js",
+                "react-dom", "static/react-bundle.es.js", "znai-components", "static/znai-components.es.js"));
 
         title = "";
 
@@ -99,6 +104,7 @@ public class HtmlPage {
                 "<body class=\"znai-theme theme-znai-dark\">\n" +
                 "<script>" + themeCode + "</script>\n" +
                 bodySuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
+                importMap.render(documentationId) + "\n" +
                 javaScriptResources.stream().map(r -> r.generateJavaScriptLink(documentationId)).collect(joining("\n")) + "\n" +
                 "<script type=\"module\">\n" +
                 javaScriptSuppliers.stream().map(RenderSupplier::render).collect(joining("\n")) + "\n" +
