@@ -81,7 +81,7 @@ public class LlmContentGenerator {
             });
         });
 
-        return llmContent.toString();
+        return llmContent.toString().stripTrailing() + "\n";
     }
 
     private String buildPageUrl(TocItem tocItem) {
