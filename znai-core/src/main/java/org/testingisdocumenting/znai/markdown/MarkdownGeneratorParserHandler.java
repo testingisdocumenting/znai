@@ -16,7 +16,8 @@
 
 package org.testingisdocumenting.znai.markdown;
 
-import org.commonmark.node.Heading;
+import org.commonmark.ext.gfm.strikethrough.Strikethrough;
+import org.commonmark.node.*;
 import org.jsoup.Jsoup;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
@@ -27,27 +28,48 @@ import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.parser.HeadingProps;
 import org.testingisdocumenting.znai.parser.PageSectionIdTitle;
+import org.testingisdocumenting.znai.parser.commonmark.HeadingTextAndProps;
 import org.testingisdocumenting.znai.parser.ParserHandler;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
 import org.testingisdocumenting.znai.parser.table.MarkupTableData;
 import org.testingisdocumenting.znai.reference.DocReferences;
+import org.testingisdocumenting.znai.utils.TextLineWrapper;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.Map;
 
 public class MarkdownGeneratorParserHandler implements ParserHandler {
-    enum State {
-        INSIDE_LIST,
-        DEFAULT
+    private static final int MAX_LINE_WIDTH = 120;
+
+    enum ListType {
+        BULLET,
+        ORDERED
+    }
+
+    record ListState(ListType type, char marker, int orderedNumber) {
+        static ListState bullet(char marker) {
+            return new ListState(ListType.BULLET, marker, 0);
+        }
+
+        static ListState ordered(int startNumber) {
+            return new ListState(ListType.ORDERED, '.', startNumber);
+        }
+
+        ListState withNextNumber() {
+            return new ListState(type, marker, orderedNumber + 1);
+        }
     }
 
     private final List<PageMarkdownSection> sections;
-    private State state = State.DEFAULT;
+    private final Deque<ListState> listStack = new ArrayDeque<>();
 
     private String currentSectionId;
     private String currentSectionTitle;
     private StringBuilder currentMarkdown;
+    private StringBuilder paragraphContent;
 
     private String linkUrl;
 
@@ -85,64 +107,124 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
 
     @Override
     public void onSubHeading(int level, String title, HeadingProps headingProps, Heading heading) {
-        currentMarkdown.append("#".repeat(level)).append(" ").append(title).append("\n\n");
+        currentMarkdown.append("#".repeat(level)).append(" ");
+        if (heading != null) {
+            currentMarkdown.append(generateFormattedHeadingContent(heading));
+        } else {
+            currentMarkdown.append(title);
+        }
+        currentMarkdown.append("\n\n");
+    }
+
+    private String generateFormattedHeadingContent(Heading heading) {
+        StringBuilder result = new StringBuilder();
+        heading.accept(new AbstractVisitor() {
+            @Override
+            public void visit(Text text) {
+                String textWithoutProps = HeadingTextAndProps.extractTextAndProps(text.getLiteral()).text();
+                result.append(textWithoutProps);
+            }
+
+            @Override
+            public void visit(Code code) {
+                result.append("`").append(code.getLiteral()).append("`");
+            }
+
+            @Override
+            public void visit(Emphasis emphasis) {
+                result.append("*");
+                visitChildren(emphasis);
+                result.append("*");
+            }
+
+            @Override
+            public void visit(StrongEmphasis strongEmphasis) {
+                result.append("**");
+                visitChildren(strongEmphasis);
+                result.append("**");
+            }
+
+            @Override
+            public void visit(CustomNode customNode) {
+                if (customNode instanceof Strikethrough) {
+                    result.append("~~");
+                    visitChildren(customNode);
+                    result.append("~~");
+                }
+            }
+        });
+        return result.toString().trim();
     }
 
     @Override
     public void onSimpleText(String value) {
-        currentMarkdown.append(value);
+        appendContentToParagraph(value);
     }
 
     @Override
     public void onParagraphStart() {
+        paragraphContent = new StringBuilder();
     }
 
     @Override
     public void onParagraphEnd() {
-        switch (state) {
-            case INSIDE_LIST -> currentMarkdown.append("\n");
-            case DEFAULT -> currentMarkdown.append("\n\n");
-        }
+        currentMarkdown.append(TextLineWrapper.wrapLine(paragraphContent.toString(), MAX_LINE_WIDTH));
+        currentMarkdown.append(listStack.isEmpty() ? "\n\n" : "\n");
+        paragraphContent = null;
     }
 
     @Override
     public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
-        currentMarkdown.append("`").append(inlinedCode).append("`");
+        appendContentToParagraph("`" + inlinedCode + "`");
     }
 
     @Override
     public void onEmphasisStart() {
-        currentMarkdown.append("*");
+        appendContentToParagraph("*");
     }
 
     @Override
     public void onEmphasisEnd() {
-        currentMarkdown.append("*");
+        appendContentToParagraph("*");
     }
 
     @Override
     public void onStrongEmphasisStart() {
-        currentMarkdown.append("**");
+        appendContentToParagraph("**");
     }
 
     @Override
     public void onStrongEmphasisEnd() {
-        currentMarkdown.append("**");
+        appendContentToParagraph("**");
     }
 
     @Override
     public void onStrikeThroughStart() {
-        currentMarkdown.append("~~");
+        appendContentToParagraph("~~");
     }
 
     @Override
     public void onStrikeThroughEnd() {
-        currentMarkdown.append("~~");
+        appendContentToParagraph("~~");
     }
 
     @Override
     public void onListItemStart() {
-        currentMarkdown.append("- ");
+        if (listStack.isEmpty()) {
+            return;
+        }
+
+        ListState currentList = listStack.peek();
+        String indent = "  ".repeat(listStack.size() - 1);
+
+        switch (currentList.type()) {
+            case BULLET -> currentMarkdown.append(indent).append(currentList.marker()).append(" ");
+            case ORDERED -> {
+                currentMarkdown.append(indent).append(currentList.orderedNumber()).append(". ");
+                listStack.pop();
+                listStack.push(currentList.withNextNumber());
+            }
+        }
     }
 
     @Override
@@ -151,24 +233,28 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
 
     @Override
     public void onBulletListStart(char bulletMarker, boolean tight) {
-        state = State.INSIDE_LIST;
+        listStack.push(ListState.bullet(bulletMarker));
     }
 
     @Override
     public void onBulletListEnd() {
-        state = State.DEFAULT;
-        currentMarkdown.append("\n");
+        listStack.pop();
+        if (listStack.isEmpty()) {
+            currentMarkdown.append("\n");
+        }
     }
 
     @Override
     public void onOrderedListStart(char delimiter, int startNumber) {
-        state = State.INSIDE_LIST;
+        listStack.push(ListState.ordered(startNumber));
     }
 
     @Override
     public void onOrderedListEnd() {
-        state = State.DEFAULT;
-        currentMarkdown.append("\n");
+        listStack.pop();
+        if (listStack.isEmpty()) {
+            currentMarkdown.append("\n");
+        }
     }
 
     @Override
@@ -233,12 +319,12 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
 
     @Override
     public void onSoftLineBreak() {
-        currentMarkdown.append(" ");
+        appendContentToParagraph(" ");
     }
 
     @Override
     public void onHardLineBreak() {
-        currentMarkdown.append("  \n");
+        appendContentToParagraph("  \n");
     }
 
     @Override
@@ -268,23 +354,19 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
 
     @Override
     public void onLinkStart(String url) {
-        currentMarkdown.append("[");
+        appendContentToParagraph("[");
         linkUrl = url;
     }
 
     @Override
     public void onLinkEnd() {
-        currentMarkdown.append("](");
-        if (linkUrl != null) {
-            currentMarkdown.append(linkUrl);
-            linkUrl = null;
-        }
-        currentMarkdown.append(")");
+        appendContentToParagraph("](" + (linkUrl != null ? linkUrl : "") + ")");
+        linkUrl = null;
     }
 
     @Override
     public void onFootnoteReference(FootnoteId footnoteId) {
-        currentMarkdown.append("[^").append(footnoteId.id()).append("]");
+        appendContentToParagraph("[^" + footnoteId.id() + "]");
     }
 
     @Override
@@ -331,5 +413,13 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     public void onInlinedCodePlugin(InlinedCodePlugin inlinedCodePlugin, PluginResult pluginResult) {
         String markdownRepresentation = inlinedCodePlugin.markdownRepresentation();
         currentMarkdown.append(markdownRepresentation);
+    }
+
+    private void appendContentToParagraph(String value) {
+        if (paragraphContent != null) {
+            paragraphContent.append(value);
+        } else {
+            currentMarkdown.append(value);
+        }
     }
 }
