@@ -1,0 +1,1 @@
+* Add: Mermaid diagrams icon packs
