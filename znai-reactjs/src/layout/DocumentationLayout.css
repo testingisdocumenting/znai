@@ -255,6 +255,21 @@
     color: var(--znai-toc-selected-text-color);
 }
 
+.toc-menu-index-only > .page-sections {
+    font-size: 15px;
+    padding-top: 10px;
+}
+
+.toc-menu-index-only > .page-sections .page-section {
+    padding-left: 30px;
+    line-height: 28px;
+}
+
+.toc-menu-index-only > .page-sections .page-section.selected {
+    border-left: 4px solid var(--znai-toc-selected-border-color);
+    padding-left: 26px;
+}
+
 .toc-panel.collapsed {
     width: 0;
     min-width: 0;

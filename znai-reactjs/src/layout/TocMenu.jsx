@@ -119,8 +119,33 @@ const Section = ({ section, selected, onTocItemClick, onTocItemPageSectionClick 
   );
 };
 
+function findIndexOnlyPageSections(toc) {
+  const allItems = toc.flatMap((section) => section.items || []);
+  const nonIndexItems = allItems.filter((item) => !isTocItemIndex(item));
+
+  if (nonIndexItems.length > 0) {
+    return null;
+  }
+
+  const indexItem = allItems.find((item) => isTocItemIndex(item));
+  return indexItem?.pageSectionIdTitles || null;
+}
+
 const TocMenu = ({ toc, selected, onTocItemClick, onTocItemPageSectionClick }) => {
   selected = selected || { dirName: "", fileName: "" };
+
+  const indexOnlyPageSections = findIndexOnlyPageSections(toc);
+  if (indexOnlyPageSections && indexOnlyPageSections.length > 0) {
+    return (
+      <div className="toc-menu toc-menu-index-only">
+        <PageSections
+          pageSectionIdTitles={indexOnlyPageSections}
+          selected={selected}
+          onTocItemPageSectionClick={onTocItemPageSectionClick}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="toc-menu">
