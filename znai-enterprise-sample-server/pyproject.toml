@@ -8,7 +8,7 @@ version = "1.0.0"
 description = "Enterprise sample server for Znai documentation questions"
 requires-python = ">=3.9"
 dependencies = [
-    "flask==3.0.0",
+    "flask==3.1.3",
     "flask-cors==4.0.0",
     "slack-sdk==3.26.1"
 ]
