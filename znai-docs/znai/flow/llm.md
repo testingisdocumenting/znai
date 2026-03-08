@@ -11,7 +11,7 @@ The primary use case is to provide guide context to systems like Claude Code.
 `````tabs
 CLI: 
 ```cli {highlight: "llm-txt"}
-znai build --llm-txt-output-path full-guide.md
+znai build --llm-txt-output-path llm.txt
 ```
 
 Maven: :include-file: maven-plugin-llm.xml {title: "expose llm.txt to source tree", highlight: "llmTxt"} 

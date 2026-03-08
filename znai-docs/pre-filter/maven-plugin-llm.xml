@@ -3,6 +3,6 @@
     <artifactId>znai-maven-plugin</artifactId>
     <version>${project.version}</version>
     <configuration>
-        <llmTxtOutputPath>\${project.basedir}/full-guide.md</llmTxtOutputPath>
+        <llmTxtOutputPath>\${project.basedir}/llm.txt</llmTxtOutputPath>
     </configuration>
 </plugin>

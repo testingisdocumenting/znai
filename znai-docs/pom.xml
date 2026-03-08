@@ -91,6 +91,7 @@
                         <configuration>
                             <docId>znai</docId>
                             <port>3334</port>
+                            <llmTxtOutputPath>${project.basedir}/znai/llm.txt</llmTxtOutputPath>
                         </configuration>
                         <dependencies>
                             <dependency>
