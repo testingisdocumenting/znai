@@ -89,6 +89,17 @@ CLI: :include-cli-command: znai --doc-id my-docs --deploy /path/to/static-conten
 Maven: :include-file: maven-deploy.xml {title: "maven plugin", highlight: "docId"} 
 ```
 
+# LLM Context File
+
+Znai generates a single `llm.txt` file with all the documentation content to be used by LLMs.
+It can be accessed via HTTP GET at `<doc-id>/llm.txt` and it can be generated at the build time 
+and stored in your repository to point your agents/skills to:
+
+```tabs
+CLI: :include-cli-command: znai build --llm-txt-output-path llm.txt {highlight: "llm-txt"}
+Maven: :include-file: maven-plugin-llm.xml {title: "expose llm.txt to source tree", highlight: "llmTxt"}
+```
+
 # GitHub Pages
 
 To deploy to [GitHub Pages](https://pages.github.com) use [GitHub Pages Action](https://github.com/peaceiris/actions-gh-pages).
