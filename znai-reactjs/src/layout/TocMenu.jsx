@@ -119,27 +119,24 @@ const Section = ({ section, selected, onTocItemClick, onTocItemPageSectionClick 
   );
 };
 
-function findIndexOnlyPageSections(toc) {
+function findSinglePageSections(toc) {
   const allItems = toc.flatMap((section) => section.items || []);
-  const nonIndexItems = allItems.filter((item) => !isTocItemIndex(item));
-
-  if (nonIndexItems.length > 0) {
+  if (allItems.length !== 1) {
     return null;
   }
 
-  const indexItem = allItems.find((item) => isTocItemIndex(item));
-  return indexItem?.pageSectionIdTitles || null;
+  return allItems[0].pageSectionIdTitles || null;
 }
 
 const TocMenu = ({ toc, selected, onTocItemClick, onTocItemPageSectionClick }) => {
   selected = selected || { dirName: "", fileName: "" };
 
-  const indexOnlyPageSections = findIndexOnlyPageSections(toc);
-  if (indexOnlyPageSections && indexOnlyPageSections.length > 0) {
+  const singlePageSections = findSinglePageSections(toc);
+  if (singlePageSections && singlePageSections.length > 0) {
     return (
-      <div className="toc-menu toc-menu-index-only">
+      <div className="toc-menu toc-menu-single-page">
         <PageSections
-          pageSectionIdTitles={indexOnlyPageSections}
+          pageSectionIdTitles={singlePageSections}
           selected={selected}
           onTocItemPageSectionClick={onTocItemPageSectionClick}
         />

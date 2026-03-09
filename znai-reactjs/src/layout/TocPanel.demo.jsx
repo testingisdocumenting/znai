@@ -30,15 +30,15 @@ const docMeta = {
 export function tocPanelDemo(registry) {
   const selectedTocItem = { dirName: "snippets", fileName: "json" };
 
-  const indexOnlySelectedItem = { dirName: "", fileName: "index", anchorId: "setup" };
+  const singlePageSelectedItem = { dirName: "", fileName: "index", anchorId: "setup" };
 
   registry
     .add("long", () => <TocPanel docMeta={docMeta} toc={testLongToc()} selectedItem={selectedTocItem} />, "")
     .add("short", () => <TocPanel docMeta={docMeta} toc={shortToc()} selectedItem={selectedTocItem} />, "")
-    .add("index only", () => <TocPanel docMeta={docMeta} toc={indexOnlyToc()} selectedItem={indexOnlySelectedItem} />, "");
+    .add("single page", () => <TocPanel docMeta={docMeta} toc={singlePageToc()} selectedItem={singlePageSelectedItem} />, "");
 }
 
-function indexOnlyToc() {
+function singlePageToc() {
   return [
     {
       chapterTitle: "",
