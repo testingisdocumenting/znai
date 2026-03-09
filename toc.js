@@ -92,6 +92,10 @@ toc = [ {
       "id" : "static-site-generation",
       "customAnchorId" : "static-site-generation"
     }, {
+      "title" : "LLM Context File",
+      "id" : "llm-context-file",
+      "customAnchorId" : "llm-context-file"
+    }, {
       "title" : "GitHub Pages",
       "id" : "github-pages",
       "customAnchorId" : "github-pages"
@@ -1335,6 +1339,10 @@ toc = [ {
       "title" : "Wide Mode",
       "id" : "wide-mode",
       "customAnchorId" : "wide-mode"
+    }, {
+      "title" : "Registering icon packs",
+      "id" : "registering-icon-packs",
+      "customAnchorId" : "registering-icon-packs"
     } ]
   }, {
     "chapterTitle" : "Visuals",
@@ -2540,6 +2548,14 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.86",
+      "id" : "186",
+      "customAnchorId" : "186"
+    }, {
+      "title" : "1.85.3",
+      "id" : "1853",
+      "customAnchorId" : "1853"
+    }, {
       "title" : "1.85.2",
       "id" : "1852",
       "customAnchorId" : "1852"

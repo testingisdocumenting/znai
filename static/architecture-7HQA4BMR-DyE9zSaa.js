@@ -1,0 +1,1 @@
+import{B as e,V as t}from"./mermaid-BPpCWsdg.js";export{e as ArchitectureModule,t as createArchitectureServices};

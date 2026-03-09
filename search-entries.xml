@@ -7,7 +7,8 @@
     <pageSectionTitle>Beautiful and Maintainable User Guide</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>`Znai` combines human written text with artifacts such as `code`, `graphs`, `REST API`, `Java Docs`, `Doxygen`, etc. to create up-to-date, maintainable, beautiful **User Guides** and **Tutorials**.
+      <text>`Znai` combines human written text with artifacts such as `code`, `graphs`, `REST API`, `Java Docs`, `Doxygen`, etc. to
+create up-to-date, maintainable, beautiful **User Guides** and **Tutorials**.
 
 
 ```md
@@ -31,7 +32,8 @@ to create up-to-date, maintainable, beautiful **User Guides** and **Tutorials**.
     <pageSectionTitle>Extensive Plugins System</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>`Znai` extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation
+      <text>`Znai` extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are
+available for usage and creation
 
 ### Include
 
@@ -126,7 +128,8 @@ Python:
     <pageSectionTitle>Two Sides Page Layout</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use [two sides](layout/two-sides-tabs) layout option to render examples and supporting information side by side with convenient examples language switch
+      <text>Use [two sides](layout/two-sides-tabs) layout option to render examples and supporting information side by side with
+convenient examples language switch
 
 
 </text>
@@ -154,7 +157,8 @@ Python:
     <pageSectionTitle>Auto Presentation</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>With a click of a button, `Znai` turns **User Guide** content to presentation slides. Single source of truth and minimal effort.
+      <text>With a click of a button, `Znai` turns **User Guide** content to presentation slides. Single source of truth and minimal
+effort.
 
 Present a feature in a meeting and then share the same content as a link to the documentation.
 
@@ -172,22 +176,18 @@ Present a feature in a meeting and then share the same content as a link to the 
       <score>STANDARD</score>
       <text>Znai comes with
 
-- Markdown with custom extensions and dozens of plugins:
-- Content from external files with markers and filters support
-- Simplified extraction of a function body content (working with examples)
-- Embedding of JavaDoc/PyDoc documentation text, preserving styles
-- Beautiful API documentation capabilities
-- Two Sides Page Layout with convenient examples language switch
-- Rich visuals like flow diagrams and charts
-- etc
-
-- Dev server mode with changes highlight and auto-jump to a change
-
-- Local search (with full preview)
-
-- Dark/light mode runtime switch
-
-- Presentation Mode to automatically turn your documentation into slides, using the same content
+* Markdown with custom extensions and dozens of plugins:
+  * Content from external files with markers and filters support
+  * Simplified extraction of a function body content (working with examples)
+  * Embedding of JavaDoc/PyDoc documentation text, preserving styles
+  * Beautiful API documentation capabilities
+  * Two Sides Page Layout with convenient examples language switch
+  * Rich visuals like flow diagrams and charts
+  * etc
+* Dev server mode with changes highlight and auto-jump to a change
+* Local search (with full preview)
+* Dark/light mode runtime switch
+* Presentation Mode to automatically turn your documentation into slides, using the same content
 
 </text>
     </text>
@@ -200,7 +200,8 @@ Present a feature in a meeting and then share the same content as a link to the 
     <pageSectionTitle>Markdown</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>The fastest way to learn Markdown is to go to [CommonMark](https://commonmark.org/help/) website and go through a 60 second cheatsheet or 10 minute tutorial.
+      <text>The fastest way to learn Markdown is to go to [CommonMark](https://commonmark.org/help/) website and go through a 60
+second cheatsheet or 10 minute tutorial.
 
 </text>
     </text>
@@ -215,10 +216,11 @@ Present a feature in a meeting and then share the same content as a link to the 
       <score>STANDARD</score>
       <text>Znai is available as
 
-- [Command Line](#command-line)
-- [Maven Plugin](#maven-plugin)
+* [Command Line](#command-line)
+* [Maven Plugin](#maven-plugin)
 
-Both command line and maven plugin lets you to build documentation website and also run preview server during documentation writing process.
+Both command line and maven plugin lets you to build documentation website and also run preview server during
+documentation writing process.
 
 </text>
     </text>
@@ -233,7 +235,9 @@ Both command line and maven plugin lets you to build documentation website and a
       <score>STANDARD</score>
       <text>## CLI download
 
-Download and unzip [znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.85.2/znai-dist-1.85.2-znai.zip). Add it to your `PATH`.
+Download and unzip
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.86/znai-dist-1.86-znai.zip). Add
+it to your `PATH`.
 
 ## Brew
 
@@ -257,7 +261,7 @@ brew install testingisdocumenting/brew/znai
 &lt;plugin>
     &lt;groupId>org.testingisdocumenting.znai&lt;/groupId>
     &lt;artifactId>znai-maven-plugin&lt;/artifactId>
-    &lt;version>1.85.2&lt;/version>
+    &lt;version>1.86&lt;/version>
 &lt;/plugin>
 ```
 
@@ -303,12 +307,14 @@ Listed above directories and files will be generated in the current directory.
     <pageSectionTitle>Preview Mode</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai comes with `preview` mode. In `preview` mode, znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes.
+      <text>Znai comes with `preview` mode. In `preview` mode, znai monitors changes you apply to the documentation files and
+notifies browser to navigates to the right page and highlights the changes.
 
 To start preview mode, navigate to the documentation directory (`znai` if you used scaffold) and run
 
 
-Open URL output by the command and open in a browser. Blue *eye* icon in the top right corner indicates that preview is on.
+Open URL output by the command and open in a browser. Blue *eye* icon in the top right corner indicates that preview is
+on.
 
 Open any text editor, modify and save a markdown file. Changes will be reflected in the browser.
 
@@ -323,15 +329,36 @@ Open any text editor, modify and save a markdown file. Changes will be reflected
     <pageSectionTitle>Static Site Generation</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>To build static documentation site you need to provide `documentation id`. Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path.
+      <text>To build static documentation site you need to provide `documentation id`. Documentation id becomes part of your url and
+is also used inside generated HTMLs to reference static resources using absolute path.
 
-For example, znai original documentation is hosted on [https://testingisdocumenting.org/znai](https://testingisdocumenting.org/znai) and documentation id is `znai`.
+For example, znai original documentation is hosted on
+[https://testingisdocumenting.org/znai](https://testingisdocumenting.org/znai) and documentation id is `znai`.
 
-This original page is hosted on [https://testingisdocumenting.org/znai/introduction/getting-started](https://testingisdocumenting.org/znai/introduction/getting-started). znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.
+This original page is hosted on
+[https://testingisdocumenting.org/znai/introduction/getting-started](https://testingisdocumenting.org/znai/introduction/getting-started).
+znai generates each page as index.html and puts inside directories to make it possible to have an extension less urls.
 
-To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute locations, and that's why it is required to provide `documentation id` during the site generation.
+To make it easier to handle static resources loading, Znai builds all the urls inside HTML pages using absolute
+locations, and that's why it is required to provide `documentation id` during the site generation.
 
 To generate static site, use
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/introduction/getting-started#llm-context-file</url>
+    <fullTitle>Znai: Getting Started, LLM Context File [Introduction]</fullTitle>
+    <pageTitle>Getting Started</pageTitle>
+    <chapterTitle>Introduction</chapterTitle>
+    <pageSectionTitle>LLM Context File</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Znai generates a single `llm.txt` file with all the documentation content to be used by LLMs. It can be accessed via
+HTTP GET at `&lt;doc-id>/llm.txt` and it can be generated at the build time and stored in your repository to point your
+agents/skills to:
 
 
 </text>
@@ -345,7 +372,8 @@ To generate static site, use
     <pageSectionTitle>GitHub Pages</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>To deploy to [GitHub Pages](https://pages.github.com) use [GitHub Pages Action](https://github.com/peaceiris/actions-gh-pages).
+      <text>To deploy to [GitHub Pages](https://pages.github.com) use [GitHub Pages
+Action](https://github.com/peaceiris/actions-gh-pages).
 
 Here is an example of znai publishing its documentation to github pages
 
@@ -368,9 +396,11 @@ Here is an example of znai publishing its documentation to github pages
     <pageSectionTitle>On-site Central Hub Deployment</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai has enterprise mode that lets you run Documentation hub inside your organization. It is completely free and open sourced.
+      <text>Znai has enterprise mode that lets you run Documentation hub inside your organization. It is completely free and open
+sourced.
 
-Please create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you want to try it out. I don't document it yet as I only have a couple of scenarios I tried it on, and I need more input.
+Please create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you want to try it out. I don't
+document it yet as I only have a couple of scenarios I tried it on, and I need more input.
 
 </text>
     </text>
@@ -385,17 +415,17 @@ Please create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issu
       <score>STANDARD</score>
       <text>`Znai` has three levels of documentation organization:
 
-- Chapters
-- Pages
-- Page Sections
+* Chapters
+* Pages
+* Page Sections
 
 `Znai` encourages authors to split their content across multiple pages.
 
 If you feel like you need to use nested headings, consider moving your content hierarchy one level up:
 
-- Split overlong page into multiple ones
-- Introduce chapters
-- Focus on one thing at a time
+* Split overlong page into multiple ones
+* Introduce chapters
+* Focus on one thing at a time
 
 </text>
     </text>
@@ -410,11 +440,12 @@ If you feel like you need to use nested headings, consider moving your content h
       <score>STANDARD</score>
       <text>It may be useful to compare documentation design to an object-oriented programming approach:
 
-- Chapters as `packages`
-- Pages as `classes`
-- Page Sections as `methods`
+* Chapters as `packages`
+* Pages as `classes`
+* Page Sections as `methods`
 
-It is a bad practice to have a class with loosely related methods. Similarly, it is a bad practice to have a long page with loosely related sections.
+It is a bad practice to have a class with loosely related methods. Similarly, it is a bad practice to have a long page
+with loosely related sections.
 
 </text>
     </text>
@@ -545,7 +576,8 @@ release-notes
 
 Take a look at the left side bar and compare it with the file content.
 
-The top entry, `introduction`, corresponds to the directory of the same name. The nested entry, `rationale`, corresponds to the file `rationale.md`.
+The top entry, `introduction`, corresponds to the directory of the same name. The nested entry, `rationale`, corresponds
+to the file `rationale.md`.
 
 </text>
     </text>
@@ -581,8 +613,8 @@ optional-chapter
       <score>STANDARD</score>
       <text>Only a first level heading is treated as a first class citizen:
 
-- Part of **TOC**
-- Smallest unit of **search result**
+* Part of **TOC**
+* Smallest unit of **search result**
 
 ```
 # First Class Citizen
@@ -634,7 +666,8 @@ Note: Only inlined code and Links are allowed as part of the heading content. Co
     <pageSectionTitle>Meta</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Each documentation must have the `meta.json` file in its root. This `JSON` file contains documentation display name, type, and optional `View On` information.
+      <text>Each documentation must have the `meta.json` file in its root. This `JSON` file contains documentation display name,
+type, and optional `View On` information.
 
 ```json
 {
@@ -665,9 +698,11 @@ Note: Only inlined code and Links are allowed as part of the heading content. Co
     <pageSectionTitle>Optional Index Landing Page</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Optional `index.md` file in the root is your landing page. Consider putting logos and high level information about your product there.
+      <text>Optional `index.md` file in the root is your landing page. Consider putting logos and high level information about your
+product there.
 
-Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential information there as users may not get back there often.
+Note: Landing page is not part of your Table Of Contents and is not present on navigation panel. Don't put essential
+information there as users may not get back there often.
 
 </text>
     </text>
@@ -686,7 +721,8 @@ Note: Landing page is not part of your Table Of Contents and is not present on n
 :include-redirect: chapter/page
 ```
 
-Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction page.
+Use it if you don't know what to put on Landing Page or find yourself repeating the content in your next introduction
+page.
 
 If `index.md` is not present, users will be redirected to the first page in your Table Of Contents.
 
@@ -722,10 +758,11 @@ title: Custom Name
 ---
 ```
 
-To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some cases, however, you want to make exceptions, for example, in cases where you:
+To keep things easy for future documentation owners, it's good practice to keep page and file names the same. In some
+cases, however, you want to make exceptions, for example, in cases where you:
 
-- Need to use special characters in title
-- Want to avoid auto-capitalization
+* Need to use special characters in title
+* Want to avoid auto-capitalization
 
 Another way to override a page title is by adding a `title` to `toc` file
 
@@ -771,7 +808,8 @@ chapter-one {title: "Chapter ONE explicit"}
       <score>STANDARD</score>
       <text>Good documentation flows naturally. Links to navigate to the next page are at the end of each page.
 
-Create links to remind users of *essential* concepts introduced previously. There is a good chance that a reader skipped over these or forgot about them.
+Create links to remind users of *essential* concepts introduced previously. There is a good chance that a reader skipped
+over these or forgot about them.
 
 Avoid: links that navigate users forward. It may break the flow of a documentation.
 
@@ -800,7 +838,8 @@ To refer `internal` page within your documentation use:
 [internal link](dir-name/file-name#optional-page-section-id)
 ```
 
-Note: you can get `page-section-id` by hovering over a section title and pressing link icon. Your browser URL display the updated link.
+Note: you can get `page-section-id` by hovering over a section title and pressing link icon. Your browser URL display
+the updated link.
 
 ## Links to Subsection
 
@@ -818,7 +857,8 @@ Use [Subsection Shortcut](#links) if a subsection is within the same page:
 
 ## Index Page
 
-Clicking this [index page](/) link will have the same effect as clicking the documentation title at the top of the **Navigation Panel**
+Clicking this [index page](/) link will have the same effect as clicking the documentation title at the top of the
+**Navigation Panel**
 
 To refer back to the top-level `index` page use:
 
@@ -838,7 +878,8 @@ To refer back to the top-level `index` page use:
     <pageSectionTitle>Downloads</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Linking to a local file will deploy the file along with the generated documentation. Clicking the link will open a file using the browser's default method.
+      <text>Linking to a local file will deploy the file along with the generated documentation. Clicking the link will open a file
+using the browser's default method.
 
 ```
 Download [test json file](data/test.json)
@@ -876,7 +917,8 @@ Download [test json file](data/test.json)
     <pageSectionTitle>Validation</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Local links are automatically validated during documentation build time. You will get a build time error if you refer to a page or a section/sub-section that does not exist.
+      <text>Local links are automatically validated during documentation build time. You will get a build time error if you refer to
+a page or a section/sub-section that does not exist.
 
 Pass `--validate-external-links` to enable external links validation.
 
@@ -943,9 +985,9 @@ Pass `--validate-external-links` to enable external links validation.
 
 `Znai` tries to find the file in following locations:
 
-- directory with the markup file that refers `my-file.cpp`
-- documentation root directory
-- locations enumerated inside `&lt;doc-root>/lookup-paths` file
+* directory with the markup file that refers `my-file.cpp`
+* documentation root directory
+* locations enumerated inside `&lt;doc-root>/lookup-paths` file
 
 ```txt
 ../examples
@@ -980,7 +1022,8 @@ znai --lookup-paths /extra/path-one /extra/path-two
     <pageSectionTitle>Zip and Jar Lookup</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>When Znai encounters zip or jar file listed inside `lookup-paths` it will unpack the archives into a temporary location and will use those locations to resolve files
+      <text>When Znai encounters zip or jar file listed inside `lookup-paths` it will unpack the archives into a temporary location
+and will use those locations to resolve files
 
 ```txt
 ../sources.zip
@@ -1064,7 +1107,8 @@ script: mvn -B verify -P code-coverage
     <pageSectionTitle>Class Path Lookup</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets from projects deployed to, for example, Maven Central.
+      <text>Znai is written using Java and can access resources from the classpath. Using class path lookup you can include snippets
+from projects deployed to, for example, Maven Central.
 
 ```xml
 &lt;plugin>
@@ -1102,11 +1146,12 @@ script: mvn -B verify -P code-coverage
 
 In [documentation structure](flow/structure) we learned that documentation consist of
 
-- Chapters
-- Pages
-- Page Sections
+* Chapters
+* Pages
+* Page Sections
 
-These entities play different and important roles in search. Search treats each *Page Section* as an independent unit. Each *Page Section* has an internally defined title that is a combination of all three titles.
+These entities play different and important roles in search. Search treats each *Page Section* as an independent unit.
+Each *Page Section* has an internally defined title that is a combination of all three titles.
 
 Title match during search yields the highest score.
 
@@ -1114,7 +1159,8 @@ For example this current section full title is: *Flow Search Local*.
 
 As your documentation grows, keep checking how easy it is to navigate to a section of your documentation using `/`.
 
-Avoid: using generic names in your page titles and page section titles. You should not have dozens of pages called *Introduction*
+Avoid: using generic names in your page titles and page section titles. You should not have dozens of pages called
+*Introduction*
 
 </text>
     </text>
@@ -1127,11 +1173,13 @@ Avoid: using generic names in your page titles and page section titles. You shou
     <pageSectionTitle>Global</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Besides local search capabilities, `Znai` provides a search entry `XML` file for your documentation. This file can be crawled to expose your documentation to external search engines.
+      <text>Besides local search capabilities, `Znai` provides a search entry `XML` file for your documentation. This file can be
+crawled to expose your documentation to external search engines.
 
 Your search entry file can be located at the following endpoint: `&lt;base-url>/&lt;doc-id>/search-entries.xml`
 
-For example, the search entry for the `Znai` documentation on Github is located at [https://testingisdocumenting.org/znai/search-entries.xml](https://testingisdocumenting.org/znai/search-entries.xml)
+For example, the search entry for the `Znai` documentation on Github is located at
+[https://testingisdocumenting.org/znai/search-entries.xml](https://testingisdocumenting.org/znai/search-entries.xml)
 
 
 </text>
@@ -1147,7 +1195,9 @@ For example, the search entry for the `Znai` documentation on Github is located 
       <score>STANDARD</score>
       <text>Note: Initial experimental support
 
-Znai generates a single markdown file called `llm.txt` to be used by LLMs. It is deployed at the root of the documentation and can be used in multiple scenarios. The primary use case is to provide guide context to systems like Claude Code.
+Znai generates a single markdown file called `llm.txt` to be used by LLMs. It is deployed at the root of the
+documentation and can be used in multiple scenarios. The primary use case is to provide guide context to systems like
+Claude Code.
 
 </text>
     </text>
@@ -1173,7 +1223,8 @@ Znai generates a single markdown file called `llm.txt` to be used by LLMs. It is
     <pageSectionTitle>Definition</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>To define a footer, create a `footer.md` file in the root directory of your documentation files. Footer content will be treated as regular page content, i.e., you can use the standard Markdown and all the custom extensions.
+      <text>To define a footer, create a `footer.md` file in the root directory of your documentation files. Footer content will be
+treated as regular page content, i.e., you can use the standard Markdown and all the custom extensions.
 
 Content in `footer.md` will be displayed at the bottom of each page.
 
@@ -1261,9 +1312,12 @@ To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
       <score>STANDARD</score>
       <text>
 
-When people build presentations, there should be great focus on the flow of information, making sure that those newly introduced to the topic are not lost. A poorly organized presentation might drive users seeking clarification to documentation, which too often is just as unfriendly to neophytes.
+When people build presentations, there should be great focus on the flow of information, making sure that those newly
+introduced to the topic are not lost. A poorly organized presentation might drive users seeking clarification to
+documentation, which too often is just as unfriendly to neophytes.
 
-Presentation mode in `Znai` is meant to help with both issues, mutually reinforcing good flow in presentations and documentation.
+Presentation mode in `Znai` is meant to help with both issues, mutually reinforcing good flow in presentations and
+documentation.
 
 </text>
     </text>
@@ -1280,13 +1334,13 @@ Presentation mode in `Znai` is meant to help with both issues, mutually reinforc
 
 In presentation mode, only certain documentation elements are converted to slides:
 
-- Headings
-- Bullets
-- Images and graphics
-- Code snippets
-- Command line input
-- Math
-- Tables
+* Headings
+* Bullets
+* Images and graphics
+* Code snippets
+* Command line input
+* Math
+* Tables
 
 If you write your documentation with a presentation in mind it should improve the flow of your documentation.
 
@@ -1301,14 +1355,17 @@ If you write your documentation with a presentation in mind it should improve th
     <pageSectionTitle>Auto Maintainable Content</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>There is a lot of content you can get by leveraging automated testing. And most importantly that content is going to be auto maintained.
+      <text>There is a lot of content you can get by leveraging automated testing. And most importantly that content is going to be
+auto maintained.
 
-Let's say you document a command line tool, and you want to provide an example of some operation output. You can copy and paste the output risking it being outdated. Or, you can write a test that exercises a command line and also captures its output.
+Let's say you document a command line tool, and you want to provide an example of some operation output. You can copy
+and paste the output risking it being outdated. Or, you can write a test that exercises a command line and also captures
+its output.
 
 You end up getting a lot of benefits:
 
-- your app is tested
-- your documentation is auto updated
+* your app is tested
+* your documentation is auto updated
 
 </text>
     </text>
@@ -1323,13 +1380,13 @@ You end up getting a lot of benefits:
       <score>STANDARD</score>
       <text>In addition to command line tools, here are some common scenarios you should consider:
 
-- Test Web UI - *application screenshots*
-- Test Business Logic - *tabular data*
-- Test REST API - *API JSON real examples*
-- Config files
-- Script snippets
-- Runtime dependencies DAGs
-- ...
+* Test Web UI - *application screenshots*
+* Test Business Logic - *tabular data*
+* Test REST API - *API JSON real examples*
+* Config files
+* Script snippets
+* Runtime dependencies DAGs
+* ...
 
 </text>
     </text>
@@ -1342,7 +1399,8 @@ You end up getting a lot of benefits:
     <pageSectionTitle>Self Powering Cycle</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>As you write your documentation you will come up with new scenarios to test. As you write tests, think about your documentation and what test-produced artifacts can improve it.
+      <text>As you write your documentation you will come up with new scenarios to test. As you write tests, think about your
+documentation and what test-produced artifacts can improve it.
 
 Znai provides a lot of utilities to include test artifacts.
 
@@ -1372,7 +1430,8 @@ In [Synergy With Testing](synergy-with-testing/web-UI) chapter you will see exam
     <pageSectionTitle>Simple Snippet</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>It is very easy to add a code snippet or an output result. All you have to do is indent your code with 4 spaces inside your Markdown document and your code will be rendered like this.
+      <text>It is very easy to add a code snippet or an output result. All you have to do is indent your code with 4 spaces inside
+your Markdown document and your code will be rendered like this.
 
 ```
 interface PriceService {
@@ -1431,19 +1490,20 @@ class MyComponent extends React.Component {
 
 The following languages/formats are supported:
 
-- C++
-- OCaml
-- Python
-- TypeScript
-- Java
-- SQL
-- JSON
-- Protobuf
-- JavaScript
-- Groovy
-- Bash
+* C++
+* OCaml
+* Python
+* TypeScript
+* Java
+* SQL
+* JSON
+* Protobuf
+* JavaScript
+* Groovy
+* Bash
 
-`Znai` uses [prismjs](http://prismjs.com) library to provide syntax highlighting. Note that it is not being executed inside the browser, but rather applied during HTML generation.
+`Znai` uses [prismjs](http://prismjs.com) library to provide syntax highlighting. Note that it is not being executed
+inside the browser, but rather applied during HTML generation.
 
 </text>
     </text>
@@ -1546,7 +1606,8 @@ class InternationalPriceService implements PriceService {
 }
 ```
 
-Note: Good placement of a *Wide Code* element is at the end of a page or a section to show the full version of a code sample.
+Note: Good placement of a *Wide Code* element is at the end of a page or a section to show the full version of a code
+sample.
 
 </text>
     </text>
@@ -1590,7 +1651,8 @@ class InternationalPriceService implements PriceService {
     <pageSectionTitle>Read More</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>If you have a large code snippet and you want to initially display only a small fraction use the `readMore` option with an **optional** `readMoreVisibleLines` option to specify a number of initial lines displayed (default is 8).
+      <text>If you have a large code snippet and you want to initially display only a small fraction use the `readMore` option with
+an **optional** `readMoreVisibleLines` option to specify a number of initial lines displayed (default is 8).
 
 ```
 ```java {readMore: true, readMoreVisibleLines: 3}
@@ -1677,7 +1739,8 @@ public class DocScaffolding {
     <pageSectionTitle>Embedding Content</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>To reduce documentation maintenance burden avoid copy and paste of code snippets. Embed content by referencing existing files using the `include-file` plugin instead.
+      <text>To reduce documentation maintenance burden avoid copy and paste of code snippets. Embed content by referencing existing
+files using the `include-file` plugin instead.
 
 ```
 :include-file: file-name.js
@@ -1697,9 +1760,9 @@ export default JsClass
 
 The file will be looked up using following rules:
 
-- directory with a markup file
-- root directory of a documentation
-- all lookup paths listed in a `lookup-paths` file
+* directory with a markup file
+* root directory of a documentation
+* all lookup paths listed in a `lookup-paths` file
 
 </text>
     </text>
@@ -1712,7 +1775,8 @@ The file will be looked up using following rules:
     <pageSectionTitle>Syntax highlighting</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Syntax highlighting is automatically selected based file extension. E.g. extensions `.c`, `.h`, `.cpp`, `.hpp` are treated as C++.
+      <text>Syntax highlighting is automatically selected based file extension. E.g. extensions `.c`, `.h`, `.cpp`, `.hpp` are
+treated as C++.
 
 ```
 :include-file: simple.c
@@ -1865,7 +1929,8 @@ class InternationalPriceService implements PriceService {
 }
 ```
 
-Note: Good placement of a *Wide Code* element is at the end of a page or a section to show the full version of a code sample.
+Note: Good placement of a *Wide Code* element is at the end of a page or a section to show the full version of a code
+sample.
 
 </text>
     </text>
@@ -1903,7 +1968,8 @@ class InternationalPriceService implements PriceService {
     <pageSectionTitle>Read More</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>If you have a file with large code snippet and you want to initially display only a small fraction use `readMore` option with an **optional** `readMoreVisibleLines` option to specify a number of initial lines displayed (default is 8).
+      <text>If you have a file with large code snippet and you want to initially display only a small fraction use `readMore` option
+with an **optional** `readMoreVisibleLines` option to specify a number of initial lines displayed (default is 8).
 
 ```
 :include-file: LongFile.java {readMore: true, readMoreVisibleLines: 3}
@@ -2047,7 +2113,8 @@ end
     <pageSectionTitle>Snippets Manipulation</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Read page on [Snippets Manipulation](snippets/snippets-manipulation) to learn more about extracting/modifying snippets before displaying them.
+      <text>Read page on [Snippets Manipulation](snippets/snippets-manipulation) to learn more about extracting/modifying snippets
+before displaying them.
 
 </text>
     </text>
@@ -2158,7 +2225,8 @@ import market
 market.cancel_trade(id)
 ```
 
-Note:  can be either single value or a list. Plugin will use a different separator for each block. Use `null` to have an empty line as a separator.
+Note:  can be either single value or a list. Plugin will use a different separator for each block. Use `null` to have an
+empty line as a separator.
 
 </text>
     </text>
@@ -2400,9 +2468,11 @@ let describe_season season =
   | Winter -> "It's winter! Time to bundle up and enjoy the snow."
 ```
 
-if we use `startLine: "match season"`, we can't guarantee what block will it pick, and it will depend on functions order.
+if we use `startLine: "match season"`, we can't guarantee what block will it pick, and it will depend on functions
+order.
 
-To hit the exact one use multiple start lines. Znai will attempt to find a combination of start lines with the smallest distance between them:
+To hit the exact one use multiple start lines. Znai will attempt to find a combination of start lines with the smallest
+distance between them:
 
 ```
 :include-file: ocaml/seasons.ml {startLine: ["let describe_season", "match season"], startLineKeepLast: true}
@@ -2416,7 +2486,9 @@ match season with
 | Winter -> "It's winter! Time to bundle up and enjoy the snow."
 ```
 
-Note: Use `endLine` and `endLineKeepFirst` to limit lines from the bottom. `excludeStart` removes all the lines between specified start lines, including the lines. `excludeEnd` removes all the lines between specified end lines, including the lines.
+Note: Use `endLine` and `endLineKeepFirst` to limit lines from the bottom. `excludeStart` removes all the lines between
+specified start lines, including the lines. `excludeEnd` removes all the lines between specified end lines, including
+the lines.
 
 </text>
     </text>
@@ -2557,7 +2629,8 @@ export default JsClass
     <pageSectionTitle>Line By Index</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally, you can combine two approaches and pass a list of things to highlight.
+      <text>It is recommended to pass a substring, but you can pass a line idx (starts from 0). Additionally, you can combine two
+approaches and pass a list of things to highlight.
 
 ```
 :include-file: file-name.js {highlight: ["export", 1]}
@@ -2645,7 +2718,8 @@ export default JsClass
     <pageSectionTitle>Region Using Scope</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use the `highlightRegion.scope` to highlight region using scope like `{}`. Unlike example above, highlight will not stop at first closing `}`:
+      <text>Use the `highlightRegion.scope` to highlight region using scope like `{}`. Unlike example above, highlight will not stop
+at first closing `}`:
 
 ```
 :include-file: with-nested-if.js {highlightRegion: {start: "userId ===", scope: "{}"}}
@@ -2768,7 +2842,8 @@ class JsClass {
 export default JsClass // new syntax for ES6 modules
 ```
 
-Multiple comment lines can be put above a code line. All the comment lines will be merged and applied to the next code line.
+Multiple comment lines can be put above a code line. All the comment lines will be merged and applied to the next code
+line.
 
 ```py
 order = fetch_order()
@@ -2905,7 +2980,9 @@ def example():
     my_func(100)
 ```
 
-Specify multiple files via [page local](plugins/default-parameters#page-local-defaults) or [global](plugins/default-parameters#global-defaults) plugin defaults to avoid repeating `validationPath` throughout the page.
+Specify multiple files via [page local](plugins/default-parameters#page-local-defaults) or
+[global](plugins/default-parameters#global-defaults) plugin defaults to avoid repeating `validationPath` throughout the
+page.
 
 ```md
 ---
@@ -2966,7 +3043,8 @@ roles.description, String, role description
 Note: when using this approach it is necessary to explicitly define a `root` entry, such as `person` in this example.
 
 
-Note: if a parameter name actually contains a period ("."), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. "person.firstName"
+Note: if a parameter name actually contains a period ("."), you can prevent this nesting behavior by putting the
+parameter name in single quotes, e.g. "person.firstName"
 
 </text>
     </text>
@@ -3071,7 +3149,8 @@ score, Integer, another description line with *markdown* support
     <pageSectionTitle>Multi-line CSV Description</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use quotes `"` to wrap a multiline description. Here is an example of description including multiple lines and nested code block example.
+      <text>Use quotes `"` to wrap a multiline description. Here is an example of description including multiple lines and nested
+code block example.
 
 ```
 `````api-parameters 
@@ -3092,7 +3171,8 @@ Specify whether to use gpu
 ```
 
 
-Note: Use larger number of backticks on outside then inside to distinct between `api-parameters` plugin boundaries and nested code blocks
+Note: Use larger number of backticks on outside then inside to distinct between `api-parameters` plugin boundaries and
+nested code blocks
 
 </text>
     </text>
@@ -3105,10 +3185,11 @@ Note: Use larger number of backticks on outside then inside to distinct between 
     <pageSectionTitle>External JSON File</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Instead of hard-coding your parameters inside markdown files, you can specify an external JSON file. JSON could be generated based on the data you have. Some examples:
+      <text>Instead of hard-coding your parameters inside markdown files, you can specify an external JSON file. JSON could be
+generated based on the data you have. Some examples:
 
-- build time annotation processor
-- test time command line parameters generation
+* build time annotation processor
+* test time command line parameters generation
 
 ```json
 [
@@ -3176,7 +3257,8 @@ Note: `description` field in JSON file is treated as Markdown
     <pageSectionTitle>Anchors</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear. Use `anchorPrefix` parameter to avoid conflict of anchor ids when using the same API parameter names within a single page:
+      <text>Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear. Use
+`anchorPrefix` parameter to avoid conflict of anchor ids when using the same API parameter names within a single page:
 
 ```
 ```api-parameters {anchorPrefix: "customPrefix"}
@@ -3288,7 +3370,8 @@ JSON format is also supported
     <pageSectionTitle>Page Defaults</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use plugin [Page Local Defaults](plugins/default-parameters#page-local-defaults) to set references file that is relevant to the page at hand.
+      <text>Use plugin [Page Local Defaults](plugins/default-parameters#page-local-defaults) to set references file that is relevant
+to the page at hand.
 
 </text>
     </text>
@@ -3335,7 +3418,8 @@ function flightStatus(id) {
     <pageSectionTitle>Inlined Code</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>[Inlined code](snippets/inlined-code-snippets) is automatically converted into a link if its content matches one of the global references entries:
+      <text>[Inlined code](snippets/inlined-code-snippets) is automatically converted into a link if its content matches one of the
+global references entries:
 
 ```md
 Use `fapi.book` to book a flight.  
@@ -3875,7 +3959,8 @@ Use `anchorId` to override auto generated identifier.
     <pageSectionTitle>Read More</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `readMore` to show only first lines of `JSON`. **Optional** `readMoreVisibleLines` can be specified to set the initial number of lines to display
+      <text>Use `readMore` to show only first lines of `JSON`. **Optional** `readMoreVisibleLines` can be specified to set the
+initial number of lines to display
 
 ```
 :include-json: book-store.json {readMore: true, readMoreVisibleLines: 5}
@@ -3989,7 +4074,8 @@ Use `anchorId` to override auto generated identifier.
     <pageSectionTitle>Highlights</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>To highlight a specific `JSON` value using `paths`, in (similar fashion to [regular code snippets](snippets/snippets-highlighting), you can highlight a line by text matching or by providing a line index.
+      <text>To highlight a specific `JSON` value using `paths`, in (similar fashion to [regular code
+snippets](snippets/snippets-highlighting), you can highlight a line by text matching or by providing a line index.
 
 ```
 :include-json: book-store.json {highlight: ["category", 2]}
@@ -4145,7 +4231,8 @@ transaction, example-references/domain#transaction
     <pageSectionTitle>Callouts From File</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `calloutsFile` parameter to read callouts from a separate file. Can reduce duplication and allows to generate callouts at runtime.
+      <text>Use `calloutsFile` parameter to read callouts from a separate file. Can reduce duplication and allows to generate
+callouts at runtime.
 
 ```markdown
 :include-json: book-store.json {
@@ -4219,10 +4306,12 @@ root.store.bicycle.price, *price* changes daily
     <pageSectionTitle>Test Results</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Below is an example of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to make an HTTP call, extract JSON response and information about asserted fields to highlight.
+      <text>Below is an example of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to make an HTTP
+call, extract JSON response and information about asserted fields to highlight.
 
 
-`http.doc.capture` captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json (validated paths).
+`http.doc.capture` captures multiple test artifacts into separate files: request/response.json, url.txt, paths.json
+(validated paths).
 
 ```markdown
 :include-json: weather-example/response.json {
@@ -4249,7 +4338,8 @@ root.store.bicycle.price, *price* changes daily
     <pageSectionTitle>Incomplete JSON</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>All the features above require fully formed JSON. If you need only syntax highlighting use [include-file](snippets/external-code-snippets) plugin
+      <text>All the features above require fully formed JSON. If you need only syntax highlighting use
+[include-file](snippets/external-code-snippets) plugin
 
 ```
 :include-file: incomplete.json
@@ -4303,10 +4393,10 @@ Note: Children index in `paths` starts with 0 and is associated with a tag
       <score>STANDARD</score>
       <text>`include-xml` and `paths` can be used to document:
 
-- XML Config
-- CSS selectors
-- ReactJS properties
-- AngularJS templates
+* XML Config
+* CSS selectors
+* ReactJS properties
+* AngularJS templates
 
 In presentation mode, paths will be highlighted one at a time.
 
@@ -4375,9 +4465,12 @@ When you use the following plugin, it will extract the comment and embed it as i
     <pageSectionTitle>Operation By Method And Path</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>If you have a file with an [Open API](https://github.com/OAI/OpenAPI-Specification/blob/master/README.md) definition (a.k.a. a Swagger file) you can render it by a given `method` and `path`, or by `operationId`. Both `yaml` and `json` formats are supported.
+      <text>If you have a file with an [Open API](https://github.com/OAI/OpenAPI-Specification/blob/master/README.md) definition
+(a.k.a. a Swagger file) you can render it by a given `method` and `path`, or by `operationId`. Both `yaml` and `json`
+formats are supported.
 
-Let's consider [Uber's API definition](https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json) as an example:
+Let's consider [Uber's API
+definition](https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v2.0/json/uber.json) as an example:
 
 ```
 :include-open-api: open-api/uber.json {method: "get", path: "/estimates/time"}
@@ -4493,7 +4586,8 @@ Note: The sections below are automatically generated by `include-open-api`
     <pageSectionTitle>Two Sides Layout</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai supports [Two Sides](layout/two-sides-pages) Layout mode that is perfect to supplement API documentation with examples column.
+      <text>Znai supports [Two Sides](layout/two-sides-pages) Layout mode that is perfect to supplement API documentation with
+examples column.
 
 [Open API example](layout/two-sides-pages#open-api-example)
 
@@ -4817,7 +4911,8 @@ Passed  will highlight each line as a separate slide.
     <pageSectionTitle>LaTeX Block</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>To render math you can use [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) math expressions. Surround LaTeX expression with fenced block and specify `latex` as a language
+      <text>To render math you can use [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) math expressions. Surround LaTeX
+expression with fenced block and specify `latex` as a language
 
 ```
 ```latex
@@ -4846,10 +4941,9 @@ Given:
 $$x=y$$ and $$y=z$$
 ```
 
-Given: 
 
- and 
 
+Given:  and 
 
 </text>
     </text>
@@ -4862,7 +4956,8 @@ Given:
     <pageSectionTitle>LaTeX Inline</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON parameters are used to allow LaTeX braces to be parsed correctly.
+      <text>Znai also supports inline LaTeX. Use single backticks instead of three to render math expressions inline. JSON
+parameters are used to allow LaTeX braces to be parsed correctly.
 
 ```
 It holds that `:latex: {src: "\\frac{1}{2} &lt; \\sqrt{2}"}`.
@@ -4968,7 +5063,8 @@ display(games)
 ```
 
 
-Note: Remember that you can define lookup paths for files like notebooks inside [lookup-paths](flow/lookup-paths) file, so you don't have to copy and paste notebooks to your documentation directory.
+Note: Remember that you can define lookup paths for files like notebooks inside [lookup-paths](flow/lookup-paths) file,
+so you don't have to copy and paste notebooks to your documentation directory.
 
 </text>
     </text>
@@ -4981,7 +5077,8 @@ Note: Remember that you can define lookup paths for files like notebooks inside 
     <pageSectionTitle>Exclude Section Title</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `excludeSectionTitle` to exclude section title. It can be useful when you want to use section titles as example separators to be included into your guides.
+      <text>Use `excludeSectionTitle` to exclude section title. It can be useful when you want to use section titles as example
+separators to be included into your guides.
 
 ```
 :include-jupyter: jupyter/notebook.ipynb {
@@ -5015,7 +5112,8 @@ games.groupby('genre')['price'].mean().plot(kind='bar',
     <pageSectionTitle>Two Sides</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>You will learn about the [Two Sides Layout](layout/two-sides-pages) in the Layout section. If you are are curious now for examples, jump to [Jupyter Two Sides example](layout/jupyter-notebook-two-sides)
+      <text>You will learn about the [Two Sides Layout](layout/two-sides-pages) in the Layout section. If you are are curious now
+for examples, jump to [Jupyter Two Sides example](layout/jupyter-notebook-two-sides)
 
 </text>
     </text>
@@ -5028,7 +5126,8 @@ games.groupby('genre')['price'].mean().plot(kind='bar',
     <pageSectionTitle>Description Extraction</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>In addition to [snippets manipulation](snippets/snippets-manipulation) that is applicable to any language, Znai can extract description of methods and convert parameters into [API Parameters](snippets/api-parameters)
+      <text>In addition to [snippets manipulation](snippets/snippets-manipulation) that is applicable to any language, Znai can
+extract description of methods and convert parameters into [API Parameters](snippets/api-parameters)
 
 ```
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
@@ -5086,7 +5185,8 @@ Head over to [CPP Auto Reference](CPP/auto-reference) to learn more
     <pageSectionTitle>Content Extraction</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>In addition to [snippets manipulation](snippets/snippets-manipulation) that is applicable to any language, Znai can extract content of methods.
+      <text>In addition to [snippets manipulation](snippets/snippets-manipulation) that is applicable to any language, Znai can
+extract content of methods.
 
 ```
 :include-python: python/example.py {entry: "Animal.says", bodyOnly: true}
@@ -5123,7 +5223,8 @@ Head over to [Python Content Extraction](python/content-extraction) to learn mor
     <pageSectionTitle>Description Extraction</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai provides plugin to extract PyDoc content. Use it to extract high level description and merge it with the rest of the documentation. Convert method parameters into [API Parameters](snippets/api-parameters)
+      <text>Znai provides plugin to extract PyDoc content. Use it to extract high level description and merge it with the rest of
+the documentation. Convert method parameters into [API Parameters](snippets/api-parameters)
 
 ```
 :include-python-doc-params: python/pydoc-params.py {entry: "my_func", title: "result and parameters"}
@@ -5210,7 +5311,8 @@ Head over to [Python Auto Reference](python/auto-reference) to learn more
     <pageSectionTitle>Content Extraction</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>In addition to [snippets manipulation](snippets/snippets-manipulation) that is applicable to any language, Znai can extract content of methods.
+      <text>In addition to [snippets manipulation](snippets/snippets-manipulation) that is applicable to any language, Znai can
+extract content of methods.
 
 ```
 :include-java: HelloWorld.java {
@@ -5234,7 +5336,8 @@ Head over to [Java Content Extraction](java/content-extraction) to learn more
     <pageSectionTitle>Description Extraction</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai provides plugin to extract JavaDoc content. Use it to extract high level description and merge it with the rest of the documentation. Convert Enums and method parameters into [API Parameters](snippets/api-parameters)
+      <text>Znai provides plugin to extract JavaDoc content. Use it to extract high level description and merge it with the rest of
+the documentation. Convert Enums and method parameters into [API Parameters](snippets/api-parameters)
 
 ```
 :include-java-doc-params: HelloWorld.java {
@@ -5260,7 +5363,8 @@ Head over to [Java Description Extraction](java/description-extraction) to learn
       <score>STANDARD</score>
       <text>Auto reference similar to [Python](python/content-extraction) is planned for the future releases.
 
-Create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) or [Discussion](https://github.com/testingisdocumenting/znai/discussions) to help prioritize
+Create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) or
+[Discussion](https://github.com/testingisdocumenting/znai/discussions) to help prioritize
 
 </text>
     </text>
@@ -5332,7 +5436,8 @@ Pass `entrySeparator: "&lt;separator>"` to have a provided line in between entri
       <score>STANDARD</score>
       <text>Specify types inside brackets to select an overloaded versions of your methods.
 
-Types should appear as they do in the file, i.e., if you use the short version of a type, you need to use the short version inside the plugin.
+Types should appear as they do in the file, i.e., if you use the short version of a type, you need to use the short
+version inside the plugin.
 
 
 ```
@@ -5429,9 +5534,12 @@ This markdown, and the sub-heading above, were included using the `include-markd
     <pageSectionTitle>Optional Markdown</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>When you document an open source project you may have different instructions based on where the documentation is deployed.
+      <text>When you document an open source project you may have different instructions based on where the documentation is
+deployed.
 
-For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like *Getting Started*.
+For example, this documentation has two versions, one deployed internally at Two Sigma and one deployed externally using
+GitHub Pages. Most of the documentation parts are the same, but there are differences in sections like *Getting
+Started*.
 
 We build documentation twice and the differences are handled by `include-markdown`'s `firstAvailable` parameter.
 
@@ -5516,9 +5624,8 @@ Use the latest version `:markdown: markdown-dir/inlined.md` to get the feature.
 `:badge: 2.34`
 ```
 
-Use the latest version 
 
- to get the feature.
+Use the latest version  to get the feature.
 
 Use `firstAvailable` parameter to include first file that can be resolved
 
@@ -5528,9 +5635,8 @@ Use the latest version `:markdown: {
 ```
 
 
-Use the latest version 
 
- to get the feature.
+Use the latest version  to get the feature.
 
 </text>
     </text>
@@ -5572,7 +5678,8 @@ znai preview
 ```
 
 
-Note: `include-markdowns` renders files of the specified directory based on the filename (by default in descending alphabetical order).
+Note: `include-markdowns` renders files of the specified directory based on the filename (by default in descending
+alphabetical order).
 
 </text>
     </text>
@@ -5626,7 +5733,8 @@ Warning: Bring attention to a common mistake or an often missed configuration st
 using a warning sign. Do not use too many warning signs.
 ```
 
-Warning: Bring attention to a common mistake or an often missed configuration step using a warning sign. Do not use too many warning signs.
+Warning: Bring attention to a common mistake or an often missed configuration step using a warning sign. Do not use too
+many warning signs.
 
 </text>
     </text>
@@ -5646,7 +5754,8 @@ What is the point of the `attention signs`?
 ```
 
 Question: Use the question sign to bring extra attention to the main idea of a page.   
-What is the point of the `attention signs`?
+What is the point of the
+`attention signs`?
 
 </text>
     </text>
@@ -5839,12 +5948,12 @@ attention-&lt;type>
       <score>STANDARD</score>
       <text>`Znai` has `include-image` extension to provide additional features:
 
-- annotations
-- fit
-- scale
-- alignment
-- border
-- presentation mode
+* annotations
+* fit
+* scale
+* alignment
+* border
+* presentation mode
 
 </text>
     </text>
@@ -6052,7 +6161,8 @@ Note: Pass  parameter to validate image urls
     <pageSectionTitle>Mobile And Desktop Only</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `mobileOnly` to only render an image in mobile screen size. Use `desktopOnly` to only render an image in desktop screen size.
+      <text>Use `mobileOnly` to only render an image in mobile screen size. Use `desktopOnly` to only render an image in desktop
+screen size.
 
 ```
 :include-image: small-book.png {title: "only visible in mobile screen size", mobileOnly: true}
@@ -6095,7 +6205,8 @@ Note: Color of badges change based on the background color
     <pageSectionTitle>Manual Coordinates</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Hover mouse over image during [Preview Mode](introduction/getting-started#preview-mode) to display coordinates under the cursor. Use the displayed coordinates to update the position.
+      <text>Hover mouse over image during [Preview Mode](introduction/getting-started#preview-mode) to display coordinates under the
+cursor. Use the displayed coordinates to update the position.
 
 </text>
     </text>
@@ -6121,10 +6232,11 @@ Note: Color of badges change based on the background color
 ```
 
 Note: Hover over image annotations to display automatic tooltip.   
-Hover over an item text to highlight the annotation on the image.
+Hover over an item text to highlight the annotation
+on the image.
 
-- Use automated testing to exercise happy paths and capture test artifacts
-- Use captured test artifacts to supercharge your documentation
+1. Use automated testing to exercise happy paths and capture test artifacts
+2. Use captured test artifacts to supercharge your documentation
 
 
 </text>
@@ -6240,7 +6352,8 @@ arrow,485,810,310,474,destination **description**
     <pageSectionTitle>Annotations Path Shortcut</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>You don't need to specify annotations path, if annotations file matches file name and path of the image and has `json` or `csv` extension.
+      <text>You don't need to specify annotations path, if annotations file matches file name and path of the image and has `json`
+or `csv` extension.
 
 Add `annotate: true` to automatically use matching annotations file
 
@@ -6264,7 +6377,8 @@ Add `annotate: true` to automatically use matching annotations file
       <score>STANDARD</score>
       <text>Use UI testing frameworks to automatically generate annotations file and capture screenshot.
 
-For example [WebTau](https://github.com/testingisdocumenting/webtau) automatically generates an annotations file in addition to capturing a screenshot.
+For example [WebTau](https://github.com/testingisdocumenting/webtau) automatically generates an annotations file in
+addition to capturing a screenshot.
 
 ```groovy
 package webtauexamples
@@ -6293,8 +6407,8 @@ scenario("capture screenshot") {
 :include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
 ```
 
-- Type question you want to be answered anonymously
-- Scan through results and pick the most relevant one
+1. Type question you want to be answered anonymously
+2. Scan through results and pick the most relevant one
 
 
 ```json
@@ -6309,7 +6423,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 230,
+    "y" : 605,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -6367,9 +6481,11 @@ Note: Card scales down large image to fit
     <pageSectionTitle>Image Height And Background</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>When you use icon like images, e.g. SVGs, then they will take all the horizontal available space, and it may not be ideal.
+      <text>When you use icon like images, e.g. SVGs, then they will take all the horizontal available space, and it may not be
+ideal.
 
-Use `imageHeight` to force image height. Use `imageBackground` to specify a [background color/gradient](https://www.w3schools.com/css/css3_gradients.asp).
+Use `imageHeight` to force image height. Use `imageBackground` to specify a [background
+color/gradient](https://www.w3schools.com/css/css3_gradients.asp).
 
 ```markdown
 ```card diamond.svg {title: "My Card", imageHeight: 120, imageBackground: "linear-gradient(to right, rgb(29 41 41), rgb(145, 152, 229))"}
@@ -6423,7 +6539,8 @@ score, Integer, another description line with *markdown* support
 ````````
 ```
 
-Note: Card plugin is designed to work with [code snippets](snippets/external-code-snippets), [Tables](layout/tables) and [API Parameters](snippets/api-parameters) by reducing spacing and integrating borders
+Note: Card plugin is designed to work with [code snippets](snippets/external-code-snippets), [Tables](layout/tables) and
+[API Parameters](snippets/api-parameters) by reducing spacing and integrating borders
 
 
 </text>
@@ -6793,7 +6910,8 @@ Use `all` as breakpoint value to create a slide for each textual entry
     <pageSectionTitle>Fenced Block</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use [Mermaid](https://mermaid-js.github.io/mermaid/#/) to create diagrams using text and code, written in a Markdown style. Surround Mermaid expressions with a fenced block and specify `mermaid` as a language
+      <text>Use [Mermaid](https://mermaid-js.github.io/mermaid/#/) to create diagrams using text and code, written in a Markdown
+style. Surround Mermaid expressions with a fenced block and specify `mermaid` as a language
 
 ```
 ```mermaid
@@ -6897,6 +7015,77 @@ or
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/mermaid-diagrams#registering-icon-packs</url>
+    <fullTitle>Znai: Mermaid Diagrams, Registering icon packs [Visuals]</fullTitle>
+    <pageTitle>Mermaid Diagrams</pageTitle>
+    <chapterTitle>Visuals</chapterTitle>
+    <pageSectionTitle>Registering icon packs</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Mermaid `architecture-beta` offers the possibility of displaying custom icons.
+
+## Registering an icon pack served by a web site
+
+```
+mermaid {iconpacks : [{ name : "logos", url : "https://unpkg.com/@iconify-json/logos@1/icons.json" }]}
+```
+
+to register the `@iconify-json/logos@1` icon pack with the name `logos`.
+
+## Registering an icon pack included in your znai documentation project
+
+```
+mermaid {iconpacks : [{ name : "logos", url : "mermaid/demo_icons.json" }]}
+```
+
+to register the `mermaid/demo_icons.json` icon pack with the name `logos`.
+
+This assumes that
+
+- the `icons.json` file is in a subdirectory `mermaid` of the directory containing the current page.
+
+## Worked example with AWS icons
+
+source :
+
+```
+```mermaid {iconpacks : [{ name : "logos", url : "mermaid/demo_icons.json" }]}
+architecture-beta
+    group api(logos:aws-lambda)[API]
+
+    service db(logos:aws-aurora)[Database] in api
+    service disk1(logos:aws-glacier)[Storage] in api
+    service disk2(logos:aws-s3)[Storage] in api
+    service server(logos:aws-ec2)[Server] in api
+
+    db:L &lt;-[hosts]- R:server
+    disk1:T &lt;-[mounts]- B:server
+    disk2:T &lt;-[mounts]- B:db
+```
+```
+
+rendered diagram :
+
+
+### how to create a file with just the icons you need from an open source icon pack
+
+Assuming that you are working on a host where curl and jq are available, here is a way to do it :
+
+```shell
+curl -L -O https://unpkg.com/@iconify-json/logos@1/icons.json
+jq '{prefix, icons: {
+  "aws-aurora": .icons["aws-aurora"], 
+  "aws-ec2": .icons["aws-ec2"],
+  "aws-glacier": .icons["aws-glacier"],
+  "aws-lambda": .icons["aws-lambda"],
+  "aws-s3": .icons["aws-s3"]
+}, width, height}' icons.json > demo_icons.json
+```
+
+</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/SVG#retina-displays</url>
     <fullTitle>Znai: SVG, Retina Displays [Visuals]</fullTitle>
     <pageTitle>SVG</pageTitle>
@@ -6931,13 +7120,15 @@ or
 
 In presentation mode, groups will be displayed one at a time in the order specified.
 
-To force all specified parts to appear at once add this before (either in the same section, or at the start of a document).
+To force all specified parts to appear at once add this before (either in the same section, or at the start of a
+document).
 
 ```
 :include-meta: {allAtOnce: true}
 ```
 
-This SVG image is taken and modified from [https://www.shareicon.net/pyramid-piramid-draw-stock-877888](https://www.shareicon.net/pyramid-piramid-draw-stock-877888)
+This SVG image is taken and modified from
+[https://www.shareicon.net/pyramid-piramid-draw-stock-877888](https://www.shareicon.net/pyramid-piramid-draw-stock-877888)
 
 ```html
 &lt;?xml version="1.0" ?>
@@ -6997,7 +7188,9 @@ This SVG image is taken and modified from [https://www.shareicon.net/pyramid-pir
     <pageSectionTitle>Actual Size</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>SVGs may have additional white space around the content and have width and height property specified inside. Use `actualSize: true` if you want to use the actual content only and effectively crop the white space. `width` and `height` will be overridden with the cropped size.
+      <text>SVGs may have additional white space around the content and have width and height property specified inside. Use
+`actualSize: true` if you want to use the actual content only and effectively crop the white space. `width` and `height`
+will be overridden with the cropped size.
 
 ```
 :include-svg: with-groups.svg {idsToReveal: ["partC"], actualSize: true}
@@ -7035,7 +7228,8 @@ Without `actualSize` there would be a gap created by hiding other parts.
     <pageSectionTitle>Fit</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `fit: true` to automatically scale down wide SVGs to fit within the available content width. This is useful for diagrams that are designed to be wide but need to adapt to different screen sizes.
+      <text>Use `fit: true` to automatically scale down wide SVGs to fit within the available content width. This is useful for
+diagrams that are designed to be wide but need to adapt to different screen sizes.
 
 ```
 :include-svg: wide-boxes.svg {fit: true}
@@ -7055,7 +7249,8 @@ Without `fit`, the SVG would overflow the content area on narrow screens.
     <pageSectionTitle>Feather Icons</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai has integration with [Feather Icons](https://feathericons.com/). Icons can be included using the *inlined code plugin*.
+      <text>Znai has integration with [Feather Icons](https://feathericons.com/). Icons can be included using the *inlined code
+plugin*.
 
 ```
 `:icon: cloud`
@@ -7083,8 +7278,8 @@ Head over to [https://feathericons.com/](https://feathericons.com/) to find the 
 * `:icon: settings` Setup must be easy
 ```
 
--  Time is important
--  Setup must be easy
+*  Time is important
+*  Setup must be easy
 
 </text>
     </text>
@@ -7108,19 +7303,20 @@ Use `stroke` parameter to set outline color.
 * `:icon: x-octagon {stroke: 'red'}` stroke: `red`
 ```
 
--  stroke: `green`
--  stroke: `blue`
--  stroke: `yellow`
--  stroke: `red`
+*  stroke: `green`
+*  stroke: `blue`
+*  stroke: `yellow`
+*  stroke: `red`
 
 ## Fill
 
 Use `stroke` parameter to set fill color.
 
--  fill: `red`
--  fill: `red`, stroke: 'black'
+*  fill: `red`
+*  fill: `red`, stroke: 'black'
 
-Note: default stroke color is a text color, which may not look good in Dark theme. Use `black` color explicitly if you want the stroke color to be black in both Light and Dark themes.
+Note: default stroke color is a text color, which may not look good in Dark theme. Use `black` color explicitly if you
+want the stroke color to be black in both Light and Dark themes.
 
 </text>
     </text>
@@ -7162,7 +7358,8 @@ featureB, -, +
     <pageSectionTitle>Heading Types</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `{style: "api"}` at the end of heading title to change style of the heading to `API` one: monospace and different subheading styles.
+      <text>Use `{style: "api"}` at the end of heading title to change style of the heading to `API` one: monospace and different
+subheading styles.
 
 Use it to hand-craft reference documentation
 
@@ -7259,8 +7456,8 @@ let value = 0
 
 Information you don't want users to see right away goes here. Can use all the markdown inside
 
-- item A
-- item B
+1. item A
+2. item B
 
 ```
 let list = [1, 2, 3]
@@ -7268,7 +7465,8 @@ let value = 0
 ```
 
 
-Note: Four backticks were used instead of the usual three. This is done so one fence block can include another block (code snippet) without confusion. It can be any number of backticks greater than three.
+Note: Four backticks were used instead of the usual three. This is done so one fence block can include another block
+(code snippet) without confusion. It can be any number of backticks greater than three.
 
 </text>
     </text>
@@ -7298,7 +7496,8 @@ let value = 0
 ```
 
 
-Note: Four backticks were used instead of the usual three. This is done so one fence block can include another block (code snippet) without confusion. It can be any number of backticks greater than three.
+Note: Four backticks were used instead of the usual three. This is done so one fence block can include another block
+(code snippet) without confusion. It can be any number of backticks greater than three.
 
 </text>
     </text>
@@ -7368,7 +7567,8 @@ To open a configuration screen press .
     <pageSectionTitle>Types</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Bullet points are an essential tool in the presentation of information. Frequent use of bullet points however may make documentation and presentation boring.
+      <text>Bullet points are an essential tool in the presentation of information. Frequent use of bullet points however may make
+documentation and presentation boring.
 
 You can change the way bullet points are rendered by using the `meta` plugin.
 
@@ -7392,7 +7592,8 @@ You can change the way bullet points are rendered by using the `meta` plugin.
     <pageSectionTitle>Left Right Timeline</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `LeftRightTimeLine` to outline your flow. This also splits related things by moving odd points to the left and even to the right.
+      <text>Use `LeftRightTimeLine` to outline your flow. This also splits related things by moving odd points to the left and even
+to the right.
 
 ```
 :include-meta: {bulletListType: "LeftRightTimeLine"}
@@ -7404,10 +7605,10 @@ You can change the way bullet points are rendered by using the `meta` plugin.
 ```
 
 
-- Testing
-- Design
-- Code Review
-- Documentation
+* Testing
+* Design
+* Code Review
+* Documentation
 
 </text>
     </text>
@@ -7423,9 +7624,9 @@ You can change the way bullet points are rendered by using the `meta` plugin.
       <text>Use `Venn` to display overlapping relationships.
 
 
-- Velocity
-- Volume
-- Variety
+* Velocity
+* Volume
+* Variety
 
 </text>
     </text>
@@ -7441,9 +7642,9 @@ You can change the way bullet points are rendered by using the `meta` plugin.
       <text>Use `Steps` to outline a procedure.
 
 
-- Install IDEA
-- Learn Java
-- Learn Machine Learning
+* Install IDEA
+* Learn Java
+* Learn Machine Learning
 
 Use `differentColors: true` to use distinct colors for each step
 
@@ -7452,9 +7653,9 @@ Use `differentColors: true` to use distinct colors for each step
 ```
 
 
-- Install IDEA
-- Learn Java
-- Learn Machine Learning
+* Install IDEA
+* Learn Java
+* Learn Machine Learning
 
 Use `align: "left"` to align steps to the left
 
@@ -7463,9 +7664,9 @@ Use `align: "left"` to align steps to the left
 ```
 
 
-- Install IDEA
-- Learn Java
-- Learn Machine Learning
+* Install IDEA
+* Learn Java
+* Learn Machine Learning
 
 </text>
     </text>
@@ -7502,9 +7703,9 @@ Use `align: "left"` to align steps to the left
 ```
 
 
-- Lessons Learned
-- Future Plans
-- Backup Strategy
+* Lessons Learned
+* Future Plans
+* Backup Strategy
 
 </text>
     </text>
@@ -7650,7 +7851,8 @@ At the minimum `edges` must be provided.
 ```
 
 
-Note: Size unit is not based on pixels. It is sized in inches (assuming correct DPI). It is the size units used by [Graphviz](https://graphviz.gitlab.io/))
+Note: Size unit is not based on pixels. It is sized in inches (assuming correct DPI). It is the size units used by
+[Graphviz](https://graphviz.gitlab.io/))
 
 Use `width` and `height` property on a node itself to control individual nodes size:
 
@@ -7755,7 +7957,8 @@ Note: To highlight more than one element use `{highlight: ["n3", "n4"]}`
     <pageSectionTitle>Color Groups</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `colorGroup` to assign a color group to a node. There are four color groups out of the box: `a` (default), `b`, `c`, `d`.
+      <text>Use `colorGroup` to assign a color group to a node. There are four color groups out of the box: `a` (default), `b`, `c`,
+`d`.
 
 ```json
 {
@@ -7871,7 +8074,8 @@ Note: To highlight more than one element use `{highlight: ["n3", "n4"]}`
     <pageSectionTitle>Legend</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `include-diagram-legend` to add a legend to your diagram. Optionally add `clickableNodes: true` to insert a message that the nodes are clickable (in case you use urls).
+      <text>Use `include-diagram-legend` to add a legend to your diagram. Optionally add `clickableNodes: true` to insert a message
+that the nodes are clickable (in case you use urls).
 
 ```
 :include-diagram-legend: {a: "inputs", b: "optimization process", c: "outcome", d: "unknown",
@@ -7926,7 +8130,8 @@ To force all highlights to appear at once add this before (either in the same se
     <pageSectionTitle>Layout Types</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `layout` to specify a different underlying layout engine. Only `dot` (default) and `neato` is supported at the moment.
+      <text>Use `layout` to specify a different underlying layout engine. Only `dot` (default) and `neato` is supported at the
+moment.
 
 ```
 :include-flow-chart: simple-dag.json {layout: "neato"}
@@ -8127,7 +8332,8 @@ digraph {
     <pageSectionTitle>Setup Requirements</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai renders [Graphviz](https://graphviz.org/) diagrams at documentation build time. For it to work `dot` executable must be present in `PATH` during documentation generation process.
+      <text>Znai renders [Graphviz](https://graphviz.org/) diagrams at documentation build time. For it to work `dot` executable
+must be present in `PATH` during documentation generation process.
 
 To override use `-Ddot.bin` Java system property to specify an alternative location.
 
@@ -8215,8 +8421,8 @@ then [Task2.1] lasts 4 days
       <score>STANDARD</score>
       <text>Use `include-iframe` plugin to embed HTML content that supports your documentation. Some examples:
 
-- generated React JS index.html with components that get rendered based on url anchor
-- custom plot functions
+* generated React JS index.html with components that get rendered based on url anchor
+* custom plot functions
 
 ```markdown
 :include-iframe: iframe/custom.html {
@@ -8267,7 +8473,8 @@ Note: Use `fit` parameter to automatically set the height of the iframe to fit i
     <pageSectionTitle>Properties Override</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `light` and `dark` to override CSS properties inside iframe content for light and dark modes respectively. Switch mode now to see the effect.
+      <text>Use `light` and `dark` to override CSS properties inside iframe content for light and dark modes respectively. Switch
+mode now to see the effect.
 
 ```markdown
 :include-iframe: iframe/custom.html {
@@ -8382,16 +8589,18 @@ Note: Use `fit` parameter to automatically set the height of the iframe to fit i
       <score>STANDARD</score>
       <text>Imagine your product supports multiple ways of achieving a final result:
 
-- REST
-- Web
-- CLI
-- Java
-- Python
-- more...
+* REST
+* Web
+* CLI
+* Java
+* Python
+* more...
 
-You can use tabs to allow your user to choose the method to accomplish the goal covered in the documentation. Tab selections will persist for users and provide streamlined experience.
+You can use tabs to allow your user to choose the method to accomplish the goal covered in the documentation. Tab
+selections will persist for users and provide streamlined experience.
 
-Don't: use tabs as navigation experience. If your user needs both `Java` and `Python` executed one by one you need to show steps one after the other in proper order.
+Don't: use tabs as navigation experience. If your user needs both `Java` and `Python` executed one by one you need to
+show steps one after the other in proper order.
 
 </text>
     </text>
@@ -8474,7 +8683,8 @@ $ whoamis
     <pageSectionTitle>Separate Markdown Files</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Consider extracting content to separate markup files if content becomes long. Use the `include-markdown` plugin to include external content.
+      <text>Consider extracting content to separate markup files if content becomes long. Use the `include-markdown` plugin to
+include external content.
 
 ```
 ```tabs
@@ -8512,7 +8722,8 @@ Each tab will display inlined markdown from specified files.
     <pageSectionTitle>Attention Signs</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use extra space(s) in front of `Note:` or other attention sign keywords to put attention signs inside a tab. Remember if you put 4+ spaces, your paragraph will become a code snippet.
+      <text>Use extra space(s) in front of `Note:` or other attention sign keywords to put attention signs inside a tab. Remember if
+you put 4+ spaces, your paragraph will become a code snippet.
 
 ```
 ````tabs
@@ -9021,10 +9232,10 @@ Account, Price, Description
       <score>STANDARD</score>
       <text>Use `columns` plugin to render content in two columns:
 
-- Before-and-after transition
-- Action and its result
-- Input and output
-- Result comparison
+* Before-and-after transition
+* Action and its result
+* Input and output
+* Result comparison
 
 </text>
     </text>
@@ -9095,7 +9306,9 @@ right:
     <pageSectionTitle>Sizes</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Size can be specified for a column as a `portion`. By default, both portions are assigned a value of `10`. If you specify right column `portion` to be `5`, then left will be left as `10` by default, leaving right side to be roughly 33% in size.
+      <text>Size can be specified for a column as a `portion`. By default, both portions are assigned a value of `10`. If you
+specify right column `portion` to be `5`, then left will be left as `10` by default, leaving right side to be roughly
+33% in size.
 
 
 ```
@@ -9195,7 +9408,8 @@ World Of Hellos
     <pageSectionTitle>Re-usable patterns</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Let's consider a chat REST API example where we want to display a sample input, example code snippet, and sample output. Here how documentation may look like.
+      <text>Let's consider a chat REST API example where we want to display a sample input, example code snippet, and sample output.
+Here how documentation may look like.
 
 Use   to send a new message
 
@@ -9240,7 +9454,8 @@ We need to document other methods as well, and as you can imagine, the repetitio
     <pageSectionTitle>Extract A Pattern</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Let's move a block we plan to repeat into a separate file and replace hardcoding of entries like **post** with placeholders. Znai uses the [FreeMarker](https://freemarker.apache.org) template engine.
+      <text>Let's move a block we plan to repeat into a separate file and replace hardcoding of entries like **post** with
+placeholders. Znai uses the [FreeMarker](https://freemarker.apache.org) template engine.
 
 ```md
 :include-groovy: org/testingisdocumenting/testing/examples/restapi/WebTauRestAPIGroovyTest.groovy {
@@ -9312,7 +9527,8 @@ type: two-sides
       <score>STANDARD</score>
       <text>Use the right pane to display additional details. It could be a REST response or a code snippet.
 
-Use `include-meta` in front of some content to place it on the right side of the page. All the following content will go to the right side. At the start of a new section it will be reset.
+Use `include-meta` in front of some content to place it on the right side of the page. All the following content will go
+to the right side. At the start of a new section it will be reset.
 
 ```markdown
 :include-open-api: snippets/open-api/uber.json {method: "get", path: "/v1/estimates/time"}
@@ -9431,7 +9647,8 @@ Use `rightSide: true` as a parameter to `include-` plugins to move result to the
     <pageSectionTitle>Aligning Data in Columns</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on either side.
+      <text>Use an `include-empty-block` to align code snippets or other data block on both sides when there is an extra text on
+either side.
 
 
 
@@ -9503,7 +9720,8 @@ Note: Selecting a tab will switch all the tabs on every page.
     <pageSectionTitle>Markdown Per Tab</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Any valid Markdown can be used as the content of each tab. Typical use case for *installation instructions*: extract differences per language or environment
+      <text>Any valid Markdown can be used as the content of each tab. Typical use case for *installation instructions*: extract
+differences per language or environment
 
 ```
 ````tabs
@@ -9546,7 +9764,8 @@ $ whoamis
     <pageSectionTitle>Code First</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>[The include-jupyter extension](snippets/jupyter-notebook) automatically assigns `{meta: {rightSide: true}}` to output cells. If page `type` is set to `two-sides` you will get automatic split between code and output.
+      <text>[The include-jupyter extension](snippets/jupyter-notebook) automatically assigns `{meta: {rightSide: true}}` to output
+cells. If page `type` is set to `two-sides` you will get automatic split between code and output.
 
 Note: Content below is included using `include-jupyter`
 
@@ -9619,7 +9838,8 @@ games.groupby('genre')['price'].mean().plot(kind='bar',
     <pageSectionTitle>Story First</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `storyFirst` if you use a notebook with Markdown cells to tell a story. In this mode, code will be moved to the right side and a reader can focus on the story itself.
+      <text>Use `storyFirst` if you use a notebook with Markdown cells to tell a story. In this mode, code will be moved to the
+right side and a reader can focus on the story itself.
 
 ```
 :include-jupyter: notebook.ipynb {storyFirst: true}
@@ -9818,7 +10038,8 @@ To show the contents of a class without the class declaration or doc string:
     <pageSectionTitle>Doc String</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `include-python-doc` plugin to embed py doc string with markdown into documentation. Znai uses [Pandas style doc string](https://pandas.pydata.org/docs/development/contributing_docstring.html) to parse description and parameters.
+      <text>Use `include-python-doc` plugin to embed py doc string with markdown into documentation. Znai uses [Pandas style doc
+string](https://pandas.pydata.org/docs/development/contributing_docstring.html) to parse description and parameters.
 
 ```py
 my_var = "a variable"
@@ -9860,7 +10081,8 @@ class Animal:
 ```
 
 
-Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include parameters
+Note: Plugin ignores parameters block and only includes the description text. Check next section to see how to include
+parameters
 
 ```
 :include-python-doc: python/example.py {entry: "Animal"}
@@ -9929,7 +10151,8 @@ Note: read more about [API parameters](snippets/api-parameters) for additional p
     <pageSectionTitle>Type Hints</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>If you define [Type Hints](https://docs.python.org/3/library/typing.html), you can omit types from PyDoc text and Znai will take the types from the signature
+      <text>If you define [Type Hints](https://docs.python.org/3/library/typing.html), you can omit types from PyDoc text and Znai
+will take the types from the signature
 
 ```py
 import fin
@@ -10088,7 +10311,8 @@ def add(self, another: 'Money'):
     self.amount += another.amount
 ```
 
-Note: Once you define `Money` class, method arguments and parameter descriptions with the same type will automatically link to the place of definition
+Note: Once you define `Money` class, method arguments and parameter descriptions with the same type will automatically
+link to the place of definition
 
 ### Properties
 
@@ -10272,11 +10496,12 @@ Note: Base classes that are defined somewhere in the documentation will turn int
       <score>STANDARD</score>
       <text>Znai parses generated [Doxygen](https://www.doxygen.nl/index.html) XML files to extract and embed
 
-- Comments
-- Signatures
-- Parameters
+* Comments
+* Signatures
+* Parameters
 
-Use the building blocks to mix and match API documentation with visuals and other artifacts. Or use the built-in plugins to generate the whole blocks of API reference.
+Use the building blocks to mix and match API documentation with visuals and other artifacts. Or use the built-in plugins
+to generate the whole blocks of API reference.
 
 </text>
     </text>
@@ -10372,7 +10597,8 @@ Note: Plugin ignores parameters block and only includes the description text
 ```
 
 
-Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.
+Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy
+and paste.
 
 </text>
     </text>
@@ -10749,7 +10975,8 @@ void their_func(long param1) {
 
 
 
-Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy and paste.
+Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy
+and paste.
 
 </text>
     </text>
@@ -10825,7 +11052,8 @@ Note: Args are coma and spaces sensitive. Znai will print available args variant
     <pageSectionTitle>Cross-Reference</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai uses doxygen cross-reference to link definitions together. Class above references `MyClass` in its parameters. After you include definition of that class, `MyClass` reference above becomes a link.
+      <text>Znai uses doxygen cross-reference to link definitions together. Class above references `MyClass` in its parameters.
+After you include definition of that class, `MyClass` reference above becomes a link.
 
 ```
 :include-doxygen-compound: utils::second::MyClass
@@ -10878,7 +11106,8 @@ If `bodyOnly` is specified, signature will be omitted.
     <pageSectionTitle>Callout Comments</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Similar to how you [specify comments type](snippets/code-comments#callout-comments) for a regular file, you can specify `commentsType` option for `include-java`.
+      <text>Similar to how you [specify comments type](snippets/code-comments#callout-comments) for a regular file, you can specify
+`commentsType` option for `include-java`.
 
 ```
 :include-java: HelloWorld.java {entry: "sampleMethod", bodyOnly: true, commentsType: "inline"}
@@ -10966,7 +11195,8 @@ Pass `entrySeparator: "&lt;separator>"` to have a provided line in between entri
       <score>STANDARD</score>
       <text>Specify types inside brackets to select an overloaded versions of your methods.
 
-Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short version inside the plugin.
+Types should appear as they are in the file, i.e., if you use the short version of a type, you need to use the short
+version inside the plugin.
 
 ```
 :include-java: HelloWorld.java {entry: "sampleMethod(Map, int, boolean)"}
@@ -11104,7 +11334,8 @@ Pass `entrySeparator: "&lt;separator>"` to have a provided line in between entri
     <pageSectionTitle>Class Level</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use `JavaDoc` strings to explain certain concepts of your system.
+      <text>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use
+`JavaDoc` strings to explain certain concepts of your system.
 
 
 Instead of copy-and-pasting text between sources, you can refer to it inside your documentation.
@@ -11182,7 +11413,8 @@ Instead of copy-and-pasting text between sources, you can refer to it inside you
     <pageSectionTitle>Handling Links</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Links defined with `{@link MyClass}` are automatically converted to [Inlined Code](snippets/inlined-code-snippets) and become `MyClass`. To turn `MyClass` into a link you need to use [Code References](snippets/code-references).
+      <text>Links defined with `{@link MyClass}` are automatically converted to [Inlined Code](snippets/inlined-code-snippets) and
+become `MyClass`. To turn `MyClass` into a link you need to use [Code References](snippets/code-references).
 
 Use the `referencesPath` value to associate `{@link CustomDomain}` with the documentation link:
 
@@ -11195,7 +11427,8 @@ BUY, example-references/domain#transaction-buy
 SELL, example-references/domain#transaction-sell
 ```
 
-Alternatively you can define [Global References](snippets/code-references#global-references) to turn `MyClass` into a link.
+Alternatively you can define [Global References](snippets/code-references#global-references) to turn `MyClass` into a
+link.
 
 </text>
     </text>
@@ -11360,7 +11593,8 @@ enum TransactionTypes {
 
 Enums are now linked with a reference section for the documentation.
 
-Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use [Global References](snippets/code-references#global-references).
+Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use [Global
+References](snippets/code-references#global-references).
 
 </text>
     </text>
@@ -11407,7 +11641,8 @@ class HelloWorld {
       <score>STANDARD</score>
       <text>Auto reference similar to [Python](python/content-extraction) is planned for the future releases.
 
-Create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) or [Discussion](https://github.com/testingisdocumenting/znai/discussions) to help prioritize
+Create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) or
+[Discussion](https://github.com/testingisdocumenting/znai/discussions) to help prioritize
 
 </text>
     </text>
@@ -11422,7 +11657,9 @@ Create a [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) or 
       <score>STANDARD</score>
       <text>In [Image Annotations](visuals/image-annotations) you can specify annotations in an external file.
 
-Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to capture a screenshot and annotations
+Using a testing framework one can generate coordinates during a UI test based on elements' placement. Here is an example
+of using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to capture a screenshot and
+annotations
 
 ```groovy
 package webtauexamples
@@ -11454,8 +11691,8 @@ scenario("capture screenshot") {
 :include-image: doc-artifacts/duckduckgo-search.png {annotate: true}
 ```
 
-- Type question you want to be answered anonymously
-- Scan through results and pick the most relevant one
+1. Type question you want to be answered anonymously
+2. Scan through results and pick the most relevant one
 
 
 ```json
@@ -11470,7 +11707,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 230,
+    "y" : 605,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -11488,9 +11725,11 @@ scenario("capture screenshot") {
     <pageSectionTitle>Request and Response Capture</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>[Open API](snippets/open-API) helps to define a formal API specification. And real examples of request/response helps to clarify.
+      <text>[Open API](snippets/open-API) helps to define a formal API specification. And real examples of request/response helps to
+clarify.
 
-Instead of manually copy-and-pasting the responses to your documentation, consider running tests and automatically capturing the relevant artifacts.
+Instead of manually copy-and-pasting the responses to your documentation, consider running tests and automatically
+capturing the relevant artifacts.
 
 </text>
     </text>
@@ -11503,7 +11742,9 @@ Instead of manually copy-and-pasting the responses to your documentation, consid
     <pageSectionTitle>WebTau</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>[WebTau](https://testingisdocumenting.org/webtau) (short for web test automation) is a testing API, command line tool and a framework to write unit, integration and end-to-end tests. Test across REST-API, Graph QL, Browser, Database, CLI and Business Logic with consistent set of matchers and concepts.
+      <text>[WebTau](https://testingisdocumenting.org/webtau) (short for web test automation) is a testing API, command line tool
+and a framework to write unit, integration and end-to-end tests. Test across REST-API, Graph QL, Browser, Database, CLI
+and Business Logic with consistent set of matchers and concepts.
 
 Here is an example of REST API test with test artifacts capture
 
@@ -11586,9 +11827,11 @@ right:
     <pageSectionTitle>Capture Input Example</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Your business logic tests can greatly improve maintainability of your documentation. The example below tests what account types are allowed to perform *Trading Activities*.
+      <text>Your business logic tests can greatly improve maintainability of your documentation. The example below tests what
+account types are allowed to perform *Trading Activities*.
 
-Test is using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to define and capture test data.
+Test is using [WebTau](https://github.com/testingisdocumenting/webtau) testing framework to define and capture test
+data.
 
 ```groovy
 package org.testingisdocumenting.testing.examples
@@ -11616,7 +11859,8 @@ class TestToDocExample {
 }
 ```
 
-As part of validation of account types, the test also captures data that was used for testing. We can refer to this data later in our documentation by using the [include-table](layout/tables) plugin
+As part of validation of account types, the test also captures data that was used for testing. We can refer to this data
+later in our documentation by using the [include-table](layout/tables) plugin
 
 ```
 :include-table: account-rules.json
@@ -11636,11 +11880,12 @@ Your test data and user-facing documentation is now linked.
     <pageSectionTitle></pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>`Znai` extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are available for usage and creation:
+      <text>`Znai` extends markdown with plugins system to supercharge visuals and maintainability. Three categories of plugins are
+available for usage and creation:
 
-- [Include Plugins](#include-plugins)
-- [Inlined Code](#inlined-code)
-- [Fenced Block](#fenced-block)
+* [Include Plugins](#include-plugins)
+* [Inlined Code](#inlined-code)
+* [Fenced Block](#fenced-block)
 
 </text>
     </text>
@@ -11763,7 +12008,8 @@ Python:
 }
 ```
 
-When the parameters file is present, any time you use [API Parameters](snippets/api-parameters) plugin without `title`, an implicit title will be present
+When the parameters file is present, any time you use [API Parameters](snippets/api-parameters) plugin without `title`,
+an implicit title will be present
 
 </text>
     </text>
@@ -11794,7 +12040,8 @@ image: {border: true}
 ---
 ```
 
-Once we have a block like this, every [include-image](visuals/images#extension) plugin on this page will have `border` set to true.
+Once we have a block like this, every [include-image](visuals/images#extension) plugin on this page will have `border`
+set to true.
 
 ```markdown
 :include-image: visuals/regular-image.png
@@ -11812,7 +12059,8 @@ Once we have a block like this, every [include-image](visuals/images#extension) 
     <pageSectionTitle>PlaceHolder</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Please create [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you are interested in plugins creation documentation.
+      <text>Please create [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you are interested in plugins
+creation documentation.
 
 </text>
     </text>
@@ -11851,7 +12099,8 @@ Once we have a block like this, every [include-image](visuals/images#extension) 
     <pageSectionTitle>CSS Variables</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>There are dozens of css variables you can target directly first, before considering more cascading options with class names. Use your browser inspector tool to see which ones are used.
+      <text>There are dozens of css variables you can target directly first, before considering more cascading options with class
+names. Use your browser inspector tool to see which ones are used.
 
 For example, to change font sizes, use:
 
@@ -11864,7 +12113,8 @@ For example, to change font sizes, use:
 }
 ```
 
-Note: consider only targeting variables and classes that starts with `znai-` prefix. Those are considered to be public API.
+Note: consider only targeting variables and classes that starts with `znai-` prefix. Those are considered to be public
+API.
 
 </text>
     </text>
@@ -11915,7 +12165,8 @@ Note: consider only targeting variables and classes that starts with `znai-` pre
       <score>STANDARD</score>
       <text>Znai automatically copies files like images to deploy location when you use them.
 
-Create `upload.txt` next to `toc` file and list all the additional files/directories you want to be copied to the deployment location.
+Create `upload.txt` next to `toc` file and list all the additional files/directories you want to be copied to the
+deployment location.
 
 ```txt
 my-extra-files/fileone.xml
@@ -11933,11 +12184,12 @@ my-extra-dir
     <pageSectionTitle></pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Znai has a server mode that can act as a Hub for your company documentations. In addition to serving static content, Hub provides:
+      <text>Znai has a server mode that can act as a Hub for your company documentations. In addition to serving static content, Hub
+provides:
 
-- Landing page, with all the documentations separated by sections
-- On-demand upload via CLI
-- Automatic build artifacts watching to grab the latest docs
+* Landing page, with all the documentations separated by sections
+* On-demand upload via CLI
+* Automatic build artifacts watching to grab the latest docs
 
 </text>
     </text>
@@ -12004,7 +12256,8 @@ znai --deploy=/path/where/docresources/generate --doc-id=my-doc-id --upload
     <pageSectionTitle>Todo</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Please create [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you are interested in automatically watching a set of directories for built documentations to automatically upload them to Hub.
+      <text>Please create [GitHub Issue](https://github.com/testingisdocumenting/znai/issues) if you are interested in automatically
+watching a set of directories for built documentations to automatically upload them to Hub.
 
 </text>
     </text>
@@ -12017,7 +12270,9 @@ znai --deploy=/path/where/docresources/generate --doc-id=my-doc-id --upload
     <pageSectionTitle></pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>This page is a dummy page to demo code reference capabilities from [Java Enums](java/description-extraction#enum-entries-with-references) and [parameter types](java/description-extraction#method-params-with-references)
+      <text>This page is a dummy page to demo code reference capabilities from [Java
+Enums](java/description-extraction#enum-entries-with-references) and [parameter
+types](java/description-extraction#method-params-with-references)
 
 </text>
     </text>
@@ -12169,7 +12424,8 @@ brew install graphviz
 
 ## Firefox
 
-Some automated tests in znai are using [WebTau](https://testingisdocumenting.org/webtau/getting-started/what-is-this), which in turn use Selenium WebDriver and firefox.
+Some automated tests in znai are using [WebTau](https://testingisdocumenting.org/webtau/getting-started/what-is-this),
+which in turn use Selenium WebDriver and firefox.
 
 A firefox executable has to be on the system path.
 
@@ -12212,6 +12468,32 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2026#186</url>
+    <fullTitle>Znai: 2026, 1.86 [Release Notes]</fullTitle>
+    <pageTitle>2026</pageTitle>
+    <chapterTitle>Release Notes</chapterTitle>
+    <pageSectionTitle>1.86</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2026#1853</url>
+    <fullTitle>Znai: 2026, 1.85.3 [Release Notes]</fullTitle>
+    <pageTitle>2026</pageTitle>
+    <chapterTitle>Release Notes</chapterTitle>
+    <pageSectionTitle>1.85.3</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
 
 </text>
     </text>
