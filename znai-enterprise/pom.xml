@@ -28,7 +28,7 @@
     <name>Znai Enterprise</name>
 
     <properties>
-        <logback.version>1.5.25</logback.version>
+        <logback.version>1.5.32</logback.version>
     </properties>
 
     <dependencies>
