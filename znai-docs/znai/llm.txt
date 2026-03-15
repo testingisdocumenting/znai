@@ -146,8 +146,8 @@ answer-link: znai-from-export/introduction/getting-started#command-line
 ## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.85.3-SNAPSHOT/znai-dist-1.85.3-SNAPSHOT-znai.zip).
-Add it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.86/znai-dist-1.86-znai.zip). Add
+it to your `PATH`.
 
 ## Brew
 
@@ -162,7 +162,7 @@ answer-link: znai-from-export/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.85.3-SNAPSHOT</version>
+    <version>1.86</version>
 </plugin>
 ```
 
@@ -225,7 +225,7 @@ To generate static site, use
 answer-link: znai-from-export/introduction/getting-started#llm-context-file
 
 Znai generates a single `llm.txt` file with all the documentation content to be used by LLMs. It can be accessed via
-HTTP GET at `<doc-id/llm.txt` and it can be generated at the build time and stored in your repository to point your
+HTTP GET at `<doc-id>/llm.txt` and it can be generated at the build time and stored in your repository to point your
 agents/skills to:
 
 # Introduction :: Getting Started :: GitHub Pages
