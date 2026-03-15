@@ -42,13 +42,13 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            await github.issues.createComment({
+            await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'documentation is deployed'
             })
-            await github.issues.update({
+            await github.rest.issues.update({
              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
