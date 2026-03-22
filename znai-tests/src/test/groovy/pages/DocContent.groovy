@@ -21,4 +21,12 @@ import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 class DocContent {
     def title = $(".page-content .page-title")
     def paragraphs = $(".paragraph")
+    def sectionHeaders = $("h1")
+    def mermaidClickableNodes = $(".znai-mermaid .clickable")
+
+    void clickMermaidNode() {
+        // GeckoDriver can't click elements inside SVG (even HTML inside foreignObject),
+        // use DOM .click() which creates a trusted event
+        browser.driver.executeScript("document.querySelector('.znai-mermaid .clickable .nodeLabel').click()")
+    }
 }

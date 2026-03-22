@@ -4,3 +4,5 @@ chapter-one
     target
 chapter-two
     doxygen-from-zip
+chapter-three
+    mermaid-diagrams
