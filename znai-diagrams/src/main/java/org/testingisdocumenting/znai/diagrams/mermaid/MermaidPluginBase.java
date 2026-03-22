@@ -37,10 +37,7 @@ abstract class MermaidPluginBase implements Plugin {
     }
 
     protected String processLinks(ComponentsRegistry componentsRegistry, Path markupPath, String content) {
-        DocStructure docStructure = componentsRegistry.docStructure();
-        MermaidLinkResolver linkResolver = new MermaidLinkResolver(docStructure, markupPath);
-        linkResolver.validateUrls(content);
-        return linkResolver.resolveLinks(content);
+        return MermaidLinkResolver.validateAndResolveLinks(componentsRegistry.docStructure(), markupPath, content);
     }
 
     protected void processIconPacks(ComponentsRegistry componentsRegistry, Map<String, Object> props) {

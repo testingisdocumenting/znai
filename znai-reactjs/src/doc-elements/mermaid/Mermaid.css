@@ -22,3 +22,18 @@
 .znai-mermaid svg text.messageText {
     stroke: none !important;
 }
+
+.znai-mermaid svg .clickable {
+    cursor: pointer;
+}
+
+.znai-mermaid svg .clickable:hover rect,
+.znai-mermaid svg .clickable:hover circle,
+.znai-mermaid svg .clickable:hover polygon,
+.znai-mermaid svg .clickable:hover path {
+    opacity: 0.8;
+}
+
+.znai-mermaid svg .clickable:hover .nodeLabel {
+    text-decoration: underline;
+}

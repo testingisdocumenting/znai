@@ -21,46 +21,33 @@ import org.testingisdocumenting.znai.structure.DocUrl;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-record MermaidLinkResolver(DocStructure docStructure, Path markupPath) {
+class MermaidLinkResolver {
     // matches: click nodeId "url" or click nodeId href "url"
     private static final Pattern CLICK_URL_PATTERN = Pattern.compile(
             "click\\s+\\S+\\s+(?:href\\s+)?\"([^\"]+)\"");
 
-    List<String> extractUrls(String mermaidContent) {
-        List<String> urls = new ArrayList<>();
-        Matcher matcher = CLICK_URL_PATTERN.matcher(mermaidContent);
-        while (matcher.find()) {
-            urls.add(matcher.group(1));
-        }
-        return urls;
+    private MermaidLinkResolver() {
     }
 
-    void validateUrls(String mermaidContent) {
-        List<String> urls = extractUrls(mermaidContent);
-        for (String url : urls) {
-            if (!UrlUtils.isExternal(url)) {
-                docStructure.validateUrl(markupPath, "inside mermaid diagram", new DocUrl(url));
-            }
-        }
-    }
-
-    String resolveLinks(String mermaidContent) {
+    static String validateAndResolveLinks(DocStructure docStructure, Path markupPath, String mermaidContent) {
         Matcher matcher = CLICK_URL_PATTERN.matcher(mermaidContent);
         StringBuilder result = new StringBuilder();
         while (matcher.find()) {
             String url = matcher.group(1);
-            if (!UrlUtils.isExternal(url)) {
-                String resolvedUrl = docStructure.createUrl(markupPath, new DocUrl(url));
-                String replacement = matcher.group().replace("\"" + url + "\"", "\"" + resolvedUrl + "\"");
-                matcher.appendReplacement(result, Matcher.quoteReplacement(replacement));
-            } else {
+            if (UrlUtils.isExternal(url)) {
                 matcher.appendReplacement(result, Matcher.quoteReplacement(matcher.group()));
+                continue;
             }
+
+            DocUrl docUrl = new DocUrl(url);
+            docStructure.validateUrl(markupPath, "inside mermaid diagram", docUrl);
+
+            String resolvedUrl = docStructure.createUrl(markupPath, docUrl);
+            String replacement = matcher.group().replace("\"" + url + "\"", "\"" + resolvedUrl + "\"");
+            matcher.appendReplacement(result, Matcher.quoteReplacement(replacement));
         }
         matcher.appendTail(result);
         return result.toString();

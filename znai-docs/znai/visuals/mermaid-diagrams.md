@@ -55,7 +55,7 @@ flowchart TD
     A[Start] --> B{Is it?}
     B -- Yes --> C[OK]
     B -- No ----> D[End]
-    click A "visuals/mermaid-diagrams"
+    click A "introduction/getting-started"
     click D href "https://mermaid-js.github.io/mermaid/#/" "Mermaid docs"
 ```
 
