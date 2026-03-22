@@ -308,6 +308,8 @@ export class Documentation extends React.Component {
   componentWillUnmount() {
     this.disableScrollListener();
 
+    this.cancelPendingScrollRestore?.();
+
     document.removeEventListener("keydown", this.keyDownHandler);
 
     presentationModeListeners.removeListener(this);
@@ -414,6 +416,45 @@ export class Documentation extends React.Component {
     }
   };
 
+  // Async-rendering components (e.g. mermaid diagrams) change page height after initial render,
+  // which invalidates scroll position restored from history state.
+  // We use a MutationObserver to re-apply scroll on every DOM change,
+  // and cancel if the user scrolls manually.
+  restoreScrollOnDomChanges(scrollTop) {
+    if (this.cancelPendingScrollRestore) {
+      this.cancelPendingScrollRestore();
+    }
+
+    const mainPanel = this.mainPanelDom;
+    if (!mainPanel) {
+      return;
+    }
+
+    mainPanel.scrollTop = scrollTop;
+
+    // cancel scroll restore on user-initiated scroll
+    const onScroll = () => this.cancelPendingScrollRestore();
+
+    const observer = new MutationObserver(() => {
+      // temporarily remove scroll listener so our programmatic scrollTop doesn't cancel itself
+      mainPanel.removeEventListener("scroll", onScroll);
+      mainPanel.scrollTop = scrollTop;
+      requestAnimationFrame(() => mainPanel.addEventListener("scroll", onScroll));
+    });
+
+    observer.observe(mainPanel, { childList: true, subtree: true });
+
+    // delay listener so the initial scrollTop assignment above doesn't cancel
+    requestAnimationFrame(() => mainPanel.addEventListener("scroll", onScroll));
+
+    this.cancelPendingScrollRestore = () => {
+      observer.disconnect();
+      mainPanel.removeEventListener("scroll", onScroll);
+    };
+
+    setTimeout(() => this.cancelPendingScrollRestore(), 2000);
+  }
+
   onPageLoad(urlHistoryState) {
     const { page, docMeta } = this.state;
 
@@ -422,7 +463,7 @@ export class Documentation extends React.Component {
     const currentPageLocation = documentationNavigation.currentPageLocation();
 
     if (urlHistoryState && urlHistoryState.scrollTop) {
-      this.mainPanelDom.scrollTop = urlHistoryState.scrollTop;
+      this.restoreScrollOnDomChanges(urlHistoryState.scrollTop);
     } else {
       const anchorId = currentPageLocation.anchorId;
       if (anchorId) {

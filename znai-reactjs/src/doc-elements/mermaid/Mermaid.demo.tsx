@@ -22,7 +22,18 @@ import c4DiagramContent from './c4context.txt?raw';  // Add this import
 import awsDiagramContent from './aws-diagram.txt?raw';
 
 export function mermaidDemo(registry: Registry) {
-  registry.add("simple ", () => <Mermaid mermaid={"graph TD; A-->B; B-->C;"} />);
+  registry.add("simple", () => <Mermaid mermaid={"graph TD; A-->B; B-->C;"} />);
+  registry.add("with links", () => (
+    <Mermaid
+      mermaid={
+        "flowchart TD\n" +
+        '    A[Start] --> B[Process]\n' +
+        '    B --> C[External]\n' +
+        '    click A "/test-doc/visuals/mermaid-diagrams"\n' +
+        '    click C "https://example.com"\n'
+      }
+    />
+  ));
   registry.add("wide", () => (
     <Mermaid
       wide={true}
@@ -43,18 +54,17 @@ export function mermaidDemo(registry: Registry) {
       }
     />
   ));
-  console.log(c4DiagramContent);
-    registry.add("c4", () => (
-        <Mermaid
-            wide={true}
-            mermaid={c4DiagramContent}
-        />
-    ));
-    registry.add("aws", () => (
-        <Mermaid
-            wide={true}
-            mermaid={awsDiagramContent}
-            iconpacks={[{ name : "logos", url : "/static/icons/demo_icons.json" }]}
-        />
-    ));
+  registry.add("c4", () => (
+    <Mermaid
+      wide={true}
+      mermaid={c4DiagramContent}
+    />
+  ));
+  registry.add("aws", () => (
+    <Mermaid
+      wide={true}
+      mermaid={awsDiagramContent}
+      iconpacks={[{ name: "logos", url: "/static/icons/demo_icons.json" }]}
+    />
+  ));
 }

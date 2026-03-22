@@ -37,6 +37,30 @@ Use include plugin to render a Mermaid diagram from a file.
 
 :include-file: mermaid/class-diagram.mmd { autoTitle: true }
 
+# Links
+
+Use mermaid `click` statements to add links to diagram nodes. Relative links will be resolved and validated against your documentation structure.
+
+    ```mermaid
+    flowchart TD
+        A[Start] --> B{Is it?}
+        B -- Yes --> C[OK]
+        B -- No ----> D[End]
+        click A "visuals/mermaid-diagrams"
+        click D href "https://mermaid-js.github.io/mermaid/#/" "Mermaid docs"
+    ```
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -- Yes --> C[OK]
+    B -- No ----> D[End]
+    click A "introduction/getting-started"
+    click D href "https://mermaid-js.github.io/mermaid/#/" "Mermaid docs"
+```
+
+Note: Relative links like `visuals/mermaid-diagrams` are validated during build time, the same way regular markdown links are validated.
+
 # Wide Mode
 
 Use `wide: true` to use as much horizontal space as required and available.

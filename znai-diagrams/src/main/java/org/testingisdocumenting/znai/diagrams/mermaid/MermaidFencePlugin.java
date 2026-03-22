@@ -52,7 +52,9 @@ public class MermaidFencePlugin extends MermaidPluginBase implements FencePlugin
         this.content = content;
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
         processIconPacks(componentsRegistry, props);
-        props.put("mermaid", content);
+
+        String processedContent = processLinks(componentsRegistry, markupPath, content);
+        props.put("mermaid", processedContent);
 
         return PluginResult.docElement("Mermaid", props);
     }
