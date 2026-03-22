@@ -33,21 +33,20 @@ scenario("open mermaid diagrams page") {
     docContent.title.waitTo == "Mermaid Diagrams"
 }
 
-scenario("scroll to diagram with links and click mermaid link") {
+scenario("click mermaid link and browser back restores scroll position") {
     docContent.sectionHeaders.get("Diagram With Links").scrollIntoView()
     docContent.mermaidClickableNodes.waitTo visible
+
+    def scrollTopBeforeClick = docContent.mainPanelScrollTop.get()
 
     docContent.clickMermaidNode()
 
     docContent.title.waitTo == "Target"
     browser.url.path.should contain("chapter-one/target")
-}
 
-scenario("browser back restores scroll position at mermaid diagram") {
     browser.back()
 
     browser.url.path.waitTo contain("chapter-three/mermaid-diagrams")
     docContent.title.waitTo == "Mermaid Diagrams"
-    docContent.mermaidClickableNodes.waitTo visible
-    docContent.sectionHeaders.get("Diagram With Links").waitTo visible
+    docContent.mainPanelScrollTop.waitTo == scrollTopBeforeClick
 }

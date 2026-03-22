@@ -22,6 +22,8 @@ class DocContent {
     def title = $(".page-content .page-title")
     def paragraphs = $(".paragraph")
     def sectionHeaders = $("h1")
+    def mainPanel = $(".znai-main-panel")
+    def mainPanelScrollTop = mainPanel.scrollTop
     def mermaidClickableNodes = $(".znai-mermaid .clickable")
 
     void clickMermaidNode() {
