@@ -18,6 +18,8 @@ package org.testingisdocumenting.znai.diagrams.mermaid
 
 import org.testingisdocumenting.znai.extensions.include.PluginsTestUtils
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
@@ -26,6 +28,13 @@ import static org.testingisdocumenting.webtau.Matchers.throwException
 
 class MermaidFencePluginTest {
     static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
+    @Before
+    @After
+    void init() {
+        TEST_COMPONENTS_REGISTRY.docStructure().clear()
+    }
+
     @Test
     void "should process mermaid diagram without iconpacks parameter"() {
         def mermaidContent = '''graph TD
@@ -86,6 +95,37 @@ class MermaidFencePluginTest {
         code {
             process(mermaidContent, [iconpacks: [[name: "test"]]])
         } should throwException(IllegalArgumentException.class, "iconpack url is missing")
+    }
+
+    @Test
+    void "should resolve relative links and keep external links"() {
+        TEST_COMPONENTS_REGISTRY.docStructure().addValidLink("doc/page")
+        TEST_COMPONENTS_REGISTRY.docStructure().addValidLink("ref/another#section")
+
+        def mermaidContent = '''flowchart TD
+    A[Start] --> B[Process] --> C[End]
+    click A "doc/page"
+    click B href "ref/another#section" "Go to page"
+    click C "https://example.com"'''
+
+        def elements = process(mermaidContent, Collections.emptyMap())
+
+        elements.mermaid.should == '''flowchart TD
+    A[Start] --> B[Process] --> C[End]
+    click A "/test-doc/doc/page"
+    click B href "/test-doc/ref/another#section" "Go to page"
+    click C "https://example.com"'''
+    }
+
+    @Test
+    void "should validate links and report invalid ones"() {
+        def mermaidContent = '''flowchart TD
+    A[Start] --> B[End]
+    click A "doc/page"'''
+
+        code {
+            process(mermaidContent, Collections.emptyMap())
+        } should throwException(~/no valid link.*doc\/page/)
     }
 
     private static def process(String content, Map<String, ?>  params) {

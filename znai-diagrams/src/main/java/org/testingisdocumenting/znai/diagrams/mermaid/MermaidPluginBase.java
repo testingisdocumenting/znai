@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.structure.DocStructure;
 import org.testingisdocumenting.znai.utils.UrlUtils;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,17 +36,21 @@ abstract class MermaidPluginBase implements Plugin {
         return additionalAuxiliaryFiles.entrySet().stream().filter(e -> e.getValue() == Boolean.FALSE).map(Map.Entry::getKey);
     }
 
+    protected String processLinks(ComponentsRegistry componentsRegistry, Path markupPath, String content) {
+        DocStructure docStructure = componentsRegistry.docStructure();
+        MermaidLinkResolver linkResolver = new MermaidLinkResolver(docStructure, markupPath);
+        linkResolver.validateUrls(content);
+        return linkResolver.resolveLinks(content);
+    }
+
     protected void processIconPacks(ComponentsRegistry componentsRegistry, Map<String, Object> props) {
         ResourcesResolver resourcesResolver = componentsRegistry.resourceResolver();
         DocStructure docStructure = componentsRegistry.docStructure();
         if (!props.containsKey("iconpacks")) {
             return;
         }
-        if ((props.get("iconpacks") instanceof List<?>)) {
-            List<?> iconPacks = (List<?>) props.get("iconpacks");
-            iconPacks.forEach(iconPack -> {
-                        tweakIconpackUrl(resourcesResolver, docStructure, iconPack);
-                    }
+        if ((props.get("iconpacks") instanceof List<?> iconPacks)) {
+            iconPacks.forEach(iconPack -> tweakIconpackUrl(resourcesResolver, docStructure, iconPack)
             );
         }
     }

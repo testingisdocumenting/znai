@@ -57,7 +57,9 @@ public class MermaidIncludePlugin extends MermaidPluginBase implements IncludePl
         content = componentsRegistry.resourceResolver().textContent(mermaidPath);
 
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
-        props.put("mermaid", content);
+
+        String processedContent = processLinks(componentsRegistry, markupPath, content);
+        props.put("mermaid", processedContent);
         processIconPacks(componentsRegistry, props);
         return PluginResult.docElement("Mermaid", props);
     }
