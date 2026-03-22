@@ -131,7 +131,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <groovy.version>3.0.25</groovy.version>
-        <vertx.io.version>3.9.4</vertx.io.version>
+        <vertx.io.version>3.9.16</vertx.io.version>
         <commonmark.version>0.27.1</commonmark.version>
         <antlr.version>4.13.2</antlr.version>
         <jackson.version>2.21.1</jackson.version>
