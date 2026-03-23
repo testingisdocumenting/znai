@@ -94,6 +94,7 @@ class ZnaiCliConfigTest {
                 OptionKey.MARKUP_TYPE,
                 OptionKey.HELP,
                 OptionKey.VERSION,
+                OptionKey.ALL_EXTERNAL_DEPS_FILE_PATH,
                 OptionKey.VALIDATE_EXTERNAL_LINKS,
                 OptionKey.ACTOR,
                 OptionKey.MODIFIED_TIME,

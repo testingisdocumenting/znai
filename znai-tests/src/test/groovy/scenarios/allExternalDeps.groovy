@@ -27,8 +27,8 @@ scenario('build sampledoc with all external dependencies file') {
             "--source=${cfg.fullPath('sampledoc')} " +
             "--all-external-dependencies-file-path $depsFilePath")
 
-    fs.textContent(depsFilePath).should == '../doc-artifacts/app.config\n' +
-            '../doc-artifacts/schema.graphql\n' +
+    fs.textContent(depsFilePath).should == '../test-doc-artifacts/app.config\n' +
+            '../test-doc-artifacts/schema.graphql\n' +
             'chapter-one/config.json\n' +
             'chapter-two/sample.py\n' +
             'utils.js'
