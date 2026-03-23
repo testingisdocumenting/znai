@@ -174,6 +174,10 @@ public class WebSite implements Log {
         return resourceResolver.getOutsideDocRequestedResources();
     }
 
+    public boolean isLocalFile(String path) {
+        return resourceResolver.isLocalFile(path);
+    }
+
     public void parseAndDeploy() {
         parse();
         deploy();

@@ -45,6 +45,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ZnaiCliApp {
@@ -97,6 +98,7 @@ public class ZnaiCliApp {
         if (needsDocGeneration()) {
             webSite = generateDocs(config.getSourceRoot());
             exportLlmTxtIfNeeded();
+            exportAllExternalDepsIfNeeded();
         }
 
         if (config.isPreviewMode()) {
@@ -164,6 +166,38 @@ public class ZnaiCliApp {
                 .map(fullPath -> sourceRoot.relativize(fullPath).toString())
                 .sorted()
                 .forEach(System.out::println);
+    }
+
+    private void exportAllExternalDepsIfNeeded() {
+        Path allExternalDepsFilePath = config.getAllExternalDepsFilePath();
+        if (allExternalDepsFilePath == null) {
+            return;
+        }
+
+        ProgressReporter.reportPhase("exporting all external dependencies");
+        ConsoleOutputs.out("creating ", Color.PURPLE, allExternalDepsFilePath);
+
+        String content = sortedExternalDependenciesRelativePaths()
+                .collect(Collectors.joining("\n"));
+
+        FileUtils.writeTextContent(allExternalDepsFilePath, content);
+    }
+
+    private Stream<String> sortedExternalDependenciesRelativePaths() {
+        Path sourceRoot = config.getSourceRoot();
+
+        Stream<String> insideDocPaths = webSite.getAuxiliaryFilesRegistry().getAllPaths()
+                .filter(fullPath -> fullPath.startsWith(sourceRoot))
+                .map(fullPath -> sourceRoot.relativize(fullPath).toString())
+                .filter(relativePath -> !relativePath.endsWith(".md"));
+
+        Stream<String> outsideDocPaths = webSite.getOutsideDocsRequestedResources().entrySet().stream()
+                .filter(e -> webSite.isLocalFile(e.getKey()))
+                .map(e -> sourceRoot.relativize(e.getValue()).toString());
+
+        return Stream.concat(insideDocPaths, outsideDocPaths)
+                .distinct()
+                .sorted();
     }
 
     private void exportLlmTxtIfNeeded() {

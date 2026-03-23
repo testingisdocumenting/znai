@@ -93,6 +93,7 @@ public class ZnaiCliConfig {
 
         DOC_ID("doc-id", "documentation id", true, false),
         LLM_TXT_OUTPUT_PATH("llm-txt-output-path", "save llm.txt to specified path during build", true, false),
+        ALL_EXTERNAL_DEPS_FILE_PATH("all-external-dependencies-file-path", "save all external file dependencies to specified path during build", true, false),
 
         EXPORT("export", "export destination directory", true, false),
 
@@ -156,6 +157,7 @@ public class ZnaiCliConfig {
         buildOptions.add(OptionKey.DOC_ID);
         buildOptions.add(OptionKey.DEPLOY);
         buildOptions.add(OptionKey.LLM_TXT_OUTPUT_PATH);
+        buildOptions.add(OptionKey.ALL_EXTERNAL_DEPS_FILE_PATH);
         COMMAND_OPTIONS.put(Command.BUILD, buildOptions);
 
         Set<OptionKey> exportOptions = EnumSet.copyOf(commonOptions);
@@ -234,6 +236,7 @@ public class ZnaiCliConfig {
     private String actor;
     private List<String> lookupPaths;
     private Path llmTxtOutputPath;
+    private Path allExternalDepsFilePath;
 
     private boolean isValidateExternalLinks;
 
@@ -350,6 +353,10 @@ public class ZnaiCliConfig {
         return llmTxtOutputPath;
     }
 
+    public Path getAllExternalDepsFilePath() {
+        return allExternalDepsFilePath;
+    }
+
     public Path getDeployRoot() {
         return validateIsSet("deployRoot", deployRoot);
     }
@@ -367,6 +374,9 @@ public class ZnaiCliConfig {
             print("             doc id", docId);
             if (getLlmTxtOutputPath() != null) {
                 print("llm txt output path", llmTxtOutputPath);
+            }
+            if (getAllExternalDepsFilePath() != null) {
+                print("all external deps file path", allExternalDepsFilePath);
             }
         } else if (isExportMode()) {
             print("source root", sourceRoot);
@@ -450,6 +460,10 @@ public class ZnaiCliConfig {
 
         llmTxtOutputPath = commandLine.hasOption(OptionKey.LLM_TXT_OUTPUT_PATH.getKey()) ?
                 Paths.get(commandLine.getOptionValue(OptionKey.LLM_TXT_OUTPUT_PATH.getKey())).toAbsolutePath() :
+                null;
+
+        allExternalDepsFilePath = commandLine.hasOption(OptionKey.ALL_EXTERNAL_DEPS_FILE_PATH.getKey()) ?
+                Paths.get(commandLine.getOptionValue(OptionKey.ALL_EXTERNAL_DEPS_FILE_PATH.getKey())).toAbsolutePath() :
                 null;
 
         modifiedTimeStrategy = determineModifiedTimeStrategy(commandLine);
