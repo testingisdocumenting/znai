@@ -97,7 +97,7 @@ public class WebResource {
         return "<script type=\"" + type + "\" src=\"" + pathForHtml(documentationId) + "\"></script>";
     }
 
-    private String pathForHtml(String documentationId) {
+    public String pathForHtml(String documentationId) {
         return "/" + ((documentationId.isEmpty()) ? "" : documentationId + "/") + path;
     }
 

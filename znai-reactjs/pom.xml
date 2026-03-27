@@ -51,8 +51,10 @@
                     <target name="copy-react-bundle">
                         <delete dir="${project.build.outputDirectory}/static" />
 
-                        <fileset dir="dist/assets" id="extra-js">
-                            <include name="*.js" />
+                        <fileset dir="dist" id="extra-js">
+                            <include name="**/*.js" />
+                            <exclude name="toc.js" />
+                            <exclude name="znai-theme.js"/>
                         </fileset>
 
                         <copy todir="${project.build.outputDirectory}/static">
@@ -62,16 +64,15 @@
                         <pathconvert property="js.files.list" pathsep="${line.separator}">
                             <fileset refid="extra-js" />
                             <chainedmapper>
-                                <mapper type="flatten" />
-                                <mapper type="regexp" from="^(.*)\.js$$" to="static/\1.js" />
+                                <mapper type="regexp" from="^.*dist/(.*)" to="static/\1" />
                             </chainedmapper>
                         </pathconvert>
 
                         <!-- Write to a file -->
-                        <echo file="${project.build.outputDirectory}/static/js-files.txt">${js.files.list}</echo>
+                        <echo file="${project.build.outputDirectory}/META-INF/znai/javascript-files.txt">${js.files.list}</echo>
 
                         <concat destfile="${project.build.outputDirectory}/static/main.css" append="true">
-                            <fileset file="dist/assets/index*.css" />
+                            <fileset file="dist/*.css" />
                         </concat>
 
                         <copy verbose="true" todir="${project.build.outputDirectory}/static/css/fonts">
@@ -89,6 +90,16 @@
                         <copy toDir="${project.build.outputDirectory}/static/css">
                             <fileset file="${project.basedir}/node_modules/katex/dist/katex.min.css" />
                         </copy>
+                        <pathconvert property="css.files.list" pathsep="${line.separator}">
+                            <fileset dir="${project.build.outputDirectory}">
+                                <include name="**/*.css"/>
+                            </fileset>
+                            <chainedmapper>
+                                <mapper type="regexp" from="^(.*)static/(.*)\.css$$" to="static/\2.css"/>
+                            </chainedmapper>
+                        </pathconvert>
+
+                        <echo file="${project.build.outputDirectory}/META-INF/znai/css-files.txt">${css.files.list}</echo>
 
                         <copy file="${project.basedir}/public/znai-theme.js" toFile="${project.build.outputDirectory}/znai-theme.js" />
                     </target>
