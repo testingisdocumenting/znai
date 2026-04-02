@@ -146,8 +146,8 @@ answer-link: znai/introduction/getting-started#command-line
 ## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.86/znai-dist-1.86-znai.zip). Add
-it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.87.1/znai-dist-1.87.1-znai.zip).
+Add it to your `PATH`.
 
 ## Brew
 
@@ -162,7 +162,7 @@ answer-link: znai/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.86</version>
+    <version>1.87.1</version>
 </plugin>
 ```
 
@@ -5096,6 +5096,27 @@ classDiagram
     }
 ```
 
+# Visuals :: Mermaid Diagrams :: Links
+answer-link: znai/visuals/mermaid-diagrams#links
+
+Use mermaid `click` statements to add links to diagram nodes. Relative links will be resolved and validated against your
+documentation structure.
+
+```
+```mermaid
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -- Yes --> C[OK]
+    B -- No ----> D[End]
+    click A "visuals/mermaid-diagrams"
+    click D href "https://mermaid-js.github.io/mermaid/#/" "Mermaid docs"
+```
+```
+
+
+Note: Relative links like `visuals/mermaid-diagrams` are validated during build time, the same way regular markdown
+links are validated.
+
 # Visuals :: Mermaid Diagrams :: Wide Mode
 answer-link: znai/visuals/mermaid-diagrams#wide-mode
 
@@ -9042,6 +9063,11 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2026 :: 1.87
+answer-link: znai/release-notes/2026#187
+
+
 
 # Release Notes :: 2026 :: 1.86
 answer-link: znai/release-notes/2026#186

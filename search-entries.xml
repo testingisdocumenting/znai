@@ -236,8 +236,8 @@ documentation writing process.
       <text>## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.86/znai-dist-1.86-znai.zip). Add
-it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.87.1/znai-dist-1.87.1-znai.zip).
+Add it to your `PATH`.
 
 ## Brew
 
@@ -261,7 +261,7 @@ brew install testingisdocumenting/brew/znai
 &lt;plugin>
     &lt;groupId>org.testingisdocumenting.znai&lt;/groupId>
     &lt;artifactId>znai-maven-plugin&lt;/artifactId>
-    &lt;version>1.86&lt;/version>
+    &lt;version>1.87.1&lt;/version>
 &lt;/plugin>
 ```
 
@@ -6977,6 +6977,35 @@ classDiagram
     </text>
   </entry>
   <entry>
+    <url>/znai/visuals/mermaid-diagrams#links</url>
+    <fullTitle>Znai: Mermaid Diagrams, Links [Visuals]</fullTitle>
+    <pageTitle>Mermaid Diagrams</pageTitle>
+    <chapterTitle>Visuals</chapterTitle>
+    <pageSectionTitle>Links</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use mermaid `click` statements to add links to diagram nodes. Relative links will be resolved and validated against your
+documentation structure.
+
+```
+```mermaid
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -- Yes --> C[OK]
+    B -- No ----> D[End]
+    click A "visuals/mermaid-diagrams"
+    click D href "https://mermaid-js.github.io/mermaid/#/" "Mermaid docs"
+```
+```
+
+
+Note: Relative links like `visuals/mermaid-diagrams` are validated during build time, the same way regular markdown
+links are validated.
+
+</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/visuals/mermaid-diagrams#wide-mode</url>
     <fullTitle>Znai: Mermaid Diagrams, Wide Mode [Visuals]</fullTitle>
     <pageTitle>Mermaid Diagrams</pageTitle>
@@ -12468,6 +12497,19 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2026#187</url>
+    <fullTitle>Znai: 2026, 1.87 [Release Notes]</fullTitle>
+    <pageTitle>2026</pageTitle>
+    <chapterTitle>Release Notes</chapterTitle>
+    <pageSectionTitle>1.87</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
 
 </text>
     </text>
