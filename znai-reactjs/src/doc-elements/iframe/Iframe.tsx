@@ -134,15 +134,18 @@ export function IframeFit({ src, title, height, maxHeight, light, dark, previewM
   }
 
   function measureContentHeight() {
-    const iframeDocument = iframeRef!.current!.contentWindow!.document;
-    const htmlEl = iframeDocument.documentElement;
+    const iframe = iframeRef!.current!;
+    const htmlEl = iframe.contentWindow!.document.documentElement;
 
-    // temporarily set html to auto height so scrollHeight reflects
-    // actual content size rather than stretching to fill the iframe
-    const prevHeight = htmlEl.style.height;
+    // collapse iframe and set html to auto height to measure
+    // natural content size without stretching to fill the container
+    const prevIframeHeight = iframe.style.height;
+    const prevHtmlHeight = htmlEl.style.height;
+    iframe.style.height = "0px";
     htmlEl.style.height = "auto";
     const contentHeight = htmlEl.scrollHeight;
-    htmlEl.style.height = prevHeight;
+    htmlEl.style.height = prevHtmlHeight;
+    iframe.style.height = prevIframeHeight;
 
     return contentHeight;
   }
