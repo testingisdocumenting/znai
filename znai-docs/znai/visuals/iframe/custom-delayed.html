@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+  <style>
+      :root {
+          --backgroundColor: #eee;
+          --color: #222;
+      }
+
+      body { margin: 0 }
+
+      .content {
+          background-color: var(--backgroundColor);
+          border: 2px solid #555;
+          color: var(--color);
+          font-size: 20px;
+          padding: 16px;
+      }
+
+      button {
+          margin: 4px;
+          padding: 4px 12px;
+          cursor: pointer;
+      }
+
+      .entry {
+          border: 1px solid #888;
+          padding: 4px 8px;
+          margin-top: 4px;
+      }
+  </style>
+  <title>dynamic content</title>
+</head>
+
+<body>
+<div class="content">
+  <button onclick="addEntry()">Add Entry</button>
+  <button onclick="removeEntry()">Remove Entry</button>
+  <div id="entries"></div>
+</div>
+
+<script>
+  var count = 0;
+  function addEntry() {
+    count++;
+    var div = document.createElement("div");
+    div.className = "entry";
+    div.textContent = "Entry " + count;
+    document.getElementById("entries").appendChild(div);
+  }
+
+  function removeEntry() {
+    var entries = document.getElementById("entries");
+    if (entries.lastChild) {
+      entries.removeChild(entries.lastChild);
+    }
+  }
+</script>
+</body>
+</html>
