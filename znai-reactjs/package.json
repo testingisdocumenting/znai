@@ -63,7 +63,7 @@
     "dompurify": "^3.3.2",
     "flatted": "^3.4.2",
     "lodash-es": "^4.17.24",
-    "minimatch": "^10.0.1",
+    "minimatch": "^9.0.7",
     "picomatch": "^4.0.4",
     "seroval": "^1.4.1"
   },
