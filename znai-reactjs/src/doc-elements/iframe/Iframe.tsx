@@ -96,7 +96,7 @@ export function IframeFit({ src, title, height, maxHeight, light, dark, previewM
       <iframe
         title={title}
         src={src}
-        style={{ height: height ? height : calculatedIframeHeight, maxHeight }}
+        style={{ height: calculatedIframeHeight, minHeight: height, maxHeight }}
         width="100%"
         className={"znai-iframe fit" + (visible ? " visible" : "")}
         ref={iframeRef}

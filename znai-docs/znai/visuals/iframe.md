@@ -68,27 +68,26 @@ When iframe content changes after page load, the iframe automatically resizes to
 Click buttons below to see it in action:
 
 :include-iframe: iframe/custom-delayed.html {
-  fit: true
+    fit: true
 }
 
-Use `maxHeight` to limit the height when content grows:
+Use `height` and `maxHeight` to limit the height when content grows:
+
+
+```markdown
+:include-iframe: iframe/custom-delayed.html {
+    fit: true,
+    height: 120,
+    maxHeight: 200
+}
+```
 
 :include-iframe: iframe/custom-delayed.html {
-  fit: true,
-  maxHeight: 120
+    fit: true,
+    height: 120,
+    maxHeight: 200
 }
 
-# Height
-
-Use `height` to force container height. Use `maxHeight` to limit the automatically calculated height.
-
-:include-iframe: iframe/custom-tall.html {
-   title: "rendered example",
-   light: { "--color": "#333", "--backgroundColor": "#eee" },
-   dark: { "--color": "#eee", "--backgroundColor": "#333" },
-   fit: true,
-   maxHeight: 64
-}
 
 # Embedding Video
 
