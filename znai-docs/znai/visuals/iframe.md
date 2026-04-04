@@ -89,6 +89,24 @@ Use `height` and `maxHeight` to limit the height when content grows:
 }
 
 
+# Wide
+
+Use `wide` to take all the available horizontal space:
+
+```markdown {highlight: "wide"}
+:include-iframe: iframe/custom.html {
+  title: "my wide iframe content",
+  fit: true,
+  wide: true
+}
+```
+
+:include-iframe: iframe/custom.html {
+  title: "my wide iframe content",
+  fit: true,
+  wide: true
+}
+
 # Embedding Video
 
 Use `include-iframe` to embed media from other places. By default, aspect ratio is set to `16:9`.

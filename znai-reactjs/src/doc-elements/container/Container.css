@@ -25,3 +25,14 @@
 .znai-container.no-gap-border {
    border-bottom: 1px solid var(--znai-snippets-outer-border-color);
 }
+
+.znai-container.wide .znai-container-title-wrapper {
+    border: none;
+}
+
+.znai-container.wide .znai-container-title {
+    max-width: var(--znai-single-column-render-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+}

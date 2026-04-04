@@ -40,6 +40,7 @@ export function iframeDemo(registry: Registry) {
   registry.add("dynamic content with max height", () => (
     <Iframe src="/frame-dynamic-content.html" fit={true} maxHeight={120} />
   ));
+  registry.add("wide", () => <Iframe src="/frame-content.html" fit={true} wide={true} />);
   registry.add("default aspect", () => <Iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />);
   registry.add("4:3 aspect", () => (
     <Iframe aspectRatio="4:3" src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />

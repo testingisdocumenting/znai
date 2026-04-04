@@ -27,7 +27,7 @@ describe('HtmlNodeDiff', () => {
                         {tagName: 'div', className: 'text', text: 'line 2'}]
                 },
                 {
-                    id: 'c2', tagName: 'div', className: 'wide-screen', children: [
+                    id: 'c2', tagName: 'div', className: 'znai-container', children: [
                         {tagName: 'div', className: 'text', text: 'line 3'},
                         {tagName: 'div', className: 'text', text: 'line 4'}]
                 }
@@ -42,7 +42,7 @@ describe('HtmlNodeDiff', () => {
                         {id: 't1', tagName: 'div', className: 'text', text: 'line 21'}]
                 },
                 {
-                    id: 'c2', tagName: 'div', className: 'wide-screen', children: [
+                    id: 'c2', tagName: 'div', className: 'znai-container', children: [
                         {id: 't2', tagName: 'div', className: 'text', text: 'line 3'},
                         {id: 't3', tagName: 'div', className: 'text', text: 'line 5'},
                         {id: 't4', tagName: 'div', className: 'text', text: 'line 6'},

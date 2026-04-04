@@ -22,7 +22,7 @@ import "./JupyterHtmlCell.css";
 
 const JupyterHtmlCell = ({ html, _elementsLibrary, ...props }) => {
   return (
-    <Container className="znai-jupyter-cell jupyter-html content-block" {...props}>
+    <Container className="znai-jupyter-cell jupyter-html" {...props}>
       <div dangerouslySetInnerHTML={{ __html: html }} />
     </Container>
   );

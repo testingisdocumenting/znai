@@ -25,7 +25,6 @@ import { Icon } from "../icons/Icon";
 import { SnippetOptionallyScrollablePart } from "./SnippetOptionallyScrollablePart";
 
 import { Container } from "../container/Container";
-import { ContainerTitle } from "../container/ContainerTitle";
 
 import "./SnippetContainer.css";
 
@@ -39,63 +38,32 @@ class SnippetContainer extends React.Component {
   }
 
   render() {
-    const { wide, isPresentation } = this.props;
+    const { title, className, resultOutput, wide, isPresentation, noGap, noGapBorder, next, prev, anchorId } =
+      this.props;
+    const { collapsed } = this.state;
     const renderWide = wide && !isPresentation;
 
-    return renderWide ? this.renderWideMode() : this.renderNormalMode();
-  }
-
-  renderNormalMode() {
-    const { title, className, resultOutput, noGap, noGapBorder, next, prev } = this.props;
-
-    const fullClassName =
-      "snippet-container content-block" + (resultOutput ? " result-output" : "") + (className ? " " + className : "");
+    const snippetClassName =
+      "snippet-container" +
+      (resultOutput ? " result-output" : "") +
+      (className ? " " + className : "");
 
     return (
-      <Container className={fullClassName} next={next} prev={prev} noGap={noGap} noGapBorder={noGapBorder}>
-        {this.renderTitle(title)}
-        {this.renderSnippet()}
-      </Container>
-    );
-  }
-
-  renderWideMode() {
-    const { title, className } = this.props;
-
-    const wideModePadding = <div className="padding" />;
-
-    const fullClassName =
-      "snippet-container wide-screen" + (title ? " with-title" : "") + (className ? " " + className : "");
-
-    return (
-      <div className={fullClassName}>
-        {wideModePadding}
-        {title && <div className="title-layer">{this.renderTitle(title)}</div>}
-
-        {wideModePadding}
-
-        {this.renderSnippet()}
-      </div>
-    );
-  }
-
-  renderTitle(title) {
-    if (!title) {
-      return null;
-    }
-
-    const anchorId = this.props.anchorId;
-
-    const { collapsed } = this.state;
-
-    return (
-      <ContainerTitle
+      <Container
+        className={snippetClassName}
+        wide={renderWide}
         title={title}
         anchorId={anchorId}
         collapsed={collapsed}
-        additionalTitleClassNames="znai-snippet-container-title"
         onCollapseToggle={this.collapseToggle}
-      />
+        additionalTitleClassNames="znai-snippet-container-title"
+        next={next}
+        prev={prev}
+        noGap={noGap}
+        noGapBorder={noGapBorder}
+      >
+        {this.renderSnippet()}
+      </Container>
     );
   }
 

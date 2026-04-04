@@ -55,6 +55,7 @@ public class IframeIncludePlugin implements IncludePlugin {
         params.add("fit", PluginParamType.BOOLEAN, "automatically set iframe height to fit its content", "true");
         params.add("height", PluginParamType.NUMBER, "force specific iframe height in pixels, acts as minimum height when fit is true", "200");
         params.add("maxHeight", PluginParamType.NUMBER, "limit the automatically calculated height, adds scrollbar", "64");
+        params.add("wide", PluginParamType.BOOLEAN, "take all the available horizontal space", "true");
         params.add("aspectRatio", PluginParamType.STRING, "aspect ratio for video embedding", "\"16:9\"");
         params.add("light", PluginParamType.OBJECT, "CSS properties override for light theme", "{ \"--color\": \"#333\" }");
         params.add("dark", PluginParamType.OBJECT, "CSS properties override for dark theme", "{ \"--color\": \"#eee\" }");

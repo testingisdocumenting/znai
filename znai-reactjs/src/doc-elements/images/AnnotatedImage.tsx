@@ -126,7 +126,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const containerClassName =
     "znai-annotated-image-container" +
     (isCentered ? " center" : "") +
-    (align ? " content-block " + align : "") +
+    (align ? " " + align : "") +
     (title ? " with-title" : "") +
     (inlined ? "  inlined" : "");
 
@@ -137,7 +137,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     (isScaledDown ? " znai-image-scaled-down" : "");
 
   return (
-    <Container className={containerClassName} noGap={noGap} next={next} prev={prev}>
+    <Container className={containerClassName} wide={!fit} noGap={noGap} next={next} prev={prev}>
       {renderTitle()}
       {renderPaddedImageIfRequired()}
       {renderCoordinates()}

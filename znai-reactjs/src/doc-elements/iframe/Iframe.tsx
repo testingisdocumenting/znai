@@ -16,7 +16,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Container } from "../container/Container";
-import { ContainerTitle } from "../container/ContainerTitle";
 
 import "./Iframe.css";
 
@@ -27,6 +26,7 @@ interface Props {
   light?: any;
   dark?: any;
   fit?: boolean;
+  wide?: boolean;
   height?: number;
   maxHeight?: number;
   // changes on every page regen to force iframe reload
@@ -44,7 +44,7 @@ export function Iframe(props: Props) {
 const initialIframeHeight = 14;
 
 let activeElement: any = null;
-export function IframeFit({ src, title, height, maxHeight, light, dark, previewMarker }: Props) {
+export function IframeFit({ src, title, wide, height, maxHeight, light, dark, previewMarker }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const mutationObserverRef = useRef<MutationObserver | null>(null);
@@ -90,8 +90,7 @@ export function IframeFit({ src, title, height, maxHeight, light, dark, previewM
   }
 
   return (
-    <Container className="content-block">
-      {title && <ContainerTitle title={title} />}
+    <Container wide={wide} title={title}>
       <div ref={containerRef}></div>
       <iframe
         title={title}

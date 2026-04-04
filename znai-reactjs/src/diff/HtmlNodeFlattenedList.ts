@@ -104,9 +104,7 @@ function isContainerNode(node: Element) {
   }
 
   const nodeClass = getNodeClassName(node);
-  return containerClassNames.some(
-    (className) => nodeClass.indexOf(className) !== -1
-  );
+  return containerClassNames.some((className) => nodeClass.indexOf(className) !== -1);
 }
 
 function isTextNode(node: Element) {
@@ -138,5 +136,5 @@ function attributesAsText(node: Element) {
 }
 
 function createContainerClassesList() {
-  return ["content-block", "wide-screen"];
+  return ["content-block", "znai-container"];
 }

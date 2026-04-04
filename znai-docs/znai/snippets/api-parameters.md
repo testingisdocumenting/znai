@@ -224,7 +224,7 @@ Use `wide: true` to use all the available horizontal space
     line with *markdown* support and few moe lines"
     ```
 
-```api-parameters {anchorPrefix: "customPrefix", noWrap: true, wide: true}
+```api-parameters {anchorPrefix: "customPrefix", title: "wide mode", noWrap: true, wide: true}
 VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, description with *markdown* support"
 VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, another description 
 line with *markdown* support and few moe lines"

@@ -103,7 +103,7 @@ Use the `wide` option to stretch wide code to occupy as much horizontal real est
     }
     ```
     
-```java {wide: true}
+```java {wide: true, title: "wide code snippet"}
 class InternationalPriceService implements PriceService {
     private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {
         ...
