@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from "react";
 
-import { PresentationDimension, SlideAreaDimension } from './PresentationDimensions';
+import { PresentationDimension, SlideAreaDimension } from "./PresentationDimensions";
 
-import './PresentationSlideContainer.css';
+import "./PresentationSlideContainer.css";
 
 interface Props {
   slideIdx: number;
@@ -32,29 +32,56 @@ interface Props {
 }
 
 export function PresentationSlideContainer({
-                                             slideIdx,
-                                             maxScaleRatio,
-                                             isPadded,
-                                             isScaled,
-                                             isCentered,
-                                             presentationArea,
-                                             slideArea,
-                                             render
-                                           }: Props) {
+  slideIdx,
+  maxScaleRatio,
+  isPadded,
+  isScaled,
+  isCentered,
+  presentationArea,
+  slideArea,
+  render,
+}: Props) {
   const [scaleRatio, setScaleRatio] = useState(1);
   const [slideAppeared, setSlideAppeared] = useState(false);
 
   const contentNode = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    setScaleRatio(isScaled ?
-      calcScale(presentationArea, slideArea, contentNode.current!, isPadded, maxScaleRatio) :
-      1.0);
+    if (!isScaled) {
+      setScaleRatio(1.0);
+      setSlideAppeared(true);
+      return;
+    }
 
-    setSlideAppeared(true);
-  }, [isPadded, maxScaleRatio, isScaled, slideIdx, presentationArea, slideArea])
+    const node = contentNode.current!;
 
-  const className = "znai-presentation-slide-container " +
+    const tryCalcScale = () => {
+      if (!hasContentLoaded(node)) {
+        return false;
+      }
+      setScaleRatio(calcScale(presentationArea, slideArea, node, isPadded, maxScaleRatio));
+      setSlideAppeared(true);
+      return true;
+    };
+
+    if (tryCalcScale()) {
+      return;
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (tryCalcScale()) {
+        resizeObserver.disconnect();
+      }
+    });
+    resizeObserver.observe(node);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [isPadded, maxScaleRatio, isScaled, slideIdx, presentationArea, slideArea]);
+
+  const className =
+    "znai-presentation-slide-container " +
     (isCentered ? " centered" : "") +
     (isPadded ? " padded" : "") +
     (slideAppeared ? " znai-presentation-slide-appeared" : "");
@@ -62,32 +89,40 @@ export function PresentationSlideContainer({
   const rendered = render();
 
   const wrappedChildren = isScaled ? (
-    <div ref={contentNode} style={{transform: "scale(" + scaleRatio + ")"}}>
+    <div ref={contentNode} style={{ transform: "scale(" + scaleRatio + ")" }}>
       {rendered}
     </div>
-  ) : rendered;
+  ) : (
+    rendered
+  );
 
-  const maxWidth = presentationArea.width * slideArea.widthPercentage / 100.0
-  const maxHeight = presentationArea.height * slideArea.heightPercentage / 100.0
+  const maxWidth = (presentationArea.width * slideArea.widthPercentage) / 100.0;
+  const maxHeight = (presentationArea.height * slideArea.heightPercentage) / 100.0;
 
   return (
-    <div className={className} style={{width: maxWidth, height: maxHeight}}>
+    <div className={className} style={{ width: maxWidth, height: maxHeight }}>
       {wrappedChildren}
     </div>
-  )
+  );
 }
 
-function calcScale(presentationArea: PresentationDimension,
-                   slideArea: SlideAreaDimension,
-                   contentNode: HTMLDivElement,
-                   isPadded: boolean,
-                   maxScaleRatio: number): number {
+function hasContentLoaded(contentNode: HTMLDivElement): boolean {
+  return contentNode.offsetWidth > 0 && contentNode.offsetHeight > 0;
+}
+
+function calcScale(
+  presentationArea: PresentationDimension,
+  slideArea: SlideAreaDimension,
+  contentNode: HTMLDivElement,
+  isPadded: boolean,
+  maxScaleRatio: number
+): number {
   // code based padding to avoid margin collapse
   const hPad = isPadded ? 60 : 0;
   const vPad = isPadded ? 30 : 0;
 
-  const maxWidth = calcMaxWidth(presentationArea, slideArea)
-  const maxHeight = calcMaxHeight(presentationArea, slideArea)
+  const maxWidth = calcMaxWidth(presentationArea, slideArea);
+  const maxHeight = calcMaxHeight(presentationArea, slideArea);
 
   const widthRatio = (maxWidth - hPad) / contentNode.offsetWidth;
   const heightRatio = (maxHeight - vPad) / contentNode.offsetHeight;
@@ -95,12 +130,10 @@ function calcScale(presentationArea: PresentationDimension,
   return Math.min(widthRatio, heightRatio, maxScaleRatio);
 }
 
-function calcMaxWidth(presentationArea: PresentationDimension,
-                      slideArea: SlideAreaDimension) {
-  return presentationArea.width * slideArea.widthPercentage / 100.0
+function calcMaxWidth(presentationArea: PresentationDimension, slideArea: SlideAreaDimension) {
+  return (presentationArea.width * slideArea.widthPercentage) / 100.0;
 }
 
-function calcMaxHeight(presentationArea: PresentationDimension,
-                       slideArea: SlideAreaDimension) {
-  return presentationArea.height * slideArea.heightPercentage / 100.0
+function calcMaxHeight(presentationArea: PresentationDimension, slideArea: SlideAreaDimension) {
+  return (presentationArea.height * slideArea.heightPercentage) / 100.0;
 }

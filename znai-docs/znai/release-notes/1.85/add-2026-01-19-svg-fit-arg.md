@@ -1,0 +1,1 @@
+* Add: SVG `fit` option

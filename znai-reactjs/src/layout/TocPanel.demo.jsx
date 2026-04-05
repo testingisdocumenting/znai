@@ -30,9 +30,37 @@ const docMeta = {
 export function tocPanelDemo(registry) {
   const selectedTocItem = { dirName: "snippets", fileName: "json" };
 
+  const singlePageSelectedItem = { dirName: "", fileName: "index", anchorId: "setup" };
+
   registry
     .add("long", () => <TocPanel docMeta={docMeta} toc={testLongToc()} selectedItem={selectedTocItem} />, "")
-    .add("short", () => <TocPanel docMeta={docMeta} toc={shortToc()} selectedItem={selectedTocItem} />, "");
+    .add("short", () => <TocPanel docMeta={docMeta} toc={shortToc()} selectedItem={selectedTocItem} />, "")
+    .add("single page", () => <TocPanel docMeta={docMeta} toc={singlePageToc()} selectedItem={singlePageSelectedItem} />, "");
+}
+
+function singlePageToc() {
+  return [
+    {
+      chapterTitle: "",
+      dirName: "",
+      items: [
+        {
+          chapterTitle: "",
+          pageTitle: "Index",
+          pageMeta: {},
+          fileName: "index",
+          dirName: "",
+          pageSectionIdTitles: [
+            { id: "introduction", title: "Introduction" },
+            { id: "setup", title: "Setup" },
+            { id: "configuration", title: "Configuration" },
+            { id: "usage", title: "Usage" },
+            { id: "troubleshooting", title: "Troubleshooting" },
+          ],
+        },
+      ],
+    },
+  ];
 }
 
 function shortToc() {

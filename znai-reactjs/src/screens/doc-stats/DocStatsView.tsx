@@ -17,7 +17,6 @@
 import React, { useEffect, useRef } from "react";
 import { TocItem } from "../../structure/TocItem";
 import { documentationNavigation } from "../../structure/DocumentationNavigation";
-import { isTocItemIndex } from "../../structure/toc/TableOfContents";
 
 import "./DocStatsView.css";
 
@@ -59,9 +58,7 @@ function collectTocPageIds(toc: TocItem[]): Set<string> {
   const pageIds = new Set<string>();
   for (const chapter of toc) {
     for (const item of chapter.items || []) {
-      if (!isTocItemIndex(item)) {
-        pageIds.add(buildPageId(item.dirName, item.fileName));
-      }
+      pageIds.add(buildPageId(item.dirName, item.fileName));
     }
   }
   return pageIds;
@@ -119,7 +116,7 @@ function PageItem({ item, stats }: PageItemProps) {
   return (
     <div className="znai-doc-stats-page-item">
       <a href={href} className="znai-doc-stats-page-link">
-        {item.pageTitle}
+        {item.pageTitle || item.fileName}
       </a>
       <StatsCounters stats={stats ?? ZERO_STATS} />
     </div>
@@ -133,7 +130,7 @@ interface ChapterSectionProps {
 }
 
 function ChapterSection({ chapter, chapterStats, pageStats }: ChapterSectionProps) {
-  const items = (chapter.items || []).filter((item) => !isTocItemIndex(item));
+  const items = chapter.items || [];
 
   if (items.length === 0) {
     return null;

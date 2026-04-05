@@ -47,7 +47,7 @@ public class UrlUtils {
     }
 
     public static boolean isExternal(String url) {
-        return EXTERNAL_URL_PATTERN.matcher(url).find();
+        return EXTERNAL_URL_PATTERN.matcher(url).find() || url.startsWith("mailto:");
     }
 
     public static String removeAnchor(String url) {

@@ -18,7 +18,9 @@ package org.testingisdocumenting.znai.extensions.svg;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -47,6 +49,21 @@ public class SvgIncludePlugin implements IncludePlugin {
     @Override
     public IncludePlugin create() {
         return new SvgIncludePlugin();
+    }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        PluginParamsDefinition params = new PluginParamsDefinition();
+        params.add("idsToReveal", PluginParamType.LIST_OR_SINGLE_STRING,
+                "element IDs to display while hiding others, revealed one at a time in presentation mode",
+                "[\"partA\", \"partB\"]");
+        params.add("actualSize", PluginParamType.BOOLEAN,
+                "crop whitespace and use actual content bounding box size", "true");
+        params.add("scale", PluginParamType.NUMBER,
+                "SVG scale ratio", "0.5");
+        params.add("fit", PluginParamType.BOOLEAN,
+                "fit SVG to the text width", "true");
+        return params;
     }
 
     @Override

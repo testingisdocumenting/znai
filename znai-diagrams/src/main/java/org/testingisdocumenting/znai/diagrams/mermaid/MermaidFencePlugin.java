@@ -29,7 +29,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MermaidFencePlugin implements FencePlugin {
+public class MermaidFencePlugin extends MermaidPluginBase implements FencePlugin {
     private String content;
 
     @Override
@@ -51,7 +51,10 @@ public class MermaidFencePlugin implements FencePlugin {
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
         this.content = content;
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
-        props.put("mermaid", content);
+        processIconPacks(componentsRegistry, props);
+
+        String processedContent = processLinks(componentsRegistry, markupPath, content);
+        props.put("mermaid", processedContent);
 
         return PluginResult.docElement("Mermaid", props);
     }

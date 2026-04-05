@@ -1,0 +1,1 @@
+* Fix: `search-entries.xml` correctly render index page url

@@ -1,0 +1,1 @@
+* Add: Mermaid diagrams links are automatically validated and clicking them performs fast navigation without page reloads

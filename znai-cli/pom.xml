@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.85-SNAPSHOT</version>
+        <version>1.87.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-cli</artifactId>
@@ -69,6 +69,14 @@
             <artifactId>webtau-core-groovy</artifactId>
             <scope>test</scope>
         </dependency>
+<!-- this dependency allows to preview znai docs -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
     </dependencies>
 
     <build>

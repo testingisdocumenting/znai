@@ -1,0 +1,1 @@
+* Add: Display index.md page sections on the TOC panel when there are no other pages

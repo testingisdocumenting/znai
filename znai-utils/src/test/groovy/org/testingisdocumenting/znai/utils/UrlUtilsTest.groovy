@@ -52,7 +52,7 @@ class UrlUtilsTest {
     void "is external"() {
         UrlUtils.isExternal("http://hello").should == true
         UrlUtils.isExternal("https://hello").should == true
-        UrlUtils.isExternal("mailto://hello").should == true
+        UrlUtils.isExternal("mailto:hello").should == true
         UrlUtils.isExternal("file://hello.txt").should == true
         UrlUtils.isExternal("custom://something").should == true
         UrlUtils.isExternal("custom:something").should == false

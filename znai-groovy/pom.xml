@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.testingisdocumenting.znai</groupId>
         <artifactId>znai-parent</artifactId>
-        <version>1.85-SNAPSHOT</version>
+        <version>1.87.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>znai-groovy</artifactId>
@@ -78,6 +78,25 @@
                             <goal>addTestSources</goal>
                             <goal>compileTests</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Generate empty javadoc JAR for Maven Central -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>empty-javadoc-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>javadoc</classifier>
+                            <classesDirectory>${project.build.directory}/javadoc</classesDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

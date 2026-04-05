@@ -1,4 +1,5 @@
 /*
+ * Copyright 2026 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,29 +15,67 @@
  * limitations under the License.
  */
 
-import {createPresentationDemo} from '../demo-utils/PresentationDemo'
-import {svg} from './svg.testdata'
+import { createPresentationDemo } from "../demo-utils/PresentationDemo";
+import { svg, wideBoxesSvg } from "./svg.testdata";
 
 export function svgPresentationDemo(registry) {
-    registry
-        .add('embedded', createPresentationDemo([{
-            type: 'Svg',
-            svg: svg(),
-            idsToReveal: ['partA', 'partC']
-        }]))
-        .add('from src', createPresentationDemo([{
-            type: 'Svg',
-            svgSrc: "svg.svg",
-            idsToReveal: ['partA', 'partC']
-        }]))
-        .add('all at once', createPresentationDemo([{
-            type: 'Svg',
-            svgSrc: "svg.svg",
-            meta: {allAtOnce: true},
-            idsToReveal: ['partA', 'partC']
-        }]))
-        .add('no ids to reveal', createPresentationDemo([{
-            type: 'Svg',
-            svg: svg()
-        }]))
+  registry
+    .add(
+      "embedded",
+      createPresentationDemo([
+        {
+          type: "Svg",
+          svg: svg(),
+          idsToReveal: ["partA", "partC"],
+        },
+      ])
+    )
+    .add(
+      "from src",
+      createPresentationDemo([
+        {
+          type: "Svg",
+          svgSrc: "svg.svg",
+          idsToReveal: ["partA", "partC"],
+        },
+      ])
+    )
+    .add(
+      "all at once",
+      createPresentationDemo([
+        {
+          type: "Svg",
+          svgSrc: "svg.svg",
+          meta: { allAtOnce: true },
+          idsToReveal: ["partA", "partC"],
+        },
+      ])
+    )
+    .add(
+      "no ids to reveal",
+      createPresentationDemo([
+        {
+          type: "Svg",
+          svg: svg(),
+        },
+      ])
+    )
+    .add(
+      "wide boxes embedded",
+      createPresentationDemo([
+        {
+          type: "Svg",
+          svg: wideBoxesSvg(),
+        },
+      ])
+    )
+    .add(
+      "wide boxes from src",
+      createPresentationDemo([
+        {
+          type: "Svg",
+          svgSrc: "wide-boxes.svg",
+        },
+      ])
+    );
 }
