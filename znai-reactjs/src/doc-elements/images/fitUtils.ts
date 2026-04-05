@@ -17,13 +17,17 @@
 import { cssVarPixelValue } from "../../utils/cssVars";
 
 export function calcFitScale(
-  fit: boolean | undefined,
+  fit: boolean,
   width: number,
   scale: number | undefined,
   isMobile: boolean
 ): number {
+  if (scale) {
+    return scale;
+  }
+
   if (!fit) {
-    return scale || 1.0;
+    return 1.0;
   }
 
   const singleColumnWidth = isMobile

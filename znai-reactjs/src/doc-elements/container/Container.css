@@ -31,6 +31,7 @@
 }
 
 .znai-container.wide .znai-container-title {
+    width: 100%;
     max-width: var(--znai-single-column-render-width);
     margin-left: auto;
     margin-right: auto;

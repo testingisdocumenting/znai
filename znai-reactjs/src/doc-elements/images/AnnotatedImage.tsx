@@ -30,7 +30,7 @@ import { TooltipPlacement } from "../../components/Tooltip";
 
 import { WithElementsLibrary } from "../default-elements/DocElement";
 
-import { ContainerTitle, ContainerTitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
+import { ContainerTitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
 
 import { useIsMobile } from "../../theme/ViewPortContext";
 import { Container, ContainerCommonProps } from "../container/Container";
@@ -44,7 +44,7 @@ export interface AnnotatedImageProps extends WithElementsLibrary, ContainerTitle
   height: number;
   alt?: string;
   align?: string;
-  fit?: boolean;
+  wide?: boolean;
   scale?: number;
   border?: boolean;
   mobileOnly?: boolean;
@@ -69,7 +69,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     alt,
     shapes,
     align,
-    fit,
+    wide,
     scale,
     border,
     timestamp,
@@ -84,7 +84,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const isMobile = useIsMobile();
   const { userDrivenCollapsed, collapseToggle } = useIsUserDrivenCollapsed(collapsed);
 
-  const scaleToUse = calcFitScale(fit, width, scale, isMobile);
+  const scaleToUse = calcFitScale(!wide, width, scale, isMobile);
 
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: -1, y: -1 });
 
@@ -107,7 +107,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const parentStyle: CSSProperties = {
     position: "relative",
     width: sizeSpecified ? scaledWidth + borderSizeAdjustment + "px" : "auto",
-    height: calcContainerHeight(),
+    height: sizeSpecified ? scaledHeight + borderSizeAdjustment + "px" : "auto",
   };
 
   const imageWidth = sizeSpecified ? scaledWidth + "px" : "auto";
@@ -124,38 +124,38 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const isCentered = !align || align === "center";
 
   const containerClassName =
-    "znai-annotated-image-container" +
-    (isCentered ? " center" : "") +
-    (align ? " " + align : "") +
-    (title ? " with-title" : "") +
-    (inlined ? "  inlined" : "");
+    "znai-annotated-image-container" + (title ? " with-title" : "") + (inlined ? " inlined" : "");
+
+  const imageAlignClassName = "znai-annotated-image-align" + (isCentered ? " center" : "") + (align ? " " + align : "");
 
   const imageClassName =
-    "znai-annotated-image" +
-    (border ? " border" : "") +
-    (fit && isScaledDown ? " znai-image-fit" : "") +
-    (isScaledDown ? " znai-image-scaled-down" : "");
+    "znai-annotated-image" + (border ? " border" : "") + (isScaledDown ? " znai-image-fit znai-image-scaled-down" : "");
+
+  const containerStyle: CSSProperties | undefined =
+    title && !wide ? { width: sizeSpecified ? scaledWidth + borderSizeAdjustment + "px" : "fit-content" } : undefined;
 
   return (
-    <Container className={containerClassName} wide={!fit} noGap={noGap} next={next} prev={prev}>
-      {renderTitle()}
-      {renderPaddedImageIfRequired()}
-      {renderCoordinates()}
+    <Container
+      className={containerClassName}
+      wide={wide}
+      title={title}
+      anchorId={anchorId}
+      collapsed={userDrivenCollapsed}
+      onCollapseToggle={collapseToggle}
+      additionalTitleClassNames="znai-image-title"
+      style={containerStyle}
+      noGap={noGap}
+      next={next}
+      prev={prev}
+    >
+      {!userDrivenCollapsed && (
+        <div className={imageAlignClassName}>
+          {renderImage()}
+          {renderCoordinates()}
+        </div>
+      )}
     </Container>
   );
-
-  function renderPaddedImageIfRequired() {
-    const renderedImage = renderImage();
-    return isCentered ? (
-      <>
-        <div />
-        {renderedImage}
-        <div />
-      </>
-    ) : (
-      renderedImage
-    );
-  }
 
   function renderImage() {
     const image = (
@@ -186,14 +186,6 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
         </div>
       </div>
     );
-  }
-
-  function calcContainerHeight() {
-    if (userDrivenCollapsed) {
-      return 0;
-    }
-
-    return sizeSpecified ? scaledHeight + borderSizeAdjustment + "px" : "auto";
   }
 
   function updatedShapesTooltipBasedOnText() {
@@ -240,30 +232,6 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     }
   }
 
-  function renderTitle() {
-    const renderedTitle = title ? (
-      <ContainerTitle
-        title={title}
-        additionalTitleClassNames="znai-image-title"
-        anchorId={anchorId}
-        collapsed={userDrivenCollapsed}
-        onCollapseToggle={collapseToggle}
-      />
-    ) : (
-      <div />
-    );
-
-    return isCentered ? (
-      <>
-        <div />
-        {renderedTitle}
-        <div />
-      </>
-    ) : (
-      renderedTitle
-    );
-  }
-
   function handleMouseMove(e: React.MouseEvent<SVGElement>) {
     if (!isPreviewEnabled()) {
       return;
@@ -289,20 +257,10 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
 
     const effectiveX = (k * mousePosition.x) | 0;
     const effectiveY = (k * mousePosition.y) | 0;
-    const renderedCoord = (
+    return (
       <div className="znai-image-preview-coordinates">
         preview coordinates, x: {effectiveX}; y: {effectiveY}
       </div>
-    );
-
-    return isCentered ? (
-      <>
-        <div />
-        {renderedCoord}
-        <div />
-      </>
-    ) : (
-      renderedCoord
     );
   }
 
@@ -311,8 +269,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
       return;
     }
 
-    const propsRemovedStyles = { ...props };
-    delete propsRemovedStyles.fit;
+    const propsRemovedStyles = { ...props, wide: true };
     delete propsRemovedStyles.scale;
     delete propsRemovedStyles.align;
     delete propsRemovedStyles.collapsed;
