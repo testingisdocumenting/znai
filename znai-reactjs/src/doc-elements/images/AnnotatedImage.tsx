@@ -84,7 +84,10 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const isMobile = useIsMobile();
   const { userDrivenCollapsed, collapseToggle } = useIsUserDrivenCollapsed(collapsed);
 
-  const scaleToUse = calcFitScale(!wide, width, scale, isMobile);
+  const borderSize = border ? 1 : 0;
+  const borderSizeAdjustment = borderSize * 2;
+
+  const scaleToUse = calcFitScale(true, width, scale, isMobile, wide, borderSizeAdjustment);
 
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: -1, y: -1 });
 
@@ -100,9 +103,6 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
 
   const scaledWidth = width * scaleToUse;
   const scaledHeight = height * scaleToUse;
-
-  const borderSize = border ? 1 : 0;
-  const borderSizeAdjustment = borderSize * 2;
 
   const parentStyle: CSSProperties = {
     position: "relative",
@@ -123,8 +123,13 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const isScaledDown = scaleToUse < 1.0;
   const isCentered = !align || align === "center";
 
+  const imageContentWidth = sizeSpecified ? scaledWidth + borderSizeAdjustment + "px" : "fit-content";
+
   const containerClassName =
-    "znai-annotated-image-container" + (title ? " with-title" : "") + (inlined ? " inlined" : "");
+    "znai-annotated-image-container" +
+    (title ? " with-title" : "") +
+    (inlined ? " inlined" : "") +
+    (!isCentered && align ? " align-" + align : "");
 
   const imageAlignClassName = "znai-annotated-image-align" + (isCentered ? " center" : "") + (align ? " " + align : "");
 
@@ -132,7 +137,11 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     "znai-annotated-image" + (border ? " border" : "") + (isScaledDown ? " znai-image-fit znai-image-scaled-down" : "");
 
   const containerStyle: CSSProperties | undefined =
-    title && !wide ? { width: sizeSpecified ? scaledWidth + borderSizeAdjustment + "px" : "fit-content" } : undefined;
+    title && !wide
+      ? isCentered
+        ? { width: imageContentWidth }
+        : ({ "--znai-image-content-width": imageContentWidth } as CSSProperties)
+      : undefined;
 
   return (
     <Container
@@ -269,8 +278,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
       return;
     }
 
-    const propsRemovedStyles = { ...props, wide: true };
-    delete propsRemovedStyles.scale;
+    const propsRemovedStyles = { ...props, wide: true, scale: 1.0 };
     delete propsRemovedStyles.align;
     delete propsRemovedStyles.collapsed;
 

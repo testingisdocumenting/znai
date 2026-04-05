@@ -86,11 +86,11 @@ Use `align` option to align images left or right.
 
     :include-image: books.jpg {align: "left", scale: 0.3}
     
-:include-image: books.jpg {align: "left", scale: 0.3}
+:include-image: books.jpg {align: "left", scale: 0.3, title: "aligned left"}
 
     :include-image: books.jpg {align: "right", scale: 0.3}
     
-:include-image: books.jpg {align: "right", scale: 0.3}
+:include-image: books.jpg {align: "right", scale: 0.3, title: "aligned right"}
 
 # Collapse
 
