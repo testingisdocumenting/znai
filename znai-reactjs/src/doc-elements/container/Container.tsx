@@ -38,6 +38,7 @@ interface Props extends ContainerCommonProps {
   onCollapseToggle?(): void;
   additionalTitleClassNames?: string;
   additionalTitleContainerClassNames?: string;
+  titleContainerStyle?: CSSProperties;
   style?: CSSProperties;
   onClick?(): void;
   children: any;
@@ -67,6 +68,7 @@ export function Container({
   onCollapseToggle,
   additionalTitleClassNames,
   additionalTitleContainerClassNames,
+  titleContainerStyle,
   style,
   onClick,
   noGap,
@@ -94,6 +96,7 @@ export function Container({
       onCollapseToggle={onCollapseToggle}
       additionalTitleClassNames={additionalTitleClassNames}
       additionalContainerClassNames={additionalTitleContainerClassNames}
+      containerStyle={titleContainerStyle}
     />
   ) : null;
 

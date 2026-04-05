@@ -126,10 +126,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
   const imageContentWidth = sizeSpecified ? scaledWidth + borderSizeAdjustment + "px" : "fit-content";
 
   const containerClassName =
-    "znai-annotated-image-container" +
-    (title ? " with-title" : "") +
-    (inlined ? " inlined" : "") +
-    (!isCentered && align ? " align-" + align : "");
+    "znai-annotated-image-container" + (title ? " with-title" : "") + (inlined ? " inlined" : "");
 
   const imageAlignClassName = "znai-annotated-image-align" + (isCentered ? " center" : "") + (align ? " " + align : "");
 
@@ -137,10 +134,11 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
     "znai-annotated-image" + (border ? " border" : "") + (isScaledDown ? " znai-image-fit znai-image-scaled-down" : "");
 
   const containerStyle: CSSProperties | undefined =
-    title && !wide
-      ? isCentered
-        ? { width: imageContentWidth }
-        : ({ "--znai-image-content-width": imageContentWidth } as CSSProperties)
+    title && !wide && isCentered ? { width: imageContentWidth } : undefined;
+
+  const titleContainerStyle: CSSProperties | undefined =
+    title && !wide && !isCentered
+      ? { width: imageContentWidth, marginLeft: align === "right" ? "auto" : undefined }
       : undefined;
 
   return (
@@ -152,6 +150,7 @@ export function AnnotatedImage(props: AnnotatedImageProps) {
       collapsed={userDrivenCollapsed}
       onCollapseToggle={collapseToggle}
       additionalTitleClassNames="znai-image-title"
+      titleContainerStyle={titleContainerStyle}
       style={containerStyle}
       noGap={noGap}
       next={next}

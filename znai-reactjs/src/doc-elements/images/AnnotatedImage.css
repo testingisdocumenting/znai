@@ -39,15 +39,6 @@
     background: var(--znai-image-title-background-color);
 }
 
-.znai-annotated-image-container.align-left .znai-container-title-wrapper,
-.znai-annotated-image-container.align-right .znai-container-title-wrapper {
-    width: var(--znai-image-content-width);
-}
-
-.znai-annotated-image-container.align-right .znai-container-title-wrapper {
-    margin-left: auto;
-}
-
 .znai-zoom-container .znai-annotated-image-container {
     overflow: visible;
 }
