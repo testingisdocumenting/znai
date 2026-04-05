@@ -90,7 +90,7 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, pr
   }
 
   return (
-    <Container wide={wide} title={title}>
+    <Container wide={wide} title={title} additionalTitleClassNames="znai-iframe-title">
       <div ref={containerRef}></div>
       <iframe
         title={title}
