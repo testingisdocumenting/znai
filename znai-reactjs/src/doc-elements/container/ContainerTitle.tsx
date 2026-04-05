@@ -29,6 +29,7 @@ export interface ContainerTitleCommonProps {
 interface Props extends ContainerTitleCommonProps {
   additionalContainerClassNames?: string;
   additionalTitleClassNames?: string;
+  containerStyle?: React.CSSProperties;
 
   onCollapseToggle?(): void;
 }
@@ -41,6 +42,7 @@ export function ContainerTitle({
   title,
   additionalContainerClassNames,
   additionalTitleClassNames,
+  containerStyle,
   collapsed,
   anchorId,
   onCollapseToggle,
@@ -59,7 +61,7 @@ export function ContainerTitle({
     (additionalTitleClassNames ? " " + additionalTitleClassNames : "");
 
   return (
-    <div className={containerClassName} id={anchorId}>
+    <div className={containerClassName} id={anchorId} style={containerStyle}>
       {collapsible && (
         <div className="znai-container-title-collapse-toggle" onClick={onCollapseToggle}>
           {collapsed ? "+" : "-"}

@@ -17,17 +17,34 @@
 import { cssVarPixelValue } from "../../utils/cssVars";
 
 export function calcFitScale(
-  fit: boolean | undefined,
+  fit: boolean,
   width: number,
   scale: number | undefined,
-  isMobile: boolean
+  isMobile: boolean,
+  wide?: boolean,
+  // fixed-size space (e.g. border) that doesn't scale with the image
+  // but must fit within available width: width * scale + reservedWidth <= availableWidth
+  reservedWidth: number = 0
 ): number {
-  if (!fit) {
-    return scale || 1.0;
+  if (scale) {
+    return scale;
   }
 
-  const singleColumnWidth = isMobile
-    ? window.innerWidth
-    : cssVarPixelValue("znai-single-column-full-width");
-  return Math.min(1.0, singleColumnWidth / width);
+  if (!fit) {
+    return 1.0;
+  }
+
+  const availableWidth = wide
+    ? wideAvailableWidth()
+    : isMobile
+      ? window.innerWidth
+      : cssVarPixelValue("znai-single-column-full-width");
+  return Math.min(1.0, (availableWidth - reservedWidth) / width);
+}
+
+function wideAvailableWidth(): number {
+  return (
+    document.querySelector<HTMLElement>(".znai-main-panel")?.clientWidth ||
+    window.innerWidth
+  );
 }

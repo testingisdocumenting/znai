@@ -1,5 +1,5 @@
 ---
-image: {border: true, fit: false}
+image: {border: true}
 ---
 
 # Standard Markdown
@@ -56,17 +56,19 @@ Use `border: true` to include a border around image.
 
 # Fit
 
-By default, images generated with `include-image` occupy all the available horizontal space:
+By default, images generated with `include-image` fit to the text column width.
 
-:include-image: books.jpg {title: "wide image"}
-
-Use `fit` parameter to fit an image to the text column width.
-
-    :include-image: books.jpg {fit: true}
+:include-image: books.jpg {title: "auto scaled down image"}
 
 Note: You can click on the scaled down images to display it full screen
 
-:include-image: books.jpg {fit: true, title: "auto scaled down image"}
+# Wide
+
+Use `wide` to take all the available horizontal space:
+
+    :include-image: books.jpg {wide: true}
+
+:include-image: books.jpg {wide: true, title: "wide image"}
 
 # Scale
 
@@ -84,11 +86,11 @@ Use `align` option to align images left or right.
 
     :include-image: books.jpg {align: "left", scale: 0.3}
     
-:include-image: books.jpg {align: "left", scale: 0.3}
+:include-image: books.jpg {align: "left", scale: 0.3, title: "aligned left"}
 
     :include-image: books.jpg {align: "right", scale: 0.3}
     
-:include-image: books.jpg {align: "right", scale: 0.3}
+:include-image: books.jpg {align: "right", scale: 0.3, title: "aligned right"}
 
 # Collapse
 

@@ -22,11 +22,9 @@ import { DocElementProps } from "../default-elements/DocElement";
 import { calcTableWidth } from "./tableSize";
 
 import { cssVarPixelValue } from "../../utils/cssVars";
-import { ContainerTitleCommonProps} from "../container/ContainerTitle";
-import { ContainerTitle, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
+import { ContainerTitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
 
-import { ContainerCommonProps } from "../container/Container";
-import { Container } from "../container/Container";
+import { ContainerCommonProps, Container } from "../container/Container";
 
 import "./Table.css";
 
@@ -80,18 +78,24 @@ export function Table({ table, highlightRowIndexes, ...props }: Props) {
 
   const hasTitle = !!props.title;
 
-  const wrapperClassName = "znai-table-wrapper " + (table.wide ? "znai-table-wide-screen" : "content-block");
+  const wrapperClassName = "znai-table-wrapper";
 
   const tableClassName = (isCustomClassName ? tableStyles.join(" ") : "znai-table") + (hasTitle ? " with-title" : "");
 
   return (
-    <Container className={wrapperClassName} next={props.next} prev={props.prev} noGap={props.noGap}>
-      <TableTitle
-        title={props.title}
-        anchorId={props.anchorId}
-        collapsed={userDrivenCollapsed}
-        onCollapseToggle={collapseToggle}
-      />
+    <Container
+      className={wrapperClassName}
+      wide={table.wide}
+      title={props.title}
+      anchorId={props.anchorId}
+      collapsed={userDrivenCollapsed}
+      onCollapseToggle={collapseToggle}
+      additionalTitleContainerClassNames="znai-table-title-container"
+      additionalTitleClassNames="znai-table-title"
+      next={props.next}
+      prev={props.prev}
+      noGap={props.noGap}
+    >
       {renderBody()}
     </Container>
   );
@@ -151,27 +155,6 @@ function buildColumnStyle(table: Table, c: Column): CSSProperties {
 
   // @ts-ignore
   return { textAlign, width: widthToUse, minWidth: widthToUse };
-}
-
-interface TableTitleProps extends ContainerTitleCommonProps {
-  onCollapseToggle?(): void;
-}
-
-function TableTitle({ title, anchorId, collapsed, onCollapseToggle }: TableTitleProps) {
-  if (!title) {
-    return null;
-  }
-
-  return (
-    <ContainerTitle
-      title={title}
-      anchorId={anchorId}
-      collapsed={collapsed}
-      onCollapseToggle={onCollapseToggle}
-      additionalContainerClassNames="znai-table-title-container"
-      additionalTitleClassNames="znai-table-title"
-    />
-  );
 }
 
 export default Table;

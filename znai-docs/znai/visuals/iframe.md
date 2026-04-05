@@ -62,16 +62,49 @@ Use `title` parameter to display title bar on top of the embedded content:
   fit: true
 }
 
-# Height
+# Dynamic Content
 
-Use `height` to force container height. Use `maxHeight` to limit the automatically calculated height.
+When iframe content changes after page load, the iframe automatically resizes to fit.
+Click buttons below to see it in action:
 
-:include-iframe: iframe/custom-tall.html {
-   title: "rendered example",
-   light: { "--color": "#333", "--backgroundColor": "#eee" },
-   dark: { "--color": "#eee", "--backgroundColor": "#333" },
-   fit: true,
-   maxHeight: 64
+:include-iframe: iframe/custom-delayed.html {
+    fit: true
+}
+
+Use `height` and `maxHeight` to limit the height when content grows:
+
+
+```markdown
+:include-iframe: iframe/custom-delayed.html {
+    fit: true,
+    height: 120,
+    maxHeight: 200
+}
+```
+
+:include-iframe: iframe/custom-delayed.html {
+    fit: true,
+    height: 120,
+    maxHeight: 200
+}
+
+
+# Wide
+
+Use `wide` to take all the available horizontal space:
+
+```markdown {highlight: "wide"}
+:include-iframe: iframe/custom.html {
+  title: "my wide iframe content",
+  fit: true,
+  wide: true
+}
+```
+
+:include-iframe: iframe/custom.html {
+  title: "my wide iframe content",
+  fit: true,
+  wide: true
 }
 
 # Embedding Video

@@ -33,13 +33,15 @@
     border-bottom: 1px solid var(--znai-snippets-outer-border-color);
 }
 
-.znai-api-parameters-wrapper.wide {
-    display: flex;
-    justify-content: center;
+
+.znai-api-parameters-wrapper.wide .znai-container-title-wrapper {
+    background: var(--znai-api-title-background-color);
 }
 
-.znai-api-parameters-wrapper.wide > .znai-api-parameters {
+.znai-api-parameters-wrapper.wide .znai-api-parameters {
     max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .znai-api-parameters-wrapper.no-bottom-margin > .znai-api-parameters {

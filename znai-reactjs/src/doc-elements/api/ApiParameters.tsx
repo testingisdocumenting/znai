@@ -23,10 +23,8 @@ import { ApiParameter } from "./ApiParameter";
 
 import { Snippet } from "../code-snippets/Snippet";
 
-import { ContainerTitleCommonProps} from "../container/ContainerTitle";
-import { ContainerTitle, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
-import { ContainerCommonProps } from "../container/Container";
-import { Container } from "../container/Container";
+import { ContainerTitleCommonProps, useIsUserDrivenCollapsed } from "../container/ContainerTitle";
+import { ContainerCommonProps, Container } from "../container/Container";
 
 import "./ApiParameters.css";
 
@@ -93,60 +91,36 @@ export default function ApiParameters({
 
   const style = { marginLeft: -parentWidth };
 
+  const titleContainerClassName = "znai-api-parameters-title-cell" + (example ? " with-example" : "");
+
   const rendered = (
     <div className={className} style={style}>
-      <ApiParametersTitle
-        title={title}
-        anchorId={anchorId}
-        example={example}
-        nestedLevel={nestedLevel}
-        collapsed={userDrivenCollapsed}
-        collapseToggle={collapseToggle}
-      />
       {!userDrivenCollapsed && <ApiParametersExample example={example} isNested={isNested} />}
       {renderedParameters}
     </div>
   );
 
   if (!isNested) {
-    const containerClass = "znai-api-parameters-wrapper " + (wide ? "wide" : "content-block");
-
     return (
-      <Container className={containerClass} noGap={noGap} next={next} prev={prev}>
+      <Container
+        className="znai-api-parameters-wrapper"
+        wide={wide}
+        title={title}
+        anchorId={anchorId}
+        collapsed={userDrivenCollapsed}
+        onCollapseToggle={collapseToggle}
+        additionalTitleContainerClassNames={titleContainerClassName}
+        additionalTitleClassNames="znai-api-parameters-title"
+        noGap={noGap}
+        next={next}
+        prev={prev}
+      >
         {rendered}
       </Container>
     );
   }
 
   return rendered;
-}
-
-interface TitleProps {
-  title?: string;
-  anchorId?: string;
-  example?: string;
-  nestedLevel: number;
-  collapsed?: boolean;
-  collapseToggle(): void;
-}
-
-function ApiParametersTitle({ title, anchorId, example, nestedLevel, collapsed, collapseToggle }: TitleProps) {
-  if (!title || nestedLevel > 0) {
-    return null;
-  }
-
-  const className = "znai-api-parameters-title-cell" + (example ? " with-example" : "");
-
-  return (
-    <ContainerTitle
-      title={title}
-      anchorId={anchorId}
-      collapsed={collapsed}
-      onCollapseToggle={collapseToggle}
-      additionalContainerClassNames={className}
-      additionalTitleClassNames="znai-api-parameters-title"
-    />
-  );
 }
 
 interface ExampleProps {

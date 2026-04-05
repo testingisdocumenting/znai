@@ -45,6 +45,7 @@ abstract class ImagePluginBase implements Plugin {
     protected static final String CAPTION_KEY = "caption";
     protected static final String CAPTION_BOTTOM_KEY = "captionBottom";
     protected static final String FIT_KEY = "fit";
+    protected static final String WIDE_KEY = "wide";
     protected static final String SCALE_KEY = "scale";
 
     private static final String PIXEL_RATIO_KEY = "pixelRatio";
@@ -72,7 +73,8 @@ abstract class ImagePluginBase implements Plugin {
         params.add(DESKTOP_ONLY_KEY, PluginParamType.BOOLEAN, "render image only for desktop screen size", "true");
 
         params.add(BORDER_KEY, PluginParamType.BOOLEAN, "use border around image", "true");
-        params.add(FIT_KEY, PluginParamType.BOOLEAN, "fit image to the text width", "true");
+        params.add(FIT_KEY, PluginParamType.BOOLEAN, "fit image to the text width, true by default", "true");
+        params.add(WIDE_KEY, PluginParamType.BOOLEAN, "take all the available horizontal space", "true");
         params.add(SCALE_KEY, PluginParamType.NUMBER, "image scale ratio", "0.5");
         params.add(PIXEL_RATIO_KEY, PluginParamType.NUMBER,
                 "pixel ratio for hi-dpi images, effect is similar to scale, e.g. 2.0 is the same as scale 0.5. " +
@@ -134,6 +136,7 @@ abstract class ImagePluginBase implements Plugin {
 
         updatePropsScale(props, opts);
         updateTitleProp(props, opts);
+        updateFitWideProps(props, opts);
 
         new AnchorFeature(docStructure, markupPath, pluginParams).updateProps(props);
 
@@ -156,6 +159,21 @@ abstract class ImagePluginBase implements Plugin {
         if (opts.has(SCALE_KEY)) {
             props.put(SCALE_KEY, opts.getNumber(SCALE_KEY));
         }
+    }
+
+    private static void updateFitWideProps(Map<String, Object> props, PluginParamsOpts opts) {
+        boolean hasFit = opts.has(FIT_KEY);
+        boolean hasWide = opts.has(WIDE_KEY);
+
+        if (hasFit && hasWide) {
+            throw new IllegalArgumentException("cannot use both \"fit\" and \"wide\" parameters, use \"wide\" instead of \"fit: false\"");
+        }
+
+        if (hasFit && !opts.get(FIT_KEY, true)) {
+            props.put(WIDE_KEY, true);
+        }
+
+        props.remove(FIT_KEY);
     }
 
     private static void updateTitleProp(Map<String, Object> props, PluginParamsOpts opts) {

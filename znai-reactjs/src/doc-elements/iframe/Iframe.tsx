@@ -16,7 +16,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Container } from "../container/Container";
-import { ContainerTitle } from "../container/ContainerTitle";
 
 import "./Iframe.css";
 
@@ -27,6 +26,7 @@ interface Props {
   light?: any;
   dark?: any;
   fit?: boolean;
+  wide?: boolean;
   height?: number;
   maxHeight?: number;
   // changes on every page regen to force iframe reload
@@ -41,12 +41,15 @@ export function Iframe(props: Props) {
   }
 }
 
+const initialIframeHeight = 14;
+
 let activeElement: any = null;
-export function IframeFit({ src, title, height, maxHeight, light, dark, previewMarker }: Props) {
+export function IframeFit({ src, title, wide, height, maxHeight, light, dark, previewMarker }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [extracClassName, setExtraClassName] = useState("");
-  const [calculatedIframeHeight, setCalculatedIframeHeight] = useState(14);
+  const mutationObserverRef = useRef<MutationObserver | null>(null);
+  const [visible, setVisible] = useState(false);
+  const [calculatedIframeHeight, setCalculatedIframeHeight] = useState(initialIframeHeight);
 
   // iframe reload on mount
   useEffect(() => {
@@ -72,7 +75,13 @@ export function IframeFit({ src, title, height, maxHeight, light, dark, previewM
     }
   }, [dark, light]);
 
-  const fullClassName = "znai-iframe fit " + extracClassName;
+  useEffect(() => {
+    return () => {
+      if (mutationObserverRef.current) {
+        mutationObserverRef.current.disconnect();
+      }
+    };
+  }, []);
 
   // remembering what is a current active element
   // so when iframe mounts we can restore focus back
@@ -80,40 +89,74 @@ export function IframeFit({ src, title, height, maxHeight, light, dark, previewM
     activeElement = document.activeElement;
   }
 
-  const renderedTitle = title ? <ContainerTitle title={title} /> : null;
-
   return (
-    <>
-      <Container className="content-block">
-        {renderedTitle}
-        <div ref={containerRef}></div>
-        <iframe
-          title={title}
-          src={src}
-          style={{ height: height ? height : calculatedIframeHeight, maxHeight }}
-          width="100%"
-          className={fullClassName}
-          ref={iframeRef}
-          onLoad={onLoad}
-        />
-      </Container>
-    </>
+    <Container wide={wide} title={title} additionalTitleClassNames="znai-iframe-title">
+      <div ref={containerRef}></div>
+      <iframe
+        title={title}
+        src={src}
+        style={{ height: calculatedIframeHeight, minHeight: height, maxHeight }}
+        width="100%"
+        className={"znai-iframe fit" + (visible ? " visible" : "")}
+        ref={iframeRef}
+        onLoad={onLoad}
+      />
+    </Container>
   );
 
   function onLoad() {
     handleSize();
     updateScrollBarToMatch(containerRef, iframeRef);
+    observeContentChanges();
+  }
+
+  function observeContentChanges() {
+    if (mutationObserverRef.current) {
+      mutationObserverRef.current.disconnect();
+    }
+
+    try {
+      const iframeDocument = iframeRef!.current!.contentWindow!.document;
+      const body = iframeDocument.body;
+      if (!body) {
+        return;
+      }
+
+      mutationObserverRef.current = new MutationObserver(() => {
+        handleSize();
+      });
+
+      mutationObserverRef.current.observe(body, { childList: true, subtree: true });
+    } catch (e) {
+      // cross-origin iframes will throw, silently ignore
+    }
+  }
+
+  function measureContentHeight() {
+    const iframe = iframeRef!.current!;
+    const htmlEl = iframe.contentWindow!.document.documentElement;
+
+    // collapse iframe and set html to auto height to measure
+    // natural content size without stretching to fill the container
+    const prevIframeHeight = iframe.style.height;
+    const prevHtmlHeight = htmlEl.style.height;
+    iframe.style.height = "0px";
+    htmlEl.style.height = "auto";
+    const contentHeight = htmlEl.scrollHeight;
+    htmlEl.style.height = prevHtmlHeight;
+    iframe.style.height = prevIframeHeight;
+
+    return contentHeight;
   }
 
   function handleSize() {
     setTimeout(() => {
-      const document = iframeRef!.current!.contentWindow!.document;
-      const htmlEl = document.getElementsByTagName("html")[0];
-      const height = htmlEl.offsetHeight + 1;
-      // @ts-ignore
+      const newHeight = measureContentHeight();
+
       injectCssProperties(iframeRef, dark, light);
-      setCalculatedIframeHeight(height);
-      setExtraClassName("visible");
+      setCalculatedIframeHeight(newHeight);
+      setVisible(true);
+
       if (activeElement != null) {
         if (activeElement.tagName === "INPUT") {
           activeElement.focus();
