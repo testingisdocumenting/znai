@@ -18,6 +18,7 @@ import { CSSProperties } from "react";
 import React from "react";
 
 import { DocElementPayload } from "../default-elements/DocElement";
+import { ContainerTitle } from "./ContainerTitle";
 
 import "./Container.css";
 
@@ -29,7 +30,15 @@ export interface ContainerCommonProps {
 }
 
 interface Props extends ContainerCommonProps {
-  className: string;
+  className?: string;
+  wide?: boolean;
+  title?: string;
+  anchorId?: string;
+  collapsed?: boolean;
+  onCollapseToggle?(): void;
+  additionalTitleClassNames?: string;
+  additionalTitleContainerClassNames?: string;
+  titleContainerStyle?: CSSProperties;
   style?: CSSProperties;
   onClick?(): void;
   children: any;
@@ -50,18 +59,50 @@ interface Props extends ContainerCommonProps {
  *
  * @constructor
  */
-export function Container({ className, style, onClick, noGap, noGapBorder, next, prev, children }: Props) {
+export function Container({
+  className,
+  wide,
+  title,
+  anchorId,
+  collapsed,
+  onCollapseToggle,
+  additionalTitleClassNames,
+  additionalTitleContainerClassNames,
+  titleContainerStyle,
+  style,
+  onClick,
+  noGap,
+  noGapBorder,
+  next,
+  prev,
+  children,
+}: Props) {
   const noBottomMargin = noGap && next;
   const noTopMargin = prev && prev.noGap;
+
   const fullClassName =
-    "znai-container znai-mobile-remove-padding " +
-    className +
+    "znai-container znai-mobile-remove-padding" +
+    (wide ? " wide" : " content-block") +
+    (className ? " " + className : "") +
     (noBottomMargin ? " no-bottom-margin" : "") +
     (noTopMargin ? " no-top-margin" : "") +
     (noBottomMargin && noGapBorder ? " no-gap-border" : "");
 
+  const titleElement = title ? (
+    <ContainerTitle
+      title={title}
+      anchorId={anchorId}
+      collapsed={collapsed}
+      onCollapseToggle={onCollapseToggle}
+      additionalTitleClassNames={additionalTitleClassNames}
+      additionalContainerClassNames={additionalTitleContainerClassNames}
+      containerStyle={titleContainerStyle}
+    />
+  ) : null;
+
   return (
     <div className={fullClassName} style={style} onClick={onClick}>
+      {titleElement}
       {children}
     </div>
   );

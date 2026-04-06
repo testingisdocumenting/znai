@@ -37,7 +37,7 @@ describe('HtmlNodeFlattenedList', () => {
                         {id: 'noc2', tagName: 'div', className: 'text', text: 'line 02'}]
                 },
                 {
-                    id: 'c2', tagName: 'div', className: 'wide-screen', children: [
+                    id: 'c2', tagName: 'div', className: 'znai-container', children: [
                         {id: 't3', tagName: 'div', className: 'text', text: 'line 3'},
                         {id: 't4', tagName: 'div', className: 'text', text: 'line 4'}]
                 }

@@ -18,7 +18,10 @@ package org.testingisdocumenting.znai.extensions.html;
 
 import org.testingisdocumenting.znai.core.AuxiliaryFile;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParams;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinitionCommon;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -43,6 +46,20 @@ public class IframeIncludePlugin implements IncludePlugin {
     @Override
     public IncludePlugin create() {
         return new IframeIncludePlugin();
+    }
+
+    @Override
+    public PluginParamsDefinition parameters() {
+        PluginParamsDefinition params = new PluginParamsDefinition();
+        params.add(PluginParamsDefinitionCommon.title);
+        params.add("fit", PluginParamType.BOOLEAN, "automatically set iframe height to fit its content", "true");
+        params.add("height", PluginParamType.NUMBER, "force specific iframe height in pixels, acts as minimum height when fit is true", "200");
+        params.add("maxHeight", PluginParamType.NUMBER, "limit the automatically calculated height, adds scrollbar", "64");
+        params.add("wide", PluginParamType.BOOLEAN, "take all the available horizontal space", "true");
+        params.add("aspectRatio", PluginParamType.STRING, "aspect ratio for video embedding", "\"16:9\"");
+        params.add("light", PluginParamType.OBJECT, "CSS properties override for light theme", "{ \"--color\": \"#333\" }");
+        params.add("dark", PluginParamType.OBJECT, "CSS properties override for dark theme", "{ \"--color\": \"#eee\" }");
+        return params;
     }
 
     @Override

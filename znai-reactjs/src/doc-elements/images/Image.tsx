@@ -26,18 +26,18 @@ interface MarkdownImageProps extends WithElementsLibrary {
   inlined: boolean;
   timestamp?: number;
   title?: string;
+  wide?: boolean;
   width?: number;
   height?: number;
-  fit?: boolean;
 }
 
-const Image = ({ destination, title, inlined, fit, width = 0, height = 0, timestamp }: MarkdownImageProps) => {
+const Image = ({ destination, title, inlined, wide, width = 0, height = 0, timestamp }: MarkdownImageProps) => {
   return (
     <AnnotatedImage
       imageSrc={destination}
       title={title}
       inlined={inlined}
-      fit={fit}
+      wide={wide}
       shapes={[]}
       width={width}
       height={height}

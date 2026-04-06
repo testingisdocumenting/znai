@@ -63,13 +63,11 @@ Use `anchorId` to override auto generated identifier.
 
 Use the `wide` option to stretch wide code to occupy as much horizontal screen real estate as possible.  
 
-    :include-file: WideCode.java {wide: true}
+```markdown
+:include-file: WideCode.java {wide: true, title: "wide code"}
+```
     
-:include-file: WideCode.java {wide: true}
-
-Without the `wide` option code will be aligned with the rest of the text and users can use scrollbars.   
-
-:include-file: WideCode.java
+:include-file: WideCode.java {wide: true, title: "wide code"}
 
 Note: Good placement of a *Wide Code* element is at the end of a page or a section to show the full version of a code sample.
 

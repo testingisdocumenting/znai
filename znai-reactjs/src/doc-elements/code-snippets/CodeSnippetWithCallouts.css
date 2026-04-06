@@ -51,7 +51,7 @@
     visibility: hidden;
 }
 
-.wide-screen .code-bullets.hidden-explanation {
+.znai-container.wide .code-bullets.hidden-explanation {
     border-left: var(--znai-snippets-outer-border-color) 1px solid;
     border-right: var(--znai-snippets-outer-border-color) 1px solid;
 }

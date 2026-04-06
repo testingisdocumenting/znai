@@ -146,8 +146,8 @@ answer-link: znai-from-export/introduction/getting-started#command-line
 ## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.87/znai-dist-1.87-znai.zip). Add
-it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.87.2-SNAPSHOT/znai-dist-1.87.2-SNAPSHOT-znai.zip).
+Add it to your `PATH`.
 
 ## Brew
 
@@ -162,7 +162,7 @@ answer-link: znai-from-export/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.87</version>
+    <version>1.87.2-SNAPSHOT</version>
 </plugin>
 ```
 
@@ -4692,7 +4692,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 594,
+    "y" : 604,
     "align" : "Center"
   } ],
   "pixelRatio" : 2
@@ -6239,10 +6239,35 @@ Use `title` parameter to display title bar on top of the embedded content:
 }
 ```
 
-# Visuals :: Iframe :: Height
-answer-link: znai-from-export/visuals/iframe#height
+# Visuals :: Iframe :: Dynamic Content
+answer-link: znai-from-export/visuals/iframe#dynamic-content
 
-Use `height` to force container height. Use `maxHeight` to limit the automatically calculated height.
+When iframe content changes after page load, the iframe automatically resizes to fit. Click buttons below to see it in
+action:
+
+
+Use `height` and `maxHeight` to limit the height when content grows:
+
+```markdown
+:include-iframe: iframe/custom-delayed.html {
+    fit: true,
+    height: 120,
+    maxHeight: 200
+}
+```
+
+# Visuals :: Iframe :: Wide
+answer-link: znai-from-export/visuals/iframe#wide
+
+Use `wide` to take all the available horizontal space:
+
+```markdown
+:include-iframe: iframe/custom.html {
+  title: "my wide iframe content",
+  fit: true,
+  wide: true
+}
+```
 
 # Visuals :: Iframe :: Embedding Video
 answer-link: znai-from-export/visuals/iframe#embedding-video
@@ -8589,7 +8614,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 594,
+    "y" : 604,
     "align" : "Center"
   } ],
   "pixelRatio" : 2
@@ -9063,6 +9088,11 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2026 :: 1.88
+answer-link: znai-from-export/release-notes/2026#188
+
+
 
 # Release Notes :: 2026 :: 1.87
 answer-link: znai-from-export/release-notes/2026#187
