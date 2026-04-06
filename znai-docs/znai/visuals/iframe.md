@@ -107,6 +107,34 @@ Use `wide` to take all the available horizontal space:
   wide: true
 }
 
+# Zoom And New Tab
+
+Use `zoomEnabled` to add a full-screen zoom button to the title bar.
+Clicking the button opens the iframe in a full-screen overlay with a close button. Press `Escape` or click the close button to exit.
+
+Use `newTabEnabled` to add an open-in-new-tab button to the title bar.
+
+Note: Requires `title` to be set.
+
+```markdown {highlight: ["zoomEnabled", "newTabEnabled"]}
+:include-iframe: iframe/custom-multi-line.html {
+  title: "parameters reference",
+  fit: true,
+  maxHeight: 120,
+  zoomEnabled: true,
+  newTabEnabled: true
+}
+```
+
+:include-iframe: iframe/custom-multi-line.html {
+  title: "parameters reference",
+  fit: true,
+  maxHeight: 120,
+  zoomEnabled: true,
+  newTabEnabled: true
+}
+
+
 # Embedding Video
 
 Use `include-iframe` to embed media from other places. By default, aspect ratio is set to `16:9`.

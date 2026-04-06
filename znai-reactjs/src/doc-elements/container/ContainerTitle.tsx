@@ -30,6 +30,7 @@ interface Props extends ContainerTitleCommonProps {
   additionalContainerClassNames?: string;
   additionalTitleClassNames?: string;
   containerStyle?: React.CSSProperties;
+  titleActions?: React.ReactNode;
 
   onCollapseToggle?(): void;
 }
@@ -45,6 +46,7 @@ export function ContainerTitle({
   containerStyle,
   collapsed,
   anchorId,
+  titleActions,
   onCollapseToggle,
 }: Props) {
   const collapsible = collapsed !== undefined;
@@ -77,6 +79,7 @@ export function ContainerTitle({
             </a>
           </div>
         )}
+        {titleActions && <div className="znai-container-title-actions">{titleActions}</div>}
       </div>
     </div>
   );

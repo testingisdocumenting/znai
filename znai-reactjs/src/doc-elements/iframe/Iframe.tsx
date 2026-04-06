@@ -16,6 +16,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Container } from "../container/Container";
+import { Icon } from "../icons/Icon";
+import { zoom } from "../zoom/Zoom";
 
 import "./Iframe.css";
 
@@ -29,6 +31,8 @@ interface Props {
   wide?: boolean;
   height?: number;
   maxHeight?: number;
+  zoomEnabled?: boolean;
+  newTabEnabled?: boolean;
   // changes on every page regen to force iframe reload
   previewMarker?: string;
 }
@@ -44,7 +48,7 @@ export function Iframe(props: Props) {
 const initialIframeHeight = 14;
 
 let activeElement: any = null;
-export function IframeFit({ src, title, wide, height, maxHeight, light, dark, previewMarker }: Props) {
+export function IframeFit({ src, title, wide, height, maxHeight, light, dark, zoomEnabled, newTabEnabled, previewMarker }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const mutationObserverRef = useRef<MutationObserver | null>(null);
@@ -60,20 +64,9 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, pr
     iframeRef!.current!.src += "";
   }, [previewMarker]);
 
-  // handle site theme switching
-  useEffect(() => {
-    // TODO theme integration via context
-    // @ts-ignore
-    window.znaiTheme.addChangeHandler(onThemeChange);
-
-    // @ts-ignore
-    return () => window.znaiTheme.removeChangeHandler(onThemeChange);
-
-    function onThemeChange() {
-      injectCssProperties(iframeRef, dark, light);
-      updateScrollBarToMatch(containerRef, iframeRef);
-    }
-  }, [dark, light]);
+  const { syncTheme } = useIframeThemeSync(iframeRef, dark, light, () => {
+    updateScrollBarToMatch(containerRef, iframeRef);
+  });
 
   useEffect(() => {
     return () => {
@@ -89,8 +82,15 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, pr
     activeElement = document.activeElement;
   }
 
+  const titleActions = (zoomEnabled || newTabEnabled) ? (
+    <>
+      {zoomEnabled && <Icon id="maximize-2" onClick={zoomIframe} />}
+      {newTabEnabled && <Icon id="external-link" onClick={openInNewTab} />}
+    </>
+  ) : undefined;
+
   return (
-    <Container wide={wide} title={title} additionalTitleClassNames="znai-iframe-title">
+    <Container wide={wide} title={title} additionalTitleClassNames="znai-iframe-title" titleActions={titleActions}>
       <div ref={containerRef}></div>
       <iframe
         title={title}
@@ -103,6 +103,14 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, pr
       />
     </Container>
   );
+
+  function zoomIframe() {
+    zoom.zoom(<IframeZoomed src={src} title={title} light={light} dark={dark} />);
+  }
+
+  function openInNewTab() {
+    window.open(src, "_blank");
+  }
 
   function onLoad() {
     handleSize();
@@ -153,7 +161,7 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, pr
     setTimeout(() => {
       const newHeight = measureContentHeight();
 
-      injectCssProperties(iframeRef, dark, light);
+      syncTheme();
       setCalculatedIframeHeight(newHeight);
       setVisible(true);
 
@@ -166,6 +174,26 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, pr
       }
     }, 0);
   }
+}
+
+function useIframeThemeSync(iframeRef: React.RefObject<HTMLIFrameElement | null>, dark: any, light: any, onThemeChangeExtra?: () => void) {
+  useEffect(() => {
+    // @ts-ignore
+    window.znaiTheme.addChangeHandler(onThemeChange);
+    // @ts-ignore
+    return () => window.znaiTheme.removeChangeHandler(onThemeChange);
+
+    function onThemeChange() {
+      syncTheme();
+      onThemeChangeExtra?.();
+    }
+  }, [dark, light]);
+
+  function syncTheme() {
+    injectCssProperties(iframeRef, dark, light);
+  }
+
+  return { syncTheme };
 }
 
 function updateScrollBarToMatch(containerRef: any, iframeRef: any) {
@@ -258,6 +286,27 @@ export function calcAspectRatioPaddingTop(aspectRatio: string): string {
   }
 
   return ((Number(height) / Number(width)) * 100.0).toFixed(2) + "%";
+}
+
+function IframeZoomed({ src, title, light, dark }: Pick<Props, "src" | "title" | "light" | "dark">) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const { syncTheme } = useIframeThemeSync(iframeRef, dark, light);
+
+  return (
+    <div className="znai-iframe-zoomed" onClick={(e) => e.stopPropagation()}>
+      <div className="znai-iframe-zoomed-header">
+        <span className="znai-iframe-zoomed-title">{title}</span>
+        <Icon id="x" className="znai-iframe-zoomed-close" onClick={() => zoom.clearZoom()} />
+      </div>
+      <iframe
+        title={title}
+        src={src}
+        className="znai-iframe-zoomed-content"
+        onLoad={syncTheme}
+        ref={iframeRef}
+      />
+    </div>
+  );
 }
 
 export const presentationIframe = {

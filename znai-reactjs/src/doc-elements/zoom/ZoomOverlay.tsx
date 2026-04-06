@@ -31,7 +31,7 @@ export function ZoomOverlay() {
       document.removeEventListener("keydown", keysHandler);
     };
 
-    function zoomRendered(rendered: JSX.Element) {
+    function zoomRendered(rendered: JSX.Element | null) {
       setZoomedIn(rendered);
     }
 

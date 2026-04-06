@@ -24,6 +24,47 @@
 }
 
 .znai-iframe-title {
-    padding: 4px 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     font-size: var(--znai-smaller-text-size);
+}
+
+.znai-iframe-zoomed {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 32px);
+    height: calc(100vh - 32px);
+    background: var(--znai-background-color);
+}
+
+.znai-iframe-zoomed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 4px 8px 16px;
+    background: var(--znai-snippets-title-background-color);
+    color: var(--znai-snippets-title-color);
+    font-size: var(--znai-smaller-text-size);
+}
+
+.znai-iframe-zoomed-close {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.znai-iframe-zoomed-close:hover {
+    opacity: 1;
+}
+
+.znai-iframe-zoomed-close.znai-icon,
+.znai-iframe-zoomed-close.znai-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.znai-iframe-zoomed-content {
+    flex: 1;
+    border: 0;
+    width: 100%;
+    height: 100%;
 }
