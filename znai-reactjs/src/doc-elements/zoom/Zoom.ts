@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-type ZoomListener = (rendered: JSX.Element) => void;
+type ZoomListener = (rendered: JSX.Element | null) => void;
 
 class Zoom {
   listeners: ZoomListener[] = [];
@@ -29,6 +29,10 @@ class Zoom {
 
   zoom(rendered: JSX.Element) {
     this.listeners.forEach((l) => l(rendered));
+  }
+
+  clearZoom() {
+    this.listeners.forEach((l) => l(null));
   }
 }
 

@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+  <style>
+      :root {
+          --backgroundColor: #eee;
+          --color: #222;
+      }
+
+      body { margin: 0 }
+
+      .content {
+          background-color: var(--backgroundColor);
+          color: var(--color);
+          font-size: 16px;
+          padding: 16px;
+          line-height: 1.6;
+      }
+
+      table {
+          border-collapse: collapse;
+          width: 100%;
+          margin-top: 12px;
+      }
+
+      th, td {
+          border: 1px solid #999;
+          padding: 8px 12px;
+          text-align: left;
+      }
+
+      th {
+          background-color: rgba(128, 128, 128, 0.15);
+      }
+  </style>
+  <title>multi line content</title>
+</head>
+
+<body>
+<div class="content">
+    <p>This is an example with more content to demonstrate zoom functionality.</p>
+    <table>
+        <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+        <tr><td>src</td><td>string</td><td>URL of the content to embed</td></tr>
+        <tr><td>fit</td><td>boolean</td><td>Auto resize iframe to fit content</td></tr>
+        <tr><td>title</td><td>string</td><td>Title bar text</td></tr>
+        <tr><td>wide</td><td>boolean</td><td>Take all available horizontal space</td></tr>
+        <tr><td>zoomEnabled</td><td>boolean</td><td>Show full-screen zoom button</td></tr>
+        <tr><td>newTabEnabled</td><td>boolean</td><td>Show open in new tab button</td></tr>
+    </table>
+</div>
+</body>
+</html>

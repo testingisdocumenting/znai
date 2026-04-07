@@ -38,6 +38,7 @@ interface Props extends ContainerCommonProps {
   onCollapseToggle?(): void;
   additionalTitleClassNames?: string;
   additionalTitleContainerClassNames?: string;
+  titleActions?: React.ReactNode;
   titleContainerStyle?: CSSProperties;
   style?: CSSProperties;
   onClick?(): void;
@@ -68,6 +69,7 @@ export function Container({
   onCollapseToggle,
   additionalTitleClassNames,
   additionalTitleContainerClassNames,
+  titleActions,
   titleContainerStyle,
   style,
   onClick,
@@ -96,6 +98,7 @@ export function Container({
       onCollapseToggle={onCollapseToggle}
       additionalTitleClassNames={additionalTitleClassNames}
       additionalContainerClassNames={additionalTitleContainerClassNames}
+      titleActions={titleActions}
       containerStyle={titleContainerStyle}
     />
   ) : null;

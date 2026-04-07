@@ -59,6 +59,8 @@ public class IframeIncludePlugin implements IncludePlugin {
         params.add("aspectRatio", PluginParamType.STRING, "aspect ratio for video embedding", "\"16:9\"");
         params.add("light", PluginParamType.OBJECT, "CSS properties override for light theme", "{ \"--color\": \"#333\" }");
         params.add("dark", PluginParamType.OBJECT, "CSS properties override for dark theme", "{ \"--color\": \"#eee\" }");
+        params.add("zoomEnabled", PluginParamType.BOOLEAN, "enable full-screen zoom button in the title bar", "true");
+        params.add("newTabEnabled", PluginParamType.BOOLEAN, "enable open in new tab button in the title bar", "true");
         return params;
     }
 

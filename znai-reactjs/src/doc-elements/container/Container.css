@@ -28,6 +28,7 @@
 
 .znai-container.wide .znai-container-title-wrapper {
     border: none;
+    padding-right: 0;
 }
 
 .znai-container.wide .znai-container-title {

@@ -25,6 +25,7 @@
 .znai-container-title {
     display: flex;
     align-items: center;
+    flex: 1;
     color: var(--znai-snippets-title-color);
     padding: 8px 0 8px 16px;
 }
@@ -60,6 +61,28 @@
 
 .znai-container-title-anchor .znai-icon,
 .znai-container-title-anchor .znai-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+.znai-container-title-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.znai-container-title-actions .znai-icon {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.znai-container-title-actions .znai-icon:hover {
+    opacity: 1;
+}
+
+.znai-container-title-actions .znai-icon,
+.znai-container-title-actions .znai-icon svg {
     width: 14px;
     height: 14px;
 }
