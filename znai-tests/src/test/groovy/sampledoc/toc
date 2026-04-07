@@ -2,6 +2,7 @@ outside-chapter-file.md
 chapter-one
     links
     target
+    tabs
 chapter-two
     doxygen-from-zip
 chapter-three

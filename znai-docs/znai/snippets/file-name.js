@@ -1,7 +1,7 @@
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
