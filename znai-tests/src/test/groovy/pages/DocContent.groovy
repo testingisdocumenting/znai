@@ -26,6 +26,10 @@ class DocContent {
     def mainPanelScrollTop = mainPanel.scrollTop
     def mermaidClickableNodes = $(".znai-mermaid .clickable")
 
+    def tabNames = $(".tabs-area .tab-name")
+    def activeTabName = $(".tabs-area .tab-name.active")
+    def tabsSnippet = $(".tabs-area .snippet")
+
     void clickMermaidNode() {
         // GeckoDriver can't click elements inside SVG (even HTML inside foreignObject),
         // use DOM .click() which creates a trusted event

@@ -1,0 +1,1 @@
+* Fix: Tab properly displays selected content (instead of previously selected content)
