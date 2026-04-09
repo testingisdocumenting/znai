@@ -38,32 +38,10 @@ class SimpleCodeSnippet extends React.Component {
   constructor(props) {
     super(props);
 
-    this.processProps(props);
     this.state = {
       clickedReadMore: false,
       hasHighlightedText: false,
     };
-  }
-
-  // handles changes during preview
-  componentDidUpdate(prevProps) {
-    // Only process props if they actually changed
-    if (
-        prevProps.tokens !== this.props.tokens ||
-        prevProps.linesOfCode !== this.props.linesOfCode ||
-        prevProps.highlight !== this.props.highlight
-    ) {
-      this.processProps(this.props);
-      // If you need to update state based on props changes, you can do it here
-      // but be careful to avoid infinite loops
-    }
-  }
-
-  processProps({ tokens, linesOfCode, highlight }) {
-    this.linesOfTokens = !linesOfCode ? splitTokensIntoLines(tokens) : linesOfCode;
-
-    // highlight is either a single line index/substring or a collection of line indexes and substrings
-    this.highlight = convertToList(highlight);
   }
 
   componentDidMount() {
@@ -99,14 +77,16 @@ class SimpleCodeSnippet extends React.Component {
   render() {
     this.hiddenLinesContainerRef = React.createRef();
     const { clickedReadMore } = this.state;
-    const { wrap, isPresentation, slideIdx, references } = this.props;
+    const { wrap, isPresentation, slideIdx, references, tokens, linesOfCode, highlight } = this.props;
 
     // slideIdx === 0 means no highlights, 1 - first highlight, etc
     const highlightIsVisible = !isPresentation || slideIdx > 0;
 
-    const linesOfTokens = this.linesOfTokens;
+    const linesOfTokens = !linesOfCode ? splitTokensIntoLines(tokens) : linesOfCode;
+    const highlightList = convertToList(highlight);
+
     const visibleLines =
-      this.limitLines(this.props) && !clickedReadMore && !isPresentation
+      this.limitLines(linesOfTokens, this.props) && !clickedReadMore && !isPresentation
         ? linesOfTokens.slice(0, this.readMoreVisibleLines(this.props))
         : linesOfTokens;
 
@@ -115,7 +95,7 @@ class SimpleCodeSnippet extends React.Component {
     const linesToRender = this.processLinesToRender(visibleLines);
 
     const mergedReferences = mergeWithGlobalDocReferences(references);
-    const isHighlightedByIdx = highlightIsVisible ? linesToRender.map((_, lineIdx) => this.isHighlighted(lineIdx)) : [];
+    const isHighlightedByIdx = highlightIsVisible ? linesToRender.map((_, lineIdx) => this.isHighlighted(highlightList, lineIdx)) : [];
 
     return (
       <pre>
@@ -157,9 +137,11 @@ class SimpleCodeSnippet extends React.Component {
 
   renderReadMore() {
     const { clickedReadMore } = this.state;
-    const { isPresentation } = this.props;
+    const { isPresentation, tokens, linesOfCode } = this.props;
 
-    if (isPresentation || !this.limitLines(this.props)) {
+    const linesOfTokens = !linesOfCode ? splitTokensIntoLines(tokens) : linesOfCode;
+
+    if (isPresentation || !this.limitLines(linesOfTokens, this.props)) {
       return null;
     }
 
@@ -208,20 +190,20 @@ class SimpleCodeSnippet extends React.Component {
     );
   };
 
-  limitLines(props) {
-    return this.linesOfTokens.length >= this.readMoreVisibleLines(props) && props.readMore;
+  limitLines(linesOfTokens, props) {
+    return linesOfTokens.length >= this.readMoreVisibleLines(props) && props.readMore;
   }
 
   readMoreVisibleLines(props) {
     return props.readMoreVisibleLines || 8;
   }
 
-  isHighlighted(lineIdx) {
+  isHighlighted(highlightList, lineIdx) {
     const { meta, isPresentation, slideIdx, revealLineStop } = this.props;
 
-    const highlightSliceIdx = calcHighlightSliceIdx(this.highlight);
+    const highlightSliceIdx = calcHighlightSliceIdx(highlightList);
 
-    const highlight = !isPresentation ? this.highlight : this.highlight.slice(0, highlightSliceIdx);
+    const highlight = !isPresentation ? highlightList : highlightList.slice(0, highlightSliceIdx);
 
     if (!highlight) {
       return false;

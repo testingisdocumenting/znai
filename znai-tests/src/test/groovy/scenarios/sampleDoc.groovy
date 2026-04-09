@@ -45,6 +45,29 @@ scenario("check redirect page") {
     docContent.title.waitToBe == "Links"
 }
 
+scenario("switch tabs and validate snippet content") {
+    def snippets = [
+            Java  : 'System.out.println("hello from java");',
+            Python: 'print("hello from python")',
+            Ruby  : 'puts "hello from ruby"',
+    ]
+
+    def assertActiveTab = { String name ->
+        docContent.activeTabName.waitTo == name
+        docContent.tabsSnippet.waitTo == snippets[name]
+    }
+
+    standardView.tocItems.get("Tabs").click()
+    docContent.title.waitTo == "Tabs"
+
+    assertActiveTab("Java")
+
+    ["Python", "Ruby", "Java"].each { name ->
+        docContent.tabNames.get(name).click()
+        assertActiveTab(name)
+    }
+}
+
 scenario("validate uploads files") {
     def baseUrl = "http://localhost:$port/preview"
 
