@@ -18,6 +18,9 @@ To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
     Constructor()
     ```
 
+Note: numeric footnotes are treated as text footnotes, and they will be assigned the auto incremented 
+number in order of appearance.
+
 # Preview
 
 Hover mouse over a footnote reference see its content in a tooltip.

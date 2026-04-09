@@ -617,7 +617,7 @@ after footnote
                         ["type": "SoftLineBreak"],
                         ["text": "numeric one ", "type": "SimpleText"],
                         [
-                            "label": "5",
+                            "label": "3",
                             "content": [["type": "Paragraph", "content": [["text": "footnote num5", "type": "SimpleText"]]]],
                             "type": "FootnoteReference"
                         ],
@@ -625,7 +625,7 @@ after footnote
                         ["type": "SoftLineBreak"],
                         ["text": "and what do we do with this ", "type": "SimpleText"],
                         [
-                            "label": "8",
+                            "label": "4",
                             "content": [["type": "Paragraph", "content": [["text": "footnote num8", "type": "SimpleText"]]]],
                             "type": "FootnoteReference"
                         ]
