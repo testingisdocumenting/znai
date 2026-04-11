@@ -1,0 +1,1 @@
+* Add: Undefined footnote references fail the build

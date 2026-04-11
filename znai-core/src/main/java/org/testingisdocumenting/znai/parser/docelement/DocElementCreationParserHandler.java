@@ -225,10 +225,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
     public void onFootnoteDefinition(ParsedFootnote footnote) {
         parsedFootnotes.put(footnote.id(), footnote);
 
-        int indexToUse = footnote.id().isNumber() ?
-            footnote.id().asNumber():
-            ++footnoteAutoIdx;
-
+        int indexToUse = ++footnoteAutoIdx;
         footnoteIdxById.put(footnote.id(), indexToUse);
     }
 

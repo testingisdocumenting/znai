@@ -44,20 +44,26 @@ import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MarkdownVisitor extends AbstractVisitor {
+    private static final Pattern FOOTNOTE_REFERENCE_PATTERN = Pattern.compile("\\[\\^([^]]+)]");
+
     private final ComponentsRegistry componentsRegistry;
     private final Path path;
     private final ParserHandler parserHandler;
     private boolean sectionStarted;
 
     private final Set<PluginParamWarning> parameterWarnings;
+    private final Set<String> unresolvedFootnoteRefs;
 
     public MarkdownVisitor(ComponentsRegistry componentsRegistry, Path path, ParserHandler parserHandler) {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
         this.parserHandler = parserHandler;
         this.parameterWarnings = new LinkedHashSet<>();
+        this.unresolvedFootnoteRefs = new LinkedHashSet<>();
     }
 
     public boolean isSectionStarted() {
@@ -70,6 +76,10 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     public Set<PluginParamWarning> getParameterWarnings() {
         return parameterWarnings;
+    }
+
+    public Set<String> getUnresolvedFootnoteRefs() {
+        return unresolvedFootnoteRefs;
     }
 
     @Override
@@ -95,7 +105,13 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Text text) {
-        parserHandler.onSimpleText(text.getLiteral());
+        String literal = text.getLiteral();
+        Matcher matcher = FOOTNOTE_REFERENCE_PATTERN.matcher(literal);
+        while (matcher.find()) {
+            unresolvedFootnoteRefs.add(matcher.group(1));
+        }
+
+        parserHandler.onSimpleText(literal);
     }
 
     @Override
