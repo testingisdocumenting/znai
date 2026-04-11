@@ -638,6 +638,16 @@ after footnote
     }
 
     @Test
+    void "undefined footnote reference"() {
+        code {
+            parse("text with [^undefined] reference")
+        } should throwException(~/undefined footnote reference\(s\): undefined/)
+
+        parse("text with `[^undefined]` reference")
+        parse("```[^ref]```")
+    }
+
+    @Test
     void "embedded html block"() {
         parse("""
 hello world 

@@ -68,6 +68,11 @@ public class MarkdownParser implements MarkupParser {
         Node node = fullParser.parse(markdown);
         MarkdownVisitor visitor = parsePartial(node, path, parserHandler);
 
+        if (!visitor.getUnresolvedFootnoteRefs().isEmpty()) {
+            throw new IllegalArgumentException("undefined footnote reference(s): " +
+                    String.join(", ", visitor.getUnresolvedFootnoteRefs()));
+        }
+
         if (visitor.hasPluginWarnings()) {
             reportWarnings(path, visitor.getParameterWarnings());
         }
