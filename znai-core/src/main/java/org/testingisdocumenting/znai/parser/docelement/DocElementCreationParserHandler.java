@@ -61,8 +61,6 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private final Deque<DocElement> elementsStack;
 
     private final Map<FootnoteId, ParsedFootnote> parsedFootnotes;
-    private final Map<FootnoteId, Integer> footnoteIdxById;
-    private int footnoteAutoIdx;
     private String currentSectionTitle;
 
     private boolean isSectionStarted;
@@ -76,8 +74,6 @@ public class DocElementCreationParserHandler implements ParserHandler {
         this.globalAnchorIds = new ArrayList<>();
 
         this.parsedFootnotes = new HashMap<>();
-        this.footnoteAutoIdx = 0;
-        this.footnoteIdxById = new HashMap<>();
 
         this.docElement = new DocElement(DocElementType.PAGE);
         this.elementsStack = new ArrayDeque<>();
@@ -224,15 +220,12 @@ public class DocElementCreationParserHandler implements ParserHandler {
     @Override
     public void onFootnoteDefinition(ParsedFootnote footnote) {
         parsedFootnotes.put(footnote.id(), footnote);
-
-        int indexToUse = ++footnoteAutoIdx;
-        footnoteIdxById.put(footnote.id(), indexToUse);
     }
 
     @Override
     public void onFootnoteReference(FootnoteId footnoteId) {
         append(new DocElement( "FootnoteReference",
-                "label", (Supplier<?>) (() -> Integer.toString(footnoteIdxById.getOrDefault(footnoteId, 1))),
+                "label", (Supplier<?>) (() -> footnoteLabel(footnoteId)),
                 "content", (Supplier<?>) (() -> footnoteContent(footnoteId))));
     }
 
@@ -577,13 +570,18 @@ public class DocElementCreationParserHandler implements ParserHandler {
         props.put("additionalIds", ids.additional());
     }
 
+    private String footnoteLabel(FootnoteId footnoteId) {
+        ParsedFootnote footnote = parsedFootnotes.get(footnoteId);
+        return footnote != null ? Integer.toString(footnote.idx()) : "undefined";
+    }
+
     private List<Map<String, Object>> footnoteContent(FootnoteId footnoteId) {
-        ParsedFootnote parsedFootnote = parsedFootnotes.get(footnoteId);
-        if (parsedFootnote == null) {
+        ParsedFootnote footnote = parsedFootnotes.get(footnoteId);
+        if (footnote == null) {
             throw new IllegalArgumentException("can't find footnote with id <" + footnoteId + ">");
         }
 
-        return parsedFootnote.docElement().contentToListOfMaps();
+        return footnote.docElement().contentToListOfMaps();
     }
 
     private void addHeadingContentWhenNotSimple(Map<String, Object> props, Heading heading) {
@@ -633,4 +631,5 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
         props.put("headingContent", content);
     }
+
 }

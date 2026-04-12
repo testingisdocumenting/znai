@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.extensions.footnote;
 
 import org.commonmark.ext.footnotes.FootnoteDefinition;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.parser.MarkdownParsingContext;
 import org.testingisdocumenting.znai.parser.ParserHandlersList;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownVisitor;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
@@ -29,8 +30,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public record ParsedFootnote(FootnoteId id, DocElement docElement, List<PageSearchEntry> searchEntries) {
-    public static ParsedFootnote parse(ComponentsRegistry componentsRegistry, Path markdownPath, FootnoteDefinition footnote) {
+public record ParsedFootnote(FootnoteId id, int idx, DocElement docElement, List<PageSearchEntry> searchEntries) {
+    public static ParsedFootnote parse(ComponentsRegistry componentsRegistry, Path markdownPath, FootnoteDefinition footnote, int idx) {
         var searchHandler = new SearchCrawlerParserHandler();
         DocElementCreationParserHandler docElementsHandler = new DocElementCreationParserHandler(componentsRegistry, markdownPath);
         var parserHandler = new ParserHandlersList(
@@ -38,13 +39,13 @@ public record ParsedFootnote(FootnoteId id, DocElement docElement, List<PageSear
                 searchHandler
         );
 
-        var visitor = new MarkdownVisitor(componentsRegistry, markdownPath, parserHandler);
+        var visitor = new MarkdownVisitor(componentsRegistry, markdownPath, new MarkdownParsingContext(), parserHandler);
         visit(visitor, footnote);
 
         List<PageSearchEntry> searchEntries = searchHandler.getSearchEntries();
         DocElement docElement = docElementsHandler.getDocElement();
 
-        return new ParsedFootnote(new FootnoteId(footnote.getLabel()), docElement, searchEntries);
+        return new ParsedFootnote(new FootnoteId(footnote.getLabel()), idx, docElement, searchEntries);
     }
 
     private static void visit(MarkdownVisitor visitor, FootnoteDefinition footnote) {

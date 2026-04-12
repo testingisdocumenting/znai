@@ -638,6 +638,38 @@ after footnote
     }
 
     @Test
+    void "footnotes inside fence plugin should continue numbering"() {
+        def previousDefaultParser = componentsRegistry.defaultParser()
+        componentsRegistry.setDefaultParser(parser)
+
+        try {
+            parse("""
+text before [^first]
+
+[^first]: first footnote
+
+~~~attention-note
+inner text [^second]
+
+[^second]: second footnote
+~~~
+""")
+
+            def content = PropsUtils.exerciseSuppliers(content)
+
+            def firstRef = content[0].content.find { it.type == "FootnoteReference" }
+            firstRef.label.should == "1"
+
+            def attentionBlock = content.find { it.type == "AttentionBlock" }
+            def innerParagraph = attentionBlock.content[0]
+            def secondRef = innerParagraph.content.find { it.type == "FootnoteReference" }
+            secondRef.label.should == "2"
+        } finally {
+            componentsRegistry.setDefaultParser(previousDefaultParser)
+        }
+    }
+
+    @Test
     void "undefined footnote reference"() {
         code {
             parse("text with [^undefined] reference")

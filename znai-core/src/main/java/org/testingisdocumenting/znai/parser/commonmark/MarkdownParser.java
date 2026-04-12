@@ -29,6 +29,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.core.Log;
 import org.testingisdocumenting.znai.extensions.PluginParamWarning;
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory;
+import org.testingisdocumenting.znai.parser.MarkdownParsingContext;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.parser.ParserHandler;
@@ -45,6 +46,8 @@ import org.commonmark.node.*;
 import org.commonmark.parser.Parser;
 
 public class MarkdownParser implements MarkupParser {
+    private static final ThreadLocal<MarkdownParsingContext> currentParsingContext = new ThreadLocal<>();
+
     private final Parser fullParser;
     private final Parser metaOnlyParser;
     private final ComponentsRegistry componentsRegistry;
@@ -58,6 +61,24 @@ public class MarkdownParser implements MarkupParser {
     }
 
     public MarkupParserResult parse(Path path, String markdown) {
+        MarkdownParsingContext existing = currentParsingContext.get();
+        boolean isTopLevel = existing == null;
+        MarkdownParsingContext parsingContext = isTopLevel ? new MarkdownParsingContext() : existing;
+
+        if (isTopLevel) {
+            currentParsingContext.set(parsingContext);
+        }
+
+        try {
+            return doParse(path, parsingContext, markdown);
+        } finally {
+            if (isTopLevel) {
+                currentParsingContext.remove();
+            }
+        }
+    }
+
+    private MarkupParserResult doParse(Path path, MarkdownParsingContext parsingContext, String markdown) {
         SearchCrawlerParserHandler searchCrawler = new SearchCrawlerParserHandler();
         DocElementCreationParserHandler elementCreationHandler =
                 new DocElementCreationParserHandler(componentsRegistry, path);
@@ -66,7 +87,7 @@ public class MarkdownParser implements MarkupParser {
         ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler, markdownGenerator);
 
         Node node = fullParser.parse(markdown);
-        MarkdownVisitor visitor = parsePartial(node, path, parserHandler);
+        MarkdownVisitor visitor = parsePartial(node, path, parsingContext, parserHandler);
 
         if (!visitor.getUnresolvedFootnoteRefs().isEmpty()) {
             throw new IllegalArgumentException("undefined footnote reference(s): " +
@@ -99,11 +120,11 @@ public class MarkdownParser implements MarkupParser {
 
     public void parse(Path path, ParserHandler handler, String markdown) {
         Node node = fullParser.parse(markdown);
-        parsePartial(node, path, handler);
+        parsePartial(node, path, new MarkdownParsingContext(), handler);
     }
 
-    private MarkdownVisitor parsePartial(Node node, Path path, ParserHandler handler) {
-        MarkdownVisitor visitor = new MarkdownVisitor(componentsRegistry, path, handler);
+    private MarkdownVisitor parsePartial(Node node, Path path, MarkdownParsingContext parsingContext, ParserHandler handler) {
+        MarkdownVisitor visitor = new MarkdownVisitor(componentsRegistry, path, parsingContext, handler);
         node.accept(visitor);
 
         return visitor;
