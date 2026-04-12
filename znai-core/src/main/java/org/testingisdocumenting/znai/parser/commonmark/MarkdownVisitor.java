@@ -184,8 +184,8 @@ public class MarkdownVisitor extends AbstractVisitor {
             GfmTableToTableConverter gfmTableToTableConverter = new GfmTableToTableConverter(componentsRegistry, path, (TableBlock) customBlock);
             parserHandler.onTable(gfmTableToTableConverter.convert());
         } else if (customBlock instanceof FootnoteDefinition footnote) {
-            ParsedFootnote parsed = ParsedFootnote.parse(componentsRegistry, path, footnote);
-            parserHandler.onFootnoteDefinition(parsed, parsingContext.nextFootnoteIdx());
+            ParsedFootnote parsed = ParsedFootnote.parse(componentsRegistry, path, footnote, parsingContext.nextFootnoteIdx());
+            parserHandler.onFootnoteDefinition(parsed);
         } else {
             throw new UnsupportedOperationException("unsupported custom block: " + customBlock);
         }

@@ -59,7 +59,7 @@ public interface ParserHandler {
     void onListItemStart();
     void onListItemEnd();
     void onTable(MarkupTableData tableData);
-    void onFootnoteDefinition(ParsedFootnote footnote, int footnoteIdx);
+    void onFootnoteDefinition(ParsedFootnote footnote);
     void onFootnoteReference(FootnoteId footnoteId);
     void onEmphasisStart();
     void onEmphasisEnd();
