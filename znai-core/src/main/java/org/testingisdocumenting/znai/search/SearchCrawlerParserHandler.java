@@ -73,7 +73,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
     }
 
     @Override
-    public void onFootnoteDefinition(ParsedFootnote footnote) {
+    public void onFootnoteDefinition(ParsedFootnote footnote, int footnoteIdx) {
         addStandardWithSpaceSeparator(footnote.allText());
     }
 

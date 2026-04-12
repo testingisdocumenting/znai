@@ -111,8 +111,8 @@ public class ParserHandlersList implements ParserHandler {
     }
 
     @Override
-    public void onFootnoteDefinition(ParsedFootnote footnote) {
-        list.forEach(h -> h.onFootnoteDefinition(footnote));
+    public void onFootnoteDefinition(ParsedFootnote footnote, int footnoteIdx) {
+        list.forEach(h -> h.onFootnoteDefinition(footnote, footnoteIdx));
     }
 
     @Override

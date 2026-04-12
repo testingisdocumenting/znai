@@ -313,7 +313,7 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onFootnoteDefinition(ParsedFootnote footnote) {
+    public void onFootnoteDefinition(ParsedFootnote footnote, int footnoteIdx) {
         currentMarkdown.append("[^").append(footnote.id().id()).append("]: ").append(footnote.allText()).append("\n\n");
     }
 

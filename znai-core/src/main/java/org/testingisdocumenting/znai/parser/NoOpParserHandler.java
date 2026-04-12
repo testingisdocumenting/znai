@@ -89,7 +89,7 @@ public class NoOpParserHandler implements ParserHandler {
     }
 
     @Override
-    public void onFootnoteDefinition(ParsedFootnote parsed) {
+    public void onFootnoteDefinition(ParsedFootnote parsed, int footnoteIdx) {
     }
 
     @Override

@@ -1,0 +1,1 @@
+* Fix: footnote idx is no longer reset when footnotes are defined inside plugins like `readmore`

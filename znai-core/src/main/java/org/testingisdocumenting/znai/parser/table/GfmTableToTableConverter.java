@@ -18,6 +18,7 @@
 package org.testingisdocumenting.znai.parser.table;
 
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.parser.MarkdownParsingContext;
 import org.testingisdocumenting.znai.parser.docelement.DocElementCreationParserHandler;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownVisitor;
 import org.commonmark.ext.gfm.tables.*;
@@ -102,7 +103,7 @@ public class GfmTableToTableConverter extends AbstractVisitor {
     @SuppressWarnings("unchecked")
     private List<Map<String, Object>> contentFromCell(TableCell bodyCell) {
         DocElementCreationParserHandler handler = new DocElementCreationParserHandler(componentsRegistry, markdownPath);
-        MarkdownVisitor markdownVisitor = new MarkdownVisitor(componentsRegistry, markdownPath, handler);
+        MarkdownVisitor markdownVisitor = new MarkdownVisitor(componentsRegistry, markdownPath, new MarkdownParsingContext(), handler);
 
         bodyCell.accept(markdownVisitor);
 

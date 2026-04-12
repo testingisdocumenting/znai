@@ -24,6 +24,7 @@ import org.testingisdocumenting.znai.extensions.*;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
 import org.testingisdocumenting.znai.extensions.footnote.FootnoteId;
 import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
+import org.testingisdocumenting.znai.parser.MarkdownParsingContext;
 import org.testingisdocumenting.znai.extensions.include.IncludePlugin;
 import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.extensions.latex.LatexDollarBlock;
@@ -52,15 +53,17 @@ public class MarkdownVisitor extends AbstractVisitor {
 
     private final ComponentsRegistry componentsRegistry;
     private final Path path;
+    private final MarkdownParsingContext parsingContext;
     private final ParserHandler parserHandler;
     private boolean sectionStarted;
 
     private final Set<PluginParamWarning> parameterWarnings;
     private final Set<String> unresolvedFootnoteRefs;
 
-    public MarkdownVisitor(ComponentsRegistry componentsRegistry, Path path, ParserHandler parserHandler) {
+    public MarkdownVisitor(ComponentsRegistry componentsRegistry, Path path, MarkdownParsingContext parsingContext, ParserHandler parserHandler) {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
+        this.parsingContext = parsingContext;
         this.parserHandler = parserHandler;
         this.parameterWarnings = new LinkedHashSet<>();
         this.unresolvedFootnoteRefs = new LinkedHashSet<>();
@@ -182,7 +185,7 @@ public class MarkdownVisitor extends AbstractVisitor {
             parserHandler.onTable(gfmTableToTableConverter.convert());
         } else if (customBlock instanceof FootnoteDefinition footnote) {
             ParsedFootnote parsed = ParsedFootnote.parse(componentsRegistry, path, footnote);
-            parserHandler.onFootnoteDefinition(parsed);
+            parserHandler.onFootnoteDefinition(parsed, parsingContext.nextFootnoteIdx());
         } else {
             throw new UnsupportedOperationException("unsupported custom block: " + customBlock);
         }

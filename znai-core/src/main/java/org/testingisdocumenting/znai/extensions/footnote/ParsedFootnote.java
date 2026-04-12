@@ -18,6 +18,7 @@ package org.testingisdocumenting.znai.extensions.footnote;
 
 import org.commonmark.ext.footnotes.FootnoteDefinition;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
+import org.testingisdocumenting.znai.parser.MarkdownParsingContext;
 import org.testingisdocumenting.znai.parser.ParserHandlersList;
 import org.testingisdocumenting.znai.parser.commonmark.MarkdownVisitor;
 import org.testingisdocumenting.znai.parser.docelement.DocElement;
@@ -38,7 +39,7 @@ public record ParsedFootnote(FootnoteId id, DocElement docElement, List<PageSear
                 searchHandler
         );
 
-        var visitor = new MarkdownVisitor(componentsRegistry, markdownPath, parserHandler);
+        var visitor = new MarkdownVisitor(componentsRegistry, markdownPath, new MarkdownParsingContext(), parserHandler);
         visit(visitor, footnote);
 
         List<PageSearchEntry> searchEntries = searchHandler.getSearchEntries();
