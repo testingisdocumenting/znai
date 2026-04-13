@@ -16,8 +16,9 @@
  */
 
 function process(pageContent) {
-    return createSectionWithEmptyTitle(
-        mergeMetaIntoContent(pageContent))
+    return annotateFootnoteOccurrences(
+        createSectionWithEmptyTitle(
+            mergeMetaIntoContent(pageContent)))
 }
 
 // meta doc elements props will be merged
@@ -58,6 +59,28 @@ function mergeMetaIntoElement(element, meta) {
     }
 
     return merged
+}
+
+function annotateFootnoteOccurrences(content) {
+    const occurrences = {}
+    return annotateFootnoteOccurrencesRec(content, occurrences)
+}
+
+function annotateFootnoteOccurrencesRec(content, occurrences) {
+    if (!content) {
+        return content
+    }
+
+    return content.map(el => {
+        const newContent = el.content ? annotateFootnoteOccurrencesRec(el.content, occurrences) : el.content
+
+        if (el.type === 'FootnoteReference') {
+            occurrences[el.label] = (occurrences[el.label] || 0) + 1
+            return {...el, content: newContent, occurrence: occurrences[el.label]}
+        }
+
+        return newContent !== el.content ? {...el, content: newContent} : el
+    })
 }
 
 function extractFootnotes(content) {

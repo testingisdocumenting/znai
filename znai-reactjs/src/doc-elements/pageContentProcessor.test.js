@@ -212,6 +212,32 @@ describe('page content post processor', () => {
         expect(footnotes).toHaveLength(0)
     })
 
+    it('should annotate footnote references with occurrence numbers during process', () => {
+        const content = [
+            {
+                "title": "Title",
+                "id": "title",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {"type": "FootnoteReference", "label": "1", "content": [{"type": "Paragraph", "content": [{"text": "note", "type": "SimpleText"}]}]},
+                            {"text": " text ", "type": "SimpleText"},
+                            {"type": "FootnoteReference", "label": "1", "content": [{"type": "Paragraph", "content": [{"text": "note", "type": "SimpleText"}]}]},
+                            {"type": "FootnoteReference", "label": "2", "content": [{"type": "Paragraph", "content": [{"text": "other", "type": "SimpleText"}]}]}
+                        ]
+                    }
+                ]
+            }]
+
+        const processed = pageContentProcessor.process(content)
+        const paragraph = processed[0].content[0]
+        expect(paragraph.content[0].occurrence).toEqual(1)
+        expect(paragraph.content[2].occurrence).toEqual(2)
+        expect(paragraph.content[3].occurrence).toEqual(1)
+    })
+
     it('should deduplicate footnotes with same label and track refCount', () => {
         const noteContent = [{"type": "Paragraph", "content": [{"text": "shared note", "type": "SimpleText"}]}]
         const content = [
