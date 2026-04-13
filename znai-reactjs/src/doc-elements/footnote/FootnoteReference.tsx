@@ -18,20 +18,32 @@ import React from "react";
 import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
 import { Tooltip } from "../../components/Tooltip";
 import { FootnotePreview } from "./FootnotePreview";
+import { isFootnoteListHidden } from "../../structure/docMeta";
+import { footnoteRefAnchorId, footnoteEntryAnchorId } from "./footnoteAnchors";
 
 import "./FootnoteReference.css";
 
 interface Props {
   label: string;
   content: DocElementContent;
+  occurrence: number;
   elementsLibrary: ElementsLibraryMap;
 }
 
-export function FootnoteReference({ label, content, elementsLibrary }: Props) {
+export function FootnoteReference({ label, content, occurrence, elementsLibrary }: Props) {
   const tooltipContent = <FootnotePreview label={label} content={content} elementsLibrary={elementsLibrary} />;
 
   const referenceClassName =
     "znai-footnote-reference " + (label.length === 1 ? "single-char-label" : "multi-char-label");
+
+  const hasFootnoteList = !isFootnoteListHidden();
+  const anchorId = hasFootnoteList ? footnoteRefAnchorId(label, occurrence) : undefined;
+
+  const sup = (
+    <sup id={anchorId} className={referenceClassName}>
+      {label}
+    </sup>
+  );
 
   return (
     <Tooltip
@@ -39,7 +51,7 @@ export function FootnoteReference({ label, content, elementsLibrary }: Props) {
       placement="parent-content-block"
       contentClassName="znai-footnote-preview-container"
     >
-      <sup className={referenceClassName}>{label}</sup>
+      {hasFootnoteList ? <a href={"#" + footnoteEntryAnchorId(label)}>{sup}</a> : sup}
     </Tooltip>
   );
 }

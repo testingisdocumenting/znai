@@ -1,0 +1,1 @@
+* Add: Footnote list at the end of the page in addition to footnote on hover

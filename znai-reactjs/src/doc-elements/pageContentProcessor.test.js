@@ -129,4 +129,137 @@ describe('page content post processor', () => {
         const actual = pageContentProcessor.process(original)
         expect(actual).toEqual(expected)
     })
+
+    it('should extract footnotes from content', () => {
+        const content = [
+            {
+                "title": "Title",
+                "id": "title",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {"text": "Some text", "type": "SimpleText"},
+                            {"type": "FootnoteReference", "label": "1", "content": [{"type": "Paragraph", "content": [{"text": "first note", "type": "SimpleText"}]}]},
+                            {"text": " more text", "type": "SimpleText"},
+                            {"type": "FootnoteReference", "label": "2", "content": [{"type": "Paragraph", "content": [{"text": "second note", "type": "SimpleText"}]}]}
+                        ]
+                    }
+                ]
+            }]
+
+        const footnotes = pageContentProcessor.extractFootnotes(content)
+
+        expect(footnotes).toEqual([
+            {label: "1", refCount: 1, content: [{"type": "Paragraph", "content": [{"text": "first note", "type": "SimpleText"}]}]},
+            {label: "2", refCount: 1, content: [{"type": "Paragraph", "content": [{"text": "second note", "type": "SimpleText"}]}]}
+        ])
+    })
+
+    it('should extract footnotes across multiple sections', () => {
+        const content = [
+            {
+                "title": "Section One",
+                "id": "section-one",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {"type": "FootnoteReference", "label": "1", "content": [{"type": "Paragraph", "content": [{"text": "note one", "type": "SimpleText"}]}]}
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Section Two",
+                "id": "section-two",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {"type": "FootnoteReference", "label": "2", "content": [{"type": "Paragraph", "content": [{"text": "note two", "type": "SimpleText"}]}]}
+                        ]
+                    }
+                ]
+            }]
+
+        const footnotes = pageContentProcessor.extractFootnotes(content)
+        expect(footnotes).toHaveLength(2)
+        expect(footnotes[0].label).toEqual("1")
+        expect(footnotes[1].label).toEqual("2")
+    })
+
+    it('should return empty array when no footnotes present', () => {
+        const content = [
+            {
+                "title": "Title",
+                "id": "title",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {"text": "Simple text", "type": "SimpleText"}
+                        ]
+                    }
+                ]
+            }]
+
+        const footnotes = pageContentProcessor.extractFootnotes(content)
+        expect(footnotes).toHaveLength(0)
+    })
+
+    it('should annotate footnote references with occurrence numbers during process', () => {
+        const content = [
+            {
+                "title": "Title",
+                "id": "title",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {"type": "FootnoteReference", "label": "1", "content": [{"type": "Paragraph", "content": [{"text": "note", "type": "SimpleText"}]}]},
+                            {"text": " text ", "type": "SimpleText"},
+                            {"type": "FootnoteReference", "label": "1", "content": [{"type": "Paragraph", "content": [{"text": "note", "type": "SimpleText"}]}]},
+                            {"type": "FootnoteReference", "label": "2", "content": [{"type": "Paragraph", "content": [{"text": "other", "type": "SimpleText"}]}]}
+                        ]
+                    }
+                ]
+            }]
+
+        const processed = pageContentProcessor.process(content)
+        const paragraph = processed[0].content[0]
+        expect(paragraph.content[0].occurrence).toEqual(1)
+        expect(paragraph.content[2].occurrence).toEqual(2)
+        expect(paragraph.content[3].occurrence).toEqual(1)
+    })
+
+    it('should deduplicate footnotes with same label and track refCount', () => {
+        const noteContent = [{"type": "Paragraph", "content": [{"text": "shared note", "type": "SimpleText"}]}]
+        const content = [
+            {
+                "title": "Title",
+                "id": "title",
+                "type": "Section",
+                "content": [
+                    {
+                        "type": "Paragraph",
+                        "content": [
+                            {"type": "FootnoteReference", "label": "1", "content": noteContent},
+                            {"type": "FootnoteReference", "label": "1", "content": noteContent},
+                            {"type": "FootnoteReference", "label": "1", "content": noteContent}
+                        ]
+                    }
+                ]
+            }]
+
+        const footnotes = pageContentProcessor.extractFootnotes(content)
+        expect(footnotes).toHaveLength(1)
+        expect(footnotes[0].label).toEqual("1")
+        expect(footnotes[0].refCount).toEqual(3)
+    })
 })
