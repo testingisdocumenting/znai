@@ -15,6 +15,7 @@
 #
 
 org.testingisdocumenting.znai.extensions.tabs.TabsFencePlugin
+org.testingisdocumenting.znai.extensions.tabs.TabContentFencePlugin
 org.testingisdocumenting.znai.extensions.templates.TemplateFencePlugin
 org.testingisdocumenting.znai.extensions.columns.ColumnsFencePlugin
 org.testingisdocumenting.znai.extensions.markup.MarkdownAndResultFencePlugin

@@ -43,6 +43,7 @@ import presentationGraphVizSvg from './graphviz/PresentationGraphVizSvg'
 import DocumentationGraphVizFlow from './graphviz/DocumentationGraphVizFlow'
 import Table from './table/Table'
 import {presentationTabsHandler, Tabs} from './tabs/Tabs'
+import TabContent from './tabs/TabContent'
 import {Columns, presentationColumnsHandler} from './columns/Columns'
 import { Icon } from './icons/Icon'
 import KeyboardShortcut from './keyboard/KeyboardShortcut'
@@ -185,6 +186,8 @@ library.FootnoteBackLinks = FootnoteBackLinks;
 
 library.Tabs = Tabs
 presentationElementHandlers.Tabs = presentationTabsHandler
+
+library.TabContent = TabContent
 
 library.Columns = Columns
 presentationElementHandlers.Columns = presentationColumnsHandler

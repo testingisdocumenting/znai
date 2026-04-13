@@ -38,6 +38,9 @@ export function pagesDemo(registry) {
       <PageMaxHeightWrap>
         <Page elementsLibrary={elementsLibrary} docMeta={docMeta()} {...twoSidesWithTabsPageContent()} />
       </PageMaxHeightWrap>
+    ))
+    .add("global tabs", () => (
+      <Page elementsLibrary={elementsLibrary} docMeta={docMeta()} {...globalTabsPageContent()} />
     ));
 }
 
@@ -2024,6 +2027,211 @@ function twoSidesWithTabsPageContent() {
         {
           title: "Attention Signs",
           id: "attention-signs",
+        },
+      ],
+    },
+  };
+}
+
+function globalTabsPageContent() {
+  return {
+    type: "Page",
+    content: [
+      {
+        title: "Getting Started",
+        id: "getting-started",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "This section applies to all languages. Follow these steps to get started.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            type: "TabContent",
+            tabId: "Java",
+            content: [
+              {
+                type: "Paragraph",
+                content: [
+                  {
+                    text: "Install Java 17 or later from your package manager.",
+                    type: "SimpleText",
+                  },
+                ],
+              },
+              {
+                type: "Snippet",
+                lang: "bash",
+                snippet: "$ sdk install java 17.0.6-tem\n$ java --version",
+              },
+            ],
+          },
+          {
+            type: "TabContent",
+            tabId: "Python",
+            content: [
+              {
+                type: "Paragraph",
+                content: [
+                  {
+                    text: "Install Python 3.10 or later.",
+                    type: "SimpleText",
+                  },
+                ],
+              },
+              {
+                type: "Snippet",
+                lang: "bash",
+                snippet: "$ pip install mylib\n$ python --version",
+              },
+            ],
+          },
+          {
+            type: "TabContent",
+            tabId: "JavaScript",
+            content: [
+              {
+                type: "Paragraph",
+                content: [
+                  {
+                    text: "Install Node.js 18 or later.",
+                    type: "SimpleText",
+                  },
+                ],
+              },
+              {
+                type: "Snippet",
+                lang: "bash",
+                snippet: "$ npm install mylib\n$ node --version",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Configuration",
+        id: "configuration",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Configure your project with the following settings.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            type: "TabContent",
+            tabId: "Java",
+            content: [
+              {
+                type: "Snippet",
+                lang: "xml",
+                snippet:
+                  '<dependency>\n  <groupId>com.example</groupId>\n  <artifactId>mylib</artifactId>\n  <version>1.0</version>\n</dependency>',
+              },
+            ],
+          },
+          {
+            type: "TabContent",
+            tabId: "Python",
+            content: [
+              {
+                type: "Snippet",
+                lang: "python",
+                snippet: "# requirements.txt\nmylib>=1.0",
+              },
+            ],
+          },
+          {
+            type: "TabContent",
+            tabId: "JavaScript",
+            content: [
+              {
+                type: "Snippet",
+                lang: "json",
+                snippet: '{\n  "dependencies": {\n    "mylib": "^1.0"\n  }\n}',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Usage",
+        id: "usage",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "Basic usage example for all platforms.",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            type: "TabContent",
+            tabId: "Java",
+            content: [
+              {
+                type: "Snippet",
+                lang: "java",
+                snippet: 'MyLib lib = new MyLib();\nlib.process("data");',
+              },
+            ],
+          },
+          {
+            type: "TabContent",
+            tabId: "Python",
+            content: [
+              {
+                type: "Snippet",
+                lang: "python",
+                snippet: 'from mylib import MyLib\n\nlib = MyLib()\nlib.process("data")',
+              },
+            ],
+          },
+          {
+            type: "TabContent",
+            tabId: "JavaScript",
+            content: [
+              {
+                type: "Snippet",
+                lang: "javascript",
+                snippet: 'const { MyLib } = require("mylib");\n\nconst lib = new MyLib();\nlib.process("data");',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    lastModifiedTime: 1516464705000,
+    tocItem: {
+      sectionTitle: "Guide",
+      pageTitle: "Global Tabs Demo",
+      fileName: "global-tabs",
+      dirName: "layout",
+      pageMeta: {},
+      pageSectionIdTitles: [
+        {
+          title: "Getting Started",
+          id: "getting-started",
+        },
+        {
+          title: "Configuration",
+          id: "configuration",
+        },
+        {
+          title: "Usage",
+          id: "usage",
         },
       ],
     },
