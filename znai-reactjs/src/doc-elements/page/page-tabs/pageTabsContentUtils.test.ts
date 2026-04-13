@@ -71,10 +71,6 @@ describe("extractTabIds", () => {
 });
 
 describe("buildContentForTab", () => {
-  it("returns content as-is for null", () => {
-    expect(buildContentForTab(null, "java")).toBe(null);
-  });
-
   it("keeps non-TabContent elements and keeps matching TabContent element", () => {
     const content = [
       section(

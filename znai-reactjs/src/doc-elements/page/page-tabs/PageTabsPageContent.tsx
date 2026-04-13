@@ -49,7 +49,7 @@ class PageTabsPageContent extends React.Component<any, PageTabsState> {
     const tabIds = extractTabIds(content);
     const filteredContent = buildContentForTab(content, activeTabId);
 
-    const renderedSections = filteredContent!.map((section: any) => {
+    const renderedSections = filteredContent.map((section: any) => {
       const id = section.id;
       return <elementsLibrary.Section key={id} {...section} elementsLibrary={elementsLibrary} />;
     });

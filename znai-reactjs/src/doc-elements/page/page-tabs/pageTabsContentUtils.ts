@@ -36,22 +36,16 @@ export function hasTabContent(pageContent: DocElementContent | undefined): boole
  * extracts unique tab IDs from all TabContent elements in page content, preserving order
  */
 export function extractTabIds(pageContent: DocElementContent | undefined): string[] {
-  const result: string[] = [];
   if (!pageContent) {
-    return result;
+    return [];
   }
 
-  pageContent.forEach((section) => {
-    if (section.content) {
-      section.content.forEach((el: any) => {
-        if (el.type === "TabContent" && el.tabId && result.indexOf(el.tabId) === -1) {
-          result.push(el.tabId);
-        }
-      });
-    }
-  });
+  const allTabIds = pageContent
+    .flatMap((section) => (section.content || []))
+    .filter((el: any) => el.type === "TabContent" && el.tabId)
+    .map((el: any) => el.tabId);
 
-  return result;
+  return [...new Set(allTabIds)];
 }
 
 /**
@@ -63,13 +57,9 @@ export function extractTabIds(pageContent: DocElementContent | undefined): strin
  * returns sections with their content filtered
  */
 export function buildContentForTab(
-  pageContent: DocElementContent | null | undefined,
+  pageContent: DocElementContent,
   selectedTabId: string
-): DocElementContent | null | undefined {
-  if (!pageContent) {
-    return pageContent;
-  }
-
+): DocElementContent {
   return pageContent
     .map((section) => buildSectionForTab(section as SectionPayload, selectedTabId))
     .filter((section): section is SectionPayload => section !== null);
@@ -80,18 +70,9 @@ function buildSectionForTab(section: SectionPayload, selectedTabId: string): Sec
     return section;
   }
 
-  const filteredContent: DocElementPayload[] = [];
-
-  section.content.forEach((el: any) => {
-    if (el.type === "TabContent") {
-      if (el.tabId === selectedTabId) {
-        filteredContent.push(el);
-      }
-      // skip non-matching tab content
-    } else {
-      filteredContent.push(el);
-    }
-  });
+  const filteredContent = section.content.filter(
+    (el: any) => el.type !== "TabContent" || el.tabId === selectedTabId
+  );
 
   if (filteredContent.length === 0 && sectionHasTabContent(section)) {
     return null;
