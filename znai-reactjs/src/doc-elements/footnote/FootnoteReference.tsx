@@ -19,7 +19,7 @@ import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocEl
 import { Tooltip } from "../../components/Tooltip";
 import { FootnotePreview } from "./FootnotePreview";
 import { isFootnoteListHidden } from "../../structure/docMeta";
-import { footnoteRefAnchorId } from "./footnoteAnchors";
+import { footnoteRefAnchorId, footnoteEntryAnchorId } from "./footnoteAnchors";
 
 import "./FootnoteReference.css";
 
@@ -52,12 +52,12 @@ export function FootnoteReference({ label, content, elementsLibrary }: Props) {
       placement="parent-content-block"
       contentClassName="znai-footnote-preview-container"
     >
-      {hasFootnoteList ? <a href={"#fn-" + label}>{sup}</a> : sup}
+      {hasFootnoteList ? <a href={"#" + footnoteEntryAnchorId(label)}>{sup}</a> : sup}
     </Tooltip>
   );
 }
 
-const labelOccurrences: Record<string, number> = {};
+let labelOccurrences: Record<string, number> = {};
 
 function footnoteRefOccurrence(label: string): number {
   labelOccurrences[label] = (labelOccurrences[label] || 0) + 1;
@@ -65,7 +65,5 @@ function footnoteRefOccurrence(label: string): number {
 }
 
 export function resetFootnoteRefOccurrences() {
-  for (const key in labelOccurrences) {
-    delete labelOccurrences[key];
-  }
+  labelOccurrences = {};
 }

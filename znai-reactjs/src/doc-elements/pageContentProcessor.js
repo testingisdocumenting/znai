@@ -60,35 +60,29 @@ function mergeMetaIntoElement(element, meta) {
     return merged
 }
 
-function collectFootnoteReferences(content, footnotes) {
+function extractFootnotes(content) {
+    const byLabel = new Map()
+    collectFootnoteReferences(content, byLabel)
+    return [...byLabel.values()]
+}
+
+function collectFootnoteReferences(content, byLabel) {
     if (!content) {
         return
     }
 
     for (const el of content) {
         if (el.type === 'FootnoteReference') {
-            footnotes.push({label: el.label, content: el.content})
+            const existing = byLabel.get(el.label)
+            if (existing) {
+                existing.refCount++
+            } else {
+                byLabel.set(el.label, {label: el.label, content: el.content, refCount: 1})
+            }
         }
 
-        collectFootnoteReferences(el.content, footnotes)
+        collectFootnoteReferences(el.content, byLabel)
     }
-}
-
-function extractFootnotes(content) {
-    const allRefs = []
-    collectFootnoteReferences(content, allRefs)
-
-    const occurrences = {}
-    const result = []
-
-    for (const ref of allRefs) {
-        occurrences[ref.label] = (occurrences[ref.label] || 0) + 1
-        if (occurrences[ref.label] === 1) {
-            result.push(ref)
-        }
-    }
-
-    return result.map(f => ({...f, refCount: occurrences[f.label]}))
 }
 
 /**

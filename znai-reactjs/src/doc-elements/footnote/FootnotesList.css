@@ -18,16 +18,14 @@
     --znai-regular-text-size: var(--znai-smaller-text-size);
     --znai-code-text-size: var(--znai-small-meta-text-size);
 
-    background-color: var(--znai-footnotes-list-background-color);
     border-top: 1px solid var(--znai-footnotes-list-border-color);
-    border-bottom: 1px solid var(--znai-footnotes-list-border-color);
     font-size: var(--znai-regular-text-size);
 
-    margin: 56px calc(-1 * var(--znai-single-side-horizontal-min-spacing)) -104px;
+    margin: 56px calc(-1 * var(--znai-single-side-horizontal-min-spacing)) -56px;
 }
 
 .znai-footnotes-list-content {
-    padding: 32px 0 32px 32px;
+    padding: 64px 0 32px 32px;
 }
 
 .znai-footnotes-list-entry {

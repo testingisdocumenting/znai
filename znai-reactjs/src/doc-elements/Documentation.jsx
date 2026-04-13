@@ -39,6 +39,7 @@ import { mergeDocMeta, isFootnoteListHidden } from "../structure/docMeta";
 
 import { pageContentProcessor } from "./pageContentProcessor.js";
 import { FootnotesList } from "./footnote/FootnotesList";
+import { resetFootnoteRefOccurrences } from "./footnote/FootnoteReference";
 
 import { DocumentationModes } from "./DocumentationModes";
 import { pageTypesRegistry } from "./page/PageTypesRegistry";
@@ -204,6 +205,7 @@ export class Documentation extends React.Component {
       />
     );
 
+    resetFootnoteRefOccurrences();
     const footnotes = isFootnoteListHidden() ? [] : pageContentProcessor.extractFootnotes(page.content);
     const renderedFootnotesList = footnotes.length > 0 ? (
       <FootnotesList footnotes={footnotes} elementsLibrary={elementsLibrary} />
