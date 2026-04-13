@@ -16,96 +16,78 @@
  */
 
 function process(pageContent) {
-    return annotateFootnoteOccurrences(
-        createSectionWithEmptyTitle(
-            mergeMetaIntoContent(pageContent)))
+  const footnoteOccurrences = {};
+  return createSectionWithEmptyTitle(processContent(pageContent, undefined, footnoteOccurrences));
 }
 
-// meta doc elements props will be merged
-// into a next doc element and all its children
-function mergeMetaIntoContent(pageContent, meta) {
-    let currentMeta = meta
+// merges Meta element props into subsequent siblings and their children,
+// and annotates FootnoteReference elements with occurrence numbers
+function processContent(content, meta, footnoteOccurrences) {
+  if (!content) {
+    return content;
+  }
 
-    const result = []
-    if (!pageContent) {
-        return result
+  let currentMeta = meta;
+  const result = [];
+
+  for (let i = 0, len = content.length; i < len; i++) {
+    const el = content[i];
+    if (el.type === "Meta") {
+      // eslint-disable-next-line no-unused-vars
+      const { type, ...metaProps } = el;
+      currentMeta = { ...currentMeta, ...metaProps };
+    } else {
+      result.push(processElement(el, currentMeta, footnoteOccurrences));
     }
+  }
 
-    for (let i = 0, len = pageContent.length; i < len; i++) {
-        const el = pageContent[i]
-        if (el.type === 'Meta') {
-            // eslint-disable-next-line no-unused-vars
-            const {type, ...meta} = el
-            currentMeta = {...currentMeta, ...meta}
-        } else {
-            result.push(mergeMetaIntoElement(el, currentMeta))
-        }
-    }
-
-    return result
+  return result;
 }
 
-function mergeMetaIntoElement(element, meta) {
-    const newContent = element.content ? mergeMetaIntoContent(element.content, meta) : element.content
+function processElement(element, meta, footnoteOccurrences) {
+  const newContent = element.content ? processContent(element.content, meta, footnoteOccurrences) : element.content;
 
-    const merged = {...element}
+  const result = { ...element };
 
-    if (newContent) {
-        merged.content = newContent
-    }
+  if (newContent) {
+    result.content = newContent;
+  }
 
-    if (meta) {
-        merged.meta = {...meta, ...merged.meta}
-    }
+  if (meta) {
+    result.meta = { ...meta, ...result.meta };
+  }
 
-    return merged
-}
+  if (element.type === "FootnoteReference") {
+    footnoteOccurrences[element.label] = (footnoteOccurrences[element.label] || 0) + 1;
+    result.occurrence = footnoteOccurrences[element.label];
+  }
 
-function annotateFootnoteOccurrences(content) {
-    const occurrences = {}
-    return annotateFootnoteOccurrencesRec(content, occurrences)
-}
-
-function annotateFootnoteOccurrencesRec(content, occurrences) {
-    if (!content) {
-        return content
-    }
-
-    return content.map(el => {
-        const newContent = el.content ? annotateFootnoteOccurrencesRec(el.content, occurrences) : el.content
-
-        if (el.type === 'FootnoteReference') {
-            occurrences[el.label] = (occurrences[el.label] || 0) + 1
-            return {...el, content: newContent, occurrence: occurrences[el.label]}
-        }
-
-        return newContent !== el.content ? {...el, content: newContent} : el
-    })
+  return result;
 }
 
 function extractFootnotes(content) {
-    const byLabel = new Map()
-    collectFootnoteReferences(content, byLabel)
-    return [...byLabel.values()]
+  const byLabel = new Map();
+  collectFootnoteReferences(content, byLabel);
+  return [...byLabel.values()];
 }
 
 function collectFootnoteReferences(content, byLabel) {
-    if (!content) {
-        return
+  if (!content) {
+    return;
+  }
+
+  for (const el of content) {
+    if (el.type === "FootnoteReference") {
+      const existing = byLabel.get(el.label);
+      if (existing) {
+        existing.refCount++;
+      } else {
+        byLabel.set(el.label, { label: el.label, content: el.content, refCount: 1 });
+      }
     }
 
-    for (const el of content) {
-        if (el.type === 'FootnoteReference') {
-            const existing = byLabel.get(el.label)
-            if (existing) {
-                existing.refCount++
-            } else {
-                byLabel.set(el.label, {label: el.label, content: el.content, refCount: 1})
-            }
-        }
-
-        collectFootnoteReferences(el.content, byLabel)
-    }
+    collectFootnoteReferences(el.content, byLabel);
+  }
 }
 
 /**
@@ -114,30 +96,26 @@ function collectFootnoteReferences(content, byLabel) {
  *
  */
 function createSectionWithEmptyTitle(pageContent) {
-    const firstSectionIdx = findFirstSectionIdx(pageContent)
-    let isSectionAbsent = firstSectionIdx === -1;
+  const firstSectionIdx = findFirstSectionIdx(pageContent);
+  let isSectionAbsent = firstSectionIdx === -1;
 
-    const elementsOutsideSection = isSectionAbsent ?
-        pageContent :
-        pageContent.slice(0, firstSectionIdx)
+  const elementsOutsideSection = isSectionAbsent ? pageContent : pageContent.slice(0, firstSectionIdx);
 
-    const restOfElements = isSectionAbsent ?
-        [] :
-        pageContent.slice(firstSectionIdx)
+  const restOfElements = isSectionAbsent ? [] : pageContent.slice(firstSectionIdx);
 
-    return elementsOutsideSection.length ?
-        [{type: "Section", title: "", id: "", content: elementsOutsideSection}].concat(restOfElements):
-        pageContent
+  return elementsOutsideSection.length
+    ? [{ type: "Section", title: "", id: "", content: elementsOutsideSection }].concat(restOfElements)
+    : pageContent;
 }
 
 function findFirstSectionIdx(content) {
-    for (let i = 0, len = content.length; i < len; i++) {
-        if (content[i].type === 'Section') {
-            return i
-        }
+  for (let i = 0, len = content.length; i < len; i++) {
+    if (content[i].type === "Section") {
+      return i;
     }
+  }
 
-    return -1
+  return -1;
 }
 
-export const pageContentProcessor = {process, extractFootnotes}
+export const pageContentProcessor = { process, extractFootnotes };
