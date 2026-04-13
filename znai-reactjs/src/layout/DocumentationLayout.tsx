@@ -40,6 +40,7 @@ interface Props {
   zoomOverlay: React.ReactNode;
   searchPopup: React.ReactNode;
   renderedPage: React.ReactNode;
+  renderedFootnotesList: React.ReactNode;
   renderedNextPrevNavigation: React.ReactNode;
   renderedFooter: React.ReactNode;
   docMeta: DocMeta;
@@ -70,6 +71,7 @@ export function DocumentationLayout({
   searchPopup,
   tocItem,
   renderedPage,
+  renderedFootnotesList,
   renderedNextPrevNavigation,
   renderedFooter,
   docMeta,
@@ -111,6 +113,7 @@ export function DocumentationLayout({
         </div>
 
         <div className="page-bottom">
+          {renderedFootnotesList}
           {renderedNextPrevNavigation}
           {renderedFooter}
         </div>

@@ -60,6 +60,37 @@ function mergeMetaIntoElement(element, meta) {
     return merged
 }
 
+function collectFootnoteReferences(content, footnotes) {
+    if (!content) {
+        return
+    }
+
+    for (const el of content) {
+        if (el.type === 'FootnoteReference') {
+            footnotes.push({label: el.label, content: el.content})
+        }
+
+        collectFootnoteReferences(el.content, footnotes)
+    }
+}
+
+function extractFootnotes(content) {
+    const allRefs = []
+    collectFootnoteReferences(content, allRefs)
+
+    const occurrences = {}
+    const result = []
+
+    for (const ref of allRefs) {
+        occurrences[ref.label] = (occurrences[ref.label] || 0) + 1
+        if (occurrences[ref.label] === 1) {
+            result.push(ref)
+        }
+    }
+
+    return result.map(f => ({...f, refCount: occurrences[f.label]}))
+}
+
 /**
  * section is the first class citizen. smallest unit of search and navigation.
  * if a user didn't specify a section, the default section wrapper will be created.
@@ -92,4 +123,4 @@ function findFirstSectionIdx(content) {
     return -1
 }
 
-export const pageContentProcessor = {process}
+export const pageContentProcessor = {process, extractFootnotes}

@@ -88,6 +88,7 @@ import { ApiLinkedTextBlock } from "./api/ApiLinkedTextBlock";
 import { OpenApiMethodAndUrl } from "./open-api/OpenApiMethodAndUrl";
 import { Card } from "./card/Card";
 import { FootnoteReference } from "./footnote/FootnoteReference";
+import { FootnoteBackLinks } from "./footnote/FootnotesList";
 import { EmbeddedHtml } from "./html/EmbeddedHtml";
 import { Asciinema } from "./asciinema/Asciinema";
 import { ReadMore } from "./read-more/ReadMore.js";
@@ -180,6 +181,7 @@ library.AnnotatedImageWithOrderedList = AnnotatedImageWithOrderedList
 library.Card = Card;
 
 library.FootnoteReference = FootnoteReference;
+library.FootnoteBackLinks = FootnoteBackLinks;
 
 library.Tabs = Tabs
 presentationElementHandlers.Tabs = presentationTabsHandler

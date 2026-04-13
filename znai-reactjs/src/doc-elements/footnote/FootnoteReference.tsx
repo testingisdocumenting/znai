@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { useRef } from "react";
 import { DocElementContent, ElementsLibraryMap } from "../default-elements/DocElement";
 import { Tooltip } from "../../components/Tooltip";
 import { FootnotePreview } from "./FootnotePreview";
+import { isFootnoteListHidden } from "../../structure/docMeta";
+import { footnoteRefAnchorId } from "./footnoteAnchors";
 
 import "./FootnoteReference.css";
 
@@ -28,10 +30,21 @@ interface Props {
 }
 
 export function FootnoteReference({ label, content, elementsLibrary }: Props) {
+  const occurrenceRef = useRef(footnoteRefOccurrence(label));
+
   const tooltipContent = <FootnotePreview label={label} content={content} elementsLibrary={elementsLibrary} />;
 
   const referenceClassName =
     "znai-footnote-reference " + (label.length === 1 ? "single-char-label" : "multi-char-label");
+
+  const hasFootnoteList = !isFootnoteListHidden();
+  const anchorId = hasFootnoteList ? footnoteRefAnchorId(label, occurrenceRef.current) : undefined;
+
+  const sup = (
+    <sup id={anchorId} className={referenceClassName}>
+      {label}
+    </sup>
+  );
 
   return (
     <Tooltip
@@ -39,7 +52,20 @@ export function FootnoteReference({ label, content, elementsLibrary }: Props) {
       placement="parent-content-block"
       contentClassName="znai-footnote-preview-container"
     >
-      <sup className={referenceClassName}>{label}</sup>
+      {hasFootnoteList ? <a href={"#fn-" + label}>{sup}</a> : sup}
     </Tooltip>
   );
+}
+
+const labelOccurrences: Record<string, number> = {};
+
+function footnoteRefOccurrence(label: string): number {
+  labelOccurrences[label] = (labelOccurrences[label] || 0) + 1;
+  return labelOccurrences[label];
+}
+
+export function resetFootnoteRefOccurrences() {
+  for (const key in labelOccurrences) {
+    delete labelOccurrences[key];
+  }
 }

@@ -39,6 +39,7 @@ export function documentationLayoutDemo(registry: Registry) {
           searchPopup={dummy}
           zoomOverlay={dummy}
           renderedPage={dummy}
+          renderedFootnotesList={null}
           renderedNextPrevNavigation={dummy}
           renderedFooter={dummy}
           docMeta={docMeta}

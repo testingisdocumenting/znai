@@ -35,9 +35,10 @@ import PresentationRegistry from "./presentation/PresentationRegistry";
 
 import AllPagesAtOnce from "./AllPagesAtOnce";
 
-import { mergeDocMeta } from "../structure/docMeta";
+import { mergeDocMeta, isFootnoteListHidden } from "../structure/docMeta";
 
 import { pageContentProcessor } from "./pageContentProcessor.js";
+import { FootnotesList } from "./footnote/FootnotesList";
 
 import { DocumentationModes } from "./DocumentationModes";
 import { pageTypesRegistry } from "./page/PageTypesRegistry";
@@ -203,6 +204,11 @@ export class Documentation extends React.Component {
       />
     );
 
+    const footnotes = isFootnoteListHidden() ? [] : pageContentProcessor.extractFootnotes(page.content);
+    const renderedFootnotesList = footnotes.length > 0 ? (
+      <FootnotesList footnotes={footnotes} elementsLibrary={elementsLibrary} />
+    ) : null;
+
     const NextPrevNavigation = pageTypesRegistry.nextPrevNavigationComponent(page.tocItem);
     const renderedNextPrevNavigation = (
       <NextPrevNavigation
@@ -255,6 +261,7 @@ export class Documentation extends React.Component {
             nextPageTocItem={this.nextPageTocItem}
             searchPopup={searchPopup}
             renderedPage={renderedPage}
+            renderedFootnotesList={renderedFootnotesList}
             renderedNextPrevNavigation={renderedNextPrevNavigation}
             renderedFooter={renderedFooter}
             onHeaderClick={this.onHeaderClick}

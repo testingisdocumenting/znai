@@ -31,6 +31,7 @@ export interface DocMeta {
   fetchIncludeContentType?: boolean;
   useTopHeader?: boolean;
   hidePresentationTrigger?: boolean;
+  hideFootnoteList?: boolean;
   support?: DocMetaSupport;
   supportMeta?: SupportMeta;
 }
@@ -74,6 +75,10 @@ function isPresentationButtonVisible() {
   return !docMeta.hidePresentationTrigger;
 }
 
+function isFootnoteListHidden() {
+  return !!docMeta.hideFootnoteList;
+}
+
 let supportLinkPromise: Promise<SupportMeta> | undefined = undefined;
 
 const defaultSupportTitle = "Support";
@@ -113,4 +118,5 @@ export {
   getDocId,
   getSupportLinkAndTitlePromise,
   isPresentationButtonVisible,
+  isFootnoteListHidden,
 };

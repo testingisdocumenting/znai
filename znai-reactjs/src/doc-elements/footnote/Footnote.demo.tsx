@@ -18,6 +18,7 @@ import React from "react";
 
 import { elementsLibrary } from "../DefaultElementsLibrary";
 import { FootnoteReference } from "./FootnoteReference";
+import { FootnotesList } from "./FootnotesList";
 import { Registry } from "react-component-viewer";
 import { TooltipRenderer } from "../../components/Tooltip";
 import { FootnotePreview } from "./FootnotePreview";
@@ -54,6 +55,16 @@ export function footnoteDemo(registry: Registry) {
       </div>
     );
   });
+
+  registry.add("footnotes list", () => (
+    <FootnotesList
+      elementsLibrary={elementsLibrary}
+      footnotes={[
+        { label: "1", content: footnoteContent(), refCount: 1 },
+        { label: "2", content: longerFootnoteContent(), refCount: 3 },
+      ]}
+    />
+  ));
 }
 
 function footnoteContent() {
