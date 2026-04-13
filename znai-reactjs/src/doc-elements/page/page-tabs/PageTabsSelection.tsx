@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import "./GlobalTabsSelection.css";
+import "./PageTabsSelection.css";
 
 interface Props {
   tabIds: string[];
@@ -24,14 +24,14 @@ interface Props {
   onTabSelect: (tabId: string) => void;
 }
 
-function GlobalTabsSelection({ tabIds, activeTabId, onTabSelect }: Props) {
+function PageTabsSelection({ tabIds, activeTabId, onTabSelect }: Props) {
   return (
-    <div className="global-tabs-selection">
-      <div className="global-tabs-names content-block">
+    <div className="znai-page-tabs-selection">
+      <div className="znai-page-tabs-names content-block">
         {tabIds.map((tabId) => (
           <span
             key={tabId}
-            className={"global-tab-name" + (tabId === activeTabId ? " active" : "")}
+            className={"znai-page-tab-name" + (tabId === activeTabId ? " active" : "")}
             onClick={() => onTabSelect(tabId)}
           >
             {tabId}
@@ -42,4 +42,4 @@ function GlobalTabsSelection({ tabIds, activeTabId, onTabSelect }: Props) {
   );
 }
 
-export default GlobalTabsSelection;
+export default PageTabsSelection;

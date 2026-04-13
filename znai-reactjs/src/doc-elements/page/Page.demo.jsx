@@ -39,8 +39,8 @@ export function pagesDemo(registry) {
         <Page elementsLibrary={elementsLibrary} docMeta={docMeta()} {...twoSidesWithTabsPageContent()} />
       </PageMaxHeightWrap>
     ))
-    .add("global tabs", () => (
-      <Page elementsLibrary={elementsLibrary} docMeta={docMeta()} {...globalTabsPageContent()} />
+    .add("page tabs", () => (
+      <Page elementsLibrary={elementsLibrary} docMeta={docMeta()} {...pageTabsPageContent()} />
     ));
 }
 
@@ -2033,7 +2033,7 @@ function twoSidesWithTabsPageContent() {
   };
 }
 
-function globalTabsPageContent() {
+function pageTabsPageContent() {
   return {
     type: "Page",
     content: [
@@ -2216,8 +2216,8 @@ function globalTabsPageContent() {
     lastModifiedTime: 1516464705000,
     tocItem: {
       sectionTitle: "Guide",
-      pageTitle: "Global Tabs Demo",
-      fileName: "global-tabs",
+      pageTitle: "Page Tabs Demo",
+      fileName: "page-tabs",
       dirName: "layout",
       pageMeta: {},
       pageSectionIdTitles: [

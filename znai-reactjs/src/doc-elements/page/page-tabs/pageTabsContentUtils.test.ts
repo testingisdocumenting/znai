@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { hasTabContent, extractTabIds, buildContentForTab } from "./globalTabsContentUtils";
+import { hasTabContent, extractTabIds, buildContentForTab } from "./pageTabsContentUtils";
 
 const paragraph = (text: string) => ({
   type: "Paragraph" as const,

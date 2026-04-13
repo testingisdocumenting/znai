@@ -14,27 +14,24 @@
  * limitations under the License.
  */
 
-.global-tabs-selection {
+.znai-page-tabs-selection {
     position: sticky;
     top: 0;
     z-index: 100;
     background-color: var(--znai-background-color);
     border-bottom: 1px solid var(--znai-snippets-outer-border-color);
-    margin-top: 32px;
-    margin-bottom: 20px;
-    margin-left: calc(-1 * var(--znai-single-side-horizontal-min-spacing));
-    margin-right: calc(-1 * var(--znai-single-side-horizontal-min-spacing));
+    margin: 32px calc(-1 * var(--znai-single-side-horizontal-min-spacing)) 20px;
     padding-left: var(--znai-single-side-horizontal-min-spacing);
     padding-right: var(--znai-single-side-horizontal-min-spacing);
 }
 
-.global-tabs-names {
+.znai-page-tabs-names {
     display: flex;
     gap: 4px;
     margin-bottom: -1px;
 }
 
-.global-tab-name {
+.znai-page-tab-name {
     padding: 6px 16px;
     cursor: pointer;
     color: var(--znai-meta-color);
@@ -43,11 +40,11 @@
     transition: color 0.15s, border-color 0.15s;
 }
 
-.global-tab-name:hover {
+.znai-page-tab-name:hover {
     color: var(--znai-regular-text-color);
 }
 
-.global-tab-name.active {
+.znai-page-tab-name.active {
     color: var(--znai-regular-text-color);
     font-weight: bold;
     border-bottom-color: #888888;

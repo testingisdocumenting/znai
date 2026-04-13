@@ -59,7 +59,7 @@ visuals
     asciinema
 layout
     tabs
-    global-tabs
+    page-tabs
     tables
     columns
     templates

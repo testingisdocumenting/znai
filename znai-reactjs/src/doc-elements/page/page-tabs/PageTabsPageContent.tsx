@@ -16,8 +16,8 @@
 
 import React from "react";
 import { afterTitleId } from "../../../layout/classNamesAndIds";
-import GlobalTabsSelection from "./GlobalTabsSelection";
-import { extractTabIds, buildContentForTab } from "./globalTabsContentUtils";
+import PageTabsSelection from "./PageTabsSelection";
+import { extractTabIds, buildContentForTab } from "./pageTabsContentUtils";
 import { findParentWithScroll } from "../../../utils/domNodes";
 
 interface ScrollSnapshot {
@@ -26,11 +26,11 @@ interface ScrollSnapshot {
   anchorOffsetFromTop: number;
 }
 
-interface GlobalTabsState {
+interface PageTabsState {
   activeTabId: string;
 }
 
-class GlobalTabsPageContent extends React.Component<any, GlobalTabsState> {
+class PageTabsPageContent extends React.Component<any, PageTabsState> {
   contentRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: any) {
@@ -59,7 +59,7 @@ class GlobalTabsPageContent extends React.Component<any, GlobalTabsState> {
         <div className="content-block">
           <PageTitle {...props} elementsLibrary={elementsLibrary} />
         </div>
-        <GlobalTabsSelection tabIds={tabIds} activeTabId={activeTabId} onTabSelect={this.onTabSelect} />
+        <PageTabsSelection tabIds={tabIds} activeTabId={activeTabId} onTabSelect={this.onTabSelect} />
         {renderedSections}
         <div id={afterTitleId}></div>
       </div>
@@ -74,7 +74,7 @@ class GlobalTabsPageContent extends React.Component<any, GlobalTabsState> {
     this.setState({ activeTabId: tabId });
   };
 
-  getSnapshotBeforeUpdate(_prevProps: any, prevState: GlobalTabsState): ScrollSnapshot | null {
+  getSnapshotBeforeUpdate(_prevProps: any, prevState: PageTabsState): ScrollSnapshot | null {
     if (prevState.activeTabId === this.state.activeTabId) {
       return null;
     }
@@ -90,7 +90,7 @@ class GlobalTabsPageContent extends React.Component<any, GlobalTabsState> {
     }
 
     // find the shared (non-tab) content element closest to the viewport center
-    // shared elements live outside .global-tab-content wrappers and are stable across tab switches
+    // shared elements live outside .znai-page-tab-content wrappers and are stable across tab switches
     const anchor = findSharedAnchorNearViewportCenter(node);
     if (!anchor) {
       return null;
@@ -103,7 +103,7 @@ class GlobalTabsPageContent extends React.Component<any, GlobalTabsState> {
     };
   }
 
-  componentDidUpdate(_prevProps: any, _prevState: GlobalTabsState, snapshot: ScrollSnapshot | null) {
+  componentDidUpdate(_prevProps: any, _prevState: PageTabsState, snapshot: ScrollSnapshot | null) {
     if (!snapshot || !snapshot.anchorNode) {
       return;
     }
@@ -129,7 +129,7 @@ function findSharedAnchorNearViewportCenter(rootNode: HTMLElement): { node: HTML
   let bestTop = 0;
 
   for (const el of candidates) {
-    if (el.closest(".global-tab-content")) {
+    if (el.closest(".znai-page-tab-content")) {
       continue;
     }
 
@@ -151,4 +151,4 @@ function findSharedAnchorNearViewportCenter(rootNode: HTMLElement): { node: HTML
   return { node: best, top: bestTop };
 }
 
-export default GlobalTabsPageContent;
+export default PageTabsPageContent;

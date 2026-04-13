@@ -25,7 +25,7 @@ interface Props {
 
 function TabContent({ elementsLibrary, content }: Props) {
   return (
-    <div className="global-tab-content">
+    <div className="znai-page-tab-content">
       <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} />
     </div>
   );
