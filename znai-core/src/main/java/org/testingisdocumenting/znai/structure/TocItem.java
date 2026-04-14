@@ -33,6 +33,7 @@ public class TocItem {
     private final TocNameAndOpts page;
     private final String fileNameWithoutExtension;
     private final String fileExtension;
+    private final TocBehavior tocBehavior;
     private String pageTitle;
     private PageMeta pageMeta;
 
@@ -55,6 +56,7 @@ public class TocItem {
 
         this.fileNameWithoutExtension = extractName(page.getGivenName());
         this.fileExtension = extractExtension(page.getGivenName(), defaultExtension);
+        this.tocBehavior = page.getTocBehavior();
         validateFileName(chapter.getGivenName());
         validateFileName(this.fileNameWithoutExtension);
 
@@ -130,6 +132,18 @@ public class TocItem {
         }
     }
 
+    public TocBehavior getTocBehavior() {
+        return tocBehavior;
+    }
+
+    public boolean isHidden() {
+        return tocBehavior == TocBehavior.HIDE;
+    }
+
+    public boolean isSkip() {
+        return tocBehavior == TocBehavior.SKIP;
+    }
+
     public boolean isIndex() {
         return chapter.getGivenName().isEmpty() && fileNameWithoutExtension.equals(INDEX);
     }
@@ -149,6 +163,10 @@ public class TocItem {
         result.put("viewOnRelativePath", viewOnRelativePath);
         result.put("pageSectionIdTitles",
                 getPageSectionIdTitles().stream().map(PageSectionIdTitle::toMap).collect(toList()));
+
+        if (tocBehavior != TocBehavior.DEFAULT) {
+            result.put("toc", tocBehavior.name().toLowerCase());
+        }
 
         return result;
     }
