@@ -190,7 +190,7 @@ api-reference.md {title: "API Docs"}""")
     }
 
     @Test
-    void "should support hide and skip toc behavior"() {
+    void "should support hide and skip toc property"() {
         def toc = new PlainTextTocGenerator("md").generate("""
 chapter1
     page-a
