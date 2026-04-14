@@ -29,11 +29,13 @@ import java.util.Map;
 public class TocNameAndOpts {
     private final String TITLE_KEY = "title";
     private final String PATH_KEY = "path";
+    private final String TOC_BEHAVIOR_KEY = "toc";
 
     private final String givenName;
     private final Map<String, ?> opts;
     private final boolean hasTitleOverride;
     private final boolean hasPath;
+    private final TocBehavior tocBehavior;
 
     private String humanReadableName;
 
@@ -45,6 +47,7 @@ public class TocNameAndOpts {
         this.opts = hasOpenBracket ? extractOpts(trimmed, openBracketIdx) : Collections.emptyMap();
         this.hasTitleOverride = opts.containsKey(TITLE_KEY);
         this.hasPath = opts.containsKey(PATH_KEY);
+        this.tocBehavior = buildTocBehavior();
 
         this.humanReadableName = buildHumanReadableName();
     }
@@ -77,6 +80,10 @@ public class TocNameAndOpts {
         return opts.get(PATH_KEY).toString();
     }
 
+    public TocBehavior getTocBehavior() {
+        return tocBehavior;
+    }
+
     private Map<String, ?> extractOpts(String trimmed, int openBracketIdx) {
         int closeBracketIdx = trimmed.indexOf('}');
         if (closeBracketIdx == -1) {
@@ -84,6 +91,15 @@ public class TocNameAndOpts {
         }
 
         return JsonUtils.deserializeAsMap(trimmed.substring(openBracketIdx, closeBracketIdx + 1));
+    }
+
+    private TocBehavior buildTocBehavior() {
+        Object behavior = opts.get(TOC_BEHAVIOR_KEY);
+        if (behavior == null) {
+            return TocBehavior.DEFAULT;
+        }
+
+        return TocBehavior.fromString(behavior.toString());
     }
 
     private String buildHumanReadableName() {

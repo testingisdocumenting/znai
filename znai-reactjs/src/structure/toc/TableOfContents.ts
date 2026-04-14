@@ -27,6 +27,7 @@ import { TocItem } from "../TocItem";
  */
 class TableOfContents {
   tocItems: TocItem[] = [];
+  navigableTocItems: TocItem[] = [];
   _toc: Partial<TocItem>[] = [];
 
   constructor(toc: Partial<TocItem>[]) {
@@ -36,6 +37,7 @@ class TableOfContents {
   set toc(toc: Partial<TocItem>[]) {
     this.tocItems = [];
     toc.forEach((s) => s.items!.forEach((ti) => this.tocItems.push(ti)));
+    this.navigableTocItems = this.tocItems.filter((ti) => ti.toc !== "skip" && ti.toc !== "hide");
     this._toc = toc;
   }
 
@@ -52,10 +54,10 @@ class TableOfContents {
   }
 
   nextTocItem(tocItem: TocItem) {
-    for (let i = 0, len = this.tocItems.length; i < len; i++) {
-      const ti = this.tocItems[i];
+    for (let i = 0, len = this.navigableTocItems.length; i < len; i++) {
+      const ti = this.navigableTocItems[i];
       if (ti.fileName === tocItem.fileName && ti.dirName === tocItem.dirName) {
-        return i + 1 < len ? this.tocItems[i + 1] : null;
+        return i + 1 < len ? this.navigableTocItems[i + 1] : null;
       }
     }
 
@@ -63,10 +65,10 @@ class TableOfContents {
   }
 
   prevTocItem(tocItem: TocItem) {
-    for (let i = this.tocItems.length - 1; i >= 0; i--) {
-      const ti = this.tocItems[i];
+    for (let i = this.navigableTocItems.length - 1; i >= 0; i--) {
+      const ti = this.navigableTocItems[i];
       if (ti.fileName === tocItem.fileName && ti.dirName === tocItem.dirName) {
-        return i - 1 >= 0 ? this.tocItems[i - 1] : null;
+        return i - 1 >= 0 ? this.navigableTocItems[i - 1] : null;
       }
     }
 

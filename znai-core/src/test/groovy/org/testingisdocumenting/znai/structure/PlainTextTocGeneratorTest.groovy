@@ -190,12 +190,70 @@ api-reference.md {title: "API Docs"}""")
     }
 
     @Test
+    void "should support hide and skip toc behavior"() {
+        def toc = new PlainTextTocGenerator("md").generate("""
+chapter1
+    page-a
+    page-b {toc: "hide"}
+    page-c {toc: "skip"}""")
+
+        def pageA = toc.findTocItem("chapter1", "page-a")
+        pageA.isHidden().should == false
+        pageA.getTocBehavior().should == TocBehavior.DEFAULT
+
+        def pageB = toc.findTocItem("chapter1", "page-b")
+        pageB.isHidden().should == true
+        pageB.getTocBehavior().should == TocBehavior.HIDE
+
+        def pageC = toc.findTocItem("chapter1", "page-c")
+        pageC.isSkip().should == true
+        pageC.getTocBehavior().should == TocBehavior.SKIP
+    }
+
+    @Test
+    void "should include hide and skip pages in toListOfMaps with toc property"() {
+        def toc = new PlainTextTocGenerator("md").generate("""
+chapter1
+    page-a
+    page-b {toc: "hide"}
+    page-c {toc: "skip"}""")
+
+        def maps = toc.toListOfMaps()
+        def items = maps[0].items
+        items.size().should == 3
+        items[1].fileName.should == "page-b"
+        items[1].toc.should == "hide"
+        items[2].fileName.should == "page-c"
+        items[2].toc.should == "skip"
+    }
+
+    @Test
+    void "should exclude hidden pages from firstNonIndexPage"() {
+        def toc = new PlainTextTocGenerator("md").generate("""
+chapter1
+    page-a {toc: "hide"}
+    page-b""")
+
+        toc.firstNonIndexPage().getFileNameWithoutExtension().should == "page-b"
+    }
+
+    @Test
+    void "should throw error for unsupported toc value"() {
+        code {
+            new PlainTextTocGenerator("md").generate("""
+chapter1
+    page-a {toc: "unknown"}""")
+        } should throwException(IllegalArgumentException,
+                ~/unsupported toc value: "unknown"/)
+    }
+
+    @Test
     void "should throw error for indented page without chapter"() {
         code {
             new PlainTextTocGenerator("md").generate("""
     page-without-chapter
 """)
-        } should throwException(IllegalArgumentException, 
+        } should throwException(IllegalArgumentException,
                 "chapter is not specified, use a line without indentation to specify a chapter")
     }
 }

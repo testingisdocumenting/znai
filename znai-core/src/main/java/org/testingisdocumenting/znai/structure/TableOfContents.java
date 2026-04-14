@@ -75,14 +75,14 @@ public class TableOfContents {
 
     public TocItem firstNonIndexPage() {
         return tocItems.stream()
-                .filter(tocItem -> !tocItem.isIndex())
+                .filter(tocItem -> !tocItem.isIndex() && !tocItem.isHidden())
                 .findFirst()
                 .orElse(null);
     }
 
     public Optional<TocItem> firstPageInChapter(String dirName) {
         return tocItems.stream()
-                .filter(tocItem -> tocItem.getDirName().equals(dirName))
+                .filter(tocItem -> tocItem.getDirName().equals(dirName) && !tocItem.isHidden())
                 .findFirst();
     }
 
