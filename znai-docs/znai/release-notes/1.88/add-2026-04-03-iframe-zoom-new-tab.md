@@ -1,1 +1,1 @@
-* Add: iframe zoom and open in new tab
+* Add: [iframe](visuals/iframe#zoom-and-new-tab) zoom and open in new tab
