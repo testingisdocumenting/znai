@@ -117,11 +117,11 @@ class WebSiteDocStructure implements DocStructure {
                 return docUrl.getTocItemFilePath();
             } else {
                 docUrl.setResolvedToDirNameAndFileName(tocItem.getDirName(), tocItem.getFileNameWithoutExtension());
-                return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
+                return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getQueryAndAnchorSuffix());
             }
         }
 
-        return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getAnchorIdWithHash());
+        return fullUrl(createRelativeUrl(path, docUrl) + docUrl.getQueryAndAnchorSuffix());
     }
 
     @Override

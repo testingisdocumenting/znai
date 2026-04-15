@@ -1,0 +1,7 @@
+.znai-url-query-value-error {
+    color: var(--znai-color-red);
+}
+
+.znai-url-query-value-error code {
+    color: var(--znai-color-red);
+}

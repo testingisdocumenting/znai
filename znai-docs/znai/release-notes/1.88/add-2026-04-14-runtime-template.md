@@ -1,0 +1,1 @@
+* Add: [Runtime Templates](layout/runtime-templates) to substitute values at runtime
