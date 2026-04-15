@@ -33,11 +33,20 @@ export function extractTabIds(pageContent: DocElementContent | undefined): strin
   }
 
   const allTabIds: string[] = [];
-  for (const section of pageContent) {
-    collectTabIds(section.content, allTabIds);
-  }
+  collect(pageContent);
 
   return [...new Set(allTabIds)];
+
+  function collect(content: DocElementContent): void {
+    for (const el of content) {
+      if (el.type === TAB_CONTENT_TYPE && el.tabId) {
+        allTabIds.push(el.tabId);
+      }
+      if (Array.isArray(el.content)) {
+        collect(el.content);
+      }
+    }
+  }
 }
 
 /**
@@ -53,66 +62,22 @@ export function buildContentForTab(
   pageContent: DocElementContent,
   selectedTabId: string
 ): DocElementContent {
-  return pageContent
-    .map((section) => buildSectionForTab(section as SectionPayload, selectedTabId))
-    .filter((section): section is SectionPayload => section !== null);
+  return pageContent.map((section) => {
+    if (!section.content) {
+      return section;
+    }
+
+    return { ...section, content: filterContentForTab(section.content, selectedTabId) };
+  });
 }
 
-function buildSectionForTab(section: SectionPayload, selectedTabId: string): SectionPayload | null {
-  if (!section.content) {
-    return section;
-  }
-
-  const { filtered, hadTabContent } = filterContentForTab(section.content, selectedTabId);
-
-  if (filtered.length === 0 && hadTabContent) {
-    return null;
-  }
-
-  return { ...section, content: filtered };
-}
-
-interface FilterResult {
-  filtered: DocElementContent;
-  hadTabContent: boolean;
-}
-
-function filterContentForTab(content: DocElementContent, selectedTabId: string): FilterResult {
-  let hadTabContent = false;
-
-  const filtered = content
-    .filter((el: any) => {
-      if (el.type === TAB_CONTENT_TYPE) {
-        hadTabContent = true;
-        return el.tabId === selectedTabId;
-      }
-      return true;
-    })
+function filterContentForTab(content: DocElementContent, selectedTabId: string): DocElementContent {
+  return content
+    .filter((el: any) => el.type !== TAB_CONTENT_TYPE || el.tabId === selectedTabId)
     .map((el: any) => {
       if (Array.isArray(el.content)) {
-        const nested = filterContentForTab(el.content, selectedTabId);
-        if (nested.hadTabContent) {
-          hadTabContent = true;
-        }
-        return { ...el, content: nested.filtered };
+        return { ...el, content: filterContentForTab(el.content, selectedTabId) };
       }
       return el;
     });
-
-  return { filtered, hadTabContent };
-}
-
-function collectTabIds(content: DocElementContent | undefined, result: string[]): void {
-  if (!content) {
-    return;
-  }
-
-  for (const el of content) {
-    if (el.type === TAB_CONTENT_TYPE && el.tabId) {
-      result.push(el.tabId);
-    }
-    if (Array.isArray(el.content)) {
-      collectTabIds(el.content, result);
-    }
-  }
 }

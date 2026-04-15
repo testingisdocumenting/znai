@@ -113,16 +113,17 @@ describe("buildContentForTab", () => {
     expect(result![0].content).toEqual([paragraph("shared"), tabContent("python", paragraph("python code"))]);
   });
 
-  it("removes sections that become empty after filtering tab-only content", () => {
+  it("keeps sections with empty content after filtering tab-only content", () => {
     const content = [
       section("s1", "Section 1", tabContent("java", paragraph("only java"))),
       section("s2", "Section 2", paragraph("always visible")),
     ];
 
     const result = buildContentForTab(content, "python");
-    expect(result!.length).toBe(1);
-    // @ts-ignore
-    expect(result![0].id).toBe("s2");
+    expect(result).toEqual([
+      { type: "Section", id: "s1", title: "Section 1", content: [] },
+      section("s2", "Section 2", paragraph("always visible")),
+    ]);
   });
 
   it("keeps sections with no tab content unchanged", () => {
