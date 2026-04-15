@@ -93,6 +93,7 @@ import { FootnoteBackLinks } from "./footnote/FootnotesList";
 import { EmbeddedHtml } from "./html/EmbeddedHtml";
 import { Asciinema } from "./asciinema/Asciinema";
 import { ReadMore } from "./read-more/ReadMore.js";
+import { UrlQueryValue } from "./url-query-value/UrlQueryValue";
 import { withDisplayName } from "./components.ts";
 
 const library = {}
@@ -142,6 +143,7 @@ library.Icon = Icon
 library.KeyboardShortcut = KeyboardShortcut
 
 library.TextBadge = TextBadge
+library.UrlQueryValue = UrlQueryValue
 
 library.OrderedList = OrderedList
 

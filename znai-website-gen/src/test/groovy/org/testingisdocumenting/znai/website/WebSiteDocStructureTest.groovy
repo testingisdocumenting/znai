@@ -75,6 +75,8 @@ class WebSiteDocStructureTest {
         docStructure.createUrl(path, new DocUrl("test/page")).should == "/product/test/page"
         docStructure.createUrl(path, new DocUrl("mailto/page")).should == "/product/mailto/page"
         docStructure.createUrl(path, new DocUrl("test/page#anchor")).should == "/product/test/page#anchor"
+        docStructure.createUrl(path, new DocUrl("test/page?key=value")).should == "/product/test/page?key=value"
+        docStructure.createUrl(path, new DocUrl("test/page?key=value#anchor")).should == "/product/test/page?key=value#anchor"
         docStructure.createUrl(path, new DocUrl("file-system/page")).should == "/product/file-system/page"
         docStructure.createUrl(indexPath, new DocUrl("#ref")).should == "/product#ref"
         docStructure.createUrl(indexPath, new DocUrl("file-system/page")).should == "/product/file-system/page"

@@ -27,7 +27,7 @@ class DocumentationNavigation {
     this.listeners = [];
 
     window.addEventListener("popstate", (e) => {
-      this.notifyNewUrl(document.location.pathname + document.location.hash, e.state);
+      this.notifyNewUrl(document.location.pathname + document.location.search + document.location.hash, e.state);
     });
   }
 
@@ -107,6 +107,8 @@ class DocumentationNavigation {
 
   extractPageLocation(url) {
     url = url.endsWith("/") ? url.substring(0, url.length - 1) : url;
+    const queryIdx = url.indexOf("?");
+    url = queryIdx >= 0 ? url.substring(0, queryIdx) : url;
     const hashIdx = url.indexOf("#");
     const anchorId = hashIdx >= 0 ? url.substring(hashIdx + 1) : "";
     url = hashIdx >= 0 ? url.substring(0, hashIdx) : url;

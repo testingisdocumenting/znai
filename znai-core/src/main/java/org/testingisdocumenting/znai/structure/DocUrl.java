@@ -35,6 +35,7 @@ public class DocUrl {
     private String dirName = "";
     private String fileNameWithoutExtension = "";
     private String anchorId = "";
+    private String queryString = "";
     private String tocItemFilePath = "";
 
     private String url;
@@ -74,11 +75,13 @@ public class DocUrl {
 
     private boolean handleBasedOnFilePath(String url) {
         String withoutAnchor = UrlUtils.removeAnchor(url);
-        String extension = FilePathUtils.fileExtension(withoutAnchor);
+        String withoutAnchorAndQuery = removeQueryString(withoutAnchor);
+        String extension = FilePathUtils.fileExtension(withoutAnchorAndQuery);
 
         if (extension.startsWith("md")) {
-            tocItemFilePath = withoutAnchor;
+            tocItemFilePath = withoutAnchorAndQuery;
             anchorId = UrlUtils.extractAnchor(url);
+            queryString = extractQueryString(withoutAnchor);
             return true;
         }
 
@@ -108,7 +111,7 @@ public class DocUrl {
     }
 
     private boolean handleLocal() {
-        String[] parts = url.split("/");
+        String[] parts = extractUrlWithoutQueryString().split("/");
         if (parts.length != 2 && parts.length != 3) {
             throw new IllegalArgumentException("Unexpected url pattern: <" + url + "> " + LINK_TO_SECTION_INSTRUCTION);
         }
@@ -172,7 +175,31 @@ public class DocUrl {
         return anchorId.isEmpty() ?  "" : "#" + anchorId;
     }
 
+    public String getQueryAndAnchorSuffix() {
+        return queryString + getAnchorIdWithHash();
+    }
+
     public String getUrl() {
         return url;
+    }
+
+    private String extractUrlWithoutQueryString() {
+        int idxOfQuery = url.indexOf('?');
+        if (idxOfQuery == -1) {
+            return url;
+        }
+
+        queryString = url.substring(idxOfQuery);
+        return url.substring(0, idxOfQuery);
+    }
+
+    private static String removeQueryString(String url) {
+        int idxOfQuery = url.indexOf('?');
+        return idxOfQuery == -1 ? url : url.substring(0, idxOfQuery);
+    }
+
+    private static String extractQueryString(String url) {
+        int idxOfQuery = url.indexOf('?');
+        return idxOfQuery == -1 ? "" : url.substring(idxOfQuery);
     }
 }

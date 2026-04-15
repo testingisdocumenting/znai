@@ -48,6 +48,7 @@ class CliCommandPropsAndValidation {
         opts.assignToProps(props, "meta");
         opts.assignToProps(props, "threshold");
         opts.assignToProps(props, "presentationThreshold");
+        opts.assignToProps(props, "templateUseQueryParam");
 
         Set<String> splitAfter = opts.getSet("splitAfter");
         if (!splitAfter.isEmpty()) {

@@ -32,6 +32,12 @@ class DocUrlTest {
     }
 
     @Test
+    void "parse with query params"() {
+        def url = new DocUrl("./chapter/name.md?key1=value1&key2=value2#page-section")
+        url.should == [anchorId: "page-section", tocItemFilePath: "./chapter/name.md", dirName: "", fileNameWithoutExtension: ""]
+    }
+
+    @Test
     void "parse with mdx extension"() {
         def url = new DocUrl("./chapter/name.mdx#page-section")
         url.should == [anchorId: "page-section", tocItemFilePath: "./chapter/name.mdx", dirName: "", fileNameWithoutExtension: ""]

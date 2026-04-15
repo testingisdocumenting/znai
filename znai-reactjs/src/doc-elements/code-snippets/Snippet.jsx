@@ -35,6 +35,7 @@ import { parseCode } from "./codeParser";
 import { countNumberOfLines } from "../../utils/strings";
 
 import { SnippetBulletExplanations } from "./explanations/SnippetBulletExplanations";
+import { resolveTemplateText } from "../url-query-value/queryParamTemplate";
 
 import "./Snippet.css";
 
@@ -44,7 +45,8 @@ const BULLETS_COMMENT_TYPE = "inline";
 const REMOVE_COMMENT_TYPE = "remove";
 
 const Snippet = (props) => {
-  const tokensToUse = parseCodeWithCompatibility({ lang: props.lang, snippet: props.snippet, tokens: props.tokens });
+  const snippet = props.templateUseQueryParam ? resolveTemplateText(props.snippet) : props.snippet;
+  const tokensToUse = parseCodeWithCompatibility({ lang: props.lang, snippet, tokens: props.tokens });
 
   const renderBulletComments =
     props.commentsType === BULLETS_COMMENT_TYPE || (props.callouts && Object.keys(props.callouts).length > 0);

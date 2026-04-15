@@ -20,6 +20,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import CliCommandToken from "./CliCommandToken";
 import { splitParts } from "../../utils/strings";
 import { DocElementPayload } from "../default-elements/DocElement";
+import { resolveTemplateText } from "../url-query-value/queryParamTemplate";
 import "./CliCommand.css";
 
 interface Token {
@@ -37,6 +38,7 @@ interface CliCommandProps {
   threshold?: number;
   presentationThreshold?: number;
   splitAfter?: string[];
+  templateUseQueryParam?: boolean;
 }
 
 const CliCommand: React.FC<CliCommandProps> = ({
@@ -49,8 +51,10 @@ const CliCommand: React.FC<CliCommandProps> = ({
   threshold = 100,
   presentationThreshold = 40,
   splitAfter = [],
+  templateUseQueryParam = false,
 }) => {
-  const tokens = useMemo(() => tokenize(command), [command]);
+  const resolvedCommand = templateUseQueryParam ? resolveTemplateText(command) : command;
+  const tokens = useMemo(() => tokenize(resolvedCommand), [resolvedCommand]);
 
   const [lastTokenIdx, setLastTokenIdx] = useState(
     isPresentation && !isPresentationDisplayed ? 1 : tokens.length
@@ -136,10 +140,10 @@ const CliCommand: React.FC<CliCommandProps> = ({
     (isPrevCliCommand ? " prev-present" : "");
 
   return (
-    <div key={command} className={className}>
+    <div key={resolvedCommand} className={className}>
       <pre>
         <span className="prompt">$ </span>
-        <span key={command}>{renderTokens()}</span>
+        <span key={resolvedCommand}>{renderTokens()}</span>
       </pre>
     </div>
   );

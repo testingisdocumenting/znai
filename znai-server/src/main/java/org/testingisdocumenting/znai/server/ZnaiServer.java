@@ -151,7 +151,9 @@ public class ZnaiServer {
     }
 
     private void redirectToTrailingSlash(RoutingContext ctx) {
-        ctx.response().putHeader("location", ctx.request().uri() + "/").setStatusCode(301).end();
+        String query = ctx.request().query();
+        String location = ctx.request().path() + "/" + (query != null ? "?" + query : "");
+        ctx.response().putHeader("location", location).setStatusCode(301).end();
     }
 
     private void serverNotAuthorizedPage(RoutingContext ctx, String docId) {
@@ -201,29 +203,29 @@ public class ZnaiServer {
             return false;
         }
 
-        return !ctx.request().uri().endsWith("/");
+        return !ctx.request().path().endsWith("/");
     }
 
     private static String extractDocId(RoutingContext ctx) {
-        String uri = ctx.request().uri();
-        String[] parts = uri.split("/");
+        String path = ctx.request().path();
+        String[] parts = path.split("/");
 
         return parts.length < 2 ? "" : parts[1];
     }
 
     private static boolean isNotDocPageRequest(RoutingContext ctx) {
-        String uri = ctx.request().uri();
-        int dotIdx = uri.lastIndexOf('.');
+        String path = ctx.request().path();
+        int dotIdx = path.lastIndexOf('.');
         if (dotIdx == -1) {
             return false;
         }
 
-        int slashIdx = uri.lastIndexOf('/');
+        int slashIdx = path.lastIndexOf('/');
         if (slashIdx > dotIdx) {
             return false;
         }
 
-        String extension = uri.substring(dotIdx);
+        String extension = path.substring(dotIdx);
         return !extension.equals("html");
     }
 }
