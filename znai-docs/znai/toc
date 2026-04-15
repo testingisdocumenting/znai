@@ -59,6 +59,7 @@ visuals
     asciinema
 layout
     tabs
+    page-tabs
     tables
     columns
     templates

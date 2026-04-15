@@ -20,6 +20,8 @@ import React, { Component } from "react";
 import { pageTypesRegistry } from "./PageTypesRegistry";
 import { PresentationHeading } from "../default-elements/PresentationHeading";
 import { areTocItemEquals } from "../../structure/TocItem";
+import { hasTabContent } from "./page-tabs/pageTabsContentUtils";
+import PageTabsPageContent from "./page-tabs/PageTabsPageContent";
 
 import "./Page.css";
 
@@ -32,7 +34,8 @@ class Page extends Component {
   render() {
     const { tocItem } = this.props;
 
-    const PageContent = pageTypesRegistry.pageContentComponent(tocItem);
+    const usePageTabs = hasTabContent(this.props.content);
+    const PageContent = usePageTabs ? PageTabsPageContent : pageTypesRegistry.pageContentComponent(tocItem);
     const PageBottomPadding = pageTypesRegistry.pageBottomPaddingComponent(tocItem);
 
     return (

@@ -1,0 +1,1 @@
+* Add: Global Tabs (per page). Simplified way to provide common and unique content per Editor/Language/Tool
