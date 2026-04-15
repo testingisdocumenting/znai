@@ -15,12 +15,15 @@
  * limitations under the License.
  */
 
+export type TocBehavior = "default" | "hide" | "skip";
+
 export interface TocItem {
   dirName: string;
   fileName: string;
   chapterTitle?: string;
   pageTitle?: string;
   pageMeta?: object;
+  toc?: TocBehavior;
   anchorId?: string;
   fileExtension?: string;
   items?: TocItem[];

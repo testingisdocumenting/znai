@@ -77,4 +77,76 @@ describe("Table of Contents", () => {
       chapterTitle: "",
     });
   });
+
+  describe("skip toc behavior", () => {
+    beforeEach(() => {
+      tableOfContents.toc = [
+        {
+          chapterTitle: "Guide",
+          dirName: "guide",
+          items: [
+            {
+              chapterTitle: "Guide",
+              pageTitle: "Page A",
+              pageMeta: {},
+              fileName: "page-a",
+              dirName: "guide",
+            },
+            {
+              chapterTitle: "Guide",
+              pageTitle: "Page B",
+              pageMeta: {},
+              fileName: "page-b",
+              dirName: "guide",
+              toc: "skip",
+            },
+            {
+              chapterTitle: "Guide",
+              pageTitle: "Page C",
+              pageMeta: {},
+              fileName: "page-c",
+              dirName: "guide",
+            },
+          ],
+        },
+      ];
+    });
+
+    it("should skip pages with toc skip in nextTocItem", () => {
+      expect(tableOfContents.nextTocItem({ dirName: "guide", fileName: "page-a" })!.pageTitle).toEqual("Page C");
+    });
+
+    it("should skip pages with toc skip in prevTocItem", () => {
+      expect(tableOfContents.prevTocItem({ dirName: "guide", fileName: "page-c" })!.pageTitle).toEqual("Page A");
+    });
+
+    it("should return null when all remaining pages are skip", () => {
+      tableOfContents.toc = [
+        {
+          chapterTitle: "Guide",
+          dirName: "guide",
+          items: [
+            {
+              chapterTitle: "Guide",
+              pageTitle: "Page A",
+              pageMeta: {},
+              fileName: "page-a",
+              dirName: "guide",
+            },
+            {
+              chapterTitle: "Guide",
+              pageTitle: "Page B",
+              pageMeta: {},
+              fileName: "page-b",
+              dirName: "guide",
+              toc: "skip",
+            },
+          ],
+        },
+      ];
+
+      expect(tableOfContents.nextTocItem({ dirName: "guide", fileName: "page-a" })).toBeNull();
+    });
+
+  });
 });

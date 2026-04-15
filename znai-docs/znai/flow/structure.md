@@ -47,6 +47,30 @@ optional-chapter
    page-four.md
 ```
 
+# Hide & Skip
+
+You can control how individual pages participate in the documentation by setting `toc` property in the `toc` file.
+
+A hidden page can be navigated to with a direct link, but it won't appear in the TOC panel
+and won't participate in next/prev page navigation.
+
+```
+chapter-name
+    page-one
+    page-two {toc: "hide"}
+    page-three
+```
+
+A skipped page is accessible via direct URL, but it won't participate in next/prev page navigation.
+Users navigating sequentially will skip over it.
+
+```
+chapter-name
+    page-one
+    page-two {toc: "skip"}
+    page-three
+```
+
 # Sub Headings
 
 Only a first level heading is treated as a first class citizen:

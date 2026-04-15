@@ -156,4 +156,24 @@ class TableOfContentsTest {
         toc.findTocItem(pathC).should == [dirName: "chapter2", fileNameWithoutExtension: "page-c"]
         toc.findTocItem(pathD).should == null
     }
+
+    @Test
+    void "firstNonIndexPage should skip hidden pages"() {
+        def toc = new TableOfContents("md")
+        toc.addIndex()
+        toc.addTocItem(new TocNameAndOpts("chapter1"), new TocNameAndOpts('page-a {toc: "hide"}'))
+        toc.addTocItem("chapter1", "page-b")
+        toc.addTocItem("chapter1", "page-c")
+
+        toc.firstNonIndexPage().fileNameWithoutExtension.should == "page-b"
+    }
+
+    @Test
+    void "firstPageInChapter should skip hidden pages"() {
+        def toc = new TableOfContents("md")
+        toc.addTocItem(new TocNameAndOpts("chapter1"), new TocNameAndOpts('page-a {toc: "hide"}'))
+        toc.addTocItem("chapter1", "page-b")
+
+        toc.firstPageInChapter("chapter1").get().fileNameWithoutExtension.should == "page-b"
+    }
 }

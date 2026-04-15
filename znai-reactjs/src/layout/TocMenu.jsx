@@ -97,7 +97,7 @@ class Item extends PureComponent {
 const Section = ({ section, selected, onTocItemClick, onTocItemPageSectionClick }) => {
   const className = "toc-section" + (section.dirName === selected.dirName ? " selected" : "");
 
-  const items = section.items.filter((item) => !isTocItemIndex(item));
+  const items = section.items.filter((item) => !isTocItemIndex(item) && item.toc !== "hide");
   if (items.length === 0) {
     return null;
   }
