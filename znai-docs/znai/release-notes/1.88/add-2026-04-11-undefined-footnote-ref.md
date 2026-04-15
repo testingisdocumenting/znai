@@ -1,1 +1,1 @@
-* Add: Undefined footnote references fail the build
+* Add: Undefined [footnote](flow/footnotes) references fail the build
