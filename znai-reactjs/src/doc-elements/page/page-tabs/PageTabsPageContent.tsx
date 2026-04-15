@@ -17,7 +17,7 @@
 import React from "react";
 import { afterTitleId } from "../../../layout/classNamesAndIds";
 import PageTabsSelection from "./PageTabsSelection";
-import { extractTabIds, buildContentForTab } from "./pageTabsContentUtils";
+import { buildContentForTab } from "./pageTabsContentUtils";
 import { findParentWithScroll } from "../../../utils/domNodes";
 
 interface ScrollSnapshot {
@@ -36,17 +36,15 @@ class PageTabsPageContent extends React.Component<any, PageTabsState> {
   constructor(props: any) {
     super(props);
 
-    const tabIds = extractTabIds(props.content);
-    this.state = { activeTabId: tabIds[0] || "" };
+    this.state = { activeTabId: "" };
     this.contentRef = React.createRef();
   }
 
   render() {
-    const { elementsLibrary, content, ...props } = this.props;
+    const { elementsLibrary, content, tabIds, ...props } = this.props;
     const { PageTitle } = elementsLibrary;
-    const { activeTabId } = this.state;
 
-    const tabIds = extractTabIds(content);
+    const activeTabId = tabIds.includes(this.state.activeTabId) ? this.state.activeTabId : tabIds[0] || "";
     const filteredContent = buildContentForTab(content, activeTabId);
 
     const renderedSections = filteredContent.map((section: any) => {

@@ -20,7 +20,7 @@ import React, { Component } from "react";
 import { pageTypesRegistry } from "./PageTypesRegistry";
 import { PresentationHeading } from "../default-elements/PresentationHeading";
 import { areTocItemEquals } from "../../structure/TocItem";
-import { hasTabContent } from "./page-tabs/pageTabsContentUtils";
+import { extractTabIds } from "./page-tabs/pageTabsContentUtils";
 import PageTabsPageContent from "./page-tabs/PageTabsPageContent";
 
 import "./Page.css";
@@ -34,18 +34,29 @@ class Page extends Component {
   render() {
     const { tocItem } = this.props;
 
-    const usePageTabs = hasTabContent(this.props.content);
-    const PageContent = usePageTabs ? PageTabsPageContent : pageTypesRegistry.pageContentComponent(tocItem);
     const PageBottomPadding = pageTypesRegistry.pageBottomPaddingComponent(tocItem);
 
     return (
       <React.Fragment>
         <div className="page-content" ref={this.contentRootDomRef}>
-          <PageContent key={tocItem.pageTitle} {...this.props} contentRootDom={this.contentRootDomRef.current} />
+          {this.renderPageContent()}
         </div>
         <PageBottomPadding />
       </React.Fragment>
     );
+  }
+
+  renderPageContent() {
+    const { tocItem } = this.props;
+    const contentRootDom = this.contentRootDomRef.current;
+    const tabIds = extractTabIds(this.props.content);
+
+    if (tabIds.length > 0) {
+      return <PageTabsPageContent key={tocItem.pageTitle} {...this.props} tabIds={tabIds} contentRootDom={contentRootDom} />;
+    }
+
+    const PageContent = pageTypesRegistry.pageContentComponent(tocItem);
+    return <PageContent key={tocItem.pageTitle} {...this.props} contentRootDom={contentRootDom} />;
   }
 
   shouldComponentUpdate(nextProps) {

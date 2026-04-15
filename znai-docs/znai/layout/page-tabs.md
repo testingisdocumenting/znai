@@ -24,8 +24,6 @@ Create `.vscode/settings.json` in your project root:
   "files.trimTrailingWhitespace": true
 }
 ```
-
-Note: VS Code will automatically detect these settings when you open the folder.
 `````
 
 `````tab-content Emacs
@@ -36,8 +34,18 @@ Create `.dir-locals.el` in your project root:
          (tab-width . 4)
          (fill-column . 100))))
 ```
+`````
 
-Note: Emacs will automatically load these settings when visiting any file in the directory.
+`````attention-note
+Double check these settings.
+
+```tab-content Emacs
+Make sure `indent-tabs-mode` is set to `nil` to avoid mixing tabs and spaces.
+```
+
+```tab-content "VS Code"
+Make sure `editor.tabSize` matches the value used by your team's linter.
+```
 `````
 
 # Build Configuration

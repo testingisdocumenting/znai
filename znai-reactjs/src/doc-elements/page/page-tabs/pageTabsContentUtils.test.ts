@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { hasTabContent, extractTabIds, buildContentForTab } from "./pageTabsContentUtils";
+import { extractTabIds, buildContentForTab } from "./pageTabsContentUtils";
 
 const paragraph = (text: string) => ({
   type: "Paragraph" as const,
@@ -27,28 +27,17 @@ const tabContent = (tabId: string, ...children: any[]) => ({
   content: children,
 });
 
+const attentionBlock = (attentionType: string, ...content: any[]) => ({
+  type: "AttentionBlock" as const,
+  attentionType,
+  content,
+});
+
 const section = (id: string, title: string, ...content: any[]) => ({
   type: "Section" as const,
   id,
   title,
   content,
-});
-
-describe("hasTabContent", () => {
-  it("returns false for null/empty content", () => {
-    expect(hasTabContent(undefined)).toBe(false);
-    expect(hasTabContent([])).toBe(false);
-  });
-
-  it("returns false when no TabContent elements", () => {
-    const content = [section("s1", "Section 1", paragraph("hello"))];
-    expect(hasTabContent(content)).toBe(false);
-  });
-
-  it("returns true when TabContent exists in section", () => {
-    const content = [section("s1", "Section 1", paragraph("shared"), tabContent("java", paragraph("java code")))];
-    expect(hasTabContent(content)).toBe(true);
-  });
 });
 
 describe("extractTabIds", () => {
@@ -67,6 +56,17 @@ describe("extractTabIds", () => {
   it("ignores non-TabContent elements", () => {
     const content = [section("s1", "Section 1", paragraph("hello"), tabContent("java", paragraph("java")))];
     expect(extractTabIds(content)).toEqual(["java"]);
+  });
+
+  it("finds TabContent nested inside container elements", () => {
+    const content = [
+      section(
+        "s1",
+        "Section 1",
+        attentionBlock("note", tabContent("java", paragraph("java")), tabContent("python", paragraph("python")))
+      ),
+    ];
+    expect(extractTabIds(content)).toEqual(["java", "python"]);
   });
 });
 
@@ -148,6 +148,44 @@ describe("buildContentForTab", () => {
       tabContent("java", paragraph("java part 1")),
       paragraph("shared"),
       tabContent("java", paragraph("java part 2")),
+    ]);
+  });
+
+  it("filters TabContent nested inside container elements like AttentionBlock", () => {
+    const content = [
+      section(
+        "s1",
+        "Section 1",
+        paragraph("shared"),
+        attentionBlock(
+          "note",
+          tabContent("java", paragraph("java note")),
+          tabContent("python", paragraph("python note"))
+        )
+      ),
+    ];
+
+    const result = buildContentForTab(content, "java");
+    expect(result![0].content).toEqual([
+      paragraph("shared"),
+      attentionBlock("note", tabContent("java", paragraph("java note"))),
+    ]);
+  });
+
+  it("removes container element when all nested TabContent is filtered out and container becomes empty", () => {
+    const content = [
+      section(
+        "s1",
+        "Section 1",
+        paragraph("shared"),
+        attentionBlock("warning", tabContent("python", paragraph("python only")))
+      ),
+    ];
+
+    const result = buildContentForTab(content, "java");
+    expect(result![0].content).toEqual([
+      paragraph("shared"),
+      attentionBlock("warning"),
     ]);
   });
 });

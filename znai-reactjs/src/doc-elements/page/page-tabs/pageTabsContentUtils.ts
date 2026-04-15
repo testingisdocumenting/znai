@@ -16,34 +16,26 @@
 
 import { DocElementContent, DocElementPayload } from "../../default-elements/DocElement";
 
+const TAB_CONTENT_TYPE = "TabContent";
+
 interface SectionPayload extends DocElementPayload {
   id: string;
   title: string;
 }
 
 /**
- * checks if page content has any TabContent elements (at section content level)
- */
-export function hasTabContent(pageContent: DocElementContent | undefined): boolean {
-  if (!pageContent) {
-    return false;
-  }
-
-  return pageContent.some((section) => sectionHasTabContent(section));
-}
-
-/**
- * extracts unique tab IDs from all TabContent elements in page content, preserving order
+ * extracts unique tab IDs from all TabContent elements in page content, preserving order.
+ * searches recursively through nested content (e.g. TabContent inside AttentionBlock)
  */
 export function extractTabIds(pageContent: DocElementContent | undefined): string[] {
   if (!pageContent) {
     return [];
   }
 
-  const allTabIds = pageContent
-    .flatMap((section) => (section.content || []))
-    .filter((el: any) => el.type === "TabContent" && el.tabId)
-    .map((el: any) => el.tabId);
+  const allTabIds: string[] = [];
+  for (const section of pageContent) {
+    collectTabIds(section.content, allTabIds);
+  }
 
   return [...new Set(allTabIds)];
 }
@@ -53,6 +45,7 @@ export function extractTabIds(pageContent: DocElementContent | undefined): strin
  * - keeps all non-TabContent elements as-is
  * - keeps TabContent elements when tabId matches (they render via TabContent component with a marker class)
  * - removes TabContent elements that don't match the selected tab
+ * - recursively filters nested content (e.g. TabContent inside AttentionBlock)
  *
  * returns sections with their content filtered
  */
@@ -70,21 +63,56 @@ function buildSectionForTab(section: SectionPayload, selectedTabId: string): Sec
     return section;
   }
 
-  const filteredContent = section.content.filter(
-    (el: any) => el.type !== "TabContent" || el.tabId === selectedTabId
-  );
+  const { filtered, hadTabContent } = filterContentForTab(section.content, selectedTabId);
 
-  if (filteredContent.length === 0 && sectionHasTabContent(section)) {
+  if (filtered.length === 0 && hadTabContent) {
     return null;
   }
 
-  return { ...section, content: filteredContent };
+  return { ...section, content: filtered };
 }
 
-function sectionHasTabContent(section: DocElementPayload): boolean {
-  if (!section.content) {
-    return false;
+interface FilterResult {
+  filtered: DocElementContent;
+  hadTabContent: boolean;
+}
+
+function filterContentForTab(content: DocElementContent, selectedTabId: string): FilterResult {
+  let hadTabContent = false;
+
+  const filtered = content
+    .filter((el: any) => {
+      if (el.type === TAB_CONTENT_TYPE) {
+        hadTabContent = true;
+        return el.tabId === selectedTabId;
+      }
+      return true;
+    })
+    .map((el: any) => {
+      if (Array.isArray(el.content)) {
+        const nested = filterContentForTab(el.content, selectedTabId);
+        if (nested.hadTabContent) {
+          hadTabContent = true;
+        }
+        return { ...el, content: nested.filtered };
+      }
+      return el;
+    });
+
+  return { filtered, hadTabContent };
+}
+
+function collectTabIds(content: DocElementContent | undefined, result: string[]): void {
+  if (!content) {
+    return;
   }
 
-  return section.content.some((el: any) => el.type === "TabContent");
+  for (const el of content) {
+    if (el.type === TAB_CONTENT_TYPE && el.tabId) {
+      result.push(el.tabId);
+    }
+    if (Array.isArray(el.content)) {
+      collectTabIds(el.content, result);
+    }
+  }
 }
