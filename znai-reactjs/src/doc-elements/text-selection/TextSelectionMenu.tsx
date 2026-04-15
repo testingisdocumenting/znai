@@ -254,6 +254,7 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       slackChannel: getDocMeta().slackChannel,
       question: question,
       context: panelData!.context,
+      persist: getDocMeta().persistAskInSlack,
     };
 
     try {
