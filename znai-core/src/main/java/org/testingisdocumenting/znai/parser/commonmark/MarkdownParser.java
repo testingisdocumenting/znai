@@ -20,9 +20,11 @@ package org.testingisdocumenting.znai.parser.commonmark;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.commonmark.ext.footnotes.FootnotesExtension;
+import org.testingisdocumenting.znai.extensions.footnote.FootnoteId;
 import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.core.ComponentsRegistry;
@@ -70,7 +72,7 @@ public class MarkdownParser implements MarkupParser {
         }
 
         try {
-            return doParse(path, parsingContext, markdown);
+            return doParse(path, parsingContext, isTopLevel, markdown);
         } finally {
             if (isTopLevel) {
                 currentParsingContext.remove();
@@ -78,10 +80,10 @@ public class MarkdownParser implements MarkupParser {
         }
     }
 
-    private MarkupParserResult doParse(Path path, MarkdownParsingContext parsingContext, String markdown) {
+    private MarkupParserResult doParse(Path path, MarkdownParsingContext parsingContext, boolean isTopLevel, String markdown) {
         SearchCrawlerParserHandler searchCrawler = new SearchCrawlerParserHandler();
         DocElementCreationParserHandler elementCreationHandler =
-                new DocElementCreationParserHandler(componentsRegistry, path);
+                new DocElementCreationParserHandler(componentsRegistry, path, parsingContext.getParsedFootnotes());
         MarkdownGeneratorParserHandler markdownGenerator = new MarkdownGeneratorParserHandler();
 
         ParserHandlersList parserHandler = new ParserHandlersList(elementCreationHandler, searchCrawler, markdownGenerator);
@@ -89,9 +91,14 @@ public class MarkdownParser implements MarkupParser {
         Node node = fullParser.parse(markdown);
         MarkdownVisitor visitor = parsePartial(node, path, parsingContext, parserHandler);
 
-        if (!visitor.getUnresolvedFootnoteRefs().isEmpty()) {
-            throw new IllegalArgumentException("undefined footnote reference(s): " +
-                    String.join(", ", visitor.getUnresolvedFootnoteRefs()));
+        if (isTopLevel) {
+            Set<String> unresolvedRefs = new LinkedHashSet<>(parsingContext.getFootnoteReferences());
+            unresolvedRefs.removeIf(label -> parsingContext.getParsedFootnotes().containsKey(new FootnoteId(label)));
+
+            if (!unresolvedRefs.isEmpty()) {
+                throw new IllegalArgumentException("undefined footnote reference(s): " +
+                        String.join(", ", unresolvedRefs));
+            }
         }
 
         if (visitor.hasPluginWarnings()) {
@@ -140,11 +147,14 @@ public class MarkdownParser implements MarkupParser {
     private static Parser createCommonMarkParser(PluginParamsFactory pluginParamsFactory) {
         CommonMarkExtension extension = new CommonMarkExtension(pluginParamsFactory);
 
-        return Parser.builder().extensions(Arrays.asList(extension,
-                TablesExtension.create(),
-                StrikethroughExtension.create(),
-                FootnotesExtension.create(),
-                YamlFrontMatterExtension.create())).build();
+        return Parser.builder()
+                .linkProcessor(new FootnoteLinkProcessorWithoutDefinitionCheck())
+                .extensions(Arrays.asList(extension,
+                        TablesExtension.create(),
+                        StrikethroughExtension.create(),
+                        FootnotesExtension.create(),
+                        YamlFrontMatterExtension.create()))
+                .build();
     }
 
     private void reportWarnings(Path path, Set<PluginParamWarning> parameterWarnings) {

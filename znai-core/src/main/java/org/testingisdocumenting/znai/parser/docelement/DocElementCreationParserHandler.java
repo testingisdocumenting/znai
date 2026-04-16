@@ -66,6 +66,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
     private boolean isSectionStarted;
 
     public DocElementCreationParserHandler(ComponentsRegistry componentsRegistry, Path path) {
+        this(componentsRegistry, path, new HashMap<>());
+    }
+
+    public DocElementCreationParserHandler(ComponentsRegistry componentsRegistry, Path path, Map<FootnoteId, ParsedFootnote> parsedFootnotes) {
         this.componentsRegistry = componentsRegistry;
         this.path = path;
         this.paragraphs = new ArrayList<>();
@@ -73,7 +77,7 @@ public class DocElementCreationParserHandler implements ParserHandler {
 
         this.globalAnchorIds = new ArrayList<>();
 
-        this.parsedFootnotes = new HashMap<>();
+        this.parsedFootnotes = parsedFootnotes;
 
         this.docElement = new DocElement(DocElementType.PAGE);
         this.elementsStack = new ArrayDeque<>();

@@ -639,11 +639,7 @@ after footnote
 
     @Test
     void "footnotes inside fence plugin should continue numbering"() {
-        def previousDefaultParser = componentsRegistry.defaultParser()
-        componentsRegistry.setDefaultParser(parser)
-
-        try {
-            parse("""
+        parseWithDefaultParser("""
 text before [^first]
 
 [^first]: first footnote
@@ -655,18 +651,31 @@ inner text [^second]
 ~~~
 """)
 
-            def content = PropsUtils.exerciseSuppliers(content)
+        def content = PropsUtils.exerciseSuppliers(content)
+        findFootnoteRef(content[0]).label.should == "1"
+        findAttentionFootnoteRef(content).label.should == "2"
+    }
 
-            def firstRef = content[0].content.find { it.type == "FootnoteReference" }
-            firstRef.label.should == "1"
+    @Test
+    void "footnote reference inside fence plugin with definition outside"() {
+        parseWithDefaultParser("""
+text before [^first]
 
-            def attentionBlock = content.find { it.type == "AttentionBlock" }
-            def innerParagraph = attentionBlock.content[0]
-            def secondRef = innerParagraph.content.find { it.type == "FootnoteReference" }
-            secondRef.label.should == "2"
-        } finally {
-            componentsRegistry.setDefaultParser(previousDefaultParser)
-        }
+[^first]: first footnote
+
+~~~attention-note
+inner text [^second]
+~~~
+
+[^second]: second footnote
+""")
+
+        def content = PropsUtils.exerciseSuppliers(content)
+        findFootnoteRef(content[0]).label.should == "1"
+
+        def secondRef = findAttentionFootnoteRef(content)
+        secondRef.label.should == "2"
+        secondRef.content.should == [["type": "Paragraph", "content": [["text": "second footnote", "type": "SimpleText"]]]]
     }
 
     @Test
@@ -677,6 +686,17 @@ inner text [^second]
 
         parse("text with `[^undefined]` reference")
         parse("```[^ref]```")
+    }
+
+    @Test
+    void "undefined footnote reference inside fence plugin"() {
+        code {
+            parseWithDefaultParser("""
+~~~attention-note
+inner text [^undefined]
+~~~
+""")
+        } should throwException(~/undefined footnote reference\(s\): undefined/)
     }
 
     @Test
@@ -736,5 +756,25 @@ hello world<br><br> of line breaks
         // use different path names if you use `sub headings` as the heading states is maintained per file/parsing
         parseResult = parser.parse(path, markdown)
         content = parseResult.docElement().getContent().collect { it.toMap() }
+    }
+
+    private void parseWithDefaultParser(String markdown) {
+        def previousDefaultParser = componentsRegistry.defaultParser()
+        componentsRegistry.setDefaultParser(parser)
+
+        try {
+            parse(markdown)
+        } finally {
+            componentsRegistry.setDefaultParser(previousDefaultParser)
+        }
+    }
+
+    private static Map findFootnoteRef(Map element) {
+        return element.content.find { it.type == "FootnoteReference" }
+    }
+
+    private static Map findAttentionFootnoteRef(List<Map> content) {
+        def attentionBlock = content.find { it.type == "AttentionBlock" }
+        findFootnoteRef(attentionBlock.content[0])
     }
 }

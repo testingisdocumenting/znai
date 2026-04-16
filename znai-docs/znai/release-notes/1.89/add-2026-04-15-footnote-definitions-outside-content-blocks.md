@@ -1,0 +1,1 @@
+* Fix: [Footnotes](flow/footnotes) can be defined outside content blocks like `attention-note` but used inside

@@ -16,10 +16,32 @@
 
 package org.testingisdocumenting.znai.parser;
 
+import org.testingisdocumenting.znai.extensions.footnote.FootnoteId;
+import org.testingisdocumenting.znai.extensions.footnote.ParsedFootnote;
+
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
 public class MarkdownParsingContext {
     private int footnoteIdx;
+    private final Map<FootnoteId, ParsedFootnote> parsedFootnotes = new HashMap<>();
+    private final Set<String> footnoteReferences = new LinkedHashSet<>();
 
     public int nextFootnoteIdx() {
         return ++footnoteIdx;
+    }
+
+    public Map<FootnoteId, ParsedFootnote> getParsedFootnotes() {
+        return parsedFootnotes;
+    }
+
+    public void addFootnoteReference(String label) {
+        footnoteReferences.add(label);
+    }
+
+    public Set<String> getFootnoteReferences() {
+        return footnoteReferences;
     }
 }
