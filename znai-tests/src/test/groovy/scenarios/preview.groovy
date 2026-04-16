@@ -59,7 +59,7 @@ scenario('toc update should redeploy all pages json and new page link should be 
 
     def newPageTocItem = standardView.tocItems.get("New Page")
     newPageTocItem.waitToBe visible
-    standardView.pageTitle.should == "New Page"
+    standardView.pageTitle.waitTo == "New Page"
 
     standardView.pageTwoTocItem.click()
     browser.refresh()
