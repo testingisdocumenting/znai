@@ -1,0 +1,1 @@
+* Add: [Page Tabs](layout/page-tabs) now works when nested inside `attention` fenced blocks.

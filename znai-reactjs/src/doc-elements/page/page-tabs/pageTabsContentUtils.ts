@@ -16,36 +16,37 @@
 
 import { DocElementContent, DocElementPayload } from "../../default-elements/DocElement";
 
+const TAB_CONTENT_TYPE = "TabContent";
+
 interface SectionPayload extends DocElementPayload {
   id: string;
   title: string;
 }
 
 /**
- * checks if page content has any TabContent elements (at section content level)
- */
-export function hasTabContent(pageContent: DocElementContent | undefined): boolean {
-  if (!pageContent) {
-    return false;
-  }
-
-  return pageContent.some((section) => sectionHasTabContent(section));
-}
-
-/**
- * extracts unique tab IDs from all TabContent elements in page content, preserving order
+ * extracts unique tab IDs from all TabContent elements in page content, preserving order.
+ * searches recursively through nested content (e.g. TabContent inside AttentionBlock)
  */
 export function extractTabIds(pageContent: DocElementContent | undefined): string[] {
   if (!pageContent) {
     return [];
   }
 
-  const allTabIds = pageContent
-    .flatMap((section) => (section.content || []))
-    .filter((el: any) => el.type === "TabContent" && el.tabId)
-    .map((el: any) => el.tabId);
+  const allTabIds: string[] = [];
+  collect(pageContent);
 
   return [...new Set(allTabIds)];
+
+  function collect(content: DocElementContent): void {
+    for (const el of content) {
+      if (el.type === TAB_CONTENT_TYPE && el.tabId) {
+        allTabIds.push(el.tabId);
+      }
+      if (Array.isArray(el.content)) {
+        collect(el.content);
+      }
+    }
+  }
 }
 
 /**
@@ -53,6 +54,7 @@ export function extractTabIds(pageContent: DocElementContent | undefined): strin
  * - keeps all non-TabContent elements as-is
  * - keeps TabContent elements when tabId matches (they render via TabContent component with a marker class)
  * - removes TabContent elements that don't match the selected tab
+ * - recursively filters nested content (e.g. TabContent inside AttentionBlock)
  *
  * returns sections with their content filtered
  */
@@ -60,31 +62,22 @@ export function buildContentForTab(
   pageContent: DocElementContent,
   selectedTabId: string
 ): DocElementContent {
-  return pageContent
-    .map((section) => buildSectionForTab(section as SectionPayload, selectedTabId))
-    .filter((section): section is SectionPayload => section !== null);
+  return pageContent.map((section) => {
+    if (!section.content) {
+      return section;
+    }
+
+    return { ...section, content: filterContentForTab(section.content, selectedTabId) };
+  });
 }
 
-function buildSectionForTab(section: SectionPayload, selectedTabId: string): SectionPayload | null {
-  if (!section.content) {
-    return section;
-  }
-
-  const filteredContent = section.content.filter(
-    (el: any) => el.type !== "TabContent" || el.tabId === selectedTabId
-  );
-
-  if (filteredContent.length === 0 && sectionHasTabContent(section)) {
-    return null;
-  }
-
-  return { ...section, content: filteredContent };
-}
-
-function sectionHasTabContent(section: DocElementPayload): boolean {
-  if (!section.content) {
-    return false;
-  }
-
-  return section.content.some((el: any) => el.type === "TabContent");
+function filterContentForTab(content: DocElementContent, selectedTabId: string): DocElementContent {
+  return content
+    .filter((el: any) => el.type !== TAB_CONTENT_TYPE || el.tabId === selectedTabId)
+    .map((el: any) => {
+      if (Array.isArray(el.content)) {
+        return { ...el, content: filterContentForTab(el.content, selectedTabId) };
+      }
+      return el;
+    });
 }
