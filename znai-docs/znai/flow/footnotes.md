@@ -4,10 +4,10 @@ To define a footnote use
 
 `````
 [^my-id]: extra content for my footnote goes here
-potentially including code blocks
-```
-Constructor()
-```
+    potentially including code blocks
+    ```
+    Constructor()
+    ```
 `````
 
 To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
@@ -23,7 +23,20 @@ number in order of appearance.
 
 # Preview
 
-Hover mouse over a footnote reference see its content in a tooltip.
+Hover mouse over a footnote reference see its content in a tooltip. Click on it to go the footnotes list at the 
+bottom of the page.
+
+# Footnotes Inside Attention Blocks
+
+Footnotes can be used inside different content blocks like `attention-note`:
+
+    ```attention-warning
+    Use something important [^my-id]
+    ```
+
+```attention-warning
+Use something important [^my-id]
+```
 
 # Footnotes List
 
