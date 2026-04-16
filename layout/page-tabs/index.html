@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: Page Tabs</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="znai-theme theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'znai-theme theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Primary Use Case</h1></header>
+<p>When your documentation covers the same concepts across multiple languages or platforms you can use to make the entire page switchable Unlike regular which require wrapping each difference in a tabs fence lets you sprinkle tab specific content throughout the page Shared content stays as regular markdown This page itself uses  notice the tabs at the top Switch between them to see how content changes across sections while shared text remains Below is a demo except the final Definition section tab content tabs tab content tab content</p>
+</article>
+
+<article>
+<header><h1>Project Setup</h1></header>
+<p>Every project needs an editor configuration Create a workspace settings file in your project root Create in your project root Note VS Code will automatically detect these settings when you open the folder vscode settings json Create in your project root Note Emacs will automatically load these settings when visiting any file in the directory dir locals el nil indent tabs mode nil tab width 4 fill column 100</p>
+</article>
+
+<article>
+<header><h1>Build Configuration</h1></header>
+<p>Set up the build tool for your project All editors use the same underlying build system but the integration differs Create to integrate the build Java C Use to run the build task vscode tasks json Ctrl Shift B Configure in Java nil compile command mvn compile C nil compile command cmake build build Use to run the build compile command dir locals el M x compile</p>
+</article>
+
+<article>
+<header><h1>Debugging</h1></header>
+<p>All projects benefit from proper debug configuration Breakpoints watch expressions and stepping through code work the same conceptually  but the configuration differs per editor Create Java C Press to start debugging vscode launch json F5 Java Use with the Java debug adapter dap mode require dap java dap register debug template Debug Main list type java request launch mainClass com example Main C Use with dap mode gdb require dap gdb lldb dap register debug template Debug Main list type cppdbg request launch program $ workspaceFolder build main Use to start a debug session M x dap debug</p>
+</article>
+
+<article>
+<header><h1>Definition</h1></header>
+<p>Use fence blocks with a tab id to mark sections of content that are specific to a tab Content outside of blocks is always visible regardless of which tab is selected When a page contains blocks tabs automatically appear at the top of the page Regular fence blocks can be used inside for additional sub grouping The global page tabs and regular tabs operate independently Shared content here is always visible Java hello VS Code Java C hello Vs Code C Java hello Emacs Java C hello Emacs C More shared content here tab content tab content Shared content here is always visible ```tab content VS Code Press `F5` to start debugging ``` ```tab content Emacs Use `M x dap debug` to start a debug session ``` More shared content here tab content tabs tab content Shared content here is always visible `````tab content VS Code ```tabs Java hello VS Code Java C hello Vs Code C ``` ````` `````tab content Emacs ```tabs Java hello Emacs Java C hello Emacs C ``` ````` More shared content here</p>
+</article>
+</section>
+<section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<a href="/znai/introduction/what-is-this/">What Is This</a>
+</article>
+
+<article>
+<a href="/znai/introduction/getting-started/">Getting Started</a>
+</article>
+
+<article>
+<a href="/znai/flow/structure/">Structure</a>
+</article>
+
+<article>
+<a href="/znai/flow/landing/">Landing</a>
+</article>
+
+<article>
+<a href="/znai/flow/names/">Page Titles</a>
+</article>
+
+<article>
+<a href="/znai/flow/page-references/">Page References</a>
+</article>
+
+<article>
+<a href="/znai/flow/page-toc/">Page Toc</a>
+</article>
+
+<article>
+<a href="/znai/flow/lookup-paths/">Lookup Paths</a>
+</article>
+
+<article>
+<a href="/znai/flow/search/">Search</a>
+</article>
+
+<article>
+<a href="/znai/flow/llm/">Llm</a>
+</article>
+
+<article>
+<a href="/znai/flow/footer/">Footer</a>
+</article>
+
+<article>
+<a href="/znai/flow/support/">Support</a>
+</article>
+
+<article>
+<a href="/znai/flow/footnotes/">Footnotes</a>
+</article>
+
+<article>
+<a href="/znai/flow/presentation/">Presentation</a>
+</article>
+
+<article>
+<a href="/znai/flow/testing-is-documenting/">Testing Is Documenting</a>
+</article>
+
+<article>
+<a href="/znai/flow/shortcuts/">Shortcuts</a>
+</article>
+
+<article>
+<a href="/znai/snippets/code-snippets/">Code Snippets</a>
+</article>
+
+<article>
+<a href="/znai/snippets/external-code-snippets/">External Code Snippets</a>
+</article>
+
+<article>
+<a href="/znai/snippets/snippets-manipulation/">Snippets Manipulation</a>
+</article>
+
+<article>
+<a href="/znai/snippets/snippets-highlighting/">Snippets Highlighting</a>
+</article>
+
+<article>
+<a href="/znai/snippets/code-comments/">Code Comments</a>
+</article>
+
+<article>
+<a href="/znai/snippets/inlined-code-snippets/">Inlined Code Snippets</a>
+</article>
+
+<article>
+<a href="/znai/snippets/api-parameters/">API Parameters</a>
+</article>
+
+<article>
+<a href="/znai/snippets/code-references/">Code References</a>
+</article>
+
+<article>
+<a href="/znai/snippets/json/">Json</a>
+</article>
+
+<article>
+<a href="/znai/snippets/xml/">Xml</a>
+</article>
+
+<article>
+<a href="/znai/snippets/ocaml/">OCaml</a>
+</article>
+
+<article>
+<a href="/znai/snippets/open-API/">Open API</a>
+</article>
+
+<article>
+<a href="/znai/snippets/CLI/">CLI</a>
+</article>
+
+<article>
+<a href="/znai/snippets/math/">Math</a>
+</article>
+
+<article>
+<a href="/znai/snippets/jupyter-notebook/">Jupyter Notebook</a>
+</article>
+
+<article>
+<a href="/znai/snippets/cpp/">Cpp</a>
+</article>
+
+<article>
+<a href="/znai/snippets/python/">Python</a>
+</article>
+
+<article>
+<a href="/znai/snippets/java/">Java</a>
+</article>
+
+<article>
+<a href="/znai/snippets/groovy/">Groovy</a>
+</article>
+
+<article>
+<a href="/znai/snippets/markdown/">Markdown</a>
+</article>
+
+<article>
+<a href="/znai/visuals/attention-signs/">Attention Signs</a>
+</article>
+
+<article>
+<a href="/znai/visuals/images/">Images</a>
+</article>
+
+<article>
+<a href="/znai/visuals/image-annotations/">Image Annotations</a>
+</article>
+
+<article>
+<a href="/znai/visuals/cards/">Cards</a>
+</article>
+
+<article>
+<a href="/znai/visuals/charts/">Charts</a>
+</article>
+
+<article>
+<a href="/znai/visuals/mermaid-diagrams/">Mermaid Diagrams</a>
+</article>
+
+<article>
+<a href="/znai/visuals/SVG/">SVG</a>
+</article>
+
+<article>
+<a href="/znai/visuals/icons/">Icons</a>
+</article>
+
+<article>
+<a href="/znai/visuals/headings/">Headings</a>
+</article>
+
+<article>
+<a href="/znai/visuals/text-badge/">Text Badge</a>
+</article>
+
+<article>
+<a href="/znai/visuals/read-more/">Read More</a>
+</article>
+
+<article>
+<a href="/znai/visuals/spoilers/">Spoilers</a>
+</article>
+
+<article>
+<a href="/znai/visuals/keyboard-shortcuts/">Keyboard Shortcuts</a>
+</article>
+
+<article>
+<a href="/znai/visuals/smart-bullet-points/">Smart Bullet Points</a>
+</article>
+
+<article>
+<a href="/znai/visuals/flow-diagrams/">Flow Diagrams</a>
+</article>
+
+<article>
+<a href="/znai/visuals/graphviz-diagrams/">Graphviz Diagrams</a>
+</article>
+
+<article>
+<a href="/znai/visuals/PlantUml/">PlantUml</a>
+</article>
+
+<article>
+<a href="/znai/visuals/iframe/">Iframe</a>
+</article>
+
+<article>
+<a href="/znai/visuals/asciinema/">Asciinema</a>
+</article>
+
+<article>
+<a href="/znai/layout/tabs/">Tabs</a>
+</article>
+
+<article>
+<a href="/znai/layout/page-tabs/">Page Tabs</a>
+</article>
+
+<article>
+<a href="/znai/layout/tables/">Tables</a>
+</article>
+
+<article>
+<a href="/znai/layout/columns/">Columns</a>
+</article>
+
+<article>
+<a href="/znai/layout/templates/">Templates</a>
+</article>
+
+<article>
+<a href="/znai/layout/runtime-templates/">Runtime Templates</a>
+</article>
+
+<article>
+<a href="/znai/layout/two-sides-pages/">Two Sides Pages</a>
+</article>
+
+<article>
+<a href="/znai/layout/two-sides-tabs/">Two Sides Tabs</a>
+</article>
+
+<article>
+<a href="/znai/layout/jupyter-notebook-two-sides/">Jupyter Notebook Two Sides</a>
+</article>
+
+<article>
+<a href="/znai/python/content-extraction/">Content Extraction</a>
+</article>
+
+<article>
+<a href="/znai/python/description-extraction/">Description Extraction</a>
+</article>
+
+<article>
+<a href="/znai/python/auto-reference/">Auto Reference</a>
+</article>
+
+<article>
+<a href="/znai/CPP/doxygen-setup/">Doxygen Setup</a>
+</article>
+
+<article>
+<a href="/znai/CPP/description-extraction/">Description Extraction</a>
+</article>
+
+<article>
+<a href="/znai/CPP/auto-reference/">Auto Reference</a>
+</article>
+
+<article>
+<a href="/znai/java/content-extraction/">Content Extraction</a>
+</article>
+
+<article>
+<a href="/znai/java/description-extraction/">Description Extraction</a>
+</article>
+
+<article>
+<a href="/znai/java/auto-reference/">Auto Reference</a>
+</article>
+
+<article>
+<a href="/znai/synergy-with-testing/web-UI/">Web UI</a>
+</article>
+
+<article>
+<a href="/znai/synergy-with-testing/REST-API/">REST API</a>
+</article>
+
+<article>
+<a href="/znai/synergy-with-testing/business-logic/">Business Logic</a>
+</article>
+
+<article>
+<a href="/znai/plugins/plugin-types/">Plugin Types</a>
+</article>
+
+<article>
+<a href="/znai/plugins/default-parameters/">Default Parameters</a>
+</article>
+
+<article>
+<a href="/znai/plugins/development/">Development</a>
+</article>
+
+<article>
+<a href="/znai/configuration/basic/">Basic</a>
+</article>
+
+<article>
+<a href="/znai/configuration/styling/">Styling</a>
+</article>
+
+<article>
+<a href="/znai/configuration/top-header/">Top Header</a>
+</article>
+
+<article>
+<a href="/znai/deployment/additional-files/">Additional Files</a>
+</article>
+
+<article>
+<a href="/znai/hub/introduction/">Introduction</a>
+</article>
+
+<article>
+<a href="/znai/hub/setup/">Setup</a>
+</article>
+
+<article>
+<a href="/znai/hub/build-artifacts-watch/">Build Artifacts Watch</a>
+</article>
+
+<article>
+<a href="/znai/example-references/domain/">Domain</a>
+</article>
+
+<article>
+<a href="/znai/example-references/api/">Api</a>
+</article>
+
+<article>
+<a href="/znai/znai-development/local-build/">Local Build</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2026/">2026</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2025/">2025</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2024/">2024</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2023/">2023</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2022/">2022</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2021/">2021</a>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C2dCodDa.js"></script>
+<script type="module" src="/znai/static/architecture-YZFGNWBL-Bw-sxZUu.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-Q4EWVU46-CS3CMp6-.js"></script>
+<script type="module" src="/znai/static/blockDiagram-DXYQGD6D-D4Vu_b5P.js"></script>
+<script type="module" src="/znai/static/c4Diagram-AHTNJAMY-DH2IvK-c.js"></script>
+<script type="module" src="/znai/static/classDiagram-6PBFFD2Q-B2u6ecx2.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-HSJHXN6E-skjbAtfI.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BAsbmd2e.js"></script>
+<script type="module" src="/znai/static/dagre-KV5264BT-Bx9zDDgQ.js"></script>
+<script type="module" src="/znai/static/diagram-5BDNPKRD-CEd0qFeo.js"></script>
+<script type="module" src="/znai/static/diagram-G4DWMVQ6-DafoCbjT.js"></script>
+<script type="module" src="/znai/static/diagram-MMDJMWI5-B-KtQsFC.js"></script>
+<script type="module" src="/znai/static/diagram-TYMM5635-Dsbt3iXr.js"></script>
+<script type="module" src="/znai/static/erDiagram-SMLLAGMA-BvUDeg4Z.js"></script>
+<script type="module" src="/znai/static/flowDiagram-DWJPFMVM-Cxocu8hR.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-T4ZO3ILL-vgqjggZ1.js"></script>
+<script type="module" src="/znai/static/gitGraph-7Q5UKJZL-9N7x-8Sq.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-UUTBAWPF-D8Nzul0v.js"></script>
+<script type="module" src="/znai/static/index-CiRlMac1.js"></script>
+<script type="module" src="/znai/static/info-OMHHGYJF-BGv6v4V6.js"></script>
+<script type="module" src="/znai/static/infoDiagram-42DDH7IO-kFZBt7f7.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-UXIWVN3A-DnsJ_azZ.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-VCZTEJTY-Ckv9zq2l.js"></script>
+<script type="module" src="/znai/static/kanban-definition-6JOO6SKY-B88EW6iw.js"></script>
+<script type="module" src="/znai/static/katex-BIdWqd8Y.js"></script>
+<script type="module" src="/znai/static/mermaid-DwXlCOJu.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-QFDTVHPH-B0em-KdG.js"></script>
+<script type="module" src="/znai/static/packet-4T2RLAQJ-zCDXyFoc.js"></script>
+<script type="module" src="/znai/static/pie-ZZUOXDRM-O-VMPFHJ.js"></script>
+<script type="module" src="/znai/static/pieDiagram-DEJITSTG-rPc25Jfj.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-34T5L4WZ-CIkL2yNz.js"></script>
+<script type="module" src="/znai/static/radar-PYXPWWZC-BH41w57R.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-MS252O5E-DN5e1GSD.js"></script>
+<script type="module" src="/znai/static/rolldown-runtime-DmV8ZhqI.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-XADWPNL6-DR3rLaOi.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-FGHM5R23-Bej0fy6F.js"></script>
+<script type="module" src="/znai/static/stateDiagram-FHFEXIEX-BHk2UhUq.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-QKLJ7IA2-UqHJyUmI.js"></script>
+<script type="module" src="/znai/static/timeline-definition-GMOUNBTQ-CRx4mfao.js"></script>
+<script type="module" src="/znai/static/treeView-SZITEDCU-C3FR6DwS.js"></script>
+<script type="module" src="/znai/static/treemap-W4RFUUIX-CqCuDxB8.js"></script>
+<script type="module" src="/znai/static/vennDiagram-DHZGUBPP-dWS7fYNb.js"></script>
+<script type="module" src="/znai/static/wardley-RL74JXVD-By_neDUl.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-NUSXRM2D-DnNUsFoL.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-5P7HB3ND-BlwBGmAb.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="module" src="/znai/search-index.js"></script>
+<script type="module">
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+/*
+ * Copyright 2025 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+function initializeSearchIndex() {
+    if (window.znaiSearchData) {
+        window.znaiSearchIdx = window.createLocalSearchIndex();
+        window.populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);
+    }
+}
+
+// Call the method to initialize the search index.
+initializeSearchIndex();
+
+window.ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "hidePresentationTrigger" : false,
+    "hideFootnoteList" : false,
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "GitHub"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "primary-use-case",
+      "additionalIds" : [ ],
+      "title" : "Primary Use Case",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When your documentation covers the same concepts across multiple languages or platforms,",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "you can use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "tab-content",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to make the entire page switchable. Unlike regular ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "tabs",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " which require",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "wrapping each difference in a tabs fence, ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "tab-content",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " lets you sprinkle tab-specific content",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "throughout the page. Shared content stays as regular markdown.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "This page itself uses ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "tab-content",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " — notice the tabs at the top. Switch between them to see",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "how content changes across sections while shared text remains.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Below is a demo, except the final ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/layout/page-tabs#definition",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "Definition",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " section.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "project-setup",
+      "additionalIds" : [ ],
+      "title" : "Project Setup",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Every project needs an editor configuration. Create a workspace settings file in your project root.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "tabId" : "VS Code",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Create ",
+            "type" : "SimpleText"
+          }, {
+            "code" : ".vscode/settings.json",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " in your project root:",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "data" : {
+            "editor.formatOnSave" : true,
+            "editor.tabSize" : 4,
+            "files.trimTrailingWhitespace" : true
+          },
+          "highlightValues" : [ ],
+          "highlightKeys" : [ ],
+          "type" : "Json"
+        }, {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Note: VS Code will automatically detect these settings when you open the folder.",
+            "type" : "SimpleText"
+          } ]
+        } ],
+        "type" : "TabContent"
+      }, {
+        "tabId" : "Emacs",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Create ",
+            "type" : "SimpleText"
+          }, {
+            "code" : ".dir-locals.el",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " in your project root:",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "lang" : "elisp",
+          "snippet" : "((nil . ((indent-tabs-mode . nil)\n         (tab-width . 4)\n         (fill-column . 100))))",
+          "lineNumber" : "",
+          "type" : "Snippet"
+        }, {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Note: Emacs will automatically load these settings when visiting any file in the directory.",
+            "type" : "SimpleText"
+          } ]
+        } ],
+        "type" : "TabContent"
+      } ]
+    }, {
+      "id" : "build-configuration",
+      "additionalIds" : [ ],
+      "title" : "Build Configuration",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Set up the build tool for your project. All editors use the same underlying build system,",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "but the integration differs.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "tabId" : "VS Code",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Create ",
+            "type" : "SimpleText"
+          }, {
+            "code" : ".vscode/tasks.json",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " to integrate the build:",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "tabsContent" : [ {
+            "name" : "Java",
+            "content" : [ {
+              "data" : {
+                "version" : "2.0.0",
+                "tasks" : [ {
+                  "label" : "build",
+                  "type" : "shell",
+                  "command" : "mvn compile",
+                  "group" : "build"
+                } ]
+              },
+              "highlightValues" : [ ],
+              "highlightKeys" : [ ],
+              "type" : "Json"
+            } ]
+          }, {
+            "name" : "C++",
+            "content" : [ {
+              "data" : {
+                "version" : "2.0.0",
+                "tasks" : [ {
+                  "label" : "build",
+                  "type" : "shell",
+                  "command" : "cmake --build build/",
+                  "group" : "build"
+                } ]
+              },
+              "highlightValues" : [ ],
+              "highlightKeys" : [ ],
+              "type" : "Json"
+            } ]
+          } ],
+          "type" : "Tabs"
+        }, {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Use ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "Ctrl+Shift+B",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " to run the build task.",
+            "type" : "SimpleText"
+          } ]
+        } ],
+        "type" : "TabContent"
+      }, {
+        "tabId" : "Emacs",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Configure ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "compile-command",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " in ",
+            "type" : "SimpleText"
+          }, {
+            "code" : ".dir-locals.el",
+            "type" : "InlinedCode"
+          }, {
+            "text" : ":",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "tabsContent" : [ {
+            "name" : "Java",
+            "content" : [ {
+              "lang" : "elisp",
+              "snippet" : "((nil . ((compile-command . \"mvn compile\"))))",
+              "lineNumber" : "",
+              "type" : "Snippet"
+            } ]
+          }, {
+            "name" : "C++",
+            "content" : [ {
+              "lang" : "elisp",
+              "snippet" : "((nil . ((compile-command . \"cmake --build build/\"))))",
+              "lineNumber" : "",
+              "type" : "Snippet"
+            } ]
+          } ],
+          "type" : "Tabs"
+        }, {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Use ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "M-x compile",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " to run the build.",
+            "type" : "SimpleText"
+          } ]
+        } ],
+        "type" : "TabContent"
+      } ]
+    }, {
+      "id" : "debugging",
+      "additionalIds" : [ ],
+      "title" : "Debugging",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "All projects benefit from proper debug configuration. Breakpoints, watch expressions,",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "and stepping through code work the same conceptually — but the configuration differs per editor.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "tabId" : "VS Code",
+        "content" : [ {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Create ",
+            "type" : "SimpleText"
+          }, {
+            "code" : ".vscode/launch.json",
+            "type" : "InlinedCode"
+          }, {
+            "text" : ":",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "tabsContent" : [ {
+            "name" : "Java",
+            "content" : [ {
+              "data" : {
+                "version" : "0.2.0",
+                "configurations" : [ {
+                  "type" : "java",
+                  "name" : "Debug Main",
+                  "request" : "launch",
+                  "mainClass" : "com.example.Main"
+                } ]
+              },
+              "highlightValues" : [ ],
+              "highlightKeys" : [ ],
+              "type" : "Json"
+            } ]
+          }, {
+            "name" : "C++",
+            "content" : [ {
+              "data" : {
+                "version" : "0.2.0",
+                "configurations" : [ {
+                  "type" : "cppdbg",
+                  "name" : "Debug Main",
+                  "request" : "launch",
+                  "program" : "${workspaceFolder}/build/main"
+                } ]
+              },
+              "highlightValues" : [ ],
+              "highlightKeys" : [ ],
+              "type" : "Json"
+            } ]
+          } ],
+          "type" : "Tabs"
+        }, {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Press ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "F5",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " to start debugging.",
+            "type" : "SimpleText"
+          } ]
+        } ],
+        "type" : "TabContent"
+      }, {
+        "tabId" : "Emacs",
+        "content" : [ {
+          "tabsContent" : [ {
+            "name" : "Java",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Use ",
+                "type" : "SimpleText"
+              }, {
+                "code" : "dap-mode",
+                "type" : "InlinedCode"
+              }, {
+                "text" : " with the Java debug adapter:",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "lang" : "elisp",
+              "snippet" : "(require 'dap-java)\n(dap-register-debug-template \"Debug Main\"\n  (list :type \"java\"\n        :request \"launch\"\n        :mainClass \"com.example.Main\"))",
+              "lineNumber" : "",
+              "type" : "Snippet"
+            } ]
+          }, {
+            "name" : "C++",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "Use ",
+                "type" : "SimpleText"
+              }, {
+                "code" : "dap-mode",
+                "type" : "InlinedCode"
+              }, {
+                "text" : " with ",
+                "type" : "SimpleText"
+              }, {
+                "code" : "gdb",
+                "type" : "InlinedCode"
+              }, {
+                "text" : ":",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "lang" : "elisp",
+              "snippet" : "(require 'dap-gdb-lldb)\n(dap-register-debug-template \"Debug Main\"\n  (list :type \"cppdbg\"\n        :request \"launch\"\n        :program \"${workspaceFolder}/build/main\"))",
+              "lineNumber" : "",
+              "type" : "Snippet"
+            } ]
+          } ],
+          "type" : "Tabs"
+        }, {
+          "type" : "Paragraph",
+          "content" : [ {
+            "text" : "Use ",
+            "type" : "SimpleText"
+          }, {
+            "code" : "M-x dap-debug",
+            "type" : "InlinedCode"
+          }, {
+            "text" : " to start a debug session.",
+            "type" : "SimpleText"
+          } ]
+        } ],
+        "type" : "TabContent"
+      } ]
+    }, {
+      "id" : "definition",
+      "additionalIds" : [ ],
+      "title" : "Definition",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "tab-content",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " fence blocks with a tab id to mark sections of content that are specific to a tab.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Content outside of ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "tab-content",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " blocks is always visible regardless of which tab is selected.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "Shared content here is always visible.\n\n```tab-content \"VS Code\"\nPress `F5` to start debugging.\n```\n\n\n```tab-content Emacs\nUse `M-x dap-debug` to start a debug session.\n```\n\nMore shared content here.",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "When a page contains ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "tab-content",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " blocks, tabs automatically appear at the top of the page.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Regular ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "tabs",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " fence blocks can be used inside ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "tab-content",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " for additional sub-grouping.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "The global page tabs and regular tabs operate independently.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : "Shared content here is always visible.\n\n`````tab-content \"VS Code\"\n```tabs\nJava: hello VS Code Java\nC++: hello Vs Code C++\n```\n`````\n\n\n`````tab-content Emacs\n```tabs\nJava: hello Emacs Java\nC++: hello Emacs C++\n```\n`````\n\nMore shared content here.",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "type" : "ThematicBreak"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Shared content here is always visible.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "tabId" : "VS Code",
+        "content" : [ {
+          "tabsContent" : [ {
+            "name" : "Java",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "hello VS Code Java",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "C++",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "hello Vs Code C++",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ],
+          "type" : "Tabs"
+        } ],
+        "type" : "TabContent"
+      }, {
+        "tabId" : "Emacs",
+        "content" : [ {
+          "tabsContent" : [ {
+            "name" : "Java",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "hello Emacs Java",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          }, {
+            "name" : "C++",
+            "content" : [ {
+              "type" : "Paragraph",
+              "content" : [ {
+                "text" : "hello Emacs C++",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ],
+          "type" : "Tabs"
+        } ],
+        "type" : "TabContent"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "More shared content here.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    } ],
+    "lastModifiedTime" : 1776303610473,
+    "tocItem" : {
+      "chapterTitle" : "Layout",
+      "pageTitle" : "Page Tabs",
+      "pageMeta" : { },
+      "dirName" : "layout",
+      "fileName" : "page-tabs",
+      "fileExtension" : "md",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Primary Use Case",
+        "id" : "primary-use-case",
+        "customAnchorId" : "primary-use-case"
+      }, {
+        "title" : "Project Setup",
+        "id" : "project-setup",
+        "customAnchorId" : "project-setup"
+      }, {
+        "title" : "Build Configuration",
+        "id" : "build-configuration",
+        "customAnchorId" : "build-configuration"
+      }, {
+        "title" : "Debugging",
+        "id" : "debugging",
+        "customAnchorId" : "debugging"
+      }, {
+        "title" : "Definition",
+        "id" : "definition",
+        "customAnchorId" : "definition"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

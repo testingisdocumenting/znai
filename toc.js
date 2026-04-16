@@ -133,6 +133,10 @@ toc = [ {
       "id" : "pages-without-chapters",
       "customAnchorId" : "pages-without-chapters"
     }, {
+      "title" : "Hide & Skip",
+      "id" : "hide-skip",
+      "customAnchorId" : "hide-skip"
+    }, {
       "title" : "Sub Headings",
       "id" : "sub-headings",
       "customAnchorId" : "sub-headings"
@@ -336,6 +340,10 @@ toc = [ {
       "title" : "Preview",
       "id" : "preview",
       "customAnchorId" : "preview"
+    }, {
+      "title" : "Footnotes List",
+      "id" : "footnotes-list",
+      "customAnchorId" : "footnotes-list"
     } ]
   }, {
     "chapterTitle" : "Flow",
@@ -1145,7 +1153,7 @@ toc = [ {
     "chapterTitle" : "Visuals",
     "pageTitle" : "Images",
     "pageMeta" : {
-      "image" : [ "{border: true, fit: false}" ]
+      "image" : [ "{border: true}" ]
     },
     "dirName" : "visuals",
     "fileName" : "images",
@@ -1175,6 +1183,10 @@ toc = [ {
       "title" : "Fit",
       "id" : "fit",
       "customAnchorId" : "fit"
+    }, {
+      "title" : "Wide",
+      "id" : "wide",
+      "customAnchorId" : "wide"
     }, {
       "title" : "Scale",
       "id" : "scale",
@@ -1641,9 +1653,17 @@ toc = [ {
       "id" : "title",
       "customAnchorId" : "title"
     }, {
-      "title" : "Height",
-      "id" : "height",
-      "customAnchorId" : "height"
+      "title" : "Dynamic Content",
+      "id" : "dynamic-content",
+      "customAnchorId" : "dynamic-content"
+    }, {
+      "title" : "Wide",
+      "id" : "wide",
+      "customAnchorId" : "wide"
+    }, {
+      "title" : "Zoom And New Tab",
+      "id" : "zoom-and-new-tab",
+      "customAnchorId" : "zoom-and-new-tab"
     }, {
       "title" : "Embedding Video",
       "id" : "embedding-video",
@@ -1702,6 +1722,35 @@ toc = [ {
       "title" : "Attention Signs",
       "id" : "attention-signs",
       "customAnchorId" : "attention-signs"
+    } ]
+  }, {
+    "chapterTitle" : "Layout",
+    "pageTitle" : "Page Tabs",
+    "pageMeta" : { },
+    "dirName" : "layout",
+    "fileName" : "page-tabs",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Primary Use Case",
+      "id" : "primary-use-case",
+      "customAnchorId" : "primary-use-case"
+    }, {
+      "title" : "Project Setup",
+      "id" : "project-setup",
+      "customAnchorId" : "project-setup"
+    }, {
+      "title" : "Build Configuration",
+      "id" : "build-configuration",
+      "customAnchorId" : "build-configuration"
+    }, {
+      "title" : "Debugging",
+      "id" : "debugging",
+      "customAnchorId" : "debugging"
+    }, {
+      "title" : "Definition",
+      "id" : "definition",
+      "customAnchorId" : "definition"
     } ]
   }, {
     "chapterTitle" : "Layout",
@@ -1845,6 +1894,39 @@ toc = [ {
       "title" : "Use A Pattern",
       "id" : "use-a-pattern",
       "customAnchorId" : "use-a-pattern"
+    } ]
+  }, {
+    "chapterTitle" : "Layout",
+    "pageTitle" : "Runtime Templates",
+    "pageMeta" : { },
+    "dirName" : "layout",
+    "fileName" : "runtime-templates",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "URL Query Value",
+      "id" : "url-query-value",
+      "customAnchorId" : "url-query-value"
+    }, {
+      "title" : "Inline Syntax",
+      "id" : "inline-syntax",
+      "customAnchorId" : "inline-syntax"
+    }, {
+      "title" : "Missing Value",
+      "id" : "missing-value",
+      "customAnchorId" : "missing-value"
+    }, {
+      "title" : "Template Syntax In Code Snippets And CLI Commands",
+      "id" : "template-syntax-in-code-snippets-and-cli-commands",
+      "customAnchorId" : "template-syntax-in-code-snippets-and-cli-commands"
+    }, {
+      "title" : "Tables With Inline Values",
+      "id" : "tables-with-inline-values",
+      "customAnchorId" : "tables-with-inline-values"
+    }, {
+      "title" : "Full Example",
+      "id" : "full-example",
+      "customAnchorId" : "full-example"
     } ]
   }, {
     "chapterTitle" : "Layout",
@@ -2552,6 +2634,10 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.88",
+      "id" : "188",
+      "customAnchorId" : "188"
+    }, {
       "title" : "1.87",
       "id" : "187",
       "customAnchorId" : "187"

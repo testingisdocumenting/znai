@@ -236,8 +236,8 @@ documentation writing process.
       <text>## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.87.1/znai-dist-1.87.1-znai.zip).
-Add it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.88/znai-dist-1.88-znai.zip). Add
+it to your `PATH`.
 
 ## Brew
 
@@ -261,7 +261,7 @@ brew install testingisdocumenting/brew/znai
 &lt;plugin>
     &lt;groupId>org.testingisdocumenting.znai&lt;/groupId>
     &lt;artifactId>znai-maven-plugin&lt;/artifactId>
-    &lt;version>1.87.1&lt;/version>
+    &lt;version>1.88&lt;/version>
 &lt;/plugin>
 ```
 
@@ -524,9 +524,11 @@ visuals
     asciinema
 layout
     tabs
+    page-tabs
     tables
     columns
     templates
+    runtime-templates
     two-sides-pages
     two-sides-tabs
     jupyter-notebook-two-sides
@@ -598,6 +600,39 @@ page-two.md
 optional-chapter
    page-three.md
    page-four.md
+```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/structure#hide-skip</url>
+    <fullTitle>Znai: Structure, Hide &amp; Skip [Flow]</fullTitle>
+    <pageTitle>Structure</pageTitle>
+    <chapterTitle>Flow</chapterTitle>
+    <pageSectionTitle>Hide &amp; Skip</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>You can control how individual pages participate in the documentation by setting `toc` property in the `toc` file.
+
+A hidden page can be navigated to with a direct link, but it won't appear in the TOC panel and won't participate in
+next/prev page navigation.
+
+```
+chapter-name
+    page-one
+    page-two {toc: "hide"}
+    page-three
+```
+
+A skipped page is accessible via direct URL, but it won't participate in next/prev page navigation. Users navigating
+sequentially will skip over it.
+
+```
+chapter-name
+    page-one
+    page-two {toc: "skip"}
+    page-three
 ```
 
 </text>
@@ -676,6 +711,7 @@ type, and optional `View On` information.
   "category": "Documentation",
   "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
   "hidePresentationTrigger": false,
+  "hideFootnoteList": false,
   "viewOn": {
     "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
     "title": "View Markdown"
@@ -1248,6 +1284,7 @@ Content in `footer.md` will be displayed at the bottom of each page.
   "category": "Documentation",
   "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
   "hidePresentationTrigger": false,
+  "hideFootnoteList": false,
   "viewOn": {
     "link": "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
     "title": "View Markdown"
@@ -1286,6 +1323,9 @@ To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
 
 [^my-id]: 
 
+Note: numeric footnotes are treated as text footnotes, and they will be assigned the auto incremented number in order of
+appearance.
+
 </text>
     </text>
   </entry>
@@ -1298,6 +1338,25 @@ To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
     <text>
       <score>STANDARD</score>
       <text>Hover mouse over a footnote reference see its content in a tooltip.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/footnotes#footnotes-list</url>
+    <fullTitle>Znai: Footnotes, Footnotes List [Flow]</fullTitle>
+    <pageTitle>Footnotes</pageTitle>
+    <chapterTitle>Flow</chapterTitle>
+    <pageSectionTitle>Footnotes List</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>A footnotes list is automatically appended at the end of the page when footnotes are present. Clicking the number in the
+list navigates back to the reference [^another-note].
+
+[^another-note]: 
+
+To hide the footnotes list, set `hideFootnoteList` to `true` in `meta.json`:
+
 
 </text>
     </text>
@@ -1750,12 +1809,12 @@ This `include-` syntax will appear throughout the documentation and represents a
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 The file will be looked up using following rules:
@@ -1841,12 +1900,12 @@ Use the `title` property to specify a title.
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 Use the `autoTitle` property to set `title` to be the file name.
@@ -1857,12 +1916,12 @@ Use the `autoTitle` property to set `title` to be the file name.
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 </text>
@@ -1886,12 +1945,12 @@ Use `anchorId` to override auto generated identifier.
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 </text>
@@ -1907,19 +1966,9 @@ export default JsClass
       <score>STANDARD</score>
       <text>Use the `wide` option to stretch wide code to occupy as much horizontal screen real estate as possible.
 
+```markdown
+:include-file: WideCode.java {wide: true, title: "wide code"}
 ```
-:include-file: WideCode.java {wide: true}
-```
-
-```java
-class InternationalPriceService implements PriceService {
-    private static void LongJavaInterfaceNameWithSuperFactory createMegaAbstractFactory(final ExchangeCalendarLongerThanLife calendar) {
-        ...
-    }
-}
-```
-
-Without the `wide` option code will be aligned with the rest of the text and users can use scrollbars.
 
 ```java
 class InternationalPriceService implements PriceService {
@@ -2022,12 +2071,12 @@ public class DocScaffolding {
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 </text>
@@ -2050,12 +2099,12 @@ export default JsClass
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 ```c
@@ -2610,12 +2659,12 @@ import market
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 </text>
@@ -2638,12 +2687,12 @@ approaches and pass a list of things to highlight.
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 Note: Order of lines to highlight is reflected during presentation mode
@@ -2667,12 +2716,12 @@ Note: Order of lines to highlight is reflected during presentation mode
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 ```txt
@@ -2699,12 +2748,12 @@ usefulAction
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 </text>
@@ -3342,12 +3391,12 @@ usefulAction, example-references/api#useful-action
 
 ```js
 class JsClass {
-    constructor() {
-        usefulAction()
-    }
+  constructor() {
+    usefulAction();
+  }
 }
 
-export default JsClass
+export default JsClass;
 ```
 
 JSON format is also supported
@@ -6022,16 +6071,27 @@ Use `anchorId` to override auto generated identifier.
     <pageSectionTitle>Fit</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>By default, images generated with `include-image` occupy all the available horizontal space:
+      <text>By default, images generated with `include-image` fit to the text column width.
 
-
-Use `fit` parameter to fit an image to the text column width.
-
-```
-:include-image: books.jpg {fit: true}
-```
 
 Note: You can click on the scaled down images to display it full screen
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/images#wide</url>
+    <fullTitle>Znai: Images, Wide [Visuals]</fullTitle>
+    <pageTitle>Images</pageTitle>
+    <chapterTitle>Visuals</chapterTitle>
+    <pageSectionTitle>Wide</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use `wide` to take all the available horizontal space:
+
+```
+:include-image: books.jpg {wide: true}
+```
 
 
 </text>
@@ -6423,7 +6483,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 605,
+    "y" : 595,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -8541,14 +8601,77 @@ mode now to see the effect.
     </text>
   </entry>
   <entry>
-    <url>/znai/visuals/iframe#height</url>
-    <fullTitle>Znai: Iframe, Height [Visuals]</fullTitle>
+    <url>/znai/visuals/iframe#dynamic-content</url>
+    <fullTitle>Znai: Iframe, Dynamic Content [Visuals]</fullTitle>
     <pageTitle>Iframe</pageTitle>
     <chapterTitle>Visuals</chapterTitle>
-    <pageSectionTitle>Height</pageSectionTitle>
+    <pageSectionTitle>Dynamic Content</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Use `height` to force container height. Use `maxHeight` to limit the automatically calculated height.
+      <text>When iframe content changes after page load, the iframe automatically resizes to fit. Click buttons below to see it in
+action:
+
+
+Use `height` and `maxHeight` to limit the height when content grows:
+
+```markdown
+:include-iframe: iframe/custom-delayed.html {
+    fit: true,
+    height: 120,
+    maxHeight: 200
+}
+```
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/iframe#wide</url>
+    <fullTitle>Znai: Iframe, Wide [Visuals]</fullTitle>
+    <pageTitle>Iframe</pageTitle>
+    <chapterTitle>Visuals</chapterTitle>
+    <pageSectionTitle>Wide</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use `wide` to take all the available horizontal space:
+
+```markdown
+:include-iframe: iframe/custom.html {
+  title: "my wide iframe content",
+  fit: true,
+  wide: true
+}
+```
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/iframe#zoom-and-new-tab</url>
+    <fullTitle>Znai: Iframe, Zoom And New Tab [Visuals]</fullTitle>
+    <pageTitle>Iframe</pageTitle>
+    <chapterTitle>Visuals</chapterTitle>
+    <pageSectionTitle>Zoom And New Tab</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use `zoomEnabled` to add a full-screen zoom button to the title bar. Clicking the button opens the iframe in a
+full-screen overlay with a close button. Press `Escape` or click the close button to exit.
+
+Use `newTabEnabled` to add an open-in-new-tab button to the title bar.
+
+Note: Requires `title` to be set.
+
+```markdown
+:include-iframe: iframe/custom-multi-line.html {
+  title: "parameters reference",
+  fit: true,
+  maxHeight: 120,
+  zoomEnabled: true,
+  newTabEnabled: true
+}
+```
 
 
 </text>
@@ -8787,6 +8910,133 @@ $ whoamis
 ````
 ```
 
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/page-tabs#primary-use-case</url>
+    <fullTitle>Znai: Page Tabs, Primary Use Case [Layout]</fullTitle>
+    <pageTitle>Page Tabs</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Primary Use Case</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>When your documentation covers the same concepts across multiple languages or platforms, you can use `tab-content` to
+make the entire page switchable. Unlike regular `tabs` which require wrapping each difference in a tabs fence,
+`tab-content` lets you sprinkle tab-specific content throughout the page. Shared content stays as regular markdown.
+
+This page itself uses `tab-content`  notice the tabs at the top. Switch between them to see how content changes across
+sections while shared text remains.
+
+Below is a demo, except the final [Definition](#definition) section.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/page-tabs#project-setup</url>
+    <fullTitle>Znai: Page Tabs, Project Setup [Layout]</fullTitle>
+    <pageTitle>Page Tabs</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Project Setup</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Every project needs an editor configuration. Create a workspace settings file in your project root.
+
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/page-tabs#build-configuration</url>
+    <fullTitle>Znai: Page Tabs, Build Configuration [Layout]</fullTitle>
+    <pageTitle>Page Tabs</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Build Configuration</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Set up the build tool for your project. All editors use the same underlying build system, but the integration differs.
+
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/page-tabs#debugging</url>
+    <fullTitle>Znai: Page Tabs, Debugging [Layout]</fullTitle>
+    <pageTitle>Page Tabs</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Debugging</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>All projects benefit from proper debug configuration. Breakpoints, watch expressions, and stepping through code work the
+same conceptually  but the configuration differs per editor.
+
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/page-tabs#definition</url>
+    <fullTitle>Znai: Page Tabs, Definition [Layout]</fullTitle>
+    <pageTitle>Page Tabs</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Definition</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use `tab-content` fence blocks with a tab id to mark sections of content that are specific to a tab. Content outside of
+`tab-content` blocks is always visible regardless of which tab is selected.
+
+```markdown
+Shared content here is always visible.
+
+```tab-content "VS Code"
+Press `F5` to start debugging.
+```
+
+```tab-content Emacs
+Use `M-x dap-debug` to start a debug session.
+```
+
+More shared content here.
+```
+
+When a page contains `tab-content` blocks, tabs automatically appear at the top of the page.
+
+Regular `tabs` fence blocks can be used inside `tab-content` for additional sub-grouping. The global page tabs and
+regular tabs operate independently.
+
+```markdown
+Shared content here is always visible.
+
+`````tab-content "VS Code"
+```tabs
+Java: hello VS Code Java
+C++: hello Vs Code C++
+```
+`````
+
+`````tab-content Emacs
+```tabs
+Java: hello Emacs Java
+C++: hello Emacs C++
+```
+`````
+
+More shared content here.
+```
+
+---
+
+Shared content here is always visible.
+
+
+
+More shared content here.
 
 </text>
     </text>
@@ -9523,6 +9773,185 @@ right:
 :include-template: templates/messages-http-call.md {method: "put"}
 ```
 
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/runtime-templates#url-query-value</url>
+    <fullTitle>Znai: Runtime Templates, URL Query Value [Layout]</fullTitle>
+    <pageTitle>Runtime Templates</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>URL Query Value</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use `url-query-value` inline plugin to display a value from URL query parameter. This can be useful for onboarding pages
+or runbooks where commands or settings change based on user or some runtime information, and you can generate a link,
+providing additional information.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/runtime-templates#inline-syntax</url>
+    <fullTitle>Znai: Runtime Templates, Inline Syntax [Layout]</fullTitle>
+    <pageTitle>Runtime Templates</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Inline Syntax</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>```
+`:url-query-value: officeName {default: "NYC-15"}`
+```
+
+Renders as: 
+
+The `officeName` is the query parameter name to read from the URL.
+
+Click [SF office](layout/runtime-templates?officeName=SF) to see the value above change.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/runtime-templates#missing-value</url>
+    <fullTitle>Znai: Runtime Templates, Missing Value [Layout]</fullTitle>
+    <pageTitle>Runtime Templates</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Missing Value</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>When no `default` is specified and the query parameter is not present, an error is displayed:
+
+```
+`:url-query-value: clusterName`
+```
+
+Renders as: 
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/runtime-templates#template-syntax-in-code-snippets-and-cli-commands</url>
+    <fullTitle>Znai: Runtime Templates, Template Syntax In Code Snippets And CLI Commands [Layout]</fullTitle>
+    <pageTitle>Runtime Templates</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Template Syntax In Code Snippets And CLI Commands</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Use `${paramName}` or `${paramName:defaultValue}` syntax inside code snippets to substitute values from URL query
+parameters. Enable it by setting `templateUseQueryParam: true` on the code block.
+
+```
+```shell {templateUseQueryParam: true}
+ssh ${userName:admin}@server-${officeName:NYC}.example.com
+```
+```
+
+```shell
+ssh ${userName:admin}@server-${officeName:NYC}.example.com
+```
+
+```
+```cli {templateUseQueryParam: true}
+kubectl config use-context ${officeName:NYC}-cluster 
+```
+```
+
+```cli
+kubectl config use-context ${officeName:NYC}-cluster
+```
+
+Without query parameters, default values are used. When the page URL contains `?userName=jdoe&amp;officeName=SF`, the
+substituted values will appear.
+
+Without default values, you get error message when no query parameter is supplied:
+
+```
+```cli {templateUseQueryParam: true}
+kubectl config use-context ${myQueryParam}-cluster 
+```
+```
+
+```cli
+kubectl config use-context ${myQueryParam}-cluster
+```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/runtime-templates#tables-with-inline-values</url>
+    <fullTitle>Znai: Runtime Templates, Tables With Inline Values [Layout]</fullTitle>
+    <pageTitle>Runtime Templates</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Tables With Inline Values</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>You can use inline `url-query-value` anywhere were text is expected, for example in table cells:
+
+```markdown
+
+| Setting       | Value                                                           |
+|---------------|-----------------------------------------------------------------|
+| Office        | `:url-query-value: officeName {default: "NYC"}`                 |
+| Floor         | `:url-query-value: floorNumber {default: "5"}`                  |
+| Wi-Fi Network | `:url-query-value: officeName {default: "NYC"}`-internal        |
+| VPN Server    | vpn-`:url-query-value: officeName {default: "NYC"}`.example.com |
+```
+
+| Setting | Value |
+| --- | --- |
+| [{text=Office, type=SimpleText}] | [{default=NYC, queryParam=officeName, type=UrlQueryValue}] |
+| [{text=Floor, type=SimpleText}] | [{default=5, queryParam=floorNumber, type=UrlQueryValue}] |
+| [{text=Wi-Fi Network, type=SimpleText}] | [{default=NYC, queryParam=officeName, type=UrlQueryValue}, {text=-internal, type=SimpleText}] |
+| [{text=VPN Server, type=SimpleText}] | [{text=vpn-, type=SimpleText}, {default=NYC, queryParam=officeName, type=UrlQueryValue}, {text=.example.com, type=SimpleText}] |
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/layout/runtime-templates#full-example</url>
+    <fullTitle>Znai: Runtime Templates, Full Example [Layout]</fullTitle>
+    <pageTitle>Runtime Templates</pageTitle>
+    <chapterTitle>Layout</chapterTitle>
+    <pageSectionTitle>Full Example</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Click one of the links below to see how values on this page change:
+
+* [SF office, floor 3](layout/runtime-templates?officeName=SF&amp;floorNumber=3&amp;userName=jdoe)
+* [NYC office, floor 12](layout/runtime-templates?officeName=NYC&amp;floorNumber=12&amp;userName=admin)
+* [London office, floor 7](layout/runtime-templates?officeName=London&amp;floorNumber=7&amp;userName=alice)
+* [Default values](layout/runtime-templates)
+
+## Setup Instructions
+
+Welcome to the  office!
+
+Connect to the office VPN:
+
+```cli
+sudo vpn connect ${officeName:NYC}-gateway.example.com --user ${userName:admin}
+```
+
+Configure your local environment:
+
+```shell
+export OFFICE=${officeName:NYC}
+export FLOOR=${floorNumber:5}
+export PRINTER=printer-${officeName:NYC}-${floorNumber:5}
+```
+
+Print a test page:
+
+```cli
+lp -d printer-${officeName:NYC}-${floorNumber:5} /etc/motd
+```
+
+Note: If you have a predetermined set of values, consider using [Page Tabs](layout/page-tabs) or [Tabs](layout/tabs)
+instead
 
 </text>
     </text>
@@ -11736,7 +12165,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 605,
+    "y" : 595,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -12497,6 +12926,19 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2026#188</url>
+    <fullTitle>Znai: 2026, 1.88 [Release Notes]</fullTitle>
+    <pageTitle>2026</pageTitle>
+    <chapterTitle>Release Notes</chapterTitle>
+    <pageSectionTitle>1.88</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
 
 </text>
     </text>

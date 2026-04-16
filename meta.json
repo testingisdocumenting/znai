@@ -1,5 +1,6 @@
 {
   "hidePresentationTrigger" : false,
+  "hideFootnoteList" : false,
   "viewOn" : {
     "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
     "title" : "View Markdown"
