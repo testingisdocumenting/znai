@@ -19,6 +19,7 @@ import { afterTitleId } from "../../../layout/classNamesAndIds";
 import PageTabsSelection from "./PageTabsSelection";
 import { buildContentForTab } from "./pageTabsContentUtils";
 import { findParentWithScroll } from "../../../utils/domNodes";
+import { tabsRegistration, TabSwitchEvent } from "../../tabs/TabsRegistration";
 
 interface ScrollSnapshot {
   parentWithScroll: HTMLElement;
@@ -36,8 +37,17 @@ class PageTabsPageContent extends React.Component<any, PageTabsState> {
   constructor(props: any) {
     super(props);
 
-    this.state = { activeTabId: "" };
+    const { tabIds } = props;
+    this.state = { activeTabId: tabsRegistration.firstMatchFromHistory(tabIds) || "" };
     this.contentRef = React.createRef();
+  }
+
+  componentDidMount() {
+    tabsRegistration.addTabSwitchListener(this.onTabSwitch);
+  }
+
+  componentWillUnmount() {
+    tabsRegistration.removeTabSwitchListener(this.onTabSwitch);
   }
 
   render() {
@@ -69,7 +79,14 @@ class PageTabsPageContent extends React.Component<any, PageTabsState> {
       return;
     }
 
-    this.setState({ activeTabId: tabId });
+    tabsRegistration.notifyNewTab({ tabName: tabId, triggeredNode: this.contentRef.current });
+  };
+
+  onTabSwitch = ({ tabName }: TabSwitchEvent) => {
+    const { tabIds } = this.props;
+    if (tabIds.includes(tabName) && tabName !== this.state.activeTabId) {
+      this.setState({ activeTabId: tabName });
+    }
   };
 
   getSnapshotBeforeUpdate(_prevProps: any, prevState: PageTabsState): ScrollSnapshot | null {

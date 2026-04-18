@@ -146,7 +146,7 @@ answer-link: znai-from-export/introduction/getting-started#command-line
 ## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.88/znai-dist-1.88-znai.zip). Add
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.89/znai-dist-1.89-znai.zip). Add
 it to your `PATH`.
 
 ## Brew
@@ -162,7 +162,7 @@ answer-link: znai-from-export/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.88</version>
+    <version>1.89</version>
 </plugin>
 ```
 
@@ -897,10 +897,10 @@ To define a footnote use
 
 ```
 [^my-id]: extra content for my footnote goes here
-potentially including code blocks
-```
-Constructor()
-```
+    potentially including code blocks
+    ```
+    Constructor()
+    ```
 ```
 
 To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
@@ -913,7 +913,19 @@ appearance.
 # Flow :: Footnotes :: Preview
 answer-link: znai-from-export/flow/footnotes#preview
 
-Hover mouse over a footnote reference see its content in a tooltip.
+Hover mouse over a footnote reference see its content in a tooltip. Click on it to go the footnotes list at the bottom
+of the page.
+
+# Flow :: Footnotes :: Footnotes Inside Attention Blocks
+answer-link: znai-from-export/flow/footnotes#footnotes-inside-attention-blocks
+
+Footnotes can be used inside different content blocks like `attention-note`:
+
+```
+```attention-warning
+Use something important [^my-id]
+```
+```
 
 # Flow :: Footnotes :: Footnotes List
 answer-link: znai-from-export/flow/footnotes#footnotes-list
@@ -9355,6 +9367,11 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2026 :: 1.89
+answer-link: znai-from-export/release-notes/2026#189
+
+
 
 # Release Notes :: 2026 :: 1.88
 answer-link: znai-from-export/release-notes/2026#188
