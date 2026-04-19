@@ -51,6 +51,8 @@
 
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+
+    scroll-padding-top: 24px;
 }
 
 .znai-main-panel:focus {

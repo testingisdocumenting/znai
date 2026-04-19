@@ -2,3 +2,7 @@
     background-color: var(--znai-search-preview-result-highlight-background-color);
     color: var(--znai-search-preview-result-highlight-color);
 }
+
+.page-content.with-page-tabs [id] {
+    scroll-margin-top: 32px;
+}
