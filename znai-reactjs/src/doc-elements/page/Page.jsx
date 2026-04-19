@@ -35,21 +35,22 @@ class Page extends Component {
     const { tocItem } = this.props;
 
     const PageBottomPadding = pageTypesRegistry.pageBottomPaddingComponent(tocItem);
+    const tabIds = extractTabIds(this.props.content);
+    const className = "page-content" + (tabIds.length > 0 ? " with-page-tabs" : "");
 
     return (
       <React.Fragment>
-        <div className="page-content" ref={this.contentRootDomRef}>
-          {this.renderPageContent()}
+        <div className={className} ref={this.contentRootDomRef}>
+          {this.renderPageContent(tabIds)}
         </div>
         <PageBottomPadding />
       </React.Fragment>
     );
   }
 
-  renderPageContent() {
+  renderPageContent(tabIds) {
     const { tocItem } = this.props;
     const contentRootDom = this.contentRootDomRef.current;
-    const tabIds = extractTabIds(this.props.content);
 
     if (tabIds.length > 0) {
       return <PageTabsPageContent key={tocItem.pageTitle} {...this.props} tabIds={tabIds} contentRootDom={contentRootDom} />;

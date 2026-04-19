@@ -1,0 +1,1 @@
+* Add: [Page Tabs](layout/page-tabs) now have a breathing room for headers and footnotes below the tabs row
