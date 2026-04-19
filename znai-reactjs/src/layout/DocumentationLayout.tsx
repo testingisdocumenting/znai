@@ -106,7 +106,7 @@ export function DocumentationLayout({
   function renderPageContent() {
     return (
       <div ref={contentRef} className={panelFullClassName}>
-        {contentRef.current && <TextSelectionMenu containerNode={contentRef.current} />}
+        {contentRef.current && <TextSelectionMenu containerNode={contentRef.current} tocItem={tocItem} />}
         {contentRef.current && <AllTextHighlights containerNode={contentRef.current} tocItem={tocItem} />}
         <div ref={contentRef} style={{ display: "contents" }}>
           {renderedPage}
