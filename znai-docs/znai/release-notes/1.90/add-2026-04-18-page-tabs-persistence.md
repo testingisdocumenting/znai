@@ -1,0 +1,1 @@
+* Add: [Page Tabs](layout/page-tabs) selection is maintained across the pages and also survives the page reload
