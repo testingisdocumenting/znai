@@ -93,6 +93,7 @@ configuration
     top-header
 deployment
     additional-files
+    extensibility
 hub
     introduction
     setup
