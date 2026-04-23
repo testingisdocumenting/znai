@@ -49,6 +49,14 @@ export function extractHighlightParams(): HighlightParams | null {
   return null;
 }
 
+const HIGHLIGHT_PARAMS = [
+  HIGHLIGHT_PREFIX_PARAM,
+  HIGHLIGHT_SELECTION_PARAM,
+  HIGHLIGHT_SUFFIX_PARAM,
+  HIGHLIGHT_QUESTION_PARAM,
+  HIGHLIGHT_CONTEXT_PARAM,
+];
+
 export function buildHighlightUrl(params: HighlightParams): string {
   let builtUrl = location.origin + location.pathname;
   if (!builtUrl.endsWith("/")) {
@@ -56,6 +64,14 @@ export function buildHighlightUrl(params: HighlightParams): string {
   }
 
   const url = new URL(builtUrl);
+  // preserve existing query params
+  new URLSearchParams(location.search).forEach((value, key) => {
+    url.searchParams.set(key, value);
+  });
+
+  // clear existing highlight params
+  HIGHLIGHT_PARAMS.forEach((p) => url.searchParams.delete(p));
+
   url.searchParams.set(HIGHLIGHT_PREFIX_PARAM, encodeURIComponent(params.prefix));
   url.searchParams.set(HIGHLIGHT_SELECTION_PARAM, encodeURIComponent(params.selection));
   url.searchParams.set(HIGHLIGHT_SUFFIX_PARAM, encodeURIComponent(params.suffix));

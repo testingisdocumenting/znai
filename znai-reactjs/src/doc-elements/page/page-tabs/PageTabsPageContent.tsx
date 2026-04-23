@@ -20,6 +20,7 @@ import PageTabsSelection from "./PageTabsSelection";
 import { buildContentForTab } from "./pageTabsContentUtils";
 import { findParentWithScroll } from "../../../utils/domNodes";
 import { tabsRegistration, TabSwitchEvent } from "../../tabs/TabsRegistration";
+import { readPageTabIdFromQuery, writePageTabIdToQuery } from "../../tabs/tabsQueryParams";
 
 interface ScrollSnapshot {
   parentWithScroll: HTMLElement;
@@ -38,12 +39,14 @@ class PageTabsPageContent extends React.Component<any, PageTabsState> {
     super(props);
 
     const { tabIds } = props;
-    this.state = { activeTabId: tabsRegistration.firstMatchFromHistory(tabIds) || "" };
+    const tabIdFromQuery = readPageTabIdFromQuery(tabIds);
+    this.state = { activeTabId: tabIdFromQuery ?? tabsRegistration.firstMatchFromHistory(tabIds) ?? "" };
     this.contentRef = React.createRef();
   }
 
   componentDidMount() {
     tabsRegistration.addTabSwitchListener(this.onTabSwitch);
+    this.syncActiveTabToQuery();
   }
 
   componentWillUnmount() {
@@ -86,6 +89,15 @@ class PageTabsPageContent extends React.Component<any, PageTabsState> {
     const { tabIds } = this.props;
     if (tabIds.includes(tabName) && tabName !== this.state.activeTabId) {
       this.setState({ activeTabId: tabName });
+      writePageTabIdToQuery(tabName);
+    }
+  };
+
+  syncActiveTabToQuery = () => {
+    const { tabIds } = this.props;
+    const activeTabId = tabIds.includes(this.state.activeTabId) ? this.state.activeTabId : tabIds[0];
+    if (activeTabId) {
+      writePageTabIdToQuery(activeTabId);
     }
   };
 
