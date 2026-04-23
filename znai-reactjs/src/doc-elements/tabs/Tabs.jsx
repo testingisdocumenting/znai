@@ -18,6 +18,7 @@
 import React from "react";
 
 import { tabsRegistration } from "./TabsRegistration";
+import { readTabIdFromQuery, writeTabIdToQuery } from "./tabsQueryParams";
 import { findParentWithScroll } from "../../utils/domNodes";
 
 import "./Tabs.css";
@@ -45,7 +46,7 @@ class Tabs extends React.Component {
         const {tabsContent, forcedTabIdx, defaultTabIdx} = this.props
         const names = tabsContent.map(t => t.name)
 
-        const tabName = tabsRegistration.firstMatchFromHistory(names);
+        const tabName = readTabIdFromQuery(names) ?? tabsRegistration.firstMatchFromHistory(names);
 
         const idx = typeof forcedTabIdx !== 'undefined' ?
             forcedTabIdx:
@@ -59,6 +60,7 @@ class Tabs extends React.Component {
 
     componentDidMount() {
         tabsRegistration.addTabSwitchListener(this.onTabSwitch)
+        this.syncActiveTabToQuery()
     }
 
     componentWillUnmount() {
@@ -137,13 +139,28 @@ class Tabs extends React.Component {
     }
 
     onTabSwitch = ({tabName, triggeredNode}) => {
-        const {tabsContent} = this.props
+        const {tabsContent, forcedTabIdx} = this.props
         const names = tabsContent.map(t => t.name)
 
         const idx = names.indexOf(tabName)
         if (idx !== -1) {
             this.setState({activeIdx: idx, triggeredNode})
+            if (typeof forcedTabIdx === 'undefined') {
+                writeTabIdToQuery(names, tabName)
+            }
         }
+    }
+
+    syncActiveTabToQuery = () => {
+        const {tabsContent, forcedTabIdx} = this.props
+        if (typeof forcedTabIdx !== 'undefined') {
+            return
+        }
+        const activeTab = tabsContent[this.state.activeIdx]
+        if (!activeTab) {
+            return
+        }
+        writeTabIdToQuery(tabsContent.map(t => t.name), activeTab.name)
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
