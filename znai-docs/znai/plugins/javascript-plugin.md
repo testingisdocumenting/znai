@@ -56,8 +56,6 @@ Your function receives three arguments:
     current: "light" | "dark",
     subscribe(listener) {
         // listener is called with the new theme name whenever the theme changes
-        // returns an unsubscribe function
-        // good place to unsubscribe from theme change notifications
     }
 }
 ```

@@ -17,6 +17,7 @@
 import React, { useEffect, useMemo, useRef } from "react";
 
 import { Container } from "../container/Container";
+import { isZnaiDarkTheme, useZnaiThemeChange, ZNAI_DARK_THEME_NAME } from "../../theme/znaiTheme";
 
 import "./JavascriptFunction.css";
 
@@ -32,11 +33,11 @@ type ThemeListener = (themeName: ThemeName) => void;
 
 export interface ThemeObservable {
   readonly current: ThemeName;
-  subscribe(listener: ThemeListener): () => void;
+  subscribe(listener: ThemeListener): void;
 }
 
 function toPublicThemeName(znaiThemeName: string): ThemeName {
-  return znaiThemeName === "znai-dark" ? "dark" : "light";
+  return znaiThemeName === ZNAI_DARK_THEME_NAME ? "dark" : "light";
 }
 
 type JavascriptPluginFunction = (
@@ -47,6 +48,7 @@ type JavascriptPluginFunction = (
 
 export function JavascriptFunction({ functionName, args }: Props) {
   const nodeRef = useRef<HTMLDivElement>(null);
+  const listenersRef = useRef<ThemeListener[]>([]);
 
   const title = typeof args?.title === "string" ? args.title : undefined;
   const wide = args?.wide === true;
@@ -54,6 +56,11 @@ export function JavascriptFunction({ functionName, args }: Props) {
   const userClassName = typeof args?.className === "string" ? args.className : "";
 
   const userArgs = useMemo(() => extractUserArgs(args), [args]);
+
+  useZnaiThemeChange((znaiThemeName) => {
+    const publicName = toPublicThemeName(znaiThemeName);
+    listenersRef.current.slice().forEach((l) => l(publicName));
+  });
 
   useEffect(() => {
     const node = nodeRef.current;
@@ -67,30 +74,15 @@ export function JavascriptFunction({ functionName, args }: Props) {
       return;
     }
 
-    const listeners: ThemeListener[] = [];
+    const listeners = listenersRef.current;
     const themeObservable: ThemeObservable = {
       get current() {
-        // @ts-ignore
-        return toPublicThemeName(window.znaiTheme.name);
+        return isZnaiDarkTheme() ? "dark" : "light";
       },
       subscribe(listener: ThemeListener) {
         listeners.push(listener);
-        return () => {
-          const idx = listeners.indexOf(listener);
-          if (idx !== -1) {
-            listeners.splice(idx, 1);
-          }
-        };
       },
     };
-
-    function broadcastThemeChange(znaiThemeName: string) {
-      const publicName = toPublicThemeName(znaiThemeName);
-      listeners.slice().forEach((l) => l(publicName));
-    }
-
-    // @ts-ignore
-    window.znaiTheme.addChangeHandler(broadcastThemeChange);
 
     let userCleanup: void | (() => void);
     try {
@@ -101,8 +93,6 @@ export function JavascriptFunction({ functionName, args }: Props) {
     }
 
     return () => {
-      // @ts-ignore
-      window.znaiTheme.removeChangeHandler(broadcastThemeChange);
       listeners.length = 0;
       if (typeof userCleanup === "function") {
         try {

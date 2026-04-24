@@ -63,11 +63,10 @@
     }
 
     applyTheme(themeObservable.current);
-    var unsubscribeFromTheme = themeObservable.subscribe(applyTheme);
+    themeObservable.subscribe(applyTheme);
 
     return function cleanup() {
-      unsubscribeFromTheme();
-      console.log("themeBox cleanup: removed theme subscription");
+      console.log("themeBox cleanup: block removed from the page");
     };
   };
 })();

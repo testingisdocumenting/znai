@@ -19,6 +19,7 @@ import React, { useRef, useState } from "react";
 import mermaid from "mermaid";
 import { isLocalUrl } from "../../structure/links";
 import { documentationNavigation } from "../../structure/DocumentationNavigation";
+import { isZnaiDarkTheme, useZnaiThemeChange } from "../../theme/znaiTheme";
 
 import "./Mermaid.css";
 
@@ -39,21 +40,15 @@ function initMermaidIfRequired() {
     return;
   }
 
-  // @ts-ignore
-  window.znaiTheme.addChangeHandler(onThemeChange);
+  window.znaiTheme.addChangeHandler(initializeMermaid);
 
   initializeMermaid();
   isMermaidInitialized = true;
-
-  function onThemeChange() {
-    initializeMermaid();
-  }
 
   function initializeMermaid() {
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: "strict",
-      // @ts-ignore
       theme: mermaidThemeName(),
     });
   }
@@ -61,21 +56,14 @@ function initMermaidIfRequired() {
 
 export default function Mermaid(props: Props) {
   const [html, setHTML] = React.useState("");
-  const [znaiThemeName, setZnaiThemeName] = useState(detectZnaiThemeName());
+  const [znaiThemeName, setZnaiThemeName] = useState(() => window.znaiTheme.name);
+
+  useZnaiThemeChange((name) => {
+    setZnaiThemeName(name);
+  });
 
   React.useEffect(() => {
-    // TODO theme integration via context
-    // @ts-ignore
-    window.znaiTheme.addChangeHandler(onThemeChange);
-
     initMermaidIfRequired();
-
-    // @ts-ignore
-    return () => window.znaiTheme.removeChangeHandler(onThemeChange);
-
-    function onThemeChange() {
-      setZnaiThemeName(detectZnaiThemeName());
-    }
   }, []);
 
   React.useEffect(() => {
@@ -83,7 +71,6 @@ export default function Mermaid(props: Props) {
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: "strict",
-      // @ts-ignore
       theme: mermaidThemeName(),
     });
     // Register icon packs if provided, otherwise use default logos pack
@@ -134,11 +121,5 @@ export default function Mermaid(props: Props) {
 }
 
 function mermaidThemeName() {
-  // @ts-ignore
-  return detectZnaiThemeName() === "znai-dark" ? "dark" : "default";
-}
-
-function detectZnaiThemeName(): string {
-  // @ts-ignore
-  return window.znaiTheme.name;
+  return isZnaiDarkTheme() ? "dark" : "default";
 }
