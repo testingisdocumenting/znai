@@ -21,6 +21,7 @@ import { configuredEcharts, EchartCommonProps } from "./EchartCommon";
 import {PresentationProps} from "../presentation/PresentationProps";
 
 import { echartGridUsingMaxDataAndLegend } from "./echartUtils";
+import { isZnaiDarkTheme, useZnaiThemeChange } from "../../theme/znaiTheme";
 
 import "./EchartReactWrapper.css";
 
@@ -39,17 +40,9 @@ export function EchartReactWrapper(props: Props) {
   const echartDivNodeRef = useRef<HTMLDivElement>(null);
   const echartRef = useRef<EChartsType>();
 
-  useEffect(() => {
-    // TODO theme integration via context
-    // @ts-ignore
-    window.znaiTheme.addChangeHandler(onThemeChange);
-    // @ts-ignore
-    return () => window.znaiTheme.removeChangeHandler(onThemeChange);
-
-    function onThemeChange() {
-      createOrInitEchart(echartDivNodeRef, echartRef, props);
-    }
-  }, [props]);
+  useZnaiThemeChange(() => {
+    createOrInitEchart(echartDivNodeRef, echartRef, props);
+  });
 
   useEffect(
     () => {
@@ -99,9 +92,7 @@ function createOrInitEchart(
 
   echartRef.current = echarts.init(
     htmlNode.current!,
-    // TODO theme context
-    // @ts-ignore
-    window.znaiTheme.name === "znai-dark" ? "dark" : undefined
+    isZnaiDarkTheme() ? "dark" : undefined
   );
 
   const config = {

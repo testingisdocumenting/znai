@@ -18,6 +18,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Container } from "../container/Container";
 import { Icon } from "../icons/Icon";
 import { zoom } from "../zoom/Zoom";
+import { isZnaiDarkTheme, useZnaiThemeChange } from "../../theme/znaiTheme";
 
 import "./Iframe.css";
 
@@ -177,17 +178,10 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, zo
 }
 
 function useIframeThemeSync(iframeRef: React.RefObject<HTMLIFrameElement | null>, dark: any, light: any, onThemeChangeExtra?: () => void) {
-  useEffect(() => {
-    // @ts-ignore
-    window.znaiTheme.addChangeHandler(onThemeChange);
-    // @ts-ignore
-    return () => window.znaiTheme.removeChangeHandler(onThemeChange);
-
-    function onThemeChange() {
-      syncTheme();
-      onThemeChangeExtra?.();
-    }
-  }, [dark, light]);
+  useZnaiThemeChange(() => {
+    syncTheme();
+    onThemeChangeExtra?.();
+  });
 
   function syncTheme() {
     injectCssProperties(iframeRef, dark, light);
@@ -244,13 +238,8 @@ function updateScrollBarToMatch(containerRef: any, iframeRef: any) {
   iframeDocument.head.appendChild(style);
 }
 
-function queryIsDarkTheme() {
-  // @ts-ignore
-  return window.znaiTheme.name === "znai-dark";
-}
-
 function injectCssProperties(iframeRef: any, dark: any, light: any) {
-  const vars = queryIsDarkTheme() ? dark : light;
+  const vars = isZnaiDarkTheme() ? dark : light;
 
   if (!vars) {
     return;
