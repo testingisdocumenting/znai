@@ -25,6 +25,7 @@ import { fetchWithCredentials } from "../../utils/fetchWithCredentials";
 import { buildContext } from "./markdownContextBuilder";
 import { Notification } from "../../components/Notification";
 import { currentPageIdWithDocId } from "../../structure/DocumentationNavigation";
+import { TocItem } from "../../structure/TocItem";
 import "./TextSelectionMenu.css";
 
 export interface TextMenuListener {
@@ -42,7 +43,7 @@ export function removeTextMenuListener(listener: TextMenuListener) {
   textMenuListeners.splice(textMenuListeners.indexOf(listener), 1);
 }
 
-export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivElement }) {
+export function TextSelectionMenu({ containerNode, tocItem }: { containerNode: HTMLDivElement; tocItem: TocItem }) {
   const menuRef = useRef<HTMLDivElement>(null);
   const expandedPanelRef = useRef<HTMLDivElement>(null);
   const slackQuestionInputRef = useRef<HTMLTextAreaElement>(null);
@@ -66,6 +67,10 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [panelData]);
+
+  useEffect(() => {
+    hideMenu();
+  }, [tocItem]);
 
   function menuItems() {
     if (panelData) {
@@ -290,6 +295,8 @@ export function TextSelectionMenu({ containerNode }: { containerNode: HTMLDivEle
   function hideMenu() {
     if (menuRef.current) {
       menuRef.current.style.visibility = "hidden";
+      menuRef.current.style.top = "0";
+      menuRef.current.style.left = "0";
     }
     setPanelData(null);
     if (slackQuestionInputRef.current) {
