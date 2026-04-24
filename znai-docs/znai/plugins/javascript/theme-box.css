@@ -1,0 +1,59 @@
+.theme-box-with-border {
+    padding: 6px;
+    border: 2px dashed var(--znai-color-green);
+    border-radius: 6px;
+}
+
+.theme-box {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--znai-snippets-outer-border-color, #dedede);
+    border-left: 4px solid var(--znai-color-blue);
+    border-radius: 4px;
+    background-color: var(--znai-snippets-title-background-color, #efeff1);
+    color: var(--znai-regular-text-color);
+    font-family: var(--znai-regular-font-family);
+}
+
+.theme-box.theme-dark {
+    border-left-color: var(--znai-color-yellow);
+}
+
+.theme-box-title {
+    color: var(--znai-section-title-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.theme-box-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    row-gap: 4px;
+    font-family: var(--znai-code-font-family, monospace);
+    font-size: 0.9rem;
+}
+
+.theme-box-empty {
+    font-style: italic;
+    color: var(--znai-regular-text-light-color);
+}
+
+.theme-box-key {
+    color: var(--znai-brand-primary-color);
+    font-weight: 600;
+}
+
+.theme-box-value {
+    color: var(--znai-regular-text-color);
+    word-break: break-word;
+}
+
+.theme-box-current-theme {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    color: var(--znai-regular-text-light-color);
+}
+

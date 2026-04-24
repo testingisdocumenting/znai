@@ -1,6 +1,6 @@
 {
-  "cssResources": ["custom.css"],
-  "jsResources": ["custom.js"],
+  "cssResources": ["custom.css", "plugins/javascript/theme-box.css"],
+  "jsResources": ["custom.js", "plugins/javascript/theme-box.js"],
   "htmlResources": ["custom.html"],
   "htmlHeadResources": ["tracking.html"]
 }

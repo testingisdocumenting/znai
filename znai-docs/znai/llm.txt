@@ -146,8 +146,8 @@ answer-link: znai-from-export/introduction/getting-started#command-line
 ## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.89/znai-dist-1.89-znai.zip). Add
-it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.90-SNAPSHOT/znai-dist-1.90-SNAPSHOT-znai.zip).
+Add it to your `PATH`.
 
 ## Brew
 
@@ -162,7 +162,7 @@ answer-link: znai-from-export/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.89</version>
+    <version>1.90-SNAPSHOT</version>
 </plugin>
 ```
 
@@ -378,10 +378,12 @@ synergy-with-testing
 plugins
     plugin-types
     default-parameters
+    javascript-function
     development
 configuration
     basic
     styling
+    extensions
     top-header
 deployment
     additional-files
@@ -4739,7 +4741,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 604,
+    "y" : 285,
     "align" : "Center"
   } ],
   "pixelRatio" : 2
@@ -8893,7 +8895,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 604,
+    "y" : 285,
     "align" : "Center"
   } ],
   "pixelRatio" : 2
@@ -9140,6 +9142,274 @@ set to true.
 :include-image: visuals/regular-image.png
 ```
 
+# Plugins :: Javascript Function :: Overview
+answer-link: znai-from-export/plugins/javascript-function#overview
+
+Use `include-javascript-function` to delegate rendering of a block to a plain JavaScript function. Znai will create a
+DOM node for your function and hand it over together with:
+
+* the DOM node to render into
+* the parameters you passed from markdown (as `args`)
+* a `themeObservable` — so your rendering can react to light/dark theme switches
+
+```markdown
+:include-javascript-function: themeBox {
+  label: "my custom content box",
+  customKey: "custom value",
+}
+```
+
+
+See [themeBox](#sample-function) definition at the end of this page.
+
+# Plugins :: Javascript Function :: Registering A Function
+answer-link: znai-from-export/plugins/javascript-function#registering-a-function
+
+Attach your function to `window` under the name you want to reference from markdown. Load the JavaScript file through
+[`extensions.json`](configuration/extensions):
+
+```javascript
+(function () {
+    window.themeBox = function (node, args, themeObservable) {
+        // draw inside `node`
+        // read initial theme via `themeObservable.current`
+        // subscribe to updates via `themeObservable.subscribe(listener)`
+    };
+})();
+```
+
+# Plugins :: Javascript Function :: Function Signature
+answer-link: znai-from-export/plugins/javascript-function#function-signature
+
+Your function receives three arguments:
+
+* `node` — a `div` parent div to append content you need.
+* `args` — an object with the parameters passed from markdown. Framework-level parameters (`title`, `wide`, `className`,
+`anchorId`) are handled by znai and are **not** forwarded here.
+* `themeObservable` — live access to the current znai theme.
+
+```javascript
+{
+    current: "light" | "dark",
+    subscribe(listener) {
+        // listener is called with the new theme name whenever the theme changes
+        // returns an unsubscribe function
+    }
+}
+```
+
+Your function may return a cleanup function. Znai calls it when the block is removed or re-rendered — a good place to
+dispose of timers, external event listeners, or any other resources you allocated.
+
+The [sample function](#sample-function) below returns a cleanup that logs to the browser console:
+
+```js
+return function cleanup() {
+  unsubscribeFromTheme();
+  console.log("themeBox cleanup: removed theme subscription");
+};
+```
+
+To see it fire, open your browser DevTools console on this page, then navigate to any other page — znai unmounts the
+block and your cleanup runs. A single page visit triggers multiple cleanups because every `themeBox` rendered above is
+torn down.
+
+# Plugins :: Javascript Function :: Theme Toggle
+answer-link: znai-from-export/plugins/javascript-function#theme-toggle
+
+
+
+Toggle the theme using the switcher in the bottom left corner and observe the custom content change style. This can be
+done via
+
+```javascript
+themeObservable.subscribe(applyTheme);
+```
+
+# Plugins :: Javascript Function :: Title
+answer-link: znai-from-export/plugins/javascript-function#title
+
+Pass `title` to render a title bar above the block. Znai handles the title through its shared container, so your
+function never sees it.
+
+```markdown
+:include-javascript-function: themeBox {
+    title: "theme aware box",
+    message: "rendered inside a titled container"
+}
+```
+
+# Plugins :: Javascript Function :: Wide
+answer-link: znai-from-export/plugins/javascript-function#wide
+
+Pass `wide: true` to let the block span the full width of the page, matching the behavior of wide images and iframes.
+
+```markdown
+:include-javascript-function: themeBox {
+    title: "wide theme aware box",
+    wide: true,
+    note: "this block breaks out of the single-column width and spans edge to edge of the page container, giving long values plenty of horizontal room to stretch before they need to wrap onto a second line",
+    tags: ["wide", "demo", "edge-to-edge", "theme"],
+    metrics: {"requests": 1024, "latency_ms": 42, "error_rate": 0.003}
+}
+```
+
+# Plugins :: Javascript Function :: Styling With A Class Name
+answer-link: znai-from-export/plugins/javascript-function#styling-with-a-class-name
+
+Pass `className` to attach an arbitrary class to the parent node znai creates. Use it to add decorations around the
+rendered block without touching the function itself:
+
+```markdown
+:include-javascript-function: themeBox {
+    label: "highlighted by an outer border",
+    className: "theme-box-with-border"
+}
+```
+
+```css
+.theme-box {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--znai-snippets-outer-border-color, #dedede);
+    border-left: 4px solid var(--znai-color-blue);
+    border-radius: 4px;
+    background-color: var(--znai-snippets-title-background-color, #efeff1);
+    color: var(--znai-regular-text-color);
+    font-family: var(--znai-regular-font-family);
+}
+
+.theme-box.theme-dark {
+    border-left-color: var(--znai-color-yellow);
+}
+
+.theme-box-title {
+    color: var(--znai-section-title-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.theme-box-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    row-gap: 4px;
+    font-family: var(--znai-code-font-family, monospace);
+    font-size: 0.9rem;
+}
+
+.theme-box-empty {
+    font-style: italic;
+    color: var(--znai-regular-text-light-color);
+}
+
+.theme-box-key {
+    color: var(--znai-brand-primary-color);
+    font-weight: 600;
+}
+
+.theme-box-value {
+    color: var(--znai-regular-text-color);
+    word-break: break-word;
+}
+
+.theme-box-current-theme {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    color: var(--znai-regular-text-light-color);
+}
+
+.theme-box-with-border {
+    padding: 6px;
+    border: 2px dashed var(--znai-color-green);
+    border-radius: 6px;
+}
+```
+
+
+The dashed outline comes from the class attached to the outermost wrapper — the box itself is untouched.
+
+# Plugins :: Javascript Function :: Search
+answer-link: znai-from-export/plugins/javascript-function#search
+
+Values passed via `args` participate in znai's local search. Searching for any word used inside the parameters will
+surface the page and the rendered block.
+
+# Plugins :: Javascript Function :: Sample Function
+answer-link: znai-from-export/plugins/javascript-function#sample-function
+
+The following function powers the example above. It demonstrates reading the initial theme and subscribing to future
+changes.
+
+```js
+/*
+ * custom javascript function registered with znai.
+ *
+ * renders a panel that lists every argument passed via the plugin as
+ * a key/value row. reacts to znai theme switches via the theme observable
+ * to toggle a `theme-dark` class that drives the accent color via CSS.
+ */
+(function () {
+  function formatValue(value) {
+    if (value === null || value === undefined) {
+      return String(value);
+    }
+
+    if (typeof value === "object") {
+      return JSON.stringify(value);
+    }
+
+    return String(value);
+  }
+
+  function createElement(tagName, className, textContent) {
+    var el = document.createElement(tagName);
+    el.className = className;
+    if (textContent !== undefined) {
+      el.textContent = textContent;
+    }
+    return el;
+  }
+
+  window.themeBox = function (node, args, themeObservable) {
+    var box = createElement("div", "theme-box");
+    var titleEl = createElement("div", "theme-box-title", "args passed to the function");
+    var list = createElement("div", "theme-box-list");
+    var themeEl = createElement("div", "theme-box-current-theme");
+
+    var argKeys = Object.keys(args);
+    if (argKeys.length === 0) {
+      list.appendChild(createElement("div", "theme-box-empty", "no args passed"));
+    } else {
+      argKeys.forEach(function (key) {
+        list.appendChild(createElement("div", "theme-box-key", key));
+        list.appendChild(createElement("div", "theme-box-value", formatValue(args[key])));
+      });
+    }
+
+    box.appendChild(titleEl);
+    box.appendChild(list);
+    box.appendChild(themeEl);
+    node.appendChild(box);
+
+    function applyTheme(themeName) {
+      box.classList.toggle("theme-dark", themeName === "dark");
+      themeEl.textContent = "current theme: " + themeName;
+    }
+
+    applyTheme(themeObservable.current);
+    var unsubscribeFromTheme = themeObservable.subscribe(applyTheme);
+
+    return function cleanup() {
+      unsubscribeFromTheme();
+      console.log("themeBox cleanup: removed theme subscription");
+    };
+  };
+})();
+```
+
 # Plugins :: Development :: PlaceHolder
 answer-link: znai-from-export/plugins/development#placeholder
 
@@ -9186,6 +9456,55 @@ Example above targets both light and dark theme. If you want to target dark them
     --znai-code-keyword-color: #5050af;
 }
 ```
+
+# Configuration :: Extensions
+answer-link: znai-from-export/configuration/extensions
+
+Add `extensions.json` next to your `toc` file to inject custom CSS, JavaScript, or HTML into the generated site. This is
+how you bring in your own stylesheets, load scripts used by the [javascript function
+plugin](plugins/javascript-function), embed tracking snippets, or ship extra static files along with the docs.
+
+
+All paths are resolved relative to your documentation root (the directory that holds the `toc` file).
+
+# Configuration :: Extensions :: cssResources
+answer-link: znai-from-export/configuration/extensions#cssresources
+
+List of CSS files to load on every page.
+
+
+Note: a file named `style.css` placed next to `toc` is picked up automatically, no need to list it here. See
+[Styling](configuration/styling).
+
+# Configuration :: Extensions :: jsResources
+answer-link: znai-from-export/configuration/extensions#jsresources
+
+List of JavaScript files to load on every page. Use this to register custom functions for the [javascript function
+plugin](plugins/javascript-function).
+
+# Configuration :: Extensions :: htmlResources
+answer-link: znai-from-export/configuration/extensions#htmlresources
+
+List of HTML snippets injected into the `<body>` of every page — useful for widgets, chat bubbles, or any markup that
+needs to live alongside the rendered content.
+
+# Configuration :: Extensions :: htmlHeadResources
+answer-link: znai-from-export/configuration/extensions#htmlheadresources
+
+List of HTML snippets injected into the `<head>` of every page. Common use cases are analytics tags, preconnect hints,
+or extra `<meta>` entries.
+
+
+Note: a file named `tracking.html` placed next to `toc` is picked up automatically.
+
+# Configuration :: Extensions :: additionalFilesToDeploy
+answer-link: znai-from-export/configuration/extensions#additionalfilestodeploy
+
+List of extra files to copy into the deploy output. Use this for assets referenced by your custom CSS/JS that znai would
+not otherwise discover — fonts, icons, supporting JSON, and so on.
+
+
+Note: for broader file/directory copying, see [additional files](deployment/additional-files).
 
 # Configuration :: Top Header
 answer-link: znai-from-export/configuration/top-header
@@ -9367,6 +9686,11 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2026 :: 1.90
+answer-link: znai-from-export/release-notes/2026#190
+
+
 
 # Release Notes :: 2026 :: 1.89
 answer-link: znai-from-export/release-notes/2026#189

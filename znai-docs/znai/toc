@@ -86,10 +86,12 @@ synergy-with-testing
 plugins
     plugin-types
     default-parameters
+    javascript-function
     development
 configuration
     basic
     styling
+    extensions
     top-header
 deployment
     additional-files

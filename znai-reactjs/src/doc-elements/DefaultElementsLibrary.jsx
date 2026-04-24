@@ -67,6 +67,7 @@ import LangClass from './lang/LangClass'
 import LangFunction from './lang/LangFunction'
 import ApiParameters, { presentationApiParameters } from "./api/ApiParameters";
 import { Iframe, presentationIframe } from "./iframe/Iframe";
+import { JavascriptFunction } from "./javascript/JavascriptFunction";
 import JupyterCell from './jupyter/JupyterCell'
 import {Spoiler} from './spoiler/Spoiler'
 import {registerDocUtilsElements} from './doc-utils/DocUtils'
@@ -212,6 +213,9 @@ presentationElementHandlers.Svg = presentationSvgHandler
 
 library.Iframe = Iframe
 presentationElementHandlers.Iframe = presentationIframe
+
+library.JavascriptFunction = JavascriptFunction
+presentationElementHandlers.JavascriptFunction = {component: JavascriptFunction, numberOfSlides: () => 1}
 
 library.Page = Page
 presentationElementHandlers.Page = presentationPageHandler
