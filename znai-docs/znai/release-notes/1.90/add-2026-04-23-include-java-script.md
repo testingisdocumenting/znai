@@ -1,1 +1,0 @@
-* Add: [Javascript Plugin](plugins/javascript-function)

@@ -86,7 +86,7 @@ synergy-with-testing
 plugins
     plugin-types
     default-parameters
-    javascript-function
+    javascript-plugin
     development
 configuration
     basic

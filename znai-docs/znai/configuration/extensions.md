@@ -1,6 +1,6 @@
 Add `extensions.json` next to your `toc` file to inject custom CSS, JavaScript,
 or HTML into the generated site. This is how you bring in your own stylesheets,
-load scripts used by the [javascript function plugin](plugins/javascript-function),
+load scripts used by the [javascript plugin](plugins/javascript-plugin),
 embed tracking snippets, or ship extra static files along with the docs.
 
 ```json {title: "extensions.json"}
@@ -31,7 +31,7 @@ no need to list it here. See [Styling](configuration/styling).
 # jsResources
 
 List of JavaScript files to load on every page. Use this to register
-custom functions for the [javascript function plugin](plugins/javascript-function).
+custom functions for the [javascript plugin](plugins/javascript-plugin).
 
 ```json
 {
