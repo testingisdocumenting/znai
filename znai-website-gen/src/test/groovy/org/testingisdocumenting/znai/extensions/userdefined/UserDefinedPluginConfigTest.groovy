@@ -17,15 +17,18 @@
 package org.testingisdocumenting.znai.extensions.userdefined
 
 import org.junit.Test
-import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.parser.TestResourceResolver
 
 import java.nio.file.Paths
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class UserDefinedPluginConfigTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     private TestResourceResolver resolver = new TestResourceResolver(Paths.get(""))
 
     @Test
@@ -40,7 +43,7 @@ class UserDefinedPluginConfigTest {
         freeForm.required.should == true
 
         def category = config.arguments["category"]
-        category.availableValues.should == ["info", "warning"]
+        ((AvailableValuesParamType) category.paramType).availableValues.should == ["info", "warning"]
     }
 
     @Test
@@ -48,7 +51,7 @@ class UserDefinedPluginConfigTest {
         UserDefinedPluginConfig config = loadConfig("user-plugin-referenced.json")
 
         def category = config.arguments["category"]
-        category.availableValues.should == ["info", "warning", "error"]
+        ((AvailableValuesParamType) category.paramType).availableValues.should == ["info", "warning", "error"]
         category.availableValuesPath.fileName.toString().should == "user-plugin-categories.json"
     }
 
@@ -128,12 +131,12 @@ class UserDefinedPluginConfigTest {
     @Test
     void "builds param definition and validates against available values"() {
         UserDefinedPluginConfig config = loadConfig("user-plugin-simple.json")
-        def definition = config.buildParamsDefinition()
+        def definition = config.getParamsDefinition()
 
-        def validParams = new PluginParams("simple-note", "hello", [category: "info"])
+        def validParams = pluginParamsFactory.create("simple-note", "hello", [category: "info"])
         definition.validateParamsAndHandleRenames(validParams).validationError.should == ""
 
-        def invalidParams = new PluginParams("simple-note", "hello", [category: "nope"])
+        def invalidParams = pluginParamsFactory.create("simple-note", "hello", [category: "nope"])
         def result = definition.validateParamsAndHandleRenames(invalidParams)
         (result.validationError.length() > 0).should == true
     }

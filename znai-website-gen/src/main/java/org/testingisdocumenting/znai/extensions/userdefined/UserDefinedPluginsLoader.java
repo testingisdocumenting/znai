@@ -61,20 +61,13 @@ public class UserDefinedPluginsLoader {
 
     public void unregister() {
         for (UserDefinedPluginConfig config : registered) {
-            switch (config.getRole()) {
-                case INCLUDE -> Plugins.removeUserIncludePlugin(config.getId());
-                case FENCE -> Plugins.removeUserFencePlugin(config.getId());
-            }
+            Plugins.removeUserPlugin(config.getId());
         }
         registered.clear();
     }
 
     private void register(UserDefinedPluginConfig config) {
-        switch (config.getRole()) {
-            case INCLUDE -> Plugins.registerUserPlugin(new UserDefinedIncludePlugin(config));
-            case FENCE -> Plugins.registerUserPlugin(new UserDefinedFencePlugin(config));
-        }
-
+        Plugins.registerUserPlugin(config.getRole().createPlugin(config));
         registered.add(config);
     }
 }

@@ -16,6 +16,7 @@
 
 package org.testingisdocumenting.znai.extensions.userdefined;
 
+import org.testingisdocumenting.znai.extensions.Plugin;
 import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
@@ -24,10 +25,39 @@ import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class UserDefinedPluginConfig {
-    public enum PluginRole { INCLUDE, FENCE }
+    public enum PluginRole {
+        INCLUDE("include", UserDefinedIncludePlugin::new),
+        FENCE("fence", UserDefinedFencePlugin::new);
+
+        private final String typeId;
+        private final Function<UserDefinedPluginConfig, Plugin> factory;
+
+        PluginRole(String typeId, Function<UserDefinedPluginConfig, Plugin> factory) {
+            this.typeId = typeId;
+            this.factory = factory;
+        }
+
+        public Plugin createPlugin(UserDefinedPluginConfig config) {
+            return factory.apply(config);
+        }
+
+        static PluginRole fromTypeId(String typeId) {
+            for (PluginRole role : values()) {
+                if (role.typeId.equals(typeId)) {
+                    return role;
+                }
+            }
+            return null;
+        }
+
+        static String availableTypeIds() {
+            return Arrays.stream(values()).map(r -> r.typeId).collect(Collectors.joining(", "));
+        }
+    }
 
     private static final Map<String, PluginParamType> ARGUMENT_TYPES = Map.of(
             "number", PluginParamType.NUMBER,
@@ -42,6 +72,8 @@ public class UserDefinedPluginConfig {
     private final Path templatePath;
     private final TextTemplate compiledTemplate;
     private final Map<String, UserDefinedPluginArgument> arguments;
+    private final PluginParamsDefinition paramsDefinition;
+    private final List<Path> availableValuesPaths;
 
     UserDefinedPluginConfig(Path configPath,
                             String id,
@@ -55,6 +87,11 @@ public class UserDefinedPluginConfig {
         this.templatePath = templatePath;
         this.compiledTemplate = compiledTemplate;
         this.arguments = arguments;
+        this.paramsDefinition = buildParamsDefinition(arguments);
+        this.availableValuesPaths = arguments.values().stream()
+                .map(UserDefinedPluginArgument::getAvailableValuesPath)
+                .filter(Objects::nonNull)
+                .toList();
     }
 
     public static UserDefinedPluginConfig load(ResourcesResolver resourcesResolver, String pluginConfigPath) {
@@ -131,11 +168,11 @@ public class UserDefinedPluginConfig {
 
         Object availableRaw = raw.get("available");
         if (availableRaw == null) {
-            return UserDefinedPluginArgument.typed(name, baseType, required);
+            return UserDefinedPluginArgument.typed(name, baseType, required, null);
         }
 
         List<Object> availableValues;
-        Path availablePath = null;
+        Path availableValuesPath = null;
 
         if (availableRaw instanceof List) {
             availableValues = new ArrayList<>((List<Object>) availableRaw);
@@ -144,15 +181,15 @@ public class UserDefinedPluginConfig {
                 throw new IllegalArgumentException(label + ": argument <" + name +
                         "> available reference must start with $, got <" + reference + ">");
             }
-            availablePath = resourcesResolver.fullPath(reference.substring(1));
-            availableValues = new ArrayList<>(JsonUtils.deserializeAsList(resourcesResolver.textContent(availablePath)));
+            availableValuesPath = resourcesResolver.fullPath(reference.substring(1));
+            availableValues = new ArrayList<>(JsonUtils.deserializeAsList(resourcesResolver.textContent(availableValuesPath)));
         } else {
             throw new IllegalArgumentException(label + ": argument <" + name +
                     "> available must be a list or a $fileReference");
         }
 
         PluginParamType paramType = new AvailableValuesParamType(baseType, availableValues);
-        return UserDefinedPluginArgument.typed(name, paramType, required, availableValues, availablePath);
+        return UserDefinedPluginArgument.typed(name, paramType, required, availableValuesPath);
     }
 
     private static PluginRole extractRole(Map<String, ?> raw, String label) {
@@ -162,15 +199,17 @@ public class UserDefinedPluginConfig {
         }
 
         if (!(typeRaw instanceof String typeId)) {
-            throw new IllegalArgumentException(label + ": <type> must be a string (one of include, fence)");
+            throw new IllegalArgumentException(label + ": <type> must be a string (one of " +
+                    PluginRole.availableTypeIds() + ")");
         }
 
-        return switch (typeId) {
-            case "include" -> PluginRole.INCLUDE;
-            case "fence" -> PluginRole.FENCE;
-            default -> throw new IllegalArgumentException(label + ": unknown plugin type <" + typeId +
-                    ">, available: include, fence");
-        };
+        PluginRole role = PluginRole.fromTypeId(typeId);
+        if (role == null) {
+            throw new IllegalArgumentException(label + ": unknown plugin type <" + typeId +
+                    ">, available: " + PluginRole.availableTypeIds());
+        }
+
+        return role;
     }
 
     private static String requireString(Map<String, ?> raw, String key, String label) {
@@ -206,7 +245,11 @@ public class UserDefinedPluginConfig {
         return role;
     }
 
-    public PluginParamsDefinition buildParamsDefinition() {
+    public PluginParamsDefinition getParamsDefinition() {
+        return paramsDefinition;
+    }
+
+    private static PluginParamsDefinition buildParamsDefinition(Map<String, UserDefinedPluginArgument> arguments) {
         PluginParamsDefinition definition = new PluginParamsDefinition();
         for (UserDefinedPluginArgument arg : arguments.values()) {
             if (arg.isFreeForm() || arg.isFenceContent()) {
@@ -233,9 +276,6 @@ public class UserDefinedPluginConfig {
     }
 
     public List<Path> getAvailableValuesPaths() {
-        return arguments.values().stream()
-                .map(UserDefinedPluginArgument::getAvailableValuesPath)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        return availableValuesPaths;
     }
 }

@@ -25,7 +25,6 @@ import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
 
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -69,7 +68,7 @@ class UserDefinedPluginProcessor {
     }
 
     private Map<String, Object> buildParams(PluginParams pluginParams, String fenceContent) {
-        Map<String, Object> params = new HashMap<>(pluginParams.getOpts().toMap());
+        Map<String, Object> params = pluginParams.getOpts().toMap();
 
         putSpecialArg(params, config.getFreeFormArgument(), pluginParams.getFreeParam(), "free form parameter");
         putSpecialArg(params, config.getFenceContentArgument(), fenceContent, "non-empty fence content");

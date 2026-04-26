@@ -18,17 +18,21 @@ package org.testingisdocumenting.znai.extensions.userdefined
 
 import org.junit.Test
 import org.testingisdocumenting.znai.core.AuxiliaryFile
-import org.testingisdocumenting.znai.extensions.PluginParams
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.testingisdocumenting.znai.parser.TestMarkupParser
 import org.testingisdocumenting.znai.parser.TestResourceResolver
 
 import java.nio.file.Paths
+import java.util.stream.Collectors
 
 import static org.testingisdocumenting.webtau.Matchers.code
 import static org.testingisdocumenting.webtau.Matchers.throwException
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class UserDefinedIncludePluginTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
     private TestResourceResolver resolver = new TestResourceResolver(Paths.get(""))
     private TestComponentsRegistry componentsRegistry = registry()
 
@@ -36,7 +40,7 @@ class UserDefinedIncludePluginTest {
     void "processes template with freeForm and named args, and collects search text"() {
         def config = UserDefinedPluginConfig.load(resolver, "user-plugin-simple.json")
         def plugin = new UserDefinedIncludePlugin(config)
-        def params = new PluginParams("simple-note", "hello there", [category: "info"])
+        def params = pluginParamsFactory.create("simple-note", "hello there", [category: "info"])
 
         def result = plugin.process(componentsRegistry, null, Paths.get("test.md"), params)
         def elements = result.docElements.collect { it.toMap() }
@@ -56,11 +60,11 @@ class UserDefinedIncludePluginTest {
         def config = UserDefinedPluginConfig.load(resolver, "user-plugin-simple.json")
         def plugin = new UserDefinedIncludePlugin(config)
         plugin.process(componentsRegistry, null, Paths.get("test.md"),
-                new PluginParams("simple-note", "msg", [category: "info"]))
+                pluginParamsFactory.create("simple-note", "msg", [category: "info"]))
 
         def auxNames = plugin.auxiliaryFiles(componentsRegistry)
                 .map { AuxiliaryFile f -> f.path.fileName.toString() }
-                .collect(java.util.stream.Collectors.toList())
+                .collect(Collectors.toList())
 
         auxNames.contains("user-plugin-simple.json").should == true
         auxNames.contains("user-plugin-simple.ftl").should == true
@@ -71,11 +75,11 @@ class UserDefinedIncludePluginTest {
         def config = UserDefinedPluginConfig.load(resolver, "user-plugin-referenced.json")
         def plugin = new UserDefinedIncludePlugin(config)
         plugin.process(componentsRegistry, null, Paths.get("test.md"),
-                new PluginParams("referenced-note", "msg", [category: "info"]))
+                pluginParamsFactory.create("referenced-note", "msg", [category: "info"]))
 
         def auxNames = plugin.auxiliaryFiles(componentsRegistry)
                 .map { AuxiliaryFile f -> f.path.fileName.toString() }
-                .collect(java.util.stream.Collectors.toList())
+                .collect(Collectors.toList())
 
         auxNames.contains("user-plugin-categories.json").should == true
     }
@@ -84,7 +88,7 @@ class UserDefinedIncludePluginTest {
     void "optional freeForm is allowed to be missing without error"() {
         def config = UserDefinedPluginConfig.load(resolver, "user-plugin-optional-free-form.json")
         def plugin = new UserDefinedIncludePlugin(config)
-        def params = new PluginParams("optional-note", "", [category: "info"])
+        def params = pluginParamsFactory.create("optional-note", "", [category: "info"])
 
         def result = plugin.process(componentsRegistry, null, Paths.get("test.md"), params)
         def markup = result.docElements.collect { it.toMap() }[0].markup as String
@@ -99,7 +103,7 @@ class UserDefinedIncludePluginTest {
         def plugin = new UserDefinedFencePlugin(config)
 
         def result = plugin.process(componentsRegistry, Paths.get("test.md"),
-                new PluginParams("simple-fence", "", [lang: "java"]),
+                pluginParamsFactory.create("simple-fence", "", [lang: "java"]),
                 "System.out.println();")
 
         def elements = result.docElements.collect { it.toMap() }
@@ -119,7 +123,7 @@ class UserDefinedIncludePluginTest {
 
         code {
             plugin.process(componentsRegistry, Paths.get("test.md"),
-                    new PluginParams("required-fence", "", [lang: "java"]),
+                    pluginParamsFactory.create("required-fence", "", [lang: "java"]),
                     "")
         } should throwException(~/requires non-empty fence content/)
     }

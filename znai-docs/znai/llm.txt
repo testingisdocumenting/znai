@@ -9455,8 +9455,8 @@ answer-link: znai-from-export/plugins/user-defined-plugins#plugin-config-shape
 }
 ```
 
-The `id` is what you'll type after the `:include-` or ````` prefix in markdown. Specify `type` as a string (one role) or
-a list of strings to register both an include plugin and a fence plugin from the same config.
+The `id` is what you'll type after the `:include-` or ````` prefix in markdown. A config registers exactly one role —
+if you need both an include and a fence variant of the same template, write two configs that point at the same `.ftl`.
 
 # Plugins :: User Defined Plugins :: Arguments
 answer-link: znai-from-export/plugins/user-defined-plugins#arguments

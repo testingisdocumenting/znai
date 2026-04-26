@@ -19,7 +19,6 @@ package org.testingisdocumenting.znai.extensions.userdefined;
 import org.testingisdocumenting.znai.extensions.PluginParamType;
 
 import java.nio.file.Path;
-import java.util.List;
 
 public class UserDefinedPluginArgument {
     public static final String FREE_FORM = "freeForm";
@@ -28,39 +27,31 @@ public class UserDefinedPluginArgument {
     private final String name;
     private final PluginParamType paramType;
     private final boolean required;
-    private final List<Object> availableValues;
     private final Path availableValuesPath;
 
     private UserDefinedPluginArgument(String name,
                                       PluginParamType paramType,
                                       boolean required,
-                                      List<Object> availableValues,
                                       Path availableValuesPath) {
         this.name = name;
         this.paramType = paramType;
         this.required = required;
-        this.availableValues = availableValues;
         this.availableValuesPath = availableValuesPath;
     }
 
     public static UserDefinedPluginArgument freeForm(boolean required) {
-        return new UserDefinedPluginArgument(FREE_FORM, null, required, null, null);
+        return new UserDefinedPluginArgument(FREE_FORM, null, required, null);
     }
 
     public static UserDefinedPluginArgument fenceContent(boolean required) {
-        return new UserDefinedPluginArgument(FENCE_CONTENT, null, required, null, null);
-    }
-
-    public static UserDefinedPluginArgument typed(String name, PluginParamType paramType, boolean required) {
-        return new UserDefinedPluginArgument(name, paramType, required, null, null);
+        return new UserDefinedPluginArgument(FENCE_CONTENT, null, required, null);
     }
 
     public static UserDefinedPluginArgument typed(String name,
                                                   PluginParamType paramType,
                                                   boolean required,
-                                                  List<Object> availableValues,
                                                   Path availableValuesPath) {
-        return new UserDefinedPluginArgument(name, paramType, required, availableValues, availableValuesPath);
+        return new UserDefinedPluginArgument(name, paramType, required, availableValuesPath);
     }
 
     public String getName() {
@@ -73,10 +64,6 @@ public class UserDefinedPluginArgument {
 
     public boolean isRequired() {
         return required;
-    }
-
-    public List<Object> getAvailableValues() {
-        return availableValues;
     }
 
     public Path getAvailableValuesPath() {

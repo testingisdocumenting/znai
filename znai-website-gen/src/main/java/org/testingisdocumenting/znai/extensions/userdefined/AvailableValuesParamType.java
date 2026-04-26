@@ -22,34 +22,44 @@ import org.testingisdocumenting.znai.extensions.paramtypes.PluginParamTypeListOr
 import org.testingisdocumenting.znai.extensions.paramtypes.PluginParamTypeListOrSingleString;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 class AvailableValuesParamType implements PluginParamType {
     private final PluginParamType baseType;
     private final List<Object> availableValues;
+    private final Set<String> availableValuesAsStrings;
+    private final String description;
+    private final String example;
 
     AvailableValuesParamType(PluginParamType baseType, List<Object> availableValues) {
         this.baseType = baseType;
         this.availableValues = availableValues;
+        this.availableValuesAsStrings = availableValues.stream()
+                .map(Object::toString)
+                .collect(Collectors.toSet());
+
+        String renderedValues = availableValues.stream()
+                .map(AvailableValuesParamType::renderValue)
+                .collect(Collectors.joining(", "));
+        this.description = baseType.description() + " of " + renderedValues;
+
+        String firstRendered = renderValue(availableValues.get(0));
+        this.example = isListBaseType(baseType) ? "[" + firstRendered + "]" : firstRendered;
+    }
+
+    public List<Object> getAvailableValues() {
+        return availableValues;
     }
 
     @Override
     public String description() {
-        return baseType.description() + " of " + availableValues.stream()
-                .map(AvailableValuesParamType::renderValue)
-                .collect(Collectors.joining(", "));
+        return description;
     }
 
     @Override
     public String example() {
-        String rendered = renderValue(availableValues.get(0));
-        return isListBaseType() ? "[" + rendered + "]" : rendered;
-    }
-
-    private boolean isListBaseType() {
-        return baseType instanceof PluginParamTypeListOrSingleNumber
-                || baseType instanceof PluginParamTypeListOrSingleString
-                || baseType instanceof PluginParamTypeListOfAny;
+        return example;
     }
 
     @Override
@@ -66,7 +76,13 @@ class AvailableValuesParamType implements PluginParamType {
     }
 
     private boolean matchesAvailable(Object value) {
-        return availableValues.stream().anyMatch(v -> v.toString().equals(value.toString()));
+        return availableValuesAsStrings.contains(value.toString());
+    }
+
+    private static boolean isListBaseType(PluginParamType baseType) {
+        return baseType instanceof PluginParamTypeListOrSingleNumber
+                || baseType instanceof PluginParamTypeListOrSingleString
+                || baseType instanceof PluginParamTypeListOfAny;
     }
 
     private static String renderValue(Object value) {

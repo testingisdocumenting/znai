@@ -38,7 +38,7 @@ abstract class UserDefinedPluginBase {
     }
 
     public PluginParamsDefinition parameters() {
-        return config.buildParamsDefinition();
+        return config.getParamsDefinition();
     }
 
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {

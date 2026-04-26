@@ -87,12 +87,13 @@ public class Plugins {
         }
     }
 
-    public static void removeUserIncludePlugin(String id) {
-        removeUserPlugin(includePluginsById, builtInIncludeIds, id);
-    }
+    public static void removeUserPlugin(String id) {
+        if (builtInIncludeIds.contains(id) || builtInFenceIds.contains(id)) {
+            throw new IllegalStateException("cannot remove built-in plugin <" + id + ">");
+        }
 
-    public static void removeUserFencePlugin(String id) {
-        removeUserPlugin(fencePluginsById, builtInFenceIds, id);
+        includePluginsById.remove(id);
+        fencePluginsById.remove(id);
     }
 
     private static void registerUserPlugin(Map<String, Plugin> plugins, Set<String> builtInIds, Plugin plugin) {
@@ -103,14 +104,6 @@ public class Plugins {
         }
 
         plugins.put(id, plugin);
-    }
-
-    private static void removeUserPlugin(Map<String, Plugin> plugins, Set<String> builtInIds, String id) {
-        if (builtInIds.contains(id)) {
-            return;
-        }
-
-        plugins.remove(id);
     }
 
     private static Plugin pluginById(Map<String, Plugin> plugins, String id) {
