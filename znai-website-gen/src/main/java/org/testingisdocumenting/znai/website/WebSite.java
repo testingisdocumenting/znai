@@ -23,6 +23,7 @@ import org.testingisdocumenting.znai.console.ansi.Color;
 import org.testingisdocumenting.znai.console.ansi.FontStyle;
 import org.testingisdocumenting.znai.extensions.PluginParamsWithDefaultsFactory;
 import org.testingisdocumenting.znai.extensions.Plugins;
+import org.testingisdocumenting.znai.extensions.userdefined.UserDefinedPluginsLoader;
 import org.testingisdocumenting.znai.preprocessor.RegexpBasedPreprocessor;
 import org.testingisdocumenting.znai.resources.*;
 import org.testingisdocumenting.znai.html.*;
@@ -105,6 +106,8 @@ public class WebSite implements Log {
     private final String llmUrlPrefix;
 
     private RegexpBasedPreprocessor regexpBasedPreprocessor;
+
+    private UserDefinedPluginsLoader userDefinedPluginsLoader;
 
     private WebSite(Configuration siteConfig) {
         cfg = siteConfig;
@@ -350,12 +353,24 @@ public class WebSite implements Log {
     }
 
     private WebSiteUserExtensions initFileBasedWebSiteExtension(Configuration cfg) {
+        Map<String, ?> extensionsDefinition = readExtensionsDefinition(cfg);
+
+        if (userDefinedPluginsLoader != null) {
+            userDefinedPluginsLoader.unregister();
+        }
+        userDefinedPluginsLoader = new UserDefinedPluginsLoader(resourceResolver);
+        userDefinedPluginsLoader.load(extensionsDefinition);
+
+        return new WebSiteUserExtensions(resourceResolver, extensionsDefinition);
+    }
+
+    private Map<String, ?> readExtensionsDefinition(Configuration cfg) {
         if (cfg.extensionsDefPath == null || ! Files.exists(cfg.extensionsDefPath)) {
-            return new WebSiteUserExtensions(resourceResolver, Collections.emptyMap());
+            return Collections.emptyMap();
         }
 
         String json = FileUtils.fileTextContent(cfg.extensionsDefPath);
-        return new WebSiteUserExtensions(resourceResolver, JsonUtils.deserializeAsMap(json));
+        return JsonUtils.deserializeAsMap(json);
     }
 
     private void reset() {

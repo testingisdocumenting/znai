@@ -49,6 +49,7 @@
 .theme-box-value {
     color: var(--znai-regular-text-color);
     word-break: break-word;
+    white-space: pre-wrap;
 }
 
 .theme-box-current-theme {

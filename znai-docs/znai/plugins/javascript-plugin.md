@@ -1,11 +1,11 @@
 # Overview
 
-Use `include-javascript-function` to delegate rendering of a block to a plain JavaScript function.
-Znai will create a DOM node for your function and hand it over together with:
+`include-javascript-function` delegates rendering of a block to a plain
+JavaScript function. znai creates a DOM node and hands your function:
 
 * the DOM node to render into
-* the parameters you passed from markdown (as `args`)
-* a `themeObservable` — so your rendering can react to light/dark theme switches
+* the parameters from markdown (as `args`)
+* a `themeObservable` so rendering can react to light/dark theme switches
 
 ```markdown
 :include-javascript-function: themeBox {
@@ -19,12 +19,12 @@ Znai will create a DOM node for your function and hand it over together with:
   customKey: "custom value"
 }
 
-See [themeBox](#sample-function) definition at the end of this page.
+See the [sample function](#sample-function) at the end of this page.
 
 # Registering A Function
 
-Attach your function to `window` under the name you want to reference from markdown.
-Load the JavaScript file through [`extensions.json`](configuration/extensions):
+Attach your function to `window` under the name you want to reference, and
+load the script via [`extensions.json`](configuration/extensions):
 
 ```javascript {title: "theme-box.js"}
 (function () {
@@ -46,36 +46,34 @@ Load the JavaScript file through [`extensions.json`](configuration/extensions):
 
 Your function receives three arguments:
 
-* `node` — a `div` parent div to append content you need.
-* `args` — an object with the parameters passed from markdown.
-  Framework-level parameters (`title`, `wide`, `className`, `anchorId`) are handled by znai and are **not** forwarded here.
+* `node` — the parent `div` to append content to.
+* `args` — the parameters passed from markdown. Framework-level keys (`title`,
+  `wide`, `className`, `anchorId`) are handled by znai and not forwarded.
 * `themeObservable` — live access to the current znai theme.
 
 ```javascript {title: "themeObservable shape"}
 {
     current: "light" | "dark",
     subscribe(listener) {
-        // listener is called with the new theme name whenever the theme changes
+        // listener is called with the new theme name on every change
     }
 }
 ```
 
-Your function may return a cleanup function. Znai calls it when the block is removed
-or re-rendered — a good place to dispose of timers, external event listeners,
-or any other resources you allocated.
+The function may return a cleanup function. znai calls it when the block is
+removed or re-rendered — dispose timers, external listeners, or other
+resources here.
 
-The [sample function](#sample-function) below returns a cleanup that logs to the
-browser console:
+The [sample function](#sample-function) below returns a cleanup that logs to
+the browser console:
 
 :include-file: javascript/theme-box.js {
   title: "theme-box.js",
   surroundedByScope: {start: "function cleanup", scope: "{}"}
 }
 
-To see it fire, open your browser DevTools console on this page, then navigate to
-any other page — znai unmounts the block and your cleanup runs. A single page
-visit triggers multiple cleanups because every `themeBox` rendered above is
-torn down.
+Open DevTools, then navigate away from this page — every `themeBox` rendered
+above is unmounted and its cleanup runs.
 
 # Theme Toggle
 
@@ -84,16 +82,17 @@ torn down.
     tags: ["demo", "theme"]
 }
 
-Toggle the theme using the switcher in the bottom left corner and observe the custom content change style.
-This can be done via 
+Toggle the theme using the switcher in the bottom left corner and watch the
+custom content restyle. The hookup is one line:
+
 ```javascript
 themeObservable.subscribe(applyTheme);
-````
+```
 
 # Title
 
-Pass `title` to render a title bar above the block. Znai handles the title
-through its shared container, so your function never sees it.
+Pass `title` to render a title bar above the block. znai owns the title via
+its shared container, so your function never sees it.
 
 ```markdown
 :include-javascript-function: themeBox {
@@ -109,8 +108,8 @@ through its shared container, so your function never sees it.
 
 # Wide
 
-Pass `wide: true` to let the block span the full width of the page, matching
-the behavior of wide images and iframes.
+Pass `wide: true` to span the full page width, matching wide images and
+iframes.
 
 ```markdown
 :include-javascript-function: themeBox {
@@ -133,8 +132,7 @@ the behavior of wide images and iframes.
 # Styling With A Class Name
 
 Pass `className` to attach an arbitrary class to the parent node znai creates.
-Use it to add decorations around the rendered block without touching the
-function itself:
+Use it to decorate the wrapper without touching the function:
 
 ```markdown
 :include-javascript-function: themeBox {
@@ -143,24 +141,24 @@ function itself:
 }
 ```
 
-:include-file: javascript/theme-box.css {title: "theme-box.css", readMore: true} 
+:include-file: javascript/theme-box.css {title: "theme-box.css", readMore: true}
 
 :include-javascript-function: themeBox {
     label: "highlighted by an outer border",
     className: "theme-box-with-border"
 }
 
-The dashed outline comes from the class attached to the outermost wrapper — the
-box itself is untouched.
+The dashed outline comes from the class on the outer wrapper — the box itself
+is untouched.
 
 # Search
 
-Values passed via `args` participate in znai's local search.
-Searching for any word used inside the parameters will surface the page and the rendered block.
+Values passed via `args` flow into znai's local search. Searching for any word
+inside the parameters surfaces the page and the rendered block.
 
 # Sample Function
 
-The following function powers the example above. It demonstrates reading the
-initial theme and subscribing to future changes.
+The function below powers the examples on this page. It reads the initial
+theme and subscribes to future changes.
 
 :include-file: javascript/theme-box.js {title: "plugins/javascript/theme-box.js"}

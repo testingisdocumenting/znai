@@ -2,5 +2,6 @@
   "cssResources": ["custom.css", "plugins/javascript/theme-box.css"],
   "jsResources": ["custom.js", "plugins/javascript/theme-box.js"],
   "htmlResources": ["custom.html"],
-  "htmlHeadResources": ["tracking.html"]
+  "htmlHeadResources": ["tracking.html"],
+  "plugins": ["plugins/themed-box-plugin.json", "plugins/custom-fence-block-plugin.json"]
 }
