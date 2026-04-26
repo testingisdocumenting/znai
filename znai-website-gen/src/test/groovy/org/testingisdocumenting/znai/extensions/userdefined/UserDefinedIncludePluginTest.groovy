@@ -19,98 +19,66 @@ package org.testingisdocumenting.znai.extensions.userdefined
 import org.junit.Test
 import org.testingisdocumenting.znai.core.AuxiliaryFile
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory
+import org.testingisdocumenting.znai.extensions.PluginResult
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.testingisdocumenting.znai.parser.TestMarkupParser
 import org.testingisdocumenting.znai.parser.TestResourceResolver
 
+import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.stream.Collectors
 
-import static org.testingisdocumenting.webtau.Matchers.code
-import static org.testingisdocumenting.webtau.Matchers.throwException
+import static org.testingisdocumenting.webtau.Matchers.*
 import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
 
 class UserDefinedIncludePluginTest {
+    private static final Path MARKUP_PATH = Paths.get("test.md")
+
     static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
 
     private TestResourceResolver resolver = new TestResourceResolver(Paths.get(""))
     private TestComponentsRegistry componentsRegistry = registry()
 
     @Test
-    void "processes template with freeForm and named args, and collects search text"() {
-        def config = UserDefinedPluginConfig.load(resolver, "user-plugin-simple.json")
-        def plugin = new UserDefinedIncludePlugin(config)
-        def params = pluginParamsFactory.create("simple-note", "hello there", [category: "info"])
+    void "processes template, collects search text, and exposes template, config and available-values reference as auxiliary files"() {
+        def plugin = loadIncludePlugin("user-plugin-referenced.json")
+        def markup = firstMarkup(processInclude(plugin, "referenced-note", "hello there", [category: "info"]))
 
-        def result = plugin.process(componentsRegistry, null, Paths.get("test.md"), params)
-        def elements = result.docElements.collect { it.toMap() }
-
-        elements.size().should == 1
-        def markup = elements[0].markup as String
-        markup.contains("message: \"hello there\"").should == true
-        markup.contains("category: \"info\"").should == true
+        markup.should contain('message: "hello there"')
+        markup.should contain('category: "info"')
 
         def searchText = plugin.textForSearch()[0].text
-        searchText.contains("hello there").should == true
-        searchText.contains("info").should == true
-    }
-
-    @Test
-    void "exposes template and config files as auxiliary files"() {
-        def config = UserDefinedPluginConfig.load(resolver, "user-plugin-simple.json")
-        def plugin = new UserDefinedIncludePlugin(config)
-        plugin.process(componentsRegistry, null, Paths.get("test.md"),
-                pluginParamsFactory.create("simple-note", "msg", [category: "info"]))
+        searchText.should contain("hello there")
+        searchText.should contain("info")
 
         def auxNames = plugin.auxiliaryFiles(componentsRegistry)
                 .map { AuxiliaryFile f -> f.path.fileName.toString() }
                 .collect(Collectors.toList())
 
-        auxNames.contains("user-plugin-simple.json").should == true
-        auxNames.contains("user-plugin-simple.ftl").should == true
-    }
-
-    @Test
-    void "available-values reference file is exposed as auxiliary file"() {
-        def config = UserDefinedPluginConfig.load(resolver, "user-plugin-referenced.json")
-        def plugin = new UserDefinedIncludePlugin(config)
-        plugin.process(componentsRegistry, null, Paths.get("test.md"),
-                pluginParamsFactory.create("referenced-note", "msg", [category: "info"]))
-
-        def auxNames = plugin.auxiliaryFiles(componentsRegistry)
-                .map { AuxiliaryFile f -> f.path.fileName.toString() }
-                .collect(Collectors.toList())
-
-        auxNames.contains("user-plugin-categories.json").should == true
+        auxNames.should contain("user-plugin-referenced.json")
+        auxNames.should contain("user-plugin-simple.ftl")
+        auxNames.should contain("user-plugin-categories.json")
     }
 
     @Test
     void "optional freeForm is allowed to be missing without error"() {
-        def config = UserDefinedPluginConfig.load(resolver, "user-plugin-optional-free-form.json")
-        def plugin = new UserDefinedIncludePlugin(config)
-        def params = pluginParamsFactory.create("optional-note", "", [category: "info"])
+        def markup = firstMarkup(processInclude("user-plugin-optional-free-form.json", "optional-note", "", [category: "info"]))
 
-        def result = plugin.process(componentsRegistry, null, Paths.get("test.md"), params)
-        def markup = result.docElements.collect { it.toMap() }[0].markup as String
-
-        markup.contains('message: ""').should == true
-        markup.contains('category: "info"').should == true
+        markup.should contain('message: ""')
+        markup.should contain('category: "info"')
     }
 
     @Test
     void "fence plugin exposes fenceContent in the template"() {
-        def config = UserDefinedPluginConfig.load(resolver, "user-plugin-fence.json")
-        def plugin = new UserDefinedFencePlugin(config)
+        def plugin = new UserDefinedFencePlugin(UserDefinedPluginConfig.load(resolver, "user-plugin-fence.json"))
 
-        def result = plugin.process(componentsRegistry, Paths.get("test.md"),
+        def result = plugin.process(componentsRegistry, MARKUP_PATH,
                 pluginParamsFactory.create("simple-fence", "", [lang: "java"]),
                 "System.out.println();")
 
-        def elements = result.docElements.collect { it.toMap() }
-        def markup = elements[0].markup as String
-
-        markup.contains("```java").should == true
-        markup.contains("System.out.println();").should == true
+        def markup = firstMarkup(result)
+        markup.should contain("```java")
+        markup.should contain("System.out.println();")
     }
 
     @Test
@@ -122,15 +90,32 @@ class UserDefinedIncludePluginTest {
         def plugin = new UserDefinedFencePlugin(config)
 
         code {
-            plugin.process(componentsRegistry, Paths.get("test.md"),
+            plugin.process(componentsRegistry, MARKUP_PATH,
                     pluginParamsFactory.create("required-fence", "", [lang: "java"]),
                     "")
         } should throwException(~/requires non-empty fence content/)
     }
 
+    private UserDefinedIncludePlugin loadIncludePlugin(String configName) {
+        return new UserDefinedIncludePlugin(UserDefinedPluginConfig.load(resolver, configName))
+    }
+
+    private PluginResult processInclude(UserDefinedIncludePlugin plugin, String pluginId, String freeForm, Map<String, Object> namedArgs) {
+        return plugin.process(componentsRegistry, null, MARKUP_PATH,
+                pluginParamsFactory.create(pluginId, freeForm, namedArgs))
+    }
+
+    private PluginResult processInclude(String configName, String pluginId, String freeForm, Map<String, Object> namedArgs) {
+        return processInclude(loadIncludePlugin(configName), pluginId, freeForm, namedArgs)
+    }
+
+    private static String firstMarkup(PluginResult result) {
+        return result.docElements.collect { it.toMap() }[0].markup as String
+    }
+
     private static TestComponentsRegistry registry() {
-        def r = new TestComponentsRegistry()
-        r.defaultParser = new TestMarkupParser()
-        return r
+        def componentsRegistry = new TestComponentsRegistry()
+        componentsRegistry.defaultParser = new TestMarkupParser()
+        return componentsRegistry
     }
 }

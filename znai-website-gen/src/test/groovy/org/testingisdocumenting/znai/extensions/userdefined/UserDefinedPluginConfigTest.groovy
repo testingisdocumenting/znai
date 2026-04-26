@@ -42,8 +42,7 @@ class UserDefinedPluginConfigTest {
         freeForm.freeForm.should == true
         freeForm.required.should == true
 
-        def category = config.arguments["category"]
-        ((AvailableValuesParamType) category.paramType).availableValues.should == ["info", "warning"]
+        availableValues(config.arguments["category"]).should == ["info", "warning"]
     }
 
     @Test
@@ -51,8 +50,9 @@ class UserDefinedPluginConfigTest {
         UserDefinedPluginConfig config = loadConfig("user-plugin-referenced.json")
 
         def category = config.arguments["category"]
-        ((AvailableValuesParamType) category.paramType).availableValues.should == ["info", "warning", "error"]
-        category.availableValuesPath.fileName.toString().should == "user-plugin-categories.json"
+        [values: availableValues(category),
+         fileName: category.availableValuesPath.fileName.toString()].should ==
+                [values: ["info", "warning", "error"], fileName: "user-plugin-categories.json"]
     }
 
     @Test
@@ -60,39 +60,34 @@ class UserDefinedPluginConfigTest {
         UserDefinedPluginConfig config = loadConfig("user-plugin-optional-free-form.json")
 
         def freeForm = config.arguments["freeForm"]
-        freeForm.freeForm.should == true
-        freeForm.required.should == false
-        freeForm.paramType.should == null
+        [freeForm: freeForm.freeForm, required: freeForm.required, paramType: freeForm.paramType].should ==
+                [freeForm: true, required: false, paramType: null]
     }
 
     @Test
-    void "supports fence type and fenceContent special arg"() {
-        UserDefinedPluginConfig config = loadConfig("user-plugin-fence.json")
-
-        config.role.should == UserDefinedPluginConfig.PluginRole.FENCE
-        config.fenceContentArgument.fenceContent.should == true
-    }
-
-    @Test
-    void "rejects freeForm arg on a fence plugin"() {
-        code {
-            loadRaw([id: "x", type: "fence", template: "t.ftl", arguments: [freeForm: [required: true]]])
-        } should throwException(~/<freeForm> is only allowed for plugins with <type: include>/)
-    }
-
-    @Test
-    void "rejects fenceContent arg on an include plugin"() {
-        code {
-            loadRaw([id: "x", type: "include", template: "t.ftl", arguments: [fenceContent: [:]]])
-        } should throwException(~/<fenceContent> is only allowed for plugins with <type: fence>/)
-    }
-
-    @Test
-    void "fenceContent required flag is honored at parse time"() {
+    void "supports fence type with required fenceContent"() {
         UserDefinedPluginConfig config = loadRaw([id: "x", type: "fence", template: "user-plugin-fence.ftl",
                                                   arguments: [fenceContent: [required: true]]])
 
-        config.fenceContentArgument.required.should == true
+        [role: config.role,
+         fenceContent: config.fenceContentArgument.fenceContent,
+         required: config.fenceContentArgument.required].should ==
+                [role: UserDefinedPluginConfig.PluginRole.FENCE, fenceContent: true, required: true]
+    }
+
+    @Test
+    void "rejects invalid plugin type and misplaced special arguments"() {
+        code {
+            loadRaw([id: "x", type: "unknown", template: "t.ftl"])
+        } should throwException(~/unknown plugin type/)
+
+        code {
+            loadRaw([id: "x", type: "fence", template: "t.ftl", arguments: [freeForm: [required: true]]])
+        } should throwException(~/<freeForm> is only allowed for plugins with <type: include>/)
+
+        code {
+            loadRaw([id: "x", type: "include", template: "t.ftl", arguments: [fenceContent: [:]]])
+        } should throwException(~/<fenceContent> is only allowed for plugins with <type: fence>/)
     }
 
     @Test
@@ -108,13 +103,6 @@ class UserDefinedPluginConfigTest {
         code {
             loadRaw([id: "x", type: "include"])
         } should throwException(~/missing required string field <template>/)
-    }
-
-    @Test
-    void "rejects unknown plugin type"() {
-        code {
-            loadRaw([id: "x", type: "unknown", template: "t.ftl"])
-        } should throwException(~/unknown plugin type/)
     }
 
     @Test
@@ -147,5 +135,9 @@ class UserDefinedPluginConfigTest {
 
     private UserDefinedPluginConfig loadRaw(Map<String, Object> raw) {
         return UserDefinedPluginConfig.parse(resolver, Paths.get("test.json"), raw)
+    }
+
+    private static List<Object> availableValues(UserDefinedPluginArgument arg) {
+        return ((AvailableValuesParamType) arg.paramType).availableValues
     }
 }
