@@ -4,6 +4,6 @@
   "template": "user-plugin-fence.ftl",
   "arguments": {
     "fenceContent": {},
-    "lang": { "type": "string", "required": true, "available": ["java", "groovy"] }
+    "lang": { "type": "string", "required": true, "limitValuesTo": ["java", "groovy"] }
   }
 }

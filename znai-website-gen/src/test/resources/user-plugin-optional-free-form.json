@@ -1,9 +1,9 @@
 {
-  "id": "simple-note",
+  "id": "optional-note",
   "type": "include",
-  "template": "user-plugin-simple.ftl",
+  "template": "user-plugin-optional-free-form.ftl",
   "arguments": {
-    "freeForm": { "required": true },
+    "freeForm": {},
     "category": { "type": "string", "limitValuesTo": ["info", "warning"] }
   }
 }

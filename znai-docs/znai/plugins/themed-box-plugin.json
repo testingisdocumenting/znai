@@ -4,7 +4,7 @@
   "template": "plugins/themed-box-plugin.ftl",
   "arguments": {
     "freeForm": { "required": true },
-    "severity": { "type": "string", "required": true, "available": ["info", "success", "warning"] },
-    "tags": { "type": "list-of-string", "available": "$plugins/themed-box-tags.json" }
+    "severity": { "type": "string", "required": true, "limitValuesTo": ["info", "success", "warning"] },
+    "tags": { "type": "list-of-string", "limitValuesTo": "$plugins/themed-box-tags.json" }
   }
 }

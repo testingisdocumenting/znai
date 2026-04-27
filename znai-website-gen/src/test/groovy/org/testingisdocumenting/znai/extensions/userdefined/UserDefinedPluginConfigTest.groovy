@@ -112,8 +112,20 @@ class UserDefinedPluginConfigTest {
         } should throwException(~/unknown argument type/)
 
         code {
-            loadRaw([id: "x", type: "include", template: "t.ftl", arguments: [bad: [type: "string", available: "no-dollar"]]])
-        } should throwException(~/available reference must start with/)
+            loadRaw([id: "x", type: "include", template: "t.ftl", arguments: [bad: [type: "string", limitValuesTo: "no-dollar"]]])
+        } should throwException(~/limitValuesTo reference must start with/)
+    }
+
+    @Test
+    void "argument without limitValuesTo accepts any value of the declared type"() {
+        UserDefinedPluginConfig config = loadRaw([id: "x", type: "include", template: "user-plugin-simple.ftl",
+                                                  arguments: [title: [type: "string"]]])
+        def title = config.arguments["title"]
+        (title.paramType instanceof AvailableValuesParamType).should == false
+
+        def definition = config.getParamsDefinition()
+        def params = pluginParamsFactory.create("x", "", [title: "anything goes"])
+        definition.validateParamsAndHandleRenames(params).validationError.should == ""
     }
 
     @Test

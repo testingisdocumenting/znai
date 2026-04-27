@@ -86,7 +86,7 @@ class UserDefinedIncludePluginTest {
         def config = UserDefinedPluginConfig.parse(resolver, Paths.get("required-fence.json"),
                 [id: "required-fence", type: "fence", template: "user-plugin-fence.ftl",
                  arguments: [fenceContent: [required: true],
-                             lang: [type: "string", required: true, available: ["java"]]]])
+                             lang: [type: "string", required: true, limitValuesTo: ["java"]]]])
         def plugin = new UserDefinedFencePlugin(config)
 
         code {

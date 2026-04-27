@@ -17,7 +17,7 @@
 
 package org.testingisdocumenting.znai.parser
 
-import org.testingisdocumenting.znai.resources.ResourcesResolver
+import org.testingisdocumenting.znai.resources.LocalResourcesResolver
 import org.testingisdocumenting.znai.utils.ResourceUtils
 
 import javax.imageio.ImageIO
@@ -26,8 +26,9 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.stream.Stream
 
-class TestResourceResolver implements ResourcesResolver {
+class TestResourceResolver implements LocalResourcesResolver {
     private Path root
+    private Path currentFilePath
 
     TestResourceResolver(Path root) {
         this.root = root.toAbsolutePath()
@@ -87,5 +88,15 @@ class TestResourceResolver implements ResourcesResolver {
     @Override
     boolean isLocalFile(String path) {
         return ResourceUtils.resourceStream(path) != null
+    }
+
+    @Override
+    void setCurrentFilePath(Path currentFilePath) {
+        this.currentFilePath = currentFilePath
+    }
+
+    @Override
+    Path getCurrentFilePath() {
+        return currentFilePath
     }
 }

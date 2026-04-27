@@ -358,7 +358,7 @@ public class WebSite implements Log {
         if (userDefinedPluginsLoader != null) {
             userDefinedPluginsLoader.unregister();
         }
-        userDefinedPluginsLoader = new UserDefinedPluginsLoader(resourceResolver);
+        userDefinedPluginsLoader = new UserDefinedPluginsLoader(localResourceResolver);
         userDefinedPluginsLoader.load(extensionsDefinition);
 
         return new WebSiteUserExtensions(resourceResolver, extensionsDefinition);

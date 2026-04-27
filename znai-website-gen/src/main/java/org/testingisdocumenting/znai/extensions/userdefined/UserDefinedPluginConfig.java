@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.userdefined;
 import org.testingisdocumenting.znai.extensions.Plugin;
 import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.resources.LocalResourcesResolver;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
 import org.testingisdocumenting.znai.template.TextTemplate;
 import org.testingisdocumenting.znai.utils.JsonUtils;
@@ -94,10 +95,17 @@ public class UserDefinedPluginConfig {
                 .toList();
     }
 
-    public static UserDefinedPluginConfig load(ResourcesResolver resourcesResolver, String pluginConfigPath) {
+    public static UserDefinedPluginConfig load(LocalResourcesResolver resourcesResolver, String pluginConfigPath) {
         Path configPath = resourcesResolver.fullPath(pluginConfigPath);
         Map<String, ?> raw = JsonUtils.deserializeAsMap(resourcesResolver.textContent(configPath));
-        return parse(resourcesResolver, configPath, raw);
+
+        Path previousCurrentFilePath = resourcesResolver.getCurrentFilePath();
+        try {
+            resourcesResolver.setCurrentFilePath(configPath);
+            return parse(resourcesResolver, configPath, raw);
+        } finally {
+            resourcesResolver.setCurrentFilePath(previousCurrentFilePath);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -166,26 +174,26 @@ public class UserDefinedPluginConfig {
                     ">, available: " + String.join(", ", ARGUMENT_TYPES.keySet()));
         }
 
-        Object availableRaw = raw.get("available");
-        if (availableRaw == null) {
+        Object limitValuesToRaw = raw.get("limitValuesTo");
+        if (limitValuesToRaw == null) {
             return UserDefinedPluginArgument.typed(name, baseType, required, null);
         }
 
         List<Object> availableValues;
         Path availableValuesPath = null;
 
-        if (availableRaw instanceof List) {
-            availableValues = new ArrayList<>((List<Object>) availableRaw);
-        } else if (availableRaw instanceof String reference) {
+        if (limitValuesToRaw instanceof List) {
+            availableValues = new ArrayList<>((List<Object>) limitValuesToRaw);
+        } else if (limitValuesToRaw instanceof String reference) {
             if (!reference.startsWith("$")) {
                 throw new IllegalArgumentException(label + ": argument <" + name +
-                        "> available reference must start with $, got <" + reference + ">");
+                        "> limitValuesTo reference must start with $, got <" + reference + ">");
             }
             availableValuesPath = resourcesResolver.fullPath(reference.substring(1));
             availableValues = new ArrayList<>(JsonUtils.deserializeAsList(resourcesResolver.textContent(availableValuesPath)));
         } else {
             throw new IllegalArgumentException(label + ": argument <" + name +
-                    "> available must be a list or a $fileReference");
+                    "> limitValuesTo must be a list or a $fileReference");
         }
 
         PluginParamType paramType = new AvailableValuesParamType(baseType, availableValues);

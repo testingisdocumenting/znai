@@ -7,7 +7,7 @@ a JSON file next to your docs that declares:
 * a unique `id` to reference from markdown
 * a `type` — either `include` or `fence`
 * a FreeMarker `template` rendered on every use
-* `arguments` — types, optional allowed values, and a `required` flag
+* `arguments` — types, an optional list to `limitValuesTo`, and a `required` flag
 
 znai renders the template with the parameters you passed, parses the output as
 markdown, and folds the result back into the page — same machinery as
@@ -42,27 +42,29 @@ Each entry under `arguments` defines one parameter callers can pass.
 {
   "type": "string",
   "required": true,
-  "available": ["info", "success", "warning"]
+  "limitValuesTo": ["info", "success", "warning"]
 }
 ```
 
 * `type` — `number`, `string`, `list-of-number`, `list-of-string`, or `list`
 * `required` — defaults to `false`
-* `available` — optional; an inline array of allowed values, or a
-  `$path/to/file.json` reference to a JSON array file
+* `limitValuesTo` — optional; an inline array of allowed values, or a
+  `$path/to/file.json` reference to a JSON array file. Omit it to accept any
+  value of `type`.
 
-Unknown arguments, type mismatches, and values outside `available` all fail the
-build with the same error reporting as built-in plugins.
+Unknown arguments, type mismatches, and values outside `limitValuesTo` all fail
+the build with the same error reporting as built-in plugins.
 
-## Available Values From A File
+## Limit Values From A File
 
-Point `available` at a JSON array when the allowed set is owned elsewhere — a
-team-wide tag list, regional names, severity levels shared with another tool:
+Point `limitValuesTo` at a JSON array when the allowed set is owned elsewhere —
+a team-wide tag list, regional names, severity levels shared with another tool:
 
 :include-file: plugins/themed-box-tags.json {title: "plugins/themed-box-tags.json"}
 
-The file is loaded through znai's resource resolver, so it works next to `toc`,
-on the lookup path, or packaged in a jar.
+The path resolves relative to the plugin config first, then falls back to
+znai's resource resolver — so it works next to the `.json`, next to `toc`, on
+the lookup path, or packaged in a jar.
 
 # Special Arguments
 
@@ -77,10 +79,10 @@ Two argument names are reserved:
   present by construction.
 
 ```json
-"freeForm": { "required": true }
+{"freeForm": { "required": true }}
 ```
 
-Both names skip the regular type/`available` validation.
+Both names skip the regular type/`limitValuesTo` validation.
 
 # Template
 
@@ -122,7 +124,8 @@ remember.
 }
 
 Omit a required argument or pass a tag missing from `themed-box-tags.json` and
-the build stops with a descriptive error.
+the build stops with a descriptive error. Arguments without `limitValuesTo`
+accept any value of the declared `type` — handy for free-text titles or counts.
 
 # Fence Plugins
 
@@ -161,7 +164,7 @@ code annotators, or other include plugins.
 
 # Rebuild Detection
 
-The plugin config, the template, and any referenced `available` files are
+The plugin config, the template, and any referenced `limitValuesTo` files are
 treated as auxiliary files. Edit any of them and znai regenerates the affected
 pages — same contract as template includes and snippet files.
 

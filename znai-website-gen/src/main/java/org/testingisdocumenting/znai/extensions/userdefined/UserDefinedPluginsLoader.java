@@ -17,7 +17,7 @@
 package org.testingisdocumenting.znai.extensions.userdefined;
 
 import org.testingisdocumenting.znai.extensions.Plugins;
-import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.resources.LocalResourcesResolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +26,10 @@ import java.util.Map;
 public class UserDefinedPluginsLoader {
     private static final String PLUGINS_KEY = "plugins";
 
-    private final ResourcesResolver resourcesResolver;
+    private final LocalResourcesResolver resourcesResolver;
     private final List<UserDefinedPluginConfig> registered = new ArrayList<>();
 
-    public UserDefinedPluginsLoader(ResourcesResolver resourcesResolver) {
+    public UserDefinedPluginsLoader(LocalResourcesResolver resourcesResolver) {
         this.resourcesResolver = resourcesResolver;
     }
 

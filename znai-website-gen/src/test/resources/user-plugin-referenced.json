@@ -4,6 +4,6 @@
   "template": "user-plugin-simple.ftl",
   "arguments": {
     "freeForm": { "required": true },
-    "category": { "type": "string", "available": "$user-plugin-categories.json" }
+    "category": { "type": "string", "limitValuesTo": "$user-plugin-categories.json" }
   }
 }
