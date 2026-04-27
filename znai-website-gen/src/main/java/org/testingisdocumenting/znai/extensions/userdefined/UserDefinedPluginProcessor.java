@@ -23,6 +23,8 @@ import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.search.SearchScore;
 import org.testingisdocumenting.znai.search.SearchText;
+import org.testingisdocumenting.znai.template.TextTemplate;
+import org.testingisdocumenting.znai.utils.FileUtils;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -42,7 +44,10 @@ class UserDefinedPluginProcessor {
                          PluginParams pluginParams,
                          String fenceContent) {
         Map<String, Object> params = buildParams(pluginParams, fenceContent);
-        String processedTemplate = config.getCompiledTemplate().process(params);
+        Path templatePath = config.getTemplatePath();
+        TextTemplate template = new TextTemplate(templatePath.getFileName().toString(),
+                FileUtils.fileTextContent(templatePath));
+        String processedTemplate = template.process(params);
 
         parserResult = componentsRegistry.defaultParser().parse(markupPath, processedTemplate);
 

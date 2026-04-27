@@ -1,22 +1,27 @@
 # Overview
 
-User-defined plugins let you register `:include-<id>:` and fenced block plugins
-straight from documentation — no Java code, no rebuild of znai. Each plugin is
-a JSON file next to your docs that declares:
+JSON and template driven user defined plugins:
 
-* a unique `id` to reference from markdown
-* a `type` — either `include` or `fence`
-* a FreeMarker `template` rendered on every use
-* `arguments` — types, an optional list to `limitValuesTo`, and a `required` flag
+`````markdown {title: "custom fence block plugin"}
+```custom-fence-block {title: "greet.js"}
+function greet(name) {
+  console.log("hello, " + name);
+}
 
-znai renders the template with the parameters you passed, parses the output as
-markdown, and folds the result back into the page — same machinery as
-[include-template](layout/templates), with argument validation on top. A typo or
-missing required argument fails the build instead of silently emitting nothing.
+greet("world");
+```
+``````
+
+```markdown {title: "custom include plugin"}
+:include-themed-box: Capacity approaching threshold {
+  severity: "warning",
+  tags: ["observability"]
+}
+```
 
 # Registering A Plugin
 
-List each plugin config under `plugins` in `extensions.json`. Paths resolve
+List each plugin config under `plugins` in [extensions.json](configuration/extensions). Paths resolve
 relative to your documentation root, like `cssResources` and `jsResources`.
 
 ```json {title: "extensions.json"}

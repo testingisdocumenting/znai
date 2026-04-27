@@ -21,7 +21,6 @@ import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 import org.testingisdocumenting.znai.resources.LocalResourcesResolver;
 import org.testingisdocumenting.znai.resources.ResourcesResolver;
-import org.testingisdocumenting.znai.template.TextTemplate;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 
 import java.nio.file.Path;
@@ -71,7 +70,6 @@ public class UserDefinedPluginConfig {
     private final String id;
     private final PluginRole role;
     private final Path templatePath;
-    private final TextTemplate compiledTemplate;
     private final Map<String, UserDefinedPluginArgument> arguments;
     private final PluginParamsDefinition paramsDefinition;
     private final List<Path> availableValuesPaths;
@@ -80,13 +78,11 @@ public class UserDefinedPluginConfig {
                             String id,
                             PluginRole role,
                             Path templatePath,
-                            TextTemplate compiledTemplate,
                             Map<String, UserDefinedPluginArgument> arguments) {
         this.configPath = configPath;
         this.id = id;
         this.role = role;
         this.templatePath = templatePath;
-        this.compiledTemplate = compiledTemplate;
         this.arguments = arguments;
         this.paramsDefinition = buildParamsDefinition(arguments);
         this.availableValuesPaths = arguments.values().stream()
@@ -133,10 +129,7 @@ public class UserDefinedPluginConfig {
             arguments.put(name, parseArgument(resourcesResolver, label, role, name, (Map<String, ?>) value));
         }
 
-        TextTemplate compiledTemplate = new TextTemplate(templatePath.getFileName().toString(),
-                resourcesResolver.textContent(templatePath));
-
-        return new UserDefinedPluginConfig(configPath, id, role, templatePath, compiledTemplate, arguments);
+        return new UserDefinedPluginConfig(configPath, id, role, templatePath, arguments);
     }
 
     @SuppressWarnings("unchecked")
@@ -239,10 +232,6 @@ public class UserDefinedPluginConfig {
 
     public Path getTemplatePath() {
         return templatePath;
-    }
-
-    public TextTemplate getCompiledTemplate() {
-        return compiledTemplate;
     }
 
     public Map<String, UserDefinedPluginArgument> getArguments() {
