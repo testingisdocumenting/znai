@@ -1,0 +1,1 @@
+* Fix: [Page Tabs](layout/page-tabs) produces correct llm.txt
