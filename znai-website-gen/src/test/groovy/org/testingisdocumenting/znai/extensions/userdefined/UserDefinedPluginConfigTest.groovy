@@ -1,0 +1,155 @@
+/*
+ * Copyright 2026 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.testingisdocumenting.znai.extensions.userdefined
+
+import org.junit.Test
+import org.testingisdocumenting.znai.extensions.PluginParamsFactory
+import org.testingisdocumenting.znai.parser.TestResourceResolver
+
+import java.nio.file.Paths
+
+import static org.testingisdocumenting.webtau.Matchers.code
+import static org.testingisdocumenting.webtau.Matchers.throwException
+import static org.testingisdocumenting.znai.parser.TestComponentsRegistry.TEST_COMPONENTS_REGISTRY
+
+class UserDefinedPluginConfigTest {
+    static PluginParamsFactory pluginParamsFactory = TEST_COMPONENTS_REGISTRY.pluginParamsFactory()
+
+    private TestResourceResolver resolver = new TestResourceResolver(Paths.get(""))
+
+    @Test
+    void "parses plugin config with inline available values"() {
+        UserDefinedPluginConfig config = loadConfig("user-plugin-simple.json")
+
+        config.id.should == "simple-note"
+        config.role.should == UserDefinedPluginConfig.PluginRole.INCLUDE
+
+        def freeForm = config.arguments["freeForm"]
+        freeForm.freeForm.should == true
+        freeForm.required.should == true
+
+        availableValues(config.arguments["category"]).should == ["info", "warning"]
+    }
+
+    @Test
+    void "resolves available values from a file reference"() {
+        UserDefinedPluginConfig config = loadConfig("user-plugin-referenced.json")
+
+        def category = config.arguments["category"]
+        [values: availableValues(category),
+         fileName: category.availableValuesPath.fileName.toString()].should ==
+                [values: ["info", "warning", "error"], fileName: "user-plugin-categories.json"]
+    }
+
+    @Test
+    void "freeForm without required defaults to optional and skips type"() {
+        UserDefinedPluginConfig config = loadConfig("user-plugin-optional-free-form.json")
+
+        def freeForm = config.arguments["freeForm"]
+        [freeForm: freeForm.freeForm, required: freeForm.required, paramType: freeForm.paramType].should ==
+                [freeForm: true, required: false, paramType: null]
+    }
+
+    @Test
+    void "supports fence type with required fenceContent"() {
+        UserDefinedPluginConfig config = loadRaw([id: "x", type: "fence", template: "user-plugin-fence.ftl",
+                                                  arguments: [fenceContent: [required: true]]])
+
+        [role: config.role,
+         fenceContent: config.fenceContentArgument.fenceContent,
+         required: config.fenceContentArgument.required].should ==
+                [role: UserDefinedPluginConfig.PluginRole.FENCE, fenceContent: true, required: true]
+    }
+
+    @Test
+    void "rejects invalid plugin type and misplaced special arguments"() {
+        code {
+            loadRaw([id: "x", type: "unknown", template: "t.ftl"])
+        } should throwException(~/unknown plugin type/)
+
+        code {
+            loadRaw([id: "x", type: "fence", template: "t.ftl", arguments: [freeForm: [required: true]]])
+        } should throwException(~/<freeForm> is only allowed for plugins with <type: include>/)
+
+        code {
+            loadRaw([id: "x", type: "include", template: "t.ftl", arguments: [fenceContent: [:]]])
+        } should throwException(~/<fenceContent> is only allowed for plugins with <type: fence>/)
+    }
+
+    @Test
+    void "requires id, type, and template at parse time"() {
+        code {
+            loadRaw([type: "include", template: "t.ftl"])
+        } should throwException(~/missing required string field <id>/)
+
+        code {
+            loadRaw([id: "x", template: "t.ftl"])
+        } should throwException(~/missing <type>/)
+
+        code {
+            loadRaw([id: "x", type: "include"])
+        } should throwException(~/missing required string field <template>/)
+    }
+
+    @Test
+    void "rejects unknown argument type and malformed reference"() {
+        code {
+            loadRaw([id: "x", type: "include", template: "t.ftl", arguments: [bad: [type: "wrong"]]])
+        } should throwException(~/unknown argument type/)
+
+        code {
+            loadRaw([id: "x", type: "include", template: "t.ftl", arguments: [bad: [type: "string", limitValuesTo: "no-dollar"]]])
+        } should throwException(~/limitValuesTo reference must start with/)
+    }
+
+    @Test
+    void "argument without limitValuesTo accepts any value of the declared type"() {
+        UserDefinedPluginConfig config = loadRaw([id: "x", type: "include", template: "user-plugin-simple.ftl",
+                                                  arguments: [title: [type: "string"]]])
+        def title = config.arguments["title"]
+        (title.paramType instanceof AvailableValuesParamType).should == false
+
+        def definition = config.getParamsDefinition()
+        def params = pluginParamsFactory.create("x", "", [title: "anything goes"])
+        definition.validateParamsAndHandleRenames(params).validationError.should == ""
+    }
+
+    @Test
+    void "builds param definition and validates against available values"() {
+        UserDefinedPluginConfig config = loadConfig("user-plugin-simple.json")
+        def definition = config.getParamsDefinition()
+
+        def validParams = pluginParamsFactory.create("simple-note", "hello", [category: "info"])
+        definition.validateParamsAndHandleRenames(validParams).validationError.should == ""
+
+        def invalidParams = pluginParamsFactory.create("simple-note", "hello", [category: "nope"])
+        def result = definition.validateParamsAndHandleRenames(invalidParams)
+        (result.validationError.length() > 0).should == true
+    }
+
+    private UserDefinedPluginConfig loadConfig(String name) {
+        return UserDefinedPluginConfig.load(resolver, name)
+    }
+
+    private UserDefinedPluginConfig loadRaw(Map<String, Object> raw) {
+        return UserDefinedPluginConfig.parse(resolver, Paths.get("test.json"), raw)
+    }
+
+    private static List<Object> availableValues(UserDefinedPluginArgument arg) {
+        return ((AvailableValuesParamType) arg.paramType).availableValues
+    }
+}

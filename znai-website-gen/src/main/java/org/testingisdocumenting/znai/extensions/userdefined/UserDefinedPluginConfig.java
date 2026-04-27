@@ -1,0 +1,278 @@
+/*
+ * Copyright 2026 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.testingisdocumenting.znai.extensions.userdefined;
+
+import org.testingisdocumenting.znai.extensions.Plugin;
+import org.testingisdocumenting.znai.extensions.PluginParamType;
+import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
+import org.testingisdocumenting.znai.resources.LocalResourcesResolver;
+import org.testingisdocumenting.znai.resources.ResourcesResolver;
+import org.testingisdocumenting.znai.utils.JsonUtils;
+
+import java.nio.file.Path;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class UserDefinedPluginConfig {
+    public enum PluginRole {
+        INCLUDE("include", UserDefinedIncludePlugin::new),
+        FENCE("fence", UserDefinedFencePlugin::new);
+
+        private final String typeId;
+        private final Function<UserDefinedPluginConfig, Plugin> factory;
+
+        PluginRole(String typeId, Function<UserDefinedPluginConfig, Plugin> factory) {
+            this.typeId = typeId;
+            this.factory = factory;
+        }
+
+        public Plugin createPlugin(UserDefinedPluginConfig config) {
+            return factory.apply(config);
+        }
+
+        static PluginRole fromTypeId(String typeId) {
+            for (PluginRole role : values()) {
+                if (role.typeId.equals(typeId)) {
+                    return role;
+                }
+            }
+            return null;
+        }
+
+        static String availableTypeIds() {
+            return Arrays.stream(values()).map(r -> r.typeId).collect(Collectors.joining(", "));
+        }
+    }
+
+    private static final Map<String, PluginParamType> ARGUMENT_TYPES = Map.of(
+            "number", PluginParamType.NUMBER,
+            "string", PluginParamType.STRING,
+            "list-of-number", PluginParamType.LIST_OR_SINGLE_NUMBER,
+            "list-of-string", PluginParamType.LIST_OR_SINGLE_STRING,
+            "list", PluginParamType.LIST_OF_ANY);
+
+    private final Path configPath;
+    private final String id;
+    private final PluginRole role;
+    private final Path templatePath;
+    private final Map<String, UserDefinedPluginArgument> arguments;
+    private final PluginParamsDefinition paramsDefinition;
+    private final List<Path> availableValuesPaths;
+
+    UserDefinedPluginConfig(Path configPath,
+                            String id,
+                            PluginRole role,
+                            Path templatePath,
+                            Map<String, UserDefinedPluginArgument> arguments) {
+        this.configPath = configPath;
+        this.id = id;
+        this.role = role;
+        this.templatePath = templatePath;
+        this.arguments = arguments;
+        this.paramsDefinition = buildParamsDefinition(arguments);
+        this.availableValuesPaths = arguments.values().stream()
+                .map(UserDefinedPluginArgument::getAvailableValuesPath)
+                .filter(Objects::nonNull)
+                .toList();
+    }
+
+    public static UserDefinedPluginConfig load(LocalResourcesResolver resourcesResolver, String pluginConfigPath) {
+        Path configPath = resourcesResolver.fullPath(pluginConfigPath);
+        Map<String, ?> raw = JsonUtils.deserializeAsMap(resourcesResolver.textContent(configPath));
+
+        Path previousCurrentFilePath = resourcesResolver.getCurrentFilePath();
+        try {
+            resourcesResolver.setCurrentFilePath(configPath);
+            return parse(resourcesResolver, configPath, raw);
+        } finally {
+            resourcesResolver.setCurrentFilePath(previousCurrentFilePath);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    static UserDefinedPluginConfig parse(ResourcesResolver resourcesResolver, Path configPath, Map<String, ?> raw) {
+        String label = "plugin config <" + configPath + ">";
+
+        String id = requireString(raw, "id", label);
+        PluginRole role = extractRole(raw, label);
+        String templateRelative = requireString(raw, "template", label);
+        Path templatePath = resourcesResolver.fullPath(templateRelative);
+
+        Map<String, ?> argumentsRaw = (Map<String, ?>) raw.get("arguments");
+        if (argumentsRaw == null) {
+            argumentsRaw = Collections.emptyMap();
+        }
+
+        Map<String, UserDefinedPluginArgument> arguments = new LinkedHashMap<>();
+        for (Map.Entry<String, ?> entry : argumentsRaw.entrySet()) {
+            String name = entry.getKey();
+            Object value = entry.getValue();
+            if (!(value instanceof Map)) {
+                throw new IllegalArgumentException(label + ": argument <" + name + "> must be an object");
+            }
+
+            arguments.put(name, parseArgument(resourcesResolver, label, role, name, (Map<String, ?>) value));
+        }
+
+        return new UserDefinedPluginConfig(configPath, id, role, templatePath, arguments);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static UserDefinedPluginArgument parseArgument(ResourcesResolver resourcesResolver,
+                                                           String label,
+                                                           PluginRole role,
+                                                           String name,
+                                                           Map<String, ?> raw) {
+        boolean required = Boolean.TRUE.equals(raw.get("required"));
+
+        if (UserDefinedPluginArgument.FENCE_CONTENT.equals(name)) {
+            if (role != PluginRole.FENCE) {
+                throw new IllegalArgumentException(label + ": argument <" + UserDefinedPluginArgument.FENCE_CONTENT +
+                        "> is only allowed for plugins with <type: fence>");
+            }
+            return UserDefinedPluginArgument.fenceContent(required);
+        }
+
+        if (UserDefinedPluginArgument.FREE_FORM.equals(name)) {
+            if (role != PluginRole.INCLUDE) {
+                throw new IllegalArgumentException(label + ": argument <" + UserDefinedPluginArgument.FREE_FORM +
+                        "> is only allowed for plugins with <type: include>");
+            }
+            return UserDefinedPluginArgument.freeForm(required);
+        }
+
+        String typeId = (String) raw.get("type");
+        if (typeId == null) {
+            throw new IllegalArgumentException(label + ": argument <" + name + "> is missing <type>");
+        }
+
+        PluginParamType baseType = ARGUMENT_TYPES.get(typeId);
+        if (baseType == null) {
+            throw new IllegalArgumentException("unknown argument type <" + typeId +
+                    ">, available: " + String.join(", ", ARGUMENT_TYPES.keySet()));
+        }
+
+        Object limitValuesToRaw = raw.get("limitValuesTo");
+        if (limitValuesToRaw == null) {
+            return UserDefinedPluginArgument.typed(name, baseType, required, null);
+        }
+
+        List<Object> availableValues;
+        Path availableValuesPath = null;
+
+        if (limitValuesToRaw instanceof List) {
+            availableValues = new ArrayList<>((List<Object>) limitValuesToRaw);
+        } else if (limitValuesToRaw instanceof String reference) {
+            if (!reference.startsWith("$")) {
+                throw new IllegalArgumentException(label + ": argument <" + name +
+                        "> limitValuesTo reference must start with $, got <" + reference + ">");
+            }
+            availableValuesPath = resourcesResolver.fullPath(reference.substring(1));
+            availableValues = new ArrayList<>(JsonUtils.deserializeAsList(resourcesResolver.textContent(availableValuesPath)));
+        } else {
+            throw new IllegalArgumentException(label + ": argument <" + name +
+                    "> limitValuesTo must be a list or a $fileReference");
+        }
+
+        PluginParamType paramType = new AvailableValuesParamType(baseType, availableValues);
+        return UserDefinedPluginArgument.typed(name, paramType, required, availableValuesPath);
+    }
+
+    private static PluginRole extractRole(Map<String, ?> raw, String label) {
+        Object typeRaw = raw.get("type");
+        if (typeRaw == null) {
+            throw new IllegalArgumentException(label + ": missing <type>");
+        }
+
+        if (!(typeRaw instanceof String typeId)) {
+            throw new IllegalArgumentException(label + ": <type> must be a string (one of " +
+                    PluginRole.availableTypeIds() + ")");
+        }
+
+        PluginRole role = PluginRole.fromTypeId(typeId);
+        if (role == null) {
+            throw new IllegalArgumentException(label + ": unknown plugin type <" + typeId +
+                    ">, available: " + PluginRole.availableTypeIds());
+        }
+
+        return role;
+    }
+
+    private static String requireString(Map<String, ?> raw, String key, String label) {
+        Object value = raw.get(key);
+        if (!(value instanceof String) || ((String) value).isEmpty()) {
+            throw new IllegalArgumentException(label + ": missing required string field <" + key + ">");
+        }
+
+        return (String) value;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Path getConfigPath() {
+        return configPath;
+    }
+
+    public Path getTemplatePath() {
+        return templatePath;
+    }
+
+    public Map<String, UserDefinedPluginArgument> getArguments() {
+        return arguments;
+    }
+
+    public PluginRole getRole() {
+        return role;
+    }
+
+    public PluginParamsDefinition getParamsDefinition() {
+        return paramsDefinition;
+    }
+
+    private static PluginParamsDefinition buildParamsDefinition(Map<String, UserDefinedPluginArgument> arguments) {
+        PluginParamsDefinition definition = new PluginParamsDefinition();
+        for (UserDefinedPluginArgument arg : arguments.values()) {
+            if (arg.isFreeForm() || arg.isFenceContent()) {
+                continue;
+            }
+
+            PluginParamType paramType = arg.getParamType();
+            if (arg.isRequired()) {
+                definition.addRequired(arg.getName(), paramType, "user-defined argument", paramType.example());
+            } else {
+                definition.add(arg.getName(), paramType, "user-defined argument", paramType.example());
+            }
+        }
+
+        return definition;
+    }
+
+    public UserDefinedPluginArgument getFreeFormArgument() {
+        return arguments.get(UserDefinedPluginArgument.FREE_FORM);
+    }
+
+    public UserDefinedPluginArgument getFenceContentArgument() {
+        return arguments.get(UserDefinedPluginArgument.FENCE_CONTENT);
+    }
+
+    public List<Path> getAvailableValuesPaths() {
+        return availableValuesPaths;
+    }
+}

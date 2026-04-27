@@ -1,0 +1,9 @@
+{
+  "id": "simple-fence",
+  "type": "fence",
+  "template": "user-plugin-fence.ftl",
+  "arguments": {
+    "fenceContent": {},
+    "lang": { "type": "string", "required": true, "limitValuesTo": ["java", "groovy"] }
+  }
+}

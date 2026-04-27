@@ -23,16 +23,19 @@ import org.testingisdocumenting.znai.extensions.inlinedcode.InlinedCodePlugin;
 import org.testingisdocumenting.znai.utils.ServiceLoaderUtils;
 
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toMap;
 
 public class Plugins {
     private static final Map<String, Plugin> includePluginsById = discoverIncludePlugins();
     private static final Map<String, Plugin> fencePluginsById = discoverFencePlugins();
     private static final Map<String, Plugin> inlineCodePluginsById = discoverInlinedCodePlugins();
+
+    private static final Set<String> builtInIncludeIds = Set.copyOf(includePluginsById.keySet());
+    private static final Set<String> builtInFenceIds = Set.copyOf(fencePluginsById.keySet());
 
     private static final PluginsTracker pluginsTracker = new PluginsTracker();
 
@@ -74,6 +77,35 @@ public class Plugins {
                 pluginsTracker.inlineCodePlugins.createParamsTracker(id));
     }
 
+    public static void registerUserPlugin(Plugin plugin) {
+        if (plugin instanceof IncludePlugin) {
+            registerUserPlugin(includePluginsById, builtInIncludeIds, plugin);
+        } else if (plugin instanceof FencePlugin) {
+            registerUserPlugin(fencePluginsById, builtInFenceIds, plugin);
+        } else {
+            throw new IllegalArgumentException("unsupported plugin type: " + plugin.getClass().getCanonicalName());
+        }
+    }
+
+    public static void removeUserPlugin(String id) {
+        if (builtInIncludeIds.contains(id) || builtInFenceIds.contains(id)) {
+            throw new IllegalStateException("cannot remove built-in plugin <" + id + ">");
+        }
+
+        includePluginsById.remove(id);
+        fencePluginsById.remove(id);
+    }
+
+    private static void registerUserPlugin(Map<String, Plugin> plugins, Set<String> builtInIds, Plugin plugin) {
+        String id = plugin.id();
+        if (builtInIds.contains(id)) {
+            throw new IllegalStateException("plugin with id <" + id + "> is already registered: " +
+                    plugins.get(id).getClass().getCanonicalName());
+        }
+
+        plugins.put(id, plugin);
+    }
+
     private static Plugin pluginById(Map<String, Plugin> plugins, String id) {
         final Plugin plugin = plugins.get(id);
         if (plugin == null) {
@@ -99,10 +131,13 @@ public class Plugins {
     private static <E extends Plugin> Map<String, Plugin> discoverPlugins(Class<E> pluginType) {
         final Set<E> list = ServiceLoaderUtils.load(pluginType);
 
-        final Map<String, Plugin> byId = list.stream().collect(toMap(Plugin::id, p -> p));
-        if (byId.size() < list.size()) {
-            throw new IllegalStateException("multiple plugins with the same id are detected. full list: \n" +
-                renderListOfPlugins(list));
+        final Map<String, Plugin> byId = new LinkedHashMap<>();
+        for (E plugin : list) {
+            Plugin prev = byId.put(plugin.id(), plugin);
+            if (prev != null) {
+                throw new IllegalStateException("multiple plugins with the same id are detected. full list: \n" +
+                        renderListOfPlugins(list));
+            }
         }
 
         return byId;

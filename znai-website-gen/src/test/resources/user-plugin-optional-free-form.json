@@ -1,0 +1,9 @@
+{
+  "id": "optional-note",
+  "type": "include",
+  "template": "user-plugin-optional-free-form.ftl",
+  "arguments": {
+    "freeForm": {},
+    "category": { "type": "string", "limitValuesTo": ["info", "warning"] }
+  }
+}

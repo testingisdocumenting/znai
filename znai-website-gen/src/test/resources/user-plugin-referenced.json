@@ -1,0 +1,9 @@
+{
+  "id": "referenced-note",
+  "type": "include",
+  "template": "user-plugin-simple.ftl",
+  "arguments": {
+    "freeForm": { "required": true },
+    "category": { "type": "string", "limitValuesTo": "$user-plugin-categories.json" }
+  }
+}

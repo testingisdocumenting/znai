@@ -378,7 +378,8 @@ synergy-with-testing
 plugins
     plugin-types
     default-parameters
-    javascript-function
+    javascript-plugin
+    user-defined-plugins
     development
 configuration
     basic
@@ -9142,8 +9143,8 @@ set to true.
 :include-image: visuals/regular-image.png
 ```
 
-# Plugins :: Javascript Function :: Overview
-answer-link: znai-from-export/plugins/javascript-function#overview
+# Plugins :: Javascript Plugin :: Overview
+answer-link: znai-from-export/plugins/javascript-plugin#overview
 
 Use `include-javascript-function` to delegate rendering of a block to a plain JavaScript function. Znai will create a
 DOM node for your function and hand it over together with:
@@ -9162,8 +9163,8 @@ DOM node for your function and hand it over together with:
 
 See [themeBox](#sample-function) definition at the end of this page.
 
-# Plugins :: Javascript Function :: Registering A Function
-answer-link: znai-from-export/plugins/javascript-function#registering-a-function
+# Plugins :: Javascript Plugin :: Registering A Function
+answer-link: znai-from-export/plugins/javascript-plugin#registering-a-function
 
 Attach your function to `window` under the name you want to reference from markdown. Load the JavaScript file through
 [`extensions.json`](configuration/extensions):
@@ -9178,8 +9179,8 @@ Attach your function to `window` under the name you want to reference from markd
 })();
 ```
 
-# Plugins :: Javascript Function :: Function Signature
-answer-link: znai-from-export/plugins/javascript-function#function-signature
+# Plugins :: Javascript Plugin :: Function Signature
+answer-link: znai-from-export/plugins/javascript-plugin#function-signature
 
 Your function receives three arguments:
 
@@ -9193,7 +9194,6 @@ Your function receives three arguments:
     current: "light" | "dark",
     subscribe(listener) {
         // listener is called with the new theme name whenever the theme changes
-        // returns an unsubscribe function
     }
 }
 ```
@@ -9205,8 +9205,7 @@ The [sample function](#sample-function) below returns a cleanup that logs to the
 
 ```js
 return function cleanup() {
-  unsubscribeFromTheme();
-  console.log("themeBox cleanup: removed theme subscription");
+  console.log("themeBox cleanup: block removed from the page");
 };
 ```
 
@@ -9214,8 +9213,8 @@ To see it fire, open your browser DevTools console on this page, then navigate t
 block and your cleanup runs. A single page visit triggers multiple cleanups because every `themeBox` rendered above is
 torn down.
 
-# Plugins :: Javascript Function :: Theme Toggle
-answer-link: znai-from-export/plugins/javascript-function#theme-toggle
+# Plugins :: Javascript Plugin :: Theme Toggle
+answer-link: znai-from-export/plugins/javascript-plugin#theme-toggle
 
 
 
@@ -9226,8 +9225,8 @@ done via
 themeObservable.subscribe(applyTheme);
 ```
 
-# Plugins :: Javascript Function :: Title
-answer-link: znai-from-export/plugins/javascript-function#title
+# Plugins :: Javascript Plugin :: Title
+answer-link: znai-from-export/plugins/javascript-plugin#title
 
 Pass `title` to render a title bar above the block. Znai handles the title through its shared container, so your
 function never sees it.
@@ -9239,8 +9238,8 @@ function never sees it.
 }
 ```
 
-# Plugins :: Javascript Function :: Wide
-answer-link: znai-from-export/plugins/javascript-function#wide
+# Plugins :: Javascript Plugin :: Wide
+answer-link: znai-from-export/plugins/javascript-plugin#wide
 
 Pass `wide: true` to let the block span the full width of the page, matching the behavior of wide images and iframes.
 
@@ -9254,8 +9253,8 @@ Pass `wide: true` to let the block span the full width of the page, matching the
 }
 ```
 
-# Plugins :: Javascript Function :: Styling With A Class Name
-answer-link: znai-from-export/plugins/javascript-function#styling-with-a-class-name
+# Plugins :: Javascript Plugin :: Styling With A Class Name
+answer-link: znai-from-export/plugins/javascript-plugin#styling-with-a-class-name
 
 Pass `className` to attach an arbitrary class to the parent node znai creates. Use it to add decorations around the
 rendered block without touching the function itself:
@@ -9268,6 +9267,12 @@ rendered block without touching the function itself:
 ```
 
 ```css
+.theme-box-with-border {
+    padding: 6px;
+    border: 2px dashed var(--znai-color-green);
+    border-radius: 6px;
+}
+
 .theme-box {
     box-sizing: border-box;
     width: 100%;
@@ -9313,6 +9318,7 @@ rendered block without touching the function itself:
 .theme-box-value {
     color: var(--znai-regular-text-color);
     word-break: break-word;
+    white-space: pre-wrap;
 }
 
 .theme-box-current-theme {
@@ -9320,32 +9326,27 @@ rendered block without touching the function itself:
     margin-top: 10px;
     color: var(--znai-regular-text-light-color);
 }
-
-.theme-box-with-border {
-    padding: 6px;
-    border: 2px dashed var(--znai-color-green);
-    border-radius: 6px;
-}
 ```
 
 
 The dashed outline comes from the class attached to the outermost wrapper — the box itself is untouched.
 
-# Plugins :: Javascript Function :: Search
-answer-link: znai-from-export/plugins/javascript-function#search
+# Plugins :: Javascript Plugin :: Search
+answer-link: znai-from-export/plugins/javascript-plugin#search
 
 Values passed via `args` participate in znai's local search. Searching for any word used inside the parameters will
 surface the page and the rendered block.
 
-# Plugins :: Javascript Function :: Sample Function
-answer-link: znai-from-export/plugins/javascript-function#sample-function
+# Plugins :: Javascript Plugin :: Sample Function
+answer-link: znai-from-export/plugins/javascript-plugin#sample-function
 
 The following function powers the example above. It demonstrates reading the initial theme and subscribing to future
 changes.
 
 ```js
 /*
- * custom javascript function registered with znai.
+ * custom javascript global function to render custom content within znai
+ * generated guides
  *
  * renders a panel that lists every argument passed via the plugin as
  * a key/value row. reacts to znai theme switches via the theme observable
@@ -9375,17 +9376,25 @@ changes.
 
   window.themeBox = function (node, args, themeObservable) {
     var box = createElement("div", "theme-box");
-    var titleEl = createElement("div", "theme-box-title", "args passed to the function");
+    var titleEl = createElement(
+      "div",
+      "theme-box-title",
+      "args passed to the function"
+    );
     var list = createElement("div", "theme-box-list");
     var themeEl = createElement("div", "theme-box-current-theme");
 
     var argKeys = Object.keys(args);
     if (argKeys.length === 0) {
-      list.appendChild(createElement("div", "theme-box-empty", "no args passed"));
+      list.appendChild(
+        createElement("div", "theme-box-empty", "no args passed")
+      );
     } else {
       argKeys.forEach(function (key) {
         list.appendChild(createElement("div", "theme-box-key", key));
-        list.appendChild(createElement("div", "theme-box-value", formatValue(args[key])));
+        list.appendChild(
+          createElement("div", "theme-box-value", formatValue(args[key]))
+        );
       });
     }
 
@@ -9400,15 +9409,205 @@ changes.
     }
 
     applyTheme(themeObservable.current);
-    var unsubscribeFromTheme = themeObservable.subscribe(applyTheme);
+    themeObservable.subscribe(applyTheme);
 
     return function cleanup() {
-      unsubscribeFromTheme();
-      console.log("themeBox cleanup: removed theme subscription");
+      console.log("themeBox cleanup: block removed from the page");
     };
   };
 })();
 ```
+
+# Plugins :: User Defined Plugins :: Overview
+answer-link: znai-from-export/plugins/user-defined-plugins#overview
+
+User-defined plugins let you register new `:include-<id>:` or fenced block plugins from documentation directly — no Java
+code, no rebuild of znai. Each plugin is a JSON file next to your docs that declares:
+
+* a unique `id` you'll reference from markdown
+* one or more `type`s (`include`, `fence`)
+* a FreeMarker `template` znai processes on every use
+* `arguments` — with types, optional allowed values, and a `required` flag
+
+Behind the scenes the plugin behaves like [include-template](layout/templates): znai renders the template with the
+parameters you passed, parses the output as markdown, and folds the result back into the page. Argument definitions
+drive validation, so a typo or missing required argument fails the build instead of silently producing empty output.
+
+# Plugins :: User Defined Plugins :: Registering A Plugin
+answer-link: znai-from-export/plugins/user-defined-plugins#registering-a-plugin
+
+List each plugin config under `plugins` inside `extensions.json`. Paths are resolved the same way as `cssResources` or
+`jsResources` — relative to your documentation root.
+
+# Plugins :: User Defined Plugins :: Plugin Config Shape
+answer-link: znai-from-export/plugins/user-defined-plugins#plugin-config-shape
+
+```json
+{
+  "id": "themed-box",
+  "type": "include",
+  "template": "plugins/themed-box-plugin.ftl",
+  "arguments": {
+    "freeForm": { "type": "string", "required": true },
+    "severity": { "type": "string", "required": true, "available": ["info", "success", "warning"] },
+    "tags": { "type": "list-of-string", "available": "$plugins/themed-box-tags.json" }
+  }
+}
+```
+
+The `id` is what you'll type after the `:include-` or ````` prefix in markdown. A config registers exactly one role —
+if you need both an include and a fence variant of the same template, write two configs that point at the same `.ftl`.
+
+# Plugins :: User Defined Plugins :: Arguments
+answer-link: znai-from-export/plugins/user-defined-plugins#arguments
+
+Every entry under `arguments` defines one parameter users can pass from markdown.
+
+
+* `type` — one of `number`, `string`, `list-of-number`, `list-of-string`, `list`
+* `required` — optional, defaults to `false`
+* `available` — optional; either an inline array of allowed values or a `$path/to/file.json` reference to a JSON file that
+contains the array
+
+Passing an unknown argument, the wrong type, or a value outside `available` fails the build with the same
+error-reporting machinery used by built-in plugins.
+
+## Available Values From A File
+
+Point `available` at a JSON array file when the allowed set is maintained elsewhere — a team-owned list of tags, a set
+of regional names, severity levels shared with another tool:
+
+```json
+["demo", "theme", "observability", "latency", "deployment"]
+```
+
+Znai reads the file via the same resource resolver used for every other documentation asset, so it works for files next
+to `toc`, on the lookup path, or packaged inside a jar.
+
+# Plugins :: User Defined Plugins :: Special Arguments
+answer-link: znai-from-export/plugins/user-defined-plugins#special-arguments
+
+Two argument names have dedicated meanings:
+
+* `freeForm` — maps to the free parameter, i.e. the text right after the plugin id and before the `{...}` options block.
+Use it for the single primary input (a message, an entity name, a URL).
+* `fenceContent` — present only on fence plugins; receives the text inside the fenced block. `fenceContent` does not need
+a `type` — the raw text is passed through to the template untouched.
+
+Both names are skipped during parameter validation — the free param and the fence body are always present by
+construction.
+
+# Plugins :: User Defined Plugins :: Template
+answer-link: znai-from-export/plugins/user-defined-plugins#template
+
+The template is processed by [FreeMarker](https://freemarker.apache.org), just like
+[include-template](layout/templates). Every argument (including `freeForm` and `fenceContent`) is available as a
+top-level variable. The template can emit anything znai knows how to parse: markdown, fenced code blocks, calls to other
+plugins.
+
+```ftl
+:include-javascript-function: themeBox {
+  label: "${freeForm}",
+  severity: "${severity}",
+  tags: [<#list tags! as tag>"${tag}"<#sep>, </#list>],
+  title: "${severity?upper_case} box"
+}
+```
+
+The example above wraps [include-javascript-function](plugins/javascript-plugin) and injects the current `severity` and
+`tags` into its args. Anything renderable by the inner plugin stays available — you're just shrinking the surface area
+your writers need to remember.
+
+# Plugins :: User Defined Plugins :: Usage
+answer-link: znai-from-export/plugins/user-defined-plugins#usage
+
+```markdown
+:include-themed-box: Deploy finished in 4 minutes flat {
+  severity: "success",
+  tags: ["deployment", "latency"]
+}
+```
+
+
+```markdown
+:include-themed-box: Capacity approaching threshold {
+  severity: "warning",
+  tags: ["observability"]
+}
+```
+
+
+Omit a required argument or pass a tag not listed in `themed-box-tags.json` and the build stops with a descriptive
+error.
+
+# Plugins :: User Defined Plugins :: Fence Plugins
+answer-link: znai-from-export/plugins/user-defined-plugins#fence-plugins
+
+Use `fence` (or include it in the list of types) to register a fenced block plugin. Fence plugins receive their body
+verbatim through the special `fenceContent` argument — you decide how to hand it to the template.
+
+```json
+{
+  "id": "custom-fence-block",
+  "type": "fence",
+  "template": "plugins/custom-fence-block-plugin.ftl",
+  "arguments": {
+    "fenceContent": {},
+    "title": { "type": "string" }
+  }
+}
+```
+
+```ftl
+:include-javascript-function: themeBox {
+  title: "${title!'code snippet'}",
+  snippet: "${fenceContent?json_string}"
+}
+```
+
+FreeMarker's `?json_string` built-in escapes the content so it stays a valid JSON string when the template passes it
+into another plugin's params block. That keeps multi-line bodies, quotes, and backslashes intact.
+
+Usage from markdown — note the fence markers are the plugin id, not a language hint:
+
+```
+```custom-fence-block {title: "greet.js"}
+function greet(name) {
+  console.log("hello, " + name);
+}
+
+greet("world");
+```
+```
+
+
+The body reaches `include-javascript-function` verbatim as the `snippet` arg, so the underlying JavaScript renderer sees
+exactly what you typed — whitespace, newlines, punctuation and all. Any fence plugin can use the same pattern to forward
+content to diagram renderers, code annotators, or other include plugins.
+
+# Plugins :: User Defined Plugins :: Rebuild Detection
+answer-link: znai-from-export/plugins/user-defined-plugins#rebuild-detection
+
+Znai treats the plugin config, the template, and any referenced `available` files as auxiliary files. Edit any of them
+and znai regenerates the pages that use the plugin — the same contract as template includes and snippet files.
+
+# Plugins :: User Defined Plugins :: Search
+answer-link: znai-from-export/plugins/user-defined-plugins#search
+
+Values you pass to the plugin flow into znai's local search via the same mechanism used by
+`include-javascript-function`. Writers don't have to duplicate content for the page to surface for a relevant query.
+
+# Plugins :: User Defined Plugins :: When To Use
+answer-link: znai-from-export/plugins/user-defined-plugins#when-to-use
+
+Reach for user-defined plugins when:
+
+* you find yourself pasting the same include plugin block over and over with only a few values changed,
+* you want writers to pick from a constrained set of values (enum-like `severity`, a registry of tags),
+* a snippet crosses multiple plugins and you want one entry point that composes them consistently.
+
+If the reuse is purely structural and needs no validation or constrained values, [include-template](layout/templates)
+may be enough. User-defined plugins add the validation layer on top.
 
 # Plugins :: Development :: PlaceHolder
 answer-link: znai-from-export/plugins/development#placeholder
@@ -9461,8 +9660,8 @@ Example above targets both light and dark theme. If you want to target dark them
 answer-link: znai-from-export/configuration/extensions
 
 Add `extensions.json` next to your `toc` file to inject custom CSS, JavaScript, or HTML into the generated site. This is
-how you bring in your own stylesheets, load scripts used by the [javascript function
-plugin](plugins/javascript-function), embed tracking snippets, or ship extra static files along with the docs.
+how you bring in your own stylesheets, load scripts used by the [javascript plugin](plugins/javascript-plugin), embed
+tracking snippets, or ship extra static files along with the docs.
 
 
 All paths are resolved relative to your documentation root (the directory that holds the `toc` file).
@@ -9479,8 +9678,8 @@ Note: a file named `style.css` placed next to `toc` is picked up automatically, 
 # Configuration :: Extensions :: jsResources
 answer-link: znai-from-export/configuration/extensions#jsresources
 
-List of JavaScript files to load on every page. Use this to register custom functions for the [javascript function
-plugin](plugins/javascript-function).
+List of JavaScript files to load on every page. Use this to register custom functions for the [javascript
+plugin](plugins/javascript-plugin).
 
 # Configuration :: Extensions :: htmlResources
 answer-link: znai-from-export/configuration/extensions#htmlresources

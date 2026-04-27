@@ -87,6 +87,7 @@ plugins
     plugin-types
     default-parameters
     javascript-plugin
+    user-defined-plugins
     development
 configuration
     basic

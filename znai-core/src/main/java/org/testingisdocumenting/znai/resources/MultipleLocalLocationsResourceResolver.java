@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class MultipleLocalLocationsResourceResolver implements ResourcesResolver {
+public class MultipleLocalLocationsResourceResolver implements LocalResourcesResolver {
     private final TableOfContents toc;
     private final Path docRootPath;
     private final List<Path> lookupPaths;
@@ -98,7 +98,13 @@ public class MultipleLocalLocationsResourceResolver implements ResourcesResolver
         return Stream.concat(relativeToCurrent, Stream.concat(absoluteLocation, lookedUpInLocations)).distinct();
     }
 
+    @Override
     public void setCurrentFilePath(Path currentFilePath) {
         this.currentFilePath.set(currentFilePath);
+    }
+
+    @Override
+    public Path getCurrentFilePath() {
+        return currentFilePath.get();
     }
 }

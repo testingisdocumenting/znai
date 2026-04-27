@@ -28,12 +28,13 @@ import java.util.Map;
 import static freemarker.template.Configuration.VERSION_2_3_23;
 
 public class TextTemplate {
+    private static final Configuration SHARED_CONFIGURATION = new Configuration(VERSION_2_3_23);
+
     private final Template template;
 
     public TextTemplate(String templateName, String templateText) {
-        Configuration cfg = new Configuration(VERSION_2_3_23);
         try {
-            template = new Template(templateName, new StringReader(templateText), cfg);
+            template = new Template(templateName, new StringReader(templateText), SHARED_CONFIGURATION);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

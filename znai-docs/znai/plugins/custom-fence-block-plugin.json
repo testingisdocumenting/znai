@@ -1,0 +1,9 @@
+{
+  "id": "custom-fence-block",
+  "type": "fence",
+  "template": "plugins/custom-fence-block-plugin.ftl",
+  "arguments": {
+    "fenceContent": {},
+    "title": { "type": "string" }
+  }
+}
