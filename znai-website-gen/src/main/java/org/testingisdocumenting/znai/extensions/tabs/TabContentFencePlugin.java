@@ -21,6 +21,7 @@ import org.testingisdocumenting.znai.core.ComponentsRegistry;
 import org.testingisdocumenting.znai.extensions.PluginParams;
 import org.testingisdocumenting.znai.extensions.PluginResult;
 import org.testingisdocumenting.znai.extensions.fence.FencePlugin;
+import org.testingisdocumenting.znai.markdown.PageMarkdownSection;
 import org.testingisdocumenting.znai.parser.MarkupParser;
 import org.testingisdocumenting.znai.parser.MarkupParserResult;
 import org.testingisdocumenting.znai.search.SearchScore;
@@ -29,10 +30,12 @@ import org.testingisdocumenting.znai.utils.CollectionUtils;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TabContentFencePlugin implements FencePlugin {
     private MarkupParserResult parserResult;
+    private String tabId;
 
     @Override
     public String id() {
@@ -46,7 +49,7 @@ public class TabContentFencePlugin implements FencePlugin {
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, Path markupPath, PluginParams pluginParams, String content) {
-        String tabId = stripQuotes(pluginParams.getFreeParam());
+        tabId = stripQuotes(pluginParams.getFreeParam());
         if (tabId == null || tabId.isEmpty()) {
             throw new IllegalArgumentException("tab-content requires a tab id, e.g. ```tab-content my-tab-id");
         }
@@ -67,6 +70,20 @@ public class TabContentFencePlugin implements FencePlugin {
     @Override
     public List<SearchText> textForSearch() {
         return List.of(SearchScore.STANDARD.text(parserResult.getAllText()));
+    }
+
+    @Override
+    public String markdownRepresentation() {
+        if (parserResult == null || parserResult.markdown() == null) {
+            return "";
+        }
+
+        String content = parserResult.markdown().sections().stream()
+                .map(PageMarkdownSection::markdown)
+                .collect(Collectors.joining("\n\n"));
+
+        String tabIdParam = tabId.contains(" ") ? "\"" + tabId + "\"" : tabId;
+        return "`````tab-content " + tabIdParam + "\n" + content + "\n`````";
     }
 
     private static String stripQuotes(String value) {

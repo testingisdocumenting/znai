@@ -19,6 +19,7 @@ package org.testingisdocumenting.znai.extensions.tabs
 import org.testingisdocumenting.znai.extensions.PluginParamsFactory
 import org.testingisdocumenting.znai.parser.TestComponentsRegistry
 import org.testingisdocumenting.znai.parser.TestMarkupParser
+import org.testingisdocumenting.znai.parser.commonmark.MarkdownParser
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -65,14 +66,55 @@ class TabContentFencePluginTest {
         result.plugin.textForSearch().text.should == ['test java markup']
     }
 
+    @Test
+    void "collects auxiliary files from inner content"() {
+        def plugin = processAndGetPlugin("java", "![dummy](dummy.png)", false).plugin
+
+        def auxFiles = plugin.auxiliaryFiles(null).toList()
+        auxFiles.path.fileName*.toString().should == ['dummy.png']
+    }
+
+    @Test
+    void "image inside tab-content ends up in page level auxiliary files"() {
+        def componentsRegistry = new TestComponentsRegistry()
+        def parser = new MarkdownParser(componentsRegistry)
+        componentsRegistry.defaultParser = parser
+
+        def parseResult = parser.parse(Paths.get("test.md"),
+                "shared text\n\n" +
+                "```tab-content java\n" +
+                "![dummy](dummy.png)\n" +
+                "```\n")
+
+        parseResult.auxiliaryFiles().path.fileName*.toString().should == ['dummy.png']
+    }
+
+    @Test
+    void "image inside tab-content nested in attention-note ends up in page level auxiliary files"() {
+        def componentsRegistry = new TestComponentsRegistry()
+        def parser = new MarkdownParser(componentsRegistry)
+        componentsRegistry.defaultParser = parser
+
+        def parseResult = parser.parse(Paths.get("test.md"),
+                "~~~~attention-note\n" +
+                "```tab-content java\n" +
+                "![dummy](dummy.png)\n" +
+                "```\n" +
+                "~~~~\n")
+
+        parseResult.auxiliaryFiles().path.fileName*.toString().should == ['dummy.png']
+    }
+
     private static List<Map> process(String tabId, String markup) {
         def result = processAndGetPlugin(tabId, markup)
         return result.result.docElements.collect { it.toMap() }
     }
 
-    private static Map processAndGetPlugin(String tabId, String markup) {
+    private static Map processAndGetPlugin(String tabId, String markup, boolean isFakeParser = true) {
         def componentsRegistry = new TestComponentsRegistry()
-        componentsRegistry.defaultParser = new TestMarkupParser()
+        componentsRegistry.defaultParser = isFakeParser ?
+                new TestMarkupParser() :
+                new MarkdownParser(componentsRegistry)
 
         def plugin = new TabContentFencePlugin()
         def result = plugin.process(componentsRegistry, Paths.get("test.md"),
