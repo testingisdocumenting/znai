@@ -57,20 +57,32 @@ const HIGHLIGHT_PARAMS = [
   HIGHLIGHT_CONTEXT_PARAM,
 ];
 
-export function buildHighlightUrl(params: HighlightParams): string {
+function buildCurrentPageUrl(): URL {
   let builtUrl = location.origin + location.pathname;
   if (!builtUrl.endsWith("/")) {
     builtUrl += "/";
   }
 
   const url = new URL(builtUrl);
-  // preserve existing query params
   new URLSearchParams(location.search).forEach((value, key) => {
     url.searchParams.set(key, value);
   });
 
-  // clear existing highlight params
   HIGHLIGHT_PARAMS.forEach((p) => url.searchParams.delete(p));
+
+  return url;
+}
+
+export function extractCurrentQueryParams(): Record<string, string> {
+  const result: Record<string, string> = {};
+  buildCurrentPageUrl().searchParams.forEach((value, key) => {
+    result[key] = value;
+  });
+  return result;
+}
+
+export function buildHighlightUrl(params: HighlightParams): string {
+  const url = buildCurrentPageUrl();
 
   url.searchParams.set(HIGHLIGHT_PREFIX_PARAM, encodeURIComponent(params.prefix));
   url.searchParams.set(HIGHLIGHT_SELECTION_PARAM, encodeURIComponent(params.selection));

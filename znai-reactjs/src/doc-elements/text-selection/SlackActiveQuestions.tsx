@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useState } from "react";
-import { currentPageIdWithDocId, pageIdFromTocItem } from "../../structure/DocumentationNavigation";
+import React, { useState } from "react";
 import { getDocMeta } from "../../structure/docMeta";
 import { Notification } from "../../components/Notification";
 import { HighlightedText } from "./HighlightedText";
-import { TocItem } from "../../structure/TocItem";
-import { errorNotifications } from "../../components/DismissableErrorIndicators";
 import { fetchWithCredentials } from "../../utils/fetchWithCredentials";
 
 import { ResolveQuestionButton } from "./ResolveQuestionButton";
-import { removeTrailingSlashFromQueryParam } from "./queryParamUtils";
 
 import "./SlackActiveQuestions.css";
 
-interface Question {
+export interface SlackQuestion {
   id: string;
   selectedText: string;
   selectedPrefix: string;
@@ -37,68 +33,21 @@ interface Question {
   context: string;
   slackLink: string;
   slackMessageTs: string;
+  queryParams: Record<string, string>;
   resolved: boolean;
 }
 
-const SLACK_ERROR_ID = "slack-connection-error";
+interface Props {
+  containerNode: HTMLElement;
+  questions: SlackQuestion[];
+  matchedQuestionTs?: string;
+  onResolved: (slackMessageTs: string) => void;
+}
 
-export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode: HTMLElement; tocItem: TocItem }) {
-  const [questions, setQuestions] = useState<Question[]>([]);
+export function SlackActiveQuestions({ containerNode, questions, matchedQuestionTs, onResolved }: Props) {
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
-  const params = new URLSearchParams(window.location.search);
-  const questionId = params.get("questionId") || "";
-
-  const pageId = pageIdFromTocItem(tocItem);
-
-  useEffect(() => {
-    void fetchActiveQuestions();
-  }, [pageId]);
-
-  async function fetchActiveQuestions() {
-    try {
-      const pageId = currentPageIdWithDocId();
-      const baseUrl = getDocMeta().slackActiveQuestionsUrl;
-      if (!baseUrl) {
-        return;
-      }
-
-      const url = `${baseUrl}?pageId=${encodeURIComponent(pageId)}&questionId=${questionId}`;
-
-      const response = await fetchWithCredentials(url);
-
-      if (response.ok) {
-        const data = await response.json();
-        const questions = data.map((item: any) => ({
-          selectedText: item.selectedText,
-          selectedPrefix: item.selectedPrefix,
-          selectedSuffix: item.selectedSuffix,
-          question: item.question,
-          context: item.context,
-          slackLink: item.slackLink,
-          slackMessageTs: item.slackMessageTs,
-          id: item.id,
-          resolved: item.resolved,
-        }));
-        setQuestions(questions);
-      } else {
-        handleFetchError(`Failed to fetch slack questions: ${response.status} ${response.statusText}`);
-        setQuestions([]);
-      }
-    } catch (err) {
-      handleFetchError(`Failed to fetch slack questions: ${err}`);
-    }
-  }
-
-  function handleFetchError(errorMessage: string) {
-    console.error(errorMessage);
-    errorNotifications.notifyError({
-      id: SLACK_ERROR_ID,
-      message: "Slack conversations are offline",
-    });
-  }
-
-  async function resolveQuestionPost(question: Question) {
+  async function resolveQuestionPost(question: SlackQuestion) {
     try {
       const response = await fetchWithCredentials(
         getDocMeta().resolveSlackQuestionUrl! + "/" + question.slackMessageTs,
@@ -109,7 +58,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
 
       if (response.ok) {
         setNotification({ type: "success", message: "Resolved slack question" });
-        setQuestions(questions.filter((q) => question.slackMessageTs !== q.slackMessageTs));
+        onResolved(question.slackMessageTs);
       } else {
         setNotification({ type: "error", message: `Failed to resolve question: ${response.statusText}` });
       }
@@ -142,8 +91,6 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
       </div>
     );
 
-    const cleanedUpQuestionId = removeTrailingSlashFromQueryParam(questionId);
-
     return (
       <HighlightedText
         key={question.slackMessageTs}
@@ -154,7 +101,7 @@ export function SlackActiveQuestions({ containerNode, tocItem }: { containerNode
         question={question.question}
         context={question.context}
         additionalView={additionalView}
-        displayBubbleAndScrollIntoView={!!cleanedUpQuestionId && question.id === cleanedUpQuestionId}
+        displayBubbleAndScrollIntoView={question.slackMessageTs === matchedQuestionTs}
       />
     );
   });

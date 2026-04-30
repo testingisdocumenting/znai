@@ -17,7 +17,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { findPrefixSuffixAndMatch } from "./textSelectionBuilder";
 
-import { buildHighlightUrl } from "./highlightUrl";
+import { buildHighlightUrl, extractCurrentQueryParams } from "./highlightUrl";
 
 import { getDocMeta } from "../../structure/docMeta";
 import { fetchWithCredentials } from "../../utils/fetchWithCredentials";
@@ -250,13 +250,22 @@ export function TextSelectionMenu({ containerNode, tocItem }: { containerNode: H
       return;
     }
 
+    const pageUrl = buildHighlightUrl({
+      ...panelData!.prefixSuffixMatch,
+      question: question,
+      context: panelData!.context,
+    });
+
     const body = {
       selectedText: panelData!.prefixSuffixMatch.selection,
       selectedPrefix: panelData!.prefixSuffixMatch.prefix,
       selectedSuffix: panelData!.prefixSuffixMatch.suffix,
       pageId: currentPageIdWithDocId(),
       pageOrigin: document.location.origin,
+      pageUrl,
+      queryParams: extractCurrentQueryParams(),
       slackChannel: getDocMeta().slackChannel,
+      slackAttn: getDocMeta().slackAttn || [],
       question: question,
       context: panelData!.context,
       persist: getDocMeta().persistAskInSlack,

@@ -1,7 +1,6 @@
 import os
 import json
 import csv
-import uuid
 from datetime import datetime, timedelta
 from collections import defaultdict
 from flask import Flask, request, jsonify
@@ -28,7 +27,7 @@ if not slack_token:
 slack_client = WebClient(token=slack_token)
 
 CSV_FILE = "active_questions.csv"
-CSV_HEADERS = ["id", "timestamp", "pageId", "pageUrl", "context", "selectedText", "selectedPrefix", "selectedSuffix", "question", "slackLink", "username", "channel", "slackMessageTs", "resolved"]
+CSV_HEADERS = ["id", "timestamp", "pageId", "pageUrl", "queryParams", "context", "selectedText", "selectedPrefix", "selectedSuffix", "question", "slackLink", "username", "channel", "slackMessageTs", "resolved"]
 
 TRACKING_CSV_FILE = "tracking_events.csv"
 TRACKING_CSV_HEADERS = ["docId", "pageId", "timestamp", "eventType",  "data"]
@@ -48,17 +47,19 @@ def ask_in_slack():
             return jsonify({"error": "No JSON data provided"}), 400
 
 
-        question_id = str(uuid.uuid4())
         page_id = data.get('pageId')
         page_origin = data.get('pageOrigin')
-        page_url = f"{page_origin}/{page_id}/?questionId={question_id}"
+        page_url = data.get('pageUrl') or f"{page_origin}/{page_id}/"
+        query_params = data.get('queryParams') or {}
         selected_text = data.get('selectedText')
         selected_prefix = data.get('selectedPrefix', '')
         selected_suffix = data.get('selectedSuffix', '')
         username = data.get('username')
         slack_channel = data.get('slackChannel')
+        slack_attn = data.get('slackAttn') or []
         question = data.get('question')
         context = data.get('context')
+        persist = data.get('persist', True)
 
         print(f"Selected text: {selected_text[:100] if selected_text else None}...")
         print(f"Page ID: {page_id}")
@@ -74,7 +75,7 @@ def ask_in_slack():
         if not slack_channel:
             return jsonify({"error": "Missing required field: slackChannel"}), 400
         
-        slack_message = format_slack_message(username, question, context, page_url)
+        slack_message = format_slack_message(username, question, context, page_url, slack_attn)
         print(f"Slack message blocks: {json.dumps(slack_message, indent=2)}")
         
         result = slack_client.chat_postMessage(
@@ -85,19 +86,22 @@ def ask_in_slack():
         message_ts = result['ts']
         slack_link = f"https://slack.com/archives/{slack_channel}/p{message_ts.replace('.', '')}"
         
-        persist_questions_to_csv([{
-            'id': question_id,
-            'pageId': page_id,
-            'context': context or '',
-            'selectedText': selected_text or '',
-            'selectedPrefix': selected_prefix,
-            'selectedSuffix': selected_suffix,
-            'question': question,
-            'slackLink': slack_link,
-            'channel': slack_channel,
-            'slackMessageTs': message_ts,
-            'resolved': False,
-        }])
+        if persist:
+            persist_questions_to_csv([{
+                'id': message_ts,
+                'pageId': page_id,
+                'pageUrl': page_url,
+                'queryParams': json.dumps(query_params),
+                'context': context or '',
+                'selectedText': selected_text or '',
+                'selectedPrefix': selected_prefix,
+                'selectedSuffix': selected_suffix,
+                'question': question,
+                'slackLink': slack_link,
+                'channel': slack_channel,
+                'slackMessageTs': message_ts,
+                'resolved': False,
+            }])
         
         print(f"Message posted successfully: {message_ts}")
         return jsonify({"success": True, "ts": message_ts, "slack_link": slack_link}), 200
@@ -133,6 +137,7 @@ def load_questions_from_csv():
         reader = csv.DictReader(csvfile)
         for row in reader:
             row['resolved'] =  row['resolved'].lower() == 'true'
+            row['queryParams'] = json.loads(row['queryParams']) if row.get('queryParams') else {}
             questions.append(row)
 
     return questions
@@ -174,10 +179,9 @@ def check_slack_message_completion(channel, message_ts):
 def get_active_questions():
     try:
         page_id = request.args.get('pageId')
-        question_id = request.args.get('questionId')
         questions = load_questions_from_csv()
-        questions = [q for q in questions if q.get('pageId') == page_id and (q.get('resolved') == False or q.get('id') == question_id)]
-        
+        questions = [q for q in questions if q.get('pageId') == page_id and q.get('resolved') == False]
+
         return jsonify(questions), 200
         
     except Exception as e:
@@ -376,11 +380,15 @@ def get_doc_stats():
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
-def format_slack_message(username, question, context, page_url):
+def format_slack_message(username, question, context, page_url, slack_attn):
     message_parts = [f"@{username} <{page_url}|asked>: {question}"]
 
     if context:
         message_parts.append(context)
+
+    attn_suffix = " ".join(f"<@{user}>" for user in slack_attn)
+    if attn_suffix:
+        message_parts.append(f"({attn_suffix})")
 
     return "\n\n".join(message_parts)
 
