@@ -23,15 +23,16 @@ import org.testingisdocumenting.znai.utils.ResourceUtils
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
 import java.nio.file.Path
-import java.nio.file.Paths
 import java.util.stream.Stream
 
 class TestResourceResolver implements LocalResourcesResolver {
     private Path root
+    private Path docRoot
     private Path currentFilePath
 
     TestResourceResolver(Path root) {
         this.root = root.toAbsolutePath()
+        this.docRoot = this.root.resolve("src/test/resources")
     }
 
     @Override
@@ -70,24 +71,22 @@ class TestResourceResolver implements LocalResourcesResolver {
 
     @Override
     Path fullPath(String path) {
-        def pathToResolve = "src/test/resources/" + path
-        return root ? root.resolve(pathToResolve) :
-                Paths.get(pathToResolve).toAbsolutePath()
+        return docRoot.resolve(path).normalize()
     }
 
     @Override
     Path docRootRelativePath(Path path) {
-        return path.fileName
+        return docRoot.relativize(path.toAbsolutePath().normalize())
     }
 
     @Override
     boolean isInsideDoc(Path path) {
-        return path.toAbsolutePath().startsWith(root)
+        return path.toAbsolutePath().normalize().startsWith(docRoot)
     }
 
     @Override
     boolean isLocalFile(String path) {
-        return ResourceUtils.resourceStream(path) != null
+        return canResolve(path)
     }
 
     @Override

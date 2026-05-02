@@ -64,7 +64,7 @@ public interface ResourcesResolver {
 
         Path deployRelativePath = isInsideDoc(fullPath) ?
                 docRelativePath:
-                Paths.get(origin);
+                Paths.get(origin).normalize();
 
         return AuxiliaryFile.runTime(fullPath, deployRelativePath);
     }

@@ -67,18 +67,19 @@ public class MultipleLocalLocationsResourceResolver implements LocalResourcesRes
     @Override
     public Path fullPath(String path) {
         return allLocationsStream(path).filter(Files::exists).findFirst()
+                .map(Path::normalize)
                 .orElseThrow(() -> new IllegalStateException(
                         "either file disappeared or canResolve implementation needs to be checked."));
     }
 
     @Override
     public Path docRootRelativePath(Path path) {
-        return docRootPath.relativize(path);
+        return docRootPath.relativize(path.toAbsolutePath().normalize());
     }
 
     @Override
     public boolean isInsideDoc(Path path) {
-        return path.toAbsolutePath().startsWith(docRootPath);
+        return path.toAbsolutePath().normalize().startsWith(docRootPath);
     }
 
     @Override
