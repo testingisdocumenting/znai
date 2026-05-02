@@ -27,6 +27,10 @@
     color: var(--znai-regular-text-color);
 }
 
+.znai-tooltip.mobile .znai-footnote-preview-container {
+    width: calc(100vw - 16px);
+}
+
 .znai-footnote-preview-label {
     position: absolute;
     display: flex;

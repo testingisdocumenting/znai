@@ -1,0 +1,1 @@
+* Fix: Correctly display [Footnote Preview](flow/footnotes) preview in narrow view port
