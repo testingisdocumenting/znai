@@ -72,56 +72,6 @@ curl -X POST http://localhost:5111/ask-in-slack \
   }'
 ```
 
-### Testing from Browser (Cross-Domain)
-
-Create a simple HTML file to test CORS:
-
-```html
-<!DOCTYPE html>
-<html>
-<body>
-<script>
-fetch('http://localhost:5000/ask-in-slack', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    username: 'U1234567890',
-    message: 'Test message from browser',
-    link: 'https://example.com'
-  })
-})
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error('Error:', error));
-</script>
-</body>
-</html>
-```
-
-## Finding Slack User IDs
-
-To find a user's Slack ID:
-1. In Slack, click on the user's profile
-2. Click the three dots menu > "Copy member ID"
-3. The ID will look like "U1234567890"
-
-Alternatively, you can use the username directly (without @) and the bot will attempt to tag them.
-
-## Message Format
-
-The `message` field can be:
-- A simple string: `"How do I configure the API?"`
-- An array of content blocks for mixed text and code:
-  ```json
-  [
-    {"type": "text", "content": "Here's my code:"},
-    {"type": "code", "content": "print('Hello')", "language": "python"},
-    {"type": "text", "content": "Why doesn't it work?"}
-  ]
-  ```
-
 ## Troubleshooting
 
 1. **401 Unauthorized**: Check your SLACK_BOT_TOKEN

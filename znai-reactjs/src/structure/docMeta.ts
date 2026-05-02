@@ -23,6 +23,7 @@ export interface DocMeta {
   type: string;
   previewEnabled: boolean;
   slackChannel?: string;
+  slackAttn?: string[];
   sendToSlackUrl?: string;
   persistAskInSlack?: boolean;
   slackActiveQuestionsUrl?: string;
