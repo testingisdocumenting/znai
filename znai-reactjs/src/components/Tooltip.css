@@ -20,8 +20,9 @@
 
 .znai-tooltip {
     position: fixed;
-    transform: translate(-50%, -100%);
-
+    width: max-content;
+    max-width: calc(100vw - 16px);
+    box-sizing: border-box;
     z-index: 1000;
 }
 
@@ -34,17 +35,4 @@
     padding: 2px 8px;
     border: 1px solid var(--znai-tooltip-border-color);
     border-radius: 6px;
-}
-
-.znai-tooltip.bottom-right,
-.znai-tooltip.bottom-left {
-    transform: translate(-50%, 0%);
-}
-
-.znai-tooltip.center {
-    transform: translate(-50%, -50%);
-}
-
-.znai-tooltip.parent-content-block {
-    transform: translate(0, 0);
 }

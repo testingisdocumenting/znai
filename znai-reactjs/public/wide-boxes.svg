@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="100" viewBox="0 0 1200 100">
+  <!-- Background boxes with semi-transparent fills that work on light and dark -->
+  <rect x="10" y="10" width="220" height="80" rx="8" fill="#4a90d9" fill-opacity="0.8" stroke="#2d5a87" stroke-width="2"/>
+  <rect x="250" y="10" width="220" height="80" rx="8" fill="#50b87d" fill-opacity="0.8" stroke="#2d7a4d" stroke-width="2"/>
+  <rect x="490" y="10" width="220" height="80" rx="8" fill="#e67e22" fill-opacity="0.8" stroke="#a85a18" stroke-width="2"/>
+  <rect x="730" y="10" width="220" height="80" rx="8" fill="#9b59b6" fill-opacity="0.8" stroke="#6c3d7a" stroke-width="2"/>
+  <rect x="970" y="10" width="220" height="80" rx="8" fill="#e74c3c" fill-opacity="0.8" stroke="#a83228" stroke-width="2"/>
+
+  <!-- Inner boxes - 20px from left edge, 50x50, 15px from top/bottom -->
+  <rect x="30" y="25" width="50" height="50" rx="4" fill="#ffffff" fill-opacity="0.3" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1"/>
+  <rect x="270" y="25" width="50" height="50" rx="4" fill="#ffffff" fill-opacity="0.3" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1"/>
+  <rect x="510" y="25" width="50" height="50" rx="4" fill="#ffffff" fill-opacity="0.3" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1"/>
+  <rect x="750" y="25" width="50" height="50" rx="4" fill="#ffffff" fill-opacity="0.3" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1"/>
+  <rect x="990" y="25" width="50" height="50" rx="4" fill="#ffffff" fill-opacity="0.3" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1"/>
+
+  <!-- Text labels - centered in remaining space: box_x + 70 (inner box end) + 75 (half of 150px remaining) = box_x + 145 -->
+  <text x="155" y="58" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Design</text>
+  <text x="395" y="58" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Develop</text>
+  <text x="635" y="58" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Test</text>
+  <text x="875" y="58" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Release</text>
+  <text x="1115" y="58" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Monitor</text>
+</svg>
