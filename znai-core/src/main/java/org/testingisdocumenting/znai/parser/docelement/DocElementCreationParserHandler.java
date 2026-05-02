@@ -314,6 +314,10 @@ public class DocElementCreationParserHandler implements ParserHandler {
         boolean isExternal = UrlUtils.isExternal(destination);
 
         if (!isExternal) {
+            if (!resourcesResolver.canResolve(destination)) {
+                throw new IllegalArgumentException("can't find image: " + destination + " referenced from " + path);
+            }
+
             AuxiliaryFile auxiliaryFile = resourcesResolver.runtimeAuxiliaryFile(destination);
             BufferedImage image = resourcesResolver.imageContent(destination);
 

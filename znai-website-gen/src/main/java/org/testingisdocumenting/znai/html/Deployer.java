@@ -47,7 +47,7 @@ public record Deployer(Path docRoot, Path deployRoot) {
     }
 
     public void deployFile(Path fullSrcPath, String relativePath) {
-        Path deployPath = deployRoot.resolve(relativePath);
+        Path deployPath = resolveAndValidateDeployPath(Paths.get(relativePath));
         printDeployMessage(relativePath, deployPath);
 
         if (!Files.exists(fullSrcPath)) {
@@ -78,7 +78,7 @@ public record Deployer(Path docRoot, Path deployRoot) {
     }
 
     public void deploy(String originalPathForLogging, Path relativePath, byte[] content) {
-        final Path fullPath = deployRoot.resolve(relativePath);
+        final Path fullPath = resolveAndValidateDeployPath(relativePath);
 
         printDeployMessage(originalPathForLogging, fullPath);
 
@@ -88,6 +88,16 @@ public record Deployer(Path docRoot, Path deployRoot) {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Path resolveAndValidateDeployPath(Path relativePath) {
+        Path fullPath = deployRoot.resolve(relativePath).normalize();
+        if (!fullPath.startsWith(deployRoot)) {
+            throw new IllegalArgumentException(
+                    "deploy path escapes deploy root: " + relativePath + " resolves to " + fullPath +
+                            ", deploy root is " + deployRoot);
+        }
+        return fullPath;
     }
 
     private void printDeployMessage(Object from, Object to) {

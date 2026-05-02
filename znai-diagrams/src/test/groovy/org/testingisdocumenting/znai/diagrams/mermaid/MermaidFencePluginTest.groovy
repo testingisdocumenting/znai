@@ -55,7 +55,7 @@ class MermaidFencePluginTest {
     A[Start] --> B[Process]
     B --> C[End]'''
 
-        def elements = process(mermaidContent, [iconpacks: [[name: "test", url: "/test-icons.json"]]])
+        def elements = process(mermaidContent, [iconpacks: [[name: "test", url: "test-icons.json"]]])
 
         elements.should == [
                 mermaid: mermaidContent,

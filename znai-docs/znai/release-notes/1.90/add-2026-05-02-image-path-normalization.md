@@ -1,0 +1,1 @@
+* Add: Images path normalization and additional validation

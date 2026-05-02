@@ -744,6 +744,23 @@ hello world<br><br> of line breaks
     }
 
     @Test
+    void "image referenced by markdown produces a url that preserves the directory structure"() {
+        parse("![alt text](images/png-test.png)")
+
+        def imageElement = content[0]
+        imageElement.type.should == 'Image'
+        imageElement.destination.should == '/test-doc/images/png-test.png'
+        imageElement.alt.should == 'alt text'
+    }
+
+    @Test
+    void "missing image is reported with a clear error"() {
+        code {
+            parse("![alt text](does-not-exist.png)")
+        } should throwException(~/can't find image: does-not-exist\.png/)
+    }
+
+    @Test
     void "creates search entries"() {
         parse("Best\n" +
                 "\n" +

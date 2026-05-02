@@ -41,4 +41,40 @@ class MultipleLocalLocationsResourceResolverTest {
         def resolver = new MultipleLocalLocationsResourceResolver(toc, Paths.get("/path/to/docs"))
         assert resolver.isInsideDoc(Paths.get("/path/to/docs/image.png"))
     }
+
+    @Test
+    void "treats parent traversal back into doc root as inside documentation"() {
+        def resolver = new MultipleLocalLocationsResourceResolver(toc, Paths.get("/path/to/docs"))
+        assert resolver.isInsideDoc(Paths.get("/path/to/docs/section/../image.png"))
+    }
+
+    @Test
+    void "treats parent traversal escaping doc root as outside documentation"() {
+        def resolver = new MultipleLocalLocationsResourceResolver(toc, Paths.get("/path/to/docs"))
+        assert !resolver.isInsideDoc(Paths.get("/path/to/docs/../outside.png"))
+    }
+
+    @Test
+    void "normalizes full path resolved relative to current markup file"() {
+        def docRoot = Paths.get("src/test/resources").toAbsolutePath()
+        def resolver = new MultipleLocalLocationsResourceResolver(toc, docRoot)
+        resolver.setCurrentFilePath(docRoot.resolve("references/page.md"))
+
+        def fullPath = resolver.fullPath("../images/png-test.png")
+        assert !fullPath.toString().contains("..")
+        assert fullPath.endsWith(Paths.get("images/png-test.png"))
+    }
+
+    @Test
+    void "produces normalized doc relative path for parent traversal references"() {
+        def docRoot = Paths.get("src/test/resources").toAbsolutePath()
+        def resolver = new MultipleLocalLocationsResourceResolver(toc, docRoot)
+        resolver.setCurrentFilePath(docRoot.resolve("references/page.md"))
+
+        def auxiliaryFile = resolver.runtimeAuxiliaryFile("../images/png-test.png")
+        // path used as a deploy URL must not contain ".." since some servers/CDNs
+        // do not normalize URL path traversal during request handling
+        assert !auxiliaryFile.deployRelativePath.toString().contains("..")
+        assert auxiliaryFile.deployRelativePath == Paths.get("images/png-test.png")
+    }
 }
