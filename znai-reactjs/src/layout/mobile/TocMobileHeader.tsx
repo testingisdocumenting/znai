@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { DocMeta } from '../../structure/docMeta';
-import { TocItem } from '../../structure/TocItem';
+import { DocMeta } from "../../structure/docMeta";
+import { TocItem } from "../../structure/TocItem";
 
-import { Icon } from '../../doc-elements/icons/Icon';
+import { Icon } from "../../doc-elements/icons/Icon";
 
-import './TocMobileHeader.css';
+import "./TocMobileHeader.css";
 
 interface Props {
   docMeta: DocMeta;
@@ -32,26 +32,37 @@ interface Props {
   scrollToPageSection(id: string): void;
 }
 
-interface ScrolledPastHeader {
+interface ActiveHeader {
   id: string;
   title: string;
+}
+
+interface HeaderInfo extends ActiveHeader {
+  el: HTMLElement;
 }
 
 // Reveal the sticky bar a bit before the first header fully clears the top so the transition feels smooth.
 const EARLY_REVEAL_OFFSET = 24;
 
-// `scrollIntoView` lands a target with `scroll-margin-top` (see Page.css `.page-content.with-page-tabs [id]`
-// at 32px) leaving the h1's top below the viewport edge. A header counts as "active" once its top has
-// reached this offset, so a click-jump correctly identifies the jumped-to section instead of the one above.
+// `scrollIntoView` lands a target with `scroll-margin-top` (Page.css `.page-content.with-page-tabs [id]` = 32px),
+// so a header counts as "active" once its top is within 40px of the viewport edge — otherwise a click-jump
+// would identify the section above the jumped-to one.
 const ACTIVE_DETECTION_OFFSET = 40;
 
 export function TocMobileHeader({ docMeta, selectedTocItem, onHeaderClick, onMenuClick, scrollToPageSection }: Props) {
-  const [scrolledPast, setScrolledPast] = useState<ScrolledPastHeader | null>(null);
+  const [active, setActive] = useState<ActiveHeader | null>(null);
 
   useEffect(() => {
-    const headers = Array.from(document.querySelectorAll<HTMLElement>(".znai-section-title")).filter((h) => h.id);
+    const headers: HeaderInfo[] = Array.from(document.querySelectorAll<HTMLElement>(".znai-section-title"))
+      .filter((el) => el.id)
+      .map((el) => ({
+        el,
+        id: el.id,
+        title: (el.querySelector(".znai-section-title-text")?.textContent ?? "").trim(),
+      }));
+
     if (headers.length === 0) {
-      setScrolledPast(null);
+      setActive(null);
       return;
     }
 
@@ -60,43 +71,40 @@ export function TocMobileHeader({ docMeta, selectedTocItem, onHeaderClick, onMen
     const apply = () => {
       queued = false;
 
-      // Active section = most recent header whose top has crossed the active-detection threshold.
-      // Updates the instant a new h1 reaches the top, so the bar can swap text without a hide-window.
-      let active: HTMLElement | null = null;
+      let current: HeaderInfo | null = null;
       for (const h of headers) {
-        if (h.getBoundingClientRect().top <= ACTIVE_DETECTION_OFFSET) {
-          active = h;
+        if (h.el.getBoundingClientRect().top <= ACTIVE_DETECTION_OFFSET) {
+          current = h;
         } else {
           break;
         }
       }
 
-      // Visibility is gated only by the first header having scrolled past — keeps the bar hidden
-      // at page start (no echo of the visible h1) but mounted across section transitions
-      // (so the next h1 doesn't briefly take over the screen on its own).
-      const showBar = active && headers[0].getBoundingClientRect().bottom <= EARLY_REVEAL_OFFSET;
+      const showBar = current && headers[0].el.getBoundingClientRect().bottom <= EARLY_REVEAL_OFFSET;
 
-      let next: ScrolledPastHeader | null = null;
-      if (showBar) {
-        const titleEl = active!.querySelector(".znai-section-title-text");
-        next = { id: active!.id, title: (titleEl?.textContent ?? "").trim() };
-      }
+      setActive((prev) => {
+        if (!showBar) {
+          return prev === null ? prev : null;
+        }
 
-      setScrolledPast((prev) => {
-        if (!next) return prev === null ? prev : null;
-        if (prev && prev.id === next.id && prev.title === next.title) return prev;
-        return next;
+        if (prev && prev.id === current!.id) {
+          return prev;
+        }
+
+        return { id: current!.id, title: current!.title };
       });
     };
 
     const onScroll = () => {
-      if (queued) return;
+      if (queued) {
+        return;
+      }
+
       queued = true;
       requestAnimationFrame(apply);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    apply();
     return () => window.removeEventListener("scroll", onScroll);
   }, [selectedTocItem?.dirName, selectedTocItem?.fileName]);
 
@@ -114,12 +122,9 @@ export function TocMobileHeader({ docMeta, selectedTocItem, onHeaderClick, onMen
         </div>
       </div>
 
-      {scrolledPast && (
-        <div
-          className="znai-mobile-sticky-section-title"
-          onClick={() => scrollToPageSection(scrolledPast.id)}
-        >
-          <div className="znai-mobile-sticky-section-title-text">{scrolledPast.title}</div>
+      {active && (
+        <div className="znai-mobile-sticky-section-title" onClick={() => scrollToPageSection(active.id)}>
+          <div className="znai-mobile-sticky-section-title-text">{active.title}</div>
         </div>
       )}
     </>
