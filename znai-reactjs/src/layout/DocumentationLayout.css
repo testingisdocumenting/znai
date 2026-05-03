@@ -77,7 +77,7 @@
     height: auto;
     max-height: initial;
     min-height: initial;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .toc-panel {
