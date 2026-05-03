@@ -1,4 +1,4 @@
-# Definition Long Long Text of The title What to do should it wrap
+# Definition
 
 To define a footnote use
 

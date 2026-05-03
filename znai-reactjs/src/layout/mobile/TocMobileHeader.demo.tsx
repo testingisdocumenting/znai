@@ -23,6 +23,7 @@ import { DocMeta } from '../../structure/docMeta';
 
 const headerClick = simpleAction('header clicked');
 const menuClick = simpleAction('menu clicked');
+const scrollToPageSection = simpleAction('scroll to page section');
 
 const docMeta: DocMeta = {
   id: 'test',
@@ -36,6 +37,7 @@ export function tocMobileHeaderDemo(registry: Registry) {
     <div style={{width: 600}}>
       <TocMobileHeader docMeta={docMeta}
                        onHeaderClick={headerClick}
-                       onMenuClick={menuClick}/>
+                       onMenuClick={menuClick}
+                       scrollToPageSection={scrollToPageSection}/>
     </div>))
 }

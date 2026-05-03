@@ -19,16 +19,6 @@
         --znai-single-column-render-width: auto;
     }
 
-    /* Disable scroll-anchoring on mobile: the sticky section title's height changes when
-       `is-stuck` toggles (wrap → nowrap+ellipsis, +padding/border). Chrome's scroll anchoring
-       compensates for the resulting layout shift by adjusting scroll position, which then moves
-       the sentinel back across the observer threshold and the title flips back — repeat. Opting
-       body out (per spec, this excludes the whole subtree from being anchor candidates) breaks
-       the loop. */
-    body {
-        overflow-anchor: none;
-    }
-
     svg {
         max-width: 100%;
     }
@@ -47,37 +37,5 @@
         white-space: nowrap;
         word-wrap: normal;
         overflow-x: auto;
-    }
-
-    .znai-section-title {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        background-color: var(--znai-background-color);
-        margin-top: 24px;
-        padding-top: 8px;
-    }
-
-    .znai-section-title.is-stuck {
-        background-color: var(--znai-toc-panel-background-color);
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--znai-toc-panel-border-color);
-        margin-left: calc(-1 * var(--znai-single-side-horizontal-min-spacing));
-        margin-right: calc(-1 * var(--znai-single-side-horizontal-min-spacing));
-        padding-left: var(--znai-single-side-horizontal-min-spacing);
-        padding-right: var(--znai-single-side-horizontal-min-spacing);
-        flex-wrap: nowrap;
-    }
-
-    .znai-section-title.is-stuck .znai-section-title-text {
-        flex: 1 1 auto;
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .znai-section-title.is-stuck .znai-section-title-actions {
-        flex: 0 0 auto;
     }
 }
