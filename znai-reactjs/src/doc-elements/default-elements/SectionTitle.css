@@ -22,8 +22,7 @@ h1 {
 .znai-section-title,
 .empty-section-title {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
     font-size: 26px;
     font-weight: bold;
     color: var(--znai-section-title-color);
@@ -52,6 +51,10 @@ h1 {
     margin-left: auto;
     padding-right: 48px;
     cursor: pointer;
+}
+
+.znai-section-title-text {
+    min-width: 0;
 }
 
 .znai-section-title-text .znai-text-badge {
