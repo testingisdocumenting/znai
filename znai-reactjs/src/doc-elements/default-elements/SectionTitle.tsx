@@ -47,12 +47,14 @@ export function SectionTitle({ id, title, headingContent, badge, style }: Props)
     // @ts-ignore
     <h1 className={className} id={id}>
       <span className="znai-section-title-text">
-        <HeadingContent title={title} headingContent={headingContent} elementsLibrary={elementsLibrary} />
+        <span className="znai-section-title-content">
+          <HeadingContent title={title} headingContent={headingContent} elementsLibrary={elementsLibrary} />
+        </span>
+        {badge && <TextBadge text={badge} useExtraLeftMargin={true} />}
         <a className="znai-section-title-link" href={"#" + id}>
           <Icon id="link" />
         </a>
       </span>
-      {badge && <TextBadge text={badge} useExtraLeftMargin={true} />}
       {isPresentationButtonVisible() && (
         <Icon id="maximize" className="znai-section-title-presentation" onClick={openPresentation} />
       )}

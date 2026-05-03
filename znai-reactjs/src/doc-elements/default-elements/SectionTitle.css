@@ -54,6 +54,10 @@ h1 {
     cursor: pointer;
 }
 
+.znai-section-title-text .znai-text-badge {
+    vertical-align: middle;
+}
+
 .znai-section-title-link {
     margin-left: 8px;
     display: inline-flex;

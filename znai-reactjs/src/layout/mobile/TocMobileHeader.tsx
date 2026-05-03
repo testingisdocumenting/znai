@@ -58,7 +58,7 @@ export function TocMobileHeader({ docMeta, selectedTocItem, onHeaderClick, onMen
       .map((el) => ({
         el,
         id: el.id,
-        title: (el.querySelector(".znai-section-title-text")?.textContent ?? "").trim(),
+        title: (el.querySelector(".znai-section-title-content")?.textContent ?? "").trim(),
       }));
 
     if (headers.length === 0) {
