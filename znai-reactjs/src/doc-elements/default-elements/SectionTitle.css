@@ -53,10 +53,6 @@ h1 {
     cursor: pointer;
 }
 
-.znai-section-title-text {
-    min-width: 0;
-}
-
 .znai-section-title-text .znai-text-badge {
     vertical-align: middle;
 }
