@@ -37,8 +37,13 @@ interface ScrolledPastHeader {
   title: string;
 }
 
-// Reveal the sticky bar a bit before the header fully clears the top so the transition feels smooth.
+// Reveal the sticky bar a bit before the first header fully clears the top so the transition feels smooth.
 const EARLY_REVEAL_OFFSET = 24;
+
+// `scrollIntoView` lands a target with `scroll-margin-top` (see Page.css `.page-content.with-page-tabs [id]`
+// at 32px) leaving the h1's top below the viewport edge. A header counts as "active" once its top has
+// reached this offset, so a click-jump correctly identifies the jumped-to section instead of the one above.
+const ACTIVE_DETECTION_OFFSET = 40;
 
 export function TocMobileHeader({ docMeta, selectedTocItem, onHeaderClick, onMenuClick, scrollToPageSection }: Props) {
   const [scrolledPast, setScrolledPast] = useState<ScrolledPastHeader | null>(null);
@@ -50,29 +55,49 @@ export function TocMobileHeader({ docMeta, selectedTocItem, onHeaderClick, onMen
       return;
     }
 
-    const update = () => {
-      let mostRecent: HTMLElement | null = null;
+    let queued = false;
+
+    const apply = () => {
+      queued = false;
+
+      // Active section = most recent header whose top has crossed the active-detection threshold.
+      // Updates the instant a new h1 reaches the top, so the bar can swap text without a hide-window.
+      let active: HTMLElement | null = null;
       for (const h of headers) {
-        if (h.getBoundingClientRect().bottom <= EARLY_REVEAL_OFFSET) {
-          mostRecent = h;
+        if (h.getBoundingClientRect().top <= ACTIVE_DETECTION_OFFSET) {
+          active = h;
         } else {
           break;
         }
       }
-      if (mostRecent) {
-        const titleEl = mostRecent.querySelector(".znai-section-title-text");
-        setScrolledPast({ id: mostRecent.id, title: (titleEl?.textContent ?? "").trim() });
-      } else {
-        setScrolledPast(null);
+
+      // Visibility is gated only by the first header having scrolled past — keeps the bar hidden
+      // at page start (no echo of the visible h1) but mounted across section transitions
+      // (so the next h1 doesn't briefly take over the screen on its own).
+      const showBar = active && headers[0].getBoundingClientRect().bottom <= EARLY_REVEAL_OFFSET;
+
+      let next: ScrolledPastHeader | null = null;
+      if (showBar) {
+        const titleEl = active!.querySelector(".znai-section-title-text");
+        next = { id: active!.id, title: (titleEl?.textContent ?? "").trim() };
       }
+
+      setScrolledPast((prev) => {
+        if (!next) return prev === null ? prev : null;
+        if (prev && prev.id === next.id && prev.title === next.title) return prev;
+        return next;
+      });
     };
 
-    const observer = new IntersectionObserver(update, {
-      threshold: 0,
-      rootMargin: `-${EARLY_REVEAL_OFFSET}px 0px 0px 0px`,
-    });
-    headers.forEach((h) => observer.observe(h));
-    return () => observer.disconnect();
+    const onScroll = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(apply);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    apply();
+    return () => window.removeEventListener("scroll", onScroll);
   }, [selectedTocItem?.dirName, selectedTocItem?.fileName]);
 
   return (
