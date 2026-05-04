@@ -146,8 +146,8 @@ answer-link: znai-from-export/introduction/getting-started#command-line
 ## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.90-SNAPSHOT/znai-dist-1.90-SNAPSHOT-znai.zip).
-Add it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.90/znai-dist-1.90-znai.zip). Add
+it to your `PATH`.
 
 ## Brew
 
@@ -162,7 +162,7 @@ answer-link: znai-from-export/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.90-SNAPSHOT</version>
+    <version>1.90</version>
 </plugin>
 ```
 
@@ -500,6 +500,7 @@ type, and optional `View On` information.
   "type": "User Guide",
   "category": "Documentation",
   "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+  "slackAttn": ["user1", "group-two"],
   "hidePresentationTrigger": false,
   "hideFootnoteList": false,
   "viewOn": {
@@ -878,6 +879,7 @@ To provide a support link to your users add link and title to the `meta.json` fi
   "type": "User Guide",
   "category": "Documentation",
   "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+  "slackAttn": ["user1", "group-two"],
   "hidePresentationTrigger": false,
   "hideFootnoteList": false,
   "viewOn": {
@@ -4742,7 +4744,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 285,
+    "y" : 486,
     "align" : "Center"
   } ],
   "pixelRatio" : 2
@@ -8948,7 +8950,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 285,
+    "y" : 486,
     "align" : "Center"
   } ],
   "pixelRatio" : 2
