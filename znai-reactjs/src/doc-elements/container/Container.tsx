@@ -83,7 +83,7 @@ export function Container({
   const noTopMargin = prev && prev.noGap;
 
   const fullClassName =
-    "znai-container znai-mobile-remove-padding" +
+    "znai-container" +
     (wide ? " wide" : " content-block") +
     (className ? " " + className : "") +
     (noBottomMargin ? " no-bottom-margin" : "") +
