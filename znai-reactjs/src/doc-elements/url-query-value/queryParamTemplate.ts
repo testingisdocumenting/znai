@@ -14,7 +14,23 @@
  * limitations under the License.
  */
 
+import { useEffect, useReducer } from "react";
+import { documentationNavigation } from "../../structure/DocumentationNavigation";
+
 const TEMPLATE_PATTERN = /\$\{([^}]+)}/g;
+
+// subscribes the calling component to URL changes so it re-renders when the
+// query string changes — query-param-driven content stays in sync even when
+// an ancestor's shouldComponentUpdate would otherwise skip the re-render.
+// TODO: switch to useSyncExternalStore once React is upgraded to 18+.
+export function useUrlQuerySubscription(): void {
+  const [, forceUpdate] = useReducer((x: number) => x + 1, 0);
+
+  useEffect(() => {
+    documentationNavigation.addUrlChangeListener(forceUpdate);
+    return () => documentationNavigation.removeUrlChangeListener(forceUpdate);
+  }, []);
+}
 
 export function resolveQueryParamValue(
   paramName: string,
