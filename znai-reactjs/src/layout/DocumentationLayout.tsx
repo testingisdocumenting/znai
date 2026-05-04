@@ -166,7 +166,13 @@ export function DocumentationLayout({
   function renderMobile() {
     return (
       <>
-        <TocMobileHeader docMeta={docMeta} onHeaderClick={onHeaderClickAndCloseMenu} onMenuClick={toggleMobileToc} />
+        <TocMobileHeader
+          docMeta={docMeta}
+          selectedTocItem={selectedTocItem}
+          onHeaderClick={onHeaderClickAndCloseMenu}
+          onMenuClick={toggleMobileToc}
+          scrollToPageSection={scrollToPageSection}
+        />
 
         {isMobileTocVisible ? (
           <TocMobilePanel toc={toc} onTocItemClick={selectTocItem} onTocItemPageSectionClick={selectPageSection} />

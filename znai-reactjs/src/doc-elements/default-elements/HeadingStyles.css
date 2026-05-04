@@ -15,7 +15,7 @@
  */
 
 .znai-heading {
-    white-space: pre;
+    white-space: pre-wrap;
 }
 
 .znai-heading .znai-inlined-code {

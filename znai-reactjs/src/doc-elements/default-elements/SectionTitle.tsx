@@ -42,19 +42,22 @@ interface Props {
 
 export function SectionTitle({ id, title, headingContent, badge, style }: Props) {
   const className = "content-block znai-section-title znai-heading" + (style ? " " + style : "");
+
   return id ? (
     // @ts-ignore
     <h1 className={className} id={id}>
-      <HeadingContent title={title} headingContent={headingContent} elementsLibrary={elementsLibrary} />
-      {badge && <TextBadge text={badge} useExtraLeftMargin={true} />}
-      <div className="znai-section-title-actions">
-        <a href={"#" + id}>
+      <span className="znai-section-title-text">
+        <span className="znai-section-title-content">
+          <HeadingContent title={title} headingContent={headingContent} elementsLibrary={elementsLibrary} />
+        </span>
+        {badge && <TextBadge text={badge} useExtraLeftMargin={true} />}
+        <a className="znai-section-title-link" href={"#" + id}>
           <Icon id="link" />
         </a>
-        {isPresentationButtonVisible() && (
-          <Icon id="maximize" className="znai-section-title-presentation" onClick={openPresentation} />
-        )}
-      </div>
+      </span>
+      {isPresentationButtonVisible() && (
+        <Icon id="maximize" className="znai-section-title-presentation" onClick={openPresentation} />
+      )}
     </h1>
   ) : (
     <h1 className="empty-section-title" id="implicit-section" />

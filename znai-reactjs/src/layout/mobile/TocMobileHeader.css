@@ -41,3 +41,34 @@
     cursor: pointer;
     margin-right: var(--znai-single-side-horizontal-min-spacing);
 }
+
+.znai-mobile-sticky-section-title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+
+    display: flex;
+    align-items: center;
+
+    height: 36px;
+    padding-left: var(--znai-single-side-horizontal-min-spacing);
+    padding-right: var(--znai-single-side-horizontal-min-spacing);
+
+    background-color: var(--znai-search-toc-panel-background-color);
+    border-bottom: 1px solid var(--znai-toc-panel-border-color);
+
+    cursor: pointer;
+}
+
+.znai-mobile-sticky-section-title-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-weight: bold;
+    color: var(--znai-section-title-color);
+}
