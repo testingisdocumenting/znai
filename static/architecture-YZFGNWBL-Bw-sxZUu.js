@@ -1,1 +1,0 @@
-import{J as e,Y as t}from"./mermaid-DwXlCOJu.js";export{e as ArchitectureModule,t as createArchitectureServices};

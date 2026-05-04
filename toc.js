@@ -341,6 +341,10 @@ toc = [ {
       "id" : "preview",
       "customAnchorId" : "preview"
     }, {
+      "title" : "Footnotes Inside Attention Blocks",
+      "id" : "footnotes-inside-attention-blocks",
+      "customAnchorId" : "footnotes-inside-attention-blocks"
+    }, {
       "title" : "Footnotes List",
       "id" : "footnotes-list",
       "customAnchorId" : "footnotes-list"
@@ -2432,6 +2436,104 @@ toc = [ {
     } ]
   }, {
     "chapterTitle" : "Plugins",
+    "pageTitle" : "Javascript Plugin",
+    "pageMeta" : { },
+    "dirName" : "plugins",
+    "fileName" : "javascript-plugin",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Overview",
+      "id" : "overview",
+      "customAnchorId" : "overview"
+    }, {
+      "title" : "Registering A Function",
+      "id" : "registering-a-function",
+      "customAnchorId" : "registering-a-function"
+    }, {
+      "title" : "Function Signature",
+      "id" : "function-signature",
+      "customAnchorId" : "function-signature"
+    }, {
+      "title" : "Theme Toggle",
+      "id" : "theme-toggle",
+      "customAnchorId" : "theme-toggle"
+    }, {
+      "title" : "Title",
+      "id" : "title",
+      "customAnchorId" : "title"
+    }, {
+      "title" : "Wide",
+      "id" : "wide",
+      "customAnchorId" : "wide"
+    }, {
+      "title" : "Styling With A Class Name",
+      "id" : "styling-with-a-class-name",
+      "customAnchorId" : "styling-with-a-class-name"
+    }, {
+      "title" : "Search",
+      "id" : "search",
+      "customAnchorId" : "search"
+    }, {
+      "title" : "Sample Function",
+      "id" : "sample-function",
+      "customAnchorId" : "sample-function"
+    } ]
+  }, {
+    "chapterTitle" : "Plugins",
+    "pageTitle" : "User Defined Plugins",
+    "pageMeta" : { },
+    "dirName" : "plugins",
+    "fileName" : "user-defined-plugins",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Overview",
+      "id" : "overview",
+      "customAnchorId" : "overview"
+    }, {
+      "title" : "Registering A Plugin",
+      "id" : "registering-a-plugin",
+      "customAnchorId" : "registering-a-plugin"
+    }, {
+      "title" : "Plugin Config Shape",
+      "id" : "plugin-config-shape",
+      "customAnchorId" : "plugin-config-shape"
+    }, {
+      "title" : "Arguments",
+      "id" : "arguments",
+      "customAnchorId" : "arguments"
+    }, {
+      "title" : "Special Arguments",
+      "id" : "special-arguments",
+      "customAnchorId" : "special-arguments"
+    }, {
+      "title" : "Template",
+      "id" : "template",
+      "customAnchorId" : "template"
+    }, {
+      "title" : "Usage",
+      "id" : "usage",
+      "customAnchorId" : "usage"
+    }, {
+      "title" : "Fence Plugins",
+      "id" : "fence-plugins",
+      "customAnchorId" : "fence-plugins"
+    }, {
+      "title" : "Rebuild Detection",
+      "id" : "rebuild-detection",
+      "customAnchorId" : "rebuild-detection"
+    }, {
+      "title" : "Search",
+      "id" : "search",
+      "customAnchorId" : "search"
+    }, {
+      "title" : "When To Use",
+      "id" : "when-to-use",
+      "customAnchorId" : "when-to-use"
+    } ]
+  }, {
+    "chapterTitle" : "Plugins",
     "pageTitle" : "Development",
     "pageMeta" : { },
     "dirName" : "plugins",
@@ -2476,6 +2578,35 @@ toc = [ {
       "title" : "Dark Light Themes Overrides",
       "id" : "dark-light-themes-overrides",
       "customAnchorId" : "dark-light-themes-overrides"
+    } ]
+  }, {
+    "chapterTitle" : "Configuration",
+    "pageTitle" : "Extensions",
+    "pageMeta" : { },
+    "dirName" : "configuration",
+    "fileName" : "extensions",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "cssResources",
+      "id" : "cssresources",
+      "customAnchorId" : "cssresources"
+    }, {
+      "title" : "jsResources",
+      "id" : "jsresources",
+      "customAnchorId" : "jsresources"
+    }, {
+      "title" : "htmlResources",
+      "id" : "htmlresources",
+      "customAnchorId" : "htmlresources"
+    }, {
+      "title" : "htmlHeadResources",
+      "id" : "htmlheadresources",
+      "customAnchorId" : "htmlheadresources"
+    }, {
+      "title" : "additionalFilesToDeploy",
+      "id" : "additionalfilestodeploy",
+      "customAnchorId" : "additionalfilestodeploy"
     } ]
   }, {
     "chapterTitle" : "Configuration",
@@ -2634,6 +2765,14 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.90",
+      "id" : "190",
+      "customAnchorId" : "190"
+    }, {
+      "title" : "1.89",
+      "id" : "189",
+      "customAnchorId" : "189"
+    }, {
       "title" : "1.88",
       "id" : "188",
       "customAnchorId" : "188"

@@ -1,4 +1,5 @@
 {
+  "slackAttn" : [ "user1", "group-two" ],
   "hidePresentationTrigger" : false,
   "hideFootnoteList" : false,
   "viewOn" : {

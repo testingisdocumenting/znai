@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
+<title>Znai: Javascript Plugin</title>
+<!--test extension added comment to head-->
+<!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/main.css">
+<link rel="stylesheet" type="text/css" href="/znai/static/css/global-overrides.css">
+<link rel="stylesheet" type="text/css" href="/znai/custom.css">
+<link rel="stylesheet" type="text/css" href="/znai/plugins/javascript/theme-box.css">
+</head>
+<link rel="shortcut icon" href="/znai/favicon.png"type="image/ico"/>
+<body class="znai-theme theme-znai-dark">
+<script>(function() {
+    var themeNameKey = 'znaiTheme';
+    var darkThemeName = 'znai-dark';
+    var lightThemeName = 'default';
+
+    var znaiTheme = {
+        changeHandlers: [],
+        addChangeHandler(handler) {
+            this.changeHandlers.push(handler);
+        },
+        removeChangeHandler(handler) {
+            var idx = this.changeHandlers.indexOf(handler);
+            this.changeHandlers.splice(idx, 1);
+        },
+        set(name) {
+            this.name = name;
+            document.body.className = 'znai-theme theme-' + name;
+
+            var idx = 0;
+            var len = this.changeHandlers.length;
+            for (; idx < len; idx++) {
+                this.changeHandlers[idx](name);
+            }
+        },
+        setExplicitly(name) {
+            storeThemeName(name);
+            this.set(name);
+        },
+        setExplicitlyIfNotSetAlready(name) {
+            const themeName = getStoredThemeName();
+            if (themeName) {
+                return
+            }
+
+            this.setExplicitly(name)
+        },
+        toggle() {
+            this.setExplicitly(this.name === lightThemeName ? darkThemeName : lightThemeName)
+        }
+    };
+
+    var mediaThemeName = setLightMatchMediaListenerAndGetThemeName()
+    var themeName = getStoredThemeName() || mediaThemeName;
+    znaiTheme.set(themeName);
+
+    window.znaiTheme = znaiTheme;
+
+    function getStoredThemeName() {
+        return localStorage.getItem(themeNameKey);
+    }
+
+    function storeThemeName(name) {
+        return localStorage.setItem(themeNameKey, name);
+    }
+
+    function setLightMatchMediaListenerAndGetThemeName() {
+        if (!window.matchMedia) {
+            return darkThemeName;
+        }
+
+        var lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+        lightQuery.addListener(function (e) {
+            const newThemeName = e.matches ? lightThemeName : darkThemeName;
+            znaiTheme.setExplicitly(newThemeName);
+        });
+
+        return lightQuery.matches ? lightThemeName : darkThemeName;
+    }
+})()</script>
+<div id="znai"><div id="znai-initial-page-loading" style="margin: -20px 0 0 -20px; padding: 0 40px 40px 0; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center">
+    <div></div>
+</div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<header><h1>Overview</h1></header>
+<p>delegates rendering of a block to a plain JavaScript function znai creates a DOM node and hands your function the DOM node to render into the parameters from markdown as a so rendering can react to light dark theme switches themeBox my custom content box custom value See the sample function at the end of this page include javascript function args themeObservable include javascript function themeBox label my custom content box customKey custom value</p>
+</article>
+
+<article>
+<header><h1>Registering A Function</h1></header>
+<p>Attach your function to under the name you want to reference and load the script via window extensions json function window themeBox function node args themeObservable draw inside `node` read initial theme via `themeObservable current` subscribe to updates via `themeObservable subscribe listener `</p>
+</article>
+
+<article>
+<header><h1>Function Signature</h1></header>
+<p>Your function receives three arguments  the parent to append content to  the parameters passed from markdown Framework level keys are handled by znai and not forwarded  live access to the current znai theme The function may return a cleanup function znai calls it when the block is removed or re rendered  dispose timers external listeners or other resources here The sample function below returns a cleanup that logs to the browser console Open DevTools then navigate away from this page  every rendered above is unmounted and its cleanup runs node div args title wide className anchorId themeObservable current light | dark subscribe listener listener is called with the new theme name on every change return function cleanup console log themeBox cleanup block removed from the page themeBox</p>
+</article>
+
+<article>
+<header><h1>Theme Toggle</h1></header>
+<p>themeBox Switch the theme to see me update demo theme Toggle the theme using the switcher in the bottom left corner and watch the custom content restyle The hookup is one line themeObservable subscribe applyTheme</p>
+</article>
+
+<article>
+<header><h1>Title</h1></header>
+<p>Pass to render a title bar above the block znai owns the title via its shared container so your function never sees it themeBox theme aware box rendered inside a titled container title include javascript function themeBox title theme aware box message rendered inside a titled container</p>
+</article>
+
+<article>
+<header><h1>Wide</h1></header>
+<p>Pass to span the full page width matching wide images and iframes themeBox wide theme aware box true this block breaks out of the single column width and spans edge to edge of the page container giving long values plenty of horizontal room to stretch before they need to wrap onto a second line wide demo edge to edge theme 1024 42 0 003 wide true include javascript function themeBox title wide theme aware box wide true note this block breaks out of the single column width and spans edge to edge of the page container giving long values plenty of horizontal room to stretch before they need to wrap onto a second line tags wide demo edge to edge theme metrics requests 1024 latency_ms 42 error_rate 0 003</p>
+</article>
+
+<article>
+<header><h1>Styling With A Class Name</h1></header>
+<p>Pass to attach an arbitrary class to the parent node znai creates Use it to decorate the wrapper without touching the function themeBox highlighted by an outer border theme box with border The dashed outline comes from the class on the outer wrapper  the box itself is untouched className include javascript function themeBox label highlighted by an outer border className theme box with border theme box with border padding 6px border 2px dashed var znai color green border radius 6px theme box box sizing border box width 100% padding 12px 16px border 1px solid var znai snippets outer border color #dedede border left 4px solid var znai color blue border radius 4px background color var znai snippets title background color #efeff1 color var znai regular text color font family var znai regular font family theme box theme dark border left color var znai color yellow theme box title color var znai section title color font weight 600 font size 0 95rem margin bottom 8px theme box list display grid grid template columns auto 1fr column gap 12px row gap 4px font family var znai code font family monospace font size 0 9rem theme box empty font style italic color var znai regular text light color theme box key color var znai brand primary color font weight 600 theme box value color var znai regular text color word break break word white space pre wrap theme box current theme font size 0 8rem margin top 10px color var znai regular text light color</p>
+</article>
+
+<article>
+<header><h1>Search</h1></header>
+<p>Values passed via flow into znai s local search Searching for any word inside the parameters surfaces the page and the rendered block args</p>
+</article>
+
+<article>
+<header><h1>Sample Function</h1></header>
+<p>The function below powers the examples on this page It reads the initial theme and subscribes to future changes * * custom javascript global function to render custom content within znai * generated guides * * renders a panel that lists every argument passed via the plugin as * a key value row reacts to znai theme switches via the theme observable * to toggle a `theme dark` class that drives the accent color via CSS * function function formatValue value if value null || value undefined return String value if typeof value object return JSON stringify value return String value function createElement tagName className textContent var el document createElement tagName el className className if textContent undefined el textContent textContent return el window themeBox function node args themeObservable var box createElement div theme box var titleEl createElement div theme box title args passed to the function var list createElement div theme box list var themeEl createElement div theme box current theme var argKeys Object keys args if argKeys length 0 list appendChild createElement div theme box empty no args passed else argKeys forEach function key list appendChild createElement div theme box key key list appendChild createElement div theme box value formatValue args key box appendChild titleEl box appendChild list box appendChild themeEl node appendChild box function applyTheme themeName box classList toggle theme dark themeName dark themeEl textContent current theme themeName applyTheme themeObservable current themeObservable subscribe applyTheme return function cleanup console log themeBox cleanup block removed from the page</p>
+</article>
+</section>
+<section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+<article>
+<a href="/znai/introduction/what-is-this/">What Is This</a>
+</article>
+
+<article>
+<a href="/znai/introduction/getting-started/">Getting Started</a>
+</article>
+
+<article>
+<a href="/znai/flow/structure/">Structure</a>
+</article>
+
+<article>
+<a href="/znai/flow/landing/">Landing</a>
+</article>
+
+<article>
+<a href="/znai/flow/names/">Page Titles</a>
+</article>
+
+<article>
+<a href="/znai/flow/page-references/">Page References</a>
+</article>
+
+<article>
+<a href="/znai/flow/page-toc/">Page Toc</a>
+</article>
+
+<article>
+<a href="/znai/flow/lookup-paths/">Lookup Paths</a>
+</article>
+
+<article>
+<a href="/znai/flow/search/">Search</a>
+</article>
+
+<article>
+<a href="/znai/flow/llm/">Llm</a>
+</article>
+
+<article>
+<a href="/znai/flow/footer/">Footer</a>
+</article>
+
+<article>
+<a href="/znai/flow/support/">Support</a>
+</article>
+
+<article>
+<a href="/znai/flow/footnotes/">Footnotes</a>
+</article>
+
+<article>
+<a href="/znai/flow/presentation/">Presentation</a>
+</article>
+
+<article>
+<a href="/znai/flow/testing-is-documenting/">Testing Is Documenting</a>
+</article>
+
+<article>
+<a href="/znai/flow/shortcuts/">Shortcuts</a>
+</article>
+
+<article>
+<a href="/znai/snippets/code-snippets/">Code Snippets</a>
+</article>
+
+<article>
+<a href="/znai/snippets/external-code-snippets/">External Code Snippets</a>
+</article>
+
+<article>
+<a href="/znai/snippets/snippets-manipulation/">Snippets Manipulation</a>
+</article>
+
+<article>
+<a href="/znai/snippets/snippets-highlighting/">Snippets Highlighting</a>
+</article>
+
+<article>
+<a href="/znai/snippets/code-comments/">Code Comments</a>
+</article>
+
+<article>
+<a href="/znai/snippets/inlined-code-snippets/">Inlined Code Snippets</a>
+</article>
+
+<article>
+<a href="/znai/snippets/api-parameters/">API Parameters</a>
+</article>
+
+<article>
+<a href="/znai/snippets/code-references/">Code References</a>
+</article>
+
+<article>
+<a href="/znai/snippets/json/">Json</a>
+</article>
+
+<article>
+<a href="/znai/snippets/xml/">Xml</a>
+</article>
+
+<article>
+<a href="/znai/snippets/ocaml/">OCaml</a>
+</article>
+
+<article>
+<a href="/znai/snippets/open-API/">Open API</a>
+</article>
+
+<article>
+<a href="/znai/snippets/CLI/">CLI</a>
+</article>
+
+<article>
+<a href="/znai/snippets/math/">Math</a>
+</article>
+
+<article>
+<a href="/znai/snippets/jupyter-notebook/">Jupyter Notebook</a>
+</article>
+
+<article>
+<a href="/znai/snippets/cpp/">Cpp</a>
+</article>
+
+<article>
+<a href="/znai/snippets/python/">Python</a>
+</article>
+
+<article>
+<a href="/znai/snippets/java/">Java</a>
+</article>
+
+<article>
+<a href="/znai/snippets/groovy/">Groovy</a>
+</article>
+
+<article>
+<a href="/znai/snippets/markdown/">Markdown</a>
+</article>
+
+<article>
+<a href="/znai/visuals/attention-signs/">Attention Signs</a>
+</article>
+
+<article>
+<a href="/znai/visuals/images/">Images</a>
+</article>
+
+<article>
+<a href="/znai/visuals/image-annotations/">Image Annotations</a>
+</article>
+
+<article>
+<a href="/znai/visuals/cards/">Cards</a>
+</article>
+
+<article>
+<a href="/znai/visuals/charts/">Charts</a>
+</article>
+
+<article>
+<a href="/znai/visuals/mermaid-diagrams/">Mermaid Diagrams</a>
+</article>
+
+<article>
+<a href="/znai/visuals/SVG/">SVG</a>
+</article>
+
+<article>
+<a href="/znai/visuals/icons/">Icons</a>
+</article>
+
+<article>
+<a href="/znai/visuals/headings/">Headings</a>
+</article>
+
+<article>
+<a href="/znai/visuals/text-badge/">Text Badge</a>
+</article>
+
+<article>
+<a href="/znai/visuals/read-more/">Read More</a>
+</article>
+
+<article>
+<a href="/znai/visuals/spoilers/">Spoilers</a>
+</article>
+
+<article>
+<a href="/znai/visuals/keyboard-shortcuts/">Keyboard Shortcuts</a>
+</article>
+
+<article>
+<a href="/znai/visuals/smart-bullet-points/">Smart Bullet Points</a>
+</article>
+
+<article>
+<a href="/znai/visuals/flow-diagrams/">Flow Diagrams</a>
+</article>
+
+<article>
+<a href="/znai/visuals/graphviz-diagrams/">Graphviz Diagrams</a>
+</article>
+
+<article>
+<a href="/znai/visuals/PlantUml/">PlantUml</a>
+</article>
+
+<article>
+<a href="/znai/visuals/iframe/">Iframe</a>
+</article>
+
+<article>
+<a href="/znai/visuals/asciinema/">Asciinema</a>
+</article>
+
+<article>
+<a href="/znai/layout/tabs/">Tabs</a>
+</article>
+
+<article>
+<a href="/znai/layout/page-tabs/">Page Tabs</a>
+</article>
+
+<article>
+<a href="/znai/layout/tables/">Tables</a>
+</article>
+
+<article>
+<a href="/znai/layout/columns/">Columns</a>
+</article>
+
+<article>
+<a href="/znai/layout/templates/">Templates</a>
+</article>
+
+<article>
+<a href="/znai/layout/runtime-templates/">Runtime Templates</a>
+</article>
+
+<article>
+<a href="/znai/layout/two-sides-pages/">Two Sides Pages</a>
+</article>
+
+<article>
+<a href="/znai/layout/two-sides-tabs/">Two Sides Tabs</a>
+</article>
+
+<article>
+<a href="/znai/layout/jupyter-notebook-two-sides/">Jupyter Notebook Two Sides</a>
+</article>
+
+<article>
+<a href="/znai/python/content-extraction/">Content Extraction</a>
+</article>
+
+<article>
+<a href="/znai/python/description-extraction/">Description Extraction</a>
+</article>
+
+<article>
+<a href="/znai/python/auto-reference/">Auto Reference</a>
+</article>
+
+<article>
+<a href="/znai/CPP/doxygen-setup/">Doxygen Setup</a>
+</article>
+
+<article>
+<a href="/znai/CPP/description-extraction/">Description Extraction</a>
+</article>
+
+<article>
+<a href="/znai/CPP/auto-reference/">Auto Reference</a>
+</article>
+
+<article>
+<a href="/znai/java/content-extraction/">Content Extraction</a>
+</article>
+
+<article>
+<a href="/znai/java/description-extraction/">Description Extraction</a>
+</article>
+
+<article>
+<a href="/znai/java/auto-reference/">Auto Reference</a>
+</article>
+
+<article>
+<a href="/znai/synergy-with-testing/web-UI/">Web UI</a>
+</article>
+
+<article>
+<a href="/znai/synergy-with-testing/REST-API/">REST API</a>
+</article>
+
+<article>
+<a href="/znai/synergy-with-testing/business-logic/">Business Logic</a>
+</article>
+
+<article>
+<a href="/znai/plugins/plugin-types/">Plugin Types</a>
+</article>
+
+<article>
+<a href="/znai/plugins/default-parameters/">Default Parameters</a>
+</article>
+
+<article>
+<a href="/znai/plugins/javascript-plugin/">Javascript Plugin</a>
+</article>
+
+<article>
+<a href="/znai/plugins/user-defined-plugins/">User Defined Plugins</a>
+</article>
+
+<article>
+<a href="/znai/plugins/development/">Development</a>
+</article>
+
+<article>
+<a href="/znai/configuration/basic/">Basic</a>
+</article>
+
+<article>
+<a href="/znai/configuration/styling/">Styling</a>
+</article>
+
+<article>
+<a href="/znai/configuration/extensions/">Extensions</a>
+</article>
+
+<article>
+<a href="/znai/configuration/top-header/">Top Header</a>
+</article>
+
+<article>
+<a href="/znai/deployment/additional-files/">Additional Files</a>
+</article>
+
+<article>
+<a href="/znai/hub/introduction/">Introduction</a>
+</article>
+
+<article>
+<a href="/znai/hub/setup/">Setup</a>
+</article>
+
+<article>
+<a href="/znai/hub/build-artifacts-watch/">Build Artifacts Watch</a>
+</article>
+
+<article>
+<a href="/znai/example-references/domain/">Domain</a>
+</article>
+
+<article>
+<a href="/znai/example-references/api/">Api</a>
+</article>
+
+<article>
+<a href="/znai/znai-development/local-build/">Local Build</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2026/">2026</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2025/">2025</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2024/">2024</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2023/">2023</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2022/">2022</a>
+</article>
+
+<article>
+<a href="/znai/release-notes/2021/">2021</a>
+</article>
+</section>
+</div>
+<!--test extension added comment-->
+<script type="text/javascript" src="/znai/footer.js"></script>
+<script type="text/javascript" src="/znai/toc.js"></script>
+<script type="text/javascript" src="/znai/documentation-references.js"></script>
+<script type="text/javascript" src="/znai/assets.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-DWefznAQ.js"></script>
+<script type="module" src="/znai/static/architecture-YZFGNWBL-DJSu3kcg.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-Q4EWVU46-DgZdoUrZ.js"></script>
+<script type="module" src="/znai/static/blockDiagram-DXYQGD6D-DIuttj7V.js"></script>
+<script type="module" src="/znai/static/c4Diagram-AHTNJAMY-BVjjFX6z.js"></script>
+<script type="module" src="/znai/static/classDiagram-6PBFFD2Q-hfd_K5Qa.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-HSJHXN6E-B3-mwZxE.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BI8Xtq0C.js"></script>
+<script type="module" src="/znai/static/dagre-KV5264BT-BilodntU.js"></script>
+<script type="module" src="/znai/static/diagram-5BDNPKRD-Buk9ns_e.js"></script>
+<script type="module" src="/znai/static/diagram-G4DWMVQ6-BO9mbuqX.js"></script>
+<script type="module" src="/znai/static/diagram-MMDJMWI5-Tro4le4k.js"></script>
+<script type="module" src="/znai/static/diagram-TYMM5635-DD1EhyAg.js"></script>
+<script type="module" src="/znai/static/erDiagram-SMLLAGMA-Bi_43muH.js"></script>
+<script type="module" src="/znai/static/flowDiagram-DWJPFMVM-BV-qC2NW.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-T4ZO3ILL-Dg0XNuE0.js"></script>
+<script type="module" src="/znai/static/gitGraph-7Q5UKJZL-C92WYRSu.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-UUTBAWPF-CbfaKDaz.js"></script>
+<script type="module" src="/znai/static/index-BtMkAnW_.js"></script>
+<script type="module" src="/znai/static/info-OMHHGYJF-5C6JdMgC.js"></script>
+<script type="module" src="/znai/static/infoDiagram-42DDH7IO-BY0jSq4d.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-UXIWVN3A-C-hBhAbJ.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-VCZTEJTY-CTIYYawW.js"></script>
+<script type="module" src="/znai/static/kanban-definition-6JOO6SKY-CSCAbrt8.js"></script>
+<script type="module" src="/znai/static/katex-XzxUsVLF.js"></script>
+<script type="module" src="/znai/static/mermaid-Dz5H2TqM.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-QFDTVHPH-C4JPm98a.js"></script>
+<script type="module" src="/znai/static/packet-4T2RLAQJ-ByPBXTqk.js"></script>
+<script type="module" src="/znai/static/pie-ZZUOXDRM-I3ioXM80.js"></script>
+<script type="module" src="/znai/static/pieDiagram-DEJITSTG-x7y9WIJG.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-34T5L4WZ-WXbwuR1l.js"></script>
+<script type="module" src="/znai/static/radar-PYXPWWZC-B-aYpdtC.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-MS252O5E-9UPfYL1A.js"></script>
+<script type="module" src="/znai/static/rolldown-runtime-DmV8ZhqI.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-XADWPNL6-Of2C-XR5.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-FGHM5R23-ClDenKeG.js"></script>
+<script type="module" src="/znai/static/stateDiagram-FHFEXIEX-CZqwkUc-.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-QKLJ7IA2-DFd5BXev.js"></script>
+<script type="module" src="/znai/static/timeline-definition-GMOUNBTQ-DHiI0xtv.js"></script>
+<script type="module" src="/znai/static/treeView-SZITEDCU-CSdA_NIg.js"></script>
+<script type="module" src="/znai/static/treemap-W4RFUUIX-1RPXMW9Y.js"></script>
+<script type="module" src="/znai/static/vennDiagram-DHZGUBPP-BqljbEfa.js"></script>
+<script type="module" src="/znai/static/wardley-RL74JXVD-DMHTWEjx.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-NUSXRM2D-Do14N2RG.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-5P7HB3ND-Tku-kaD8.js"></script>
+<script type="text/javascript" src="/znai/custom.js"></script>
+<script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
+<script type="module" src="/znai/search-index.js"></script>
+<script type="module">
+document.getElementById('znai').innerHTML = '';
+/*<!--*/
+/*
+ * Copyright 2025 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+function initializeSearchIndex() {
+    if (window.znaiSearchData) {
+        window.znaiSearchIdx = window.createLocalSearchIndex();
+        window.populateLocalSearchIndexWithData(window.znaiSearchIdx, window.znaiSearchData);
+    }
+}
+
+// Call the method to initialize the search index.
+initializeSearchIndex();
+
+window.ReactDOM.render(React.createElement(Documentation, {
+  "docMeta" : {
+    "slackAttn" : [ "user1", "group-two" ],
+    "hidePresentationTrigger" : false,
+    "hideFootnoteList" : false,
+    "viewOn" : {
+      "link" : "https://github.com/testingisdocumenting/znai/blob/master/znai-docs/znai",
+      "title" : "View Markdown"
+    },
+    "description" : "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+    "id" : "znai",
+    "title" : "Znai",
+    "type" : "User Guide",
+    "category" : "Documentation",
+    "previewEnabled" : false,
+    "support" : {
+      "link" : "https://github.com/testingisdocumenting/znai/discussions",
+      "title" : "GitHub"
+    }
+  },
+  "page" : {
+    "type" : "Page",
+    "content" : [ {
+      "id" : "overview",
+      "additionalIds" : [ ],
+      "title" : "Overview",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "code" : "include-javascript-function",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " delegates rendering of a block to a plain",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "JavaScript function. znai creates a DOM node and hands your function:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "the DOM node to render into",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "the parameters from markdown (as ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "args",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ")",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "a ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "themeObservable",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " so rendering can react to light/dark theme switches",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-javascript-function: themeBox {\n  label: \"my custom content box\",\n  customKey: \"custom value\",\n}",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "functionName" : "themeBox",
+        "args" : {
+          "label" : "my custom content box",
+          "customKey" : "custom value"
+        },
+        "type" : "JavascriptFunction"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "See the ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/plugins/javascript-plugin#sample-function",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "sample function",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " at the end of this page.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "registering-a-function",
+      "additionalIds" : [ ],
+      "title" : "Registering A Function",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Attach your function to ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "window",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " under the name you want to reference, and",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "load the script via ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/configuration/extensions",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "code" : "extensions.json",
+            "type" : "InlinedCode"
+          } ]
+        }, {
+          "text" : ":",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "javascript",
+        "snippet" : "(function () {\n    window.themeBox = function (node, args, themeObservable) {\n        // draw inside `node`\n        // read initial theme via `themeObservable.current`\n        // subscribe to updates via `themeObservable.subscribe(listener)`\n    };\n})();",
+        "lineNumber" : "",
+        "title" : "theme-box.js",
+        "anchorId" : "registering-a-function-theme-boxjs",
+        "type" : "Snippet"
+      }, {
+        "title" : "extensions.json",
+        "data" : {
+          "jsResources" : [ "plugins/javascript/theme-box.js" ]
+        },
+        "highlightValues" : [ ],
+        "highlightKeys" : [ ],
+        "anchorId" : "registering-a-function-extensionsjson",
+        "type" : "Json"
+      } ]
+    }, {
+      "id" : "function-signature",
+      "additionalIds" : [ ],
+      "title" : "Function Signature",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Your function receives three arguments:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "code" : "node",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " — the parent ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "div",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " to append content to.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "code" : "args",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " — the parameters passed from markdown. Framework-level keys (",
+              "type" : "SimpleText"
+            }, {
+              "code" : "title",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ",",
+              "type" : "SimpleText"
+            }, {
+              "type" : "SoftLineBreak"
+            }, {
+              "code" : "wide",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "className",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "anchorId",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ") are handled by znai and not forwarded.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "code" : "themeObservable",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " — live access to the current znai theme.",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "lang" : "javascript",
+        "snippet" : "{\n    current: \"light\" | \"dark\",\n    subscribe(listener) {\n        // listener is called with the new theme name on every change\n    }\n}",
+        "lineNumber" : "",
+        "title" : "themeObservable shape",
+        "anchorId" : "function-signature-themeobservable-shape",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The function may return a cleanup function. znai calls it when the block is",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "removed or re-rendered — dispose timers, external listeners, or other",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "resources here.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The ",
+          "type" : "SimpleText"
+        }, {
+          "url" : "/znai/plugins/javascript-plugin#sample-function",
+          "isFile" : false,
+          "type" : "Link",
+          "content" : [ {
+            "text" : "sample function",
+            "type" : "SimpleText"
+          } ]
+        }, {
+          "text" : " below returns a cleanup that logs to",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "the browser console:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "js",
+        "snippet" : "return function cleanup() {\n  console.log(\"themeBox cleanup: block removed from the page\");\n};",
+        "title" : "theme-box.js",
+        "surroundedByScope" : {
+          "start" : "function cleanup",
+          "scope" : "{}"
+        },
+        "anchorId" : "function-signature-theme-boxjs",
+        "type" : "Snippet"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Open DevTools, then navigate away from this page — every ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "themeBox",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " rendered",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "above is unmounted and its cleanup runs.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "theme-toggle",
+      "additionalIds" : [ ],
+      "title" : "Theme Toggle",
+      "type" : "Section",
+      "content" : [ {
+        "functionName" : "themeBox",
+        "args" : {
+          "message" : "Switch the theme to see me update.",
+          "tags" : [ "demo", "theme" ]
+        },
+        "type" : "JavascriptFunction"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Toggle the theme using the switcher in the bottom left corner and watch the",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "custom content restyle. The hookup is one line:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "javascript",
+        "snippet" : "themeObservable.subscribe(applyTheme);",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      } ]
+    }, {
+      "id" : "title",
+      "additionalIds" : [ ],
+      "title" : "Title",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to render a title bar above the block. znai owns the title via",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "its shared container, so your function never sees it.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-javascript-function: themeBox {\n    title: \"theme aware box\",\n    message: \"rendered inside a titled container\"\n}",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "functionName" : "themeBox",
+        "args" : {
+          "title" : "theme aware box",
+          "message" : "rendered inside a titled container"
+        },
+        "type" : "JavascriptFunction"
+      } ]
+    }, {
+      "id" : "wide",
+      "additionalIds" : [ ],
+      "title" : "Wide",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "wide: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to span the full page width, matching wide images and",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "iframes.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-javascript-function: themeBox {\n    title: \"wide theme aware box\",\n    wide: true,\n    note: \"this block breaks out of the single-column width and spans edge to edge of the page container, giving long values plenty of horizontal room to stretch before they need to wrap onto a second line\",\n    tags: [\"wide\", \"demo\", \"edge-to-edge\", \"theme\"],\n    metrics: {\"requests\": 1024, \"latency_ms\": 42, \"error_rate\": 0.003}\n}",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "functionName" : "themeBox",
+        "args" : {
+          "title" : "wide theme aware box",
+          "wide" : true,
+          "note" : "this block breaks out of the single-column width and spans edge to edge of the page container, giving long values plenty of horizontal room to stretch before they need to wrap onto a second line",
+          "tags" : [ "wide", "demo", "edge-to-edge", "theme" ],
+          "metrics" : {
+            "requests" : 1024,
+            "latency_ms" : 42,
+            "error_rate" : 0.003
+          }
+        },
+        "type" : "JavascriptFunction"
+      } ]
+    }, {
+      "id" : "styling-with-a-class-name",
+      "additionalIds" : [ ],
+      "title" : "Styling With A Class Name",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Pass ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "className",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to attach an arbitrary class to the parent node znai creates.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Use it to decorate the wrapper without touching the function:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-javascript-function: themeBox {\n    label: \"highlighted by an outer border\",\n    className: \"theme-box-with-border\"\n}",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "lang" : "css",
+        "snippet" : ".theme-box-with-border {\n    padding: 6px;\n    border: 2px dashed var(--znai-color-green);\n    border-radius: 6px;\n}\n\n.theme-box {\n    box-sizing: border-box;\n    width: 100%;\n    padding: 12px 16px;\n    border: 1px solid var(--znai-snippets-outer-border-color, #dedede);\n    border-left: 4px solid var(--znai-color-blue);\n    border-radius: 4px;\n    background-color: var(--znai-snippets-title-background-color, #efeff1);\n    color: var(--znai-regular-text-color);\n    font-family: var(--znai-regular-font-family);\n}\n\n.theme-box.theme-dark {\n    border-left-color: var(--znai-color-yellow);\n}\n\n.theme-box-title {\n    color: var(--znai-section-title-color);\n    font-weight: 600;\n    font-size: 0.95rem;\n    margin-bottom: 8px;\n}\n\n.theme-box-list {\n    display: grid;\n    grid-template-columns: auto 1fr;\n    column-gap: 12px;\n    row-gap: 4px;\n    font-family: var(--znai-code-font-family, monospace);\n    font-size: 0.9rem;\n}\n\n.theme-box-empty {\n    font-style: italic;\n    color: var(--znai-regular-text-light-color);\n}\n\n.theme-box-key {\n    color: var(--znai-brand-primary-color);\n    font-weight: 600;\n}\n\n.theme-box-value {\n    color: var(--znai-regular-text-color);\n    word-break: break-word;\n    white-space: pre-wrap;\n}\n\n.theme-box-current-theme {\n    font-size: 0.8rem;\n    margin-top: 10px;\n    color: var(--znai-regular-text-light-color);\n}",
+        "title" : "theme-box.css",
+        "readMore" : true,
+        "anchorId" : "styling-with-a-class-name-theme-boxcss",
+        "type" : "Snippet"
+      }, {
+        "functionName" : "themeBox",
+        "args" : {
+          "label" : "highlighted by an outer border",
+          "className" : "theme-box-with-border"
+        },
+        "type" : "JavascriptFunction"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The dashed outline comes from the class on the outer wrapper — the box itself",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "is untouched.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "search",
+      "additionalIds" : [ ],
+      "title" : "Search",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Values passed via ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "args",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " flow into znai's local search. Searching for any word",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "inside the parameters surfaces the page and the rendered block.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "sample-function",
+      "additionalIds" : [ ],
+      "title" : "Sample Function",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "The function below powers the examples on this page. It reads the initial",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "theme and subscribes to future changes.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "js",
+        "snippet" : "/*\n * custom javascript global function to render custom content within znai\n * generated guides\n *\n * renders a panel that lists every argument passed via the plugin as\n * a key/value row. reacts to znai theme switches via the theme observable\n * to toggle a `theme-dark` class that drives the accent color via CSS.\n */\n(function () {\n  function formatValue(value) {\n    if (value === null || value === undefined) {\n      return String(value);\n    }\n\n    if (typeof value === \"object\") {\n      return JSON.stringify(value);\n    }\n\n    return String(value);\n  }\n\n  function createElement(tagName, className, textContent) {\n    var el = document.createElement(tagName);\n    el.className = className;\n    if (textContent !== undefined) {\n      el.textContent = textContent;\n    }\n    return el;\n  }\n\n  window.themeBox = function (node, args, themeObservable) {\n    var box = createElement(\"div\", \"theme-box\");\n    var titleEl = createElement(\n      \"div\",\n      \"theme-box-title\",\n      \"args passed to the function\"\n    );\n    var list = createElement(\"div\", \"theme-box-list\");\n    var themeEl = createElement(\"div\", \"theme-box-current-theme\");\n\n    var argKeys = Object.keys(args);\n    if (argKeys.length === 0) {\n      list.appendChild(\n        createElement(\"div\", \"theme-box-empty\", \"no args passed\")\n      );\n    } else {\n      argKeys.forEach(function (key) {\n        list.appendChild(createElement(\"div\", \"theme-box-key\", key));\n        list.appendChild(\n          createElement(\"div\", \"theme-box-value\", formatValue(args[key]))\n        );\n      });\n    }\n\n    box.appendChild(titleEl);\n    box.appendChild(list);\n    box.appendChild(themeEl);\n    node.appendChild(box);\n\n    function applyTheme(themeName) {\n      box.classList.toggle(\"theme-dark\", themeName === \"dark\");\n      themeEl.textContent = \"current theme: \" + themeName;\n    }\n\n    applyTheme(themeObservable.current);\n    themeObservable.subscribe(applyTheme);\n\n    return function cleanup() {\n      console.log(\"themeBox cleanup: block removed from the page\");\n    };\n  };\n})();",
+        "title" : "plugins/javascript/theme-box.js",
+        "anchorId" : "sample-function-plugins-javascript-theme-boxjs",
+        "type" : "Snippet"
+      } ]
+    } ],
+    "lastModifiedTime" : 1777860212130,
+    "tocItem" : {
+      "chapterTitle" : "Plugins",
+      "pageTitle" : "Javascript Plugin",
+      "pageMeta" : { },
+      "dirName" : "plugins",
+      "fileName" : "javascript-plugin",
+      "fileExtension" : "md",
+      "viewOnRelativePath" : null,
+      "pageSectionIdTitles" : [ {
+        "title" : "Overview",
+        "id" : "overview",
+        "customAnchorId" : "overview"
+      }, {
+        "title" : "Registering A Function",
+        "id" : "registering-a-function",
+        "customAnchorId" : "registering-a-function"
+      }, {
+        "title" : "Function Signature",
+        "id" : "function-signature",
+        "customAnchorId" : "function-signature"
+      }, {
+        "title" : "Theme Toggle",
+        "id" : "theme-toggle",
+        "customAnchorId" : "theme-toggle"
+      }, {
+        "title" : "Title",
+        "id" : "title",
+        "customAnchorId" : "title"
+      }, {
+        "title" : "Wide",
+        "id" : "wide",
+        "customAnchorId" : "wide"
+      }, {
+        "title" : "Styling With A Class Name",
+        "id" : "styling-with-a-class-name",
+        "customAnchorId" : "styling-with-a-class-name"
+      }, {
+        "title" : "Search",
+        "id" : "search",
+        "customAnchorId" : "search"
+      }, {
+        "title" : "Sample Function",
+        "id" : "sample-function",
+        "customAnchorId" : "sample-function"
+      } ]
+    }
+  }
+}), document.getElementById("znai"));
+/*-->*/
+
+</script>
+
+</body>
+</html>

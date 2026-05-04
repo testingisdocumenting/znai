@@ -236,7 +236,7 @@ documentation writing process.
       <text>## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.88/znai-dist-1.88-znai.zip). Add
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.89/znai-dist-1.89-znai.zip). Add
 it to your `PATH`.
 
 ## Brew
@@ -261,7 +261,7 @@ brew install testingisdocumenting/brew/znai
 &lt;plugin>
     &lt;groupId>org.testingisdocumenting.znai&lt;/groupId>
     &lt;artifactId>znai-maven-plugin&lt;/artifactId>
-    &lt;version>1.88&lt;/version>
+    &lt;version>1.89&lt;/version>
 &lt;/plugin>
 ```
 
@@ -551,10 +551,13 @@ synergy-with-testing
 plugins
     plugin-types
     default-parameters
+    javascript-plugin
+    user-defined-plugins
     development
 configuration
     basic
     styling
+    extensions
     top-header
 deployment
     additional-files
@@ -710,6 +713,7 @@ type, and optional `View On` information.
   "type": "User Guide",
   "category": "Documentation",
   "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+  "slackAttn": ["user1", "group-two"],
   "hidePresentationTrigger": false,
   "hideFootnoteList": false,
   "viewOn": {
@@ -1283,6 +1287,7 @@ Content in `footer.md` will be displayed at the bottom of each page.
   "type": "User Guide",
   "category": "Documentation",
   "description": "Build functional, maintainable, beautiful User Guides with markdown and Znai plugins. Instant pages navigation. Local search. Multiple integrations to work with Python, Java, C++, OpenAPI, etc. Transform \"getting started\" sections into slideshow for your workshops. Manage multiple documentations with self-deployed znai hub.",
+  "slackAttn": ["user1", "group-two"],
   "hidePresentationTrigger": false,
   "hideFootnoteList": false,
   "viewOn": {
@@ -1313,10 +1318,10 @@ Take a look at the example at the top of this page.
 
 ```
 [^my-id]: extra content for my footnote goes here
-potentially including code blocks
-```
-Constructor()
-```
+    potentially including code blocks
+    ```
+    Constructor()
+    ```
 ```
 
 To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
@@ -1337,7 +1342,28 @@ appearance.
     <pageSectionTitle>Preview</pageSectionTitle>
     <text>
       <score>STANDARD</score>
-      <text>Hover mouse over a footnote reference see its content in a tooltip.
+      <text>Hover mouse over a footnote reference see its content in a tooltip. Click on it to go the footnotes list at the bottom
+of the page.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/flow/footnotes#footnotes-inside-attention-blocks</url>
+    <fullTitle>Znai: Footnotes, Footnotes Inside Attention Blocks [Flow]</fullTitle>
+    <pageTitle>Footnotes</pageTitle>
+    <chapterTitle>Flow</chapterTitle>
+    <pageSectionTitle>Footnotes Inside Attention Blocks</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Footnotes can be used inside different content blocks like `attention-note`:
+
+```
+```attention-warning
+Use something important [^my-id]
+```
+```
+
 
 </text>
     </text>
@@ -6483,7 +6509,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 595,
+    "y" : 582,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -8944,6 +8970,22 @@ Below is a demo, except the final [Definition](#definition) section.
       <score>STANDARD</score>
       <text>Every project needs an editor configuration. Create a workspace settings file in your project root.
 
+`````tab-content "VS Code"
+Create `.vscode/settings.json` in your project root:
+
+
+`````
+
+`````tab-content Emacs
+Create `.dir-locals.el` in your project root:
+
+```elisp
+((nil . ((indent-tabs-mode . nil)
+         (tab-width . 4)
+         (fill-column . 100))))
+```
+
+`````
 
 
 </text>
@@ -8959,7 +9001,19 @@ Below is a demo, except the final [Definition](#definition) section.
       <score>STANDARD</score>
       <text>Set up the build tool for your project. All editors use the same underlying build system, but the integration differs.
 
+`````tab-content "VS Code"
+Create `.vscode/tasks.json` to integrate the build:
 
+Use `Ctrl+Shift+B` to run the build task.
+
+`````
+
+`````tab-content Emacs
+Configure `compile-command` in `.dir-locals.el`:
+
+Use `M-x compile` to run the build.
+
+`````
 
 </text>
     </text>
@@ -8975,7 +9029,18 @@ Below is a demo, except the final [Definition](#definition) section.
       <text>All projects benefit from proper debug configuration. Breakpoints, watch expressions, and stepping through code work the
 same conceptually  but the configuration differs per editor.
 
+`````tab-content "VS Code"
+Create `.vscode/launch.json`:
 
+Press `F5` to start debugging.
+
+`````
+
+`````tab-content Emacs
+
+Use `M-x dap-debug` to start a debug session.
+
+`````
 
 </text>
     </text>
@@ -9034,7 +9099,15 @@ More shared content here.
 
 Shared content here is always visible.
 
+`````tab-content "VS Code"
 
+
+`````
+
+`````tab-content Emacs
+
+
+`````
 
 More shared content here.
 
@@ -12165,7 +12238,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 595,
+    "y" : 582,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -12510,6 +12583,637 @@ set to true.
     </text>
   </entry>
   <entry>
+    <url>/znai/plugins/javascript-plugin#overview</url>
+    <fullTitle>Znai: Javascript Plugin, Overview [Plugins]</fullTitle>
+    <pageTitle>Javascript Plugin</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Overview</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>`include-javascript-function` delegates rendering of a block to a plain JavaScript function. znai creates a DOM node and
+hands your function:
+
+* the DOM node to render into
+* the parameters from markdown (as `args`)
+* a `themeObservable` so rendering can react to light/dark theme switches
+
+```markdown
+:include-javascript-function: themeBox {
+  label: "my custom content box",
+  customKey: "custom value",
+}
+```
+
+
+See the [sample function](#sample-function) at the end of this page.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/javascript-plugin#registering-a-function</url>
+    <fullTitle>Znai: Javascript Plugin, Registering A Function [Plugins]</fullTitle>
+    <pageTitle>Javascript Plugin</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Registering A Function</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Attach your function to `window` under the name you want to reference, and load the script via
+[`extensions.json`](configuration/extensions):
+
+```javascript
+(function () {
+    window.themeBox = function (node, args, themeObservable) {
+        // draw inside `node`
+        // read initial theme via `themeObservable.current`
+        // subscribe to updates via `themeObservable.subscribe(listener)`
+    };
+})();
+```
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/javascript-plugin#function-signature</url>
+    <fullTitle>Znai: Javascript Plugin, Function Signature [Plugins]</fullTitle>
+    <pageTitle>Javascript Plugin</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Function Signature</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Your function receives three arguments:
+
+* `node`  the parent `div` to append content to.
+* `args`  the parameters passed from markdown. Framework-level keys (`title`, `wide`, `className`, `anchorId`) are
+handled by znai and not forwarded.
+* `themeObservable`  live access to the current znai theme.
+
+```javascript
+{
+    current: "light" | "dark",
+    subscribe(listener) {
+        // listener is called with the new theme name on every change
+    }
+}
+```
+
+The function may return a cleanup function. znai calls it when the block is removed or re-rendered  dispose timers,
+external listeners, or other resources here.
+
+The [sample function](#sample-function) below returns a cleanup that logs to the browser console:
+
+```js
+return function cleanup() {
+  console.log("themeBox cleanup: block removed from the page");
+};
+```
+
+Open DevTools, then navigate away from this page  every `themeBox` rendered above is unmounted and its cleanup runs.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/javascript-plugin#theme-toggle</url>
+    <fullTitle>Znai: Javascript Plugin, Theme Toggle [Plugins]</fullTitle>
+    <pageTitle>Javascript Plugin</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Theme Toggle</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
+
+Toggle the theme using the switcher in the bottom left corner and watch the custom content restyle. The hookup is one
+line:
+
+```javascript
+themeObservable.subscribe(applyTheme);
+```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/javascript-plugin#title</url>
+    <fullTitle>Znai: Javascript Plugin, Title [Plugins]</fullTitle>
+    <pageTitle>Javascript Plugin</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Title</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Pass `title` to render a title bar above the block. znai owns the title via its shared container, so your function never
+sees it.
+
+```markdown
+:include-javascript-function: themeBox {
+    title: "theme aware box",
+    message: "rendered inside a titled container"
+}
+```
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/javascript-plugin#wide</url>
+    <fullTitle>Znai: Javascript Plugin, Wide [Plugins]</fullTitle>
+    <pageTitle>Javascript Plugin</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Wide</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Pass `wide: true` to span the full page width, matching wide images and iframes.
+
+```markdown
+:include-javascript-function: themeBox {
+    title: "wide theme aware box",
+    wide: true,
+    note: "this block breaks out of the single-column width and spans edge to edge of the page container, giving long values plenty of horizontal room to stretch before they need to wrap onto a second line",
+    tags: ["wide", "demo", "edge-to-edge", "theme"],
+    metrics: {"requests": 1024, "latency_ms": 42, "error_rate": 0.003}
+}
+```
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/javascript-plugin#styling-with-a-class-name</url>
+    <fullTitle>Znai: Javascript Plugin, Styling With A Class Name [Plugins]</fullTitle>
+    <pageTitle>Javascript Plugin</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Styling With A Class Name</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Pass `className` to attach an arbitrary class to the parent node znai creates. Use it to decorate the wrapper without
+touching the function:
+
+```markdown
+:include-javascript-function: themeBox {
+    label: "highlighted by an outer border",
+    className: "theme-box-with-border"
+}
+```
+
+```css
+.theme-box-with-border {
+    padding: 6px;
+    border: 2px dashed var(--znai-color-green);
+    border-radius: 6px;
+}
+
+.theme-box {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--znai-snippets-outer-border-color, #dedede);
+    border-left: 4px solid var(--znai-color-blue);
+    border-radius: 4px;
+    background-color: var(--znai-snippets-title-background-color, #efeff1);
+    color: var(--znai-regular-text-color);
+    font-family: var(--znai-regular-font-family);
+}
+
+.theme-box.theme-dark {
+    border-left-color: var(--znai-color-yellow);
+}
+
+.theme-box-title {
+    color: var(--znai-section-title-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.theme-box-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    row-gap: 4px;
+    font-family: var(--znai-code-font-family, monospace);
+    font-size: 0.9rem;
+}
+
+.theme-box-empty {
+    font-style: italic;
+    color: var(--znai-regular-text-light-color);
+}
+
+.theme-box-key {
+    color: var(--znai-brand-primary-color);
+    font-weight: 600;
+}
+
+.theme-box-value {
+    color: var(--znai-regular-text-color);
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.theme-box-current-theme {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    color: var(--znai-regular-text-light-color);
+}
+```
+
+
+The dashed outline comes from the class on the outer wrapper  the box itself is untouched.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/javascript-plugin#search</url>
+    <fullTitle>Znai: Javascript Plugin, Search [Plugins]</fullTitle>
+    <pageTitle>Javascript Plugin</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Search</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Values passed via `args` flow into znai's local search. Searching for any word inside the parameters surfaces the page
+and the rendered block.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/javascript-plugin#sample-function</url>
+    <fullTitle>Znai: Javascript Plugin, Sample Function [Plugins]</fullTitle>
+    <pageTitle>Javascript Plugin</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Sample Function</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>The function below powers the examples on this page. It reads the initial theme and subscribes to future changes.
+
+```js
+/*
+ * custom javascript global function to render custom content within znai
+ * generated guides
+ *
+ * renders a panel that lists every argument passed via the plugin as
+ * a key/value row. reacts to znai theme switches via the theme observable
+ * to toggle a `theme-dark` class that drives the accent color via CSS.
+ */
+(function () {
+  function formatValue(value) {
+    if (value === null || value === undefined) {
+      return String(value);
+    }
+
+    if (typeof value === "object") {
+      return JSON.stringify(value);
+    }
+
+    return String(value);
+  }
+
+  function createElement(tagName, className, textContent) {
+    var el = document.createElement(tagName);
+    el.className = className;
+    if (textContent !== undefined) {
+      el.textContent = textContent;
+    }
+    return el;
+  }
+
+  window.themeBox = function (node, args, themeObservable) {
+    var box = createElement("div", "theme-box");
+    var titleEl = createElement(
+      "div",
+      "theme-box-title",
+      "args passed to the function"
+    );
+    var list = createElement("div", "theme-box-list");
+    var themeEl = createElement("div", "theme-box-current-theme");
+
+    var argKeys = Object.keys(args);
+    if (argKeys.length === 0) {
+      list.appendChild(
+        createElement("div", "theme-box-empty", "no args passed")
+      );
+    } else {
+      argKeys.forEach(function (key) {
+        list.appendChild(createElement("div", "theme-box-key", key));
+        list.appendChild(
+          createElement("div", "theme-box-value", formatValue(args[key]))
+        );
+      });
+    }
+
+    box.appendChild(titleEl);
+    box.appendChild(list);
+    box.appendChild(themeEl);
+    node.appendChild(box);
+
+    function applyTheme(themeName) {
+      box.classList.toggle("theme-dark", themeName === "dark");
+      themeEl.textContent = "current theme: " + themeName;
+    }
+
+    applyTheme(themeObservable.current);
+    themeObservable.subscribe(applyTheme);
+
+    return function cleanup() {
+      console.log("themeBox cleanup: block removed from the page");
+    };
+  };
+})();
+```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#overview</url>
+    <fullTitle>Znai: User Defined Plugins, Overview [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Overview</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>JSON and template driven user defined plugins:
+
+```markdown
+```custom-fence-block {title: "greet.js"}
+function greet(name) {
+  console.log("hello, " + name);
+}
+
+greet("world");
+```
+```
+
+```markdown
+:include-themed-box: Capacity approaching threshold {
+  severity: "warning",
+  tags: ["observability"]
+}
+```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#registering-a-plugin</url>
+    <fullTitle>Znai: User Defined Plugins, Registering A Plugin [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Registering A Plugin</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>List each plugin config under `plugins` in [extensions.json](configuration/extensions). Paths resolve relative to your
+documentation root, like `cssResources` and `jsResources`.
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#plugin-config-shape</url>
+    <fullTitle>Znai: User Defined Plugins, Plugin Config Shape [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Plugin Config Shape</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>```json
+{
+  "id": "themed-box",
+  "type": "include",
+  "template": "plugins/themed-box-plugin.ftl",
+  "arguments": {
+    "freeForm": { "required": true },
+    "severity": { "type": "string", "required": true, "limitValuesTo": ["info", "success", "warning"] },
+    "tags": { "type": "list-of-string", "limitValuesTo": "$plugins/themed-box-tags.json" }
+  }
+}
+```
+
+`id` is what you type after `:include-` or as the fence language. A config registers exactly one role; if you need both
+an include and a fence variant of the same template, write two configs that point at the same `.ftl`  they take
+different special arguments (`freeForm` vs `fenceContent`) anyway.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#arguments</url>
+    <fullTitle>Znai: User Defined Plugins, Arguments [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Arguments</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Each entry under `arguments` defines one parameter callers can pass.
+
+
+* `type`  `number`, `string`, `list-of-number`, `list-of-string`, or `list`
+* `required`  defaults to `false`
+* `limitValuesTo`  optional; an inline array of allowed values, or a `$path/to/file.json` reference to a JSON array file.
+Omit it to accept any value of `type`.
+
+Unknown arguments, type mismatches, and values outside `limitValuesTo` all fail the build with the same error reporting
+as built-in plugins.
+
+## Limit Values From A File
+
+Point `limitValuesTo` at a JSON array when the allowed set is owned elsewhere  a team-wide tag list, regional names,
+severity levels shared with another tool:
+
+```json
+["demo", "theme", "observability", "latency", "deployment"]
+```
+
+The path resolves relative to the plugin config first, then falls back to znai's resource resolver  so it works next to
+the `.json`, next to `toc`, on the lookup path, or packaged in a jar.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#special-arguments</url>
+    <fullTitle>Znai: User Defined Plugins, Special Arguments [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Special Arguments</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Two argument names are reserved:
+
+* `freeForm`  the text right after the plugin id and before `{...}`. Use it for the single primary input (a message, an
+entity name, a URL). No `type` needed  it's always raw text. Set `required: true` to fail the build when the caller
+omits it; defaults to optional.
+* `fenceContent`  the body of a fenced block; only meaningful for fence plugins. No `type` needed  the raw text is
+passed through untouched. Always present by construction.
+
+
+Both names skip the regular type/`limitValuesTo` validation.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#template</url>
+    <fullTitle>Znai: User Defined Plugins, Template [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Template</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Templates are rendered with [FreeMarker](https://freemarker.apache.org), same as [include-template](layout/templates).
+Every argument  including `freeForm` and `fenceContent`  is a top-level variable. The output can be any markdown znai
+understands: prose, fenced code, calls to other plugins.
+
+```ftl
+:include-javascript-function: themeBox {
+  label: "${freeForm}",
+  severity: "${severity}",
+  tags: [&lt;#list tags! as tag>"${tag}"&lt;#sep>, &lt;/#list>],
+  title: "${severity?upper_case} box title from template"
+}
+```
+
+This example wraps [include-javascript-function](plugins/javascript-plugin) and forwards `severity` and `tags`,
+shrinking the surface area writers need to remember.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#usage</url>
+    <fullTitle>Znai: User Defined Plugins, Usage [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Usage</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>```markdown
+:include-themed-box: Deploy finished in 4 minutes flat {
+  severity: "success",
+  tags: ["deployment", "latency"]
+}
+```
+
+
+```markdown
+:include-themed-box: Capacity approaching threshold {
+  severity: "warning",
+  tags: ["observability"]
+}
+```
+
+
+Omit a required argument or pass a tag missing from `themed-box-tags.json` and the build stops with a descriptive error.
+Arguments without `limitValuesTo` accept any value of the declared `type`  handy for free-text titles or counts.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#fence-plugins</url>
+    <fullTitle>Znai: User Defined Plugins, Fence Plugins [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Fence Plugins</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Set `"type": "fence"` to register a fenced block plugin. The body comes through the special `fenceContent` argument:
+
+```json
+{
+  "id": "custom-fence-block",
+  "type": "fence",
+  "template": "plugins/custom-fence-block-plugin.ftl",
+  "arguments": {
+    "fenceContent": {},
+    "title": { "type": "string" }
+  }
+}
+```
+
+```ftl
+:include-javascript-function: themeBox {
+  title: "${title!'code snippet'}",
+  snippet: "${fenceContent?json_string}"
+}
+```
+
+FreeMarker's `?json_string` escapes the body so it stays a valid JSON string when handed to another plugin's params
+block  multi-line bodies, quotes, and backslashes survive intact.
+
+The fence marker is the plugin id, not a language hint:
+
+```
+```custom-fence-block {title: "greet.js"}
+function greet(name) {
+  console.log("hello, " + name);
+}
+
+greet("world");
+```
+```
+
+
+The body reaches `include-javascript-function` verbatim as the `snippet` arg. Any fence plugin can use this pattern to
+forward content to diagram renderers, code annotators, or other include plugins.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#rebuild-detection</url>
+    <fullTitle>Znai: User Defined Plugins, Rebuild Detection [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Rebuild Detection</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>The plugin config, the template, and any referenced `limitValuesTo` files are treated as auxiliary files. Edit any of
+them and znai regenerates the affected pages  same contract as template includes and snippet files.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#search</url>
+    <fullTitle>Znai: User Defined Plugins, Search [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>Search</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Values you pass to the plugin flow into znai's local search via the inner plugin's `textForSearch`. No extra work to
+make pages searchable by parameter content.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/plugins/user-defined-plugins#when-to-use</url>
+    <fullTitle>Znai: User Defined Plugins, When To Use [Plugins]</fullTitle>
+    <pageTitle>User Defined Plugins</pageTitle>
+    <chapterTitle>Plugins</chapterTitle>
+    <pageSectionTitle>When To Use</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>User-defined plugins fit when:
+
+* you keep pasting the same include block with only a few values changed
+* writers should pick from a constrained set (an enum-like `severity`, a tag registry)
+* a snippet spans multiple plugins and you want one entry point that composes them consistently
+
+If the reuse is purely structural and needs no validation, [include-template](layout/templates) is enough on its own.
+
+</text>
+    </text>
+  </entry>
+  <entry>
     <url>/znai/plugins/development#placeholder</url>
     <fullTitle>Znai: Development, PlaceHolder [Plugins]</fullTitle>
     <pageTitle>Development</pageTitle>
@@ -12592,6 +13296,105 @@ API.
     --znai-code-keyword-color: #5050af;
 }
 ```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/configuration/extensions</url>
+    <fullTitle>Znai: Extensions [Configuration]</fullTitle>
+    <pageTitle>Extensions</pageTitle>
+    <chapterTitle>Configuration</chapterTitle>
+    <pageSectionTitle></pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Add `extensions.json` next to your `toc` file to inject custom CSS, JavaScript, or HTML into the generated site. This is
+how you bring in your own stylesheets, load scripts used by the [javascript plugin](plugins/javascript-plugin), embed
+tracking snippets, or ship extra static files along with the docs.
+
+
+All paths are resolved relative to your documentation root (the directory that holds the `toc` file).
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/configuration/extensions#cssresources</url>
+    <fullTitle>Znai: Extensions, cssResources [Configuration]</fullTitle>
+    <pageTitle>Extensions</pageTitle>
+    <chapterTitle>Configuration</chapterTitle>
+    <pageSectionTitle>cssResources</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>List of CSS files to load on every page.
+
+
+Note: a file named `style.css` placed next to `toc` is picked up automatically, no need to list it here. See
+[Styling](configuration/styling).
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/configuration/extensions#jsresources</url>
+    <fullTitle>Znai: Extensions, jsResources [Configuration]</fullTitle>
+    <pageTitle>Extensions</pageTitle>
+    <chapterTitle>Configuration</chapterTitle>
+    <pageSectionTitle>jsResources</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>List of JavaScript files to load on every page. Use this to register custom functions for the [javascript
+plugin](plugins/javascript-plugin).
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/configuration/extensions#htmlresources</url>
+    <fullTitle>Znai: Extensions, htmlResources [Configuration]</fullTitle>
+    <pageTitle>Extensions</pageTitle>
+    <chapterTitle>Configuration</chapterTitle>
+    <pageSectionTitle>htmlResources</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>List of HTML snippets injected into the `&lt;body>` of every page  useful for widgets, chat bubbles, or any markup that
+needs to live alongside the rendered content.
+
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/configuration/extensions#htmlheadresources</url>
+    <fullTitle>Znai: Extensions, htmlHeadResources [Configuration]</fullTitle>
+    <pageTitle>Extensions</pageTitle>
+    <chapterTitle>Configuration</chapterTitle>
+    <pageSectionTitle>htmlHeadResources</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>List of HTML snippets injected into the `&lt;head>` of every page. Common use cases are analytics tags, preconnect hints,
+or extra `&lt;meta>` entries.
+
+
+Note: a file named `tracking.html` placed next to `toc` is picked up automatically.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/configuration/extensions#additionalfilestodeploy</url>
+    <fullTitle>Znai: Extensions, additionalFilesToDeploy [Configuration]</fullTitle>
+    <pageTitle>Extensions</pageTitle>
+    <chapterTitle>Configuration</chapterTitle>
+    <pageSectionTitle>additionalFilesToDeploy</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>List of extra files to copy into the deploy output. Use this for assets referenced by your custom CSS/JS that znai would
+not otherwise discover  fonts, icons, supporting JSON, and so on.
+
+
+Note: for broader file/directory copying, see [additional files](deployment/additional-files).
 
 </text>
     </text>
@@ -12926,6 +13729,32 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2026#190</url>
+    <fullTitle>Znai: 2026, 1.90 [Release Notes]</fullTitle>
+    <pageTitle>2026</pageTitle>
+    <chapterTitle>Release Notes</chapterTitle>
+    <pageSectionTitle>1.90</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2026#189</url>
+    <fullTitle>Znai: 2026, 1.89 [Release Notes]</fullTitle>
+    <pageTitle>2026</pageTitle>
+    <chapterTitle>Release Notes</chapterTitle>
+    <pageSectionTitle>1.89</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
 
 </text>
     </text>
