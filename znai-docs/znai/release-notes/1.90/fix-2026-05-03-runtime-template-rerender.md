@@ -1,0 +1,1 @@
+* Fix: [Runtime Templates](layout/runtime-templates) re-renders on url change

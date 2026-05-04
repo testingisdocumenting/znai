@@ -16,7 +16,7 @@
 
 import React from "react";
 
-import { resolveQueryParamValue } from "./queryParamTemplate";
+import { resolveQueryParamValue, useUrlQuerySubscription } from "./queryParamTemplate";
 
 import "./UrlQueryValue.css";
 
@@ -26,6 +26,7 @@ interface Props {
 }
 
 export function UrlQueryValue({ queryParam, default: defaultValue }: Props) {
+  useUrlQuerySubscription();
   const resolved = resolveQueryParamValue(queryParam, defaultValue);
 
   if (resolved.isMissing) {

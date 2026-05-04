@@ -20,7 +20,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import CliCommandToken from "./CliCommandToken";
 import { splitParts } from "../../utils/strings";
 import { DocElementPayload } from "../default-elements/DocElement";
-import { resolveTemplateText } from "../url-query-value/queryParamTemplate";
+import { resolveTemplateText, useUrlQuerySubscription } from "../url-query-value/queryParamTemplate";
 import "./CliCommand.css";
 
 interface Token {
@@ -53,6 +53,7 @@ const CliCommand: React.FC<CliCommandProps> = ({
   splitAfter = [],
   templateUseQueryParam = false,
 }) => {
+  useUrlQuerySubscription();
   const resolvedCommand = templateUseQueryParam ? resolveTemplateText(command) : command;
   const tokens = useMemo(() => tokenize(resolvedCommand), [resolvedCommand]);
 
