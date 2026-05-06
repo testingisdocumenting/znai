@@ -24,7 +24,7 @@ function process(pageContent) {
 // and annotates FootnoteReference elements with occurrence numbers
 function processContent(content, meta, footnoteOccurrences) {
   if (!content) {
-    return content;
+    return [];
   }
 
   let currentMeta = meta;

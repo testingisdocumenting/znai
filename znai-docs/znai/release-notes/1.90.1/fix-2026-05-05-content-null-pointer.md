@@ -1,0 +1,1 @@
+* Fix: Empty pages no longer throw exception
