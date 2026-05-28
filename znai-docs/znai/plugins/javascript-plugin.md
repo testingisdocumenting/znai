@@ -231,4 +231,5 @@ inside the parameters surfaces the page and the rendered block.
 The function below powers the examples on this page. It reads the initial
 theme and subscribes to future changes.
 
-:include-file: javascript/theme-box.js {title: "plugins/javascript/theme-box.js"}
+:include-file: javascript/theme-box.js {title: "plugins/javascript/theme-box.js", collapsed: true, noGap: true}
+:include-file: javascript/activity-feed.js {title: "plugins/javascript/activity-feed.js", collapsed: true, noGap: true}
