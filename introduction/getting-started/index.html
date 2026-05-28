@@ -102,7 +102,7 @@
 
 <article>
 <header><h1>Maven Plugin</h1></header>
-<p>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 89&lt; version&gt; &lt; plugin&gt;</p>
+<p>Note consider adding a separate module for documentation in the multi module maven project &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 90 1&lt; version&gt; &lt; plugin&gt;</p>
 </article>
 
 <article>
@@ -112,17 +112,17 @@
 
 <article>
 <header><h1>Preview Mode</h1></header>
-<p>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 89&lt; version&gt; &lt;configuration&gt; &lt;port&gt;3334&lt; port&gt; &lt; optional override of default value 3333 &gt; &lt; configuration&gt; &lt; plugin&gt; Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</p>
+<p>Znai comes with mode In mode znai monitors changes you apply to the documentation files and notifies browser to navigates to the right page and highlights the changes To start preview mode navigate to the documentation directory if you used scaffold and run CLI znai preview port port number Maven mvn znai preview &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 90 1&lt; version&gt; &lt;configuration&gt; &lt;port&gt;3334&lt; port&gt; &lt; optional override of default value 3333 &gt; &lt; configuration&gt; &lt; plugin&gt; Open URL output by the command and open in a browser Blue eye icon in the top right corner indicates that preview is on Open any text editor modify and save a markdown file Changes will be reflected in the browser preview preview znai</p>
 </article>
 
 <article>
 <header><h1>Static Site Generation</h1></header>
-<p>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 89&lt; version&gt; &lt;configuration&gt; &lt;docId&gt;project name&lt; docId&gt; &lt;deployRoot&gt; path to static content&lt; deployRoot&gt; &lt; default is $ project build directory &gt; &lt; configuration&gt; &lt; plugin&gt; documentation id znai documentation id</p>
+<p>To build static documentation site you need to provide Documentation id becomes part of your url and is also used inside generated HTMLs to reference static resources using absolute path For example znai original documentation is hosted on https testingisdocumenting org znai and documentation id is This original page is hosted on https testingisdocumenting org znai introduction getting started znai generates each page as index html and puts inside directories to make it possible to have an extension less urls To make it easier to handle static resources loading Znai builds all the urls inside HTML pages using absolute locations and that s why it is required to provide during the site generation To generate static site use CLI znai doc id my docs deploy path to static content Maven &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 90 1&lt; version&gt; &lt;configuration&gt; &lt;docId&gt;project name&lt; docId&gt; &lt;deployRoot&gt; path to static content&lt; deployRoot&gt; &lt; default is $ project build directory &gt; &lt; configuration&gt; &lt; plugin&gt; documentation id znai documentation id</p>
 </article>
 
 <article>
 <header><h1>LLM Context File</h1></header>
-<p>Znai generates a single file with all the documentation content to be used by LLMs It can be accessed via HTTP GET at and it can be generated at the build time and stored in your repository to point your agents skills to CLI znai build llm txt output path llm txt Maven &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 89&lt; version&gt; &lt;configuration&gt; &lt;llmTxtOutputPath&gt;$ project basedir llm txt&lt; llmTxtOutputPath&gt; &lt; configuration&gt; &lt; plugin&gt; llm txt &lt;doc id&gt; llm txt</p>
+<p>Znai generates a single file with all the documentation content to be used by LLMs It can be accessed via HTTP GET at and it can be generated at the build time and stored in your repository to point your agents skills to CLI znai build llm txt output path llm txt Maven &lt;plugin&gt; &lt;groupId&gt;org testingisdocumenting znai&lt; groupId&gt; &lt;artifactId&gt;znai maven plugin&lt; artifactId&gt; &lt;version&gt;1 90 1&lt; version&gt; &lt;configuration&gt; &lt;llmTxtOutputPath&gt;$ project basedir llm txt&lt; llmTxtOutputPath&gt; &lt; configuration&gt; &lt; plugin&gt; llm txt &lt;doc id&gt; llm txt</p>
 </article>
 
 <article>
@@ -534,51 +534,51 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-DWefznAQ.js"></script>
-<script type="module" src="/znai/static/architecture-YZFGNWBL-DJSu3kcg.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-Q4EWVU46-DgZdoUrZ.js"></script>
-<script type="module" src="/znai/static/blockDiagram-DXYQGD6D-DIuttj7V.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AHTNJAMY-BVjjFX6z.js"></script>
-<script type="module" src="/znai/static/classDiagram-6PBFFD2Q-hfd_K5Qa.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-HSJHXN6E-B3-mwZxE.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BI8Xtq0C.js"></script>
-<script type="module" src="/znai/static/dagre-KV5264BT-BilodntU.js"></script>
-<script type="module" src="/znai/static/diagram-5BDNPKRD-Buk9ns_e.js"></script>
-<script type="module" src="/znai/static/diagram-G4DWMVQ6-BO9mbuqX.js"></script>
-<script type="module" src="/znai/static/diagram-MMDJMWI5-Tro4le4k.js"></script>
-<script type="module" src="/znai/static/diagram-TYMM5635-DD1EhyAg.js"></script>
-<script type="module" src="/znai/static/erDiagram-SMLLAGMA-Bi_43muH.js"></script>
-<script type="module" src="/znai/static/flowDiagram-DWJPFMVM-BV-qC2NW.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-T4ZO3ILL-Dg0XNuE0.js"></script>
-<script type="module" src="/znai/static/gitGraph-7Q5UKJZL-C92WYRSu.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-UUTBAWPF-CbfaKDaz.js"></script>
-<script type="module" src="/znai/static/index-BtMkAnW_.js"></script>
-<script type="module" src="/znai/static/info-OMHHGYJF-5C6JdMgC.js"></script>
-<script type="module" src="/znai/static/infoDiagram-42DDH7IO-BY0jSq4d.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-UXIWVN3A-C-hBhAbJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-VCZTEJTY-CTIYYawW.js"></script>
-<script type="module" src="/znai/static/kanban-definition-6JOO6SKY-CSCAbrt8.js"></script>
-<script type="module" src="/znai/static/katex-XzxUsVLF.js"></script>
-<script type="module" src="/znai/static/mermaid-Dz5H2TqM.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-QFDTVHPH-C4JPm98a.js"></script>
-<script type="module" src="/znai/static/packet-4T2RLAQJ-ByPBXTqk.js"></script>
-<script type="module" src="/znai/static/pie-ZZUOXDRM-I3ioXM80.js"></script>
-<script type="module" src="/znai/static/pieDiagram-DEJITSTG-x7y9WIJG.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-34T5L4WZ-WXbwuR1l.js"></script>
-<script type="module" src="/znai/static/radar-PYXPWWZC-B-aYpdtC.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-MS252O5E-9UPfYL1A.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-BXAaY8d3.js"></script>
+<script type="module" src="/znai/static/architecture-YZFGNWBL-CIK56XRd.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-Q4EWVU46-8wHk3qKa.js"></script>
+<script type="module" src="/znai/static/blockDiagram-DXYQGD6D-CZZvTIja.js"></script>
+<script type="module" src="/znai/static/c4Diagram-AHTNJAMY-DJCl5Jp8.js"></script>
+<script type="module" src="/znai/static/classDiagram-6PBFFD2Q-BIuQjoec.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-HSJHXN6E-CxnuVo1i.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-Dg_SX718.js"></script>
+<script type="module" src="/znai/static/dagre-KV5264BT-DGZoQ0cE.js"></script>
+<script type="module" src="/znai/static/diagram-5BDNPKRD-Dd-QlvVu.js"></script>
+<script type="module" src="/znai/static/diagram-G4DWMVQ6-Cqw6i5VV.js"></script>
+<script type="module" src="/znai/static/diagram-MMDJMWI5-Cd-uf5JR.js"></script>
+<script type="module" src="/znai/static/diagram-TYMM5635-gSLX2_fV.js"></script>
+<script type="module" src="/znai/static/erDiagram-SMLLAGMA-D4lrPPo0.js"></script>
+<script type="module" src="/znai/static/flowDiagram-DWJPFMVM-CG3VqOEQ.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-T4ZO3ILL-DUxUwLU1.js"></script>
+<script type="module" src="/znai/static/gitGraph-7Q5UKJZL-CZxZuZSy.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-UUTBAWPF-PTKMVcgQ.js"></script>
+<script type="module" src="/znai/static/index-Dxu05PRE.js"></script>
+<script type="module" src="/znai/static/info-OMHHGYJF-BVGNNYJ6.js"></script>
+<script type="module" src="/znai/static/infoDiagram-42DDH7IO-BxndfE6n.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-UXIWVN3A-zG3CGeDX.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-VCZTEJTY-CNCH8mzD.js"></script>
+<script type="module" src="/znai/static/kanban-definition-6JOO6SKY-DBxEytvj.js"></script>
+<script type="module" src="/znai/static/katex-D8XDOAQq.js"></script>
+<script type="module" src="/znai/static/mermaid-C5xBaIxD.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-QFDTVHPH-CziDL_wu.js"></script>
+<script type="module" src="/znai/static/packet-4T2RLAQJ-DL9oW43p.js"></script>
+<script type="module" src="/znai/static/pie-ZZUOXDRM-XKBL2iwm.js"></script>
+<script type="module" src="/znai/static/pieDiagram-DEJITSTG-BmEt2fGx.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-34T5L4WZ-CY20CsVO.js"></script>
+<script type="module" src="/znai/static/radar-PYXPWWZC-D_u-deS4.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-MS252O5E-B4MzM5OZ.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-DmV8ZhqI.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-XADWPNL6-Of2C-XR5.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-FGHM5R23-ClDenKeG.js"></script>
-<script type="module" src="/znai/static/stateDiagram-FHFEXIEX-CZqwkUc-.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-QKLJ7IA2-DFd5BXev.js"></script>
-<script type="module" src="/znai/static/timeline-definition-GMOUNBTQ-DHiI0xtv.js"></script>
-<script type="module" src="/znai/static/treeView-SZITEDCU-CSdA_NIg.js"></script>
-<script type="module" src="/znai/static/treemap-W4RFUUIX-1RPXMW9Y.js"></script>
-<script type="module" src="/znai/static/vennDiagram-DHZGUBPP-BqljbEfa.js"></script>
-<script type="module" src="/znai/static/wardley-RL74JXVD-DMHTWEjx.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-NUSXRM2D-Do14N2RG.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-5P7HB3ND-Tku-kaD8.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-XADWPNL6-D_42yHhv.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-FGHM5R23-D9HCmyd4.js"></script>
+<script type="module" src="/znai/static/stateDiagram-FHFEXIEX--7CgjyFx.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-QKLJ7IA2-Cx7ss4G9.js"></script>
+<script type="module" src="/znai/static/timeline-definition-GMOUNBTQ-CIG-SJsQ.js"></script>
+<script type="module" src="/znai/static/treeView-SZITEDCU-aK7dMViW.js"></script>
+<script type="module" src="/znai/static/treemap-W4RFUUIX-B8S1a-iQ.js"></script>
+<script type="module" src="/znai/static/vennDiagram-DHZGUBPP-9e4agcGL.js"></script>
+<script type="module" src="/znai/static/wardley-RL74JXVD-TyVlewaG.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-NUSXRM2D-AS0O1D8D.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-5P7HB3ND-CrFfs6Lu.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="module" src="/znai/search-index.js"></script>
@@ -733,7 +733,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "text" : "Download and unzip ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.89/znai-dist-1.89-znai.zip",
+          "url" : "https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.90.1/znai-dist-1.90.1-znai.zip",
           "isFile" : false,
           "type" : "Link",
           "content" : [ {
@@ -773,7 +773,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
       "type" : "Section",
       "content" : [ {
         "lang" : "xml",
-        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.89</version>\n</plugin>",
+        "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.90.1</version>\n</plugin>",
         "title" : "maven plugin",
         "anchorId" : "maven-plugin-maven-plugin",
         "type" : "Snippet"
@@ -880,7 +880,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
             "type" : "CliCommand"
           }, {
             "lang" : "xml",
-            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.89</version>\n    <configuration>\n        <port>3334</port> <!-- optional override of default value 3333-->\n    </configuration>\n</plugin>",
+            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.90.1</version>\n    <configuration>\n        <port>3334</port> <!-- optional override of default value 3333-->\n    </configuration>\n</plugin>",
             "title" : "preview port",
             "excludeRegexp" : [ "docId" ],
             "highlight" : [ 5 ],
@@ -1030,7 +1030,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "name" : "Maven",
           "content" : [ {
             "lang" : "xml",
-            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.89</version>\n    <configuration>\n        <docId>project-name</docId>\n        <deployRoot>/path/to/static-content</deployRoot>  <!-- default is ${project.build.directory} -->\n    </configuration>\n</plugin>",
+            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.90.1</version>\n    <configuration>\n        <docId>project-name</docId>\n        <deployRoot>/path/to/static-content</deployRoot>  <!-- default is ${project.build.directory} -->\n    </configuration>\n</plugin>",
             "title" : "maven plugin",
             "highlight" : [ 5 ],
             "anchorId" : "static-site-generation-maven-plugin",
@@ -1084,7 +1084,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "name" : "Maven",
           "content" : [ {
             "lang" : "xml",
-            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.89</version>\n    <configuration>\n        <llmTxtOutputPath>${project.basedir}/llm.txt</llmTxtOutputPath>\n    </configuration>\n</plugin>",
+            "snippet" : "<plugin>\n    <groupId>org.testingisdocumenting.znai</groupId>\n    <artifactId>znai-maven-plugin</artifactId>\n    <version>1.90.1</version>\n    <configuration>\n        <llmTxtOutputPath>${project.basedir}/llm.txt</llmTxtOutputPath>\n    </configuration>\n</plugin>",
             "title" : "expose llm.txt to source tree",
             "highlight" : [ 5 ],
             "anchorId" : "llm-context-file-expose-llmtxt-to-source-tree",
@@ -1181,7 +1181,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1777860212128,
+    "lastModifiedTime" : 1779989258121,
     "tocItem" : {
       "chapterTitle" : "Introduction",
       "pageTitle" : "Getting Started",

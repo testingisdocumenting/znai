@@ -146,8 +146,8 @@ answer-link: znai/introduction/getting-started#command-line
 ## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.89/znai-dist-1.89-znai.zip). Add
-it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.90.1/znai-dist-1.90.1-znai.zip).
+Add it to your `PATH`.
 
 ## Brew
 
@@ -162,7 +162,7 @@ answer-link: znai/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.89</version>
+    <version>1.90.1</version>
 </plugin>
 ```
 
@@ -4744,7 +4744,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 582,
+    "y" : 387,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -8950,7 +8950,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 582,
+    "y" : 387,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -9940,6 +9940,11 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2026 :: 1.90.1
+answer-link: znai/release-notes/2026#1901
+
+
 
 # Release Notes :: 2026 :: 1.90
 answer-link: znai/release-notes/2026#190
