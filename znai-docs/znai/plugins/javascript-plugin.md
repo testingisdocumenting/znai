@@ -48,7 +48,7 @@ Your function receives three arguments:
 
 * `node` — the parent `div` to append content to.
 * `args` — the parameters passed from markdown. Framework-level keys (`title`,
-  `wide`, `className`, `anchorId`) are handled by znai and not forwarded.
+  `wide`, `className`, `anchorId`, `height`) are handled by znai and not forwarded.
 * `themeObservable` — live access to the current znai theme.
 
 ```javascript {title: "themeObservable shape"}
@@ -127,6 +127,76 @@ iframes.
     note: "this block breaks out of the single-column width and spans edge to edge of the page container, giving long values plenty of horizontal room to stretch before they need to wrap onto a second line",
     tags: ["wide", "demo", "edge-to-edge", "theme"],
     metrics: {"requests": 1024, "latency_ms": 42, "error_rate": 0.003}
+}
+
+# Height
+
+By default the block grows to fit whatever the function renders into it. Pass
+`height` to pin the block to a fixed size — content past it scrolls inside the
+viewport znai gives the function.
+
+`height` accepts either a number (treated as pixels) or any CSS length string
+like `"320px"` or `"30vh"`.
+
+The `activityFeed` function below appends one row per event. Without `height`,
+all twelve rows render and the block grows to fit them:
+
+```markdown
+:include-javascript-function: activityFeed {
+    title: "deploys",
+    events: [
+        {time: "09:14", action: "build started", detail: "commit a31f9b on main"},
+        {time: "09:17", action: "tests passed", detail: "248 / 248 green"},
+        ...
+    ]  
+}
+```
+
+:include-javascript-function: activityFeed {
+    title: "deploys",
+    events: [
+        {time: "09:14", action: "build started", detail: "commit a31f9b on main"},
+        {time: "09:17", action: "tests passed", detail: "248 / 248 green"},
+        {time: "09:18", action: "image pushed", detail: "registry.io/web@sha256:c2..."},
+        {time: "09:19", action: "deploy started", detail: "rolling out to canary"},
+        {time: "09:21", action: "canary healthy", detail: "p99 42ms, error rate 0.0%"},
+        {time: "09:24", action: "promoted", detail: "100% of fleet now on a31f9b"},
+        {time: "09:31", action: "alert fired", detail: "latency spike on shard 4"},
+        {time: "09:33", action: "shard restarted", detail: "shard 4 back to baseline"},
+        {time: "09:40", action: "config reload", detail: "feature flag billing-v2 → on"},
+        {time: "09:47", action: "backfill queued", detail: "1.2M rows over 6 batches"},
+        {time: "09:58", action: "backfill complete", detail: "elapsed 11m02s"},
+        {time: "10:05", action: "deploy started", detail: "rolling out to prod-eu"}
+    ]
+}
+
+Add `height` and the same twelve events scroll inside a fixed-size box instead:
+
+```markdown
+:include-javascript-function: activityFeed {
+    title: "deploys",
+    height: 220,
+    events: [/* same twelve events */]
+}
+```
+
+:include-javascript-function: activityFeed {
+    title: "deploys",
+    height: 220,
+    events: [
+        {time: "09:14", action: "build started", detail: "commit a31f9b on main"},
+        {time: "09:17", action: "tests passed", detail: "248 / 248 green"},
+        {time: "09:18", action: "image pushed", detail: "registry.io/web@sha256:c2..."},
+        {time: "09:19", action: "deploy started", detail: "rolling out to canary"},
+        {time: "09:21", action: "canary healthy", detail: "p99 42ms, error rate 0.0%"},
+        {time: "09:24", action: "promoted", detail: "100% of fleet now on a31f9b"},
+        {time: "09:31", action: "alert fired", detail: "latency spike on shard 4"},
+        {time: "09:33", action: "shard restarted", detail: "shard 4 back to baseline"},
+        {time: "09:40", action: "config reload", detail: "feature flag billing-v2 → on"},
+        {time: "09:47", action: "backfill queued", detail: "1.2M rows over 6 batches"},
+        {time: "09:58", action: "backfill complete", detail: "elapsed 11m02s"},
+        {time: "10:05", action: "deploy started", detail: "rolling out to prod-eu"}
+    ]
 }
 
 # Styling With A Class Name

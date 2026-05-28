@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { CSSProperties, useEffect, useMemo, useRef } from "react";
 
 import { Container } from "../container/Container";
 import { isZnaiDarkTheme, useZnaiThemeChange, ZNAI_DARK_THEME_NAME } from "../../theme/znaiTheme";
@@ -48,12 +48,16 @@ export function JavascriptFunction({ functionName, args }: Props) {
   const anchorId = asString(args?.anchorId);
   const userClassName = asString(args?.className);
   const wide = args?.wide === true;
+  const height = asHeight(args?.height);
 
   const userArgs = useMemo(() => {
     if (!args) return {};
-    const { title: _t, wide: _w, className: _c, anchorId: _a, ...rest } = args;
+    const { title: _t, wide: _w, className: _c, anchorId: _a, height: _h, ...rest } = args;
     return rest;
   }, [args]);
+
+  const nodeStyle: CSSProperties | undefined =
+    height !== undefined ? { height, overflow: "auto" } : undefined;
 
   useZnaiThemeChange((znaiThemeName) => {
     const publicName: ThemeName = znaiThemeName === ZNAI_DARK_THEME_NAME ? "dark" : "light";
@@ -109,13 +113,19 @@ export function JavascriptFunction({ functionName, args }: Props) {
       className={userClassName ? `znai-javascript-function ${userClassName}` : "znai-javascript-function"}
       additionalTitleClassNames="znai-javascript-function-title"
     >
-      <div ref={nodeRef} onClick={(e) => e.stopPropagation()} />
+      <div ref={nodeRef} style={nodeStyle} onClick={(e) => e.stopPropagation()} />
     </Container>
   );
 }
 
 function asString(value: unknown): string | undefined {
   return typeof value === "string" ? value : undefined;
+}
+
+function asHeight(value: unknown): string | number | undefined {
+  if (typeof value === "number") return value;
+  if (typeof value === "string" && value.length > 0) return value;
+  return undefined;
 }
 
 function lookupWindowFunction(functionName: string): JavascriptPluginFunction | undefined {
