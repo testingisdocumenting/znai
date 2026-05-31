@@ -1,0 +1,79 @@
+/*
+ * Copyright 2026 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.znai-mermaid.zoomed {
+    width: 92vw;
+    height: 92vh;
+    background-color: var(--znai-background-color);
+    overflow: hidden;
+}
+
+.znai-mermaid-zoomed-surface {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    touch-action: none;
+    user-select: none;
+}
+
+.znai-mermaid-zoomed-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+}
+
+.znai-mermaid-zoomed-svg svg {
+    display: block;
+}
+
+.znai-mermaid-zoomed-toolbar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: var(--znai-zoom-container-border);
+    background-color: var(--znai-background-color);
+}
+
+.znai-mermaid-zoomed-button {
+    cursor: pointer;
+    opacity: 0.55;
+    width: 20px;
+    height: 20px;
+}
+
+.znai-mermaid-zoomed-button:hover {
+    opacity: 1;
+}
+
+.znai-mermaid-zoomed-percent {
+    min-width: 42px;
+    text-align: center;
+    font-size: var(--znai-small-meta-text-size);
+    color: var(--znai-regular-text-light-color);
+    user-select: none;
+}

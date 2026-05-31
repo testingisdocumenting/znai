@@ -1,0 +1,34 @@
+flowchart LR
+    Client[Web & Mobile Clients] --> Gateway[API Gateway]
+    Gateway --> Auth[Auth Service]
+    Gateway --> Catalog[Catalog Service]
+    Gateway --> Cart[Cart Service]
+    Gateway --> Orders[Order Service]
+    Gateway --> Payments[Payment Service]
+    Gateway --> Shipping[Shipping Service]
+    Gateway --> Notifications[Notification Service]
+
+    Auth --> AuthDb[(Auth DB)]
+    Catalog --> CatalogDb[(Catalog DB)]
+    Catalog --> Search[(Search Index)]
+    Cart --> CartCache[(Cart Cache)]
+    Orders --> OrdersDb[(Orders DB)]
+    Orders --> Queue[[Event Queue]]
+    Payments --> PaymentsDb[(Payments DB)]
+    Payments --> Gatewayp[External Payment Gateway]
+    Shipping --> ShippingDb[(Shipping DB)]
+    Shipping --> Carrier[External Carrier API]
+
+    Queue --> Notifications
+    Queue --> Analytics[Analytics Pipeline]
+    Queue --> Warehouse[(Data Warehouse)]
+    Analytics --> Warehouse
+    Notifications --> Email[Email Provider]
+    Notifications --> SMS[SMS Provider]
+    Notifications --> Push[Push Provider]
+
+    Analytics --> Dashboards[BI Dashboards]
+    Warehouse --> Dashboards
+
+    click Catalog "/test-doc/visuals/mermaid-diagrams"
+    click Payments href "https://mermaid.js.org" "Mermaid documentation"

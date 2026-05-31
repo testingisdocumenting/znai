@@ -14,9 +14,21 @@
  * limitations under the License.
  */
 
+.znai-mermaid {
+    position: relative;
+}
+
 .znai-mermaid.wide {
     display: flex;
     justify-content: center;
+}
+
+.znai-mermaid-zoomable {
+    cursor: zoom-in;
+}
+
+.znai-mermaid-zoomable:hover::after {
+    opacity: 0.95;
 }
 
 .znai-mermaid svg text.messageText {
@@ -25,6 +37,18 @@
 
 .znai-mermaid svg .clickable {
     cursor: pointer;
+}
+
+/*
+ * Mermaid scopes the node text color to the diagram id (e.g. #znai-mermaid-id-3 span), so a linked
+ * node's label looks like any other node. Recolor it with znai's link color - !important is needed
+ * to win over that id-scoped rule - so links are recognizable, including in the dark theme where
+ * znai links carry no underline.
+ */
+.znai-mermaid svg .clickable .nodeLabel,
+.znai-mermaid svg .clickable .nodeLabel p {
+    color: var(--znai-link-color) !important;
+    fill: var(--znai-link-color) !important;
 }
 
 .znai-mermaid svg .clickable:hover rect,

@@ -27,6 +27,61 @@ In presentation mode, rendered expressions will automatically scale to make use 
 
 Note: Rendering is done by using [Mermaid](https://mermaid-js.github.io/mermaid/#/) library.
 
+# Large Diagrams
+
+A diagram that is too large to fit the page width is shrunk to fit and can become hard to read.
+Znai detects this automatically: hovering over such a diagram shows a `Click to zoom & pan` hint.
+
+Click the diagram to open it in a full screen overlay where you can:
+
+- scroll/`wheel` to zoom towards the cursor
+- drag to pan
+- use the `+` / `-` buttons to zoom and the fit button to fit the diagram back to the screen
+- press `Escape`, click the backdrop, or use the close button to exit
+
+No extra configuration is required &mdash; only diagrams that don't fit become zoomable, smaller diagrams render as before.
+
+The diagram below is wider than the page, so it is shrunk to fit. Hover over it and click to zoom and pan.
+
+```mermaid
+flowchart LR
+    Client[Web & Mobile Clients] --> Gateway[API Gateway]
+    Gateway --> Auth[Auth Service]
+    Gateway --> Catalog[Catalog Service]
+    Gateway --> Cart[Cart Service]
+    Gateway --> Orders[Order Service]
+    Gateway --> Payments[Payment Service]
+    Gateway --> Shipping[Shipping Service]
+    Gateway --> Notifications[Notification Service]
+
+    Auth --> AuthDb[(Auth DB)]
+    Catalog --> CatalogDb[(Catalog DB)]
+    Catalog --> Search[(Search Index)]
+    Cart --> CartCache[(Cart Cache)]
+    Orders --> OrdersDb[(Orders DB)]
+    Orders --> Queue[[Event Queue]]
+    Payments --> PaymentsDb[(Payments DB)]
+    Payments --> Gatewayp[External Payment Gateway]
+    Shipping --> ShippingDb[(Shipping DB)]
+    Shipping --> Carrier[External Carrier API]
+
+    Queue --> Notifications
+    Queue --> Analytics[Analytics Pipeline]
+    Queue --> Warehouse[(Data Warehouse)]
+    Analytics --> Warehouse
+    Notifications --> Email[Email Provider]
+    Notifications --> SMS[SMS Provider]
+    Notifications --> Push[Push Provider]
+
+    Analytics --> Dashboards[BI Dashboards]
+    Warehouse --> Dashboards
+
+    click Catalog "visuals/graphviz-diagrams"
+    click Payments href "https://mermaid.js.org" "Mermaid documentation"
+```
+
+Node links work inside the overlay too: open the diagram above and click the `Catalog` or `Payments` node.
+
 # External File
 
 Use include plugin to render a Mermaid diagram from a file.
