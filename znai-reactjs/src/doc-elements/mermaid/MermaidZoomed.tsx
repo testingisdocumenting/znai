@@ -36,9 +36,9 @@ interface View {
   y: number;
 }
 
-// the overlay opens at the diagram's natural (100%) size; from there the user can zoom in for
-// detail up to MAX_SCALE, or zoom out down to the size at which the whole diagram is visible
-const MAX_SCALE = 4;
+// the overlay opens at the diagram's natural (100%) size; from there the user can zoom out down to
+// the size at which the whole diagram is visible. natural (100%) size is the maximum zoom
+const MAX_SCALE = 1;
 const WHEEL_ZOOM_SENSITIVITY = 0.0015;
 const BUTTON_ZOOM_FACTOR = 1.3;
 // drag distance (px) past which the gesture is a pan, not a click on a node link
@@ -73,6 +73,13 @@ export function MermaidZoomed(props: Props) {
   // a pan ends with a click event we don't want to treat as a link activation
   const suppressClickRef = useRef(false);
 
+  // zoom out is allowed down to the whole-diagram-visible scale (or natural size, whichever is
+  // smaller, so a diagram that already fits is never shrunk); zoom in goes up to MAX_SCALE
+  function clampScale(scale: number): number {
+    const minScale = Math.min(fitScaleRef.current, 1);
+    return Math.min(Math.max(scale, minScale), MAX_SCALE);
+  }
+
   function clamp(candidate: View): View {
     const surface = surfaceRef.current;
     const { width: natW, height: natH } = naturalRef.current;
@@ -83,10 +90,7 @@ export function MermaidZoomed(props: Props) {
     const surfaceW = surface.clientWidth;
     const surfaceH = surface.clientHeight;
 
-    // zoom out is allowed down to the whole-diagram-visible scale (or natural size, whichever is
-    // smaller, so a diagram that already fits is never shrunk); zoom in goes up to MAX_SCALE
-    const minScale = Math.min(fitScaleRef.current, 1);
-    const scale = Math.min(Math.max(candidate.scale, minScale), MAX_SCALE);
+    const scale = clampScale(candidate.scale);
     const contentW = natW * scale;
     const contentH = natH * scale;
 
@@ -96,10 +100,12 @@ export function MermaidZoomed(props: Props) {
     return { scale, x, y };
   }
 
-  // zoom keeping the point under (anchorX, anchorY) - relative to the surface - fixed on screen
+  // zoom keeping the point under (anchorX, anchorY) - relative to the surface - fixed on screen.
+  // the scale is clamped up front so that, once the zoom limit is reached, continued wheel input
+  // does not keep shifting the pan (which would scroll the diagram sideways while standing still)
   function zoomAround(anchorX: number, anchorY: number, factor: number) {
     setView((prev) => {
-      const targetScale = prev.scale * factor;
+      const targetScale = clampScale(prev.scale * factor);
       const worldX = (anchorX - prev.x) / prev.scale;
       const worldY = (anchorY - prev.y) / prev.scale;
       return clamp({ scale: targetScale, x: anchorX - worldX * targetScale, y: anchorY - worldY * targetScale });
