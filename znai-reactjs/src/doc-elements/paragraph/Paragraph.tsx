@@ -178,6 +178,13 @@ const presentationParagraph = {
       ? 1
       : 0;
   },
+  // plain/forced paragraphs are fixed-font text (not transform-scaled), so the font stays
+  // consistent and the text wraps into more lines. attention paragraphs (Question:/Note:/...)
+  // render as attention blocks and are auto-scaled like a standalone attention block, so
+  // their chrome (icon/label) and any inline code scale uniformly with the slide
+  slideInfoProvider: ({ content }: { content: DocElementContent }) => ({
+    isSlideScaled: allSuffixes.some((suffix) => paragraphStartsWith(content, suffix)),
+  }),
 };
 
 function isParagraphPresentationForced(content: DocElementContent) {

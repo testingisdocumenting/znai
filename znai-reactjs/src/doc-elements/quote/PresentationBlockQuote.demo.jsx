@@ -1,4 +1,5 @@
 /*
+ * Copyright 2026 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +15,30 @@
  * limitations under the License.
  */
 
-import {createPresentationDemo} from '../demo-utils/PresentationDemo'
+import { createPresentationDemo } from "../demo-utils/PresentationDemo";
 
 export function blockQuotePresentationDemo(registry) {
-    registry
-        .add('block quote', createPresentationDemo([{
-            type: 'BlockQuote',
-            content: paragraph()
-        }]))
+  registry.add(
+    "block quote",
+    createPresentationDemo([
+      {
+        type: "BlockQuote",
+        content: paragraph(),
+      },
+    ])
+  );
 }
 
 function paragraph() {
-    return [
+  return [
+    {
+      type: "Paragraph",
+      content: [
         {
-            type: 'Paragraph',
-            content: [{
-                type: 'SimpleText',
-                text: 'quote text quote text'
-            }]
-        }
-    ]
+          type: "SimpleText",
+          text: "quote text quote text. More long text more text for some extra lines and then some more ",
+        },
+      ],
+    },
+  ];
 }

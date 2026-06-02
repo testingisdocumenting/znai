@@ -20,6 +20,9 @@
     flex-direction: column;
     height: 100vh;
     width: 100vw;
+
+    --znai-presentation-text-font-size: 4cqw;
+    --znai-presentation-text-max-width: 70cqw;
 }
 
 .presentation .header {

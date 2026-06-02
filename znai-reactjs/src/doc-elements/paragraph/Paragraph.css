@@ -47,8 +47,14 @@ not belong to the same parent node so margins won't even each other out.
     justify-content: center;
 }
 
+.presentation .znai-presentation-paragraph-wrapper > *:not(.znai-attention-block) {
+    max-width: var(--znai-presentation-text-max-width);
+    font-size: var(--znai-presentation-text-font-size);
+    overflow-wrap: break-word;
+}
+
 .znai-presentation-paragraph-default {
-    background-color: var(--znai-attention-note-background-color);
-    border-left: 3px solid var(--znai-attention-note-color);
-    padding: 16px;
+    background: var(--znai-presentation-paragraph-background);
+    padding: 2.5cqw 3cqw;
+    border-radius: 1.2cqw;
 }
