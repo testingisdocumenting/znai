@@ -24,6 +24,7 @@ import "./AttentionBlock.css";
 interface Props extends DocElementProps {
   attentionType: string;
   label?: string;
+  icon?: string;
   iconTooltip?: string;
   content: DocElementContent;
 }
@@ -36,14 +37,16 @@ const iconByType: Record<string, string> = {
   recommendation: "check-circle",
 };
 
-export function AttentionBlock({ attentionType, label, iconTooltip, content, elementsLibrary }: Props) {
-  const iconId = iconByType[attentionType] || "square";
+export function AttentionBlock({ attentionType, label, icon, iconTooltip, content, elementsLibrary }: Props) {
+  const iconId = icon ?? iconByType[attentionType];
   return (
     <div className={`znai-attention-block ${attentionType} content-block`}>
-      <span className="znai-attention-block-icon" title={tooltipToUse()}>
-        <Icon id={iconId} />
-        {label && <span className="znai-attention-block-label">{label}:</span>}
-      </span>
+      {(iconId || label) && (
+        <span className="znai-attention-block-icon" title={tooltipToUse()}>
+          {iconId && <Icon id={iconId} />}
+          {label && <span className="znai-attention-block-label">{label}:</span>}
+        </span>
+      )}
       <span className="znai-attention-block-content">
         <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} />
       </span>
