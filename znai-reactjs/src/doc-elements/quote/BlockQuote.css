@@ -27,32 +27,37 @@ blockquote {
 }
 
 .presentation blockquote {
-    max-width: 400px;
     margin: 0;
-    font-size: 20px;
+    max-width: var(--znai-presentation-text-max-width);
+    font-size: var(--znai-presentation-text-font-size);
+    padding-left: 4cqw;
+    overflow-wrap: break-word;
+}
+
+.presentation blockquote .content-block {
+    max-width: none;
 }
 
 .presentation .znai-presentation-slide-container blockquote {
-    display: none;
+    visibility: hidden;
 }
 
 .presentation .znai-presentation-slide-appeared blockquote.no-animation {
-    display: block;
+    visibility: visible;
 }
 
 .presentation .znai-presentation-slide-appeared blockquote.animate {
-    display: block;
-    animation: blockquote-presentation-appear;
-    animation-fill-mode:forwards;
-    animation-duration: 1.5s;
+    visibility: visible;
+    animation: blockquote-presentation-appear 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 @keyframes blockquote-presentation-appear {
     from {
-        padding: 10px 20px 10px 120px;
-        max-width: 500px;
+        opacity: 0;
+        transform: translateX(-12%) scale(0.94);
     }
     to {
-        padding: 10px 20px 10px 20px;
+        opacity: 1;
+        transform: translateX(0) scale(1);
     }
 }

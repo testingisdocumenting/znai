@@ -17,4 +17,6 @@
 .znai-presentation-slide-panel {
     height: 100%;
     overflow-y: hidden;
+
+    container-type: inline-size;
 }

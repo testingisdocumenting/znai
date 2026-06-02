@@ -26,6 +26,8 @@
     --znai-zoom-overlay-background-color: rgba(70, 70, 70, 0.9);
     --znai-zoom-container-border: 1px #000 solid;
 
+    --znai-presentation-paragraph-background: linear-gradient(135deg, #eef3fb 0%, #dfe8f6 100%);
+
     /*
     single column render width to keep content centered
     it changes its value for mobile and when other content is nested

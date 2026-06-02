@@ -15,28 +15,32 @@
  * limitations under the License.
  */
 
-import React from 'react'
+import React from "react";
 
-import './BlockQuote.css'
+import "./BlockQuote.css";
 
 const BlockQuote = (props) => (
-    <blockquote className="content-block">
-        <props.elementsLibrary.DocElement {...props}/>
-    </blockquote>
-)
+  <blockquote className="content-block">
+    <props.elementsLibrary.DocElement {...props} />
+  </blockquote>
+);
 
 const PresentationBlockQuote = (props) => {
-    const className = props.isPresentationDisplayed ? "no-animation" : "animate";
-    return (
-        <blockquote className={className}>
-            <props.elementsLibrary.DocElement {...props}/>
-        </blockquote>
-    )
-}
+  const className = props.isPresentationDisplayed ? "no-animation" : "animate";
+  return (
+    <blockquote className={className}>
+      <props.elementsLibrary.DocElement {...props} />
+    </blockquote>
+  );
+};
 
 const presentationBlockQuoteHandler = {
-    component: PresentationBlockQuote,
-    numberOfSlides: () => 1
-}
+  component: PresentationBlockQuote,
+  numberOfSlides: () => 1,
+  // don't transform-scale the quote to fill the slide. instead it renders at a fixed,
+  // slide-relative size (font-size/max-width in cqw, see BlockQuote.css) so the font
+  // stays consistent and the text simply wraps into more lines when space is tight
+  slideInfoProvider: () => ({ isSlideScaled: false }),
+};
 
-export {BlockQuote, presentationBlockQuoteHandler}
+export { BlockQuote, presentationBlockQuoteHandler };
