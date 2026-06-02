@@ -1,6 +1,6 @@
 {
-  "cssResources": ["custom.css", "plugins/javascript/theme-box.css"],
-  "jsResources": ["custom.js", "plugins/javascript/theme-box.js"],
+  "cssResources": ["custom.css", "plugins/javascript/theme-box.css", "plugins/javascript/activity-feed.css"],
+  "jsResources": ["custom.js", "plugins/javascript/theme-box.js", "plugins/javascript/activity-feed.js"],
   "htmlResources": ["custom.html"],
   "htmlHeadResources": ["tracking.html"],
   "plugins": ["plugins/themed-box-plugin.json", "plugins/custom-fence-block-plugin.json"]
