@@ -1,0 +1,1 @@
+* Add: Live preview on Linux now detects files saved via atomic write (write-to-temp then rename), so changes from AI agents are picked up reliably
