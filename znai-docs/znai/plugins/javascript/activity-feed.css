@@ -1,0 +1,47 @@
+.activity-feed {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid var(--znai-snippets-outer-border-color, #dedede);
+    border-radius: 4px;
+    background-color: var(--znai-snippets-title-background-color, #efeff1);
+    color: var(--znai-regular-text-color);
+    font-family: var(--znai-regular-font-family);
+}
+
+.activity-feed-row {
+    display: grid;
+    grid-template-columns: 80px 140px 1fr;
+    column-gap: 12px;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--znai-snippets-outer-border-color, #dedede);
+    font-family: var(--znai-code-font-family, monospace);
+    font-size: 0.85rem;
+}
+
+.activity-feed-row:last-child {
+    border-bottom: none;
+}
+
+.activity-feed-time {
+    color: var(--znai-regular-text-light-color);
+}
+
+.activity-feed-action {
+    color: var(--znai-brand-primary-color);
+    font-weight: 600;
+}
+
+.activity-feed-action::before {
+    content: "▸ ";
+}
+
+.activity-feed-detail {
+    color: var(--znai-regular-text-color);
+    word-break: break-word;
+}
+
+.activity-feed.activity-feed-dark .activity-feed-action {
+    color: var(--znai-color-yellow);
+}

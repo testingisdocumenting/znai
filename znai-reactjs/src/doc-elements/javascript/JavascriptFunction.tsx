@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { CSSProperties, useEffect, useMemo, useRef } from "react";
 
 import { Container } from "../container/Container";
 import { isZnaiDarkTheme, useZnaiThemeChange, ZNAI_DARK_THEME_NAME } from "../../theme/znaiTheme";
@@ -26,18 +26,12 @@ interface Props {
   args?: Record<string, unknown>;
 }
 
-const CONTAINER_ARG_NAMES = new Set(["title", "wide", "className", "anchorId"]);
-
 type ThemeName = "light" | "dark";
 type ThemeListener = (themeName: ThemeName) => void;
 
 export interface ThemeObservable {
   readonly current: ThemeName;
   subscribe(listener: ThemeListener): void;
-}
-
-function toPublicThemeName(znaiThemeName: string): ThemeName {
-  return znaiThemeName === ZNAI_DARK_THEME_NAME ? "dark" : "light";
 }
 
 type JavascriptPluginFunction = (
@@ -50,25 +44,31 @@ export function JavascriptFunction({ functionName, args }: Props) {
   const nodeRef = useRef<HTMLDivElement>(null);
   const listenersRef = useRef<ThemeListener[]>([]);
 
-  const title = typeof args?.title === "string" ? args.title : undefined;
+  const title = asString(args?.title);
+  const anchorId = asString(args?.anchorId);
+  const userClassName = asString(args?.className);
   const wide = args?.wide === true;
-  const anchorId = typeof args?.anchorId === "string" ? args.anchorId : undefined;
-  const userClassName = typeof args?.className === "string" ? args.className : "";
+  const height = asHeight(args?.height);
 
-  const userArgs = useMemo(() => extractUserArgs(args), [args]);
+  const userArgs = useMemo(() => {
+    if (!args) return {};
+    const { title: _t, wide: _w, className: _c, anchorId: _a, height: _h, ...rest } = args;
+    return rest;
+  }, [args]);
+
+  const nodeStyle: CSSProperties | undefined =
+    height !== undefined ? { height, overflow: "auto" } : undefined;
 
   useZnaiThemeChange((znaiThemeName) => {
-    const publicName = toPublicThemeName(znaiThemeName);
+    const publicName: ThemeName = znaiThemeName === ZNAI_DARK_THEME_NAME ? "dark" : "light";
     listenersRef.current.slice().forEach((l) => l(publicName));
   });
 
   useEffect(() => {
     const node = nodeRef.current;
-    if (!node) {
-      return;
-    }
+    if (!node) return;
 
-    const fn = lookupFunction(functionName);
+    const fn = lookupWindowFunction(functionName);
     if (!fn) {
       renderError(node, `javascript function "${functionName}" was not found on window`);
       return;
@@ -79,7 +79,7 @@ export function JavascriptFunction({ functionName, args }: Props) {
       get current() {
         return isZnaiDarkTheme() ? "dark" : "light";
       },
-      subscribe(listener: ThemeListener) {
+      subscribe(listener) {
         listeners.push(listener);
       },
     };
@@ -105,36 +105,30 @@ export function JavascriptFunction({ functionName, args }: Props) {
     };
   }, [functionName, userArgs]);
 
-  const containerClassName = `znai-javascript-function${userClassName ? ` ${userClassName}` : ""}`;
-
   return (
     <Container
       wide={wide}
       title={title}
       anchorId={anchorId}
-      className={containerClassName}
+      className={userClassName ? `znai-javascript-function ${userClassName}` : "znai-javascript-function"}
       additionalTitleClassNames="znai-javascript-function-title"
     >
-      <div ref={nodeRef} />
+      <div ref={nodeRef} style={nodeStyle} onClick={(e) => e.stopPropagation()} />
     </Container>
   );
 }
 
-function extractUserArgs(args: Record<string, unknown> | undefined): Record<string, unknown> {
-  if (!args) {
-    return {};
-  }
-
-  const result: Record<string, unknown> = {};
-  for (const key of Object.keys(args)) {
-    if (!CONTAINER_ARG_NAMES.has(key)) {
-      result[key] = args[key];
-    }
-  }
-  return result;
+function asString(value: unknown): string | undefined {
+  return typeof value === "string" ? value : undefined;
 }
 
-function lookupFunction(functionName: string): JavascriptPluginFunction | undefined {
+function asHeight(value: unknown): string | number | undefined {
+  if (typeof value === "number") return value;
+  if (typeof value === "string" && value.length > 0) return value;
+  return undefined;
+}
+
+function lookupWindowFunction(functionName: string): JavascriptPluginFunction | undefined {
   // @ts-ignore
   const candidate = window[functionName];
   return typeof candidate === "function" ? (candidate as JavascriptPluginFunction) : undefined;
