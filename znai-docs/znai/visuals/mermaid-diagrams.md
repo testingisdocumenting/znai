@@ -27,6 +27,51 @@ In presentation mode, rendered expressions will automatically scale to make use 
 
 Note: Rendering is done by using [Mermaid](https://mermaid-js.github.io/mermaid/#/) library.
 
+# Large Diagrams
+
+A diagram that is too large to fit the page width is shrunk to fit and can become hard to read.
+Click the diagram to open it in a full screen overlay where you can:
+
+- scroll/`wheel` to zoom towards the cursor
+- drag to pan
+
+```mermaid
+flowchart LR
+    Client[Web & Mobile Clients] --> Gateway[API Gateway]
+    Gateway --> Auth[Auth Service]
+    Gateway --> Catalog[Catalog Service]
+    Gateway --> Cart[Cart Service]
+    Gateway --> Orders[Order Service]
+    Gateway --> Payments[Payment Service]
+    Gateway --> Shipping[Shipping Service]
+    Gateway --> Notifications[Notification Service]
+
+    Auth --> AuthDb[(Auth DB)]
+    Catalog --> CatalogDb[(Catalog DB)]
+    Catalog --> Search[(Search Index)]
+    Cart --> CartCache[(Cart Cache)]
+    Orders --> OrdersDb[(Orders DB)]
+    Orders --> Queue[[Event Queue]]
+    Payments --> PaymentsDb[(Payments DB)]
+    Payments --> Gatewayp[External Payment Gateway]
+    Shipping --> ShippingDb[(Shipping DB)]
+    Shipping --> Carrier[External Carrier API]
+
+    Queue --> Notifications
+    Queue --> Analytics[Analytics Pipeline]
+    Queue --> Warehouse[(Data Warehouse)]
+    Analytics --> Warehouse
+    Notifications --> Email[Email Provider]
+    Notifications --> SMS[SMS Provider]
+    Notifications --> Push[Push Provider]
+
+    Analytics --> Dashboards[BI Dashboards]
+    Warehouse --> Dashboards
+
+    click Catalog "visuals/graphviz-diagrams"
+    click Payments href "https://mermaid.js.org" "Mermaid documentation"
+```
+
 # External File
 
 Use include plugin to render a Mermaid diagram from a file.

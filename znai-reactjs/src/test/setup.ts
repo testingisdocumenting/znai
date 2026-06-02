@@ -30,19 +30,19 @@ global.getSelection = vi.fn(() => ({
     type: 'None'
 }))
 
-// Mock ResizeObserver if needed
-global.ResizeObserver = vi.fn(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn(),
-}))
+// Mock ResizeObserver if needed (class so it can be used with `new`)
+global.ResizeObserver = class {
+    observe = vi.fn()
+    unobserve = vi.fn()
+    disconnect = vi.fn()
+} as any
 
-// Mock IntersectionObserver if needed
-global.IntersectionObserver = vi.fn(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn(),
-}))
+// Mock IntersectionObserver if needed (class so it can be used with `new`)
+global.IntersectionObserver = class {
+    observe = vi.fn()
+    unobserve = vi.fn()
+    disconnect = vi.fn()
+} as any
 
 // Mock fetch globally
 global.fetch = vi.fn()

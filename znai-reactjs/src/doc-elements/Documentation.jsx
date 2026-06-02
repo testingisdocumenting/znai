@@ -205,9 +205,8 @@ export class Documentation extends React.Component {
     );
 
     const footnotes = isFootnoteListHidden() ? [] : pageContentProcessor.extractFootnotes(page.content);
-    const renderedFootnotesList = footnotes.length > 0 ? (
-      <FootnotesList footnotes={footnotes} elementsLibrary={elementsLibrary} />
-    ) : null;
+    const renderedFootnotesList =
+      footnotes.length > 0 ? <FootnotesList footnotes={footnotes} elementsLibrary={elementsLibrary} /> : null;
 
     const NextPrevNavigation = pageTypesRegistry.nextPrevNavigationComponent(page.tocItem);
     const renderedNextPrevNavigation = (
@@ -466,6 +465,10 @@ export class Documentation extends React.Component {
     const { page, docMeta } = this.state;
 
     this.extractPageSectionNodes();
+
+    if (this.cancelPendingScrollRestore) {
+      this.cancelPendingScrollRestore();
+    }
 
     const currentPageLocation = documentationNavigation.currentPageLocation();
 

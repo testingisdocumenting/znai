@@ -17,12 +17,20 @@
 import React from "react";
 
 import Mermaid from "./Mermaid";
+import { ZoomOverlay } from "../zoom/ZoomOverlay";
 import { Registry } from "react-component-viewer";
 import c4DiagramContent from './c4context.txt?raw';  // Add this import
 import awsDiagramContent from './aws-diagram.txt?raw';
+import largeDiagramContent from './large-diagram.txt?raw';
 
 export function mermaidDemo(registry: Registry) {
   registry.add("simple", () => <Mermaid mermaid={"graph TD; A-->B; B-->C;"} />);
+  registry.add("large (zoom & pan)", () => (
+    <>
+      <ZoomOverlay />
+      <Mermaid mermaid={largeDiagramContent} />
+    </>
+  ));
   registry.add("with links", () => (
     <Mermaid
       mermaid={

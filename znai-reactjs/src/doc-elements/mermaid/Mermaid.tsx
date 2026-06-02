@@ -14,85 +14,50 @@
  * limitations under the License.
  */
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import mermaid from "mermaid";
 import { isLocalUrl } from "../../structure/links";
 import { documentationNavigation } from "../../structure/DocumentationNavigation";
-import { isZnaiDarkTheme, useZnaiThemeChange } from "../../theme/znaiTheme";
+import { zoom } from "../zoom/Zoom";
+import { useMermaidSvg, MermaidIconPack } from "./useMermaidSvg";
+import { isMermaidSvgShrunk } from "./mermaidSvgSize";
+import { MermaidZoomed } from "./MermaidZoomed";
 
 import "./Mermaid.css";
 
 interface Props {
   mermaid: string;
   wide?: boolean;
-  iconpacks?: Array<{ name: string; url: string }>;
-}
-
-let mermaidIdIdx = 0;
-function generateNewMermaidId() {
-  return "znai-mermaid-id-" + mermaidIdIdx++;
-}
-
-let isMermaidInitialized = false;
-function initMermaidIfRequired() {
-  if (isMermaidInitialized) {
-    return;
-  }
-
-  window.znaiTheme.addChangeHandler(initializeMermaid);
-
-  initializeMermaid();
-  isMermaidInitialized = true;
-
-  function initializeMermaid() {
-    mermaid.initialize({
-      startOnLoad: false,
-      securityLevel: "strict",
-      theme: mermaidThemeName(),
-    });
-  }
+  iconpacks?: MermaidIconPack[];
 }
 
 export default function Mermaid(props: Props) {
-  const [html, setHTML] = React.useState("");
-  const [znaiThemeName, setZnaiThemeName] = useState(() => window.znaiTheme.name);
-
-  useZnaiThemeChange((name) => {
-    setZnaiThemeName(name);
-  });
-
-  React.useEffect(() => {
-    initMermaidIfRequired();
-  }, []);
-
-  React.useEffect(() => {
-    const id = generateNewMermaidId();
-    mermaid.initialize({
-      startOnLoad: false,
-      securityLevel: "strict",
-      theme: mermaidThemeName(),
-    });
-    // Register icon packs if provided, otherwise use default logos pack
-    if (props.iconpacks && props.iconpacks.length > 0) {
-      mermaid.registerIconPacks(props.iconpacks.map(pack => ({
-        name: pack.name,
-        loader: () => fetch(pack.url).then(res => res.json())
-      })));
-    }
-
-    mermaid.render(id, props.mermaid)
-        .then(({ svg }) => {
-          setHTML(svg);
-        })
-        .catch((error) => {
-          console.error('Error rendering mermaid diagram:', error);
-        });
-  }, [props.mermaid, props.iconpacks, znaiThemeName]);
-
+  const html = useMermaidSvg(props.mermaid, props.iconpacks);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  // a large diagram is shrunk to fit the page width and becomes hard to read; in that case we let
+  // the reader open it in a full screen zoom & pan overlay. Re-checked on resize as the available
+  // width (and thus whether the diagram fits) changes with the window/layout.
+  const [isZoomable, setIsZoomable] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    function update() {
+      setIsZoomable(isMermaidSvgShrunk(containerRef.current));
+    }
+
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [html]);
+
+  useEffect(() => {
     const container = containerRef.current;
     if (!container) {
       return;
@@ -114,12 +79,21 @@ export default function Mermaid(props: Props) {
 
     container.addEventListener("click", handleClick);
     return () => container.removeEventListener("click", handleClick);
-  }, [html]);
+  }, [html, isZoomable]);
 
-  const className = "znai-mermaid " + (props.wide ? "wide" : "content-block");
-  return <div ref={containerRef} className={className} dangerouslySetInnerHTML={{ __html: html }}></div>;
-}
+  function openZoom() {
+    zoom.zoom(<MermaidZoomed mermaid={props.mermaid} iconpacks={props.iconpacks} />);
+  }
 
-function mermaidThemeName() {
-  return isZnaiDarkTheme() ? "dark" : "default";
+  const className =
+    "znai-mermaid " + (props.wide ? "wide" : "content-block") + (isZoomable ? " znai-mermaid-zoomable" : "");
+
+  return (
+    <div
+      ref={containerRef}
+      className={className}
+      onClick={isZoomable ? openZoom : undefined}
+      dangerouslySetInnerHTML={{ __html: html }}
+    ></div>
+  );
 }
