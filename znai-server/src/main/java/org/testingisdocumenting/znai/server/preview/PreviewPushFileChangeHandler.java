@@ -137,6 +137,11 @@ public class PreviewPushFileChangeHandler implements FileChangeHandler {
 
     private void onDependentChange(Path path) {
         execute(() -> {
+            String pathAsString = path.toString();
+            if (pathAsString.contains(".md.tmp.") || pathAsString.endsWith(".md.tmp")) {
+                return;
+            }
+
             Collection<TocItem> dependentTocItems = previewWebSite.dependentTocItems(path);
             if (dependentTocItems.isEmpty()) {
                 ConsoleOutputs.out("no markup files depends on ", BLUE, path);

@@ -179,7 +179,9 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
                 return;
             }
 
-            final WatchKey key = path.register(watchService, new WatchEvent.Kind[]{StandardWatchEventKinds.ENTRY_MODIFY},
+            // ENTRY_CREATE is required to handle swap in atomic writes
+            final WatchKey key = path.register(watchService,
+                    new WatchEvent.Kind[]{StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY},
                     SensitivityWatchEventModifier.HIGH);
             pathByKey.put(key, path);
 
