@@ -108,6 +108,22 @@
     border: none;
 }
 
+.presentation-title-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.presentation-title-chapter {
+    margin-bottom: 24px;
+
+    font-size: 28px;
+    text-align: center;
+    color: var(--znai-presentation-title-color);
+    opacity: 0.7;
+}
+
 h1.presentation-title {
     font-size: 50px;
 }

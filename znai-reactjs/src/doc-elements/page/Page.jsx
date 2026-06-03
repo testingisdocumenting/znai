@@ -66,14 +66,19 @@ class Page extends Component {
 }
 
 const PresentationTitle = ({ tocItem }) => {
-  return <PresentationHeading className="presentation-title" level={1} title={tocItem.pageTitle} />;
+  return (
+    <div className="presentation-title-slide">
+      {tocItem.chapterTitle && <div className="presentation-title-chapter">{tocItem.chapterTitle}</div>}
+      <PresentationHeading className="presentation-title" level={1} title={tocItem.pageTitle} />
+    </div>
+  );
 };
 
 const presentationPageHandler = {
   component: PresentationTitle,
   numberOfSlides: () => 1,
   slideInfoProvider: ({ tocItem }) => {
-    return { pageTitle: tocItem.pageTitle };
+    return { chapterTitle: tocItem.chapterTitle, pageTitle: tocItem.pageTitle };
   },
 };
 

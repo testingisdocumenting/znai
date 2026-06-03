@@ -42,7 +42,7 @@ class Presentation extends React.Component {
         const {docMeta, presentationRegistry, pageGenError} = this.props
         const {currentSlideIdx} = this.state
 
-        const {pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
+        const {chapterTitle, pageTitle, sectionTitle} = presentationRegistry.extractCombinedSlideInfo(currentSlideIdx - 1)
 
         const slide = presentationRegistry.slideByIdx(currentSlideIdx)
         const isSectionTitleOnSlide = !!slide.info.sectionTitle
@@ -58,6 +58,14 @@ class Presentation extends React.Component {
                     </div>
 
                     <div className="slide-info">
+                        {chapterTitle ?
+                            <div className="presentation-chapter-title">{chapterTitle}</div> :
+                            null
+                        }
+                        {chapterTitle && pageTitle ?
+                            <span className="presentation-title-divider">&gt;&gt;</span> :
+                            null
+                        }
                         <div className="presentation-page-title">{pageTitle}</div>
                         {pageTitle && !isSectionTitleOnSlide && sectionTitle.length !== 0 ?
                             <span className="presentation-title-divider">&gt;&gt;</span> :
