@@ -18,6 +18,7 @@ import React from "react";
 
 import PresentationRegistry from "./PresentationRegistry";
 import {presentationSectionHandler} from "../default-elements/Section";
+import {presentationPageHandler} from "../page/Page";
 
 const elementsLibrary = {
     'Dummy': () => <div/>,
@@ -37,6 +38,7 @@ const presentationElementHandlers = {
         component: () => <div/>,
         numberOfSlides: () => 0
     },
+    'Page': presentationPageHandler,
     'Section': presentationSectionHandler
 }
 
@@ -75,6 +77,70 @@ describe('PresentationRegistry', () => {
             expect(registry.findSlideIdxBySectionId(undefined)).toEqual(0)
             expect(registry.findSlideIdxBySectionId('')).toEqual(0)
             expect(registry.findSlideIdxBySectionId('non-existing')).toEqual(0)
+        })
+    })
+
+    describe('combined slide info', () => {
+        it('should carry chapter and page titles from the page title slide across the whole page', () => {
+            const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, {
+                type: 'Page',
+                tocItem: {
+                    chapterTitle: 'Chapter One',
+                    pageTitle: 'Page One',
+                },
+                content: [
+                    {
+                        type: 'Section',
+                        title: 'Section One',
+                        id: 'section-one',
+                    },
+                    {
+                        type: 'Dummy',
+                        snippet: 'code1',
+                    },
+                ]
+            })
+
+            // slide 0 is the page title slide
+            expect(registry.extractCombinedSlideInfo(0)).toMatchObject({
+                chapterTitle: 'Chapter One',
+                pageTitle: 'Page One',
+                sectionTitle: '',
+            })
+
+            // slide 1 is the section title slide
+            expect(registry.extractCombinedSlideInfo(1)).toMatchObject({
+                chapterTitle: 'Chapter One',
+                pageTitle: 'Page One',
+                sectionTitle: 'Section One',
+            })
+
+            // slide 2 is a content slide within the section
+            expect(registry.extractCombinedSlideInfo(2)).toMatchObject({
+                chapterTitle: 'Chapter One',
+                pageTitle: 'Page One',
+                sectionTitle: 'Section One',
+            })
+        })
+
+        it('should leave chapter title empty for a page without a chapter', () => {
+            const registry = new PresentationRegistry(elementsLibrary, presentationElementHandlers, {
+                type: 'Page',
+                tocItem: {
+                    pageTitle: 'Page One',
+                },
+                content: [
+                    {
+                        type: 'Dummy',
+                        snippet: 'code1',
+                    },
+                ]
+            })
+
+            expect(registry.extractCombinedSlideInfo(0)).toMatchObject({
+                chapterTitle: '',
+                pageTitle: 'Page One',
+            })
         })
     })
 

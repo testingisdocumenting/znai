@@ -135,17 +135,22 @@ class PresentationRegistry {
 
     extractCombinedSlideInfo(pageLocalSlideIdx) {
         if (pageLocalSlideIdx < 0 || pageLocalSlideIdx >= this.slides.length) {
-            return {pageTitle: '', sectionTitle: '', slideVisibleNote: ''}
+            return {chapterTitle: '', pageTitle: '', sectionTitle: '', slideVisibleNote: ''}
         }
 
         const slideInfo = this.slides[pageLocalSlideIdx].info
 
         const slideVisibleNote = slideInfo.slideVisibleNote
+        let chapterTitle = ""
         let pageTitle = ""
         let sectionTitle = ""
 
         for (let i = pageLocalSlideIdx; i >= 0; i--) {
             const slide = this.slides[i];
+
+            if (slide.info.chapterTitle && !chapterTitle) {
+                chapterTitle = slide.info.chapterTitle
+            }
 
             if (slide.info.pageTitle && !pageTitle) {
                 pageTitle = slide.info.pageTitle
@@ -156,7 +161,7 @@ class PresentationRegistry {
             }
         }
 
-        return {pageTitle, sectionTitle, slideVisibleNote}
+        return {chapterTitle, pageTitle, sectionTitle, slideVisibleNote}
     }
 
     renderSlide(slide, renderOpts) {

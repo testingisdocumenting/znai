@@ -56,6 +56,7 @@ function longHeadersAndSideNote() {
     return {
         "type": "Page",
         "tocItem": {
+            "chapterTitle": "Chapter Title",
             "sectionTitle": "Section Title",
             "pageTitle": "Long Page Title Long Page Title",
             "pageMeta": {},
@@ -87,6 +88,7 @@ function shortHeaders() {
     return {
         "type": "Page",
         "tocItem": {
+            "chapterTitle": "Intro",
             "sectionTitle": "Section Title",
             "pageTitle": "Shor",
             "pageMeta": {},
