@@ -43,6 +43,10 @@ public abstract class AttentionSignFencePluginBase implements FencePlugin {
 
     abstract protected String type();
 
+    protected String attentionType(PluginParams pluginParams) {
+        return type();
+    }
+
     @Override
     public PluginParamsDefinition parameters() {
         return new PluginParamsDefinition()
@@ -55,7 +59,7 @@ public abstract class AttentionSignFencePluginBase implements FencePlugin {
         parserResult = markupParser.parse(markupPath, content);
 
         Map<String, Object> props = pluginParams.getOpts().toMap();
-        props.put("attentionType", type());
+        props.put("attentionType", attentionType(pluginParams));
         props.put("content", parserResult.docElement().contentToListOfMaps());
 
         return PluginResult.docElement("AttentionBlock", props);

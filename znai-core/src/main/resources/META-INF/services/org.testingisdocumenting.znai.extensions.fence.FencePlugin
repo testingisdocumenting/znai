@@ -22,5 +22,6 @@ org.testingisdocumenting.znai.extensions.attention.AttentionSignQuestionFencePlu
 org.testingisdocumenting.znai.extensions.attention.AttentionSignWarningFencePlugin
 org.testingisdocumenting.znai.extensions.attention.AttentionSignAvoidFencePlugin
 org.testingisdocumenting.znai.extensions.attention.AttentionSignRecommendationFencePlugin
+org.testingisdocumenting.znai.extensions.attention.AttentionSignCustomFencePlugin
 org.testingisdocumenting.znai.extensions.json.JsonFencePlugin
 org.testingisdocumenting.znai.extensions.latex.LatexFencePlugin

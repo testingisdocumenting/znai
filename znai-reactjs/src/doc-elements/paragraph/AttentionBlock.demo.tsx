@@ -48,4 +48,18 @@ export function attentionBlockDemo(registry: Registry) {
       elementsLibrary={elementsLibrary}
     />
   ));
+
+  registry.add("custom type without icon", () => (
+    <AttentionBlock attentionType="my-type" content={multipleParagraph} elementsLibrary={elementsLibrary} />
+  ));
+
+  registry.add("custom type with icon and label", () => (
+    <AttentionBlock
+      attentionType="my-type"
+      icon="zap"
+      label="Consider"
+      content={multipleParagraph}
+      elementsLibrary={elementsLibrary}
+    />
+  ));
 }
