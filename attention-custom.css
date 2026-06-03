@@ -1,0 +1,17 @@
+.znai-attention-block.my-type {
+    border-left: 3px solid #6f42c1;
+    background: #f3effb;
+}
+
+.znai-attention-block.my-type .znai-attention-block-icon {
+    color: #6f42c1;
+}
+
+.theme-znai-dark .znai-attention-block.my-type {
+    border-left-color: #b794f6;
+    background: rgba(159, 122, 234, 0.12);
+}
+
+.theme-znai-dark .znai-attention-block.my-type .znai-attention-block-icon {
+    color: #b794f6;
+}

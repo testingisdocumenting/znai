@@ -4399,6 +4399,66 @@ answer-link: znai/visuals/attention-signs#attention-block-types
 attention-<type>
 ```
 
+# Visuals :: Attention Signs :: Custom Attention Block
+answer-link: znai/visuals/attention-signs#custom-attention-block
+
+Use `attention-custom` when the built-in types are not enough. The free form parameter defines the type. It is used as a
+CSS class name, exactly like `note`, `warning`, and the other built-in types.
+
+```markdown
+```attention-custom my-type
+hello world
+```
+```
+
+
+`attention-custom` only provides the markup placeholders. Each guide is responsible for implementing the CSS for its own
+types.
+
+Use in combination with `style.css`. Scope rules under `.theme-znai-dark` to define dark mode colors.
+
+```css
+.znai-attention-block.my-type {
+    border-left: 3px solid #6f42c1;
+    background: #f3effb;
+}
+
+.znai-attention-block.my-type .znai-attention-block-icon {
+    color: #6f42c1;
+}
+
+.theme-znai-dark .znai-attention-block.my-type {
+    border-left-color: #b794f6;
+    background: rgba(159, 122, 234, 0.12);
+}
+
+.theme-znai-dark .znai-attention-block.my-type .znai-attention-block-icon {
+    color: #b794f6;
+}
+```
+
+# Visuals :: Attention Signs :: Custom Icon
+answer-link: znai/visuals/attention-signs#custom-icon
+
+Unlike the built-in types, a custom type has no icon by default. Use the `icon` parameter to display one.
+
+To pick an icons to use go to [Feather icons](https://feathericons.com/).
+
+```markdown
+```attention-custom my-type {icon: "zap"}
+hello world
+```
+```
+
+
+Combine `icon` with the optional `label`
+
+```markdown
+```attention-custom my-type {icon: "zap", label: "Consider"}
+hello world
+```
+```
+
 # Visuals :: Images :: Standard Markdown
 answer-link: znai/visuals/images#standard-markdown
 
@@ -4744,7 +4804,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 387,
+    "y" : 285,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -5113,6 +5173,15 @@ The result will be a diagram.
 In presentation mode, rendered expressions will automatically scale to make use of the screen space.
 
 Note: Rendering is done by using [Mermaid](https://mermaid-js.github.io/mermaid/#/) library.
+
+# Visuals :: Mermaid Diagrams :: Large Diagrams
+answer-link: znai/visuals/mermaid-diagrams#large-diagrams
+
+A diagram that is too large to fit the page width is shrunk to fit and can become hard to read. Click the diagram to
+open it in a full screen overlay where you can:
+
+- scroll/`wheel` to zoom towards the cursor
+- drag to pan
 
 # Visuals :: Mermaid Diagrams :: External File
 answer-link: znai/visuals/mermaid-diagrams#external-file
@@ -8950,7 +9019,7 @@ scenario("capture screenshot") {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 387,
+    "y" : 285,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -9239,8 +9308,8 @@ answer-link: znai/plugins/javascript-plugin#function-signature
 Your function receives three arguments:
 
 * `node` — the parent `div` to append content to.
-* `args` — the parameters passed from markdown. Framework-level keys (`title`, `wide`, `className`, `anchorId`) are
-handled by znai and not forwarded.
+* `args` — the parameters passed from markdown. Framework-level keys (`title`, `wide`, `className`, `anchorId`, `height`)
+are handled by znai and not forwarded.
 * `themeObservable` — live access to the current znai theme.
 
 ```javascript
@@ -9302,6 +9371,39 @@ Pass `wide: true` to span the full page width, matching wide images and iframes.
     note: "this block breaks out of the single-column width and spans edge to edge of the page container, giving long values plenty of horizontal room to stretch before they need to wrap onto a second line",
     tags: ["wide", "demo", "edge-to-edge", "theme"],
     metrics: {"requests": 1024, "latency_ms": 42, "error_rate": 0.003}
+}
+```
+
+# Plugins :: Javascript Plugin :: Height
+answer-link: znai/plugins/javascript-plugin#height
+
+By default the block grows to fit whatever the function renders into it. Pass `height` to pin the block to a fixed size
+— content past it scrolls inside the viewport znai gives the function.
+
+`height` accepts either a number (treated as pixels) or any CSS length string like `"320px"` or `"30vh"`.
+
+The `activityFeed` function below appends one row per event. Without `height`, all twelve rows render and the block
+grows to fit them:
+
+```markdown
+:include-javascript-function: activityFeed {
+    title: "deploys",
+    events: [
+        {time: "09:14", action: "build started", detail: "commit a31f9b on main"},
+        {time: "09:17", action: "tests passed", detail: "248 / 248 green"},
+        ...
+    ]  
+}
+```
+
+
+Add `height` and the same twelve events scroll inside a fixed-size box instead:
+
+```markdown
+:include-javascript-function: activityFeed {
+    title: "deploys",
+    height: 220,
+    events: [/* same twelve events */]
 }
 ```
 
@@ -9465,6 +9567,52 @@ The function below powers the examples on this page. It reads the initial theme 
     return function cleanup() {
       console.log("themeBox cleanup: block removed from the page");
     };
+  };
+})();
+```
+
+```js
+/*
+ * sample plugin showing a list of rows that grows to fit its content.
+ *
+ * the parent node sized by znai (`height` arg) is what constrains us — when
+ * unset, the feed renders all rows tall enough to show them all; when set,
+ * the same content scrolls inside the fixed viewport znai gave us.
+ */
+(function () {
+  function createElement(tagName, className, textContent) {
+    var el = document.createElement(tagName);
+    el.className = className;
+    if (textContent !== undefined) {
+      el.textContent = textContent;
+    }
+    return el;
+  }
+
+  function buildRow(event) {
+    var row = createElement("div", "activity-feed-row");
+    row.appendChild(createElement("span", "activity-feed-time", event.time || ""));
+    row.appendChild(createElement("span", "activity-feed-action", event.action || ""));
+    row.appendChild(createElement("span", "activity-feed-detail", event.detail || ""));
+    return row;
+  }
+
+  window.activityFeed = function (node, args, themeObservable) {
+    var events = Array.isArray(args.events) ? args.events : [];
+
+    var feed = createElement("div", "activity-feed");
+    events.forEach(function (event) {
+      feed.appendChild(buildRow(event));
+    });
+
+    node.appendChild(feed);
+
+    function applyTheme(themeName) {
+      feed.classList.toggle("activity-feed-dark", themeName === "dark");
+    }
+
+    applyTheme(themeObservable.current);
+    themeObservable.subscribe(applyTheme);
   };
 })();
 ```
@@ -9940,6 +10088,11 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2026 :: 1.91
+answer-link: znai/release-notes/2026#191
+
+
 
 # Release Notes :: 2026 :: 1.90.1
 answer-link: znai/release-notes/2026#1901

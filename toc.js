@@ -1152,6 +1152,14 @@ toc = [ {
       "title" : "Attention Block Types",
       "id" : "attention-block-types",
       "customAnchorId" : "attention-block-types"
+    }, {
+      "title" : "Custom Attention Block",
+      "id" : "custom-attention-block",
+      "customAnchorId" : "custom-attention-block"
+    }, {
+      "title" : "Custom Icon",
+      "id" : "custom-icon",
+      "customAnchorId" : "custom-icon"
     } ]
   }, {
     "chapterTitle" : "Visuals",
@@ -1347,6 +1355,10 @@ toc = [ {
       "title" : "Fenced Block",
       "id" : "fenced-block",
       "customAnchorId" : "fenced-block"
+    }, {
+      "title" : "Large Diagrams",
+      "id" : "large-diagrams",
+      "customAnchorId" : "large-diagrams"
     }, {
       "title" : "External File",
       "id" : "external-file",
@@ -2467,6 +2479,10 @@ toc = [ {
       "id" : "wide",
       "customAnchorId" : "wide"
     }, {
+      "title" : "Height",
+      "id" : "height",
+      "customAnchorId" : "height"
+    }, {
       "title" : "Styling With A Class Name",
       "id" : "styling-with-a-class-name",
       "customAnchorId" : "styling-with-a-class-name"
@@ -2765,6 +2781,10 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.91",
+      "id" : "191",
+      "customAnchorId" : "191"
+    }, {
       "title" : "1.90.1",
       "id" : "1901",
       "customAnchorId" : "1901"
