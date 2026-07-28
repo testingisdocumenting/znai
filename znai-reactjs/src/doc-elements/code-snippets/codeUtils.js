@@ -170,6 +170,26 @@ export function extractTextFromTokens(tokens) {
     return tokens.map(t => tokenToText(t)).join('')
 }
 
+const shellLangs = new Set(['bash', 'sh', 'shell', 'shell-session', 'zsh', 'console'])
+
+/**
+ * strips the optional "$ " prompt prefix from each line of a shell snippet,
+ * so that copied commands can be pasted into a terminal as-is
+ * @param text snippet text
+ * @param lang snippet language
+ * @return {String}
+ */
+export function stripShellPromptPrefix(text, lang) {
+    if (!lang || !shellLangs.has(lang.toLowerCase())) {
+        return text
+    }
+
+    return text
+        .split('\n')
+        .map(line => line.replace(/^(\s*)\$ /, '$1'))
+        .join('\n')
+}
+
 function tokenToText(token) {
     if (typeof token === 'string') {
         return token

@@ -19,7 +19,7 @@ import * as React from "react";
 
 import ClipboardJS from "clipboard";
 
-import { extractTextFromTokens } from "./codeUtils";
+import { extractTextFromTokens, stripShellPromptPrefix } from "./codeUtils";
 
 import { Icon } from "../icons/Icon";
 import { SnippetOptionallyScrollablePart } from "./SnippetOptionallyScrollablePart";
@@ -129,11 +129,11 @@ class SnippetContainer extends React.Component {
 
     this.clipboard = new ClipboardJS(this.copyToClipboardNode, {
       text: () => {
-        const { linesOfCode, tokensForClipboardProvider } = this.props;
+        const { lang, linesOfCode, tokensForClipboardProvider } = this.props;
         this.setState({ displayCopied: true });
         this.startRemoveFeedbackTimer();
 
-        return extractTextFromTokens(tokensToUse());
+        return stripShellPromptPrefix(extractTextFromTokens(tokensToUse()), lang);
 
         function tokensToUse() {
           if (tokensForClipboardProvider) {
