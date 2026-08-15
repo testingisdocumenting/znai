@@ -81,4 +81,51 @@ describe("flex search", () => {
     expect(truncateQueryByMinLength("typing sl", 3)).toEqual("typing");
     expect(truncateQueryByMinLength("typing slo", 3)).toEqual("typing slo");
   });
+
+  it("min query term length only counts searchable chars as the encoder strips the rest", () => {
+    expect(truncateQueryByMinLength("bu-", 3)).toEqual("");
+    expect(truncateQueryByMinLength("c++", 3)).toEqual("");
+    expect(truncateQueryByMinLength("bu_", 3)).toEqual("bu_");
+    expect(truncateQueryByMinLength("bu_id", 3)).toEqual("bu_id");
+    expect(truncateQueryByMinLength("c+ typing", 3)).toEqual("typing");
+  });
+
+  it("underscore is part of code identifiers and matches by prefix", () => {
+    const index = createLocalSearchIndex();
+    index.add({
+      id: "id1",
+      title: "trading",
+      content: "use bu_id to identify business unit",
+    });
+    index.add({
+      id: "id2",
+      title: "building",
+      content: "how to build and bundle",
+    });
+
+    expect(searchWithHighlight(index, "bu_")).toEqual([
+      { id: "id1", type: "content", termsToHighlight: ["bu_id"] },
+    ]);
+
+    expect(searchWithHighlight(index, "bu_id")).toEqual([
+      { id: "id1", type: "content", termsToHighlight: ["bu_id"] },
+    ]);
+  });
+
+  it("code identifier with underscore matches by its start", () => {
+    const index = createLocalSearchIndex();
+    index.add({
+      id: "id1",
+      title: "config",
+      content: "defines build_config for projects",
+    });
+
+    expect(searchWithHighlight(index, "build")).toEqual([
+      { id: "id1", type: "content", termsToHighlight: ["build_config"] },
+    ]);
+
+    expect(searchWithHighlight(index, "build_c")).toEqual([
+      { id: "id1", type: "content", termsToHighlight: ["build_config"] },
+    ]);
+  });
 });
