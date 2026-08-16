@@ -44,7 +44,8 @@ public class ServerSideSimplifiedRenderer {
     }
 
     private static String renderTocLink(TocItem tocItem, String docId) {
-        String rootLink = aHref("/" + docId + "/" + tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension() + "/",
+        String docIdPrefix = docId.isEmpty() ? "" : "/" + docId;
+        String rootLink = aHref(docIdPrefix + "/" + tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension() + "/",
                 tocItem.getPageTitle());
 
         return article(rootLink);
