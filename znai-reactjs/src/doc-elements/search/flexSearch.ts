@@ -19,15 +19,13 @@ import FlexSearch from "flexsearch";
 
 // default encoder splits terms on any non alphanumeric char, keep underscore as part of terms
 // so code identifiers like `bu_id` are indexed as is and can be found by typing `bu_`
-function createSearchEncoder() {
-  return new FlexSearch.Encoder({
-    include: {
-      letter: true,
-      number: true,
-      char: "_",
-    },
-  });
-}
+const searchEncoder = new FlexSearch.Encoder({
+  include: {
+    letter: true,
+    number: true,
+    char: "_",
+  },
+});
 
 export function createLocalSearchIndex() {
   return new FlexSearch.Document({
@@ -36,7 +34,7 @@ export function createLocalSearchIndex() {
     context: true,
     store: true,
     resolution: 3,
-    encoder: createSearchEncoder(),
+    encoder: searchEncoder,
     document: {
       id: "id",
       index: [

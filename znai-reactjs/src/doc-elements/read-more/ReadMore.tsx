@@ -14,23 +14,48 @@
  * limitations under the License.
  */
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { DocElementProps } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
 
 import { useHighlightOfHiddenElement } from "../text-selection/componentsHighlightUtils";
+import { contentMatchesSearchSnippets } from "../search/searchSnippetsContentMatch";
+import { highlightSearchResultAndMaybeScroll } from "../search/searchResultHighlighter";
 import "./ReadMore.css";
 
 interface Props extends DocElementProps {
   title: string;
 }
 
-export function ReadMore({ title, content, isPartOfSearch, elementsLibrary }: Props) {
-  const [expanded, setExpanded] = useState(() => isPartOfSearch);
+export function ReadMore({ title, content, searchSnippets, elementsLibrary }: Props) {
+  const isPartOfSearch = searchSnippets !== undefined;
+
+  // during search auto reveal only when content has matched search terms,
+  // pages with dozens of read more blocks are too expensive to render and highlight fully expanded
+  const [expanded, setExpanded] = useState(
+    () => searchSnippets !== undefined && contentMatchesSearchSnippets(content, searchSnippets)
+  );
   const containerRef = useRef<HTMLDivElement | null>(null);
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
-  const hasHiddenHighlightedElement = useHighlightOfHiddenElement(containerRef, hiddenContainerRef, expanded);
+  const hasHiddenHighlightedElement = useHighlightOfHiddenElement(
+    containerRef,
+    hiddenContainerRef,
+    expanded,
+    isPartOfSearch
+  );
+
+  // highlight search terms inside revealed content, manually revealed content
+  // is not covered by the initial search highlight pass
+  useEffect(() => {
+    if (expanded && searchSnippets && containerRef.current) {
+      highlightSearchResultAndMaybeScroll(containerRef.current, searchSnippets, false);
+    }
+  }, [expanded]);
+
+  // during search, collapsed content is not mounted to avoid rendering and highlighting hidden blocks,
+  // regular pages keep hidden content mounted so the highlight engine can find it
+  const renderContent = expanded || !isPartOfSearch;
 
   const expandedClassName = expanded ? "expanded" : "collapsed";
   const topClassName = "znai-read-more content-block " + expandedClassName;
@@ -49,7 +74,9 @@ export function ReadMore({ title, content, isPartOfSearch, elementsLibrary }: Pr
     <div className={topClassName} ref={containerRef}>
       {summary}
       <div className="znai-read-more-content content-block" style={style} ref={hiddenContainerRef}>
-        <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} />
+        {renderContent && (
+          <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} searchSnippets={searchSnippets} />
+        )}
       </div>
     </div>
   );

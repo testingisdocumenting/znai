@@ -63,14 +63,14 @@ export function DefaultPageContent(props: Props) {
   const renderedSections = content!.map((section) => {
     // @ts-ignore
     const id = section.id;
-    const isPartOfSearch = isSearchResultOnThisPage && id === searchResultId.pageSectionId;
+    const isSelectedAsSearchResult = isSearchResultOnThisPage && id === searchResultId.pageSectionId;
     return (
       <elementsLibrary.Section
         key={id}
         {...section}
         elementsLibrary={elementsLibrary}
-        isPartOfSearch={isPartOfSearch}
-        highlight={isPartOfSearch}
+        searchSnippets={isSelectedAsSearchResult ? searchSnippetsToHighlight : undefined}
+        highlight={isSelectedAsSearchResult}
       />
     );
   });

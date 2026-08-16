@@ -23,16 +23,17 @@ class SearchPreview extends Component {
     this.highlight();
   }
 
-  componentDidUpdate(_prevProp, _prevState) {
-    this.highlight();
+  shouldComponentUpdate() {
+    // SearchPopup keys the preview by result id and matched terms, any content change remounts it
+    return false;
   }
 
   render() {
-    const { section, elementsLibrary } = this.props;
+    const { section, snippets, elementsLibrary } = this.props;
     const key = section.id + "#" + section.title;
     return (
       <div key={key} className="znai-search-result-preview" ref={(dom) => (this.dom = dom)}>
-        <elementsLibrary.DocElement {...this.props} content={section.content} isPartOfSearch={true} />
+        <elementsLibrary.DocElement {...this.props} content={section.content} searchSnippets={snippets} />
       </div>
     );
   }
