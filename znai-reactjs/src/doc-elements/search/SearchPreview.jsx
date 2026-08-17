@@ -16,11 +16,15 @@
  */
 
 import React, { Component } from "react";
-import { highlightSearchResultAndMaybeScroll } from "./searchResultHighlighter.ts";
+import { startSearchHighlightSession } from "./searchResultHighlighter.ts";
 
 class SearchPreview extends Component {
   componentDidMount() {
-    this.highlight();
+    this.disposeHighlightSession = startSearchHighlightSession(this.dom, this.props.snippets);
+  }
+
+  componentWillUnmount() {
+    this.disposeHighlightSession();
   }
 
   shouldComponentUpdate() {
@@ -36,11 +40,6 @@ class SearchPreview extends Component {
         <elementsLibrary.DocElement {...this.props} content={section.content} searchSnippets={snippets} />
       </div>
     );
-  }
-
-  highlight() {
-    const { snippets } = this.props;
-    highlightSearchResultAndMaybeScroll(this.dom, snippets);
   }
 }
 

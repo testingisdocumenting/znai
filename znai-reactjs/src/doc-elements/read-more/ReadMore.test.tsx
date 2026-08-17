@@ -57,12 +57,11 @@ describe("ReadMore", () => {
     expect(container.querySelector(".znai-read-more-content")).not.toHaveAttribute("hidden");
   });
 
-  it("reveals content during search and highlights terms when it contains matched terms", () => {
+  it("reveals content during search when it contains matched terms", () => {
     const { container } = renderReadMore({ searchSnippets: ["cancel_trade"] });
 
     expect(container.querySelector(".znai-read-more")).toHaveClass("expanded");
     expect(container.querySelector(".test-text")).not.toBeNull();
-    expect(container.querySelector("mark")).not.toBeNull();
   });
 
   it("does not mount content during search when no terms match", () => {

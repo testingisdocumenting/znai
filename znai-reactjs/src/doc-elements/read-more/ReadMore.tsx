@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { DocElementProps } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
@@ -22,7 +22,6 @@ import { Icon } from "../icons/Icon";
 import { useHighlightOfHiddenElement } from "../text-selection/componentsHighlightUtils";
 import { useHiddenUntilFound } from "../hidden-content/hiddenContentUtils";
 import { contentMatchesSearchSnippets } from "../search/searchSnippetsContentMatch";
-import { highlightSearchResultAndMaybeScroll } from "../search/searchResultHighlighter";
 import "./ReadMore.css";
 
 interface Props extends DocElementProps {
@@ -45,14 +44,6 @@ export function ReadMore({ title, content, searchSnippets, elementsLibrary }: Pr
     expanded,
     isPartOfSearch
   );
-
-  // highlight search terms inside revealed content, manually revealed content
-  // is not covered by the initial search highlight pass
-  useEffect(() => {
-    if (expanded && searchSnippets && containerRef.current) {
-      highlightSearchResultAndMaybeScroll(containerRef.current, searchSnippets, false);
-    }
-  }, [expanded]);
 
   useHiddenUntilFound(hiddenContainerRef, !expanded, () => setExpanded(true));
 

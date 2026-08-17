@@ -18,7 +18,51 @@
 // @ts-ignore
 import Mark from "mark.js/dist/mark.js";
 
-export function highlightSearchResultAndMaybeScroll(root: HTMLElement, snippets: string[], scroll: boolean) {
+const observeConfig = { childList: true, subtree: true };
+
+/**
+ * highlights search snippets inside root and keeps highlighting content that mounts later,
+ * e.g. a read more block revealed while a search result is displayed.
+ * content components stay unaware of the highlight mechanics this way.
+ *
+ * returned dispose stops watching for late mounted content,
+ * highlights are removed separately with removeSearchHighlight
+ */
+export function startSearchHighlightSession(root: HTMLElement, snippets: string[]): () => void {
+  markSnippets(root, snippets);
+
+  const observer = new MutationObserver((mutations) => {
+    const lateMounted: HTMLElement[] = [];
+    for (const mutation of mutations) {
+      for (const node of Array.from(mutation.addedNodes)) {
+        if (node instanceof HTMLElement && node.tagName !== "MARK") {
+          lateMounted.push(node);
+        }
+      }
+    }
+
+    if (lateMounted.length === 0) {
+      return;
+    }
+
+    // pause observing while marking so mark.js own dom changes don't re-trigger this callback
+    observer.disconnect();
+    lateMounted.forEach((lateMountedRoot) => markSnippets(lateMountedRoot, snippets));
+    observer.takeRecords();
+    observer.observe(root, observeConfig);
+  });
+
+  observer.observe(root, observeConfig);
+
+  return () => observer.disconnect();
+}
+
+export function removeSearchHighlight(root: HTMLElement) {
+  const mark = new Mark(root);
+  mark.unmark({});
+}
+
+function markSnippets(root: HTMLElement, snippets: string[]) {
   const mark = new Mark(root);
   mark.unmark({
     done: () => {
@@ -30,18 +74,7 @@ export function highlightSearchResultAndMaybeScroll(root: HTMLElement, snippets:
         diacritics: false,
         ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", '"', "'", "~"],
         accuracy: "partially",
-        done: () => {
-          const marked = root.querySelector("mark");
-          if (marked && scroll) {
-            marked.scrollIntoView();
-          }
-        },
       });
     },
   });
-}
-
-export function removeSearchHighlight(root: HTMLElement) {
-  const mark = new Mark(root);
-  mark.unmark({});
 }
