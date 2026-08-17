@@ -42,6 +42,21 @@ describe("ReadMore", () => {
     expect(container.querySelector(".test-text")).not.toBeNull();
   });
 
+  it("hides collapsed content with until-found so browser find-in-page can match it", () => {
+    const { container } = renderReadMore();
+
+    expect(container.querySelector(".znai-read-more-content")).toHaveAttribute("hidden", "until-found");
+  });
+
+  it("expands when browser find-in-page reveals hidden content", () => {
+    const { container } = renderReadMore();
+
+    fireEvent(container.querySelector(".znai-read-more-content")!, new Event("beforematch"));
+
+    expect(container.querySelector(".znai-read-more")).toHaveClass("expanded");
+    expect(container.querySelector(".znai-read-more-content")).not.toHaveAttribute("hidden");
+  });
+
   it("reveals content during search and highlights terms when it contains matched terms", () => {
     const { container } = renderReadMore({ searchSnippets: ["cancel_trade"] });
 

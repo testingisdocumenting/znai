@@ -20,6 +20,7 @@ import { DocElementProps } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
 
 import { useHighlightOfHiddenElement } from "../text-selection/componentsHighlightUtils";
+import { useHiddenUntilFound } from "../hidden-content/hiddenContentUtils";
 import { contentMatchesSearchSnippets } from "../search/searchSnippetsContentMatch";
 import { highlightSearchResultAndMaybeScroll } from "../search/searchResultHighlighter";
 import "./ReadMore.css";
@@ -53,6 +54,8 @@ export function ReadMore({ title, content, searchSnippets, elementsLibrary }: Pr
     }
   }, [expanded]);
 
+  useHiddenUntilFound(hiddenContainerRef, !expanded, () => setExpanded(true));
+
   // during search, collapsed content is not mounted to avoid rendering and highlighting hidden blocks,
   // regular pages keep hidden content mounted so the highlight engine can find it
   const renderContent = expanded || !isPartOfSearch;
@@ -69,11 +72,10 @@ export function ReadMore({ title, content, searchSnippets, elementsLibrary }: Pr
       <span className="znai-read-more-title">{title}</span>
     </div>
   );
-  const style = expanded ? { display: "block" } : { display: "none" };
   return (
     <div className={topClassName} ref={containerRef}>
       {summary}
-      <div className="znai-read-more-content content-block" style={style} ref={hiddenContainerRef}>
+      <div className="znai-read-more-content content-block" ref={hiddenContainerRef}>
         {renderContent && (
           <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} searchSnippets={searchSnippets} />
         )}
