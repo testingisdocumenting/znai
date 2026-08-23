@@ -20,7 +20,7 @@ import { afterTitleId } from "../../../layout/classNamesAndIds";
 import { DocElementProps } from "../../default-elements/DocElement";
 import { SearchResultId } from "../../search/SearchResultId";
 import { TocItem } from "../../../structure/TocItem";
-import { highlightSearchResultAndMaybeScroll, removeSearchHighlight } from "../../search/searchResultHighlighter";
+import { removeSearchHighlight, startSearchHighlightSession } from "../../search/searchResultHighlighter";
 
 interface Props extends DocElementProps {
   tocItem: TocItem;
@@ -41,7 +41,7 @@ export function DefaultPageContent(props: Props) {
 
   useEffect(() => {
     if (searchSnippetsToHighlight && isSearchResultOnThisPage && contentRootDom) {
-      highlightSearchResultAndMaybeScroll(contentRootDom, searchSnippetsToHighlight, false);
+      return startSearchHighlightSession(contentRootDom, searchSnippetsToHighlight);
     }
   }, [searchSnippetsToHighlight]);
 
@@ -63,14 +63,14 @@ export function DefaultPageContent(props: Props) {
   const renderedSections = content!.map((section) => {
     // @ts-ignore
     const id = section.id;
-    const isPartOfSearch = isSearchResultOnThisPage && id === searchResultId.pageSectionId;
+    const isSelectedAsSearchResult = isSearchResultOnThisPage && id === searchResultId.pageSectionId;
     return (
       <elementsLibrary.Section
         key={id}
         {...section}
         elementsLibrary={elementsLibrary}
-        isPartOfSearch={isPartOfSearch}
-        highlight={isPartOfSearch}
+        searchSnippets={isSelectedAsSearchResult ? searchSnippetsToHighlight : undefined}
+        highlight={isSelectedAsSearchResult}
       />
     );
   });

@@ -18,7 +18,52 @@
 // @ts-ignore
 import Mark from "mark.js/dist/mark.js";
 
-export function highlightSearchResultAndMaybeScroll(root: HTMLElement, snippets: string[], scroll: boolean) {
+const observeConfig = { childList: true, subtree: true };
+
+/**
+ * highlights search snippets inside root and keeps highlighting content that mounts later,
+ * e.g. a read more block revealed while a search result is displayed.
+ * content components stay unaware of the highlight mechanics this way.
+ *
+ * returned dispose stops watching for late mounted content,
+ * highlights are removed separately with removeSearchHighlight
+ */
+export function startSearchHighlightSession(root: HTMLElement, snippets: string[]): () => void {
+  markSnippets(root, snippets);
+
+  const observer = new MutationObserver((mutations) => {
+    const lateMounted: HTMLElement[] = [];
+    for (const mutation of mutations) {
+      for (const node of Array.from(mutation.addedNodes)) {
+        if (node instanceof HTMLElement && node.tagName !== "MARK") {
+          lateMounted.push(node);
+        }
+      }
+    }
+
+    if (lateMounted.length === 0) {
+      return;
+    }
+
+    // pause observing while marking so mark.js own dom changes don't re-trigger this callback
+    observer.disconnect();
+    markSnippets(lateMounted, snippets);
+    observer.observe(root, observeConfig);
+  });
+
+  observer.observe(root, observeConfig);
+
+  return () => observer.disconnect();
+}
+
+export function removeSearchHighlight(root: HTMLElement) {
+  const mark = new Mark(root);
+  mark.unmark({});
+}
+
+// mark.js accepts a single element or an array of elements as context,
+// late mounted nodes from one react commit are marked in a single pass
+function markSnippets(root: HTMLElement | HTMLElement[], snippets: string[]) {
   const mark = new Mark(root);
   mark.unmark({
     done: () => {
@@ -28,20 +73,28 @@ export function highlightSearchResultAndMaybeScroll(root: HTMLElement, snippets:
         caseSensitive: false,
         ignoreJoiners: false,
         diacritics: false,
-        ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", '"', "'", "~"],
+        // underscore is deliberately not here: it is part of indexed symbols like cancel_trade
+        ignorePunctuation: ["(", ")", ";", "[", "]", "-", ".", ",", '"', "'", "~"],
         accuracy: "partially",
-        done: () => {
-          const marked = root.querySelector("mark");
-          if (marked && scroll) {
-            marked.scrollIntoView();
-          }
-        },
+        done: () => revealHiddenMatches(root),
       });
     },
   });
 }
 
-export function removeSearchHighlight(root: HTMLElement) {
-  const mark = new Mark(root);
-  mark.unmark({});
+// highlights can land inside content collapsed with hidden="until-found", e.g. a read more block
+// on a page a search result points to. fire the same beforematch event the browser fires for
+// find-in-page matches, so owning components reveal through their one existing reveal path
+function revealHiddenMatches(root: HTMLElement | HTMLElement[]) {
+  const hiddenContainers = new Set<Element>();
+  for (const element of Array.isArray(root) ? root : [root]) {
+    for (const mark of Array.from(element.querySelectorAll("mark[data-markjs]"))) {
+      // reveal every hidden ancestor, matching browser behavior for nested until-found regions
+      for (let hidden = mark.closest("[hidden]"); hidden; hidden = hidden.parentElement?.closest("[hidden]") ?? null) {
+        hiddenContainers.add(hidden);
+      }
+    }
+  }
+
+  hiddenContainers.forEach((container) => container.dispatchEvent(new Event("beforematch")));
 }

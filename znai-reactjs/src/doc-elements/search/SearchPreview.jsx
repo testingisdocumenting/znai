@@ -16,30 +16,29 @@
  */
 
 import React, { Component } from "react";
-import { highlightSearchResultAndMaybeScroll } from "./searchResultHighlighter.ts";
+import { startSearchHighlightSession } from "./searchResultHighlighter.ts";
 
 class SearchPreview extends Component {
   componentDidMount() {
-    this.highlight();
+    this.disposeHighlightSession = startSearchHighlightSession(this.dom, this.props.snippets);
   }
 
-  componentDidUpdate(_prevProp, _prevState) {
-    this.highlight();
+  componentWillUnmount() {
+    this.disposeHighlightSession();
+  }
+
+  shouldComponentUpdate() {
+    // SearchPopup keys the preview by result id and matched terms, any content change remounts it
+    return false;
   }
 
   render() {
-    const { section, elementsLibrary } = this.props;
-    const key = section.id + "#" + section.title;
+    const { section, snippets, elementsLibrary } = this.props;
     return (
-      <div key={key} className="znai-search-result-preview" ref={(dom) => (this.dom = dom)}>
-        <elementsLibrary.DocElement {...this.props} content={section.content} isPartOfSearch={true} />
+      <div className="znai-search-result-preview" ref={(dom) => (this.dom = dom)}>
+        <elementsLibrary.DocElement {...this.props} content={section.content} searchSnippets={snippets} />
       </div>
     );
-  }
-
-  highlight() {
-    const { snippets } = this.props;
-    highlightSearchResultAndMaybeScroll(this.dom, snippets);
   }
 }
 

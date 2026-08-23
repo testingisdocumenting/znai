@@ -1,4 +1,5 @@
 /*
+ * Copyright 2026 znai maintainers
  * Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,43 +15,51 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react'
+import React, { Component } from "react";
+
+const searchDebounceMs = 150;
 
 class SearchBox extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {value: ""}
-    }
+  constructor(props) {
+    super(props);
+    this.state = { value: "" };
+  }
 
-    render() {
-        return (
-            <div className="znai-search-popup-input-box">
-                <input
-                    ref={(dom) => this.dom = dom}
-                    placeholder="Type terms to search..."
-                    onKeyDown={this.onKeyDown}
-                    value={this.state.value}
-                    onChange={this.onInputChange}/>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="znai-search-popup-input-box">
+        <input
+          ref={(dom) => (this.dom = dom)}
+          placeholder="Type terms to search..."
+          onKeyDown={this.onKeyDown}
+          value={this.state.value}
+          onChange={this.onInputChange}
+        />
+      </div>
+    );
+  }
 
-    componentDidMount() {
-        this.dom.focus();
-    }
+  componentDidMount() {
+    this.dom.focus();
+  }
 
-    // TODO debounce?
-    onInputChange = (e) => {
-        const value = e.target.value
-        this.props.onChange(value)
-        this.setState({value})
-    }
+  componentWillUnmount() {
+    clearTimeout(this.debounceTimer);
+  }
 
-    onKeyDown = (e) => {
-        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-            e.preventDefault()
-        }
+  onInputChange = (e) => {
+    const value = e.target.value;
+    this.setState({ value });
+
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => this.props.onChange(value), searchDebounceMs);
+  };
+
+  onKeyDown = (e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      e.preventDefault();
     }
+  };
 }
 
-export default SearchBox
+export default SearchBox;

@@ -17,6 +17,16 @@
 import { Document } from "flexsearch";
 import FlexSearch from "flexsearch";
 
+// default encoder splits terms on any non alphanumeric char, keep underscore as part of terms
+// so code identifiers like `bu_id` are indexed as is and can be found by typing `bu_`
+const searchEncoder = new FlexSearch.Encoder({
+  include: {
+    letter: true,
+    number: true,
+    char: "_",
+  },
+});
+
 export function createLocalSearchIndex() {
   return new FlexSearch.Document({
     preset: "score",
@@ -24,6 +34,7 @@ export function createLocalSearchIndex() {
     context: true,
     store: true,
     resolution: 3,
+    encoder: searchEncoder,
     document: {
       id: "id",
       index: [
@@ -31,8 +42,6 @@ export function createLocalSearchIndex() {
           field: "title",
           tokenize: "forward",
         },
-        // for contentHigh use custom encoder that allows underscored and symbols like semicolons(?)
-        // maybe allow search from the middle as well
         {
           field: "contentHigh",
           tokenize: "forward",
@@ -61,45 +70,78 @@ export function populateLocalSearchIndexWithData(index: Document, data: string[]
   });
 }
 
-export interface SearchResult {
-  id: string;
-  type?: string;
-  termsToHighlight: string[];
-}
+// flexsearch default is 100 results per field
+const resultsPerFieldLimit = 30;
 
-const highlightRegex = /@\w+\b/g;
-export function searchWithHighlight(index: Document, query: string) {
-  const searchResults = index.search(query, { enrich: true, highlight: { template: "@$1" } });
+// per keystroke search fetches ids only, no enrich/highlight, so cost does not grow
+// with the size of the stored content, highlight terms are derived lazily by QueryResult
+// when a result is actually displayed
+export function searchIds(index: Document, query: string): string[] {
+  const searchResults = index.search(query, { limit: resultsPerFieldLimit });
 
-  const withHighlights: SearchResult[] = [];
+  // union across fields keeping first occurrence, so title matches stay ranked before content matches
+  const ids: string[] = [];
+  const seen = new Set<string>();
   for (let idx = 0; idx < searchResults.length; idx++) {
-    const forFieldParent = searchResults[idx];
-    const results = forFieldParent.result;
-
-    for (let resultIdx = 0; resultIdx < results.length; resultIdx++) {
-      const subResult = results[resultIdx];
-      let termsToHighlight: string[] = [];
-      if (subResult.highlight) {
-        termsToHighlight = (subResult.highlight.match(highlightRegex) || [])
-          .map((term) => term.substring(1))
-          .filter((term) => term.length > 2);
+    const forFieldResult = searchResults[idx].result;
+    for (let resultIdx = 0; resultIdx < forFieldResult.length; resultIdx++) {
+      const id = forFieldResult[resultIdx].toString();
+      if (!seen.has(id)) {
+        seen.add(id);
+        ids.push(id);
       }
-
-      withHighlights.push({
-        id: subResult.id.toString(),
-        type: forFieldParent.field,
-        termsToHighlight,
-      });
     }
   }
 
-  return withHighlights;
+  return ids;
+}
+
+export function encodeSearchQuery(query: string): string[] {
+  return searchEncoder.encode(query);
+}
+
+// encoder normalizes words (lowercase, letter dedupe: "running" -> "runing"), so encoded tokens
+// can't be handed to the dom highlighter, split the raw text with the encoder's own word splitter instead,
+// the splitter is not part of the public typings but is derived from the include config above
+const encoderWordSplit = (searchEncoder as unknown as { split: RegExp }).split;
+
+// index uses tokenize: "forward", so words whose encoded form prefix matches an encoded query term
+// mirror what flexsearch matched, searchEncoder is the single source of truth for tokenization
+export function deriveTermsToHighlight(encodedQueryTerms: string[], text: string): string[] {
+  if (encodedQueryTerms.length === 0) {
+    return [];
+  }
+
+  // dedupe so the same word is not highlighted multiple times downstream,
+  // short terms produce too much highlight noise
+  const terms = new Set<string>();
+  const words = text.split(encoderWordSplit);
+  for (let idx = 0; idx < words.length; idx++) {
+    const word = words[idx];
+    if (word.length <= 2 || terms.has(word)) {
+      continue;
+    }
+
+    const encodedWord = searchEncoder.encode(word);
+    if (encodedWord.some((token) => encodedQueryTerms.some((queryTerm) => token.startsWith(queryTerm)))) {
+      terms.add(word);
+    }
+  }
+
+  return [...terms];
 }
 
 export function truncateQueryByMinLength(query: string, minLength: number) {
   return query
     .split(" ")
     .map((e) => e.trim())
-    .filter((e) => e.length >= minLength)
+    .filter((e) => effectiveTermLength(e) >= minLength)
     .join(" ");
+}
+
+// search encoder strips chars other than alphanumeric and underscore, e.g. "c++" is searched as the one char prefix "c",
+// so only searchable chars count towards the min length, otherwise "c++" bypasses the guard
+// and triggers an expensive short prefix search
+function effectiveTermLength(term: string) {
+  return searchEncoder.encode(term).join("").length;
 }

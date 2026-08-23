@@ -14,26 +14,20 @@
  * limitations under the License.
  */
 
+import { walkContentNodes } from '../default-elements/contentTreeWalker'
+
 export function contentTabNames(content) {
     const result = []
 
-    collectTabNamesRecursively(result, content)
-
-    return result
-}
-
-function collectTabNamesRecursively(result, content) {
-    if (!content || content.length === 0) {
-        return
-    }
-
-    content.forEach(e => {
+    walkContentNodes(content, e => {
         if (e.type === 'Tabs') {
             addMissingTabNames(result, e)
-        } else {
-            collectTabNamesRecursively(result, e.content)
+            // nested per tab elements live under tabsContent and are handled above, not walked into
+            return "skip-children"
         }
     })
+
+    return result
 }
 
 function addMissingTabNames(result, tabsDocEl) {

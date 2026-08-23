@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+import { walkContentNodes } from '../default-elements/contentTreeWalker'
+
 export function startsWithIcon(content) {
     return content &&
             content.length && content[0].type === 'Paragraph' &&
@@ -64,29 +66,17 @@ export function extractTextLinesEmphasisOrFull(content) {
 
 function extractText(listItem, emphasisedOnly) {
     const result = []
-    collectTextRecursively(result, listItem.content, emphasisedOnly, false)
+    walkContentNodes(listItem.content, (item, ancestors) => {
+        if (item.type !== "SimpleText") {
+            return
+        }
 
-    return capitalizeFirstLetter(result.join(" "))
-}
-
-function collectTextRecursively(result, content, emphasisedOnly, withinEmphasis) {
-    if (! content) {
-        return
-    }
-
-    content.forEach(item => {
-        if (item.type === "SimpleText") {
-            if (emphasisedOnly && withinEmphasis) {
-                result.push(item.text)
-            } else if (! emphasisedOnly) {
-                result.push(item.text)
-            }
-        } else {
-            collectTextRecursively(result, item.content, emphasisedOnly, withinEmphasis || isEmphasis(item))
+        if (! emphasisedOnly || ancestors.some(isEmphasis)) {
+            result.push(item.text)
         }
     })
 
-    return result
+    return capitalizeFirstLetter(result.join(" "))
 }
 
 function isEmphasis(docElement) {
