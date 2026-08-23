@@ -26,6 +26,12 @@
     padding-top: 8px;
 }
 
+/* collapsed content uses hidden="until-found" which hides via content-visibility and keeps the element own box,
+   remove the padding so the collapsed block takes no space */
+.znai-read-more-content[hidden] {
+    padding: 0;
+}
+
 .znai-read-more-title-block {
     display: flex;
     align-items: center;

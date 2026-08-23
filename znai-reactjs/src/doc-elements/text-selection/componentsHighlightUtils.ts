@@ -28,13 +28,20 @@ Hook below attempts to encapsulate this logic.
 export function useHighlightOfHiddenElement(
   containerRef: MutableRefObject<HTMLElement | null>,
   hiddenContainerRef: MutableRefObject<HTMLElement | null>,
-  contentVisibilityTrigger: any
+  contentVisibilityTrigger: any,
+  // during search, content reveal is driven by matched search terms instead,
+  // skip user driven highlights re-apply to avoid page wide highlight passes on every search interaction
+  disabled?: boolean
 ) {
   const restoreFirstHighlightElementFunRef = useRef<(() => void) | null>(null);
   const [hasHiddenHighlightedElement, setHasHiddenHighlightedElement] = useState(false);
   const onlyOnce = useRef<boolean>(false);
 
   useEffect(() => {
+    if (disabled) {
+      return;
+    }
+
     const listener = {
       onUserDrivenTextHighlight: (firstHighlightElement: HTMLElement, hideBubble: () => void) => {
         if (
@@ -57,10 +64,14 @@ export function useHighlightOfHiddenElement(
     return () => {
       removeHighlightedTextListener(listener);
     };
-  }, []);
+  }, [disabled]);
 
   // this may not work with Tabs
   useEffect(() => {
+    if (disabled) {
+      return;
+    }
+
     if (restoreFirstHighlightElementFunRef.current && onlyOnce.current) {
       restoreFirstHighlightElementFunRef.current();
       restoreFirstHighlightElementFunRef.current = null;
@@ -68,7 +79,7 @@ export function useHighlightOfHiddenElement(
     // TODO only reapply for the specific highlight(s) that are affected maybe somehow(?)
     // or make sure that the scroll to the selected question is triggered everytime someone toggles read more
     reapplyTextHighlights();
-  }, [contentVisibilityTrigger]);
+  }, [contentVisibilityTrigger, disabled]);
 
   return hasHiddenHighlightedElement;
 }

@@ -21,7 +21,9 @@ export type ElementsLibraryMap = { [key: string]: any };
 export type DocElementContent = DocElementPayload[];
 
 interface CommonProps {
-  isPartOfSearch?: boolean; // when element is rendered in search preview or after section is selected as search result
+  // matched search terms, present only when element is rendered in search preview or after section
+  // is selected as search result; lets elements with hidden content decide what to reveal during search
+  searchSnippets?: string[];
   noGap?: boolean;
   content?: DocElementContent;
   next?: DocElementPayload;
@@ -41,7 +43,7 @@ export interface WithElementsLibrary {
 /**
  * uses a given set of components to render DocElements like links, paragraphs, code blocks, etc
  */
-export function DocElement({ content, elementsLibrary, isPartOfSearch }: DocElementProps) {
+export function DocElement({ content, elementsLibrary, searchSnippets }: DocElementProps) {
   if (!content) {
     return null;
   }
@@ -52,7 +54,7 @@ export function DocElement({ content, elementsLibrary, isPartOfSearch }: DocElem
   while (contentProvider.peekCurrent()) {
     const found = findRenderComponent(elementsLibrary, contentProvider);
     const ElementToUse = found.component;
-    const propsToUse = { isPartOfSearch, ...found.propsToUse };
+    const propsToUse = { searchSnippets, ...found.propsToUse };
 
     if (!ElementToUse) {
       console.warn("can't find component to display: " + JSON.stringify(contentProvider.peekCurrent()));

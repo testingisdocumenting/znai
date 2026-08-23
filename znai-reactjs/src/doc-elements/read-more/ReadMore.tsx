@@ -20,17 +20,39 @@ import { DocElementProps } from "../default-elements/DocElement";
 import { Icon } from "../icons/Icon";
 
 import { useHighlightOfHiddenElement } from "../text-selection/componentsHighlightUtils";
+import { useHiddenUntilFound } from "../hidden-content/hiddenContentUtils";
+import { contentMatchesSearchSnippets } from "../search/searchSnippetsContentMatch";
 import "./ReadMore.css";
 
 interface Props extends DocElementProps {
   title: string;
 }
 
-export function ReadMore({ title, content, isPartOfSearch, elementsLibrary }: Props) {
-  const [expanded, setExpanded] = useState(() => isPartOfSearch);
+export function ReadMore({ title, content, searchSnippets, elementsLibrary }: Props) {
+  const isPartOfSearch = searchSnippets !== undefined;
+
+  // during search auto reveal only when content has matched search terms,
+  // pages with dozens of read more blocks are too expensive to render and highlight fully expanded
+  const [expanded, setExpanded] = useState(() => contentMatchesSearchSnippets(content, searchSnippets));
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
-  const hasHiddenHighlightedElement = useHighlightOfHiddenElement(containerRef, hiddenContainerRef, expanded);
+  const hasHiddenHighlightedElement = useHighlightOfHiddenElement(
+    containerRef,
+    hiddenContainerRef,
+    expanded,
+    isPartOfSearch
+  );
+
+  useHiddenUntilFound(hiddenContainerRef, !expanded, () => setExpanded(true));
+
+  // captured at mount: a block that first rendered outside of search keeps content mounted
+  // when snippets arrive later, unmounting would leave nothing to highlight and reveal
+  const [wasMountedOutsideSearch] = useState(!isPartOfSearch);
+
+  // during search preview, collapsed content is not mounted to avoid rendering and highlighting hidden blocks,
+  // on regular pages hidden content stays mounted so the highlight engine and find-in-page can reach it
+  const renderContent = expanded || !isPartOfSearch || wasMountedOutsideSearch;
 
   const expandedClassName = expanded ? "expanded" : "collapsed";
   const topClassName = "znai-read-more content-block " + expandedClassName;
@@ -44,12 +66,13 @@ export function ReadMore({ title, content, isPartOfSearch, elementsLibrary }: Pr
       <span className="znai-read-more-title">{title}</span>
     </div>
   );
-  const style = expanded ? { display: "block" } : { display: "none" };
   return (
     <div className={topClassName} ref={containerRef}>
       {summary}
-      <div className="znai-read-more-content content-block" style={style} ref={hiddenContainerRef}>
-        <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} />
+      <div className="znai-read-more-content content-block" ref={hiddenContainerRef}>
+        {renderContent && (
+          <elementsLibrary.DocElement content={content} elementsLibrary={elementsLibrary} searchSnippets={searchSnippets} />
+        )}
       </div>
     </div>
   );

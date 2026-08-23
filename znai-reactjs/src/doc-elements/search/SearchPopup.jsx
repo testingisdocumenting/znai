@@ -81,6 +81,9 @@ class SearchPopup extends Component {
     const { elementsLibrary } = this.props;
     const { search } = this.state;
 
+    // key by content identity so the preview remounts and re-highlights only when the result or matched terms change
+    const previewKey = ids[selectedIdx] + "#" + previewDetails.snippets.join(" ");
+
     return (
       <div className="znai-toc-and-preview">
         <div className="znai-search-toc-panel">
@@ -93,7 +96,7 @@ class SearchPopup extends Component {
           />
         </div>
         <div className="znai-search-preview-panel">
-          <SearchPreview key={selectedIdx} elementsLibrary={elementsLibrary} {...previewDetails} />
+          <SearchPreview key={previewKey} elementsLibrary={elementsLibrary} {...previewDetails} />
         </div>
       </div>
     );
