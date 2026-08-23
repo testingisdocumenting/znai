@@ -21,6 +21,26 @@ import React from "react";
 import { ReadMore } from "./ReadMore";
 import { DocElement, DocElementContent } from "../default-elements/DocElement";
 
+// jsdom implements onbeforematch on a prototype, remove it there to mimic browsers without support
+function withoutBeforematchSupport(test: () => void) {
+  let owner: any = document.body;
+  while (owner && !Object.getOwnPropertyDescriptor(owner, "onbeforematch")) {
+    owner = Object.getPrototypeOf(owner);
+  }
+  const descriptor = owner && Object.getOwnPropertyDescriptor(owner, "onbeforematch");
+  if (owner) {
+    delete owner.onbeforematch;
+  }
+
+  try {
+    test();
+  } finally {
+    if (owner && descriptor) {
+      Object.defineProperty(owner, "onbeforematch", descriptor);
+    }
+  }
+}
+
 const elementsLibrary: any = {
   DocElement,
   TestText: ({ text }: { text: string }) => <div className="test-text">{text}</div>,
@@ -46,6 +66,16 @@ describe("ReadMore", () => {
     const { container } = renderReadMore();
 
     expect(container.querySelector(".znai-read-more-content")).toHaveAttribute("hidden", "until-found");
+  });
+
+  it("falls back to plain hidden when the browser has no beforematch support", () => {
+    // hiddenContent.css reverts the normalize display none reset for until-found,
+    // so non supporting browsers must not receive that attribute value or content would show
+    withoutBeforematchSupport(() => {
+      const { container } = renderReadMore();
+
+      expect(container.querySelector(".znai-read-more-content")).toHaveAttribute("hidden", "");
+    });
   });
 
   it("expands when browser find-in-page reveals hidden content", () => {

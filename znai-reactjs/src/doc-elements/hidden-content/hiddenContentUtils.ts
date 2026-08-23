@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import { RefObject, useEffect, useLayoutEffect } from "react";
+import { RefObject, useEffect, useLayoutEffect, useRef } from "react";
+
+import "./hiddenContent.css";
 
 /**
  * hides collapsible content with hidden="until-found" so browser find-in-page can still match it,
@@ -36,11 +38,16 @@ export function useHiddenUntilFound(
     }
 
     if (hidden) {
-      hiddenContainer.setAttribute("hidden", "until-found");
+      hiddenContainer.setAttribute("hidden", supportsHiddenUntilFound() ? "until-found" : "");
     } else {
       hiddenContainer.removeAttribute("hidden");
     }
   }, [hidden]);
+
+  // latest callback is kept in a ref so callers can pass inline arrows
+  // without re-subscribing the listener on every render
+  const onFindInPageRevealRef = useRef(onFindInPageReveal);
+  onFindInPageRevealRef.current = onFindInPageReveal;
 
   // browser fires beforematch right before revealing hidden content matched by find-in-page
   useEffect(() => {
@@ -49,7 +56,12 @@ export function useHiddenUntilFound(
       return;
     }
 
-    hiddenContainer.addEventListener("beforematch", onFindInPageReveal);
-    return () => hiddenContainer.removeEventListener("beforematch", onFindInPageReveal);
-  }, [onFindInPageReveal]);
+    const listener = () => onFindInPageRevealRef.current();
+    hiddenContainer.addEventListener("beforematch", listener);
+    return () => hiddenContainer.removeEventListener("beforematch", listener);
+  }, []);
+}
+
+function supportsHiddenUntilFound() {
+  return "onbeforematch" in document.body;
 }

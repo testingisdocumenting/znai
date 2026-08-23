@@ -20,12 +20,16 @@ import { removeSearchHighlight, startSearchHighlightSession } from "./searchResu
 let root: HTMLElement;
 let disposeSession: (() => void) | undefined;
 
-function startSession(snippets: string[]) {
+function startSession(snippets: string[], html = "<p>use cancel_trade to abort</p>") {
   root = document.createElement("div");
-  root.innerHTML = "<p>use cancel_trade to abort</p>";
+  root.innerHTML = html;
   document.body.appendChild(root);
 
   disposeSession = startSearchHighlightSession(root, snippets);
+}
+
+function markedTexts() {
+  return Array.from(root.querySelectorAll("mark")).map((mark) => mark.textContent);
 }
 
 function mountLateContent() {
@@ -76,6 +80,31 @@ describe("startSearchHighlightSession", () => {
   it("removeSearchHighlight removes session marks", () => {
     startSession(["cancel_trade"]);
     removeSearchHighlight(root);
+
+    expect(root.querySelector("mark")).toBeNull();
+  });
+});
+
+// underscore is part of indexed symbols (see flexSearch.ts encoder), so the highlighter
+// treats it as a literal character of the snippet, not as ignorable punctuation
+describe("underscore as part of searched symbols", () => {
+  it("highlights underscore identifier surrounded by text and punctuation", () => {
+    startSession(["my_func"], "<p>call my_func() now</p>");
+
+    expect(markedTexts()).toEqual(["my_func"]);
+  });
+
+  it("highlights prefix snippet occurrences including the underscore", () => {
+    // accuracy "partially" matches the snippet anywhere, so a forward tokenization prefix
+    // like bu_id also highlights the start of a longer identifier
+    startSession(["bu_id"], "<p>use bu_id here and bu_id_extra there</p>");
+
+    expect(markedTexts()).toEqual(["bu_id", "bu_id"]);
+  });
+
+  it("does not match text with underscore when snippet has none", () => {
+    // canceltrade and cancel_trade are different symbols now that underscore is not ignorable
+    startSession(["canceltrade"], "<p>use cancel_trade to abort</p>");
 
     expect(root.querySelector("mark")).toBeNull();
   });

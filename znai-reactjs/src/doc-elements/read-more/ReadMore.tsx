@@ -33,9 +33,7 @@ export function ReadMore({ title, content, searchSnippets, elementsLibrary }: Pr
 
   // during search auto reveal only when content has matched search terms,
   // pages with dozens of read more blocks are too expensive to render and highlight fully expanded
-  const [expanded, setExpanded] = useState(
-    () => searchSnippets !== undefined && contentMatchesSearchSnippets(content, searchSnippets)
-  );
+  const [expanded, setExpanded] = useState(() => contentMatchesSearchSnippets(content, searchSnippets));
   const containerRef = useRef<HTMLDivElement | null>(null);
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
   const hasHiddenHighlightedElement = useHighlightOfHiddenElement(

@@ -15,39 +15,27 @@
  */
 
 import { DocElementContent } from "../default-elements/DocElement";
+import { someTextValue } from "../default-elements/contentTreeWalker";
 
 /**
  * checks if doc elements content contains any of the matched search terms.
  * lets elements with hidden content (e.g. read more) decide whether to auto reveal it
  * during search instead of rendering and highlighting every hidden block.
  */
-export function contentMatchesSearchSnippets(content: DocElementContent | undefined, searchSnippets: string[]) {
-  if (!content || searchSnippets.length === 0) {
+export function contentMatchesSearchSnippets(
+  content: DocElementContent | undefined,
+  searchSnippets: string[] | undefined
+) {
+  if (!content || !searchSnippets || searchSnippets.length === 0) {
     return false;
   }
 
-  const loweredSnippets = searchSnippets.map((snippet) => snippet.toLowerCase());
-  return anyTextValueMatches(content, loweredSnippets);
+  // single case-insensitive alternation checks every snippet in one scan per string,
+  // instead of lowering and rescanning every string in the content tree per snippet
+  const anySnippetRegex = new RegExp(searchSnippets.map(escapeRegexChars).join("|"), "i");
+  return someTextValue(content, (text) => anySnippetRegex.test(text));
 }
 
-function anyTextValueMatches(value: unknown, loweredSnippets: string[]): boolean {
-  if (typeof value === "string") {
-    const text = value.toLowerCase();
-    return loweredSnippets.some((snippet) => text.includes(snippet));
-  }
-
-  if (Array.isArray(value)) {
-    return value.some((entry) => anyTextValueMatches(entry, loweredSnippets));
-  }
-
-  if (typeof value === "object" && value !== null) {
-    for (const key in value) {
-      // type holds doc element names like Snippet and is not a visible text
-      if (key !== "type" && anyTextValueMatches((value as Record<string, unknown>)[key], loweredSnippets)) {
-        return true;
-      }
-    }
-  }
-
-  return false;
+function escapeRegexChars(text: string) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

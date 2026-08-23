@@ -47,6 +47,12 @@ describe("contentMatchesSearchSnippets", () => {
 
   it("no match when terms list is empty or content is missing", () => {
     expect(contentMatchesSearchSnippets(content, [])).toBe(false);
+    expect(contentMatchesSearchSnippets(content, undefined)).toBe(false);
     expect(contentMatchesSearchSnippets(undefined, ["abort"])).toBe(false);
+  });
+
+  it("treats terms as plain text and not as regexp", () => {
+    expect(contentMatchesSearchSnippets(content, ["my_func():"])).toBe(true);
+    expect(contentMatchesSearchSnippets(content, ["c.n..l"])).toBe(false);
   });
 });

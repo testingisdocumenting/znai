@@ -16,13 +16,15 @@
  */
 
 import QueryResult from "./QueryResult";
-import { searchWithHighlight, truncateQueryByMinLength } from "./flexSearch.js";
+import { encodeSearchQuery, searchIds, truncateQueryByMinLength } from "./flexSearch.js";
 
 class Search {
   constructor(allPages) {
     this.allPages = allPages;
     this.searchIdx = window.znaiSearchIdx;
     this.searchDataById = mapById(window.znaiSearchData);
+    // built lazily on first preview lookup, the constructor runs on doc load even if search is never used
+    this.sectionByIndexId = null;
   }
 
   static convertIndexIdToSectionCoords(indexId) {
@@ -31,12 +33,23 @@ class Search {
   }
 
   search(term) {
-    const matches = searchWithHighlight(this.searchIdx, truncateQueryByMinLength(term, 3));
-    return new QueryResult(matches);
+    const query = truncateQueryByMinLength(term, 3);
+    const ids = searchIds(this.searchIdx, query);
+    return new QueryResult(ids, encodeSearchQuery(query), (id) => this._textToHighlightById(id));
   }
 
   findSearchEntryById(id) {
     return this.searchDataById[id];
+  }
+
+  // same text pieces the index docs are built from, see populateLocalSearchIndexWithData
+  _textToHighlightById(id) {
+    const searchEntry = this.searchDataById[id];
+    if (!searchEntry) {
+      return "";
+    }
+
+    return [searchEntry.pageTitle, searchEntry.pageSection, searchEntry.textStandard, searchEntry.textHigh].join(" ");
   }
 
   previewDetails(id, queryResult) {
@@ -47,31 +60,53 @@ class Search {
   }
 
   _findSectionById(indexId) {
+    if (this.sectionByIndexId === null) {
+      this.sectionByIndexId = buildSectionByIndexId(this.allPages);
+    }
+
     const sectionCoords = Search.convertIndexIdToSectionCoords(indexId);
+    const key = sectionLookupKey(sectionCoords.dirName, sectionCoords.fileName, sectionCoords.pageSectionId || "");
 
-    const matching = [];
-
-    this.allPages.pages.forEach((p) => {
-      const tocItem = p.tocItem;
-
-      const sections = p.content.filter((de) => {
-        return (
-          tocItem.dirName === sectionCoords.dirName &&
-          tocItem.fileName === sectionCoords.fileName &&
-          de.type === "Section" &&
-          (!sectionCoords.pageSectionId || de.id === sectionCoords.pageSectionId)
-        );
-      });
-
-      sections.forEach((s) => matching.push(s));
-    });
-
-    if (!matching) {
+    const section = this.sectionByIndexId.get(key);
+    if (section === undefined) {
       console.error("expected section associated with", indexId);
     }
 
-    return matching[0];
+    return section;
   }
+}
+
+function sectionLookupKey(dirName, fileName, pageSectionId) {
+  return dirName + "@@" + fileName + "@@" + pageSectionId;
+}
+
+// index sections both by their id and by page alone (empty section id means first section of the page)
+function buildSectionByIndexId(allPages) {
+  const result = new Map();
+
+  allPages.pages.forEach((p) => {
+    const tocItem = p.tocItem;
+
+    p.content.forEach((de) => {
+      if (de.type !== "Section") {
+        return;
+      }
+
+      const pageKey = sectionLookupKey(tocItem.dirName, tocItem.fileName, "");
+      if (!result.has(pageKey)) {
+        result.set(pageKey, de);
+      }
+
+      if (de.id) {
+        const idKey = sectionLookupKey(tocItem.dirName, tocItem.fileName, de.id);
+        if (!result.has(idKey)) {
+          result.set(idKey, de);
+        }
+      }
+    });
+  });
+
+  return result;
 }
 
 function mapById(searchData) {

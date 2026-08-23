@@ -15,6 +15,7 @@
  */
 
 import { DocElementContent, DocElementPayload } from "../../default-elements/DocElement";
+import { walkContentNodes } from "../../default-elements/contentTreeWalker";
 
 const TAB_CONTENT_TYPE = "TabContent";
 
@@ -28,25 +29,15 @@ interface SectionPayload extends DocElementPayload {
  * searches recursively through nested content (e.g. TabContent inside AttentionBlock)
  */
 export function extractTabIds(pageContent: DocElementContent | undefined): string[] {
-  if (!pageContent) {
-    return [];
-  }
-
   const allTabIds: string[] = [];
-  collect(pageContent);
+  walkContentNodes(pageContent, (el) => {
+    const tabId = (el as { tabId?: string }).tabId;
+    if (el.type === TAB_CONTENT_TYPE && tabId) {
+      allTabIds.push(tabId);
+    }
+  });
 
   return [...new Set(allTabIds)];
-
-  function collect(content: DocElementContent): void {
-    for (const el of content) {
-      if (el.type === TAB_CONTENT_TYPE && el.tabId) {
-        allTabIds.push(el.tabId);
-      }
-      if (Array.isArray(el.content)) {
-        collect(el.content);
-      }
-    }
-  }
 }
 
 /**

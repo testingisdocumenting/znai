@@ -47,8 +47,7 @@ export function startSearchHighlightSession(root: HTMLElement, snippets: string[
 
     // pause observing while marking so mark.js own dom changes don't re-trigger this callback
     observer.disconnect();
-    lateMounted.forEach((lateMountedRoot) => markSnippets(lateMountedRoot, snippets));
-    observer.takeRecords();
+    markSnippets(lateMounted, snippets);
     observer.observe(root, observeConfig);
   });
 
@@ -62,7 +61,9 @@ export function removeSearchHighlight(root: HTMLElement) {
   mark.unmark({});
 }
 
-function markSnippets(root: HTMLElement, snippets: string[]) {
+// mark.js accepts a single element or an array of elements as context,
+// late mounted nodes from one react commit are marked in a single pass
+function markSnippets(root: HTMLElement | HTMLElement[], snippets: string[]) {
   const mark = new Mark(root);
   mark.unmark({
     done: () => {
@@ -72,7 +73,8 @@ function markSnippets(root: HTMLElement, snippets: string[]) {
         caseSensitive: false,
         ignoreJoiners: false,
         diacritics: false,
-        ignorePunctuation: ["(", ")", ";", "[", "]", "-", "_", ".", ",", '"', "'", "~"],
+        // underscore is deliberately not here: it is part of indexed symbols like cancel_trade
+        ignorePunctuation: ["(", ")", ";", "[", "]", "-", ".", ",", '"', "'", "~"],
         accuracy: "partially",
       });
     },
