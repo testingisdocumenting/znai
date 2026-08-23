@@ -85,6 +85,66 @@ describe("startSearchHighlightSession", () => {
   });
 });
 
+// highlights landing inside hidden="until-found" content (e.g. collapsed read more) trigger
+// the same beforematch event browser find-in-page uses, owning components reveal through one path
+describe("hidden content reveal", () => {
+  function trackReveal(container: Element) {
+    const revealed = { count: 0 };
+    container.addEventListener("beforematch", () => revealed.count++);
+    return revealed;
+  }
+
+  function createRoot(html: string) {
+    root = document.createElement("div");
+    root.innerHTML = html;
+    document.body.appendChild(root);
+  }
+
+  it("fires beforematch on a hidden container that received a highlight", () => {
+    createRoot('<div hidden="until-found"><p>use cancel_trade to abort</p></div>');
+    const revealed = trackReveal(root.querySelector("[hidden]")!);
+
+    disposeSession = startSearchHighlightSession(root, ["cancel_trade"]);
+
+    expect(revealed.count).toBe(1);
+  });
+
+  it("does not fire beforematch when hidden content has no highlight", () => {
+    createRoot('<div hidden="until-found"><p>unrelated text</p></div>');
+    const revealed = trackReveal(root.querySelector("[hidden]")!);
+
+    disposeSession = startSearchHighlightSession(root, ["cancel_trade"]);
+
+    expect(revealed.count).toBe(0);
+  });
+
+  it("fires beforematch on every hidden ancestor of a highlight, like nested until-found regions", () => {
+    createRoot('<div hidden="until-found" class="outer"><div hidden="until-found"><p>cancel_trade</p></div></div>');
+    const outerRevealed = trackReveal(root.querySelector(".outer")!);
+    const innerRevealed = trackReveal(root.querySelector(".outer [hidden]")!);
+
+    disposeSession = startSearchHighlightSession(root, ["cancel_trade"]);
+
+    expect(innerRevealed.count).toBe(1);
+    // outer count includes the inner event only if it bubbled, beforematch does not bubble
+    expect(outerRevealed.count).toBe(1);
+  });
+
+  it("fires beforematch for hidden content mounted after session start", async () => {
+    createRoot("<p>visible cancel_trade</p>");
+    disposeSession = startSearchHighlightSession(root, ["cancel_trade"]);
+
+    const lateMounted = document.createElement("div");
+    lateMounted.innerHTML = '<div hidden="until-found"><p>late cancel_trade</p></div>';
+    const revealed = trackReveal(lateMounted.querySelector("[hidden]")!);
+    root.appendChild(lateMounted);
+
+    await observerDelivery();
+
+    expect(revealed.count).toBe(1);
+  });
+});
+
 // underscore is part of indexed symbols (see flexSearch.ts encoder), so the highlighter
 // treats it as a literal character of the snippet, not as ignorable punctuation
 describe("underscore as part of searched symbols", () => {

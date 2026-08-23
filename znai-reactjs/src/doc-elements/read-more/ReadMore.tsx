@@ -34,6 +34,7 @@ export function ReadMore({ title, content, searchSnippets, elementsLibrary }: Pr
   // during search auto reveal only when content has matched search terms,
   // pages with dozens of read more blocks are too expensive to render and highlight fully expanded
   const [expanded, setExpanded] = useState(() => contentMatchesSearchSnippets(content, searchSnippets));
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
   const hasHiddenHighlightedElement = useHighlightOfHiddenElement(
@@ -45,9 +46,13 @@ export function ReadMore({ title, content, searchSnippets, elementsLibrary }: Pr
 
   useHiddenUntilFound(hiddenContainerRef, !expanded, () => setExpanded(true));
 
-  // during search, collapsed content is not mounted to avoid rendering and highlighting hidden blocks,
-  // regular pages keep hidden content mounted so the highlight engine can find it
-  const renderContent = expanded || !isPartOfSearch;
+  // captured at mount: a block that first rendered outside of search keeps content mounted
+  // when snippets arrive later, unmounting would leave nothing to highlight and reveal
+  const [wasMountedOutsideSearch] = useState(!isPartOfSearch);
+
+  // during search preview, collapsed content is not mounted to avoid rendering and highlighting hidden blocks,
+  // on regular pages hidden content stays mounted so the highlight engine and find-in-page can reach it
+  const renderContent = expanded || !isPartOfSearch || wasMountedOutsideSearch;
 
   const expandedClassName = expanded ? "expanded" : "collapsed";
   const topClassName = "znai-read-more content-block " + expandedClassName;

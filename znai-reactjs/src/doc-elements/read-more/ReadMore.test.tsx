@@ -94,6 +94,27 @@ describe("ReadMore", () => {
     expect(container.querySelector(".test-text")).not.toBeNull();
   });
 
+  it("keeps content mounted when snippets arrive after mount, highlighter reveals it via beforematch", () => {
+    const { container, rerender } = renderReadMore();
+
+    rerender(
+      <ReadMore
+        title="details"
+        content={content}
+        elementsLibrary={elementsLibrary}
+        {...({ searchSnippets: ["cancel_trade"] } as any)}
+      />
+    );
+
+    // still mounted and collapsed, waiting for the highlight session to dispatch beforematch
+    expect(container.querySelector(".znai-read-more")).toHaveClass("collapsed");
+    expect(container.querySelector(".test-text")).not.toBeNull();
+
+    fireEvent(container.querySelector(".znai-read-more-content")!, new Event("beforematch"));
+
+    expect(container.querySelector(".znai-read-more")).toHaveClass("expanded");
+  });
+
   it("does not mount content during search when no terms match", () => {
     const { container } = renderReadMore({ searchSnippets: ["deploy"] });
 

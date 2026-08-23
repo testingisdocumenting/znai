@@ -20,8 +20,9 @@ import "./hiddenContent.css";
 
 /**
  * hides collapsible content with hidden="until-found" so browser find-in-page can still match it,
- * onFindInPageReveal is invoked when the browser reveals the content on a match so the owner
- * can sync its expanded state.
+ * onReveal is invoked on a beforematch event so the owner can sync its expanded state.
+ * both the browser (find-in-page match) and the search highlighter (snippet marked inside
+ * hidden content) deliver reveals through that one event.
  *
  * the attribute is set manually because react normalizes hidden to a boolean and drops the value.
  * browsers without until-found support treat it as plain hidden which matches display none behavior
@@ -29,7 +30,7 @@ import "./hiddenContent.css";
 export function useHiddenUntilFound(
   hiddenContainerRef: RefObject<HTMLElement | null>,
   hidden: boolean,
-  onFindInPageReveal: () => void
+  onReveal: () => void
 ) {
   useLayoutEffect(() => {
     const hiddenContainer = hiddenContainerRef.current;
@@ -46,17 +47,18 @@ export function useHiddenUntilFound(
 
   // latest callback is kept in a ref so callers can pass inline arrows
   // without re-subscribing the listener on every render
-  const onFindInPageRevealRef = useRef(onFindInPageReveal);
-  onFindInPageRevealRef.current = onFindInPageReveal;
+  const onRevealRef = useRef(onReveal);
+  onRevealRef.current = onReveal;
 
-  // browser fires beforematch right before revealing hidden content matched by find-in-page
+  // browser fires beforematch right before revealing hidden content matched by find-in-page,
+  // the search highlighter dispatches the same event for highlights inside hidden content
   useEffect(() => {
     const hiddenContainer = hiddenContainerRef.current;
     if (!hiddenContainer) {
       return;
     }
 
-    const listener = () => onFindInPageRevealRef.current();
+    const listener = () => onRevealRef.current();
     hiddenContainer.addEventListener("beforematch", listener);
     return () => hiddenContainer.removeEventListener("beforematch", listener);
   }, []);

@@ -76,7 +76,25 @@ function markSnippets(root: HTMLElement | HTMLElement[], snippets: string[]) {
         // underscore is deliberately not here: it is part of indexed symbols like cancel_trade
         ignorePunctuation: ["(", ")", ";", "[", "]", "-", ".", ",", '"', "'", "~"],
         accuracy: "partially",
+        done: () => revealHiddenMatches(root),
       });
     },
   });
+}
+
+// highlights can land inside content collapsed with hidden="until-found", e.g. a read more block
+// on a page a search result points to. fire the same beforematch event the browser fires for
+// find-in-page matches, so owning components reveal through their one existing reveal path
+function revealHiddenMatches(root: HTMLElement | HTMLElement[]) {
+  const hiddenContainers = new Set<Element>();
+  for (const element of Array.isArray(root) ? root : [root]) {
+    for (const mark of Array.from(element.querySelectorAll("mark[data-markjs]"))) {
+      // reveal every hidden ancestor, matching browser behavior for nested until-found regions
+      for (let hidden = mark.closest("[hidden]"); hidden; hidden = hidden.parentElement?.closest("[hidden]") ?? null) {
+        hiddenContainers.add(hidden);
+      }
+    }
+  }
+
+  hiddenContainers.forEach((container) => container.dispatchEvent(new Event("beforematch")));
 }
