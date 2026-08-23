@@ -19,11 +19,6 @@ import { walkContentNodes } from "../../default-elements/contentTreeWalker";
 
 const TAB_CONTENT_TYPE = "TabContent";
 
-interface SectionPayload extends DocElementPayload {
-  id: string;
-  title: string;
-}
-
 /**
  * extracts unique tab IDs from all TabContent elements in page content, preserving order.
  * searches recursively through nested content (e.g. TabContent inside AttentionBlock)
@@ -49,10 +44,7 @@ export function extractTabIds(pageContent: DocElementContent | undefined): strin
  *
  * returns sections with their content filtered
  */
-export function buildContentForTab(
-  pageContent: DocElementContent,
-  selectedTabId: string
-): DocElementContent {
+export function buildContentForTab(pageContent: DocElementContent, selectedTabId: string): DocElementContent {
   return pageContent.map((section) => {
     if (!section.content) {
       return section;
