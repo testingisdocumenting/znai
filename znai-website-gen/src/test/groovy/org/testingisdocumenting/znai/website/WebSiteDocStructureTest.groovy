@@ -84,6 +84,25 @@ class WebSiteDocStructureTest {
     }
 
     @Test
+    void "should create root based url without double slashes when doc id is empty"() {
+        def rootDocMeta = new DocMeta([:])
+        def rootDocStructure = new WebSiteDocStructure(TEST_COMPONENTS_REGISTRY, rootDocMeta, toc, new MarkdownParsingConfiguration())
+
+        def indexPath = Paths.get('/home/user/docs/index.md')
+        def path = Paths.get('/home/user/docs/chapter/pageOne.md')
+
+        rootDocStructure.createUrl(path, new DocUrl("/")).should == "/"
+        rootDocStructure.createUrl(path, new DocUrl("#anchor")).should == "/chapter/pageOne#anchor"
+        rootDocStructure.createUrl(path, new DocUrl("/#anchor")).should == "/#anchor"
+        rootDocStructure.createUrl(path, new DocUrl("test/page")).should == "/test/page"
+        rootDocStructure.createUrl(path, new DocUrl("test/page#anchor")).should == "/test/page#anchor"
+        rootDocStructure.createUrl(path, new DocUrl("test/page?key=value#anchor")).should == "/test/page?key=value#anchor"
+        rootDocStructure.createUrl(indexPath, new DocUrl("file-system/page")).should == "/file-system/page"
+        rootDocStructure.fullUrl("chapter/pageOne").should == "/chapter/pageOne"
+        rootDocStructure.fullUrl("").should == "/"
+    }
+
+    @Test
     void "should create url without double slashes when dirName is empty"() {
         def path = Paths.get('/home/user/docs/chapter/pageOne.md')
 

@@ -126,8 +126,13 @@ class WebSiteDocStructure implements DocStructure {
 
     @Override
     public String fullUrl(String relativeUrl) {
+        String docId = docMeta.getId();
+        if (docId.isEmpty()) {
+            return "/" + relativeUrl;
+        }
+
         boolean addSlash = !relativeUrl.isEmpty() && !relativeUrl.startsWith("#");
-        return  "/" + docMeta.getId() + (addSlash ? "/" : "") + relativeUrl;
+        return "/" + docId + (addSlash ? "/" : "") + relativeUrl;
     }
 
     @Override

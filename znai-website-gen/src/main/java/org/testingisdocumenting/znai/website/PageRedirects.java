@@ -45,11 +45,23 @@ public class PageRedirects {
                     fromTo.newDirName + "/" + fromTo.newFileNameWithoutExtension);
         }
 
-        String redirectUrl = docStructure.fullUrl(
-                tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension());
-        String redirectPage = ResourceUtils.textContent("template/redirect.html")
-                .replace("${newUrl}", redirectUrl);
-        deployer.deploy(fromTo.oldLink + "/index.html", redirectPage);
+        deployer.deploy(fromTo.oldLink + "/index.html", redirectPageHtml(docStructure, tocItem));
+    }
+
+    // the target ends with a slash so hosts that resolve <dir>/index.html before <dir>/index/
+    // (e.g. GitHub Pages) don't serve the redirect stub again in an infinite refresh loop
+    static String redirectPageHtml(DocStructure docStructure, TocItem tocItem) {
+        return ResourceUtils.textContent("template/redirect.html")
+                .replace("${newUrl}", redirectTargetUrl(docStructure, tocItem));
+    }
+
+    private static String redirectTargetUrl(DocStructure docStructure, TocItem tocItem) {
+        if (tocItem.isIndex()) {
+            return docStructure.fullUrl("");
+        }
+
+        String dirNamePrefix = tocItem.getDirName().isEmpty() ? "" : tocItem.getDirName() + "/";
+        return docStructure.fullUrl(dirNamePrefix + tocItem.getFileNameWithoutExtension() + "/");
     }
 
     private static List<FromTo> parse(Path csvPath) {

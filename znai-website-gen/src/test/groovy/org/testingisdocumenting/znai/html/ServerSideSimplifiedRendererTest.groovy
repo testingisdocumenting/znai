@@ -46,6 +46,24 @@ class ServerSideSimplifiedRendererTest {
     }
 
     @Test
+    void "should render TOC without double slashes when doc id is empty"() {
+        ServerSideSimplifiedRenderer.renderToc(toc, "").should ==
+                '<section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">\n' +
+                '<article>\n' +
+                '<a href="/chapter-a/page-one/">Page One</a>\n' +
+                '</article>\n' +
+                '\n' +
+                '<article>\n' +
+                '<a href="/chapter-a/page-two/">Page Two</a>\n' +
+                '</article>\n' +
+                '\n' +
+                '<article>\n' +
+                '<a href="/chapter-b/page-one/">Page One</a>\n' +
+                '</article>\n' +
+                '</section>\n'
+    }
+
+    @Test
     void "should render simple page for crawl indexing"() {
         def searchEntries = new PageLocalSearchEntries(
                 toc.tocItems[0], [

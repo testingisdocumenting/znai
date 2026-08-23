@@ -40,7 +40,6 @@ import org.testingisdocumenting.znai.utils.FileUtils;
 import org.testingisdocumenting.znai.utils.JsonUtils;
 import org.testingisdocumenting.znai.parser.MarkupParsingConfiguration;
 import org.testingisdocumenting.znai.parser.MarkupParsingConfigurations;
-import org.testingisdocumenting.znai.utils.ResourceUtils;
 import org.testingisdocumenting.znai.website.modifiedtime.FileBasedPageModifiedTime;
 import org.testingisdocumenting.znai.website.modifiedtime.PageModifiedTimeStrategy;
 
@@ -641,11 +640,7 @@ public class WebSite implements Log {
         Set<String> dirNames = toc.getAllDirNames();
         dirNames.forEach(dirName -> {
             toc.firstPageInChapter(dirName).ifPresent((tocItem) -> {
-                String redirectUrl = docStructure.fullUrl(
-                        tocItem.getDirName() + "/" + tocItem.getFileNameWithoutExtension());
-                String redirectPage = ResourceUtils.textContent("template/redirect.html")
-                        .replace("${newUrl}", redirectUrl);
-
+                String redirectPage = PageRedirects.redirectPageHtml(docStructure, tocItem);
                 deployer.deploy(dirName + "/index.html", redirectPage);
             });
         });
