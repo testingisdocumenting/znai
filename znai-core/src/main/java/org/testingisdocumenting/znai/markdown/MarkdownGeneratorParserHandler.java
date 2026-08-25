@@ -288,28 +288,12 @@ public class MarkdownGeneratorParserHandler implements ParserHandler {
 
     @Override
     public void onTable(MarkupTableData tableData) {
-        List<String> columnTitles = tableData.getColumnTitles();
-        List<List<Object>> data = tableData.getData();
-
-        if (columnTitles.isEmpty()) {
+        String markdownTable = tableData.toMarkdown();
+        if (markdownTable.isEmpty()) {
             return;
         }
 
-        currentMarkdown.append("| ").append(String.join(" | ", columnTitles)).append(" |\n");
-        currentMarkdown.append("|").append(" --- |".repeat(columnTitles.size())).append("\n");
-
-        for (List<Object> row : data) {
-            currentMarkdown.append("| ");
-            for (int i = 0; i < columnTitles.size(); i++) {
-                String cell = i < row.size() && row.get(i) != null ? row.get(i).toString() : "";
-                currentMarkdown.append(cell.replace("|", "\\|"));
-                if (i < columnTitles.size() - 1) {
-                    currentMarkdown.append(" | ");
-                }
-            }
-            currentMarkdown.append(" |\n");
-        }
-        currentMarkdown.append("\n\n");
+        currentMarkdown.append(markdownTable).append("\n\n");
     }
 
     @Override
