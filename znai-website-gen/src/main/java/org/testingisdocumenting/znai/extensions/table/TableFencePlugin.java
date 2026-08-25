@@ -69,4 +69,9 @@ public class TableFencePlugin implements FencePlugin {
     public List<SearchText> textForSearch() {
         return List.of(SearchScore.STANDARD.text(docElementFromParams.getModifiedTable().allText()));
     }
+
+    @Override
+    public String markdownRepresentation() {
+        return docElementFromParams.getModifiedTable().toMarkdown();
+    }
 }

@@ -41,6 +41,7 @@ public record ParsedFootnote(FootnoteId id, int idx, DocElement docElement, List
 
         var visitor = new MarkdownVisitor(componentsRegistry, markdownPath, new MarkdownParsingContext(), parserHandler);
         visit(visitor, footnote);
+        parserHandler.onParsingEnd();
 
         List<PageSearchEntry> searchEntries = searchHandler.getSearchEntries();
         DocElement docElement = docElementsHandler.getDocElement();

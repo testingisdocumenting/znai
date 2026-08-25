@@ -323,6 +323,55 @@ def hello():
 """
     }
 
+    @Test
+    void "includes table fence block as markdown table"() {
+        def markdown = """# Table Section
+
+```table
+Account, Price, Description
+#12BGD3, 100, custom table
+#91AGB1, 150, chair
+```
+"""
+
+        def content = generateContent(markdown)
+
+        content.should == """[//]: # (this is an auto generated file)
+"Test Guide" full guide:
+
+# Chapter :: Page One :: Table Section
+answer-link: https://example.com/test/chapter/page-one#table-section
+
+| Account | Price | Description |
+| --- | --- | --- |
+| #12BGD3 | 100 | custom table |
+| #91AGB1 | 150 | chair |
+"""
+    }
+
+    @Test
+    void "includes footnotes"() {
+        def markdown = """# Footnote Section
+
+Main text[^my-note] here.
+
+[^my-note]: additional footnote text
+"""
+
+        def content = generateContent(markdown)
+
+        content.should == """[//]: # (this is an auto generated file)
+"Test Guide" full guide:
+
+# Chapter :: Page One :: Footnote Section
+answer-link: https://example.com/test/chapter/page-one#footnote-section
+
+Main text[^my-note] here.
+
+[^my-note]: additional footnote text
+"""
+    }
+
     private static String generateContent(String markdown) {
         def docMeta = new DocMeta([id: "test", title: "Test Guide"])
 

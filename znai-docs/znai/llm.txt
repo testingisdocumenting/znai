@@ -146,8 +146,8 @@ answer-link: znai-from-export/introduction/getting-started#command-line
 ## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.91/znai-dist-1.91-znai.zip). Add
-it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.92-SNAPSHOT/znai-dist-1.92-SNAPSHOT-znai.zip).
+Add it to your `PATH`.
 
 ## Brew
 
@@ -162,7 +162,7 @@ answer-link: znai-from-export/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.91</version>
+    <version>1.92-SNAPSHOT</version>
 </plugin>
 ```
 
@@ -910,7 +910,7 @@ To define a footnote use
 
 To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
 
-[^my-id]: 
+[^my-id]: extra content for my footnote goes here potentially including code blocks Constructor
 
 Note: numeric footnotes are treated as text footnotes, and they will be assigned the auto incremented number in order of
 appearance.
@@ -938,7 +938,7 @@ answer-link: znai-from-export/flow/footnotes#footnotes-list
 A footnotes list is automatically appended at the end of the page when footnotes are present. Clicking the number in the
 list navigates back to the reference [^another-note].
 
-[^another-note]: 
+[^another-note]: This is another footnote to demonstrate the list with multiple entries
 
 To hide the footnotes list, set `hideFootnoteList` to `true` in `meta.json`:
 
@@ -4766,7 +4766,7 @@ package webtauexamples
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
-def homeSearchInput = $('input[class*="searchbox_input"], input[class*="search-input"]')
+def homeSearchInput = $('textarea[class*="search-input"], input[class*="searchbox_input"], input[class*="search-input"]')
 def resultSearchInput = $("#search_form_input")
 def result = $('article[data-testid="result"]')
 
@@ -6945,6 +6945,12 @@ Account, Price, Description
 ```
 ```
 
+| Account | Price | Description |
+| --- | --- | --- |
+| #12BGD3 | 100 | custom table with a long attachment |
+| #12BGD3 | 150 | chair |
+| #91AGB1 | 10 | lunch |
+
 # Layout :: Tables :: Multiline Content
 answer-link: znai-from-export/layout/tables#multiline-content
 
@@ -8978,7 +8984,7 @@ package webtauexamples
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
-def homeSearchInput = $('input[class*="searchbox_input"], input[class*="search-input"]')
+def homeSearchInput = $('textarea[class*="search-input"], input[class*="searchbox_input"], input[class*="search-input"]')
 def resultSearchInput = $("#search_form_input")
 def result = $('article[data-testid="result"]')
 
@@ -10088,6 +10094,11 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2026 :: 1.92
+answer-link: znai-from-export/release-notes/2026#192
+
+
 
 # Release Notes :: 2026 :: 1.91
 answer-link: znai-from-export/release-notes/2026#191

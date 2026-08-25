@@ -93,6 +93,31 @@ public class MarkupTableData {
         return String.join(" ", textParts);
     }
 
+    public String toMarkdown() {
+        if (header.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder markdown = new StringBuilder();
+        List<String> columnTitles = getColumnTitles();
+        markdown.append("| ").append(String.join(" | ", columnTitles)).append(" |\n");
+        markdown.append("|").append(" --- |".repeat(columnTitles.size())).append("\n");
+
+        for (List<Object> row : getData()) {
+            markdown.append("| ");
+            for (int i = 0; i < columnTitles.size(); i++) {
+                String cell = i < row.size() && row.get(i) != null ? row.get(i).toString() : "";
+                markdown.append(cell.replace("|", "\\|"));
+                if (i < columnTitles.size() - 1) {
+                    markdown.append(" | ");
+                }
+            }
+            markdown.append(" |\n");
+        }
+
+        return markdown.toString().stripTrailing();
+    }
+
     public MarkupTableData withColumnsInOrder(List<String> columnNames) {
         List<Integer> newIdxOrder = findColumnIdxes(columnNames);
 
@@ -111,7 +136,7 @@ public class MarkupTableData {
     }
 
     public MarkupTableData withRowsRegexpPredicate(List<String> regexpList, BiFunction<Row, Pattern, Boolean> predicate) {
-        List<Pattern> patternsList = regexpList.stream().map(Pattern::compile).collect(toList());
+        List<Pattern> patternsList = regexpList.stream().map(Pattern::compile).toList();
         List<Row> newRows = data.stream()
                 .filter(row -> patternsList.stream().anyMatch(regexp -> predicate.apply(row, regexp)))
                 .collect(toList());
