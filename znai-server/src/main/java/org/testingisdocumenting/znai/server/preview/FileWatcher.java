@@ -28,9 +28,13 @@ import org.testingisdocumenting.znai.website.WebSite;
 
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
@@ -42,6 +46,10 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
     private final FileChangeHandler fileChangeHandler;
     private final WatchService watchService;
     private final Map<WatchKey, Path> pathByKey;
+    private final Map<Path, WatchKey> keyByPath;
+    // directories that were watched but disappeared (e.g. deleted during git rebase);
+    // checked every watch cycle to resume watching once they are re-created
+    private final Set<Path> droppedPaths;
     private final AtomicBoolean isTerminated = new AtomicBoolean(false);
 
     private static final Path tempDirPath = detectTempFilesDir();
@@ -52,6 +60,8 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
 
         watchService = createWatchService();
         pathByKey = new HashMap<>();
+        keyByPath = new HashMap<>();
+        droppedPaths = new LinkedHashSet<>();
 
         Path absoluteRoot = siteCfg.getDocRootPath().toAbsolutePath();
         register(absoluteRoot);
@@ -95,6 +105,8 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
     }
 
     private void watchCycle() throws InterruptedException {
+        reRegisterDroppedPaths();
+
         final WatchKey key = watchService.poll(1000, TimeUnit.MILLISECONDS);
 
         if (key == null) {
@@ -108,7 +120,10 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
 
             final Path path = pathByKey.get(key);
             if (path == null) {
-                ConsoleOutputs.err("bad watch key: ", key);
+                if (key.isValid()) {
+                    ConsoleOutputs.err("bad watch key: ", key);
+                }
+
                 return;
             }
 
@@ -116,9 +131,39 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
         } finally {
             boolean isValid = key.reset();
             if (!isValid) {
-                pathByKey.remove(key);
+                markDropped(key);
             }
         }
+    }
+
+    private void markDropped(WatchKey key) {
+        Path path = pathByKey.remove(key);
+        if (path == null) {
+            return;
+        }
+
+        keyByPath.remove(path, key);
+        droppedPaths.add(path);
+        ConsoleOutputs.out("stopped watching (directory is gone): ", Color.PURPLE, path);
+    }
+
+    // a git rebase (or branch switch) can delete a watched directory and re-create it a moment later;
+    // a watch key of a deleted directory is invalidated forever, so watching is resumed
+    // explicitly once the directory shows up again
+    private void reRegisterDroppedPaths() {
+        if (droppedPaths.isEmpty() || isTerminated.get()) {
+            return;
+        }
+
+        List<Path> reAppeared = new ArrayList<>();
+        for (Path path : droppedPaths) {
+            if (Files.isDirectory(path)) {
+                reAppeared.add(path);
+            }
+        }
+
+        droppedPaths.removeAll(reAppeared);
+        reAppeared.forEach(this::registerDirAndHandleMissedChanges);
     }
 
     private void handleEvent(Path parentPath, final WatchEvent<?> watchEvent) {
@@ -143,7 +188,7 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
         final String fileName = path.getFileName().toString();
 
         if (Files.isDirectory(path)) {
-            register(path);
+            registerDirAndHandleMissedChanges(path);
         } else if (fileName.equals("toc")) {
             fileChangeHandler.onTocChange(path);
         } else if (path.equals(siteCfg.getFooterPath())) {
@@ -157,6 +202,40 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
         }
     }
 
+    // registers a directory that just appeared (e.g. created by a user or re-created by a git rebase).
+    // its content may have been created before the watch was established, so nested directories are
+    // registered explicitly and files are treated as changed as their events may have been missed
+    private void registerDirAndHandleMissedChanges(Path dir) {
+        if (isWatched(dir) || shouldIgnore(dir)) {
+            return;
+        }
+
+        register(dir);
+
+        try (Stream<Path> children = Files.list(dir)) {
+            children.forEach(child -> {
+                if (Files.isDirectory(child)) {
+                    if (!Files.isSymbolicLink(child)) {
+                        registerDirAndHandleMissedChanges(child);
+                    }
+                } else {
+                    handleModify(child);
+                }
+            });
+        } catch (IOException e) {
+            ConsoleOutputs.err("can't list directory " + dir + ": " + e.getMessage());
+        }
+    }
+
+    private boolean isWatched(Path dir) {
+        WatchKey key = keyByPath.get(dir);
+        return key != null && key.isValid();
+    }
+
+    private static boolean shouldIgnore(Path dir) {
+        return dir.endsWith(".vertx") || dir.endsWith(".idea") || tempDirPath.equals(dir);
+    }
+
     private void register(Path path) {
         try {
             if (!Files.exists(path)) {
@@ -167,23 +246,30 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
                 path = path.getParent();
             }
 
-            if (path.endsWith(".vertx") || path.endsWith(".idea")) {
+            if (shouldIgnore(path)) {
                 return;
             }
 
-            if (tempDirPath.equals(path)) {
-                return;
+            WatchKey existingKey = keyByPath.get(path);
+            if (existingKey != null) {
+                if (existingKey.isValid()) {
+                    return;
+                }
+
+                // directory was deleted and re-created (e.g. during git rebase), old key is unusable
+                existingKey.cancel();
+                pathByKey.remove(existingKey);
+                keyByPath.remove(path);
             }
 
-            if (pathByKey.containsValue(path)) {
-                return;
-            }
+            droppedPaths.remove(path);
 
             // ENTRY_CREATE is required to handle swap in atomic writes
             final WatchKey key = path.register(watchService,
                     new WatchEvent.Kind[]{StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY},
                     SensitivityWatchEventModifier.HIGH);
             pathByKey.put(key, path);
+            keyByPath.put(path, key);
 
             ConsoleOutputs.out("watching: ", path);
         } catch (IOException e) {
