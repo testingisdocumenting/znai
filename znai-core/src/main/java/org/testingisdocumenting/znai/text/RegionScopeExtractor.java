@@ -22,7 +22,6 @@ public class RegionScopeExtractor {
     private String scopeStart;
     private String scopeEnd;
     private final TextLinesAccessor linesAccessor;
-    private boolean insideDoubleQuote;
     private boolean isSingleCharScope;
     private int resultStartLineIdx;
     private int resultEndLineIdx;
@@ -44,6 +43,7 @@ public class RegionScopeExtractor {
     public void process() {
         int scopeBalance = 0;
         boolean encounteredScopeStart = false;
+        boolean insideDoubleQuote = false;
         resultStartLineIdx = -1;
         resultEndLineIdx = -1;
 
@@ -73,16 +73,14 @@ public class RegionScopeExtractor {
                     continue;
                 }
 
-                boolean scopeStartMatch = matchSubstr(line, charIdx, scopeStart);
-                boolean scopeEndMatch = matchSubstr(line, charIdx, scopeEnd);
-                if (scopeStartMatch) {
+                if (matchSubstr(line, charIdx, scopeStart)) {
                     charIdx += scopeStart.length() - 1;
                     if (!encounteredScopeStart) {
                         resultStartLineIdx = Math.min(startLineIdx, lineIdx);
                         encounteredScopeStart = true;
                     }
                     scopeBalance++;
-                } else if (scopeEndMatch) {
+                } else if (matchSubstr(line, charIdx, scopeEnd)) {
                     charIdx += scopeEnd.length() - 1;
                     scopeBalance--;
                     if (scopeBalance < 0) {
@@ -120,10 +118,7 @@ public class RegionScopeExtractor {
 
     private int findUnescapedSingleQuote(String line, int fromIdx) {
         for (int idx = fromIdx; idx < line.length(); idx++) {
-            char c = line.charAt(idx);
-            if (c == '\\') {
-                idx++;
-            } else if (c == '\'') {
+            if (line.charAt(idx) == '\'' && !isEscaped(line, idx)) {
                 return idx;
             }
         }
@@ -132,6 +127,7 @@ public class RegionScopeExtractor {
     }
 
     private boolean isIdentifierChar(char c) {
+        // quote counts as an identifier char so that multi-primed names like x'' are rejected as literal starts
         return Character.isAlphabetic(c) || Character.isDigit(c) || c == '_' || c == '\'';
     }
 
