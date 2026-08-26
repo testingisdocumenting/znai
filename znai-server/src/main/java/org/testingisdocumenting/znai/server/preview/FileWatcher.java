@@ -227,7 +227,7 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
         }
     }
 
-    private boolean isWatched(Path dir) {
+    boolean isWatched(Path dir) {
         WatchKey key = keyByPath.get(dir);
         return key != null && key.isValid();
     }
@@ -250,16 +250,15 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
                 return;
             }
 
-            WatchKey existingKey = keyByPath.get(path);
-            if (existingKey != null) {
-                if (existingKey.isValid()) {
-                    return;
-                }
+            if (isWatched(path)) {
+                return;
+            }
 
+            WatchKey staleKey = keyByPath.remove(path);
+            if (staleKey != null) {
                 // directory was deleted and re-created (e.g. during git rebase), old key is unusable
-                existingKey.cancel();
-                pathByKey.remove(existingKey);
-                keyByPath.remove(path);
+                staleKey.cancel();
+                pathByKey.remove(staleKey);
             }
 
             droppedPaths.remove(path);

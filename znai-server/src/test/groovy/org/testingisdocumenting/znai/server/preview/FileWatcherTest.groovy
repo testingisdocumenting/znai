@@ -26,6 +26,8 @@ import java.nio.file.Path
 import java.nio.file.attribute.FileTime
 import java.util.concurrent.ConcurrentLinkedQueue
 
+import static org.testingisdocumenting.webtau.WebTauCore.*
+
 class FileWatcherTest {
     private static final long TIMEOUT_MILLIS = 30_000
 
@@ -77,9 +79,8 @@ class FileWatcherTest {
         startWatcher(pageFile)
 
         chapterDir.toFile().deleteDir()
-        waitFor("watcher to notice deleted directory") {
-            !fileWatcher.keyByPath.containsKey(chapterDir) || !fileWatcher.keyByPath[chapterDir].isValid()
-        }
+        actual(liveValue { fileWatcher.isWatched(chapterDir) }, "chapter dir is watched")
+                .waitTo(equal(false), TIMEOUT_MILLIS)
 
         createFile(pageFile, "# rebased")
         waitForChange(pageFile)
@@ -114,22 +115,8 @@ class FileWatcherTest {
     }
 
     private void waitForChange(Path path) {
-        waitFor("change notification for " + path) {
-            changeHandler.changedPaths.any { it.fileName == path.fileName }
-        }
-    }
-
-    private static void waitFor(String message, Closure<Boolean> condition) {
-        long deadline = System.currentTimeMillis() + TIMEOUT_MILLIS
-        while (System.currentTimeMillis() < deadline) {
-            if (condition()) {
-                return
-            }
-
-            Thread.sleep(50)
-        }
-
-        throw new AssertionError("timed out waiting for " + message)
+        actual(liveValue { changeHandler.changedPaths.collect { it.fileName.toString() } }, "changed files")
+                .waitTo(contain(path.fileName.toString()), TIMEOUT_MILLIS)
     }
 
     private static void createFile(Path path, String content) {
