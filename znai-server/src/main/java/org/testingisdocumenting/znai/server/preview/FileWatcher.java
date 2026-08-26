@@ -236,7 +236,10 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
     }
 
     private static boolean shouldIgnore(Path dir) {
-        return dir.endsWith(".vertx") || dir.endsWith(".idea") || tempDirPath.equals(dir);
+        Path dirName = dir.getFileName();
+        boolean isHidden = dirName != null && dirName.toString().startsWith(".");
+
+        return isHidden || tempDirPath.equals(dir);
     }
 
     private void register(Path path) {

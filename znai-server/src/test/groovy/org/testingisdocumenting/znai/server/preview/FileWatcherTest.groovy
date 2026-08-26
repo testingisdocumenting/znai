@@ -105,6 +105,22 @@ class FileWatcherTest {
         waitForChange(nestedFile)
     }
 
+    @Test
+    void "should not watch hidden directories like git internals"() {
+        startWatcher(root)
+
+        def hiddenFile = root.resolve(".git/objects/blob.md")
+        createFile(hiddenFile, "# hidden")
+
+        def visibleFile = root.resolve("chapter/page.md")
+        createFile(visibleFile, "# visible")
+
+        // by the time the visible file change is noticed, the hidden one (created earlier) was processed and ignored
+        waitForChange(visibleFile)
+        actual(changeHandler.changedPaths.collect { it.fileName.toString() }, "changed files")
+                .shouldNot(contain("blob.md"))
+    }
+
     private void startWatcher(Path pathToWatch) {
         def cfg = WebSite.withRoot(root)
         fileWatcher = new FileWatcher(cfg, [pathToWatch].stream(), changeHandler)
