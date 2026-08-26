@@ -70,6 +70,92 @@ println "hello"
         result.should == [1, 6]
     }
 
+    @Test
+    void "ocaml type variables should not be treated as string start"() {
+        def result = extract(0, "sig,end", """module type S = sig
+  type 'a t
+  val map : ('a -> 'b) -> 'a t -> 'b t
+end
+let x = 5
+""")
+
+        result.should == [0, 3]
+    }
+
+    @Test
+    void "ocaml multiple type variables on one line should not mask scope"() {
+        def result = extract(0, "{}", """type ('a, 'b) pair = {
+  first: 'a;
+  second: 'b;
+}
+type other = int
+""")
+
+        result.should == [0, 3]
+    }
+
+    @Test
+    void "primed names should not be treated as quotes"() {
+        def result = extract(0, "{}", """let f x' = {
+  value = x' + 1;
+}
+let another = 2
+""")
+
+        result.should == [0, 2]
+    }
+
+    @Test
+    void "rust lifetimes should not be treated as quotes"() {
+        def result = extract(0, "{}", """fn foo<'a>(x: &'a str) -> &'a str {
+    x
+}
+fn bar() {}
+""")
+
+        result.should == [0, 2]
+    }
+
+    @Test
+    void "apostrophe in comments should not break scope"() {
+        def result = extract(0, "{}", """function f() { // don't fail
+  return 1;
+}
+""")
+
+        result.should == [0, 2]
+    }
+
+    @Test
+    void "char literals with scope chars inside should be ignored"() {
+        def result = extract(0, "{}", """if (c == '{') {
+  handle('\\'');
+}
+""")
+
+        result.should == [0, 2]
+    }
+
+    @Test
+    void "single quoted strings with scope chars inside should be ignored"() {
+        def result = extract(0, "{}", """d = {
+  'key{': 'value}'
+}
+""")
+
+        result.should == [0, 2]
+    }
+
+    @Test
+    void "scope char inside double quotes after apostrophe should be ignored"() {
+        def result = extract(0, "{}", """if (cond) {
+  print("don't } stop")
+}
+""")
+
+        result.should == [0, 2]
+    }
+
     private static List<Integer> extract(int startLineIdx, String scope, String text) {
         def extractor = new RegionScopeExtractor(TextLinesAccessor.createFromArray(text.split("\n")), startLineIdx, scope)
         extractor.process()
