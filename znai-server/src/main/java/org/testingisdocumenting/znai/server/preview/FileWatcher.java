@@ -122,6 +122,9 @@ public class FileWatcher implements AuxiliaryFileListener, TocChangeListener {
             if (path == null) {
                 if (key.isValid()) {
                     ConsoleOutputs.err("bad watch key: ", key);
+                    // drain pending events so reset() below doesn't immediately re-queue the key,
+                    // otherwise the loop would spin re-logging the same key
+                    key.pollEvents();
                 }
 
                 return;
