@@ -93,6 +93,27 @@ public class ApiParameters {
         return result;
     }
 
+    public String toMarkdown() {
+        if (isEmpty()) {
+            return "";
+        }
+
+        StringBuilder markdown = new StringBuilder();
+        markdown.append("```api-parameters\n");
+        root.getChildren().forEach(child -> child.appendCsvRows(markdown, ""));
+        markdown.append("```");
+
+        if (example != null) {
+            markdown.append("\n\nexample:\n\n```\n").append(example);
+            if (!example.endsWith("\n")) {
+                markdown.append("\n");
+            }
+            markdown.append("```");
+        }
+
+        return markdown.toString();
+    }
+
     public List<String> collectAllAnchors() {
         return root.getChildren().stream()
                 .flatMap(child -> child.collectAllAnchors().stream())

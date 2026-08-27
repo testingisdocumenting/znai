@@ -59,4 +59,9 @@ public class ApiParametersFencePlugin implements FencePlugin {
     public List<SearchText> textForSearch() {
         return List.of(SearchScore.STANDARD.text(apiParameters.combinedTextForSearch()));
     }
+
+    @Override
+    public String markdownRepresentation() {
+        return apiParameters.toMarkdown();
+    }
 }

@@ -36,6 +36,7 @@ import java.util.stream.Stream;
 
 public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
     private DoxygenMembersList membersList;
+    private ApiParameters apiParameters;
 
     @Override
     public String id() {
@@ -67,7 +68,7 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
         DoxygenDescription description = membersList.first().getDescription();
         String type = pluginParams.getOpts().get("type", "");
 
-        ApiParameters apiParameters = "template".equals(type) ?
+        apiParameters = "template".equals(type) ?
                 description.getFull().getApiTemplateParameters():
                 description.getFull().getApiParameters();
 
@@ -94,5 +95,10 @@ public class DoxygenDocParamsIncludePlugin implements IncludePlugin {
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
         return Stream.of(AuxiliaryFile.builtTime(Doxygen.INSTANCE.getIndexPath()));
+    }
+
+    @Override
+    public String markdownRepresentation() {
+        return apiParameters == null ? "" : apiParameters.toMarkdown();
     }
 }

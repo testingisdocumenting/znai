@@ -82,6 +82,23 @@ public class ApiParameter {
         return result;
     }
 
+    public void appendCsvRows(StringBuilder markdown, String namePrefix) {
+        String fullName = namePrefix.isEmpty() ? name : namePrefix + "." + name;
+        markdown.append(escapeCsvValue(fullName)).append(", ")
+                .append(escapeCsvValue(type.buildCombinedText())).append(", ")
+                .append(escapeCsvValue(textForSearch)).append("\n");
+
+        children.forEach(child -> child.appendCsvRows(markdown, fullName));
+    }
+
+    private static String escapeCsvValue(String value) {
+        if (value.contains(",") || value.contains("\"")) {
+            return "\"" + value.replace("\"", "\"\"") + "\"";
+        }
+
+        return value;
+    }
+
     public List<ApiParameter> getChildren() {
         return children;
     }
