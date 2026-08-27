@@ -1,0 +1,1 @@
+* Add: [Surrounded By Scope](snippets/snippets-manipulation#surrounded-by-scope) extraction treats OCaml/Rust/Haskell single quotes like type variables `'a`, lifetimes `&'a` and primed names `x'` as regular characters instead of string starts
