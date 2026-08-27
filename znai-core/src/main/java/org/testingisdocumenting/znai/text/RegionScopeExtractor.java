@@ -22,8 +22,6 @@ public class RegionScopeExtractor {
     private String scopeStart;
     private String scopeEnd;
     private final TextLinesAccessor linesAccessor;
-    private boolean insideSingleQuote;
-    private boolean insideDoubleQuote;
     private boolean isSingleCharScope;
     private int resultStartLineIdx;
     private int resultEndLineIdx;
@@ -45,51 +43,101 @@ public class RegionScopeExtractor {
     public void process() {
         int scopeBalance = 0;
         boolean encounteredScopeStart = false;
+        boolean insideDoubleQuote = false;
         resultStartLineIdx = -1;
         resultEndLineIdx = -1;
 
         for (int lineIdx = startLineIdx; lineIdx < linesAccessor.numberOfLines(); lineIdx++) {
             String line = linesAccessor.lineAtIdx(lineIdx);
 
-            char previousChar = ' ';
             for (int charIdx = 0; charIdx < line.length(); charIdx++) {
                 char c = line.charAt(charIdx);
 
-                if (!insideSingleQuote && !insideDoubleQuote) {
-                    boolean scopeStartMatch = matchSubstr(line, charIdx, scopeStart);
-                    boolean scopeEndMatch = matchSubstr(line, charIdx, scopeEnd);
-                    if (scopeStartMatch) {
-                        charIdx += scopeStart.length() - 1;
-                        if (!encounteredScopeStart) {
-                            resultStartLineIdx = Math.min(startLineIdx, lineIdx);
-                            encounteredScopeStart = true;
-                        }
-                        scopeBalance++;
-                    } else if (scopeEndMatch) {
-                        charIdx += scopeEnd.length() - 1;
-                        scopeBalance--;
-                        if (scopeBalance < 0) {
-                            return;
-                        }
-                        else if (scopeBalance == 0) {
-                            resultEndLineIdx = lineIdx;
-                            return;
-                        }
+                if (insideDoubleQuote) {
+                    if (c == '\"' && !isEscaped(line, charIdx)) {
+                        insideDoubleQuote = false;
+                    }
+                    continue;
+                }
+
+                if (c == '\"' && !isEscaped(line, charIdx)) {
+                    insideDoubleQuote = true;
+                    continue;
+                }
+
+                if (c == '\'' && !isEscaped(line, charIdx)) {
+                    int literalEndIdx = singleQuoteLiteralEndIdx(line, charIdx);
+                    if (literalEndIdx != -1) {
+                        charIdx = literalEndIdx;
+                    }
+                    continue;
+                }
+
+                if (matchSubstr(line, charIdx, scopeStart)) {
+                    charIdx += scopeStart.length() - 1;
+                    if (!encounteredScopeStart) {
+                        resultStartLineIdx = Math.min(startLineIdx, lineIdx);
+                        encounteredScopeStart = true;
+                    }
+                    scopeBalance++;
+                } else if (matchSubstr(line, charIdx, scopeEnd)) {
+                    charIdx += scopeEnd.length() - 1;
+                    scopeBalance--;
+                    if (scopeBalance < 0) {
+                        return;
+                    }
+                    else if (scopeBalance == 0) {
+                        resultEndLineIdx = lineIdx;
+                        return;
                     }
                 }
-
-                boolean isPreviousCharEscape = previousChar == '\\';
-                if (c == '\"' && !isPreviousCharEscape) {
-                    insideDoubleQuote = !insideDoubleQuote;
-                }
-
-                if (c == '\'' && !isPreviousCharEscape) {
-                    insideSingleQuote = !insideSingleQuote;
-                }
-
-                previousChar = c;
             }
         }
+    }
+
+    // single quote does not always open a literal: OCaml/Rust/Haskell use it for
+    // type variables ('a), lifetimes (&'a str) and primed names (x')
+    // returns idx of the closing quote when the quote opens a literal like 'a' or 'text{',
+    // returns -1 when the quote should be treated as a regular character
+    private int singleQuoteLiteralEndIdx(String line, int quoteIdx) {
+        if (quoteIdx > 0 && isIdentifierChar(line.charAt(quoteIdx - 1))) {
+            return -1; // primed name like x' or digit separator like 1'000
+        }
+
+        int closingIdx = findUnescapedSingleQuote(line, quoteIdx + 1);
+        if (closingIdx == -1) {
+            return -1; // lone quote is a type variable like 'a or an apostrophe
+        }
+
+        if (closingIdx + 1 < line.length() && isIdentifierChar(line.charAt(closingIdx + 1))) {
+            return -1; // closing quote glued to a name is another type variable like in ('a, 'b)
+        }
+
+        return closingIdx;
+    }
+
+    private int findUnescapedSingleQuote(String line, int fromIdx) {
+        for (int idx = fromIdx; idx < line.length(); idx++) {
+            if (line.charAt(idx) == '\'' && !isEscaped(line, idx)) {
+                return idx;
+            }
+        }
+
+        return -1;
+    }
+
+    private boolean isIdentifierChar(char c) {
+        // quote counts as an identifier char so that multi-primed names like x'' are rejected as literal starts
+        return Character.isAlphabetic(c) || Character.isDigit(c) || c == '_' || c == '\'';
+    }
+
+    private boolean isEscaped(String line, int charIdx) {
+        int backslashCount = 0;
+        for (int idx = charIdx - 1; idx >= 0 && line.charAt(idx) == '\\'; idx--) {
+            backslashCount++;
+        }
+
+        return backslashCount % 2 == 1;
     }
 
     private boolean matchSubstr(String line, int charIdx, String substr) {
