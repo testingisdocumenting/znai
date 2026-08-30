@@ -14,18 +14,31 @@
  * limitations under the License.
  */
 
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { removeSearchHighlight, startSearchHighlightSession } from "./searchResultHighlighter";
 
 let root: HTMLElement;
 let disposeSession: (() => void) | undefined;
+let scrolledTo: Element[];
 
-function startSession(snippets: string[], html = "<p>use cancel_trade to abort</p>") {
+// jsdom has no scrollIntoView, record calls to assert on scroll behavior
+beforeEach(() => {
+  scrolledTo = [];
+  Element.prototype.scrollIntoView = function () {
+    scrolledTo.push(this);
+  };
+});
+
+function startSession(
+  snippets: string[],
+  html = "<p>use cancel_trade to abort</p>",
+  options?: { scrollToFirstMark?: boolean }
+) {
   root = document.createElement("div");
   root.innerHTML = html;
   document.body.appendChild(root);
 
-  disposeSession = startSearchHighlightSession(root, snippets);
+  disposeSession = startSearchHighlightSession(root, snippets, options);
 }
 
 function markedTexts() {
@@ -82,6 +95,38 @@ describe("startSearchHighlightSession", () => {
     removeSearchHighlight(root);
 
     expect(root.querySelector("mark")).toBeNull();
+  });
+});
+
+// the search popup preview scrolls to the first highlight, a match like "c++" can sit deep
+// inside a long section. the page-level session keeps the section anchor scroll it already has
+describe("scroll to first mark", () => {
+  it("scrolls the first mark into view when scrollToFirstMark is set", () => {
+    startSession(["cancel_trade"], "<p>intro text</p><p>use cancel_trade to abort</p>", { scrollToFirstMark: true });
+
+    expect(scrolledTo).toEqual([root.querySelector("mark")]);
+  });
+
+  it("does not scroll without scrollToFirstMark", () => {
+    startSession(["cancel_trade"]);
+
+    expect(scrolledTo).toEqual([]);
+  });
+
+  it("does not scroll when nothing matched", () => {
+    startSession(["no_such_term"], "<p>unrelated text</p>", { scrollToFirstMark: true });
+
+    expect(scrolledTo).toEqual([]);
+  });
+
+  it("does not scroll again when late mounted content is highlighted", async () => {
+    startSession(["cancel_trade"], "<p>use cancel_trade to abort</p>", { scrollToFirstMark: true });
+    mountLateContent();
+
+    await observerDelivery();
+
+    expect(root.querySelectorAll("mark").length).toBe(2);
+    expect(scrolledTo.length).toBe(1);
   });
 });
 

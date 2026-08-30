@@ -70,8 +70,9 @@ export function populateLocalSearchIndexWithData(index: Document, data: string[]
   });
 }
 
-// flexsearch default is 100 results per field
-const resultsPerFieldLimit = 30;
+// flexsearch default is 100 results per field, exact match search (see exactMatchSearch.ts)
+// shares the cap so both modes surface a similar amount of results
+export const resultsPerFieldLimit = 30;
 
 // per keystroke search fetches ids only, no enrich/highlight, so cost does not grow
 // with the size of the stored content, highlight terms are derived lazily by QueryResult
@@ -104,6 +105,13 @@ export function encodeSearchQuery(query: string): string[] {
 // can't be handed to the dom highlighter, split the raw text with the encoder's own word splitter instead,
 // the splitter is not part of the public typings but is derived from the include config above
 const encoderWordSplit = (searchEncoder as unknown as { split: RegExp }).split;
+
+// queries with chars the encoder strips, e.g. "." in "List.map" or "+" in "c++", can't be fully
+// represented by the token index, whitespace aside as it separates terms instead of being stripped from them,
+// derived from the encoder's own split regex so the check can't drift from the include config above
+export function hasCharsStrippedByEncoder(query: string): boolean {
+  return query.split(encoderWordSplit).join("") !== query.replace(/\s+/g, "");
+}
 
 // index uses tokenize: "forward", so words whose encoded form prefix matches an encoded query term
 // mirror what flexsearch matched, searchEncoder is the single source of truth for tokenization

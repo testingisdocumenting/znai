@@ -79,7 +79,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onSimpleText(String value) {
-        addStandard(replaceCommonSeparatorsWithSpace(value));
+        addStandard(value);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
 
     @Override
     public void onInlinedCode(String inlinedCode, DocReferences docReferences) {
-        addHighWithSpaceSeparator(replaceCommonSeparatorsWithSpace(inlinedCode));
+        addHighWithSpaceSeparator(inlinedCode);
     }
 
     @Override
@@ -161,12 +161,15 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
         standardScoreParts.add(part);
     }
 
+    // text is kept as is, with separators like "." and "+" in place: token splitting is done
+    // by the search index encoder at runtime, while verbatim matching of queries like "List.map"
+    // or "c++" needs the raw text
     private void addStandardWithSpaceSeparator(String part) {
         if (part == null) {
             return;
         }
 
-        standardScoreParts.add(' ' + replaceCommonSeparatorsWithSpace(part) + ' ');
+        standardScoreParts.add(' ' + part + ' ');
     }
 
     private void addHighWithSpaceSeparator(String part) {
@@ -174,11 +177,7 @@ public class SearchCrawlerParserHandler extends NoOpParserHandler {
             return;
         }
 
-        highScoreParts.add(' ' + replaceCommonSeparatorsWithSpace(part) + ' ');
-    }
-
-    private String replaceCommonSeparatorsWithSpace(String text) {
-        return text.replaceAll("[.,();:\\-+=\\\\/\"'!?\\[\\]{}~]", " ");
+        highScoreParts.add(' ' + part + ' ');
     }
 
     private SearchText createSearchText(SearchScore score, List<String> parts) {

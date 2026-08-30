@@ -99,7 +99,7 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchText.should == ["entry one entry two"]
+        searchText.should == ["entry one. entry two."]
     }
 
     @Test
@@ -110,27 +110,27 @@ class SearchCrawlerParserHandlerTest {
             parserHandler.onSimpleText("entry two.")
         }
 
-        searchText.should == ["entry one entry two"]
+        searchText.should == ["entry one. entry two."]
     }
 
     @Test
-    void "should split on separators in code snippets"() {
+    void "should keep separators in code snippets for verbatim matching"() {
         withinSection {
             parserHandler.onInlinedCode("record.access", DocReferences.EMPTY)
         }
 
-        searchText.should == ["record access"]
+        searchText.should == ["record.access"]
     }
 
     @Test
-    void "should remove delimiters"() {
+    void "should keep delimiters for verbatim matching"() {
         withinSection {
             parserHandler.onSimpleText("\"hello\" world of 'quotes'. and separators,like!and?maybe/backward\\and[inside]different{brackets}and(other)" +
                     " --key=value")
         }
 
-        searchText.should == ["hello world of quotes and separators like and maybe backward and " +
-                                                         "inside different brackets and other key value"]
+        searchText.should == ["\"hello\" world of 'quotes'. and separators,like!and?maybe/backward\\and[inside]different{brackets}and(other)" +
+                                                         " --key=value"]
     }
 
     @Test

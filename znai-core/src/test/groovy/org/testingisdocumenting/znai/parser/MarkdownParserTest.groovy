@@ -766,7 +766,7 @@ hello world<br><br> of line breaks
                 "\n" +
                 "To create an `external` link use:\n")
 
-        parseResult.searchEntries().collect { it -> it.extractText() }.join(" ").should == "Best To create an link use external"
+        parseResult.searchEntries().collect { it -> it.extractText() }.join(" ").should == "Best To create an link use: external"
     }
 
     private void parse(String markdown, Path path = Paths.get("test.md")) {

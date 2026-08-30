@@ -15,7 +15,13 @@
  */
 
 import { describe, expect, it, vi } from "vitest";
-import { createLocalSearchIndex, encodeSearchQuery, searchIds, truncateQueryByMinLength } from "./flexSearch";
+import {
+  createLocalSearchIndex,
+  encodeSearchQuery,
+  hasCharsStrippedByEncoder,
+  searchIds,
+  truncateQueryByMinLength,
+} from "./flexSearch";
 import QueryResult from "./QueryResult";
 
 // type alias instead of interface so the implicit index signature satisfies flexsearch DocumentData
@@ -104,6 +110,17 @@ describe("flex search", () => {
     expect(truncateQueryByMinLength("ty", 3)).toEqual("");
     expect(truncateQueryByMinLength("typing sl", 3)).toEqual("typing");
     expect(truncateQueryByMinLength("typing slo", 3)).toEqual("typing slo");
+  });
+
+  it("detects queries with chars the encoder strips", () => {
+    expect(hasCharsStrippedByEncoder("List.map")).toBe(true);
+    expect(hasCharsStrippedByEncoder("c++")).toBe(true);
+    expect(hasCharsStrippedByEncoder("std::vector")).toBe(true);
+    expect(hasCharsStrippedByEncoder("read-only")).toBe(true);
+
+    expect(hasCharsStrippedByEncoder("plain words")).toBe(false);
+    expect(hasCharsStrippedByEncoder("code_identifier")).toBe(false);
+    expect(hasCharsStrippedByEncoder("")).toBe(false);
   });
 
   it("min query term length only counts searchable chars as the encoder strips the rest", () => {
