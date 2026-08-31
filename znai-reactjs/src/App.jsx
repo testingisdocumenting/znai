@@ -101,6 +101,7 @@ import { attentionBlockDemo } from "./doc-elements/paragraph/AttentionBlock.demo
 import { attentionBlockPresentationDemo } from "./doc-elements/paragraph/PresentationAttentionBlock.demo";
 import { containerTitleDemo } from "./doc-elements/container/ContainerTitle.demo";
 import { cardsDemo } from "./doc-elements/card/CardsDemo";
+import { checkboxesDemo } from "./doc-elements/checkboxes/Checkboxes.demo";
 import { doxygenPresentationDemo } from "./doc-elements/doxygen/PresentationDoxygen.demo";
 import { jsonPresentationDemo } from "./doc-elements/json/PresentationJson.demo";
 import { footnoteDemo } from "./doc-elements/footnote/Footnote.demo";
@@ -190,6 +191,7 @@ registries
   .registerAsGrid("SVG", 0, svgDemo)
   .registerAsGrid("GraphViz SVG", 0, graphVizSvgDemo)
   .registerAsRows("Cards", cardsDemo)
+  .registerAsRows("Checkboxes", checkboxesDemo)
   .registerAsRows("Diagram Legend", diagramLegendDemo)
   .registerAsGrid("Keyboard shortcuts", 0, keyboardShortcutsDemo)
   .registerAsGrid("Iframe", 0, iframeDemo)

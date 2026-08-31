@@ -42,6 +42,7 @@ visuals
     images
     image-annotations
     cards
+    checkboxes
     charts
     mermaid-diagrams
     SVG
