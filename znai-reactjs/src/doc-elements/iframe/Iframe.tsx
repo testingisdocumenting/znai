@@ -15,16 +15,18 @@
  */
 
 import React, { useEffect, useRef, useState } from "react";
-import { Container } from "../container/Container";
+import { Container, ContainerCommonProps } from "../container/Container";
+import { useIsUserDrivenCollapsed } from "../container/ContainerTitle";
 import { Icon } from "../icons/Icon";
 import { zoom } from "../zoom/Zoom";
 import { isZnaiDarkTheme, useZnaiThemeChange } from "../../theme/znaiTheme";
 
 import "./Iframe.css";
 
-interface Props {
+interface Props extends ContainerCommonProps {
   src: string;
   title?: string;
+  collapsed?: boolean;
   aspectRatio?: string;
   light?: any;
   dark?: any;
@@ -47,22 +49,50 @@ export function Iframe(props: Props) {
 }
 
 const initialIframeHeight = 14;
+// used when content height can't be measured (e.g. cross-origin iframe) and no explicit height is provided
+const fallbackIframeHeight = 400;
+
+function accessibleIframeDocument(iframeRef: React.RefObject<HTMLIFrameElement | null>): Document | null {
+  try {
+    return iframeRef.current?.contentWindow?.document ?? null;
+  } catch (e) {
+    // cross-origin iframes deny access to their document
+    return null;
+  }
+}
 
 let activeElement: any = null;
-export function IframeFit({ src, title, wide, height, maxHeight, light, dark, zoomEnabled, newTabEnabled, previewMarker }: Props) {
+export function IframeFit({
+  src,
+  title,
+  wide,
+  height,
+  maxHeight,
+  light,
+  dark,
+  zoomEnabled,
+  newTabEnabled,
+  collapsed,
+  noGap,
+  noGapBorder,
+  next,
+  prev,
+  previewMarker,
+}: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const mutationObserverRef = useRef<MutationObserver | null>(null);
   const [visible, setVisible] = useState(false);
   const [calculatedIframeHeight, setCalculatedIframeHeight] = useState(initialIframeHeight);
+  const { userDrivenCollapsed, collapseToggle } = useIsUserDrivenCollapsed(collapsed);
 
   // iframe reload on mount
   useEffect(() => {
-    if (!iframeRef) {
+    if (!iframeRef.current) {
       return;
     }
 
-    iframeRef!.current!.src += "";
+    iframeRef.current.src += "";
   }, [previewMarker]);
 
   const { syncTheme } = useIframeThemeSync(iframeRef, dark, light, () => {
@@ -83,35 +113,37 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, zo
     activeElement = document.activeElement;
   }
 
-  const titleActions = (zoomEnabled || newTabEnabled) ? (
-    <>
-      {zoomEnabled && <Icon id="maximize-2" onClick={zoomIframe} />}
-      {newTabEnabled && <Icon id="external-link" onClick={openInNewTab} />}
-    </>
-  ) : undefined;
+  const titleActions = iframeTitleActions({ src, title, light, dark, zoomEnabled, newTabEnabled });
 
   return (
-    <Container wide={wide} title={title} additionalTitleClassNames="znai-iframe-title" titleActions={titleActions}>
-      <div ref={containerRef}></div>
-      <iframe
-        title={title}
-        src={src}
-        style={{ height: calculatedIframeHeight, minHeight: height, maxHeight }}
-        width="100%"
-        className={"znai-iframe fit" + (visible ? " visible" : "")}
-        ref={iframeRef}
-        onLoad={onLoad}
-      />
+    <Container
+      wide={wide}
+      title={title}
+      additionalTitleClassNames="znai-iframe-title"
+      titleActions={titleActions}
+      collapsed={userDrivenCollapsed}
+      onCollapseToggle={collapseToggle}
+      noGap={noGap}
+      noGapBorder={noGapBorder}
+      next={next}
+      prev={prev}
+    >
+      {!userDrivenCollapsed && (
+        <>
+          <div ref={containerRef}></div>
+          <iframe
+            title={title}
+            src={src}
+            style={{ height: calculatedIframeHeight, minHeight: height, maxHeight }}
+            width="100%"
+            className={"znai-iframe fit" + (visible ? " visible" : "")}
+            ref={iframeRef}
+            onLoad={onLoad}
+          />
+        </>
+      )}
     </Container>
   );
-
-  function zoomIframe() {
-    zoom.zoom(<IframeZoomed src={src} title={title} light={light} dark={dark} />);
-  }
-
-  function openInNewTab() {
-    window.open(src, "_blank");
-  }
 
   function onLoad() {
     handleSize();
@@ -124,26 +156,27 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, zo
       mutationObserverRef.current.disconnect();
     }
 
-    try {
-      const iframeDocument = iframeRef!.current!.contentWindow!.document;
-      const body = iframeDocument.body;
-      if (!body) {
-        return;
-      }
-
-      mutationObserverRef.current = new MutationObserver(() => {
-        handleSize();
-      });
-
-      mutationObserverRef.current.observe(body, { childList: true, subtree: true });
-    } catch (e) {
-      // cross-origin iframes will throw, silently ignore
+    const iframeDocument = accessibleIframeDocument(iframeRef);
+    const body = iframeDocument?.body;
+    if (!body) {
+      return;
     }
+
+    mutationObserverRef.current = new MutationObserver(() => {
+      handleSize();
+    });
+
+    mutationObserverRef.current.observe(body, { childList: true, subtree: true });
   }
 
-  function measureContentHeight() {
+  function measureContentHeight(): number | null {
+    const iframeDocument = accessibleIframeDocument(iframeRef);
+    if (!iframeDocument) {
+      return null;
+    }
+
     const iframe = iframeRef!.current!;
-    const htmlEl = iframe.contentWindow!.document.documentElement;
+    const htmlEl = iframeDocument.documentElement;
 
     // collapse iframe and set html to auto height to measure
     // natural content size without stretching to fill the container
@@ -160,7 +193,8 @@ export function IframeFit({ src, title, wide, height, maxHeight, light, dark, zo
 
   function handleSize() {
     setTimeout(() => {
-      const newHeight = measureContentHeight();
+      const measuredHeight = measureContentHeight();
+      const newHeight = measuredHeight !== null ? measuredHeight : height || fallbackIframeHeight;
 
       syncTheme();
       setCalculatedIframeHeight(newHeight);
@@ -191,6 +225,11 @@ function useIframeThemeSync(iframeRef: React.RefObject<HTMLIFrameElement | null>
 }
 
 function updateScrollBarToMatch(containerRef: any, iframeRef: any) {
+  const iframeDocument = accessibleIframeDocument(iframeRef);
+  if (!iframeDocument) {
+    return;
+  }
+
   const div = containerRef!.current;
 
   function styleValue(varName: string) {
@@ -207,11 +246,9 @@ function updateScrollBarToMatch(containerRef: any, iframeRef: any) {
   const scrollbarBg = styleValue(bgKey);
   const scrollbarFg = styleValue(fgKey);
 
-  const iframeDocument = iframeRef!.current!.contentWindow!.document;
   const iframeEl = iframeDocument.documentElement;
 
   function setStyle(varName: string, value: string) {
-    console.log("el", iframeEl, varName, value);
     iframeEl.style.setProperty("--" + varName, value);
   }
 
@@ -245,26 +282,85 @@ function injectCssProperties(iframeRef: any, dark: any, light: any) {
     return;
   }
 
-  const document = iframeRef!.current!.contentWindow!.document;
-  const documentEl = document.documentElement;
+  const iframeDocument = accessibleIframeDocument(iframeRef);
+  if (!iframeDocument) {
+    return;
+  }
+
+  const documentEl = iframeDocument.documentElement;
 
   Object.keys(vars).forEach((k) => {
     documentEl.style.setProperty(k, vars[k]);
   });
 }
 
-export function IframeVideo({ src, title, aspectRatio = "16:9" }: Props) {
+function iframeTitleActions({
+  src,
+  title,
+  light,
+  dark,
+  zoomEnabled,
+  newTabEnabled,
+}: Pick<Props, "src" | "title" | "light" | "dark" | "zoomEnabled" | "newTabEnabled">) {
+  if (!zoomEnabled && !newTabEnabled) {
+    return undefined;
+  }
+
   return (
-    <div className="content-block">
-      <div style={{ position: "relative", paddingTop: calcAspectRatioPaddingTop(aspectRatio), height: 0 }}>
-        <iframe
-          title={title}
-          src={src}
-          allowFullScreen={true}
-          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+    <>
+      {zoomEnabled && (
+        <Icon
+          id="maximize-2"
+          onClick={() => zoom.zoom(<IframeZoomed src={src} title={title} light={light} dark={dark} />)}
         />
-      </div>
-    </div>
+      )}
+      {newTabEnabled && <Icon id="external-link" onClick={() => window.open(src, "_blank")} />}
+    </>
+  );
+}
+
+export function IframeVideo({
+  src,
+  title,
+  aspectRatio = "16:9",
+  wide,
+  light,
+  dark,
+  zoomEnabled,
+  newTabEnabled,
+  collapsed,
+  noGap,
+  noGapBorder,
+  next,
+  prev,
+}: Props) {
+  const { userDrivenCollapsed, collapseToggle } = useIsUserDrivenCollapsed(collapsed);
+  const titleActions = iframeTitleActions({ src, title, light, dark, zoomEnabled, newTabEnabled });
+
+  return (
+    <Container
+      wide={wide}
+      title={title}
+      additionalTitleClassNames="znai-iframe-title"
+      titleActions={titleActions}
+      collapsed={userDrivenCollapsed}
+      onCollapseToggle={collapseToggle}
+      noGap={noGap}
+      noGapBorder={noGapBorder}
+      next={next}
+      prev={prev}
+    >
+      {!userDrivenCollapsed && (
+        <div style={{ position: "relative", paddingTop: calcAspectRatioPaddingTop(aspectRatio), height: 0 }}>
+          <iframe
+            title={title}
+            src={src}
+            allowFullScreen={true}
+            style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+          />
+        </div>
+      )}
+    </Container>
   );
 }
 

@@ -52,6 +52,9 @@ public class IframeIncludePlugin implements IncludePlugin {
     public PluginParamsDefinition parameters() {
         PluginParamsDefinition params = new PluginParamsDefinition();
         params.add(PluginParamsDefinitionCommon.title);
+        params.add(PluginParamsDefinitionCommon.collapsible);
+        params.add(PluginParamsDefinitionCommon.noGap);
+        params.add(PluginParamsDefinitionCommon.noGapBorder);
         params.add("fit", PluginParamType.BOOLEAN, "automatically set iframe height to fit its content", "true");
         params.add("height", PluginParamType.NUMBER, "force specific iframe height in pixels, acts as minimum height when fit is true", "200");
         params.add("maxHeight", PluginParamType.NUMBER, "limit the automatically calculated height, adds scrollbar", "64");

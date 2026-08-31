@@ -41,7 +41,32 @@ export function iframeDemo(registry: Registry) {
     <Iframe src="/frame-dynamic-content.html" fit={true} maxHeight={120} />
   ));
   registry.add("wide", () => <Iframe src="/frame-content.html" fit={true} wide={true} />);
+  registry.add("collapsed", () => (
+    <Iframe src="/frame-content.html" title="collapsible content" fit={true} collapsed={true} />
+  ));
+  registry.add("no gap pair", () => (
+    <>
+      <Iframe
+        src="/frame-content.html"
+        title="part one"
+        fit={true}
+        noGap={true}
+        noGapBorder={true}
+        next={{ type: "Iframe" }}
+      />
+      <Iframe src="/frame-content.html" title="part two" fit={true} prev={{ type: "Iframe", noGap: true }} />
+    </>
+  ));
+  registry.add("external cross-origin url", () => (
+    <Iframe src="https://example.com" title="external demo title" fit={true} wide={true} />
+  ));
+  registry.add("external cross-origin url with height", () => (
+    <Iframe src="https://example.com" title="external demo title" fit={true} height={200} />
+  ));
   registry.add("default aspect", () => <Iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />);
+  registry.add("video with new tab action", () => (
+    <Iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" newTabEnabled={true} />
+  ));
   registry.add("4:3 aspect", () => (
     <Iframe aspectRatio="4:3" src="https://www.youtube.com/embed/tgbNymZ7vqY" title="demo title" />
   ));
