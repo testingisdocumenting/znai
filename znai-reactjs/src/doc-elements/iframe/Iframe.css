@@ -15,6 +15,9 @@
  */
 
 .znai-iframe {
+    /* iframes are inline by default which reserves baseline space below,
+       creating a small gap that breaks noGap stacking */
+    display: block;
     border: 0;
     box-sizing: content-box;
     overflow: hidden;

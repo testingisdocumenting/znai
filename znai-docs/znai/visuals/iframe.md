@@ -134,14 +134,72 @@ Note: Requires `title` to be set.
   newTabEnabled: true
 }
 
+# Collapse
+
+Use `collapsed: true|false` to make iframe collapsible.
+
+Note: Requires `title` to be set.
+
+```markdown {highlight: "collapsed"}
+:include-iframe: iframe/custom.html {
+  title: "collapsible content",
+  fit: true,
+  collapsed: true
+}
+```
+
+:include-iframe: iframe/custom.html {
+  title: "collapsible content",
+  fit: true,
+  collapsed: true
+}
+
+# No Gap
+
+Use `noGap: true` to remove top/bottom margins when there are multiple iframes in a row.
+Use `noGapBorder: true` to add a delimiter between them:
+
+```markdown {highlight: ["noGap", "noGapBorder"]}
+:include-iframe: iframe/custom.html {
+  title: "part one",
+  fit: true,
+  noGap: true,
+  noGapBorder: true
+}
+
+:include-iframe: iframe/custom.html {
+  title: "part two",
+  fit: true
+}
+```
+
+:include-iframe: iframe/custom.html {
+  title: "part one",
+  fit: true,
+  noGap: true,
+  noGapBorder: true
+}
+
+:include-iframe: iframe/custom.html {
+  title: "part two",
+  fit: true
+}
 
 # Embedding Video
 
 Use `include-iframe` to embed media from other places. By default, aspect ratio is set to `16:9`.
 
-    :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY
+```markdown {highlight: ["title", "newTabEnabled"]}
+:include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {
+  title: "sample video",
+  newTabEnabled: true
+}
+```
 
-:include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY
+:include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {
+  title: "sample video",
+  newTabEnabled: true
+}
 
 # Aspect Ratio
 
