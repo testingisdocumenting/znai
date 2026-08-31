@@ -350,6 +350,54 @@ answer-link: https://example.com/test/chapter/page-one#table-section
     }
 
     @Test
+    void "includes api parameters fence block as csv fence block"() {
+        def markdown = """# Api Parameters Section
+
+```api-parameters
+firstName, String, first name
+address, Object, address holder
+address.street, String, street name
+```
+"""
+
+        def content = generateContent(markdown)
+
+        content.should == """[//]: # (this is an auto generated file)
+"Test Guide" full guide:
+
+# Chapter :: Page One :: Api Parameters Section
+answer-link: https://example.com/test/chapter/page-one#api-parameters-section
+
+```api-parameters
+firstName, String, first name
+address, Object, address holder
+address.street, String, street name
+```
+"""
+    }
+
+    @Test
+    void "includes api parameters include plugin as csv fence block"() {
+        def markdown = """# Api Parameters Include Section
+
+:include-api-parameters: api-params-simple.json
+"""
+
+        def content = generateContent(markdown)
+
+        content.should == """[//]: # (this is an auto generated file)
+"Test Guide" full guide:
+
+# Chapter :: Page One :: Api Parameters Include Section
+answer-link: https://example.com/test/chapter/page-one#api-parameters-include-section
+
+```api-parameters
+firstName, String, first name
+```
+"""
+    }
+
+    @Test
     void "includes footnotes"() {
         def markdown = """# Footnote Section
 

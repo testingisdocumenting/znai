@@ -73,4 +73,9 @@ public class ApiParametersIncludePlugin implements IncludePlugin {
     public List<SearchText> textForSearch() {
         return List.of(SearchScore.STANDARD.text(apiParameters.combinedTextForSearch()));
     }
+
+    @Override
+    public String markdownRepresentation() {
+        return apiParameters.toMarkdown();
+    }
 }
