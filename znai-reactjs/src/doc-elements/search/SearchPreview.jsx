@@ -20,7 +20,9 @@ import { startSearchHighlightSession } from "./searchResultHighlighter.ts";
 
 class SearchPreview extends Component {
   componentDidMount() {
-    this.disposeHighlightSession = startSearchHighlightSession(this.dom, this.props.snippets);
+    this.disposeHighlightSession = startSearchHighlightSession(this.dom, this.props.snippets, {
+      scrollToFirstMark: true,
+    });
   }
 
   componentWillUnmount() {

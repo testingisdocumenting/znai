@@ -16,15 +16,26 @@
  */
 
 import QueryResult from "./QueryResult";
-import { encodeSearchQuery, searchIds, truncateQueryByMinLength } from "./flexSearch.js";
+import { encodeSearchQuery, hasCharsStrippedByEncoder, searchIds, truncateQueryByMinLength } from "./flexSearch.js";
+import {
+  buildExactMatchEntries,
+  extractQuotedPhrase,
+  normalizeExactMatchText,
+  searchExactMatchIds,
+} from "./exactMatchSearch";
+
+const minQueryTermLength = 3;
 
 class Search {
   constructor(allPages) {
     this.allPages = allPages;
     this.searchIdx = window.znaiSearchIdx;
-    this.searchDataById = mapById(window.znaiSearchData);
+    this.searchData = window.znaiSearchData;
+    this.searchDataById = mapById(this.searchData);
     // built lazily on first preview lookup, the constructor runs on doc load even if search is never used
     this.sectionByIndexId = null;
+    // built lazily on first exact match query, most queries are token based
+    this.exactMatchEntries = null;
   }
 
   static convertIndexIdToSectionCoords(indexId) {
@@ -33,13 +44,56 @@ class Search {
   }
 
   search(term) {
-    const query = truncateQueryByMinLength(term, 3);
-    const ids = searchIds(this.searchIdx, query);
-    return new QueryResult(ids, encodeSearchQuery(query), (id) => this._textToHighlightById(id));
+    const textToHighlightById = (id) => this._textToHighlightById(id);
+
+    // explicitly quoted queries, e.g. "list map", match verbatim only without token fallback,
+    // quoting is the way to say tokens alone are not good enough; no encoded terms are needed
+    // as every result is an exact match and highlights the phrase itself
+    const quotedPhrase = extractQuotedPhrase(term);
+    if (quotedPhrase !== null) {
+      const phrase = normalizeExactMatchText(quotedPhrase);
+      const exactIds = this._searchExactMatchIds(phrase);
+
+      return new QueryResult(exactIds, [], textToHighlightById, { phrase, ids: new Set(exactIds) });
+    }
+
+    const query = truncateQueryByMinLength(term, minQueryTermLength);
+    const tokenIds = searchIds(this.searchIdx, query);
+    const encodedQueryTerms = encodeSearchQuery(query);
+
+    // queries with chars the token encoder strips, e.g. "List.map" or "c++", are additionally
+    // matched verbatim so docs containing the exact text rank before docs merely containing the tokens
+    const phrase = normalizeExactMatchText(term);
+    if (!hasCharsStrippedByEncoder(phrase)) {
+      return new QueryResult(tokenIds, encodedQueryTerms, textToHighlightById);
+    }
+
+    const exactIds = this._searchExactMatchIds(phrase);
+    const exactIdsSet = new Set(exactIds);
+    const ids = exactIds.concat(tokenIds.filter((id) => !exactIdsSet.has(id)));
+
+    return new QueryResult(ids, encodedQueryTerms, textToHighlightById, { phrase, ids: exactIdsSet });
   }
 
   findSearchEntryById(id) {
     return this.searchDataById[id];
+  }
+
+  // short phrases substring match too many docs, return nothing instead of noise while the user is still typing
+  _searchExactMatchIds(phrase) {
+    if (phrase.length < minQueryTermLength) {
+      return [];
+    }
+
+    return searchExactMatchIds(this._exactMatchEntries(), phrase);
+  }
+
+  _exactMatchEntries() {
+    if (this.exactMatchEntries === null) {
+      this.exactMatchEntries = buildExactMatchEntries(this.searchDataById);
+    }
+
+    return this.exactMatchEntries;
   }
 
   // same text pieces the index docs are built from, see populateLocalSearchIndexWithData

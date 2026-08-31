@@ -17,17 +17,30 @@
 
 import { deriveTermsToHighlight } from "./flexSearch";
 
+export interface ExactMatch {
+  // normalized phrase that was substring matched, see exactMatchSearch.ts
+  phrase: string;
+  ids: ReadonlySet<string>;
+}
+
 export default class QueryResult {
   private readonly ids: string[];
   private readonly encodedQueryTerms: string[];
   private readonly textToHighlightById: (id: string) => string;
+  private readonly exactMatch?: ExactMatch;
   // terms are derived lazily per id, only the displayed result pays for it
   private readonly termsToHighlightById: Record<string, string[]> = {};
 
-  constructor(ids: string[], encodedQueryTerms: string[], textToHighlightById: (id: string) => string) {
+  constructor(
+    ids: string[],
+    encodedQueryTerms: string[],
+    textToHighlightById: (id: string) => string,
+    exactMatch?: ExactMatch
+  ) {
     this.ids = ids;
     this.encodedQueryTerms = encodedQueryTerms;
     this.textToHighlightById = textToHighlightById;
+    this.exactMatch = exactMatch;
   }
 
   getIds() {
@@ -37,7 +50,11 @@ export default class QueryResult {
   getSnippetsToHighlight(id: string) {
     let terms = this.termsToHighlightById[id];
     if (!terms) {
-      terms = deriveTermsToHighlight(this.encodedQueryTerms, this.textToHighlightById(id));
+      // exact matched docs highlight the verbatim phrase, e.g. "list.map", not the individual tokens
+      terms =
+        this.exactMatch && this.exactMatch.ids.has(id)
+          ? [this.exactMatch.phrase]
+          : deriveTermsToHighlight(this.encodedQueryTerms, this.textToHighlightById(id));
       this.termsToHighlightById[id] = terms;
     }
 

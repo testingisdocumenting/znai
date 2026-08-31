@@ -20,6 +20,13 @@ import Mark from "mark.js/dist/mark.js";
 
 const observeConfig = { childList: true, subtree: true };
 
+interface HighlightSessionOptions {
+  // scroll the first highlight into view once the initial content is marked, used by the search
+  // popup preview where the match can be deep inside a long section. late mounted content never
+  // scrolls, it would yank the view the user may already be reading
+  scrollToFirstMark?: boolean;
+}
+
 /**
  * highlights search snippets inside root and keeps highlighting content that mounts later,
  * e.g. a read more block revealed while a search result is displayed.
@@ -28,8 +35,16 @@ const observeConfig = { childList: true, subtree: true };
  * returned dispose stops watching for late mounted content,
  * highlights are removed separately with removeSearchHighlight
  */
-export function startSearchHighlightSession(root: HTMLElement, snippets: string[]): () => void {
-  markSnippets(root, snippets);
+export function startSearchHighlightSession(
+  root: HTMLElement,
+  snippets: string[],
+  { scrollToFirstMark = false }: HighlightSessionOptions = {}
+): () => void {
+  markSnippets(root, snippets, () => {
+    if (scrollToFirstMark) {
+      root.querySelector("mark[data-markjs]")?.scrollIntoView({ block: "center" });
+    }
+  });
 
   const observer = new MutationObserver((mutations) => {
     const lateMounted: HTMLElement[] = [];
@@ -63,7 +78,7 @@ export function removeSearchHighlight(root: HTMLElement) {
 
 // mark.js accepts a single element or an array of elements as context,
 // late mounted nodes from one react commit are marked in a single pass
-function markSnippets(root: HTMLElement | HTMLElement[], snippets: string[]) {
+function markSnippets(root: HTMLElement | HTMLElement[], snippets: string[], onMarked?: () => void) {
   const mark = new Mark(root);
   mark.unmark({
     done: () => {
@@ -76,7 +91,10 @@ function markSnippets(root: HTMLElement | HTMLElement[], snippets: string[]) {
         // underscore is deliberately not here: it is part of indexed symbols like cancel_trade
         ignorePunctuation: ["(", ")", ";", "[", "]", "-", ".", ",", '"', "'", "~"],
         accuracy: "partially",
-        done: () => revealHiddenMatches(root),
+        done: () => {
+          revealHiddenMatches(root);
+          onMarked?.();
+        },
       });
     },
   });

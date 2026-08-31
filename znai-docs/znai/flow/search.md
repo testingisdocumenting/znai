@@ -14,6 +14,9 @@ Title match during search yields the highest score.
 
 For example this current section full title is: *Flow Search Local*.
 
+Queries with special characters like `List.map` or `c++` are additionally matched verbatim: sections containing the exact text appear first.
+Wrap a query in quotes, e.g. `"List.map"`, to only match sections containing the exact text.
+
 As your documentation grows, keep checking how easy it is to navigate to a section of your documentation using `/`.
 
 Avoid: using generic names in your page titles and page section titles. You should not have dozens of pages called *Introduction*  
