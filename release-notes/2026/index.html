@@ -88,53 +88,58 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.92</h1></header>
+<p>Fix: include-iframe wide mode and title now works for iframed content with different origin Fix: llm.txt no longer misses content from Api Parameters fence and include plugins and doxygen-doc-params Fix: preview survives git rebases and other sudden directory moves and re-creation Fix: llm.txt no longer misses content from Table fence plugin Fix: llm.txt no longer misses content from footnotes Fix: Empty no longer generates protocol-relative links in pages, chapter redirects and Fix: Chapter and page redirects use trailing slash targets so static hosts like GitHub Pages don't serve the redirect page in a loop --doc-id &quot;&quot; //chapter/page search-entries.xml Add: include-iframe and noGap collapse Add: Use for en-dash -- Add: Guide level search matches queries with special characters like or verbatim, ranking exact matches first Add: Guide level search quoted queries like match verbatim only List.map c++ &quot;list map&quot; Add: Surrounded By Scope extraction treats OCaml/Rust/Haskell single quotes like type variables , lifetimes and primed names as regular characters instead of string starts 'a &amp;'a x' Add: Search on the page with Read More blocks auto opens the blocks Add: Optimize guide level search rendering and debounce Add: Guide level search keeps symbol as it is often part of the search term _</p>
+</article>
+
+<article>
 <header><h1>1.91</h1></header>
-<p>Fix Presentation mode renders blockquotes correctly Add Presentation mode wraps long paragraphs better Add Presentation mode shows the chapter title on each page s title slide and in the top breadcrumb Add Attention Signs block attention custom Add Live preview on Linux now detects files saved via atomic write write to temp then rename so changes from AI agents are picked up reliably Add Large Mermaid diagrams can be zoomed and panned in a full screen overlay Add Javascript Plugin config to pin a block to a fixed size with overflow scrolling Add Clicks inside Javascript Plugin blocks no longer advance Presentation slides height</p>
+<p>Fix: Presentation mode renders blockquotes correctly Add: Presentation mode wraps long paragraphs better Add: Presentation mode shows the chapter title on each page's title slide and in the top breadcrumb Add: Attention Signs block attention-custom Add: Live preview on Linux now detects files saved via atomic write (write-to-temp then rename), so changes from AI agents are picked up reliably Add: Large Mermaid diagrams can be zoomed and panned in a full screen overlay Add: Javascript Plugin config to pin a block to a fixed size with overflow scrolling Add: Clicks inside Javascript Plugin blocks no longer advance Presentation slides height</p>
 </article>
 
 <article>
 <header><h1>1.90.1</h1></header>
-<p>Fix Empty pages no longer throw exception</p>
+<p>Fix: Empty pages no longer throw exception</p>
 </article>
 
 <article>
 <header><h1>1.90</h1></header>
-<p>Fix Runtime Templates re renders on url change Fix Correctly display Footnote Preview preview in narrow view port Fix Mobile view snippet image etc containers only remove the horizontal gap when they are a top level container Nested containers do not remove the gap Fix Page Tabs produces correct llm txt Fix Ask In Slack and Generate Link no longer break scroll when switch to a different page from longer pager after selecting text at the bottom of a longer page Add Display page top level headers when rendering for mobile Add Images path normalization and additional validation Add Ask in Slack now send the full page url including and query params so the question is properly attached It also sends a separate as a json object Add to send to the server so the generated message can tag additional users tabId pageTabId queryParams slackAttn Add User Defined Plugins Add Javascript Plugin Add Selected Tabs and Page Tabs are reflected in the URL Add Page Tabs now have a breathing room for headers and footnotes below the tabs row Add Page Tabs selection is maintained across the pages and also survives the page reload</p>
+<p>Fix: Runtime Templates re-renders on url change Fix: Correctly display Footnote Preview preview in narrow view port Fix: Mobile view snippet/image/etc containers only remove the horizontal gap when they are a top level container. Nested containers do not remove the gap Fix: Page Tabs produces correct llm.txt Fix: &quot;Ask In Slack&quot; and &quot;Generate Link&quot; no longer break scroll when switch to a different page from longer pager after selecting text at the bottom of a longer page Add: Display page top level headers when rendering for mobile Add: Images path normalization and additional validation Add: &quot;Ask in Slack&quot; now send the full page url including and query params so the question is properly attached. It also sends a separate as a json object Add: to send to the server so the generated message can tag additional users tabId pageTabId queryParams slackAttn Add: User Defined Plugins Add: Javascript Plugin Add: Selected Tabs and Page Tabs are reflected in the URL Add: Page Tabs now have a breathing room for headers and footnotes below the tabs row Add: Page Tabs selection is maintained across the pages and also survives the page reload</p>
 </article>
 
 <article>
 <header><h1>1.89</h1></header>
-<p>Add Page Tabs now works when nested inside fenced blocks attention Fix Footnotes can be defined outside content blocks like but used inside attention note</p>
+<p>Add: Page Tabs now works when nested inside fenced blocks. attention Fix: Footnotes can be defined outside content blocks like but used inside attention-note</p>
 </article>
 
 <article>
 <header><h1>1.88</h1></header>
-<p>Fix footnote idx is no longer reset when footnotes are defined inside plugins like readmore Fix Tab properly displays selected content instead of previously selected content Add file items support new property with and to control what is displayed in TOC navigation and what pages are skipped with next prev page buttons toc toc skip hide Add Runtime Templates to substitute values at runtime Add meta json option When set to the will receive in the request body persistAskInSlack true ZNAI_SEND_TO_SLACK_URL persist false Add Page Tabs Simplified way to provide common and unique content per Editor Language Tool Can be combined with regular tabs for extra choice axes Add Footnote list at the end of the page in addition to footnote on hover Add Undefined footnote references fail the build Add numeric Footnotes auto increment and ignore the given numeric value Add image wide mode title layout consistent with iframes Add image wide mode fits and takes all the space Add images are fit by default now Add code snippets wide mode title is aligned with content block Add api params wide mode title is aligned with content block Add iframe zoom and open in new tab Add iframe resize on content changes Add iframe wide mode</p>
+<p>Fix: footnote idx is no longer reset when footnotes are defined inside plugins like readmore Fix: Tab properly displays selected content (instead of previously selected content) Add: file items support new property with and to control what is displayed in TOC navigation and what pages are skipped with next/prev page buttons toc toc skip hide Add: Runtime Templates to substitute values at runtime Add: meta.json option. When set to , the will receive in the request body persistAskInSlack true ZNAI_SEND_TO_SLACK_URL persist: false Add: Page Tabs. Simplified way to provide common and unique content per Editor/Language/Tool. Can be combined with regular tabs for extra choice axes. Add: Footnote list at the end of the page in addition to footnote on hover Add: Undefined footnote references fail the build Add: numeric Footnotes auto increment and ignore the given numeric value Add: image wide mode title layout consistent with iframes Add: image wide mode fits and takes all the space Add: images are fit by default now Add: code snippets wide mode title is aligned with content block Add: api params wide mode title is aligned with content block Add: iframe zoom and open in new tab Add: iframe resize on content changes Add: iframe wide mode</p>
 </article>
 
 <article>
 <header><h1>1.87</h1></header>
-<p>Add Mermaid diagrams links are automatically validated and clicking them performs fast navigation without page reloads Add option to list all the external dependencies used during build all external dependencies file path tmp external dependendies txt</p>
+<p>Add: Mermaid diagrams links are automatically validated and clicking them performs fast navigation without page reloads Add: option to list all the external dependencies used during build. --all-external-dependencies-file-path=/tmp/external-dependendies.txt</p>
 </article>
 
 <article>
 <header><h1>1.86</h1></header>
-<p>Doc Update docs around llm txt Add Display index md page sections on the TOC panel when there are no other pages Add Wrap long paragraph text in generated file llm txt Add Mermaid diagrams icon packs</p>
+<p>Doc: Update docs around llm.txt Add: Display index.md page sections on the TOC panel when there are no other pages Add: Wrap long paragraph text in generated file llm.txt Add: Mermaid diagrams icon packs</p>
 </article>
 
 <article>
 <header><h1>1.85.3</h1></header>
-<p>Fix is correctly identified as external URL again mailto name</p>
+<p>Fix: is correctly identified as external URL again mailto:name</p>
 </article>
 
 <article>
 <header><h1>1.85.2</h1></header>
-<p>Fix displays index page stats instead of treating it as orphan page _stats Fix correctly render index page url search entries xml</p>
+<p>Fix: displays index page stats instead of treating it as orphan page /_stats Fix: correctly render index page url search-entries.xml</p>
 </article>
 
 <article>
 <header><h1>1.85</h1></header>
-<p>Fix request unique aggregated views instead of incorrectly calculating them on client _stats Fix Pass missing query params from page docId _stats Add SVG option fit Add Jupyter notebook images are auto scaled down to fit the column width</p>
+<p>Fix: request unique aggregated views instead of incorrectly calculating them on client _stats/ Fix: Pass missing query params from page docId _stats/ Add: SVG option fit Add: Jupyter notebook images are auto-scaled down to fit the column width</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -536,53 +541,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -638,6 +656,433 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "192",
+      "additionalIds" : [ ],
+      "title" : "1.92",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/iframe",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include-iframe",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " wide mode and title now works for iframed content with different origin",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: llm.txt no longer misses content from Api Parameters fence and include plugins and ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "doxygen-doc-params",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: preview survives git rebases and other sudden directory moves and re-creation",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/llm",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "llm.txt",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " no longer misses content from ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/tables",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Table",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " fence plugin",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/llm",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "llm.txt",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " no longer misses content from ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/footnotes",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "footnotes",
+                "type" : "SimpleText"
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Empty ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/introduction/getting-started#static-site-generation",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "code" : "--doc-id \"\"",
+                "type" : "InlinedCode"
+              } ]
+            }, {
+              "text" : " no longer generates protocol-relative ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "//chapter/page",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " links in pages, chapter redirects and ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search#global",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "code" : "search-entries.xml",
+                "type" : "InlinedCode"
+              } ]
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: Chapter and page redirects use trailing slash targets so static hosts like ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/introduction/getting-started#github-pages",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "GitHub Pages",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " don't serve the redirect page in a loop",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/iframe",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "include-iframe",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "noGap",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "collapse",
+              "type" : "InlinedCode"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Use ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "--",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " for en-dash",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Guide level search",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " matches queries with special characters like ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "List.map",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " or ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "c++",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " verbatim, ranking exact matches first",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Guide level search",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " quoted queries like ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "\"list map\"",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " match verbatim only",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/snippets-manipulation#surrounded-by-scope",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Surrounded By Scope",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " extraction treats OCaml/Rust/Haskell single quotes like type variables ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "'a",
+              "type" : "InlinedCode"
+            }, {
+              "text" : ", lifetimes ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "&'a",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and primed names ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "x'",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " as regular characters instead of string starts",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Search",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " on the page with ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/read-more",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Read More",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " blocks auto opens the blocks",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: Optimize ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "guide level search",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " rendering and debounce",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/flow/search",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Guide level search",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " keeps ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "_",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " symbol as it is often part of the search term",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "191",
       "additionalIds" : [ ],
       "title" : "1.91",
@@ -1961,7 +2406,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1780448659799,
+    "lastModifiedTime" : 1788140029231,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2026",
@@ -1971,6 +2416,10 @@ window.ReactDOM.render(React.createElement(Documentation, {
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.92",
+        "id" : "192",
+        "customAnchorId" : "192"
+      }, {
         "title" : "1.91",
         "id" : "191",
         "customAnchorId" : "191"

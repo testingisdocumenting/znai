@@ -89,27 +89,27 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Primary Use Case</h1></header>
-<p>When your documentation covers the same concepts across multiple languages or platforms you can use to make the entire page switchable Unlike regular which require wrapping each difference in a tabs fence lets you sprinkle tab specific content throughout the page Shared content stays as regular markdown This page itself uses  notice the tabs at the top Switch between them to see how content changes across sections while shared text remains Below is a demo except the final Definition section tab content tabs tab content tab content</p>
+<p>When your documentation covers the same concepts across multiple languages or platforms, you can use to make the entire page switchable. Unlike regular which require wrapping each difference in a tabs fence, lets you sprinkle tab-specific content throughout the page. Shared content stays as regular markdown. This page itself uses  notice the tabs at the top. Switch between them to see how content changes across sections while shared text remains. Below is a demo, except the final Definition section. tab-content tabs tab-content tab-content</p>
 </article>
 
 <article>
 <header><h1>Project Setup</h1></header>
-<p>Every project needs an editor configuration Create a workspace settings file in your project root Create in your project root vscode settings json Create in your project root dir locals el nil indent tabs mode nil tab width 4 fill column 100 Double check these settings Make sure is set to to avoid mixing tabs and spaces indent tabs mode nil Make sure matches the value used by your team s linter editor tabSize</p>
+<p>Every project needs an editor configuration. Create a workspace settings file in your project root. Create in your project root: .vscode/settings.json Create in your project root: .dir-locals.el ((nil . ((indent-tabs-mode . nil) (tab-width . 4) (fill-column . 100)))) Double check these settings. Make sure is set to to avoid mixing tabs and spaces. indent-tabs-mode nil Make sure matches the value used by your team's linter. editor.tabSize</p>
 </article>
 
 <article>
 <header><h1>Build Configuration</h1></header>
-<p>Set up the build tool for your project All editors use the same underlying build system but the integration differs Create to integrate the build Java C Use to run the build task vscode tasks json Ctrl Shift B Configure in Java nil compile command mvn compile C nil compile command cmake build build Use to run the build compile command dir locals el M x compile</p>
+<p>Set up the build tool for your project. All editors use the same underlying build system, but the integration differs. Create to integrate the build: Java C++ Use to run the build task. .vscode/tasks.json Ctrl+Shift+B Configure in : Java ((nil . ((compile-command . &quot;mvn compile&quot;)))) C++ ((nil . ((compile-command . &quot;cmake --build build/&quot;)))) Use to run the build. compile-command .dir-locals.el M-x compile</p>
 </article>
 
 <article>
 <header><h1>Debugging</h1></header>
-<p>All projects benefit from proper debug configuration Breakpoints watch expressions and stepping through code work the same conceptually  but the configuration differs per editor Create Java C Press to start debugging vscode launch json F5 Java Use with the Java debug adapter dap mode require dap java dap register debug template Debug Main list type java request launch mainClass com example Main C Use with dap mode gdb require dap gdb lldb dap register debug template Debug Main list type cppdbg request launch program $ workspaceFolder build main Use to start a debug session M x dap debug</p>
+<p>All projects benefit from proper debug configuration. Breakpoints, watch expressions, and stepping through code work the same conceptually  but the configuration differs per editor. Create : Java C++ Press to start debugging. .vscode/launch.json F5 Java Use with the Java debug adapter: dap-mode (require 'dap-java) (dap-register-debug-template &quot;Debug Main&quot; (list :type &quot;java&quot; :request &quot;launch&quot; :mainClass &quot;com.example.Main&quot;)) C++ Use with : dap-mode gdb (require 'dap-gdb-lldb) (dap-register-debug-template &quot;Debug Main&quot; (list :type &quot;cppdbg&quot; :request &quot;launch&quot; :program &quot;${workspaceFolder}/build/main&quot;)) Use to start a debug session. M-x dap-debug</p>
 </article>
 
 <article>
 <header><h1>Definition</h1></header>
-<p>Use fence blocks with a tab id to mark sections of content that are specific to a tab Content outside of blocks is always visible regardless of which tab is selected When a page contains blocks tabs automatically appear at the top of the page Regular fence blocks can be used inside for additional sub grouping The global page tabs and regular tabs operate independently Shared content here is always visible Java hello VS Code Java C hello Vs Code C Java hello Emacs Java C hello Emacs C More shared content here tab content tab content Shared content here is always visible ```tab content VS Code Press `F5` to start debugging ``` ```tab content Emacs Use `M x dap debug` to start a debug session ``` More shared content here tab content tabs tab content Shared content here is always visible `````tab content VS Code ```tabs Java hello VS Code Java C hello Vs Code C ``` ````` `````tab content Emacs ```tabs Java hello Emacs Java C hello Emacs C ``` ````` More shared content here</p>
+<p>Use fence blocks with a tab id to mark sections of content that are specific to a tab. Content outside of blocks is always visible regardless of which tab is selected. When a page contains blocks, tabs automatically appear at the top of the page. Regular fence blocks can be used inside for additional sub-grouping. The global page tabs and regular tabs operate independently. Shared content here is always visible. Java hello VS Code Java C++ hello Vs Code C++ Java hello Emacs Java C++ hello Emacs C++ More shared content here. tab-content tab-content Shared content here is always visible. ```tab-content &quot;VS Code&quot; Press `F5` to start debugging. ``` ```tab-content Emacs Use `M-x dap-debug` to start a debug session. ``` More shared content here. tab-content tabs tab-content Shared content here is always visible. `````tab-content &quot;VS Code&quot; ```tabs Java: hello VS Code Java C++: hello Vs Code C++ ``` ````` `````tab-content Emacs ```tabs Java: hello Emacs Java C++: hello Emacs C++ ``` ````` More shared content here.</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -511,53 +511,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -1214,7 +1227,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1780448659789,
+    "lastModifiedTime" : 1788140029217,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Page Tabs",

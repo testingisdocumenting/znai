@@ -146,8 +146,8 @@ answer-link: znai/introduction/getting-started#command-line
 ## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.90.1/znai-dist-1.90.1-znai.zip).
-Add it to your `PATH`.
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.92/znai-dist-1.92-znai.zip). Add
+it to your `PATH`.
 
 ## Brew
 
@@ -162,7 +162,7 @@ answer-link: znai/introduction/getting-started#maven-plugin
 <plugin>
     <groupId>org.testingisdocumenting.znai</groupId>
     <artifactId>znai-maven-plugin</artifactId>
-    <version>1.90.1</version>
+    <version>1.92</version>
 </plugin>
 ```
 
@@ -830,6 +830,9 @@ Title match during search yields the highest score.
 
 For example this current section full title is: *Flow Search Local*.
 
+Queries with special characters like `List.map` or `c++` are additionally matched verbatim: sections containing the
+exact text appear first. Wrap a query in quotes, e.g. `"List.map"`, to only match sections containing the exact text.
+
 As your documentation grows, keep checking how easy it is to navigate to a section of your documentation using `/`.
 
 Avoid: using generic names in your page titles and page section titles. You should not have dozens of pages called
@@ -910,7 +913,7 @@ To define a footnote use
 
 To add a reference to the footnote use `[^my-id]` which will result in [^my-id]
 
-[^my-id]: 
+[^my-id]: extra content for my footnote goes here potentially including code blocks Constructor()
 
 Note: numeric footnotes are treated as text footnotes, and they will be assigned the auto incremented number in order of
 appearance.
@@ -938,7 +941,7 @@ answer-link: znai/flow/footnotes#footnotes-list
 A footnotes list is automatically appended at the end of the page when footnotes are present. Clicking the number in the
 list navigates back to the reference [^another-note].
 
-[^another-note]: 
+[^another-note]: This is another footnote to demonstrate the list with multiple entries.
 
 To hide the footnotes list, set `hideFootnoteList` to `true` in `meta.json`:
 
@@ -2247,6 +2250,11 @@ score, Integer, another description line with *markdown* support
 ```
 ```
 
+```api-parameters
+firstName, String, description with markdown support
+score, Integer, another description line with markdown support
+```
+
 # Snippets :: API Parameters :: Nested
 answer-link: znai/snippets/api-parameters#nested
 
@@ -2266,6 +2274,15 @@ roles.description, String, role description
 
 Note: when using this approach it is necessary to explicitly define a `root` entry, such as `person` in this example.
 
+```api-parameters
+sessionId, Integer, session Id
+person, Person, person to login with
+person.firstName, String, first name of the person
+person.lastName, String, last name of the person
+roles, List<Role>, list of authorized roles
+roles.id, String, role id
+roles.description, String, role description
+```
 
 Note: if a parameter name actually contains a period ("."), you can prevent this nesting behavior by putting the
 parameter name in single quotes, e.g. "person.firstName"
@@ -2282,6 +2299,11 @@ score, Integer, another description line with *markdown* support
 ```
 ```
 
+```api-parameters
+firstName, String, description with markdown support
+score, Integer, another description line with markdown support
+```
+
 # Snippets :: API Parameters :: Collapsing Parameters
 answer-link: znai/snippets/api-parameters#collapsing-parameters
 
@@ -2294,6 +2316,10 @@ zipCode, String, zip code
 ```
 ```
 
+```api-parameters
+city, String, city name
+zipCode, String, zip code
+```
 
 Note: `collapsed` requires `title` to be present
 
@@ -2314,6 +2340,16 @@ zipCode, String, zip code
 ```
 ```
 
+```api-parameters
+firstName, String, description with markdown support
+score, Integer, another description line with markdown support
+```
+
+```api-parameters
+city, String, city name
+zipCode, String, zip code
+```
+
 # Snippets :: API Parameters :: Size
 answer-link: znai/snippets/api-parameters#size
 
@@ -2324,6 +2360,11 @@ Use the `small` parameter to render API Parameters using smaller font size and o
 firstName, String, description with *markdown* support
 score, Integer, another description line with *markdown* support
 ```
+```
+
+```api-parameters
+firstName, String, description with markdown support
+score, Integer, another description line with markdown support
 ```
 
 # Snippets :: API Parameters :: Multi-line CSV Description
@@ -2350,6 +2391,10 @@ Specify whether to use gpu
 `````
 ```
 
+```api-parameters
+cores, String, Specify how many cores to allocate for execution execute(cores: 10)
+gpu, Boolean, "Specify whether to use gpu execute(cores: 10, gpu: true)"
+```
 
 Note: Use larger number of backticks on outside then inside to distinct between `api-parameters` plugin boundaries and
 nested code blocks
@@ -2415,6 +2460,15 @@ Given the above file, use
 
 to display it as API Parameters
 
+```api-parameters
+sessionId, Integer, session Id
+person, Person, person to login with
+person.firstName, String, first name of the person
+person.lastName, String, last name of the person
+roles, List<Role>, list of authorized roles
+roles.id, String, role id
+roles.description, String, role description
+```
 
 Note: `description` field in JSON file is treated as Markdown
 
@@ -2431,6 +2485,10 @@ score, Integer, another description line with *markdown* support
 ```
 ```
 
+```api-parameters
+firstName, String, description with markdown support
+score, Integer, another description line with markdown support
+```
 
 In the example above `customPrefix` is added to each parameter link.
 
@@ -2439,6 +2497,10 @@ answer-link: znai/snippets/api-parameters#long-parameter-names
 
 Znai hard wraps long parameter names to leave more space to description.
 
+```api-parameters
+VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with markdown support
+VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with markdown support
+```
 
 Use `noWrap: true` to remove hard wrap enforcement
 
@@ -2447,6 +2509,11 @@ Use `noWrap: true` to remove hard wrap enforcement
 VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support
 VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support
 ```
+```
+
+```api-parameters
+VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with markdown support
+VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with markdown support
 ```
 
 # Snippets :: API Parameters :: Wide Mode
@@ -2460,6 +2527,11 @@ VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, descr
 VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, another description 
 line with *markdown* support and few moe lines"
 ```
+```
+
+```api-parameters
+VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, description with markdown support"
+VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, "longer line longer line, another description line with markdown support and few moe lines"
 ```
 
 # Snippets :: Code References :: Local References
@@ -3854,6 +3926,10 @@ extract description of methods and convert parameters into [API Parameters](snip
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
 ```
 
+```api-parameters
+first_param, int, description of first param item a item b
+second_param, bool, description of second param
+```
 
 Head over to [CPP Description Extraction](CPP/description-extraction) to learn more
 
@@ -3867,8 +3943,15 @@ Znai provides plugins to automatically create reference documentation for method
 ```
 
 
+```api-parameters
+v1, const T1 &, value to print
+v2, const T2 &, value to print
+```
 
-
+```api-parameters
+T1, , type of the value one to print
+T2, , type of the value two to print
+```
 
 
 ```hpp
@@ -4766,7 +4849,7 @@ package webtauexamples
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
-def homeSearchInput = $('input[class*="searchbox_input"], input[class*="search-input"]')
+def homeSearchInput = $('textarea[class*="search-input"], input[class*="searchbox_input"], input[class*="search-input"]')
 def resultSearchInput = $("#search_form_input")
 def result = $('article[data-testid="result"]')
 
@@ -6410,13 +6493,51 @@ Note: Requires `title` to be set.
 }
 ```
 
+# Visuals :: Iframe :: Collapse
+answer-link: znai/visuals/iframe#collapse
+
+Use `collapsed: true|false` to make iframe collapsible.
+
+Note: Requires `title` to be set.
+
+```markdown
+:include-iframe: iframe/custom.html {
+  title: "collapsible content",
+  fit: true,
+  collapsed: true
+}
+```
+
+# Visuals :: Iframe :: No Gap
+answer-link: znai/visuals/iframe#no-gap
+
+Use `noGap: true` to remove top/bottom margins when there are multiple iframes in a row. Use `noGapBorder: true` to add
+a delimiter between them:
+
+```markdown
+:include-iframe: iframe/custom.html {
+  title: "part one",
+  fit: true,
+  noGap: true,
+  noGapBorder: true
+}
+
+:include-iframe: iframe/custom.html {
+  title: "part two",
+  fit: true
+}
+```
+
 # Visuals :: Iframe :: Embedding Video
 answer-link: znai/visuals/iframe#embedding-video
 
 Use `include-iframe` to embed media from other places. By default, aspect ratio is set to `16:9`.
 
-```
-:include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY
+```markdown
+:include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {
+  title: "sample video",
+  newTabEnabled: true
+}
 ```
 
 # Visuals :: Iframe :: Aspect Ratio
@@ -6944,6 +7065,12 @@ Account, Price, Description
 #91AGB1, 10, lunch
 ```
 ```
+
+| Account | Price | Description |
+| --- | --- | --- |
+| #12BGD3 | 100 | custom table with a long attachment |
+| #12BGD3 | 150 | chair |
+| #91AGB1 | 10 | lunch |
 
 # Layout :: Tables :: Multiline Content
 answer-link: znai/layout/tables#multiline-content
@@ -8274,8 +8401,17 @@ Use `include-doxygen-doc-params` to extract parameters description from doxygen 
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params" }
 ```
 
+```api-parameters
+first_param, int, description of first param item a item b
+second_param, bool, description of second param
+```
 
 Use `small: true` option to make parameters smaller
+
+```api-parameters
+first_param, int, description of first param item a item b
+second_param, bool, description of second param
+```
 
 # CPP :: Description Extraction :: Extract Parameters By Args
 answer-link: znai/CPP/description-extraction#extract-parameters-by-args
@@ -8284,6 +8420,10 @@ Use `args` to select a specific overload by providing parameters string
 
 ```
 :include-doxygen-doc-params: utils::nested::my_func { title: "My Params", args: "int" }
+```
+
+```api-parameters
+first_param, int, description of first param item a item b
 ```
 
 # CPP :: Description Extraction :: Extract Template Parameters
@@ -8307,6 +8447,11 @@ void multi_println(const T1& v1, const T2& v2) {
 
 ```
 :include-doxygen-doc-params: multi_println { title: "Template parameters", type: "template" }
+```
+
+```api-parameters
+T1, , type of the value one to print
+T2, , type of the value two to print
 ```
 
 # CPP :: Description Extraction :: Ignore Template Parameters
@@ -8354,6 +8499,12 @@ int add(int a, int b);
 :include-doxygen-doc-params: math::add
 ```
 
+```api-parameters
+return, , sum of two numbers
+a, int, number to add to
+b, int, number that is added
+```
+
 # CPP :: Auto Reference :: Member Signature, Comment And Parameters
 answer-link: znai/CPP/auto-reference#member-signature-comment-and-parameters
 
@@ -8399,7 +8550,10 @@ void free_func() {
 ```
 
 
-
+```api-parameters
+first_param, int, description of first param item a item b
+second_param, bool, description of second param
+```
 
 
 ```markdown
@@ -8418,6 +8572,17 @@ template<typename T1, typename T2>
 void multi_println(const T1& v1, const T2& v2) {
     std::cout << v1 << ", " << v2 << "\n";
 }
+```
+
+
+```api-parameters
+v1, const T1 &, value to print
+v2, const T2 &, value to print
+```
+
+```api-parameters
+T1, , type of the value one to print
+T2, , type of the value two to print
 ```
 
 # CPP :: Auto Reference :: Member Signature Only
@@ -8502,7 +8667,10 @@ Use `args` to select a specific overload by providing parameters string
 ```
 
 
-
+```api-parameters
+param1, long, description of param1
+param3, bool, description of param3
+```
 
 
 Note: Args are coma and spaces sensitive. Znai will print available args variants in case of mismatch for you to copy
@@ -8533,19 +8701,28 @@ Use `include-doxygen-compound` to render a definition of a class/struct
 #### sing
 
 
-
+```api-parameters
+tone, int, tone at which to sing
+volume, int, volume at which to sing
+```
 
 
 #### bark
 
 
-
+```api-parameters
+myClass, const MyClass &, to test reference
+tone, int, tone at which to sing
+volume, int, volume at which to sing
+```
 
 
 #### smile
 
 
-
+```api-parameters
+volume, int, smile volume
+```
 
 
 #### number_of_sounds
@@ -8557,6 +8734,12 @@ Use `include-doxygen-compound` to render a definition of a class/struct
 
 
 #### help
+
+
+```api-parameters
+tone, int, tone at which to sing
+volume, int, volume at which to sing
+```
 
 # CPP :: Auto Reference :: Cross-Reference
 answer-link: znai/CPP/auto-reference#cross-reference
@@ -8978,7 +9161,7 @@ package webtauexamples
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
-def homeSearchInput = $('input[class*="searchbox_input"], input[class*="search-input"]')
+def homeSearchInput = $('textarea[class*="search-input"], input[class*="searchbox_input"], input[class*="search-input"]')
 def resultSearchInput = $("#search_form_input")
 def result = $('article[data-testid="result"]')
 
@@ -10088,6 +10271,11 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+# Release Notes :: 2026 :: 1.92
+answer-link: znai/release-notes/2026#192
+
+
 
 # Release Notes :: 2026 :: 1.91
 answer-link: znai/release-notes/2026#191

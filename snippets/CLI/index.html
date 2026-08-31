@@ -89,62 +89,62 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Parameters Highlight</h1></header>
-<p>To bring attention to important parameters in your CLI examples use the fence plugin Note Parameter names gets matched as long as their names contain the passed value cli ```cli highlight important my super command paramA important flag true ``` my super command paramA important flag true ```cli highlight important my super command paramA important flag true another command stop ``` my super command paramA important flag true another command stop</p>
+<p>To bring attention to important parameters in your CLI examples use the fence plugin. Note: Parameter names gets matched as long as their names contain the passed value. cli ```cli {highlight: &quot;important&quot;} my-super-command paramA --important-flag=true ``` my-super-command paramA --important-flag=true ```cli {highlight: &quot;important&quot;} my-super-command paramA --important-flag=true another-command stop ``` my-super-command paramA --important-flag=true another-command stop</p>
 </article>
 
 <article>
 <header><h1>Include Plugin</h1></header>
-<p>Alternatively to fence plugin above you can use include type Note options listed below are applicable to either form include cli command my super command paramA important flag true highlight important my super command paramA important flag true</p>
+<p>Alternatively to fence plugin above, you can use include type. Note: options listed below are applicable to either form :include-cli-command: my-super-command paramA --important-flag=true {highlight: &quot;important&quot;} my-super-command paramA --important-flag=true</p>
 </article>
 
 <article>
 <header><h1>Long Commands</h1></header>
-<p>Long command lines will be automatically wrapped into multiple lines Use parameter to specify the max length of a line before splitting Use to force line splitting after specified parameter Note Unlike must be an exact match another command score 2 name Name value 8 long parameter test another long parameter1 another long parameter2 another long3 threshold include cli command another command score 2 name Name value 8 long parameter test another long parameter1 another long parameter2 another long3 highlight name value threshold 30 another command score 2 name Name value 8 long parameter test another long parameter1 another long parameter2 another long3 splitAfter include cli command another command score 2 name Name value 8 long parameter test another long parameter1 another long parameter2 another long3 highlight name value splitAfter score 2 value 8 another command score 2 name Name value 8 long parameter test another long parameter1 another long parameter2 another long3 highlight splitAfter</p>
+<p>Long command lines will be automatically wrapped into multiple lines. Use parameter to specify the max length of a line before splitting: Use to force line splitting after specified parameter: Note: Unlike , must be an exact match another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 threshold :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { highlight: [&quot;name&quot;, &quot;value&quot;], threshold: 30 } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 splitAfter :include-cli-command: another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 { highlight: [&quot;name&quot;, &quot;value&quot;], splitAfter: [&quot;--score=2&quot;, &quot;--value=8&quot;] } another-command --score=2 --name=Name --value=8 --long-parameter-test --another-long-parameter1 --another-long-parameter2 --another-long3 highlight splitAfter</p>
 </article>
 
 <article>
 <header><h1>Handle Special Symbols</h1></header>
-<p>If your command contains special symbols such as move the command definition to a option command include cli command command another command file1 file2 highlight file1 another command file1 file2</p>
+<p>If your command contains special symbols, such as , move the command definition to a option { command :include-cli-command: {command: &quot;another-command {file1} [file2]&quot;, highlight: [&quot;file1&quot;]} another-command {file1} [file2]</p>
 </article>
 
 <article>
 <header><h1>From File</h1></header>
-<p>You can read a command from file This option is useful for displaying a captured command during tests include cli command commandFile cli command txt highlight value my captured command param 10 another value my captured command param 10 another value</p>
+<p>You can read a command from file. This option is useful for displaying a captured command during tests. :include-cli-command: {commandFile: &quot;cli/command.txt&quot;, highlight: &quot;value&quot;} my-captured-command --param=10 --another=value my-captured-command --param=10 --another=value</p>
 </article>
 
 <article>
 <header><h1>ANSI Colors Output</h1></header>
-<p>CLI renders ANSI colors automatically webtau 000&gt; http get https jsonplaceholder typicode com todos 1 &gt; executing HTTP GET https jsonplaceholder typicode com todos 1 header statusCode equals 200 matches header statusCode actual 200 &lt;java lang Integer&gt; expected 200 &lt;java lang Integer&gt; 47ms userId 1 id 1 title delectus aut autem completed false executed HTTP GET https jsonplaceholder typicode com todos 1 342ms webtau 000&gt; http get https jsonplaceholder typicode com todos 1 &gt; executing HTTP GET https jsonplaceholder typicode com todos 1 header statusCode equals 200 matches header statusCode actual 200 &lt;java lang Integer&gt; expected 200 &lt;java lang Integer&gt; 47ms userId 1 id 1 title delectus aut autem completed false executed HTTP GET https jsonplaceholder typicode com todos 1 342ms include cli output cli ansi out</p>
+<p>CLI renders ANSI colors automatically. webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) :include-cli-output: cli/ansi.out</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use to specify output of the output webtau 000&gt; http get https jsonplaceholder typicode com todos 1 &gt; executing HTTP GET https jsonplaceholder typicode com todos 1 header statusCode equals 200 matches header statusCode actual 200 &lt;java lang Integer&gt; expected 200 &lt;java lang Integer&gt; 47ms userId 1 id 1 title delectus aut autem completed false executed HTTP GET https jsonplaceholder typicode com todos 1 342ms title include cli output cli ansi out title captured output</p>
+<p>Use to specify output of the output webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) title :include-cli-output: cli/ansi.out {title: &quot;captured output&quot;}</p>
 </article>
 
 <article>
 <header><h1>Anchor</h1></header>
-<p>When you specify a title hover mouse over it to see a clickable anchor Use to override auto generated identifier webtau 000&gt; http get https jsonplaceholder typicode com todos 1 &gt; executing HTTP GET https jsonplaceholder typicode com todos 1 header statusCode equals 200 matches header statusCode actual 200 &lt;java lang Integer&gt; expected 200 &lt;java lang Integer&gt; 47ms userId 1 id 1 title delectus aut autem completed false executed HTTP GET https jsonplaceholder typicode com todos 1 342ms anchorId include cli output cli ansi out title captured output anchorId my output</p>
+<p>When you specify a title, hover mouse over it to see a clickable anchor. Use to override auto generated identifier. webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) anchorId :include-cli-output: cli/ansi.out { title: &quot;captured output&quot;, anchorId: &quot;my-output&quot; }</p>
 </article>
 
 <article>
 <header><h1>Output Highlight</h1></header>
-<p>Use to highlight lines webtau 000&gt; http get https jsonplaceholder typicode com todos 1 &gt; executing HTTP GET https jsonplaceholder typicode com todos 1 header statusCode equals 200 matches header statusCode actual 200 &lt;java lang Integer&gt; expected 200 &lt;java lang Integer&gt; 47ms userId 1 id 1 title delectus aut autem completed false executed HTTP GET https jsonplaceholder typicode com todos 1 342ms Use to highlight lines based on the content of a file webtau 000&gt; http get https jsonplaceholder typicode com todos 1 &gt; executing HTTP GET https jsonplaceholder typicode com todos 1 header statusCode equals 200 matches header statusCode actual 200 &lt;java lang Integer&gt; expected 200 &lt;java lang Integer&gt; 47ms userId 1 id 1 title delectus aut autem completed false executed HTTP GET https jsonplaceholder typicode com todos 1 342ms include cli output cli ansi out title captured output highlight GET https include cli output cli ansi out highlightPath cli file path of asserted lines txt statusCode equals 200 executed HTTP GET</p>
+<p>Use to highlight lines webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) Use to highlight lines based on the content of a file webtau:000&gt; http.get(&quot;https://jsonplaceholder.typicode.com/todos/1&quot;) &gt; executing HTTP GET https://jsonplaceholder.typicode.com/todos/1 . header.statusCode equals 200 matches: header.statusCode: actual: 200 &lt;java.lang.Integer&gt; expected: 200 &lt;java.lang.Integer&gt; (47ms) { &quot;userId&quot;: 1, &quot;id&quot;: 1, &quot;title&quot;: &quot;delectus aut autem&quot;, &quot;completed&quot;: false } . executed HTTP GET https://jsonplaceholder.typicode.com/todos/1 (342ms) :include-cli-output: cli/ansi.out { title: &quot;captured output&quot;, &quot;highlight&quot;: &quot;GET https&quot; } :include-cli-output: cli/ansi.out {highlightPath: &quot;cli/file-path-of-asserted-lines.txt&quot;} statusCode equals 200 executed HTTP GET</p>
 </article>
 
 <article>
 <header><h1>Wide Mode</h1></header>
-<p>Use option to occupy as much horizontal space as available long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output wide include cli output cli wide output out title Captured output wide true</p>
+<p>Use option to occupy as much horizontal space as available long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output long line from captured output wide :include-cli-output: cli/wide-output.out { title: &quot;Captured output&quot;, wide: true }</p>
 </article>
 
 <article>
 <header><h1>Extract Snippets</h1></header>
-<p>Use to extract specific content by using marker lines Mykolas MacBook Pro znai reactjs mykola$ git push Counting objects 13 done Delta compression using up to 8 threads Compressing objects 100% 13 13 done Writing objects 100% 13 13 1 25 KiB | 0 bytes s done Total 13 delta 11 reused 0 delta 0 remote Resolving deltas 100% 11 11 completed with 11 local objects To https github com testingisdocumenting znai git e310685 900e0be master &gt; master More on snippets extractions Snippets Manipulation startLine endLine include cli output cli file path of captured out title Limited captured output startLine git push endLine master &gt; master</p>
+<p>Use , to extract specific content by using marker lines. Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master More on snippets extractions: Snippets Manipulation. startLine endLine :include-cli-output: cli/file-path-of-captured.out { title: &quot;Limited captured output&quot;, startLine: &quot;git push&quot;, endLine: &quot;master -&gt; master&quot; }</p>
 </article>
 
 <article>
 <header><h1>Presentation Mode</h1></header>
-<p>In presentation mode cli command related plugins will simulate typing inside the terminal You can gradually reveal by providing parameter Passed will highlight each line as a separate slide Delta compression using up to 8 threads Compressing objects 100% 16 16 done Writing objects 100% 16 16 1 34 KiB | 0 bytes s done Total 16 delta 14 reused 0 delta 0 remote Resolving deltas 100% 14 14 completed with 10 local objects To https github com testingisdocumenting znai git ea44003 e310685 master &gt; master Mykolas MacBook Pro znai reactjs mykola$ git push Counting objects 13 done Delta compression using up to 8 threads Compressing objects 100% 13 13 done Writing objects 100% 13 13 1 25 KiB | 0 bytes s done Total 13 delta 11 reused 0 delta 0 remote Resolving deltas 100% 11 11 completed with 11 local objects To https github com testingisdocumenting znai git e310685 900e0be master &gt; master Mykolas MacBook Pro znai reactjs mykola$ git push Counting objects 33 done Delta compression using up to 8 threads Compressing objects 100% 33 33 done Writing objects 100% 33 33 3 34 KiB | 0 bytes s done Total 33 delta 28 reused 0 delta 0 remote Resolving deltas 100% 28 28 completed with 14 local objects To https github com testingisdocumenting znai git 900e0be bb9993f master &gt; master cli output revealLineStop include cli output cli file path of captured out revealLineStop 0 4 highlight remote</p>
+<p>In presentation mode, cli command related plugins will simulate typing inside the terminal. You can gradually reveal by providing parameter. Passed will highlight each line as a separate slide. Delta compression using up to 8 threads. Compressing objects: 100% (16/16), done. Writing objects: 100% (16/16), 1.34 KiB | 0 bytes/s, done. Total 16 (delta 14), reused 0 (delta 0) remote: Resolving deltas: 100% (14/14), completed with 10 local objects. To https://github.com/testingisdocumenting/znai.git ea44003..e310685 master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 13, done. Delta compression using up to 8 threads. Compressing objects: 100% (13/13), done. Writing objects: 100% (13/13), 1.25 KiB | 0 bytes/s, done. Total 13 (delta 11), reused 0 (delta 0) remote: Resolving deltas: 100% (11/11), completed with 11 local objects. To https://github.com/testingisdocumenting/znai.git e310685..900e0be master -&gt; master Mykolas-MacBook-Pro:znai-reactjs mykola$ git push Counting objects: 33, done. Delta compression using up to 8 threads. Compressing objects: 100% (33/33), done. Writing objects: 100% (33/33), 3.34 KiB | 0 bytes/s, done. Total 33 (delta 28), reused 0 (delta 0) remote: Resolving deltas: 100% (28/28), completed with 14 local objects. To https://github.com/testingisdocumenting/znai.git 900e0be..bb9993f master -&gt; master cli-output revealLineStop :include-cli-output: cli/file-path-of-captured.out {revealLineStop: [0, 4], highlight: &quot;remote&quot;}</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -546,53 +546,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -1146,7 +1159,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "CliOutput"
       } ]
     } ],
-    "lastModifiedTime" : 1780448659799,
+    "lastModifiedTime" : 1788140029231,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "CLI",

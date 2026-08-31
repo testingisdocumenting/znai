@@ -89,62 +89,62 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Surrounded By</h1></header>
-<p>Use to extract code snippet surrounded by a marker Use to keep marker lines # example import block import market # example import block def main # example book trade id market book_trade symbol market CURRENT_PRICE 100 # example end # example cancel trade market cancel_trade id # example cancel trade if __name__ __main__ main include file python examples py title extracted example with surroundedBy surroundedBy # example cancel trade market cancel_trade id block A start event one handler block A end block B start block B end include file custom dsl title keep marker lines surroundedBy block A surroundedByKeep true block A start event one handler block A end</p>
+<p>Use to extract code snippet surrounded by a marker Use to keep marker lines # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py { title: &quot;extracted example with surroundedBy&quot;, surroundedBy: &quot;# example-cancel-trade&quot;} market.cancel_trade(id) block-A-start: event-one-handler: ... block-A-end block-B-start ... block-B-end :include-file: custom.dsl { title: &quot;keep marker lines&quot;, surroundedBy: &quot;block-A&quot;, surroundedByKeep: true } block-A-start: event-one-handler: ... block-A-end</p>
 </article>
 
 <article>
 <header><h1>Multiple Surrounded By</h1></header>
-<p>Pass a list to to extract multiple blocks Use to select separator s between blocks Note can be either single value or a list Plugin will use a different separator for each block Use to have an empty line as a separator include file python examples py title extracted example surroundedBy # example import block # example cancel trade import market market cancel_trade id include file python examples py title extracted example surroundedBy # example import block # example cancel trade surroundedBySeparator import market market cancel_trade id null</p>
+<p>Pass a list to to extract multiple blocks Use to select separator(s) between blocks Note: can be either single value or a list. Plugin will use a different separator for each block. Use to have an empty line as a separator. :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;]} import market market.cancel_trade(id) :include-file: python-examples.py { title: &quot;extracted example&quot;, surroundedBy: [&quot;# example-import-block&quot;, &quot;# example-cancel-trade&quot;], surroundedBySeparator: [&quot;...&quot;] } import market ... market.cancel_trade(id) null</p>
 </article>
 
 <article>
 <header><h1>Surrounded By Scope</h1></header>
-<p>Use to extract text using scopes like etc class MyClass void action if condition importantExample if anotherCondition anotherImportantExample include file MyClass java surroundedByScope start if condition scope if condition importantExample</p>
+<p>Use to extract text using scopes like , , etc: {} [] class MyClass { void action() { if (condition) { importantExample(); } if (anotherCondition) { anotherImportantExample(); } } } :include-file: MyClass.java {surroundedByScope: {start: &quot;if (condition)&quot;, scope: &quot;{}&quot;}} if (condition) { importantExample(); }</p>
 </article>
 
 <article>
 <header><h1>Surrounded By Multi-chars scope</h1></header>
-<p>Pass comma separated multi char region definition to to handle scopes defined with keywords module ModelZero sig type t end module ModelA sig type t val calc t &gt; int module Nested sig type t end end module ModelC sig type t end include file ocaml model mli surroundedByScope start module ModelA scope sig end module ModelA sig type t val calc t &gt; int module Nested sig type t end end</p>
+<p>Pass comma separated multi char region definition to to handle scopes defined with keywords: module ModelZero : sig type t end module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end module ModelC : sig type t end :include-file: ocaml/model.mli {surroundedByScope: {start: &quot;module ModelA&quot;, scope: &quot;sig,end&quot;}} module ModelA : sig type t val calc: t -&gt; int module Nested : sig type t end end</p>
 </article>
 
 <article>
 <header><h1>Replace</h1></header>
-<p>Use to replace content of the resulting snippet Pass a list of lists to for multiple replaces include file python examples py surroundedBy # example cancel trade replace id trade_id market cancel_trade trade_id include file python examples py surroundedBy # example cancel trade replace id trade_id market api api cancel_trade trade_id</p>
+<p>Use to replace content of the resulting snippet Pass a list of lists to for multiple replaces :include-file: python-examples.py { surroundedBy: &quot;# example-cancel-trade&quot;, replace: ['id', '&quot;trade_id&quot;'] } market.cancel_trade(&quot;trade_id&quot;) :include-file: python-examples.py { surroundedBy: &quot;# example-cancel-trade&quot;, replace: [['id', '&quot;trade_id&quot;'], [&quot;market&quot;, &quot;api&quot;]]} api.cancel_trade(&quot;trade_id&quot;)</p>
 </article>
 
 <article>
 <header><h1>Replace Regexp Groups</h1></header>
-<p>Use regexp capture groups to create derived content $1 hello1 world2 another3 line4 include file replace all group txt replace w d $2 $1 1 hello 2 world 3 another 4 line</p>
+<p>Use regexp capture groups to create derived content $1 hello1 world2 another3 line4 :include-file: replace-all-group.txt {replace: [&quot;(\\w+)(\\d+)&quot;, &quot;$2-$1&quot;]} 1-hello 2-world 3-another 4-line</p>
 </article>
 
 <article>
 <header><h1>Start/End Line</h1></header>
-<p>Use to extract specific content by using marker lines Note Lines match doesn t have to be exact is used By default and are included in the rendered result Use to remove markers To exclude start or end line only use and # example import block import market # example import block def main # example book trade id market book_trade symbol market CURRENT_PRICE 100 # example end # example cancel trade market cancel_trade id # example cancel trade if __name__ __main__ main include file python examples py startLine example book trade endLine example end # example book trade id market book_trade symbol market CURRENT_PRICE 100 # example end contains include file python examples py startLine example book trade endLine example end excludeStartEnd true id market book_trade symbol market CURRENT_PRICE 100</p>
+<p>Use , to extract specific content by using marker lines. Note: Lines match doesn't have to be exact, is used. By default and are included in the rendered result. Use to remove markers. To exclude start or end line only use and # example-import-block import market # example-import-block def main(): # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end # example-cancel-trade market.cancel_trade(id) # example-cancel-trade if __name__ == &quot;__main__&quot;: main() :include-file: python-examples.py {startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;} # example: book trade id = market.book_trade('symbol', market.CURRENT_PRICE, 100) # example-end contains :include-file: python-examples.py { startLine: &quot;example: book trade&quot;, endLine: &quot;example-end&quot;, excludeStartEnd: true } id = market.book_trade('symbol', market.CURRENT_PRICE, 100)</p>
 </article>
 
 <article>
 <header><h1>Start/End Multiple Lines</h1></header>
-<p>Pass multiple values to and to specify more precisely a block of code to extract As example let s extract a second block from the code snippets below without adding extra markers if we use we can t guarantee what block will it pick and it will depend on functions order To hit the exact one use multiple start lines Znai will attempt to find a combination of start lines with the smallest distance between them Note Use and to limit lines from the bottom removes all the lines between specified start lines including the lines removes all the lines between specified end lines including the lines startLine endLine match type weather_season | Spring | Summer | Autumn | Winter let weight_season season match season with | Spring &gt; 4 | Summer &gt; 5 | Autumn &gt; 3 | Winter &gt; 1 let describe_season season ** human readable season description * match season with | Spring &gt; It s springtime Flowers are blooming | Summer &gt; It s summertime Enjoy the warm weather | Autumn &gt; It s autumn Leaves are changing colors | Winter &gt; It s winter Time to bundle up and enjoy the snow startLine match season include file ocaml seasons ml startLine let describe_season match season startLineKeepLast true match season with | Spring &gt; It s springtime Flowers are blooming | Summer &gt; It s summertime Enjoy the warm weather | Autumn &gt; It s autumn Leaves are changing colors | Winter &gt; It s winter Time to bundle up and enjoy the snow endLine endLineKeepFirst excludeStart excludeEnd</p>
+<p>Pass multiple values to and to specify more precisely a block of code to extract. As example, let's extract a second block from the code snippets below without adding extra markers: if we use , we can't guarantee what block will it pick, and it will depend on functions order. To hit the exact one use multiple start lines. Znai will attempt to find a combination of start lines with the smallest distance between them: Note: Use and to limit lines from the bottom. removes all the lines between specified start lines, including the lines. removes all the lines between specified end lines, including the lines. startLine endLine match type weather_season = | Spring | Summer | Autumn | Winter let weight_season season = match season with | Spring -&gt; 4 | Summer -&gt; 5 | Autumn -&gt; 3 | Winter -&gt; -1 let describe_season season = (** human readable season description *) match season with | Spring -&gt; &quot;It's springtime! Flowers are blooming.&quot; | Summer -&gt; &quot;It's summertime! Enjoy the warm weather.&quot; | Autumn -&gt; &quot;It's autumn! Leaves are changing colors.&quot; | Winter -&gt; &quot;It's winter! Time to bundle up and enjoy the snow.&quot; startLine: &quot;match season&quot; :include-file: ocaml/seasons.ml {startLine: [&quot;let describe_season&quot;, &quot;match season&quot;], startLineKeepLast: true} match season with | Spring -&gt; &quot;It's springtime! Flowers are blooming.&quot; | Summer -&gt; &quot;It's summertime! Enjoy the warm weather.&quot; | Autumn -&gt; &quot;It's autumn! Leaves are changing colors.&quot; | Winter -&gt; &quot;It's winter! Time to bundle up and enjoy the snow.&quot; endLine endLineKeepFirst excludeStart excludeEnd</p>
 </article>
 
 <article>
 <header><h1>Include Contains</h1></header>
-<p>Use to include only lines containing specified text s include file python examples py include import or include file python examples py include import import market</p>
+<p>Use to include only lines containing specified text(s). :include-file: python-examples.py { include: &quot;import &quot; } or :include-file: python-examples.py { include: [&quot;import &quot;] } import market</p>
 </article>
 
 <article>
 <header><h1>Exclude Contains</h1></header>
-<p>Use to exclude lines containing specified text s include file python examples py exclude # example or include file python examples py exclude # example import market def main id market book_trade symbol market CURRENT_PRICE 100 market cancel_trade id if __name__ __main__ main</p>
+<p>Use to exclude lines containing specified text(s). :include-file: python-examples.py { exclude: &quot;# example&quot; } or :include-file: python-examples.py { exclude: [&quot;# example&quot;] } import market def main(): id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id) if __name__ == &quot;__main__&quot;: main()</p>
 </article>
 
 <article>
 <header><h1>Include Regexp</h1></header>
-<p>Use to include only lines matching regexp s include file python examples py includeRegexp market *_trade or include file python examples py includeRegexp market *_trade id market book_trade symbol market CURRENT_PRICE 100 market cancel_trade id</p>
+<p>Use to include only lines matching regexp(s). :include-file: python-examples.py { includeRegexp: &quot;market.*_trade&quot; } or :include-file: python-examples.py { includeRegexp: [&quot;market.*_trade&quot;] } id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id)</p>
 </article>
 
 <article>
 <header><h1>Exclude Regexp</h1></header>
-<p>Use to exclude lines matching regexp s include file python examples py excludeRegexp if * s main # example ^ s*$ import market id market book_trade symbol market CURRENT_PRICE 100 market cancel_trade id</p>
+<p>Use to exclude lines matching regexp(s). :include-file: python-examples.py { excludeRegexp: [&quot;if .* ==&quot;, &quot;\\s+main&quot;, &quot;# example&quot;, &quot;^\\s*$&quot;] } import market id = market.book_trade('symbol', market.CURRENT_PRICE, 100) market.cancel_trade(id)</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -546,53 +546,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -1316,7 +1329,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1780448659801,
+    "lastModifiedTime" : 1788140029234,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "Snippets Manipulation",

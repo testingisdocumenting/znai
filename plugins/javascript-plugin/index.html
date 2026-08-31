@@ -89,52 +89,52 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Overview</h1></header>
-<p>delegates rendering of a block to a plain JavaScript function znai creates a DOM node and hands your function the DOM node to render into the parameters from markdown as a so rendering can react to light dark theme switches themeBox my custom content box custom value See the sample function at the end of this page include javascript function args themeObservable include javascript function themeBox label my custom content box customKey custom value</p>
+<p>delegates rendering of a block to a plain JavaScript function. znai creates a DOM node and hands your function: the DOM node to render into the parameters from markdown (as ) a so rendering can react to light/dark theme switches themeBox my custom content box custom value See the sample function at the end of this page. include-javascript-function args themeObservable :include-javascript-function: themeBox { label: &quot;my custom content box&quot;, customKey: &quot;custom value&quot;, }</p>
 </article>
 
 <article>
 <header><h1>Registering A Function</h1></header>
-<p>Attach your function to under the name you want to reference and load the script via window extensions json function window themeBox function node args themeObservable draw inside `node` read initial theme via `themeObservable current` subscribe to updates via `themeObservable subscribe listener `</p>
+<p>Attach your function to under the name you want to reference, and load the script via : window extensions.json (function () { window.themeBox = function (node, args, themeObservable) { // draw inside `node` // read initial theme via `themeObservable.current` // subscribe to updates via `themeObservable.subscribe(listener)` }; })();</p>
 </article>
 
 <article>
 <header><h1>Function Signature</h1></header>
-<p>Your function receives three arguments  the parent to append content to  the parameters passed from markdown Framework level keys are handled by znai and not forwarded  live access to the current znai theme The function may return a cleanup function znai calls it when the block is removed or re rendered  dispose timers external listeners or other resources here The sample function below returns a cleanup that logs to the browser console Open DevTools then navigate away from this page  every rendered above is unmounted and its cleanup runs node div args title wide className anchorId height themeObservable current light | dark subscribe listener listener is called with the new theme name on every change return function cleanup console log themeBox cleanup block removed from the page themeBox</p>
+<p>Your function receives three arguments:  the parent to append content to.  the parameters passed from markdown. Framework-level keys (, , , , ) are handled by znai and not forwarded.  live access to the current znai theme. The function may return a cleanup function. znai calls it when the block is removed or re-rendered  dispose timers, external listeners, or other resources here. The sample function below returns a cleanup that logs to the browser console: Open DevTools, then navigate away from this page  every rendered above is unmounted and its cleanup runs. node div args title wide className anchorId height themeObservable { current: &quot;light&quot; | &quot;dark&quot;, subscribe(listener) { // listener is called with the new theme name on every change } } return function cleanup() { console.log(&quot;themeBox cleanup: block removed from the page&quot;); }; themeBox</p>
 </article>
 
 <article>
 <header><h1>Theme Toggle</h1></header>
-<p>themeBox Switch the theme to see me update demo theme Toggle the theme using the switcher in the bottom left corner and watch the custom content restyle The hookup is one line themeObservable subscribe applyTheme</p>
+<p>themeBox Switch the theme to see me update. demo theme Toggle the theme using the switcher in the bottom left corner and watch the custom content restyle. The hookup is one line: themeObservable.subscribe(applyTheme);</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Pass to render a title bar above the block znai owns the title via its shared container so your function never sees it themeBox theme aware box rendered inside a titled container title include javascript function themeBox title theme aware box message rendered inside a titled container</p>
+<p>Pass to render a title bar above the block. znai owns the title via its shared container, so your function never sees it. themeBox theme aware box rendered inside a titled container title :include-javascript-function: themeBox { title: &quot;theme aware box&quot;, message: &quot;rendered inside a titled container&quot; }</p>
 </article>
 
 <article>
 <header><h1>Wide</h1></header>
-<p>Pass to span the full page width matching wide images and iframes themeBox wide theme aware box true this block breaks out of the single column width and spans edge to edge of the page container giving long values plenty of horizontal room to stretch before they need to wrap onto a second line wide demo edge to edge theme 1024 42 0 003 wide true include javascript function themeBox title wide theme aware box wide true note this block breaks out of the single column width and spans edge to edge of the page container giving long values plenty of horizontal room to stretch before they need to wrap onto a second line tags wide demo edge to edge theme metrics requests 1024 latency_ms 42 error_rate 0 003</p>
+<p>Pass to span the full page width, matching wide images and iframes. themeBox wide theme aware box true this block breaks out of the single-column width and spans edge to edge of the page container, giving long values plenty of horizontal room to stretch before they need to wrap onto a second line wide demo edge-to-edge theme 1024 42 0.003 wide: true :include-javascript-function: themeBox { title: &quot;wide theme aware box&quot;, wide: true, note: &quot;this block breaks out of the single-column width and spans edge to edge of the page container, giving long values plenty of horizontal room to stretch before they need to wrap onto a second line&quot;, tags: [&quot;wide&quot;, &quot;demo&quot;, &quot;edge-to-edge&quot;, &quot;theme&quot;], metrics: {&quot;requests&quot;: 1024, &quot;latency_ms&quot;: 42, &quot;error_rate&quot;: 0.003} }</p>
 </article>
 
 <article>
 <header><h1>Height</h1></header>
-<p>By default the block grows to fit whatever the function renders into it Pass to pin the block to a fixed size  content past it scrolls inside the viewport znai gives the function accepts either a number treated as pixels or any CSS length string like or The function below appends one row per event Without all twelve rows render and the block grows to fit them activityFeed deploys 09 14 build started commit a31f9b on main 09 17 tests passed 248 248 green 09 18 image pushed registry io web@sha256 c2 09 19 deploy started rolling out to canary 09 21 canary healthy p99 42ms error rate 0 0% 09 24 promoted 100% of fleet now on a31f9b 09 31 alert fired latency spike on shard 4 09 33 shard restarted shard 4 back to baseline 09 40 config reload feature flag billing v2 on 09 47 backfill queued 1 2M rows over 6 batches 09 58 backfill complete elapsed 11m02s 10 05 deploy started rolling out to prod eu Add and the same twelve events scroll inside a fixed size box instead activityFeed deploys 220 09 14 build started commit a31f9b on main 09 17 tests passed 248 248 green 09 18 image pushed registry io web@sha256 c2 09 19 deploy started rolling out to canary 09 21 canary healthy p99 42ms error rate 0 0% 09 24 promoted 100% of fleet now on a31f9b 09 31 alert fired latency spike on shard 4 09 33 shard restarted shard 4 back to baseline 09 40 config reload feature flag billing v2 on 09 47 backfill queued 1 2M rows over 6 batches 09 58 backfill complete elapsed 11m02s 10 05 deploy started rolling out to prod eu height height 320px 30vh activityFeed height include javascript function activityFeed title deploys events time 09 14 action build started detail commit a31f9b on main time 09 17 action tests passed detail 248 248 green height include javascript function activityFeed title deploys height 220 events * same twelve events *</p>
+<p>By default the block grows to fit whatever the function renders into it. Pass to pin the block to a fixed size  content past it scrolls inside the viewport znai gives the function. accepts either a number (treated as pixels) or any CSS length string like or . The function below appends one row per event. Without , all twelve rows render and the block grows to fit them: activityFeed deploys 09:14 build started commit a31f9b on main 09:17 tests passed 248 / 248 green 09:18 image pushed registry.io/web@sha256:c2... 09:19 deploy started rolling out to canary 09:21 canary healthy p99 42ms, error rate 0.0% 09:24 promoted 100% of fleet now on a31f9b 09:31 alert fired latency spike on shard 4 09:33 shard restarted shard 4 back to baseline 09:40 config reload feature flag billing-v2 on 09:47 backfill queued 1.2M rows over 6 batches 09:58 backfill complete elapsed 11m02s 10:05 deploy started rolling out to prod-eu Add and the same twelve events scroll inside a fixed-size box instead: activityFeed deploys 220 09:14 build started commit a31f9b on main 09:17 tests passed 248 / 248 green 09:18 image pushed registry.io/web@sha256:c2... 09:19 deploy started rolling out to canary 09:21 canary healthy p99 42ms, error rate 0.0% 09:24 promoted 100% of fleet now on a31f9b 09:31 alert fired latency spike on shard 4 09:33 shard restarted shard 4 back to baseline 09:40 config reload feature flag billing-v2 on 09:47 backfill queued 1.2M rows over 6 batches 09:58 backfill complete elapsed 11m02s 10:05 deploy started rolling out to prod-eu height height &quot;320px&quot; &quot;30vh&quot; activityFeed height :include-javascript-function: activityFeed { title: &quot;deploys&quot;, events: [ {time: &quot;09:14&quot;, action: &quot;build started&quot;, detail: &quot;commit a31f9b on main&quot;}, {time: &quot;09:17&quot;, action: &quot;tests passed&quot;, detail: &quot;248 / 248 green&quot;}, ... ] } height :include-javascript-function: activityFeed { title: &quot;deploys&quot;, height: 220, events: [/* same twelve events */] }</p>
 </article>
 
 <article>
 <header><h1>Styling With A Class Name</h1></header>
-<p>Pass to attach an arbitrary class to the parent node znai creates Use it to decorate the wrapper without touching the function themeBox highlighted by an outer border theme box with border The dashed outline comes from the class on the outer wrapper  the box itself is untouched className include javascript function themeBox label highlighted by an outer border className theme box with border theme box with border padding 6px border 2px dashed var znai color green border radius 6px theme box box sizing border box width 100% padding 12px 16px border 1px solid var znai snippets outer border color #dedede border left 4px solid var znai color blue border radius 4px background color var znai snippets title background color #efeff1 color var znai regular text color font family var znai regular font family theme box theme dark border left color var znai color yellow theme box title color var znai section title color font weight 600 font size 0 95rem margin bottom 8px theme box list display grid grid template columns auto 1fr column gap 12px row gap 4px font family var znai code font family monospace font size 0 9rem theme box empty font style italic color var znai regular text light color theme box key color var znai brand primary color font weight 600 theme box value color var znai regular text color word break break word white space pre wrap theme box current theme font size 0 8rem margin top 10px color var znai regular text light color</p>
+<p>Pass to attach an arbitrary class to the parent node znai creates. Use it to decorate the wrapper without touching the function: themeBox highlighted by an outer border theme-box-with-border The dashed outline comes from the class on the outer wrapper  the box itself is untouched. className :include-javascript-function: themeBox { label: &quot;highlighted by an outer border&quot;, className: &quot;theme-box-with-border&quot; } .theme-box-with-border { padding: 6px; border: 2px dashed var(--znai-color-green); border-radius: 6px; } .theme-box { box-sizing: border-box; width: 100%; padding: 12px 16px; border: 1px solid var(--znai-snippets-outer-border-color, #dedede); border-left: 4px solid var(--znai-color-blue); border-radius: 4px; background-color: var(--znai-snippets-title-background-color, #efeff1); color: var(--znai-regular-text-color); font-family: var(--znai-regular-font-family); } .theme-box.theme-dark { border-left-color: var(--znai-color-yellow); } .theme-box-title { color: var(--znai-section-title-color); font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; } .theme-box-list { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; row-gap: 4px; font-family: var(--znai-code-font-family, monospace); font-size: 0.9rem; } .theme-box-empty { font-style: italic; color: var(--znai-regular-text-light-color); } .theme-box-key { color: var(--znai-brand-primary-color); font-weight: 600; } .theme-box-value { color: var(--znai-regular-text-color); word-break: break-word; white-space: pre-wrap; } .theme-box-current-theme { font-size: 0.8rem; margin-top: 10px; color: var(--znai-regular-text-light-color); }</p>
 </article>
 
 <article>
 <header><h1>Search</h1></header>
-<p>Values passed via flow into znai s local search Searching for any word inside the parameters surfaces the page and the rendered block args</p>
+<p>Values passed via flow into znai's local search. Searching for any word inside the parameters surfaces the page and the rendered block. args</p>
 </article>
 
 <article>
 <header><h1>Sample Function</h1></header>
-<p>The function below powers the examples on this page It reads the initial theme and subscribes to future changes * * custom javascript global function to render custom content within znai * generated guides * * renders a panel that lists every argument passed via the plugin as * a key value row reacts to znai theme switches via the theme observable * to toggle a `theme dark` class that drives the accent color via CSS * function function formatValue value if value null || value undefined return String value if typeof value object return JSON stringify value return String value function createElement tagName className textContent var el document createElement tagName el className className if textContent undefined el textContent textContent return el window themeBox function node args themeObservable var box createElement div theme box var titleEl createElement div theme box title args passed to the function var list createElement div theme box list var themeEl createElement div theme box current theme var argKeys Object keys args if argKeys length 0 list appendChild createElement div theme box empty no args passed else argKeys forEach function key list appendChild createElement div theme box key key list appendChild createElement div theme box value formatValue args key box appendChild titleEl box appendChild list box appendChild themeEl node appendChild box function applyTheme themeName box classList toggle theme dark themeName dark themeEl textContent current theme themeName applyTheme themeObservable current themeObservable subscribe applyTheme return function cleanup console log themeBox cleanup block removed from the page * * sample plugin showing a list of rows that grows to fit its content * * the parent node sized by znai `height` arg is what constrains us when * unset the feed renders all rows tall enough to show them all when set * the same content scrolls inside the fixed viewport znai gave us * function function createElement tagName className textContent var el document createElement tagName el className className if textContent undefined el textContent textContent return el function buildRow event var row createElement div activity feed row row appendChild createElement span activity feed time event time || row appendChild createElement span activity feed action event action || row appendChild createElement span activity feed detail event detail || return row window activityFeed function node args themeObservable var events Array isArray args events args events var feed createElement div activity feed events forEach function event feed appendChild buildRow event node appendChild feed function applyTheme themeName feed classList toggle activity feed dark themeName dark applyTheme themeObservable current themeObservable subscribe applyTheme</p>
+<p>The function below powers the examples on this page. It reads the initial theme and subscribes to future changes. /* * custom javascript global function to render custom content within znai * generated guides * * renders a panel that lists every argument passed via the plugin as * a key/value row. reacts to znai theme switches via the theme observable * to toggle a `theme-dark` class that drives the accent color via CSS. */ (function () { function formatValue(value) { if (value === null || value === undefined) { return String(value); } if (typeof value === &quot;object&quot;) { return JSON.stringify(value); } return String(value); } function createElement(tagName, className, textContent) { var el = document.createElement(tagName); el.className = className; if (textContent !== undefined) { el.textContent = textContent; } return el; } window.themeBox = function (node, args, themeObservable) { var box = createElement(&quot;div&quot;, &quot;theme-box&quot;); var titleEl = createElement( &quot;div&quot;, &quot;theme-box-title&quot;, &quot;args passed to the function&quot; ); var list = createElement(&quot;div&quot;, &quot;theme-box-list&quot;); var themeEl = createElement(&quot;div&quot;, &quot;theme-box-current-theme&quot;); var argKeys = Object.keys(args); if (argKeys.length === 0) { list.appendChild( createElement(&quot;div&quot;, &quot;theme-box-empty&quot;, &quot;no args passed&quot;) ); } else { argKeys.forEach(function (key) { list.appendChild(createElement(&quot;div&quot;, &quot;theme-box-key&quot;, key)); list.appendChild( createElement(&quot;div&quot;, &quot;theme-box-value&quot;, formatValue(args[key])) ); }); } box.appendChild(titleEl); box.appendChild(list); box.appendChild(themeEl); node.appendChild(box); function applyTheme(themeName) { box.classList.toggle(&quot;theme-dark&quot;, themeName === &quot;dark&quot;); themeEl.textContent = &quot;current theme: &quot; + themeName; } applyTheme(themeObservable.current); themeObservable.subscribe(applyTheme); return function cleanup() { console.log(&quot;themeBox cleanup: block removed from the page&quot;); }; }; })(); /* * sample plugin showing a list of rows that grows to fit its content. * * the parent node sized by znai (`height` arg) is what constrains us when * unset, the feed renders all rows tall enough to show them all; when set, * the same content scrolls inside the fixed viewport znai gave us. */ (function () { function createElement(tagName, className, textContent) { var el = document.createElement(tagName); el.className = className; if (textContent !== undefined) { el.textContent = textContent; } return el; } function buildRow(event) { var row = createElement(&quot;div&quot;, &quot;activity-feed-row&quot;); row.appendChild(createElement(&quot;span&quot;, &quot;activity-feed-time&quot;, event.time || &quot;&quot;)); row.appendChild(createElement(&quot;span&quot;, &quot;activity-feed-action&quot;, event.action || &quot;&quot;)); row.appendChild(createElement(&quot;span&quot;, &quot;activity-feed-detail&quot;, event.detail || &quot;&quot;)); return row; } window.activityFeed = function (node, args, themeObservable) { var events = Array.isArray(args.events) ? args.events : []; var feed = createElement(&quot;div&quot;, &quot;activity-feed&quot;); events.forEach(function (event) { feed.appendChild(buildRow(event)); }); node.appendChild(feed); function applyTheme(themeName) { feed.classList.toggle(&quot;activity-feed-dark&quot;, themeName === &quot;dark&quot;); } applyTheme(themeObservable.current); themeObservable.subscribe(applyTheme); }; })();</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -536,53 +536,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -1366,7 +1379,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1780448659790,
+    "lastModifiedTime" : 1788140029218,
     "tocItem" : {
       "chapterTitle" : "Plugins",
       "pageTitle" : "Javascript Plugin",

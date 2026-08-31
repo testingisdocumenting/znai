@@ -89,57 +89,57 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Inlined CSV</h1></header>
-<p>Use fenced code plugin to document API parameters firstName String description with markdown support score Integer another description line with markdown support api parameters ```api parameters firstName String description with *markdown* support score Integer another description line with *markdown* support ```</p>
+<p>Use fenced code plugin to document API parameters. firstName String description with markdown support score Integer another description line with markdown support api-parameters ```api-parameters firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>Nested</h1></header>
-<p>Use syntax to define nested objects like this Note when using this approach it is necessary to explicitly define a entry such as in this example sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note if a parameter name actually contains a period you can prevent this nesting behavior by putting the parameter name in single quotes e g person firstName parent child ```api parameters sessionId Integer session Id person Person person to login with person firstName String first name of the person person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles roles id String role id roles description String role description ``` root person</p>
+<p>Use syntax to define nested objects like this: Note: when using this approach it is necessary to explicitly define a entry, such as in this example. sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note: if a parameter name actually contains a period (&quot;.&quot;), you can prevent this nesting behavior by putting the parameter name in single quotes, e.g. &quot;person.firstName&quot; parent.child ```api-parameters sessionId, Integer, session Id person, Person, person to login with person.firstName, String, first name of the person person.lastName, String, last name of the person roles, List&lt;Role&gt;, list of authorized roles roles.id, String, role id roles.description, String, role description ``` root person</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use the parameter to specify a title firstName String description with markdown support score Integer another description line with markdown support title ```api parameters title person definition firstName String description with *markdown* support score Integer another description line with *markdown* support ```</p>
+<p>Use the parameter to specify a title. firstName String description with markdown support score Integer another description line with markdown support title ```api-parameters {title: &quot;person definition&quot;} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>Collapsing Parameters</h1></header>
-<p>Use to make collapsible city String city name zipCode String zip code Note requires to be present collapsed true|false api parameters ```api parameters title address definition anchorPrefix title collapsed true city String city name zipCode String zip code ``` collapsed title</p>
+<p>Use to make collapsible. city String city name zipCode String zip code Note: requires to be present collapsed: true|false api-parameters ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true} city, String, city name zipCode, String, zip code ``` collapsed title</p>
 </article>
 
 <article>
 <header><h1>No Gap</h1></header>
-<p>Use to remove top bottom margins when there are multiple parameter instances in a row firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code noGap true ```api parameters title person definition anchorPrefix title collapsed false noGap true firstName String description with *markdown* support score Integer another description line with *markdown* support ``` ```api parameters title address definition anchorPrefix title collapsed true city String city name zipCode String zip code ```</p>
+<p>Use to remove top/bottom margins when there are multiple parameter instances in a row. firstName String description with markdown support score Integer another description line with markdown support city String city name zipCode String zip code noGap: true ```api-parameters { title: &quot;person definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: false, noGap: true } firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` ```api-parameters {title: &quot;address definition&quot;, anchorPrefix: &quot;title&quot;, collapsed: true} city, String, city name zipCode, String, zip code ```</p>
 </article>
 
 <article>
 <header><h1>Size</h1></header>
-<p>Use the parameter to render API Parameters using smaller font size and occupying less width firstName String description with markdown support score Integer another description line with markdown support small ```api parameters small true firstName String description with *markdown* support score Integer another description line with *markdown* support ```</p>
+<p>Use the parameter to render API Parameters using smaller font size and occupying less width firstName String description with markdown support score Integer another description line with markdown support small ```api-parameters {small: true} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>Multi-line CSV Description</h1></header>
-<p>Use quotes to wrap a multiline description Here is an example of description including multiple lines and nested code block example cores String Specify how many cores to allocate for execution execute cores 10 gpu Boolean Specify whether to use gpu execute cores 10 gpu true Note Use larger number of backticks on outside then inside to distinct between plugin boundaries and nested code blocks `````api parameters cores String ``` execute cores 10 ``` Specify how many cores to allocate for execution gpu Boolean ``` execute cores 10 gpu true ``` Specify whether to use gpu ````` api parameters</p>
+<p>Use quotes to wrap a multiline description. Here is an example of description including multiple lines and nested code block example. cores String Specify how many cores to allocate for execution execute(cores: 10) gpu Boolean Specify whether to use gpu execute(cores: 10, gpu: true) Note: Use larger number of backticks on outside then inside to distinct between plugin boundaries and nested code blocks &quot; `````api-parameters cores, String, &quot; ``` execute(cores: 10) ``` Specify how many cores to allocate for execution &quot; gpu, Boolean, &quot; ``` execute(cores: 10, gpu: true) ``` Specify whether to use gpu &quot; ````` api-parameters</p>
 </article>
 
 <article>
 <header><h1>External JSON File</h1></header>
-<p>Instead of hard coding your parameters inside markdown files you can specify an external JSON file JSON could be generated based on the data you have Some examples build time annotation processor test time command line parameters generation Given the above file use to display it as API Parameters sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note field in JSON file is treated as Markdown include api parameters api parameters json title Person Definition description</p>
+<p>Instead of hard-coding your parameters inside markdown files, you can specify an external JSON file. JSON could be generated based on the data you have. Some examples: build time annotation processor test time command line parameters generation Given the above file, use to display it as API Parameters sessionId Integer session Id person Person person to login with firstName String first name of the person lastName String last name of the person roles List&lt;Role&gt; list of authorized roles id String role id description String role description Note: field in JSON file is treated as Markdown :include-api-parameters: api-parameters.json {title: &quot;Person Definition&quot;} description</p>
 </article>
 
 <article>
 <header><h1>Anchors</h1></header>
-<p>Each API parameter has an anchor associated with it You need to hover over parameter name for it to appear Use parameter to avoid conflict of anchor ids when using the same API parameter names within a single page firstName String description with markdown support score Integer another description line with markdown support In the example above is added to each parameter link anchorPrefix ```api parameters anchorPrefix customPrefix firstName String description with *markdown* support score Integer another description line with *markdown* support ``` customPrefix</p>
+<p>Each API parameter has an anchor associated with it. You need to hover over parameter name for it to appear. Use parameter to avoid conflict of anchor ids when using the same API parameter names within a single page: firstName String description with markdown support score Integer another description line with markdown support In the example above is added to each parameter link. anchorPrefix ```api-parameters {anchorPrefix: &quot;customPrefix&quot;} firstName, String, description with *markdown* support score, Integer, another description line with *markdown* support ``` customPrefix</p>
 </article>
 
 <article>
 <header><h1>Long Parameter Names</h1></header>
-<p>Znai hard wraps long parameter names to leave more space to description VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support Use to remove hard wrap enforcement VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support noWrap true ```api parameters anchorPrefix customPrefix noWrap true VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with *markdown* support ```</p>
+<p>Znai hard wraps long parameter names to leave more space to description. VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support Use to remove hard wrap enforcement VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String another description line with markdown support noWrap: true ```api-parameters {anchorPrefix: &quot;customPrefix&quot;, noWrap: true} VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, another description line with *markdown* support ```</p>
 </article>
 
 <article>
 <header><h1>Wide Mode</h1></header>
-<p>Use to use all the available horizontal space VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line another description line with markdown support and few moe lines wide true ```api parameters anchorPrefix customPrefix noWrap true wide true VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line description with *markdown* support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line another description line with *markdown* support and few moe lines ```</p>
+<p>Use to use all the available horizontal space VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line, description with markdown support VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES String longer line longer line, another description line with markdown support and few moe lines wide: true ```api-parameters {anchorPrefix: &quot;customPrefix&quot;, noWrap: true, wide: true} VERY_LONG_PARAMETER_NAME_WITHOUT_SPACES, String, &quot;longer line longer line, description with *markdown* support&quot; VERY_LONG_ANOTHER_PARAMETER_NAME_WITHOUT_SPACES, String, &quot;longer line longer line, another description line with *markdown* support and few moe lines&quot; ```</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -541,53 +541,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -1816,7 +1829,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "ApiParameters"
       } ]
     } ],
-    "lastModifiedTime" : 1780448659799,
+    "lastModifiedTime" : 1788140029232,
     "tocItem" : {
       "chapterTitle" : "Snippets",
       "pageTitle" : "API Parameters",

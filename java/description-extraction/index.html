@@ -89,52 +89,52 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Class Level</h1></header>
-<p>Documentation maintenance is one of the main goals of this documentation system In the case of Java you may already use strings to explain certain concepts of your system Instead of copy and pasting text between sources you can refer to it inside your documentation Text bellow is extracted from top class level JavaDoc ** * Top level conceptual description of a @link CustomDomain problem * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt; b&gt; of the content consider to re use information * class HelloWorld ** * Each year we hire students from different universities to increase * @link Diversity * private int numberOfStudents ** * Conceptual description of a &lt;i&gt;Domain&lt; i&gt; problem * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt; b&gt; implementation details * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt; i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt; b&gt; sample * public String sampleMethod String p1 int p2 validate process p2 important comment notifyAll p1 very important return bestSample public void sampleMethod Map&lt;String Integer&gt; p1 int p2 boolean isActive overloaded method ** * @param trader trader that performs action * @param transaction transaction to perform action on * public void importantAction Trader trader Transaction transaction TODO important public Data createData create data include java doc HelloWorld java JavaDoc Top level conceptual description of a problem To avoid copy &amp; paste of the content consider to re use information CustomDomain</p>
+<p>Documentation maintenance is one of the main goals of this documentation system. In the case of Java you may already use strings to explain certain concepts of your system. Instead of copy-and-pasting text between sources, you can refer to it inside your documentation. Text bellow is extracted from top class level JavaDoc /** * Top level conceptual description of a {@link CustomDomain} problem. * &lt;p&gt; * To avoid &lt;b&gt;copy &amp; paste&lt;/b&gt; of the content consider to re-use information. */ class HelloWorld { /** * Each year we hire students from different universities to increase * {@link Diversity} */ private int numberOfStudents; /** * Conceptual description of a &lt;i&gt;Domain&lt;/i&gt; problem. * &lt;p&gt; * It will work only if you put high level description here and * &lt;b&gt;not&lt;/b&gt; implementation details. * * @param p1 important parameter of something * @param p2 sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe * @return name of the &lt;b&gt;best&lt;/b&gt; sample */ public String sampleMethod(String p1, int p2) { validate(); process(p2); // important comment notifyAll(p1); // very important return bestSample(); } public void sampleMethod(Map&lt;String, Integer&gt; p1, int p2, boolean isActive) { // overloaded method } /** * @param trader trader that performs action * @param transaction transaction to perform action on */ public void importantAction(Trader trader, Transaction transaction) { // TODO important } public Data createData() { // create data } } :include-java-doc: HelloWorld.java JavaDoc Top level conceptual description of a problem. To avoid copy &amp; paste of the content consider to re-use information. CustomDomain</p>
 </article>
 
 <article>
 <header><h1>Method Level</h1></header>
-<p>Method level text can be referred to as well by specifying the parameter Text bellow is extracted from method JavaDoc entry include java doc HelloWorld java entry sampleMethod sampleMethod JavaDoc Conceptual description of a Domain problem It will work only if you put high level description here and not implementation details</p>
+<p>Method level text can be referred to as well by specifying the parameter. Text bellow is extracted from method JavaDoc entry :include-java-doc: HelloWorld.java {entry: &quot;sampleMethod&quot;} sampleMethod JavaDoc Conceptual description of a Domain problem. It will work only if you put high level description here and not implementation details.</p>
 </article>
 
 <article>
 <header><h1>Field Level</h1></header>
-<p>include java doc HelloWorld java entry numberOfStudents Each year we hire students from different universities to increase Diversity</p>
+<p>:include-java-doc: HelloWorld.java {entry: &quot;numberOfStudents&quot;} Each year we hire students from different universities to increase Diversity</p>
 </article>
 
 <article>
 <header><h1>Inner Classes</h1></header>
-<p>Use to disambiguate a field or a method name NestedName entityName class HelloWorld private int importantScore public static class Nested ** * system caclulates &lt;b&gt;importance&lt; b&gt; score based on following factors * private int importantScore include java doc HelloWorldWithInner java entry Nested importantScore system caclulates importance score based on following factors</p>
+<p>Use to disambiguate a field or a method name NestedName.entityName class HelloWorld { private int importantScore; public static class Nested { /** * system caclulates &lt;b&gt;importance&lt;/b&gt; score based on following factors... */ private int importantScore; } } :include-java-doc: HelloWorldWithInner.java {entry: &quot;Nested.importantScore&quot;} system caclulates importance score based on following factors...</p>
 </article>
 
 <article>
 <header><h1>Handling Links</h1></header>
-<p>Links defined with are automatically converted to Inlined Code and become To turn into a link you need to use Code References Use the value to associate with the documentation link Top level conceptual description of a problem To avoid copy &amp; paste of the content consider to re use information CustomDomain Alternatively you can define Global References to turn into a link @link MyClass MyClass MyClass referencesPath @link CustomDomain CustomDomain example references domain Trader example references domain#trader Transaction example references domain#transaction BUY example references domain#transaction buy SELL example references domain#transaction sell MyClass</p>
+<p>Links defined with are automatically converted to Inlined Code and become . To turn into a link you need to use Code References. Use the value to associate with the documentation link: Top level conceptual description of a problem. To avoid copy &amp; paste of the content consider to re-use information. CustomDomain Alternatively you can define Global References to turn into a link. {@link MyClass} MyClass MyClass referencesPath {@link CustomDomain} CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell MyClass</p>
 </article>
 
 <article>
 <header><h1>Method Params</h1></header>
-<p>Use the parameter to specify a title include java doc params HelloWorld java entry sampleMethod p1 String important parameter of something p2 int sample &lt;i&gt;offset&lt; i&gt; according to the rules of the universe return String name of the &lt;b&gt;best&lt; b&gt; sample title include java doc params HelloWorld java entry importantAction title Trading Required Parameters trader Trader trader that performs action transaction Transaction transaction to perform action on</p>
+<p>Use the parameter to specify a title. :include-java-doc-params: HelloWorld.java {entry: &quot;sampleMethod&quot;} p1 String important parameter of something p2 int sample &lt;i&gt;offset&lt;/i&gt; according to the rules of the universe return String name of the &lt;b&gt;best&lt;/b&gt; sample title :include-java-doc-params: HelloWorld.java {entry: &quot;importantAction&quot;, title: &quot;Trading Required Parameters&quot;} trader Trader trader that performs action transaction Transaction transaction to perform action on</p>
 </article>
 
 <article>
 <header><h1>Method Params With References</h1></header>
-<p>Use the Code References file to link method parameters to reference pages To do that define references in a CSV file using a two column format Parameters are now linked with a reference section for the documentation type or variable name link CustomDomain example references domain Trader example references domain#trader Transaction example references domain#transaction BUY example references domain#transaction buy SELL example references domain#transaction sell include java doc params HelloWorld java entry importantAction title Trading Required Parameters referencesPath references javadoc references demo csv trader Trader trader that performs action transaction Transaction transaction to perform action on</p>
+<p>Use the Code References file to link method parameters to reference pages. To do that, define references in a CSV file, using a two column format: . Parameters are now linked with a reference section for the documentation. type-or-variable-name, link CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell :include-java-doc-params: HelloWorld.java { entry: &quot;importantAction&quot;, title: &quot;Trading Required Parameters&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot;} trader Trader trader that performs action transaction Transaction transaction to perform action on</p>
 </article>
 
 <article>
 <header><h1>Enum Entries</h1></header>
-<p>Use to enumerate entries of a enum from a file You can exclude deprecated entries from the list by setting the parameter Use the parameter to specify a title include java enum entries package my company enum MyEnum ** * description of &lt;b&gt;entry one&lt; b&gt; * ENTRY_ONE ** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt; li&gt; * &lt;li&gt;item two&lt; li&gt; * &lt; ul&gt; * ENTRY_TWO ** * Don t use instead use ENTRY_TWO * @Deprecated ENTRY_THREE include java enum entries MyEnum java ENTRY_ONE description of &lt;b&gt;entry one&lt; b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt; li&gt; &lt;li&gt;item two&lt; li&gt; &lt; ul&gt; ENTRY_THREE Don t use instead use ENTRY_TWO excludeDeprecated include java enum entries MyEnum java excludeDeprecated true ENTRY_ONE description of &lt;b&gt;entry one&lt; b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt; li&gt; &lt;li&gt;item two&lt; li&gt; &lt; ul&gt; ENTRY_THREE Don t use instead use ENTRY_TWO title include java enum entries TransactionTypes java title Transaction Types BUY buy intrument SELL sell instrument</p>
+<p>Use to enumerate entries of a enum from a file. You can exclude deprecated entries from the list by setting the parameter. Use the parameter to specify a title. include-java-enum-entries package my.company; enum MyEnum { /** * description of &lt;b&gt;entry one&lt;/b&gt; */ ENTRY_ONE, /** * description of entry two * &lt;ul&gt; * &lt;li&gt;item one&lt;/li&gt; * &lt;li&gt;item two&lt;/li&gt; * &lt;/ul&gt; */ ENTRY_TWO, /** * Don't use, instead use ENTRY_TWO */ @Deprecated ENTRY_THREE } :include-java-enum-entries: MyEnum.java ENTRY_ONE description of &lt;b&gt;entry one&lt;/b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt;/li&gt; &lt;li&gt;item two&lt;/li&gt; &lt;/ul&gt; ENTRY_THREE Don't use, instead use ENTRY_TWO excludeDeprecated :include-java-enum-entries: MyEnum.java {excludeDeprecated: true} ENTRY_ONE description of &lt;b&gt;entry one&lt;/b&gt; ENTRY_TWO description of entry two &lt;ul&gt; &lt;li&gt;item one&lt;/li&gt; &lt;li&gt;item two&lt;/li&gt; &lt;/ul&gt; ENTRY_THREE Don't use, instead use ENTRY_TWO title :include-java-enum-entries: TransactionTypes.java {title: &quot;Transaction Types&quot;} BUY buy intrument SELL sell instrument</p>
 </article>
 
 <article>
 <header><h1>Enum Entries With References</h1></header>
-<p>Use a Code References file to link enum entries to reference pages To do that define references in a CSV file using a two column format Enums are now linked with a reference section for the documentation Note you can reuse the same CSV file for Enums Parameters Code Snippets Alternatively you can use Global References enum name link CustomDomain example references domain Trader example references domain#trader Transaction example references domain#transaction BUY example references domain#transaction buy SELL example references domain#transaction sell package my company enum TransactionTypes ** * buy intrument * BUY ** * sell instrument * SELL include java enum entries TransactionTypes java title Transaction Types referencesPath references javadoc references demo csv BUY buy intrument SELL sell instrument</p>
+<p>Use a Code References file to link enum entries to reference pages. To do that, define references in a CSV file, using a two column format: . Enums are now linked with a reference section for the documentation. Note: you can reuse the same CSV file for Enums, Parameters, Code Snippets. Alternatively, you can use Global References. enum-name, link CustomDomain, example-references/domain Trader, example-references/domain#trader Transaction, example-references/domain#transaction BUY, example-references/domain#transaction-buy SELL, example-references/domain#transaction-sell package my.company; enum TransactionTypes { /** * buy intrument */ BUY, /** * sell instrument */ SELL } :include-java-enum-entries: TransactionTypes.java { title: &quot;Transaction Types&quot;, referencesPath: &quot;references/javadoc-references-demo.csv&quot; } BUY buy intrument SELL sell instrument</p>
 </article>
 
 <article>
 <header><h1>Markdown</h1></header>
-<p>Pass parameter to the plugins to treat JavaDoc content as markdown markdown true ** * Top level **conceptual** description of a `CustomDomain` problem * * markdown *list* * * item two * ``` * code snippet * goes here * ``` * class HelloWorld include java doc HelloWorld java markdown true Top level conceptual description of a problem markdown list item two CustomDomain code snippet goes here</p>
+<p>Pass parameter to the plugins to treat JavaDoc content as markdown markdown: true /** * Top level **conceptual** description of a `CustomDomain` problem. * * markdown *list* * * item two * ``` * code snippet * goes here * ``` */ class HelloWorld { } :include-java-doc: HelloWorld.java {markdown: true} Top level conceptual description of a problem. markdown list item two CustomDomain code snippet goes here</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -536,53 +536,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -1641,7 +1654,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1780448659789,
+    "lastModifiedTime" : 1788140029216,
     "tocItem" : {
       "chapterTitle" : "Java",
       "pageTitle" : "Description Extraction",

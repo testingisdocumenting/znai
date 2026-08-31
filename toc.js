@@ -1681,6 +1681,14 @@ toc = [ {
       "id" : "zoom-and-new-tab",
       "customAnchorId" : "zoom-and-new-tab"
     }, {
+      "title" : "Collapse",
+      "id" : "collapse",
+      "customAnchorId" : "collapse"
+    }, {
+      "title" : "No Gap",
+      "id" : "no-gap",
+      "customAnchorId" : "no-gap"
+    }, {
       "title" : "Embedding Video",
       "id" : "embedding-video",
       "customAnchorId" : "embedding-video"
@@ -2781,6 +2789,10 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.92",
+      "id" : "192",
+      "customAnchorId" : "192"
+    }, {
       "title" : "1.91",
       "id" : "191",
       "customAnchorId" : "191"

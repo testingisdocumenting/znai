@@ -89,42 +89,52 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Embedding Supporting Content</h1></header>
-<p>Use plugin to embed HTML content that supports your documentation Some examples generated React JS index html with components that get rendered based on url anchor custom plot functions Note Use parameter to automatically set the height of the iframe to fit its content Only will be automatically copied to the deploy destination during documentation build step If you need other supporting files you need to use upload txt iframe custom html include iframe include iframe iframe custom html fit true fit &lt;html lang en &gt; &lt;head&gt; &lt;style&gt; root backgroundColor #eee color #222 body margin 0 content background color var backgroundColor border 2px solid #555 color var color font size 20px padding 16px &lt; style&gt; &lt;title&gt;generated content&lt; title&gt; &lt; head&gt; &lt;body&gt; &lt;div class content &gt;Custom content&lt; div&gt; &lt; body&gt; &lt; html&gt;</p>
+<p>Use plugin to embed HTML content that supports your documentation. Some examples: generated React JS index.html with components that get rendered based on url anchor custom plot functions Note: Use parameter to automatically set the height of the iframe to fit its content Only will be automatically copied to the deploy destination during documentation build step. If you need other supporting files you need to use upload.txt iframe/custom.html include-iframe :include-iframe: iframe/custom.html { fit: true } fit &lt;html lang=&quot;en&quot;&gt; &lt;head&gt; &lt;style&gt; :root { --backgroundColor: #eee; --color: #222; } body { margin: 0 } .content { background-color: var(--backgroundColor); border: 2px solid #555; color: var(--color); font-size: 20px; padding: 16px; } &lt;/style&gt; &lt;title&gt;generated content&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div class=&quot;content&quot;&gt;Custom content&lt;/div&gt; &lt;/body&gt; &lt;/html&gt;</p>
 </article>
 
 <article>
 <header><h1>Properties Override</h1></header>
-<p>Use and to override CSS properties inside iframe content for light and dark modes respectively Switch mode now to see the effect light dark include iframe iframe custom html fit true light color #333 backgroundColor #eee dark color #eee backgroundColor #333</p>
+<p>Use and to override CSS properties inside iframe content for light and dark modes respectively. Switch mode now to see the effect. light dark :include-iframe: iframe/custom.html { fit: true, light: { &quot;--color&quot;: &quot;#333&quot;, &quot;--backgroundColor&quot;: &quot;#eee&quot; }, dark: { &quot;--color&quot;: &quot;#eee&quot;, &quot;--backgroundColor&quot;: &quot;#333&quot; }, }</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use parameter to display title bar on top of the embedded content title include iframe iframe custom html title rendered example light color #333 backgroundColor #eee dark color #eee backgroundColor #333 fit true</p>
+<p>Use parameter to display title bar on top of the embedded content: title :include-iframe: iframe/custom.html { title: &quot;rendered example&quot;, light: { &quot;--color&quot;: &quot;#333&quot;, &quot;--backgroundColor&quot;: &quot;#eee&quot; }, dark: { &quot;--color&quot;: &quot;#eee&quot;, &quot;--backgroundColor&quot;: &quot;#333&quot; }, fit: true }</p>
 </article>
 
 <article>
 <header><h1>Dynamic Content</h1></header>
-<p>When iframe content changes after page load the iframe automatically resizes to fit Click buttons below to see it in action Use and to limit the height when content grows height maxHeight include iframe iframe custom delayed html fit true height 120 maxHeight 200</p>
+<p>When iframe content changes after page load, the iframe automatically resizes to fit. Click buttons below to see it in action: Use and to limit the height when content grows: height maxHeight :include-iframe: iframe/custom-delayed.html { fit: true, height: 120, maxHeight: 200 }</p>
 </article>
 
 <article>
 <header><h1>Wide</h1></header>
-<p>Use to take all the available horizontal space wide include iframe iframe custom html title my wide iframe content fit true wide true</p>
+<p>Use to take all the available horizontal space: wide :include-iframe: iframe/custom.html { title: &quot;my wide iframe content&quot;, fit: true, wide: true }</p>
 </article>
 
 <article>
 <header><h1>Zoom And New Tab</h1></header>
-<p>Use to add a full screen zoom button to the title bar Clicking the button opens the iframe in a full screen overlay with a close button Press or click the close button to exit Use to add an open in new tab button to the title bar Note Requires to be set zoomEnabled Escape newTabEnabled title include iframe iframe custom multi line html title parameters reference fit true maxHeight 120 zoomEnabled true newTabEnabled true</p>
+<p>Use to add a full-screen zoom button to the title bar. Clicking the button opens the iframe in a full-screen overlay with a close button. Press or click the close button to exit. Use to add an open-in-new-tab button to the title bar. Note: Requires to be set. zoomEnabled Escape newTabEnabled title :include-iframe: iframe/custom-multi-line.html { title: &quot;parameters reference&quot;, fit: true, maxHeight: 120, zoomEnabled: true, newTabEnabled: true }</p>
+</article>
+
+<article>
+<header><h1>Collapse</h1></header>
+<p>Use to make iframe collapsible. Note: Requires to be set. collapsed: true|false title :include-iframe: iframe/custom.html { title: &quot;collapsible content&quot;, fit: true, collapsed: true }</p>
+</article>
+
+<article>
+<header><h1>No Gap</h1></header>
+<p>Use to remove top/bottom margins when there are multiple iframes in a row. Use to add a delimiter between them: noGap: true noGapBorder: true :include-iframe: iframe/custom.html { title: &quot;part one&quot;, fit: true, noGap: true, noGapBorder: true } :include-iframe: iframe/custom.html { title: &quot;part two&quot;, fit: true }</p>
 </article>
 
 <article>
 <header><h1>Embedding Video</h1></header>
-<p>Use to embed media from other places By default aspect ratio is set to include iframe 16 9 include iframe https www youtube com embed tgbNymZ7vqY</p>
+<p>Use to embed media from other places. By default, aspect ratio is set to . include-iframe 16:9 :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY { title: &quot;sample video&quot;, newTabEnabled: true }</p>
 </article>
 
 <article>
 <header><h1>Aspect Ratio</h1></header>
-<p>Use to change aspect ratio of the embedded content aspectRatio include iframe https www youtube com embed tgbNymZ7vqY aspectRatio 4 3</p>
+<p>Use to change aspect ratio of the embedded content aspectRatio :include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {aspectRatio: &quot;4:3&quot;}</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -526,53 +536,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -675,7 +698,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "b38e7417-91f5-4281-a59a-f5aee62a0aed",
+        "previewMarker" : "39e5f2a5-fffe-4fe6-8c45-2a01cc6c2e89",
         "fit" : true,
         "type" : "Iframe"
       }, {
@@ -762,7 +785,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "ecf00e28-106f-4fe1-bfc2-d3f870d044ab",
+        "previewMarker" : "71fd1aee-1d9a-4434-b97e-d190d981f113",
         "fit" : true,
         "light" : {
           "--color" : "#333",
@@ -799,7 +822,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "d86e88ae-2dec-4ab4-8096-56675e4debd3",
+        "previewMarker" : "8c72f959-1c81-4084-8148-95c97f172e59",
         "title" : "rendered example",
         "light" : {
           "--color" : "#333",
@@ -830,7 +853,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       }, {
         "src" : "/znai/iframe/custom-delayed.html",
-        "previewMarker" : "02b90bc7-4a1e-4d8f-bc43-8c6acccdbcc9",
+        "previewMarker" : "9e91d0e0-1eb7-42d0-8257-a4006f2a938d",
         "fit" : true,
         "type" : "Iframe"
       }, {
@@ -858,7 +881,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom-delayed.html",
-        "previewMarker" : "5f9f6ca8-ee65-4a86-9837-71428992dfaa",
+        "previewMarker" : "d7ef4168-f386-4b64-93f9-15d7b3d57e9c",
         "fit" : true,
         "height" : 120,
         "maxHeight" : 200,
@@ -889,7 +912,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom.html",
-        "previewMarker" : "8bfa6e5e-a0e7-4316-a3ed-cd22e21f5492",
+        "previewMarker" : "be34b4ea-ab31-4906-a24b-0f429e71c4be",
         "title" : "my wide iframe content",
         "fit" : true,
         "wide" : true,
@@ -955,12 +978,104 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "/znai/iframe/custom-multi-line.html",
-        "previewMarker" : "0ff17115-cbd6-4529-a1c3-8b521e3f92a2",
+        "previewMarker" : "b26d542f-dc74-4372-ac3a-01452661b38f",
         "title" : "parameters reference",
         "fit" : true,
         "maxHeight" : 120,
         "zoomEnabled" : true,
         "newTabEnabled" : true,
+        "type" : "Iframe"
+      } ]
+    }, {
+      "id" : "collapse",
+      "additionalIds" : [ ],
+      "title" : "Collapse",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "collapsed: true|false",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to make iframe collapsible.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Requires ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "title",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to be set.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-iframe: iframe/custom.html {\n  title: \"collapsible content\",\n  fit: true,\n  collapsed: true\n}",
+        "lineNumber" : "",
+        "highlight" : [ 3 ],
+        "type" : "Snippet"
+      }, {
+        "src" : "/znai/iframe/custom.html",
+        "previewMarker" : "8e91365f-6127-4ab8-aa8b-ba58cc18ddf8",
+        "title" : "collapsible content",
+        "fit" : true,
+        "collapsed" : true,
+        "type" : "Iframe"
+      } ]
+    }, {
+      "id" : "no-gap",
+      "additionalIds" : [ ],
+      "title" : "No Gap",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "noGap: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to remove top/bottom margins when there are multiple iframes in a row.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Use ",
+          "type" : "SimpleText"
+        }, {
+          "code" : "noGapBorder: true",
+          "type" : "InlinedCode"
+        }, {
+          "text" : " to add a delimiter between them:",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "markdown",
+        "snippet" : ":include-iframe: iframe/custom.html {\n  title: \"part one\",\n  fit: true,\n  noGap: true,\n  noGapBorder: true\n}\n\n:include-iframe: iframe/custom.html {\n  title: \"part two\",\n  fit: true\n}",
+        "lineNumber" : "",
+        "highlight" : [ 3, 4 ],
+        "type" : "Snippet"
+      }, {
+        "src" : "/znai/iframe/custom.html",
+        "previewMarker" : "fbe038bf-e388-4275-8bab-16964fe89ae6",
+        "title" : "part one",
+        "fit" : true,
+        "noGap" : true,
+        "noGapBorder" : true,
+        "type" : "Iframe"
+      }, {
+        "src" : "/znai/iframe/custom.html",
+        "previewMarker" : "3dcd15a5-08c5-44bb-80cb-2d221079cde8",
+        "title" : "part two",
+        "fit" : true,
         "type" : "Iframe"
       } ]
     }, {
@@ -987,13 +1102,16 @@ window.ReactDOM.render(React.createElement(Documentation, {
           "type" : "SimpleText"
         } ]
       }, {
-        "lang" : "",
-        "snippet" : ":include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY",
+        "lang" : "markdown",
+        "snippet" : ":include-iframe: https://www.youtube.com/embed/tgbNymZ7vqY {\n  title: \"sample video\",\n  newTabEnabled: true\n}",
         "lineNumber" : "",
+        "highlight" : [ 1, 2 ],
         "type" : "Snippet"
       }, {
         "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
-        "previewMarker" : "6da7e100-3dbd-4bd5-98ef-39dcb8243f05",
+        "previewMarker" : "704d1c0c-0e63-498f-acbf-6a6d65b38fda",
+        "title" : "sample video",
+        "newTabEnabled" : true,
         "type" : "Iframe"
       } ]
     }, {
@@ -1020,12 +1138,12 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       }, {
         "src" : "https://www.youtube.com/embed/tgbNymZ7vqY",
-        "previewMarker" : "f62c2420-b3ba-4790-826c-e0124e6c9348",
+        "previewMarker" : "931f946f-43c8-457e-8982-332905923706",
         "aspectRatio" : "4:3",
         "type" : "Iframe"
       } ]
     } ],
-    "lastModifiedTime" : 1780448659812,
+    "lastModifiedTime" : 1788140029244,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Iframe",
@@ -1058,6 +1176,14 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "title" : "Zoom And New Tab",
         "id" : "zoom-and-new-tab",
         "customAnchorId" : "zoom-and-new-tab"
+      }, {
+        "title" : "Collapse",
+        "id" : "collapse",
+        "customAnchorId" : "collapse"
+      }, {
+        "title" : "No Gap",
+        "id" : "no-gap",
+        "customAnchorId" : "no-gap"
       }, {
         "title" : "Embedding Video",
         "id" : "embedding-video",

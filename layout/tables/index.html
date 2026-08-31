@@ -89,97 +89,97 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>CSV</h1></header>
-<p>Instead of aligning tables using one of the standard Markdown extensions you can use your editor of choice In this way the following file will render like so Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch CSV include table table csv CSV Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch</p>
+<p>Instead of aligning tables using one of the standard Markdown extensions, you can use your editor of choice. In this way, the following file... ...will render like so: Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch CSV :include-table: table.csv CSV Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD4, 90, custom table with a short attachment #12BGD5, 150, chair #91AGB1, 10, lunch</p>
 </article>
 
 <article>
 <header><h1>JSON</h1></header>
-<p>This extension can be used to display data from a file representing tabular data So the following file will render like so Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch JSON include table table json JSON Account #12BGD3 Price 100 Description custom table with a long attachment Account #12BGD3 Price 150 Description chair Account #91AGB1 Price 10 Description lunch</p>
+<p>This extension can be used to display data from a file representing tabular data. So the following file... ...will render like so: Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch JSON :include-table: table.json JSON [ { &quot;Account&quot;: &quot;#12BGD3&quot;, &quot;Price&quot;: 100, &quot;Description&quot;: &quot;custom table with a long attachment&quot; }, { &quot;Account&quot;: &quot;#12BGD3&quot;, &quot;Price&quot;: 150, &quot;Description&quot;: &quot;chair&quot; }, { &quot;Account&quot;: &quot;#91AGB1&quot;, &quot;Price&quot;: 10, &quot;Description&quot;: &quot;lunch&quot; } ]</p>
 </article>
 
 <article>
 <header><h1>Title</h1></header>
-<p>Use parameter to set a table title Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch title include table table json title Monthly Report</p>
+<p>Use parameter to set a table title. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch title :include-table: table.json {title: &quot;Monthly Report&quot;}</p>
 </article>
 
 <article>
 <header><h1>Anchor</h1></header>
-<p>When you specify a title hover mouse over it to see a clickable anchor Use to override auto generated identifier Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch anchorId include table table table json title Monthly Report anchorId my super table</p>
+<p>When you specify a title, hover mouse over it to see a clickable anchor. Use to override auto generated identifier. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch anchorId :include-table: table/table.json {title: &quot;Monthly Report&quot;, anchorId: &quot;my-super-table&quot;}</p>
 </article>
 
 <article>
 <header><h1>Collapse</h1></header>
-<p>Use to make image collapsible Note option is required Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch collapsed true|false title include table table table json title Monthly Report collapsed true</p>
+<p>Use to make image collapsible. Note: option is required Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch collapsed: true|false title :include-table: table/table.json { title: &quot;Monthly Report&quot;, collapsed: true }</p>
 </article>
 
 <article>
 <header><h1>No Gap</h1></header>
-<p>Use to remove top bottom margins when there are multiple tables in a row Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch noGap true include table table table json title Monthly Report collapsed true noGap true include table table table json title Weekly Report collapsed false</p>
+<p>Use to remove top/bottom margins when there are multiple tables in a row. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch noGap: true :include-table: table/table.json { title: &quot;Monthly Report&quot;, collapsed: true, noGap: true } :include-table: table/table.json { title: &quot;Weekly Report&quot;, collapsed: false }</p>
 </article>
 
 <article>
 <header><h1>Highlight</h1></header>
-<p>Use to highlight a row or a set of rows by their index Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch highlightRow include table table table json title Highlight multiple rows highlightRow 0 2 include table table table json title Highlight single row highlightRow 1</p>
+<p>Use to highlight a row, or a set of rows by their index Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch highlightRow :include-table: table/table.json {title: &quot;Highlight multiple rows&quot;, highlightRow: [0, 2]} :include-table: table/table.json {title: &quot;Highlight single row&quot;, highlightRow: 1}</p>
 </article>
 
 <article>
 <header><h1>Arrange and Remove Columns</h1></header>
-<p>To change the order of columns or to filter out certain columns specify the parameter Description Price custom table with a long attachment 100 custom table with a short attachment 90 chair 150 lunch 10 columns include table table csv columns Description Price</p>
+<p>To change the order of columns or to filter out certain columns, specify the parameter. Description Price custom table with a long attachment 100 custom table with a short attachment 90 chair 150 lunch 10 columns :include-table: table.csv {columns: [&quot;Description&quot;, &quot;Price&quot;]}</p>
 </article>
 
 <article>
 <header><h1>Filter Rows</h1></header>
-<p>Use to include only rows that match a regular expression Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair Use to exclude rows that match a regular expression Account Price Description #12BGD3 100 custom table with a long attachment #12BGD5 150 chair include table table table csv includeRowsRegexp table cha include table table table csv includeRowsRegexp table cha excludeRowsRegexp short</p>
+<p>Use to include only rows that match a regular expression Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair Use to exclude rows that match a regular expression Account Price Description #12BGD3 100 custom table with a long attachment #12BGD5 150 chair :include-table: table/table.csv {includeRowsRegexp: [&quot;table&quot;, &quot;cha..&quot;]} :include-table: table/table.csv {includeRowsRegexp: [&quot;table&quot;, &quot;cha..&quot;], excludeRowsRegexp: &quot;short&quot;}</p>
 </article>
 
 <article>
 <header><h1>Width</h1></header>
-<p>By default columns width is auto calculated to fit the values inside Use to control the width of a column Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Note total percentage of all columns can go above 100% in which case a scroll bar will be used to fit the content Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch width include table table csv Price width 200 Description width 400 include table table table csv Price width 50% Description width 30% include table table table csv Price width 50% Description width 60%</p>
+<p>By default, columns width is auto-calculated to fit the values inside. Use to control the width of a column. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Use percentage value to change column size relative to the page content width. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch Note: total percentage of all columns can go above 100%, in which case a scroll bar will be used to fit the content Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch width :include-table: table.csv {Price: {width: 200}, &quot;Description&quot;: {width: 400}} :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;30%&quot;}} :include-table: table/table.csv {Price: {width: &quot;50%&quot;}, &quot;Description&quot;: {width: &quot;60%&quot;}}</p>
 </article>
 
 <article>
 <header><h1>Column Names Conflict</h1></header>
-<p>Use prefix if a column name matches the plugin parameter name like when setting column specific parameters account title #12BGD3 custom table with a long attachment #12BGD4 custom table with a short attachment _ title include table table table conflict csv _title width 80%</p>
+<p>Use prefix if a column name matches the plugin parameter name like when setting column specific parameters. account title #12BGD3 custom table with a long attachment #12BGD4 custom table with a short attachment _ title :include-table: table/table-conflict.csv {&quot;_title&quot;: {width: &quot;80%&quot;}}</p>
 </article>
 
 <article>
 <header><h1>Min Width</h1></header>
-<p>Use to set min width for all table columns Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch minColumnWidth include table table table csv minColumnWidth 400 Description width 500</p>
+<p>Use to set min width for all table columns Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch minColumnWidth :include-table: table/table.csv {minColumnWidth: 400, &quot;Description&quot;: {width: 500}}</p>
 </article>
 
 <article>
 <header><h1>Wide Mode</h1></header>
-<p>Use to make table occupy all available width Account Price Zip Code Rating Description #12BGD3 100 11111 4 custom table with a long attachment #12BGD3 150 22222 5 chair #91AGB1 10 33333 4 5 lunch wide true include table table table csv wide true minColumnWidth 400 title My Items</p>
+<p>Use to make table occupy all available width Account Price Zip Code Rating Description #12BGD3 100 11111 4 custom table with a long attachment #12BGD3 150 22222 5 chair #91AGB1 10 33333 4.5 lunch wide: true :include-table: table/table.csv {wide: true, minColumnWidth: 400, title: &quot;My Items&quot;}</p>
 </article>
 
 <article>
 <header><h1>Text Alignment</h1></header>
-<p>Use to change a column text alignment Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch data example Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch align include table table csv Price width 200 align right JSON include table table json Price width 100 align right</p>
+<p>Use to change a column text alignment. Account Price Description #12BGD3 100 custom table with a long attachment #12BGD4 90 custom table with a short attachment #12BGD5 150 chair #91AGB1 10 lunch data example: Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch align :include-table: table.csv {Price: {width: 200, align: &quot;right&quot;}} JSON :include-table: table.json {Price: {width: 100, align: &quot;right&quot;}}</p>
 </article>
 
 <article>
 <header><h1>Mapping</h1></header>
-<p>Use to provide a way to override table values using mapping table Feature Name V1 V2 featureA ` icon check stroke green ` ` icon check stroke green ` featureB ` icon slash stroke red ` ` icon check stroke green ` Note We used Icons in this example but you can use any plugins or any text you want mappingPath Feature Name V1 V2 featureA featureB ` icon check stroke green ` ` icon slash stroke red ` include table table csv mappingPath mapping csv</p>
+<p>Use to provide a way to override table values using mapping table. Feature Name V1 V2 featureA `:icon: check {stroke: &quot;green&quot;}` `:icon: check {stroke: &quot;green&quot;}` featureB `:icon: slash {stroke: &quot;red&quot;}` `:icon: check {stroke: &quot;green&quot;}` Note: We used Icons in this example, but you can use any plugins or any text you want. mappingPath Feature Name, V1, V2 featureA, +, + featureB, -, + +, `:icon: check {stroke: &quot;green&quot;}` -, `:icon: slash {stroke: &quot;red&quot;}` :include-table: table.csv {mappingPath: &quot;mapping.csv&quot;}</p>
 </article>
 
 <article>
 <header><h1>Inlined</h1></header>
-<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch ```table title my table Price width 100 align right Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch ```</p>
+<p>Account Price Description #12BGD3 100 custom table with a long attachment #12BGD3 150 chair #91AGB1 10 lunch ```table {title: &quot;my table&quot;, Price: {width: 100, align: &quot;right&quot;}} Account, Price, Description #12BGD3, 100, custom table with a long attachment #12BGD3, 150, chair #91AGB1, 10, lunch ```</p>
 </article>
 
 <article>
 <header><h1>Multiline Content</h1></header>
-<p>Use quotes to provide multi line markdown content such as bullet points and code snippets Account Price Description #12BGD3 100 multi line markdown with * bullet point * list #12BGD3 150 and some code snippet ```java class HelloWorld ``` Account Price Description #12BGD3 100 multi line markdown with * bullet point * list #12BGD3 150 and some code snippet ```java class HelloWorld ```</p>
+<p>Use quotes to provide multi line markdown content such as bullet points and code snippets Account Price Description #12BGD3 100 multi line markdown with * bullet point * list #12BGD3 150 and some code snippet ```java class HelloWorld { } ``` Account, Price, Description #12BGD3, 100, &quot;multi line markdown with * bullet point * list &quot; #12BGD3, 150, &quot;and some code snippet ```java class HelloWorld { } ``` &quot;</p>
 </article>
 
 <article>
 <header><h1>Markdown in Cells</h1></header>
-<p>You can use Markdown table syntax within your table file Account Price Description #12BGD3 100 **custom** table with a long attachment #12BGD3 150 chair #91AGB1 10 `lunch` Account Price Description #12BGD3 100 **custom** table with a long attachment #12BGD3 150 chair #91AGB1 10 `lunch`</p>
+<p>You can use Markdown table syntax within your table file. Account Price Description #12BGD3 100 **custom** table with a long attachment #12BGD3 150 chair #91AGB1 10 `lunch` Account, Price, Description #12BGD3, 100, **custom** table with a long attachment #12BGD3, 150, chair #91AGB1, 10, `lunch`</p>
 </article>
 
 <article>
 <header><h1>Github Flavored Table</h1></header>
-<p>Github Flavored Table text col 3 is type SimpleText text right aligned type SimpleText text $1600 type SimpleText text col 2 is type SimpleText text centered type SimpleText text $12 type SimpleText | Github | Flavored | Table | | | | | | col 3 is | right aligned | $1600 | | col 2 is | centered | $12 |</p>
+<p>Github Flavored Table [{text=col 3 is, type=SimpleText}] [{text=right-aligned, type=SimpleText}] [{text=$1600, type=SimpleText}] [{text=col 2 is, type=SimpleText}] [{text=centered, type=SimpleText}] [{text=$12, type=SimpleText}] | Github | Flavored | Table | | ------------- |:-------------:| -----:| | col 3 is | right-aligned | $1600 | | col 2 is | centered | $12 |</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -581,53 +581,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -3000,7 +3013,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Table"
       } ]
     } ],
-    "lastModifiedTime" : 1780448659789,
+    "lastModifiedTime" : 1788140029217,
     "tocItem" : {
       "chapterTitle" : "Layout",
       "pageTitle" : "Tables",

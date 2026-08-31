@@ -89,32 +89,32 @@
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
 <header><h1>Fenced Block</h1></header>
-<p>Use Mermaid to create diagrams using text and code written in a Markdown style Surround Mermaid expressions with a fenced block and specify as a language The result will be a diagram flowchart TD A Start &gt; B Is it B Yes &gt; C OK C &gt; D Rethink D &gt; B B No &gt; E End In presentation mode rendered expressions will automatically scale to make use of the screen space Note Rendering is done by using Mermaid library mermaid ```mermaid flowchart TD A Start &gt; B Is it B Yes &gt; C OK C &gt; D Rethink D &gt; B B No &gt; E End ```</p>
+<p>Use Mermaid to create diagrams using text and code, written in a Markdown style. Surround Mermaid expressions with a fenced block and specify as a language The result will be a diagram. flowchart TD A[Start] --&gt; B{Is it?} B -- Yes --&gt; C[OK] C --&gt; D[Rethink] D --&gt; B B -- No ----&gt; E[End] In presentation mode, rendered expressions will automatically scale to make use of the screen space. Note: Rendering is done by using Mermaid library. mermaid ```mermaid flowchart TD A[Start] --&gt; B{Is it?} B -- Yes --&gt; C[OK] C --&gt; D[Rethink] D --&gt; B B -- No ----&gt; E[End] ```</p>
 </article>
 
 <article>
 <header><h1>Large Diagrams</h1></header>
-<p>A diagram that is too large to fit the page width is shrunk to fit and can become hard to read Click the diagram to open it in a full screen overlay where you can scroll to zoom towards the cursor drag to pan flowchart LR Client Web &amp; Mobile Clients &gt; Gateway API Gateway Gateway &gt; Auth Auth Service Gateway &gt; Catalog Catalog Service Gateway &gt; Cart Cart Service Gateway &gt; Orders Order Service Gateway &gt; Payments Payment Service Gateway &gt; Shipping Shipping Service Gateway &gt; Notifications Notification Service Auth &gt; AuthDb Auth DB Catalog &gt; CatalogDb Catalog DB Catalog &gt; Search Search Index Cart &gt; CartCache Cart Cache Orders &gt; OrdersDb Orders DB Orders &gt; Queue Event Queue Payments &gt; PaymentsDb Payments DB Payments &gt; Gatewayp External Payment Gateway Shipping &gt; ShippingDb Shipping DB Shipping &gt; Carrier External Carrier API Queue &gt; Notifications Queue &gt; Analytics Analytics Pipeline Queue &gt; Warehouse Data Warehouse Analytics &gt; Warehouse Notifications &gt; Email Email Provider Notifications &gt; SMS SMS Provider Notifications &gt; Push Push Provider Analytics &gt; Dashboards BI Dashboards Warehouse &gt; Dashboards click Catalog visuals graphviz diagrams click Payments href https mermaid js org Mermaid documentation wheel</p>
+<p>A diagram that is too large to fit the page width is shrunk to fit and can become hard to read. Click the diagram to open it in a full screen overlay where you can: scroll/ to zoom towards the cursor drag to pan flowchart LR Client[Web &amp; Mobile Clients] --&gt; Gateway[API Gateway] Gateway --&gt; Auth[Auth Service] Gateway --&gt; Catalog[Catalog Service] Gateway --&gt; Cart[Cart Service] Gateway --&gt; Orders[Order Service] Gateway --&gt; Payments[Payment Service] Gateway --&gt; Shipping[Shipping Service] Gateway --&gt; Notifications[Notification Service] Auth --&gt; AuthDb[(Auth DB)] Catalog --&gt; CatalogDb[(Catalog DB)] Catalog --&gt; Search[(Search Index)] Cart --&gt; CartCache[(Cart Cache)] Orders --&gt; OrdersDb[(Orders DB)] Orders --&gt; Queue[[Event Queue]] Payments --&gt; PaymentsDb[(Payments DB)] Payments --&gt; Gatewayp[External Payment Gateway] Shipping --&gt; ShippingDb[(Shipping DB)] Shipping --&gt; Carrier[External Carrier API] Queue --&gt; Notifications Queue --&gt; Analytics[Analytics Pipeline] Queue --&gt; Warehouse[(Data Warehouse)] Analytics --&gt; Warehouse Notifications --&gt; Email[Email Provider] Notifications --&gt; SMS[SMS Provider] Notifications --&gt; Push[Push Provider] Analytics --&gt; Dashboards[BI Dashboards] Warehouse --&gt; Dashboards click Catalog &quot;visuals/graphviz-diagrams&quot; click Payments href &quot;https://mermaid.js.org&quot; &quot;Mermaid documentation&quot; wheel</p>
 </article>
 
 <article>
 <header><h1>External File</h1></header>
-<p>Use include plugin to render a Mermaid diagram from a file classDiagram Animal &lt;| Duck Animal &lt;| Fish Animal &lt;| Zebra Animal int age Animal String gender Animal isMammal Animal mate class Duck String beakColor swim quack class Fish int sizeInFeet canEat class Zebra bool is_wild run include mermaid mermaid class diagram mmd classDiagram Animal &lt;| Duck Animal &lt;| Fish Animal &lt;| Zebra Animal int age Animal String gender Animal isMammal Animal mate class Duck String beakColor swim quack class Fish int sizeInFeet canEat class Zebra bool is_wild run</p>
+<p>Use include plugin to render a Mermaid diagram from a file. classDiagram Animal &lt;|-- Duck Animal &lt;|-- Fish Animal &lt;|-- Zebra Animal : +int age Animal : +String gender Animal: +isMammal() Animal: +mate() class Duck{ +String beakColor +swim() +quack() } class Fish{ -int sizeInFeet -canEat() } class Zebra{ +bool is_wild +run() } :include-mermaid: mermaid/class-diagram.mmd classDiagram Animal &lt;|-- Duck Animal &lt;|-- Fish Animal &lt;|-- Zebra Animal : +int age Animal : +String gender Animal: +isMammal() Animal: +mate() class Duck{ +String beakColor +swim() +quack() } class Fish{ -int sizeInFeet -canEat() } class Zebra{ +bool is_wild +run() }</p>
 </article>
 
 <article>
 <header><h1>Links</h1></header>
-<p>Use mermaid statements to add links to diagram nodes Relative links will be resolved and validated against your documentation structure flowchart TD A Start &gt; B Is it B Yes &gt; C OK B No &gt; D End click A introduction getting started click D href https mermaid js github io mermaid # Mermaid docs Note Relative links like are validated during build time the same way regular markdown links are validated click ```mermaid flowchart TD A Start &gt; B Is it B Yes &gt; C OK B No &gt; D End click A visuals mermaid diagrams click D href https mermaid js github io mermaid # Mermaid docs ``` visuals mermaid diagrams</p>
+<p>Use mermaid statements to add links to diagram nodes. Relative links will be resolved and validated against your documentation structure. flowchart TD A[Start] --&gt; B{Is it?} B -- Yes --&gt; C[OK] B -- No ----&gt; D[End] click A &quot;introduction/getting-started&quot; click D href &quot;https://mermaid-js.github.io/mermaid/#/&quot; &quot;Mermaid docs&quot; Note: Relative links like are validated during build time, the same way regular markdown links are validated. click ```mermaid flowchart TD A[Start] --&gt; B{Is it?} B -- Yes --&gt; C[OK] B -- No ----&gt; D[End] click A &quot;visuals/mermaid-diagrams&quot; click D href &quot;https://mermaid-js.github.io/mermaid/#/&quot; &quot;Mermaid docs&quot; ``` visuals/mermaid-diagrams</p>
 </article>
 
 <article>
 <header><h1>Wide Mode</h1></header>
-<p>Use to use as much horizontal space as required and available or sequenceDiagram par Alice to Bob Alice &gt;&gt;Bob Go help John and Alice to John Alice &gt;&gt;John I want this done today par John to Charlie John &gt;&gt;Charlie Can we do this today and John to Diana John &gt;&gt;Diana Can you help us today and Alice to Carl Alice &gt;&gt;Carl I also want this done today end end wide true ```mermaid wide true sequenceDiagram par Alice to Bob Alice &gt;&gt;Bob Go help John and Alice to John Alice &gt;&gt;John I want this done today par John to Charlie John &gt;&gt;Charlie Can we do this today and John to Diana John &gt;&gt;Diana Can you help us today and Alice to Carl Alice &gt;&gt;Carl I also want this done today end end ``` include mermaid mermaid sequence diagram mmd wide true</p>
+<p>Use to use as much horizontal space as required and available. or sequenceDiagram par Alice to Bob Alice-&gt;&gt;Bob: Go help John and Alice to John Alice-&gt;&gt;John: I want this done today par John to Charlie John-&gt;&gt;Charlie: Can we do this today? and John to Diana John-&gt;&gt;Diana: Can you help us today? and Alice to Carl Alice-&gt;&gt;Carl: I also want this done today end end wide: true ```mermaid {wide: true} sequenceDiagram par Alice to Bob Alice-&gt;&gt;Bob: Go help John and Alice to John Alice-&gt;&gt;John: I want this done today par John to Charlie John-&gt;&gt;Charlie: Can we do this today? and John to Diana John-&gt;&gt;Diana: Can you help us today? and Alice to Carl Alice-&gt;&gt;Carl: I also want this done today end end ``` :include-mermaid: mermaid/sequence-diagram.mmd { wide: true }</p>
 </article>
 
 <article>
 <header><h1>Registering icon packs</h1></header>
-<p>Mermaid offers the possibility of displaying custom icons Registering an icon pack served by a web site to register the icon pack with the name Registering an icon pack included in your znai documentation project to register the icon pack with the name This assumes that the file is in a subdirectory of the directory containing the current page Worked example with AWS icons source rendered diagram architecture beta group api logos aws lambda API service db logos aws aurora Database in api service disk1 logos aws glacier Storage in api service disk2 logos aws s3 Storage in api service server logos aws ec2 Server in api db L &lt; hosts R server disk1 T &lt; mounts B server disk2 T &lt; mounts B db how to create a file with just the icons you need from an open source icon pack Assuming that you are working on a host where curl and jq are available here is a way to do it architecture beta mermaid iconpacks name logos url https unpkg com @iconify json logos@1 icons json @iconify json logos@1 logos mermaid iconpacks name logos url mermaid demo_icons json mermaid demo_icons json logos icons json mermaid ```mermaid iconpacks name logos url mermaid demo_icons json architecture beta group api logos aws lambda API service db logos aws aurora Database in api service disk1 logos aws glacier Storage in api service disk2 logos aws s3 Storage in api service server logos aws ec2 Server in api db L &lt; hosts R server disk1 T &lt; mounts B server disk2 T &lt; mounts B db ``` curl L O https unpkg com @iconify json logos@1 icons json jq prefix icons aws aurora icons aws aurora aws ec2 icons aws ec2 aws glacier icons aws glacier aws lambda icons aws lambda aws s3 icons aws s3 width height icons json &gt; demo_icons json</p>
+<p>Mermaid offers the possibility of displaying custom icons. Registering an icon pack served by a web site to register the icon pack with the name . Registering an icon pack included in your znai documentation project to register the icon pack with the name . This assumes that the file is in a subdirectory of the directory containing the current page. Worked example with AWS icons source : rendered diagram : architecture-beta group api(logos:aws-lambda)[API] service db(logos:aws-aurora)[Database] in api service disk1(logos:aws-glacier)[Storage] in api service disk2(logos:aws-s3)[Storage] in api service server(logos:aws-ec2)[Server] in api db:L &lt;-[hosts]- R:server disk1:T &lt;-[mounts]- B:server disk2:T &lt;-[mounts]- B:db how to create a file with just the icons you need from an open source icon pack Assuming that you are working on a host where curl and jq are available, here is a way to do it : architecture-beta mermaid {iconpacks : [{ name : &quot;logos&quot;, url : &quot;https://unpkg.com/@iconify-json/logos@1/icons.json&quot; }]} @iconify-json/logos@1 logos mermaid {iconpacks : [{ name : &quot;logos&quot;, url : &quot;mermaid/demo_icons.json&quot; }]} mermaid/demo_icons.json logos icons.json mermaid ```mermaid {iconpacks : [{ name : &quot;logos&quot;, url : &quot;mermaid/demo_icons.json&quot; }]} architecture-beta group api(logos:aws-lambda)[API] service db(logos:aws-aurora)[Database] in api service disk1(logos:aws-glacier)[Storage] in api service disk2(logos:aws-s3)[Storage] in api service server(logos:aws-ec2)[Server] in api db:L &lt;-[hosts]- R:server disk1:T &lt;-[mounts]- B:server disk2:T &lt;-[mounts]- B:db ``` curl -L -O https://unpkg.com/@iconify-json/logos@1/icons.json jq '{prefix, icons: { &quot;aws-aurora&quot;: .icons[&quot;aws-aurora&quot;], &quot;aws-ec2&quot;: .icons[&quot;aws-ec2&quot;], &quot;aws-glacier&quot;: .icons[&quot;aws-glacier&quot;], &quot;aws-lambda&quot;: .icons[&quot;aws-lambda&quot;], &quot;aws-s3&quot;: .icons[&quot;aws-s3&quot;] }, width, height}' icons.json &gt; demo_icons.json</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -516,53 +516,66 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-RdVdkQtE.js"></script>
-<script type="module" src="/znai/static/architecture-7EHR7CIX-xxpzkfCG.js"></script>
-<script type="module" src="/znai/static/architectureDiagram-3BPJPVTR-BUvXLKpc.js"></script>
-<script type="module" src="/znai/static/blockDiagram-GPEHLZMM-DQkskzPw.js"></script>
-<script type="module" src="/znai/static/c4Diagram-AAUBKEIU-Bpn-7umj.js"></script>
-<script type="module" src="/znai/static/classDiagram-4FO5ZUOK-C-2B96sD.js"></script>
-<script type="module" src="/znai/static/classDiagram-v2-Q7XG4LA2-D3oi48vF.js"></script>
-<script type="module" src="/znai/static/cose-bilkent-S5V4N54A-BCXCvQOF.js"></script>
-<script type="module" src="/znai/static/dagre-BM42HDAG-Cc78wdVZ.js"></script>
-<script type="module" src="/znai/static/diagram-2AECGRRQ-C097eezT.js"></script>
-<script type="module" src="/znai/static/diagram-5GNKFQAL-hjxnnMhB.js"></script>
-<script type="module" src="/znai/static/diagram-KO2AKTUF-CAUZLpoG.js"></script>
-<script type="module" src="/znai/static/diagram-LMA3HP47-diPTlvm_.js"></script>
-<script type="module" src="/znai/static/diagram-OG6HWLK6-CH2jcJIT.js"></script>
-<script type="module" src="/znai/static/erDiagram-TEJ5UH35-Cr1VvSmz.js"></script>
-<script type="module" src="/znai/static/eventmodeling-FCH6USID-RC1BLkKd.js"></script>
-<script type="module" src="/znai/static/flowDiagram-I6XJVG4X-CDCv2295.js"></script>
-<script type="module" src="/znai/static/ganttDiagram-6RSMTGT7-BR4mRbFY.js"></script>
-<script type="module" src="/znai/static/gitGraph-WXDBUCRP-CpmxTMqy.js"></script>
-<script type="module" src="/znai/static/gitGraphDiagram-PVQCEYII-DxNbnbwd.js"></script>
-<script type="module" src="/znai/static/index-7Sh1X86R.js"></script>
-<script type="module" src="/znai/static/info-J43DQDTF-DAgppa5S.js"></script>
-<script type="module" src="/znai/static/infoDiagram-5YYISTIA-CVuWbv6I.js"></script>
-<script type="module" src="/znai/static/ishikawaDiagram-YF4QCWOH-DB_WPzDJ.js"></script>
-<script type="module" src="/znai/static/journeyDiagram-JHISSGLW-BPrxtqhf.js"></script>
-<script type="module" src="/znai/static/kanban-definition-UN3LZRKU-DUfwLEfg.js"></script>
-<script type="module" src="/znai/static/katex-DeIpYIwo.js"></script>
-<script type="module" src="/znai/static/mermaid-BqwjLks-.js"></script>
-<script type="module" src="/znai/static/mindmap-definition-RKZ34NQL-DaM2_BWN.js"></script>
-<script type="module" src="/znai/static/packet-YPE3B663-DTT4Hb4J.js"></script>
-<script type="module" src="/znai/static/pie-LRSECV5Y-BDDKzod5.js"></script>
-<script type="module" src="/znai/static/pieDiagram-4H26LBE5-N6wANTAe.js"></script>
-<script type="module" src="/znai/static/quadrantDiagram-W4KKPZXB-DR0fXv_u.js"></script>
-<script type="module" src="/znai/static/radar-GUYGQ44K-C2mNSmA1.js"></script>
-<script type="module" src="/znai/static/requirementDiagram-4Y6WPE33-C8mXe5ei.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
+<script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
+<script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
+<script type="module" src="/znai/static/blockDiagram-NRAW4CY4-DeF7MqHw.js"></script>
+<script type="module" src="/znai/static/c4Diagram-UCG6FXSJ-CQSgNXVJ.js"></script>
+<script type="module" src="/znai/static/classDiagram-DTDB5LWJ-D863XQzz.js"></script>
+<script type="module" src="/znai/static/classDiagram-v2-JRS7N3AN-CDCQkTaj.js"></script>
+<script type="module" src="/znai/static/cose-bilkent-JH36ORCC-DhtGuMMZ.js"></script>
+<script type="module" src="/znai/static/cynefin-OW5HDTMX-Dno3j-4p.js"></script>
+<script type="module" src="/znai/static/cynefinDiagram-5FMLGOSQ-D9kl4s_F.js"></script>
+<script type="module" src="/znai/static/dagre-3AP2YEHR-cM5jdJlp.js"></script>
+<script type="module" src="/znai/static/diagram-S7CK7UJ4-DfnLH3P7.js"></script>
+<script type="module" src="/znai/static/diagram-UQ7AKVKN-CKMreXQQ.js"></script>
+<script type="module" src="/znai/static/diagram-VSXAHHWV-CLKhy1UN.js"></script>
+<script type="module" src="/znai/static/diagram-VX7I27RA-drWC67Ov.js"></script>
+<script type="module" src="/znai/static/diagram-Z3DM3KII-Dgl5joOb.js"></script>
+<script type="module" src="/znai/static/ebnfDiagram-PWID7BFC-DW0zjF79.js"></script>
+<script type="module" src="/znai/static/erDiagram-SSCWMZ5O-DzXHzvmH.js"></script>
+<script type="module" src="/znai/static/eventmodeling-NTZA5JFV-DSDJE_Yh.js"></script>
+<script type="module" src="/znai/static/flowDiagram-A5DVABFB-BTSDM-Tn.js"></script>
+<script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
+<script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
+<script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
+<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
+<script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
+<script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
+<script type="module" src="/znai/static/journeyDiagram-EYS64GPL-B17cxPC1.js"></script>
+<script type="module" src="/znai/static/kanban-definition-3QL26DDD-DqqGxz6g.js"></script>
+<script type="module" src="/znai/static/katex-BF0GAwrn.js"></script>
+<script type="module" src="/znai/static/mermaid-Bje8tQKQ.js"></script>
+<script type="module" src="/znai/static/mindmap-definition-FBJOCRG2-DCIRoLe6.js"></script>
+<script type="module" src="/znai/static/packet-AYTQ26CC-BnC5KTC9.js"></script>
+<script type="module" src="/znai/static/pegDiagram-XKGWAZYB-BQlHFEwn.js"></script>
+<script type="module" src="/znai/static/pie-WAS4IAKB-BR412gJn.js"></script>
+<script type="module" src="/znai/static/pieDiagram-E7YTZNPT-BdWOuFiX.js"></script>
+<script type="module" src="/znai/static/quadrantDiagram-AXDQQJYC-ChfenDBq.js"></script>
+<script type="module" src="/znai/static/radar-RG4KPBEZ-BISF9Shy.js"></script>
+<script type="module" src="/znai/static/railroad-74A4TZTK-DtURFlGs.js"></script>
+<script type="module" src="/znai/static/railroad-abnf-HS5TGJTU-DPNpY8y-.js"></script>
+<script type="module" src="/znai/static/railroad-ebnf-LZEXJU2U-CeDSNOFY.js"></script>
+<script type="module" src="/znai/static/railroad-peg-WCYAUIDC-D0S9kVuf.js"></script>
+<script type="module" src="/znai/static/railroadDiagram-O6MQD6OU-CEoECMup.js"></script>
+<script type="module" src="/znai/static/requirementDiagram-EFPCY7ZU-BLK0KrQG.js"></script>
 <script type="module" src="/znai/static/rolldown-runtime-CWU8vmCm.js"></script>
-<script type="module" src="/znai/static/sankeyDiagram-5OEKKPKP-BBDoZ-sx.js"></script>
-<script type="module" src="/znai/static/sequenceDiagram-3UESZ5HK-BqisPtOK.js"></script>
-<script type="module" src="/znai/static/stateDiagram-AJRCARHV-CiC-Moml.js"></script>
-<script type="module" src="/znai/static/stateDiagram-v2-BHNVJYJU-D0Ryiamm.js"></script>
-<script type="module" src="/znai/static/timeline-definition-PNZ67QCA-D661wfqD.js"></script>
-<script type="module" src="/znai/static/treeView-BLDUP644-C40wJjez.js"></script>
-<script type="module" src="/znai/static/treemap-LRROVOQU-BsK_pOnH.js"></script>
-<script type="module" src="/znai/static/vennDiagram-CIIHVFJN-DwXJOwH8.js"></script>
-<script type="module" src="/znai/static/wardley-L42UT6IY-CZ93k7bK.js"></script>
-<script type="module" src="/znai/static/wardleyDiagram-YWT4CUSO-C_RE8KDW.js"></script>
-<script type="module" src="/znai/static/xychartDiagram-2RQKCTM6-DZh5UzCw.js"></script>
+<script type="module" src="/znai/static/sankeyDiagram-P5KCCOFB-BK1wgcPR.js"></script>
+<script type="module" src="/znai/static/sequenceDiagram-WJ2MYXX4-MVFdMkIK.js"></script>
+<script type="module" src="/znai/static/sizeCapture-X5ZJPWSS-ZBcTWF9d.js"></script>
+<script type="module" src="/znai/static/stateDiagram-HBIQ2CUA-DyJALGuK.js"></script>
+<script type="module" src="/znai/static/stateDiagram-v2-4QOOHH4V-z3EUtHS4.js"></script>
+<script type="module" src="/znai/static/swimlanes-XN3QIQJK-CAuI4M8s.js"></script>
+<script type="module" src="/znai/static/swimlanesDiagram-VK2B7HYN-BSs7f_Qg.js"></script>
+<script type="module" src="/znai/static/timeline-definition-24CTP7MA-DvfLBzHn.js"></script>
+<script type="module" src="/znai/static/treeView-Q6P3EWNA--TEYZIp3.js"></script>
+<script type="module" src="/znai/static/treemap-WGGIJYW6-DucTnIQr.js"></script>
+<script type="module" src="/znai/static/vennDiagram-4TSXK5OY-vK95oJjb.js"></script>
+<script type="module" src="/znai/static/wardley-WFR3VGLG-CC6342D5.js"></script>
+<script type="module" src="/znai/static/wardleyDiagram-VM6X3IG4-C90LZQR8.js"></script>
+<script type="module" src="/znai/static/xychartDiagram-S5SC5T6Z-BXqZ35JW.js"></script>
 <script type="text/javascript" src="/znai/custom.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/theme-box.js"></script>
 <script type="text/javascript" src="/znai/plugins/javascript/activity-feed.js"></script>
@@ -996,7 +1009,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         "type" : "Snippet"
       } ]
     } ],
-    "lastModifiedTime" : 1780448659813,
+    "lastModifiedTime" : 1788140029245,
     "tocItem" : {
       "chapterTitle" : "Visuals",
       "pageTitle" : "Mermaid Diagrams",
