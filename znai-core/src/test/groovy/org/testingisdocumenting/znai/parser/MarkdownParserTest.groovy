@@ -355,6 +355,18 @@ world""")
     }
 
     @Test
+    void "double dash as en dash"() {
+        parse("pages 10 -- 20")
+        content.should == [[type: 'Paragraph', content:[[text: 'pages 10 – 20', type: 'SimpleText']]]]
+    }
+
+    @Test
+    void "em dash takes precedence over en dash"() {
+        parse("em --- and en -- together")
+        content.should == [[type: 'Paragraph', content:[[text: 'em — and en – together', type: 'SimpleText']]]]
+    }
+
+    @Test
     void "include plugin error should provide context of the plugin"() {
         code {
             parse(":include-dummy: free-form text {param1: 'v1', param2: 'v2', throw: 'message to throw'}")
