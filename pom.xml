@@ -140,15 +140,15 @@
         <jaxb.version>2.3.0</jaxb.version>
         <ant.version>1.10.17</ant.version>
         <ant-compress.version>1.5</ant-compress.version>
-        <jsoup.version>1.23.1</jsoup.version>
-        <freemarker.version>2.3.34</freemarker.version>
+        <jsoup.version>1.23.2</jsoup.version>
+        <freemarker.version>2.3.35</freemarker.version>
         <commons-io.version>2.22.0</commons-io.version>
         <commons-cli.version>1.11.0</commons-cli.version>
         <commons-csv.version>1.14.1</commons-csv.version>
         <commons-compress.version>1.28.0</commons-compress.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-codec.version>1.22.0</commons-codec.version>
-        <plantuml.version>1.2026.6</plantuml.version>
+        <plantuml.version>1.2026.7</plantuml.version>
         <json-path.version>2.10.0</json-path.version>
         <slf4j.version>1.7.36</slf4j.version>
         <junit.version>4.13.1</junit.version>
@@ -474,7 +474,7 @@
                 <plugin>
                     <groupId>com.github.eirslett</groupId>
                     <artifactId>frontend-maven-plugin</artifactId>
-                    <version>2.0.0</version>
+                    <version>2.0.2</version>
                     <executions>
                         <execution>
                             <id>Install Node</id>
