@@ -26,6 +26,7 @@ export function syntaxHighlightSnippetDemo(registry) {
         .add('graphql', () => <Snippet snippet={graphqlCode()} lang="graphql" highlight={[5]}/>)
         .add('cypher', () => <Snippet snippet={cypherCode()} lang="cyp" highlight={[4]}/>)
         .add('sql', () => <Snippet snippet={sqlCode()} lang="sql" highlight={[1]}/>)
+        .add('ocaml', () => <Snippet snippet={ocamlCode()} lang="ocaml"/>)
         .add('diff', () => <Snippet snippet={diffCode()} lang="diff"/>)
         .add('diff-javascript', () => <Snippet snippet={diffJavaScriptCode()} lang="diff-javascript"/>)
 }
@@ -42,6 +43,21 @@ function sqlCode() {
     return "SELECT column1, column2, ...\n" +
       "FROM table_name\n" +
       "WHERE condition;"
+}
+
+function ocamlCode() {
+    return '(* circle area calculation *)\n' +
+        'open Base\n' +
+        '\n' +
+        'module Circle = struct\n' +
+        '  let pi = 3.14159\n' +
+        '  let area radius = pi *. radius *. radius\n' +
+        'end\n' +
+        '\n' +
+        'let () =\n' +
+        '  let area = Circle.area 5.0 in\n' +
+        '  Stdio.printf "area: %f\\n" area;\n' +
+        '  List.iter [ 1; 2; 3 ] ~f:(fun x -> Stdio.printf "%d\\n" x)'
 }
 
 function yamlCode() {

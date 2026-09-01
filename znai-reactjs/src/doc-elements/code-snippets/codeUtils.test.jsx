@@ -251,6 +251,80 @@ describe("codeUtils", () => {
         ])
     });
 
+    it("should tokenize ocaml module path into module and function parts", () => {
+        const tokens = parseCode("ocaml", "let () = My_module.my_function 42")
+
+        expect(tokens).toEqual([
+            { type: 'keyword', content: 'let' },
+            ' ',
+            { type: 'punctuation', content: '(' },
+            { type: 'punctuation', content: ')' },
+            ' ',
+            { type: 'operator', content: '=' },
+            ' ',
+            { type: 'class-name', content: 'My_module' },
+            { type: 'punctuation', content: '.' },
+            { type: 'function', content: 'my_function' },
+            ' ',
+            { type: 'number', content: '42' }
+        ])
+    });
+
+    it("should tokenize ocaml nested module path", () => {
+        const tokens = parseCode("ocaml", "Foo.Bar.baz")
+
+        expect(tokens).toEqual([
+            { type: 'class-name', content: 'Foo' },
+            { type: 'punctuation', content: '.' },
+            { type: 'class-name', content: 'Bar' },
+            { type: 'punctuation', content: '.' },
+            { type: 'function', content: 'baz' }
+        ])
+    });
+
+    it("should tokenize ocaml module name after open and module keywords", () => {
+        const openTokens = parseCode("ocaml", "open My_module")
+        expect(openTokens).toEqual([
+            { type: 'keyword', content: 'open' },
+            ' ',
+            { type: 'class-name', content: 'My_module' }
+        ])
+
+        const moduleTokens = parseCode("ocaml", "module Circle = struct")
+        expect(moduleTokens).toEqual([
+            { type: 'keyword', content: 'module' },
+            ' ',
+            { type: 'class-name', content: 'Circle' },
+            ' ',
+            { type: 'operator', content: '=' },
+            ' ',
+            { type: 'keyword', content: 'struct' }
+        ])
+    });
+
+    it("should tokenize ocaml function definition name but not value binding name", () => {
+        const functionTokens = parseCode("ocaml", "let area radius = radius *. radius")
+        expect(functionTokens).toEqual([
+            { type: 'keyword', content: 'let' },
+            ' ',
+            { type: 'function', content: 'area' },
+            ' radius ',
+            { type: 'operator', content: '=' },
+            ' radius ',
+            { type: 'operator', content: '*.' },
+            ' radius'
+        ])
+
+        const valueTokens = parseCode("ocaml", "let pi = 3.14159")
+        expect(valueTokens).toEqual([
+            { type: 'keyword', content: 'let' },
+            ' pi ',
+            { type: 'operator', content: '=' },
+            ' ',
+            { type: 'number', content: '3.14159' }
+        ])
+    });
+
     it("splits java multi line comment into separate lines", () => {
         const tokens = parseCode('java', `  /** hello
   multi line
