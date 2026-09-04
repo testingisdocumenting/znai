@@ -47,29 +47,42 @@ interface Props extends DocElementProps, ContainerTitleCommonProps, ContainerCom
   highlightRowIndexes: number[];
 }
 
+interface RowProps {
+  table: Table;
+  row: any[];
+  highlight: boolean;
+  docElementProps: Omit<Props, "table" | "highlightRowIndexes">;
+}
+
+// defined outside of Table so React keeps the same component identity across Table re-renders,
+// otherwise every re-render (e.g. preview mode re-renders on scroll) remounts each row's DOM
+function Row({ table, row, highlight, docElementProps }: RowProps) {
+  const className = "znai-table-row" + (highlight ? " znai-table-row-highlight" : "");
+  return (
+    <tr className={className}>
+      {row.map((v, idx) => {
+        const c = table.columns[idx];
+        const style = buildColumnStyle(table, c);
+        const value = Array.isArray(v) ? (
+          <docElementProps.elementsLibrary.DocElement {...docElementProps} content={v} />
+        ) : (
+          v
+        );
+
+        return (
+          <td key={idx} style={style}>
+            {value}
+          </td>
+        );
+      })}
+    </tr>
+  );
+}
+
 export function Table({ table, highlightRowIndexes, ...props }: Props) {
   const { userDrivenCollapsed, collapseToggle } = useIsUserDrivenCollapsed(props.collapsed);
 
   const tableStyles = table.styles || [];
-
-  const Row = ({ row, highlight }: { row: any[]; highlight: boolean }) => {
-    const className = "znai-table-row" + (highlight ? " znai-table-row-highlight" : "");
-    return (
-      <tr className={className}>
-        {row.map((v, idx) => {
-          const c = table.columns[idx];
-          const style = buildColumnStyle(table, c);
-          const value = Array.isArray(v) ? <props.elementsLibrary.DocElement {...props} content={v} /> : v;
-
-          return (
-            <td key={idx} style={style}>
-              {value}
-            </td>
-          );
-        })}
-      </tr>
-    );
-  };
 
   const showHeader = tableStyles.indexOf("no-header") === -1;
 
@@ -124,7 +137,7 @@ export function Table({ table, highlightRowIndexes, ...props }: Props) {
           </thead>
           <tbody>
             {table.data.map((r, idx) => (
-              <Row key={idx} row={r} highlight={hasIdx(highlightRowIndexes, idx)} />
+              <Row key={idx} table={table} row={r} highlight={hasIdx(highlightRowIndexes, idx)} docElementProps={props} />
             ))}
           </tbody>
         </table>

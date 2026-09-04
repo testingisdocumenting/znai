@@ -37,6 +37,90 @@ export const testDocumentation = {
     type: "Page",
     content: [
       {
+        title: "Tables",
+        id: "tables",
+        type: "Section",
+        content: [
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "pipe table below: cells are bare inline elements (no Paragraph wrapper)",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            table: {
+              columns: [
+                { title: "Setting", align: "left" },
+                { title: "Value", align: "left" },
+              ],
+              data: [
+                [[{ text: "Office", type: "SimpleText" }], [{ text: "NYC", type: "SimpleText" }]],
+                [[{ text: "Floor", type: "SimpleText" }], [{ text: "5", type: "SimpleText" }]],
+                [
+                  [{ text: "Wi-Fi Network", type: "SimpleText" }],
+                  [
+                    { code: "nyc", type: "InlinedCode" },
+                    { text: "-internal", type: "SimpleText" },
+                  ],
+                ],
+                [
+                  [{ text: "VPN Server", type: "SimpleText" }],
+                  [{ text: "vpn-nyc.example.com", type: "SimpleText" }],
+                ],
+              ],
+            },
+            type: "Table",
+          },
+          {
+            type: "Paragraph",
+            content: [
+              {
+                text: "csv fence table below: cells are wrapped in Paragraph",
+                type: "SimpleText",
+              },
+            ],
+          },
+          {
+            table: {
+              columns: [
+                { title: "Setting", align: "left" },
+                { title: "Value", align: "left" },
+              ],
+              data: [
+                [
+                  [{ type: "Paragraph", content: [{ text: "Office", type: "SimpleText" }] }],
+                  [{ type: "Paragraph", content: [{ text: "NYC", type: "SimpleText" }] }],
+                ],
+                [
+                  [{ type: "Paragraph", content: [{ text: "Floor", type: "SimpleText" }] }],
+                  [{ type: "Paragraph", content: [{ text: "5", type: "SimpleText" }] }],
+                ],
+                [
+                  [{ type: "Paragraph", content: [{ text: "Wi-Fi Network", type: "SimpleText" }] }],
+                  [
+                    {
+                      type: "Paragraph",
+                      content: [
+                        { code: "nyc", type: "InlinedCode" },
+                        { text: "-internal", type: "SimpleText" },
+                      ],
+                    },
+                  ],
+                ],
+                [
+                  [{ type: "Paragraph", content: [{ text: "VPN Server", type: "SimpleText" }] }],
+                  [{ type: "Paragraph", content: [{ text: "vpn-nyc.example.com", type: "SimpleText" }] }],
+                ],
+              ],
+            },
+            type: "Table",
+          },
+        ],
+      },
+      {
         title: "Embedding Content",
         id: "embedding-content",
         type: "Section",
@@ -1040,6 +1124,10 @@ export const testDocumentation = {
       fileName: "external-code-snippets",
       viewOnRelativePath: null,
       pageSectionIdTitles: [
+        {
+          title: "Tables",
+          id: "tables",
+        },
         {
           title: "Embedding Content",
           id: "embedding-content",
