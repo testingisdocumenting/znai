@@ -766,10 +766,17 @@ export class Documentation extends React.Component {
     }
 
     const visible = withVisibleTitle.length ? withVisibleTitle[0] : closestToTopZero();
+    const visibleAnchorId = visible && visible.idTitle ? visible.idTitle.id : null;
+
+    // scroll events fire constantly, skip the state update when the current section did not change
+    // to avoid re-rendering the whole documentation on every scroll step
+    if (!forceSelectedTocItem && autoSelectedTocItem.anchorId === visibleAnchorId) {
+      return;
+    }
 
     const enrichedSelectedTocItem = {
       ...autoSelectedTocItem,
-      anchorId: visible && visible.idTitle ? visible.idTitle.id : null,
+      anchorId: visibleAnchorId,
     };
     this.setState({ autoSelectedTocItem: enrichedSelectedTocItem, forceSelectedTocItem: null });
 
