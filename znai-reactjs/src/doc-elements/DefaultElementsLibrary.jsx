@@ -89,6 +89,7 @@ import { PythonMethod } from "./python/PythonMethod";
 import { ApiLinkedTextBlock } from "./api/ApiLinkedTextBlock";
 import { OpenApiMethodAndUrl } from "./open-api/OpenApiMethodAndUrl";
 import { Card } from "./card/Card";
+import { Checkboxes } from "./checkboxes/Checkboxes";
 import { FootnoteReference } from "./footnote/FootnoteReference";
 import { FootnoteBackLinks } from "./footnote/FootnotesList";
 import { EmbeddedHtml } from "./html/EmbeddedHtml";
@@ -183,6 +184,7 @@ presentationElementHandlers.AnnotatedImage = presentationAnnotatedImageHandler
 library.AnnotatedImageWithOrderedList = AnnotatedImageWithOrderedList
 
 library.Card = Card;
+library.Checkboxes = Checkboxes;
 
 library.FootnoteReference = FootnoteReference;
 library.FootnoteBackLinks = FootnoteBackLinks;

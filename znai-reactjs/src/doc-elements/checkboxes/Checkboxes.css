@@ -1,0 +1,77 @@
+/*
+ * Copyright 2026 znai maintainers
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.znai-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.znai-checkboxes-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* 1lh keeps the checkbox centered against the first line of the item content */
+.znai-checkboxes-tick-cell {
+    display: flex;
+    align-items: center;
+    height: 1lh;
+    flex-shrink: 0;
+}
+
+.znai-checkboxes-tick {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    border: 2px solid var(--znai-checkboxes-border-color);
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.znai-checkboxes-tick:hover {
+    border-color: var(--znai-checkboxes-checked-color);
+}
+
+.znai-checkboxes-tick:focus-visible {
+    outline: 2px solid var(--znai-checkboxes-checked-color);
+    outline-offset: 2px;
+}
+
+.znai-checkboxes-tick:checked {
+    border-color: var(--znai-checkboxes-checked-color);
+    background-color: var(--znai-checkboxes-checked-color);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.5l3 3 6-7'/%3E%3C/svg%3E");
+    background-size: 12px 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.znai-checkboxes-item-content {
+    flex: 1;
+    min-width: 0;
+    transition: opacity 0.15s ease-in-out;
+
+    --znai-single-column-render-width: auto;
+}
+
+.znai-checkboxes-item.checked .znai-checkboxes-item-content {
+    opacity: 0.55;
+}
