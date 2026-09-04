@@ -36,7 +36,7 @@ import 'prismjs/components/prism-diff'
 import 'prismjs/components/prism-graphql'
 import 'prismjs/components/prism-cypher'
 import 'prismjs/components/prism-sql'
-import 'prismjs/components/prism-ocaml'
+import './prismOcaml'
 import 'prismjs/plugins/autoloader/prism-autoloader'
 import 'prismjs/plugins/diff-highlight/prism-diff-highlight'
 
