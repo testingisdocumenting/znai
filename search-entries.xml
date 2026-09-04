@@ -236,7 +236,7 @@ documentation writing process.
       <text>## CLI download
 
 Download and unzip
-[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.92/znai-dist-1.92-znai.zip). Add
+[znai](https://repo.maven.apache.org/maven2/org/testingisdocumenting/znai/znai-dist/1.93/znai-dist-1.93-znai.zip). Add
 it to your `PATH`.
 
 ## Brew
@@ -261,7 +261,7 @@ brew install testingisdocumenting/brew/znai
 &lt;plugin>
     &lt;groupId>org.testingisdocumenting.znai&lt;/groupId>
     &lt;artifactId>znai-maven-plugin&lt;/artifactId>
-    &lt;version>1.92&lt;/version>
+    &lt;version>1.93&lt;/version>
 &lt;/plugin>
 ```
 
@@ -507,6 +507,7 @@ visuals
     images
     image-annotations
     cards
+    checkboxes
     charts
     mermaid-diagrams
     SVG
@@ -6624,7 +6625,7 @@ package webtauexamples
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
-def homeSearchInput = $('textarea[class*="search-input"], input[class*="searchbox_input"], input[class*="search-input"]')
+def homeSearchInput = $('textarea[name="q"], input[name="q"]')
 def resultSearchInput = $("#search_form_input")
 def result = $('article[data-testid="result"]')
 
@@ -6655,14 +6656,14 @@ scenario("capture screenshot") {
   "shapes" : [ {
     "type" : "badge",
     "text" : "1",
-    "x" : 375,
-    "y" : 42,
+    "x" : 373,
+    "y" : 41,
     "align" : "Center"
   }, {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 285,
+    "y" : 273,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -6805,6 +6806,69 @@ Markdown content goes here
 [Learn More](snippets/external-code-snippets)
 ```
 ```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/checkboxes#interactive-checklist</url>
+    <fullTitle>Znai: Checkboxes, Interactive Checklist [Visuals]</fullTitle>
+    <pageTitle>Checkboxes</pageTitle>
+    <chapterTitle>Visuals</chapterTitle>
+    <pageSectionTitle>Interactive Checklist</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>To render an interactive checklist use the `checkboxes` fence plugin. Each bullet point inside becomes a checkbox users
+can tick.
+
+```
+```checkboxes
+* install cli
+* setup environment
+* run first example
+```
+```
+
+
+Note: Checked state is persisted in the browser local storage, so it survives page reloads and revisits. Changing
+checklist content resets its checked state. During local preview state is not persisted.
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/visuals/checkboxes#complex-content</url>
+    <fullTitle>Znai: Checkboxes, Complex Content [Visuals]</fullTitle>
+    <pageTitle>Checkboxes</pageTitle>
+    <chapterTitle>Visuals</chapterTitle>
+    <pageSectionTitle>Complex Content</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>Bullet points can contain any markdown, including multiple paragraphs and code snippets.
+
+```
+````checkboxes
+* install dependencies using package manager
+
+  ```bash
+  npm install --save-dev my-tool
+  ```
+
+* validate generated config
+
+  ```javascript
+  module.exports = {
+    preset: "default",
+  };
+  ```
+
+* commit changes
+````
+```
+
+
+Note: Four backticks were used instead of the usual three. This is done so one fence block can include another block
+(code snippet) without confusion. It can be any number of backticks greater than three.
 
 </text>
     </text>
@@ -12475,7 +12539,7 @@ package webtauexamples
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
-def homeSearchInput = $('textarea[class*="search-input"], input[class*="searchbox_input"], input[class*="search-input"]')
+def homeSearchInput = $('textarea[name="q"], input[name="q"]')
 def resultSearchInput = $("#search_form_input")
 def result = $('article[data-testid="result"]')
 
@@ -12509,14 +12573,14 @@ scenario("capture screenshot") {
   "shapes" : [ {
     "type" : "badge",
     "text" : "1",
-    "x" : 375,
-    "y" : 42,
+    "x" : 373,
+    "y" : 41,
     "align" : "Center"
   }, {
     "type" : "badge",
     "text" : "2",
     "x" : 367,
-    "y" : 285,
+    "y" : 273,
     "align" : "Center"
   } ],
   "pixelRatio" : 1
@@ -14095,6 +14159,19 @@ unzip dist-znai.zip
 export PATH=$(pwd)/dist:$PATH
 znai --version
 ```
+
+</text>
+    </text>
+  </entry>
+  <entry>
+    <url>/znai/release-notes/2026#193</url>
+    <fullTitle>Znai: 2026, 1.93 [Release Notes]</fullTitle>
+    <pageTitle>2026</pageTitle>
+    <chapterTitle>Release Notes</chapterTitle>
+    <pageSectionTitle>1.93</pageSectionTitle>
+    <text>
+      <score>STANDARD</score>
+      <text>
 
 </text>
     </text>

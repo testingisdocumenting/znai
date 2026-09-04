@@ -88,6 +88,11 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
+<header><h1>1.93</h1></header>
+<p>Fix: Tables no longer flicker on scroll in preview mode, scroll no longer re-renders the page unless the current section changes Add: OCaml syntax highlighting of module paths like and function definition names Add: More legible class name highlight color in light mode My_module.my_function Add: checkboxes fence plugin renders bullet points as an interactive checklist, checked state persists in browser local storage</p>
+</article>
+
+<article>
 <header><h1>1.92</h1></header>
 <p>Fix: include-iframe wide mode and title now works for iframed content with different origin Fix: llm.txt no longer misses content from Api Parameters fence and include plugins and doxygen-doc-params Fix: preview survives git rebases and other sudden directory moves and re-creation Fix: llm.txt no longer misses content from Table fence plugin Fix: llm.txt no longer misses content from footnotes Fix: Empty no longer generates protocol-relative links in pages, chapter redirects and Fix: Chapter and page redirects use trailing slash targets so static hosts like GitHub Pages don't serve the redirect page in a loop --doc-id &quot;&quot; //chapter/page search-entries.xml Add: include-iframe and noGap collapse Add: Use for en-dash -- Add: Guide level search matches queries with special characters like or verbatim, ranking exact matches first Add: Guide level search quoted queries like match verbatim only List.map c++ &quot;list map&quot; Add: Surrounded By Scope extraction treats OCaml/Rust/Haskell single quotes like type variables , lifetimes and primed names as regular characters instead of string starts 'a &amp;'a x' Add: Search on the page with Read More blocks auto opens the blocks Add: Optimize guide level search rendering and debounce Add: Guide level search keeps symbol as it is often part of the search term _</p>
 </article>
@@ -301,6 +306,10 @@
 
 <article>
 <a href="/znai/visuals/cards/">Cards</a>
+</article>
+
+<article>
+<a href="/znai/visuals/checkboxes/">Checkboxes</a>
 </article>
 
 <article>
@@ -541,7 +550,7 @@
 <script type="text/javascript" src="/znai/toc.js"></script>
 <script type="text/javascript" src="/znai/documentation-references.js"></script>
 <script type="text/javascript" src="/znai/assets.js"></script>
-<script type="module" src="/znai/static/__vite-browser-external-C5CmLA9E.js"></script>
+<script type="module" src="/znai/static/__vite-browser-external-BGnBTosV.js"></script>
 <script type="module" src="/znai/static/abnfDiagram-VCTEODGH-BRqqqU5n.js"></script>
 <script type="module" src="/znai/static/architecture-7GRP2DOG-9wnybhUh.js"></script>
 <script type="module" src="/znai/static/architectureDiagram-5GKGNRK7-DUMpRZn_.js"></script>
@@ -565,7 +574,7 @@
 <script type="module" src="/znai/static/ganttDiagram-EL5Y4UJY-CCL7MAdr.js"></script>
 <script type="module" src="/znai/static/gitGraph-4MIJSDKK-BLMXBjkK.js"></script>
 <script type="module" src="/znai/static/gitGraphDiagram-WWUBYQGX-C0kBUhQM.js"></script>
-<script type="module" src="/znai/static/index-QAw-pPpT.js"></script>
+<script type="module" src="/znai/static/index-nmggSSz7.js"></script>
 <script type="module" src="/znai/static/info-A6RAGUB7-CytVF5aE.js"></script>
 <script type="module" src="/znai/static/infoDiagram-RXCK75RN-Bh98jVhK.js"></script>
 <script type="module" src="/znai/static/ishikawaDiagram-5VMMS53U-CxC_0eim.js"></script>
@@ -656,6 +665,102 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
+      "id" : "193",
+      "additionalIds" : [ ],
+      "title" : "1.93",
+      "type" : "Section",
+      "content" : [ {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Fix: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/layout/tables",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "Tables",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " no longer flicker on scroll in preview mode, scroll no longer re-renders the page unless the current section changes",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/snippets/ocaml",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "OCaml",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " syntax highlighting of module paths like ",
+              "type" : "SimpleText"
+            }, {
+              "code" : "My_module.my_function",
+              "type" : "InlinedCode"
+            }, {
+              "text" : " and function definition names",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: More legible class name highlight color in light mode",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      }, {
+        "bulletMarker" : "*",
+        "tight" : true,
+        "type" : "BulletList",
+        "content" : [ {
+          "type" : "ListItem",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "Add: ",
+              "type" : "SimpleText"
+            }, {
+              "url" : "/znai/visuals/checkboxes",
+              "isFile" : false,
+              "type" : "Link",
+              "content" : [ {
+                "text" : "checkboxes",
+                "type" : "SimpleText"
+              } ]
+            }, {
+              "text" : " fence plugin renders bullet points as an interactive checklist, checked state persists in browser local storage",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
       "id" : "192",
       "additionalIds" : [ ],
       "title" : "1.92",
@@ -2406,7 +2511,7 @@ window.ReactDOM.render(React.createElement(Documentation, {
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1788140029231,
+    "lastModifiedTime" : 1788489012157,
     "tocItem" : {
       "chapterTitle" : "Release Notes",
       "pageTitle" : "2026",
@@ -2416,6 +2521,10 @@ window.ReactDOM.render(React.createElement(Documentation, {
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
+        "title" : "1.93",
+        "id" : "193",
+        "customAnchorId" : "193"
+      }, {
         "title" : "1.92",
         "id" : "192",
         "customAnchorId" : "192"

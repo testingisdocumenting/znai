@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" /> 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> 
-<title>Znai: Build Artifacts Watch</title>
+<title>Znai: Checkboxes</title>
 <!--test extension added comment to head-->
 <!--test extension added comment to head--><link rel="stylesheet" type="text/css" href="/znai/static/css/katex.min.css">
 <link rel="stylesheet" type="text/css" href="/znai/static/main.css">
@@ -88,8 +88,13 @@
     <div></div>
 </div><section id="page-content" style="max-width: 640px; margin-left: auto; margin-right: auto;">
 <article>
-<header><h1>Todo</h1></header>
-<p>Please create GitHub Issue if you are interested in automatically watching a set of directories for built documentations to automatically upload them to Hub.</p>
+<header><h1>Interactive Checklist</h1></header>
+<p>To render an interactive checklist use the fence plugin. Each bullet point inside becomes a checkbox users can tick. install cli setup environment run first example Note: Checked state is persisted in the browser local storage, so it survives page reloads and revisits. Changing checklist content resets its checked state. During local preview state is not persisted. checkboxes ```checkboxes * install cli * setup environment * run first example ```</p>
+</article>
+
+<article>
+<header><h1>Complex Content</h1></header>
+<p>Bullet points can contain any markdown, including multiple paragraphs and code snippets. install dependencies using package manager validate generated config commit changes npm install --save-dev my-tool module.exports = { preset: &quot;default&quot;, }; Note: Four backticks were used instead of the usual three. This is done so one fence block can include another block (code snippet) without confusion. It can be any number of backticks greater than three. ````checkboxes * install dependencies using package manager ```bash npm install --save-dev my-tool ``` * validate generated config ```javascript module.exports = { preset: &quot;default&quot;, }; ``` * commit changes ````</p>
 </article>
 </section>
 <section id="table-of-contents" style="max-width: 640px; margin-left: auto; margin-right: auto;">
@@ -610,47 +615,162 @@ window.ReactDOM.render(React.createElement(Documentation, {
   "page" : {
     "type" : "Page",
     "content" : [ {
-      "id" : "todo",
+      "id" : "interactive-checklist",
       "additionalIds" : [ ],
-      "title" : "Todo",
+      "title" : "Interactive Checklist",
       "type" : "Section",
       "content" : [ {
         "type" : "Paragraph",
         "content" : [ {
-          "text" : "Please create ",
+          "text" : "To render an interactive checklist use the ",
           "type" : "SimpleText"
         }, {
-          "url" : "https://github.com/testingisdocumenting/znai/issues",
-          "isFile" : false,
-          "type" : "Link",
-          "content" : [ {
-            "text" : "GitHub Issue",
-            "type" : "SimpleText"
-          } ]
+          "code" : "checkboxes",
+          "type" : "InlinedCode"
         }, {
-          "text" : " if you are interested in automatically watching a set of directories for",
+          "text" : " fence plugin.",
           "type" : "SimpleText"
         }, {
           "type" : "SoftLineBreak"
         }, {
-          "text" : "built documentations to automatically upload them to Hub.",
+          "text" : "Each bullet point inside becomes a checkbox users can tick.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "```checkboxes\n* install cli\n* setup environment\n* run first example\n```",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "blockId" : "93b376fc4dba66f3",
+        "checkboxItems" : [ {
+          "id" : "install-cli",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "install cli",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "id" : "setup-environment",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "setup environment",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        }, {
+          "id" : "run-first-example",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "run first example",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "Checkboxes"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Checked state is persisted in the browser local storage, so it survives page reloads and revisits.",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "Changing checklist content resets its checked state. During local preview state is not persisted.",
+          "type" : "SimpleText"
+        } ]
+      } ]
+    }, {
+      "id" : "complex-content",
+      "additionalIds" : [ ],
+      "title" : "Complex Content",
+      "type" : "Section",
+      "content" : [ {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Bullet points can contain any markdown, including multiple paragraphs and code snippets.",
+          "type" : "SimpleText"
+        } ]
+      }, {
+        "lang" : "",
+        "snippet" : "````checkboxes\n* install dependencies using package manager\n\n  ```bash\n  npm install --save-dev my-tool\n  ```\n\n* validate generated config\n\n  ```javascript\n  module.exports = {\n    preset: \"default\",\n  };\n  ```\n\n* commit changes\n````",
+        "lineNumber" : "",
+        "type" : "Snippet"
+      }, {
+        "blockId" : "8713853b15f9398a",
+        "checkboxItems" : [ {
+          "id" : "install-dependencies-using-package-manager",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "install dependencies using package manager",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "bash",
+            "snippet" : "npm install --save-dev my-tool",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          } ]
+        }, {
+          "id" : "validate-generated-config",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "validate generated config",
+              "type" : "SimpleText"
+            } ]
+          }, {
+            "lang" : "javascript",
+            "snippet" : "module.exports = {\n  preset: \"default\",\n};",
+            "lineNumber" : "",
+            "type" : "Snippet"
+          } ]
+        }, {
+          "id" : "commit-changes",
+          "content" : [ {
+            "type" : "Paragraph",
+            "content" : [ {
+              "text" : "commit changes",
+              "type" : "SimpleText"
+            } ]
+          } ]
+        } ],
+        "type" : "Checkboxes"
+      }, {
+        "type" : "Paragraph",
+        "content" : [ {
+          "text" : "Note: Four backticks were used instead of the usual three. This is done so one fence block can include",
+          "type" : "SimpleText"
+        }, {
+          "type" : "SoftLineBreak"
+        }, {
+          "text" : "another block (code snippet) without confusion. It can be any number of backticks greater than three.",
           "type" : "SimpleText"
         } ]
       } ]
     } ],
-    "lastModifiedTime" : 1788489012135,
+    "lastModifiedTime" : 1788489012170,
     "tocItem" : {
-      "chapterTitle" : "Hub",
-      "pageTitle" : "Build Artifacts Watch",
+      "chapterTitle" : "Visuals",
+      "pageTitle" : "Checkboxes",
       "pageMeta" : { },
-      "dirName" : "hub",
-      "fileName" : "build-artifacts-watch",
+      "dirName" : "visuals",
+      "fileName" : "checkboxes",
       "fileExtension" : "md",
       "viewOnRelativePath" : null,
       "pageSectionIdTitles" : [ {
-        "title" : "Todo",
-        "id" : "todo",
-        "customAnchorId" : "todo"
+        "title" : "Interactive Checklist",
+        "id" : "interactive-checklist",
+        "customAnchorId" : "interactive-checklist"
+      }, {
+        "title" : "Complex Content",
+        "id" : "complex-content",
+        "customAnchorId" : "complex-content"
       } ]
     }
   }

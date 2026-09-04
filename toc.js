@@ -1296,6 +1296,23 @@ toc = [ {
     } ]
   }, {
     "chapterTitle" : "Visuals",
+    "pageTitle" : "Checkboxes",
+    "pageMeta" : { },
+    "dirName" : "visuals",
+    "fileName" : "checkboxes",
+    "fileExtension" : "md",
+    "viewOnRelativePath" : null,
+    "pageSectionIdTitles" : [ {
+      "title" : "Interactive Checklist",
+      "id" : "interactive-checklist",
+      "customAnchorId" : "interactive-checklist"
+    }, {
+      "title" : "Complex Content",
+      "id" : "complex-content",
+      "customAnchorId" : "complex-content"
+    } ]
+  }, {
+    "chapterTitle" : "Visuals",
     "pageTitle" : "Charts",
     "pageMeta" : { },
     "dirName" : "visuals",
@@ -2789,6 +2806,10 @@ toc = [ {
     "fileExtension" : "md",
     "viewOnRelativePath" : null,
     "pageSectionIdTitles" : [ {
+      "title" : "1.93",
+      "id" : "193",
+      "customAnchorId" : "193"
+    }, {
       "title" : "1.92",
       "id" : "192",
       "customAnchorId" : "192"
