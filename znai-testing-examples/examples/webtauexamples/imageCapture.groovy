@@ -2,7 +2,7 @@ package webtauexamples
 
 import static org.testingisdocumenting.webtau.WebTauGroovyDsl.*
 
-def homeSearchInput = $('textarea[class*="search-input"], input[class*="searchbox_input"], input[class*="search-input"]')
+def homeSearchInput = $('textarea[name="q"], input[name="q"]')
 def resultSearchInput = $("#search_form_input")
 def result = $('article[data-testid="result"]')
 
